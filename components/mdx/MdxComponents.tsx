@@ -274,14 +274,37 @@ export function Verdict({
 }
 
 // ─── ProsConsList ─────────────────────────────────────────────────────────────
+// Deux modes :
+// 1. Array props (pages/templates) : <ProsConsList pros={["a","b"]} cons={["c"]} />
+// 2. Children MDX (articles) : <ProsConsList><ProsBlock>…</ProsBlock><ConsBlock>…</ConsBlock></ProsConsList>
 
-export function ProsConsList({ pros = [], cons = [] }: { pros?: string[]; cons?: string[] }) {
+export function ProsConsList({
+  pros,
+  cons,
+  children,
+}: {
+  pros?: string[]
+  cons?: string[]
+  children?: ReactNode
+}) {
+  // Mode enfants (MDX) — évite les array literal props incompatibles avec next-mdx-remote/rsc
+  if (children) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
+        {children}
+      </div>
+    )
+  }
+
+  // Mode array (pages/templates)
+  const prosItems = pros ?? []
+  const consItems = cons ?? []
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
       <div className="rounded-[var(--radius-lg)] p-4 border" style={{ borderColor: 'var(--pill-green)', background: '#F0FFF8' }}>
         <p className="text-sm font-bold mb-3" style={{ color: '#1A7A47' }}>Points forts</p>
         <ul className="space-y-2">
-          {pros.map((p, i) => (
+          {prosItems.map((p, i) => (
             <li key={i} className="text-sm text-[var(--text-secondary)] flex gap-2">
               <span style={{ color: '#1A7A47' }} className="shrink-0 font-bold">✓</span>
               {p}
@@ -292,7 +315,7 @@ export function ProsConsList({ pros = [], cons = [] }: { pros?: string[]; cons?:
       <div className="rounded-[var(--radius-lg)] p-4 border" style={{ borderColor: 'var(--pill-rose)', background: 'var(--bg-rose)' }}>
         <p className="text-sm font-bold mb-3" style={{ color: '#8B1A4A' }}>Points faibles</p>
         <ul className="space-y-2">
-          {cons.map((c, i) => (
+          {consItems.map((c, i) => (
             <li key={i} className="text-sm text-[var(--text-secondary)] flex gap-2">
               <span style={{ color: 'var(--accent-1)' }} className="shrink-0 font-bold">✗</span>
               {c}
@@ -301,6 +324,44 @@ export function ProsConsList({ pros = [], cons = [] }: { pros?: string[]; cons?:
         </ul>
       </div>
     </div>
+  )
+}
+
+// Sous-composants MDX pour ProsConsList (évitent les array literal props)
+
+export function ProsBlock({ children }: { children: ReactNode }) {
+  return (
+    <div className="rounded-[var(--radius-lg)] p-4 border" style={{ borderColor: 'var(--pill-green)', background: '#F0FFF8' }}>
+      <p className="text-sm font-bold mb-3" style={{ color: '#1A7A47' }}>Points forts</p>
+      <ul className="space-y-2">{children}</ul>
+    </div>
+  )
+}
+
+export function ConsBlock({ children }: { children: ReactNode }) {
+  return (
+    <div className="rounded-[var(--radius-lg)] p-4 border" style={{ borderColor: 'var(--pill-rose)', background: 'var(--bg-rose)' }}>
+      <p className="text-sm font-bold mb-3" style={{ color: '#8B1A4A' }}>Points faibles</p>
+      <ul className="space-y-2">{children}</ul>
+    </div>
+  )
+}
+
+export function ProItem({ children }: { children: ReactNode }) {
+  return (
+    <li className="text-sm text-[var(--text-secondary)] flex gap-2">
+      <span style={{ color: '#1A7A47' }} className="shrink-0 font-bold">✓</span>
+      {children}
+    </li>
+  )
+}
+
+export function ConItem({ children }: { children: ReactNode }) {
+  return (
+    <li className="text-sm text-[var(--text-secondary)] flex gap-2">
+      <span style={{ color: 'var(--accent-1)' }} className="shrink-0 font-bold">✗</span>
+      {children}
+    </li>
   )
 }
 
