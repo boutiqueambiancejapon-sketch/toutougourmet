@@ -129,7 +129,7 @@ export default function ComparateurPage() {
 
         {/* SEO block + FAQ */}
         <div className="max-w-3xl mx-auto mt-16">
-          <h1 className="text-3xl font-black mb-4" style={{ fontFamily: "'Fraunces', serif", color: 'var(--text-primary)' }}>
+          <h1 className="page-title mb-4">
             Quelle nourriture pour chien choisir ?
           </h1>
           <p className="text-base leading-relaxed mb-10" style={{ color: 'var(--text-secondary)' }}>
