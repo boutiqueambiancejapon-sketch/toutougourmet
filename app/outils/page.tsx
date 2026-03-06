@@ -55,14 +55,14 @@ export default function OutilsPage() {
       <div className="max-w-[960px] mx-auto">
 
         {/* Header */}
-        <div className="text-center mb-12">
-          <p className="text-sm font-semibold text-[var(--accent-1)] uppercase tracking-wider mb-2">
+        <div className="mb-12 max-w-[640px]">
+          <p className="text-sm font-bold uppercase tracking-widest text-[var(--accent-1)] mb-2">
             🛠️ Outils gratuits
           </p>
-          <h1 className="page-title mb-4" >
+          <h1 className="page-title mb-4">
             Calculateurs & Simulateurs
           </h1>
-          <p className="text-[var(--text-secondary)] max-w-2xl mx-auto text-lg leading-relaxed">
+          <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
             Des outils concrets pour mieux nourrir ton chien ou ton chat — ration, budget, poids
             idéal, comparaison des coûts. Tout est gratuit, sans inscription.
           </p>

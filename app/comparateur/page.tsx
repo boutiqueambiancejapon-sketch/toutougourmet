@@ -19,13 +19,12 @@ export default function ComparateurPage() {
       <div className="max-w-[1280px] mx-auto">
 
         {/* Header compact */}
-        <div className="text-center mb-10">
-          <p className="text-xs font-semibold uppercase tracking-widest mb-3"
-            style={{ color: 'var(--accent-1)' }}>
+        <div className="mb-10 max-w-[640px]">
+          <p className="text-sm font-bold uppercase tracking-widest text-[var(--accent-1)] mb-2">
             Mis à jour mars 2026
           </p>
           <h1 className="page-title mb-3">Comparatif complet des 4 marques</h1>
-          <p className="text-base max-w-xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
+          <p className="text-base text-[var(--text-secondary)]">
             Franklin, Elmut, Petty Well et Dog Chef — analysés sur les mêmes critères, sans favoritisme.
           </p>
         </div>
@@ -143,7 +142,7 @@ export default function ComparateurPage() {
           <div className="space-y-8">
 
             <div>
-              <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+              <h3 className="mb-2">
                 Quelle est la différence entre les croquettes classiques et le repas frais pour chien ?
               </h3>
               <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
@@ -156,7 +155,7 @@ export default function ComparateurPage() {
             </div>
 
             <div>
-              <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+              <h3 className="mb-2">
                 Les croquettes sans céréales sont-elles vraiment meilleures ?
               </h3>
               <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
@@ -170,7 +169,7 @@ export default function ComparateurPage() {
             </div>
 
             <div>
-              <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+              <h3 className="mb-2">
                 Comment choisir entre Franklin, Elmut, Petty Well et Dog Chef ?
               </h3>
               <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
@@ -184,7 +183,7 @@ export default function ComparateurPage() {
             </div>
 
             <div>
-              <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+              <h3 className="mb-2">
                 Combien coûte en moyenne une alimentation premium pour chien ?
               </h3>
               <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
@@ -197,7 +196,7 @@ export default function ComparateurPage() {
             </div>
 
             <div>
-              <h3 className="text-lg font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
+              <h3 className="mb-2">
                 Peut-on mélanger croquettes et pâtée pour son chien ?
               </h3>
               <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>

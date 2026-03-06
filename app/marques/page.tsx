@@ -14,11 +14,11 @@ export default function MarquesPage() {
   return (
     <div className="min-h-screen py-12 px-4 bg-[var(--bg-primary)]">
       <div className="max-w-[1280px] mx-auto">
-        <div className="text-center mb-10">
+        <div className="mb-10 max-w-[640px]">
           <h1 className="page-title mb-3">
             Notre sélection de marques
           </h1>
-          <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
+          <p className="text-[var(--text-secondary)]">
             On a comparé des dizaines de marques et retenu les 4 meilleures. Critères : qualité des
             ingrédients, digestibilité, rapport qualité/prix, retours clients.
           </p>
