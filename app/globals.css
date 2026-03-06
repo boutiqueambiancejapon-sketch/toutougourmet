@@ -316,3 +316,10 @@ h3 {
 .mdx-content tr:last-child td { border-bottom: none; }
 .mdx-content tr:nth-child(even) td { background: var(--bg-surface-2); }
 .mdx-content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+/* Verdict block — force text lisible sur fond sombre */
+.verdict-content p,
+.verdict-content li,
+.verdict-content ul,
+.verdict-content ol { color: var(--text-on-dark); }
+.verdict-content strong { color: #ffffff; }

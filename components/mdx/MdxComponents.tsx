@@ -266,7 +266,7 @@ export function Verdict({
           )}
         </div>
       </div>
-      <div className="text-base leading-relaxed" style={{ color: 'var(--text-on-dark)' }}>
+      <div className="verdict-content text-base leading-relaxed" style={{ color: 'var(--text-on-dark)' }}>
         {children}
       </div>
     </div>
