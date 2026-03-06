@@ -151,16 +151,16 @@ export function Stat({
 
   return (
     <div
-      className="rounded-[var(--radius-xl)] p-5 flex flex-col items-center gap-2 text-center"
+      className="rounded-[var(--radius-xl)] p-5 flex flex-col items-center gap-3 text-center"
       style={{ background: c.bg, borderTop: `3px solid ${c.accent}` }}
     >
       <p
-        className="font-black leading-none"
-        style={{ fontFamily: "'Fraunces', serif", color: c.text, fontSize: 'clamp(2rem, 5vw, 3rem)' }}
+        className="font-black leading-none whitespace-nowrap"
+        style={{ fontFamily: "'Fraunces', serif", color: c.text, fontSize: 'clamp(1.75rem, 4vw, 2.5rem)' }}
       >
         {value}
       </p>
-      <p className="text-xs font-semibold uppercase tracking-wide leading-snug" style={{ color: c.text, opacity: 0.75 }}>{label}</p>
+      <p className="text-sm leading-snug" style={{ color: c.text, opacity: 0.7 }}>{label}</p>
     </div>
   )
 }
