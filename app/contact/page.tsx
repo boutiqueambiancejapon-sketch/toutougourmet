@@ -16,7 +16,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen py-12 px-4 bg-[var(--bg-primary)]">
       <div className="max-w-[560px] mx-auto">
-        <h1 className="mb-3" style={{ fontFamily: "'Fraunces', serif" }}>
+        <h1 className="page-title mb-3">
           Contact
         </h1>
         <p className="text-[var(--text-secondary)] mb-8">

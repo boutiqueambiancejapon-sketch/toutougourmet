@@ -10,7 +10,7 @@ export default function MentionsLegalesPage() {
   return (
     <div className="min-h-screen py-12 px-4 bg-[var(--bg-primary)]">
       <div className="max-w-[720px] mx-auto">
-        <h1 className="mb-8" style={{ fontFamily: "'Fraunces', serif" }}>
+        <h1 className="page-title mb-8">
           Mentions légales
         </h1>
         <div className="flex flex-col gap-8 text-[var(--text-secondary)]">
