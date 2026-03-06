@@ -7,7 +7,7 @@ User-agent: *
 Disallow: /api/
 
 # Host
-Host: https://toutougourmet.fr
+Host: https://toutou-gourmet.com
 
 # Sitemaps
-Sitemap: https://toutougourmet.fr/sitemap.xml
+Sitemap: https://toutou-gourmet.com/sitemap.xml

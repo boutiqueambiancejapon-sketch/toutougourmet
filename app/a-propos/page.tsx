@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'À propos — Qui sommes-nous et comment on fonctionne',
   description:
     "Toutou Gourmet est un comparateur indépendant de pet food premium. Découvrez notre équipe, notre méthodologie et notre modèle d'affiliation.",
-  alternates: { canonical: 'https://toutougourmet.fr/a-propos' },
+  alternates: { canonical: 'https://toutou-gourmet.com/a-propos' },
 }
 
 export default function AProposPage() {

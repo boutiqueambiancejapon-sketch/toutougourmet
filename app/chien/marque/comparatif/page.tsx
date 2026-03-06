@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Comparatif croquettes pour chien',
   description:
     "Dog Chef vs Elmut, Franklin vs Petty Well... Tous nos comparatifs détaillés pour choisir la meilleure alimentation pour ton chien.",
-  alternates: { canonical: 'https://toutougourmet.fr/chien/marque/comparatif' },
+  alternates: { canonical: 'https://toutou-gourmet.com/chien/marque/comparatif' },
 }
 
 export default function ComparatifHubPage() {

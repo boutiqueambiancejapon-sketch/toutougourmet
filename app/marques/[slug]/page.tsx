@@ -23,12 +23,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${brand.name} : Avis Complet, Test & Promo 2026`,
     description: `Notre avis honnête sur ${brand.name} : composition, prix, avantages et inconvénients. ${brand.discountOffer}.`,
-    alternates: { canonical: `https://toutougourmet.fr/marques/${slug}` },
+    alternates: { canonical: `https://toutou-gourmet.com/marques/${slug}` },
     openGraph: {
       title: `${brand.name} — Notre avis honnête`,
       description: `Tout savoir sur ${brand.name} avant de commander.`,
-      url: `https://toutougourmet.fr/marques/${slug}`,
-      images: [{ url: `https://toutougourmet.fr/images/og/${slug}.webp`, width: 1200, height: 630 }],
+      url: `https://toutou-gourmet.com/marques/${slug}`,
+      images: [{ url: `https://toutou-gourmet.com/images/og/${slug}.webp`, width: 1200, height: 630 }],
     },
   }
 }
@@ -123,7 +123,7 @@ export default async function MarquePage({ params }: Props) {
     name: brand.name,
     brand: { '@type': 'Brand', name: brand.name },
     description: brand.tagline,
-    url: `https://toutougourmet.fr/marques/${slug}`,
+    url: `https://toutou-gourmet.com/marques/${slug}`,
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: brand.scores.global.toString(),

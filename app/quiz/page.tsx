@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: 'Quiz — Quelle nourriture pour mon chien ?',
   description:
     "5 questions pour trouver la meilleure nourriture pour ton chien. Résultat immédiat, recommandation personnalisée et code promo exclusif.",
-  alternates: { canonical: 'https://toutougourmet.fr/quiz' },
+  alternates: { canonical: 'https://toutou-gourmet.com/quiz' },
 }
 
 export default function QuizPage() {

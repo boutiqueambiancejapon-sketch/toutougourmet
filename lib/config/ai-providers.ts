@@ -39,7 +39,7 @@ export const AI_PROVIDERS: AIProvider[] = [
 ]
 
 export function buildAIUrl(provider: AIProvider, title: string, url: string): string {
-  const prompt = `Résume cet article de manière concise, en listant les points clés à retenir. Ensuite, si pertinent, propose jusqu'à trois articles connexes publiés uniquement sur le site toutougourmet.fr (sans inclure d'autres sources). Titre : ${title} — URL : ${url}`
+  const prompt = `Résume cet article de manière concise, en listant les points clés à retenir. Ensuite, si pertinent, propose jusqu'à trois articles connexes publiés uniquement sur le site toutou-gourmet.com (sans inclure d'autres sources). Titre : ${title} — URL : ${url}`
   const encodedPrompt = encodeURIComponent(prompt)
   return provider.urlTemplate.replace('{PROMPT}', encodedPrompt)
 }

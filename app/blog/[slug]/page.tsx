@@ -38,11 +38,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: frontmatter.title,
     description: frontmatter.description,
-    alternates: { canonical: `https://toutougourmet.fr/blog/${slug}` },
+    alternates: { canonical: `https://toutou-gourmet.com/blog/${slug}` },
     openGraph: {
       title: frontmatter.title,
       description: frontmatter.description,
-      url: `https://toutougourmet.fr/blog/${slug}`,
+      url: `https://toutou-gourmet.com/blog/${slug}`,
       type: 'article',
     },
   }
@@ -54,7 +54,7 @@ export default async function ArticlePage({ params }: Props) {
   if (!article) notFound()
 
   const { frontmatter, content, rawContent } = article
-  const canonicalUrl = `https://toutougourmet.fr/blog/${slug}`
+  const canonicalUrl = `https://toutou-gourmet.com/blog/${slug}`
   const tldrItems = extractTldr(rawContent)
   const readTime = estimateReadTime(rawContent)
 
@@ -68,7 +68,7 @@ export default async function ArticlePage({ params }: Props) {
     publisher: {
       '@type': 'Organization',
       name: 'Toutou Gourmet',
-      logo: { '@type': 'ImageObject', url: 'https://toutougourmet.fr/images/brand/logo.webp' },
+      logo: { '@type': 'ImageObject', url: 'https://toutou-gourmet.com/images/brand/logo.webp' },
     },
   }
 
@@ -105,7 +105,7 @@ export default async function ArticlePage({ params }: Props) {
           <SummarizeWithAI
             title={frontmatter.title}
             url={canonicalUrl}
-            domain="toutougourmet.fr"
+            domain="toutou-gourmet.com"
           />
 
           {/* Contenu MDX avec composants custom */}

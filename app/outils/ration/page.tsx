@@ -7,11 +7,11 @@ export const metadata: Metadata = {
   title: 'Calculateur ration journalière chien',
   description:
     'Calcule la ration journalière de ton chien ou chat selon son poids, âge et activité. Formule vétérinaire NRC 2006, résultat en grammes.',
-  alternates: { canonical: 'https://toutougourmet.fr/outils/ration' },
+  alternates: { canonical: 'https://toutou-gourmet.com/outils/ration' },
   openGraph: {
     title: 'Calculateur ration journalière chien',
     description: 'Combien de grammes par jour pour ton animal ? La formule vétérinaire standard adaptée à ton chien ou chat.',
-    url: 'https://toutougourmet.fr/outils/ration',
+    url: 'https://toutou-gourmet.com/outils/ration',
     type: 'website',
   },
 }

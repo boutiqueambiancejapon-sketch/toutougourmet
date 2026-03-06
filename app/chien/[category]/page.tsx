@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${cat.label} — Articles & Guides pour chiens`,
     description: cat.description,
-    alternates: { canonical: `https://toutougourmet.fr/chien/${category}` },
+    alternates: { canonical: `https://toutou-gourmet.com/chien/${category}` },
   }
 }
 

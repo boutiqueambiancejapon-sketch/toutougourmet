@@ -26,12 +26,12 @@ export const metadata: Metadata = {
   },
   description:
     'Le comparateur indépendant et honnête du pet food premium en France. Quiz personnalisé, comparatif des meilleures marques, avis vétérinaires.',
-  metadataBase: new URL('https://toutougourmet.fr'),
-  alternates: { canonical: 'https://toutougourmet.fr' },
+  metadataBase: new URL('https://toutou-gourmet.com'),
+  alternates: { canonical: 'https://toutou-gourmet.com' },
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
-    url: 'https://toutougourmet.fr',
+    url: 'https://toutou-gourmet.com',
     siteName: 'Toutou Gourmet',
     title: 'Toutou Gourmet — La bouffe premium pour ton animal, enfin comparée honnêtement',
     description:
@@ -53,12 +53,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               '@context': 'https://schema.org',
               '@type': 'WebSite',
               name: 'Toutou Gourmet',
-              url: 'https://toutougourmet.fr',
+              url: 'https://toutou-gourmet.com',
               description:
                 "Comparateur et guide d'alimentation premium pour chiens et chats en France",
               potentialAction: {
                 '@type': 'SearchAction',
-                target: 'https://toutougourmet.fr/recherche?q={search_term_string}',
+                target: 'https://toutou-gourmet.com/recherche?q={search_term_string}',
                 'query-input': 'required name=search_term_string',
               },
             }),
@@ -82,7 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Plausible Analytics */}
         <Script
           defer
-          data-domain="toutougourmet.fr"
+          data-domain="toutou-gourmet.com"
           src="https://plausible.io/js/script.js"
           strategy="afterInteractive"
         />

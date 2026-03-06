@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'Meilleures marques nourriture pour chien',
   description:
     "Franklin, Elmut, Petty Well, Dog Chef : notre sélection des meilleures croquettes et repas frais pour chien. Notes, prix et promos.",
-  alternates: { canonical: 'https://toutougourmet.fr/marques' },
+  alternates: { canonical: 'https://toutou-gourmet.com/marques' },
 }
 
 export default function MarquesPage() {
