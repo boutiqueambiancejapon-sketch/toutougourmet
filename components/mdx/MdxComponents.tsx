@@ -342,8 +342,10 @@ export function FaqItem({
 }) {
   return (
     <details className="group border-b border-[var(--border)] last:border-0">
-      <summary className="flex items-center justify-between gap-4 py-4 px-5 cursor-pointer list-none font-bold text-[var(--text-primary)] hover:text-[var(--accent-1)] transition-colors select-none">
-        {question}
+      <summary className="flex items-center justify-between gap-4 py-4 px-5 cursor-pointer list-none select-none hover:text-[var(--accent-1)] transition-colors">
+        <h3 className="font-bold text-[var(--text-primary)] text-base leading-snug m-0 group-hover:text-[var(--accent-1)] transition-colors">
+          {question}
+        </h3>
         <span className="shrink-0 text-[var(--text-muted)] transition-transform duration-200 group-open:rotate-180">▾</span>
       </summary>
       <div className="px-5 pb-4 pt-3 text-[var(--text-secondary)] leading-relaxed">

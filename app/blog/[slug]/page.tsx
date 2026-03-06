@@ -7,6 +7,7 @@ import { formatDate } from '@/lib/utils'
 import { TLDR } from '@/components/blog/TLDR'
 import { SummarizeWithAI } from '@/components/blog/SummarizeWithAI'
 import { NewsletterBlock } from '@/components/blog/NewsletterBlock'
+import { StickyCtaDogChef } from '@/components/blog/StickyCtaDogChef'
 import { Badge } from '@/components/ui/Badge'
 import {
   InfoBox, Callout, FeatureGrid, Feature,
@@ -133,11 +134,13 @@ export default async function ArticlePage({ params }: Props) {
           </div>
 
           {/* Newsletter */}
-          <div className="mt-10">
+          <div className="mt-10 pb-24">
             <NewsletterBlock />
           </div>
         </article>
       </div>
+
+      <StickyCtaDogChef />
     </>
   )
 }

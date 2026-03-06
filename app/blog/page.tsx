@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getAllArticles } from '@/lib/mdx'
-import { ArticleCard } from '@/components/blog/ArticleCard'
+import { BlogFilter } from '@/components/blog/BlogFilter'
 
 export const metadata: Metadata = {
   title: 'Conseils alimentation chien et chat',
@@ -35,11 +35,7 @@ export default function BlogPage() {
             <p className="text-[var(--text-muted)]">Les premiers articles arrivent très bientôt !</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {articles.map((article) => (
-              <ArticleCard key={article.slug} article={article} />
-            ))}
-          </div>
+          <BlogFilter articles={articles} />
         )}
 
         {/* Lien vers les comparatifs VS */}
