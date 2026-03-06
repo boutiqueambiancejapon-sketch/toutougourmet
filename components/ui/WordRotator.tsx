@@ -40,7 +40,7 @@ export function WordRotator({ words, intervalMs = 2000, className = '' }: WordRo
     <span
       ref={spanRef}
       className={className}
-      style={{ display: 'inline-block' }}
+      style={{ display: 'inline-block', transition: 'none' }}
     >
       {words[index]}
     </span>
