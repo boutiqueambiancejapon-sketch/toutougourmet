@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'Conseils alimentation chien et chat',
   description:
     "Articles de fond sur l'alimentation premium pour chiens et chats. Comparatifs, guides pratiques, décryptage des étiquettes.",
-  alternates: { canonical: 'https://toutou-gourmet.com/blog' },
+  alternates: { canonical: 'https://www.toutou-gourmet.com/blog' },
 }
 
 export default function BlogPage() {

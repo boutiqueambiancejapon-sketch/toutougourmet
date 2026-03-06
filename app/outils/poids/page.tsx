@@ -7,11 +7,11 @@ export const metadata: Metadata = {
   title: 'Score de condition corporelle chien et chat',
   description:
     'Ton chien est-il en surpoids, trop maigre ou à son poids idéal ? Évalue son score de condition corporelle (SCC) utilisé par les vétérinaires.',
-  alternates: { canonical: 'https://toutou-gourmet.com/outils/poids' },
+  alternates: { canonical: 'https://www.toutou-gourmet.com/outils/poids' },
   openGraph: {
     title: 'Score de condition corporelle chien',
     description: 'Ton animal est-il à son poids de forme ? Découvre son score de condition corporelle vétérinaire.',
-    url: 'https://toutou-gourmet.com/outils/poids',
+    url: 'https://www.toutou-gourmet.com/outils/poids',
     type: 'website',
   },
 }

@@ -40,11 +40,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: frontmatter.title,
     description: frontmatter.description,
-    alternates: { canonical: `https://toutou-gourmet.com/chien/${frontmatter.categorySlug}/${slug}` },
+    alternates: { canonical: `https://www.toutou-gourmet.com/chien/${frontmatter.categorySlug}/${slug}` },
     openGraph: {
       title: frontmatter.title,
       description: frontmatter.description,
-      url: `https://toutou-gourmet.com/chien/${frontmatter.categorySlug}/${slug}`,
+      url: `https://www.toutou-gourmet.com/chien/${frontmatter.categorySlug}/${slug}`,
       type: 'article',
     },
   }
@@ -58,7 +58,7 @@ export default async function ArticleCategoryPage({ params }: Props) {
   const cat = getCategoryBySlug(category)
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const { frontmatter, content, rawContent } = article!
-  const canonicalUrl = `https://toutou-gourmet.com/chien/${category}/${slug}`
+  const canonicalUrl = `https://www.toutou-gourmet.com/chien/${category}/${slug}`
   const tldrItems = extractTldr(rawContent)
   const readTime = estimateReadTime(rawContent)
 
@@ -72,7 +72,7 @@ export default async function ArticleCategoryPage({ params }: Props) {
     publisher: {
       '@type': 'Organization',
       name: 'Toutou Gourmet',
-      logo: { '@type': 'ImageObject', url: 'https://toutou-gourmet.com/images/brand/logo.webp' },
+      logo: { '@type': 'ImageObject', url: 'https://www.toutou-gourmet.com/images/brand/logo.webp' },
     },
   }
 

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Avis croquettes premium pour chien',
   description:
     "Dog Chef, Elmut, Franklin, Petty Well : avis complets, comparatifs et codes promo. Trouve la meilleure alimentation pour ton chien.",
-  alternates: { canonical: 'https://toutou-gourmet.com/chien/marque' },
+  alternates: { canonical: 'https://www.toutou-gourmet.com/chien/marque' },
 }
 
 const vsComparisons = [
