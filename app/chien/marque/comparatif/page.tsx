@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { brands } from '@/data/brands'
+import { getComparatif } from '@/lib/mdx'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 
 export const metadata: Metadata = {
@@ -46,21 +47,31 @@ export default function ComparatifHubPage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {comparisons.map(({ slug, label, a, b }) => (
-            <Link
-              key={slug}
-              href={`/chien/marque/${slug}`}
-              className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-5 flex flex-col gap-2 hover:border-[var(--accent-1)] hover:shadow-[var(--shadow-md)] transition-all group"
-            >
-              <p className="font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-1)] transition-colors">
-                {label}
-              </p>
-              <p className="text-sm text-[var(--text-muted)]">
-                {a} face à {b} — comparatif complet
-              </p>
-              <span className="text-sm text-[var(--accent-1)] mt-1">Lire le comparatif →</span>
-            </Link>
-          ))}
+          {comparisons.map(({ slug, label, a, b }) => {
+            const hasEditorial = !!getComparatif(slug)
+            return (
+              <Link
+                key={slug}
+                href={`/chien/marque/${slug}`}
+                className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-5 flex flex-col gap-2 hover:border-[var(--accent-1)] hover:shadow-[var(--shadow-md)] transition-all group"
+              >
+                <div className="flex items-center gap-2">
+                  <p className="font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-1)] transition-colors flex-1">
+                    {label}
+                  </p>
+                  {hasEditorial && (
+                    <span className="text-xs font-bold px-2 py-0.5 rounded-full shrink-0" style={{ background: 'var(--pill-green)', color: '#1A7A47' }}>
+                      Article complet
+                    </span>
+                  )}
+                </div>
+                <p className="text-sm text-[var(--text-muted)]">
+                  {a} face à {b} — comparatif {hasEditorial ? 'éditorial' : 'automatique'}
+                </p>
+                <span className="text-sm text-[var(--accent-1)] mt-1">Lire le comparatif →</span>
+              </Link>
+            )
+          })}
         </div>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { getAllArticles } from '@/lib/mdx'
 import { ArticleCard } from '@/components/blog/ArticleCard'
 
@@ -40,6 +41,17 @@ export default function BlogPage() {
             ))}
           </div>
         )}
+
+        {/* Lien vers les comparatifs VS */}
+        <div className="mt-12 bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <p className="font-bold text-[var(--text-primary)] mb-1">Comparatifs marque vs marque</p>
+            <p className="text-sm text-[var(--text-muted)]">Elmut vs Dog Chef, Franklin vs Petty Well… tous nos comparatifs détaillés.</p>
+          </div>
+          <Link href="/chien/marque/comparatif" className="btn-outline text-sm whitespace-nowrap">
+            Voir les comparatifs →
+          </Link>
+        </div>
       </div>
     </div>
   )
