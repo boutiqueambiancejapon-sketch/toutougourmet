@@ -10,8 +10,10 @@ interface WordRotatorProps {
 
 export function WordRotator({ words, intervalMs = 2000, className = '' }: WordRotatorProps) {
   const [index, setIndex] = useState(0)
+  const [animKey, setAnimKey] = useState(0)
 
   useEffect(() => {
+    setAnimKey(1)
     const timer = setInterval(() => {
       setIndex((i) => (i + 1) % words.length)
     }, intervalMs)
@@ -20,11 +22,11 @@ export function WordRotator({ words, intervalMs = 2000, className = '' }: WordRo
 
   return (
     <span
-      key={index}
+      key={`${index}-${animKey}`}
       className={className}
       style={{
         display: 'inline-block',
-        animation: 'wordSlideIn 0.3s ease both',
+        animation: animKey > 0 ? 'wordSlideIn 0.3s ease both' : undefined,
       }}
     >
       {words[index]}
