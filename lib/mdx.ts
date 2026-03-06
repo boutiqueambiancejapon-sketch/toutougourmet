@@ -1,6 +1,10 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import { marked } from 'marked'
+
+// Configure marked for GFM (tables, strikethrough, etc.)
+marked.setOptions({ gfm: true, breaks: false })
 
 const contentDir = path.join(process.cwd(), 'content')
 
@@ -18,7 +22,12 @@ export interface ArticleFrontmatter {
 export interface Article {
   slug: string
   frontmatter: ArticleFrontmatter
-  content: string
+  content: string      // HTML rendu
+  rawContent: string   // Markdown brut (pour extraction TL;DR, etc.)
+}
+
+function parseContent(rawContent: string): string {
+  return marked.parse(rawContent) as string
 }
 
 export function getAllArticles(): Article[] {
@@ -30,7 +39,12 @@ export function getAllArticles(): Article[] {
       const slug = file.replace(/\.mdx$/, '')
       const raw = fs.readFileSync(path.join(blogDir, file), 'utf-8')
       const { data, content } = matter(raw)
-      return { slug, frontmatter: data as ArticleFrontmatter, content }
+      return {
+        slug,
+        frontmatter: data as ArticleFrontmatter,
+        content: parseContent(content),
+        rawContent: content,
+      }
     })
     .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
 }
@@ -40,7 +54,12 @@ export function getArticleBySlug(slug: string): Article | null {
   if (!fs.existsSync(filePath)) return null
   const raw = fs.readFileSync(filePath, 'utf-8')
   const { data, content } = matter(raw)
-  return { slug, frontmatter: data as ArticleFrontmatter, content }
+  return {
+    slug,
+    frontmatter: data as ArticleFrontmatter,
+    content: parseContent(content),
+    rawContent: content,
+  }
 }
 
 export function getArticlesByCategory(category: string): Article[] {

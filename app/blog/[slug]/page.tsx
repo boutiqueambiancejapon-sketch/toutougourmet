@@ -42,7 +42,7 @@ export default async function ArticlePage({ params }: Props) {
   const article = getArticleBySlug(slug)
   if (!article) notFound()
 
-  const { frontmatter, content } = article
+  const { frontmatter, content, rawContent } = article
   const canonicalUrl = `https://toutougourmet.fr/blog/${slug}`
 
   const articleSchema = {
@@ -60,8 +60,8 @@ export default async function ArticlePage({ params }: Props) {
     },
   }
 
-  // Extract TL;DR from content (simple heuristic — first list after "TL;DR")
-  const tldrMatch = content.match(/##?\s*TL;DR[^\n]*\n([\s\S]*?)(?=\n##)/i)
+  // Extract TL;DR from raw markdown (before HTML conversion)
+  const tldrMatch = rawContent.match(/##?\s*TL;DR[^\n]*\n([\s\S]*?)(?=\n##)/i)
   const tldrItems: string[] = []
   if (tldrMatch) {
     const listPart = tldrMatch[1]
@@ -115,18 +115,25 @@ export default async function ArticlePage({ params }: Props) {
             domain="toutougourmet.fr"
           />
 
-          {/* Content */}
-          <div className="prose prose-stone max-w-none
-            [&_h2]:font-fraunces [&_h2]:font-bold [&_h2]:text-[var(--text-primary)] [&_h2]:mt-10 [&_h2]:mb-4
-            [&_h3]:font-fraunces [&_h3]:font-bold [&_h3]:text-[var(--text-primary)] [&_h3]:mt-6 [&_h3]:mb-3
-            [&_p]:text-[var(--text-secondary)] [&_p]:leading-relaxed [&_p]:mb-4
-            [&_a]:text-[var(--accent-1)] [&_a]:underline
-            [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ul]:text-[var(--text-secondary)]
-            [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1
-            [&_strong]:text-[var(--text-primary)] [&_strong]:font-semibold
-            [&_blockquote]:border-l-4 [&_blockquote]:border-[var(--accent-1)] [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-[var(--text-secondary)]">
-            <div dangerouslySetInnerHTML={{ __html: content }} />
-          </div>
+          {/* Content — HTML rendu depuis markdown */}
+          <div
+            className="prose prose-stone max-w-none mt-8
+              [&_h2]:font-black [&_h2]:text-[var(--text-primary)] [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-2xl
+              [&_h3]:font-bold [&_h3]:text-[var(--text-primary)] [&_h3]:mt-6 [&_h3]:mb-3 [&_h3]:text-xl
+              [&_p]:text-[var(--text-secondary)] [&_p]:leading-relaxed [&_p]:mb-4
+              [&_a]:text-[var(--accent-1)] [&_a]:underline [&_a]:underline-offset-2
+              [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1.5 [&_ul]:text-[var(--text-secondary)] [&_ul]:mb-4
+              [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1.5 [&_ol]:text-[var(--text-secondary)] [&_ol]:mb-4
+              [&_li]:leading-relaxed
+              [&_strong]:text-[var(--text-primary)] [&_strong]:font-semibold
+              [&_em]:italic
+              [&_blockquote]:border-l-4 [&_blockquote]:border-[var(--accent-1)] [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-[var(--text-secondary)] [&_blockquote]:mb-4
+              [&_table]:w-full [&_table]:border-collapse [&_table]:mb-6
+              [&_th]:bg-[var(--bg-surface-2)] [&_th]:p-3 [&_th]:text-left [&_th]:font-semibold [&_th]:border [&_th]:border-[var(--border)]
+              [&_td]:p-3 [&_td]:border [&_td]:border-[var(--border)] [&_td]:text-[var(--text-secondary)]
+              [&_hr]:border-[var(--border)] [&_hr]:my-8"
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
 
           {/* Tags */}
           {frontmatter.tags && frontmatter.tags.length > 0 && (
