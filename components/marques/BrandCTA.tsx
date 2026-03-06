@@ -16,14 +16,12 @@ export function BrandCTA({
   variant = 'primary',
 }: BrandCTAProps) {
   return (
-    <div className="flex flex-col items-center gap-2 h-full">
-      <div className="flex-1 flex items-end w-full">
-        {offer && (
-          <p className="text-sm font-semibold text-center w-full pb-1" style={{ color: 'var(--accent-1)' }}>
-            🎉 {offer}
-          </p>
-        )}
-      </div>
+    <div className="flex flex-col items-center gap-2">
+      {offer && (
+        <p className="text-sm font-semibold text-center w-full" style={{ color: 'var(--accent-1)' }}>
+          🎉 {offer}
+        </p>
+      )}
       <a
         href={affiliateUrl}
         target="_blank"

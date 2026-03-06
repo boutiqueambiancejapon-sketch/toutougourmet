@@ -426,7 +426,7 @@ function ComparatifMdxPage({
         </header>
 
         {brandA && brandB && (
-          <div className="grid grid-cols-2 gap-4 mb-8 p-5 bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)]">
+          <div className="grid grid-cols-2 gap-4 mb-8 p-5 bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] items-start">
             <BrandCTA brandName={brandA.name} affiliateUrl={brandA.affiliateUrl} offer={brandA.discountOffer} code={brandA.affiliateCode} variant="primary" />
             <BrandCTA brandName={brandB.name} affiliateUrl={brandB.affiliateUrl} offer={brandB.discountOffer} code={brandB.affiliateCode} variant="primary" />
           </div>
