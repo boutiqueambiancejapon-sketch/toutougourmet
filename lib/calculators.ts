@@ -233,16 +233,16 @@ export function buildCostComparisons(dailyCalories: number): CostComparison[] {
     {
       type: 'repas-frais',
       label: 'Repas frais (livraison)',
-      pricePerKg: 25.0,
-      kcalPer100g: 115,
+      pricePerKg: 8.0,     // tarif abonnement mensuel (~8€/kg livré, hors remise 1ère box)
+      kcalPer100g: 145,    // densité moyenne repas frais premium
       pros: ['Meilleure digestibilité', 'Ingrédients qualité humaine', 'Sans conservateurs'],
       cons: ['Le plus cher', 'Nécessite un frigo', 'Logistique de livraison'],
     },
     {
       type: 'mixte',
       label: 'Mix croquettes premium + repas frais',
-      pricePerKg: 18.5,
-      kcalPer100g: 250,
+      pricePerKg: 7.0,     // prix moyen pondéré ~70% croquettes + 30% frais
+      kcalPer100g: 200,    // densité intermédiaire
       pros: ['Bon compromis qualité/prix', 'Variété appréciée des animaux'],
       cons: ['Calcul des rations plus complexe'],
     },
