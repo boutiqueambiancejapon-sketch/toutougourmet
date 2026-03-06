@@ -38,7 +38,7 @@ export function BrandsGrid() {
                   <div className="flex items-start justify-between mb-4">
                     <span className="text-3xl">{accent.emoji}</span>
                     <span className="text-xs font-bold px-3 py-1 rounded-full" style={{ background: accent.pill, color: 'var(--text-primary)' }}>
-                      {brand.type.includes('repas-frais') ? 'Repas frais' : 'Croquettes'}
+                      {brand.type.includes('repas frais') ? 'Repas frais' : 'Croquettes'}
                     </span>
                   </div>
                   <h3 className="text-xl font-black text-[var(--text-primary)] mb-1" style={{ fontFamily: "'Fraunces', serif" }}>
@@ -50,10 +50,10 @@ export function BrandsGrid() {
                 <div className="px-6 pb-4">
                   <div className="flex items-center gap-2">
                     <div className="flex-1 h-2 rounded-full overflow-hidden" style={{ background: 'var(--border)' }}>
-                      <div className="h-full rounded-full" style={{ width: `${(score / 10) * 100}%`, background: 'var(--accent-1)' }} />
+                      <div className="h-full rounded-full" style={{ width: `${(score / 5) * 100}%`, background: 'var(--accent-1)' }} />
                     </div>
                     <span className="text-base font-black text-[var(--accent-1)] shrink-0" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                      {score}/10
+                      {score}/5
                     </span>
                   </div>
                 </div>

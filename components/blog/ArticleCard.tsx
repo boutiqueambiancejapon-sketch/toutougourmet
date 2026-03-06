@@ -77,7 +77,7 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
       <div className="flex flex-col gap-2.5 p-5 flex-1">
         <h2
           className="font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-1)] leading-snug transition-colors"
-          style={{ fontFamily: "'Fraunces', serif", fontSize: '1.1rem' }}
+          style={{ fontFamily: "'Fraunces', serif", fontSize: 'clamp(1rem, 2vw, 1.2rem)' }}
         >
           {frontmatter.title}
         </h2>
