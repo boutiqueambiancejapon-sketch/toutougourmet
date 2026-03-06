@@ -1,42 +1,59 @@
 import Link from 'next/link'
 
-const steps = [
-  { icon: '🐶', title: 'Ton animal', desc: 'Chien ou chat, âge, problèmes de santé' },
-  { icon: '💰', title: 'Ton budget', desc: 'De < 30€ à + de 100€ par mois' },
-  { icon: '🍖', title: 'Ta recommandation', desc: 'La marque idéale + des alternatives' },
-]
-
 export function QuizTeaser() {
   return (
-    <section className="py-16 px-4 bg-[var(--bg-primary)]">
-      <div className="max-w-[1280px] mx-auto">
-        <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-8 md:p-10 text-center shadow-[var(--shadow-md)]">
-          <p className="text-sm font-semibold text-[var(--accent-1)] uppercase tracking-wider mb-2">
-            ⚡ Quiz — 2 minutes
-          </p>
-          <h2 className="mb-3" style={{ fontFamily: "'Fraunces', serif" }}>
-            Quelle marque est faite pour ton animal ?
-          </h2>
-          <p className="text-[var(--text-secondary)] mb-8 max-w-lg mx-auto">
-            5 questions. On analyse ton profil. On te recommande la meilleure option. Sans te noyer
-            dans les détails.
-          </p>
+    <section className="bg-[var(--bg-dark)] px-6 md:px-10 py-24 relative overflow-hidden">
+      {/* Blob rose */}
+      <div aria-hidden="true" className="absolute top-[-40px] right-[-40px] w-[300px] h-[300px] rounded-full opacity-15 blur-3xl pointer-events-none" style={{ background: 'var(--pill-rose)' }} />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            {steps.map((step, i) => (
-              <div key={i} className="flex flex-col items-center gap-2">
-                <span className="text-4xl">{step.icon}</span>
-                <p className="font-bold text-[var(--text-primary)]" style={{ fontFamily: "'Fraunces', serif" }}>
-                  {step.title}
-                </p>
-                <p className="text-sm text-[var(--text-muted)]">{step.desc}</p>
+      <div className="max-w-[1280px] mx-auto">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10">
+
+          {/* Texte */}
+          <div className="lg:max-w-[560px]">
+            <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-6" style={{ background: 'rgba(245,238,230,0.12)', color: 'var(--text-on-dark)' }}>
+              ⚡ 2 minutes chrono
+            </span>
+            <h2 className="text-[var(--text-on-dark)] mb-5" style={{ fontFamily: "'Fraunces', serif" }}>
+              Quelle marque est faite pour{' '}
+              <span className="inline-block px-3 py-0.5 rounded-[var(--radius-md)]" style={{ background: 'var(--pill-blue)', color: 'var(--text-primary)' }}>
+                ton animal ?
+              </span>
+            </h2>
+            <p className="text-base leading-relaxed mb-8" style={{ color: 'var(--text-on-dark)', opacity: 0.70 }}>
+              5 questions. On analyse le profil de ta bestiole. On te recommande la meilleure option — sans te noyer dans les détails.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/quiz" className="btn-dark text-base px-8 py-4">
+                Faire le quiz gratuit →
+              </Link>
+            </div>
+          </div>
+
+          {/* Steps */}
+          <div className="flex flex-col gap-4 lg:max-w-[380px] w-full">
+            {[
+              { num: '01', icon: '🐶', title: 'Ton animal', desc: 'Chien ou chat, âge, taille, problèmes de santé' },
+              { num: '02', icon: '💰', title: 'Ton budget', desc: 'De moins de 30€ à plus de 100€ par mois' },
+              { num: '03', icon: '🎯', title: 'Ta recommandation', desc: 'La marque idéale + des alternatives' },
+            ].map((step) => (
+              <div
+                key={step.num}
+                className="flex items-start gap-4 rounded-[var(--radius-lg)] p-4"
+                style={{ background: 'rgba(245,238,230,0.06)', border: '1px solid rgba(245,238,230,0.10)' }}
+              >
+                <span className="text-xs font-black opacity-30 shrink-0 mt-0.5" style={{ color: 'var(--text-on-dark)', fontFamily: "'JetBrains Mono', monospace" }}>
+                  {step.num}
+                </span>
+                <span className="text-xl shrink-0">{step.icon}</span>
+                <div>
+                  <p className="text-sm font-bold mb-0.5" style={{ color: 'var(--text-on-dark)' }}>{step.title}</p>
+                  <p className="text-sm" style={{ color: 'var(--text-on-dark)', opacity: 0.55 }}>{step.desc}</p>
+                </div>
               </div>
             ))}
           </div>
 
-          <Link href="/quiz" className="btn-primary text-base px-8 py-3 inline-block">
-            Je fais le quiz maintenant →
-          </Link>
         </div>
       </div>
     </section>

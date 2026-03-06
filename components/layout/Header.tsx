@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { Menu, X, Search } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 
 const navLinks = [
   { href: '/quiz', label: 'Le Quiz' },
@@ -16,23 +16,33 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 bg-[var(--bg-surface)] border-b border-[var(--border)] shadow-[var(--shadow-sm)]">
-      <div className="max-w-[1280px] mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 font-bold text-xl" style={{ fontFamily: "'Fraunces', serif", color: 'var(--text-primary)' }}>
-          <span className="text-2xl">🐾</span>
-          <span>
-            Toutou<span style={{ color: 'var(--accent-1)' }}>Gourmet</span>
+    <header className="sticky top-0 z-50 bg-[var(--bg-surface)]/95 backdrop-blur-sm border-b border-[var(--border)]">
+      <div className="max-w-[1280px] mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+
+        {/* Logo textuel */}
+        <Link
+          href="/"
+          className="flex items-center gap-2"
+          style={{ fontFamily: "'Fraunces', serif" }}
+        >
+          <span className="text-xl font-black tracking-tight text-[var(--text-primary)]">
+            Toutou
+          </span>
+          <span
+            className="text-xl font-black tracking-tight px-2 py-0.5 rounded-[var(--radius-sm)]"
+            style={{ background: 'var(--pill-rose)', color: 'var(--text-primary)' }}
+          >
+            Gourmet
           </span>
         </Link>
 
         {/* Nav desktop */}
-        <nav className="hidden md:flex items-center gap-6" aria-label="Navigation principale">
+        <nav className="hidden md:flex items-center gap-1" aria-label="Navigation principale">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--accent-1)]"
+              className="text-sm font-semibold px-3 py-1.5 rounded-[var(--radius-md)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-2)] transition-all"
             >
               {link.label}
             </Link>
@@ -41,7 +51,7 @@ export default function Header() {
 
         {/* CTA desktop */}
         <div className="hidden md:flex items-center gap-3">
-          <Link href="/quiz" className="btn-primary text-sm py-2 px-4">
+          <Link href="/quiz" className="btn-primary text-sm py-2 px-5">
             Faire le quiz →
           </Link>
         </div>
@@ -59,22 +69,18 @@ export default function Header() {
 
       {/* Menu mobile */}
       {menuOpen && (
-        <div className="md:hidden border-t border-[var(--border)] bg-[var(--bg-surface)] px-4 py-4 flex flex-col gap-3">
+        <div className="md:hidden border-t border-[var(--border)] bg-[var(--bg-surface)] px-6 py-5 flex flex-col gap-1">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className="text-base font-medium text-[var(--text-primary)] py-2 border-b border-[var(--border)] last:border-0"
+              className="text-base font-semibold text-[var(--text-primary)] py-3 border-b border-[var(--border)] last:border-0"
             >
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/quiz"
-            onClick={() => setMenuOpen(false)}
-            className="btn-primary text-center mt-2"
-          >
+          <Link href="/quiz" onClick={() => setMenuOpen(false)} className="btn-primary text-center mt-4">
             Faire le quiz →
           </Link>
         </div>
