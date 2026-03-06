@@ -38,11 +38,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: frontmatter.title,
     description: frontmatter.description,
-    alternates: { canonical: `https://toutou-gourmet.com/blog/${slug}` },
+    alternates: { canonical: `https://www.toutou-gourmet.com/blog/${slug}` },
     openGraph: {
       title: frontmatter.title,
       description: frontmatter.description,
-      url: `https://toutou-gourmet.com/blog/${slug}`,
+      url: `https://www.toutou-gourmet.com/blog/${slug}`,
       type: 'article',
     },
   }
@@ -54,7 +54,7 @@ export default async function ArticlePage({ params }: Props) {
   if (!article) notFound()
 
   const { frontmatter, content, rawContent } = article
-  const canonicalUrl = `https://toutou-gourmet.com/blog/${slug}`
+  const canonicalUrl = `https://www.toutou-gourmet.com/blog/${slug}`
   const tldrItems = extractTldr(rawContent)
   const readTime = estimateReadTime(rawContent)
 
@@ -68,7 +68,7 @@ export default async function ArticlePage({ params }: Props) {
     publisher: {
       '@type': 'Organization',
       name: 'Toutou Gourmet',
-      logo: { '@type': 'ImageObject', url: 'https://toutou-gourmet.com/images/brand/logo.webp' },
+      logo: { '@type': 'ImageObject', url: 'https://www.toutou-gourmet.com/images/brand/logo.webp' },
     },
   }
 

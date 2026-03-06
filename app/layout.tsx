@@ -26,12 +26,12 @@ export const metadata: Metadata = {
   },
   description:
     'Le comparateur indépendant et honnête du pet food premium en France. Quiz personnalisé, comparatif des meilleures marques, avis vétérinaires.',
-  metadataBase: new URL('https://toutou-gourmet.com'),
-  alternates: { canonical: 'https://toutou-gourmet.com' },
+  metadataBase: new URL('https://www.toutou-gourmet.com'),
+  alternates: { canonical: 'https://www.toutou-gourmet.com' },
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
-    url: 'https://toutou-gourmet.com',
+    url: 'https://www.toutou-gourmet.com',
     siteName: 'Toutou Gourmet',
     title: 'Toutou Gourmet — La bouffe premium pour ton animal, enfin comparée honnêtement',
     description:
@@ -53,12 +53,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               '@context': 'https://schema.org',
               '@type': 'WebSite',
               name: 'Toutou Gourmet',
-              url: 'https://toutou-gourmet.com',
+              url: 'https://www.toutou-gourmet.com',
               description:
                 "Comparateur et guide d'alimentation premium pour chiens et chats en France",
               potentialAction: {
                 '@type': 'SearchAction',
-                target: 'https://toutou-gourmet.com/recherche?q={search_term_string}',
+                target: 'https://www.toutou-gourmet.com/recherche?q={search_term_string}',
                 'query-input': 'required name=search_term_string',
               },
             }),

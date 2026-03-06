@@ -13,7 +13,7 @@ export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
       '@type': 'ListItem',
       position: i + 1,
       name: item.label,
-      ...(item.href ? { item: `https://toutou-gourmet.com${item.href}` } : {}),
+      ...(item.href ? { item: `https://www.toutou-gourmet.com${item.href}` } : {}),
     })),
   }
 

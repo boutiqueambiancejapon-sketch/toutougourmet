@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://toutou-gourmet.com',
+  siteUrl: 'https://www.toutou-gourmet.com',
   generateRobotsTxt: true,
   changefreq: 'weekly',
   priority: 0.7,

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Comparatif nourriture pour chien',
   description:
     'Comparez Franklin, Elmut, Petty Well et Dog Chef : notes, prix, ingrédients, croquettes et nourriture fraîche pour chien. Offres et promos 2026.',
-  alternates: { canonical: 'https://toutou-gourmet.com/comparateur' },
+  alternates: { canonical: 'https://www.toutou-gourmet.com/comparateur' },
 }
 
 const brandBgs = ['#C2F0D5', '#FFD6E3', '#C8DCFF', '#FFE8B5']
