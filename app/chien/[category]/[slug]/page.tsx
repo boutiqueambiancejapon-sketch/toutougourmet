@@ -8,6 +8,8 @@ import { TLDR } from '@/components/blog/TLDR'
 import { SummarizeWithAI } from '@/components/blog/SummarizeWithAI'
 import { NewsletterBlock } from '@/components/blog/NewsletterBlock'
 import { Badge } from '@/components/ui/Badge'
+import { Breadcrumb } from '@/components/ui/Breadcrumb'
+import { getCategoryBySlug } from '@/data/categories'
 import {
   InfoBox, Callout, FeatureGrid, Feature,
   StatRow, Stat, CompareTable, CompareThead, CompareTh,
@@ -15,10 +17,9 @@ import {
 } from '@/components/mdx/MdxComponents'
 
 interface Props {
-  params: Promise<{ slug: string }>
+  params: Promise<{ category: string; slug: string }>
 }
 
-// Composants disponibles dans les fichiers MDX
 const mdxComponents = {
   InfoBox, Callout, FeatureGrid, Feature,
   StatRow, Stat, CompareTable, CompareThead, CompareTh,
@@ -26,8 +27,9 @@ const mdxComponents = {
 }
 
 export async function generateStaticParams() {
-  const articles = getAllArticles()
-  return articles.map((a) => ({ slug: a.slug }))
+  return getAllArticles()
+    .filter((a) => a.frontmatter.categorySlug)
+    .map((a) => ({ category: a.frontmatter.categorySlug, slug: a.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -38,23 +40,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: frontmatter.title,
     description: frontmatter.description,
-    alternates: { canonical: `https://toutougourmet.fr/blog/${slug}` },
+    alternates: { canonical: `https://toutougourmet.fr/chien/${frontmatter.categorySlug}/${slug}` },
     openGraph: {
       title: frontmatter.title,
       description: frontmatter.description,
-      url: `https://toutougourmet.fr/blog/${slug}`,
+      url: `https://toutougourmet.fr/chien/${frontmatter.categorySlug}/${slug}`,
       type: 'article',
     },
   }
 }
 
-export default async function ArticlePage({ params }: Props) {
-  const { slug } = await params
+export default async function ArticleCategoryPage({ params }: Props) {
+  const { category, slug } = await params
   const article = getArticleBySlug(slug)
-  if (!article) notFound()
+  if (!article || article.frontmatter.categorySlug !== category) notFound()
 
-  const { frontmatter, content, rawContent } = article
-  const canonicalUrl = `https://toutougourmet.fr/blog/${slug}`
+  const cat = getCategoryBySlug(category)
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const { frontmatter, content, rawContent } = article!
+  const canonicalUrl = `https://toutougourmet.fr/chien/${category}/${slug}`
   const tldrItems = extractTldr(rawContent)
   const readTime = estimateReadTime(rawContent)
 
@@ -74,15 +78,17 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
 
       <div className="min-h-screen py-10 px-6 bg-[var(--bg-primary)]">
         <article className="max-w-[720px] mx-auto">
+          <Breadcrumb items={[
+            { label: 'Accueil', href: '/' },
+            { label: 'Chien', href: '/chien' },
+            ...(cat ? [{ label: cat.label, href: `/chien/${category}` }] : []),
+            { label: frontmatter.title },
+          ]} />
 
-          {/* Header */}
           <header className="mb-8">
             <div className="flex items-center gap-2 mb-4 flex-wrap">
               <Badge>{frontmatter.category}</Badge>
@@ -98,22 +104,14 @@ export default async function ArticlePage({ params }: Props) {
             </p>
           </header>
 
-          {/* TL;DR */}
           {tldrItems.length > 0 && <TLDR items={tldrItems} />}
 
-          {/* SummarizeWithAI */}
-          <SummarizeWithAI
-            title={frontmatter.title}
-            url={canonicalUrl}
-            domain="toutougourmet.fr"
-          />
+          <SummarizeWithAI title={frontmatter.title} url={canonicalUrl} domain="toutougourmet.fr" />
 
-          {/* Contenu MDX avec composants custom */}
           <div className="mdx-content mt-8">
             <MDXRemote source={stripTldr(content)} components={mdxComponents} />
           </div>
 
-          {/* Tags */}
           {frontmatter.tags && frontmatter.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-10 pt-6 border-t border-[var(--border)]">
               {frontmatter.tags.map((tag: string) => (
@@ -122,17 +120,11 @@ export default async function ArticlePage({ params }: Props) {
             </div>
           )}
 
-          {/* Liens internes */}
           <div className="flex flex-wrap gap-4 mt-6 text-sm font-medium">
-            <Link href="/quiz" className="text-[var(--accent-1)] hover:underline">
-              → Faire le quiz personnalisé
-            </Link>
-            <Link href="/comparateur" className="text-[var(--accent-1)] hover:underline">
-              → Voir le comparateur complet
-            </Link>
+            <Link href="/quiz" className="text-[var(--accent-1)] hover:underline">→ Faire le quiz personnalisé</Link>
+            <Link href="/comparateur" className="text-[var(--accent-1)] hover:underline">→ Voir le comparateur complet</Link>
           </div>
 
-          {/* Newsletter */}
           <div className="mt-10">
             <NewsletterBlock />
           </div>

@@ -10,7 +10,7 @@ export default function PolitiqueConfidentialitePage() {
   return (
     <div className="min-h-screen py-12 px-4 bg-[var(--bg-primary)]">
       <div className="max-w-[720px] mx-auto">
-        <h1 className="mb-8" style={{ fontFamily: "'Fraunces', serif" }}>
+        <h1 className="page-title mb-8">
           Politique de confidentialité
         </h1>
         <p className="text-sm text-[var(--text-muted)] mb-8">Dernière mise à jour : mars 2026</p>

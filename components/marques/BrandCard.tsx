@@ -60,7 +60,7 @@ export function BrandCard({ brand, showCTA = true }: BrandCardProps) {
           </Link>
         )}
         <Link
-          href={`/marques/${brand.slug}`}
+          href={`/chien/marque/${brand.slug}`}
           className="text-center text-sm font-medium hover:underline"
           style={{ color: accent }}
         >

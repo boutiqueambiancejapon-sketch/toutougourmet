@@ -17,6 +17,14 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
     turbopackUseSystemTlsCerts: true,
   },
+  async redirects() {
+    return [
+      // Anciennes URLs marques → nouvelle structure /chien/marque/
+      { source: '/marques', destination: '/chien/marque', permanent: true },
+      { source: '/marques/:slug', destination: '/chien/marque/:slug', permanent: true },
+    ]
+  },
+
   async headers() {
     return [
       {
@@ -32,7 +40,7 @@ const nextConfig: NextConfig = {
           {
             key: 'Content-Security-Policy',
             value:
-              "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' plausible.io; img-src 'self' data: blob:; font-src 'self' fonts.gstatic.com; connect-src 'self' plausible.io;",
+              "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' plausible.io;",
           },
         ],
       },
