@@ -21,31 +21,32 @@ export function calculateDailyCalories(params: {
 }): number {
   const { animal, weightKg, ageGroup, activityLevel, sterilized, isRaceHighEnergy } = params
 
-  // Coefficient de base selon âge
-  let baseCoeff = 130
-  if (animal === 'chat') baseCoeff = 100
-  if (ageGroup === 'senior') baseCoeff = animal === 'chien' ? 95 : 80
-  if (isRaceHighEnergy) baseCoeff = 180
+  // Base RER (Resting Energy Requirement) — FEDIAF/NRC 2006
+  // Chien : 70 × W^0.75 | Chat : 50 × W^0.75
+  // NB : le facteur 130 anciennement utilisé incluait déjà l'activité,
+  //      ce qui causait un double-comptage avec les facteurs ci-dessous.
+  let baseCoeff = animal === 'chat' ? 50 : 70
+  if (ageGroup === 'senior') baseCoeff = animal === 'chien' ? 55 : 40
+  if (isRaceHighEnergy) baseCoeff = 90
 
-  // BEE de base
-  let bee = baseCoeff * Math.pow(weightKg, 0.75)
+  let ber = baseCoeff * Math.pow(weightKg, 0.75)
 
-  // Facteur d'activité
+  // Facteur d'activité appliqué sur le RER
   const activityFactors: Record<ActivityLevel, number> = {
-    sedentaire: 1.0,
-    normal: 1.3,
-    actif: 1.6,
-    'tres-actif': 2.0,
+    sedentaire:   1.2,
+    normal:       1.5,
+    actif:        1.8,
+    'tres-actif': 2.3,
   }
-  bee *= activityFactors[activityLevel]
+  ber *= activityFactors[activityLevel]
 
-  // Chiots : besoins augmentés
-  if (ageGroup === 'chiot') bee *= 2.0
+  // Chiots : besoins augmentés (~1.8× adulte)
+  if (ageGroup === 'chiot') ber *= 1.8
 
   // Stérilisé : -15%
-  if (sterilized) bee *= 0.85
+  if (sterilized) ber *= 0.85
 
-  return Math.round(bee)
+  return Math.round(ber)
 }
 
 /**
@@ -98,18 +99,18 @@ export const brandPricings: BrandPricing[] = [
   {
     name: 'Elmut',
     slug: 'elmut',
-    pricePerKg: 24.0,
+    pricePerKg: 8.0,    // tarif abonnement mensuel (~8€/kg livré)
     type: 'repas-frais',
-    kcalPer100g: 115,
+    kcalPer100g: 140,   // repas frais, densité élevée
     affiliateUrl: 'https://c3po.link/QWMW4k6mbU',
     offer: '-20% 1ère commande',
   },
   {
     name: 'Dog Chef',
     slug: 'dog-chef',
-    pricePerKg: 27.0,
+    pricePerKg: 8.5,    // tarif abonnement mensuel hors remise 1ère box
     type: 'repas-frais',
-    kcalPer100g: 110,
+    kcalPer100g: 150,   // recettes légèrement plus denses qu'Elmut
     affiliateUrl: 'https://www.dogchef.com/fr/code/WZU7090',
     offer: '-35% box d\'essai',
   },
@@ -232,16 +233,16 @@ export function buildCostComparisons(dailyCalories: number): CostComparison[] {
     {
       type: 'repas-frais',
       label: 'Repas frais (livraison)',
-      pricePerKg: 25.0,
-      kcalPer100g: 115,
+      pricePerKg: 8.0,     // tarif abonnement mensuel (~8€/kg livré, hors remise 1ère box)
+      kcalPer100g: 145,    // densité moyenne repas frais premium
       pros: ['Meilleure digestibilité', 'Ingrédients qualité humaine', 'Sans conservateurs'],
       cons: ['Le plus cher', 'Nécessite un frigo', 'Logistique de livraison'],
     },
     {
       type: 'mixte',
       label: 'Mix croquettes premium + repas frais',
-      pricePerKg: 18.5,
-      kcalPer100g: 250,
+      pricePerKg: 7.0,     // prix moyen pondéré ~70% croquettes + 30% frais
+      kcalPer100g: 200,    // densité intermédiaire
       pros: ['Bon compromis qualité/prix', 'Variété appréciée des animaux'],
       cons: ['Calcul des rations plus complexe'],
     },

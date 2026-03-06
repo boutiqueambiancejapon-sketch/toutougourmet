@@ -151,13 +151,15 @@ export function BudgetCalculator() {
                   i === 0 ? 'border-[var(--accent-1)] bg-[var(--accent-1)]/5' : 'border-[var(--border)]'
                 }`}
               >
-                {i === 0 && (
-                  <span className="text-xs font-semibold text-[var(--accent-1)] bg-[var(--accent-1)]/10 px-2 py-0.5 rounded-full whitespace-nowrap">
-                    Moins cher
-                  </span>
-                )}
                 <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-[var(--text-primary)] text-sm">{r.name}</p>
+                  <div className="flex items-center gap-2 flex-wrap mb-0.5">
+                    {i === 0 && (
+                      <span className="text-xs font-semibold text-[var(--accent-1)] bg-[var(--accent-1)]/10 px-2 py-0.5 rounded-full whitespace-nowrap">
+                        Moins cher
+                      </span>
+                    )}
+                    <p className="font-semibold text-[var(--text-primary)] text-sm">{r.name}</p>
+                  </div>
                   <p className="text-xs text-[var(--text-muted)]">
                     {r.type === 'croquettes' ? '🥣 Croquettes' : '🍖 Repas frais'} • {r.offer}
                   </p>
