@@ -59,7 +59,7 @@ export default function OutilsPage() {
           <p className="text-sm font-semibold text-[var(--accent-1)] uppercase tracking-wider mb-2">
             🛠️ Outils gratuits
           </p>
-          <h1 className="mb-4" style={{ fontFamily: "'Fraunces', serif" }}>
+          <h1 className="page-title mb-4" >
             Calculateurs & Simulateurs
           </h1>
           <p className="text-[var(--text-secondary)] max-w-2xl mx-auto text-lg leading-relaxed">
@@ -79,7 +79,7 @@ export default function OutilsPage() {
               <div className="flex items-start gap-4">
                 <span className="text-5xl shrink-0">{tool.icon}</span>
                 <div className="flex-1">
-                  <h2 className="text-lg font-black text-[var(--text-primary)] mb-2 group-hover:text-[var(--accent-1)] transition-colors" style={{ fontFamily: "'Fraunces', serif" }}>
+                  <h2 className="text-lg font-black text-[var(--text-primary)] mb-2 group-hover:text-[var(--accent-1)] transition-colors" >
                     {tool.title}
                   </h2>
                   <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
@@ -111,7 +111,7 @@ export default function OutilsPage() {
 
         {/* CTA bas */}
         <div className="mt-12 bg-[var(--bg-surface-2)] border border-[var(--border)] rounded-[var(--radius-xl)] p-8 text-center">
-          <h2 className="text-xl font-black mb-2" style={{ fontFamily: "'Fraunces', serif" }}>
+          <h2 className="text-xl font-black mb-2" >
             Tu veux une recommandation personnalisée ?
           </h2>
           <p className="text-[var(--text-secondary)] mb-5 text-sm">

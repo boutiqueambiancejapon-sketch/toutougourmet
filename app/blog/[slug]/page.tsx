@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Image from 'next/image'
+
 import Link from 'next/link'
 import { getAllArticles, getArticleBySlug } from '@/lib/mdx'
 import { formatDate } from '@/lib/utils'
@@ -86,23 +86,12 @@ export default async function ArticlePage({ params }: Props) {
                 Mis à jour le {formatDate(frontmatter.updatedAt || frontmatter.date)}
               </span>
             </div>
-            <h1 className="mb-4" style={{ fontFamily: "'Fraunces', serif" }}>
+            <h1 className="page-title mb-4">
               {frontmatter.title}
             </h1>
             <p className="text-lg text-[var(--text-secondary)] leading-relaxed">
               {frontmatter.description}
             </p>
-            {frontmatter.image && (
-              <div className="relative aspect-[16/9] mt-6 rounded-[var(--radius-xl)] overflow-hidden">
-                <Image
-                  src={frontmatter.image}
-                  alt={frontmatter.title}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            )}
           </header>
 
           {/* TL;DR */}

@@ -13,24 +13,28 @@ export default function BlogPage() {
   const articles = getAllArticles()
 
   return (
-    <div className="min-h-screen py-12 px-4 bg-[var(--bg-primary)]">
+    <div className="min-h-screen py-10 px-6 md:px-10 bg-[var(--bg-primary)]">
       <div className="max-w-[1280px] mx-auto">
-        <div className="text-center mb-10">
-          <h1 className="mb-3" style={{ fontFamily: "'Fraunces', serif" }}>
-            Le blog Toutou Gourmet
+
+        {/* Header sobre */}
+        <div className="mb-10 max-w-[640px]">
+          <p className="text-sm font-bold uppercase tracking-widest text-[var(--accent-1)] mb-2">
+            Le blog
+          </p>
+          <h1 className="page-title mb-3">
+            Nutrition, comparatifs & conseils — sans bullshit.
           </h1>
-          <p className="text-[var(--text-secondary)] max-w-xl mx-auto">
-            Nutrition, comparatifs, conseils vétérinaires — sans blabla, sans langue de bois.
+          <p className="text-base text-[var(--text-secondary)]">
+            Des articles de fond sur l&apos;alimentation de ta bestiole. Pas de langue de bois, pas de contenus sponsorisés.
           </p>
         </div>
 
         {articles.length === 0 ? (
           <div className="text-center py-16">
-            <span className="text-5xl block mb-4">🐾</span>
             <p className="text-[var(--text-muted)]">Les premiers articles arrivent très bientôt !</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {articles.map((article) => (
               <ArticleCard key={article.slug} article={article} />
             ))}

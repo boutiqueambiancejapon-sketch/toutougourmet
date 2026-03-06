@@ -31,7 +31,7 @@ export default function CoutPage() {
         <div className="flex items-start gap-4 mb-8">
           <span className="text-5xl shrink-0">📊</span>
           <div>
-            <h1 className="mb-2" style={{ fontFamily: "'Fraunces', serif" }}>
+            <h1 className="page-title mb-2" >
               Comparateur de coût annuel
             </h1>
             <p className="text-[var(--text-secondary)] leading-relaxed">
@@ -47,7 +47,7 @@ export default function CoutPage() {
         {/* Contexte */}
         <div className="mt-8 flex flex-col gap-4">
           <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] p-5">
-            <h2 className="font-bold text-[var(--text-primary)] mb-3" style={{ fontFamily: "'Fraunces', serif" }}>
+            <h2 className="font-bold text-[var(--text-primary)] mb-3" >
               🤔 Qualité vs Prix : le vrai calcul
             </h2>
             <p className="text-sm text-[var(--text-secondary)] mb-2">

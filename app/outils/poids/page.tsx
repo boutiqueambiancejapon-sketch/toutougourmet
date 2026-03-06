@@ -31,7 +31,7 @@ export default function PoidsPage() {
         <div className="flex items-start gap-4 mb-8">
           <span className="text-5xl shrink-0">⚖️</span>
           <div>
-            <h1 className="mb-2" style={{ fontFamily: "'Fraunces', serif" }}>
+            <h1 className="page-title mb-2" >
               Évaluateur de poids & score corporel
             </h1>
             <p className="text-[var(--text-secondary)] leading-relaxed">
@@ -47,7 +47,7 @@ export default function PoidsPage() {
         {/* Explications */}
         <div className="mt-8 flex flex-col gap-4">
           <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] p-5">
-            <h2 className="font-bold text-[var(--text-primary)] mb-3" style={{ fontFamily: "'Fraunces', serif" }}>
+            <h2 className="font-bold text-[var(--text-primary)] mb-3" >
               📏 Qu&apos;est-ce que le Score de Condition Corporelle (SCC) ?
             </h2>
             <p className="text-sm text-[var(--text-secondary)] mb-3">
@@ -61,7 +61,7 @@ export default function PoidsPage() {
           </div>
 
           <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] p-5">
-            <h2 className="font-bold text-[var(--text-primary)] mb-3" style={{ fontFamily: "'Fraunces', serif" }}>
+            <h2 className="font-bold text-[var(--text-primary)] mb-3" >
               ⚠️ Risques du surpoids chez l&apos;animal
             </h2>
             <ul className="text-sm text-[var(--text-secondary)] space-y-1.5 list-disc pl-4">
