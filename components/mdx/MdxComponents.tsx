@@ -321,3 +321,34 @@ export function SectionDivider({ label }: { label?: string }) {
     </div>
   )
 }
+
+// ─── FaqList / FaqItem ────────────────────────────────────────────────────────
+// FAQ accordéon natif (pas de JS nécessaire)
+
+export function FaqList({ children }: { children: ReactNode }) {
+  return (
+    <div className="border border-[var(--border)] rounded-[var(--radius-xl)] overflow-hidden my-6 bg-[var(--bg-surface)]">
+      {children}
+    </div>
+  )
+}
+
+export function FaqItem({
+  question,
+  children,
+}: {
+  question: string
+  children: ReactNode
+}) {
+  return (
+    <details className="group border-b border-[var(--border)] last:border-0">
+      <summary className="flex items-center justify-between gap-4 py-4 px-5 cursor-pointer list-none font-bold text-[var(--text-primary)] hover:text-[var(--accent-1)] transition-colors select-none">
+        {question}
+        <span className="shrink-0 text-[var(--text-muted)] transition-transform duration-200 group-open:rotate-180">▾</span>
+      </summary>
+      <div className="px-5 pb-4 pt-3 text-[var(--text-secondary)] leading-relaxed">
+        {children}
+      </div>
+    </details>
+  )
+}
