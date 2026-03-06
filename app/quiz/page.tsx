@@ -11,18 +11,15 @@ export const metadata: Metadata = {
 export default function QuizPage() {
   return (
     <div className="min-h-screen py-12 px-4 bg-[var(--bg-primary)]">
-      <div className="max-w-[1280px] mx-auto">
-        <div className="text-center mb-10">
+      <div className="max-w-[960px] mx-auto">
+        <div className="text-center mb-12">
           <p className="text-sm font-semibold text-[var(--accent-1)] uppercase tracking-wider mb-2">
             ⚡ 2 minutes — Résultat immédiat
           </p>
-          <h1
-            className="text-3xl md:text-4xl font-black mb-3"
-            style={{ fontFamily: "'Fraunces', serif" }}
-          >
+          <h1 className="page-title mb-4">
             Quelle marque est faite pour ton animal ?
           </h1>
-          <p className="text-[var(--text-secondary)] max-w-lg mx-auto">
+          <p className="text-[var(--text-secondary)] max-w-lg mx-auto text-lg leading-relaxed">
             Réponds à 5 questions, on analyse ton profil et on te recommande la meilleure option.
           </p>
         </div>

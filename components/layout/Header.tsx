@@ -29,8 +29,7 @@ export default function Header() {
             Toutou
           </span>
           <span
-            className="text-xl font-black tracking-tight px-2 py-0.5 rounded-[var(--radius-sm)]"
-            style={{ background: 'var(--pill-rose)', color: 'var(--text-primary)' }}
+            className="text-xl font-black tracking-tight px-2 py-0.5 rounded-[var(--radius-sm)] bg-[#FFD6E3] text-[var(--text-primary)]"
           >
             Gourmet
           </span>

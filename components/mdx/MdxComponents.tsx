@@ -141,26 +141,26 @@ export function Stat({
   color?: 'default' | 'rose' | 'blue' | 'green' | 'amber'
 }) {
   const pillColors = {
-    default: { bg: 'var(--bg-surface-2)', text: 'var(--accent-1)' },
-    rose:    { bg: 'var(--pill-rose)',     text: '#8B1A4A' },
-    blue:    { bg: 'var(--pill-blue)',     text: '#1A4E8B' },
-    green:   { bg: 'var(--pill-green)',    text: '#1A7A47' },
-    amber:   { bg: 'var(--pill-amber)',    text: '#C47C00' },
+    default: { bg: 'var(--bg-surface-2)', text: 'var(--accent-1)',  accent: 'var(--accent-1)' },
+    rose:    { bg: 'var(--pill-rose)',     text: '#8B1A4A',          accent: '#8B1A4A' },
+    blue:    { bg: 'var(--pill-blue)',     text: '#1A4E8B',          accent: '#1A4E8B' },
+    green:   { bg: 'var(--pill-green)',    text: '#1A7A47',          accent: '#1A7A47' },
+    amber:   { bg: 'var(--pill-amber)',    text: '#C47C00',          accent: '#C47C00' },
   }
   const c = pillColors[color]
 
   return (
     <div
-      className="rounded-[var(--radius-lg)] p-4 text-center"
-      style={{ background: c.bg }}
+      className="rounded-[var(--radius-xl)] p-5 flex flex-col items-center gap-3 text-center"
+      style={{ background: c.bg, borderTop: `3px solid ${c.accent}` }}
     >
       <p
-        className="text-3xl font-black mb-1"
-        style={{ fontFamily: "'Fraunces', serif", color: c.text }}
+        className="font-black leading-none whitespace-nowrap"
+        style={{ fontFamily: "'Fraunces', serif", color: c.text, fontSize: 'clamp(1.75rem, 4vw, 2.5rem)' }}
       >
         {value}
       </p>
-      <p className="text-xs text-[var(--text-muted)]">{label}</p>
+      <p className="text-sm leading-snug" style={{ color: c.text, opacity: 0.7 }}>{label}</p>
     </div>
   )
 }
@@ -266,7 +266,7 @@ export function Verdict({
           )}
         </div>
       </div>
-      <div className="text-base leading-relaxed" style={{ color: 'var(--text-on-dark)' }}>
+      <div className="verdict-content text-base leading-relaxed" style={{ color: 'var(--text-on-dark)' }}>
         {children}
       </div>
     </div>

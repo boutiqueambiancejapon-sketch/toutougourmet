@@ -42,13 +42,13 @@ export function QuizTeaser() {
                 className="flex items-start gap-4 rounded-[var(--radius-lg)] p-4"
                 style={{ background: 'rgba(245,238,230,0.06)', border: '1px solid rgba(245,238,230,0.10)' }}
               >
-                <span className="text-xs font-black opacity-30 shrink-0 mt-0.5" style={{ color: 'var(--text-on-dark)', fontFamily: "'JetBrains Mono', monospace" }}>
+                <span className="text-xs font-black opacity-60 shrink-0 mt-0.5" style={{ color: 'var(--text-on-dark)', fontFamily: "'JetBrains Mono', monospace" }}>
                   {step.num}
                 </span>
                 <span className="text-xl shrink-0">{step.icon}</span>
                 <div>
                   <p className="text-sm font-bold mb-0.5" style={{ color: 'var(--text-on-dark)' }}>{step.title}</p>
-                  <p className="text-sm" style={{ color: 'var(--text-on-dark)', opacity: 0.55 }}>{step.desc}</p>
+                  <p className="text-sm" style={{ color: 'var(--text-on-dark)', opacity: 0.70 }}>{step.desc}</p>
                 </div>
               </div>
             ))}

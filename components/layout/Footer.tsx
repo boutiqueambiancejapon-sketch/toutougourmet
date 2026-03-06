@@ -28,8 +28,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
           {/* Brand */}
           <div className="md:col-span-1">
-            <Link href="/" className="text-xl font-bold mb-3 block" style={{ fontFamily: "'Fraunces', serif" }}>
-              🐾 Toutou<span style={{ color: 'var(--accent-2)' }}>Gourmet</span>
+            <Link href="/" className="inline-flex items-center gap-2 mb-3 font-black text-xl" style={{ fontFamily: "'Fraunces', serif" }}>
+              <span className="text-white">Toutou</span>
+              <span className="px-2 py-0.5 rounded-[var(--radius-sm)]" style={{ background: '#FFD6E3', color: 'var(--text-primary)' }}>Gourmet</span>
             </Link>
             <p className="text-sm text-white/70 leading-relaxed">
               Le comparateur fun et honnête de la bouffe premium pour chiens et chats en France.
