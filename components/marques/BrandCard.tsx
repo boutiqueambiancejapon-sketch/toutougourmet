@@ -3,19 +3,27 @@ import { StarRating } from '@/components/ui/StarRating'
 import { Badge } from '@/components/ui/Badge'
 import type { Brand } from '@/data/brands'
 
+const accentBySlug: Record<string, string> = {
+  franklin:     '#1A7A47',
+  elmut:        '#8B1A4A',
+  'petty-well': '#1A4E8B',
+  'dog-chef':   '#C47C00',
+}
+
 interface BrandCardProps {
   brand: Brand
   showCTA?: boolean
 }
 
 export function BrandCard({ brand, showCTA = true }: BrandCardProps) {
+  const accent = accentBySlug[brand.slug] ?? 'var(--accent-1)'
   return (
-    <div className="card p-5 flex flex-col gap-4">
+    <div className="card p-5 flex flex-col gap-4" style={{ borderTop: `3px solid ${accent}` }}>
       {/* Header */}
       <div className="flex items-start gap-3">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <h2 className="font-bold text-[var(--text-primary)]" style={{ fontFamily: "'Fraunces', serif" }}>
+            <h2 className="font-bold" style={{ fontFamily: "'Fraunces', serif", color: accent }}>
               {brand.name}
             </h2>
             <Badge variant="default">{brand.priceRange}</Badge>
