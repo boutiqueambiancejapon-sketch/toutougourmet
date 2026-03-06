@@ -10,17 +10,24 @@ interface WordRotatorProps {
 
 export function WordRotator({ words, intervalMs = 2000, className = '' }: WordRotatorProps) {
   const [index, setIndex] = useState(0)
-  const [visible, setVisible] = useState(true)
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
+    // Fade-in au montage — garantit l'affichage sur hard nav et soft nav
+    const fadeIn = setTimeout(() => setVisible(true), 50)
+
     const timer = setInterval(() => {
       setVisible(false)
       setTimeout(() => {
         setIndex((i) => (i + 1) % words.length)
         setVisible(true)
-      }, 250)
+      }, 300)
     }, intervalMs)
-    return () => clearInterval(timer)
+
+    return () => {
+      clearTimeout(fadeIn)
+      clearInterval(timer)
+    }
   }, [words.length, intervalMs])
 
   return (
