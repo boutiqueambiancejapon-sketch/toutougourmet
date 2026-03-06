@@ -2,14 +2,14 @@ import Link from 'next/link'
 import { WordRotator } from '@/components/ui/WordRotator'
 
 const rotatingWords = [
-  'bestiole',
   'chien',
   'chat',
-  'boule de poils',
   'Labrador',
   'Golden',
   'animal',
   'bouledogue',
+  'compagnon',
+  'toutou',
 ]
 
 const stats = [
@@ -39,7 +39,7 @@ export function HeroSection() {
 
           {/* H1 avec mot rotatif */}
           <h1 className="text-[var(--text-on-dark)] mb-6" style={{ fontFamily: "'Fraunces', serif" }}>
-            La bouffe de ta{' '}
+            La bouffe de ton{' '}
             <span className="inline-block px-4 py-1 rounded-[var(--radius-md)] leading-tight" style={{ background: 'var(--pill-rose)', color: 'var(--text-primary)' }}>
               <WordRotator words={rotatingWords} intervalMs={1800} />
             </span>
