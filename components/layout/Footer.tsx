@@ -10,6 +10,7 @@ const footerLinks = {
   'Outils': [
     { href: '/quiz', label: 'Le quiz personnalisé' },
     { href: '/comparateur', label: 'Comparateur' },
+    { href: '/outils', label: 'Calculateurs & Simulateurs' },
     { href: '/blog', label: 'Le blog' },
   ],
   'Infos': [
