@@ -5,9 +5,9 @@ import { Disclosure } from '@/components/ui/Disclosure'
 import { brands } from '@/data/brands'
 
 export const metadata: Metadata = {
-  title: 'Comparatif nourriture pour chien — Franklin vs Elmut vs Petty Well vs Dog Chef',
+  title: 'Comparatif nourriture pour chien',
   description:
-    'Comparatif nourriture pour chien : tableau complet de 4 marques premium dont la nourriture fraiche pour chien. Notes, prix, ingrédients, offres. Mis à jour mars 2026.',
+    'Comparez Franklin, Elmut, Petty Well et Dog Chef : notes, prix, ingrédients, croquettes et nourriture fraîche pour chien. Offres et promos 2026.',
   alternates: { canonical: 'https://toutougourmet.fr/comparateur' },
 }
 

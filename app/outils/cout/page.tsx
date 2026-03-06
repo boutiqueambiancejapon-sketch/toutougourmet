@@ -4,12 +4,12 @@ import { CostComparisonTool } from '@/components/outils/CostComparison'
 import { InfoBox } from '@/components/mdx/MdxComponents'
 
 export const metadata: Metadata = {
-  title: 'Comparateur de coût annuel alimentation pour chien et chat — Toutou Gourmet',
+  title: 'Comparateur coût alimentation chien annuel',
   description:
-    'Croquettes standard, croquettes premium, repas frais ou mix : compare le coût réel sur un an selon le poids de ton chien ou chat. Visualisation claire avec avantages et inconvénients.',
+    'Croquettes ou repas frais : compare le vrai coût annuel selon le poids de ton chien. Visualisation claire avec bilan par format alimentaire.',
   alternates: { canonical: 'https://toutougourmet.fr/outils/cout' },
   openGraph: {
-    title: 'Comparateur de coût annuel alimentation — Toutou Gourmet',
+    title: 'Comparateur coût alimentation chien',
     description: 'Croquettes vs repas frais : quelle est la vraie différence de budget sur un an ?',
     url: 'https://toutougourmet.fr/outils/cout',
     type: 'website',

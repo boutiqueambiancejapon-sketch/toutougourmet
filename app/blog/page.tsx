@@ -4,7 +4,7 @@ import { getAllArticles } from '@/lib/mdx'
 import { ArticleCard } from '@/components/blog/ArticleCard'
 
 export const metadata: Metadata = {
-  title: 'Blog — Nutrition et conseils pour chiens et chats',
+  title: 'Conseils alimentation chien et chat',
   description:
     "Articles de fond sur l'alimentation premium pour chiens et chats. Comparatifs, guides pratiques, décryptage des étiquettes.",
   alternates: { canonical: 'https://toutougourmet.fr/blog' },
