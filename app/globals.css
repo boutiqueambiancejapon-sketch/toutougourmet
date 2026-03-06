@@ -94,8 +94,11 @@
   to   { opacity: 0; transform: translateY(-14px); }
 }
 
+/* Transitions globales : seulement les propriétés composited (GPU).
+   background-color et box-shadow déclenchent des repaints sur tout le DOM → jank.
+   On les déclare explicitement sur les éléments interactifs seulement. */
 *, *::before, *::after {
-  transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+  transition-property: color, border-color, transform, opacity;
   transition-duration: 180ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -168,6 +171,7 @@ h3 {
   padding: 0.875rem 1.75rem; border-radius: var(--radius-md);
   font-weight: 700; font-size: 1rem; cursor: pointer;
   border: 2px solid transparent; text-decoration: none; letter-spacing: -0.01em;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
 }
 .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(232,98,42,0.35); background-color: #d4541f; }
 .btn-primary:active { transform: translateY(0); }
@@ -179,6 +183,7 @@ h3 {
   padding: 0.875rem 1.75rem; border-radius: var(--radius-md);
   font-weight: 700; font-size: 1rem; cursor: pointer;
   border: 2px solid var(--accent-1); text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
 }
 .btn-outline:hover { background-color: var(--accent-1); color: #ffffff; transform: translateY(-3px); box-shadow: 0 12px 32px rgba(232,98,42,0.35); }
 
@@ -188,6 +193,7 @@ h3 {
   padding: 0.875rem 1.75rem; border-radius: var(--radius-md);
   font-weight: 600; font-size: 1rem; cursor: pointer;
   border: 2px solid transparent; text-decoration: none;
+  transition: background-color 180ms ease;
 }
 .btn-ghost:hover { background-color: var(--bg-surface-2); }
 
@@ -197,6 +203,7 @@ h3 {
   padding: 0.875rem 1.75rem; border-radius: var(--radius-md);
   font-weight: 700; font-size: 1rem; cursor: pointer;
   border: 2px solid transparent; text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease;
 }
 .btn-dark:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(245,238,230,0.20); }
 
@@ -205,6 +212,8 @@ h3 {
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border);
+  transition: transform 300ms ease, box-shadow 300ms ease;
+  will-change: transform;
 }
 .card:hover { transform: translateY(-6px); box-shadow: var(--shadow-xl); }
 
