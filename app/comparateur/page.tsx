@@ -72,7 +72,7 @@ export default function ComparateurPage() {
 
               {/* Offre + CTA */}
               <div
-                className="text-[11px] font-bold text-center px-2 py-1 rounded-full mb-3"
+                className="text-xs font-bold text-center px-2 py-1 rounded-full mb-3"
                 style={{ background: 'rgba(255,255,255,0.6)', color: brandAccents[i] }}
               >
                 {brand.discountOffer}

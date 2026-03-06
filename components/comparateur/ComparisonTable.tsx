@@ -53,7 +53,7 @@ export function ComparisonTable() {
                 >
                   {brand.name}
                 </div>
-                <div className="text-[11px] leading-snug mt-1 font-normal max-w-[140px] mx-auto"
+                <div className="text-xs leading-snug mt-1 font-normal max-w-[140px] mx-auto"
                   style={{ color: 'var(--text-muted)' }}>
                   {brand.tagline}
                 </div>
@@ -88,7 +88,7 @@ export function ComparisonTable() {
             {brands.map((brand) => (
               <td key={brand.slug} className="px-4 py-3 text-center">
                 <div className="text-base">{brand.animal.map((a) => (a === 'chien' ? '🐶' : '🐱')).join(' ')}</div>
-                <div className="text-[11px] capitalize mt-0.5" style={{ color: 'var(--text-muted)' }}>
+                <div className="text-xs capitalize mt-0.5" style={{ color: 'var(--text-muted)' }}>
                   {brand.animal.join(' & ')}
                 </div>
               </td>
@@ -146,7 +146,7 @@ export function ComparisonTable() {
             {brands.map((brand, i) => (
               <td key={brand.slug} className="px-4 py-3 text-center">
                 <span
-                  className="inline-block text-[11px] font-bold px-2 py-1 rounded-full leading-snug"
+                  className="inline-block text-xs font-bold px-2 py-1 rounded-full leading-snug"
                   style={{ background: brandBgs[i], color: brandAccents[i] }}
                 >
                   {brand.discountOffer}
