@@ -116,7 +116,7 @@ function BrandPage({ brand }: { brand: Brand }) {
     name: brand.name,
     brand: { '@type': 'Brand', name: brand.name },
     description: brand.tagline,
-    url: `https://toutougourmet.fr/chien/marque/${brand.slug}`,
+    url: `https://toutou-gourmet.com/chien/marque/${brand.slug}`,
     aggregateRating: {
       '@type': 'AggregateRating',
       ratingValue: brand.scores.global.toString(),
@@ -248,7 +248,7 @@ function VsPage({ brandA, brandB }: { brandA: Brand; brandB: Brand }) {
       '@type': 'ListItem',
       position: i + 1,
       name: b.name,
-      url: `https://toutougourmet.fr/chien/marque/${b.slug}`,
+      url: `https://toutou-gourmet.com/chien/marque/${b.slug}`,
     })),
   }
 
@@ -470,7 +470,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
       title: `${a.name} vs ${b.name} — Comparatif 2026`,
       description: `Comparaison complète ${a.name} vs ${b.name} : composition, prix, scores, verdict. Quelle marque choisir pour ton chien ?`,
-      alternates: { canonical: `https://toutougourmet.fr/chien/marque/${slug}` },
+      alternates: { canonical: `https://toutou-gourmet.com/chien/marque/${slug}` },
     }
   }
 
@@ -479,7 +479,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${brand.name} : Avis Complet, Test & Promo 2026`,
     description: `Notre avis honnête sur ${brand.name} : composition, prix, avantages et inconvénients. ${brand.discountOffer}.`,
-    alternates: { canonical: `https://toutougourmet.fr/chien/marque/${slug}` },
+    alternates: { canonical: `https://toutou-gourmet.com/chien/marque/${slug}` },
   }
 }
 

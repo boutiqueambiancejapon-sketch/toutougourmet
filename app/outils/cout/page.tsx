@@ -7,11 +7,11 @@ export const metadata: Metadata = {
   title: 'Comparateur coût alimentation chien annuel',
   description:
     'Croquettes ou repas frais : compare le vrai coût annuel selon le poids de ton chien. Visualisation claire avec bilan par format alimentaire.',
-  alternates: { canonical: 'https://toutougourmet.fr/outils/cout' },
+  alternates: { canonical: 'https://toutou-gourmet.com/outils/cout' },
   openGraph: {
     title: 'Comparateur coût alimentation chien',
     description: 'Croquettes vs repas frais : quelle est la vraie différence de budget sur un an ?',
-    url: 'https://toutougourmet.fr/outils/cout',
+    url: 'https://toutou-gourmet.com/outils/cout',
     type: 'website',
   },
 }

@@ -18,11 +18,11 @@ export default function MentionsLegalesPage() {
             <h2 className="text-xl font-bold text-[var(--text-primary)] mb-3" style={{ fontFamily: "'Fraunces', serif" }}>
               Éditeur du site
             </h2>
-            <p>Le site toutougourmet.fr est édité par :</p>
+            <p>Le site toutou-gourmet.com est édité par :</p>
             <p className="mt-2">
               <strong className="text-[var(--text-primary)]">Toutou Gourmet</strong><br />
               Adresse : France<br />
-              Email : contact@toutougourmet.fr<br />
+              Email : contact@toutou-gourmet.com<br />
               SIRET : [À compléter]
             </p>
           </section>
@@ -65,7 +65,7 @@ export default function MentionsLegalesPage() {
               Limitation de responsabilité
             </h2>
             <p>
-              Les informations publiées sur toutougourmet.fr sont fournies à titre indicatif. Nous
+              Les informations publiées sur toutou-gourmet.com sont fournies à titre indicatif. Nous
               ne sommes pas des vétérinaires. En cas de problème de santé pour ton animal, consulte
               toujours un professionnel qualifié.
             </p>

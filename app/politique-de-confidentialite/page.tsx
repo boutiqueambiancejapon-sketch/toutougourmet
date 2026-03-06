@@ -56,8 +56,8 @@ export default function PolitiqueConfidentialitePage() {
             <p>
               Conformément au RGPD, tu disposes d&apos;un droit d&apos;accès, de rectification et de suppression
               de tes données. Pour exercer ces droits, contacte-nous à :{' '}
-              <a href="mailto:contact@toutougourmet.fr" className="text-[var(--accent-1)] underline">
-                contact@toutougourmet.fr
+              <a href="mailto:contact@toutou-gourmet.com" className="text-[var(--accent-1)] underline">
+                contact@toutou-gourmet.com
               </a>
             </p>
           </section>

@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   title: 'Comparateur nourriture chien et chat',
   description:
     'Comparez les meilleures marques de nourriture pour chien : Franklin, Elmut, Petty Well, Dog Chef. Quiz personnalisé, notes, prix et codes promo exclusifs.',
-  alternates: { canonical: 'https://toutougourmet.fr' },
+  alternates: { canonical: 'https://toutou-gourmet.com' },
 }
 
 import { HeroSection } from '@/components/home/HeroSection'

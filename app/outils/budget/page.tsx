@@ -7,11 +7,11 @@ export const metadata: Metadata = {
   title: 'Estimateur budget alimentation chien',
   description:
     'Compare le budget mensuel de Franklin, Elmut, Petty Well et Dog Chef selon le profil de ton chien ou chat. Avec les offres du moment.',
-  alternates: { canonical: 'https://toutougourmet.fr/outils/budget' },
+  alternates: { canonical: 'https://toutou-gourmet.com/outils/budget' },
   openGraph: {
     title: 'Estimateur budget alimentation chien',
     description: 'Combien ça coûte vraiment de nourrir ton chien ou chat avec les meilleures marques ?',
-    url: 'https://toutougourmet.fr/outils/budget',
+    url: 'https://toutou-gourmet.com/outils/budget',
     type: 'website',
   },
 }
