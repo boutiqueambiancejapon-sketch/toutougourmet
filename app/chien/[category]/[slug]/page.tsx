@@ -13,7 +13,7 @@ import { getCategoryBySlug } from '@/data/categories'
 import {
   InfoBox, Callout, FeatureGrid, Feature,
   StatRow, Stat, CompareTable, CompareThead, CompareTh,
-  CompareTr, CompareTd, Verdict, ProsConsList, SectionDivider, FaqList, FaqItem,
+  CompareTr, CompareTd, Verdict, ProsConsList, ProsBlock, ConsBlock, ProItem, ConItem, SectionDivider, FaqList, FaqItem,
 } from '@/components/mdx/MdxComponents'
 
 interface Props {
@@ -23,7 +23,7 @@ interface Props {
 const mdxComponents = {
   InfoBox, Callout, FeatureGrid, Feature,
   StatRow, Stat, CompareTable, CompareThead, CompareTh,
-  CompareTr, CompareTd, Verdict, ProsConsList, SectionDivider, FaqList, FaqItem,
+  CompareTr, CompareTd, Verdict, ProsConsList, ProsBlock, ConsBlock, ProItem, ConItem, SectionDivider, FaqList, FaqItem,
 }
 
 export async function generateStaticParams() {
