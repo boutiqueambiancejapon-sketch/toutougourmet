@@ -10,27 +10,21 @@ interface WordRotatorProps {
 
 export function WordRotator({ words, intervalMs = 2000, className = '' }: WordRotatorProps) {
   const [index, setIndex] = useState(0)
-  const [visible, setVisible] = useState(true)
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setVisible(false)
-      setTimeout(() => {
-        setIndex((i) => (i + 1) % words.length)
-        setVisible(true)
-      }, 250)
+      setIndex((i) => (i + 1) % words.length)
     }, intervalMs)
     return () => clearInterval(timer)
   }, [words.length, intervalMs])
 
   return (
     <span
+      key={index}
       className={className}
       style={{
         display: 'inline-block',
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(-10px)',
-        transition: 'opacity 0.25s ease, transform 0.25s ease',
+        animation: 'wordSlideIn 0.3s ease both',
       }}
     >
       {words[index]}
