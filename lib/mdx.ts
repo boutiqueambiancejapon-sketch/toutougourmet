@@ -1,10 +1,6 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { marked } from 'marked'
-
-// Configure marked for GFM (tables, strikethrough, etc.)
-marked.setOptions({ gfm: true, breaks: false })
 
 const contentDir = path.join(process.cwd(), 'content')
 
@@ -22,12 +18,8 @@ export interface ArticleFrontmatter {
 export interface Article {
   slug: string
   frontmatter: ArticleFrontmatter
-  content: string      // HTML rendu
-  rawContent: string   // Markdown brut (pour extraction TL;DR, etc.)
-}
-
-function parseContent(rawContent: string): string {
-  return marked.parse(rawContent) as string
+  content: string      // MDX brut pour next-mdx-remote
+  rawContent: string   // même chose (alias pour compat TL;DR)
 }
 
 export function getAllArticles(): Article[] {
@@ -39,12 +31,7 @@ export function getAllArticles(): Article[] {
       const slug = file.replace(/\.mdx$/, '')
       const raw = fs.readFileSync(path.join(blogDir, file), 'utf-8')
       const { data, content } = matter(raw)
-      return {
-        slug,
-        frontmatter: data as ArticleFrontmatter,
-        content: parseContent(content),
-        rawContent: content,
-      }
+      return { slug, frontmatter: data as ArticleFrontmatter, content, rawContent: content }
     })
     .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
 }
@@ -54,14 +41,23 @@ export function getArticleBySlug(slug: string): Article | null {
   if (!fs.existsSync(filePath)) return null
   const raw = fs.readFileSync(filePath, 'utf-8')
   const { data, content } = matter(raw)
-  return {
-    slug,
-    frontmatter: data as ArticleFrontmatter,
-    content: parseContent(content),
-    rawContent: content,
-  }
+  return { slug, frontmatter: data as ArticleFrontmatter, content, rawContent: content }
 }
 
 export function getArticlesByCategory(category: string): Article[] {
   return getAllArticles().filter((a) => a.frontmatter.category === category)
+}
+
+// Extrait les items TL;DR depuis le contenu MDX brut
+export function extractTldr(rawContent: string): string[] {
+  const match = rawContent.match(/##?\s*TL;DR[^\n]*\n([\s\S]*?)(?=\n##)/i)
+  if (!match) return []
+  const items = match[1].match(/^[-*]\s+(.+)$/gm)
+  return items ? items.map((i) => i.replace(/^[-*]\s+/, '')) : []
+}
+
+// Estimation du temps de lecture depuis le MDX brut
+export function estimateReadTime(content: string): number {
+  const words = content.replace(/^---[\s\S]*?---/, '').split(/\s+/).length
+  return Math.max(1, Math.round(words / 200))
 }

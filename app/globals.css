@@ -229,3 +229,81 @@ h3 {
   *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
   html { scroll-behavior: auto; }
 }
+
+/* ─── MDX Prose Content ──────────────────────────────────────────────────── */
+.mdx-content h2 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+.mdx-content h3 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+.mdx-content p {
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+.mdx-content a { color: var(--accent-1); text-decoration: underline; text-underline-offset: 3px; }
+.mdx-content strong { color: var(--text-primary); font-weight: 700; }
+.mdx-content em { font-style: italic; }
+.mdx-content ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+.mdx-content ol {
+  list-style: decimal;
+  padding-left: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+.mdx-content li { margin-bottom: 0.4rem; line-height: 1.65; }
+.mdx-content blockquote {
+  border-left: 4px solid var(--accent-1);
+  padding: 0.75rem 1rem;
+  margin: 1.5rem 0;
+  background: var(--bg-surface-2);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+.mdx-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.mdx-content th {
+  background: var(--bg-dark);
+  color: var(--text-on-dark);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.mdx-content td {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+.mdx-content tr:last-child td { border-bottom: none; }
+.mdx-content tr:nth-child(even) td { background: var(--bg-surface-2); }
+.mdx-content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
