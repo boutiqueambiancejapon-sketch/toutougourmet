@@ -56,6 +56,11 @@ export function extractTldr(rawContent: string): string[] {
   return items ? items.map((i) => i.replace(/^[-*]\s+/, '')) : []
 }
 
+// Supprime la section TL;DR du contenu MDX pour éviter le doublon
+export function stripTldr(content: string): string {
+  return content.replace(/##?\s*TL;DR[^\n]*\n([\s\S]*?)(?=\n##)/i, '')
+}
+
 // Estimation du temps de lecture depuis le MDX brut
 export function estimateReadTime(content: string): number {
   const words = content.replace(/^---[\s\S]*?---/, '').split(/\s+/).length

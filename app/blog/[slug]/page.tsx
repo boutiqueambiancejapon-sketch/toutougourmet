@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { MDXRemote } from 'next-mdx-remote/rsc'
-import { getAllArticles, getArticleBySlug, extractTldr, estimateReadTime } from '@/lib/mdx'
+import { getAllArticles, getArticleBySlug, extractTldr, stripTldr, estimateReadTime } from '@/lib/mdx'
 import { formatDate } from '@/lib/utils'
 import { TLDR } from '@/components/blog/TLDR'
 import { SummarizeWithAI } from '@/components/blog/SummarizeWithAI'
@@ -110,7 +110,7 @@ export default async function ArticlePage({ params }: Props) {
 
           {/* Contenu MDX avec composants custom */}
           <div className="mdx-content mt-8">
-            <MDXRemote source={content} components={mdxComponents} />
+            <MDXRemote source={stripTldr(content)} components={mdxComponents} />
           </div>
 
           {/* Tags */}

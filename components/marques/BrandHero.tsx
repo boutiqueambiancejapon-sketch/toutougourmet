@@ -14,7 +14,7 @@ export function BrandHero({ brand }: BrandHeroProps) {
       {/* Infos */}
       <div className="flex-1">
         <div className="flex flex-wrap items-center gap-2 mb-2">
-          <h1 className="page-title" style={{ fontFamily: "'Fraunces', serif" }}>
+          <h1 className="page-title">
             {brand.name}
           </h1>
           <Badge variant="promo">{brand.priceRange}</Badge>
