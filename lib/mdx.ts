@@ -10,6 +10,7 @@ export interface ArticleFrontmatter {
   date: string
   updatedAt: string
   category: string
+  categorySlug: string
   tags: string[]
   image: string
   author: string
@@ -44,8 +45,8 @@ export function getArticleBySlug(slug: string): Article | null {
   return { slug, frontmatter: data as ArticleFrontmatter, content, rawContent: content }
 }
 
-export function getArticlesByCategory(category: string): Article[] {
-  return getAllArticles().filter((a) => a.frontmatter.category === category)
+export function getArticlesByCategory(categorySlug: string): Article[] {
+  return getAllArticles().filter((a) => a.frontmatter.categorySlug === categorySlug)
 }
 
 // Extrait les items TL;DR depuis le contenu MDX brut

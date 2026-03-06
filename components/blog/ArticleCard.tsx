@@ -29,7 +29,7 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
   if (variant === 'horizontal') {
     return (
       <Link
-        href={`/blog/${slug}`}
+        href={frontmatter.categorySlug ? `/chien/${frontmatter.categorySlug}/${slug}` : `/blog/${slug}`}
         className="group flex gap-4 items-center bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] p-4 hover:border-[var(--accent-1)] hover:-translate-y-1 hover:shadow-[var(--shadow-md)] transition-all"
       >
         {/* Indicateur catégorie */}
@@ -57,7 +57,7 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
 
   return (
     <Link
-      href={`/blog/${slug}`}
+      href={frontmatter.categorySlug ? `/chien/${frontmatter.categorySlug}/${slug}` : `/blog/${slug}`}
       className="group flex flex-col bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] overflow-hidden hover:border-[var(--accent-1)] hover:-translate-y-2 hover:shadow-[var(--shadow-xl)] transition-all duration-300"
     >
       {/* Bandeau coloré catégorie — remplace l'image */}

@@ -17,6 +17,14 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
     turbopackUseSystemTlsCerts: true,
   },
+  async redirects() {
+    return [
+      // Anciennes URLs marques → nouvelle structure /chien/marque/
+      { source: '/marques', destination: '/chien/marque', permanent: true },
+      { source: '/marques/:slug', destination: '/chien/marque/:slug', permanent: true },
+    ]
+  },
+
   async headers() {
     return [
       {
