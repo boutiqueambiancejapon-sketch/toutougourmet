@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface WordRotatorProps {
   words: string[]
@@ -10,37 +10,28 @@ interface WordRotatorProps {
 
 export function WordRotator({ words, intervalMs = 2000, className = '' }: WordRotatorProps) {
   const [index, setIndex] = useState(0)
-  const spanRef = useRef<HTMLSpanElement>(null)
-  const isMountedRef = useRef(false)
-
-  const restartAnim = () => {
-    const el = spanRef.current
-    if (!el) return
-    el.style.animation = 'none'
-    void el.getBoundingClientRect() // force reflow so browser registers the reset
-    el.style.animation = 'wordSlideIn 0.3s ease both'
-  }
-
-  // Restart animation synchronously before paint when word changes (avoids flash)
-  useLayoutEffect(() => {
-    if (isMountedRef.current) restartAnim()
-  }, [index])
+  const [visible, setVisible] = useState(true)
 
   useEffect(() => {
-    // Trigger entrance animation after hydration — fixes SSR first-load issue
-    restartAnim()
-    isMountedRef.current = true
     const timer = setInterval(() => {
-      setIndex((i) => (i + 1) % words.length)
+      setVisible(false)
+      setTimeout(() => {
+        setIndex(i => (i + 1) % words.length)
+        setVisible(true)
+      }, 200)
     }, intervalMs)
     return () => clearInterval(timer)
   }, [words.length, intervalMs])
 
   return (
     <span
-      ref={spanRef}
       className={className}
-      style={{ display: 'inline-block', transition: 'none' }}
+      style={{
+        display: 'inline-block',
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(8px)',
+        transition: 'opacity 0.2s ease, transform 0.2s ease',
+      }}
     >
       {words[index]}
     </span>
