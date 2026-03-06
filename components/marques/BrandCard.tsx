@@ -15,9 +15,9 @@ export function BrandCard({ brand, showCTA = true }: BrandCardProps) {
       <div className="flex items-start gap-3">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="font-bold text-[var(--text-primary)]" style={{ fontFamily: "'Fraunces', serif" }}>
+            <h2 className="font-bold text-[var(--text-primary)]" style={{ fontFamily: "'Fraunces', serif" }}>
               {brand.name}
-            </h3>
+            </h2>
             <Badge variant="default">{brand.priceRange}</Badge>
           </div>
           <StarRating score={brand.scores.global} size={14} />
