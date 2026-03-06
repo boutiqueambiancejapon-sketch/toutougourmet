@@ -25,7 +25,7 @@ export default function BlogPage() {
             Nutrition, comparatifs & conseils — sans bullshit.
           </h1>
           <p className="text-base text-[var(--text-secondary)]">
-            Des articles de fond sur l&apos;alimentation de ta bestiole. Pas de langue de bois, pas de contenus sponsorisés.
+            Des articles de fond sur l&apos;alimentation de ton animal. Pas de langue de bois, pas de contenus sponsorisés.
           </p>
         </div>
 

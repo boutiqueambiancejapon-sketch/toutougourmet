@@ -67,7 +67,7 @@ export default function PolitiqueConfidentialitePage() {
               Cookies
             </h2>
             <p>
-              Ce site n&apos;utilise pas de cookies de tracking ou publicitaires. Aucun consentement
+              Ce site n&apos;utilise pas de cookies de traçage ou publicitaires. Aucun consentement
               cookie n&apos;est requis.
             </p>
           </section>

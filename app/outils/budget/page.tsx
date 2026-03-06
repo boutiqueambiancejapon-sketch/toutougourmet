@@ -4,7 +4,7 @@ import { BudgetCalculator } from '@/components/outils/BudgetCalculator'
 import { InfoBox } from '@/components/mdx/MdxComponents'
 
 export const metadata: Metadata = {
-  title: 'Estimateur de budget mensuel alimentation chien & chat — Toutou Gourmet',
+  title: 'Estimateur de budget mensuel alimentation pour chien et chat — Toutou Gourmet',
   description:
     'Compare le coût mensuel de Franklin Pet Food, Petty Well, Elmut et Dog Chef pour le profil de ton animal. Estimations basées sur les besoins réels de ton chien ou chat.',
   alternates: { canonical: 'https://toutougourmet.fr/outils/budget' },

@@ -21,7 +21,7 @@ export function QuizTeaser() {
               </span>
             </h2>
             <p className="text-base leading-relaxed mb-8" style={{ color: 'var(--text-on-dark)', opacity: 0.70 }}>
-              5 questions. On analyse le profil de ta bestiole. On te recommande la meilleure option — sans te noyer dans les détails.
+              5 questions. On analyse le profil de ton animal. On te recommande la meilleure option — sans te noyer dans les détails.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link href="/quiz" className="btn-dark text-base px-8 py-4">
