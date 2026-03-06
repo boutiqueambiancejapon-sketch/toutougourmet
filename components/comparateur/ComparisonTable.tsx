@@ -1,103 +1,127 @@
 import Link from 'next/link'
-import { StarRating } from '@/components/ui/StarRating'
 import { brands } from '@/data/brands'
 
 const criteriaLabels: Record<string, string> = {
-  global: 'Note globale',
   qualiteIngredients: 'Qualité ingrédients',
   rapportQualitePrix: 'Rapport qualité/prix',
   digestibilite: 'Digestibilité',
-  variantesDisponibles: 'Variantes disponibles',
+  variantesDisponibles: 'Variantes dispo',
   serviceClient: 'Service client',
 }
 
-// Couleur d'accent par brand (même ordre que brands[])
-const brandAccents = ['#1A7A47', '#8B1A4A', '#1A4E8B', '#C47C00']
+export const brandAccents = ['#1A7A47', '#8B1A4A', '#1A4E8B', '#C47C00']
+const brandBgs    = ['#C2F0D5', '#FFD6E3', '#C8DCFF', '#FFE8B5']
+
+function ScoreBar({ score, accent, muted }: { score: number; accent: string; muted: boolean }) {
+  return (
+    <div className="flex items-center gap-2 justify-center">
+      <div className="w-14 h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--border)' }}>
+        <div
+          className="h-full rounded-full"
+          style={{ width: `${(score / 5) * 100}%`, background: muted ? 'var(--border-strong)' : accent }}
+        />
+      </div>
+      <span
+        className="text-xs font-semibold tabular-nums"
+        style={{ color: muted ? 'var(--text-muted)' : accent }}
+      >
+        {score.toFixed(1)}
+      </span>
+    </div>
+  )
+}
 
 export function ComparisonTable() {
-  const bestGlobal = Math.max(...brands.map((b) => b.scores.global))
-
   return (
-    <div className="overflow-x-auto -mx-4 md:mx-0">
+    <div className="overflow-x-auto">
       <table className="min-w-full border-collapse text-sm" aria-label="Comparatif des marques">
         <thead>
-          {/* Barre d'accent colorée par marque */}
-          <tr>
-            <td className="bg-[var(--bg-dark)]" />
-            {brands.map((brand, i) => (
-              <td key={brand.slug} style={{ height: 4, background: brandAccents[i], padding: 0 }} />
-            ))}
-          </tr>
-          <tr className="bg-[var(--bg-dark)]">
-            <th className="text-left px-4 py-3 font-semibold w-44" style={{ color: 'var(--text-on-dark)', opacity: 0.5 }}>
+          <tr style={{ background: 'var(--bg-surface-2)' }}>
+            <th className="text-left px-5 py-4 text-xs font-semibold uppercase tracking-wide w-44 border-b"
+              style={{ color: 'var(--text-muted)', borderColor: 'var(--border)' }}>
               Critère
             </th>
             {brands.map((brand, i) => (
               <th
                 key={brand.slug}
-                className="text-center px-3 py-3 font-bold"
-                style={{ fontFamily: "'Fraunces', serif", color: brandAccents[i] }}
+                className="px-4 pt-0 pb-4 text-center border-b"
+                style={{ borderColor: 'var(--border)', borderTop: `3px solid ${brandAccents[i]}` }}
               >
-                {brand.name}
-                {brand.scores.global === bestGlobal && (
-                  <div className="text-[10px] font-normal mt-0.5" style={{ color: 'var(--text-on-dark)', opacity: 0.4 }}>⭐ top pick</div>
-                )}
+                <div
+                  className="font-black text-base leading-tight mt-3"
+                  style={{ fontFamily: "'Fraunces', serif", color: brandAccents[i] }}
+                >
+                  {brand.name}
+                </div>
+                <div className="text-[11px] leading-snug mt-1 font-normal max-w-[140px] mx-auto"
+                  style={{ color: 'var(--text-muted)' }}>
+                  {brand.tagline}
+                </div>
               </th>
             ))}
           </tr>
         </thead>
+
         <tbody>
-          {/* Type */}
-          <tr className="border-t border-[var(--border)]">
-            <td className="px-4 py-3 text-[var(--text-secondary)] font-medium">Type</td>
+          {/* Note globale — row mise en valeur */}
+          <tr className="border-b" style={{ borderColor: 'var(--border)', background: 'var(--bg-surface)' }}>
+            <td className="px-5 py-4 text-xs font-semibold uppercase tracking-wide"
+              style={{ color: 'var(--text-muted)' }}>
+              Note globale
+            </td>
+            {brands.map((brand, i) => (
+              <td key={brand.slug} className="px-4 py-4 text-center">
+                <span
+                  className="font-black leading-none"
+                  style={{ fontFamily: "'Fraunces', serif", color: brandAccents[i], fontSize: '2rem' }}
+                >
+                  {brand.scores.global.toFixed(1)}
+                </span>
+                <span className="text-xs ml-0.5" style={{ color: 'var(--text-muted)' }}>/5</span>
+              </td>
+            ))}
+          </tr>
+
+          {/* Pour quel animal */}
+          <tr className="border-b" style={{ borderColor: 'var(--border)', background: 'var(--bg-surface-2)' }}>
+            <td className="px-5 py-3 font-medium" style={{ color: 'var(--text-secondary)' }}>Pour</td>
             {brands.map((brand) => (
-              <td key={brand.slug} className="px-3 py-3 text-center text-xs text-[var(--text-secondary)]">
+              <td key={brand.slug} className="px-4 py-3 text-center">
+                <div className="text-base">{brand.animal.map((a) => (a === 'chien' ? '🐶' : '🐱')).join(' ')}</div>
+                <div className="text-[11px] capitalize mt-0.5" style={{ color: 'var(--text-muted)' }}>
+                  {brand.animal.join(' & ')}
+                </div>
+              </td>
+            ))}
+          </tr>
+
+          {/* Type */}
+          <tr className="border-b" style={{ borderColor: 'var(--border)' }}>
+            <td className="px-5 py-3 font-medium" style={{ color: 'var(--text-secondary)' }}>Type</td>
+            {brands.map((brand) => (
+              <td key={brand.slug} className="px-4 py-3 text-center text-xs"
+                style={{ color: 'var(--text-secondary)' }}>
                 {brand.type.join(', ')}
               </td>
             ))}
           </tr>
 
-          {/* Animal */}
-          <tr className="border-t border-[var(--border)] bg-[var(--bg-surface-2)]/40">
-            <td className="px-4 py-3 text-[var(--text-secondary)] font-medium">Animal</td>
-            {brands.map((brand) => (
-              <td key={brand.slug} className="px-3 py-3 text-center text-base">
-                {brand.animal.map((a) => (a === 'chien' ? '🐶' : '🐱')).join(' ')}
+          {/* Critères avec barre */}
+          {(Object.keys(criteriaLabels) as (keyof typeof criteriaLabels)[]).map((key, i) => (
+            <tr
+              key={key}
+              className="border-b"
+              style={{ borderColor: 'var(--border)', background: i % 2 !== 0 ? 'var(--bg-surface-2)' : undefined }}
+            >
+              <td className="px-5 py-3 font-medium" style={{ color: 'var(--text-secondary)' }}>
+                {criteriaLabels[key]}
               </td>
-            ))}
-          </tr>
-
-          {/* Scores */}
-          {Object.entries(criteriaLabels).map(([key, label], i) => (
-            <tr key={key} className={`border-t border-[var(--border)] ${i % 2 !== 0 ? 'bg-[var(--bg-surface-2)]/40' : ''}`}>
-              <td className="px-4 py-3 text-[var(--text-secondary)] font-medium">{label}</td>
               {brands.map((brand, bi) => {
-                const score = brand.scores[key as keyof typeof brand.scores]
-                const isBest = brands.every((b) => b.scores[key as keyof typeof b.scores] <= score)
+                const score = brand.scores[key]
+                const isBest = brands.every((b) => b.scores[key] <= score)
                 return (
-                  <td key={brand.slug} className="px-3 py-3 text-center">
-                    {key === 'global' ? (
-                      <div className="flex flex-col items-center gap-1">
-                        <span
-                          className="font-black text-base"
-                          style={{ fontFamily: "'Fraunces', serif", color: brandAccents[bi] }}
-                        >
-                          {score.toFixed(1)}
-                        </span>
-                        <StarRating score={score} size={12} />
-                      </div>
-                    ) : (
-                      <span
-                        style={{
-                          fontFamily: "'JetBrains Mono', monospace",
-                          color: isBest ? brandAccents[bi] : 'var(--text-secondary)',
-                          fontWeight: isBest ? 700 : 400,
-                        }}
-                      >
-                        {score.toFixed(1)}
-                        {isBest && <span className="ml-0.5 text-xs">↑</span>}
-                      </span>
-                    )}
+                  <td key={brand.slug} className="px-4 py-3">
+                    <ScoreBar score={score} accent={brandAccents[bi]} muted={!isBest} />
                   </td>
                 )
               })}
@@ -105,35 +129,61 @@ export function ComparisonTable() {
           ))}
 
           {/* Prix */}
-          <tr className="border-t border-[var(--border)]">
-            <td className="px-4 py-3 text-[var(--text-secondary)] font-medium">Prix mensuel</td>
-            {brands.map((brand) => (
-              <td key={brand.slug} className="px-3 py-3 text-center font-semibold text-[var(--text-primary)]">
-                {brand.priceRange}
+          <tr className="border-b" style={{ borderColor: 'var(--border)' }}>
+            <td className="px-5 py-3 font-medium" style={{ color: 'var(--text-secondary)' }}>Prix mensuel</td>
+            {brands.map((brand, i) => (
+              <td key={brand.slug} className="px-4 py-3 text-center">
+                <span className="font-black text-xl" style={{ fontFamily: "'Fraunces', serif", color: brandAccents[i] }}>
+                  {brand.priceRange}
+                </span>
               </td>
             ))}
           </tr>
 
           {/* Offre */}
-          <tr className="border-t border-[var(--border)] bg-[var(--bg-surface-2)]/40">
-            <td className="px-4 py-3 text-[var(--text-secondary)] font-medium">Offre bienvenue</td>
+          <tr className="border-b" style={{ borderColor: 'var(--border)', background: 'var(--bg-surface-2)' }}>
+            <td className="px-5 py-3 font-medium" style={{ color: 'var(--text-secondary)' }}>Offre bienvenue</td>
             {brands.map((brand, i) => (
-              <td key={brand.slug} className="px-3 py-3 text-center text-xs font-semibold" style={{ color: brandAccents[i] }}>
-                {brand.discountOffer}
+              <td key={brand.slug} className="px-4 py-3 text-center">
+                <span
+                  className="inline-block text-[11px] font-bold px-2 py-1 rounded-full leading-snug"
+                  style={{ background: brandBgs[i], color: brandAccents[i] }}
+                >
+                  {brand.discountOffer}
+                </span>
+              </td>
+            ))}
+          </tr>
+
+          {/* Points forts */}
+          <tr className="border-b" style={{ borderColor: 'var(--border)' }}>
+            <td className="px-5 py-4 font-medium align-top" style={{ color: 'var(--text-secondary)' }}>
+              Points forts
+            </td>
+            {brands.map((brand, i) => (
+              <td key={brand.slug} className="px-4 py-4 align-top">
+                <ul className="space-y-1.5">
+                  {brand.pros.slice(0, 3).map((pro, j) => (
+                    <li key={j} className="flex items-start gap-1.5 text-xs" style={{ color: 'var(--text-secondary)' }}>
+                      <span className="font-bold mt-px shrink-0" style={{ color: brandAccents[i] }}>✓</span>
+                      {pro}
+                    </li>
+                  ))}
+                </ul>
               </td>
             ))}
           </tr>
 
           {/* CTA */}
-          <tr className="border-t-2 border-[var(--border-strong)]">
-            <td className="px-4 py-3" />
+          <tr>
+            <td className="px-5 py-4" />
             {brands.map((brand) => (
-              <td key={brand.slug} className="px-3 py-4 text-center">
+              <td key={brand.slug} className="px-4 py-4 text-center">
                 <Link
                   href={brand.affiliateUrl}
                   target="_blank"
                   rel="noopener noreferrer sponsored"
-                  className="btn-primary text-xs py-2 px-3 inline-block"
+                  className="btn-primary text-xs py-2 px-4 inline-block"
                 >
                   Essayer →
                 </Link>
