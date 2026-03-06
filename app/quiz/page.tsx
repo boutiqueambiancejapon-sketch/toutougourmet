@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import { QuizWrapper } from '@/components/quiz/QuizWrapper'
 
 export const metadata: Metadata = {
-  title: 'Quiz — Trouve la meilleure marque pour ton animal',
+  title: 'Quiz — Quelle nourriture pour mon chien ?',
   description:
-    "5 questions pour trouver l'alimentation idéale pour ton chien ou ton chat. Quiz personnalisé, résultat immédiat, recommandation + code promo.",
+    "5 questions pour trouver la meilleure nourriture pour ton chien. Résultat immédiat, recommandation personnalisée et code promo exclusif.",
   alternates: { canonical: 'https://toutougourmet.fr/quiz' },
 }
 

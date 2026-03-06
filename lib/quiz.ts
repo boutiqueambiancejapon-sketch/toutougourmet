@@ -15,7 +15,8 @@ export function computeScores(answers: QuizAnswers): BrandScores {
   // Format
   if (answers.format === 'frais') { scores.elmut += 3; scores.dogChef += 3 }
   if (answers.format === 'croquettes') { scores.franklin += 3; scores.pettyWell += 3 }
-  if (answers.format === 'mixte') { scores.dogChef += 2; scores.elmut += 1; scores.franklin += 1 }
+  if (answers.format === 'mixte') { scores.dogChef += 3; scores.elmut += 1; scores.franklin += 1 }
+  if (answers.format === 'aucune') { scores.dogChef += 1 }
 
   // Chat → Dog Chef non disponible
   if (answers.animal === 'chat') { scores.dogChef -= 10 }
@@ -37,6 +38,7 @@ export function computeScores(answers: QuizAnswers): BrandScores {
 
   // Age
   if (answers.age === 'senior') { scores.elmut += 1; scores.dogChef += 1 }
+  if (answers.age === 'adulte') { scores.dogChef += 1 }
   if (answers.age === 'chiot') { scores.franklin += 1; scores.pettyWell += 1 }
 
   return scores

@@ -5,7 +5,7 @@ import { getComparatif } from '@/lib/mdx'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 
 export const metadata: Metadata = {
-  title: 'Comparatifs marques — Tous les X vs Y de pet food premium',
+  title: 'Comparatif croquettes pour chien',
   description:
     "Dog Chef vs Elmut, Franklin vs Petty Well... Tous nos comparatifs détaillés pour choisir la meilleure alimentation pour ton chien.",
   alternates: { canonical: 'https://toutougourmet.fr/chien/marque/comparatif' },

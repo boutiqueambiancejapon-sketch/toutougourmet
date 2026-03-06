@@ -155,8 +155,8 @@ export function Stat({
       style={{ background: c.bg, borderTop: `3px solid ${c.accent}` }}
     >
       <p
-        className="font-black leading-none whitespace-nowrap"
-        style={{ fontFamily: "'Fraunces', serif", color: c.text, fontSize: 'clamp(1.75rem, 4vw, 2.5rem)' }}
+        className="font-black leading-tight break-words min-w-0 w-full"
+        style={{ fontFamily: "'Fraunces', serif", color: c.text, fontSize: 'clamp(1.25rem, 3vw, 2rem)' }}
       >
         {value}
       </p>

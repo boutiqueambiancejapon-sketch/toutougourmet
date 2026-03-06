@@ -2,12 +2,12 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Outils & Calculateurs gratuits — Chien et Chat | Toutou Gourmet',
+  title: 'Calculateurs alimentation chien et chat',
   description:
-    'Calculateurs et simulateurs gratuits pour propriétaires : ration journalière, budget mensuel, score de condition corporelle, comparaison des coûts alimentaires.',
+    'Ration journalière, budget mensuel, poids idéal, coût annuel : des calculateurs gratuits pour mieux nourrir ton chien ou chat.',
   alternates: { canonical: 'https://toutougourmet.fr/outils' },
   openGraph: {
-    title: 'Outils & Calculateurs — Toutou Gourmet',
+    title: 'Calculateurs alimentation chien et chat',
     description: 'Ration journalière, budget par marque, poids idéal, coût annuel — des outils concrets pour mieux nourrir ton animal.',
     url: 'https://toutougourmet.fr/outils',
     type: 'website',

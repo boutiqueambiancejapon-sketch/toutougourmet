@@ -4,12 +4,12 @@ import { BodyScoreEvaluator } from '@/components/outils/BodyScoreEvaluator'
 import { InfoBox } from '@/components/mdx/MdxComponents'
 
 export const metadata: Metadata = {
-  title: 'Évaluateur de poids & score de condition corporelle chien chat — Toutou Gourmet',
+  title: 'Score de condition corporelle chien et chat',
   description:
-    'Ton chien ou chat est-il en surpoids, trop maigre ou à son poids idéal ? Évalue son score de condition corporelle (SCC) avec la méthode utilisée par les vétérinaires.',
+    'Ton chien est-il en surpoids, trop maigre ou à son poids idéal ? Évalue son score de condition corporelle (SCC) utilisé par les vétérinaires.',
   alternates: { canonical: 'https://toutougourmet.fr/outils/poids' },
   openGraph: {
-    title: 'Évaluateur de poids & score corporel — Toutou Gourmet',
+    title: 'Score de condition corporelle chien',
     description: 'Ton animal est-il à son poids de forme ? Découvre son score de condition corporelle vétérinaire.',
     url: 'https://toutougourmet.fr/outils/poids',
     type: 'website',

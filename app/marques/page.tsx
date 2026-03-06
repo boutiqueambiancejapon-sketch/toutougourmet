@@ -4,9 +4,9 @@ import { BrandCard } from '@/components/marques/BrandCard'
 import { brands } from '@/data/brands'
 
 export const metadata: Metadata = {
-  title: 'Toutes les marques — Notre sélection de pet food premium',
+  title: 'Meilleures marques nourriture pour chien',
   description:
-    "Franklin, Elmut, Petty Well, Dog Chef : notre sélection des meilleures marques d'alimentation premium pour chiens et chats en France.",
+    "Franklin, Elmut, Petty Well, Dog Chef : notre sélection des meilleures croquettes et repas frais pour chien. Notes, prix et promos.",
   alternates: { canonical: 'https://toutougourmet.fr/marques' },
 }
 

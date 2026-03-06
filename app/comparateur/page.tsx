@@ -5,9 +5,9 @@ import { Disclosure } from '@/components/ui/Disclosure'
 import { brands } from '@/data/brands'
 
 export const metadata: Metadata = {
-  title: 'Comparateur — Franklin vs Elmut vs Petty Well vs Dog Chef',
+  title: 'Comparatif nourriture pour chien',
   description:
-    'Tableau comparatif complet des 4 meilleures marques de pet food premium en France. Notes, prix, ingrédients, offres. Mis à jour en 2026.',
+    'Comparez Franklin, Elmut, Petty Well et Dog Chef : notes, prix, ingrédients, croquettes et nourriture fraîche pour chien. Offres et promos 2026.',
   alternates: { canonical: 'https://toutougourmet.fr/comparateur' },
 }
 
@@ -23,9 +23,9 @@ export default function ComparateurPage() {
           <p className="text-sm font-bold uppercase tracking-widest text-[var(--accent-1)] mb-2">
             Mis à jour mars 2026
           </p>
-          <h1 className="page-title mb-3">Comparatif complet des 4 marques</h1>
+          <h1 className="page-title mb-3">Comparatif nourriture pour chien — 4 marques premium</h1>
           <p className="text-base text-[var(--text-secondary)]">
-            Franklin, Elmut, Petty Well et Dog Chef — analysés sur les mêmes critères, sans favoritisme.
+            Franklin, Elmut, Petty Well et Dog Chef — croquettes et nourriture fraîche pour chien, analysés sur les mêmes critères, sans favoritisme.
           </p>
         </div>
 
@@ -128,14 +128,15 @@ export default function ComparateurPage() {
 
         {/* SEO block + FAQ */}
         <div className="max-w-3xl mx-auto mt-16">
-          <h1 className="page-title mb-4">
+          <h2 className="page-title mb-4">
             Quelle nourriture pour chien choisir ?
-          </h1>
+          </h2>
           <p className="text-base leading-relaxed mb-10" style={{ color: 'var(--text-secondary)' }}>
             Croquettes, pâtées, repas frais, sans céréales… le marché du pet food déborde d&apos;options et les
-            promesses marketing se ressemblent toutes. Ce comparatif analyse Franklin, Elmut, Petty Well et
-            Dog Chef sur les mêmes critères objectifs pour t&apos;aider à faire le meilleur choix selon le profil
-            de ton chien — sans te noyer dans le jargon.
+            promesses marketing se ressemblent toutes. Ce comparatif nourriture pour chien analyse Franklin,
+            Elmut, Petty Well et Dog Chef sur les mêmes critères objectifs. Tu hésite entre croquettes classiques
+            et comparatif nourriture fraîche pour chien ? On détaille les différences ci-dessous pour t&apos;aider
+            à faire le meilleur choix selon le profil de ton chien — sans jargon.
           </p>
 
           {/* FAQ */}
