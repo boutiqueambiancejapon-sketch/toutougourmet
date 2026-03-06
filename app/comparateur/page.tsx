@@ -38,42 +38,42 @@ export default function ComparateurPage() {
               className="rounded-[var(--radius-xl)] p-5 flex flex-col"
               style={{ background: brandBgs[i], borderTop: `3px solid ${brandAccents[i]}` }}
             >
-              {/* Score + nom */}
-              <div className="flex items-start justify-between mb-2">
+              {/* Nom + score */}
+              <div className="flex items-start justify-between gap-2 mb-1">
                 <div
-                  className="font-black text-base leading-tight"
+                  className="font-black text-lg leading-tight"
                   style={{ fontFamily: "'Fraunces', serif", color: brandAccents[i] }}
                 >
                   {brand.name}
                 </div>
                 <div
-                  className="font-black text-2xl leading-none ml-2 shrink-0"
+                  className="font-black text-2xl leading-none shrink-0"
                   style={{ fontFamily: "'Fraunces', serif", color: brandAccents[i] }}
                 >
                   {brand.scores.global.toFixed(1)}
-                  <span className="text-xs font-normal opacity-60">/5</span>
+                  <span className="text-sm font-normal opacity-60">/5</span>
                 </div>
               </div>
 
-              {/* Tagline */}
-              <p className="text-xs leading-snug mb-4" style={{ color: brandAccents[i], opacity: 0.75 }}>
+              {/* Tagline — texte sombre sur fond clair = bon contraste */}
+              <p className="text-sm leading-snug mb-4" style={{ color: 'var(--text-secondary)' }}>
                 {brand.tagline}
               </p>
 
               {/* Pros */}
-              <ul className="space-y-1.5 mb-5 flex-1">
+              <ul className="space-y-2 mb-5 flex-1">
                 {brand.pros.slice(0, 3).map((pro, j) => (
-                  <li key={j} className="flex items-start gap-1.5 text-xs" style={{ color: brandAccents[i] }}>
-                    <span className="font-bold mt-px shrink-0">✓</span>
-                    <span style={{ opacity: 0.85 }}>{pro}</span>
+                  <li key={j} className="flex items-start gap-2 text-sm" style={{ color: 'var(--text-primary)' }}>
+                    <span className="font-bold mt-px shrink-0" style={{ color: brandAccents[i] }}>✓</span>
+                    {pro}
                   </li>
                 ))}
               </ul>
 
-              {/* Offre + CTA */}
+              {/* Offre — fond blanc solide pour bon contraste */}
               <div
-                className="text-xs font-bold text-center px-2 py-1 rounded-full mb-3"
-                style={{ background: 'rgba(255,255,255,0.6)', color: brandAccents[i] }}
+                className="text-sm font-bold text-center px-3 py-1.5 rounded-full mb-3"
+                style={{ background: '#ffffff', color: brandAccents[i] }}
               >
                 {brand.discountOffer}
               </div>
@@ -81,7 +81,7 @@ export default function ComparateurPage() {
                 href={brand.affiliateUrl}
                 target="_blank"
                 rel="noopener noreferrer sponsored"
-                className="btn-primary text-xs py-2 text-center block"
+                className="btn-primary text-sm py-2.5 text-center block"
               >
                 Essayer →
               </Link>
