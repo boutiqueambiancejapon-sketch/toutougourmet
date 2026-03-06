@@ -1,13 +1,26 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { brands, getBrandBySlug } from '@/data/brands'
+import { MDXRemote } from 'next-mdx-remote/rsc'
+import { brands, getBrandBySlug, type Brand } from '@/data/brands'
+import { getComparatif, type Comparatif } from '@/lib/mdx'
 import { BrandHero } from '@/components/marques/BrandHero'
 import { BrandCTA } from '@/components/marques/BrandCTA'
 import { ScoreBar } from '@/components/ui/ScoreBar'
 import { FAQ } from '@/components/ui/FAQ'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
-import { StatRow, Stat, ProsConsList, InfoBox } from '@/components/mdx/MdxComponents'
+import { formatDate } from '@/lib/utils'
+import {
+  InfoBox, Callout, FeatureGrid, Feature,
+  StatRow, Stat, CompareTable, CompareThead, CompareTh,
+  CompareTr, CompareTd, Verdict, ProsConsList, SectionDivider, FaqList, FaqItem,
+} from '@/components/mdx/MdxComponents'
+
+const mdxComponents = {
+  InfoBox, Callout, FeatureGrid, Feature,
+  StatRow, Stat, CompareTable, CompareThead, CompareTh,
+  CompareTr, CompareTd, Verdict, ProsConsList, SectionDivider, FaqList, FaqItem,
+}
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -75,7 +88,7 @@ const brandDescriptions: Record<string, string[]> = {
 
 // ─── Page brand ────────────────────────────────────────────────────────────────
 
-function BrandPage({ brand }: { brand: ReturnType<typeof getBrandBySlug> & object }) {
+function BrandPage({ brand }: { brand: Brand }) {
   const faqs = brandFaqs[brand.slug] || []
   const descriptions = brandDescriptions[brand.slug] || []
 
@@ -154,7 +167,7 @@ function BrandPage({ brand }: { brand: ReturnType<typeof getBrandBySlug> & objec
             </h2>
             <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-6 flex flex-col gap-4">
               {Object.entries(scoreLabels).map(([key, label]) => (
-                <ScoreBar key={key} label={label} score={brand.scores[key as keyof typeof brand.scores]} />
+                <ScoreBar label={label} score={Number(brand.scores[key as keyof typeof brand.scores])} />
               ))}
             </div>
           </section>
@@ -214,7 +227,7 @@ const accentBySlug: Record<string, string> = {
   'dog-chef':   '#C47C00',
 }
 
-function VsPage({ brandA, brandB }: { brandA: ReturnType<typeof getBrandBySlug> & object; brandB: ReturnType<typeof getBrandBySlug> & object }) {
+function VsPage({ brandA, brandB }: { brandA: Brand; brandB: Brand }) {
   const scoreLabels: [keyof typeof brandA.scores, string][] = [
     ['qualiteIngredients', 'Qualité des ingrédients'],
     ['rapportQualitePrix', 'Rapport qualité/prix'],
@@ -367,6 +380,72 @@ function VsPage({ brandA, brandB }: { brandA: ReturnType<typeof getBrandBySlug> 
   )
 }
 
+// ─── Page comparatif éditorial MDX ───────────────────────────────────────────
+
+function ComparatifMdxPage({
+  slug,
+  comparatif,
+  brandA,
+  brandB,
+}: {
+  slug: string
+  comparatif: Comparatif
+  brandA: Brand | undefined
+  brandB: Brand | undefined
+}) {
+  const { frontmatter, content } = comparatif
+  const accentA = brandA ? (accentBySlug[brandA.slug] ?? 'var(--accent-1)') : 'var(--accent-1)'
+  const accentB = brandB ? (accentBySlug[brandB.slug] ?? 'var(--accent-1)') : 'var(--accent-1)'
+
+  return (
+    <div className="min-h-screen py-10 px-6 bg-[var(--bg-primary)]">
+      <article className="max-w-[720px] mx-auto">
+        <Breadcrumb items={[
+          { label: 'Accueil', href: '/' },
+          { label: 'Chien', href: '/chien' },
+          { label: 'Marques', href: '/chien/marque' },
+          { label: `${brandA?.name ?? ''} vs ${brandB?.name ?? ''}` },
+        ]} />
+
+        <header className="mb-8">
+          <div className="flex items-center gap-2 mb-4 flex-wrap">
+            <span
+              className="text-xs font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-[var(--radius-sm)]"
+              style={{ background: 'var(--pill-rose)', color: 'var(--text-primary)' }}
+            >
+              Comparatif
+            </span>
+            <span className="text-sm text-[var(--text-muted)]">
+              {formatDate(frontmatter.updatedAt || frontmatter.date)}
+            </span>
+          </div>
+          <h1 className="page-title mb-3">{frontmatter.title}</h1>
+          <p className="text-lg text-[var(--text-secondary)] leading-relaxed">
+            {frontmatter.description}
+          </p>
+        </header>
+
+        {brandA && brandB && (
+          <div className="grid grid-cols-2 gap-4 mb-8 p-5 bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)]">
+            <BrandCTA brandName={brandA.name} affiliateUrl={brandA.affiliateUrl} offer={brandA.discountOffer} code={brandA.affiliateCode} variant="primary" />
+            <BrandCTA brandName={brandB.name} affiliateUrl={brandB.affiliateUrl} offer={brandB.discountOffer} code={brandB.affiliateCode} variant="primary" />
+          </div>
+        )}
+
+        <div className="mdx-content">
+          <MDXRemote source={content} components={mdxComponents} />
+        </div>
+
+        <div className="flex flex-wrap gap-4 mt-10 pt-6 border-t border-[var(--border)] text-sm font-medium">
+          <Link href="/quiz" className="text-[var(--accent-1)] hover:underline">→ Faire le quiz personnalisé</Link>
+          <Link href="/chien/marque" className="text-[var(--accent-1)] hover:underline">→ Voir toutes les marques</Link>
+          <Link href="/chien/marque/comparatif" className="text-[var(--accent-1)] hover:underline">→ Tous les comparatifs</Link>
+        </div>
+      </article>
+    </div>
+  )
+}
+
 // ─── Route principale ─────────────────────────────────────────────────────────
 
 export async function generateStaticParams() {
@@ -408,15 +487,23 @@ export default async function MarqueOrVsPage({ params }: Props) {
   const { slug } = await params
 
   if (slug.includes('-vs-')) {
-    const parts = slug.split('-vs-')
-    // handles slugs like "petty-well-vs-dog-chef" — find matching brands
+    // Essaie d'abord de charger un article éditorial MDX
+    const comparatif = getComparatif(slug)
+    if (comparatif) {
+      const brandA = getBrandBySlug(comparatif.frontmatter.brandA)
+      const brandB = getBrandBySlug(comparatif.frontmatter.brandB)
+      return <ComparatifMdxPage slug={slug} comparatif={comparatif} brandA={brandA} brandB={brandB} />
+    }
+
+    // Fallback auto-généré depuis les données brands
     const brandA = brands.find((b) => slug.startsWith(b.slug + '-vs-'))
-    const brandB = brandA ? getBrandBySlug(slug.replace(brandA.slug + '-vs-', '')) : undefined
+    const brandBSlug = brandA ? slug.replace(brandA.slug + '-vs-', '') : ''
+    const brandB = getBrandBySlug(brandBSlug)
     if (!brandA || !brandB) notFound()
-    return <VsPage brandA={brandA} brandB={brandB} />
+    return <VsPage brandA={brandA as Brand} brandB={brandB as Brand} />
   }
 
   const brand = getBrandBySlug(slug)
   if (!brand) notFound()
-  return <BrandPage brand={brand} />
+  return <BrandPage brand={brand as Brand} />
 }

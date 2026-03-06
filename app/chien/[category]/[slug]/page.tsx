@@ -53,11 +53,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ArticleCategoryPage({ params }: Props) {
   const { category, slug } = await params
   const article = getArticleBySlug(slug)
-  if (!article) notFound()
-  if (article.frontmatter.categorySlug !== category) notFound()
+  if (!article || article.frontmatter.categorySlug !== category) notFound()
 
   const cat = getCategoryBySlug(category)
-  const { frontmatter, content, rawContent } = article
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const { frontmatter, content, rawContent } = article!
   const canonicalUrl = `https://toutougourmet.fr/chien/${category}/${slug}`
   const tldrItems = extractTldr(rawContent)
   const readTime = estimateReadTime(rawContent)

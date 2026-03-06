@@ -67,3 +67,29 @@ export function estimateReadTime(content: string): number {
   const words = content.replace(/^---[\s\S]*?---/, '').split(/\s+/).length
   return Math.max(1, Math.round(words / 200))
 }
+
+export interface ComparatifFrontmatter {
+  title: string
+  description: string
+  date: string
+  updatedAt: string
+  brandA: string
+  brandB: string
+  author: string
+  tags: string[]
+}
+
+export interface Comparatif {
+  slug: string
+  frontmatter: ComparatifFrontmatter
+  content: string
+  rawContent: string
+}
+
+export function getComparatif(slug: string): Comparatif | null {
+  const filePath = path.join(contentDir, 'comparatifs', `${slug}.mdx`)
+  if (!fs.existsSync(filePath)) return null
+  const raw = fs.readFileSync(filePath, 'utf-8')
+  const { data, content } = matter(raw)
+  return { slug, frontmatter: data as ComparatifFrontmatter, content, rawContent: content }
+}
