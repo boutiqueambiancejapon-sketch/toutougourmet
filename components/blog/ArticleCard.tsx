@@ -41,12 +41,12 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
           <span className="text-xs font-bold uppercase tracking-wide" style={{ color: colors.pill }}>
             {frontmatter.category}
           </span>
-          <h3
+          <h2
             className="font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-1)] leading-snug text-sm line-clamp-2 transition-colors"
             style={{ fontFamily: "'Fraunces', serif" }}
           >
             {frontmatter.title}
-          </h3>
+          </h2>
           <p className="text-xs text-[var(--text-muted)]">
             {formatDate(frontmatter.date)} · {readTime} min
           </p>
@@ -75,12 +75,12 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
 
       {/* Contenu */}
       <div className="flex flex-col gap-2.5 p-5 flex-1">
-        <h3
+        <h2
           className="font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-1)] leading-snug transition-colors"
           style={{ fontFamily: "'Fraunces', serif", fontSize: '1.1rem' }}
         >
           {frontmatter.title}
-        </h3>
+        </h2>
         <p className="text-sm text-[var(--text-secondary)] line-clamp-2 flex-1 leading-relaxed">
           {frontmatter.description}
         </p>
