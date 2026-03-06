@@ -11,7 +11,7 @@ export function BlogPreview() {
         <div className="flex items-end justify-between mb-8 gap-4">
           <div>
             <p className="text-sm font-bold uppercase tracking-widest text-[var(--accent-1)] mb-2">Le blog</p>
-            <h2 style={{ fontFamily: "'Fraunces', serif" }}>Nos derniers articles</h2>
+            <h2 className="section-title">Nos derniers articles</h2>
           </div>
           <Link href="/blog" className="text-sm font-semibold text-[var(--accent-1)] hover:underline whitespace-nowrap shrink-0">
             Voir tout →

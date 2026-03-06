@@ -6,8 +6,7 @@ import { BrandHero } from '@/components/marques/BrandHero'
 import { BrandCTA } from '@/components/marques/BrandCTA'
 import { ScoreBar } from '@/components/ui/ScoreBar'
 import { FAQ } from '@/components/ui/FAQ'
-import { Disclosure } from '@/components/ui/Disclosure'
-import { Check, X } from 'lucide-react'
+import { StatRow, Stat, ProsConsList, InfoBox } from '@/components/mdx/MdxComponents'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -149,9 +148,17 @@ export default async function MarquePage({ params }: Props) {
           {/* Hero */}
           <BrandHero brand={brand} />
 
+          {/* Stats rapides */}
+          <StatRow>
+            <Stat value={`${brand.scores.global}/5`} label="Note globale" color="rose" />
+            <Stat value={brand.priceRange} label="Gamme de prix" color="amber" />
+            <Stat value={brand.animal.join(' & ')} label="Pour" color="blue" />
+            <Stat value={brand.type[0]} label="Type" color="green" />
+          </StatRow>
+
           {/* Présentation */}
           <section>
-            <h2 className="text-2xl font-bold mb-4" style={{ fontFamily: "'Fraunces', serif" }}>
+            <h2 className="font-bold mb-4" style={{ fontFamily: "'Fraunces', serif" }}>
               Présentation de {brand.name}
             </h2>
             {descriptions.map((para, i) => (
@@ -162,38 +169,13 @@ export default async function MarquePage({ params }: Props) {
           </section>
 
           {/* Pros & Cons */}
-          <section className="grid md:grid-cols-2 gap-5">
-            <div className="bg-[var(--bg-surface)] border border-[var(--accent-3)]/30 rounded-[var(--radius-xl)] p-5">
-              <h3 className="font-bold text-[var(--accent-3)] mb-3 flex items-center gap-2">
-                <Check size={18} /> Nos points forts
-              </h3>
-              <ul className="space-y-2">
-                {brand.pros.map((pro, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
-                    <span className="text-[var(--accent-3)] mt-0.5 shrink-0">✅</span>
-                    <span>{pro}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="bg-[var(--bg-surface)] border border-[var(--error)]/30 rounded-[var(--radius-xl)] p-5">
-              <h3 className="font-bold text-[var(--error)] mb-3 flex items-center gap-2">
-                <X size={18} /> Nos réserves
-              </h3>
-              <ul className="space-y-2">
-                {brand.cons.map((con, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
-                    <span className="text-[var(--error)] mt-0.5 shrink-0">⚠️</span>
-                    <span>{con}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <section>
+            <ProsConsList pros={brand.pros} cons={brand.cons} />
           </section>
 
           {/* Scores */}
           <section>
-            <h2 className="text-2xl font-bold mb-5" style={{ fontFamily: "'Fraunces', serif" }}>
+            <h2 className="font-bold mb-4" style={{ fontFamily: "'Fraunces', serif" }}>
               Nos scores détaillés
             </h2>
             <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-6 flex flex-col gap-4">
@@ -208,13 +190,8 @@ export default async function MarquePage({ params }: Props) {
           </section>
 
           {/* Offre */}
-          <section className="bg-[var(--bg-surface-2)] border-2 border-[var(--accent-2)] rounded-[var(--radius-xl)] p-6 text-center">
-            <p className="text-sm font-semibold text-[var(--text-muted)] uppercase tracking-wider mb-2">
-              🎉 Offre du moment
-            </p>
-            <h2 className="text-2xl font-black mb-4" style={{ fontFamily: "'Fraunces', serif" }}>
-              {brand.discountOffer}
-            </h2>
+          <InfoBox color="amber" emoji="🎉" title="Offre du moment">
+            <p className="font-bold text-base text-[var(--text-primary)] mb-3">{brand.discountOffer}</p>
             <BrandCTA
               brandName={brand.name}
               affiliateUrl={brand.affiliateUrl}
@@ -222,24 +199,33 @@ export default async function MarquePage({ params }: Props) {
               code={brand.affiliateCode}
               variant="primary"
             />
-          </section>
+          </InfoBox>
 
           {/* FAQ */}
           {faqs.length > 0 && (
             <section>
-              <h2 className="text-2xl font-bold mb-5" style={{ fontFamily: "'Fraunces', serif" }}>
+              <h2 className="font-bold mb-4" style={{ fontFamily: "'Fraunces', serif" }}>
                 Questions fréquentes sur {brand.name}
               </h2>
               <FAQ items={faqs} />
             </section>
           )}
 
-          {/* Conclusion */}
-          <section className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-6 md:p-8">
-            <h2 className="text-2xl font-bold mb-3" style={{ fontFamily: "'Fraunces', serif" }}>
-              Notre verdict final sur {brand.name}
-            </h2>
-            <p className="text-[var(--text-secondary)] mb-6 leading-relaxed">
+          {/* Verdict final */}
+          <div className="rounded-[var(--radius-xl)] p-6 border-2" style={{ background: 'var(--bg-dark)', borderColor: 'var(--pill-rose)' }}>
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-3xl">🏆</span>
+              <div>
+                <p className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--pill-rose)' }}>Notre verdict</p>
+                <p className="font-black text-xl" style={{ fontFamily: "'Fraunces', serif", color: 'var(--text-on-dark)' }}>
+                  {brand.name}
+                  <span className="ml-2 text-base px-2 py-0.5 rounded-[var(--radius-sm)]" style={{ background: 'var(--pill-rose)', color: 'var(--text-primary)' }}>
+                    {brand.scores.global}/5
+                  </span>
+                </p>
+              </div>
+            </div>
+            <p className="text-base leading-relaxed mb-5" style={{ color: 'var(--text-on-dark)' }}>
               {brand.name} fait partie des meilleures options du marché pour son profil d&apos;usage.
               Si ton animal correspond aux profils recommandés, c&apos;est une valeur sûre. Profite
               de l&apos;offre du moment pour tester sans risque.
@@ -251,7 +237,7 @@ export default async function MarquePage({ params }: Props) {
               code={brand.affiliateCode}
               variant="primary"
             />
-          </section>
+          </div>
 
           {/* Liens internes */}
           <div className="flex flex-wrap gap-3 justify-center text-sm">

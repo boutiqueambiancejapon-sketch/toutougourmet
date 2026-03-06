@@ -6,9 +6,9 @@ import type { ReactNode } from 'react'
 type InfoBoxColor = 'rose' | 'blue' | 'green' | 'amber' | 'dark'
 
 const infoBoxStyles: Record<InfoBoxColor, { bg: string; border: string; titleColor: string }> = {
-  rose:  { bg: 'var(--bg-rose)',   border: 'var(--pill-rose)',  titleColor: 'var(--accent-rose)' },
-  blue:  { bg: 'var(--bg-blue)',   border: 'var(--pill-blue)',  titleColor: 'var(--accent-blue)' },
-  green: { bg: '#F0FFF8',          border: 'var(--pill-green)', titleColor: 'var(--accent-3)' },
+  rose:  { bg: 'var(--bg-rose)',   border: 'var(--pill-rose)',  titleColor: '#8B1A4A' },
+  blue:  { bg: 'var(--bg-blue)',   border: 'var(--pill-blue)',  titleColor: '#1A4E8B' },
+  green: { bg: '#F0FFF8',          border: 'var(--pill-green)', titleColor: '#1A7A47' },
   amber: { bg: '#FFFBF0',          border: 'var(--pill-amber)', titleColor: '#C47C00' },
   dark:  { bg: 'var(--bg-dark)',   border: 'var(--bg-dark)',    titleColor: 'var(--text-on-dark)' },
 }
@@ -142,9 +142,9 @@ export function Stat({
 }) {
   const pillColors = {
     default: { bg: 'var(--bg-surface-2)', text: 'var(--accent-1)' },
-    rose:    { bg: 'var(--pill-rose)',     text: 'var(--accent-rose)' },
-    blue:    { bg: 'var(--pill-blue)',     text: 'var(--accent-blue)' },
-    green:   { bg: 'var(--pill-green)',    text: 'var(--accent-3)' },
+    rose:    { bg: 'var(--pill-rose)',     text: '#8B1A4A' },
+    blue:    { bg: 'var(--pill-blue)',     text: '#1A4E8B' },
+    green:   { bg: 'var(--pill-green)',    text: '#1A7A47' },
     amber:   { bg: 'var(--pill-amber)',    text: '#C47C00' },
   }
   const c = pillColors[color]
@@ -266,7 +266,7 @@ export function Verdict({
           )}
         </div>
       </div>
-      <div className="text-base leading-relaxed" style={{ color: 'var(--text-on-dark)', opacity: 0.85 }}>
+      <div className="text-base leading-relaxed" style={{ color: 'var(--text-on-dark)' }}>
         {children}
       </div>
     </div>
@@ -279,18 +279,18 @@ export function ProsConsList({ pros = [], cons = [] }: { pros?: string[]; cons?:
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
       <div className="rounded-[var(--radius-lg)] p-4 border" style={{ borderColor: 'var(--pill-green)', background: '#F0FFF8' }}>
-        <p className="text-sm font-bold mb-3" style={{ color: 'var(--accent-3)' }}>Points forts</p>
+        <p className="text-sm font-bold mb-3" style={{ color: '#1A7A47' }}>Points forts</p>
         <ul className="space-y-2">
           {pros.map((p, i) => (
             <li key={i} className="text-sm text-[var(--text-secondary)] flex gap-2">
-              <span style={{ color: 'var(--accent-3)' }} className="shrink-0 font-bold">✓</span>
+              <span style={{ color: '#1A7A47' }} className="shrink-0 font-bold">✓</span>
               {p}
             </li>
           ))}
         </ul>
       </div>
       <div className="rounded-[var(--radius-lg)] p-4 border" style={{ borderColor: 'var(--pill-rose)', background: 'var(--bg-rose)' }}>
-        <p className="text-sm font-bold mb-3" style={{ color: 'var(--accent-rose)' }}>Points faibles</p>
+        <p className="text-sm font-bold mb-3" style={{ color: '#8B1A4A' }}>Points faibles</p>
         <ul className="space-y-2">
           {cons.map((c, i) => (
             <li key={i} className="text-sm text-[var(--text-secondary)] flex gap-2">

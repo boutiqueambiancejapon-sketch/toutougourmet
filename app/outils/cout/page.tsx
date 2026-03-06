@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { CostComparisonTool } from '@/components/outils/CostComparison'
+import { InfoBox } from '@/components/mdx/MdxComponents'
 
 export const metadata: Metadata = {
   title: 'Comparateur de coût annuel alimentation chien & chat — Toutou Gourmet',
@@ -45,24 +46,21 @@ export default function CoutPage() {
         <CostComparisonTool />
 
         {/* Contexte */}
-        <div className="mt-8 flex flex-col gap-4">
-          <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] p-5">
-            <h2 className="font-bold text-[var(--text-primary)] mb-3" >
-              🤔 Qualité vs Prix : le vrai calcul
-            </h2>
-            <p className="text-sm text-[var(--text-secondary)] mb-2">
+        <div className="mt-2 flex flex-col">
+          <InfoBox color="amber" emoji="🤔" title="Qualité vs Prix : le vrai calcul">
+            <p className="mb-2">
               Les croquettes bon marché semblent moins chères au kilo, mais leur densité
               énergétique est plus faible : tu en donnes davantage. La différence réelle est
               souvent moins importante que ce qu&apos;on pense.
             </p>
-            <p className="text-sm text-[var(--text-secondary)]">
+            <p>
               À cela s&apos;ajoutent les potentiels frais vétérinaires liés à une alimentation de
               moins bonne qualité (problèmes digestifs, pelage, surpoids). Le coût d&apos;une bonne
               alimentation peut s&apos;avérer un investissement sur le long terme.
             </p>
-          </div>
+          </InfoBox>
 
-          <div className="bg-[var(--bg-surface-2)] border border-[var(--border)] rounded-[var(--radius-lg)] p-5 text-center">
+          <div className="rounded-[var(--radius-lg)] p-5 text-center" style={{ background: 'var(--bg-surface-2)', border: '1px solid var(--border)' }}>
             <p className="text-sm font-semibold text-[var(--text-primary)] mb-2">
               Tu veux savoir quelle marque est la meilleure pour ton animal ?
             </p>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BodyScoreEvaluator } from '@/components/outils/BodyScoreEvaluator'
+import { InfoBox } from '@/components/mdx/MdxComponents'
 
 export const metadata: Metadata = {
   title: 'Évaluateur de poids & score de condition corporelle chien chat — Toutou Gourmet',
@@ -45,32 +46,26 @@ export default function PoidsPage() {
         <BodyScoreEvaluator />
 
         {/* Explications */}
-        <div className="mt-8 flex flex-col gap-4">
-          <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] p-5">
-            <h2 className="font-bold text-[var(--text-primary)] mb-3" >
-              📏 Qu&apos;est-ce que le Score de Condition Corporelle (SCC) ?
-            </h2>
-            <p className="text-sm text-[var(--text-secondary)] mb-3">
+        <div className="mt-2 flex flex-col">
+          <InfoBox color="blue" emoji="📏" title="Qu'est-ce que le Score de Condition Corporelle (SCC) ?">
+            <p className="mb-2">
               Le SCC est l&apos;indicateur utilisé par les vétérinaires pour évaluer la composition
               corporelle d&apos;un animal sur une échelle de 1 (cachectique) à 9 (obèse).
             </p>
-            <p className="text-sm text-[var(--text-secondary)]">
+            <p>
               Il s&apos;évalue en palpant les côtes, en observant la silhouette de profil (creux abdominal)
               et de dessus (sablier visible). Le score idéal se situe entre 4 et 5.
             </p>
-          </div>
+          </InfoBox>
 
-          <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] p-5">
-            <h2 className="font-bold text-[var(--text-primary)] mb-3" >
-              ⚠️ Risques du surpoids chez l&apos;animal
-            </h2>
-            <ul className="text-sm text-[var(--text-secondary)] space-y-1.5 list-disc pl-4">
+          <InfoBox color="rose" emoji="⚠️" title="Risques du surpoids chez l'animal">
+            <ul className="space-y-1.5 list-disc pl-4">
               <li>Diabète et résistance à l&apos;insuline</li>
               <li>Problèmes articulaires et d&apos;arthrose prématurés</li>
               <li>Maladies cardiovasculaires</li>
               <li>Réduction de l&apos;espérance de vie de 15 à 20%</li>
             </ul>
-          </div>
+          </InfoBox>
         </div>
 
         {/* Nav outils */}

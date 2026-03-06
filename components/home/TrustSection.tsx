@@ -28,7 +28,7 @@ export function TrustSection() {
           <p className="text-sm font-bold uppercase tracking-widest text-[var(--accent-blue)] mb-2">
             Pourquoi nous faire confiance ?
           </p>
-          <h2 style={{ fontFamily: "'Fraunces', serif" }}>
+          <h2 className="section-title">
             On est chiants.{' '}
             <span style={{ color: 'var(--accent-blue)' }}>C&apos;est voulu.</span>
           </h2>

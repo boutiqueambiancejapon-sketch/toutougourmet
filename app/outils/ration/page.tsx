@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { RationCalculator } from '@/components/outils/RationCalculator'
+import { InfoBox, Callout } from '@/components/mdx/MdxComponents'
 
 export const metadata: Metadata = {
   title: 'Calculateur de ration journalière chien & chat — Toutou Gourmet',
@@ -45,35 +46,29 @@ export default function RationPage() {
         <RationCalculator />
 
         {/* Explication */}
-        <div className="mt-8 flex flex-col gap-4">
-          <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] p-5">
-            <h2 className="font-bold text-[var(--text-primary)] mb-3" >
-              💡 Comment bien utiliser ce résultat ?
-            </h2>
-            <ul className="text-sm text-[var(--text-secondary)] space-y-2 list-disc pl-4">
+        <div className="mt-2 flex flex-col">
+          <InfoBox color="blue" emoji="💡" title="Comment bien utiliser ce résultat ?">
+            <ul className="space-y-1.5 list-disc pl-4">
               <li>Pèse les croquettes avec une <strong>balance de cuisine</strong> plutôt qu&apos;une cuillère.</li>
               <li>Divise la ration en <strong>2 repas</strong> pour un adulte, <strong>3 repas</strong> pour un chiot.</li>
               <li>Surveille le poids de ton animal sur <strong>4 semaines</strong> et ajuste de ±10% si besoin.</li>
               <li>Les friandises comptent dans la ration quotidienne — réduis en conséquence.</li>
             </ul>
-          </div>
+          </InfoBox>
 
-          <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] p-5">
-            <h2 className="font-bold text-[var(--text-primary)] mb-3" >
-              📐 La formule utilisée
-            </h2>
-            <p className="text-sm text-[var(--text-secondary)] mb-2">
+          <InfoBox color="amber" emoji="📐" title="La formule utilisée">
+            <p className="mb-2">
               Basé sur la formule vétérinaire <strong>BEE (Besoin Énergétique d&apos;Entretien)</strong> du National
               Research Council (NRC 2006) :
             </p>
-            <div className="bg-[var(--bg-surface-2)] rounded-[var(--radius-md)] p-3 font-mono text-sm text-center">
+            <div className="bg-[var(--bg-surface-2)] rounded-[var(--radius-md)] p-3 font-mono text-sm text-center my-2">
               BEE = 130 × Poids(kg)^0,75 × Facteur activité
             </div>
-            <p className="text-xs text-[var(--text-muted)] mt-2">
+            <p className="text-xs text-[var(--text-muted)]">
               Coefficients ajustés pour les seniors (95), les races à haute énergie (180), les chiots (×2) et
               les animaux stérilisés (−15%).
             </p>
-          </div>
+          </InfoBox>
         </div>
 
         {/* Nav outils */}

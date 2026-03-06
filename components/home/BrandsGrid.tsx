@@ -16,7 +16,7 @@ export function BrandsGrid() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
           <div>
             <p className="text-sm font-bold uppercase tracking-widest text-[var(--accent-1)] mb-2">Notre sélection</p>
-            <h2 style={{ fontFamily: "'Fraunces', serif" }}>4 marques.<br />Zéro bullshit.</h2>
+            <h2 className="section-title">4 marques.<br />Zéro bullshit.</h2>
           </div>
           <p className="text-[var(--text-secondary)] max-w-sm text-base leading-relaxed">
             On a filtré des dizaines de marques pour ne garder que celles qui valent vraiment le coup.

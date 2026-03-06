@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BudgetCalculator } from '@/components/outils/BudgetCalculator'
+import { InfoBox } from '@/components/mdx/MdxComponents'
 
 export const metadata: Metadata = {
   title: 'Estimateur de budget mensuel alimentation chien & chat — Toutou Gourmet',
@@ -45,11 +46,8 @@ export default function BudgetPage() {
         <BudgetCalculator />
 
         {/* Infos */}
-        <div className="mt-8 bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] p-5">
-          <h2 className="font-bold text-[var(--text-primary)] mb-3" >
-            ℹ️ Comment sont calculées ces estimations ?
-          </h2>
-          <ul className="text-sm text-[var(--text-secondary)] space-y-2 list-disc pl-4">
+        <InfoBox color="blue" emoji="ℹ️" title="Comment sont calculées ces estimations ?">
+          <ul className="space-y-1.5 list-disc pl-4">
             <li>On calcule d&apos;abord les besoins caloriques journaliers de ton animal (formule BEE).</li>
             <li>On convertit en grammes selon la densité énergétique de chaque type de produit.</li>
             <li>On multiplie par le prix moyen au kilo de la gamme standard de chaque marque.</li>
@@ -58,7 +56,7 @@ export default function BudgetPage() {
           <p className="text-xs text-[var(--text-muted)] mt-3 italic">
             Liens affiliés — on perçoit une commission si tu passes commande, sans surcoût pour toi.
           </p>
-        </div>
+        </InfoBox>
 
         {/* Nav outils */}
         <div className="mt-10 pt-6 border-t border-[var(--border)]">

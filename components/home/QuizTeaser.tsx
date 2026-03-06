@@ -14,7 +14,7 @@ export function QuizTeaser() {
             <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full mb-6" style={{ background: 'rgba(245,238,230,0.12)', color: 'var(--text-on-dark)' }}>
               ⚡ 2 minutes chrono
             </span>
-            <h2 className="text-[var(--text-on-dark)] mb-5" style={{ fontFamily: "'Fraunces', serif" }}>
+            <h2 className="section-title text-[var(--text-on-dark)] mb-5">
               Quelle marque est faite pour{' '}
               <span className="inline-block px-3 py-0.5 rounded-[var(--radius-md)]" style={{ background: 'var(--pill-blue)', color: 'var(--text-primary)' }}>
                 ton animal ?
