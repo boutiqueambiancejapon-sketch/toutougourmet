@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { brands } from '@/data/brands'
+import { brands, type BrandScores } from '@/data/brands'
 
 const criteriaLabels: Record<string, string> = {
   qualiteIngredients: 'Qualité ingrédients',
@@ -107,7 +107,7 @@ export function ComparisonTable() {
           </tr>
 
           {/* Critères avec barre */}
-          {(Object.keys(criteriaLabels) as (keyof typeof criteriaLabels)[]).map((key, i) => (
+          {(Object.keys(criteriaLabels) as (keyof BrandScores)[]).map((key, i) => (
             <tr
               key={key}
               className="border-b"
