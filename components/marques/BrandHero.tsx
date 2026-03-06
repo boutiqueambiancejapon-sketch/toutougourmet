@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { StarRating } from '@/components/ui/StarRating'
 import { Badge } from '@/components/ui/Badge'
 import { BrandCTA } from './BrandCTA'
@@ -12,15 +11,6 @@ interface BrandHeroProps {
 export function BrandHero({ brand }: BrandHeroProps) {
   return (
     <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-6 md:p-8 flex flex-col md:flex-row gap-6 items-start">
-      {/* Logo */}
-      <div className="w-24 h-24 relative rounded-[var(--radius-lg)] overflow-hidden bg-[var(--bg-surface-2)] shrink-0 flex items-center justify-center text-4xl">
-        {brand.logo ? (
-          <Image src={brand.logo} alt={`Logo ${brand.name}`} fill className="object-contain p-2" />
-        ) : (
-          '🐾'
-        )}
-      </div>
-
       {/* Infos */}
       <div className="flex-1">
         <div className="flex flex-wrap items-center gap-2 mb-2">

@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { StarRating } from '@/components/ui/StarRating'
 import { Badge } from '@/components/ui/Badge'
 import type { Brand } from '@/data/brands'
@@ -14,13 +13,6 @@ export function BrandCard({ brand, showCTA = true }: BrandCardProps) {
     <div className="card p-5 flex flex-col gap-4">
       {/* Header */}
       <div className="flex items-start gap-3">
-        <div className="w-14 h-14 relative rounded-[var(--radius-md)] overflow-hidden bg-[var(--bg-surface-2)] shrink-0 flex items-center justify-center text-2xl">
-          {brand.logo ? (
-            <Image src={brand.logo} alt={`Logo ${brand.name}`} fill className="object-contain p-1" />
-          ) : (
-            '🐾'
-          )}
-        </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <h3 className="font-bold text-[var(--text-primary)]" style={{ fontFamily: "'Fraunces', serif" }}>
