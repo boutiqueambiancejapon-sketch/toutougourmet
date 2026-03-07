@@ -7,6 +7,7 @@ import { getComparatif, type Comparatif } from '@/lib/mdx'
 import { BrandHero } from '@/components/marques/BrandHero'
 import { BrandCTA } from '@/components/marques/BrandCTA'
 import { StickyBrandCTA } from '@/components/marques/StickyBrandCTA'
+import { StickyComparatifCTA } from '@/components/marques/StickyComparatifCTA'
 import { ScoreBar } from '@/components/ui/ScoreBar'
 import { FAQ } from '@/components/ui/FAQ'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
@@ -517,6 +518,13 @@ function ComparatifMdxPage({
   const accentB = brandB ? (accentBySlug[brandB.slug] ?? 'var(--accent-1)') : 'var(--accent-1)'
 
   return (
+    <>
+    {brandA && brandB && (
+      <StickyComparatifCTA
+        brandA={{ name: brandA.name, affiliateUrl: brandA.affiliateUrl, offer: brandA.discountOffer, code: brandA.affiliateCode }}
+        brandB={{ name: brandB.name, affiliateUrl: brandB.affiliateUrl, offer: brandB.discountOffer, code: brandB.affiliateCode }}
+      />
+    )}
     <div className="min-h-screen py-10 px-6 bg-[var(--bg-primary)]">
       <article className="max-w-[720px] mx-auto">
         <Breadcrumb items={[
@@ -562,6 +570,7 @@ function ComparatifMdxPage({
         </div>
       </article>
     </div>
+    </>
   )
 }
 
