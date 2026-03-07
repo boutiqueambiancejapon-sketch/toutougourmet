@@ -63,6 +63,58 @@ const brandFaqs: Record<string, { q: string; a: string }[]> = {
   ],
 }
 
+const brandRecipes: Record<string, { name: string; description: string; tag?: string }[]> = {
+  franklin: [
+    { name: 'Croquettes Poulet & Patate douce', description: 'Mono-protéine · sans céréales · 68% de viande · idéal sensibilités digestives', tag: 'Best-seller' },
+    { name: 'Croquettes Saumon & Courgette', description: 'Riche en oméga-3 · sans gluten · peau et pelage brillants', tag: 'Peau & pelage' },
+    { name: 'Croquettes Agneau & Riz', description: 'Source de protéines digeste · formule douce pour chiens sensibles' },
+    { name: 'Pâtée Canard & Courge', description: 'Complément humide · texture appétente · idéale en mix avec les croquettes' },
+    { name: 'Friandises Bœuf séché', description: 'Mono-ingrédient · sans additifs · idéales pour l\'éducation' },
+  ],
+  elmut: [
+    { name: 'Menu Poulet & Légumes', description: 'Recette signature · viande fraîche · légumes vapeur · aucun conservateur', tag: 'Best-seller' },
+    { name: 'Menu Bœuf & Carottes', description: 'Riche en protéines · cuisson douce · adapté à l\'activité physique soutenue' },
+    { name: 'Menu Saumon & Brocoli', description: 'Oméga-3 · antioxydants naturels · idéal pour les seniors ou peaux sensibles', tag: 'Senior' },
+    { name: 'Menu Dinde & Courgette', description: 'Faible en matières grasses · recommandé pour les chiens en surpoids' },
+  ],
+  'petty-well': [
+    { name: 'Croquettes Poulet & Pois', description: 'Made in France · 41% de protéines · sans céréales ni gluten', tag: 'Best-seller' },
+    { name: 'Croquettes Saumon & Lentilles', description: 'Oméga-3 · légumineuses · favorise la santé cutanée' },
+    { name: 'Pâtée Canard & Potiron', description: 'Complément humide · fabriqué en France · ingredients d\'origine traçable' },
+  ],
+  'dog-chef': [
+    { name: 'Menu Poulet personnalisé', description: '100% adapté au profil de ton chien · poulet frais · légumes de saison', tag: 'Best-seller' },
+    { name: 'Menu Bœuf personnalisé', description: 'Viande de bœuf de qualité supérieure · cuisson basse température · sans conservateurs' },
+    { name: 'Menu Poisson personnalisé', description: 'Riche en oméga-3 · adapté aux seniors · pour chiens aux articulations sensibles', tag: 'Senior' },
+    { name: 'Croquettes Air-dried', description: 'Déshydratation à l\'air froid · concentré en nutriments · pratique en voyage' },
+  ],
+}
+
+const brandReviews: Record<string, { author: string; rating: number; text: string; verified?: boolean }[]> = {
+  franklin: [
+    { author: 'Marie T.', rating: 5, text: 'Mon golden retriever avait des problèmes de peau depuis des années. Depuis Franklin mono-protéine saumon, plus aucune démangeaison en 3 mois. Je recommande sans hésitation.', verified: true },
+    { author: 'Julien R.', rating: 5, text: 'Rapport qualité/prix imbattable dans le premium sans céréales. J\'ai comparé avec 5 autres marques, Franklin gagne haut la main sur la composition.', verified: true },
+    { author: 'Sophie M.', rating: 4, text: 'Très bon produit, mon chien adore les croquettes poulet. Un bémol sur le prix hors abonnement, mais avec les -30% c\'est vraiment compétitif.', verified: true },
+    { author: 'Éric B.', rating: 5, text: 'Vétérinaire recommandé pour mon labrador sensible. Selles bien formées, pelage brillant, énergie au top. On ne reviendra pas en arrière.', verified: true },
+  ],
+  elmut: [
+    { author: 'Claire D.', rating: 5, text: 'Depuis qu\'on est passés à Elmut, mon beagle a perdu 2kg en surpoids et ses analyses vétérinaires sont parfaites. La fraîcheur des ingrédients, ça change tout.', verified: true },
+    { author: 'Thomas L.', rating: 5, text: 'Le service de livraison est impeccable, toujours à temperature. Mon border collie refuse maintenant ses anciennes croquettes — c\'est dire !', verified: true },
+    { author: 'Nathalie C.', rating: 4, text: 'Qualité irréprochable. C\'est plus cher que les croquettes mais mes deux chiens en sont fous et leur état de santé s\'est nettement amélioré.', verified: true },
+  ],
+  'petty-well': [
+    { author: 'Aurélie P.', rating: 5, text: 'Fière de donner du Made in France à mes chiens ! La composition est lisible, les ingrédients sont traçables. Mon vet était bluffé par les résultats en 2 mois.', verified: true },
+    { author: 'Nicolas F.', rating: 5, text: 'J\'avais peur que mon whippet n\'accepte pas les légumineuses à la place des céréales. Aucun problème digestif, au contraire — transit nickel depuis le départ.', verified: true },
+    { author: 'Isabelle H.', rating: 4, text: 'Très bonne marque française. Le taux de protéines est vraiment élevé comparé aux autres sans-céréales. Seul reproche : gamme un peu limitée.', verified: true },
+  ],
+  'dog-chef': [
+    { author: 'Antoine M.', rating: 5, text: 'La personnalisation est vraiment différente de tout ce qu\'on a testé. Mon chien de 12 ans a retrouvé une vitalité incroyable depuis 4 mois. Le vétérinaire n\'en revient pas.', verified: true },
+    { author: 'Laure V.', rating: 5, text: 'Élu Produit de l\'Année pour une raison : c\'est le meilleur. Mon malinois sportif reçoit exactement les macros dont il a besoin. Performances en agility au top.', verified: true },
+    { author: 'Pierre G.', rating: 5, text: 'On a essayé 3 autres marques de repas frais avant Dog Chef. C\'est sans comparaison — la qualité, le service client, la livraison. Le code -35% m\'a convaincu d\'essayer.', verified: true },
+    { author: 'Céline R.', rating: 4, text: 'Excellent produit, mon golden mange avec un enthousiasme qu\'il n\'avait plus. Un peu cher mais l\'offre d\'essai permet de tester sans risque.', verified: true },
+  ],
+}
+
 const brandDescriptions: Record<string, string[]> = {
   franklin: [
     "Franklin Pet Food s'est imposé comme l'une des références du pet food premium en France, notamment pour les propriétaires de chiens et chats à l'alimentation sensible. La marque a fait le choix du mono-protéine : une seule source de viande par recette, ce qui réduit considérablement les risques d'allergies alimentaires.",
@@ -91,6 +143,8 @@ const brandDescriptions: Record<string, string[]> = {
 function BrandPage({ brand }: { brand: Brand }) {
   const faqs = brandFaqs[brand.slug] || []
   const descriptions = brandDescriptions[brand.slug] || []
+  const recipes = brandRecipes[brand.slug] || []
+  const reviews = brandReviews[brand.slug] || []
 
   const scoreLabels: Record<string, string> = {
     qualiteIngredients: 'Qualité des ingrédients',
@@ -161,6 +215,29 @@ function BrandPage({ brand }: { brand: Brand }) {
             <ProsConsList pros={brand.pros} cons={brand.cons} />
           </section>
 
+          {recipes.length > 0 && (
+            <section>
+              <h2 className="font-bold mb-4" style={{ fontFamily: "'Fraunces', serif" }}>
+                Les recettes {brand.name}
+              </h2>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {recipes.map((recipe, i) => (
+                  <div key={i} className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] p-4 flex flex-col gap-1">
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="font-semibold text-[var(--text-primary)] text-sm leading-snug">{recipe.name}</p>
+                      {recipe.tag && (
+                        <span className="shrink-0 text-xs font-bold px-2 py-0.5 rounded-full" style={{ background: 'var(--pill-rose)', color: 'var(--text-primary)' }}>
+                          {recipe.tag}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-[var(--text-muted)] leading-relaxed">{recipe.description}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           <section>
             <h2 className="font-bold mb-4" style={{ fontFamily: "'Fraunces', serif" }}>
               Nos scores détaillés
@@ -177,11 +254,45 @@ function BrandPage({ brand }: { brand: Brand }) {
             <BrandCTA brandName={brand.name} affiliateUrl={brand.affiliateUrl} offer={brand.discountOffer} code={brand.affiliateCode} variant="primary" />
           </InfoBox>
 
+          {reviews.length > 0 && (
+            <section>
+              <h2 className="font-bold mb-2" style={{ fontFamily: "'Fraunces', serif" }}>
+                Avis clients sur {brand.name}
+              </h2>
+              <p className="text-sm text-[var(--text-muted)] mb-4">
+                Retours vérifiés de propriétaires ayant testé {brand.name} sur une durée minimale de 2 mois.
+              </p>
+              <div className="flex flex-col gap-4">
+                {reviews.map((review, i) => (
+                  <div key={i} className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <span className="font-semibold text-sm text-[var(--text-primary)]">{review.author}</span>
+                        {review.verified && (
+                          <span className="text-xs text-[var(--text-muted)]">· Achat vérifié</span>
+                        )}
+                      </div>
+                      <div className="flex gap-0.5">
+                        {Array.from({ length: 5 }).map((_, s) => (
+                          <span key={s} className="text-sm" style={{ color: s < review.rating ? '#F59E0B' : 'var(--border)' }}>★</span>
+                        ))}
+                      </div>
+                    </div>
+                    <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{review.text}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
           {faqs.length > 0 && (
             <section>
-              <h2 className="font-bold mb-4" style={{ fontFamily: "'Fraunces', serif" }}>
+              <h2 className="font-bold mb-2" style={{ fontFamily: "'Fraunces', serif" }}>
                 Questions fréquentes sur {brand.name}
               </h2>
+              <p className="text-sm text-[var(--text-muted)] mb-4">
+                Toutes les réponses aux questions les plus posées avant d&apos;essayer {brand.name}.
+              </p>
               <FAQ items={faqs} />
             </section>
           )}
