@@ -7,6 +7,7 @@ import { formatDate } from '@/lib/utils'
 import { TLDR } from '@/components/blog/TLDR'
 import { SummarizeWithAI } from '@/components/blog/SummarizeWithAI'
 import { NewsletterBlock } from '@/components/blog/NewsletterBlock'
+import { StickyCtaDogChef } from '@/components/blog/StickyCtaDogChef'
 import { Badge } from '@/components/ui/Badge'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { getCategoryBySlug } from '@/data/categories'
@@ -125,11 +126,13 @@ export default async function ArticleCategoryPage({ params }: Props) {
             <Link href="/comparateur" className="text-[var(--accent-1)] hover:underline">→ Voir le comparateur complet</Link>
           </div>
 
-          <div className="mt-10">
+          <div className="mt-10 pb-24">
             <NewsletterBlock />
           </div>
         </article>
       </div>
+
+      <StickyCtaDogChef />
     </>
   )
 }
