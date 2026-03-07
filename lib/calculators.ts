@@ -233,7 +233,7 @@ export function buildCostComparisons(dailyCalories: number): CostComparison[] {
     {
       type: 'repas-frais',
       label: 'Repas frais (livraison)',
-      pricePerKg: 8.0,     // tarif abonnement mensuel (~8€/kg livré, hors remise 1ère box)
+      pricePerKg: 5.3,     // tarif abonnement fidèle (~5-6€/kg livré, hors remise 1ère box)
       kcalPer100g: 145,    // densité moyenne repas frais premium
       pros: ['Meilleure digestibilité', 'Ingrédients qualité humaine', 'Sans conservateurs'],
       cons: ['Le plus cher', 'Nécessite un frigo', 'Logistique de livraison'],
