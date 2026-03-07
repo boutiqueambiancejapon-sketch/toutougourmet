@@ -10,7 +10,7 @@ export function TLDR({ items }: TLDRProps) {
         {items.map((item, i) => (
           <li key={i} className="flex items-start gap-2 text-sm">
             <span className="text-[var(--accent-3)] mt-0.5">✅</span>
-            <span>{item}</span>
+            <span dangerouslySetInnerHTML={{ __html: item.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') }} />
           </li>
         ))}
       </ul>
