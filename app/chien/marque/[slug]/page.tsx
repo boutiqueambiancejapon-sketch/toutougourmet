@@ -6,6 +6,7 @@ import { brands, getBrandBySlug, type Brand } from '@/data/brands'
 import { getComparatif, type Comparatif } from '@/lib/mdx'
 import { BrandHero } from '@/components/marques/BrandHero'
 import { BrandCTA } from '@/components/marques/BrandCTA'
+import { StickyBrandCTA } from '@/components/marques/StickyBrandCTA'
 import { ScoreBar } from '@/components/ui/ScoreBar'
 import { FAQ } from '@/components/ui/FAQ'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
@@ -325,6 +326,13 @@ function BrandPage({ brand }: { brand: Brand }) {
           </div>
         </div>
       </div>
+
+      <StickyBrandCTA
+        brandName={brand.name}
+        affiliateUrl={brand.affiliateUrl}
+        offer={brand.discountOffer}
+        code={brand.affiliateCode}
+      />
     </>
   )
 }
