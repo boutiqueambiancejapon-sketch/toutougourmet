@@ -44,7 +44,7 @@ export function StickyCtaDogChef() {
         >
           <span className="font-bold">Dog Chef</span>
           <span className={`hidden sm:inline ${scrolled ? 'text-[var(--text-secondary)]' : 'text-[var(--text-muted)]'}`}> — repas frais personnalisés</span>
-          {' '}· Code <span className="font-mono font-bold" style={{ color: 'var(--pill-rose)' }}>WZU7090</span>
+          {' '}· Code <span className={`font-mono font-bold transition-colors duration-500 ${scrolled ? 'text-rose-600' : ''}`} style={scrolled ? {} : { color: 'var(--pill-rose)' }}>WZU7090</span>
         </p>
 
         {/* CTA */}
