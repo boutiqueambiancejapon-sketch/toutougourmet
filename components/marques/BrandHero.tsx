@@ -15,7 +15,7 @@ export function BrandHero({ brand }: BrandHeroProps) {
       <div className="flex-1">
         <div className="flex flex-wrap items-center gap-2 mb-2">
           <h1 className="page-title">
-            {brand.name}
+            Avis {brand.name}
           </h1>
           <Badge variant="promo">{brand.priceRange}</Badge>
           {brand.animal.map((a) => (
