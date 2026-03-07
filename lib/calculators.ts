@@ -233,7 +233,7 @@ export function buildCostComparisons(dailyCalories: number): CostComparison[] {
     {
       type: 'repas-frais',
       label: 'Repas frais (livraison)',
-      pricePerKg: 5.3,     // tarif abonnement fidèle (~5-6€/kg livré, hors remise 1ère box)
+      pricePerKg: 7.0,     // moyenne marché abonnement (Elmut ~6€, Dog Chef ~8€)
       kcalPer100g: 145,    // densité moyenne repas frais premium
       pros: ['Meilleure digestibilité', 'Ingrédients qualité humaine', 'Sans conservateurs'],
       cons: ['Le plus cher', 'Nécessite un frigo', 'Logistique de livraison'],
