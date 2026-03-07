@@ -1,18 +1,30 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 export function StickyCtaDogChef() {
   const [dismissed, setDismissed] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   if (dismissed) return null
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 px-4 pb-4 pointer-events-none">
       <div
-        className="max-w-[720px] mx-auto rounded-[var(--radius-xl)] border border-[var(--border)] shadow-[var(--shadow-xl)] flex items-center gap-3 sm:gap-4 p-4 pointer-events-auto"
-        style={{ background: 'var(--bg-dark)' }}
+        className={[
+          'max-w-[720px] mx-auto rounded-[var(--radius-xl)] border shadow-[var(--shadow-xl)] flex items-center gap-3 sm:gap-4 p-4 pointer-events-auto transition-all duration-500',
+          scrolled
+            ? 'backdrop-blur-xl bg-white/10 border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.12)]'
+            : 'border-[var(--border)]',
+        ].join(' ')}
+        style={scrolled ? {} : { background: 'var(--bg-dark)' }}
       >
         {/* Badge promo */}
         <span
@@ -23,10 +35,16 @@ export function StickyCtaDogChef() {
         </span>
 
         {/* Texte */}
-        <p className="flex-1 text-sm leading-snug" style={{ color: 'var(--text-on-dark)' }}>
+        <p
+          className={[
+            'flex-1 text-sm leading-snug transition-colors duration-500',
+            scrolled ? 'text-[var(--text-primary)]' : '',
+          ].join(' ')}
+          style={scrolled ? {} : { color: 'var(--text-on-dark)' }}
+        >
           <span className="font-bold">Dog Chef</span>
-          <span className="text-[var(--text-muted)] hidden sm:inline"> — repas frais personnalisés</span>
-          {' '}· Code <span className="font-mono font-bold" style={{ color: 'var(--pill-rose)' }}>WZU7090</span>
+          <span className={`hidden sm:inline ${scrolled ? 'text-[var(--text-secondary)]' : 'text-[var(--text-muted)]'}`}> — repas frais personnalisés</span>
+          {' '}· Code <span className={`font-mono font-bold transition-colors duration-500 ${scrolled ? 'text-rose-600' : ''}`} style={scrolled ? {} : { color: 'var(--pill-rose)' }}>WZU7090</span>
         </p>
 
         {/* CTA */}
@@ -43,7 +61,7 @@ export function StickyCtaDogChef() {
         <button
           onClick={() => setDismissed(true)}
           aria-label="Fermer"
-          className="shrink-0 text-[var(--text-muted)] hover:text-[var(--text-on-dark)] transition-colors text-lg leading-none"
+          className={`shrink-0 transition-colors text-lg leading-none ${scrolled ? 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-on-dark)]'}`}
         >
           ✕
         </button>
