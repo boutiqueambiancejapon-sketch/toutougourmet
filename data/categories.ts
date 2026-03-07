@@ -31,6 +31,12 @@ export const categories: Category[] = [
     emoji: '🍽️',
   },
   {
+    slug: 'fruit',
+    label: 'Fruits',
+    description: 'Quels fruits ton chien peut-il manger sans risque ? Fraises, pommes, bananes, raisins... On fait le tour des fruits autorisés et interdits.',
+    emoji: '🍓',
+  },
+  {
     slug: 'comportement-alimentaire',
     label: 'Comportement alimentaire',
     description: 'Mange trop vite, capricieux, refuse les croquettes... Comprendre et corriger les comportements alimentaires de ton chien.',

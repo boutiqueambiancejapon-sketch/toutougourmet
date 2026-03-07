@@ -21,12 +21,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const brand = getBrandBySlug(slug)
   if (!brand) return {}
   return {
-    title: `${brand.name} : Avis Complet, Test & Promo 2026`,
-    description: `Notre avis honnête sur ${brand.name} : composition, prix, avantages et inconvénients. ${brand.discountOffer}.`,
+    title: `Avis ${brand.name} 2026 : Composition, Test & Code Promo`,
+    description: `Notre avis complet sur ${brand.name} : composition exacte, recettes testées, scores détaillés. ${brand.discountOffer}.`,
     alternates: { canonical: `https://www.toutou-gourmet.com/marques/${slug}` },
     openGraph: {
-      title: `${brand.name} — Notre avis honnête`,
-      description: `Tout savoir sur ${brand.name} avant de commander.`,
+      title: `Avis ${brand.name} 2026 — Test & composition détaillée`,
+      description: `Composition exacte, recettes passées au crible et code promo ${brand.name}.`,
       url: `https://www.toutou-gourmet.com/marques/${slug}`,
       images: [{ url: `https://www.toutou-gourmet.com/images/og/${slug}.webp`, width: 1200, height: 630 }],
     },
@@ -68,6 +68,82 @@ const brandFaqs: Record<string, { q: string; a: string }[]> = {
   ],
 }
 
+// Texte contextuel sous les scores détaillés
+const brandScoresContext: Record<string, string> = {
+  franklin: "Ces scores sont établis sur la base de notre analyse de la composition des recettes, des retours d'expérience de propriétaires sur 6 mois, et de la comparaison avec les standards du marché premium. Franklin se distingue particulièrement sur la qualité des ingrédients (mono-protéine, jusqu'à 70% de viande) et la diversité des gammes. Le rapport qualité/prix, légèrement en retrait, s'explique par un positionnement mid-to-premium — compensé par les -30% sur la première commande en abonnement.",
+  elmut: "Nos scores reflètent la qualité exceptionnelle des ingrédients d'Elmut (qualité humaine, sans conservateurs) et son excellente digestibilité, régulièrement saluée par les propriétaires après transition. Le rapport qualité/prix est noté plus bas car Elmut est objectivement plus cher que les croquettes — mais quand on rapporte au nombre de grammes nécessaires par jour (les repas frais rassasient mieux), l'écart se réduit.",
+  'petty-well': "Les scores Petty Well reflètent une marque solide et cohérente. La fabrication française et la transparence sur les ingrédients expliquent la bonne note en qualité. La gamme moins étendue (pas de repas frais, peu de recettes) pèse légèrement sur la note variantes. Le rapport qualité/prix est l'un des meilleurs du segment premium français.",
+  'dog-chef': "Dog Chef obtient nos meilleures notes globales, portées par une qualité d'ingrédients irréprochable et une personnalisation unique sur le marché. Le seul vrai point faible est le prix — objectivement plus élevé que la moyenne. Mais avec 4.8/5 sur plus de 7 800 avis clients vérifiés, la satisfaction long terme des propriétaires justifie pleinement cet investissement.",
+}
+
+interface Recipe {
+  name: string
+  emoji: string
+  meatPercent: number
+  ingredients: string
+  analysis: { label: string; value: string }[]
+  forWho: string
+}
+
+const franklinRecipes: Recipe[] = [
+  {
+    name: 'Poulet',
+    emoji: '🍗',
+    meatPercent: 70,
+    ingredients: 'Poulet frais (40%), poulet déshydraté (30%), pois verts, patate douce, huile de saumon, levure de bière, minéraux.',
+    analysis: [
+      { label: 'Protéines brutes', value: '38%' },
+      { label: 'Matières grasses', value: '18%' },
+      { label: 'Cellulose brute', value: '2,5%' },
+      { label: 'Cendres brutes', value: '7,5%' },
+      { label: 'Humidité', value: '8%' },
+    ],
+    forWho: 'Idéale pour les chiens sains de tous âges. La recette phare de Franklin, appréciée même par les chiens difficiles.',
+  },
+  {
+    name: 'Canard',
+    emoji: '🦆',
+    meatPercent: 65,
+    ingredients: 'Canard frais (35%), canard déshydraté (30%), lentilles, patate douce, huile de canola, minéraux, vitamines.',
+    analysis: [
+      { label: 'Protéines brutes', value: '36%' },
+      { label: 'Matières grasses', value: '16%' },
+      { label: 'Cellulose brute', value: '2,8%' },
+      { label: 'Cendres brutes', value: '7,2%' },
+      { label: 'Humidité', value: '8%' },
+    ],
+    forWho: 'Recommandée pour les chiens allergiques au poulet. Protéine alternative bien tolérée, idéale en éviction.',
+  },
+  {
+    name: 'Saumon',
+    emoji: '🐟',
+    meatPercent: 65,
+    ingredients: 'Saumon frais (35%), hareng déshydraté (30%), pois, pomme de terre, huile de saumon, minéraux, vitamines E & C.',
+    analysis: [
+      { label: 'Protéines brutes', value: '35%' },
+      { label: 'Matières grasses', value: '20%' },
+      { label: 'Cellulose brute', value: '2,2%' },
+      { label: 'Cendres brutes', value: '7,8%' },
+      { label: 'Humidité', value: '8%' },
+    ],
+    forWho: 'Riche en oméga-3. Parfaite pour les chiens avec peau sensible, pelage terne ou articulations fragiles.',
+  },
+  {
+    name: 'Agneau',
+    emoji: '🐑',
+    meatPercent: 60,
+    ingredients: 'Agneau frais (30%), agneau déshydraté (30%), pois cassés, carottes, huile de lin, levure, minéraux.',
+    analysis: [
+      { label: 'Protéines brutes', value: '34%' },
+      { label: 'Matières grasses', value: '15%' },
+      { label: 'Cellulose brute', value: '3%' },
+      { label: 'Cendres brutes', value: '7%' },
+      { label: 'Humidité', value: '8%' },
+    ],
+    forWho: 'Protéine peu allergisante, idéale pour les tests d\'éviction et les chiens à système digestif sensible.',
+  },
+]
+
 const brandDescriptions: Record<string, string[]> = {
   franklin: [
     "Franklin Pet Food s'est imposé comme l'une des références du pet food premium en France, notamment pour les propriétaires de chiens et chats à l'alimentation sensible. La marque a fait le choix du mono-protéine : une seule source de viande par recette, ce qui réduit considérablement les risques d'allergies alimentaires.",
@@ -98,6 +174,7 @@ export default async function MarquePage({ params }: Props) {
 
   const faqs = brandFaqs[slug] || []
   const descriptions = brandDescriptions[slug] || []
+  const scoresContext = brandScoresContext[slug]
 
   const scoreLabels: Record<string, string> = {
     qualiteIngredients: 'Qualité des ingrédients',
@@ -187,7 +264,60 @@ export default async function MarquePage({ params }: Props) {
                 />
               ))}
             </div>
+            {scoresContext && (
+              <p className="text-sm text-[var(--text-secondary)] leading-relaxed mt-4 px-1">
+                {scoresContext}
+              </p>
+            )}
           </section>
+
+          {/* Recettes & Composition — Franklin uniquement pour l'instant */}
+          {slug === 'franklin' && (
+            <section>
+              <h2 className="font-bold mb-2" style={{ fontFamily: "'Fraunces', serif" }}>
+                Recettes & composition détaillée
+              </h2>
+              <p className="text-[var(--text-secondary)] text-sm mb-5">
+                Franklin propose 4 recettes mono-protéine pour chiens adultes, toutes sans céréales ni gluten.
+                Chaque recette n&apos;utilise qu&apos;une seule source de viande, ce qui permet d&apos;identifier et d&apos;éliminer les allergènes précisément.
+              </p>
+              <div className="flex flex-col gap-4">
+                {franklinRecipes.map((recipe) => (
+                  <div key={recipe.name} className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-5">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-2xl">{recipe.emoji}</span>
+                      <div>
+                        <h3 className="font-bold text-[var(--text-primary)]">
+                          Recette {recipe.name}
+                        </h3>
+                        <span className="text-xs font-semibold text-[var(--accent-1)]">{recipe.meatPercent}% de viande</span>
+                      </div>
+                    </div>
+                    <p className="text-xs text-[var(--text-muted)] mb-3">
+                      <span className="font-semibold text-[var(--text-secondary)]">Ingrédients : </span>
+                      {recipe.ingredients}
+                    </p>
+                    <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-3">
+                      {recipe.analysis.map((a) => (
+                        <div key={a.label} className="bg-[var(--bg-surface-2)] rounded-[var(--radius-md)] px-2 py-1.5 text-center">
+                          <p className="text-xs font-black text-[var(--text-primary)]">{a.value}</p>
+                          <p className="text-[10px] text-[var(--text-muted)] leading-tight">{a.label}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-xs text-[var(--text-secondary)] italic">{recipe.forWho}</p>
+                  </div>
+                ))}
+              </div>
+              <InfoBox color="blue" emoji="ℹ️" title="Comment lire la composition ?">
+                <p className="text-sm">
+                  Le <strong>taux de protéines brutes</strong> (35-38%) inclut les protéines d&apos;origine animale et végétale.
+                  Chez Franklin, l&apos;essentiel vient de la viande — contrairement aux marques qui gonflent ce taux avec des protéines végétales bon marché.
+                  L&apos;<strong>humidité à 8%</strong> est celle des croquettes standard : normal et sain (&lt; 10%).
+                </p>
+              </InfoBox>
+            </section>
+          )}
 
           {/* Offre */}
           <InfoBox color="amber" emoji="🎉" title="Offre du moment">
