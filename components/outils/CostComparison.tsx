@@ -123,14 +123,17 @@ export function CostComparisonTool() {
               <div key={r.type} className="flex flex-col gap-2">
                 <div className="flex items-center justify-between gap-2">
                   <span className="text-sm font-medium text-[var(--text-primary)]">{r.label}</span>
-                  <div className="flex items-baseline gap-2 shrink-0">
-                    <span
-                      className="text-xl font-black"
-                      style={{ fontFamily: "'JetBrains Mono', monospace", color: typeColors[r.type] }}
-                    >
-                      {r.annualBudget}€
-                    </span>
-                    <span className="text-xs text-[var(--text-muted)]">/ an</span>
+                  <div className="flex flex-col items-end shrink-0">
+                    <div className="flex items-baseline gap-1">
+                      <span
+                        className="text-xl font-black"
+                        style={{ fontFamily: "'JetBrains Mono', monospace", color: typeColors[r.type] }}
+                      >
+                        {r.monthlyBudget}€
+                      </span>
+                      <span className="text-xs text-[var(--text-muted)]">/mois</span>
+                    </div>
+                    <span className="text-xs text-[var(--text-muted)]">{r.annualBudget}€/an</span>
                   </div>
                 </div>
                 {/* Barre */}

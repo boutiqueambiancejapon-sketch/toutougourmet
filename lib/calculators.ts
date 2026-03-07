@@ -99,9 +99,9 @@ export const brandPricings: BrandPricing[] = [
   {
     name: 'Elmut',
     slug: 'elmut',
-    pricePerKg: 8.0,    // tarif abonnement mensuel (~8€/kg livré)
+    pricePerKg: 6.0,    // tarif abonnement (~6€/kg livré, moins cher que Dog Chef)
     type: 'repas-frais',
-    kcalPer100g: 140,   // repas frais, densité élevée
+    kcalPer100g: 170,   // densité calorique recettes viande fraîche Elmut
     affiliateUrl: 'https://c3po.link/QWMW4k6mbU',
     offer: '-20% 1ère commande',
   },
@@ -110,7 +110,7 @@ export const brandPricings: BrandPricing[] = [
     slug: 'dog-chef',
     pricePerKg: 8.5,    // tarif abonnement mensuel hors remise 1ère box
     type: 'repas-frais',
-    kcalPer100g: 150,   // recettes légèrement plus denses qu'Elmut
+    kcalPer100g: 188,   // densité calorique recettes Dog Chef (viande fraîche)
     affiliateUrl: 'https://www.dogchef.com/fr/code/WZU7090',
     offer: '-35% box d\'essai',
   },
@@ -233,7 +233,7 @@ export function buildCostComparisons(dailyCalories: number): CostComparison[] {
     {
       type: 'repas-frais',
       label: 'Repas frais (livraison)',
-      pricePerKg: 8.0,     // tarif abonnement mensuel (~8€/kg livré, hors remise 1ère box)
+      pricePerKg: 7.0,     // moyenne marché abonnement (Elmut ~6€, Dog Chef ~8€)
       kcalPer100g: 145,    // densité moyenne repas frais premium
       pros: ['Meilleure digestibilité', 'Ingrédients qualité humaine', 'Sans conservateurs'],
       cons: ['Le plus cher', 'Nécessite un frigo', 'Logistique de livraison'],
