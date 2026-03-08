@@ -6,6 +6,7 @@ import { brands, getBrandBySlug, type Brand } from '@/data/brands'
 import { getComparatif, type Comparatif } from '@/lib/mdx'
 import { BrandHero } from '@/components/marques/BrandHero'
 import { BrandCTA } from '@/components/marques/BrandCTA'
+import { DualBrandCTA } from '@/components/marques/DualBrandCTA'
 import { StickyBrandCTA } from '@/components/marques/StickyBrandCTA'
 import { StickyComparatifCTA } from '@/components/marques/StickyComparatifCTA'
 import { ScoreBar } from '@/components/ui/ScoreBar'
@@ -569,10 +570,10 @@ function ComparatifMdxPage({
         </header>
 
         {brandA && brandB && (
-          <div className="grid grid-cols-2 gap-4 mb-8 p-5 bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] items-start">
-            <BrandCTA brandName={brandA.name} affiliateUrl={brandA.affiliateUrl} offer={brandA.discountOffer} code={brandA.affiliateCode} variant="primary" />
-            <BrandCTA brandName={brandB.name} affiliateUrl={brandB.affiliateUrl} offer={brandB.discountOffer} code={brandB.affiliateCode} variant="primary" />
-          </div>
+          <DualBrandCTA
+            brandA={{ name: brandA.name, affiliateUrl: brandA.affiliateUrl, offer: brandA.discountOffer, code: brandA.affiliateCode }}
+            brandB={{ name: brandB.name, affiliateUrl: brandB.affiliateUrl, offer: brandB.discountOffer, code: brandB.affiliateCode }}
+          />
         )}
 
         <div className="mdx-content">
