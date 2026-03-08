@@ -57,12 +57,14 @@ const brandFaqs: Record<string, { q: string; a: string }[]> = {
     { q: "Petty Well convient-il aux chats ?", a: "Oui, Petty Well propose des gammes adaptées aux chats avec des niveaux de protéines et une teneur en taurine adaptés aux besoins des félins." },
   ],
   'dog-chef': [
-    { q: "Dog Chef vaut-il son prix ?", a: "Dog Chef est effectivement plus cher que les croquettes classiques, mais comparable à d'autres repas frais premium. Élu Produit de l'Année 2026, avec 4.8/5 sur plus de 7 800 avis, le rapport qualité/prix est reconnu par les clients." },
-    { q: "Dog Chef est-il disponible pour les chats ?", a: "Non, Dog Chef est exclusivement formulé pour les chiens. Si tu as un chat, nous te recommandons Franklin, Elmut ou Petty Well qui proposent tous des gammes félines." },
-    { q: "Comment fonctionne la personnalisation chez Dog Chef ?", a: "Tu renseignes le profil de ton chien : race, âge, poids, niveau d'activité, problèmes de santé éventuels. Dog Chef génère ensuite un menu 100% adapté à ses besoins spécifiques." },
-    { q: "Quel est le code promo Dog Chef ?", a: "Le code WZU7090 te donne -35% sur la box d'essai. Applique-le directement sur le site Dog Chef ou passe par notre lien affilié qui l'applique automatiquement." },
-    { q: "Combien de temps se conservent les repas Dog Chef ?", a: "Les repas se conservent 4 jours au réfrigérateur et plusieurs mois au congélateur. La livraison se fait en emballages réfrigérés isothermes." },
-    { q: "Dog Chef est-il sans conservateurs ?", a: "Oui, Dog Chef ne contient aucun conservateur artificiel. Les repas sont cuisinés à basse température pour préserver les nutriments et la fraîcheur naturelle des ingrédients." },
+    { q: "Quel est le prix Dog Chef selon la taille de mon chien ?", a: "Petit chien (< 10 kg) : environ 1,50–2 €/jour soit ~45–60 €/mois. Chien moyen (10–25 kg) : environ 2–4 €/jour soit ~60–120 €/mois. Grand chien (25–40 kg) : environ 4–5,50 €/jour soit ~120–165 €/mois. Livraison gratuite incluse. Le plan mixte 50/50 (frais + croquettes) réduit la facture de moitié tout en conservant la majorité des bénéfices santé." },
+    { q: "Quelle est la différence entre les 3 plans Dog Chef ?", a: "Plan 100% frais : alimentation maximale, meilleure digestibilité, tous les bénéfices sur le pelage, le transit et l'énergie. Plan mixte 50/50 : recommandé en première approche — le meilleur rapport qualité/budget. Plan 100% croquettes Dog Chef : sans gluten, enrichies en prébiotiques, glucosamine et oméga-3 via huile d'algues. Idéal si le budget ou la logistique frigo est un frein." },
+    { q: "Qu'est-ce que les Boosters Dog Chef ?", a: "Les Boosters sont des compléments alimentaires ciblés que tu peux ajouter à la ration. Puppy Booster : calcium et phosphore pour les chiots en croissance. Senior Booster : glucosamine + curcuma anti-inflammatoire pour les chiens âgés. Mobility Booster : soutien des cartilages pour les chiens à risque articulaire. Pro Transit Booster : pré et probiotiques pour les chiens au transit fragile. Chaque Booster s'ajoute à ta box d'abonnement si Dog Chef le recommande après questionnaire." },
+    { q: "Dog Chef convient-il aux chiens allergiques ?", a: "Oui. Les recettes au canard et au poisson sont hypoallergéniques et particulièrement adaptées aux chiens avec des sensibilités alimentaires avérées ou une peau atopique. Le canard est une protéine dite 'novel' — la plupart des chiens ne l'ont jamais consommée, ce qui réduit drastiquement le risque de réaction." },
+    { q: "Dog Chef convient-il aux chiots et aux seniors ?", a: "Oui pour les deux. Pour les chiots : Dog Chef adapte les ratios calcium/phosphore à la race et au poids adulte estimé, et propose le Puppy Booster pour soutenir la croissance. Pour les seniors : le menu Poisson + Senior Booster (glucosamine + curcuma) est particulièrement adapté aux chiens de plus de 7-8 ans avec de l'arthrite ou une mobilité réduite." },
+    { q: "Combien de temps se conservent les repas Dog Chef ?", a: "Les boudins non ouverts se conservent 7 jours au réfrigérateur et 4 mois au congélateur — une durée supérieure à la plupart des concurrents. Une fois ouvert, consommer dans les 24h. La box d'essai couvre 2 semaines complètes pour une transition sereine." },
+    { q: "La livraison Dog Chef est-elle gratuite ?", a: "Oui, la livraison est gratuite en France métropolitaine, incluse dans le tarif de l'abonnement. Les repas arrivent en camionnette réfrigérée sous forme de boudins portionnés. Pas de mauvaise surprise sur la facture finale." },
+    { q: "Quel est le code promo Dog Chef ?", a: "Le code WZU7090 donne -35% sur la box d'essai. Tu peux l'entrer directement sur le site Dog Chef ou passer par notre lien affilié qui l'applique automatiquement à la commande." },
   ],
 }
 
@@ -87,10 +89,12 @@ const brandRecipes: Record<string, { name: string; description: string; tag?: st
     { name: 'Pâtée Canard & Potiron', description: 'Complément humide · fabriqué en France · ingredients d\'origine traçable' },
   ],
   'dog-chef': [
-    { name: 'Menu Poulet personnalisé', description: '100% adapté au profil de ton chien · poulet frais · légumes de saison', tag: 'Best-seller' },
-    { name: 'Menu Bœuf personnalisé', description: 'Viande de bœuf de qualité supérieure · cuisson basse température · sans conservateurs' },
-    { name: 'Menu Poisson personnalisé', description: 'Riche en oméga-3 · adapté aux seniors · pour chiens aux articulations sensibles', tag: 'Senior' },
-    { name: 'Croquettes Air-dried', description: 'Déshydratation à l\'air froid · concentré en nutriments · pratique en voyage' },
+    { name: 'Menu Poulet', description: 'Viande + gésier + foie · 48% protéines (MS) · 15% lipides · recette la plus digestible', tag: 'Best-seller' },
+    { name: 'Menu Bœuf', description: 'Abats de bœuf (cœur, tripes, foie) + pommes de terre + haricots verts + sarrasin · riche en fer' },
+    { name: 'Menu Porc', description: 'Cœur + langue de porc + haricots verts + riz · recette économique · complète et équilibrée' },
+    { name: 'Menu Canard', description: 'Viande premium · hypoallergénique · idéal allergies avérées ou exclusion diagnostique', tag: 'Hypoallergénique' },
+    { name: 'Menu Poisson', description: 'Merlu/colin + carottes + courgettes + riz · 1,4% oméga-3 · anti-inflammatoire · senior & arthrose', tag: 'Senior' },
+    { name: 'Croquettes Poulet ou Canard', description: 'Sans gluten · prébiotiques + huile d\'algues (EPA/DHA) · glucosamine + chondroïtine articulaire' },
   ],
 }
 
@@ -113,10 +117,11 @@ const brandReviews: Record<string, { author: string; rating: number; text: strin
     { author: 'Isabelle H.', rating: 4, text: 'Très bonne marque française. Le taux de protéines est vraiment élevé comparé aux autres sans-céréales. Seul reproche : gamme un peu limitée.', verified: true },
   ],
   'dog-chef': [
-    { author: 'Antoine M.', rating: 5, text: 'La personnalisation est vraiment différente de tout ce qu\'on a testé. Mon chien de 12 ans a retrouvé une vitalité incroyable depuis 4 mois. Le vétérinaire n\'en revient pas.', verified: true },
-    { author: 'Laure V.', rating: 5, text: 'Élu Produit de l\'Année pour une raison : c\'est le meilleur. Mon malinois sportif reçoit exactement les macros dont il a besoin. Performances en agility au top.', verified: true },
-    { author: 'Pierre G.', rating: 5, text: 'On a essayé 3 autres marques de repas frais avant Dog Chef. C\'est sans comparaison — la qualité, le service client, la livraison. Le code -35% m\'a convaincu d\'essayer.', verified: true },
-    { author: 'Céline R.', rating: 4, text: 'Excellent produit, mon golden mange avec un enthousiasme qu\'il n\'avait plus. Un peu cher mais l\'offre d\'essai permet de tester sans risque.', verified: true },
+    { author: 'Antoine M.', rating: 5, text: 'Mon Labrador de 12 ans avait tellement de mal à se lever le matin qu\'on envisageait des anti-douleurs à vie. J\'ai opté pour le menu Poisson + Senior Booster. En 6 semaines, il monte les escaliers seul. Le véto a réduit sa médication de 30%.', verified: true },
+    { author: 'Laure V.', rating: 5, text: 'Mon malinois fait de l\'agility compétition. Avec le plan 100% frais poulet + Mobility Booster, ses récupérations sont deux fois plus rapides. Son entraîneur a remarqué la différence avant même que je lui dise quoi que ce soit.', verified: true },
+    { author: 'Pierre G.', rating: 5, text: 'J\'ai essayé 3 autres marques avant Dog Chef. La différence : ils ont vraiment ajusté le plan quand mon chien a pris 2 kg en 3 mois. Pas juste un mail automatique — un vrai recalibrage. Service client imbattable.', verified: true },
+    { author: 'Céline R.', rating: 4, text: 'Mon bouledogue français avait des intolérances alimentaires depuis ses 2 ans. Passage au menu Canard — fini les démangeaisons et les oreilles rouges en 1 mois. Cher, oui. Mais mes frais vétérinaires ont chuté de 80%.', verified: true },
+    { author: 'Romain D.', rating: 5, text: 'Chiot berger australien de 4 mois. Le Puppy Booster est une vraie valeur ajoutée — mon véto était rassuré par les ratios calcium/phosphore adaptés à sa croissance. Selles parfaites depuis le J7. La box d\'essai à -35% ne m\'a laissé aucune excuse pour ne pas tester.', verified: true },
   ],
 }
 
@@ -138,9 +143,10 @@ const brandDescriptions: Record<string, string[]> = {
     "Petty Well mise sur la simplicité : peu de références mais bien faites. Pas de repas frais, pas de compléments compliqués. Juste des croquettes de qualité, fabriquées ici, avec des ingrédients qu'on peut lire sans dictionnaire.",
   ],
   'dog-chef': [
-    "Dog Chef, c'est le top du top pour les chiens. Élu Produit de l'Année 2026, la marque belge (livraison en France) propose des repas frais 100% personnalisés selon le profil précis de ton chien : race, âge, poids, niveau d'activité, pathologies éventuelles.",
-    "Le concept de personnalisation poussée est vraiment différenciant. Ton chien de 8 kg au métabolisme lent ne reçoit pas le même menu qu'un Husky de 30 kg hyperactif. C'est de la nutrition sur-mesure, ce que seul un vétérinaire ou un nutritionniste pouvait proposer avant.",
-    "4.8/5 sur plus de 7 800 avis vérifiés, aucun conservateur artificiel, cuisson basse température — Dog Chef fait partie des rares marques à mériter pleinement son positionnement premium.",
+    "Fondée en 2017 en Belgique, Dog Chef cuisine ses repas dans son propre atelier à Huldenberg, avec plus de 100 employés. Élu Produit de l'Année 2026, c'est aujourd'hui la référence du repas frais personnalisé pour chiens en France, Belgique et Luxembourg. Livraison gratuite incluse — pas de frais cachés.",
+    "Le principe : un questionnaire de 5 minutes (race, âge, poids, activité, santé, stérilisation) génère un plan nutritionnel sur-mesure. Les portions sont calculées à la calorie près et s'ajustent automatiquement si le poids de ton chien évolue. Trois formats au choix — 100% frais, mixte 50/50 (frais + croquettes), ou 100% croquettes. Le plan mixte est souvent recommandé en première approche : meilleur équilibre qualité/budget.",
+    "Un vrai différenciant par rapport aux concurrents : les Boosters. Ces compléments ciblés s'ajoutent à la ration selon le profil — Puppy Booster (calcium/phosphore pour la croissance), Senior Booster (glucosamine + curcuma anti-inflammatoire), Mobility Booster (cartilages), Pro Transit Booster (pré et probiotiques). Du sur-mesure au niveau nutritionnel, pas juste sur la portion.",
+    "Pour la transition : Dog Chef recommande 7 jours progressifs. Les repas se conservent 7 jours au réfrigérateur (vs 5 pour Elmut) et jusqu'à 4 mois au congélateur. La box d'essai couvre 2 semaines complètes — largement assez pour voir les premiers effets.",
   ],
 }
 

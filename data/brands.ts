@@ -140,11 +140,11 @@ export const brands: Brand[] = [
       serviceClient: 4.7,
     },
     pros: [
-      "Élu Produit de l'Année 2026",
-      '100% personnalisé par profil de chien',
-      'Aucun conservateur artificiel',
-      'Cuisson basse température',
-      "4.8/5 sur plus de 7 800 avis vérifiés",
+      "Élu Produit de l'Année 2026 — 4.8/5 sur 7 800+ avis",
+      '100% personnalisé par profil + ajustement automatique',
+      'Boosters ciblés : Puppy, Senior, Mobility, Transit',
+      'Livraison gratuite incluse — 0 frais cachés',
+      'Conservation 7j frigo / 4 mois congélo',
     ],
     cons: [
       'Uniquement pour les chiens (pas de chat)',
