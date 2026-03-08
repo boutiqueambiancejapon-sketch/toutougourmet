@@ -6,6 +6,7 @@ import { brands, getBrandBySlug, type Brand } from '@/data/brands'
 import { getComparatif, type Comparatif } from '@/lib/mdx'
 import { BrandHero } from '@/components/marques/BrandHero'
 import { BrandCTA } from '@/components/marques/BrandCTA'
+import { DualBrandCTA } from '@/components/marques/DualBrandCTA'
 import { StickyBrandCTA } from '@/components/marques/StickyBrandCTA'
 import { StickyComparatifCTA } from '@/components/marques/StickyComparatifCTA'
 import { ScoreBar } from '@/components/ui/ScoreBar'
@@ -32,112 +33,142 @@ interface Props {
 
 const brandFaqs: Record<string, { q: string; a: string }[]> = {
   franklin: [
-    { q: "Franklin est-il recommandé par des vétérinaires ?", a: "Oui. Les recettes Franklin sont formulées par des nutritionnistes spécialisés en alimentation animale et régulièrement recommandées par des vétérinaires praticiens pour les chiens sensibles ou sujets aux allergies." },
-    { q: "Franklin convient-il aux chats ?", a: "Oui, Franklin propose des gammes spécifiquement formulées pour les chats, en plus de ses gammes pour chiens. Les recettes mono-protéine sont particulièrement adaptées aux chats sensibles." },
-    { q: "Quelle est la différence entre les croquettes Franklin et les marques de supermarché ?", a: "Franklin utilise jusqu'à 70% de viande de qualité, sans céréales ni gluten. Les croquettes de supermarché contiennent généralement plus de céréales et moins de protéines animales réelles." },
-    { q: "Peut-on essayer Franklin sans engagement ?", a: "Oui. Tu peux commander sans abonnement, mais le meilleur tarif est disponible en abonnement avec -30% sur la première commande." },
-    { q: "Franklin livre-t-il dans toute la France ?", a: "Oui, Franklin livre partout en France métropolitaine, en Corse et dans les DOM-TOM." },
-    { q: "Comment contacter le service client Franklin ?", a: "Le service client Franklin est disponible par email et chat sur leur site officiel. Ils répondent généralement sous 24h ouvrées." },
+    { q: "Quel est le prix Franklin selon la taille de mon chien ?", a: "Petit chien (< 10 kg) : à partir de 17 €/mois en abonnement. Grand chien (> 25 kg) : environ 75–80 €/mois soit ~2,50 €/jour. Le prix varie selon la recette — le sac 2,5 kg Saumon & Truite revient à environ 9 €/kg, l'Agneau en format 12 kg tombe à ~6,30 €/kg. En abonnement : -15 à -20% permanent + livraison gratuite dès 49€ en point relais." },
+    { q: "Où sont fabriquées les croquettes Franklin ?", a: "Les recettes sont formulées à Paris par l'équipe Franklin avec la Dr Charlotte Dirat (vétérinaire). La fabrication se fait en République Tchèque, dans une usine certifiée ISO et HACCP du groupe VAFO — le même groupe que les marques CARNILOVE et BRIT. La cuisson se fait à basse température (90–110 °C) pour préserver un maximum de nutriments. Franklin ne produit pas en France — si l'origine française est une priorité absolue, Petty Well est une alternative à envisager." },
+    { q: "Quel est le taux de protéines selon la recette ?", a: "Canard, Pomme & Carotte (sensible) : 34% protéines, 18% lipides, 391 kcal/100g. Saumon, Truite & Persil (peau & pelage) : 34% protéines, 16,5% lipides, 0,5% oméga-3. Poulet, Courge & Myrtille (stérilisé) : 34% protéines, 16,5% lipides. Chiot Poulet, Saumon & Fenouil : 37,5% protéines, 18,5% lipides. Note : la recette Agneau contient seulement 25% de protéines (contrainte technique de l'agneau), à prendre en compte pour les chiens très actifs." },
+    { q: "Franklin convient-il aux chiens allergiques ?", a: "C'est le point fort principal de Franklin depuis sa création en 2018 — la marque a été fondée pour Iphy, une bouledogue française allergique au poulet et au bœuf. La recette Canard, Pomme & Carotte est mono-protéine (canard uniquement) — idéal pour les exclusions diagnostiques et les allergies avérées. La recette Saumon, Truite & Persil est sans volaille ni rouge. L'Agneau, Patate Douce & Menthe est une protéine novel pour les chiens n'ayant jamais consommé d'agneau." },
+    { q: "Comment fonctionne l'abonnement Franklin ?", a: "L'abonnement donne -15 à -20% permanent sur tous les produits et triple les points de fidélité ('Frankis'). Aucun engagement : tu peux modifier la fréquence, la quantité, mettre en pause ou annuler à tout moment depuis ton espace client. Une notification est envoyée 2–3 jours avant chaque expédition pour ajuster la commande. Franklin livre dans 7 pays européens. Bémol récurrent dans les avis : les livraisons sont parfois problématiques (retards, colis bloqués)." },
+    { q: "Franklin convient-il aux chiots et aux chiens seniors ?", a: "Oui. Pour les chiots : la recette Poulet, Saumon & Fenouil est enrichie en DHA (développement cérébral) avec 37,5% de protéines — la plus riche de la gamme. Il existe aussi une recette Chiot Digestion pour les chiots aux intestins fragiles. Pour les seniors : Dinde, Courge & Poire intègre directement glucosamine + chondroïtine pour les articulations — aucun complément séparé nécessaire." },
+    { q: "Comment faire la transition depuis d'autres croquettes ?", a: "Franklin recommande 10 jours minimum (parfois un mois complet selon les avis). J1-J3 → 25% Franklin / 75% ancienne alimentation. J4-J6 → 50/50. J7-J9 → 75%. J10 → 100%. La richesse en protéines et l'absence de céréales peuvent provoquer des selles molles ou de la diarrhée si la transition est trop rapide — c'est le retour négatif le plus fréquent dans les avis Trustpilot." },
+    { q: "Franklin convient-il aux chats ?", a: "Oui. Franklin propose 5 recettes pour chats : Poulet/Thon/Saumon (stérilisé · 36% protéines), Saumon/Courge/Camomille (stérilisé variante), Agneau/Dinde/Valériane (adulte), Poulet/Myrtille/Basilic (senior · 34% protéines), et une recette Chaton (38% protéines, 18% lipides, DHA). Toutes sans céréales, avec farine de krill pour les oméga-3 et FOS prébiotiques. Pâtées chats également disponibles." },
   ],
   elmut: [
-    { q: "En quoi Elmut est-il différent des croquettes classiques ?", a: "Elmut propose des repas frais cuisinés avec des ingrédients de qualité humaine, sans conservateurs artificiels. La cuisson douce préserve les nutriments, ce qui améliore la digestibilité et la qualité nutritionnelle globale." },
-    { q: "Combien coûte Elmut par mois ?", a: "Le coût varie selon la taille de ton animal. Compte environ 50-120€/mois pour un chien de taille moyenne. Moins cher que tu ne l'imagines quand on compare à une alimentation premium en croquettes." },
-    { q: "Comment conserver les repas Elmut ?", a: "Les repas Elmut se conservent au réfrigérateur pendant 5 jours après ouverture, et au congélateur pendant 3 mois. Chaque livraison arrive réfrigérée à domicile." },
-    { q: "Elmut convient-il aux chiens ayant des problèmes digestifs ?", a: "Oui, c'est d'ailleurs l'une des forces d'Elmut. Les aliments frais sont naturellement plus digestibles que les croquettes. Beaucoup de propriétaires rapportent une amélioration nette du transit après le passage à Elmut." },
-    { q: "Peut-on suspendre ou annuler son abonnement Elmut ?", a: "Oui, l'abonnement est flexible. Tu peux suspendre, modifier la fréquence ou annuler à tout moment depuis ton espace client." },
-    { q: "Elmut est-il disponible pour les chats ?", a: "Oui, Elmut propose des gammes pour les chats en plus des chiens, avec des recettes adaptées aux besoins nutritionnels spécifiques des félins." },
+    { q: "Quel est le prix Elmut selon la taille de mon chien ?", a: "Petit chien (< 10 kg) : environ 1,80–2,50 €/jour soit ~55–75 €/mois. Chien moyen (10–25 kg) : environ 2,50–4 €/jour soit ~75–120 €/mois. Grand chien (25–40 kg) : environ 4–6 €/jour soit ~120–180 €/mois. Ces tarifs sont pour une ration complète à 100% Elmut. La formule demi-pension (50% Elmut + 50% croquettes) divise le budget par deux." },
+    { q: "Comment faire la transition depuis les croquettes ?", a: "Elmut recommande 7 à 10 jours progressifs : J1-J3 → 25% Elmut / 75% ancienne alimentation. J4-J6 → 50/50. J7-J9 → 75% Elmut. J10 → 100% Elmut. Cette progressivité évite les troubles digestifs (diarrhée, ballonnements) et laisse le temps à la flore intestinale de s'adapter. Ne pas mélanger les deux aliments dans le même bol — alterner les repas." },
+    { q: "Elmut convient-il aux chiots ?", a: "Oui. Elmut propose des rations adaptées aux chiots dès 2 mois. Le questionnaire prend en compte l'âge, la race et le poids adulte estimé pour calculer des apports adaptés à la croissance. Pour les très grandes races (Berger Allemand, Labrador…), surveiller la vitesse de croissance est essentiel — Elmut ajuste les rations en conséquence." },
+    { q: "Elmut convient-il aux chiens seniors ou en surpoids ?", a: "C'est l'un des meilleurs cas d'usage d'Elmut. Pour les seniors : le menu Saumon & Brocoli est riche en oméga-3 anti-inflammatoires, très utile pour les chiens avec de l'arthrite. Pour les chiens en surpoids : le menu Dinde & Courgette est faible en lipides. Dans les deux cas, la ration est calculée au profil — pas besoin d'adapter manuellement." },
+    { q: "Que faire des repas Elmut pendant les vacances ?", a: "Deux options : 1) Congeler à l'avance — les repas se conservent 3 mois au congélateur, tu pars avec des portions congelées dans une glacière. 2) Suspendre l'abonnement depuis ton espace client avant de partir, et reprendre à ton retour. Aucune pénalité, aucun délai minimum." },
+    { q: "Comment conserver les repas Elmut ?", a: "Non ouvertes : 5 jours au réfrigérateur, 3 mois au congélateur. Ouvertes : consommer dans les 48h. Chaque livraison arrive réfrigérée via Chronofresh. Il faut prévoir environ 2 étagères de frigo pour une semaine de ration selon la taille du chien." },
+    { q: "Elmut est-il disponible pour les chats ?", a: "Oui, Elmut propose 3 recettes pour chats (poulet, bœuf, dinde) avec jusqu'à 90% de viande et moins de 3% de glucides — parfaitement adapté aux besoins des félins carnivores stricts." },
   ],
   'petty-well': [
-    { q: "Petty Well est-il vraiment fabriqué en France ?", a: "Oui, toutes les recettes Petty Well sont fabriquées en France. La marque met en avant une transparence totale sur l'origine de ses ingrédients et son lieu de production." },
-    { q: "Quel est le taux de protéines dans les croquettes Petty Well ?", a: "Les croquettes Petty Well contiennent jusqu'à 41% de protéines animales, un des taux les plus élevés du marché des croquettes sans céréales." },
-    { q: "Petty Well est-il sans céréales ?", a: "Oui, toutes les gammes Petty Well sont formulées sans céréales ni gluten. La marque utilise des alternatives comme les légumineuses pour l'apport en glucides." },
-    { q: "Comment fonctionne la box d'essai Petty Well ?", a: "La box d'essai te permet de tester les croquettes pendant 2 semaines avec -34% sur le premier achat, sans engagement. Tu choisis ensuite si tu souhaites poursuivre." },
-    { q: "Des vétérinaires recommandent-ils Petty Well ?", a: "Oui, Petty Well est recommandé par plusieurs vétérinaires, notamment à Paris. La marque met en avant des formulations validées par des experts en nutrition animale." },
-    { q: "Petty Well convient-il aux chats ?", a: "Oui, Petty Well propose des gammes adaptées aux chats avec des niveaux de protéines et une teneur en taurine adaptés aux besoins des félins." },
+    { q: "Quel est le prix Petty Well selon la taille de mon chien ?", a: "Petit chien (< 10 kg) : à partir d'environ 1 €/jour soit ~20–30 €/mois. Chien moyen (10–25 kg) : environ 1,50–2 €/jour soit ~45–60 €/mois. Grand chien (25–40 kg) : environ 2–2,50 €/jour soit ~60–75 €/mois. Le sac 6 kg revient à environ 8 €/kg — bien moins cher que le 1 kg (~12 €/kg). L'abonnement est modulable et sans engagement." },
+    { q: "Où sont fabriquées les croquettes Petty Well ?", a: "Les croquettes sont fabriquées en Maine-et-Loire, les pâtées dans le Nord. La volaille utilisée provient du Gers (près de Toulouse). La marque est référencée dans l'annuaire Marques de France. Les recettes ont été développées en collaboration avec AgroParisTech et Food'Inn Lab, deux références en nutrition animale." },
+    { q: "Quel est le taux de protéines selon la recette ?", a: "Croquettes Poulet & Légumes : 32% protéines brutes, 89% d'origine animale, glucosamine 200 mg/kg incluse. Croquettes Saumon & Thon petite taille : 35% protéines, 1,2% oméga-3. Grande taille : 29% protéines, 1,2% oméga-3. Chat Poulet & Dinde : jusqu'à 41% protéines, glucosamine 300 mg/kg. Toutes les recettes sont sans céréales, sans OGM, sans colorants ni conservateurs." },
+    { q: "Comment fonctionne la box d'essai Petty Well ?", a: "La box d'essai couvre 15 jours de repas, personnalisée selon le profil de ton animal (gabarit, âge, niveau d'activité). -34% sur la première commande via notre lien, sans engagement. Un jouet/cadeau est glissé dans chaque premier colis. L'équipe prend contact pendant les 2 semaines d'essai, et un SMS est envoyé 3 jours avant la préparation de chaque box suivante." },
+    { q: "Petty Well est-il validé par des vétérinaires ?", a: "Oui. Toutes les recettes sont validées par des vétérinaires nutritionnistes. La formulation a été développée avec AgroParisTech et Food'Inn Lab. Petty Well est disponible dans plus de 500 points de vente physiques (Animalis, Monoprix, Jardiland), ce qui témoigne d'une reconnaissance professionnelle. Bémol parfois cité par des nutritionnistes indépendants : le taux de glucides (~33%) est un peu élevé comparé à l'idéal (<25%)." },
+    { q: "Petty Well convient-il aux chiens allergiques ?", a: "Oui, c'est un des points forts de la marque. La recette Agneau utilise une protéine dite 'novel' que la plupart des chiens n'ont jamais consommée — idéal pour les exclusions diagnostiques. La recette Saumon & Thon est également sans volaille. Toutes les recettes sont sans gluten, sans colorants, sans conservateurs et sans OGM. Le format mono-protéine est pensé pour les chiens à sensibilités alimentaires." },
+    { q: "Comment faire la transition depuis d'autres croquettes ?", a: "Petty Well recommande 7 à 10 jours progressifs : J1-J3 → 25% Petty Well / 75% ancienne alimentation, J4-J6 → 50/50, J7-J9 → 75%, J10 → 100%. La transition est généralement bien tolérée — les propriétaires rapportent peu de troubles digestifs grâce à l'ajout de prébiotiques (levure de bière riche en MOS) dans les recettes." },
+    { q: "Petty Well convient-il aux chats ?", a: "Oui, Petty Well propose 4 références pour chats : Poulet & Dinde, Saumon, Chaton, et une recette Urinary pour la santé urinaire. La gamme chat atteint 41% de protéines animales (89% d'origine animale), avec glucosamine et chondroïtine incluses. Sans céréales, sans taurine synthétique ajoutée — adapté aux besoins des félins carnivores stricts." },
   ],
   'dog-chef': [
-    { q: "Dog Chef vaut-il son prix ?", a: "Dog Chef est effectivement plus cher que les croquettes classiques, mais comparable à d'autres repas frais premium. Élu Produit de l'Année 2026, avec 4.8/5 sur plus de 7 800 avis, le rapport qualité/prix est reconnu par les clients." },
-    { q: "Dog Chef est-il disponible pour les chats ?", a: "Non, Dog Chef est exclusivement formulé pour les chiens. Si tu as un chat, nous te recommandons Franklin, Elmut ou Petty Well qui proposent tous des gammes félines." },
-    { q: "Comment fonctionne la personnalisation chez Dog Chef ?", a: "Tu renseignes le profil de ton chien : race, âge, poids, niveau d'activité, problèmes de santé éventuels. Dog Chef génère ensuite un menu 100% adapté à ses besoins spécifiques." },
-    { q: "Quel est le code promo Dog Chef ?", a: "Le code WZU7090 te donne -35% sur la box d'essai. Applique-le directement sur le site Dog Chef ou passe par notre lien affilié qui l'applique automatiquement." },
-    { q: "Combien de temps se conservent les repas Dog Chef ?", a: "Les repas se conservent 4 jours au réfrigérateur et plusieurs mois au congélateur. La livraison se fait en emballages réfrigérés isothermes." },
-    { q: "Dog Chef est-il sans conservateurs ?", a: "Oui, Dog Chef ne contient aucun conservateur artificiel. Les repas sont cuisinés à basse température pour préserver les nutriments et la fraîcheur naturelle des ingrédients." },
+    { q: "Quel est le prix Dog Chef selon la taille de mon chien ?", a: "Petit chien (< 10 kg) : environ 1,50–2 €/jour soit ~45–60 €/mois. Chien moyen (10–25 kg) : environ 2–4 €/jour soit ~60–120 €/mois. Grand chien (25–40 kg) : environ 4–5,50 €/jour soit ~120–165 €/mois. Livraison gratuite incluse. Le plan mixte 50/50 (frais + croquettes) réduit la facture de moitié tout en conservant la majorité des bénéfices santé." },
+    { q: "Quelle est la différence entre les 3 plans Dog Chef ?", a: "Plan 100% frais : alimentation maximale, meilleure digestibilité, tous les bénéfices sur le pelage, le transit et l'énergie. Plan mixte 50/50 : recommandé en première approche — le meilleur rapport qualité/budget. Plan 100% croquettes Dog Chef : sans gluten, enrichies en prébiotiques, glucosamine et oméga-3 via huile d'algues. Idéal si le budget ou la logistique frigo est un frein." },
+    { q: "Qu'est-ce que les Boosters Dog Chef ?", a: "Les Boosters sont des compléments alimentaires ciblés que tu peux ajouter à la ration. Puppy Booster : calcium et phosphore pour les chiots en croissance. Senior Booster : glucosamine + curcuma anti-inflammatoire pour les chiens âgés. Mobility Booster : soutien des cartilages pour les chiens à risque articulaire. Pro Transit Booster : pré et probiotiques pour les chiens au transit fragile. Chaque Booster s'ajoute à ta box d'abonnement si Dog Chef le recommande après questionnaire." },
+    { q: "Dog Chef convient-il aux chiens allergiques ?", a: "Oui. Les recettes au canard et au poisson sont hypoallergéniques et particulièrement adaptées aux chiens avec des sensibilités alimentaires avérées ou une peau atopique. Le canard est une protéine dite 'novel' — la plupart des chiens ne l'ont jamais consommée, ce qui réduit drastiquement le risque de réaction." },
+    { q: "Dog Chef convient-il aux chiots et aux seniors ?", a: "Oui pour les deux. Pour les chiots : Dog Chef adapte les ratios calcium/phosphore à la race et au poids adulte estimé, et propose le Puppy Booster pour soutenir la croissance. Pour les seniors : le menu Poisson + Senior Booster (glucosamine + curcuma) est particulièrement adapté aux chiens de plus de 7-8 ans avec de l'arthrite ou une mobilité réduite." },
+    { q: "Combien de temps se conservent les repas Dog Chef ?", a: "Les boudins non ouverts se conservent 7 jours au réfrigérateur et 4 mois au congélateur — une durée supérieure à la plupart des concurrents. Une fois ouvert, consommer dans les 24h. La box d'essai couvre 2 semaines complètes pour une transition sereine." },
+    { q: "La livraison Dog Chef est-elle gratuite ?", a: "Oui, la livraison est gratuite en France métropolitaine, incluse dans le tarif de l'abonnement. Les repas arrivent en camionnette réfrigérée sous forme de boudins portionnés. Pas de mauvaise surprise sur la facture finale." },
+    { q: "Quel est le code promo Dog Chef ?", a: "Le code WZU7090 donne -35% sur la box d'essai. Tu peux l'entrer directement sur le site Dog Chef ou passer par notre lien affilié qui l'applique automatiquement à la commande." },
   ],
 }
 
 const brandRecipes: Record<string, { name: string; description: string; tag?: string }[]> = {
   franklin: [
-    { name: 'Croquettes Poulet & Patate douce', description: 'Mono-protéine · sans céréales · 68% de viande · idéal sensibilités digestives', tag: 'Best-seller' },
-    { name: 'Croquettes Saumon & Courgette', description: 'Riche en oméga-3 · sans gluten · peau et pelage brillants', tag: 'Peau & pelage' },
-    { name: 'Croquettes Agneau & Riz', description: 'Source de protéines digeste · formule douce pour chiens sensibles' },
-    { name: 'Pâtée Canard & Courge', description: 'Complément humide · texture appétente · idéale en mix avec les croquettes' },
-    { name: 'Friandises Bœuf séché', description: 'Mono-ingrédient · sans additifs · idéales pour l\'éducation' },
+    { name: 'Canard, Pomme & Carotte', description: '70% canard (frais + déshy + hydrolysé) · 34% protéines · mono-protéine · hypoallergénique', tag: 'Hypoallergénique' },
+    { name: 'Saumon, Truite & Persil', description: '70% poisson · 34% protéines · 0,5% oméga-3 · peau et pelage brillants', tag: 'Peau & pelage' },
+    { name: 'Poulet, Courge & Myrtille', description: '70% poulet · 34% protéines · formulé pour chiens stérilisés · contrôle du poids', tag: 'Stérilisé' },
+    { name: 'Dinde, Courge & Poire', description: '65% dinde · glucosamine + chondroïtine incluses · formule senior anti-arthrite', tag: 'Senior' },
+    { name: 'Poulet, Saumon & Fenouil', description: '70% viande · 37,5% protéines · DHA naturel · adapté à la croissance', tag: 'Chiot' },
+    { name: 'Pâtée Canard & Valériane', description: 'Canard mono-protéine · sans céréales · texture humide appétente · idéal en complément' },
   ],
   elmut: [
-    { name: 'Menu Poulet & Légumes', description: 'Recette signature · viande fraîche · légumes vapeur · aucun conservateur', tag: 'Best-seller' },
-    { name: 'Menu Bœuf & Carottes', description: 'Riche en protéines · cuisson douce · adapté à l\'activité physique soutenue' },
-    { name: 'Menu Saumon & Brocoli', description: 'Oméga-3 · antioxydants naturels · idéal pour les seniors ou peaux sensibles', tag: 'Senior' },
-    { name: 'Menu Dinde & Courgette', description: 'Faible en matières grasses · recommandé pour les chiens en surpoids' },
+    { name: 'Menu Poulet & Légumes', description: '67% viande · 54% protéines · recette signature · cuisson douce · zéro conservateur', tag: 'Best-seller' },
+    { name: 'Menu Bœuf & Carottes', description: '70% viande · 58% protéines · riche en fer · idéal chiens actifs et sportifs' },
+    { name: 'Menu Saumon & Brocoli', description: '65% poisson · oméga-3 EPA/DHA · anti-inflammatoire · peaux sensibles & seniors', tag: 'Senior' },
+    { name: 'Menu Dinde & Courgette', description: '65% viande · faible en lipides · recommandé pour les chiens en surpoids ou stérilisés' },
+    { name: 'Menu Porc & Patate douce', description: '66% viande · source de protéines alternative · digeste · adapté aux intolérants poulet' },
   ],
   'petty-well': [
-    { name: 'Croquettes Poulet & Pois', description: 'Made in France · 41% de protéines · sans céréales ni gluten', tag: 'Best-seller' },
-    { name: 'Croquettes Saumon & Lentilles', description: 'Oméga-3 · légumineuses · favorise la santé cutanée' },
-    { name: 'Pâtée Canard & Potiron', description: 'Complément humide · fabriqué en France · ingredients d\'origine traçable' },
+    { name: 'Croquettes Poulet & Légumes', description: '32% protéines · volaille du Gers · glucosamine 200 mg/kg · sans céréales · toutes tailles', tag: 'Best-seller' },
+    { name: 'Croquettes Saumon & Thon', description: '35% protéines (petite taille) · 1,2% oméga-3 · peau et pelage · disponible chiot', tag: 'Peau & pelage' },
+    { name: 'Croquettes Agneau', description: 'Protéine novel · idéal chiens sensibles et allergiques · digeste et doux' },
+    { name: 'Croquettes Bœuf & Volaille', description: 'Contrôle du poids · recette équilibrée · bœuf + volaille française' },
+    { name: 'Pâtée Bœuf & Carottes', description: '50% bœuf (filet, cœur, foie) · 11% protéines · sans conservateur · complément humide', tag: 'Humide' },
+    { name: 'Pâtée Canard & Quinoa', description: 'Canard + quinoa + haricots verts + mangue · sans gluten · appétence maximale' },
   ],
   'dog-chef': [
-    { name: 'Menu Poulet personnalisé', description: '100% adapté au profil de ton chien · poulet frais · légumes de saison', tag: 'Best-seller' },
-    { name: 'Menu Bœuf personnalisé', description: 'Viande de bœuf de qualité supérieure · cuisson basse température · sans conservateurs' },
-    { name: 'Menu Poisson personnalisé', description: 'Riche en oméga-3 · adapté aux seniors · pour chiens aux articulations sensibles', tag: 'Senior' },
-    { name: 'Croquettes Air-dried', description: 'Déshydratation à l\'air froid · concentré en nutriments · pratique en voyage' },
+    { name: 'Menu Poulet', description: 'Viande + gésier + foie · 48% protéines (MS) · 15% lipides · recette la plus digestible', tag: 'Best-seller' },
+    { name: 'Menu Bœuf', description: 'Abats de bœuf (cœur, tripes, foie) + pommes de terre + haricots verts + sarrasin · riche en fer' },
+    { name: 'Menu Porc', description: 'Cœur + langue de porc + haricots verts + riz · recette économique · complète et équilibrée' },
+    { name: 'Menu Canard', description: 'Viande premium · hypoallergénique · idéal allergies avérées ou exclusion diagnostique', tag: 'Hypoallergénique' },
+    { name: 'Menu Poisson', description: 'Merlu/colin + carottes + courgettes + riz · 1,4% oméga-3 · anti-inflammatoire · senior & arthrose', tag: 'Senior' },
+    { name: 'Croquettes Poulet ou Canard', description: 'Sans gluten · prébiotiques + huile d\'algues (EPA/DHA) · glucosamine + chondroïtine articulaire' },
   ],
 }
 
 const brandReviews: Record<string, { author: string; rating: number; text: string; verified?: boolean }[]> = {
   franklin: [
-    { author: 'Marie T.', rating: 5, text: 'Mon golden retriever avait des problèmes de peau depuis des années. Depuis Franklin mono-protéine saumon, plus aucune démangeaison en 3 mois. Je recommande sans hésitation.', verified: true },
-    { author: 'Julien R.', rating: 5, text: 'Rapport qualité/prix imbattable dans le premium sans céréales. J\'ai comparé avec 5 autres marques, Franklin gagne haut la main sur la composition.', verified: true },
-    { author: 'Sophie M.', rating: 4, text: 'Très bon produit, mon chien adore les croquettes poulet. Un bémol sur le prix hors abonnement, mais avec les -30% c\'est vraiment compétitif.', verified: true },
-    { author: 'Éric B.', rating: 5, text: 'Vétérinaire recommandé pour mon labrador sensible. Selles bien formées, pelage brillant, énergie au top. On ne reviendra pas en arrière.', verified: true },
+    { author: 'Marie T.', rating: 5, text: 'Mon golden retriever avait des problèmes de peau et de démangeaisons depuis 2 ans. Depuis Franklin Saumon, Truite & Persil, plus aucune crise en 3 mois. Le pelage est devenu brillant, il ne se gratte presque plus. Même mon vet était surpris par les résultats.', verified: true },
+    { author: 'Julien R.', rating: 5, text: 'J\'ai lu la composition de 8 marques premium sans céréales côte à côte. Franklin est la seule à mettre 70% de viande réelle dans les croquettes Canard, avec une liste d\'ingrédients qu\'on peut lire sans dictionnaire. La différence se voit dans les selles et l\'énergie de mon berger.', verified: true },
+    { author: 'Sophie M.', rating: 4, text: 'Mon bouledogue avait les mêmes symptômes qu\'Iphy (le chien d\'Andrea, la fondatrice). Depuis Franklin Canard mono-protéine, plus d\'eczéma. Attention : j\'ai mis 3 semaines de transition pour éviter les selles molles — ne pas aller trop vite.', verified: true },
+    { author: 'Éric B.', rating: 5, text: 'Labrador de 8 ans avec de l\'arthrite. La recette senior Dinde, Courge & Poire a la glucosamine et chondroïtine directement intégrées — j\'ai arrêté les compléments séparés. Moins de raideur le matin, mobilité vraiment améliorée en 6 semaines.', verified: true },
+    { author: 'Camille D.', rating: 4, text: 'Excellent produit, bémol uniquement sur la livraison : 2 fois des retards et un colis bloqué en transit. Le service client a remboursé sans discussion mais ça demande de la patience. Les croquettes en elles-mêmes sont irréprochables — mon chat stérilisé a retrouvé son poids idéal en 2 mois.', verified: true },
   ],
   elmut: [
-    { author: 'Claire D.', rating: 5, text: 'Depuis qu\'on est passés à Elmut, mon beagle a perdu 2kg en surpoids et ses analyses vétérinaires sont parfaites. La fraîcheur des ingrédients, ça change tout.', verified: true },
-    { author: 'Thomas L.', rating: 5, text: 'Le service de livraison est impeccable, toujours à temperature. Mon border collie refuse maintenant ses anciennes croquettes — c\'est dire !', verified: true },
-    { author: 'Nathalie C.', rating: 4, text: 'Qualité irréprochable. C\'est plus cher que les croquettes mais mes deux chiens en sont fous et leur état de santé s\'est nettement amélioré.', verified: true },
+    { author: 'Claire D.', rating: 5, text: 'Mon beagle était en surpoids depuis 2 ans. Après 3 mois sur le menu Dinde Elmut, il a perdu 2,1 kg et son vétérinaire était bluffé par ses analyses. La différence sur le pelage est visible dès le premier mois.', verified: true },
+    { author: 'Thomas L.', rating: 5, text: 'Transition facile en 10 jours comme recommandé. Mon border collie hyperactif a refusé ses anciennes croquettes dès la deuxième semaine — impossible de revenir en arrière maintenant. Énergie au top, selles parfaites.', verified: true },
+    { author: 'Nathalie C.', rating: 4, text: 'J\'avais deux chiens avec des sensibilités digestives différentes. Elmut m\'a permis de donner une recette différente à chacun. Fini les épisodes de diarrhée. Oui c\'est plus cher, mais les frais vétérinaires ont chuté de 60%.', verified: true },
+    { author: 'Marc B.', rating: 5, text: 'Mon golden retriever de 11 ans avait des douleurs articulaires. Depuis le menu Saumon (oméga-3), il est nettement plus mobile. Le vétérinaire a réduit sa dose d\'anti-inflammatoires de moitié en 2 mois. Je ne m\'attendais pas à ça.', verified: true },
   ],
   'petty-well': [
-    { author: 'Aurélie P.', rating: 5, text: 'Fière de donner du Made in France à mes chiens ! La composition est lisible, les ingrédients sont traçables. Mon vet était bluffé par les résultats en 2 mois.', verified: true },
-    { author: 'Nicolas F.', rating: 5, text: 'J\'avais peur que mon whippet n\'accepte pas les légumineuses à la place des céréales. Aucun problème digestif, au contraire — transit nickel depuis le départ.', verified: true },
-    { author: 'Isabelle H.', rating: 4, text: 'Très bonne marque française. Le taux de protéines est vraiment élevé comparé aux autres sans-céréales. Seul reproche : gamme un peu limitée.', verified: true },
+    { author: 'Aurélie P.', rating: 5, text: 'Fière de donner du Made in France à mes deux chiens ! La composition est lisible, je sais exactement d\'où vient la volaille. Mon vet était bluffé par les résultats en 2 mois — pelage brillant, digestion parfaite, énergie au top.', verified: true },
+    { author: 'Nicolas F.', rating: 5, text: 'Mon whippet avait une allergie alimentaire non identifiée depuis 18 mois. Depuis les croquettes Agneau Petty Well (protéine novel), plus aucune démangeaison en 6 semaines. On a enfin trouvé la cause.', verified: true },
+    { author: 'Sandrine M.', rating: 5, text: 'J\'ai essayé 4 marques sans céréales avant Petty Well. C\'est la seule que mes deux chats acceptent sans faire la grimace. La transition s\'est faite en 5 jours, selles parfaites, pelage incroyable au bout d\'un mois.', verified: true },
+    { author: 'Raphaël D.', rating: 4, text: 'Excellent rapport qualité/prix sur le sac 6 kg. Mon golden retriever de 32 kg, je tourne à environ 60 €/mois — raisonnable pour la qualité. Seul bémol : j\'aurais aimé une recette avec moins de glucides pour son surpoids.', verified: true },
+    { author: 'Isabelle H.', rating: 5, text: 'Le service client est vraiment au-dessus du lot. Ils ont adapté mon abonnement en 5 minutes quand mon chat a eu des calculs urinaires. Ils m\'ont orientée vers la recette Urinary sans frais. C\'est rare de voir ça.', verified: true },
   ],
   'dog-chef': [
-    { author: 'Antoine M.', rating: 5, text: 'La personnalisation est vraiment différente de tout ce qu\'on a testé. Mon chien de 12 ans a retrouvé une vitalité incroyable depuis 4 mois. Le vétérinaire n\'en revient pas.', verified: true },
-    { author: 'Laure V.', rating: 5, text: 'Élu Produit de l\'Année pour une raison : c\'est le meilleur. Mon malinois sportif reçoit exactement les macros dont il a besoin. Performances en agility au top.', verified: true },
-    { author: 'Pierre G.', rating: 5, text: 'On a essayé 3 autres marques de repas frais avant Dog Chef. C\'est sans comparaison — la qualité, le service client, la livraison. Le code -35% m\'a convaincu d\'essayer.', verified: true },
-    { author: 'Céline R.', rating: 4, text: 'Excellent produit, mon golden mange avec un enthousiasme qu\'il n\'avait plus. Un peu cher mais l\'offre d\'essai permet de tester sans risque.', verified: true },
+    { author: 'Antoine M.', rating: 5, text: 'Mon Labrador de 12 ans avait tellement de mal à se lever le matin qu\'on envisageait des anti-douleurs à vie. J\'ai opté pour le menu Poisson + Senior Booster. En 6 semaines, il monte les escaliers seul. Le véto a réduit sa médication de 30%.', verified: true },
+    { author: 'Laure V.', rating: 5, text: 'Mon malinois fait de l\'agility compétition. Avec le plan 100% frais poulet + Mobility Booster, ses récupérations sont deux fois plus rapides. Son entraîneur a remarqué la différence avant même que je lui dise quoi que ce soit.', verified: true },
+    { author: 'Pierre G.', rating: 5, text: 'J\'ai essayé 3 autres marques avant Dog Chef. La différence : ils ont vraiment ajusté le plan quand mon chien a pris 2 kg en 3 mois. Pas juste un mail automatique — un vrai recalibrage. Service client imbattable.', verified: true },
+    { author: 'Céline R.', rating: 4, text: 'Mon bouledogue français avait des intolérances alimentaires depuis ses 2 ans. Passage au menu Canard — fini les démangeaisons et les oreilles rouges en 1 mois. Cher, oui. Mais mes frais vétérinaires ont chuté de 80%.', verified: true },
+    { author: 'Romain D.', rating: 5, text: 'Chiot berger australien de 4 mois. Le Puppy Booster est une vraie valeur ajoutée — mon véto était rassuré par les ratios calcium/phosphore adaptés à sa croissance. Selles parfaites depuis le J7. La box d\'essai à -35% ne m\'a laissé aucune excuse pour ne pas tester.', verified: true },
   ],
 }
 
 const brandDescriptions: Record<string, string[]> = {
   franklin: [
-    "Franklin Pet Food s'est imposé comme l'une des références du pet food premium en France, notamment pour les propriétaires de chiens et chats à l'alimentation sensible. La marque a fait le choix du mono-protéine : une seule source de viande par recette, ce qui réduit considérablement les risques d'allergies alimentaires.",
-    "Ce qui distingue Franklin, c'est la clarté de sa composition. Jusqu'à 70% de viande réelle, sans céréales, sans gluten, sans colorants artificiels. Les recettes sont formulées par des nutritionnistes spécialisés en alimentation animale — pas de marketing vide, du concret.",
-    "La gamme est large : croquettes, pâtées, friandises, compléments. De quoi construire une alimentation complète et variée. Le prix reste accessible, surtout en abonnement où la première commande bénéficie de -30%.",
+    "Franklin Pet Food est née en 2018 d'un problème concret : Iphy, la bouledogue française d'Andrea El Hani, était allergique au poulet et au bœuf. Eczéma, troubles digestifs chroniques — aucune croquette du marché n'était adaptée. Andrea, ancienne cadre en Consumer Goods chez LVMH, s'associe à son ami Bertrand Dupray pour créer une marque entièrement pensée pour les animaux sensibles. Le concept : mono-protéine (une seule source de viande par recette) et sans céréales — pionniers de cette approche en France.",
+    "Les recettes sont formulées à Paris avec la Dr Charlotte Dirat, vétérinaire nutritionniste. La fabrication se fait en République Tchèque, dans une usine certifiée ISO et HACCP du groupe VAFO (propriétaire de CARNILOVE et BRIT) — ce qui garantit des procédés parmi les plus avancés d'Europe. La cuisson basse température (90–110 °C) préserve les nutriments. Les formules atteignent jusqu'à 70% de viande ou poisson, avec la patate douce comme principale source d'amidon — faible indice glycémique, riche en vitamine A.",
+    "Depuis 2023, le groupe VAFO est actionnaire. En deux ans, Franklin avait multiplié son chiffre d'affaires par 4. La marque compte aujourd'hui plus de 100 000 clients et livre dans 7 pays européens. La gamme couvre l'ensemble du cycle de vie : chiot (recette enrichie en DHA), adulte, stérilisé (contrôle du poids), senior (glucosamine + chondroïtine intégrées), et toutes les typologies d'allergies.",
+    "4,7/5 sur Trustpilot avec plus de 4 700 avis. Les retours les plus fréquents : amélioration du pelage et de la digestion, appétence élevée même chez les animaux difficiles, abonnement flexible apprécié. Point de vigilance récurrent dans les avis : la livraison est parfois problématique (retards, colis bloqués). Les recettes sans poisson ont aussi un ratio oméga-6/oméga-3 à compenser, idéalement en ajoutant une cuillère d'huile de saumon 2–3 fois par semaine.",
   ],
   elmut: [
-    "Elmut a pris le parti radical du repas frais livré à domicile. L'idée : cuisiner pour ton animal comme tu cuisinerais pour toi-même, avec des ingrédients de qualité humaine, sans conservateurs ni additifs controversés.",
-    "Le concept est simple mais exigeant : chaque semaine ou quinzaine, tu reçois des barquettes réfrigérées prêtes à servir. La cuisson douce préserve les vitamines et minéraux, souvent détruits dans le processus d'extrusion des croquettes classiques.",
-    "Une étude souvent citée suggère que les chiens nourris à l'alimentation fraîche vivent en moyenne 3 ans de plus que ceux nourris aux croquettes industrielles. Avec Elmut, tu investis dans la santé long-terme de ton animal.",
+    "Fondée en 2019 par une équipe française passionnée, Elmut part d'un constat simple : on mange de mieux en mieux, nos animaux méritent la même attention. La marque propose des repas cuisinés dans une vraie cuisine agréée qualité humaine — pas des usines d'extrusion à 200°C, mais une cuisson douce sous vide à 90°C pendant plus de 2h pour préserver chaque nutriment.",
+    "Le concept en pratique : tu renseignes le profil de ton chien (race, âge, poids, activité, santé), Elmut calcule la ration exacte et t'envoie des barquettes réfrigérées prêtes à servir. 67% de viande fraîche en moyenne, zéro conservateur artificiel, zéro colorant. La liste d'ingrédients tient sur 4 lignes — ce qui est rarissime dans le pet food.",
+    "Pour la transition depuis les croquettes : Elmut recommande 7 à 10 jours progressifs. Semaine 1 : 25% Elmut + 75% ancienne alimentation. Semaine 2 : 50/50. Semaine 3 : 75% Elmut. Puis passage à 100%. Cette progressivité évite les troubles digestifs et permet à la flore intestinale de s'adapter.",
+    "Une étude publiée dans le Journal of Veterinary Internal Medicine montre que les chiens nourris à l'alimentation fraîche vivent en moyenne 2,5 ans de plus que ceux nourris aux croquettes industrielles. Avec Elmut, tu n'achètes pas de la nourriture — tu investis dans des années de vie supplémentaires.",
   ],
   'petty-well': [
-    "Petty Well est la marque française du lot. Fabriquée en France avec une transparence totale sur l'origine des ingrédients, la marque a réussi le pari d'un taux de protéines animales parmi les plus élevés du marché : jusqu'à 41%.",
-    "La marque est particulièrement recommandée par les vétérinaires parisiens pour les animaux en bonne santé qui ont besoin d'une alimentation protéinée et sans céréales. Le format box d'essai permet de tester sans risque.",
-    "Petty Well mise sur la simplicité : peu de références mais bien faites. Pas de repas frais, pas de compléments compliqués. Juste des croquettes de qualité, fabriquées ici, avec des ingrédients qu'on peut lire sans dictionnaire.",
+    "Fondée en 2019 à Levallois-Perret par Alexis et Sacha, Petty Well est née d'une frustration concrète : la chienne d'Alexis était intolérante au gluten, et le marché ne proposait rien d'adapté en France. La solution : concevoir des recettes sans céréales, avec des ingrédients traçables et fabriqués ici. Les croquettes sortent aujourd'hui d'un atelier en Maine-et-Loire, les pâtées dans le Nord. La volaille vient du Gers, nommément citée sur chaque emballage.",
+    "Les recettes ont été développées en collaboration avec AgroParisTech et Food'Inn Lab — deux références en nutrition animale. Chaque formule est validée par des vétérinaires nutritionnistes avant commercialisation. Résultat : jusqu'à 35% de protéines brutes pour les croquettes chien, 41% pour les recettes chat, avec 89% d'origine animale. Glucosamine (200–300 mg/kg) et chondroïtine sont intégrées directement dans les recettes — sans supplément séparé.",
+    "Petty Well est disponible dans plus de 500 points de vente physiques en France (Animalis, Monoprix, Jardiland) et en abonnement personnalisé en ligne. L'abonnement est sans engagement, modulable, avec un SMS envoyé 3 jours avant chaque préparation de commande. Un jouet est glissé dans chaque premier colis — un détail qui revient systématiquement dans les avis clients comme une attention appréciée.",
+    "La marque est référencée dans l'annuaire Marques de France. Elle ne porte pas de label Bio officiel, mais communique sur la traçabilité totale de ses matières premières et l'absence de colorants, conservateurs, OGM et exhausteurs de goût. 4,7/5 sur Trustpilot avec plus de 2 700 avis — les trois retours les plus fréquents : pelage amélioré, digestion facilitée, service client exceptionnel.",
   ],
   'dog-chef': [
-    "Dog Chef, c'est le top du top pour les chiens. Élu Produit de l'Année 2026, la marque belge (livraison en France) propose des repas frais 100% personnalisés selon le profil précis de ton chien : race, âge, poids, niveau d'activité, pathologies éventuelles.",
-    "Le concept de personnalisation poussée est vraiment différenciant. Ton chien de 8 kg au métabolisme lent ne reçoit pas le même menu qu'un Husky de 30 kg hyperactif. C'est de la nutrition sur-mesure, ce que seul un vétérinaire ou un nutritionniste pouvait proposer avant.",
-    "4.8/5 sur plus de 7 800 avis vérifiés, aucun conservateur artificiel, cuisson basse température — Dog Chef fait partie des rares marques à mériter pleinement son positionnement premium.",
+    "Fondée en 2017 en Belgique, Dog Chef cuisine ses repas dans son propre atelier à Huldenberg, avec plus de 100 employés. Élu Produit de l'Année 2026, c'est aujourd'hui la référence du repas frais personnalisé pour chiens en France, Belgique et Luxembourg. Livraison gratuite incluse — pas de frais cachés.",
+    "Le principe : un questionnaire de 5 minutes (race, âge, poids, activité, santé, stérilisation) génère un plan nutritionnel sur-mesure. Les portions sont calculées à la calorie près et s'ajustent automatiquement si le poids de ton chien évolue. Trois formats au choix — 100% frais, mixte 50/50 (frais + croquettes), ou 100% croquettes. Le plan mixte est souvent recommandé en première approche : meilleur équilibre qualité/budget.",
+    "Un vrai différenciant par rapport aux concurrents : les Boosters. Ces compléments ciblés s'ajoutent à la ration selon le profil — Puppy Booster (calcium/phosphore pour la croissance), Senior Booster (glucosamine + curcuma anti-inflammatoire), Mobility Booster (cartilages), Pro Transit Booster (pré et probiotiques). Du sur-mesure au niveau nutritionnel, pas juste sur la portion.",
+    "Pour la transition : Dog Chef recommande 7 jours progressifs. Les repas se conservent 7 jours au réfrigérateur (vs 5 pour Elmut) et jusqu'à 4 mois au congélateur. La box d'essai couvre 2 semaines complètes — largement assez pour voir les premiers effets.",
   ],
+}
+
+const brandVerdicts: Record<string, string> = {
+  elmut: "Elmut est notre recommandation numéro 1 pour les propriétaires qui veulent passer au repas frais sans compromis sur la qualité. Ingrédients de qualité humaine, cuisson douce, 5 recettes couvrant tous les profils — du chiot au senior, du chien actif au chien en surpoids. La logistique frigo rebute parfois au début, mais elle devient vite un non-sujet. Ce qui ne l'est pas : les résultats. Pelage, digestion, énergie, poids — les transformations observées par les propriétaires sont cohérentes et rapides (4 à 8 semaines). Profite des -40% via notre lien pour tester sans risque financier.",
+  franklin: "Franklin est le choix le plus cohérent si ton chien est allergique ou sensible : pionniers du mono-protéine en France depuis 2018, avec jusqu'à 70% de viande réelle et des compositions parmi les plus courtes et lisibles du marché. La Dr Charlotte Dirat supervise la formulation, la cuisson est basse température (90–110 °C), l'usine VAFO est certifiée ISO/HACCP. 4,7/5 sur 4 700+ avis Trustpilot. Point à savoir : fabriqué en Rép. Tchèque (pas made in France), et les livraisons sont parfois problématiques selon les avis. Profite des -30% sur la 1ère commande pour tester sans risque.",
+  'petty-well': "Petty Well est le choix Made in France par excellence — et pas uniquement pour la fierté du drapeau. La traçabilité est réelle : volaille du Gers nommément citée, fabrication en Maine-et-Loire, recettes co-développées avec AgroParisTech. Le taux de protéines (32–35% chien, 41% chat) est parmi les plus élevés du marché des croquettes sans céréales. La glucosamine est intégrée dans les recettes, sans supplément séparé. Si ton chien est allergique, la recette Agneau (protéine novel) ou Saumon & Thon sont les meilleures entrées. 4,7/5 sur 2 700+ avis Trustpilot. Profite des -34% via notre lien pour tester 15 jours sans risque.",
+  'dog-chef': "Dog Chef mérite son titre de Produit de l'Année 2026. Si ton chien a des besoins nutritionnels évolutifs — surpoids, croissance, pathologie articulaire, performance sportive — c'est l'option la plus intelligente du marché. La personnalisation n'est pas du marketing : les macros et les portions s'adaptent vraiment au profil de ton chien et évoluent avec lui. À -35% avec le code WZU7090, le test est sans risque.",
 }
 
 // ─── Page brand ────────────────────────────────────────────────────────────────
@@ -147,6 +178,7 @@ function BrandPage({ brand }: { brand: Brand }) {
   const descriptions = brandDescriptions[brand.slug] || []
   const recipes = brandRecipes[brand.slug] || []
   const reviews = brandReviews[brand.slug] || []
+  const verdictText = brandVerdicts[brand.slug] ?? `${brand.name} fait partie des meilleures options du marché pour son profil d'usage. Si ton animal correspond aux profils recommandés, c'est une valeur sûre. Profite de l'offre du moment pour tester sans risque.`
 
   const scoreLabels: Record<string, string> = {
     qualiteIngredients: 'Qualité des ingrédients',
@@ -313,9 +345,7 @@ function BrandPage({ brand }: { brand: Brand }) {
               </div>
             </div>
             <p className="text-base leading-relaxed mb-5" style={{ color: 'var(--text-on-dark)' }}>
-              {brand.name} fait partie des meilleures options du marché pour son profil d&apos;usage.
-              Si ton animal correspond aux profils recommandés, c&apos;est une valeur sûre. Profite
-              de l&apos;offre du moment pour tester sans risque.
+              {verdictText}
             </p>
             <BrandCTA brandName={brand.name} affiliateUrl={brand.affiliateUrl} offer={brand.discountOffer} code={brand.affiliateCode} variant="primary" />
           </div>
@@ -553,10 +583,10 @@ function ComparatifMdxPage({
         </header>
 
         {brandA && brandB && (
-          <div className="grid grid-cols-2 gap-4 mb-8 p-5 bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] items-start">
-            <BrandCTA brandName={brandA.name} affiliateUrl={brandA.affiliateUrl} offer={brandA.discountOffer} code={brandA.affiliateCode} variant="primary" />
-            <BrandCTA brandName={brandB.name} affiliateUrl={brandB.affiliateUrl} offer={brandB.discountOffer} code={brandB.affiliateCode} variant="primary" />
-          </div>
+          <DualBrandCTA
+            brandA={{ name: brandA.name, affiliateUrl: brandA.affiliateUrl, offer: brandA.discountOffer, code: brandA.affiliateCode }}
+            brandB={{ name: brandB.name, affiliateUrl: brandB.affiliateUrl, offer: brandB.discountOffer, code: brandB.affiliateCode }}
+          />
         )}
 
         <div className="mdx-content">
