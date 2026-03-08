@@ -23,6 +23,9 @@ const mdxComponents = {
   InfoBox, Callout, FeatureGrid, Feature,
   StatRow, Stat, CompareTable, CompareThead, CompareTh,
   CompareTr, CompareTd, Verdict, ProsConsList, ProsBlock, ConsBlock, ProItem, ConItem, SectionDivider, FaqList, FaqItem,
+  h2: ({ children }: { children?: React.ReactNode }) => (
+    <h2>{children === 'TL;DR' ? 'En bref' : children}</h2>
+  ),
 }
 
 interface Props {
