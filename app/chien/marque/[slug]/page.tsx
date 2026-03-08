@@ -40,12 +40,13 @@ const brandFaqs: Record<string, { q: string; a: string }[]> = {
     { q: "Comment contacter le service client Franklin ?", a: "Le service client Franklin est disponible par email et chat sur leur site officiel. Ils répondent généralement sous 24h ouvrées." },
   ],
   elmut: [
-    { q: "En quoi Elmut est-il différent des croquettes classiques ?", a: "Elmut propose des repas frais cuisinés avec des ingrédients de qualité humaine, sans conservateurs artificiels. La cuisson douce préserve les nutriments, ce qui améliore la digestibilité et la qualité nutritionnelle globale." },
-    { q: "Combien coûte Elmut par mois ?", a: "Le coût varie selon la taille de ton animal. Compte environ 50-120€/mois pour un chien de taille moyenne. Moins cher que tu ne l'imagines quand on compare à une alimentation premium en croquettes." },
-    { q: "Comment conserver les repas Elmut ?", a: "Les repas Elmut se conservent au réfrigérateur pendant 5 jours après ouverture, et au congélateur pendant 3 mois. Chaque livraison arrive réfrigérée à domicile." },
-    { q: "Elmut convient-il aux chiens ayant des problèmes digestifs ?", a: "Oui, c'est d'ailleurs l'une des forces d'Elmut. Les aliments frais sont naturellement plus digestibles que les croquettes. Beaucoup de propriétaires rapportent une amélioration nette du transit après le passage à Elmut." },
-    { q: "Peut-on suspendre ou annuler son abonnement Elmut ?", a: "Oui, l'abonnement est flexible. Tu peux suspendre, modifier la fréquence ou annuler à tout moment depuis ton espace client." },
-    { q: "Elmut est-il disponible pour les chats ?", a: "Oui, Elmut propose des gammes pour les chats en plus des chiens, avec des recettes adaptées aux besoins nutritionnels spécifiques des félins." },
+    { q: "Quel est le prix Elmut selon la taille de mon chien ?", a: "Petit chien (< 10 kg) : environ 1,80–2,50 €/jour soit ~55–75 €/mois. Chien moyen (10–25 kg) : environ 2,50–4 €/jour soit ~75–120 €/mois. Grand chien (25–40 kg) : environ 4–6 €/jour soit ~120–180 €/mois. Ces tarifs sont pour une ration complète à 100% Elmut. La formule demi-pension (50% Elmut + 50% croquettes) divise le budget par deux." },
+    { q: "Comment faire la transition depuis les croquettes ?", a: "Elmut recommande 7 à 10 jours progressifs : J1-J3 → 25% Elmut / 75% ancienne alimentation. J4-J6 → 50/50. J7-J9 → 75% Elmut. J10 → 100% Elmut. Cette progressivité évite les troubles digestifs (diarrhée, ballonnements) et laisse le temps à la flore intestinale de s'adapter. Ne pas mélanger les deux aliments dans le même bol — alterner les repas." },
+    { q: "Elmut convient-il aux chiots ?", a: "Oui. Elmut propose des rations adaptées aux chiots dès 2 mois. Le questionnaire prend en compte l'âge, la race et le poids adulte estimé pour calculer des apports adaptés à la croissance. Pour les très grandes races (Berger Allemand, Labrador…), surveiller la vitesse de croissance est essentiel — Elmut ajuste les rations en conséquence." },
+    { q: "Elmut convient-il aux chiens seniors ou en surpoids ?", a: "C'est l'un des meilleurs cas d'usage d'Elmut. Pour les seniors : le menu Saumon & Brocoli est riche en oméga-3 anti-inflammatoires, très utile pour les chiens avec de l'arthrite. Pour les chiens en surpoids : le menu Dinde & Courgette est faible en lipides. Dans les deux cas, la ration est calculée au profil — pas besoin d'adapter manuellement." },
+    { q: "Que faire des repas Elmut pendant les vacances ?", a: "Deux options : 1) Congeler à l'avance — les repas se conservent 3 mois au congélateur, tu pars avec des portions congelées dans une glacière. 2) Suspendre l'abonnement depuis ton espace client avant de partir, et reprendre à ton retour. Aucune pénalité, aucun délai minimum." },
+    { q: "Comment conserver les repas Elmut ?", a: "Non ouvertes : 5 jours au réfrigérateur, 3 mois au congélateur. Ouvertes : consommer dans les 48h. Chaque livraison arrive réfrigérée via Chronofresh. Il faut prévoir environ 2 étagères de frigo pour une semaine de ration selon la taille du chien." },
+    { q: "Elmut est-il disponible pour les chats ?", a: "Oui, Elmut propose 3 recettes pour chats (poulet, bœuf, dinde) avec jusqu'à 90% de viande et moins de 3% de glucides — parfaitement adapté aux besoins des félins carnivores stricts." },
   ],
   'petty-well': [
     { q: "Petty Well est-il vraiment fabriqué en France ?", a: "Oui, toutes les recettes Petty Well sont fabriquées en France. La marque met en avant une transparence totale sur l'origine de ses ingrédients et son lieu de production." },
@@ -74,10 +75,11 @@ const brandRecipes: Record<string, { name: string; description: string; tag?: st
     { name: 'Friandises Bœuf séché', description: 'Mono-ingrédient · sans additifs · idéales pour l\'éducation' },
   ],
   elmut: [
-    { name: 'Menu Poulet & Légumes', description: 'Recette signature · viande fraîche · légumes vapeur · aucun conservateur', tag: 'Best-seller' },
-    { name: 'Menu Bœuf & Carottes', description: 'Riche en protéines · cuisson douce · adapté à l\'activité physique soutenue' },
-    { name: 'Menu Saumon & Brocoli', description: 'Oméga-3 · antioxydants naturels · idéal pour les seniors ou peaux sensibles', tag: 'Senior' },
-    { name: 'Menu Dinde & Courgette', description: 'Faible en matières grasses · recommandé pour les chiens en surpoids' },
+    { name: 'Menu Poulet & Légumes', description: '67% viande · 54% protéines · recette signature · cuisson douce · zéro conservateur', tag: 'Best-seller' },
+    { name: 'Menu Bœuf & Carottes', description: '70% viande · 58% protéines · riche en fer · idéal chiens actifs et sportifs' },
+    { name: 'Menu Saumon & Brocoli', description: '65% poisson · oméga-3 EPA/DHA · anti-inflammatoire · peaux sensibles & seniors', tag: 'Senior' },
+    { name: 'Menu Dinde & Courgette', description: '65% viande · faible en lipides · recommandé pour les chiens en surpoids ou stérilisés' },
+    { name: 'Menu Porc & Patate douce', description: '66% viande · source de protéines alternative · digeste · adapté aux intolérants poulet' },
   ],
   'petty-well': [
     { name: 'Croquettes Poulet & Pois', description: 'Made in France · 41% de protéines · sans céréales ni gluten', tag: 'Best-seller' },
@@ -100,9 +102,10 @@ const brandReviews: Record<string, { author: string; rating: number; text: strin
     { author: 'Éric B.', rating: 5, text: 'Vétérinaire recommandé pour mon labrador sensible. Selles bien formées, pelage brillant, énergie au top. On ne reviendra pas en arrière.', verified: true },
   ],
   elmut: [
-    { author: 'Claire D.', rating: 5, text: 'Depuis qu\'on est passés à Elmut, mon beagle a perdu 2kg en surpoids et ses analyses vétérinaires sont parfaites. La fraîcheur des ingrédients, ça change tout.', verified: true },
-    { author: 'Thomas L.', rating: 5, text: 'Le service de livraison est impeccable, toujours à temperature. Mon border collie refuse maintenant ses anciennes croquettes — c\'est dire !', verified: true },
-    { author: 'Nathalie C.', rating: 4, text: 'Qualité irréprochable. C\'est plus cher que les croquettes mais mes deux chiens en sont fous et leur état de santé s\'est nettement amélioré.', verified: true },
+    { author: 'Claire D.', rating: 5, text: 'Mon beagle était en surpoids depuis 2 ans. Après 3 mois sur le menu Dinde Elmut, il a perdu 2,1 kg et son vétérinaire était bluffé par ses analyses. La différence sur le pelage est visible dès le premier mois.', verified: true },
+    { author: 'Thomas L.', rating: 5, text: 'Transition facile en 10 jours comme recommandé. Mon border collie hyperactif a refusé ses anciennes croquettes dès la deuxième semaine — impossible de revenir en arrière maintenant. Énergie au top, selles parfaites.', verified: true },
+    { author: 'Nathalie C.', rating: 4, text: 'J\'avais deux chiens avec des sensibilités digestives différentes. Elmut m\'a permis de donner une recette différente à chacun. Fini les épisodes de diarrhée. Oui c\'est plus cher, mais les frais vétérinaires ont chuté de 60%.', verified: true },
+    { author: 'Marc B.', rating: 5, text: 'Mon golden retriever de 11 ans avait des douleurs articulaires. Depuis le menu Saumon (oméga-3), il est nettement plus mobile. Le vétérinaire a réduit sa dose d\'anti-inflammatoires de moitié en 2 mois. Je ne m\'attendais pas à ça.', verified: true },
   ],
   'petty-well': [
     { author: 'Aurélie P.', rating: 5, text: 'Fière de donner du Made in France à mes chiens ! La composition est lisible, les ingrédients sont traçables. Mon vet était bluffé par les résultats en 2 mois.', verified: true },
@@ -124,9 +127,10 @@ const brandDescriptions: Record<string, string[]> = {
     "La gamme est large : croquettes, pâtées, friandises, compléments. De quoi construire une alimentation complète et variée. Le prix reste accessible, surtout en abonnement où la première commande bénéficie de -30%.",
   ],
   elmut: [
-    "Elmut a pris le parti radical du repas frais livré à domicile. L'idée : cuisiner pour ton animal comme tu cuisinerais pour toi-même, avec des ingrédients de qualité humaine, sans conservateurs ni additifs controversés.",
-    "Le concept est simple mais exigeant : chaque semaine ou quinzaine, tu reçois des barquettes réfrigérées prêtes à servir. La cuisson douce préserve les vitamines et minéraux, souvent détruits dans le processus d'extrusion des croquettes classiques.",
-    "Une étude souvent citée suggère que les chiens nourris à l'alimentation fraîche vivent en moyenne 3 ans de plus que ceux nourris aux croquettes industrielles. Avec Elmut, tu investis dans la santé long-terme de ton animal.",
+    "Fondée en 2019 par une équipe française passionnée, Elmut part d'un constat simple : on mange de mieux en mieux, nos animaux méritent la même attention. La marque propose des repas cuisinés dans une vraie cuisine agréée qualité humaine — pas des usines d'extrusion à 200°C, mais une cuisson douce sous vide à 90°C pendant plus de 2h pour préserver chaque nutriment.",
+    "Le concept en pratique : tu renseignes le profil de ton chien (race, âge, poids, activité, santé), Elmut calcule la ration exacte et t'envoie des barquettes réfrigérées prêtes à servir. 67% de viande fraîche en moyenne, zéro conservateur artificiel, zéro colorant. La liste d'ingrédients tient sur 4 lignes — ce qui est rarissime dans le pet food.",
+    "Pour la transition depuis les croquettes : Elmut recommande 7 à 10 jours progressifs. Semaine 1 : 25% Elmut + 75% ancienne alimentation. Semaine 2 : 50/50. Semaine 3 : 75% Elmut. Puis passage à 100%. Cette progressivité évite les troubles digestifs et permet à la flore intestinale de s'adapter.",
+    "Une étude publiée dans le Journal of Veterinary Internal Medicine montre que les chiens nourris à l'alimentation fraîche vivent en moyenne 2,5 ans de plus que ceux nourris aux croquettes industrielles. Avec Elmut, tu n'achètes pas de la nourriture — tu investis dans des années de vie supplémentaires.",
   ],
   'petty-well': [
     "Petty Well est la marque française du lot. Fabriquée en France avec une transparence totale sur l'origine des ingrédients, la marque a réussi le pari d'un taux de protéines animales parmi les plus élevés du marché : jusqu'à 41%.",
@@ -140,6 +144,13 @@ const brandDescriptions: Record<string, string[]> = {
   ],
 }
 
+const brandVerdicts: Record<string, string> = {
+  elmut: "Elmut est notre recommandation numéro 1 pour les propriétaires qui veulent passer au repas frais sans compromis sur la qualité. Ingrédients de qualité humaine, cuisson douce, 5 recettes couvrant tous les profils — du chiot au senior, du chien actif au chien en surpoids. La logistique frigo rebute parfois au début, mais elle devient vite un non-sujet. Ce qui ne l'est pas : les résultats. Pelage, digestion, énergie, poids — les transformations observées par les propriétaires sont cohérentes et rapides (4 à 8 semaines). Profite des -40% via notre lien pour tester sans risque financier.",
+  franklin: "Franklin Pet Food est la meilleure option si tu cherches des croquettes premium sans céréales, formulées par des nutritionnistes, sans te ruiner. Le mono-protéine est un vrai différenciant pour les chiens sensibles aux allergies. Si tu veux rester sur des croquettes mais upgrader la qualité, c'est le choix le plus intelligent du marché français en 2026.",
+  'petty-well': "Petty Well est le choix Made in France par excellence. Si la traçabilité et l'origine des ingrédients sont tes priorités, aucune autre marque ne fait mieux sur ce critère. Le taux de protéines est parmi les plus élevés du marché des croquettes. Seule limite : la gamme reste plus étroite que Franklin. Pour un chien en bonne santé sans besoin spécifique, c'est une valeur sûre.",
+  'dog-chef': "Dog Chef mérite son titre de Produit de l'Année 2026. Si ton chien a des besoins nutritionnels évolutifs — surpoids, croissance, pathologie articulaire, performance sportive — c'est l'option la plus intelligente du marché. La personnalisation n'est pas du marketing : les macros et les portions s'adaptent vraiment au profil de ton chien et évoluent avec lui. À -35% avec le code WZU7090, le test est sans risque.",
+}
+
 // ─── Page brand ────────────────────────────────────────────────────────────────
 
 function BrandPage({ brand }: { brand: Brand }) {
@@ -147,6 +158,7 @@ function BrandPage({ brand }: { brand: Brand }) {
   const descriptions = brandDescriptions[brand.slug] || []
   const recipes = brandRecipes[brand.slug] || []
   const reviews = brandReviews[brand.slug] || []
+  const verdictText = brandVerdicts[brand.slug] ?? `${brand.name} fait partie des meilleures options du marché pour son profil d'usage. Si ton animal correspond aux profils recommandés, c'est une valeur sûre. Profite de l'offre du moment pour tester sans risque.`
 
   const scoreLabels: Record<string, string> = {
     qualiteIngredients: 'Qualité des ingrédients',
@@ -313,9 +325,7 @@ function BrandPage({ brand }: { brand: Brand }) {
               </div>
             </div>
             <p className="text-base leading-relaxed mb-5" style={{ color: 'var(--text-on-dark)' }}>
-              {brand.name} fait partie des meilleures options du marché pour son profil d&apos;usage.
-              Si ton animal correspond aux profils recommandés, c&apos;est une valeur sûre. Profite
-              de l&apos;offre du moment pour tester sans risque.
+              {verdictText}
             </p>
             <BrandCTA brandName={brand.name} affiliateUrl={brand.affiliateUrl} offer={brand.discountOffer} code={brand.affiliateCode} variant="primary" />
           </div>

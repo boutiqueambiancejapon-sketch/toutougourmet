@@ -8,7 +8,7 @@ export const affiliateLinks = {
   elmut: {
     url: 'https://c3po.link/QWMW4k6mbU',
     label: 'Elmut',
-    offer: "-20% sur la 1ère commande",
+    offer: "-40% sur la 1ère commande via notre lien",
     code: null,
   },
   pettyWell: {

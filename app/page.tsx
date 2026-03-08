@@ -24,7 +24,7 @@ const marqueeItems = [
   'Petty Well → -34% 1ère box',
   'Quiz gratuit en 2 min',
   'Dog Chef → -35% box d\'essai',
-  'Elmut → -20% 1ère commande',
+  'Elmut → -40% 1ère commande',
   'Sans blabla, sans bullshit',
 ]
 

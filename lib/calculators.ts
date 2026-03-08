@@ -103,7 +103,7 @@ export const brandPricings: BrandPricing[] = [
     type: 'repas-frais',
     kcalPer100g: 170,   // densité calorique recettes viande fraîche Elmut
     affiliateUrl: 'https://c3po.link/QWMW4k6mbU',
-    offer: '-20% 1ère commande',
+    offer: '-40% 1ère commande',
   },
   {
     name: 'Dog Chef',

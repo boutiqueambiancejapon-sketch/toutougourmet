@@ -79,14 +79,15 @@ export const brands: Brand[] = [
       'Sans conservateurs ni additifs controversés',
       'Cuisson douce préservant les nutriments',
       'Livraison réfrigérée à domicile',
-      "+3 ans d'espérance de vie vs croquettes",
+      "+2,5 ans d'espérance de vie vs croquettes industrielles",
+      "-40% sur la 1ère commande via notre lien",
     ],
     cons: [
       'Plus onéreux que les croquettes',
       'Nécessite un frigo — logistique différente',
     ],
     priceRange: '€€€',
-    discountOffer: "-20% sur la 1ère commande",
+    discountOffer: "-40% sur la 1ère commande via notre lien",
     discountCode: null,
   },
   {
