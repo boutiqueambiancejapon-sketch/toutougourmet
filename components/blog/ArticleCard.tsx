@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { formatDate } from '@/lib/utils'
+import { estimateReadTime } from '@/lib/mdx'
 import type { Article } from '@/lib/mdx'
 
 // Couleur de bandeau par catégorie
@@ -11,10 +12,6 @@ const categoryColors: Record<string, { band: string; pill: string }> = {
 }
 const defaultColor = { band: 'var(--bg-surface-2)', pill: 'var(--text-muted)' }
 
-function estimateReadTime(rawContent: string): number {
-  const words = rawContent.replace(/<[^>]+>/g, '').split(/\s+/).length
-  return Math.max(1, Math.round(words / 200))
-}
 
 interface ArticleCardProps {
   article: Article
