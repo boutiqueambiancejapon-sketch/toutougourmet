@@ -62,11 +62,7 @@ export function stripTldr(content: string): string {
   return content.replace(/##?\s*TL;DR[^\n]*\n([\s\S]*?)(?=\n##)/i, '')
 }
 
-// Estimation du temps de lecture depuis le MDX brut
-export function estimateReadTime(content: string): number {
-  const words = content.replace(/^---[\s\S]*?---/, '').split(/\s+/).length
-  return Math.max(1, Math.round(words / 200))
-}
+export { estimateReadTime } from '@/lib/utils'
 
 export interface ComparatifFrontmatter {
   title: string
