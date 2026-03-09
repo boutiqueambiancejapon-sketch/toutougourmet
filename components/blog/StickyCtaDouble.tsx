@@ -29,30 +29,39 @@ export function StickyCtaDouble({ brandA, brandB, eyebrow }: StickyCtaDoubleProp
     <div className="fixed bottom-0 left-0 right-0 z-50 px-4 pb-4 pointer-events-none">
       <div
         className={[
-          'max-w-[720px] mx-auto rounded-[var(--radius-xl)] border shadow-[var(--shadow-xl)] flex items-center gap-3 sm:gap-4 p-4 pointer-events-auto transition-all duration-500',
+          'max-w-[720px] mx-auto rounded-[var(--radius-xl)] border shadow-[var(--shadow-xl)] pointer-events-auto transition-all duration-500',
           scrolled
             ? 'backdrop-blur-xl bg-white/10 border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.12)]'
             : 'border-[var(--border)]',
         ].join(' ')}
         style={scrolled ? {} : { background: 'var(--bg-dark)' }}
       >
-        {/* Texte */}
-        {eyebrow && (
-          <p
-            className={`hidden sm:block shrink-0 text-sm font-semibold transition-colors duration-500 ${scrolled ? 'text-[var(--text-secondary)]' : ''}`}
-            style={scrolled ? {} : { color: 'var(--text-muted)' }}
+        {/* Ligne principale */}
+        <div className="flex items-center gap-3 px-4 pt-4 pb-2">
+          {eyebrow && (
+            <p
+              className={`hidden sm:block flex-1 text-sm font-semibold transition-colors duration-500 ${scrolled ? 'text-[var(--text-secondary)]' : ''}`}
+              style={scrolled ? {} : { color: 'var(--text-muted)' }}
+            >
+              {eyebrow}
+            </p>
+          )}
+          <button
+            onClick={() => setDismissed(true)}
+            aria-label="Fermer"
+            className={`ml-auto shrink-0 transition-colors text-lg leading-none ${scrolled ? 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-on-dark)]'}`}
           >
-            {eyebrow}
-          </p>
-        )}
+            ✕
+          </button>
+        </div>
 
-        {/* CTAs */}
-        <div className="flex flex-1 gap-2 justify-center sm:justify-end">
+        {/* CTAs — pleine largeur sur mobile, côte à côte sur sm+ */}
+        <div className="flex flex-col sm:flex-row gap-2 px-4 pb-4">
           <a
             href={brandA.href}
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="btn-primary text-sm px-4 py-2 whitespace-nowrap shrink-0"
+            className="btn-primary text-sm px-4 py-2.5 text-center flex-1"
           >
             {brandA.label} →
           </a>
@@ -60,20 +69,11 @@ export function StickyCtaDouble({ brandA, brandB, eyebrow }: StickyCtaDoubleProp
             href={brandB.href}
             target="_blank"
             rel="noopener noreferrer sponsored"
-            className="btn-outline text-sm px-4 py-2 whitespace-nowrap shrink-0"
+            className="btn-outline text-sm px-4 py-2.5 text-center flex-1"
           >
             {brandB.label} →
           </a>
         </div>
-
-        {/* Fermer */}
-        <button
-          onClick={() => setDismissed(true)}
-          aria-label="Fermer"
-          className={`shrink-0 transition-colors text-lg leading-none ${scrolled ? 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-on-dark)]'}`}
-        >
-          ✕
-        </button>
       </div>
     </div>
   )
