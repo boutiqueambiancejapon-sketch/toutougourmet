@@ -8,6 +8,7 @@ import { TLDR } from '@/components/blog/TLDR'
 import { SummarizeWithAI } from '@/components/blog/SummarizeWithAI'
 import { NewsletterBlock } from '@/components/blog/NewsletterBlock'
 import { StickyCtaDogChef } from '@/components/blog/StickyCtaDogChef'
+import { StickyCtaDouble } from '@/components/blog/StickyCtaDouble'
 import { Badge } from '@/components/ui/Badge'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { getCategoryBySlug } from '@/data/categories'
@@ -134,7 +135,15 @@ export default async function ArticleCategoryPage({ params }: Props) {
         </article>
       </div>
 
-      <StickyCtaDogChef />
+      {slug === 'eukanuba-vs-royal-canin' ? (
+        <StickyCtaDouble
+          eyebrow="Disponibles sur Amazon"
+          brandA={{ label: 'Essayer Royal Canin', href: 'https://amzn.to/4rYE9JY' }}
+          brandB={{ label: 'Essayer Eukanuba', href: 'https://amzn.to/4sAAulM' }}
+        />
+      ) : (
+        <StickyCtaDogChef />
+      )}
     </>
   )
 }
