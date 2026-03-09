@@ -13,6 +13,16 @@ export function formatDate(dateStr: string): string {
   }).format(new Date(dateStr))
 }
 
+export function estimateReadTime(content: string): number {
+  const words = content
+    .replace(/^---[\s\S]*?---/, '')   // front matter
+    .replace(/<[^>]+>/g, ' ')         // balises JSX/HTML
+    .replace(/```[\s\S]*?```/g, ' ')  // blocs de code
+    .split(/\s+/)
+    .filter(Boolean).length
+  return Math.max(1, Math.round(words / 200))
+}
+
 export function slugify(str: string): string {
   return str
     .toLowerCase()

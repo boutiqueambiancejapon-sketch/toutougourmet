@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import { formatDate } from '@/lib/utils'
-import { estimateReadTime } from '@/lib/mdx'
+import { formatDate, estimateReadTime } from '@/lib/utils'
 import type { Article } from '@/lib/mdx'
 
 // Couleur de bandeau par catégorie
