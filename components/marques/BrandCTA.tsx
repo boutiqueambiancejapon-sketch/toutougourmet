@@ -27,6 +27,7 @@ export function BrandCTA({
         target="_blank"
         rel="noopener noreferrer sponsored"
         className={`${variant === 'primary' ? 'btn-primary' : 'btn-outline'} w-full text-center`}
+        style={variant === 'primary' ? { color: 'var(--bg-dark)' } : undefined}
       >
         {`Essayer ${brandName} →`}
       </a>
