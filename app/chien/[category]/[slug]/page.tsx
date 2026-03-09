@@ -16,6 +16,7 @@ import {
   StatRow, Stat, CompareTable, CompareThead, CompareTh,
   CompareTr, CompareTd, Verdict, ProsConsList, ProsBlock, ConsBlock, ProItem, ConItem, SectionDivider, FaqList, FaqItem,
 } from '@/components/mdx/MdxComponents'
+import { BrandCTA } from '@/components/marques/BrandCTA'
 
 interface Props {
   params: Promise<{ category: string; slug: string }>
@@ -25,6 +26,7 @@ const mdxComponents = {
   InfoBox, Callout, FeatureGrid, Feature,
   StatRow, Stat, CompareTable, CompareThead, CompareTh,
   CompareTr, CompareTd, Verdict, ProsConsList, ProsBlock, ConsBlock, ProItem, ConItem, SectionDivider, FaqList, FaqItem,
+  BrandCTA,
 }
 
 export async function generateStaticParams() {
