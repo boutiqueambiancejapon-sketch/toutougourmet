@@ -1,6 +1,13 @@
+# *
 User-agent: *
 Allow: /
+
+# *
+User-agent: *
 Disallow: /api/
 
+# Host
 Host: https://www.toutou-gourmet.com
+
+# Sitemaps
 Sitemap: https://www.toutou-gourmet.com/sitemap.xml
