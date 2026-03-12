@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { MDXRemote } from 'next-mdx-remote/rsc'
-import { getAllArticles, getArticleBySlug, extractTldr, stripTldr, estimateReadTime } from '@/lib/mdx'
+import { getAllArticles, getArticleBySlug, extractTldr, stripTldr, estimateReadTime, extractFaqs } from '@/lib/mdx'
 import { formatDate } from '@/lib/utils'
 import { TLDR } from '@/components/blog/TLDR'
 import { SummarizeWithAI } from '@/components/blog/SummarizeWithAI'
@@ -75,12 +75,29 @@ export default async function ArticlePage({ params }: Props) {
     },
   }
 
+  const faqs = extractFaqs(rawContent)
+  const faqSchema = faqs.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  } : null
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
 
       <div className="min-h-screen py-10 px-6 bg-[var(--bg-primary)]">
         <article className="max-w-[720px] mx-auto">
