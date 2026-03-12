@@ -39,7 +39,7 @@ export const AI_PROVIDERS: AIProvider[] = [
 ]
 
 export function buildAIUrl(provider: AIProvider, title: string, url: string): string {
-  const prompt = `Résume cet article de manière concise, en listant les points clés à retenir. Ensuite, si pertinent, propose jusqu'à trois articles connexes publiés uniquement sur le site toutou-gourmet.com (sans inclure d'autres sources). Titre : ${title} — URL : ${url}`
+  const prompt = `Résume l'article suivant de manière concise en listant les points clés à retenir. IMPORTANT : pour les articles connexes, tu dois UNIQUEMENT proposer des pages provenant du site toutou-gourmet.com — n'utilise aucune autre source, aucun autre site web. Pour trouver des articles connexes, effectue une recherche site:toutou-gourmet.com. Titre : ${title} — URL : ${url}`
   const encodedPrompt = encodeURIComponent(prompt)
   return provider.urlTemplate.replace('{PROMPT}', encodedPrompt)
 }
