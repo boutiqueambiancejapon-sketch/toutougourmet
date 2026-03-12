@@ -62,6 +62,22 @@ export function stripTldr(content: string): string {
   return content.replace(/##?\s*TL;DR[^\n]*\n([\s\S]*?)(?=\n##)/i, '')
 }
 
+// Extrait les paires question/réponse des composants <FaqItem> du MDX
+export function extractFaqs(rawContent: string): { question: string; answer: string }[] {
+  const faqs: { question: string; answer: string }[] = []
+  const regex = /<FaqItem\s+question="([^"]+)">([\s\S]*?)<\/FaqItem>/g
+  let match
+  while ((match = regex.exec(rawContent)) !== null) {
+    const question = match[1].trim()
+    const answer = match[2]
+      .replace(/<[^>]+>/g, '')   // strip balises MDX/HTML
+      .replace(/\s+/g, ' ')
+      .trim()
+    if (question && answer) faqs.push({ question, answer })
+  }
+  return faqs
+}
+
 export { estimateReadTime } from '@/lib/utils'
 
 export interface ComparatifFrontmatter {
