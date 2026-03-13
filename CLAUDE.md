@@ -1,0 +1,73 @@
+# Instructions Claude Code — Toutou Gourmet
+
+Lis PROGRESS.md avant chaque session.
+Lis le fichier /docs/ correspondant à ta tâche.
+Pour tâche transversale : lis docs/CDC.md uniquement.
+
+## Projet
+
+Domaine : www.toutou-gourmet.com
+Stack : Next.js 16.1.6 + React 19 + TypeScript strict + Tailwind v4 + MDX
+Next.js : 16.1.6 — ne jamais changer sans PR dédiée
+Langue défaut : français (monolangue, pas de i18n)
+Déploiement : Vercel · prod sur main · GitHub
+
+## Comportement agent
+
+- Tâche non-triviale (3+ étapes) → plan dans tasks/todo.md avant exécution
+- Blocage → STOP + re-plan, jamais de pushing
+- Correction reçue → mettre à jour tasks/lessons.md immédiatement
+- Tâche terminée → prouver que ça marche avant de marquer done
+- Bug report → fix autonome, zéro questions, pointer logs + tests
+- Sous-agents → décharger recherche, exploration, analyse parallèle
+
+## Filtre qualité — vérifier avant chaque commit
+
+- [ ] TypeScript : zéro `any`, zéro erreur `tsc --noEmit`
+- [ ] Lint : zéro erreur `next lint`
+- [ ] next/image : jamais de `<img>` natif · width+height sur toutes les images · priority sur LCP uniquement
+- [ ] Variables CSS : jamais de valeur hardcodée
+- [ ] Composants : aucun > 150 lignes
+- [ ] TODO : aucun sans numéro d'issue GitHub
+- [ ] Secrets : aucun dans le code, tout dans Vercel Dashboard
+- [ ] Bots : `curl -s [PREVIEW_URL]/[page]` retourne H1 + premier paragraphe sans JS
+- [ ] CSP : unsafe-eval présent → exception documentée dans DECISIONS.md (Plausible Analytics)
+- [ ] Polices : zéro requête fonts.googleapis.com · max 2 familles · DM_Sans 3 weights (exception documentée DECISIONS.md)
+- [ ] Above-fold : aucun import Framer Motion sur composants visibles sans scroll
+- [ ] Dette technique : adjustFontFallback absent sur Fraunces + DM_Sans — ajouter si on touche layout.tsx
+
+## Règles Git absolues
+
+- Jamais de push direct sur main
+- Une feature = une branche = une PR
+- Conventional Commits en anglais
+- Chaque PR déclenche un preview Vercel automatiquement
+
+## Règles absolues code
+
+- TypeScript strict, jamais de `any`
+- Variables CSS uniquement, jamais de valeur hardcodée
+- next/image obligatoire, jamais de `<img>` natif
+- next/image : width + height obligatoires sur toutes les images
+- next/image : priority uniquement sur l'image LCP (above-fold) — une seule par page
+- HTML sémantique, jamais de `<div>` inutile
+- prefers-reduced-motion respecté (déjà dans globals.css)
+- Polices : next/font uniquement · jamais de `<link>` Google Fonts
+- Jamais de `'use client'` sur un fichier page.tsx — isoler dans un sous-composant
+- Contenu textuel indexable (H1, H2, p, li) → rendu serveur obligatoire
+- Fetch → toujours spécifier `{ next: { revalidate: X } }` ou `{ cache: 'no-store' }` explicitement
+- Pas d'explication de ce que tu vas faire — fais-le
+- Un seul doute bloquant à la fois
+
+## Annotation dans le code
+
+```
+// @cdc [section] — [règle courte]
+```
+
+## Fin de session
+
+1. Mettre à jour PROGRESS.md
+2. Mettre à jour DECISIONS.md si nouvelle décision
+3. `git add PROGRESS.md DECISIONS.md && git commit -m "docs: update PROGRESS and DECISIONS"`
+4. Pusher la branche courante (jamais main directement)
