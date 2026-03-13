@@ -7,6 +7,7 @@ import { formatDate } from '@/lib/utils'
 import { TLDR } from '@/components/blog/TLDR'
 import { SummarizeWithAI } from '@/components/blog/SummarizeWithAI'
 import { NewsletterBlock } from '@/components/blog/NewsletterBlock'
+import { RelatedArticles } from '@/components/blog/RelatedArticles'
 import { StickyCtaDogChef } from '@/components/blog/StickyCtaDogChef'
 import { StickyCtaDouble } from '@/components/blog/StickyCtaDouble'
 import { Badge } from '@/components/ui/Badge'
@@ -18,6 +19,8 @@ import {
   CompareTr, CompareTd, Verdict, ProsConsList, ProsBlock, ConsBlock, ProItem, ConItem, SectionDivider, FaqList, FaqItem,
 } from '@/components/mdx/MdxComponents'
 import { BrandCTA } from '@/components/marques/BrandCTA'
+import rehypeAutolinkTerms from '@/lib/rehype-autolink-terms'
+import { AUTOLINK_DICTIONARY } from '@/lib/autolink-dictionary'
 
 interface Props {
   params: Promise<{ category: string; slug: string }>
@@ -58,6 +61,8 @@ export default async function ArticleCategoryPage({ params }: Props) {
   const { category, slug } = await params
   const article = getArticleBySlug(slug)
   if (!article || article.frontmatter.categorySlug !== category) notFound()
+
+  const allArticles = getAllArticles()
 
   const cat = getCategoryBySlug(category)
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -127,7 +132,17 @@ export default async function ArticleCategoryPage({ params }: Props) {
           <SummarizeWithAI title={frontmatter.title} url={canonicalUrl} domain="toutou-gourmet.com" />
 
           <div className="mdx-content mt-8">
-            <MDXRemote source={stripTldr(content)} components={mdxComponents} />
+            <MDXRemote
+              source={stripTldr(content)}
+              components={mdxComponents}
+              options={{
+                mdxOptions: {
+                  rehypePlugins: [
+                    [rehypeAutolinkTerms, { terms: AUTOLINK_DICTIONARY, maxTotal: 3 }],
+                  ],
+                },
+              }}
+            />
           </div>
 
           {frontmatter.tags && frontmatter.tags.length > 0 && (
@@ -142,6 +157,12 @@ export default async function ArticleCategoryPage({ params }: Props) {
             <Link href="/quiz" className="text-[var(--accent-1)] hover:underline">→ Faire le quiz personnalisé</Link>
             <Link href="/comparateur" className="text-[var(--accent-1)] hover:underline">→ Voir le comparateur complet</Link>
           </div>
+
+          <RelatedArticles
+            currentSlug={slug}
+            categorySlug={category}
+            allArticles={allArticles}
+          />
 
           <div className="mt-10 pb-24">
             <NewsletterBlock />
