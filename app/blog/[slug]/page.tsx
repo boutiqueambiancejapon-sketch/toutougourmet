@@ -7,6 +7,7 @@ import { formatDate } from '@/lib/utils'
 import { TLDR } from '@/components/blog/TLDR'
 import { SummarizeWithAI } from '@/components/blog/SummarizeWithAI'
 import { NewsletterBlock } from '@/components/blog/NewsletterBlock'
+import { RelatedArticles } from '@/components/blog/RelatedArticles'
 import { StickyCtaDogChef } from '@/components/blog/StickyCtaDogChef'
 import { Badge } from '@/components/ui/Badge'
 import {
@@ -15,6 +16,8 @@ import {
   CompareTr, CompareTd, Verdict, ProsConsList, ProsBlock, ConsBlock, ProItem, ConItem, SectionDivider, FaqList, FaqItem,
 } from '@/components/mdx/MdxComponents'
 import { BrandCTA } from '@/components/marques/BrandCTA'
+import rehypeAutolinkTerms from '@/lib/rehype-autolink-terms'
+import { AUTOLINK_DICTIONARY } from '@/lib/autolink-dictionary'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -55,6 +58,8 @@ export default async function ArticlePage({ params }: Props) {
   const { slug } = await params
   const article = getArticleBySlug(slug)
   if (!article) notFound()
+
+  const allArticles = getAllArticles()
 
   const { frontmatter, content, rawContent } = article
   const canonicalUrl = `https://www.toutou-gourmet.com/blog/${slug}`
@@ -130,7 +135,17 @@ export default async function ArticlePage({ params }: Props) {
 
           {/* Contenu MDX avec composants custom */}
           <div className="mdx-content mt-8">
-            <MDXRemote source={stripTldr(content)} components={mdxComponents} />
+            <MDXRemote
+              source={stripTldr(content)}
+              components={mdxComponents}
+              options={{
+                mdxOptions: {
+                  rehypePlugins: [
+                    [rehypeAutolinkTerms, { terms: AUTOLINK_DICTIONARY, maxTotal: 3 }],
+                  ],
+                },
+              }}
+            />
           </div>
 
           {/* Tags */}
@@ -151,6 +166,13 @@ export default async function ArticlePage({ params }: Props) {
               → Voir le comparateur complet
             </Link>
           </div>
+
+          {/* Articles similaires */}
+          <RelatedArticles
+            currentSlug={slug}
+            categorySlug={frontmatter.categorySlug}
+            allArticles={allArticles}
+          />
 
           {/* Newsletter */}
           <div className="mt-10 pb-24">
