@@ -64,7 +64,7 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
         <span className="text-xs font-bold uppercase tracking-wide px-2.5 py-0.5 rounded-[var(--radius-sm)] bg-white text-[var(--text-primary)]">
           {frontmatter.category}
         </span>
-        <span className="text-xs font-semibold text-[var(--text-muted)] whitespace-nowrap">
+        <span className="text-xs font-semibold text-[var(--text-muted)] whitespace-nowrap shrink-0">
           {readTime} min de lecture
         </span>
       </div>
