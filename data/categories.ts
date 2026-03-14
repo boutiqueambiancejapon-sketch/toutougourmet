@@ -51,6 +51,12 @@ export const categories: Category[] = [
     description: 'Refuse ses croquettes, sort la nourriture du bol, mange ses crottes, avale trop vite… Comprendre et corriger les comportements alimentaires.',
     emoji: '🐾',
   },
+  {
+    slug: 'race',
+    label: 'Alimentation par race',
+    description: 'Labrador, Golden Retriever, Berger Allemand, Bouledogue Français… Trouvez les conseils nutritionnels adaptés à la race de votre chien.',
+    emoji: '🐕',
+  },
 ]
 
 export function getCategoryBySlug(slug: string): Category | undefined {
