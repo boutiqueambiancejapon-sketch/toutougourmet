@@ -61,10 +61,10 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
         className="px-5 pt-5 pb-4 flex items-start justify-between gap-3"
         style={{ background: colors.band }}
       >
-        <span className="text-xs font-bold uppercase tracking-wide px-2.5 py-0.5 rounded-[var(--radius-sm)] bg-white text-[var(--text-primary)]">
+        <span className="text-xs font-bold uppercase tracking-wide px-2.5 py-0.5 rounded-[var(--radius-sm)] bg-white text-[var(--text-primary)] min-w-0 truncate">
           {frontmatter.category}
         </span>
-        <span className="text-xs font-semibold text-[var(--text-muted)] whitespace-nowrap">
+        <span className="text-xs font-semibold text-[var(--text-muted)] whitespace-nowrap shrink-0">
           {readTime} min de lecture
         </span>
       </div>
@@ -72,8 +72,8 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
       {/* Contenu */}
       <div className="flex flex-col gap-2.5 p-5 flex-1">
         <h2
-          className="font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-1)] leading-snug transition-colors"
-          style={{ fontFamily: "'Fraunces', serif", fontSize: 'clamp(1rem, 2vw, 1.2rem)' }}
+          className="font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-1)] leading-snug transition-colors line-clamp-2"
+          style={{ fontFamily: "'Fraunces', serif", fontSize: '1rem' }}
         >
           {frontmatter.title}
         </h2>
