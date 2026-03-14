@@ -3,6 +3,7 @@
 Lis PROGRESS.md avant chaque session.
 Lis le fichier /docs/ correspondant à ta tâche.
 Pour tâche transversale : lis docs/CDC.md uniquement.
+**Rédaction de contenu (article, page pilier, page cluster) : lis docs/09-seo-geo-guide.md en entier avant d'écrire la première ligne.**
 
 ## Projet
 
