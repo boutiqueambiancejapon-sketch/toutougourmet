@@ -17,16 +17,16 @@ interface HubCardsProps {
 }
 
 export function HubCards({ hubs, columns = 4 }: HubCardsProps) {
-  const gridClass = columns === 3
-    ? 'grid grid-cols-1 sm:grid-cols-3 gap-4'
-    : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'
+  const desktopCols = columns === 3 ? 'md:grid-cols-3' : 'md:grid-cols-4'
   return (
-    <div className={gridClass}>
+    <div
+      className={`flex gap-4 overflow-x-auto pb-3 snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:overflow-visible md:pb-0 ${desktopCols}`}
+    >
       {hubs.map(({ slug, label, description, emoji, count, colors }) => (
         <Link
           key={slug}
           href={`/chien/${slug}`}
-          className="group flex flex-col rounded-[var(--radius-xl)] overflow-hidden border border-[var(--border)] hover:-translate-y-2 hover:shadow-[var(--shadow-xl)] hover:border-transparent transition-all duration-300"
+          className="group snap-start shrink-0 w-[72vw] sm:w-auto flex flex-col rounded-[var(--radius-xl)] overflow-hidden border border-[var(--border)] hover:-translate-y-2 hover:shadow-[var(--shadow-xl)] hover:border-transparent transition-all duration-300"
         >
           {/* Bande colorée + emoji — même pattern que ArticleCard */}
           <div
