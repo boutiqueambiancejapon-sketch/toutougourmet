@@ -13,11 +13,15 @@ interface Hub {
 
 interface HubCardsProps {
   hubs: Hub[]
+  columns?: 3 | 4
 }
 
-export function HubCards({ hubs }: HubCardsProps) {
+export function HubCards({ hubs, columns = 4 }: HubCardsProps) {
+  const gridClass = columns === 3
+    ? 'grid grid-cols-1 sm:grid-cols-3 gap-4'
+    : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4'
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className={gridClass}>
       {hubs.map(({ slug, label, description, emoji, count, colors }) => (
         <Link
           key={slug}
