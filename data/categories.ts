@@ -57,6 +57,12 @@ export const categories: Category[] = [
     description: 'Labrador, Golden Retriever, Berger Allemand, Bouledogue Français… Trouvez les conseils nutritionnels adaptés à la race de votre chien.',
     emoji: '🐕',
   },
+  {
+    slug: 'sante',
+    label: 'Croquettes pour chiens malades',
+    description: 'Insuffisance rénale, arthrose, dermatite, cancer, problèmes cardiaques… Quelle alimentation choisir selon la condition de santé de votre chien ?',
+    emoji: '🏥',
+  },
 ]
 
 export function getCategoryBySlug(slug: string): Category | undefined {
