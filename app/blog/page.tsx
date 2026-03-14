@@ -18,14 +18,16 @@ const HUB_COLORS: Record<string, { band: string; accent: string }> = {
   'alimentation-quotidienne': { band: 'var(--pill-amber)', accent: 'var(--accent-2)'   },
   'urgences':                 { band: '#FFE0D5',           accent: 'var(--accent-1)'   },
   'comportement-alimentaire': { band: 'var(--pill-blue)',  accent: 'var(--accent-blue)' },
+  'fruit':                    { band: 'var(--pill-rose)',  accent: 'var(--accent-rose)' },
+  'legumes':                  { band: 'var(--pill-green)', accent: 'var(--accent-3)'   },
+  'viandes':                  { band: '#FFE0D5',           accent: 'var(--accent-1)'   },
 }
 
 const HUB_SLUGS = ['peut-manger', 'alimentation-quotidienne', 'urgences', 'comportement-alimentaire']
+const SUB_SLUGS  = ['fruit', 'legumes', 'viandes']
 
-export default function BlogPage() {
-  const articles = getAllArticles()
-
-  const hubs = HUB_SLUGS.map((slug) => {
+function buildHubs(slugs: string[]) {
+  return slugs.map((slug) => {
     const cat = categories.find((c) => c.slug === slug)!
     const count = cat.subCategorySlugs
       ? cat.subCategorySlugs.reduce((acc, s) => acc + getArticlesByCategory(s).length, 0)
@@ -33,6 +35,12 @@ export default function BlogPage() {
     const colors = HUB_COLORS[slug] ?? { band: 'var(--bg-surface-2)', accent: 'var(--text-muted)' }
     return { slug, label: cat.label, description: cat.description, emoji: cat.emoji, count, colors }
   })
+}
+
+export default function BlogPage() {
+  const articles = getAllArticles()
+  const hubs = buildHubs(HUB_SLUGS)
+  const subHubs = buildHubs(SUB_SLUGS)
 
   return (
     <div className="min-h-screen py-10 px-6 md:px-10 bg-[var(--bg-primary)]">
@@ -51,12 +59,20 @@ export default function BlogPage() {
           </p>
         </div>
 
-        {/* Hub cards */}
-        <section className="mb-14" aria-label="Explorer par thème">
+        {/* Hub cards — thèmes principaux */}
+        <section className="mb-6" aria-label="Explorer par thème">
           <p className="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)] mb-5">
             Explorer par thème
           </p>
           <HubCards hubs={hubs} />
+        </section>
+
+        {/* Sous-thèmes — fruit / légumes / viandes — depth 3 depuis /blog */}
+        <section className="mb-14" aria-label="Explorer par aliment">
+          <p className="text-sm font-bold uppercase tracking-widest text-[var(--text-muted)] mb-4">
+            Par aliment
+          </p>
+          <HubCards hubs={subHubs} columns={3} />
         </section>
 
         {/* Tous les articles + pagination */}

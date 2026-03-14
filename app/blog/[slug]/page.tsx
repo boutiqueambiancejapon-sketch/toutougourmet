@@ -59,6 +59,12 @@ export default async function ArticlePage({ params }: Props) {
   const article = getArticleBySlug(slug)
   if (!article) notFound()
 
+  // Redirect articles with a canonical /chien/[cat]/[slug] URL — avoid duplicate routes
+  if (article.frontmatter.categorySlug) {
+    const { redirect } = await import('next/navigation')
+    redirect(`/chien/${article.frontmatter.categorySlug}/${slug}`)
+  }
+
   const allArticles = getAllArticles()
 
   const { frontmatter, content, rawContent } = article
