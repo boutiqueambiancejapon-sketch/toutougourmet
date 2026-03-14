@@ -23,10 +23,10 @@ export const AUTOLINK_DICTIONARY: Record<string, string> = {
   'quiz':               '/quiz',
 
   // — Articles piliers —
-  'repas frais':                      '/blog/repas-frais-vs-croquettes-chien',
-  'BARF':                             '/blog/chien-peut-manger-viande-crue-barf',
-  'croquettes sans céréales':         '/blog/croquettes-sans-cereales-chien',
-  'os de poulet':                     '/blog/os-poulet-chien-danger',
-  'alimentation naturelle':           '/blog/chien-peut-manger-viande-crue-barf',
-  'raw feeding':                      '/blog/chien-peut-manger-viande-crue-barf',
+  'repas frais':                      '/chien/alimentation-quotidienne/repas-frais-vs-croquettes-chien',
+  'BARF':                             '/chien/viandes/chien-peut-manger-viande-crue-barf',
+  'croquettes sans céréales':         '/chien/alimentation-quotidienne/croquettes-sans-cereales-chien',
+  'os de poulet':                     '/chien/urgences/os-poulet-chien-danger',
+  'alimentation naturelle':           '/chien/viandes/chien-peut-manger-viande-crue-barf',
+  'raw feeding':                      '/chien/viandes/chien-peut-manger-viande-crue-barf',
 }
