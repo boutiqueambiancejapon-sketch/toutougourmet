@@ -61,7 +61,7 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
         className="px-5 pt-5 pb-4 flex items-start justify-between gap-3"
         style={{ background: colors.band }}
       >
-        <span className="text-xs font-bold uppercase tracking-wide px-2.5 py-0.5 rounded-[var(--radius-sm)] bg-white text-[var(--text-primary)]">
+        <span className="text-xs font-bold uppercase tracking-wide px-2.5 py-0.5 rounded-[var(--radius-sm)] bg-white text-[var(--text-primary)] min-w-0 truncate">
           {frontmatter.category}
         </span>
         <span className="text-xs font-semibold text-[var(--text-muted)] whitespace-nowrap shrink-0">
