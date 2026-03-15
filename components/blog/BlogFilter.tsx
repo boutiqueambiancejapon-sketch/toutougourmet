@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ArticleCard } from './ArticleCard'
 import type { Article } from '@/lib/mdx'
 
@@ -21,6 +21,10 @@ interface BlogFilterProps {
 export function BlogFilter({ articles }: BlogFilterProps) {
   const [active, setActive] = useState<string | null>(null)
   const [page, setPage] = useState(1)
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [page])
 
   const categoryList = Array.from(new Set(articles.map((a) => a.frontmatter.category))).sort()
 
