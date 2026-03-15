@@ -23,9 +23,9 @@ export function NewsletterBlock({
     }
     setStatus('loading')
     try {
-      const res = await fetch('https://formspree.io/f/xaqpdpqd', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, _subject: 'Nouvelle inscription newsletter' }),
       })
       setStatus(res.ok ? 'success' : 'error')
