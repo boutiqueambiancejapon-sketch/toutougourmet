@@ -4,6 +4,7 @@ import { Fraunces, DM_Sans } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import ScrollToTop from '@/components/layout/ScrollToTop'
 import './globals.css'
 
 const fraunces = Fraunces({
@@ -76,6 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Aller au contenu principal
         </a>
 
+        <ScrollToTop />
         <Header />
         <main id="main-content">{children}</main>
         <Footer />
