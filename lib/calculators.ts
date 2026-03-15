@@ -197,6 +197,69 @@ export const dogSizeRanges: Record<SizeCategory, { label: string; minKg: number;
   'tres-grand': { label: 'Très grand (Berger, Dogue, Saint-Bernard...)', minKg: 40, maxKg: 80, midKg: 55 },
 }
 
+// ─── Calculateur d'âge humain équivalent ─────────────────────────────────────
+
+// Tables de conversion âge chien → âge humain selon la taille
+// Source : consensus vétérinaire international (WSAVA / AVMA)
+const AGE_TABLES: Record<SizeCategory, number[]> = {
+  // index 0 = 1 an, index 1 = 2 ans, etc.
+  petit:      [15, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80],
+  moyen:      [15, 24, 28, 32, 36, 42, 47, 51, 56, 60, 65, 69, 74, 78, 83, 87],
+  grand:      [15, 24, 28, 32, 36, 45, 50, 55, 61, 66, 72, 77, 82, 88],
+  'tres-grand': [12, 22, 31, 38, 45, 49, 56, 64, 71, 79, 86, 93],
+}
+
+export interface DogAgeResult {
+  humanAge: number
+  lifeStage: string
+  stagePill: 'chiot' | 'jeune' | 'adulte' | 'senior' | 'tres-senior'
+  context: string
+}
+
+/**
+ * Convertit l'âge d'un chien en âge humain équivalent selon sa taille.
+ * Supporte les années fractionnaires (ex : 1.5 = 1 an et 6 mois).
+ */
+export function calculateDogHumanAge(dogYears: number, size: SizeCategory): DogAgeResult {
+  const table = AGE_TABLES[size]
+  const maxAge = table.length // âge max de la table (1-indexé)
+
+  let humanAge: number
+
+  if (dogYears <= 0) {
+    // Moins d'1 an : interpolation linéaire entre 0 et table[0]
+    humanAge = Math.round(dogYears * table[0])
+  } else if (dogYears >= maxAge) {
+    // Au-delà de la table : extrapolation avec le dernier incrément
+    const lastIncrement = table[maxAge - 1] - table[maxAge - 2]
+    humanAge = table[maxAge - 1] + Math.round((dogYears - maxAge) * lastIncrement)
+  } else {
+    // Interpolation linéaire entre deux entrées de la table
+    const lowerIdx = Math.floor(dogYears) - 1
+    const upperIdx = lowerIdx + 1
+    const frac = dogYears - Math.floor(dogYears)
+    const lower = lowerIdx < 0 ? 0 : table[lowerIdx]
+    const upper = table[upperIdx] ?? table[lowerIdx]
+    humanAge = Math.round(lower + frac * (upper - lower))
+  }
+
+  // Stade de vie et contexte
+  if (dogYears < 1) {
+    return { humanAge, lifeStage: 'Chiot', stagePill: 'chiot', context: 'Ton chien est encore en pleine croissance — c\'est la période la plus décisive pour une bonne alimentation.' }
+  }
+  if (dogYears < 3) {
+    return { humanAge, lifeStage: 'Jeune adulte', stagePill: 'jeune', context: 'Ton chien est dans la fleur de l\'âge — plein d\'énergie, sa croissance est presque terminée.' }
+  }
+  if (size === 'petit' || size === 'moyen') {
+    if (dogYears < 8) return { humanAge, lifeStage: 'Adulte', stagePill: 'adulte', context: 'Ton chien est en pleine maturité. Les petites races vieillissent plus lentement que les grandes.' }
+    if (dogYears < 12) return { humanAge, lifeStage: 'Senior', stagePill: 'senior', context: 'Ton chien entre dans sa phase senior. Un suivi vétérinaire annuel et une alimentation adaptée sont importants.' }
+    return { humanAge, lifeStage: 'Très senior', stagePill: 'tres-senior', context: 'Ton chien est un véritable vétéran ! Les petites races peuvent vivre jusqu\'à 18-20 ans en bonne santé.' }
+  }
+  if (dogYears < 7) return { humanAge, lifeStage: 'Adulte', stagePill: 'adulte', context: 'Ton chien est en pleine maturité. Les grandes races vieillissent plus vite que les petites.' }
+  if (dogYears < 10) return { humanAge, lifeStage: 'Senior', stagePill: 'senior', context: 'Ton grand chien entre en phase senior. Consulte ton vétérinaire pour adapter son alimentation.' }
+  return { humanAge, lifeStage: 'Très senior', stagePill: 'tres-senior', context: 'À cet âge, les grandes races sont de véritables champions de longévité. Bravo !' }
+}
+
 // ─── Comparateur coût annuel ─────────────────────────────────────────────────
 
 export type FoodType = 'croquettes-standard' | 'croquettes-premium' | 'repas-frais' | 'mixte'

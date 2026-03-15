@@ -16,6 +16,14 @@ export const metadata: Metadata = {
 
 const tools = [
   {
+    href: '/outils/age',
+    icon: '🐾',
+    title: 'Calculateur d\'âge en âge humain',
+    description: 'Quel âge a vraiment ton chien en années humaines ? Conversion précise selon le gabarit — bien plus fiable que la règle des 7 ans.',
+    cta: 'Calculer son âge',
+    tags: ['Chien', 'Gabarit', 'Vieillissement'],
+  },
+  {
     href: '/outils/ration',
     icon: '🥣',
     title: 'Calculateur de ration journalière',
