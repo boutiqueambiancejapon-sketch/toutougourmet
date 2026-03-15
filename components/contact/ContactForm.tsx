@@ -14,13 +14,16 @@ export function ContactForm() {
     e.preventDefault()
     setStatus('loading')
 
-    const res = await fetch('https://formspree.io/f/xaqpdpqd', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(form),
-    })
-
-    setStatus(res.ok ? 'success' : 'error')
+    try {
+      const res = await fetch('https://formspree.io/f/xaqpdpqd', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(form),
+      })
+      setStatus(res.ok ? 'success' : 'error')
+    } catch {
+      setStatus('error')
+    }
   }
 
   if (status === 'success') {

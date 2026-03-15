@@ -22,12 +22,16 @@ export function NewsletterBlock({
       return
     }
     setStatus('loading')
-    const res = await fetch('https://formspree.io/f/xaqpdpqd', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({ email, _subject: 'Nouvelle inscription newsletter' }),
-    })
-    setStatus(res.ok ? 'success' : 'error')
+    try {
+      const res = await fetch('https://formspree.io/f/xaqpdpqd', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ email, _subject: 'Nouvelle inscription newsletter' }),
+      })
+      setStatus(res.ok ? 'success' : 'error')
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
