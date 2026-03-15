@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(req: NextRequest) {
-  const formId = process.env.NEXT_PUBLIC_FORMSPREE_ID
+  const formId = process.env.FORMSPREE_ID
   if (!formId) return NextResponse.json({ error: 'Form not configured' }, { status: 500 })
 
   const body = await req.json()
