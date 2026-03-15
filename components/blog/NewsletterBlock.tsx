@@ -22,9 +22,16 @@ export function NewsletterBlock({
       return
     }
     setStatus('loading')
-    // Simulation — à remplacer par l'intégration Resend
-    await new Promise((r) => setTimeout(r, 800))
-    setStatus('success')
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, _subject: 'Nouvelle inscription newsletter' }),
+      })
+      setStatus(res.ok ? 'success' : 'error')
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -64,6 +71,7 @@ export function NewsletterBlock({
         </form>
       )}
       {errorMsg && <p className="text-sm text-[var(--error)] mt-2">{errorMsg}</p>}
+      {status === 'error' && <p className="text-sm text-[var(--error)] mt-2">Une erreur est survenue, réessaie.</p>}
       <p className="text-xs text-[var(--text-muted)] mt-3">
         Double opt-in, désabonnement en 1 clic. Pas de spam.
       </p>

@@ -5,12 +5,12 @@ import { AgeCalculator } from '@/components/outils/AgeCalculator'
 import { InfoBox } from '@/components/mdx/MdxComponents'
 
 export const metadata: Metadata = {
-  title: 'Calculateur âge chien en âge humain | Toutou Gourmet',
+  title: 'Calculateur âge chien en âge humain — Formule précise selon le gabarit',
   description:
     'Quel âge a vraiment ton chien en âge humain ? Convertis l\'âge de ton chien selon son gabarit — bien plus précis que la règle des 7 ans. Gratuit et instantané.',
   alternates: { canonical: 'https://www.toutou-gourmet.com/outils/age' },
   openGraph: {
-    title: 'Calculateur âge chien en âge humain | Toutou Gourmet',
+    title: 'Calculateur âge chien en âge humain — Formule précise selon le gabarit',
     description: 'Convertis l\'âge de ton chien en âge humain selon son gabarit. La règle des 7 ans, c\'est dépassé.',
     url: 'https://www.toutou-gourmet.com/outils/age',
     type: 'website',
