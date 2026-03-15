@@ -5,12 +5,12 @@ import { RationCalculator } from '@/components/outils/RationCalculator'
 import { InfoBox, Callout } from '@/components/mdx/MdxComponents'
 
 export const metadata: Metadata = {
-  title: 'Calculateur ration journalière chien et chat | Toutou Gourmet',
+  title: 'Calculateur de ration journalière chien & chat — Résultat en grammes selon le NRC',
   description:
     'Calcule la ration journalière de ton chien ou chat selon son poids, âge et activité. Formule vétérinaire NRC 2006, résultat en grammes. Gratuit et instantané.',
   alternates: { canonical: 'https://www.toutou-gourmet.com/outils/ration' },
   openGraph: {
-    title: 'Calculateur ration journalière chien et chat | Toutou Gourmet',
+    title: 'Calculateur de ration journalière chien & chat — Résultat en grammes selon le NRC',
     description: 'Combien de grammes par jour pour ton animal ? La formule vétérinaire NRC adaptée à ton chien ou chat.',
     url: 'https://www.toutou-gourmet.com/outils/ration',
     type: 'website',

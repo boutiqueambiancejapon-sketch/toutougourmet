@@ -5,12 +5,12 @@ import { BudgetCalculator } from '@/components/outils/BudgetCalculator'
 import { InfoBox } from '@/components/mdx/MdxComponents'
 
 export const metadata: Metadata = {
-  title: 'Estimateur budget mensuel alimentation chien | Toutou Gourmet',
+  title: 'Simulateur budget chien — Franklin, Elmut et Dog Chef comparés',
   description:
     'Compare le budget mensuel de Franklin, Elmut, Petty Well et Dog Chef selon le profil de ton chien. Calcul instantané avec les offres du moment.',
   alternates: { canonical: 'https://www.toutou-gourmet.com/outils/budget' },
   openGraph: {
-    title: 'Estimateur budget mensuel alimentation chien | Toutou Gourmet',
+    title: 'Simulateur budget chien — Franklin, Elmut et Dog Chef comparés',
     description: 'Combien ça coûte vraiment de nourrir ton chien avec les meilleures marques ? Calcul en 30 secondes.',
     url: 'https://www.toutou-gourmet.com/outils/budget',
     type: 'website',
