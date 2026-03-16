@@ -4,6 +4,17 @@ import matter from 'gray-matter'
 
 const contentDir = path.join(process.cwd(), 'content')
 
+// Remplace l'année de rédaction dans les titres/descriptions par l'année courante
+// Ex: "Avis Royal Canin : notre test complet 2026" → "…2027" en 2027
+function injectCurrentYear(frontmatter: ArticleFrontmatter): ArticleFrontmatter {
+  const year = String(new Date().getFullYear())
+  // Remplace uniquement l'année de rédaction en fin de titre (ex: "… 2026" → "… 2027")
+  // N'affecte pas les années historiques en milieu de phrase ("depuis 2012", "fondée en 1953")
+  const replaceTitle = (s: string) => s?.replace(/\b(20[2-9]\d)\s*$/, year) ?? s
+  const replaceDesc  = (s: string) => s?.replace(/\b(20[2-9]\d)\b(?=\s*[.?]?\s*$)/, year) ?? s
+  return { ...frontmatter, title: replaceTitle(frontmatter.title), description: replaceDesc(frontmatter.description) }
+}
+
 export interface ArticleFrontmatter {
   title: string
   description: string
@@ -32,7 +43,7 @@ export function getAllArticles(): Article[] {
       const slug = file.replace(/\.mdx$/, '')
       const raw = fs.readFileSync(path.join(blogDir, file), 'utf-8')
       const { data, content } = matter(raw)
-      return { slug, frontmatter: data as ArticleFrontmatter, content, rawContent: content }
+      return { slug, frontmatter: injectCurrentYear(data as ArticleFrontmatter), content, rawContent: content }
     })
     .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
 }
@@ -42,7 +53,7 @@ export function getArticleBySlug(slug: string): Article | null {
   if (!fs.existsSync(filePath)) return null
   const raw = fs.readFileSync(filePath, 'utf-8')
   const { data, content } = matter(raw)
-  return { slug, frontmatter: data as ArticleFrontmatter, content, rawContent: content }
+  return { slug, frontmatter: injectCurrentYear(data as ArticleFrontmatter), content, rawContent: content }
 }
 
 export function getArticlesByCategory(categorySlug: string): Article[] {
