@@ -21,6 +21,7 @@ import {
 import { BrandCTA } from '@/components/marques/BrandCTA'
 import rehypeAutolinkTerms from '@/lib/rehype-autolink-terms'
 import { AUTOLINK_DICTIONARY } from '@/lib/autolink-dictionary'
+import remarkGfm from 'remark-gfm'
 
 interface Props {
   params: Promise<{ category: string; slug: string }>
@@ -137,6 +138,7 @@ export default async function ArticleCategoryPage({ params }: Props) {
               components={mdxComponents}
               options={{
                 mdxOptions: {
+                  remarkPlugins: [remarkGfm],
                   rehypePlugins: [
                     [rehypeAutolinkTerms, { terms: AUTOLINK_DICTIONARY, maxTotal: 3 }],
                   ],
