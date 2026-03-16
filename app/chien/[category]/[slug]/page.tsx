@@ -34,7 +34,7 @@ const mdxComponents = {
   CompareTr, CompareTd, Verdict, ProsConsList, ProsBlock, ConsBlock, ProItem, ConItem, SectionDivider, FaqList, FaqItem,
   BrandCTA,
   table: (props: React.ComponentProps<'table'>) => (
-    <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+    <div className="table-scroll">
       <table {...props} />
     </div>
   ),
