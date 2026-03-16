@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { getAllArticles, getArticlesByCategory } from '@/lib/mdx'
 import { BlogFilter } from '@/components/blog/BlogFilter'
 import { HubCards } from '@/components/blog/HubCards'
@@ -18,12 +17,13 @@ const HUB_COLORS: Record<string, { band: string; accent: string }> = {
   'alimentation-quotidienne': { band: 'var(--pill-amber)', accent: 'var(--accent-2)'   },
   'urgences':                 { band: '#FFE0D5',           accent: 'var(--accent-1)'   },
   'comportement-alimentaire': { band: 'var(--pill-blue)',  accent: 'var(--accent-blue)' },
+  'avis-marques':             { band: 'var(--pill-amber)', accent: 'var(--accent-2)'   },
   'fruit':                    { band: 'var(--pill-rose)',  accent: 'var(--accent-rose)' },
   'legumes':                  { band: 'var(--pill-green)', accent: 'var(--accent-3)'   },
   'viandes':                  { band: '#FFE0D5',           accent: 'var(--accent-1)'   },
 }
 
-const HUB_SLUGS = ['peut-manger', 'alimentation-quotidienne', 'urgences', 'comportement-alimentaire']
+const HUB_SLUGS = ['peut-manger', 'alimentation-quotidienne', 'urgences', 'comportement-alimentaire', 'avis-marques']
 const SUB_SLUGS  = ['fruit', 'legumes', 'viandes']
 
 function buildHubs(slugs: string[]) {
@@ -89,16 +89,6 @@ export default function BlogPage() {
           )}
         </section>
 
-        {/* Lien comparatifs */}
-        <div className="mt-12 bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div>
-            <p className="font-bold text-[var(--text-primary)] mb-1">Comparatifs marque vs marque</p>
-            <p className="text-sm text-[var(--text-muted)]">Elmut vs Dog Chef, Franklin vs Petty Well… tous nos comparatifs détaillés.</p>
-          </div>
-          <Link href="/chien/marque/comparatif" className="btn-outline text-sm whitespace-nowrap">
-            Voir les comparatifs →
-          </Link>
-        </div>
       </div>
     </div>
   )
