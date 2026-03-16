@@ -1,3 +1,4 @@
+import React from 'react'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -30,6 +31,11 @@ const mdxComponents = {
   StatRow, Stat, CompareTable, CompareThead, CompareTh,
   CompareTr, CompareTd, Verdict, ProsConsList, ProsBlock, ConsBlock, ProItem, ConItem, SectionDivider, FaqList, FaqItem,
   BrandCTA,
+  table: (props: React.ComponentProps<'table'>) => (
+    <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+      <table {...props} />
+    </div>
+  ),
 }
 
 export async function generateStaticParams() {
