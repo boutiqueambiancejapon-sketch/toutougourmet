@@ -63,6 +63,12 @@ export const categories: Category[] = [
     description: 'Insuffisance rénale, arthrose, dermatite, cancer, problèmes cardiaques… Quelle alimentation choisir selon la condition de santé de votre chien ?',
     emoji: '🏥',
   },
+  {
+    slug: 'avis-marques',
+    label: 'Avis & Comparatif',
+    description: 'Royal Canin, Hill\'s, Orijen, Farmina, Belcando… Nos tests complets des grandes marques de croquettes et comparatifs détaillés pour choisir sans se tromper.',
+    emoji: '🔍',
+  },
 ]
 
 export function getCategoryBySlug(slug: string): Category | undefined {

@@ -298,14 +298,18 @@ h3 {
   color: var(--text-secondary);
   font-style: italic;
 }
+.mdx-content .table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1.5rem 0;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
 .mdx-content table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1.5rem 0;
   font-size: 0.9rem;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  border: 1px solid var(--border);
+  white-space: nowrap;
 }
 .mdx-content th {
   background: var(--bg-dark);

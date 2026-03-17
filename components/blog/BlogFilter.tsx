@@ -96,22 +96,38 @@ export function BlogFilter({ articles }: BlogFilterProps) {
             ←
           </button>
 
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
-            <button
-              key={n}
-              onClick={() => setPage(n)}
-              className="w-9 h-9 rounded-[var(--radius-md)] text-sm font-semibold border transition-all"
-              style={{
-                background: page === n ? 'var(--accent-1)' : 'transparent',
-                color: page === n ? '#fff' : 'var(--text-secondary)',
-                borderColor: page === n ? 'var(--accent-1)' : 'var(--border)',
-              }}
-              aria-label={`Page ${n}`}
-              aria-current={page === n ? 'page' : undefined}
-            >
-              {n}
-            </button>
-          ))}
+          {Array.from({ length: totalPages }, (_, i) => i + 1)
+            .filter((n) => {
+              if (totalPages <= 10) return true
+              if (n === 1 || n === totalPages) return true
+              if (Math.abs(n - page) <= 2) return true
+              return false
+            })
+            .reduce<(number | '…')[]>((acc, n, i, arr) => {
+              if (i > 0 && (n as number) - (arr[i - 1] as number) > 1) acc.push('…')
+              acc.push(n)
+              return acc
+            }, [])
+            .map((n, i) =>
+              n === '…' ? (
+                <span key={`ellipsis-${i}`} className="w-9 h-9 flex items-center justify-center text-sm text-[var(--text-muted)]">…</span>
+              ) : (
+                <button
+                  key={n}
+                  onClick={() => setPage(n as number)}
+                  className="w-9 h-9 rounded-[var(--radius-md)] text-sm font-semibold border transition-all"
+                  style={{
+                    background: page === n ? 'var(--accent-1)' : 'transparent',
+                    color: page === n ? '#fff' : 'var(--text-secondary)',
+                    borderColor: page === n ? 'var(--accent-1)' : 'var(--border)',
+                  }}
+                  aria-label={`Page ${n}`}
+                  aria-current={page === n ? 'page' : undefined}
+                >
+                  {n}
+                </button>
+              )
+            )}
 
           <button
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
