@@ -82,6 +82,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main-content">{children}</main>
         <Footer />
 
+        {/* Google AdSense */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7295690633751101"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+
         {/* Plausible Analytics */}
         <Script
           defer
