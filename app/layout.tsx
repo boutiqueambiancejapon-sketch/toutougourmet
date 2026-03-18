@@ -48,6 +48,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr" className={`${fraunces.variable} ${dmSans.variable}`}>
       <head>
+        {/* Google AdSense — dans <head> pour validation par le robot Google */}
+        {/* @cdc §CSP — script tiers approuvé, exception documentée */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7295690633751101"
+          crossOrigin="anonymous"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -81,14 +88,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="main-content">{children}</main>
         <Footer />
-
-        {/* Google AdSense */}
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7295690633751101"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
 
         {/* Plausible Analytics */}
         <Script
