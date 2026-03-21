@@ -9,7 +9,8 @@ import { TLDR } from '@/components/blog/TLDR'
 import { SummarizeWithAI } from '@/components/blog/SummarizeWithAI'
 import { NewsletterBlock } from '@/components/blog/NewsletterBlock'
 import { RelatedArticles } from '@/components/blog/RelatedArticles'
-import { StickyCtaDogChef } from '@/components/blog/StickyCtaDogChef'
+import { StickyCta } from '@/components/blog/StickyCta'
+import { STICKY_CTA_BY_SLUG, DOG_CHEF_CTA } from '@/lib/sticky-cta-config'
 import { AuthorBox } from '@/components/blog/AuthorBox'
 import { Badge } from '@/components/ui/Badge'
 import {
@@ -203,7 +204,7 @@ export default async function ArticlePage({ params }: Props) {
         </article>
       </div>
 
-      <StickyCtaDogChef />
+      <StickyCta config={STICKY_CTA_BY_SLUG[slug] ?? DOG_CHEF_CTA} />
     </>
   )
 }
