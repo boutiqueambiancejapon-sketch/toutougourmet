@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getAllArticles } from '@/lib/mdx'
 import { getAuthorBySlug } from '@/data/authors'
-import { ArticleCard } from '@/components/blog/ArticleCard'
+import { BlogFilter } from '@/components/blog/BlogFilter'
 import { notFound } from 'next/navigation'
 
 const AUTHOR_SLUG = 'mathias-c'
@@ -32,6 +32,7 @@ export default function AutheurMathiasPage() {
       url: 'https://www.toutou-gourmet.com',
     },
     knowsAbout: author.knowsAbout,
+    ...(author.linkedin ? { sameAs: [author.linkedin] } : {}),
   }
 
   return (
@@ -42,7 +43,9 @@ export default function AutheurMathiasPage() {
       />
 
       <div className="min-h-screen py-10 px-6 md:px-10 bg-[var(--bg-primary)]">
-        <div className="max-w-[720px] mx-auto">
+
+        {/* Hero — largeur article */}
+        <div className="max-w-[720px] mx-auto mb-12">
 
           {/* Breadcrumb */}
           <nav className="text-sm text-[var(--text-muted)] mb-8" aria-label="Fil d'Ariane">
@@ -54,7 +57,7 @@ export default function AutheurMathiasPage() {
           </nav>
 
           {/* Hero auteur */}
-          <header className="mb-12">
+          <header>
             <div className="flex gap-5 items-center mb-6">
               {/* Avatar */}
               <div
@@ -71,9 +74,22 @@ export default function AutheurMathiasPage() {
               </div>
               <div>
                 <h1 className="page-title leading-tight">{author.name}</h1>
-                <p className="text-sm font-bold uppercase tracking-widest text-[var(--accent-1)] mt-1">
-                  {author.title}
-                </p>
+                <div className="flex items-center gap-3 mt-1 flex-wrap">
+                  <p className="text-sm font-bold uppercase tracking-widest text-[var(--accent-1)]">
+                    {author.title}
+                  </p>
+                  {author.linkedin && (
+                    <Link
+                      href={author.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-semibold text-[var(--text-muted)] hover:text-[var(--accent-1)] transition-colors"
+                      aria-label="Profil LinkedIn de Mathias C."
+                    >
+                      LinkedIn →
+                    </Link>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -113,20 +129,18 @@ export default function AutheurMathiasPage() {
               </div>
             </section>
           </header>
+        </div>
 
-          {/* Articles */}
+        {/* Grille articles — pleine largeur */}
+        <div className="max-w-[1280px] mx-auto">
           <section>
             <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-6">
               {articles.length} article{articles.length > 1 ? 's' : ''} publiés
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {articles.map((article) => (
-                <ArticleCard key={article.slug} article={article} />
-              ))}
-            </div>
+            <BlogFilter articles={articles} />
           </section>
-
         </div>
+
       </div>
     </>
   )

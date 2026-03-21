@@ -13,6 +13,7 @@ export interface Author {
   bioLong: string
   pets: AuthorPet[]
   url: string
+  linkedin?: string
   knowsAbout: string[]
 }
 
@@ -45,6 +46,7 @@ export const AUTHORS: Record<string, Author> = {
       },
     ],
     url: '/auteurs/mathias-c',
+    linkedin: 'https://www.linkedin.com/in/mathiascetani/',
     knowsAbout: [
       'alimentation chien',
       'nutrition canine',
