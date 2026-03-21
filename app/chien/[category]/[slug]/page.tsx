@@ -11,9 +11,11 @@ import { NewsletterBlock } from '@/components/blog/NewsletterBlock'
 import { RelatedArticles } from '@/components/blog/RelatedArticles'
 import { StickyCtaDogChef } from '@/components/blog/StickyCtaDogChef'
 import { StickyCtaDouble } from '@/components/blog/StickyCtaDouble'
+import { AuthorBox } from '@/components/blog/AuthorBox'
 import { Badge } from '@/components/ui/Badge'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { getCategoryBySlug } from '@/data/categories'
+import { DEFAULT_AUTHOR } from '@/data/authors'
 import {
   InfoBox, Callout, FeatureGrid, Feature,
   StatRow, Stat, CompareTable, CompareThead, CompareTh,
@@ -82,7 +84,11 @@ export default async function ArticleCategoryPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: frontmatter.title,
-    author: { '@type': 'Organization', name: 'Toutou Gourmet' },
+    author: {
+      '@type': 'Person',
+      name: DEFAULT_AUTHOR.name,
+      url: `https://www.toutou-gourmet.com${DEFAULT_AUTHOR.url}`,
+    },
     datePublished: frontmatter.date,
     dateModified: frontmatter.updatedAt || frontmatter.date,
     publisher: {
@@ -165,6 +171,8 @@ export default async function ArticleCategoryPage({ params }: Props) {
             <Link href="/quiz" className="text-[var(--accent-1)] hover:underline">→ Faire le quiz personnalisé</Link>
             <Link href="/comparateur" className="text-[var(--accent-1)] hover:underline">→ Voir le comparateur complet</Link>
           </div>
+
+          <AuthorBox author={DEFAULT_AUTHOR} />
 
           <RelatedArticles
             currentSlug={slug}

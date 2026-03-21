@@ -10,6 +10,7 @@ import { SummarizeWithAI } from '@/components/blog/SummarizeWithAI'
 import { NewsletterBlock } from '@/components/blog/NewsletterBlock'
 import { RelatedArticles } from '@/components/blog/RelatedArticles'
 import { StickyCtaDogChef } from '@/components/blog/StickyCtaDogChef'
+import { AuthorBox } from '@/components/blog/AuthorBox'
 import { Badge } from '@/components/ui/Badge'
 import {
   InfoBox, Callout, FeatureGrid, Feature,
@@ -17,6 +18,7 @@ import {
   CompareTr, CompareTd, Verdict, ProsConsList, ProsBlock, ConsBlock, ProItem, ConItem, SectionDivider, FaqList, FaqItem,
 } from '@/components/mdx/MdxComponents'
 import { BrandCTA } from '@/components/marques/BrandCTA'
+import { DEFAULT_AUTHOR } from '@/data/authors'
 import rehypeAutolinkTerms from '@/lib/rehype-autolink-terms'
 import remarkGfm from 'remark-gfm'
 import { AUTOLINK_DICTIONARY } from '@/lib/autolink-dictionary'
@@ -83,7 +85,11 @@ export default async function ArticlePage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: frontmatter.title,
-    author: { '@type': 'Organization', name: 'Toutou Gourmet' },
+    author: {
+      '@type': 'Person',
+      name: DEFAULT_AUTHOR.name,
+      url: `https://www.toutou-gourmet.com${DEFAULT_AUTHOR.url}`,
+    },
     datePublished: frontmatter.date,
     dateModified: frontmatter.updatedAt || frontmatter.date,
     publisher: {
@@ -180,6 +186,8 @@ export default async function ArticlePage({ params }: Props) {
               → Voir le comparateur complet
             </Link>
           </div>
+
+          <AuthorBox author={DEFAULT_AUTHOR} />
 
           {/* Articles similaires */}
           <RelatedArticles
