@@ -9,8 +9,9 @@ import { TLDR } from '@/components/blog/TLDR'
 import { SummarizeWithAI } from '@/components/blog/SummarizeWithAI'
 import { NewsletterBlock } from '@/components/blog/NewsletterBlock'
 import { RelatedArticles } from '@/components/blog/RelatedArticles'
-import { StickyCtaDogChef } from '@/components/blog/StickyCtaDogChef'
+import { StickyCta } from '@/components/blog/StickyCta'
 import { StickyCtaDouble } from '@/components/blog/StickyCtaDouble'
+import { DOG_CHEF_CTA } from '@/lib/sticky-cta-config'
 import { AuthorBox } from '@/components/blog/AuthorBox'
 import { Badge } from '@/components/ui/Badge'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
@@ -186,14 +187,22 @@ export default async function ArticleCategoryPage({ params }: Props) {
         </article>
       </div>
 
-      {slug === 'eukanuba-vs-royal-canin' ? (
+      {frontmatter.affiliateA && frontmatter.affiliateB ? (
         <StickyCtaDouble
-          eyebrow="Disponibles sur Amazon"
-          brandA={{ label: 'Essayer Royal Canin', href: 'https://amzn.to/4rYE9JY' }}
-          brandB={{ label: 'Essayer Eukanuba', href: 'https://amzn.to/4sAAulM' }}
+          eyebrow="Comparer les deux"
+          brandA={{ label: `Acheter ${frontmatter.affiliateA.name}`, href: frontmatter.affiliateA.url }}
+          brandB={{ label: `Acheter ${frontmatter.affiliateB.name}`, href: frontmatter.affiliateB.url }}
         />
+      ) : frontmatter.affiliateA ? (
+        <StickyCta config={{
+          brandName: frontmatter.affiliateA.name,
+          url: frontmatter.affiliateA.url,
+          label: `disponible chez ${frontmatter.affiliateA.badge ?? 'Maxi Zoo'}`,
+          badge: frontmatter.affiliateA.badge,
+          code: frontmatter.affiliateA.code,
+        }} />
       ) : (
-        <StickyCtaDogChef />
+        <StickyCta config={DOG_CHEF_CTA} />
       )}
     </>
   )
