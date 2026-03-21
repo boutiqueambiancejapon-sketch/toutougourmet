@@ -15,6 +15,14 @@ function injectCurrentYear(frontmatter: ArticleFrontmatter): ArticleFrontmatter 
   return { ...frontmatter, title: replaceTitle(frontmatter.title), description: replaceDesc(frontmatter.description) }
 }
 
+export interface AffiliateLink {
+  name: string
+  url: string
+  label?: string
+  badge?: string
+  code?: string
+}
+
 export interface ArticleFrontmatter {
   title: string
   description: string
@@ -25,6 +33,8 @@ export interface ArticleFrontmatter {
   tags: string[]
   image: string
   author: string
+  affiliateA?: AffiliateLink
+  affiliateB?: AffiliateLink
 }
 
 export interface Article {
