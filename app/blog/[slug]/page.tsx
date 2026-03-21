@@ -215,7 +215,7 @@ export default async function ArticlePage({ params }: Props) {
         <StickyCta config={{
           brandName: frontmatter.affiliateA.name,
           url: frontmatter.affiliateA.url,
-          label: `disponible chez ${frontmatter.affiliateA.badge ?? 'Maxi Zoo'}`,
+          label: frontmatter.affiliateA.label ?? `disponible chez ${frontmatter.affiliateA.badge ?? 'Maxi Zoo'}`,
           badge: frontmatter.affiliateA.badge,
           code: frontmatter.affiliateA.code,
         }} />

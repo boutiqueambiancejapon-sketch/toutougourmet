@@ -18,6 +18,7 @@ function injectCurrentYear(frontmatter: ArticleFrontmatter): ArticleFrontmatter 
 export interface AffiliateLink {
   name: string
   url: string
+  label?: string
   badge?: string
   code?: string
 }
