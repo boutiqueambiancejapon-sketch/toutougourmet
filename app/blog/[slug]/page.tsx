@@ -11,7 +11,7 @@ import { NewsletterBlock } from '@/components/blog/NewsletterBlock'
 import { RelatedArticles } from '@/components/blog/RelatedArticles'
 import { StickyCta } from '@/components/blog/StickyCta'
 import { StickyCtaDouble } from '@/components/blog/StickyCtaDouble'
-import { STICKY_CTA_BY_SLUG, STICKY_CTA_DOUBLE_BY_SLUG, DOG_CHEF_CTA } from '@/lib/sticky-cta-config'
+import { DOG_CHEF_CTA } from '@/lib/sticky-cta-config'
 import { AuthorBox } from '@/components/blog/AuthorBox'
 import { Badge } from '@/components/ui/Badge'
 import {
@@ -205,10 +205,23 @@ export default async function ArticlePage({ params }: Props) {
         </article>
       </div>
 
-      {STICKY_CTA_DOUBLE_BY_SLUG[slug]
-        ? <StickyCtaDouble {...STICKY_CTA_DOUBLE_BY_SLUG[slug]} />
-        : <StickyCta config={STICKY_CTA_BY_SLUG[slug] ?? DOG_CHEF_CTA} />
-      }
+      {frontmatter.affiliateA && frontmatter.affiliateB ? (
+        <StickyCtaDouble
+          eyebrow="Comparer les deux"
+          brandA={{ label: `Acheter ${frontmatter.affiliateA.name}`, href: frontmatter.affiliateA.url }}
+          brandB={{ label: `Acheter ${frontmatter.affiliateB.name}`, href: frontmatter.affiliateB.url }}
+        />
+      ) : frontmatter.affiliateA ? (
+        <StickyCta config={{
+          brandName: frontmatter.affiliateA.name,
+          url: frontmatter.affiliateA.url,
+          label: `disponible chez ${frontmatter.affiliateA.badge ?? 'Maxi Zoo'}`,
+          badge: frontmatter.affiliateA.badge,
+          code: frontmatter.affiliateA.code,
+        }} />
+      ) : (
+        <StickyCta config={DOG_CHEF_CTA} />
+      )}
     </>
   )
 }

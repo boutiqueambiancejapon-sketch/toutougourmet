@@ -2,7 +2,13 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import type { StickyCtaConfig } from '@/lib/sticky-cta-config'
+export interface StickyCtaConfig {
+  brandName: string
+  url: string
+  label: string
+  badge?: string
+  code?: string
+}
 
 interface StickyCtaProps {
   config: StickyCtaConfig
