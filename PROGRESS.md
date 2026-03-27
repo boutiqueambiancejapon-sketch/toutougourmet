@@ -2,6 +2,7 @@
 
 ## Complété
 
+- **9 articles urgences sécurité chien** (2026-03-27) : chocolat, raisin, ail/oignon, mort-aux-rats, limace, glands de chêne, os cuit, os de poulet, crapaud — SERP analysée (3 concurrents/sujet), content gaps identifiés, protocoles d'urgence, tableaux dose/poids, chronologie symptômes, FAQ 6-8 questions, coûts vétérinaires, catégorie "urgences"
 - **8 articles comparatifs blog** (2026-03-20) : Dog Chef vs Just Russel, Dog Chef vs Japhy, Just Russel vs Elmut, Just Russel vs Japhy, Elmut vs Edgard & Cooper, Butternut Box vs Dog Chef, Dog Chef vs Royal Canin, Just Russel vs Royal Canin — SEO/GEO conforme, TL;DR, CompareTable, FAQ 6+, Verdict, BrandCTA affiliés
 - Structure routes app/ complète (chien, outils, comparateur, blog, marques, pages légales)
 - Redirects /blog/ et /marques/ → nouvelle structure (next.config.ts)
