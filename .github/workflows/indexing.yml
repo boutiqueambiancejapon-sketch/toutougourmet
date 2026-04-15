@@ -1,0 +1,90 @@
+name: Google Indexing API
+
+# Soumet automatiquement les URLs canoniques à l'API Google Indexing
+# lorsque des articles MDX sont ajoutés ou modifiés sur `main`.
+#
+# Trigger auto : push sur main touchant content/blog/**.mdx ou content/comparatifs/**.mdx
+# Trigger manuel : workflow_dispatch avec filter regex optionnel (ou full = true pour tout resoumettre)
+#
+# Requiert :
+#   - GitHub secret INDEXING_API_SECRET (même valeur que dans Vercel)
+#   - GOOGLE_SERVICE_ACCOUNT_JSON doit être configuré côté Vercel (env var de la route /api/indexing)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/blog/**.mdx'
+      - 'content/comparatifs/**.mdx'
+
+  workflow_dispatch:
+    inputs:
+      filter:
+        description: 'Regex filter on URLs (ex: "yaourt|miel")'
+        required: false
+        default: ''
+      full:
+        description: 'Soumettre toutes les URLs du site (au lieu du diff)'
+        type: boolean
+        required: false
+        default: false
+
+concurrency:
+  group: indexing-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  submit:
+    name: Submit URLs to Google Indexing API
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout (full history for git diff)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Submit changed URLs (push event)
+        if: github.event_name == 'push'
+        env:
+          INDEXING_API_SECRET: ${{ secrets.INDEXING_API_SECRET }}
+          BEFORE_SHA: ${{ github.event.before }}
+        run: |
+          if [ -z "$INDEXING_API_SECRET" ]; then
+            echo "::error::INDEXING_API_SECRET secret is not set in GitHub repository settings"
+            exit 1
+          fi
+          if [ "$BEFORE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            echo "First push on this branch — submitting all canonical URLs"
+            node scripts/submit-indexing.mjs --all
+          else
+            echo "Diff since $BEFORE_SHA"
+            node scripts/submit-indexing.mjs --since "$BEFORE_SHA"
+          fi
+
+      - name: Submit URLs (manual dispatch)
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          INDEXING_API_SECRET: ${{ secrets.INDEXING_API_SECRET }}
+          FILTER: ${{ github.event.inputs.filter }}
+          FULL: ${{ github.event.inputs.full }}
+        run: |
+          if [ -z "$INDEXING_API_SECRET" ]; then
+            echo "::error::INDEXING_API_SECRET secret is not set in GitHub repository settings"
+            exit 1
+          fi
+          ARGS="--all"
+          if [ "$FULL" != "true" ]; then
+            ARGS="--since HEAD~1"
+          fi
+          if [ -n "$FILTER" ]; then
+            ARGS="$ARGS --filter $FILTER"
+          fi
+          echo "Running: node scripts/submit-indexing.mjs $ARGS"
+          node scripts/submit-indexing.mjs $ARGS

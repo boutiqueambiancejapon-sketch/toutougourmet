@@ -1,6 +1,61 @@
 # Scripts — Toutou Gourmet
 
-## google_indexer.py
+## submit-indexing.mjs (recommandé)
+
+Script Node zéro-dépendance qui appelle `/api/indexing` (déployée sur Vercel).
+Construit les URLs canoniques directement depuis le frontmatter MDX
+(`categorySlug` pour blog, `marque/<slug>` pour comparatifs) — impossible
+de se tromper d'URL.
+
+### Usage
+
+```bash
+# Une URL unique
+npm run indexing:submit -- --url https://www.toutou-gourmet.com/chien/alimentation-quotidienne/chien-peut-manger-yaourt
+
+# Toutes les URLs du site (max 200/jour, quota Google)
+npm run indexing:submit -- --all
+
+# Depuis le diff git (ajoutés + modifiés depuis un ref)
+npm run indexing:submit -- --since HEAD~5
+npm run indexing:submit -- --since main
+
+# Avec filtre regex sur l'URL
+npm run indexing:submit -- --all --filter "yaourt|miel|curcuma"
+
+# Dry run (affiche sans envoyer)
+npm run indexing:submit -- --all --dry-run
+
+# Supprimer une URL de l'index
+npm run indexing:submit -- --url https://www.toutou-gourmet.com/old-page --action delete
+```
+
+### Env
+
+```bash
+# Dans .env.local (jamais committé)
+INDEXING_API_SECRET=xxx
+```
+
+Ou inline : `INDEXING_API_SECRET=xxx npm run indexing:submit -- --all`.
+
+### GitHub Action (automatique)
+
+`.github/workflows/indexing.yml` se déclenche à chaque push sur `main`
+touchant `content/blog/**.mdx` ou `content/comparatifs/**.mdx`. Il
+détecte les fichiers ajoutés/modifiés via `git diff`, construit les
+URLs canoniques et les soumet à l'API.
+
+Pour que ça marche :
+1. Ajouter le secret `INDEXING_API_SECRET` dans **Settings > Secrets and variables > Actions** du repo GitHub (même valeur que celle de Vercel).
+2. S'assurer que `GOOGLE_SERVICE_ACCOUNT_JSON` est bien configurée côté Vercel (env var utilisée par la route `/api/indexing`).
+
+Trigger manuel : **Actions > Google Indexing API > Run workflow**, avec
+filter regex optionnel ou `full: true` pour resoumettre tout le site.
+
+---
+
+## google_indexer.py (legacy, usage local)
 
 Soumet des URLs à l'API Google Indexing pour accélérer l'indexation.
 
