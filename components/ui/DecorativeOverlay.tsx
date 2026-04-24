@@ -1,13 +1,15 @@
+import type { CSSProperties } from 'react'
 import type { Decoration, ImageTone } from '@/data/images-manifest'
 
 interface DecorativeOverlayProps {
   tone: ImageTone
   decorations: readonly Decoration[]
-  /** Optional override to dim overlays when placed over busy photos */
+  /** Only render "targeted" decorations (hat/bowl/bone/paw) when a real photo is present */
+  hasImage?: boolean
   intensity?: 'soft' | 'normal'
 }
 
-const TONE_FILL: Record<ImageTone, string> = {
+const PRIMARY: Record<ImageTone, string> = {
   cream: 'var(--pill-amber)',
   rose: 'var(--pill-rose)',
   blue: 'var(--pill-blue)',
@@ -15,7 +17,7 @@ const TONE_FILL: Record<ImageTone, string> = {
   green: 'var(--pill-green)',
 }
 
-const TONE_SECONDARY: Record<ImageTone, string> = {
+const ACCENT: Record<ImageTone, string> = {
   cream: 'var(--pill-rose)',
   rose: 'var(--pill-blue)',
   blue: 'var(--pill-rose)',
@@ -23,96 +25,119 @@ const TONE_SECONDARY: Record<ImageTone, string> = {
   green: 'var(--pill-blue)',
 }
 
-function Confetti({ fill, alt }: { fill: string; alt: string }) {
+interface DotProps {
+  pos: CSSProperties
+  size: number
+  fill: string
+  shape?: 'circle' | 'tri' | 'bar'
+  rotate?: number
+}
+
+function Dot({ pos, size, fill, shape = 'circle', rotate = 0 }: DotProps) {
+  const common: CSSProperties = {
+    position: 'absolute',
+    width: size,
+    height: size,
+    transform: rotate ? `rotate(${rotate}deg)` : undefined,
+    ...pos,
+  }
+  if (shape === 'circle') {
+    return <span aria-hidden="true" style={{ ...common, borderRadius: '50%', background: fill }} />
+  }
+  if (shape === 'bar') {
+    return <span aria-hidden="true" style={{ ...common, height: size / 2.5, borderRadius: size, background: fill }} />
+  }
   return (
-    <g aria-hidden="true">
-      <circle cx="12" cy="18" r="2.2" fill={fill} />
-      <circle cx="88" cy="24" r="1.8" fill={alt} />
-      <circle cx="78" cy="12" r="1.4" fill={fill} opacity="0.85" />
-      <polygon points="22,8 26,4 28,10" fill={alt} />
-      <polygon points="92,82 96,78 97,86" fill={fill} />
-      <rect x="6" y="68" width="5" height="1.6" rx="0.8" fill={alt} transform="rotate(24 8 69)" />
-      <rect x="70" y="62" width="5" height="1.6" rx="0.8" fill={fill} transform="rotate(-18 72 63)" />
-      <circle cx="50" cy="6" r="1.2" fill={alt} opacity="0.85" />
-      <polygon points="44,90 48,86 50,92" fill={fill} opacity="0.9" />
-    </g>
+    <svg aria-hidden="true" viewBox="0 0 10 10" style={common}>
+      <polygon points="5,1 9,9 1,9" fill={fill} />
+    </svg>
   )
 }
 
-function Sparkle({ fill, x, y, size = 6 }: { fill: string; x: number; y: number; size?: number }) {
-  const s = size
+function Sparkle({ pos, size, fill }: { pos: CSSProperties; size: number; fill: string }) {
   return (
-    <g transform={`translate(${x} ${y})`} aria-hidden="true">
-      <path d={`M0 -${s} Q0.6 -0.6 ${s} 0 Q0.6 0.6 0 ${s} Q-0.6 0.6 -${s} 0 Q-0.6 -0.6 0 -${s} Z`} fill={fill} />
-    </g>
+    <svg aria-hidden="true" viewBox="-10 -10 20 20" style={{ position: 'absolute', width: size, height: size, ...pos }}>
+      <path d="M0 -9 Q0.9 -0.9 9 0 Q0.9 0.9 0 9 Q-0.9 0.9 -9 0 Q-0.9 -0.9 0 -9 Z" fill={fill} />
+    </svg>
   )
 }
 
-function PartyHat({ fill }: { fill: string }) {
+function PartyHat({ pos, size, fill }: { pos: CSSProperties; size: number; fill: string }) {
   return (
-    <g aria-hidden="true">
-      <polygon points="50,6 62,34 38,34" fill={fill} stroke="var(--text-primary)" strokeWidth="1.2" strokeLinejoin="round" />
-      <circle cx="50" cy="5" r="2.4" fill="var(--bg-surface)" stroke="var(--text-primary)" strokeWidth="0.8" />
-      <circle cx="44" cy="26" r="1.2" fill="var(--bg-surface)" />
-      <circle cx="54" cy="22" r="1" fill="var(--bg-surface)" opacity="0.9" />
-    </g>
+    <svg aria-hidden="true" viewBox="0 0 50 60" style={{ position: 'absolute', width: size, height: size * 1.2, ...pos }}>
+      <polygon points="25,4 44,54 6,54" fill={fill} stroke="var(--text-primary)" strokeWidth="2" strokeLinejoin="round" />
+      <circle cx="25" cy="3" r="3" fill="var(--bg-surface)" stroke="var(--text-primary)" strokeWidth="1.4" />
+      <circle cx="19" cy="38" r="1.8" fill="var(--bg-surface)" />
+      <circle cx="30" cy="30" r="1.4" fill="var(--bg-surface)" opacity="0.85" />
+    </svg>
   )
 }
 
-function FoodBowl({ fill }: { fill: string }) {
+function FoodBowl({ pos, size, fill }: { pos: CSSProperties; size: number; fill: string }) {
   return (
-    <g aria-hidden="true">
-      <ellipse cx="50" cy="88" rx="24" ry="5" fill="var(--text-primary)" opacity="0.12" />
-      <path d="M26 82 Q50 100 74 82 L70 74 L30 74 Z" fill={fill} stroke="var(--text-primary)" strokeWidth="1.2" strokeLinejoin="round" />
-      <ellipse cx="50" cy="74" rx="20" ry="3.6" fill="var(--bg-surface)" stroke="var(--text-primary)" strokeWidth="1.2" />
-    </g>
+    <svg aria-hidden="true" viewBox="0 0 80 50" style={{ position: 'absolute', width: size, height: size * 0.6, ...pos }}>
+      <path d="M10 18 Q40 44 70 18 L64 10 L16 10 Z" fill={fill} stroke="var(--text-primary)" strokeWidth="2" strokeLinejoin="round" />
+      <ellipse cx="40" cy="10" rx="28" ry="5" fill="var(--bg-surface)" stroke="var(--text-primary)" strokeWidth="2" />
+    </svg>
   )
 }
 
-function Bone({ fill, x, y }: { fill: string; x: number; y: number }) {
+function Bone({ pos, size, fill, rotate = 0 }: { pos: CSSProperties; size: number; fill: string; rotate?: number }) {
   return (
-    <g transform={`translate(${x} ${y}) rotate(-18)`} aria-hidden="true">
-      <path d="M-14 -3 a3 3 0 1 1 0 6 h28 a3 3 0 1 1 0 -6 Z" fill={fill} stroke="var(--text-primary)" strokeWidth="1" strokeLinejoin="round" />
-    </g>
+    <svg aria-hidden="true" viewBox="-35 -10 70 20" style={{ position: 'absolute', width: size, height: size * 0.3, transform: `rotate(${rotate}deg)`, ...pos }}>
+      <path d="M-30 -4 a4 4 0 1 1 0 8 h60 a4 4 0 1 1 0 -8 Z" fill={fill} stroke="var(--text-primary)" strokeWidth="1.6" />
+    </svg>
   )
 }
 
-function PawPrint({ fill, x, y }: { fill: string; x: number; y: number }) {
+function PawPrint({ pos, size, fill }: { pos: CSSProperties; size: number; fill: string }) {
   return (
-    <g transform={`translate(${x} ${y})`} aria-hidden="true">
-      <ellipse cx="0" cy="3" rx="5" ry="4" fill={fill} stroke="var(--text-primary)" strokeWidth="0.8" />
-      <ellipse cx="-5" cy="-4" rx="1.6" ry="2.4" fill={fill} stroke="var(--text-primary)" strokeWidth="0.8" />
-      <ellipse cx="-1.6" cy="-6" rx="1.6" ry="2.4" fill={fill} stroke="var(--text-primary)" strokeWidth="0.8" />
-      <ellipse cx="1.8" cy="-6" rx="1.6" ry="2.4" fill={fill} stroke="var(--text-primary)" strokeWidth="0.8" />
-      <ellipse cx="5" cy="-4" rx="1.6" ry="2.4" fill={fill} stroke="var(--text-primary)" strokeWidth="0.8" />
-    </g>
+    <svg aria-hidden="true" viewBox="-12 -12 24 24" style={{ position: 'absolute', width: size, height: size, ...pos }}>
+      <ellipse cx="0" cy="3" rx="6.5" ry="5" fill={fill} stroke="var(--text-primary)" strokeWidth="1" />
+      <ellipse cx="-7" cy="-4" rx="2.1" ry="3" fill={fill} stroke="var(--text-primary)" strokeWidth="1" />
+      <ellipse cx="-2.2" cy="-7" rx="2.1" ry="3" fill={fill} stroke="var(--text-primary)" strokeWidth="1" />
+      <ellipse cx="2.2" cy="-7" rx="2.1" ry="3" fill={fill} stroke="var(--text-primary)" strokeWidth="1" />
+      <ellipse cx="7" cy="-4" rx="2.1" ry="3" fill={fill} stroke="var(--text-primary)" strokeWidth="1" />
+    </svg>
   )
 }
 
-export function DecorativeOverlay({ tone, decorations, intensity = 'normal' }: DecorativeOverlayProps) {
-  const primary = TONE_FILL[tone]
-  const accent = TONE_SECONDARY[tone]
-  const opacity = intensity === 'soft' ? 0.7 : 1
+export function DecorativeOverlay({ tone, decorations, hasImage = false, intensity = 'normal' }: DecorativeOverlayProps) {
+  const primary = PRIMARY[tone]
+  const accent = ACCENT[tone]
+  const opacity = intensity === 'soft' ? 0.75 : 1
 
   return (
-    <svg
-      viewBox="0 0 100 100"
-      preserveAspectRatio="xMidYMid slice"
-      aria-hidden="true"
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ opacity }}
-    >
-      {decorations.includes('confetti') && <Confetti fill={primary} alt={accent} />}
-      {decorations.includes('sparkle') && (
+    <div className="absolute inset-0 pointer-events-none" aria-hidden="true" style={{ opacity }}>
+      {decorations.includes('confetti') && (
         <>
-          <Sparkle fill="var(--accent-1)" x={86} y={12} size={5} />
-          <Sparkle fill={accent} x={14} y={84} size={4} />
+          <Dot pos={{ top: '10%', left: '6%' }} size={14} fill={primary} />
+          <Dot pos={{ top: '18%', right: '8%' }} size={12} fill={accent} />
+          <Dot pos={{ top: '8%', right: '22%' }} size={9} fill={primary} shape="tri" rotate={14} />
+          <Dot pos={{ bottom: '12%', left: '10%' }} size={10} fill={accent} shape="tri" rotate={-22} />
+          <Dot pos={{ bottom: '22%', right: '14%' }} size={16} fill={primary} />
+          <Dot pos={{ top: '42%', left: '4%' }} size={22} fill={accent} shape="bar" rotate={20} />
+          <Dot pos={{ bottom: '8%', right: '32%' }} size={8} fill={accent} />
         </>
       )}
-      {decorations.includes('party-hat') && <PartyHat fill={primary} />}
-      {decorations.includes('food-bowl') && <FoodBowl fill={primary} />}
-      {decorations.includes('bone') && <Bone fill={primary} x={20} y={84} />}
-      {decorations.includes('paw-print') && <PawPrint fill={primary} x={86} y={18} />}
-    </svg>
+      {decorations.includes('sparkle') && (
+        <>
+          <Sparkle pos={{ top: '14%', right: '14%' }} size={26} fill="var(--accent-1)" />
+          <Sparkle pos={{ bottom: '18%', left: '14%' }} size={18} fill={accent} />
+        </>
+      )}
+      {hasImage && decorations.includes('party-hat') && (
+        <PartyHat pos={{ top: '6%', left: '50%', transform: 'translateX(-50%)' }} size={64} fill={primary} />
+      )}
+      {hasImage && decorations.includes('food-bowl') && (
+        <FoodBowl pos={{ bottom: '10%', left: '50%', transform: 'translateX(-50%)' }} size={140} fill={primary} />
+      )}
+      {hasImage && decorations.includes('bone') && (
+        <Bone pos={{ bottom: '14%', left: '10%' }} size={72} fill={primary} rotate={-18} />
+      )}
+      {hasImage && decorations.includes('paw-print') && (
+        <PawPrint pos={{ top: '12%', right: '10%' }} size={44} fill={primary} />
+      )}
+    </div>
   )
 }

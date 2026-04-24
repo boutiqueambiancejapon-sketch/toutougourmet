@@ -92,6 +92,7 @@ export function Illustration({
       <DecorativeOverlay
         tone={slot.tone}
         decorations={slot.decorations}
+        hasImage={hasRealImage}
         intensity={hasRealImage ? overlayIntensity : 'normal'}
       />
     </div>
