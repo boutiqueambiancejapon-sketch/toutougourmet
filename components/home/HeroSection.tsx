@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Illustration } from '@/components/ui/Illustration'
 import { WordRotator } from '@/components/ui/WordRotator'
 
 const rotatingWords = [
@@ -6,7 +7,6 @@ const rotatingWords = [
   'chat',
   'Labrador',
   'Golden',
-  'animal',
   'bouledogue',
   'compagnon',
   'toutou',
@@ -21,65 +21,107 @@ const stats = [
 
 export function HeroSection() {
   return (
-    <section className="bg-[var(--bg-dark)] min-h-[90vh] flex flex-col justify-center px-6 md:px-10 lg:px-16 py-20 relative overflow-hidden">
+    <section className="relative overflow-hidden bg-[var(--bg-primary)]">
+      {/* Cover illustration — fades into cream at bottom */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-[620px] pointer-events-none"
+      >
+        <Illustration
+          slot="home-hero"
+          alt=""
+          priority
+          className="h-full !rounded-none"
+          overlayIntensity="soft"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(180deg, rgba(250,250,248,0) 0%, rgba(250,250,248,0) 35%, rgba(250,250,248,0.4) 60%, rgba(250,250,248,0.9) 85%, var(--bg-primary) 100%)',
+          }}
+        />
+        {/* Signature blobs */}
+        <div
+          className="absolute -top-16 right-[12%] w-[320px] h-[320px] rounded-full opacity-30 blur-3xl"
+          style={{ background: 'var(--pill-rose)' }}
+        />
+        <div
+          className="absolute top-16 -left-16 w-[260px] h-[260px] rounded-full opacity-25 blur-3xl"
+          style={{ background: 'var(--pill-blue)' }}
+        />
+      </div>
 
-      {/* Blobs déco */}
-      <div aria-hidden="true" className="absolute top-[-80px] right-[-80px] w-[380px] h-[380px] rounded-full opacity-20 blur-3xl pointer-events-none" style={{ background: 'var(--pill-rose)' }} />
-      <div aria-hidden="true" className="absolute bottom-[-60px] left-[8%] w-[260px] h-[260px] rounded-full opacity-15 blur-3xl pointer-events-none" style={{ background: 'var(--pill-blue)' }} />
-
-      <div className="max-w-[1280px] mx-auto w-full">
-        <div className="max-w-[900px]">
-
-          {/* Eyebrow */}
-          <div className="mb-8">
-            <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full" style={{ background: 'var(--pill-rose)', color: 'var(--text-primary)' }}>
+      <div className="relative max-w-[1280px] mx-auto px-6 md:px-10 pt-[180px] pb-16">
+        <div className="max-w-[960px]">
+          <span
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[var(--border)] shadow-[var(--shadow-sm)] mb-7"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-1)]" />
+            <span className="text-xs font-bold uppercase tracking-widest text-[var(--accent-1)]">
               Comparatif indépendant · 2026
             </span>
-          </div>
+          </span>
 
-          {/* H1 avec mot rotatif */}
-          <h1 className="text-[var(--text-on-dark)] mb-6" style={{ fontFamily: "'Fraunces', serif" }}>
+          <h1
+            className="mb-7 text-[var(--text-primary)]"
+            style={{
+              fontFamily: "'Fraunces', serif",
+              textWrap: 'balance',
+              letterSpacing: '-0.03em',
+              lineHeight: 1,
+            }}
+          >
             La bouffe de ton{' '}
-            <span className="inline-block px-4 py-1 rounded-[var(--radius-md)] leading-tight" style={{ background: 'var(--pill-rose)', color: 'var(--text-primary)' }}>
+            <span
+              className="inline-block px-4 pb-1.5 rounded-[var(--radius-lg)] align-baseline"
+              style={{ background: 'var(--pill-rose)', lineHeight: 1 }}
+            >
               <WordRotator words={rotatingWords} intervalMs={1800} />
             </span>
-            {' '}on a tout comparé.
+            <br />
+            on a tout comparé.
           </h1>
 
-          {/* Sous-titre */}
-          <p className="text-lg md:text-xl mb-10 max-w-[600px] leading-relaxed" style={{ color: 'var(--text-on-dark)', opacity: 0.75 }}>
-            Franklin, Elmut, Petty Well, Dog Chef — on les a tous testés, scrutés, notés.
-            Sans blabla, sans langue de bois. Trouve la meilleure option en 2 min.
+          <p className="text-lg md:text-xl mb-10 max-w-[640px] leading-relaxed text-[var(--text-secondary)]">
+            Franklin, Elmut, Petty Well, Dog Chef — on les a tous testés,
+            scrutés, notés. Sans blabla, sans langue de bois.{' '}
+            <b className="text-[var(--text-primary)]">
+              Trouve la meilleure option en 2 min.
+            </b>
           </p>
 
-          {/* CTAs */}
-          <div className="flex flex-wrap gap-4 mb-14">
-            <Link href="/quiz" className="btn-dark text-base px-8 py-4">
+          <div className="flex flex-wrap gap-3.5 mb-16">
+            <Link href="/quiz" className="btn-primary text-base px-8 py-4">
               Faire le quiz personnalisé →
             </Link>
             <Link
-              href="/comparateur"
-              className="text-base px-8 py-4 rounded-[var(--radius-md)] font-bold border-2 inline-flex items-center gap-2 hover:bg-white/10 transition-colors"
-              style={{ borderColor: 'rgba(245,238,230,0.30)', color: 'var(--text-on-dark)' }}
+              href="#comparatif"
+              className="btn-outline text-base px-7 py-3.5"
             >
               Voir le comparateur
             </Link>
           </div>
 
-          {/* Stats row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 pt-8 border-t" style={{ borderColor: 'rgba(245,238,230,0.12)' }}>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-[var(--border)]">
             {stats.map((s) => (
               <div key={s.label}>
-                <p className="text-4xl font-black mb-0.5" style={{ fontFamily: "'Fraunces', serif", color: 'var(--text-on-dark)' }}>
+                <p
+                  className="text-4xl md:text-5xl font-black text-[var(--text-primary)] mb-1"
+                  style={{
+                    fontFamily: "'Fraunces', serif",
+                    letterSpacing: '-0.02em',
+                    lineHeight: 1.05,
+                  }}
+                >
                   {s.value}
                 </p>
-                <p className="text-sm" style={{ color: 'var(--text-on-dark)', opacity: 0.55 }}>
+                <p className="text-sm font-medium text-[var(--text-muted)]">
                   {s.label}
                 </p>
               </div>
             ))}
           </div>
-
         </div>
       </div>
     </section>
