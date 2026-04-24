@@ -7,6 +7,8 @@
   --bg-dark:       #1A1109;
   --bg-rose:       #FFF0F5;
   --bg-blue:       #EEF4FF;
+  --bg-amber:      #FFF8E8;
+  --bg-green:      #E8F5EE;
 
   --accent-1:      #E8622A;
   --accent-2:      #F2B85A;
@@ -66,6 +68,8 @@
   --color-bg-dark:       var(--bg-dark);
   --color-bg-rose:       var(--bg-rose);
   --color-bg-blue:       var(--bg-blue);
+  --color-bg-amber:      var(--bg-amber);
+  --color-bg-green:      var(--bg-green);
   --color-text-primary:   var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-text-muted:     var(--text-muted);
