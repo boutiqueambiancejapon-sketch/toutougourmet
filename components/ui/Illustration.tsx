@@ -18,7 +18,14 @@ interface IllustrationProps {
   alt: string
   /** Set true on the single above-the-fold LCP image per page */
   priority?: boolean
-  /** Constrain max rendered height (ex. hero banners). Falls back to slot ratio. */
+  /**
+   * Fill mode — the illustration takes 100% width and 100% height of its parent,
+   * ignoring the slot aspect-ratio. Use for decorative covers (hero, banners).
+   * Parent must be positioned (relative/absolute).
+   */
+  fill?: boolean
+  /** Custom `sizes` attribute for next/image; falls back to a sensible default. */
+  sizes?: string
   className?: string
   /** Override overlay intensity when placing over busy hero photos */
   overlayIntensity?: 'soft' | 'normal'
@@ -31,6 +38,8 @@ const GROUP_TO_VARIANT: Record<ImageGroup, PlaceholderVariant> = {
   articles: 'editorial',
   social: 'landscape',
 }
+
+const DEFAULT_SIZES = '(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 33vw'
 
 /** Build the expected public path for a slot — `/images/{group}/{id}.webp` */
 function expectedSrc(slot: ImageSlot): string {
@@ -50,6 +59,8 @@ export function Illustration({
   slot: slotId,
   alt,
   priority = false,
+  fill = false,
+  sizes = DEFAULT_SIZES,
   className,
   overlayIntensity = 'normal',
 }: IllustrationProps) {
@@ -68,24 +79,28 @@ export function Illustration({
   return (
     <div
       className={cn(
-        'relative overflow-hidden',
-        'bg-[var(--bg-surface-2)]',
+        'relative overflow-hidden bg-[var(--bg-surface-2)]',
+        fill ? 'w-full h-full' : '',
         className
       )}
-      style={{ aspectRatio: `${w} / ${h}` }}
+      style={fill ? undefined : { aspectRatio: `${w} / ${h}` }}
       data-slot={slot.id}
       data-has-image={hasRealImage ? 'true' : 'false'}
     >
       {hasRealImage ? (
-        <Image
-          src={src}
-          alt={alt}
-          width={w}
-          height={h}
-          priority={priority}
-          sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 33vw"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+        fill ? (
+          <Image src={src} alt={alt} fill priority={priority} sizes={sizes} className="object-cover" />
+        ) : (
+          <Image
+            src={src}
+            alt={alt}
+            width={w}
+            height={h}
+            priority={priority}
+            sizes={sizes}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        )
       ) : (
         <IllustratedPlaceholder variant={variant} tone={slot.tone} />
       )}

@@ -31,7 +31,8 @@ export function HeroSection() {
           slot="home-hero"
           alt=""
           priority
-          className="h-full !rounded-none"
+          fill
+          sizes="100vw"
           overlayIntensity="soft"
         />
         <div
