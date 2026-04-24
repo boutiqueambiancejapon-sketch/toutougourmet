@@ -106,7 +106,7 @@ const BRAND_ELMUT: ImageSlot = {
     'A shallow ceramic bowl filled with fresh cooked dog food (visible pieces of meat, carrots, peas, rice), shot from above, with fresh herbs scattered around on a cream linen surface.',
   composition:
     'Bowl centered. Herbs (rosemary, parsley) scattered at the edges. Shot 3/4 high angle.',
-  decorations: ['food-bowl', 'sparkle'],
+  decorations: ['sparkle', 'confetti'],
   notes:
     'Evokes home-cooked freshness. Green-forward palette. Do NOT imitate Elmut packaging.',
 }
@@ -134,7 +134,7 @@ const BRAND_DOG_CHEF: ImageSlot = {
     'A handwritten-style fresh meal portion in a clear compartmented tray (meat, veggies, grains) with a small ribbon tag, shot from above on a cream surface.',
   composition:
     'Tray centered, slight tilt for editorial feel. Cream negative space around.',
-  decorations: ['food-bowl', 'confetti'],
+  decorations: ['sparkle', 'confetti'],
   notes:
     'Evokes tailored personalized fresh meals. Rose-forward palette. Do NOT imitate Dog Chef packaging.',
 }
@@ -250,7 +250,7 @@ const CAT_ALIMENTATION: ImageSlot = {
   subject:
     'A happy dog looking up at a hand holding a bowl of food (hand cropped from frame), cream kitchen backdrop, soft window light.',
   composition: 'Dog on the left, bowl upper-right, lots of cream space.',
-  decorations: ['food-bowl', 'confetti'],
+  decorations: ['confetti', 'sparkle'],
 }
 
 const CAT_COMPORTEMENT: ImageSlot = {
