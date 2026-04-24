@@ -1,5 +1,3 @@
-import { existsSync } from 'node:fs'
-import { join } from 'node:path'
 import Image from 'next/image'
 import {
   getSlotById,
@@ -19,9 +17,8 @@ interface IllustrationProps {
   /** Set true on the single above-the-fold LCP image per page */
   priority?: boolean
   /**
-   * Fill mode — the illustration takes 100% width and 100% height of its parent,
-   * ignoring the slot aspect-ratio. Use for decorative covers (hero, banners).
-   * Parent must be positioned (relative/absolute).
+   * Fill mode — the illustration takes 100% width and 100% height of its
+   * parent, ignoring the slot aspect-ratio. Parent must be positioned.
    */
   fill?: boolean
   /** Custom `sizes` attribute for next/image; falls back to a sensible default. */
@@ -41,18 +38,9 @@ const GROUP_TO_VARIANT: Record<ImageGroup, PlaceholderVariant> = {
 
 const DEFAULT_SIZES = '(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 33vw'
 
-/** Build the expected public path for a slot — `/images/{group}/{id}.webp` */
+/** Expected public path for a slot — `/images/{group}/{id}.webp` */
 function expectedSrc(slot: ImageSlot): string {
   return `/images/${slot.group}/${slot.id}.webp`
-}
-
-/** Check at server-render time if the image file exists in /public */
-function imageExists(src: string): boolean {
-  try {
-    return existsSync(join(process.cwd(), 'public', src))
-  } catch {
-    return false
-  }
 }
 
 export function Illustration({
@@ -73,7 +61,7 @@ export function Illustration({
 
   const { w, h } = RATIO_DIMENSIONS[slot.ratio]
   const src = expectedSrc(slot)
-  const hasRealImage = imageExists(src)
+  const hasRealImage = slot.imageReady === true
   const variant = GROUP_TO_VARIANT[slot.group]
 
   return (

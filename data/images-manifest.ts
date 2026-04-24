@@ -44,6 +44,12 @@ export interface ImageSlot {
   decorations: Decoration[]
   /** LCP = priority sur next/image — une seule par page */
   isLCP?: boolean
+  /**
+   * Set `true` once the WebP file exists in /public/images/{group}/{id}.webp.
+   * Flipped manually after each Gemini generation batch. Controls whether
+   * the <Illustration> component renders the real photo or the SVG placeholder.
+   */
+  imageReady?: boolean
   /** Notes additionnelles pour variation artistique */
   notes?: string
 }
