@@ -15,8 +15,8 @@ const OPTIONS: Array<[BlogSort, string]> = [
 
 export function BlogSortButtons({ value, onChange }: BlogSortButtonsProps) {
   return (
-    <div className="flex items-center gap-2 flex-wrap">
-      <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider">
+    <div className="flex items-center gap-2 flex-nowrap md:flex-wrap pb-1 md:pb-0">
+      <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider shrink-0">
         Trier
       </span>
       {OPTIONS.map(([k, l]) => {
@@ -25,7 +25,7 @@ export function BlogSortButtons({ value, onChange }: BlogSortButtonsProps) {
           <button
             key={k}
             onClick={() => onChange(k)}
-            className="text-xs font-semibold px-3 py-1.5 rounded-full border-2"
+            className="text-xs font-semibold px-3 py-1.5 rounded-full border-2 shrink-0"
             style={{
               borderColor: active ? 'var(--text-primary)' : 'var(--border)',
               background: active ? 'var(--text-primary)' : 'var(--bg-surface)',
