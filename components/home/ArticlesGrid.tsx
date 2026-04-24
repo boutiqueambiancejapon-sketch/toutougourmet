@@ -82,10 +82,18 @@ function SmallCard({ article }: { article: Article }) {
   return (
     <Link
       href={articleHref(article)}
-      className="group grid grid-cols-[120px_1fr] gap-0 rounded-[var(--radius-lg)] overflow-hidden bg-[var(--bg-surface)] border border-[var(--border)] hover:-translate-y-1 hover:shadow-[var(--shadow-md)] transition-all duration-300"
+      className="group grid grid-cols-[140px_1fr] gap-0 rounded-[var(--radius-lg)] overflow-hidden bg-[var(--bg-surface)] border border-[var(--border)] hover:-translate-y-1 hover:shadow-[var(--shadow-md)] transition-all duration-300 min-h-[140px]"
     >
-      <Illustration slot={resolveSlot(article)} alt={frontmatter.title} className="!rounded-none h-full" />
-      <div className="p-4 flex flex-col gap-1.5">
+      <div className="relative w-[140px] h-full shrink-0">
+        <Illustration
+          slot={resolveSlot(article)}
+          alt={frontmatter.title}
+          fill
+          sizes="140px"
+          className="!rounded-none"
+        />
+      </div>
+      <div className="p-4 flex flex-col gap-1.5 min-w-0">
         <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--text-muted)]">
           {frontmatter.category}
         </span>
