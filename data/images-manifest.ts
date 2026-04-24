@@ -73,6 +73,7 @@ const HOME_HERO: ImageSlot = {
   ratio: '16:9',
   tone: 'cream',
   isLCP: true,
+  imageReady: true,
   subject:
     'A medium-sized happy golden-coated dog sitting on a warm cream backdrop, head tilted slightly, soft natural daylight from the top-left, shallow depth of field.',
   composition:
@@ -220,6 +221,7 @@ const CAT_NUTRITION: ImageSlot = {
   group: 'articles',
   ratio: '3:2',
   tone: 'amber',
+  imageReady: true,
   subject:
     'An editorial still-life: a bowl of premium dog food surrounded by key nutrients — a piece of raw meat, a small pile of rice, fresh vegetables — shot from above on cream linen.',
   composition: 'Flat lay composition, bowl slightly off-center.',
@@ -231,6 +233,7 @@ const CAT_SANTE: ImageSlot = {
   group: 'articles',
   ratio: '3:2',
   tone: 'green',
+  imageReady: true,
   subject:
     'A ceramic dog bowl next to a wooden spoon and a few natural supplements (fish oil capsules, dried herbs) on cream background.',
   composition: 'Left-side subject, right side negative space for title overlay.',
@@ -243,6 +246,7 @@ const CAT_ALIMENTATION: ImageSlot = {
   group: 'articles',
   ratio: '3:2',
   tone: 'rose',
+  imageReady: true,
   subject:
     'A happy dog looking up at a hand holding a bowl of food (hand cropped from frame), cream kitchen backdrop, soft window light.',
   composition: 'Dog on the left, bowl upper-right, lots of cream space.',
@@ -254,6 +258,7 @@ const CAT_COMPORTEMENT: ImageSlot = {
   group: 'articles',
   ratio: '3:2',
   tone: 'blue',
+  imageReady: true,
   subject:
     'A curious dog tilting its head sideways looking at camera, warm cream backdrop, 3/4 view.',
   composition: 'Dog centered-left, right side clean for text.',
@@ -267,6 +272,7 @@ const CAT_ENQUETES: ImageSlot = {
   group: 'articles',
   ratio: '3:2',
   tone: 'amber',
+  imageReady: true,
   subject:
     'A pile of dry kibble on cream linen with a magnifying glass hovering just above, warm daylight, macro detail on the kibble texture.',
   composition: 'Kibble pile centered, magnifying glass upper-right.',
@@ -279,6 +285,7 @@ const CAT_URGENCES: ImageSlot = {
   group: 'articles',
   ratio: '3:2',
   tone: 'rose',
+  imageReady: true,
   subject:
     'A dog food bowl with a small illustrated warning star floating above it, cream backdrop.',
   composition: 'Bowl lower-right, star upper-left for a read-flow.',
@@ -292,6 +299,7 @@ const CAT_AVIS_MARQUES: ImageSlot = {
   group: 'articles',
   ratio: '3:2',
   tone: 'blue',
+  imageReady: true,
   subject:
     'Three different ceramic bowls with different textures of dog food (kibble / fresh / raw-style), arranged in a row on cream linen, top-down 45° view.',
   composition: 'Three bowls left-to-right diagonal, cream space above.',
@@ -303,6 +311,7 @@ const CAT_PAR_RACE: ImageSlot = {
   group: 'articles',
   ratio: '3:2',
   tone: 'amber',
+  imageReady: true,
   subject:
     'Two different dogs side by side in portrait (one small, one medium-large, any breeds) sharing the same cream backdrop, calm and friendly.',
   composition: 'Two dogs centered, frontal.',
@@ -382,6 +391,7 @@ const OG_DEFAULT: ImageSlot = {
   group: 'social',
   ratio: '1.91:1',
   tone: 'cream',
+  imageReady: true,
   subject:
     'A happy dog with a party hat sitting next to a bowl of food on warm cream backdrop, editorial composition with lots of clean space for title overlay.',
   composition:
