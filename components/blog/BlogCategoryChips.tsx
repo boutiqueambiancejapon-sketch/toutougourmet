@@ -32,7 +32,7 @@ function Chip({
   return (
     <button
       onClick={onClick}
-      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border-2 text-sm font-semibold whitespace-nowrap"
+      className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border-2 text-sm font-semibold whitespace-nowrap shrink-0"
       style={{
         borderColor: active ? 'var(--text-primary)' : 'var(--border)',
         background: active ? 'var(--text-primary)' : 'var(--bg-surface)',
@@ -57,7 +57,7 @@ function Chip({
 
 export function BlogCategoryChips({ total, categories, active, onChange }: BlogCategoryChipsProps) {
   return (
-    <div className="flex gap-2 flex-wrap">
+    <div className="flex gap-2 flex-nowrap md:flex-wrap pb-1 md:pb-0">
       <Chip
         label="Tout"
         count={total}

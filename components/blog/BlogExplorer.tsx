@@ -89,20 +89,22 @@ export function BlogExplorer({ articles, featured }: BlogExplorerProps) {
 
   return (
     <>
-      <div className="sticky top-[68px] z-20 bg-[var(--bg-primary)]/95 backdrop-blur border-y border-[var(--border)]">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-10 py-4 flex flex-col gap-3">
-          <div className="flex flex-wrap items-center gap-3">
+      <div className="md:sticky md:top-[68px] z-20 bg-[var(--bg-primary)]/95 md:backdrop-blur border-y border-[var(--border)]">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10 py-3 md:py-4 flex flex-col gap-3">
+          <div className="flex flex-col md:flex-row md:flex-wrap md:items-center gap-3">
             <BlogSearchBar value={query} onChange={onQueryChange} />
-            <div className="ml-auto">
+            <div className="md:ml-auto -mx-6 md:mx-0 px-6 md:px-0 overflow-x-auto">
               <BlogSortButtons value={sort} onChange={setSort} />
             </div>
           </div>
-          <BlogCategoryChips
-            total={articles.length}
-            categories={categoryChips}
-            active={activeCat}
-            onChange={onCategoryChange}
-          />
+          <div className="-mx-6 md:mx-0 px-6 md:px-0 overflow-x-auto">
+            <BlogCategoryChips
+              total={articles.length}
+              categories={categoryChips}
+              active={activeCat}
+              onChange={onCategoryChange}
+            />
+          </div>
         </div>
       </div>
 

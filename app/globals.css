@@ -26,6 +26,12 @@
   --text-muted:     #8A7264;
   --text-on-dark:   #F5EEE6;
 
+  /* Darkened text colors to pair with their matching pill background */
+  --text-on-rose:   #8B1A4A;
+  --text-on-blue:   #1A4E8B;
+  --text-on-amber:  #8B5A0F;
+  --text-on-green:  #1A7A47;
+
   --border:         #E2D5C8;
   --border-strong:  #C4A98A;
 
