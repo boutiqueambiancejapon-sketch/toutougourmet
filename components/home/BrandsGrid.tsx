@@ -1,44 +1,38 @@
 import Link from 'next/link'
 import { brands } from '@/data/brands'
-import { Illustration } from '@/components/ui/Illustration'
 
 interface BrandDisplay {
-  bgVar: string
   pillVar: string
-  slot: string
-  emoji: string
+  textVar: string
+  borderVar: string
   typeLabel: string
   featured?: boolean
 }
 
 const BRAND_DISPLAY: Record<string, BrandDisplay> = {
   franklin: {
-    bgVar: 'var(--bg-amber)',
     pillVar: 'var(--pill-amber)',
-    slot: 'brand-franklin',
-    emoji: '🔥',
+    textVar: 'var(--text-on-amber)',
+    borderVar: 'var(--pill-amber)',
     typeLabel: 'Croquettes',
   },
   elmut: {
-    bgVar: 'var(--bg-green)',
     pillVar: 'var(--pill-green)',
-    slot: 'brand-elmut',
-    emoji: '🌿',
+    textVar: 'var(--text-on-green)',
+    borderVar: 'var(--text-on-green)',
     typeLabel: 'Repas frais',
     featured: true,
   },
   'petty-well': {
-    bgVar: 'var(--bg-blue)',
     pillVar: 'var(--pill-blue)',
-    slot: 'brand-pettywell',
-    emoji: '⭐',
+    textVar: 'var(--text-on-blue)',
+    borderVar: 'var(--pill-blue)',
     typeLabel: 'Croquettes',
   },
   'dog-chef': {
-    bgVar: 'var(--bg-rose)',
     pillVar: 'var(--pill-rose)',
-    slot: 'brand-dogchef',
-    emoji: '👨‍🍳',
+    textVar: 'var(--text-on-rose)',
+    borderVar: 'var(--pill-rose)',
     typeLabel: 'Repas frais',
   },
 }
@@ -68,73 +62,84 @@ export function BrandsGrid() {
           {brands.map((brand) => {
             const d = BRAND_DISPLAY[brand.slug]
             if (!d) return null
+            const pros = brand.pros.slice(0, 3)
             return (
-              <Link
+              <article
                 key={brand.slug}
-                href={`/marques/${brand.slug}`}
-                className="group relative flex flex-col rounded-[var(--radius-xl)] overflow-hidden hover:-translate-y-1 hover:shadow-[var(--shadow-xl)] transition-all duration-300"
+                className="relative flex flex-col rounded-[var(--radius-xl)] overflow-hidden p-6 gap-5"
                 style={{
-                  background: d.bgVar,
-                  border: `2px solid ${d.featured ? 'var(--accent-1)' : 'var(--border)'}`,
+                  background: d.pillVar,
+                  border: `2px solid ${d.featured ? 'var(--accent-1)' : d.borderVar}`,
+                  color: d.textVar,
                 }}
               >
                 {d.featured && (
-                  <span className="absolute top-3 right-3 z-10 text-[10px] font-black tracking-widest uppercase px-2.5 py-1 rounded-full bg-[var(--accent-1)] text-white">
+                  <span className="absolute -top-px right-4 text-[10px] font-black tracking-widest uppercase px-3 py-1.5 rounded-b-[var(--radius-md)] bg-[var(--accent-1)] text-white">
                     Coup de cœur
                   </span>
                 )}
-                <Illustration slot={d.slot} alt={`Illustration ${brand.name}`} className="!rounded-none" />
-                <div className="p-5 pb-3">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-2xl">{d.emoji}</span>
-                    <span
-                      className="text-[11px] font-bold px-3 py-1 rounded-full text-[var(--text-primary)]"
-                      style={{ background: d.pillVar }}
-                    >
-                      {d.typeLabel}
-                    </span>
-                  </div>
-                  <h3
-                    className="text-xl font-black text-[var(--text-primary)] mb-1.5"
-                    style={{ fontFamily: "'Fraunces', serif", letterSpacing: '-0.01em' }}
+
+                <header className="flex items-start justify-between gap-3">
+                  <Link
+                    href={`/marques/${brand.slug}`}
+                    className="font-black text-2xl hover:underline"
+                    style={{ fontFamily: "'Fraunces', serif", letterSpacing: '-0.01em', color: d.textVar }}
                   >
                     {brand.name}
-                  </h3>
-                  <p className="text-sm text-[var(--text-secondary)] line-clamp-2 leading-relaxed">
-                    {brand.tagline}
-                  </p>
-                </div>
-                <div className="px-5 pb-3.5">
-                  <div className="flex items-center gap-2.5">
-                    <div className="flex-1 h-1.5 rounded-full bg-[var(--border)] overflow-hidden">
-                      <div
-                        className="h-full rounded-full bg-[var(--accent-1)]"
-                        style={{ width: `${(brand.scores.global / 5) * 100}%` }}
-                      />
-                    </div>
-                    <span
-                      className="text-sm font-bold text-[var(--accent-1)] shrink-0"
-                      style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                    >
-                      {brand.scores.global}/5
-                    </span>
-                  </div>
-                </div>
-                <div
-                  className="mt-auto px-5 py-3.5 border-t border-[var(--border)] flex items-center justify-between"
-                  style={{ background: 'rgba(255,255,255,0.4)' }}
-                >
-                  <span className="text-sm font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-1)]">
-                    Voir la fiche →
-                  </span>
-                  <span
-                    className="text-[11px] font-bold px-2.5 py-0.5 rounded-full text-[var(--text-secondary)]"
-                    style={{ background: d.pillVar, fontFamily: "'JetBrains Mono', monospace" }}
+                  </Link>
+                  <p
+                    className="font-black text-2xl shrink-0 m-0"
+                    style={{ fontFamily: "'Fraunces', serif", color: d.textVar }}
+                    aria-label={`Note ${brand.scores.global} sur 5`}
                   >
-                    {brand.priceRange}
+                    {brand.scores.global}
+                    <span className="text-sm opacity-60" style={{ fontFamily: "'JetBrains Mono', monospace" }}>/5</span>
+                  </p>
+                </header>
+
+                <p className="text-sm leading-relaxed m-0 opacity-85" style={{ color: d.textVar }}>
+                  {brand.tagline}
+                </p>
+
+                <ul className="flex flex-col gap-2 m-0 p-0 list-none">
+                  {pros.map((pro, i) => (
+                    <li
+                      key={i}
+                      className="grid grid-cols-[18px_1fr] gap-2 items-start text-sm leading-snug line-clamp-2"
+                      style={{ color: d.textVar }}
+                    >
+                      <span aria-hidden="true" className="font-bold mt-0.5">
+                        ✓
+                      </span>
+                      <span>{pro}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-auto flex flex-col gap-2.5">
+                  <span
+                    className="inline-flex items-center justify-center text-center text-sm font-bold px-4 py-3 rounded-full bg-[var(--bg-surface)]"
+                    style={{ color: d.textVar }}
+                  >
+                    {brand.discountOffer}
                   </span>
+                  <a
+                    href={brand.affiliateUrl}
+                    target="_blank"
+                    rel="nofollow sponsored noopener"
+                    className="btn-primary text-base w-full justify-center"
+                  >
+                    Essayer →
+                  </a>
+                  <Link
+                    href={`/marques/${brand.slug}`}
+                    className="text-xs font-semibold text-center opacity-70 hover:opacity-100"
+                    style={{ color: d.textVar }}
+                  >
+                    Voir la fiche détaillée →
+                  </Link>
                 </div>
-              </Link>
+              </article>
             )
           })}
         </div>
