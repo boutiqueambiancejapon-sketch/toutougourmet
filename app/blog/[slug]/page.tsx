@@ -15,7 +15,7 @@ import { StickyCta } from '@/components/blog/StickyCta'
 import { StickyCtaDouble } from '@/components/blog/StickyCtaDouble'
 import { DOG_CHEF_CTA } from '@/lib/sticky-cta-config'
 import { ArticleLayout } from '@/components/blog/ArticleLayout'
-import { getCategoryVisual } from '@/components/blog/blog-categories'
+import { getArticleSlot } from '@/components/blog/blog-categories'
 import {
   InfoBox, Callout, FeatureGrid, Feature,
   StatRow, Stat, CompareTable, CompareThead, CompareTh,
@@ -53,7 +53,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!article) return {}
   const { frontmatter } = article
   const canonical = `https://www.toutou-gourmet.com/blog/${slug}`
-  const ogImage = `https://www.toutou-gourmet.com/images/articles/${getCategoryVisual(frontmatter.category).slot}.webp`
+  const slot = getArticleSlot(slug, frontmatter.category)
+  const ogGroup = slot.startsWith('breed-') ? 'breeds' : 'articles'
+  const ogImage = `https://www.toutou-gourmet.com/images/${ogGroup}/${slot}.webp`
   return {
     title: frontmatter.title,
     description: frontmatter.description,
