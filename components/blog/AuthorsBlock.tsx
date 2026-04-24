@@ -11,17 +11,16 @@ export function AuthorsBlock() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8">
           <div>
             <p className="text-xs font-bold uppercase tracking-widest text-[var(--accent-1)] mb-2.5">
-              La rédaction
+              Qui écrit ici
             </p>
             <h2 className="section-title m-0">
-              Un humain.
-              <br />
-              <span style={{ color: 'var(--accent-1)' }}>Zéro bot.</span>
+              Un humain,{' '}
+              <span style={{ color: 'var(--accent-1)' }}>trois chiens</span>,<br />
+              zéro pige à 20&nbsp;€.
             </h2>
           </div>
           <p className="text-[var(--text-secondary)] max-w-sm text-base leading-relaxed m-0">
-            Tout est écrit à la main, recoupé contre les études vétérinaires.
-            Pas d&rsquo;IA pour pondre du vide, pas de pige à 20&nbsp;€.
+            Tout est rédigé à la main, recoupé contre la littérature vétérinaire. Pas d&rsquo;IA qui ponde du vide, pas de contenu acheté au kilo.
           </p>
         </div>
 

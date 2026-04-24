@@ -11,7 +11,7 @@ import { BlogSortButtons, type BlogSort } from './BlogSortButtons'
 import { BlogPagination } from './BlogPagination'
 import { CATEGORY_ORDER } from './blog-categories'
 
-const PAGE_SIZE = 9
+const PAGE_SIZE = 16 // 4 rows × 4 cols on desktop
 
 interface BlogExplorerProps {
   articles: Article[]
@@ -130,7 +130,7 @@ export function BlogExplorer({ articles, featured }: BlogExplorerProps) {
                   {list.length} résultat{list.length > 1 ? 's' : ''}
                 </span>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                 {paginated.map((a) => (
                   <BlogPostCard key={a.slug} article={a} />
                 ))}
