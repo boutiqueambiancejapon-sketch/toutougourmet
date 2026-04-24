@@ -94,7 +94,7 @@ export function ArticleHero({
       </p>
 
       <div className="rounded-[var(--radius-2xl)] overflow-hidden border border-[var(--border)]">
-        <div className="relative w-full h-[260px] md:h-[380px]">
+        <div className="relative w-full aspect-[3/2] max-h-[70vh]">
           <Illustration
             slot={coverSlot}
             alt={`Illustration de couverture — ${title}`}
