@@ -36,7 +36,7 @@
 
 ## En cours
 
-—
+- **Redesign V2 — Batch 1 / 7** (2026-04-24) : cadrage images & prompt système Gemini. Livrables : `docs/prompts/gemini-image-system.md` (prompt système unique, palette figée, 6 éléments décoratifs signatures, règles de déclinaison par type de slot) + `data/images-manifest.ts` (25 slots typés TypeScript strict : 1 hero home LCP, 4 cartes marques, 6 cartes races, 8 covers catégorie article, 5 articles pilotes, 1 OG social). Style cible : "photo réaliste + illustration peinte par-dessus" (Oatly/Liquid Death). Aucune image imitant les packshots des 4 marques partenaires (Franklin/Elmut/Petty Well/Dog Chef) pour éviter tout risque légal. Prochaine étape : batch 2 — script `scripts/generate-images.ts` + 9 images pilotes test via Gemini 2.5 Flash Image.
 
 ## Bloqué
 
@@ -45,9 +45,10 @@
 
 ## Prochaine session
 
-1. Ajouter scripts manquants dans package.json : `type-check`, `test`, `audit`
-2. Créer `vitest.config.ts` + `tests/setup.ts` (§14)
-3. Créer `.github/workflows/ci.yml` (§13.2)
-4. Créer `.env.example` avec toutes les clés
-5. Créer `vercel.json`
-6. Valider DÉCISIONS À VALIDER dans DECISIONS.md
+1. **Redesign V2 — Batch 2** : `scripts/generate-images.ts` (Node + `@google/generative-ai`, lit `data/images-manifest.ts`, 3 variantes × 3 slots pilotes : home-hero + breed-labrador + art-malinois). Validation utilisateur avant batch 3 (génération complète des 25 slots).
+2. **Redesign V2 — Batch 3** : génération batch complète (25 slots × 1 variante retenue) + post-process sharp (WebP 1600w + 800w, < 200 Ko/image).
+3. **Redesign V2 — Batch 4** : composant `components/ui/IllustratedImage.tsx` (wrap `next/image`, props `tone`/`variant`/`priority`, overlay SVG confetti par ton).
+4. **Redesign V2 — Batch 5** : portage Home (HeroSection, BrandsGrid, ComparisonTable nouveau, BreedsGuides nouveau, QuizTeaser, ArticlesGrid, TrustSection, StickyCta).
+5. **Redesign V2 — Batch 6** : portage page article (ArticleHero, RelatedBrands sticky, Callout MDX, TLDR + SummarizeWithAI refonte visuelle).
+6. **Redesign V2 — Batch 7** : portage hub blog (BlogHero, BlogFilter client refondu, CategoryChip, FeaturedBlock, ArticleCard, AuthorsBlock, NewsletterBlock).
+7. Dette technique à traiter en parallèle : scripts manquants `package.json` (`type-check`, `test`, `audit`), `vitest.config.ts`, `.github/workflows/ci.yml`, `.env.example`, `vercel.json`, DÉCISIONS À VALIDER (DM_Sans 3 weights, adjustFontFallback).
