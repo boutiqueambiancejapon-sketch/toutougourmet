@@ -48,3 +48,30 @@ export const CATEGORY_ORDER: string[] = [
   'Comportement',
   'Guide',
 ]
+
+/**
+ * Articles de race (slugs `nourriture-{breed}`) → slot de cover dédié.
+ * Les 6 races phares de la home ont leur image unique ; les 26 autres
+ * tombent sur `breed-generic`.
+ */
+const BREED_SLOT_BY_SLUG: Record<string, string> = {
+  'labrador-retriever': 'breed-labrador',
+  'golden-retriever': 'breed-golden',
+  'bouledogue-francais': 'breed-bouledogue',
+  'berger-australien': 'breed-berger-australien',
+  chihuahua: 'breed-chihuahua',
+  'cavalier-king-charles': 'breed-cavalier',
+}
+
+/**
+ * Résout le slot Illustration à utiliser pour un article donné.
+ * - Articles de race (`nourriture-{breed}`) → slot breed dédié ou `breed-generic`
+ * - Autres articles → slot dérivé de `frontmatter.category` (cf. CATEGORY_TABLE)
+ */
+export function getArticleSlot(slug: string, category: string): string {
+  if (slug.startsWith('nourriture-')) {
+    const breed = slug.slice('nourriture-'.length)
+    return BREED_SLOT_BY_SLUG[breed] ?? 'breed-generic'
+  }
+  return getCategoryVisual(category).slot
+}

@@ -6,6 +6,7 @@ import { RelatedBrands } from './RelatedBrands'
 import { AuthorBox } from './AuthorBox'
 import { RelatedArticles } from './RelatedArticles'
 import { NewsletterBlock } from './NewsletterBlock'
+import { getArticleSlot } from './blog-categories'
 import { Badge } from '@/components/ui/Badge'
 import { DEFAULT_AUTHOR } from '@/data/authors'
 import type { Article } from '@/lib/mdx'
@@ -39,12 +40,14 @@ export function ArticleLayout({
   children,
 }: ArticleLayoutProps) {
   const { frontmatter, slug } = article
+  const coverSlot = getArticleSlot(slug, frontmatter.category)
 
   return (
     <article className="bg-[var(--bg-primary)] pb-20">
       <ArticleHero
         breadcrumb={breadcrumb}
         category={frontmatter.category}
+        coverSlot={coverSlot}
         dateDisplay={dateDisplay}
         readTime={readTime}
         title={frontmatter.title}

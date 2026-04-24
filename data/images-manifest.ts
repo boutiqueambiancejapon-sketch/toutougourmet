@@ -142,74 +142,92 @@ const BRAND_DOG_CHEF: ImageSlot = {
 const BREED_LABRADOR: ImageSlot = {
   id: 'breed-labrador',
   group: 'breeds',
-  ratio: '1:1',
+  ratio: '3:2',
   tone: 'amber',
+  imageReady: true,
   subject:
     'A chest-up portrait of a happy yellow Labrador Retriever, mouth slightly open in a smile, looking directly at camera, warm cream backdrop.',
   composition: 'Head-shoulders framing, eyes at upper third.',
-  decorations: ['party-hat'],
-  notes: 'Hat sits precisely on top of the head, amber color.',
+  decorations: ['sparkle'],
+  notes: 'Real photo already includes a painted party hat + ambient decorations — keep overlay minimal.',
 }
 
 const BREED_GOLDEN: ImageSlot = {
   id: 'breed-golden',
   group: 'breeds',
-  ratio: '1:1',
+  ratio: '3:2',
   tone: 'rose',
+  imageReady: true,
   subject:
     'A chest-up portrait of a Golden Retriever with a soft curly coat, calm and alert expression, warm cream backdrop.',
   composition: 'Head-shoulders framing, slight 3/4 angle.',
-  decorations: ['party-hat'],
-  notes: 'Rose-colored party hat on the head.',
+  decorations: ['sparkle'],
+  notes: 'Rose-toned photo with baked-in party hat.',
 }
 
 const BREED_BOULEDOGUE: ImageSlot = {
   id: 'breed-bouledogue',
   group: 'breeds',
-  ratio: '1:1',
+  ratio: '3:2',
   tone: 'blue',
+  imageReady: true,
   subject:
     'A chest-up portrait of a French Bulldog with a fawn or cream coat, ears upright, curious expression.',
   composition: 'Head-shoulders framing, straight on.',
-  decorations: ['paw-print'],
-  notes:
-    'Paw print floating near top-right corner, blue color. No party hat for this one (brachycephalic, different signature).',
+  decorations: ['sparkle'],
+  notes: 'No party hat on the photo (brachycephalic) — paw print baked in.',
 }
 
 const BREED_BERGER_AUSTRALIEN: ImageSlot = {
   id: 'breed-berger-australien',
   group: 'breeds',
-  ratio: '1:1',
+  ratio: '3:2',
   tone: 'green',
+  imageReady: true,
   subject:
     'A chest-up portrait of an Australian Shepherd with merle coat pattern (blue merle or red merle), bright alert eyes.',
   composition: 'Head-shoulders framing, slight angle.',
-  decorations: ['sparkle', 'party-hat'],
-  notes: 'Green hat, sparkle near one eye.',
+  decorations: ['sparkle'],
+  notes: 'Green-toned photo with baked-in party hat + eye sparkle.',
 }
 
 const BREED_CHIHUAHUA: ImageSlot = {
   id: 'breed-chihuahua',
   group: 'breeds',
-  ratio: '1:1',
+  ratio: '3:2',
   tone: 'rose',
+  imageReady: true,
   subject:
     'A chest-up portrait of a small Chihuahua with large alert ears, tan or cream coat, looking confidently at camera.',
   composition: 'Head-shoulders framing, centered.',
-  decorations: ['party-hat', 'sparkle'],
-  notes: 'Tiny rose party hat — scale adjusted to small breed.',
+  decorations: ['sparkle'],
+  notes: 'Tiny rose party hat baked into photo, scaled to small breed.',
 }
 
 const BREED_CAVALIER: ImageSlot = {
   id: 'breed-cavalier',
   group: 'breeds',
-  ratio: '1:1',
+  ratio: '3:2',
   tone: 'amber',
+  imageReady: true,
   subject:
     'A chest-up portrait of a Cavalier King Charles Spaniel with long silky ears (Blenheim pattern — white with chestnut markings), gentle expression.',
   composition: 'Head-shoulders framing, slight 3/4 angle.',
-  decorations: ['party-hat'],
-  notes: 'Amber hat, ears framing the face softly.',
+  decorations: ['sparkle'],
+  notes: 'Amber hat baked into photo, ears framing the face softly.',
+}
+
+const BREED_GENERIC: ImageSlot = {
+  id: 'breed-generic',
+  group: 'breeds',
+  ratio: '3:2',
+  tone: 'amber',
+  imageReady: true,
+  subject:
+    'A happy adult medium-sized mixed-breed dog in a chest-up portrait — intentionally ambiguous breed, universal portrait. Warm cream backdrop.',
+  composition: 'Dog centered, frontal or slight 3/4 angle, clean cream borders.',
+  decorations: ['sparkle'],
+  notes: 'Fallback cover for the 26 breed article pages without a dedicated image (Akita, Beagle, Boxer, Berger Allemand, Husky, etc.).',
 }
 
 // ============================================================
@@ -418,6 +436,8 @@ export const imageSlots: readonly ImageSlot[] = [
   BREED_BERGER_AUSTRALIEN,
   BREED_CHIHUAHUA,
   BREED_CAVALIER,
+  // Breed fallback
+  BREED_GENERIC,
   // Categories (8)
   CAT_NUTRITION,
   CAT_SANTE,

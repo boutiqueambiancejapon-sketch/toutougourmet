@@ -10,12 +10,12 @@ interface Breed {
 }
 
 const BREEDS: Breed[] = [
-  { slug: 'labrador', name: 'Labrador', count: '12 guides', slot: 'breed-labrador', emoji: '🦴' },
-  { slug: 'golden-retriever', name: 'Golden Retriever', count: '9 guides', slot: 'breed-golden', emoji: '🌟' },
-  { slug: 'bouledogue-francais', name: 'Bouledogue', count: '7 guides', slot: 'breed-bouledogue', emoji: '💪' },
-  { slug: 'berger-australien', name: 'Berger Australien', count: '8 guides', slot: 'breed-berger-australien', emoji: '🏃' },
-  { slug: 'chihuahua', name: 'Chihuahua', count: '6 guides', slot: 'breed-chihuahua', emoji: '✨' },
-  { slug: 'cavalier-king-charles', name: 'Cavalier King Charles', count: '5 guides', slot: 'breed-cavalier', emoji: '👑' },
+  { slug: 'nourriture-labrador-retriever', name: 'Labrador', count: '12 guides', slot: 'breed-labrador', emoji: '🦴' },
+  { slug: 'nourriture-golden-retriever', name: 'Golden Retriever', count: '9 guides', slot: 'breed-golden', emoji: '🌟' },
+  { slug: 'nourriture-bouledogue-francais', name: 'Bouledogue', count: '7 guides', slot: 'breed-bouledogue', emoji: '💪' },
+  { slug: 'nourriture-berger-australien', name: 'Berger Australien', count: '8 guides', slot: 'breed-berger-australien', emoji: '🏃' },
+  { slug: 'nourriture-chihuahua', name: 'Chihuahua', count: '6 guides', slot: 'breed-chihuahua', emoji: '✨' },
+  { slug: 'nourriture-cavalier-king-charles', name: 'Cavalier King Charles', count: '5 guides', slot: 'breed-cavalier', emoji: '👑' },
 ]
 
 export function BreedsGuides() {
@@ -53,8 +53,14 @@ export function BreedsGuides() {
               href={`/chien/race/${b.slug}`}
               className="group flex flex-col rounded-[var(--radius-lg)] overflow-hidden bg-[var(--bg-surface)] border border-[var(--border)] hover:-translate-y-1 hover:shadow-[var(--shadow-md)] hover:border-[var(--accent-1)] transition-all duration-300"
             >
-              <div className="relative">
-                <Illustration slot={b.slot} alt={`Photo ${b.name}`} className="!rounded-none" />
+              <div className="relative aspect-square">
+                <Illustration
+                  slot={b.slot}
+                  alt={`Photo ${b.name}`}
+                  fill
+                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 200px"
+                  className="!rounded-none"
+                />
                 <span
                   className="absolute top-2.5 right-2.5 flex items-center justify-center w-8 h-8 rounded-full bg-[var(--bg-surface)] text-lg shadow-[var(--shadow-sm)]"
                   aria-hidden="true"
