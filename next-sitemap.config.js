@@ -4,7 +4,7 @@ module.exports = {
   generateRobotsTxt: true,
   changefreq: 'weekly',
   priority: 0.7,
-  exclude: ['/api/*', '/contact'],
+  exclude: ['/api/*', '/contact', '/dev/*'],
   additionalPaths: async (config) => [
     { loc: '/', priority: 1.0, changefreq: 'daily' },
     { loc: '/quiz', priority: 0.9, changefreq: 'monthly' },
@@ -15,7 +15,7 @@ module.exports = {
     additionalSitemaps: [],
     policies: [
       { userAgent: '*', allow: '/' },
-      { userAgent: '*', disallow: ['/api/'] },
+      { userAgent: '*', disallow: ['/api/', '/dev/'] },
     ],
   },
 }
