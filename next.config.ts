@@ -23,6 +23,10 @@ const nextConfig: NextConfig = {
       { source: '/marques', destination: '/chien/marque', permanent: true },
       { source: '/marques/:slug', destination: '/chien/marque/:slug', permanent: true },
 
+      // Fusion catégorie "Santé & nutrition" → "Santé"
+      // Les 2 articles concernés migrent de /chien/sante-nutrition/ vers /chien/sante/
+      { source: '/chien/sante-nutrition/:slug', destination: '/chien/sante/:slug', permanent: true },
+
       // Articles chien /blog/ → /chien/[category]/[slug]
       { source: '/blog/avis-croquettes-orlando-lidl', destination: '/chien/alimentation-quotidienne/avis-croquettes-orlando-lidl', permanent: true },
       { source: '/blog/croquettes-sans-cereales-chien', destination: '/chien/alimentation-quotidienne/croquettes-sans-cereales-chien', permanent: true },
@@ -38,6 +42,9 @@ const nextConfig: NextConfig = {
       { source: '/blog/chien-peut-manger-myrtilles', destination: '/chien/fruit/chien-peut-manger-myrtilles', permanent: true },
       { source: '/blog/chien-peut-manger-peches', destination: '/chien/fruit/chien-peut-manger-peches', permanent: true },
       { source: '/blog/chien-peut-manger-poires', destination: '/chien/fruit/chien-peut-manger-poires', permanent: true },
+
+      // Article alimentation chat (anciennement catégorie "Guide", à /blog/) → reclassé en Alimentation
+      { source: '/blog/choisir-alimentation-chat-guide', destination: '/chien/alimentation-quotidienne/choisir-alimentation-chat-guide', permanent: true },
     ]
   },
 

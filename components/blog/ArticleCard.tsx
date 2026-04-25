@@ -1,49 +1,56 @@
 import Link from 'next/link'
 import { formatDate, estimateReadTime } from '@/lib/utils'
 import type { Article } from '@/lib/mdx'
-
-// Couleur de bandeau par catégorie
-const categoryColors: Record<string, { band: string; pill: string }> = {
-  'Alimentation':  { band: 'var(--pill-rose)',  pill: 'var(--accent-rose)' },
-  'Comparatif':    { band: 'var(--pill-blue)',  pill: 'var(--accent-blue)' },
-  'Guide':         { band: 'var(--pill-amber)', pill: 'var(--accent-2)' },
-  'Santé':         { band: 'var(--pill-green)', pill: 'var(--accent-3)' },
-}
-const defaultColor = { band: 'var(--bg-surface-2)', pill: 'var(--text-muted)' }
-
+import { getCategoryVisual } from './blog-categories'
 
 interface ArticleCardProps {
   article: Article
   variant?: 'vertical' | 'horizontal'
 }
 
+/**
+ * Card d'article — pattern "Option C".
+ *
+ * - `vertical` : fond pâle teinté par catégorie + emoji watermark + chip
+ *   (cf. BlogPostCard, même look pour cohérence sur tout le blog)
+ * - `horizontal` : version compacte avec accent latéral coloré, sans watermark
+ *   (utilisée pour les sidebars / listes en colonne étroite)
+ *
+ * Couleurs sourcées depuis `blog-categories.ts` — ne pas hardcoder.
+ */
 export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps) {
   const { frontmatter, slug, content } = article
-  const colors = categoryColors[frontmatter.category] ?? defaultColor
+  const visual = getCategoryVisual(frontmatter.category)
   const readTime = estimateReadTime(content)
+  const href = frontmatter.categorySlug
+    ? `/chien/${frontmatter.categorySlug}/${slug}`
+    : `/blog/${slug}`
 
   if (variant === 'horizontal') {
     return (
       <Link
-        href={frontmatter.categorySlug ? `/chien/${frontmatter.categorySlug}/${slug}` : `/blog/${slug}`}
-        className="group flex gap-4 items-center bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] p-4 hover:border-[var(--accent-1)] hover:-translate-y-1 hover:shadow-[var(--shadow-md)] transition-all"
+        href={href}
+        className="group flex gap-4 items-stretch bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] p-4 hover:border-[var(--accent-1)] hover:-translate-y-1 hover:shadow-[var(--shadow-md)] transition-all"
       >
-        {/* Indicateur catégorie */}
+        {/* Indicateur catégorie — barre verticale colorée */}
         <div
           className="w-1.5 self-stretch rounded-full shrink-0"
-          style={{ background: colors.pill }}
+          style={{ background: visual.pillVar }}
         />
-        <div className="flex flex-col gap-1 min-w-0">
-          <span className="text-xs font-bold uppercase tracking-wide" style={{ color: colors.pill }}>
+        <div className="flex flex-col gap-1 min-w-0 flex-1">
+          <span
+            className="text-[10px] font-bold uppercase tracking-widest"
+            style={{ color: visual.textOnVar }}
+          >
             {frontmatter.category}
           </span>
           <h2
-            className="font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-1)] leading-snug text-sm line-clamp-2 transition-colors"
+            className="font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-1)] leading-snug text-sm line-clamp-2 transition-colors m-0"
             style={{ fontFamily: "'Fraunces', serif" }}
           >
             {frontmatter.title}
           </h2>
-          <p className="text-xs text-[var(--text-muted)]">
+          <p className="text-xs text-[var(--text-muted)] m-0">
             {formatDate(frontmatter.date)} · {readTime} min
           </p>
         </div>
@@ -51,38 +58,56 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
     )
   }
 
+  // Variant `vertical` — pattern Option C : fond pastel + emoji watermark + chip
   return (
     <Link
-      href={frontmatter.categorySlug ? `/chien/${frontmatter.categorySlug}/${slug}` : `/blog/${slug}`}
-      className="group flex flex-col bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] overflow-hidden hover:border-[var(--accent-1)] hover:-translate-y-2 hover:shadow-[var(--shadow-xl)] transition-all duration-300"
+      href={href}
+      className="group relative flex flex-col rounded-[var(--radius-xl)] overflow-hidden border border-[var(--border)] hover:-translate-y-1 hover:shadow-[var(--shadow-md)] hover:border-[var(--accent-1)] transition-all duration-300 h-full"
+      style={{ background: visual.bgVar }}
     >
-      {/* Bandeau coloré catégorie — remplace l'image */}
-      <div
-        className="px-5 pt-5 pb-4 flex items-start justify-between gap-3"
-        style={{ background: colors.band }}
+      {/* Emoji watermark */}
+      <span
+        aria-hidden="true"
+        className="absolute pointer-events-none select-none leading-none"
+        style={{
+          right: '-12px',
+          bottom: '-26px',
+          fontSize: '130px',
+          opacity: 0.16,
+          transform: 'rotate(-8deg)',
+        }}
       >
-        <span className="text-xs font-bold uppercase tracking-wide px-2.5 py-0.5 rounded-[var(--radius-sm)] bg-white text-[var(--text-primary)] min-w-0 truncate">
+        {visual.emoji}
+      </span>
+
+      {/* Header : chip catégorie */}
+      <div className="relative px-5 pt-5">
+        <span
+          className="inline-block text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full whitespace-nowrap"
+          style={{
+            background: visual.pillVar,
+            color: visual.textOnVar,
+          }}
+        >
           {frontmatter.category}
-        </span>
-        <span className="text-xs font-semibold text-[var(--text-muted)] whitespace-nowrap shrink-0">
-          {readTime} min de lecture
         </span>
       </div>
 
-      {/* Contenu */}
-      <div className="flex flex-col gap-2.5 p-5 flex-1">
+      {/* Body */}
+      <div className="relative px-5 py-4 flex flex-col gap-2.5 flex-1">
         <h2
-          className="font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-1)] leading-snug transition-colors line-clamp-2"
-          style={{ fontFamily: "'Fraunces', serif", fontSize: '1rem' }}
+          className="m-0 font-black text-[var(--text-primary)] leading-tight text-lg line-clamp-3 group-hover:text-[var(--accent-1)] transition-colors"
+          style={{ fontFamily: "'Fraunces', serif", letterSpacing: '-0.01em' }}
         >
           {frontmatter.title}
         </h2>
-        <p className="text-sm text-[var(--text-secondary)] line-clamp-2 flex-1 leading-relaxed">
+        <p className="text-sm text-[var(--text-secondary)] leading-relaxed line-clamp-2 m-0">
           {frontmatter.description}
         </p>
-        <div className="flex items-center justify-between mt-1 pt-3 border-t border-[var(--border)]">
-          <span className="text-xs text-[var(--text-muted)]">{formatDate(frontmatter.date)}</span>
-          <span className="text-sm font-semibold text-[var(--accent-1)]">Lire →</span>
+        <div className="flex items-center gap-2 mt-auto pt-2 text-xs text-[var(--text-muted)] flex-wrap">
+          <span>{formatDate(frontmatter.date)}</span>
+          <span>·</span>
+          <span style={{ fontFamily: "'JetBrains Mono', monospace" }}>{readTime} min</span>
         </div>
       </div>
     </Link>

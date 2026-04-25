@@ -1,34 +1,76 @@
 /**
  * Mapping catégorie (libellé frontmatter) → présentation blog hub.
- * Utilisé pour les chips, les covers Illustration et les pills sur les cartes.
+ * Utilisé pour les chips, les covers Illustration et les cards.
+ *
+ * Source de vérité unique pour les couleurs par catégorie. Les composants
+ * dérivent leur palette depuis `pillVar`/`bgVar`/`textOnVar` — ne pas
+ * hardcoder de couleurs dans les cards.
  */
 
 export interface CategoryVisual {
-  /** Slot Illustration à utiliser pour cette catégorie */
+  /** Slot Illustration à utiliser pour cette catégorie (featured card) */
   slot: string
-  /** Variable CSS de la pill color */
+  /** Pill colorée (pastel saturé) — ex: chips de filtres, accent */
   pillVar: string
-  /** Emoji badge */
+  /** Fond pâle de la card en mode Option C */
+  bgVar: string
+  /** Couleur texte foncée lisible sur fond pillVar / bgVar */
+  textOnVar: string
+  /** Emoji catégorie (utilisé en watermark sur les cards) */
   emoji: string
 }
 
 const DEFAULT_VISUAL: CategoryVisual = {
   slot: 'cat-nutrition',
   pillVar: 'var(--pill-amber)',
+  bgVar: 'var(--bg-amber)',
+  textOnVar: 'var(--text-on-amber)',
   emoji: '📚',
 }
 
 const CATEGORY_TABLE: Record<string, CategoryVisual> = {
-  Alimentation: { slot: 'cat-alimentation', pillVar: 'var(--pill-rose)', emoji: '🥩' },
-  Santé: { slot: 'cat-sante', pillVar: 'var(--pill-green)', emoji: '💊' },
-  'Santé & nutrition': { slot: 'cat-sante', pillVar: 'var(--pill-green)', emoji: '💊' },
-  'Avis & Comparatif': { slot: 'cat-avis-marques', pillVar: 'var(--pill-blue)', emoji: '🔍' },
-  Race: { slot: 'cat-par-race', pillVar: 'var(--pill-amber)', emoji: '🐕' },
-  'Urgences & Intoxications': { slot: 'cat-urgences', pillVar: 'var(--pill-rose)', emoji: '⚠️' },
-  Comportement: { slot: 'cat-comportement', pillVar: 'var(--pill-blue)', emoji: '🐾' },
-  Guide: { slot: 'cat-nutrition', pillVar: 'var(--pill-amber)', emoji: '📘' },
-  Nutrition: { slot: 'cat-nutrition', pillVar: 'var(--pill-amber)', emoji: '🍖' },
-  Enquêtes: { slot: 'cat-enquetes', pillVar: 'var(--pill-amber)', emoji: '🔎' },
+  Alimentation: {
+    slot: 'cat-alimentation',
+    pillVar: 'var(--pill-rose)',
+    bgVar: 'var(--bg-rose)',
+    textOnVar: 'var(--text-on-rose)',
+    emoji: '🥩',
+  },
+  Santé: {
+    slot: 'cat-sante',
+    pillVar: 'var(--pill-green)',
+    bgVar: 'var(--bg-green)',
+    textOnVar: 'var(--text-on-green)',
+    emoji: '💊',
+  },
+  'Avis & Comparatif': {
+    slot: 'cat-avis-marques',
+    pillVar: 'var(--pill-blue)',
+    bgVar: 'var(--bg-blue)',
+    textOnVar: 'var(--text-on-blue)',
+    emoji: '🔍',
+  },
+  Race: {
+    slot: 'cat-par-race',
+    pillVar: 'var(--pill-amber)',
+    bgVar: 'var(--bg-amber)',
+    textOnVar: 'var(--text-on-amber)',
+    emoji: '🐕',
+  },
+  'Urgences & Intoxications': {
+    slot: 'cat-urgences',
+    pillVar: 'var(--pill-rose)',
+    bgVar: 'var(--bg-rose)',
+    textOnVar: 'var(--text-on-rose)',
+    emoji: '⚠️',
+  },
+  Comportement: {
+    slot: 'cat-comportement',
+    pillVar: 'var(--pill-blue)',
+    bgVar: 'var(--bg-blue)',
+    textOnVar: 'var(--text-on-blue)',
+    emoji: '🐾',
+  },
 }
 
 export function getCategoryVisual(label: string): CategoryVisual {
@@ -46,7 +88,6 @@ export const CATEGORY_ORDER: string[] = [
   'Race',
   'Urgences & Intoxications',
   'Comportement',
-  'Guide',
 ]
 
 /**
