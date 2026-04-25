@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { Article } from '@/lib/mdx'
 import { estimateReadTime } from '@/lib/utils'
 import { BlogFeaturedCard } from './BlogFeaturedCard'
@@ -60,6 +60,20 @@ export function BlogExplorer({ articles, featured }: BlogExplorerProps) {
   const [activeCat, setActiveCat] = useState<string>('all')
   const [sort, setSort] = useState<BlogSort>('recent')
   const [page, setPage] = useState(1)
+
+  // Pré-sélection du filtre catégorie depuis le querystring (ex: /blog?cat=Santé)
+  // Permet aux liens "Voir tout" de la home de pointer directement vers la
+  // bonne catégorie sans réimplémenter la liste filtrée ailleurs.
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const params = new URLSearchParams(window.location.search)
+    const cat = params.get('cat')
+    if (!cat) return
+    // Vérifier que le libellé existe dans les articles (évite les valeurs invalides)
+    const exists = articles.some((a) => a.frontmatter.category === cat)
+    if (exists) setActiveCat(cat)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const categoryChips = useMemo(() => buildCategoryCounts(articles), [articles])
 

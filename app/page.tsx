@@ -5,7 +5,7 @@ import { BrandsGrid } from '@/components/home/BrandsGrid'
 import { ComparisonTable } from '@/components/home/ComparisonTable'
 import { BreedsGuides } from '@/components/home/BreedsGuides'
 import { QuizTeaser } from '@/components/home/QuizTeaser'
-import { ArticlesGrid } from '@/components/home/ArticlesGrid'
+import { BlogSections } from '@/components/home/BlogSections'
 import { TrustSection } from '@/components/home/TrustSection'
 import { NewsletterBlock } from '@/components/blog/NewsletterBlock'
 
@@ -24,7 +24,7 @@ export default function HomePage() {
       <ComparisonTable />
       <BreedsGuides />
       <QuizTeaser />
-      <ArticlesGrid />
+      <BlogSections />
       <TrustSection />
 
       <section className="py-20 px-6 bg-[var(--bg-primary)]">
