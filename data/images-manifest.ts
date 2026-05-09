@@ -27,7 +27,7 @@ export type Decoration =
 /** Ratios supportés = 1 ratio = 1 set de dimensions */
 export type ImageRatio = '16:9' | '4:3' | '3:2' | '1:1' | '1.91:1'
 
-/** Extension de fichier — `webp` par défaut, `jpg` pour les images générées en JPEG natif */
+/** Extension de fichier — `webp` par défaut, `jpeg` pour les images générées en JPEG natif */
 export type ImageExt = 'webp' | 'jpg' | 'jpeg' | 'png'
 
 export interface ImageSlot {
@@ -53,7 +53,7 @@ export interface ImageSlot {
    * the <Illustration> component renders the real photo or the SVG placeholder.
    */
   imageReady?: boolean
-  /** Extension du fichier image — `webp` par défaut, `jpg` pour les nouveaux batches Gemini */
+  /** Extension du fichier image — `webp` par défaut, `jpeg` pour les nouveaux batches Gemini */
   ext?: ImageExt
   /** Notes additionnelles pour variation artistique */
   notes?: string
@@ -236,7 +236,7 @@ const BREED_GENERIC: ImageSlot = {
 }
 
 // ============================================================
-// GROUPE A.bis — RACES PHOTOS BATCH 2 (36 slots, .jpg natifs Gemini)
+// GROUPE A.bis — RACES PHOTOS BATCH 2 (36 slots, .jpeg natifs Gemini)
 // ============================================================
 
 interface BreedPhotoConfig {
@@ -253,7 +253,7 @@ function makeBreedPhoto(cfg: BreedPhotoConfig): ImageSlot {
     ratio: '3:2',
     tone: cfg.tone,
     imageReady: true,
-    ext: 'jpg',
+    ext: 'jpeg',
     subject: cfg.subject,
     composition: 'Chest-up portrait, dog centered on warm cream backdrop, soft natural daylight.',
     decorations: cfg.decorations ?? ['party-hat', 'sparkle'],
@@ -540,8 +540,8 @@ export function getSlotsByGroup(group: ImageGroup): readonly ImageSlot[] {
  * Construit le chemin public d'une image à partir d'un slot.
  * Respecte le champ optionnel `slot.ext` (par défaut `webp`).
  *
- * Ex: { id: 'breed-akita-inu', group: 'breeds', ext: 'jpg' }
- *  → '/images/breeds/breed-akita-inu.jpg'
+ * Ex: { id: 'breed-akita-inu', group: 'breeds', ext: 'jpeg' }
+ *  → '/images/breeds/breed-akita-inu.jpeg'
  */
 export function getSlotPath(slot: ImageSlot): string {
   const ext = slot.ext ?? 'webp'
