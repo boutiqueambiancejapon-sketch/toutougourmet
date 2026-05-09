@@ -92,16 +92,55 @@ export const CATEGORY_ORDER: string[] = [
 
 /**
  * Articles de race (slugs `nourriture-{breed}`) → slot de cover dédié.
- * Les 6 races phares de la home ont leur image unique ; les 26 autres
- * tombent sur `breed-generic`.
+ * Chaque race a maintenant son image unique (.webp pour les 6 historiques,
+ * .jpg pour le batch Gemini de 36 races). La fallback `breed-generic`
+ * reste disponible pour toute future race non encore mappée.
  */
 const BREED_SLOT_BY_SLUG: Record<string, string> = {
+  // Batch 1 — webp historique
   'labrador-retriever': 'breed-labrador',
   'golden-retriever': 'breed-golden',
   'bouledogue-francais': 'breed-bouledogue',
   'berger-australien': 'breed-berger-australien',
   chihuahua: 'breed-chihuahua',
   'cavalier-king-charles': 'breed-cavalier',
+  // Batch 2 — jpg Gemini (36 races)
+  'akita-inu': 'breed-akita-inu',
+  'basset-hound': 'breed-basset-hound',
+  beagle: 'breed-beagle',
+  'berger-allemand': 'breed-berger-allemand',
+  'berger-belge-malinois': 'breed-berger-belge-malinois',
+  'berger-de-beauce': 'breed-berger-de-beauce',
+  'berger-des-shetland': 'breed-berger-des-shetland',
+  'bichon-frise': 'breed-bichon-frise',
+  'border-collie': 'breed-border-collie',
+  'bouledogue-anglais': 'breed-bouledogue-anglais',
+  'bouvier-bernois': 'breed-bouvier-bernois',
+  boxer: 'breed-boxer',
+  'cane-corso': 'breed-cane-corso',
+  caniche: 'breed-caniche',
+  carlin: 'breed-carlin',
+  'chow-chow': 'breed-chow-chow',
+  'cocker-spaniel': 'breed-cocker-spaniel',
+  dachshund: 'breed-dachshund',
+  dalmatien: 'breed-dalmatien',
+  doberman: 'breed-doberman',
+  'epagneul-breton': 'breed-epagneul-breton',
+  'husky-siberien': 'breed-husky-siberien',
+  'jack-russell-terrier': 'breed-jack-russell-terrier',
+  rottweiler: 'breed-rottweiler',
+  'saint-bernard': 'breed-saint-bernard',
+  samoyed: 'breed-samoyed',
+  'schnauzer-nain': 'breed-schnauzer-nain',
+  'shiba-inu': 'breed-shiba-inu',
+  'shih-tzu': 'breed-shih-tzu',
+  'spitz-nain': 'breed-spitz-nain',
+  'staffordshire-bull-terrier': 'breed-staffordshire-bull-terrier',
+  teckel: 'breed-teckel',
+  'terre-neuve': 'breed-terre-neuve',
+  'welsh-corgi-pembroke': 'breed-welsh-corgi-pembroke',
+  westie: 'breed-westie',
+  'yorkshire-terrier': 'breed-yorkshire-terrier',
 }
 
 /**
