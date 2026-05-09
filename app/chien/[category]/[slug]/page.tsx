@@ -17,6 +17,7 @@ import { DOG_CHEF_CTA } from '@/lib/sticky-cta-config'
 import { ArticleLayout } from '@/components/blog/ArticleLayout'
 import { getCategoryBySlug } from '@/data/categories'
 import { getArticleSlot } from '@/components/blog/blog-categories'
+import { getSlotById, getSlotPath } from '@/data/images-manifest'
 import { DEFAULT_AUTHOR } from '@/data/authors'
 import {
   InfoBox, Callout, FeatureGrid, Feature,
@@ -56,9 +57,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!article) return {}
   const { frontmatter } = article
   const canonical = `https://www.toutou-gourmet.com/chien/${frontmatter.categorySlug}/${slug}`
-  const slot = getArticleSlot(slug, frontmatter.category)
-  const ogGroup = slot.startsWith('breed-') ? 'breeds' : 'articles'
-  const ogImage = `https://www.toutou-gourmet.com/images/${ogGroup}/${slot}.webp`
+  const slotId = getArticleSlot(slug, frontmatter.category)
+  const slot = getSlotById(slotId)
+  // Fallback: si le slot est introuvable dans le manifest, on retombe sur l'ancienne convention .webp
+  const ogImagePath = slot
+    ? getSlotPath(slot)
+    : `/images/${slotId.startsWith('breed-') ? 'breeds' : 'articles'}/${slotId}.webp`
+  const ogImage = `https://www.toutou-gourmet.com${ogImagePath}`
   return {
     title: frontmatter.title,
     description: frontmatter.description,
