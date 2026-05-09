@@ -27,6 +27,9 @@ export type Decoration =
 /** Ratios supportés = 1 ratio = 1 set de dimensions */
 export type ImageRatio = '16:9' | '4:3' | '3:2' | '1:1' | '1.91:1'
 
+/** Extension de fichier — `webp` par défaut, `jpg` pour les images générées en JPEG natif */
+export type ImageExt = 'webp' | 'jpg' | 'jpeg' | 'png'
+
 export interface ImageSlot {
   /** Identifiant unique (= basename du fichier) */
   id: string
@@ -50,6 +53,8 @@ export interface ImageSlot {
    * the <Illustration> component renders the real photo or the SVG placeholder.
    */
   imageReady?: boolean
+  /** Extension du fichier image — `webp` par défaut, `jpg` pour les nouveaux batches Gemini */
+  ext?: ImageExt
   /** Notes additionnelles pour variation artistique */
   notes?: string
 }
@@ -227,8 +232,72 @@ const BREED_GENERIC: ImageSlot = {
     'A happy adult medium-sized mixed-breed dog in a chest-up portrait — intentionally ambiguous breed, universal portrait. Warm cream backdrop.',
   composition: 'Dog centered, frontal or slight 3/4 angle, clean cream borders.',
   decorations: ['sparkle'],
-  notes: 'Fallback cover for the 26 breed article pages without a dedicated image (Akita, Beagle, Boxer, Berger Allemand, Husky, etc.).',
+  notes: 'Fallback cover used only when no dedicated breed image exists.',
 }
+
+// ============================================================
+// GROUPE A.bis — RACES PHOTOS BATCH 2 (36 slots, .jpg natifs Gemini)
+// ============================================================
+
+interface BreedPhotoConfig {
+  id: string
+  tone: ImageTone
+  subject: string
+  decorations?: Decoration[]
+}
+
+function makeBreedPhoto(cfg: BreedPhotoConfig): ImageSlot {
+  return {
+    id: cfg.id,
+    group: 'breeds',
+    ratio: '3:2',
+    tone: cfg.tone,
+    imageReady: true,
+    ext: 'jpg',
+    subject: cfg.subject,
+    composition: 'Chest-up portrait, dog centered on warm cream backdrop, soft natural daylight.',
+    decorations: cfg.decorations ?? ['party-hat', 'sparkle'],
+  }
+}
+
+const NEW_BREED_PHOTOS: readonly ImageSlot[] = [
+  makeBreedPhoto({ id: 'breed-akita-inu', tone: 'amber', subject: 'Akita Inu, red-and-white double coat, fox-like face, erect triangular ears.' }),
+  makeBreedPhoto({ id: 'breed-basset-hound', tone: 'rose', subject: 'Basset Hound, tricolor coat, very long droopy ears.' }),
+  makeBreedPhoto({ id: 'breed-beagle', tone: 'blue', subject: 'Beagle, tricolor coat, floppy ears, friendly expression.' }),
+  makeBreedPhoto({ id: 'breed-berger-allemand', tone: 'green', subject: 'German Shepherd, tan and black coat, erect ears.' }),
+  makeBreedPhoto({ id: 'breed-berger-belge-malinois', tone: 'amber', subject: 'Belgian Malinois, fawn coat with black mask, erect ears.' }),
+  makeBreedPhoto({ id: 'breed-berger-de-beauce', tone: 'rose', subject: 'Beauceron, black-and-tan short coat, robust head.' }),
+  makeBreedPhoto({ id: 'breed-berger-des-shetland', tone: 'blue', subject: 'Shetland Sheepdog, sable and white long coat.' }),
+  makeBreedPhoto({ id: 'breed-bichon-frise', tone: 'green', subject: 'Bichon Frise, fluffy white curly coat.' }),
+  makeBreedPhoto({ id: 'breed-border-collie', tone: 'amber', subject: 'Border Collie, black-and-white coat, intelligent gaze.' }),
+  makeBreedPhoto({ id: 'breed-bouledogue-anglais', tone: 'blue', subject: 'English Bulldog, fawn-and-white coat, wrinkled brachycephalic face.', decorations: ['paw-print', 'sparkle'] }),
+  makeBreedPhoto({ id: 'breed-bouvier-bernois', tone: 'rose', subject: 'Bernese Mountain Dog, tricolor coat (black, white, tan), gentle expression.' }),
+  makeBreedPhoto({ id: 'breed-boxer', tone: 'green', subject: 'Boxer, fawn coat with black mask, brachycephalic muscular face.', decorations: ['paw-print', 'sparkle'] }),
+  makeBreedPhoto({ id: 'breed-cane-corso', tone: 'amber', subject: 'Cane Corso, gray brindle coat, large robust head.', decorations: ['paw-print', 'sparkle'] }),
+  makeBreedPhoto({ id: 'breed-caniche', tone: 'rose', subject: 'Standard Poodle, apricot curly coat, alert expression.' }),
+  makeBreedPhoto({ id: 'breed-carlin', tone: 'blue', subject: 'Pug, fawn coat with black mask, brachycephalic wrinkled face.', decorations: ['paw-print', 'sparkle'] }),
+  makeBreedPhoto({ id: 'breed-chow-chow', tone: 'amber', subject: 'Chow Chow, fluffy red coat, lion-like mane.' }),
+  makeBreedPhoto({ id: 'breed-cocker-spaniel', tone: 'rose', subject: 'Cocker Spaniel, golden silky coat, long droopy ears.' }),
+  makeBreedPhoto({ id: 'breed-dachshund', tone: 'green', subject: 'Dachshund, smooth red coat, long body short legs.' }),
+  makeBreedPhoto({ id: 'breed-dalmatien', tone: 'blue', subject: 'Dalmatian, white coat with black spots.' }),
+  makeBreedPhoto({ id: 'breed-doberman', tone: 'amber', subject: 'Doberman Pinscher, sleek black-and-tan coat, alert expression.' }),
+  makeBreedPhoto({ id: 'breed-epagneul-breton', tone: 'rose', subject: 'Brittany Spaniel, white-and-orange coat, friendly expression.' }),
+  makeBreedPhoto({ id: 'breed-husky-siberien', tone: 'blue', subject: 'Siberian Husky, gray-and-white coat, blue eyes, erect ears.' }),
+  makeBreedPhoto({ id: 'breed-jack-russell-terrier', tone: 'green', subject: 'Jack Russell Terrier, white coat with brown markings, alert expression.' }),
+  makeBreedPhoto({ id: 'breed-rottweiler', tone: 'amber', subject: 'Rottweiler, black-and-tan coat, robust expression.' }),
+  makeBreedPhoto({ id: 'breed-saint-bernard', tone: 'rose', subject: 'Saint Bernard, white-and-red-brown coat, gentle giant expression.' }),
+  makeBreedPhoto({ id: 'breed-samoyed', tone: 'blue', subject: 'Samoyed, fluffy pure white coat, smiling expression.' }),
+  makeBreedPhoto({ id: 'breed-schnauzer-nain', tone: 'green', subject: 'Miniature Schnauzer, salt-and-pepper coat, distinctive beard and eyebrows.' }),
+  makeBreedPhoto({ id: 'breed-shiba-inu', tone: 'amber', subject: 'Shiba Inu, red coat with cream markings, fox-like face, erect ears.' }),
+  makeBreedPhoto({ id: 'breed-shih-tzu', tone: 'rose', subject: 'Shih Tzu, long flowing white-and-gold coat, small flat face.', decorations: ['paw-print', 'sparkle'] }),
+  makeBreedPhoto({ id: 'breed-spitz-nain', tone: 'blue', subject: 'Pomeranian, fluffy orange coat, fox-like face.' }),
+  makeBreedPhoto({ id: 'breed-staffordshire-bull-terrier', tone: 'green', subject: 'Staffordshire Bull Terrier, brindle coat, muscular short face.' }),
+  makeBreedPhoto({ id: 'breed-teckel', tone: 'amber', subject: 'Teckel (long-haired dachshund), chocolate coat, long body short legs.' }),
+  makeBreedPhoto({ id: 'breed-terre-neuve', tone: 'rose', subject: 'Newfoundland, fluffy black coat, gentle giant expression.' }),
+  makeBreedPhoto({ id: 'breed-welsh-corgi-pembroke', tone: 'blue', subject: 'Welsh Corgi Pembroke, red-and-white coat, fox-like face, erect ears.' }),
+  makeBreedPhoto({ id: 'breed-westie', tone: 'green', subject: 'West Highland White Terrier, fluffy pure white coat, alert expression.' }),
+  makeBreedPhoto({ id: 'breed-yorkshire-terrier', tone: 'amber', subject: 'Yorkshire Terrier, long silky steel-blue-and-tan coat.' }),
+]
 
 // ============================================================
 // GROUPE B — ARTICLE COVERS PAR CATÉGORIE (8 slots)
@@ -438,6 +507,8 @@ export const imageSlots: readonly ImageSlot[] = [
   BREED_CAVALIER,
   // Breed fallback
   BREED_GENERIC,
+  // Breed photos batch 2 (36)
+  ...NEW_BREED_PHOTOS,
   // Categories (8)
   CAT_NUTRITION,
   CAT_SANTE,
@@ -463,4 +534,16 @@ export function getSlotById(id: string): ImageSlot | undefined {
 
 export function getSlotsByGroup(group: ImageGroup): readonly ImageSlot[] {
   return imageSlots.filter((s) => s.group === group)
+}
+
+/**
+ * Construit le chemin public d'une image à partir d'un slot.
+ * Respecte le champ optionnel `slot.ext` (par défaut `webp`).
+ *
+ * Ex: { id: 'breed-akita-inu', group: 'breeds', ext: 'jpg' }
+ *  → '/images/breeds/breed-akita-inu.jpg'
+ */
+export function getSlotPath(slot: ImageSlot): string {
+  const ext = slot.ext ?? 'webp'
+  return `/images/${slot.group}/${slot.id}.${ext}`
 }
