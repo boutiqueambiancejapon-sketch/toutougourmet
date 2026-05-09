@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import {
   getSlotById,
+  getSlotPath,
   RATIO_DIMENSIONS,
   type ImageGroup,
-  type ImageSlot,
 } from '@/data/images-manifest'
 import { DecorativeOverlay } from './DecorativeOverlay'
 import { IllustratedPlaceholder, type PlaceholderVariant } from './IllustratedPlaceholder'
@@ -38,11 +38,6 @@ const GROUP_TO_VARIANT: Record<ImageGroup, PlaceholderVariant> = {
 
 const DEFAULT_SIZES = '(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 33vw'
 
-/** Expected public path for a slot — `/images/{group}/{id}.webp` */
-function expectedSrc(slot: ImageSlot): string {
-  return `/images/${slot.group}/${slot.id}.webp`
-}
-
 export function Illustration({
   slot: slotId,
   alt,
@@ -60,7 +55,7 @@ export function Illustration({
   }
 
   const { w, h } = RATIO_DIMENSIONS[slot.ratio]
-  const src = expectedSrc(slot)
+  const src = getSlotPath(slot)
   const hasRealImage = slot.imageReady === true
   const variant = GROUP_TO_VARIANT[slot.group]
 
