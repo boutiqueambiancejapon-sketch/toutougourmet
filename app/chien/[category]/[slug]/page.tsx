@@ -33,6 +33,8 @@ interface Props {
   params: Promise<{ category: string; slug: string }>
 }
 
+const SITE_URL = 'https://www.toutou-gourmet.com'
+
 const mdxComponents = {
   InfoBox, Callout, FeatureGrid, Feature,
   StatRow, Stat, CompareTable, CompareThead, CompareTh,
@@ -43,6 +45,20 @@ const mdxComponents = {
       <table {...props} />
     </div>
   ),
+}
+
+/**
+ * Construit l'URL absolue de l'image cover pour un article.
+ * - Cherche le slot dans le manifest pour utiliser le bon ext (.webp / .jpeg)
+ * - Fallback sur la convention historique `.webp` si le slot n'est pas déclaré
+ */
+function getArticleImageUrl(slug: string, category: string): string {
+  const slotId = getArticleSlot(slug, category)
+  const slot = getSlotById(slotId)
+  const path = slot
+    ? getSlotPath(slot)
+    : `/images/${slotId.startsWith('breed-') ? 'breeds' : 'articles'}/${slotId}.webp`
+  return `${SITE_URL}${path}`
 }
 
 export async function generateStaticParams() {
@@ -56,14 +72,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = getArticleBySlug(slug)
   if (!article) return {}
   const { frontmatter } = article
-  const canonical = `https://www.toutou-gourmet.com/chien/${frontmatter.categorySlug}/${slug}`
-  const slotId = getArticleSlot(slug, frontmatter.category)
-  const slot = getSlotById(slotId)
-  // Fallback: si le slot est introuvable dans le manifest, on retombe sur l'ancienne convention .webp
-  const ogImagePath = slot
-    ? getSlotPath(slot)
-    : `/images/${slotId.startsWith('breed-') ? 'breeds' : 'articles'}/${slotId}.webp`
-  const ogImage = `https://www.toutou-gourmet.com${ogImagePath}`
+  const canonical = `${SITE_URL}/chien/${frontmatter.categorySlug}/${slug}`
+  const ogImage = getArticleImageUrl(slug, frontmatter.category)
   return {
     title: frontmatter.title,
     description: frontmatter.description,
@@ -92,7 +102,8 @@ export default async function ArticleCategoryPage({ params }: Props) {
   const allArticles = getAllArticles()
   const cat = getCategoryBySlug(category)
   const { frontmatter, content, rawContent } = article
-  const canonicalUrl = `https://www.toutou-gourmet.com/chien/${category}/${slug}`
+  const canonicalUrl = `${SITE_URL}/chien/${category}/${slug}`
+  const articleImageUrl = getArticleImageUrl(slug, frontmatter.category)
   const tldrItems = extractTldr(rawContent)
   const readTime = estimateReadTime(rawContent)
 
@@ -100,17 +111,23 @@ export default async function ArticleCategoryPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: frontmatter.title,
+    description: frontmatter.description,
+    image: [articleImageUrl],
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalUrl,
+    },
     author: {
       '@type': 'Person',
       name: DEFAULT_AUTHOR.name,
-      url: `https://www.toutou-gourmet.com${DEFAULT_AUTHOR.url}`,
+      url: `${SITE_URL}${DEFAULT_AUTHOR.url}`,
     },
     datePublished: frontmatter.date,
     dateModified: frontmatter.updatedAt || frontmatter.date,
     publisher: {
       '@type': 'Organization',
       name: 'Toutou Gourmet',
-      logo: { '@type': 'ImageObject', url: 'https://www.toutou-gourmet.com/images/brand/logo.webp' },
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/images/brand/logo.webp` },
     },
   }
 
