@@ -42,6 +42,9 @@ export const metadata: Metadata = {
   },
   twitter: { card: 'summary_large_image' },
   robots: { index: true, follow: true },
+  other: {
+    linkavista: 'link-6122-9760',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
