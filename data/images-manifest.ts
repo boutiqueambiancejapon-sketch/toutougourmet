@@ -469,6 +469,20 @@ const ART_TRANSITION: ImageSlot = {
   decorations: ['confetti', 'sparkle'],
 }
 
+const ART_RECETTE_BOUILLON_OS_MAISON_CHIEN: ImageSlot = {
+  id: 'art-recette-bouillon-os-maison-chien',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial flat-lay still-life: a rustic shallow ceramic bowl filled with clear amber dog bone broth, gentle steam rising, surrounded by raw beef knuckle bones, a wooden spoon, fresh parsley and thyme sprigs, a halved carrot, and a small glass cruet of apple cider vinegar, on a warm cream linen surface.',
+  composition: 'Bowl centered-right, generous cream negative space on the upper-left third (40%+ clean cream for title overlay). Soft natural daylight from upper-left.',
+  decorations: ['bone', 'sparkle'],
+  notes: 'Featured image auto-générée pour l\'article recette-bouillon-os-maison-chien le 2026-05-17.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -524,6 +538,8 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_BARF,
   ART_BCS,
   ART_TRANSITION,
+  // Featured per-article (1+, auto-générés par la tâche planifiée)
+  ART_RECETTE_BOUILLON_OS_MAISON_CHIEN,
   // Social (1)
   OG_DEFAULT,
 ] as const
