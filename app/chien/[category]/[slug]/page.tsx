@@ -23,6 +23,7 @@ import {
   InfoBox, Callout, FeatureGrid, Feature,
   StatRow, Stat, CompareTable, CompareThead, CompareTh,
   CompareTr, CompareTd, Verdict, ProsConsList, ProsBlock, ConsBlock, ProItem, ConItem, SectionDivider, FaqList, FaqItem,
+  BodyImage,
 } from '@/components/mdx/MdxComponents'
 import { BrandCTA } from '@/components/marques/BrandCTA'
 import rehypeAutolinkTerms from '@/lib/rehype-autolink-terms'
@@ -40,6 +41,7 @@ const mdxComponents = {
   StatRow, Stat, CompareTable, CompareThead, CompareTh,
   CompareTr, CompareTd, Verdict, ProsConsList, ProsBlock, ConsBlock, ProItem, ConItem, SectionDivider, FaqList, FaqItem,
   BrandCTA,
+  BodyImage,
   table: (props: React.ComponentProps<'table'>) => (
     <div className="table-scroll">
       <table {...props} />
