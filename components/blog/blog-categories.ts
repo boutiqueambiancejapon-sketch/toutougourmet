@@ -154,6 +154,7 @@ const BREED_SLOT_BY_SLUG: Record<string, string> = {
  */
 const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'recette-bouillon-os-maison-chien': 'art-recette-bouillon-os-maison-chien',
+  'chien-peut-manger-beurre-de-cacahuete': 'art-chien-peut-manger-beurre-de-cacahuete',
 }
 
 /**
