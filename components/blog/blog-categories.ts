@@ -153,7 +153,7 @@ const BREED_SLOT_BY_SLUG: Record<string, string> = {
  * (cf. `getArticleSlot`) — c'est le mécanisme « featured image » par article.
  */
 const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
-  // Ajouté automatiquement par la tâche planifiée. Format : 'slug-article': 'art-slug-article'
+  'recette-bouillon-os-maison-chien': 'art-recette-bouillon-os-maison-chien',
 }
 
 /**
