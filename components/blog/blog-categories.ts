@@ -144,11 +144,29 @@ const BREED_SLOT_BY_SLUG: Record<string, string> = {
 }
 
 /**
+ * Articles génériques (non-race) avec featured image dédiée.
+ * Alimenté par la tâche planifiée `toutougourmet-daily-article` qui génère
+ * une image unique par article via Nano Banana et ajoute le slot correspondant
+ * à `data/images-manifest.ts`. Le slot suit la convention `art-{slug}` (.jpeg).
+ *
+ * La présence d'une entrée ici remplace la cover de catégorie par défaut
+ * (cf. `getArticleSlot`) — c'est le mécanisme « featured image » par article.
+ */
+const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
+  // Ajouté automatiquement par la tâche planifiée. Format : 'slug-article': 'art-slug-article'
+}
+
+/**
  * Résout le slot Illustration à utiliser pour un article donné.
- * - Articles de race (`nourriture-{breed}`) → slot breed dédié ou `breed-generic`
- * - Autres articles → slot dérivé de `frontmatter.category` (cf. CATEGORY_TABLE)
+ * Ordre de priorité :
+ *  1. Article générique avec featured dédiée (ARTICLE_SLOT_BY_SLUG)
+ *  2. Article de race (`nourriture-{breed}`) → slot breed dédié ou `breed-generic`
+ *  3. Autres articles → slot dérivé de `frontmatter.category` (cf. CATEGORY_TABLE)
  */
 export function getArticleSlot(slug: string, category: string): string {
+  if (ARTICLE_SLOT_BY_SLUG[slug]) {
+    return ARTICLE_SLOT_BY_SLUG[slug]
+  }
   if (slug.startsWith('nourriture-')) {
     const breed = slug.slice('nourriture-'.length)
     return BREED_SLOT_BY_SLUG[breed] ?? 'breed-generic'
