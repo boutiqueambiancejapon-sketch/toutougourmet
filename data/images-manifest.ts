@@ -483,6 +483,20 @@ const ART_RECETTE_BOUILLON_OS_MAISON_CHIEN: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article recette-bouillon-os-maison-chien le 2026-05-17.',
 }
 
+const ART_CHIEN_PEUT_MANGER_BEURRE_DE_CACAHUETE: ImageSlot = {
+  id: 'art-chien-peut-manger-beurre-de-cacahuete',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial flat-lay still-life on warm cream linen: a small open glass jar of natural peanut butter (visible creamy texture, no label, no brand), a wooden spoon resting on the rim with a generous dollop of peanut butter, a small scattering of whole roasted peanuts and one half-cut peanut showing its kernel. A curious cream-coated medium dog with soft floppy ears peeks into the frame from the upper-right corner, calm playful expression.',
+  composition: 'Jar and spoon centered-left, peanuts scattered on the lower third. Dog upper-right but not dominating. 40%+ clean cream negative space upper-left and right for editorial title overlay. Rule-of-thirds, shallow depth of field, soft creamy bokeh.',
+  decorations: ['confetti', 'sparkle', 'paw-print'],
+  notes: 'Featured image auto-générée pour l\'article chien-peut-manger-beurre-de-cacahuete le 2026-05-17.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -540,6 +554,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_TRANSITION,
   // Featured per-article (1+, auto-générés par la tâche planifiée)
   ART_RECETTE_BOUILLON_OS_MAISON_CHIEN,
+  ART_CHIEN_PEUT_MANGER_BEURRE_DE_CACAHUETE,
   // Social (1)
   OG_DEFAULT,
 ] as const
