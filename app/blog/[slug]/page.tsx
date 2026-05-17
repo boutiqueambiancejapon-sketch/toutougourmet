@@ -16,6 +16,7 @@ import { StickyCtaDouble } from '@/components/blog/StickyCtaDouble'
 import { DOG_CHEF_CTA } from '@/lib/sticky-cta-config'
 import { ArticleLayout } from '@/components/blog/ArticleLayout'
 import { getArticleSlot } from '@/components/blog/blog-categories'
+import { getSlotById, getSlotPath } from '@/data/images-manifest'
 import {
   InfoBox, Callout, FeatureGrid, Feature,
   StatRow, Stat, CompareTable, CompareThead, CompareTh,
@@ -32,6 +33,8 @@ interface Props {
   params: Promise<{ slug: string }>
 }
 
+const SITE_URL = 'https://www.toutou-gourmet.com'
+
 const mdxComponents = {
   InfoBox, Callout, FeatureGrid, Feature,
   StatRow, Stat, CompareTable, CompareThead, CompareTh,
@@ -45,6 +48,21 @@ const mdxComponents = {
   ),
 }
 
+/**
+ * Construit l'URL absolue de l'image cover pour un article — manifest-aware.
+ * - Cherche le slot dans le manifest pour utiliser le bon ext (.webp / .jpeg)
+ * - Fallback sur la convention historique `.webp` si le slot n'est pas déclaré
+ * (cf. mirror dans `app/chien/[category]/[slug]/page.tsx`)
+ */
+function getArticleImageUrl(slug: string, category: string): string {
+  const slotId = getArticleSlot(slug, category)
+  const slot = getSlotById(slotId)
+  const path = slot
+    ? getSlotPath(slot)
+    : `/images/${slotId.startsWith('breed-') ? 'breeds' : 'articles'}/${slotId}.webp`
+  return `${SITE_URL}${path}`
+}
+
 export async function generateStaticParams() {
   return getAllArticles().map((a) => ({ slug: a.slug }))
 }
@@ -54,10 +72,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const article = getArticleBySlug(slug)
   if (!article) return {}
   const { frontmatter } = article
-  const canonical = `https://www.toutou-gourmet.com/blog/${slug}`
-  const slot = getArticleSlot(slug, frontmatter.category)
-  const ogGroup = slot.startsWith('breed-') ? 'breeds' : 'articles'
-  const ogImage = `https://www.toutou-gourmet.com/images/${ogGroup}/${slot}.webp`
+  const canonical = `${SITE_URL}/blog/${slug}`
+  const ogImage = getArticleImageUrl(slug, frontmatter.category)
   return {
     title: frontmatter.title,
     description: frontmatter.description,
@@ -91,7 +107,8 @@ export default async function ArticlePage({ params }: Props) {
 
   const allArticles = getAllArticles()
   const { frontmatter, content, rawContent } = article
-  const canonicalUrl = `https://www.toutou-gourmet.com/blog/${slug}`
+  const canonicalUrl = `${SITE_URL}/blog/${slug}`
+  const articleImageUrl = getArticleImageUrl(slug, frontmatter.category)
   const tldrItems = extractTldr(rawContent)
   const readTime = estimateReadTime(rawContent)
 
@@ -99,17 +116,23 @@ export default async function ArticlePage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: frontmatter.title,
+    description: frontmatter.description,
+    image: [articleImageUrl],
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalUrl,
+    },
     author: {
       '@type': 'Person',
       name: DEFAULT_AUTHOR.name,
-      url: `https://www.toutou-gourmet.com${DEFAULT_AUTHOR.url}`,
+      url: `${SITE_URL}${DEFAULT_AUTHOR.url}`,
     },
     datePublished: frontmatter.date,
     dateModified: frontmatter.updatedAt || frontmatter.date,
     publisher: {
       '@type': 'Organization',
       name: 'Toutou Gourmet',
-      logo: { '@type': 'ImageObject', url: 'https://www.toutou-gourmet.com/images/brand/logo.webp' },
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/images/brand/logo.webp` },
     },
   }
 
