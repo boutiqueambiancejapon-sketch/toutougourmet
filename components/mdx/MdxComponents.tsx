@@ -1,4 +1,60 @@
 import type { ReactNode } from 'react'
+import Image from 'next/image'
+
+// ─── BodyImage ───────────────────────────────────────────────────────────────
+// Image éditoriale insérée dans le corps d'un article MDX.
+// Wrap next/image (mandatory per CLAUDE.md) + figure/figcaption pour le SEO.
+// Lazy par défaut (sauf si priority est explicitement true sur une image LCP).
+// Utilisé pour les 2 images génériques body (gamelle + chien curieux) et toute
+// future image en cours d'article.
+
+interface BodyImageProps {
+  /** Chemin relatif depuis /public, ex: /images/articles/body-gamelle-ingredients.jpeg */
+  src: string
+  /** Texte alternatif descriptif (SEO + a11y) */
+  alt: string
+  /** Légende optionnelle (rendue dans <figcaption>) */
+  caption?: ReactNode
+  /** Dimensions intrinsèques de l'image — défaut 1200×900 (4:3) */
+  width?: number
+  height?: number
+  /** Forcer priority=true uniquement si l'image est above-the-fold (LCP) */
+  priority?: boolean
+}
+
+export function BodyImage({
+  src,
+  alt,
+  caption,
+  width = 1200,
+  height = 900,
+  priority = false,
+}: BodyImageProps) {
+  return (
+    <figure className="my-8">
+      <div className="relative w-full rounded-[var(--radius-xl)] overflow-hidden border border-[var(--border)]">
+        <Image
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          sizes="(max-width: 768px) 100vw, 800px"
+          className="w-full h-auto"
+          priority={priority}
+          loading={priority ? 'eager' : 'lazy'}
+        />
+      </div>
+      {caption && (
+        <figcaption
+          className="mt-3 text-sm text-center italic"
+          style={{ color: 'var(--text-muted)' }}
+        >
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  )
+}
 
 // ─── InfoBox ─────────────────────────────────────────────────────────────────
 // Équivalent des callout boxes colorées de Klaro
