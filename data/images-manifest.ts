@@ -497,6 +497,20 @@ const ART_CHIEN_PEUT_MANGER_BEURRE_DE_CACAHUETE: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article chien-peut-manger-beurre-de-cacahuete le 2026-05-17.',
 }
 
+const ART_TAPIS_DE_LECHAGE_CHIEN_GUIDE_UTILISATION_V2: ImageSlot = {
+  id: 'art-tapis-de-lechage-chien-guide-utilisation-v2',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'blue',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media illustration: a curious medium dog with cream-and-amber coat and soft floppy ears, leaning toward a pastel-blue silicone lick mat garnished with creamy white yogurt swirls, a light amber peanut-butter streak and a small mashed-banana smear, on a warm cream linen surface. A small ceramic bowl of plain yogurt sits soft-focus behind.',
+  composition: 'Dog centered-left occupying about 45% of the frame, lick mat lower-center, 40%+ clean cream negative space upper-right for editorial title overlay. Soft natural daylight upper-left, gentle catch-light in the dog eye, shallow depth of field, creamy bokeh background.',
+  decorations: ['sparkle', 'paw-print'],
+  notes: 'Featured image auto-générée pour l\'article tapis-de-lechage-chien-guide-utilisation le 2026-05-18.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -555,6 +569,7 @@ export const imageSlots: readonly ImageSlot[] = [
   // Featured per-article (1+, auto-générés par la tâche planifiée)
   ART_RECETTE_BOUILLON_OS_MAISON_CHIEN,
   ART_CHIEN_PEUT_MANGER_BEURRE_DE_CACAHUETE,
+  ART_TAPIS_DE_LECHAGE_CHIEN_GUIDE_UTILISATION_V2,
   // Social (1)
   OG_DEFAULT,
 ] as const
