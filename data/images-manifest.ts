@@ -525,6 +525,20 @@ const ART_MYCOTOXINES_CROQUETTES_CHIEN_RISQUES_PREVENTION_V2: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article mycotoxines-croquettes-chien-risques-prevention le 2026-05-19.',
 }
 
+const ART_RECETTE_FRIANDISES_SAUMON_PATATE_DOUCE_CHIEN: ImageSlot = {
+  id: 'art-recette-friandises-saumon-patate-douce-chien',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media still-life on warm cream linen: a small baking tray of freshly baked round dog treats with a rustic golden-amber color (visible specks of pink salmon flakes and orange sweet potato), arranged neatly. Next to the tray, a halved roasted sweet potato showing its bright orange flesh, a small piece of cooked pink salmon fillet flaking apart, a wooden rolling pin, a small ceramic bowl with rolled oats, and fresh parsley sprigs. A small linen napkin in soft rose peeks under the tray.',
+  composition: 'Tray centered-left at ~45% of the frame, sweet potato and salmon arranged on the lower third, 40%+ clean cream negative space on the upper-right for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, shallow depth of field, soft creamy bokeh.',
+  decorations: ['paw-print', 'sparkle', 'confetti'],
+  notes: 'Featured image auto-générée pour l\'article recette-friandises-saumon-patate-douce-chien le 2026-05-19.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -585,6 +599,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHIEN_PEUT_MANGER_BEURRE_DE_CACAHUETE,
   ART_TAPIS_DE_LECHAGE_CHIEN_GUIDE_UTILISATION_V2,
   ART_MYCOTOXINES_CROQUETTES_CHIEN_RISQUES_PREVENTION_V2,
+  ART_RECETTE_FRIANDISES_SAUMON_PATATE_DOUCE_CHIEN,
   // Social (1)
   OG_DEFAULT,
 ] as const
