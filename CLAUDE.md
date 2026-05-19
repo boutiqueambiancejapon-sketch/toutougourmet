@@ -4,6 +4,7 @@ Lis PROGRESS.md avant chaque session.
 Lis le fichier /docs/ correspondant à ta tâche.
 Pour tâche transversale : lis docs/CDC.md uniquement.
 **Rédaction de contenu (article, page pilier, page cluster) : lis docs/09-seo-geo-guide.md en entier avant d'écrire la première ligne.**
+**Toute rédaction française (article MDX, page, FAQ, méta, copy, scheduled task de génération) : charger le skill `boileau` (`.claude/skills/boileau/SKILL.md`) AVANT d'écrire — règles préventives à appliquer dès le premier jet, pas une correction post-rédaction.**
 
 ## Projet
 
