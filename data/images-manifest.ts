@@ -511,6 +511,20 @@ const ART_TAPIS_DE_LECHAGE_CHIEN_GUIDE_UTILISATION_V2: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article tapis-de-lechage-chien-guide-utilisation le 2026-05-18.',
 }
 
+const ART_MYCOTOXINES_CROQUETTES_CHIEN_RISQUES_PREVENTION_V2: ImageSlot = {
+  id: 'art-mycotoxines-croquettes-chien-risques-prevention-v2',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'green',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial flat-lay still-life on warm cream linen: a shallow ceramic bowl of golden-amber dry dog kibble, a small glass mason jar with airtight clip lid containing kibble, a wooden scoop, a few dried corn kernels and a wheat sprig. A small vintage magnifying glass hovers just above the kibble. A tiny illustrated pill-green shield with a hand-drawn checkmark floats upper-right as a safety/verification signature.',
+  composition: 'Bowl of kibble centered-left at ~40% of frame, magnifying glass and mason jar staggered to the right and upper-third, 40%+ clean cream negative space on the right and lower portions for editorial title overlay. Rule-of-thirds, shallow depth of field, soft creamy bokeh.',
+  decorations: ['sparkle', 'paw-print'],
+  notes: 'Featured image auto-générée pour l\'article mycotoxines-croquettes-chien-risques-prevention le 2026-05-19.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -570,6 +584,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_RECETTE_BOUILLON_OS_MAISON_CHIEN,
   ART_CHIEN_PEUT_MANGER_BEURRE_DE_CACAHUETE,
   ART_TAPIS_DE_LECHAGE_CHIEN_GUIDE_UTILISATION_V2,
+  ART_MYCOTOXINES_CROQUETTES_CHIEN_RISQUES_PREVENTION_V2,
   // Social (1)
   OG_DEFAULT,
 ] as const
