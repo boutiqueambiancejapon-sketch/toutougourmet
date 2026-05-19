@@ -156,6 +156,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'recette-bouillon-os-maison-chien': 'art-recette-bouillon-os-maison-chien',
   'chien-peut-manger-beurre-de-cacahuete': 'art-chien-peut-manger-beurre-de-cacahuete',
   'tapis-de-lechage-chien-guide-utilisation': 'art-tapis-de-lechage-chien-guide-utilisation-v2',
+  'mycotoxines-croquettes-chien-risques-prevention': 'art-mycotoxines-croquettes-chien-risques-prevention-v2',
 }
 
 /**
