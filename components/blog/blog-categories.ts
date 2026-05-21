@@ -158,6 +158,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'tapis-de-lechage-chien-guide-utilisation': 'art-tapis-de-lechage-chien-guide-utilisation-v2',
   'mycotoxines-croquettes-chien-risques-prevention': 'art-mycotoxines-croquettes-chien-risques-prevention-v2',
   'recette-friandises-saumon-patate-douce-chien': 'art-recette-friandises-saumon-patate-douce-chien',
+  'comprendre-etiquette-patee-chien': 'art-comprendre-etiquette-patee-chien-v2',
 }
 
 /**
