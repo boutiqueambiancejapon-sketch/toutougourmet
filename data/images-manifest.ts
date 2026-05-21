@@ -539,6 +539,20 @@ const ART_RECETTE_FRIANDISES_SAUMON_PATATE_DOUCE_CHIEN: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article recette-friandises-saumon-patate-douce-chien le 2026-05-19.',
 }
 
+const ART_COMPRENDRE_ETIQUETTE_PATEE_CHIEN_V2: ImageSlot = {
+  id: 'art-comprendre-etiquette-patee-chien-v2',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay still-life on warm cream linen: a small open round metal can of unbranded wet dog food with rich glossy brown pâté texture visible from above, a shallow off-white ceramic dog bowl beside it holding a smooth portion of brown wet food, a small wooden spoon, and a few fresh ingredients (a small piece of pink raw beef, a few green peas, a parsley sprig, two cooked carrot slices). Style: mixed-media editorial — photo lifestyle combined with subtle hand-drawn gouache decorations in flat color, pill rose and amber accents, contour #1A1109.',
+  composition: 'Can and bowl centered-left at ~45% of the frame, ingredients arranged on the lower third, 40%+ clean cream negative space on the upper-right for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, shallow depth of field, soft creamy bokeh.',
+  decorations: ['paw-print', 'sparkle'],
+  notes: 'Featured image auto-générée pour l\'article comprendre-etiquette-patee-chien le 2026-05-21.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -600,6 +614,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_TAPIS_DE_LECHAGE_CHIEN_GUIDE_UTILISATION_V2,
   ART_MYCOTOXINES_CROQUETTES_CHIEN_RISQUES_PREVENTION_V2,
   ART_RECETTE_FRIANDISES_SAUMON_PATATE_DOUCE_CHIEN,
+  ART_COMPRENDRE_ETIQUETTE_PATEE_CHIEN_V2,
   // Social (1)
   OG_DEFAULT,
 ] as const
