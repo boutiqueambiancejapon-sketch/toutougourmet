@@ -138,11 +138,11 @@ export default async function ArticlePage({ params }: Props) {
 
   // ── Sélection du sticky CTA ─────────────────────────────────
   // Priorité : frontmatter affiliateA+B (double explicite) > affiliateA seul (single explicite)
-  // > routing intent-based (getStickyCtaForArticle)
+  // > routing intent-based (getStickyCtaForArticle, slug-aware)
   const explicitDouble = frontmatter.affiliateA && frontmatter.affiliateB
   const explicitSingle = !explicitDouble && frontmatter.affiliateA
   const intentSelection = !explicitDouble && !explicitSingle
-    ? getStickyCtaForArticle(frontmatter.category)
+    ? getStickyCtaForArticle(frontmatter.category, slug)
     : null
 
   return (
@@ -193,13 +193,6 @@ export default async function ArticlePage({ params }: Props) {
           badge: frontmatter.affiliateA!.badge,
           code: frontmatter.affiliateA!.code,
         }} />
-      ) : intentSelection?.kind === 'double' ? (
-        <StickyCtaDouble
-          eyebrow={intentSelection.eyebrow}
-          subProof={intentSelection.subProof}
-          brandA={intentSelection.brandA}
-          brandB={intentSelection.brandB}
-        />
       ) : intentSelection?.kind === 'single' ? (
         <StickyCta config={intentSelection.config} />
       ) : null}
