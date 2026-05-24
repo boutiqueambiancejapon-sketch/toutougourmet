@@ -19,14 +19,22 @@ export type { StickyCtaConfig }
 // Configs individuels
 // ────────────────────────────────────────────────────────────
 
+/**
+ * Dog Chef — CTA commercial principal.
+ * - socialProof : 5 étoiles dorées (rendues amber par <StickyCta>) + rating + preuve véto
+ * - subButton : friction-remover « Livraison incluse · sans engagement »
+ *   Alternative validée (à activer si prix Dog Chef confirmé exact) :
+ *   `subButton: 'à partir de 1,4€/jour'` — price anchor plus convertissant
+ */
 export const DOG_CHEF_CTA: StickyCtaConfig = {
   brandName: 'Dog Chef',
   url: 'https://www.dogchef.com/fr/code/WZU7090',
   label: 'le menu sur-mesure pour ton chien',
   badge: '-35%',
   code: 'WZU7090',
-  socialProof: '★ 4.8/5 · validé par 1 000+ vétérinaires',
+  socialProof: '★★★★★ 4.8/5 · validé par 1 000+ vétérinaires',
   buttonLabel: 'Calculer →',
+  subButton: 'Livraison incluse · sans engagement',
 }
 
 /**
@@ -39,8 +47,9 @@ export const ELMUT_CTA: StickyCtaConfig = {
   url: 'https://c3po.link/QWMW4k6mbU',
   label: 'repas frais cuisinés en France',
   badge: '-40%',
-  socialProof: '★ 4.7/5 · qualité humaine, cuisson douce',
+  socialProof: '★★★★★ 4.7/5 · qualité humaine, cuisson douce',
   buttonLabel: 'Essayer →',
+  subButton: 'Livraison réfrigérée incluse',
 }
 
 /**
@@ -56,13 +65,15 @@ export const ELMUT_CTA: StickyCtaConfig = {
  *    ne peut pas répondre « oui évidemment » sans hésiter)
  *  - label = 3 promesses tangibles (court / mesurable / personnalisé) au lieu
  *    des clichés « bilan gratuit en 2 min »
- *  - buttonLabel = verbe-promesse de connaissance, pas verbe-effort
+ *  - buttonLabel = action claire avec un nom familier (« test »)
+ *  - subButton = micro-réassurance temps
  */
 export const BIEN_NOURRI_CTA: StickyCtaConfig = {
   brandName: 'Ton chien est-il vraiment bien nourri ?',
   url: '/outils/bien-nourri',
   label: 'test 2 min · score sur 100 + 3 conseils perso',
-  buttonLabel: 'Le savoir →',
+  buttonLabel: 'Faire le test →',
+  subButton: 'max 2 min',
 }
 
 // ────────────────────────────────────────────────────────────
