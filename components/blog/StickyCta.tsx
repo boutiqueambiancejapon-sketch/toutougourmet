@@ -14,14 +14,39 @@ export interface StickyCtaConfig {
   badge?: string
   /** Code promo affiché inline après le label (sm+) */
   code?: string
-  /** Ligne preuve sociale — affichée UNIQUEMENT en lg+ pour préserver le mobile */
+  /**
+   * Ligne preuve sociale — affichée uniquement en lg+.
+   * Toute séquence de ★ est automatiquement colorisée en doré (#F59E0B).
+   * Ex : "★★★★★ 4.8/5 · validé par 1 000+ vétérinaires"
+   */
   socialProof?: string
   /** Override du libellé du bouton — défaut: "J'en profite →" si code, "Acheter →" sinon */
   buttonLabel?: string
+  /**
+   * Sous-label discret sous le bouton CTA (sm+ uniquement).
+   * Sert à anchorer prix / friction-removers / promesses non-commerciales.
+   * Ex : "Livraison incluse · sans engagement" ou "max 2 min"
+   */
+  subButton?: string
 }
 
 interface StickyCtaProps {
   config: StickyCtaConfig
+}
+
+/**
+ * Colorise toute séquence de ★ en doré, garde le reste tel quel.
+ * Permet d'écrire `"★★★★★ 4.8/5 · ..."` dans la config et obtenir 5 étoiles
+ * dorées au rendu sans surcharger l'API du composant.
+ */
+function colorizeStars(text: string) {
+  return text.split(/(★+)/).map((part, i) =>
+    /^★+$/.test(part) ? (
+      <span key={i} style={{ color: '#F59E0B' }}>{part}</span>
+    ) : (
+      part
+    ),
+  )
 }
 
 export function StickyCta({ config }: StickyCtaProps) {
@@ -94,7 +119,7 @@ export function StickyCta({ config }: StickyCtaProps) {
             )}
           </p>
 
-          {/* Social proof — lg+ uniquement, pour ne pas surcharger mobile/tablet */}
+          {/* Social proof — lg+ uniquement, étoiles ★ colorisées en doré */}
           {config.socialProof && (
             <p
               className={`hidden lg:block text-xs leading-snug mt-0.5 transition-colors duration-500 ${
@@ -102,20 +127,32 @@ export function StickyCta({ config }: StickyCtaProps) {
               }`}
               style={scrolled ? {} : { color: 'var(--text-muted)', opacity: 0.85 }}
             >
-              {config.socialProof}
+              {colorizeStars(config.socialProof)}
             </p>
           )}
         </div>
 
-        {/* CTA bouton */}
-        <Link
-          href={config.url}
-          target={isInternal ? undefined : '_blank'}
-          rel={isInternal ? undefined : 'noopener noreferrer sponsored'}
-          className="shrink-0 btn-primary text-sm px-4 py-2 whitespace-nowrap"
-        >
-          {buttonLabel}
-        </Link>
+        {/* Colonne CTA — bouton + sublabel optionnel */}
+        <div className="shrink-0 flex flex-col items-center gap-0.5">
+          <Link
+            href={config.url}
+            target={isInternal ? undefined : '_blank'}
+            rel={isInternal ? undefined : 'noopener noreferrer sponsored'}
+            className="btn-primary text-sm px-4 py-2 whitespace-nowrap"
+          >
+            {buttonLabel}
+          </Link>
+          {config.subButton && (
+            <span
+              className={`hidden sm:block text-[10px] leading-snug whitespace-nowrap transition-colors duration-500 ${
+                scrolled ? 'text-[var(--text-muted)]' : ''
+              }`}
+              style={scrolled ? {} : { color: 'var(--text-muted)', opacity: 0.85 }}
+            >
+              {config.subButton}
+            </span>
+          )}
+        </div>
 
         {/* Fermer */}
         <button
