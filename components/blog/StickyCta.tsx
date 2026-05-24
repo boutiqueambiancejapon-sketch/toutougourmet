@@ -25,9 +25,10 @@ export interface StickyCtaConfig {
   /** Code promo affiché inline après le label (sm+) */
   code?: string
   /**
-   * Ligne preuve sociale — affichée uniquement en lg+.
+   * Ligne preuve sociale — affichée sur tous viewports (mobile inclus).
    * Toute séquence de ★ est automatiquement colorisée en doré (#F59E0B).
-   * Ex : "★★★★★ 4.8/5 · validé par 1 000+ vétérinaires"
+   * Ex : "★★★★★ 4.8/5 · 7 800+ avis Trustpilot"
+   * Garder concis (< 40 chars idéalement) pour ne pas wrap sur 3 lignes en mobile.
    */
   socialProof?: string
   /** Override du libellé du bouton — défaut: "J'en profite →" si code, "Acheter →" sinon */
@@ -161,10 +162,10 @@ export function StickyCta({ config }: StickyCtaProps) {
               )}
             </p>
 
-            {/* Social proof — lg+ uniquement, étoiles ★ colorisées en doré */}
+            {/* Social proof — visible sur tous viewports, étoiles ★ colorisées en doré */}
             {config.socialProof && (
               <p
-                className={`hidden lg:block text-xs leading-snug mt-0.5 transition-colors duration-500 ${
+                className={`text-xs leading-snug mt-0.5 transition-colors duration-500 ${
                   scrolled ? 'text-[var(--text-muted)]' : ''
                 }`}
                 style={scrolled ? {} : { color: 'var(--text-muted)', opacity: 0.85 }}
