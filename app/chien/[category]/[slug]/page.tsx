@@ -13,7 +13,7 @@ import {
 import { formatDate } from '@/lib/utils'
 import { StickyCta } from '@/components/blog/StickyCta'
 import { StickyCtaDouble } from '@/components/blog/StickyCtaDouble'
-import { DOG_CHEF_CTA } from '@/lib/sticky-cta-config'
+import { getStickyCtaForArticle } from '@/lib/sticky-cta-config'
 import { ArticleLayout } from '@/components/blog/ArticleLayout'
 import { getCategoryBySlug } from '@/data/categories'
 import { getArticleSlot } from '@/components/blog/blog-categories'
@@ -50,7 +50,7 @@ const mdxComponents = {
 }
 
 /**
- * Construit l'URL absolue de l'image cover pour un article.
+ * Construit l'URL absolue de l'image cover pour un article — manifest-aware.
  * - Cherche le slot dans le manifest pour utiliser le bon ext (.webp / .jpeg)
  * - Fallback sur la convention historique `.webp` si le slot n'est pas déclaré
  */
@@ -144,6 +144,15 @@ export default async function ArticleCategoryPage({ params }: Props) {
     })),
   } : null
 
+  // ── Sélection du sticky CTA ─────────────────────────────────
+  // Priorité : frontmatter affiliateA+B (double explicite) > affiliateA seul (single explicite)
+  // > routing intent-based (getStickyCtaForArticle)
+  const explicitDouble = frontmatter.affiliateA && frontmatter.affiliateB
+  const explicitSingle = !explicitDouble && frontmatter.affiliateA
+  const intentSelection = !explicitDouble && !explicitSingle
+    ? getStickyCtaForArticle(frontmatter.category)
+    : null
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
@@ -181,23 +190,30 @@ export default async function ArticleCategoryPage({ params }: Props) {
         />
       </ArticleLayout>
 
-      {frontmatter.affiliateA && frontmatter.affiliateB ? (
+      {explicitDouble ? (
         <StickyCtaDouble
           eyebrow="Comparer les deux"
-          brandA={{ label: `Acheter ${frontmatter.affiliateA.name}`, href: frontmatter.affiliateA.url }}
-          brandB={{ label: `Acheter ${frontmatter.affiliateB.name}`, href: frontmatter.affiliateB.url }}
+          brandA={{ label: `Acheter ${frontmatter.affiliateA!.name}`, href: frontmatter.affiliateA!.url }}
+          brandB={{ label: `Acheter ${frontmatter.affiliateB!.name}`, href: frontmatter.affiliateB!.url }}
         />
-      ) : frontmatter.affiliateA ? (
+      ) : explicitSingle ? (
         <StickyCta config={{
-          brandName: frontmatter.affiliateA.name,
-          url: frontmatter.affiliateA.url,
-          label: frontmatter.affiliateA.label ?? `disponible chez ${frontmatter.affiliateA.badge ?? 'Maxi Zoo'}`,
-          badge: frontmatter.affiliateA.badge,
-          code: frontmatter.affiliateA.code,
+          brandName: frontmatter.affiliateA!.name,
+          url: frontmatter.affiliateA!.url,
+          label: frontmatter.affiliateA!.label ?? `disponible chez ${frontmatter.affiliateA!.badge ?? 'Maxi Zoo'}`,
+          badge: frontmatter.affiliateA!.badge,
+          code: frontmatter.affiliateA!.code,
         }} />
-      ) : (
-        <StickyCta config={DOG_CHEF_CTA} />
-      )}
+      ) : intentSelection?.kind === 'double' ? (
+        <StickyCtaDouble
+          eyebrow={intentSelection.eyebrow}
+          subProof={intentSelection.subProof}
+          brandA={intentSelection.brandA}
+          brandB={intentSelection.brandB}
+        />
+      ) : intentSelection?.kind === 'single' ? (
+        <StickyCta config={intentSelection.config} />
+      ) : null}
     </>
   )
 }
