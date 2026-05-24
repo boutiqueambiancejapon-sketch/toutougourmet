@@ -1,8 +1,15 @@
 // @cdc affiliation — fallback sticky CTA quand l'article n'a pas d'affiliateA en frontmatter
-// Routing intent-based : la catégorie de l'article détermine quel CTA est servi.
-// - Urgences / Santé → CTA soft vers le bilan "Bien nourri ?" (non commercial)
-// - Alimentation / Race / Comportement → double CTA Dog Chef + Elmut (les 2 leaders du frais)
-// - Default → Dog Chef enrichi
+// Routing intent-based : la catégorie + le slug décident quel CTA est servi.
+//
+// Logique actuelle (phase quick-win, single CTA partout sauf VS frontmatter) :
+//   - Urgences & Intoxications        → Bien Nourri (soft, non-commercial)
+//   - Santé                            → Bien Nourri
+//   - Slugs "chien-peut-manger-*"      → Bien Nourri (intent éducation/safety)
+//   - Slugs "chien-mange-*"            → Bien Nourri (intent safety/santé)
+//   - Default (Alimentation hors slugs ci-dessus, Race, Comportement, Avis & Comparatif) → Dog Chef enrichi
+//
+// On teste d'abord le copy enrichi Dog Chef seul pour mesurer le lift.
+// L'A/B test Dog Chef vs double Dog Chef+Elmut viendra dans une 2e phase.
 
 import type { StickyCtaConfig } from '@/components/blog/StickyCta'
 
@@ -22,6 +29,11 @@ export const DOG_CHEF_CTA: StickyCtaConfig = {
   buttonLabel: 'Calculer →',
 }
 
+/**
+ * Conservé pour usage interne (recommandation Bien Nourri quand le profil
+ * révèle des signes santé/digestif) — pas servi en sticky direct dans la phase
+ * actuelle. Voir data/bien-nourri.ts → recommend().
+ */
 export const ELMUT_CTA: StickyCtaConfig = {
   brandName: 'Elmut',
   url: 'https://c3po.link/QWMW4k6mbU',
@@ -32,9 +44,10 @@ export const ELMUT_CTA: StickyCtaConfig = {
 }
 
 /**
- * Soft CTA — pour articles à intent éducative/anxiogène (Urgences, Santé).
+ * Soft CTA — pour articles à intent éducative / safety / anxiogène
+ * (Urgences, Santé, "chien peut manger X", "chien mange X").
  * Sur ces pages, pousser une marque tombe à plat ; un bilan gratuit
- * "Est-ce que ton chien est bien nourri ?" rebondit sur l'anxiété naturelle
+ * "Est-ce que ton chien est bien nourri ?" rebondit sur la question naturelle
  * créée par la lecture, capte la curiosité et requalifie le trafic.
  * À la fin du bilan, on route vers Dog Chef ou Elmut selon le profil.
  */
@@ -65,34 +78,35 @@ export type StickyCtaSelection =
     }
 
 /**
- * Mapping `category` (libellé exact du frontmatter) → sticky CTA à servir.
+ * Slugs qui basculent en CTA Bien Nourri (intent éducation/safety) même
+ * quand la catégorie n'est pas Urgences/Santé.
+ *
+ * Couvre les ~100 articles "chien peut manger X" (poire, banane, raisin…) et
+ * les ~12 articles "chien mange X" (herbe, couche, glands, chocolat…) — qui
+ * sont taggés Alimentation mais en intent éducation/safety, pas en intent achat.
+ */
+function isEducationalSafetySlug(slug: string): boolean {
+  return slug.startsWith('chien-peut-manger-') || slug.startsWith('chien-mange-')
+}
+
+/**
+ * Mapping (`category`, `slug`) → sticky CTA à servir.
  *
  * Ordre de priorité dans les pages article :
  *   1. Article a `affiliateA + affiliateB` en frontmatter → StickyCtaDouble (override marqué)
  *   2. Article a `affiliateA` seul → StickyCta avec le config issu du frontmatter
- *   3. Fallback → cette fonction (intent-based)
+ *   3. Fallback → cette fonction (intent-based, single CTA toujours)
  */
-export function getStickyCtaForArticle(category: string): StickyCtaSelection {
-  // Articles anxiogènes ou santé → bilan gratuit (pas de marque)
-  if (category === 'Urgences & Intoxications' || category === 'Santé') {
+export function getStickyCtaForArticle(category: string, slug: string): StickyCtaSelection {
+  // Articles éducatifs/safety/santé/anxiogènes → bilan gratuit (pas de marque pushée)
+  if (
+    category === 'Urgences & Intoxications' ||
+    category === 'Santé' ||
+    isEducationalSafetySlug(slug)
+  ) {
     return { kind: 'single', config: BIEN_NOURRI_CTA }
   }
 
-  // Articles à intent achat (alim, race, comportement) → double CTA
-  if (
-    category === 'Alimentation' ||
-    category === 'Race' ||
-    category === 'Comportement'
-  ) {
-    return {
-      kind: 'double',
-      eyebrow: 'Les 2 leaders du repas frais en France',
-      subProof: 'Offre de bienvenue exclusive · sans engagement',
-      brandA: { label: 'Dog Chef · -35%', href: DOG_CHEF_CTA.url },
-      brandB: { label: 'Elmut · -40%', href: ELMUT_CTA.url },
-    }
-  }
-
-  // Default (Avis & Comparatif sans affiliateA, autres) → Dog Chef enrichi
+  // Tout le reste → Dog Chef enrichi (phase quick-win single CTA)
   return { kind: 'single', config: DOG_CHEF_CTA }
 }
