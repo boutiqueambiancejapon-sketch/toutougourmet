@@ -11,9 +11,16 @@ interface StickyCtaDoubleProps {
   brandA: CtaBrand
   brandB: CtaBrand
   eyebrow?: string
+  /** Ligne sous l'eyebrow — affichée uniquement en lg+ pour ne pas surcharger mobile */
+  subProof?: string
 }
 
-export function StickyCtaDouble({ brandA, brandB, eyebrow }: StickyCtaDoubleProps) {
+export function StickyCtaDouble({
+  brandA,
+  brandB,
+  eyebrow,
+  subProof,
+}: StickyCtaDoubleProps) {
   const [dismissed, setDismissed] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -36,26 +43,44 @@ export function StickyCtaDouble({ brandA, brandB, eyebrow }: StickyCtaDoubleProp
         ].join(' ')}
         style={scrolled ? {} : { background: 'var(--bg-dark)' }}
       >
-        {/* Ligne principale */}
-        <div className="flex items-center gap-3 px-4 pt-4 pb-2">
-          {eyebrow && (
-            <p
-              className={`hidden sm:block flex-1 text-sm font-semibold transition-colors duration-500 ${scrolled ? 'text-[var(--text-secondary)]' : ''}`}
-              style={scrolled ? {} : { color: 'var(--text-muted)' }}
-            >
-              {eyebrow}
-            </p>
+        {/* Header : eyebrow + sub-proof (lg+) + close */}
+        <div className="flex items-start gap-3 px-4 pt-3 pb-1">
+          {(eyebrow || subProof) && (
+            <div className="hidden sm:block flex-1 min-w-0">
+              {eyebrow && (
+                <p
+                  className={`text-sm font-semibold leading-snug transition-colors duration-500 ${
+                    scrolled ? 'text-[var(--text-secondary)]' : ''
+                  }`}
+                  style={scrolled ? {} : { color: 'var(--text-on-dark)' }}
+                >
+                  {eyebrow}
+                </p>
+              )}
+              {subProof && (
+                <p
+                  className={`hidden lg:block text-xs leading-snug mt-0.5 transition-colors duration-500`}
+                  style={scrolled ? { color: 'var(--text-muted)' } : { color: 'var(--text-muted)', opacity: 0.85 }}
+                >
+                  {subProof}
+                </p>
+              )}
+            </div>
           )}
           <button
             onClick={() => setDismissed(true)}
             aria-label="Fermer"
-            className={`ml-auto shrink-0 transition-colors text-lg leading-none ${scrolled ? 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]' : 'text-[var(--text-muted)] hover:text-[var(--text-on-dark)]'}`}
+            className={`ml-auto shrink-0 transition-colors text-lg leading-none ${
+              scrolled
+                ? 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                : 'text-[var(--text-muted)] hover:text-[var(--text-on-dark)]'
+            }`}
           >
             ✕
           </button>
         </div>
 
-        {/* CTAs — pleine largeur sur mobile, côte à côte sur sm+ */}
+        {/* CTAs — empilés sur mobile, côte à côte sm+ */}
         <div className="flex flex-col sm:flex-row gap-2 px-4 pb-4">
           <a
             href={brandA.href}
