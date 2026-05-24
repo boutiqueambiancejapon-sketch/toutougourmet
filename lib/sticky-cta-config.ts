@@ -60,20 +60,27 @@ export const ELMUT_CTA: StickyCtaConfig = {
  * et requalifie le trafic. À la fin du bilan, on route vers Dog Chef ou Elmut
  * selon le profil (cf. data/bien-nourri.ts → recommend()).
  *
+ * Pivot émotionnel : la version précédente (« Ton chien est-il vraiment bien
+ * nourri ? ») ne convertissait pas car le propriétaire qui aime son chien y
+ * répond mentalement « oui je m'en occupe bien » et passe outre. Le mot
+ * magique pour un propriétaire qui aime son chien c'est « peut-être » — la
+ * peur de mal faire SANS LE SAVOIR. C'est ce qui crée la friction cognitive
+ * nécessaire à l'engagement.
+ *
  * Copy choisi :
- *  - « vraiment » dans le brandName crée une friction cognitive (le lecteur
- *    ne peut pas répondre « oui évidemment » sans hésiter)
- *  - label = 3 promesses tangibles (court / mesurable / personnalisé) au lieu
- *    des clichés « bilan gratuit en 2 min »
- *  - buttonLabel = action claire avec un nom familier (« test »)
- *  - subButton = micro-réassurance temps
+ *  - brandName = affirmation chargée + doux ("peut-être" évite l'accusation
+ *    frontale tout en injectant le doute essentiel)
+ *  - label = promesse bornée et concrète (6 questions, diagnostic médical,
+ *    pas un quiz BuzzFeed)
+ *  - buttonLabel = verbe d'investigation de vérité, pas verbe d'effort
+ *  - subButton = enlève les 2 frictions les plus communes (€ + lead capture)
  */
 export const BIEN_NOURRI_CTA: StickyCtaConfig = {
-  brandName: 'Ton chien est-il vraiment bien nourri ?',
+  brandName: 'Tu nourris peut-être mal ton chien',
   url: '/outils/bien-nourri',
-  label: 'test 2 min · score sur 100 + 3 conseils perso',
-  buttonLabel: 'Faire le test →',
-  subButton: 'max 2 min',
+  label: '6 questions clés · diagnostic en 2 min',
+  buttonLabel: 'Vérifier →',
+  subButton: 'Gratuit · sans inscription',
 }
 
 // ────────────────────────────────────────────────────────────
