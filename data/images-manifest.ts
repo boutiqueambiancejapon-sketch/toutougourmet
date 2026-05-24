@@ -553,6 +553,20 @@ const ART_COMPRENDRE_ETIQUETTE_PATEE_CHIEN_V2: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article comprendre-etiquette-patee-chien le 2026-05-21.',
 }
 
+const ART_CHIEN_PEUT_MANGER_COURGETTE: ImageSlot = {
+  id: 'art-chien-peut-manger-courgette',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'green',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media still-life on warm cream linen: a shallow off-white ceramic dog bowl filled with neatly cut bright-green zucchini rounds, a whole long green zucchini lying horizontally beside the bowl with one end sliced into rounds, a small wooden cutting board with zucchini cubes, a halved zucchini showing tender pale-green seeds, and a few fresh basil and parsley leaves scattered. Style: mixed-media editorial — photo lifestyle combined with subtle hand-drawn gouache decorations, contour #1A1109, palette dominated by cream #FAFAF8 with pill-green #C2F0D5 accents and a hint of amber #FFE8B5.',
+  composition: 'Bowl and zucchini centered-left at ~50% of the frame, ingredients arranged on the lower third, 40%+ clean cream negative space on the upper-right for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, shallow depth of field, soft creamy bokeh.',
+  decorations: ['paw-print', 'sparkle'],
+  notes: 'Featured image auto-générée pour l\'article chien-peut-manger-courgette le 2026-05-24.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -615,6 +629,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_MYCOTOXINES_CROQUETTES_CHIEN_RISQUES_PREVENTION_V2,
   ART_RECETTE_FRIANDISES_SAUMON_PATATE_DOUCE_CHIEN,
   ART_COMPRENDRE_ETIQUETTE_PATEE_CHIEN_V2,
+  ART_CHIEN_PEUT_MANGER_COURGETTE,
   // Social (1)
   OG_DEFAULT,
 ] as const
