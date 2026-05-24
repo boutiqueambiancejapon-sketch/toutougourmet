@@ -22,7 +22,9 @@ export type { StickyCtaConfig }
 /**
  * Dog Chef — CTA commercial principal.
  * - badge rose (par défaut) : code promo/alerte douce
- * - socialProof : 5 étoiles dorées (rendues amber par <StickyCta>) + rating + preuve véto
+ * - socialProof : 5 étoiles dorées (rendues amber par <StickyCta>) + rating + nb d'avis
+ *   → sourcé depuis data/brands.ts (pros Dog Chef : « Élu Produit de l'Année 2026 —
+ *     4.8/5 sur 7 800+ avis »). Factuel, pas de claim inventée.
  * - subButton : friction-remover « Livraison incluse · sans engagement »
  *   Alternative validée (à activer si prix Dog Chef confirmé exact) :
  *   `subButton: 'à partir de 1,4€/jour'` — price anchor plus convertissant
@@ -34,7 +36,7 @@ export const DOG_CHEF_CTA: StickyCtaConfig = {
   badge: '-35%',
   // badgeColor par défaut = 'rose' (codé promo)
   code: 'WZU7090',
-  socialProof: '★★★★★ 4.8/5 · validé par 1 000+ vétérinaires',
+  socialProof: '★★★★★ 4.8/5 · 7 800+ avis Trustpilot',
   buttonLabel: 'Calculer →',
   subButton: 'Livraison incluse · sans engagement',
 }
@@ -43,13 +45,17 @@ export const DOG_CHEF_CTA: StickyCtaConfig = {
  * Conservé pour usage interne (recommandation Bien Nourri quand le profil
  * révèle des signes santé/digestif) — pas servi en sticky direct dans la phase
  * actuelle. Voir data/bien-nourri.ts → recommend().
+ *
+ * Note : 4.7/5 est l'évaluation éditoriale interne (data/brands.ts → scores.global),
+ * pas un rating Trustpilot vérifié — d'où le wording « 4.7/5 selon notre test »
+ * pour rester honnête. À updater quand on aura le Trustpilot/Avis vérifié officiel.
  */
 export const ELMUT_CTA: StickyCtaConfig = {
   brandName: 'Elmut',
   url: 'https://c3po.link/QWMW4k6mbU',
   label: 'repas frais cuisinés en France',
   badge: '-40%',
-  socialProof: '★★★★★ 4.7/5 · qualité humaine, cuisson douce',
+  socialProof: '★★★★★ 4.7/5 selon notre test · cuisson douce',
   buttonLabel: 'Essayer →',
   subButton: 'Livraison réfrigérée incluse',
 }
@@ -74,6 +80,10 @@ export const ELMUT_CTA: StickyCtaConfig = {
  * Dog Chef. Le badge GRATUIT en vert (couleur safe/positive, vs rose qui code
  * promo/alerte) joue ce rôle : il pop visuellement, signale instantanément
  * « pas commercial » et enlève la friction « ça va me coûter quoi ».
+ *
+ * Pas de socialProof ici (un outil de bilan n'a pas d'« avis Trustpilot » à
+ * citer honnêtement — à ajouter plus tard si on collecte de vrais stats
+ * d'usage type « 12 000 maîtres ont fait le test »).
  *
  * Copy choisi :
  *  - badge = « GRATUIT » en vert (signal positif, ancrage mobile)
