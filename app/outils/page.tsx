@@ -16,6 +16,15 @@ export const metadata: Metadata = {
 
 const tools = [
   {
+    href: '/outils/bien-nourri',
+    icon: '🐶',
+    title: 'Est-ce que ton chien est bien nourri ?',
+    description: 'Bilan rapide en 6 questions pour évaluer la qualité de son alimentation. Score sur 100, diagnostic clair et conseils actionnables.',
+    cta: 'Faire le bilan',
+    tags: ['Diagnostic', 'Gratuit', '2 minutes'],
+    featured: true,
+  },
+  {
     href: '/outils/age',
     icon: '🐾',
     title: 'Calculateur d\'âge en âge humain',
@@ -71,7 +80,7 @@ export default function OutilsPage() {
             Calculateurs & Simulateurs
           </h1>
           <p className="text-[var(--text-secondary)] text-lg leading-relaxed">
-            Des outils concrets pour mieux nourrir ton chien ou ton chat — ration, budget, poids
+            Des outils concrets pour mieux nourrir ton chien ou ton chat — bilan d&apos;alimentation, ration, budget, poids
             idéal, comparaison des coûts. Tout est gratuit, sans inscription.
           </p>
         </div>
@@ -82,12 +91,24 @@ export default function OutilsPage() {
             <Link
               key={tool.href}
               href={tool.href}
-              className="group bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-6 hover:border-[var(--accent-1)] hover:shadow-[var(--shadow-md)] transition-all flex flex-col gap-4"
+              className={`group bg-[var(--bg-surface)] border rounded-[var(--radius-xl)] p-6 hover:shadow-[var(--shadow-md)] transition-all flex flex-col gap-4 ${
+                tool.featured
+                  ? 'border-2 border-[var(--accent-1)] md:col-span-2 hover:border-[var(--accent-1)]'
+                  : 'border-[var(--border)] hover:border-[var(--accent-1)]'
+              }`}
             >
+              {tool.featured && (
+                <span
+                  className="self-start text-xs font-bold uppercase tracking-widest px-2.5 py-1 rounded-full"
+                  style={{ background: 'var(--pill-rose)', color: 'var(--text-primary)' }}
+                >
+                  ✨ Nouveau
+                </span>
+              )}
               <div className="flex items-start gap-4">
                 <span className="text-5xl shrink-0">{tool.icon}</span>
                 <div className="flex-1">
-                  <h2 className="text-lg font-black text-[var(--text-primary)] mb-2 group-hover:text-[var(--accent-1)] transition-colors" >
+                  <h2 className="text-lg font-black text-[var(--text-primary)] mb-2 group-hover:text-[var(--accent-1)] transition-colors">
                     {tool.title}
                   </h2>
                   <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
@@ -119,7 +140,7 @@ export default function OutilsPage() {
 
         {/* CTA bas */}
         <div className="mt-12 bg-[var(--bg-surface-2)] border border-[var(--border)] rounded-[var(--radius-xl)] p-8 text-center">
-          <h2 className="text-xl font-black mb-2" >
+          <h2 className="text-xl font-black mb-2">
             Tu veux une recommandation personnalisée ?
           </h2>
           <p className="text-[var(--text-secondary)] mb-5 text-sm">
