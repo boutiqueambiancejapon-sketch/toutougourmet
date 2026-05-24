@@ -47,15 +47,22 @@ export const ELMUT_CTA: StickyCtaConfig = {
  * Soft CTA — pour articles à intent éducative / safety / anxiogène
  * (Urgences, Santé, "chien peut manger X", "chien mange X").
  * Sur ces pages, pousser une marque tombe à plat ; un bilan gratuit
- * "Est-ce que ton chien est bien nourri ?" rebondit sur la question naturelle
- * créée par la lecture, capte la curiosité et requalifie le trafic.
- * À la fin du bilan, on route vers Dog Chef ou Elmut selon le profil.
+ * rebondit sur la question naturelle créée par la lecture, capte la curiosité
+ * et requalifie le trafic. À la fin du bilan, on route vers Dog Chef ou Elmut
+ * selon le profil (cf. data/bien-nourri.ts → recommend()).
+ *
+ * Copy choisi :
+ *  - « vraiment » dans le brandName crée une friction cognitive (le lecteur
+ *    ne peut pas répondre « oui évidemment » sans hésiter)
+ *  - label = 3 promesses tangibles (court / mesurable / personnalisé) au lieu
+ *    des clichés « bilan gratuit en 2 min »
+ *  - buttonLabel = verbe-promesse de connaissance, pas verbe-effort
  */
 export const BIEN_NOURRI_CTA: StickyCtaConfig = {
-  brandName: 'Est-ce que ton chien est bien nourri ?',
+  brandName: 'Ton chien est-il vraiment bien nourri ?',
   url: '/outils/bien-nourri',
-  label: 'fais le bilan gratuit en 2 min',
-  buttonLabel: 'Faire le bilan →',
+  label: 'test 2 min · score sur 100 + 3 conseils perso',
+  buttonLabel: 'Le savoir →',
 }
 
 // ────────────────────────────────────────────────────────────
