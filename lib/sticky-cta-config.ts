@@ -21,6 +21,7 @@ export type { StickyCtaConfig }
 
 /**
  * Dog Chef — CTA commercial principal.
+ * - badge rose (par défaut) : code promo/alerte douce
  * - socialProof : 5 étoiles dorées (rendues amber par <StickyCta>) + rating + preuve véto
  * - subButton : friction-remover « Livraison incluse · sans engagement »
  *   Alternative validée (à activer si prix Dog Chef confirmé exact) :
@@ -31,6 +32,7 @@ export const DOG_CHEF_CTA: StickyCtaConfig = {
   url: 'https://www.dogchef.com/fr/code/WZU7090',
   label: 'le menu sur-mesure pour ton chien',
   badge: '-35%',
+  // badgeColor par défaut = 'rose' (codé promo)
   code: 'WZU7090',
   socialProof: '★★★★★ 4.8/5 · validé par 1 000+ vétérinaires',
   buttonLabel: 'Calculer →',
@@ -67,20 +69,29 @@ export const ELMUT_CTA: StickyCtaConfig = {
  * peur de mal faire SANS LE SAVOIR. C'est ce qui crée la friction cognitive
  * nécessaire à l'engagement.
  *
+ * Ancrage visuel mobile : sur mobile (où label, sublabel et socialProof sont
+ * cachés), il manquait un point d'accroche visuel équivalent au « -35% » de
+ * Dog Chef. Le badge GRATUIT en vert (couleur safe/positive, vs rose qui code
+ * promo/alerte) joue ce rôle : il pop visuellement, signale instantanément
+ * « pas commercial » et enlève la friction « ça va me coûter quoi ».
+ *
  * Copy choisi :
+ *  - badge = « GRATUIT » en vert (signal positif, ancrage mobile)
  *  - brandName = affirmation chargée + doux ("peut-être" évite l'accusation
  *    frontale tout en injectant le doute essentiel)
  *  - label = promesse bornée et concrète (6 questions, diagnostic médical,
  *    pas un quiz BuzzFeed)
  *  - buttonLabel = verbe d'investigation de vérité, pas verbe d'effort
- *  - subButton = enlève les 2 frictions les plus communes (€ + lead capture)
+ *  - subButton = renforce la promesse temps (le « gratuit » est déjà dans le badge)
  */
 export const BIEN_NOURRI_CTA: StickyCtaConfig = {
   brandName: 'Tu nourris peut-être mal ton chien',
   url: '/outils/bien-nourri',
   label: '6 questions clés · diagnostic en 2 min',
+  badge: 'GRATUIT',
+  badgeColor: 'green',
   buttonLabel: 'Vérifier →',
-  subButton: 'Gratuit · sans inscription',
+  subButton: 'Sans inscription · 2 min',
 }
 
 // ────────────────────────────────────────────────────────────
