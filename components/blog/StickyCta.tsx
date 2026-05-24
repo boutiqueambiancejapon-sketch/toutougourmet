@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
+export type StickyCtaBadgeColor = 'rose' | 'green' | 'blue' | 'amber'
+
 export interface StickyCtaConfig {
   /** Marque ou titre principal (affiché toujours, mobile inclus) */
   brandName: string
@@ -10,8 +12,16 @@ export interface StickyCtaConfig {
   url: string
   /** Phrase d'accroche affichée à partir de sm+ — garde < 60 chars */
   label: string
-  /** Pastille promo (ex. "-35%") — affichée si présente, mobile inclus */
+  /** Pastille promo (ex. "-35%", "GRATUIT") — affichée si présente, mobile inclus */
   badge?: string
+  /**
+   * Couleur du badge — défaut: rose (codé promo/alerte).
+   * - `rose` : promo, discount, alerte douce
+   * - `green` : gratuit, sans engagement, safe
+   * - `blue` : info, neutre, comparatif
+   * - `amber` : nouveau, mise en avant
+   */
+  badgeColor?: StickyCtaBadgeColor
   /** Code promo affiché inline après le label (sm+) */
   code?: string
   /**
@@ -32,6 +42,13 @@ export interface StickyCtaConfig {
 
 interface StickyCtaProps {
   config: StickyCtaConfig
+}
+
+const BADGE_BG_BY_COLOR: Record<StickyCtaBadgeColor, string> = {
+  rose: 'var(--pill-rose)',
+  green: 'var(--pill-green)',
+  blue: 'var(--pill-blue)',
+  amber: 'var(--pill-amber)',
 }
 
 /**
@@ -65,6 +82,7 @@ export function StickyCta({ config }: StickyCtaProps) {
   const isInternal = config.url.startsWith('/')
   const buttonLabel =
     config.buttonLabel ?? (config.code ? 'J\'en profite →' : 'Acheter →')
+  const badgeBg = BADGE_BG_BY_COLOR[config.badgeColor ?? 'rose']
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 px-4 pb-4 pointer-events-none">
@@ -77,11 +95,11 @@ export function StickyCta({ config }: StickyCtaProps) {
         ].join(' ')}
         style={scrolled ? {} : { background: 'var(--bg-dark)' }}
       >
-        {/* Badge promo (visible mobile inclus) */}
+        {/* Badge (visible mobile inclus) — couleur configurable */}
         {config.badge && (
           <span
             className="shrink-0 text-xs font-black px-2.5 py-1.5 rounded-[var(--radius-md)] whitespace-nowrap"
-            style={{ background: 'var(--pill-rose)', color: 'var(--text-primary)' }}
+            style={{ background: badgeBg, color: 'var(--text-primary)' }}
           >
             {config.badge}
           </span>
