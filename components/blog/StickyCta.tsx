@@ -33,9 +33,9 @@ export interface StickyCtaConfig {
   /** Override du libellé du bouton — défaut: "J'en profite →" si code, "Acheter →" sinon */
   buttonLabel?: string
   /**
-   * Sous-label discret sous le bouton CTA (sm+ uniquement).
+   * Sous-label discret sous le bouton CTA (visible mobile + desktop).
    * Sert à anchorer prix / friction-removers / promesses non-commerciales.
-   * Ex : "Livraison incluse · sans engagement" ou "max 2 min"
+   * Ex : "Livraison incluse · sans engagement" ou "Sans inscription · 2 min"
    */
   subButton?: string
 }
@@ -84,85 +84,113 @@ export function StickyCta({ config }: StickyCtaProps) {
     config.buttonLabel ?? (config.code ? 'J\'en profite →' : 'Acheter →')
   const badgeBg = BADGE_BG_BY_COLOR[config.badgeColor ?? 'rose']
 
+  // Bouton de fermeture — rendu en 2 emplacements selon viewport (l'un est
+  // toujours masqué via sm:hidden/sm:block, donc UX = un seul bouton visible)
+  function CloseBtn({ extraClasses = '' }: { extraClasses?: string }) {
+    return (
+      <button
+        onClick={() => setDismissed(true)}
+        aria-label="Fermer"
+        className={`shrink-0 transition-colors text-lg leading-none ${
+          scrolled
+            ? 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+            : 'text-[var(--text-muted)] hover:text-[var(--text-on-dark)]'
+        } ${extraClasses}`}
+      >
+        ✕
+      </button>
+    )
+  }
+
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 px-4 pb-4 pointer-events-none">
       <div
         className={[
-          'max-w-[720px] mx-auto rounded-[var(--radius-xl)] border shadow-[var(--shadow-xl)] flex items-center gap-3 sm:gap-4 p-4 pointer-events-auto transition-all duration-500',
+          'max-w-[720px] mx-auto rounded-[var(--radius-xl)] border shadow-[var(--shadow-xl)] p-4 pointer-events-auto transition-all duration-500',
+          // Mobile : empilement vertical (texte ligne 1, bouton pleine largeur ligne 2)
+          // sm+ : tout sur une ligne horizontale
+          'flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4',
           scrolled
             ? 'backdrop-blur-xl bg-white/10 border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.12)]'
             : 'border-[var(--border)]',
         ].join(' ')}
         style={scrolled ? {} : { background: 'var(--bg-dark)' }}
       >
-        {/* Badge (visible mobile inclus) — couleur configurable */}
-        {config.badge && (
-          <span
-            className="shrink-0 text-xs font-black px-2.5 py-1.5 rounded-[var(--radius-md)] whitespace-nowrap"
-            style={{ background: badgeBg, color: 'var(--text-primary)' }}
-          >
-            {config.badge}
-          </span>
-        )}
-
-        {/* Bloc texte — flex-col pour empiler ligne principale + social proof (lg+) */}
-        <div className="flex-1 min-w-0">
-          <p
-            className={[
-              'text-sm leading-snug transition-colors duration-500',
-              scrolled ? 'text-[var(--text-primary)]' : '',
-            ].join(' ')}
-            style={scrolled ? {} : { color: 'var(--text-on-dark)' }}
-          >
-            <span className="font-bold">{config.brandName}</span>
+        {/* Groupe A : badge + bloc texte + close (mobile only).
+            Sur sm+, `sm:contents` flatten ce conteneur dans le flex parent,
+            si bien que badge/text/button-col/close-desktop deviennent tous
+            siblings d'un seul flex horizontal. */}
+        <div className="flex items-start sm:items-center gap-3 sm:contents">
+          {config.badge && (
             <span
-              className={`hidden sm:inline ${
-                scrolled ? 'text-[var(--text-secondary)]' : 'text-[var(--text-muted)]'
-              }`}
+              className="shrink-0 text-xs font-black px-2.5 py-1.5 rounded-[var(--radius-md)] whitespace-nowrap"
+              style={{ background: badgeBg, color: 'var(--text-primary)' }}
             >
-              {' '}— {config.label}
+              {config.badge}
             </span>
-            {config.code && (
-              <>
-                {' '}· Code{' '}
-                <span
-                  className={`font-mono font-bold transition-colors duration-500 ${
-                    scrolled ? 'text-rose-600' : ''
-                  }`}
-                  style={scrolled ? {} : { color: 'var(--pill-rose)' }}
-                >
-                  {config.code}
-                </span>
-              </>
-            )}
-          </p>
-
-          {/* Social proof — lg+ uniquement, étoiles ★ colorisées en doré */}
-          {config.socialProof && (
-            <p
-              className={`hidden lg:block text-xs leading-snug mt-0.5 transition-colors duration-500 ${
-                scrolled ? 'text-[var(--text-muted)]' : ''
-              }`}
-              style={scrolled ? {} : { color: 'var(--text-muted)', opacity: 0.85 }}
-            >
-              {colorizeStars(config.socialProof)}
-            </p>
           )}
+
+          <div className="flex-1 min-w-0">
+            <p
+              className={[
+                'text-sm leading-snug transition-colors duration-500',
+                scrolled ? 'text-[var(--text-primary)]' : '',
+              ].join(' ')}
+              style={scrolled ? {} : { color: 'var(--text-on-dark)' }}
+            >
+              <span className="font-bold">{config.brandName}</span>
+              <span
+                className={`hidden sm:inline ${
+                  scrolled ? 'text-[var(--text-secondary)]' : 'text-[var(--text-muted)]'
+                }`}
+              >
+                {' '}— {config.label}
+              </span>
+              {config.code && (
+                <>
+                  {' '}· Code{' '}
+                  <span
+                    className={`font-mono font-bold transition-colors duration-500 ${
+                      scrolled ? 'text-rose-600' : ''
+                    }`}
+                    style={scrolled ? {} : { color: 'var(--pill-rose)' }}
+                  >
+                    {config.code}
+                  </span>
+                </>
+              )}
+            </p>
+
+            {/* Social proof — lg+ uniquement, étoiles ★ colorisées en doré */}
+            {config.socialProof && (
+              <p
+                className={`hidden lg:block text-xs leading-snug mt-0.5 transition-colors duration-500 ${
+                  scrolled ? 'text-[var(--text-muted)]' : ''
+                }`}
+                style={scrolled ? {} : { color: 'var(--text-muted)', opacity: 0.85 }}
+              >
+                {colorizeStars(config.socialProof)}
+              </p>
+            )}
+          </div>
+
+          {/* Close button — mobile only, en haut-droite du card */}
+          <CloseBtn extraClasses="sm:hidden mt-0.5" />
         </div>
 
-        {/* Colonne CTA — bouton + sublabel optionnel */}
-        <div className="shrink-0 flex flex-col items-center gap-0.5">
+        {/* Groupe B : colonne CTA — bouton pleine largeur sur mobile, inline sm+ */}
+        <div className="flex flex-col items-center gap-1 shrink-0 w-full sm:w-auto">
           <Link
             href={config.url}
             target={isInternal ? undefined : '_blank'}
             rel={isInternal ? undefined : 'noopener noreferrer sponsored'}
-            className="btn-primary text-sm px-4 py-2 whitespace-nowrap"
+            className="btn-primary text-sm px-4 py-2.5 sm:py-2 whitespace-nowrap w-full sm:w-auto text-center"
           >
             {buttonLabel}
           </Link>
           {config.subButton && (
             <span
-              className={`hidden sm:block text-[10px] leading-snug whitespace-nowrap transition-colors duration-500 ${
+              className={`text-[10px] leading-snug whitespace-nowrap transition-colors duration-500 ${
                 scrolled ? 'text-[var(--text-muted)]' : ''
               }`}
               style={scrolled ? {} : { color: 'var(--text-muted)', opacity: 0.85 }}
@@ -172,18 +200,8 @@ export function StickyCta({ config }: StickyCtaProps) {
           )}
         </div>
 
-        {/* Fermer */}
-        <button
-          onClick={() => setDismissed(true)}
-          aria-label="Fermer"
-          className={`shrink-0 transition-colors text-lg leading-none ${
-            scrolled
-              ? 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
-              : 'text-[var(--text-muted)] hover:text-[var(--text-on-dark)]'
-          }`}
-        >
-          ✕
-        </button>
+        {/* Close button — sm+ uniquement, fin de ligne horizontale */}
+        <CloseBtn extraClasses="hidden sm:block" />
       </div>
     </div>
   )
