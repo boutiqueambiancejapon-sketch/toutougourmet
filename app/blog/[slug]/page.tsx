@@ -13,7 +13,7 @@ import {
 import { formatDate } from '@/lib/utils'
 import { StickyCta } from '@/components/blog/StickyCta'
 import { StickyCtaDouble } from '@/components/blog/StickyCtaDouble'
-import { DOG_CHEF_CTA } from '@/lib/sticky-cta-config'
+import { getStickyCtaForArticle } from '@/lib/sticky-cta-config'
 import { ArticleLayout } from '@/components/blog/ArticleLayout'
 import { getArticleSlot } from '@/components/blog/blog-categories'
 import { getSlotById, getSlotPath } from '@/data/images-manifest'
@@ -48,12 +48,6 @@ const mdxComponents = {
   ),
 }
 
-/**
- * Construit l'URL absolue de l'image cover pour un article — manifest-aware.
- * - Cherche le slot dans le manifest pour utiliser le bon ext (.webp / .jpeg)
- * - Fallback sur la convention historique `.webp` si le slot n'est pas déclaré
- * (cf. mirror dans `app/chien/[category]/[slug]/page.tsx`)
- */
 function getArticleImageUrl(slug: string, category: string): string {
   const slotId = getArticleSlot(slug, category)
   const slot = getSlotById(slotId)
@@ -99,7 +93,6 @@ export default async function ArticlePage({ params }: Props) {
   const article = getArticleBySlug(slug)
   if (!article) notFound()
 
-  // 308 permanent redirect — articles with a categorySlug are canonical at /chien/[cat]/[slug]
   if (article.frontmatter.categorySlug) {
     const { permanentRedirect } = await import('next/navigation')
     permanentRedirect(`/chien/${article.frontmatter.categorySlug}/${slug}`)
@@ -118,10 +111,6 @@ export default async function ArticlePage({ params }: Props) {
     headline: frontmatter.title,
     description: frontmatter.description,
     image: [articleImageUrl],
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': canonicalUrl,
-    },
     author: {
       '@type': 'Person',
       name: DEFAULT_AUTHOR.name,
@@ -146,6 +135,15 @@ export default async function ArticlePage({ params }: Props) {
       acceptedAnswer: { '@type': 'Answer', text: f.answer },
     })),
   } : null
+
+  // ── Sélection du sticky CTA ─────────────────────────────────
+  // Priorité : frontmatter affiliateA+B (double explicite) > affiliateA seul (single explicite)
+  // > routing intent-based (getStickyCtaForArticle)
+  const explicitDouble = frontmatter.affiliateA && frontmatter.affiliateB
+  const explicitSingle = !explicitDouble && frontmatter.affiliateA
+  const intentSelection = !explicitDouble && !explicitSingle
+    ? getStickyCtaForArticle(frontmatter.category)
+    : null
 
   return (
     <>
@@ -181,23 +179,30 @@ export default async function ArticlePage({ params }: Props) {
         />
       </ArticleLayout>
 
-      {frontmatter.affiliateA && frontmatter.affiliateB ? (
+      {explicitDouble ? (
         <StickyCtaDouble
           eyebrow="Comparer les deux"
-          brandA={{ label: `Acheter ${frontmatter.affiliateA.name}`, href: frontmatter.affiliateA.url }}
-          brandB={{ label: `Acheter ${frontmatter.affiliateB.name}`, href: frontmatter.affiliateB.url }}
+          brandA={{ label: `Acheter ${frontmatter.affiliateA!.name}`, href: frontmatter.affiliateA!.url }}
+          brandB={{ label: `Acheter ${frontmatter.affiliateB!.name}`, href: frontmatter.affiliateB!.url }}
         />
-      ) : frontmatter.affiliateA ? (
+      ) : explicitSingle ? (
         <StickyCta config={{
-          brandName: frontmatter.affiliateA.name,
-          url: frontmatter.affiliateA.url,
-          label: frontmatter.affiliateA.label ?? `disponible chez ${frontmatter.affiliateA.badge ?? 'Maxi Zoo'}`,
-          badge: frontmatter.affiliateA.badge,
-          code: frontmatter.affiliateA.code,
+          brandName: frontmatter.affiliateA!.name,
+          url: frontmatter.affiliateA!.url,
+          label: frontmatter.affiliateA!.label ?? `disponible chez ${frontmatter.affiliateA!.badge ?? 'Maxi Zoo'}`,
+          badge: frontmatter.affiliateA!.badge,
+          code: frontmatter.affiliateA!.code,
         }} />
-      ) : (
-        <StickyCta config={DOG_CHEF_CTA} />
-      )}
+      ) : intentSelection?.kind === 'double' ? (
+        <StickyCtaDouble
+          eyebrow={intentSelection.eyebrow}
+          subProof={intentSelection.subProof}
+          brandA={intentSelection.brandA}
+          brandB={intentSelection.brandB}
+        />
+      ) : intentSelection?.kind === 'single' ? (
+        <StickyCta config={intentSelection.config} />
+      ) : null}
     </>
   )
 }
