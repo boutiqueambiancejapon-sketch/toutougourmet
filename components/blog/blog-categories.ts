@@ -159,6 +159,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'mycotoxines-croquettes-chien-risques-prevention': 'art-mycotoxines-croquettes-chien-risques-prevention-v2',
   'recette-friandises-saumon-patate-douce-chien': 'art-recette-friandises-saumon-patate-douce-chien',
   'comprendre-etiquette-patee-chien': 'art-comprendre-etiquette-patee-chien-v2',
+  'chien-peut-manger-courgette': 'art-chien-peut-manger-courgette',
 }
 
 /**
