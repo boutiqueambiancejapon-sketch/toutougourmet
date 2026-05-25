@@ -56,17 +56,22 @@ export const ELMUT_CTA: StickyCtaConfig = {
  * (today / last_7d / last_30d / all_time). Les tiers ci-dessous sont évalués
  * dans l'ordre — le PREMIER qui dépasse son seuil est affiché. Comme chaque
  * valeur vient de SA vraie fenêtre Plausible, le framing « aujourd'hui » /
- * « cette semaine » / « ce mois » est strictement honnête (pas du tout du fake
- * social proof avec all-time camouflé en short window).
+ * « cette semaine » / « ce mois » est strictement honnête.
+ *
+ * STRATÉGIE COLD START : pas de tier all_time low-threshold (qui aurait affiché
+ * « Déjà 1 bilan depuis le lancement » et fait paraître le site mort). Le
+ * silence est préféré à un faible volume. Quand un tier crosse son seuil, il
+ * apparaît — et c'est forcément un chiffre qui valorise.
  *
  * Logique des seuils :
  *  - today >= 3        → activité quotidienne perceptible
  *  - last_7d >= 15     → ~2/jour sur la semaine = site vivant
  *  - last_30d >= 50    → ~1.6/jour sur le mois = adoption régulière
- *  - all_time >= 1     → fallback final (avant ça, rien affiché = cold start propre)
+ *  - sinon             → rien d'affiché (cold start)
  *
- * À tuner librement selon les volumes réels post-lancement (édite les minCount
- * dans le tableau `tiers` ci-dessous, pas besoin de toucher au code).
+ * Suivi cold start : utilise directement le dashboard Plausible (l'event
+ * `bien_nourri_completed` est tracké dès le 1er bilan). Ne dépend pas du
+ * sticky pour savoir où on en est.
  */
 export const BIEN_NOURRI_CTA: StickyCtaConfig = {
   brandName: 'Nourrissez-vous bien votre toutou ?',
@@ -94,11 +99,8 @@ export const BIEN_NOURRI_CTA: StickyCtaConfig = {
         minCount: 50,
         template: 'Déjà {count} bilans réalisés ce mois',
       },
-      {
-        field: 'all_time',
-        minCount: 1,
-        template: 'Déjà {count} bilan{plural} réalisé{plural}',
-      },
+      // Pas de fallback all_time low-threshold. Si aucun tier ne matche,
+      // le compteur reste caché — c'est volontaire (cf. doc ci-dessus).
     ],
   },
 }
