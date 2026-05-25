@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import {
   BILAN_QUESTIONS,
@@ -12,10 +12,43 @@ import {
 } from '@/data/bien-nourri'
 import { cn } from '@/lib/utils'
 
+// Plausible Analytics — déclaration globale pour TypeScript
+// (le script Plausible expose `window.plausible` une fois chargé)
+declare global {
+  interface Window {
+    plausible?: (
+      eventName: string,
+      options?: { props?: Record<string, string | number> },
+    ) => void
+  }
+}
+
 export function BienNourriEvaluator() {
   const [currentStep, setCurrentStep] = useState(0)
   const [answers, setAnswers] = useState<BilanAnswers>({})
   const [showResult, setShowResult] = useState(false)
+
+  // Track le completion du bilan dans Plausible (une seule fois par session).
+  // L'event « bien_nourri_completed » alimente le compteur public sur le sticky CTA
+  // via /api/bien-nourri-count (cf. route handler).
+  const eventFired = useRef(false)
+  useEffect(() => {
+    if (!showResult || eventFired.current) return
+    if (typeof window === 'undefined' || typeof window.plausible !== 'function') return
+
+    const scores = computeBilan(answers)
+    const verdict = getVerdict(scores.normalized)
+    const reco = recommend(scores)
+
+    window.plausible('bien_nourri_completed', {
+      props: {
+        score_band: verdict.band,
+        reco: reco.primary,
+        score: scores.normalized,
+      },
+    })
+    eventFired.current = true
+  }, [showResult, answers])
 
   const totalSteps = BILAN_QUESTIONS.length
   const step = BILAN_QUESTIONS[currentStep]
@@ -64,6 +97,7 @@ export function BienNourriEvaluator() {
     setCurrentStep(0)
     setAnswers({})
     setShowResult(false)
+    eventFired.current = false // re-permettre tracking si refait dans la même session
   }
 
   const currentAnswer = answers[step?.id]
