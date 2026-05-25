@@ -163,6 +163,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'omega-3-chien-comparatif-sources': 'art-omega-3-chien-comparatif-sources-v4',
   'avis-franklin-light-dinde-patate-douce-epinards': 'art-avis-franklin-light-dinde-patate-douce-epinards',
   'avis-dog-chef-croquettes-canard-frais': 'art-avis-dog-chef-croquettes-canard-frais',
+  'avis-fidelis-menus-frais-chien-bocaux': 'art-avis-fidelis-menus-frais-chien-bocaux-v2',
 }
 
 /**
