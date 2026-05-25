@@ -144,6 +144,46 @@ export default async function ArticleCategoryPage({ params }: Props) {
     })),
   } : null
 
+  // ── Product + Review + AggregateRating ──────────────────────
+  // Injecté uniquement si frontmatter.review est présent (articles avis-*).
+  // Conformité Google Search Central « Review snippet » : l'AggregateRating
+  // doit refléter des avis réels et vérifiables affichés sur la même page.
+  const review = frontmatter.review
+  const productSchema = review ? {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: review.productName,
+    image: [articleImageUrl],
+    description: frontmatter.description,
+    brand: { '@type': 'Brand', name: review.brand },
+    ...(review.productUrl ? { url: review.productUrl } : {}),
+    ...(review.editorialRating ? {
+      review: {
+        '@type': 'Review',
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: review.editorialRating,
+          bestRating: 10,
+        },
+        author: {
+          '@type': 'Organization',
+          name: 'Équipe Toutou Gourmet',
+          url: SITE_URL,
+        },
+        datePublished: frontmatter.date,
+      },
+    } : {}),
+    ...(review.aggregateRating ? {
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: review.aggregateRating.value,
+        reviewCount: review.aggregateRating.count,
+        bestRating: review.aggregateRating.best ?? 5,
+        worstRating: 1,
+      },
+    } : {}),
+  } : null
+
   // ── Sélection du sticky CTA ─────────────────────────────────
   // Priorité : frontmatter affiliateA+B (double explicite) > affiliateA seul (single explicite)
   // > routing intent-based (getStickyCtaForArticle, slug-aware)
@@ -158,6 +198,9 @@ export default async function ArticleCategoryPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       {faqSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      )}
+      {productSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       )}
 
       <ArticleLayout
