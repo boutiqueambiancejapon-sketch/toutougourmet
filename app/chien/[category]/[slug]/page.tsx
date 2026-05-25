@@ -245,7 +245,11 @@ export default async function ArticleCategoryPage({ params }: Props) {
           url: frontmatter.affiliateA!.url,
           label: frontmatter.affiliateA!.label ?? `disponible chez ${frontmatter.affiliateA!.badge ?? 'Maxi Zoo'}`,
           badge: frontmatter.affiliateA!.badge,
+          badgeColor: frontmatter.affiliateA!.badgeColor,
           code: frontmatter.affiliateA!.code,
+          socialProof: frontmatter.affiliateA!.socialProof,
+          subButton: frontmatter.affiliateA!.subButton,
+          buttonLabel: frontmatter.affiliateA!.buttonLabel,
         }} />
       ) : intentSelection?.kind === 'single' ? (
         <StickyCta config={intentSelection.config} />
