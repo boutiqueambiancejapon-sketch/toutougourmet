@@ -68,39 +68,30 @@ export const ELMUT_CTA: StickyCtaConfig = {
  * et requalifie le trafic. À la fin du bilan, on route vers Dog Chef ou Elmut
  * selon le profil (cf. data/bien-nourri.ts → recommend()).
  *
- * Pivot émotionnel : la version précédente (« Ton chien est-il vraiment bien
- * nourri ? ») ne convertissait pas car le propriétaire qui aime son chien y
- * répond mentalement « oui je m'en occupe bien » et passe outre. Le mot
- * magique pour un propriétaire qui aime son chien c'est « peut-être » — la
- * peur de mal faire SANS LE SAVOIR. C'est ce qui crée la friction cognitive
- * nécessaire à l'engagement.
- *
- * Ancrage visuel mobile : sur mobile (où label, sublabel et socialProof sont
- * cachés), il manquait un point d'accroche visuel équivalent au « -35% » de
- * Dog Chef. Le badge GRATUIT en vert (couleur safe/positive, vs rose qui code
- * promo/alerte) joue ce rôle : il pop visuellement, signale instantanément
- * « pas commercial » et enlève la friction « ça va me coûter quoi ».
- *
- * Pas de socialProof ici (un outil de bilan n'a pas d'« avis Trustpilot » à
- * citer honnêtement — à ajouter plus tard si on collecte de vrais stats
- * d'usage type « 12 000 maîtres ont fait le test »).
+ * Évolution du copy (3e itération) :
+ *  - V1 "Est-ce que ton chien est bien nourri ?" → cliché bureaucratique, pas de tension
+ *  - V2 "Tu nourris peut-être mal ton chien" → accusation frontale, le lecteur se braque
+ *  - V3 "Sa gamelle, on peut faire mieux ?" ← actuel
+ *     L'invitation aspirationnelle marche mieux que l'accusation :
+ *     - "On" inclusif (toi et moi) au lieu du "tu" accusateur
+ *     - "On peut faire mieux" est universellement vrai → curiosité naturelle de savoir comment
+ *     - Pas de score référencé dans la question → pas de mismatch avec le /100 du tool
+ *     - 6 mots, lisible mobile sur 1 ligne
  *
  * Copy choisi :
  *  - badge = « GRATUIT » en vert (signal positif, ancrage mobile)
- *  - brandName = affirmation chargée + doux ("peut-être" évite l'accusation
- *    frontale tout en injectant le doute essentiel)
- *  - label = promesse bornée et concrète (6 questions, diagnostic médical,
- *    pas un quiz BuzzFeed)
- *  - buttonLabel = verbe d'investigation de vérité, pas verbe d'effort
- *  - subButton = renforce la promesse temps (le « gratuit » est déjà dans le badge)
+ *  - brandName = question aspirationnelle non-accusatoire
+ *  - label = promesse double (diagnostic + actions) avec ancrage temps
+ *  - buttonLabel = action claire alignée avec le ton « tu » du site
+ *  - subButton = friction-remover (inscription) + rappel temps
  */
 export const BIEN_NOURRI_CTA: StickyCtaConfig = {
-  brandName: 'Tu nourris peut-être mal ton chien',
+  brandName: 'Sa gamelle, on peut faire mieux ?',
   url: '/outils/bien-nourri',
-  label: '6 questions clés · diagnostic en 2 min',
+  label: 'diagnostic + 3 axes à améliorer en 2 min',
   badge: 'GRATUIT',
   badgeColor: 'green',
-  buttonLabel: 'Vérifier →',
+  buttonLabel: 'Fais le test →',
   subButton: 'Sans inscription · 2 min',
 }
 
