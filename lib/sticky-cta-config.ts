@@ -73,7 +73,7 @@ export const ELMUT_CTA: StickyCtaConfig = {
  *  - V2 "Tu nourris peut-être mal ton chien" → accusation frontale, braquage
  *  - V3 "Sa gamelle, on peut faire mieux ?" → aspirationnel mais pas top
  *  - V4 "Nourrissez-vous bien votre toutou ?" ← actuel
- *     Le wording proposé par le user marche pour 3 raisons :
+ *     Le wording marche pour 3 raisons :
  *     - "toutou" intègre le nom de la marque (Toutou Gourmet) — branding subtil
  *     - "vous" formel adoucit la confrontation tout en restant direct
  *     - La question vise la COMPÉTENCE du maître (vs la gamelle ou le chien),
@@ -84,12 +84,10 @@ export const ELMUT_CTA: StickyCtaConfig = {
  * Pattern classique presse FR (Le Monde, Le Figaro) : CTA marketing en vous,
  * corps éditorial en tu/vous selon ligne. Pas une vraie inconsistance.
  *
- * Copy choisi :
- *  - badge = « GRATUIT » en vert (signal positif, ancrage mobile)
- *  - brandName = question directe à la compétence + branding « toutou »
- *  - label = double promesse (diagnostic + actions) + ancrage temps
- *  - buttonLabel = aligné « vous » avec le brandName
- *  - subButton = friction-remover (inscription) + rappel temps
+ * Compteur dynamique : socialProof se peuple via /api/bien-nourri-count
+ * (route handler qui agrège l'event Plausible « bien_nourri_completed »).
+ * Affiché dès le 1er bilan réalisé. Avant ça → rien (cold start propre).
+ * Le user peut suivre l'adoption en allant sur n'importe quelle page Bien Nourri.
  */
 export const BIEN_NOURRI_CTA: StickyCtaConfig = {
   brandName: 'Nourrissez-vous bien votre toutou ?',
@@ -99,6 +97,11 @@ export const BIEN_NOURRI_CTA: StickyCtaConfig = {
   badgeColor: 'green',
   buttonLabel: 'Faites le test →',
   subButton: 'Sans inscription · 2 min',
+  dynamicSocialProof: {
+    endpoint: '/api/bien-nourri-count',
+    template: 'Déjà {count} bilan{plural} réalisé{plural}',
+    minCount: 1, // affiche dès le 1er bilan complété (avant : rien)
+  },
 }
 
 // ────────────────────────────────────────────────────────────
