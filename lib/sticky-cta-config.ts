@@ -21,20 +21,12 @@ export type { StickyCtaConfig }
 
 /**
  * Dog Chef — CTA commercial principal.
- * - badge rose (par défaut) : code promo/alerte douce
- * - socialProof : 5 étoiles dorées (rendues amber par <StickyCta>) + rating + nb d'avis
- *   → sourcé depuis data/brands.ts (pros Dog Chef : « Élu Produit de l'Année 2026 —
- *     4.8/5 sur 7 800+ avis »). Factuel, pas de claim inventée.
- * - subButton : friction-remover « Livraison incluse · sans engagement »
- *   Alternative validée (à activer si prix Dog Chef confirmé exact) :
- *   `subButton: 'à partir de 1,4€/jour'` — price anchor plus convertissant
  */
 export const DOG_CHEF_CTA: StickyCtaConfig = {
   brandName: 'Dog Chef',
   url: 'https://www.dogchef.com/fr/code/WZU7090',
   label: 'le menu sur-mesure pour ton chien',
   badge: '-35%',
-  // badgeColor par défaut = 'rose' (codé promo)
   code: 'WZU7090',
   socialProof: '★★★★★ 4.8/5 · 7 800+ avis Trustpilot',
   buttonLabel: 'Calculer →',
@@ -43,12 +35,7 @@ export const DOG_CHEF_CTA: StickyCtaConfig = {
 
 /**
  * Conservé pour usage interne (recommandation Bien Nourri quand le profil
- * révèle des signes santé/digestif) — pas servi en sticky direct dans la phase
- * actuelle. Voir data/bien-nourri.ts → recommend().
- *
- * Note : 4.7/5 est l'évaluation éditoriale interne (data/brands.ts → scores.global),
- * pas un rating Trustpilot vérifié — d'où le wording « 4.7/5 selon notre test »
- * pour rester honnête. À updater quand on aura le Trustpilot/Avis vérifié officiel.
+ * révèle des signes santé/digestif). Voir data/bien-nourri.ts → recommend().
  */
 export const ELMUT_CTA: StickyCtaConfig = {
   brandName: 'Elmut',
@@ -63,31 +50,23 @@ export const ELMUT_CTA: StickyCtaConfig = {
 /**
  * Soft CTA — pour articles à intent éducative / safety / anxiogène
  * (Urgences, Santé, "chien peut manger X", "chien mange X").
- * Sur ces pages, pousser une marque tombe à plat ; un bilan gratuit
- * rebondit sur la question naturelle créée par la lecture, capte la curiosité
- * et requalifie le trafic. À la fin du bilan, on route vers Dog Chef ou Elmut
- * selon le profil (cf. data/bien-nourri.ts → recommend()).
  *
- * Évolution du copy (4e itération) :
- *  - V1 "Est-ce que ton chien est bien nourri ?" → cliché bureaucratique
- *  - V2 "Tu nourris peut-être mal ton chien" → accusation frontale, braquage
- *  - V3 "Sa gamelle, on peut faire mieux ?" → aspirationnel mais pas top
- *  - V4 "Nourrissez-vous bien votre toutou ?" ← actuel
- *     Le wording marche pour 3 raisons :
- *     - "toutou" intègre le nom de la marque (Toutou Gourmet) — branding subtil
- *     - "vous" formel adoucit la confrontation tout en restant direct
- *     - La question vise la COMPÉTENCE du maître (vs la gamelle ou le chien),
- *       ce qui crée la friction émotionnelle la plus forte chez quelqu'un qui
- *       aime son chien
+ * Compteur dynamique multi-fenêtres :
+ * La route /api/bien-nourri-count interroge Plausible sur 4 fenêtres réelles
+ * (today / last_7d / last_30d / all_time). Les tiers ci-dessous sont évalués
+ * dans l'ordre — le PREMIER qui dépasse son seuil est affiché. Comme chaque
+ * valeur vient de SA vraie fenêtre Plausible, le framing « aujourd'hui » /
+ * « cette semaine » / « ce mois » est strictement honnête (pas du tout du fake
+ * social proof avec all-time camouflé en short window).
  *
- * Note tu/vous : ce CTA est en "vous" alors que les articles sont en "tu".
- * Pattern classique presse FR (Le Monde, Le Figaro) : CTA marketing en vous,
- * corps éditorial en tu/vous selon ligne. Pas une vraie inconsistance.
+ * Logique des seuils :
+ *  - today >= 3        → activité quotidienne perceptible
+ *  - last_7d >= 15     → ~2/jour sur la semaine = site vivant
+ *  - last_30d >= 50    → ~1.6/jour sur le mois = adoption régulière
+ *  - all_time >= 1     → fallback final (avant ça, rien affiché = cold start propre)
  *
- * Compteur dynamique : socialProof se peuple via /api/bien-nourri-count
- * (route handler qui agrège l'event Plausible « bien_nourri_completed »).
- * Affiché dès le 1er bilan réalisé. Avant ça → rien (cold start propre).
- * Le user peut suivre l'adoption en allant sur n'importe quelle page Bien Nourri.
+ * À tuner librement selon les volumes réels post-lancement (édite les minCount
+ * dans le tableau `tiers` ci-dessous, pas besoin de toucher au code).
  */
 export const BIEN_NOURRI_CTA: StickyCtaConfig = {
   brandName: 'Nourrissez-vous bien votre toutou ?',
@@ -99,8 +78,28 @@ export const BIEN_NOURRI_CTA: StickyCtaConfig = {
   subButton: 'Sans inscription · 2 min',
   dynamicSocialProof: {
     endpoint: '/api/bien-nourri-count',
-    template: 'Déjà {count} bilan{plural} réalisé{plural}',
-    minCount: 1, // affiche dès le 1er bilan complété (avant : rien)
+    tiers: [
+      {
+        field: 'today',
+        minCount: 3,
+        template: 'Déjà {count} bilans réalisés aujourd\'hui',
+      },
+      {
+        field: 'last_7d',
+        minCount: 15,
+        template: 'Déjà {count} bilans réalisés cette semaine',
+      },
+      {
+        field: 'last_30d',
+        minCount: 50,
+        template: 'Déjà {count} bilans réalisés ce mois',
+      },
+      {
+        field: 'all_time',
+        minCount: 1,
+        template: 'Déjà {count} bilan{plural} réalisé{plural}',
+      },
+    ],
   },
 }
 
