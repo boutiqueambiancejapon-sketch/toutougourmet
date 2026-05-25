@@ -160,6 +160,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'recette-friandises-saumon-patate-douce-chien': 'art-recette-friandises-saumon-patate-douce-chien',
   'comprendre-etiquette-patee-chien': 'art-comprendre-etiquette-patee-chien-v2',
   'chien-peut-manger-courgette': 'art-chien-peut-manger-courgette',
+  'omega-3-chien-comparatif-sources': 'art-omega-3-chien-comparatif-sources-v4',
 }
 
 /**
