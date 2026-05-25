@@ -19,6 +19,15 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // ── Favicon ──────────────────────────────────────────────
+      // Le binaire `app/favicon.ico` contient le triangle Next.js scaffold
+      // (jamais remplacé). On le bypass via redirect vers /icon.svg qui est
+      // aux couleurs de la DA. Next.js évalue les redirects AVANT le filesystem
+      // donc le binaire scaffold ne sera plus jamais servi.
+      // Quand on aura généré un vrai favicon.ico aux couleurs DA, on remplacera
+      // le binaire et on virera ce redirect.
+      { source: '/favicon.ico', destination: '/icon.svg', permanent: true },
+
       // Anciennes URLs marques → nouvelle structure /chien/marque/
       { source: '/marques', destination: '/chien/marque', permanent: true },
       { source: '/marques/:slug', destination: '/chien/marque/:slug', permanent: true },
