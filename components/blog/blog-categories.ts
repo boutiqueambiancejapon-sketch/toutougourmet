@@ -161,6 +161,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'comprendre-etiquette-patee-chien': 'art-comprendre-etiquette-patee-chien-v2',
   'chien-peut-manger-courgette': 'art-chien-peut-manger-courgette',
   'omega-3-chien-comparatif-sources': 'art-omega-3-chien-comparatif-sources-v4',
+  'avis-franklin-light-dinde-patate-douce-epinards': 'art-avis-franklin-light-dinde-patate-douce-epinards',
 }
 
 /**
