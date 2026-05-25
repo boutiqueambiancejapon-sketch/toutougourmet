@@ -5,6 +5,15 @@ import Link from 'next/link'
 
 export type StickyCtaBadgeColor = 'rose' | 'green' | 'blue' | 'amber'
 
+export interface DynamicSocialProofConfig {
+  /** Endpoint qui retourne { count: number } */
+  endpoint: string
+  /** Template avec {count} pour le nombre formaté et {plural} pour "s"/"" */
+  template: string
+  /** Affiche le compteur uniquement si count >= minCount. Défaut 1. */
+  minCount?: number
+}
+
 export interface StickyCtaConfig {
   /** Marque ou titre principal (affiché toujours, mobile inclus) */
   brandName: string
@@ -25,12 +34,19 @@ export interface StickyCtaConfig {
   /** Code promo affiché inline après le label (sm+) */
   code?: string
   /**
-   * Ligne preuve sociale — affichée sur tous viewports (mobile inclus).
+   * Ligne preuve sociale statique — affichée sur tous viewports (mobile inclus).
    * Toute séquence de ★ est automatiquement colorisée en doré (#F59E0B).
    * Ex : "★★★★★ 4.8/5 · 7 800+ avis Trustpilot"
-   * Garder concis (< 40 chars idéalement) pour ne pas wrap sur 3 lignes en mobile.
    */
   socialProof?: string
+  /**
+   * Preuve sociale dynamique — fetch côté client depuis `endpoint`, formate
+   * via `template` ({count} et {plural} sont remplacés), et n'affiche que si
+   * `count >= minCount`. Si présent, OVERRIDE `socialProof` statique.
+   * Ex pour le bilan Bien Nourri :
+   *   { endpoint: '/api/bien-nourri-count', template: 'Déjà {count} bilan{plural} réalisé{plural}', minCount: 1 }
+   */
+  dynamicSocialProof?: DynamicSocialProofConfig
   /** Override du libellé du bouton — défaut: "J'en profite →" si code, "Acheter →" sinon */
   buttonLabel?: string
   /**
@@ -67,15 +83,49 @@ function colorizeStars(text: string) {
   )
 }
 
+/**
+ * Formate un template `{count}` / `{plural}` avec le nombre fourni.
+ * - {count} → formaté FR (espace fine comme séparateur de milliers)
+ * - {plural} → "s" si count >= 2, "" sinon (singulier pour 0 et 1)
+ */
+function formatDynamicTemplate(template: string, count: number): string {
+  const formatted = new Intl.NumberFormat('fr-FR').format(count)
+  const plural = count >= 2 ? 's' : ''
+  return template.replace(/\{count\}/g, formatted).replace(/\{plural\}/g, plural)
+}
+
 export function StickyCta({ config }: StickyCtaProps) {
   const [dismissed, setDismissed] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [dynamicCount, setDynamicCount] = useState<number | null>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  // Fetch du compteur dynamique si la config en déclare un.
+  // Silencieux en cas d'échec — le compteur reste null et on retombe sur
+  // le socialProof statique (ou rien si pas défini).
+  useEffect(() => {
+    const endpoint = config.dynamicSocialProof?.endpoint
+    if (!endpoint) return
+
+    let cancelled = false
+    fetch(endpoint)
+      .then((r) => r.json())
+      .then((d: { count?: number }) => {
+        if (!cancelled) setDynamicCount(typeof d.count === 'number' ? d.count : 0)
+      })
+      .catch(() => {
+        /* fail silently — pas de compteur, c'est tout */
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [config.dynamicSocialProof?.endpoint])
 
   if (dismissed) return null
 
@@ -84,6 +134,15 @@ export function StickyCta({ config }: StickyCtaProps) {
   const buttonLabel =
     config.buttonLabel ?? (config.code ? 'J\'en profite →' : 'Acheter →')
   const badgeBg = BADGE_BG_BY_COLOR[config.badgeColor ?? 'rose']
+
+  // Calcule la social proof à afficher : dynamique si seuil atteint, sinon statique
+  const dyn = config.dynamicSocialProof
+  const minCount = dyn?.minCount ?? 1
+  const dynamicProof =
+    dyn && dynamicCount !== null && dynamicCount >= minCount
+      ? formatDynamicTemplate(dyn.template, dynamicCount)
+      : null
+  const effectiveSocialProof = dynamicProof ?? config.socialProof
 
   // Bouton de fermeture — rendu en 2 emplacements selon viewport (l'un est
   // toujours masqué via sm:hidden/sm:block, donc UX = un seul bouton visible)
@@ -162,15 +221,15 @@ export function StickyCta({ config }: StickyCtaProps) {
               )}
             </p>
 
-            {/* Social proof — visible sur tous viewports, étoiles ★ colorisées en doré */}
-            {config.socialProof && (
+            {/* Social proof (statique ou dynamique) — visible sur tous viewports */}
+            {effectiveSocialProof && (
               <p
                 className={`text-xs leading-snug mt-0.5 transition-colors duration-500 ${
                   scrolled ? 'text-[var(--text-muted)]' : ''
                 }`}
                 style={scrolled ? {} : { color: 'var(--text-muted)', opacity: 0.85 }}
               >
-                {colorizeStars(config.socialProof)}
+                {colorizeStars(effectiveSocialProof)}
               </p>
             )}
           </div>
