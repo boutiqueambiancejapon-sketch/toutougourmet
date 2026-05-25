@@ -581,6 +581,20 @@ const ART_OMEGA_3_CHIEN_COMPARATIF_SOURCES_V4: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article omega-3-chien-comparatif-sources le 2026-05-25.',
 }
 
+const ART_AVIS_FRANKLIN_LIGHT_DINDE_PATATE_DOUCE_EPINARDS: ImageSlot = {
+  id: 'art-avis-franklin-light-dinde-patate-douce-epinards',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'amber',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay still-life on warm cream linen: a shallow off-white ceramic dog bowl filled with crunchy light-amber kibble, a few kibble pieces scattered around. Next to it, fresh ingredients evoking the recipe — a small piece of cooked turkey breast sliced pale pink, a halved roasted sweet potato showing bright orange flesh, a small bunch of fresh dark-green spinach leaves arranged loosely, a small wooden scoop with a few kibble pieces, and a tiny linen napkin in soft blue tucked under the bowl. Style: mixed-media editorial — photo lifestyle combined with subtle hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, pill-green #C2F0D5 on the spinach, soft amber #FFE8B5 on the kibble and sweet potato, gentle blue #C8DCFF hint on the napkin.',
+  composition: 'Bowl and ingredients centered-left at ~50% of the frame, 40%+ clean cream negative space on the upper-right for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, shallow depth of field, soft creamy bokeh.',
+  decorations: ['sparkle', 'paw-print'],
+  notes: 'Featured image auto-générée pour l\'article avis-franklin-light-dinde-patate-douce-epinards le 2026-05-25.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -645,6 +659,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_COMPRENDRE_ETIQUETTE_PATEE_CHIEN_V2,
   ART_CHIEN_PEUT_MANGER_COURGETTE,
   ART_OMEGA_3_CHIEN_COMPARATIF_SOURCES_V4,
+  ART_AVIS_FRANKLIN_LIGHT_DINDE_PATATE_DOUCE_EPINARDS,
   // Social (1)
   OG_DEFAULT,
 ] as const
