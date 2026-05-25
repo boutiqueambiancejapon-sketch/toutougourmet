@@ -5,13 +5,27 @@ import Link from 'next/link'
 
 export type StickyCtaBadgeColor = 'rose' | 'green' | 'blue' | 'amber'
 
-export interface DynamicSocialProofConfig {
-  /** Endpoint qui retourne { count: number } */
-  endpoint: string
-  /** Template avec {count} pour le nombre formaté et {plural} pour "s"/"" */
+/**
+ * Un tier = un seuil + un template + le nom du champ JSON à lire dans la réponse
+ * de l'endpoint. Les tiers sont évalués dans l'ordre, le premier qui matche est
+ * affiché. La logique honnête : si « today » a 5 events, on dit « 5 aujourd'hui »
+ * (pas « 5 dans la dernière heure »), car la valeur vient réellement du window
+ * « today ».
+ */
+export interface DynamicSocialProofTier {
+  /** Champ à lire dans la réponse JSON (ex: 'today', 'last_7d', 'last_30d', 'all_time') */
+  field: string
+  /** Affiche ce tier uniquement si count >= minCount */
+  minCount: number
+  /** Template avec {count} (nombre formaté FR) et {plural} ("s" si count >= 2 sinon "") */
   template: string
-  /** Affiche le compteur uniquement si count >= minCount. Défaut 1. */
-  minCount?: number
+}
+
+export interface DynamicSocialProofConfig {
+  /** Endpoint qui retourne un objet `{ field: number }` selon les fields référencés par les tiers */
+  endpoint: string
+  /** Tiers évalués dans l'ordre — le premier qui matche est utilisé */
+  tiers: DynamicSocialProofTier[]
 }
 
 export interface StickyCtaConfig {
@@ -40,11 +54,9 @@ export interface StickyCtaConfig {
    */
   socialProof?: string
   /**
-   * Preuve sociale dynamique — fetch côté client depuis `endpoint`, formate
-   * via `template` ({count} et {plural} sont remplacés), et n'affiche que si
-   * `count >= minCount`. Si présent, OVERRIDE `socialProof` statique.
-   * Ex pour le bilan Bien Nourri :
-   *   { endpoint: '/api/bien-nourri-count', template: 'Déjà {count} bilan{plural} réalisé{plural}', minCount: 1 }
+   * Preuve sociale dynamique — fetch côté client, évalue les tiers dans l'ordre.
+   * OVERRIDE `socialProof` statique dès qu'un tier matche.
+   * Cf. DynamicSocialProofConfig pour la sémantique tiers.
    */
   dynamicSocialProof?: DynamicSocialProofConfig
   /** Override du libellé du bouton — défaut: "J'en profite →" si code, "Acheter →" sinon */
@@ -70,8 +82,6 @@ const BADGE_BG_BY_COLOR: Record<StickyCtaBadgeColor, string> = {
 
 /**
  * Colorise toute séquence de ★ en doré, garde le reste tel quel.
- * Permet d'écrire `"★★★★★ 4.8/5 · ..."` dans la config et obtenir 5 étoiles
- * dorées au rendu sans surcharger l'API du composant.
  */
 function colorizeStars(text: string) {
   return text.split(/(★+)/).map((part, i) =>
@@ -94,10 +104,27 @@ function formatDynamicTemplate(template: string, count: number): string {
   return template.replace(/\{count\}/g, formatted).replace(/\{plural\}/g, plural)
 }
 
+/**
+ * Parcourt les tiers dans l'ordre et retourne le premier formaté dont le count
+ * dépasse minCount. Sinon null (= pas de proof dynamique).
+ */
+function pickDynamicTier(
+  data: Record<string, number>,
+  tiers: DynamicSocialProofTier[],
+): string | null {
+  for (const tier of tiers) {
+    const count = data[tier.field]
+    if (typeof count === 'number' && count >= tier.minCount) {
+      return formatDynamicTemplate(tier.template, count)
+    }
+  }
+  return null
+}
+
 export function StickyCta({ config }: StickyCtaProps) {
   const [dismissed, setDismissed] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [dynamicCount, setDynamicCount] = useState<number | null>(null)
+  const [dynData, setDynData] = useState<Record<string, number> | null>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80)
@@ -105,9 +132,9 @@ export function StickyCta({ config }: StickyCtaProps) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Fetch du compteur dynamique si la config en déclare un.
-  // Silencieux en cas d'échec — le compteur reste null et on retombe sur
-  // le socialProof statique (ou rien si pas défini).
+  // Fetch des compteurs dynamiques si la config en déclare.
+  // Silencieux en cas d'échec — dynData reste null et on retombe sur le
+  // socialProof statique (ou rien si pas défini).
   useEffect(() => {
     const endpoint = config.dynamicSocialProof?.endpoint
     if (!endpoint) return
@@ -115,8 +142,14 @@ export function StickyCta({ config }: StickyCtaProps) {
     let cancelled = false
     fetch(endpoint)
       .then((r) => r.json())
-      .then((d: { count?: number }) => {
-        if (!cancelled) setDynamicCount(typeof d.count === 'number' ? d.count : 0)
+      .then((d: Record<string, unknown>) => {
+        if (cancelled) return
+        // Sanitize : on ne conserve que les champs numériques
+        const cleaned: Record<string, number> = {}
+        for (const [k, v] of Object.entries(d)) {
+          if (typeof v === 'number') cleaned[k] = v
+        }
+        setDynData(cleaned)
       })
       .catch(() => {
         /* fail silently — pas de compteur, c'est tout */
@@ -135,12 +168,10 @@ export function StickyCta({ config }: StickyCtaProps) {
     config.buttonLabel ?? (config.code ? 'J\'en profite →' : 'Acheter →')
   const badgeBg = BADGE_BG_BY_COLOR[config.badgeColor ?? 'rose']
 
-  // Calcule la social proof à afficher : dynamique si seuil atteint, sinon statique
-  const dyn = config.dynamicSocialProof
-  const minCount = dyn?.minCount ?? 1
+  // Calcule la social proof à afficher : dynamique (1er tier qui matche) sinon statique
   const dynamicProof =
-    dyn && dynamicCount !== null && dynamicCount >= minCount
-      ? formatDynamicTemplate(dyn.template, dynamicCount)
+    config.dynamicSocialProof && dynData
+      ? pickDynamicTier(dynData, config.dynamicSocialProof.tiers)
       : null
   const effectiveSocialProof = dynamicProof ?? config.socialProof
 
