@@ -23,6 +23,33 @@ export interface AffiliateLink {
   code?: string
 }
 
+/**
+ * Bloc optionnel destiné aux articles de type avis-produit.
+ * Permet d'injecter un Schema.org Product (+ Review éditorial + AggregateRating)
+ * dans le `<head>` SSR, et de récolter les rich snippets « étoile » côté SERP.
+ *
+ * Règle d'usage : `aggregateRating` ne doit refléter que des avis réels et
+ * vérifiables affichés sur la page (cf. policy Google Search Central « Review
+ * snippet », consolidée 2024). Toutougourmet seede ces avis manuellement.
+ */
+export interface ReviewFrontmatter {
+  /** Nom commercial du produit testé */
+  productName: string
+  /** Nom de la marque (Schema.org Brand) */
+  brand: string
+  /** URL canonique du produit chez le fabricant (optionnelle) */
+  productUrl?: string
+  /** Note éditoriale Toutou Gourmet sur 10 (issue du <Verdict score={…}/>) */
+  editorialRating?: number
+  /** Agrégation des avis lecteurs affichés sur la page */
+  aggregateRating?: {
+    value: number
+    count: number
+    /** Note maximale (par défaut 5) */
+    best?: number
+  }
+}
+
 export interface ArticleFrontmatter {
   title: string
   description: string
@@ -35,6 +62,8 @@ export interface ArticleFrontmatter {
   author: string
   affiliateA?: AffiliateLink
   affiliateB?: AffiliateLink
+  /** Optionnel — active l'injection de Product/Review/AggregateRating JSON-LD */
+  review?: ReviewFrontmatter
 }
 
 export interface Article {
