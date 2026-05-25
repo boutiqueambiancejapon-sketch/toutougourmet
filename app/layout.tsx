@@ -30,6 +30,16 @@ export const metadata: Metadata = {
     'Le comparateur indépendant et honnête du pet food premium en France. Quiz personnalisé, comparatif des meilleures marques, avis vétérinaires.',
   metadataBase: new URL('https://www.toutou-gourmet.com'),
   alternates: { canonical: 'https://www.toutou-gourmet.com' },
+  // Icônes — déclaration explicite pour défense en profondeur (Next 16 auto-détecte
+  // les fichiers app/icon.svg et app/apple-icon.svg mais la déclaration explicite
+  // garantit l'émission des bons <link rel="icon"> dans le HTML.
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    apple: [{ url: '/apple-icon.svg', type: 'image/svg+xml' }],
+  },
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
