@@ -164,6 +164,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'avis-franklin-light-dinde-patate-douce-epinards': 'art-avis-franklin-light-dinde-patate-douce-epinards',
   'avis-dog-chef-croquettes-canard-frais': 'art-avis-dog-chef-croquettes-canard-frais',
   'avis-fidelis-menus-frais-chien-bocaux': 'art-avis-fidelis-menus-frais-chien-bocaux-v2',
+  'avis-dogfy-diet-repas-frais-chien': 'art-avis-dogfy-diet-repas-frais-chien',
 }
 
 /**
