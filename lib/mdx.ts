@@ -16,11 +16,34 @@ function injectCurrentYear(frontmatter: ArticleFrontmatter): ArticleFrontmatter 
 }
 
 export interface AffiliateLink {
+  /** Nom de la marque affiché en gras dans le sticky */
   name: string
+  /** URL affiliée tracker (https://) ou route interne (/...) */
   url: string
+  /** Phrase d'accroche sm+ — garde sous 60 chars */
   label?: string
+  /** Étiquette retailer affichée à défaut de label (ex. "Maxi Zoo") */
   badge?: string
+  /** Code promo affiché inline après le label */
   code?: string
+  /**
+   * Couleur de la pastille badge — défaut: rose.
+   * `rose` (promo) · `green` (gratuit) · `blue` (info) · `amber` (nouveauté)
+   */
+  badgeColor?: 'rose' | 'green' | 'blue' | 'amber'
+  /**
+   * Ligne preuve sociale statique — visible sur tous viewports.
+   * Toute séquence de ★ est colorisée en doré automatiquement.
+   * Ex : "★★★★★ 4,8/5 · 7 845 avis clients"
+   */
+  socialProof?: string
+  /**
+   * Sous-label discret sous le bouton CTA — friction-removers ou promesses.
+   * Ex : "Livraison gratuite · sans engagement"
+   */
+  subButton?: string
+  /** Override du libellé du bouton — défaut: "J'en profite →" si code, "Acheter →" sinon */
+  buttonLabel?: string
 }
 
 /**
