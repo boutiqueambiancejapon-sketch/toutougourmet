@@ -567,6 +567,20 @@ const ART_CHIEN_PEUT_MANGER_COURGETTE: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article chien-peut-manger-courgette le 2026-05-24.',
 }
 
+const ART_OMEGA_3_CHIEN_COMPARATIF_SOURCES_V4: ImageSlot = {
+  id: 'art-omega-3-chien-comparatif-sources-v4',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'green',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay still-life on warm cream linen: four omega-3 sources for dogs in a soft diagonal — a small amber glass dropper bottle of golden salmon oil with a wooden spoon and a single drop, a small clear glass jar of soft ruby-red krill oil softgel capsules, a small white ceramic ramekin with deep-green microalgae powder and a tiny dried green algae leaf, an open round metal tin of small whole silver sardines with one sardine resting on the linen. A halved lemon wedge and a sprig of fresh dill garnish the composition. Style: mixed-media editorial — photo lifestyle combined with subtle hand-drawn gouache decorations in flat color, contour #1A1109. Palette: cream #FAFAF8 dominant, pill-green #C2F0D5 on the algae, soft amber #FFE8B5 highlights on the salmon oil and sardine tin, gentle rose #FFD6E3 hint on a small linen napkin.',
+  composition: 'Items centered-left in a diagonal flow at ~50% of the frame, 40%+ clean cream negative space on the upper-right for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, shallow depth of field, soft creamy bokeh.',
+  decorations: ['sparkle', 'paw-print'],
+  notes: 'Featured image auto-générée pour l\'article omega-3-chien-comparatif-sources le 2026-05-25.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -630,6 +644,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_RECETTE_FRIANDISES_SAUMON_PATATE_DOUCE_CHIEN,
   ART_COMPRENDRE_ETIQUETTE_PATEE_CHIEN_V2,
   ART_CHIEN_PEUT_MANGER_COURGETTE,
+  ART_OMEGA_3_CHIEN_COMPARATIF_SOURCES_V4,
   // Social (1)
   OG_DEFAULT,
 ] as const
