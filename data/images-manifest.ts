@@ -595,6 +595,20 @@ const ART_AVIS_FRANKLIN_LIGHT_DINDE_PATATE_DOUCE_EPINARDS: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article avis-franklin-light-dinde-patate-douce-epinards le 2026-05-25.',
 }
 
+const ART_AVIS_DOG_CHEF_CROQUETTES_CANARD_FRAIS: ImageSlot = {
+  id: 'art-avis-dog-chef-croquettes-canard-frais',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay still-life on warm cream linen: a shallow off-white ceramic dog bowl filled with crunchy reddish-brown duck kibble, a few kibble pieces scattered around. Next to it, fresh ingredients evoking the recipe — a small piece of fresh raw duck breast (skin side up, pinkish-red), a halved roasted sweet potato showing bright orange flesh, a small handful of green peas, a few buckwheat grains, a small wooden cutting board, a tiny linen napkin in soft rose tucked under the bowl. A small sprig of fresh nettle leaves and a few cranberries as accents. Style: mixed-media editorial — photo lifestyle combined with subtle hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, soft amber #FFE8B5 on the kibble and sweet potato, gentle rose #FFD6E3 on the napkin and duck meat, pill-green #C2F0D5 on the peas and nettle.',
+  composition: 'Bowl and ingredients centered-left at ~50% of the frame, 40%+ clean cream negative space on the upper-right for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, shallow depth of field, soft creamy bokeh.',
+  decorations: ['sparkle', 'paw-print'],
+  notes: 'Featured image auto-générée pour l\'article avis-dog-chef-croquettes-canard-frais le 2026-05-25.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -660,6 +674,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHIEN_PEUT_MANGER_COURGETTE,
   ART_OMEGA_3_CHIEN_COMPARATIF_SOURCES_V4,
   ART_AVIS_FRANKLIN_LIGHT_DINDE_PATATE_DOUCE_EPINARDS,
+  ART_AVIS_DOG_CHEF_CROQUETTES_CANARD_FRAIS,
   // Social (1)
   OG_DEFAULT,
 ] as const
