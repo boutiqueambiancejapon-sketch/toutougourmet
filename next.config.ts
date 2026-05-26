@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // ── Favicon ──────────────────────────────────────────────
+      // ── Favicon ─────────────────────────────────────
       // Le binaire `app/favicon.ico` contient le triangle Next.js scaffold
       // (jamais remplacé). On le bypass via redirect vers /icon.svg qui est
       // aux couleurs de la DA. Next.js évalue les redirects AVANT le filesystem
@@ -27,6 +27,15 @@ const nextConfig: NextConfig = {
       // Quand on aura généré un vrai favicon.ico aux couleurs DA, on remplacera
       // le binaire et on virera ce redirect.
       { source: '/favicon.ico', destination: '/icon.svg', permanent: true },
+
+      // ── Partenariat Petty Well → Ultra Premium Direct (mai 2026) ─────────
+      // Petty Well a été retiré du comparateur au profit d'Ultra Premium Direct.
+      // On redirige les anciennes URLs (slug 'petty-well') vers le nouveau slug
+      // pour préserver le SEO et les backlinks externes. Placé AVANT le
+      // redirect catch-all /marques/:slug → /chien/marque/:slug pour éviter le
+      // double hop sur /marques/petty-well.
+      { source: '/marques/petty-well', destination: '/chien/marque/ultra-premium-direct', permanent: true },
+      { source: '/chien/marque/petty-well', destination: '/chien/marque/ultra-premium-direct', permanent: true },
 
       // Anciennes URLs marques → nouvelle structure /chien/marque/
       { source: '/marques', destination: '/chien/marque', permanent: true },

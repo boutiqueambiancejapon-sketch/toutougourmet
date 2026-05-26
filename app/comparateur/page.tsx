@@ -7,7 +7,7 @@ import { brands } from '@/data/brands'
 export const metadata: Metadata = {
   title: 'Comparatif nourriture pour chien',
   description:
-    'Comparez Franklin, Elmut, Petty Well et Dog Chef : notes, prix, ingrédients, croquettes et nourriture fraîche pour chien. Offres et promos 2026.',
+    'Comparez Franklin, Elmut, Ultra Premium Direct et Dog Chef : notes, prix, ingrédients, croquettes et nourriture fraîche pour chien. Offres et promos 2026.',
   alternates: { canonical: 'https://www.toutou-gourmet.com/comparateur' },
 }
 
@@ -25,7 +25,7 @@ export default function ComparateurPage() {
           </p>
           <h1 className="page-title mb-3">Comparatif nourriture pour chien — 4 marques premium</h1>
           <p className="text-base text-[var(--text-secondary)]">
-            Franklin, Elmut, Petty Well et Dog Chef — croquettes et nourriture fraîche pour chien, analysés sur les mêmes critères, sans favoritisme.
+            Franklin, Elmut, Ultra Premium Direct et Dog Chef — croquettes et nourriture fraîche pour chien, analysés sur les mêmes critères, sans favoritisme.
           </p>
         </div>
 
@@ -134,7 +134,7 @@ export default function ComparateurPage() {
           <p className="text-base leading-relaxed mb-10" style={{ color: 'var(--text-secondary)' }}>
             Croquettes, pâtées, repas frais, sans céréales… le marché du pet food déborde d&apos;options et les
             promesses marketing se ressemblent toutes. Ce comparatif nourriture pour chien analyse Franklin,
-            Elmut, Petty Well et Dog Chef sur les mêmes critères objectifs. Tu hésite entre croquettes classiques
+            Elmut, Ultra Premium Direct et Dog Chef sur les mêmes critères objectifs. Tu hésite entre croquettes classiques
             et comparatif nourriture fraîche pour chien ? On détaille les différences ci-dessous pour t&apos;aider
             à faire le meilleur choix selon le profil de ton chien — sans jargon.
           </p>
@@ -148,7 +148,7 @@ export default function ComparateurPage() {
               </h3>
               <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 Les croquettes subissent une cuisson à haute température (extrusion) qui concentre les nutriments
-                mais peut dégrader certaines protéines et vitamines. Le repas frais (comme Dog Chef ou Petty Well
+                mais peut dégrader certaines protéines et vitamines. Le repas frais (comme Dog Chef ou Elmut
                 en format barquette) est cuit à basse température, ce qui préserve davantage la valeur nutritive
                 des ingrédients. En pratique, la différence se ressent surtout sur la digestibilité et la qualité
                 du poil pour les chiens sensibles.
@@ -171,15 +171,16 @@ export default function ComparateurPage() {
 
             <div>
               <h3 className="mb-2">
-                Comment choisir entre Franklin, Elmut, Petty Well et Dog Chef ?
+                Comment choisir entre Franklin, Elmut, Ultra Premium Direct et Dog Chef ?
               </h3>
               <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 Tout dépend du profil de ton chien et de ton budget. Franklin est le meilleur rapport
                 qualité/prix pour un chien standard sans problème particulier. Elmut se distingue sur la
-                personnalisation de la gamme (taille, activité, âge). Petty Well est idéal si tu préfères un
-                format mixte croquettes + pâtée. Dog Chef, le plus premium, convient aux chiens très sensibles
-                ou aux propriétaires qui veulent une alimentation la plus proche du fait-maison. Utilise notre
-                quiz pour obtenir une recommandation personnalisée.
+                personnalisation de la gamme (taille, activité, âge). Ultra Premium Direct mise sur le modèle
+                vente directe sans intermédiaire — jusqu&apos;à 40 % moins cher que des marques équivalentes en
+                animalerie, avec prébiotiques FOS/MOS intégrés. Dog Chef, le plus premium, convient aux chiens
+                très sensibles ou aux propriétaires qui veulent une alimentation la plus proche du fait-maison.
+                Utilise notre quiz pour obtenir une recommandation personnalisée.
               </p>
             </div>
 
@@ -188,11 +189,11 @@ export default function ComparateurPage() {
                 Combien coûte en moyenne une alimentation premium pour chien ?
               </h3>
               <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                Pour un chien de taille moyenne (10–20 kg), compte entre 60 € et 120 € par mois selon la
-                marque et le format. Franklin se situe en entrée de gamme premium (autour de 60–75 €/mois),
-                Elmut et Petty Well dans une fourchette intermédiaire (75–95 €/mois), et Dog Chef en haut de
-                gamme (100–120 €/mois). Toutes les marques proposent des offres de bienvenue — voir les
-                détails dans le tableau ci-dessus.
+                Pour un chien de taille moyenne (10–20 kg), compte entre 55 € et 120 € par mois selon la
+                marque et le format. Ultra Premium Direct se positionne en entrée de gamme premium grâce à la
+                vente directe (autour de 55–80 €/mois), Franklin juste au-dessus (60–75 €/mois), Elmut dans une
+                fourchette intermédiaire (90–110 €/mois), et Dog Chef en haut de gamme (100–120 €/mois). Toutes
+                les marques proposent des offres de bienvenue — voir les détails dans le tableau ci-dessus.
               </p>
             </div>
 
@@ -204,8 +205,9 @@ export default function ComparateurPage() {
                 Oui, c&apos;est même recommandé par de nombreux vétérinaires. L&apos;alimentation mixte combine les
                 avantages des deux formats : la densité nutritive et la praticité des croquettes, et l&apos;hydratation
                 supplémentaire apportée par la pâtée. L&apos;idéal est de maintenir les proportions
-                recommandées par le fabricant pour éviter les déséquilibres. Petty Well propose d&apos;ailleurs
-                des packs mixtes spécialement formulés pour cet usage.
+                recommandées par le fabricant pour éviter les déséquilibres. Ultra Premium Direct propose à la
+                fois croquettes et pâtées en livraison directe — pratique pour combiner les deux formats avec un
+                seul fournisseur, sans gestion logistique séparée.
               </p>
             </div>
 
