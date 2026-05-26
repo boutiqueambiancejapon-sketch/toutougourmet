@@ -96,7 +96,7 @@ export const brands: Brand[] = [
     name: 'Ultra Premium Direct',
     logo: '/images/marques/ultrapremiumdirect-logo.webp',
     tagline: 'Vente directe sans intermédiaire — premium accessible à -40 % vs animalerie',
-    affiliateUrl: 'https://c3po.link/QdMASYq2T2',
+    affiliateUrl: 'https://c3po.link/QqJYNnzYD8',
     affiliateCode: null,
     animal: ['chien', 'chat'],
     type: ['croquettes', 'pâtée', 'friandises'],
