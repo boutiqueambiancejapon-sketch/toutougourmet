@@ -1,6 +1,6 @@
 ---
 name: boileau
-version: 0.2.0
+version: 0.3.0
 description: Règles de rédaction française anti-marques-IA pour Toutou Gourmet. À CHARGER AVANT D'ÉCRIRE — pas après. Se déclenche dès qu'une tâche implique de rédiger, drafter ou produire du texte français destiné au site (article MDX, page pilier, page cluster, page outil, FAQ, méta-description, copy CTA, fiche race, dossier, post réseau social, newsletter, scheduled task de génération d'article). Ne pas attendre une demande d'humanisation : appliquer les règles dès la première ligne pour éviter l'aller-retour rédaction → correction.
 allowed-tools:
   - Read
@@ -229,6 +229,38 @@ Si la conclusion n'apporte pas un fait neuf, un dosage, un dernier rappel sécur
 
 ---
 
+## 25. H2 questions naturelles, pas pattern « Ce que X fait »
+
+Les H2 doivent capter la longue traîne SEO (matching « People Also Ask » de Google) et éviter les patterns LLM/SEO faibles qui ne ciblent aucune requête.
+
+**H2 interdits (pattern IA générique)** :
+- *Ce que {marque} fait bien*
+- *Les limites à connaître*
+- *Composition typique de {recette}*
+- *Pour quel chien {marque} convient le mieux* (sans point d'interrogation, mode déclaratif)
+- *Notre note détaillée*
+- *Avis vérifiés des lecteurs*
+- *Comparatif : {marque} vs {concurrent}* (déclaratif, sans verbe d'action)
+- *FAQ* tout seul
+
+**H2 préférés (question naturelle, capture sous-requête)** :
+- *Pourquoi {marque} séduit-elle les propriétaires de {profil cible} ?*
+- *Que contient vraiment {recette} en détail ?*
+- *{marque} est-il fait pour mon chien ?*
+- *Quels sont les vrais inconvénients de {marque} ?*
+- *{marque} vs {concurrent A} ou {concurrent B} : lequel choisir ?*
+- *Combien on met à {marque} — et pourquoi*
+- *Que disent les propriétaires qui utilisent {marque} ?*
+- *Questions fréquentes sur {marque}*
+
+Le test à appliquer avant de valider un H2 : « est-ce qu'un internaute taperait cette phrase dans Google ? ». Si non, tu reformules. Un bon H2 contient typiquement la marque/le sujet + un mot d'intention (*pourquoi*, *que*, *comment*, *quand*, *est-il*, *quels sont*, *lequel*, *combien*).
+
+Gain SEO mesurable : un article avec 6-8 H2 questions capte 4 à 6 patterns de requête supplémentaires par rapport au pattern « Ce que X fait bien » — multiplication des positions Google possibles, augmentation des chances en featured snippet, alignement format People Also Ask.
+
+Cette règle s'applique en priorité aux articles d'avis (`avis-{marque}`), comparatifs (`{a}-vs-{b}`) et dossiers thématiques. Pour les FAQ courtes ou recettes, les H2 peuvent rester descriptifs si la question n'a pas de sens (ex. *Ingrédients*, *Préparation*, *Temps de cuisson*).
+
+---
+
 ## VOIX ÉDITORIALE TOUTOU GOURMET
 
 Tu écris depuis une voix éditoriale précise :
@@ -246,18 +278,20 @@ Tu écris depuis une voix éditoriale précise :
 
 1. J'ai lu le brief / la SERP / les sources
 2. J'ai en tête la voix éditoriale (sobre, factuel, sources nommées)
-3. J'ai banni mentalement les listes 1-24 ci-dessus
+3. J'ai banni mentalement les listes 1-25 ci-dessus
 4. Je sais quel est le détail concret que je vais donner au lieu d'un mot vague
-5. J'attaque la rédaction direct, sans préambule chatbot
+5. **J'ai écrit mes H2 sous forme de questions naturelles** (test : un internaute taperait-il ça dans Google ?)
+6. J'attaque la rédaction direct, sans préambule chatbot
 
 ## CHECKLIST AVANT DE COMMITTER
 
 1. Lecture à voix haute mentale : aucun passage ne sonne IA
 2. Aucun mot de la liste #2 sans détail concret derrière
 3. Aucune des structures de #5 dans le texte
-4. Typographie FR correcte (#16)
-5. Sources scientifiques citées précisément (#12)
-6. Si un dosage / étude / chiffre est cité, il est intact et vérifié
+4. **Aucun H2 du pattern interdit de #25** (*Ce que X fait bien*, *Les limites à connaître*, etc.)
+5. Typographie FR correcte (#16)
+6. Sources scientifiques citées précisément (#12)
+7. Si un dosage / étude / chiffre est cité, il est intact et vérifié
 
 ---
 
