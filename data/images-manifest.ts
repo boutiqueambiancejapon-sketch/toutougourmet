@@ -651,6 +651,20 @@ const ART_AVIS_ULTRA_PREMIUM_DIRECT: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article avis-ultra-premium-direct le 2026-05-25.',
 }
 
+const ART_CHIEN_PEUT_MANGER_CERISES: ImageSlot = {
+  id: 'art-chien-peut-manger-cerises',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media still-life on warm cream linen: a shallow off-white ceramic dog bowl filled with glossy fresh red cherries, a few cherries spilling onto the linen, two cherries halved to show the pit removed, and a small set of cherry pits and green stems deliberately placed apart as a "do not give" detail. A curious cream-and-amber coated medium dog with soft floppy ears peeks gently into the frame from the upper-right corner, calm friendly expression. Style: mixed-media editorial — photo lifestyle combined with subtle hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, glossy natural red on the cherries, gentle rose #FFD6E3 and soft amber #FFE8B5 on the decorations.',
+  composition: 'Bowl of cherries centered-left at ~45% of the frame, halved cherries and separated pits/stems on the lower third, dog upper-right but not dominating. 40%+ clean cream negative space upper-right and lower portions for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, shallow depth of field, soft creamy bokeh.',
+  decorations: ['paw-print', 'sparkle', 'confetti'],
+  notes: 'Featured image auto-générée pour l\'article chien-peut-manger-cerises le 2026-05-28.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -720,6 +734,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_AVIS_FIDELIS_MENUS_FRAIS_CHIEN_BOCAUX_V2,
   ART_AVIS_DOGFY_DIET_REPAS_FRAIS_CHIEN,
   ART_AVIS_ULTRA_PREMIUM_DIRECT,
+  ART_CHIEN_PEUT_MANGER_CERISES,
   // Social (1)
   OG_DEFAULT,
 ] as const
