@@ -637,6 +637,20 @@ const ART_AVIS_DOGFY_DIET_REPAS_FRAIS_CHIEN: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article avis-dogfy-diet-repas-frais-chien le 2026-05-25.',
 }
 
+const ART_AVIS_ULTRA_PREMIUM_DIRECT: ImageSlot = {
+  id: 'art-avis-ultra-premium-direct',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'amber',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay still-life on warm cream linen: a shallow off-white ceramic dog bowl filled with crunchy golden-amber kibble with a mono-protein rustic appearance, kibble pieces scattered around. Beside the bowl, fresh ingredients evoking a French premium recipe — a small piece of fresh raw chicken breast pale-pink, a halved roasted sweet potato showing bright orange flesh, a small handful of fresh peas, a small wooden cutting board, a tiny bunch of fresh thyme and parsley, and a tiny linen napkin in soft amber tucked under the bowl. Style: mixed-media editorial — photo lifestyle combined with subtle hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, soft amber #FFE8B5 on the kibble and sweet potato, gentle rose #FFD6E3 hint on the chicken meat, pill-green #C2F0D5 on the peas and herbs.',
+  composition: 'Bowl and ingredients centered-left at ~50% of the frame, 40%+ clean cream negative space on the upper-right for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, shallow depth of field, soft creamy bokeh.',
+  decorations: ['sparkle', 'paw-print'],
+  notes: 'Featured image auto-générée pour l\'article avis-ultra-premium-direct le 2026-05-25.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -705,6 +719,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_AVIS_DOG_CHEF_CROQUETTES_CANARD_FRAIS,
   ART_AVIS_FIDELIS_MENUS_FRAIS_CHIEN_BOCAUX_V2,
   ART_AVIS_DOGFY_DIET_REPAS_FRAIS_CHIEN,
+  ART_AVIS_ULTRA_PREMIUM_DIRECT,
   // Social (1)
   OG_DEFAULT,
 ] as const
