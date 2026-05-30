@@ -165,8 +165,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'avis-dog-chef-croquettes-canard-frais': 'art-avis-dog-chef-croquettes-canard-frais',
   'avis-fidelis-menus-frais-chien-bocaux': 'art-avis-fidelis-menus-frais-chien-bocaux-v2',
   'avis-dogfy-diet-repas-frais-chien': 'art-avis-dogfy-diet-repas-frais-chien',
-  'avis-ultra-premium-direct': 'art-avis-ultra-premium-direct',
-  'chien-peut-manger-cerises': 'art-chien-peut-manger-cerises-v2',
+  'chien-barbecue-securite-aliments-eviter': 'art-chien-barbecue-securite-aliments-eviter',
 }
 
 /**
