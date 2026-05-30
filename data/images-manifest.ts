@@ -651,6 +651,20 @@ const ART_CHIEN_BARBECUE_SECURITE_ALIMENTS_EVITER: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article chien-barbecue-securite-aliments-eviter le 2026-05-27.',
 }
 
+const ART_FAUT_IL_REHYDRATER_CROQUETTES_CHIEN: ImageSlot = {
+  id: 'art-faut-il-rehydrater-croquettes-chien-2',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay still-life on warm cream linen: a shallow off-white ceramic dog bowl filled with golden-amber dry kibble half-submerged in warm water with gentle steam rising, a small clear glass measuring jug of water beside it, a wooden spoon, and a few dry kibble pieces scattered on the lower third. Style: mixed-media editorial — photo lifestyle combined with subtle hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, pill rose #FFD6E3 accent, soft amber #FFE8B5 on the kibble.',
+  composition: 'Bowl and jug centered-left at ~50% of the frame, 40%+ clean cream negative space on the upper-right for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, shallow depth of field, soft creamy bokeh.',
+  decorations: ['sparkle', 'paw-print'],
+  notes: 'Featured image auto-générée pour l\'article faut-il-rehydrater-croquettes-chien le 2026-05-30.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -720,6 +734,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_AVIS_FIDELIS_MENUS_FRAIS_CHIEN_BOCAUX_V2,
   ART_AVIS_DOGFY_DIET_REPAS_FRAIS_CHIEN,
   ART_CHIEN_BARBECUE_SECURITE_ALIMENTS_EVITER,
+  ART_FAUT_IL_REHYDRATER_CROQUETTES_CHIEN,
   // Social (1)
   OG_DEFAULT,
 ] as const
