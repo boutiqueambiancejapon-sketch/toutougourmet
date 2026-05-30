@@ -637,32 +637,18 @@ const ART_AVIS_DOGFY_DIET_REPAS_FRAIS_CHIEN: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article avis-dogfy-diet-repas-frais-chien le 2026-05-25.',
 }
 
-const ART_AVIS_ULTRA_PREMIUM_DIRECT: ImageSlot = {
-  id: 'art-avis-ultra-premium-direct',
+const ART_CHIEN_BARBECUE_SECURITE_ALIMENTS_EVITER: ImageSlot = {
+  id: 'art-chien-barbecue-securite-aliments-eviter',
   group: 'articles',
   ratio: '3:2',
-  tone: 'amber',
+  tone: 'green',
   imageReady: true,
   ext: 'jpeg',
   subject:
-    'Editorial mixed-media flat-lay still-life on warm cream linen: a shallow off-white ceramic dog bowl filled with crunchy golden-amber kibble with a mono-protein rustic appearance, kibble pieces scattered around. Beside the bowl, fresh ingredients evoking a French premium recipe — a small piece of fresh raw chicken breast pale-pink, a halved roasted sweet potato showing bright orange flesh, a small handful of fresh peas, a small wooden cutting board, a tiny bunch of fresh thyme and parsley, and a tiny linen napkin in soft amber tucked under the bowl. Style: mixed-media editorial — photo lifestyle combined with subtle hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, soft amber #FFE8B5 on the kibble and sweet potato, gentle rose #FFD6E3 hint on the chicken meat, pill-green #C2F0D5 on the peas and herbs.',
-  composition: 'Bowl and ingredients centered-left at ~50% of the frame, 40%+ clean cream negative space on the upper-right for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, shallow depth of field, soft creamy bokeh.',
-  decorations: ['sparkle', 'paw-print'],
-  notes: 'Featured image auto-générée pour l\'article avis-ultra-premium-direct le 2026-05-25.',
-}
-
-const ART_CHIEN_PEUT_MANGER_CERISES_V2: ImageSlot = {
-  id: 'art-chien-peut-manger-cerises-v2',
-  group: 'articles',
-  ratio: '3:2',
-  tone: 'rose',
-  imageReady: true,
-  ext: 'jpeg',
-  subject:
-    'Full-bleed editorial mixed-media still-life on a cream-linen kitchen table filling the entire frame (no internal frame or border): a shallow off-white ceramic dog bowl filled with glossy fresh red cherries, a few cherries spilling onto the linen, two cherries halved to show the pit removed, and a small set of cherry pits and green stems placed apart as a "do not give" detail. A curious cream-and-amber coated medium dog leans into the frame from the right, calm friendly expression. Style: mixed-media editorial — photo lifestyle combined with subtle hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, glossy natural red on the cherries, gentle rose #FFD6E3 and soft amber #FFE8B5 on the decorations.',
-  composition: 'Full-bleed photo, scene edge to edge. Bowl of cherries centered, dog entering from the right, foreground cherries and pits on the lower third. Airy clean cream space in the upper-left third for an editorial title overlay (part of the continuous photo, not an empty drawn band). Rule-of-thirds, soft natural daylight from upper-left, shallow depth of field, soft creamy bokeh.',
+    'Editorial mixed-media flat-lay still-life on warm cream linen: a shallow off-white ceramic dog bowl filled with a safe portion of plain grilled chicken pieces (light golden, unseasoned, no skin), garnished with a single fresh parsley sprig. Arranged in a soft diagonal arc around the bowl on the lower-right third: a single wooden barbecue skewer with a small piece of meat, one chipolata-style grilled sausage, a small grilled rib bone, a small whole brown onion, a tiny ceramic ramekin of dark barbecue sauce, and a halved garlic clove. Style: mixed-media editorial — photo lifestyle combined with subtle hand-drawn gouache decorations in flat color, contour #1A1109. Palette: cream #FAFAF8 dominant, pill-green #C2F0D5 accents on the parsley and paw-print decoration, soft amber #FFE8B5 highlights on the grilled chicken and rib bone, very subtle rose #FFD6E3 hint on a small linen napkin tucked under the bowl.',
+  composition: 'Bowl centered-left at ~45% of the frame, unsafe items arranged in a soft diagonal arc on the lower-right third, 40%+ clean cream negative space on the upper-right for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, shallow depth of field, soft creamy bokeh.',
   decorations: ['paw-print', 'sparkle'],
-  notes: 'Featured image auto-générée (full-bleed, sans cadre interne) pour l\'article chien-peut-manger-cerises le 2026-05-28. Régénération v2 après bug d\'affichage (cadre interne sur la v1).',
+  notes: 'Featured image auto-générée pour l\'article chien-barbecue-securite-aliments-eviter le 2026-05-27.',
 }
 
 // ============================================================
@@ -733,8 +719,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_AVIS_DOG_CHEF_CROQUETTES_CANARD_FRAIS,
   ART_AVIS_FIDELIS_MENUS_FRAIS_CHIEN_BOCAUX_V2,
   ART_AVIS_DOGFY_DIET_REPAS_FRAIS_CHIEN,
-  ART_AVIS_ULTRA_PREMIUM_DIRECT,
-  ART_CHIEN_PEUT_MANGER_CERISES_V2,
+  ART_CHIEN_BARBECUE_SECURITE_ALIMENTS_EVITER,
   // Social (1)
   OG_DEFAULT,
 ] as const
