@@ -166,6 +166,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'avis-fidelis-menus-frais-chien-bocaux': 'art-avis-fidelis-menus-frais-chien-bocaux-v2',
   'avis-dogfy-diet-repas-frais-chien': 'art-avis-dogfy-diet-repas-frais-chien',
   'chien-barbecue-securite-aliments-eviter': 'art-chien-barbecue-securite-aliments-eviter',
+  'faut-il-rehydrater-croquettes-chien': 'art-faut-il-rehydrater-croquettes-chien-2',
 }
 
 /**
