@@ -679,6 +679,20 @@ const ART_CHIEN_PEUT_MANGER_PAIN: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article chien-peut-manger-pain le 2026-06-02.',
 }
 
+const ART_PSYLLIUM_CHIEN_BIENFAITS_DOSAGE: ImageSlot = {
+  id: 'art-psyllium-chien-bienfaits-dosage',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay still-life on warm cream linen: a small off-white ceramic ramekin filled with pale beige psyllium husk powder, a wooden spoon beside it holding light tan psyllium husks, a small clear glass of water in which a translucent psyllium gel (mucilage) is forming with a few husks suspended, and a shallow off-white ceramic dog bowl with a scoop of kibble lightly dusted with psyllium powder. A few loose husks scattered on the lower third. Style: mixed-media editorial — photo lifestyle combined with subtle hand-drawn gouache decorations in flat color, contour #1A1109. Palette: cream #FAFAF8 dominant, gentle rose #FFD6E3 accent on a small linen napkin, soft amber #FFE8B5 on the kibble, a hint of pill-green #C2F0D5 on a small drawn botanical leaf.',
+  composition: 'Ramekin and bowl centered-left at ~50% of the frame, glass of gel upper-center, 40%+ clean cream negative space on the upper-right for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, shallow depth of field, soft creamy bokeh.',
+  decorations: ['paw-print', 'sparkle'],
+  notes: 'Featured image auto-générée pour l\'article psyllium-chien-bienfaits-dosage le 2026-06-02.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -750,6 +764,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHIEN_BARBECUE_SECURITE_ALIMENTS_EVITER,
   ART_FAUT_IL_REHYDRATER_CROQUETTES_CHIEN,
   ART_CHIEN_PEUT_MANGER_PAIN,
+  ART_PSYLLIUM_CHIEN_BIENFAITS_DOSAGE,
   // Social (1)
   OG_DEFAULT,
 ] as const
