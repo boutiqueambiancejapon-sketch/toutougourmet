@@ -665,6 +665,20 @@ const ART_FAUT_IL_REHYDRATER_CROQUETTES_CHIEN: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article faut-il-rehydrater-croquettes-chien le 2026-05-30.',
 }
 
+const ART_CHIEN_PEUT_MANGER_PAIN: ImageSlot = {
+  id: 'art-chien-peut-manger-pain',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay still-life on warm cream linen: a few slices and torn pieces of plain rustic white bread and a small chunk of baguette arranged loosely, beside a shallow off-white ceramic dog bowl. A curious medium dog with a cream-and-amber coat and soft floppy ears peeks gently into the frame from the upper-right corner, calm curious expression. Style: mixed-media editorial — photo lifestyle combined with subtle hand-drawn gouache decorations in flat color, contour #1A1109. Palette: cream #FAFAF8 dominant, gentle rose #FFD6E3 accent, soft amber #FFE8B5 on the bread crust, hints of blue #C8DCFF and green #C2F0D5 on the drawn botanicals.',
+  composition: 'Bread and bowl centered-left at ~45% of the frame, dog peeking from the upper-right but not dominating, 40%+ clean cream negative space upper-right for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, gentle catch-light in the dog eye, shallow depth of field, soft creamy bokeh.',
+  decorations: ['sparkle', 'paw-print'],
+  notes: 'Featured image auto-générée pour l\'article chien-peut-manger-pain le 2026-06-02.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -735,6 +749,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_AVIS_DOGFY_DIET_REPAS_FRAIS_CHIEN,
   ART_CHIEN_BARBECUE_SECURITE_ALIMENTS_EVITER,
   ART_FAUT_IL_REHYDRATER_CROQUETTES_CHIEN,
+  ART_CHIEN_PEUT_MANGER_PAIN,
   // Social (1)
   OG_DEFAULT,
 ] as const
