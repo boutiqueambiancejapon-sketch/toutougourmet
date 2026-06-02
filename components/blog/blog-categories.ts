@@ -169,6 +169,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'faut-il-rehydrater-croquettes-chien': 'art-faut-il-rehydrater-croquettes-chien-2',
   'chien-peut-manger-pain': 'art-chien-peut-manger-pain',
   'psyllium-chien-bienfaits-dosage': 'art-psyllium-chien-bienfaits-dosage',
+  'huile-olive-chien-bienfaits-dosage': 'art-huile-olive-chien-bienfaits-dosage',
 }
 
 /**
