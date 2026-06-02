@@ -693,6 +693,20 @@ const ART_PSYLLIUM_CHIEN_BIENFAITS_DOSAGE: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article psyllium-chien-bienfaits-dosage le 2026-06-02.',
 }
 
+const ART_HUILE_OLIVE_CHIEN_BIENFAITS_DOSAGE: ImageSlot = {
+  id: 'art-huile-olive-chien-bienfaits-dosage',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'amber',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay still-life on warm cream linen: a small clear glass bottle of golden-green extra virgin olive oil with a cork stopper, beside a shallow off-white ceramic dog bowl with golden-amber kibble drizzled with olive oil, a small wooden spoon, two whole green olives with a small olive branch, and a tiny soft-amber linen napkin.',
+  composition: 'Bottle and bowl centered-left at ~50% of the frame, 40%+ clean cream negative space on the upper-right for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, shallow depth of field, soft creamy bokeh.',
+  decorations: ['paw-print', 'sparkle'],
+  notes: 'Featured image auto-générée pour l\'article huile-olive-chien-bienfaits-dosage le 2026-06-02.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -765,6 +779,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_FAUT_IL_REHYDRATER_CROQUETTES_CHIEN,
   ART_CHIEN_PEUT_MANGER_PAIN,
   ART_PSYLLIUM_CHIEN_BIENFAITS_DOSAGE,
+  ART_HUILE_OLIVE_CHIEN_BIENFAITS_DOSAGE,
   // Social (1)
   OG_DEFAULT,
 ] as const
