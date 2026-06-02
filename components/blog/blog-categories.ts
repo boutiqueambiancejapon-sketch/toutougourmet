@@ -167,6 +167,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'avis-dogfy-diet-repas-frais-chien': 'art-avis-dogfy-diet-repas-frais-chien',
   'chien-barbecue-securite-aliments-eviter': 'art-chien-barbecue-securite-aliments-eviter',
   'faut-il-rehydrater-croquettes-chien': 'art-faut-il-rehydrater-croquettes-chien-2',
+  'chien-peut-manger-pain': 'art-chien-peut-manger-pain',
 }
 
 /**
