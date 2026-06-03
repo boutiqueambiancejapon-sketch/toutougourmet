@@ -707,6 +707,20 @@ const ART_HUILE_OLIVE_CHIEN_BIENFAITS_DOSAGE: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article huile-olive-chien-bienfaits-dosage le 2026-06-02.',
 }
 
+const ART_RECETTE_BISCUITS_POTIRON_CHIEN: ImageSlot = {
+  id: 'art-recette-biscuits-potiron-chien',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay still-life on warm cream linen: a small rustic baking tray of freshly baked bone-shaped and round dog biscuits in a warm pumpkin amber color, a small off-white ceramic bowl of smooth bright-orange pumpkin purée, a halved small orange pumpkin showing flesh and seeds, a wooden spoon holding rolled oats, a scattering of rolled oats, one cinnamon stick and a few fresh parsley sprigs. Style: mixed-media editorial — photo lifestyle combined with subtle hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, soft amber #FFE8B5 on the pumpkin and biscuits, gentle rose #FFD6E3 on a small linen napkin, hints of green #C2F0D5 on drawn botanicals.',
+  composition: 'Tray and pumpkin centered-left at ~50% of the frame, ingredients arranged on the lower third, 40%+ clean cream negative space on the upper-right for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, shallow depth of field, soft creamy bokeh.',
+  decorations: ['bone', 'sparkle', 'paw-print'],
+  notes: 'Featured image auto-générée pour l\'article recette-biscuits-potiron-chien le 2026-06-03.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -780,6 +794,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHIEN_PEUT_MANGER_PAIN,
   ART_PSYLLIUM_CHIEN_BIENFAITS_DOSAGE,
   ART_HUILE_OLIVE_CHIEN_BIENFAITS_DOSAGE,
+  ART_RECETTE_BISCUITS_POTIRON_CHIEN,
   // Social (1)
   OG_DEFAULT,
 ] as const
