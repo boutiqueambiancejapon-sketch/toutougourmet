@@ -170,6 +170,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-peut-manger-pain': 'art-chien-peut-manger-pain',
   'psyllium-chien-bienfaits-dosage': 'art-psyllium-chien-bienfaits-dosage',
   'huile-olive-chien-bienfaits-dosage': 'art-huile-olive-chien-bienfaits-dosage',
+  'recette-biscuits-potiron-chien': 'art-recette-biscuits-potiron-chien',
 }
 
 /**
