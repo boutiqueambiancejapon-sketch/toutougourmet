@@ -721,6 +721,20 @@ const ART_RECETTE_BISCUITS_POTIRON_CHIEN: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article recette-biscuits-potiron-chien le 2026-06-03.',
 }
 
+const ART_PROTEINES_CHIEN_BESOINS_QUALITE: ImageSlot = {
+  id: 'art-proteines-chien-besoins-qualite',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay still-life on warm cream linen: a shallow off-white ceramic dog bowl filled with golden-amber dry kibble, surrounded by protein sources — one cracked brown egg with intact yolk, a small piece of fresh raw pink chicken breast, a small flaking pink salmon fillet, a few green peas, and a small wooden scoop with kibble. A soft-rose linen napkin tucked under the bowl. Style: mixed-media editorial — photo lifestyle combined with subtle hand-drawn gouache decorations in flat color, contour #1A1109. Palette: cream #FAFAF8 dominant, gentle rose #FFD6E3 accents, soft amber #FFE8B5 on the kibble and egg yolk, pink hints on the meat and salmon, a touch of green #C2F0D5 on the peas.',
+  composition: 'Bowl and protein sources centered-left at ~50% of the frame, 40%+ clean cream negative space on the upper-right for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, shallow depth of field, soft creamy bokeh.',
+  decorations: ['paw-print', 'sparkle'],
+  notes: 'Featured image auto-générée pour l\'article proteines-chien-besoins-qualite le 2026-06-04.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -795,6 +809,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_PSYLLIUM_CHIEN_BIENFAITS_DOSAGE,
   ART_HUILE_OLIVE_CHIEN_BIENFAITS_DOSAGE,
   ART_RECETTE_BISCUITS_POTIRON_CHIEN,
+  ART_PROTEINES_CHIEN_BESOINS_QUALITE,
   // Social (1)
   OG_DEFAULT,
 ] as const
