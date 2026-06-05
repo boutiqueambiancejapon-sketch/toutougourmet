@@ -735,6 +735,20 @@ const ART_PROTEINES_CHIEN_BESOINS_QUALITE: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article proteines-chien-besoins-qualite le 2026-06-04.',
 }
 
+const ART_CROQUETTES_CHIOT_GRANDE_RACE: ImageSlot = {
+  id: 'art-croquettes-chiot-grande-race',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay still-life on warm cream linen: a shallow off-white ceramic dog bowl filled with large golden-amber triangular kibble (grande race size, approximately 12-15mm), a small wooden scoop beside the bowl holding a few large kibble pieces, a few loose kibble pieces scattered on the lower third. A young large-breed puppy (Labrador Retriever, approximately 8-10 weeks old, golden coat, big round puppy head, oversized paws) peeks curiously into the frame from the upper-right corner with a calm playful expression.',
+  composition: 'Bowl and wooden scoop centered-left at approximately 45% of the frame, large kibble scattered on lower third, puppy peeking from the upper-right corner but not dominating the frame, 40%+ clean cream negative space on the upper-right area for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, gentle catch-light in the puppy eyes, shallow depth of field, soft creamy bokeh background.',
+  decorations: ['paw-print', 'bone', 'sparkle'],
+  notes: "Featured image auto-générée pour l'article croquettes-chiot-grande-race le 2026-06-05.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -810,6 +824,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_HUILE_OLIVE_CHIEN_BIENFAITS_DOSAGE,
   ART_RECETTE_BISCUITS_POTIRON_CHIEN,
   ART_PROTEINES_CHIEN_BESOINS_QUALITE,
+  ART_CROQUETTES_CHIOT_GRANDE_RACE,
   // Social (1)
   OG_DEFAULT,
 ] as const
