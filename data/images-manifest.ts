@@ -763,6 +763,20 @@ const ART_CHIEN_PEUT_MANGER_NOIX: ImageSlot = {
   notes: "Featured image auto-générée pour l'article chien-peut-manger-noix le 2026-06-08.",
 }
 
+const ART_CHIEN_PEUT_MANGER_LENTILLES: ImageSlot = {
+  id: 'art-chien-peut-manger-lentilles',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay still-life on warm cream linen: a shallow off-white ceramic dog bowl filled with cooked green lentils and coral-red lentils, a wooden spoon beside the bowl, a small pile of dry red coral lentils on the lower-left, a few dry green lentils scattered, and a curious medium-sized dog with cream-and-amber coat and soft floppy ears peeking from the upper-right corner, calm inquisitive expression.',
+  composition: 'Bowl and lentils centered-left at ~45% of the frame, dog peeking upper-right but not dominating, 40%+ clean cream negative space upper-right for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, shallow depth of field, soft creamy bokeh.',
+  decorations: ['food-bowl', 'sparkle'],
+  notes: "Featured image auto-générée pour l'article chien-peut-manger-lentilles le 2026-06-09.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -840,6 +854,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_PROTEINES_CHIEN_BESOINS_QUALITE,
   ART_CROQUETTES_CHIOT_GRANDE_RACE,
   ART_CHIEN_PEUT_MANGER_NOIX,
+  ART_CHIEN_PEUT_MANGER_LENTILLES,
   // Social (1)
   OG_DEFAULT,
 ] as const
