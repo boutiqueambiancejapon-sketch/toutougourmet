@@ -174,6 +174,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'proteines-chien-besoins-qualite': 'art-proteines-chien-besoins-qualite',
   'croquettes-chiot-grande-race': 'art-croquettes-chiot-grande-race',
   'chien-peut-manger-noix': 'art-chien-peut-manger-noix',
+  'chien-peut-manger-lentilles': 'art-chien-peut-manger-lentilles',
 }
 
 /**
