@@ -777,6 +777,21 @@ const ART_CHIEN_PEUT_MANGER_LENTILLES: ImageSlot = {
   notes: "Featured image auto-générée pour l'article chien-peut-manger-lentilles le 2026-06-09.",
 }
 
+const ART_RECETTE_POULET_SECHE_CHIEN: ImageSlot = {
+  id: 'art-recette-poulet-seche-chien',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay still-life on warm cream linen: golden-brown homemade dried chicken strips (jerky) arranged in a loose artful pile on a warm cream wooden cutting board, a fresh raw chicken breast fillet visible to the side. Warm natural daylight from upper-left, shallow depth of field, strips and board sharp, background cream soft bokeh.',
+  composition:
+    'Chicken jerky strips occupying center-left two-thirds of the frame, clean cream negative space on the right third for editorial text overlay. Rule of thirds. Background soft cream bokeh. 40%+ negative cream space.',
+  decorations: ['food-bowl', 'sparkle'],
+  notes: 'Featured image auto-générée pour l\'article recette-poulet-seche-chien le 2026-06-10.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -855,6 +870,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CROQUETTES_CHIOT_GRANDE_RACE,
   ART_CHIEN_PEUT_MANGER_NOIX,
   ART_CHIEN_PEUT_MANGER_LENTILLES,
+  ART_RECETTE_POULET_SECHE_CHIEN,
   // Social (1)
   OG_DEFAULT,
 ] as const
