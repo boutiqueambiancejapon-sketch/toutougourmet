@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/outils/cout`, lastModified: NOW, changeFrequency: 'monthly', priority: 0.65 },
     { url: `${BASE}/outils/poids`, lastModified: NOW, changeFrequency: 'monthly', priority: 0.65 },
     { url: `${BASE}/comparatifs/elmut-vs-dog-chef`, lastModified: NOW, changeFrequency: 'monthly', priority: 0.75 },
+    { url: `${BASE}/plan-du-site`, lastModified: NOW, changeFrequency: 'weekly', priority: 0.3 },
     { url: `${BASE}/a-propos`, lastModified: NOW, changeFrequency: 'monthly', priority: 0.4 },
     { url: `${BASE}/mentions-legales`, lastModified: NOW, changeFrequency: 'yearly', priority: 0.2 },
     { url: `${BASE}/politique-de-confidentialite`, lastModified: NOW, changeFrequency: 'yearly', priority: 0.2 },
