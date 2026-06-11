@@ -792,6 +792,21 @@ const ART_RECETTE_POULET_SECHE_CHIEN: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article recette-poulet-seche-chien le 2026-06-10.',
 }
 
+const ART_CHIEN_PEUT_MANGER_KIWI: ImageSlot = {
+  id: 'art-chien-peut-manger-kiwi',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay still-life on warm cream linen: two ripe green kiwis, one sliced in half revealing bright green flesh and black seeds, one whole kiwi, a shallow off-white ceramic dog bowl with small diced kiwi pieces. A curious medium dog with cream-and-amber coat and soft floppy ears peeks gently into the frame from the upper-right corner, calm inquisitive expression. Small soft-rose linen napkin tucked under the bowl.',
+  composition:
+    'Kiwis and bowl centered-left at ~45% of the frame, dog peeking upper-right but not dominating, 40%+ clean cream negative space upper-right for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, gentle catch-light in the dog eye, shallow depth of field, soft creamy bokeh.',
+  decorations: ['sparkle', 'food-bowl'],
+  notes: "Featured image auto-générée pour l'article chien-peut-manger-kiwi le 2026-06-11.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -871,6 +886,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHIEN_PEUT_MANGER_NOIX,
   ART_CHIEN_PEUT_MANGER_LENTILLES,
   ART_RECETTE_POULET_SECHE_CHIEN,
+  ART_CHIEN_PEUT_MANGER_KIWI,
   // Social (1)
   OG_DEFAULT,
 ] as const
