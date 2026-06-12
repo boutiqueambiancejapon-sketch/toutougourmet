@@ -177,6 +177,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-peut-manger-lentilles': 'art-chien-peut-manger-lentilles',
   'recette-poulet-seche-chien': 'art-recette-poulet-seche-chien',
   'chien-peut-manger-kiwi': 'art-chien-peut-manger-kiwi',
+  'recette-friandises-foie-seche-chien': 'art-recette-friandises-foie-seche-chien-2',
 }
 
 /**
