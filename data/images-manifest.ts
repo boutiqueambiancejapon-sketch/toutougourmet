@@ -807,6 +807,21 @@ const ART_CHIEN_PEUT_MANGER_KIWI: ImageSlot = {
   notes: "Featured image auto-générée pour l'article chien-peut-manger-kiwi le 2026-06-11.",
 }
 
+const ART_RECETTE_FRIANDISES_FOIE_SECHE_CHIEN: ImageSlot = {
+  id: 'art-recette-friandises-foie-seche-chien-2',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay still-life on warm wood cutting board: sliced raw beef liver (deep burgundy-red) beside a small pile of golden-brown dried liver dog treats, a shallow off-white ceramic bowl filled with treats, a fresh parsley sprig, a small linen napkin in soft rose. A curious medium dog with cream-and-amber coat and soft floppy ears appears blurred in the upper-right background.',
+  composition:
+    'Cutting board lower-left at ~50% of frame, treats and bowl centered, clean cream negative space upper-right (40%+). Natural side lighting from left, warm ambient light.',
+  decorations: ['food-bowl', 'bone'],
+  notes: 'Featured image auto-générée pour l\'article recette-friandises-foie-seche-chien le 2026-06-12.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -887,6 +902,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHIEN_PEUT_MANGER_LENTILLES,
   ART_RECETTE_POULET_SECHE_CHIEN,
   ART_CHIEN_PEUT_MANGER_KIWI,
+  ART_RECETTE_FRIANDISES_FOIE_SECHE_CHIEN,
   // Social (1)
   OG_DEFAULT,
 ] as const
