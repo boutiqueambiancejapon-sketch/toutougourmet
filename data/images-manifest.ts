@@ -822,6 +822,20 @@ const ART_RECETTE_FRIANDISES_FOIE_SECHE_CHIEN: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article recette-friandises-foie-seche-chien le 2026-06-12.',
 }
 
+const ART_MEILLEURES_CROQUETTES_CHIEN_SENIOR: ImageSlot = {
+  id: 'art-meilleures-croquettes-chien-senior',
+  group: 'articles',
+  ratio: '4:3',
+  tone: 'blue',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay still-life on warm cream linen: three small shallow ceramic dog bowls in a diagonal arrangement, each filled with dry golden-amber kibble of slightly different hues (representing different senior dog food brands). A vintage magnifying glass leans against the central bowl. A silver-muzzled medium dog with gentle wise expression and gray fur around the snout sits upright on the right side looking at the bowls with calm dignified expression. Hand-drawn gouache checklist icon and nutrition labels float in the upper-left corner.',
+  composition: 'Three bowls diagonal centered-left, senior dog on the right, 40%+ clean cream negative space upper-right for editorial title overlay. Pill-blue #C8DCFF accent on a folded linen napkin.',
+  decorations: ['sparkle', 'paw-print'],
+  notes: 'Featured image auto-générée pour l\'article meilleures-croquettes-chien-senior le 2026-06-13.',
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -877,7 +891,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_BARF,
   ART_BCS,
   ART_TRANSITION,
-  // Featured per-article (1+, auto-générés par la tâche planifiée)
+  // Featured per-article (auto-générés par la tâche planifiée)
   ART_RECETTE_BOUILLON_OS_MAISON_CHIEN,
   ART_CHIEN_PEUT_MANGER_BEURRE_DE_CACAHUETE,
   ART_TAPIS_DE_LECHAGE_CHIEN_GUIDE_UTILISATION_V2,
@@ -903,6 +917,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_RECETTE_POULET_SECHE_CHIEN,
   ART_CHIEN_PEUT_MANGER_KIWI,
   ART_RECETTE_FRIANDISES_FOIE_SECHE_CHIEN,
+  ART_MEILLEURES_CROQUETTES_CHIEN_SENIOR,
   // Social (1)
   OG_DEFAULT,
 ] as const

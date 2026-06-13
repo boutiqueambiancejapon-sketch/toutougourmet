@@ -178,6 +178,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'recette-poulet-seche-chien': 'art-recette-poulet-seche-chien',
   'chien-peut-manger-kiwi': 'art-chien-peut-manger-kiwi',
   'recette-friandises-foie-seche-chien': 'art-recette-friandises-foie-seche-chien-2',
+  'meilleures-croquettes-chien-senior': 'art-meilleures-croquettes-chien-senior',
 }
 
 /**
