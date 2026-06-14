@@ -836,6 +836,21 @@ const ART_MEILLEURES_CROQUETTES_CHIEN_SENIOR: ImageSlot = {
   notes: 'Featured image auto-générée pour l\'article meilleures-croquettes-chien-senior le 2026-06-13.',
 }
 
+const ART_CHIEN_PEUT_MANGER_AVOINE: ImageSlot = {
+  id: 'art-chien-peut-manger-avoine',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'amber',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial flat-lay still-life on warm cream linen: a small ceramic bowl overflowing with natural rolled oats (cream-colored oat flakes), with a few loose oat grains scattered around it, and a clean empty white dog bowl slightly behind. Warm golden morning daylight from upper-left, 85mm editorial photography feel.',
+  composition:
+    'Oat bowl centered-left, dog bowl slightly behind right, oat grains scattered in foreground. Clean cream negative space on the right half (40%+) for editorial title overlay. Rule of thirds.',
+  decorations: ['food-bowl', 'sparkle', 'paw-print'],
+  notes: "Featured image auto-générée pour l'article chien-peut-manger-avoine le 2026-06-14.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -918,6 +933,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHIEN_PEUT_MANGER_KIWI,
   ART_RECETTE_FRIANDISES_FOIE_SECHE_CHIEN,
   ART_MEILLEURES_CROQUETTES_CHIEN_SENIOR,
+  ART_CHIEN_PEUT_MANGER_AVOINE,
   // Social (1)
   OG_DEFAULT,
 ] as const
