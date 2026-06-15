@@ -851,6 +851,21 @@ const ART_CHIEN_PEUT_MANGER_AVOINE: ImageSlot = {
   notes: "Featured image auto-générée pour l'article chien-peut-manger-avoine le 2026-06-14.",
 }
 
+const ART_ADDITIFS_CROQUETTES_CHIEN_CONSERVATEURS_COLORANTS: ImageSlot = {
+  id: 'art-additifs-croquettes-chien-conservateurs-colorants',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'green',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay still-life on warm cream linen: a shallow off-white ceramic dog bowl filled with golden-amber dry kibble, a vintage magnifying glass with a brass frame leaning against the bowl, a small amber glass dropper bottle of golden tocopherol oil beside a wooden spoon, a fresh rosemary sprig as a natural preservative emblem, a small white ceramic ramekin with pale golden tocopherol capsules, scattered kibble pieces on the lower third, soft-green linen napkin tucked under the bowl.',
+  composition:
+    'Bowl and magnifying glass centered-left at approximately 45% of the frame, dropper bottle and rosemary arranged on the right third, 40%+ clean cream negative space on the upper-right for editorial title overlay. Rule-of-thirds, soft natural daylight from upper-left, shallow depth of field, soft creamy bokeh.',
+  decorations: ['sparkle', 'paw-print'],
+  notes: "Featured image auto-générée pour l'article additifs-croquettes-chien-conservateurs-colorants le 2026-06-15.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -934,6 +949,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_RECETTE_FRIANDISES_FOIE_SECHE_CHIEN,
   ART_MEILLEURES_CROQUETTES_CHIEN_SENIOR,
   ART_CHIEN_PEUT_MANGER_AVOINE,
+  ART_ADDITIFS_CROQUETTES_CHIEN_CONSERVATEURS_COLORANTS,
   // Social (1)
   OG_DEFAULT,
 ] as const
