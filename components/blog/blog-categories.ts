@@ -180,6 +180,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'recette-friandises-foie-seche-chien': 'art-recette-friandises-foie-seche-chien-2',
   'meilleures-croquettes-chien-senior': 'art-meilleures-croquettes-chien-senior',
   'chien-peut-manger-avoine': 'art-chien-peut-manger-avoine',
+  'additifs-croquettes-chien-conservateurs-colorants': 'art-additifs-croquettes-chien-conservateurs-colorants',
 }
 
 /**
