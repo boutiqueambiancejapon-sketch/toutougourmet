@@ -181,6 +181,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'meilleures-croquettes-chien-senior': 'art-meilleures-croquettes-chien-senior',
   'chien-peut-manger-avoine': 'art-chien-peut-manger-avoine',
   'additifs-croquettes-chien-conservateurs-colorants': 'art-additifs-croquettes-chien-conservateurs-colorants',
+  'chien-peut-manger-melon': 'art-chien-peut-manger-melon',
 }
 
 /**
