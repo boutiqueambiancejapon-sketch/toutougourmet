@@ -866,6 +866,21 @@ const ART_ADDITIFS_CROQUETTES_CHIEN_CONSERVATEURS_COLORANTS: ImageSlot = {
   notes: "Featured image auto-générée pour l'article additifs-croquettes-chien-conservateurs-colorants le 2026-06-15.",
 }
 
+const ART_CHIEN_PEUT_MANGER_MELON: ImageSlot = {
+  id: 'art-chien-peut-manger-melon',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'A medium-sized dog with warm tan fur and floppy ears gently sniffing a large fresh cantaloupe melon slice showing bright orange flesh on a cream surface, seeds removed; calm curious expression, slightly tilted head, warm natural studio daylight from upper left, mixed-media editorial style.',
+  composition:
+    'Melon slice center-left of frame, dog muzzle and curious eyes at right third, 40%+ cream negative space at top and right edge for editorial text overlay; shallow depth of field, melon and dog face crisp, background soft cream bokeh.',
+  decorations: ['sparkle', 'confetti'],
+  notes: "Featured image auto-générée pour l'article chien-peut-manger-melon le 2026-06-16.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -950,6 +965,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_MEILLEURES_CROQUETTES_CHIEN_SENIOR,
   ART_CHIEN_PEUT_MANGER_AVOINE,
   ART_ADDITIFS_CROQUETTES_CHIEN_CONSERVATEURS_COLORANTS,
+  ART_CHIEN_PEUT_MANGER_MELON,
   // Social (1)
   OG_DEFAULT,
 ] as const
