@@ -63,12 +63,18 @@ export function Illustration({
   return (
     <div
       className={cn(
-        'relative overflow-hidden bg-[var(--bg-surface-2)]',
-        // In fill mode use absolute inset-0 so the wrapper sticks to its
-        // positioned parent regardless of whether parent height comes from
-        // an explicit value, min-height, or aspect-ratio.
-        // (h-full would not resolve when parent uses only min-height.)
-        fill ? 'absolute inset-0' : '',
+        // Do NOT combine `relative` and `absolute` — Tailwind generates
+        // `.relative` after `.absolute` in the stylesheet, so `relative`
+        // always wins when both are present. Keep exactly one position
+        // class per mode.
+        //
+        // fill=false  → normal flow, sized by slot aspect-ratio
+        // fill=true   → absolute inset-0, covers the nearest positioned ancestor
+        //               regardless of whether its height comes from min-height,
+        //               aspect-ratio, or an explicit value.
+        fill
+          ? 'absolute inset-0 overflow-hidden bg-[var(--bg-surface-2)]'
+          : 'relative overflow-hidden bg-[var(--bg-surface-2)]',
         className
       )}
       style={fill ? undefined : { aspectRatio: `${w} / ${h}` }}
