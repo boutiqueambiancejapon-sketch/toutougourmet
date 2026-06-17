@@ -6,6 +6,25 @@
 
 ---
 
+## 0. RÈGLE DE CADRAGE — PLEIN-CADRE OBLIGATOIRE (priorité absolue)
+
+L'image est affichée en `object-cover` dans des conteneurs de ratios variés
+(16:9 en hero d'article, ~1:1 à paysage dans les cards, 4:3 en body). Le texte
+du site est **toujours posé à côté de l'image, jamais dessus**. Il ne faut donc
+**JAMAIS** réserver de bandeau, colonne ou marge de couleur unie « pour le texte ».
+
+- La scène photographique remplit **tout le cadre, bord à bord** (full-bleed).
+- Le sujet (chien / aliment / gamelle) et son décor touchent les quatre bords.
+- **Aucune bande crème plate**, aucune colonne vide, aucun cadre/passe-partout.
+- Le sujet principal est posé de façon à rester lisible quel que soit le recadrage
+  (centre élargi qui survit à un crop 16:9, 4:3 ou carré).
+- L'« espace négatif » autorisé = arrière-plan **photographique** doux (bokeh crème
+  de la scène réelle), pas un aplat de couleur réservé.
+
+Cette règle prime sur toute mention contraire plus bas dans ce document.
+
+---
+
 ## 1. Intention visuelle
 
 Style **"photo réaliste + illustration peinte par-dessus"**.
@@ -47,6 +66,7 @@ Une image contient **1 à 3** éléments parmi cette liste (jamais plus, jamais 
 6. **Empreinte de patte** — trait contour noir, remplissage pill, taille moyenne
 
 Règle : les éléments sont **dessinés**, pas photographiques. Contour visible. Aplat ou léger dégradé.
+Les décorations sont posées **sur la photo** (au-dessus du sujet ou de la scène), jamais dans une marge vide.
 
 ---
 
@@ -55,6 +75,13 @@ Règle : les éléments sont **dessinés**, pas photographiques. Contour visible
 ```
 You are generating an image for "Toutou Gourmet", a French premium dog food
 comparison website. Style guide:
+
+FRAMING (HIGHEST PRIORITY): Full-bleed. The photographic scene fills the ENTIRE
+frame edge-to-edge. The subject and its setting reach all four edges. NEVER
+reserve a flat-colour band, column, margin, border or empty cream block for
+text — the website places all text OUTSIDE the image, never on top of it.
+Compose the subject so it stays well-framed after a centre crop to 16:9, 4:3
+or square.
 
 STYLE: Mixed media. Start from a photorealistic base (lifestyle/editorial
 photography, natural warm daylight, soft film grain, 85mm look) then OVERLAY
@@ -72,23 +99,26 @@ COLOR PALETTE (strict):
 DECORATIVE SIGNATURE (pick 1 to 3 per image, no more, no less):
 party cone hat on the dog's head, illustrated food bowl, stylized bone,
 4-point sparkle star, paw print, geometric confetti (small triangles+circles).
-These elements MUST be drawn (not photographed) with visible contour lines.
+These elements MUST be drawn (not photographed) with visible contour lines,
+placed ON the photographic scene — never inside an empty margin.
 
 NEGATIVE / AVOID:
 - No text, no typography, no watermark, no logo
 - No brand packaging imitation (no visible food bags or branded products)
 - No dark moody lighting, no dramatic shadows, no night scenes
 - No AI-typical deformed anatomy (check eyes, paws, mouth)
-- No cluttered backgrounds — keep it clean, airy, 40%+ negative space
+- No empty flat-colour band, column, border, frame or reserved text zone
+- No letterboxing / pillarboxing / vignette frame around the photo
 - No surreal or psychedelic effects
 - No humans in frame (dogs only, unless explicitly requested)
 - No aggressive or stressed dog expressions — always calm, happy, curious
 
 COMPOSITION:
-- Subject centered or rule-of-thirds
+- Subject centered or rule-of-thirds, filling the frame edge-to-edge
 - Shallow depth of field on the photo layer (dog/food crisp, background soft cream)
-- Decorative elements placed with intention (hat aligned with head, bowl at dog's muzzle level, confetti scattered at edges)
-- 40%+ of the frame is soft cream negative space to allow UI overlays
+- Decorative elements placed with intention (hat aligned with head, bowl at dog's muzzle level, confetti scattered over the scene)
+- The soft cream background is PHOTOGRAPHIC depth-of-field bokeh from the real
+  scene, spread across the whole frame — NOT a reserved flat zone for UI text
 
 OUTPUT: {ratio} aspect ratio. High resolution, print-quality.
 ```
@@ -99,10 +129,11 @@ OUTPUT: {ratio} aspect ratio. High resolution, print-quality.
 
 ### 5.1 Hero (home / blog hub / article)
 
-- **Sujet** : scène large, chien + accessoire (gamelle / os), plan moyen
+- **Sujet** : scène large, chien + accessoire (gamelle / os), plan moyen, qui **remplit le cadre**
 - **Éléments déco** : 2-3 (ex. confetti + chapeau OU gamelle + étoile + confetti)
 - **Ratio** : 16:9 (1920×1080 export, 1600w webp)
-- **Negative space** : zone crème dégagée en bas ET à gauche (pour H1 overlay)
+- **Cadrage** : full-bleed, sujet décalé selon la règle des tiers mais la scène
+  photographique couvre tout le cadre — pas de bandeau crème vide réservé à un H1
 
 ### 5.2 Carte marque (4 slots)
 
@@ -113,16 +144,18 @@ OUTPUT: {ratio} aspect ratio. High resolution, print-quality.
 
 ### 5.3 Carte race (6 slots)
 
-- **Sujet** : portrait chien de la race, plan buste ou tête-épaules, expression calme
+- **Sujet** : portrait chien de la race, plan buste ou tête-épaules, expression calme, **qui remplit le cadre**
 - **Éléments déco** : 1 seul — souvent **chapeau de fête** sur la tête (signature forte) OU empreinte de patte flottante
 - **Ratio** : 1:1 (1000×1000)
 - **Ton** : dérivé du fond, accent couleur race (amber/rose/blue/green)
+- **Cadrage** : le chien et le fond studio crème occupent tout le cadre bord à bord ; pas de colonne vide réservée au texte
 
 ### 5.4 Cover article (par catégorie + pilotes)
 
 - **Sujet** : illustration conceptuelle liée au sujet (ex. santé = bol + comprimés dessinés ; comportement = chien avec bulles de pensée ; nutrition = ingrédients)
 - **Éléments déco** : 2-3, ton aligné avec la catégorie
 - **Ratio** : 3:2 (1500×1000)
+- **Cadrage** : full-bleed, scène bord à bord
 - **Ton** :
   - Nutrition → ambre `#FFE8B5`
   - Santé → vert `#C2F0D5`
@@ -157,6 +190,10 @@ RATIO: ${slot.ratio}
 ```
 
 Appel via `@google/generative-ai` → `gemini-2.5-flash-image-preview` avec `responseModalities: ['IMAGE']`.
+
+> ⚠️ Les `composition` notes par slot dans `data/images-manifest.ts` ne doivent
+> plus contenir d'instruction de « negative space / text zone / reserved margin ».
+> La règle §0 (full-bleed) prime sur toute note de slot contraire.
 
 ---
 
