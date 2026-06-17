@@ -18,7 +18,8 @@ interface IllustrationProps {
   priority?: boolean
   /**
    * Fill mode — the illustration takes 100% width and 100% height of its
-   * parent, ignoring the slot aspect-ratio. Parent must be positioned.
+   * parent, ignoring the slot aspect-ratio. Parent must be positioned
+   * (position: relative / absolute / fixed / sticky).
    */
   fill?: boolean
   /** Custom `sizes` attribute for next/image; falls back to a sensible default. */
@@ -63,7 +64,11 @@ export function Illustration({
     <div
       className={cn(
         'relative overflow-hidden bg-[var(--bg-surface-2)]',
-        fill ? 'w-full h-full' : '',
+        // In fill mode use absolute inset-0 so the wrapper sticks to its
+        // positioned parent regardless of whether parent height comes from
+        // an explicit value, min-height, or aspect-ratio.
+        // (h-full would not resolve when parent uses only min-height.)
+        fill ? 'absolute inset-0' : '',
         className
       )}
       style={fill ? undefined : { aspectRatio: `${w} / ${h}` }}
