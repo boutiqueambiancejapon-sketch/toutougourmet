@@ -182,6 +182,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-peut-manger-avoine': 'art-chien-peut-manger-avoine',
   'additifs-croquettes-chien-conservateurs-colorants': 'art-additifs-croquettes-chien-conservateurs-colorants',
   'chien-peut-manger-melon': 'art-chien-peut-manger-melon',
+  'chien-mange-xylitol-urgence': 'art-chien-mange-xylitol-urgence',
 }
 
 /**
