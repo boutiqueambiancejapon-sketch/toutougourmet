@@ -881,6 +881,21 @@ const ART_CHIEN_PEUT_MANGER_MELON: ImageSlot = {
   notes: "Featured image auto-générée pour l'article chien-peut-manger-melon le 2026-06-16.",
 }
 
+const ART_CHIEN_MANGE_XYLITOL_URGENCE: ImageSlot = {
+  id: 'art-chien-mange-xylitol-urgence',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'A warm cream tabletop editorial scene: a curious tan dog with floppy ears leans in from the right sniffing an open blister pack of small white sugar-free chewing-gum pellets that has spilled onto a cream linen surface, beside a small open glass jar of peanut butter, mixed-media editorial style, soft natural daylight from upper-left.',
+  composition:
+    'Full-bleed: the dog and the cream tabletop scene fill the entire frame edge-to-edge, reaching all four edges; dog and spilled pellets centre-right, peanut butter jar on the left, shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band or text margin.',
+  decorations: ['sparkle', 'paw-print'],
+  notes: "Featured image auto-générée pour l'article chien-mange-xylitol-urgence le 2026-06-17.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -966,6 +981,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHIEN_PEUT_MANGER_AVOINE,
   ART_ADDITIFS_CROQUETTES_CHIEN_CONSERVATEURS_COLORANTS,
   ART_CHIEN_PEUT_MANGER_MELON,
+  ART_CHIEN_MANGE_XYLITOL_URGENCE,
   // Social (1)
   OG_DEFAULT,
 ] as const
