@@ -1,3 +1,4 @@
+
 /**
  * Images manifest — Toutou Gourmet V2
  *
@@ -137,8 +138,7 @@ const BRAND_DOG_CHEF: ImageSlot = {
   tone: 'rose',
   subject:
     'A handwritten-style fresh meal portion in a clear compartmented tray (meat, veggies, grains) with a small ribbon tag, shot from above on a cream surface.',
-  composition:
-    'Tray centered, slight tilt for editorial feel. Cream negative space around.',
+  composition: 'Tray centered, slight tilt for editorial feel. Cream negative space around.',
   decorations: ['sparkle', 'confetti'],
   notes:
     'Evokes tailored personalized fresh meals. Rose-forward palette. Do NOT imitate Dog Chef packaging.',
@@ -896,6 +896,21 @@ const ART_CHIEN_MANGE_XYLITOL_URGENCE: ImageSlot = {
   notes: "Featured image auto-générée pour l'article chien-mange-xylitol-urgence le 2026-06-17.",
 }
 
+const ART_CHARDON_MARIE_CHIEN_BIENFAITS_DOSAGE: ImageSlot = {
+  id: 'art-chardon-marie-chien-bienfaits-dosage',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'green',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'A warm cream linen tabletop editorial scene: a fresh sprig of milk thistle with its spiky purple flower and a small pile of seeds rest beside a plain cream ceramic bowl, while a calm friendly tan dog with soft floppy ears leans in from the right and sniffs toward the bowl; mixed-media editorial style, soft natural daylight from the upper-left.',
+  composition:
+    'Full-bleed: the dog and the cream tabletop scene fill the entire frame edge-to-edge, reaching all four edges; milk thistle and seeds lower-left, bowl centre, dog head upper-right; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band or text margin.',
+  decorations: ['sparkle', 'paw-print'],
+  notes: "Featured image auto-générée pour l'article chardon-marie-chien-bienfaits-dosage le 2026-06-19.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -982,6 +997,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_ADDITIFS_CROQUETTES_CHIEN_CONSERVATEURS_COLORANTS,
   ART_CHIEN_PEUT_MANGER_MELON,
   ART_CHIEN_MANGE_XYLITOL_URGENCE,
+  ART_CHARDON_MARIE_CHIEN_BIENFAITS_DOSAGE,
   // Social (1)
   OG_DEFAULT,
 ] as const
