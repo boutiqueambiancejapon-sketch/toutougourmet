@@ -1,4 +1,5 @@
 
+
 /**
  * Images manifest — Toutou Gourmet V2
  *
@@ -911,6 +912,21 @@ const ART_CHARDON_MARIE_CHIEN_BIENFAITS_DOSAGE: ImageSlot = {
   notes: "Featured image auto-générée pour l'article chardon-marie-chien-bienfaits-dosage le 2026-06-19.",
 }
 
+const ART_CHIEN_TOUJOURS_FAIM_CAUSES_SOLUTIONS: ImageSlot = {
+  id: 'art-chien-toujours-faim-causes-solutions',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'green',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'A warm cream kitchen-floor editorial scene: a calm friendly tan retriever-type dog lies and gazes eagerly at an empty cream ceramic bowl, tongue slightly out, with a small pile of fresh green beans and courgette slices and a few stray kibble beside the bowl; mixed-media editorial style, soft natural daylight from the upper-left.',
+  composition:
+    'Full-bleed: the dog and the cream kitchen scene fill the entire frame edge-to-edge, reaching all four edges; dog upper-right, empty bowl lower-centre, green vegetables lower-left; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band or text margin.',
+  decorations: ['sparkle', 'paw-print'],
+  notes: "Featured image auto-générée pour l'article chien-toujours-faim-causes-solutions le 2026-06-20.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -998,6 +1014,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHIEN_PEUT_MANGER_MELON,
   ART_CHIEN_MANGE_XYLITOL_URGENCE,
   ART_CHARDON_MARIE_CHIEN_BIENFAITS_DOSAGE,
+  ART_CHIEN_TOUJOURS_FAIM_CAUSES_SOLUTIONS,
   // Social (1)
   OG_DEFAULT,
 ] as const
@@ -1008,16 +1025,4 @@ export function getSlotById(id: string): ImageSlot | undefined {
 
 export function getSlotsByGroup(group: ImageGroup): readonly ImageSlot[] {
   return imageSlots.filter((s) => s.group === group)
-}
-
-/**
- * Construit le chemin public d'une image à partir d'un slot.
- * Respecte le champ optionnel `slot.ext` (par défaut `webp`).
- *
- * Ex: { id: 'breed-akita-inu', group: 'breeds', ext: 'jpeg' }
- *  → '/images/breeds/breed-akita-inu.jpeg'
- */
-export function getSlotPath(slot: ImageSlot): string {
-  const ext = slot.ext ?? 'webp'
-  return `/images/${slot.group}/${slot.id}.${ext}`
 }
