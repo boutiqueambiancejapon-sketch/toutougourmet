@@ -184,6 +184,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-peut-manger-melon': 'art-chien-peut-manger-melon',
   'chien-mange-xylitol-urgence': 'art-chien-mange-xylitol-urgence',
   'chardon-marie-chien-bienfaits-dosage': 'art-chardon-marie-chien-bienfaits-dosage',
+  'chien-toujours-faim-causes-solutions': 'art-chien-toujours-faim-causes-solutions',
 }
 
 /**
