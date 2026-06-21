@@ -16,7 +16,8 @@ import { StickyCtaDouble } from '@/components/blog/StickyCtaDouble'
 import { getStickyCtaForArticle } from '@/lib/sticky-cta-config'
 import { ArticleLayout } from '@/components/blog/ArticleLayout'
 import { getArticleSlot } from '@/components/blog/blog-categories'
-import { getSlotById, getSlotPath } from '@/data/images-manifest'
+import { getSlotById } from '@/data/images-manifest'
+import { getSlotPath } from '@/data/image-utils'
 import {
   InfoBox, Callout, FeatureGrid, Feature,
   StatRow, Stat, CompareTable, CompareThead, CompareTh,
