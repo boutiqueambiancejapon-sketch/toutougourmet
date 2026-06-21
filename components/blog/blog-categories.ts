@@ -185,6 +185,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-mange-xylitol-urgence': 'art-chien-mange-xylitol-urgence',
   'chardon-marie-chien-bienfaits-dosage': 'art-chardon-marie-chien-bienfaits-dosage',
   'chien-toujours-faim-causes-solutions': 'art-chien-toujours-faim-causes-solutions',
+  'chien-peut-manger-carottes': 'art-chien-peut-manger-carottes',
 }
 
 /**
