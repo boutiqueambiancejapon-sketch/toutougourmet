@@ -1,5 +1,3 @@
-
-
 /**
  * Images manifest — Toutou Gourmet V2
  *
@@ -927,6 +925,21 @@ const ART_CHIEN_TOUJOURS_FAIM_CAUSES_SOLUTIONS: ImageSlot = {
   notes: "Featured image auto-générée pour l'article chien-toujours-faim-causes-solutions le 2026-06-20.",
 }
 
+const ART_CHIEN_PEUT_MANGER_CAROTTES: ImageSlot = {
+  id: 'art-chien-peut-manger-carottes',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'A warm cream linen tabletop editorial scene: a shallow off-white ceramic dog bowl filled with bright-orange carrot rounds sits centre-left, two whole fresh carrots with leafy green tops lie beside it, and a small wooden cutting board holds a few orange carrot sticks; a calm friendly tan-and-cream dog leans in from the right and sniffs gently toward the bowl; mixed-media editorial style, soft natural daylight from the upper-left.',
+  composition:
+    'Full-bleed: the dog and the cream tabletop scene fill the entire frame edge-to-edge, reaching all four edges; carrots and cutting board lower-left, bowl of carrot rounds centre, dog head upper-right; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band or text margin.',
+  decorations: ['sparkle', 'paw-print'],
+  notes: "Featured image auto-générée pour l'article chien-peut-manger-carottes le 2026-06-21.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1015,6 +1028,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHIEN_MANGE_XYLITOL_URGENCE,
   ART_CHARDON_MARIE_CHIEN_BIENFAITS_DOSAGE,
   ART_CHIEN_TOUJOURS_FAIM_CAUSES_SOLUTIONS,
+  ART_CHIEN_PEUT_MANGER_CAROTTES,
   // Social (1)
   OG_DEFAULT,
 ] as const
