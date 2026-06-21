@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import {
   getSlotById,
-  getSlotPath,
   RATIO_DIMENSIONS,
   type ImageGroup,
 } from '@/data/images-manifest'
+import { getSlotPath } from '@/data/image-utils'
 import { DecorativeOverlay } from './DecorativeOverlay'
 import { IllustratedPlaceholder, type PlaceholderVariant } from './IllustratedPlaceholder'
 import { cn } from '@/lib/utils'
