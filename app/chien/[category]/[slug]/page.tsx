@@ -17,7 +17,8 @@ import { getStickyCtaForArticle } from '@/lib/sticky-cta-config'
 import { ArticleLayout } from '@/components/blog/ArticleLayout'
 import { getCategoryBySlug } from '@/data/categories'
 import { getArticleSlot } from '@/components/blog/blog-categories'
-import { getSlotById, getSlotPath } from '@/data/images-manifest'
+import { getSlotById } from '@/data/images-manifest'
+import { getSlotPath } from '@/data/image-utils'
 import { DEFAULT_AUTHOR } from '@/data/authors'
 import {
   InfoBox, Callout, FeatureGrid, Feature,
