@@ -940,6 +940,21 @@ const ART_CHIEN_PEUT_MANGER_CAROTTES: ImageSlot = {
   notes: "Featured image auto-générée pour l'article chien-peut-manger-carottes le 2026-06-21.",
 }
 
+const ART_CROQUETTES_A_VOLONTE_OU_RATIONNEES: ImageSlot = {
+  id: 'art-croquettes-a-volonte-ou-rationnees',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'A warm cream kitchen-counter editorial scene about portioning dog food: a shallow off-white ceramic dog bowl holds a neat measured portion of brown kibble centre, a small kitchen scale with a scoop of kibble sits centre-left, a calm friendly tan-and-cream dog looks toward the bowl from the right, and a few stray kibble pieces rest on the counter in the foreground; mixed-media editorial style, soft natural daylight from the upper-left.',
+  composition:
+    'Full-bleed: the dog and the cream kitchen scene fill the entire frame edge-to-edge, reaching all four edges; kitchen scale centre-left, bowl of kibble centre, dog head upper-right, stray kibble lower foreground; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band or text margin.',
+  decorations: ['sparkle', 'paw-print'],
+  notes: "Featured image auto-générée pour l'article croquettes-a-volonte-ou-rationnees le 2026-06-22.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1030,6 +1045,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHIEN_TOUJOURS_FAIM_CAUSES_SOLUTIONS,
   ART_CHIEN_PEUT_MANGER_CAROTTES,
   // Social (1)
+  ART_CROQUETTES_A_VOLONTE_OU_RATIONNEES,
   OG_DEFAULT,
 ] as const
 
