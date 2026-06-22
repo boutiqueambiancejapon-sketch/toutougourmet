@@ -186,6 +186,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chardon-marie-chien-bienfaits-dosage': 'art-chardon-marie-chien-bienfaits-dosage',
   'chien-toujours-faim-causes-solutions': 'art-chien-toujours-faim-causes-solutions',
   'chien-peut-manger-carottes': 'art-chien-peut-manger-carottes',
+  'croquettes-a-volonte-ou-rationnees': 'art-croquettes-a-volonte-ou-rationnees',
 }
 
 /**
