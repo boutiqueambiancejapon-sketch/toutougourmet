@@ -187,6 +187,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-toujours-faim-causes-solutions': 'art-chien-toujours-faim-causes-solutions',
   'chien-peut-manger-carottes': 'art-chien-peut-manger-carottes',
   'croquettes-a-volonte-ou-rationnees': 'art-croquettes-a-volonte-ou-rationnees',
+  'recette-patee-maison-poulet-chien': 'art-recette-patee-maison-poulet-chien',
 }
 
 /**
