@@ -955,6 +955,20 @@ const ART_CROQUETTES_A_VOLONTE_OU_RATIONNEES: ImageSlot = {
   notes: "Featured image auto-générée pour l'article croquettes-a-volonte-ou-rationnees le 2026-06-22.",
 }
 
+const ART_RECETTE_PATEE_MAISON_POULET_CHIEN: ImageSlot = {
+  id: 'art-recette-patee-maison-poulet-chien',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay on warm cream linen: a warm cream ceramic bowl holding a freshly made homemade dog meal — cooked shredded chicken breast, a portion of fluffy white rice, steamed green courgette slices and green beans, with a small drizzle of golden oil — a wooden spoon resting beside, a few green bean pods and a sprig of green herb around the bowl. Mixed-media editorial style: lifestyle photo with subtle hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, soft rose #FFD6E3 accent, hints of amber #FFE8B5 and blue #C8DCFF on drawn confetti, green #C2F0D5 on the vegetables.',
+  composition: 'Full-bleed: the bowl of food and the warm cream linen scene fill the entire frame edge-to-edge, reaching all four edges; bowl centred, wooden spoon lower-right, ingredient cues scattered around; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band or text margin.',
+  decorations: ['sparkle', 'paw-print', 'confetti'],
+  notes: "Featured image auto-générée pour l'article recette-patee-maison-poulet-chien le 2026-06-23.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1046,6 +1060,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHIEN_PEUT_MANGER_CAROTTES,
   // Social (1)
   ART_CROQUETTES_A_VOLONTE_OU_RATIONNEES,
+  ART_RECETTE_PATEE_MAISON_POULET_CHIEN,
   OG_DEFAULT,
 ] as const
 
