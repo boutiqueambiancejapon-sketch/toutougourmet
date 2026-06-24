@@ -1086,3 +1086,4 @@ export function getSlotById(id: string): ImageSlot | undefined {
 
 export function getSlotsByGroup(group: ImageGroup): readonly ImageSlot[] {
   return imageSlots.filter((s) => s.group === group)
+}
