@@ -969,6 +969,21 @@ const ART_RECETTE_PATEE_MAISON_POULET_CHIEN: ImageSlot = {
   notes: "Featured image auto-générée pour l'article recette-patee-maison-poulet-chien le 2026-06-23.",
 }
 
+const ART_CHIEN_PEUT_MANGER_POMME: ImageSlot = {
+  id: 'art-chien-peut-manger-pomme',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'A warm cream editorial scene about apples for dogs: a few fresh red apples and one apple cut into clean wedges on a cream surface, with a calm curious tan-and-cream medium dog leaning in from the right to sniff the apple slices; mixed-media editorial style, soft natural daylight from the upper-left.',
+  composition:
+    'Full-bleed: the dog and the cream tabletop scene fill the entire frame edge-to-edge, reaching all four edges; whole apples lower-left, cut apple wedges centre, dog head upper-right; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band or text margin.',
+  decorations: ['paw-print', 'sparkle'],
+  notes: "Featured image auto-générée pour l'article chien-peut-manger-pomme le 2026-06-24.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1061,6 +1076,7 @@ export const imageSlots: readonly ImageSlot[] = [
   // Social (1)
   ART_CROQUETTES_A_VOLONTE_OU_RATIONNEES,
   ART_RECETTE_PATEE_MAISON_POULET_CHIEN,
+  ART_CHIEN_PEUT_MANGER_POMME,
   OG_DEFAULT,
 ] as const
 
@@ -1070,4 +1086,3 @@ export function getSlotById(id: string): ImageSlot | undefined {
 
 export function getSlotsByGroup(group: ImageGroup): readonly ImageSlot[] {
   return imageSlots.filter((s) => s.group === group)
-}
