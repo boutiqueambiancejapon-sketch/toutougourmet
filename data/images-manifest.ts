@@ -1,3 +1,4 @@
+
 /**
  * Images manifest — Toutou Gourmet V2
  *
@@ -984,6 +985,21 @@ const ART_CHIEN_PEUT_MANGER_POMME: ImageSlot = {
   notes: "Featured image auto-générée pour l'article chien-peut-manger-pomme le 2026-06-24.",
 }
 
+const ART_GAMELLE_SURELEVEE_CHIEN: ImageSlot = {
+  id: 'art-gamelle-surelevee-chien-v2',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'green',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial lifestyle photo: a calm German Shepherd standing in three-quarter view beside a raised wooden dog-feeder stand holding two stainless steel bowls at chest height, in a bright warm cream home interior, soft natural daylight from the upper-left, calm curious expression. Mixed-media editorial style with small hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, green #C2F0D5 accent on a drawn paw print, amber #FFE8B5 on a small sparkle.',
+  composition:
+    'Full-bleed: the dog and the cream interior scene fill the entire frame edge-to-edge, reaching all four edges; dog centre-right, raised wooden feeder lower-left, shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band or text margin.',
+  decorations: ['paw-print', 'sparkle'],
+  notes: "Featured image auto-générée pour l'article gamelle-surelevee-chien le 2026-06-25.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1077,6 +1093,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CROQUETTES_A_VOLONTE_OU_RATIONNEES,
   ART_RECETTE_PATEE_MAISON_POULET_CHIEN,
   ART_CHIEN_PEUT_MANGER_POMME,
+  ART_GAMELLE_SURELEVEE_CHIEN,
   OG_DEFAULT,
 ] as const
 
