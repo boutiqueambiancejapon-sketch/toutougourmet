@@ -469,6 +469,20 @@ const ART_TRANSITION: ImageSlot = {
   decorations: ['confetti', 'sparkle'],
 }
 
+const ART_RECETTE_PATATE_DOUCE_SECHEE_CHIEN: ImageSlot = {
+  id: 'art-recette-patate-douce-sechee-chien',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial lifestyle scene on a warm cream wooden surface: neat rows of home-dried orange sweet potato treats (thick chewy strips and thin crunchy rounds), one fresh halved sweet potato showing bright orange flesh, and a small cream ceramic bowl. A calm curious medium dog leans in from the upper corner to sniff the treats.',
+  composition: 'Full-bleed: the photographic scene fills the entire frame edge-to-edge, sweet potato treats arranged across the lower two-thirds, dog upper-right, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column or margin for text.',
+  decorations: ['paw-print', 'sparkle'],
+  notes: 'Featured image auto-générée pour l\'article recette-patate-douce-sechee-chien le 2026-06-26.',
+}
+
 const ART_RECETTE_BOUILLON_OS_MAISON_CHIEN: ImageSlot = {
   id: 'art-recette-bouillon-os-maison-chien',
   group: 'articles',
@@ -1094,6 +1108,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_RECETTE_PATEE_MAISON_POULET_CHIEN,
   ART_CHIEN_PEUT_MANGER_POMME,
   ART_GAMELLE_SURELEVEE_CHIEN,
+  ART_RECETTE_PATATE_DOUCE_SECHEE_CHIEN,
   OG_DEFAULT,
 ] as const
 
