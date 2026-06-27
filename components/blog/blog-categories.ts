@@ -191,6 +191,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-peut-manger-pomme': 'art-chien-peut-manger-pomme',
   'gamelle-surelevee-chien': 'art-gamelle-surelevee-chien-v2',
   'recette-patate-douce-sechee-chien': 'art-recette-patate-douce-sechee-chien',
+  'chien-peut-manger-haricots-verts': 'art-chien-peut-manger-haricots-verts',
 }
 
 /**
