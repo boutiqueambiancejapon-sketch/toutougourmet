@@ -1,4 +1,3 @@
-
 /**
  * Images manifest — Toutou Gourmet V2
  *
@@ -467,6 +466,20 @@ const ART_TRANSITION: ImageSlot = {
     'Two adjacent small bowls — one with old-style kibble, one with new kibble of different color — with a few pieces mixing in the middle on a cream surface.',
   composition: 'Two bowls centered, top-down view, transition zone emphasized.',
   decorations: ['confetti', 'sparkle'],
+}
+
+const ART_CHIEN_PEUT_MANGER_HARICOTS_VERTS: ImageSlot = {
+  id: 'art-chien-peut-manger-haricots-verts',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial flat-lay still-life on a warm cream wooden surface: a small cream ceramic bowl filled with bright green cooked green beans cut into short pieces, a few whole fresh green beans and a wooden spoon beside it, one halved green bean showing its seeds. A calm curious cream-and-tan medium dog with soft floppy ears leans into the frame from the upper-right corner to sniff the green beans.',
+  composition: 'Full-bleed: the photographic scene fills the entire frame edge-to-edge, bowl of green beans on the lower-left third, dog upper-right, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column or margin for text.',
+  decorations: ['paw-print', 'sparkle'],
+  notes: 'Featured image auto-générée pour l’article chien-peut-manger-haricots-verts le 2026-06-27.',
 }
 
 const ART_RECETTE_PATATE_DOUCE_SECHEE_CHIEN: ImageSlot = {
@@ -1109,6 +1122,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHIEN_PEUT_MANGER_POMME,
   ART_GAMELLE_SURELEVEE_CHIEN,
   ART_RECETTE_PATATE_DOUCE_SECHEE_CHIEN,
+  ART_CHIEN_PEUT_MANGER_HARICOTS_VERTS,
   OG_DEFAULT,
 ] as const
 
