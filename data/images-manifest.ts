@@ -468,6 +468,20 @@ const ART_TRANSITION: ImageSlot = {
   decorations: ['confetti', 'sparkle'],
 }
 
+const ART_QUELLE_QUANTITE_PATEE_CHIEN_PAR_JOUR: ImageSlot = {
+  id: 'art-quelle-quantite-patee-chien-par-jour',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial food still-life on a warm cream tabletop: a clean white ceramic dog bowl filled with glossy brown wet dog food (pate loaf chunks), a small kitchen scale and a few fresh ingredient cues (parsley sprig, small piece of raw meat) softly out of focus beside it. A calm curious tan-and-brindle medium dog leans in from the upper-right corner toward the bowl.',
+  composition: 'Full-bleed: the photographic scene fills the entire frame edge-to-edge, bowl of wet food on the lower-centre third, dog upper-right, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column or margin for text.',
+  decorations: ['paw-print', 'sparkle', 'confetti'],
+  notes: 'Featured image auto-generee pour l\'article quelle-quantite-patee-chien-par-jour le 2026-06-28.',
+}
+
 const ART_CHIEN_PEUT_MANGER_HARICOTS_VERTS: ImageSlot = {
   id: 'art-chien-peut-manger-haricots-verts',
   group: 'articles',
@@ -1123,6 +1137,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_GAMELLE_SURELEVEE_CHIEN,
   ART_RECETTE_PATATE_DOUCE_SECHEE_CHIEN,
   ART_CHIEN_PEUT_MANGER_HARICOTS_VERTS,
+  ART_QUELLE_QUANTITE_PATEE_CHIEN_PAR_JOUR,
   OG_DEFAULT,
 ] as const
 
