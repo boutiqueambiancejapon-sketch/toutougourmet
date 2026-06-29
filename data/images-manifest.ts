@@ -468,6 +468,20 @@ const ART_TRANSITION: ImageSlot = {
   decorations: ['confetti', 'sparkle'],
 }
 
+const ART_GLUCIDES_CROQUETTES_CHIEN: ImageSlot = {
+  id: 'art-glucides-croquettes-chien',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media still-life on warm cream linen: a shallow off-white ceramic dog bowl filled with crunchy golden-brown kibble, surrounded by starch sources — a small mound of cooked white rice on a tiny wooden spoon, a halved roasted sweet potato showing bright orange flesh, a small handful of fresh green peas, a few amber barley grains and a whole potato. A calm curious tan-and-cream medium dog leans in from the upper-right toward the bowl. Style: mixed-media editorial — photographic lifestyle still-life combined with subtle hand-drawn gouache decorations in flat color, contour #1A1109. Palette: cream #FAFAF8 dominant, soft amber #FFE8B5 on the kibble and sweet potato, pill-green #C2F0D5 on the peas, gentle rose #FFD6E3 hint on a small linen napkin.',
+  composition: 'Full-bleed: the photographic scene fills the entire frame edge-to-edge, bowl of kibble lower-centre, dog leaning in from upper-right, starch ingredients spread across the lower third, soft cream photographic bokeh covering the whole frame. No reserved blank cream band, column or margin for text.',
+  decorations: ['paw-print', 'sparkle'],
+  notes: 'Featured image auto-générée pour l\'article glucides-croquettes-chien le 2026-06-29.',
+}
+
 const ART_QUELLE_QUANTITE_PATEE_CHIEN_PAR_JOUR: ImageSlot = {
   id: 'art-quelle-quantite-patee-chien-par-jour',
   group: 'articles',
@@ -1138,6 +1152,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_RECETTE_PATATE_DOUCE_SECHEE_CHIEN,
   ART_CHIEN_PEUT_MANGER_HARICOTS_VERTS,
   ART_QUELLE_QUANTITE_PATEE_CHIEN_PAR_JOUR,
+  ART_GLUCIDES_CROQUETTES_CHIEN,
   OG_DEFAULT,
 ] as const
 
