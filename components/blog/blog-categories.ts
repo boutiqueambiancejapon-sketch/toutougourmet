@@ -193,6 +193,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'gamelle-surelevee-chien': 'art-gamelle-surelevee-chien-v2',
   'recette-patate-douce-sechee-chien': 'art-recette-patate-douce-sechee-chien',
   'chien-peut-manger-haricots-verts': 'art-chien-peut-manger-haricots-verts',
+  'glucides-croquettes-chien': 'art-glucides-croquettes-chien',
 }
 
 /**
