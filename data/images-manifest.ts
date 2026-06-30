@@ -1055,6 +1055,21 @@ const ART_GAMELLE_SURELEVEE_CHIEN: ImageSlot = {
   notes: "Featured image auto-générée pour l'article gamelle-surelevee-chien le 2026-06-25.",
 }
 
+const ART_CHIEN_PEUT_MANGER_THON: ImageSlot = {
+  id: 'art-chien-peut-manger-thon',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'A warm cream tabletop editorial scene about tuna for dogs: a small open tin of plain tuna in water and a light off-white ceramic bowl holding flaked tuna sit on a pale cream surface, while a calm friendly curious tan-and-cream medium dog leans in from the right to sniff toward the bowl; mixed-media editorial style, soft natural daylight from the upper-left.',
+  composition:
+    'Full-bleed: the dog and the cream tabletop scene fill the entire frame edge-to-edge, reaching all four edges; ceramic bowl of flaked tuna centre-left, open tin lower-centre, dog head upper-right; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band or text margin.',
+  decorations: ['sparkle', 'paw-print'],
+  notes: "Featured image auto-générée pour l'article chien-peut-manger-thon le 2026-06-30.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1153,6 +1168,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHIEN_PEUT_MANGER_HARICOTS_VERTS,
   ART_QUELLE_QUANTITE_PATEE_CHIEN_PAR_JOUR,
   ART_GLUCIDES_CROQUETTES_CHIEN,
+  ART_CHIEN_PEUT_MANGER_THON,
   OG_DEFAULT,
 ] as const
 
