@@ -1070,6 +1070,21 @@ const ART_CHIEN_PEUT_MANGER_THON: ImageSlot = {
   notes: "Featured image auto-générée pour l'article chien-peut-manger-thon le 2026-06-30.",
 }
 
+const ART_FIBRES_ALIMENTAIRES_CHIEN_ROLE_SOURCES_DOSAGE: ImageSlot = {
+  id: 'art-fibres-alimentaires-chien-role-sources-dosage',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'A warm cream tabletop editorial scene about dietary fibre for dogs: a light off-white ceramic bowl holds fibre-rich foods — cubes of cooked pumpkin, grated carrot, a small heap of psyllium husk and a spoon of beet pulp — on a pale cream surface, while a calm friendly curious tan-and-cream medium dog leans in from the right to sniff toward the bowl; mixed-media editorial style, soft natural daylight from the upper-left.',
+  composition:
+    'Full-bleed: the dog and the cream tabletop scene fill the entire frame edge-to-edge, reaching all four edges; ceramic bowl of fibre-rich food centre-left, dog head upper-right; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band or text margin.',
+  decorations: ['paw-print', 'sparkle'],
+  notes: "Featured image auto-générée pour l'article fibres-alimentaires-chien-role-sources-dosage le 2026-07-01.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1169,6 +1184,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_QUELLE_QUANTITE_PATEE_CHIEN_PAR_JOUR,
   ART_GLUCIDES_CROQUETTES_CHIEN,
   ART_CHIEN_PEUT_MANGER_THON,
+  ART_FIBRES_ALIMENTAIRES_CHIEN_ROLE_SOURCES_DOSAGE,
   OG_DEFAULT,
 ] as const
 
