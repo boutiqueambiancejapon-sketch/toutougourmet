@@ -1085,6 +1085,21 @@ const ART_FIBRES_ALIMENTAIRES_CHIEN_ROLE_SOURCES_DOSAGE: ImageSlot = {
   notes: "Featured image auto-générée pour l'article fibres-alimentaires-chien-role-sources-dosage le 2026-07-01.",
 }
 
+const ART_CHOISIR_TAILLE_CROQUETTES_CHIEN: ImageSlot = {
+  id: 'art-choisir-taille-croquettes-chien',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial lifestyle food photography on a warm cream tabletop: a cream ceramic dog bowl filled with dry kibble, with three separate loose piles of kibble beside it sorted clearly by size — tiny 8mm, medium 15mm and large 25mm — so the size difference reads at a glance; a light-coated cream-and-tan dog leans in from the right to sniff the bowl; soft natural daylight from the upper-left, shallow depth of field.',
+  composition:
+    'Full-bleed: the photographic scene fills the entire frame edge-to-edge, cream bowl centre with the three kibble-size piles across the lower third and the dog head upper-right; soft cream photographic bokeh spread across the whole frame; no reserved blank cream band, column or text margin.',
+  decorations: ['paw-print', 'sparkle'],
+  notes: "Featured image auto-générée pour l'article choisir-taille-croquettes-chien le 2026-07-02.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1185,6 +1200,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_GLUCIDES_CROQUETTES_CHIEN,
   ART_CHIEN_PEUT_MANGER_THON,
   ART_FIBRES_ALIMENTAIRES_CHIEN_ROLE_SOURCES_DOSAGE,
+  ART_CHOISIR_TAILLE_CROQUETTES_CHIEN,
   OG_DEFAULT,
 ] as const
 
