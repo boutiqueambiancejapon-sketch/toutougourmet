@@ -1,3 +1,4 @@
+
 /**
  * Images manifest — Toutou Gourmet V2
  *
@@ -1100,6 +1101,21 @@ const ART_CHOISIR_TAILLE_CROQUETTES_CHIEN: ImageSlot = {
   notes: "Featured image auto-générée pour l'article choisir-taille-croquettes-chien le 2026-07-02.",
 }
 
+const ART_RECETTE_FRIANDISES_BANANE_AVOINE_CHIEN: ImageSlot = {
+  id: 'art-recette-friandises-banane-avoine-chien',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media still-life on a warm cream tabletop about homemade banana-and-oat dog treats: a light off-white ceramic bowl of golden-brown baked bone-shaped biscuits, a ripe spotted banana partly peeled, a small heap of rolled oats on a wooden spoon and one cracked egg, while a calm friendly curious tan-and-cream medium dog leans in from the upper-right to sniff toward the biscuits; soft natural daylight from the upper-left.',
+  composition:
+    'Full-bleed: the dog and the cream tabletop scene fill the entire frame edge-to-edge, reaching all four edges; biscuit bowl lower-centre-left, banana and oats across the lower third, dog head upper-right; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band or text margin.',
+  decorations: ['paw-print', 'sparkle'],
+  notes: "Featured image auto-générée pour l'article recette-friandises-banane-avoine-chien le 2026-07-03.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1201,6 +1217,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHIEN_PEUT_MANGER_THON,
   ART_FIBRES_ALIMENTAIRES_CHIEN_ROLE_SOURCES_DOSAGE,
   ART_CHOISIR_TAILLE_CROQUETTES_CHIEN,
+  ART_RECETTE_FRIANDISES_BANANE_AVOINE_CHIEN,
   OG_DEFAULT,
 ] as const
 
