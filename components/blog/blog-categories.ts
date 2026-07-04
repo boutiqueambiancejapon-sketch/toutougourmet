@@ -198,6 +198,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'glucides-croquettes-chien': 'art-glucides-croquettes-chien',
   'fibres-alimentaires-chien-role-sources-dosage': 'art-fibres-alimentaires-chien-role-sources-dosage',
   'recette-friandises-banane-avoine-chien': 'art-recette-friandises-banane-avoine-chien',
+  'nourriture-braque-de-weimar': 'art-nourriture-braque-de-weimar',
 }
 
 /**
