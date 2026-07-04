@@ -1,4 +1,3 @@
-
 /**
  * Images manifest — Toutou Gourmet V2
  *
@@ -1116,6 +1115,21 @@ const ART_RECETTE_FRIANDISES_BANANE_AVOINE_CHIEN: ImageSlot = {
   notes: "Featured image auto-générée pour l'article recette-friandises-banane-avoine-chien le 2026-07-03.",
 }
 
+const ART_NOURRITURE_BRAQUE_DE_WEIMAR: ImageSlot = {
+  id: 'art-nourriture-braque-de-weimar',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'amber',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'A chest-up portrait of a Weimaraner (Braque de Weimar) dog: sleek short silver-grey mouse-grey coat, long refined muzzle, long velvety high-set ears folded down beside the head, striking amber-to-blue-grey eyes, calm friendly inquisitive expression, warm cream studio backdrop, soft natural daylight from the upper-left, gentle catch-light in the eyes, slight three-quarter angle, head-and-shoulders framing.',
+  composition:
+    'Full-bleed: the dog and the warm cream studio scene fill the entire frame edge-to-edge, reaching all four edges; dog framed head-and-shoulders slightly off-centre per rule-of-thirds; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream column or text margin.',
+  decorations: ['party-hat', 'sparkle'],
+  notes: "Featured image auto-generee pour l'article nourriture-braque-de-weimar le 2026-07-04.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1218,6 +1232,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_FIBRES_ALIMENTAIRES_CHIEN_ROLE_SOURCES_DOSAGE,
   ART_CHOISIR_TAILLE_CROQUETTES_CHIEN,
   ART_RECETTE_FRIANDISES_BANANE_AVOINE_CHIEN,
+  ART_NOURRITURE_BRAQUE_DE_WEIMAR,
   OG_DEFAULT,
 ] as const
 
