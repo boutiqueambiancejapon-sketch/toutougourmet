@@ -199,6 +199,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'fibres-alimentaires-chien-role-sources-dosage': 'art-fibres-alimentaires-chien-role-sources-dosage',
   'recette-friandises-banane-avoine-chien': 'art-recette-friandises-banane-avoine-chien',
   'nourriture-braque-de-weimar': 'art-nourriture-braque-de-weimar',
+  'chien-peut-manger-prunes': 'art-chien-peut-manger-prunes',
 }
 
 /**
