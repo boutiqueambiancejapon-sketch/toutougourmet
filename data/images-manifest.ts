@@ -1130,6 +1130,21 @@ const ART_NOURRITURE_BRAQUE_DE_WEIMAR: ImageSlot = {
   notes: "Featured image auto-generee pour l'article nourriture-braque-de-weimar le 2026-07-04.",
 }
 
+const ART_CHIEN_PEUT_MANGER_PRUNES: ImageSlot = {
+  id: 'art-chien-peut-manger-prunes',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'A warm cream studio tabletop editorial scene about plums for dogs: a small pile of fresh purple-red plums with one plum cut in half showing amber flesh and its removed stone set aside, while a calm friendly curious beagle-type dog leans in from the right to gently sniff toward the fruit; mixed-media editorial style, soft natural daylight from the upper-left.',
+  composition:
+    'Full-bleed: the dog and the cream tabletop scene fill the entire frame edge-to-edge, reaching all four edges; whole plums and the halved plum lower-left, dog head upper-right; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band or text margin.',
+  decorations: ['sparkle', 'confetti'],
+  notes: "Featured image auto-générée pour l'article chien-peut-manger-prunes le 2026-07-05.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1233,6 +1248,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHOISIR_TAILLE_CROQUETTES_CHIEN,
   ART_RECETTE_FRIANDISES_BANANE_AVOINE_CHIEN,
   ART_NOURRITURE_BRAQUE_DE_WEIMAR,
+  ART_CHIEN_PEUT_MANGER_PRUNES,
   OG_DEFAULT,
 ] as const
 
