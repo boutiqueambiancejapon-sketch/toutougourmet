@@ -1145,6 +1145,21 @@ const ART_CHIEN_PEUT_MANGER_PRUNES: ImageSlot = {
   notes: "Featured image auto-générée pour l'article chien-peut-manger-prunes le 2026-07-05.",
 }
 
+const ART_MEILLEURES_CROQUETTES_PETIT_CHIEN: ImageSlot = {
+  id: 'art-meilleures-croquettes-petit-chien',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'blue',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'A warm cream tabletop editorial scene about kibble for small dogs: a small light-cream ceramic dog bowl filled with tiny 8mm kibble, a small wooden scoop holding a little pile of tiny kibble beside it, while a calm friendly curious Yorkshire-terrier-type small dog with silky tan-and-grey coat and perky ears leans in from the upper-right to sniff toward the bowl; mixed-media editorial style, soft natural daylight from the upper-left, gentle catch-light in the eyes.',
+  composition:
+    'Full-bleed: the small dog and the cream tabletop scene fill the entire frame edge-to-edge, reaching all four edges; bowl of tiny kibble centre-left, wooden scoop lower-right, dog head upper-right; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band or text margin.',
+  decorations: ['sparkle', 'paw-print'],
+  notes: "Featured image auto-générée pour l'article meilleures-croquettes-petit-chien le 2026-07-06.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1249,6 +1264,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_RECETTE_FRIANDISES_BANANE_AVOINE_CHIEN,
   ART_NOURRITURE_BRAQUE_DE_WEIMAR,
   ART_CHIEN_PEUT_MANGER_PRUNES,
+  ART_MEILLEURES_CROQUETTES_PETIT_CHIEN,
   OG_DEFAULT,
 ] as const
 
