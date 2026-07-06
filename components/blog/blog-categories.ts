@@ -200,6 +200,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'recette-friandises-banane-avoine-chien': 'art-recette-friandises-banane-avoine-chien',
   'nourriture-braque-de-weimar': 'art-nourriture-braque-de-weimar',
   'chien-peut-manger-prunes': 'art-chien-peut-manger-prunes',
+  'meilleures-croquettes-petit-chien': 'art-meilleures-croquettes-petit-chien',
 }
 
 /**
