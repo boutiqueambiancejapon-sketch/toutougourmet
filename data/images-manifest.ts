@@ -1,3 +1,4 @@
+
 /**
  * Images manifest — Toutou Gourmet V2
  *
@@ -466,6 +467,20 @@ const ART_TRANSITION: ImageSlot = {
     'Two adjacent small bowls — one with old-style kibble, one with new kibble of different color — with a few pieces mixing in the middle on a cream surface.',
   composition: 'Two bowls centered, top-down view, transition zone emphasized.',
   decorations: ['confetti', 'sparkle'],
+}
+
+const ART_CHIEN_A_BU_EAU_DE_MER_QUE_FAIRE: ImageSlot = {
+  id: 'art-chien-a-bu-eau-de-mer-que-faire',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media beach scene on warm cream sand: a calm happy short-coated golden-fawn dog sits near the shoreline in warm daylight, a real off-white ceramic bowl of clean fresh water on the sand at its muzzle level, soft turquoise-cream sea with out-of-focus waves behind. Mixed-media: photographic lifestyle base with hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, rose #FFD6E3 drawn bowl accent, blue #C8DCFF and amber #FFE8B5 confetti, a single orange #E8622A sparkle as a soft alert cue.',
+  composition: 'Full-bleed: the photographic beach scene fills the entire frame edge-to-edge, dog seated right-of-centre, fresh-water bowl lower-left on the sand, sea and soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column or margin for text.',
+  decorations: ['food-bowl', 'sparkle', 'confetti'],
+  notes: 'Featured image auto-générée pour l\'article chien-a-bu-eau-de-mer-que-faire le 2026-07-07.',
 }
 
 const ART_GLUCIDES_CROQUETTES_CHIEN: ImageSlot = {
@@ -1265,6 +1280,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_NOURRITURE_BRAQUE_DE_WEIMAR,
   ART_CHIEN_PEUT_MANGER_PRUNES,
   ART_MEILLEURES_CROQUETTES_PETIT_CHIEN,
+  ART_CHIEN_A_BU_EAU_DE_MER_QUE_FAIRE,
   OG_DEFAULT,
 ] as const
 
