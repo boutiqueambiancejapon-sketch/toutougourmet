@@ -202,6 +202,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-peut-manger-prunes': 'art-chien-peut-manger-prunes',
   'meilleures-croquettes-petit-chien': 'art-meilleures-croquettes-petit-chien',
   'chien-a-bu-eau-de-mer-que-faire': 'art-chien-a-bu-eau-de-mer-que-faire',
+  'conserver-patee-chien-apres-ouverture': 'art-conserver-patee-chien-apres-ouverture',
 }
 
 /**
