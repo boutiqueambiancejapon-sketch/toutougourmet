@@ -469,6 +469,20 @@ const ART_TRANSITION: ImageSlot = {
   decorations: ['confetti', 'sparkle'],
 }
 
+const ART_CONSERVER_PATEE_CHIEN_APRES_OUVERTURE: ImageSlot = {
+  id: 'art-conserver-patee-chien-apres-ouverture',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media kitchen still-life on a warm cream counter: an opened plain metal tin of wet dog food with its lid lifted, a beige ceramic bowl filled with chunky meat pate in the foreground, and a small glass storage container with a lid beside them, suggesting fridge storage of leftovers. Soft natural daylight from upper-left, shallow depth of field, warm cream photographic bokeh of a kitchen behind. Mixed-media: photographic lifestyle base with hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, amber #FFE8B5 sparkle, rose #FFD6E3 and blue #C8DCFF confetti.',
+  composition: 'Full-bleed: the photographic kitchen scene fills the entire frame edge-to-edge, bowl of pate lower-left, opened tin centre-right, glass storage container right, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column or margin for text.',
+  decorations: ['sparkle', 'confetti'],
+  notes: 'Featured image auto-générée pour l\'article conserver-patee-chien-apres-ouverture le 2026-07-08.',
+}
+
 const ART_CHIEN_A_BU_EAU_DE_MER_QUE_FAIRE: ImageSlot = {
   id: 'art-chien-a-bu-eau-de-mer-que-faire',
   group: 'articles',
@@ -1281,6 +1295,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHIEN_PEUT_MANGER_PRUNES,
   ART_MEILLEURES_CROQUETTES_PETIT_CHIEN,
   ART_CHIEN_A_BU_EAU_DE_MER_QUE_FAIRE,
+  ART_CONSERVER_PATEE_CHIEN_APRES_OUVERTURE,
   OG_DEFAULT,
 ] as const
 
