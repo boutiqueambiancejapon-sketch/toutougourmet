@@ -203,6 +203,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'meilleures-croquettes-petit-chien': 'art-meilleures-croquettes-petit-chien',
   'chien-a-bu-eau-de-mer-que-faire': 'art-chien-a-bu-eau-de-mer-que-faire',
   'conserver-patee-chien-apres-ouverture': 'art-conserver-patee-chien-apres-ouverture',
+  'chien-peut-manger-pates': 'art-chien-peut-manger-pates',
 }
 
 /**
