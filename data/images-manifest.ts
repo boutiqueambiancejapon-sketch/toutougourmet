@@ -1,4 +1,3 @@
-
 /**
  * Images manifest — Toutou Gourmet V2
  *
@@ -467,6 +466,20 @@ const ART_TRANSITION: ImageSlot = {
     'Two adjacent small bowls — one with old-style kibble, one with new kibble of different color — with a few pieces mixing in the middle on a cream surface.',
   composition: 'Two bowls centered, top-down view, transition zone emphasized.',
   decorations: ['confetti', 'sparkle'],
+}
+
+const ART_CHIEN_PEUT_MANGER_PATES: ImageSlot = {
+  id: 'art-chien-peut-manger-pates',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media kitchen still-life on a warm cream counter: a beige ceramic bowl filled with plain well-cooked white pasta (short pasta shapes, no sauce) in the foreground, and a calm curious short-coated fawn dog just behind tilting its head toward the bowl in soft natural daylight from the upper-left. Shallow depth of field, dog and bowl crisp, warm cream photographic kitchen bokeh spread across the whole frame. Mixed-media: photographic lifestyle base with hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, rose #FFD6E3 drawn bowl accent, rose and blue #C8DCFF confetti.',
+  composition: 'Full-bleed: the photographic kitchen scene fills the entire frame edge-to-edge, bowl of cooked pasta lower-centre, curious dog head-tilted upper-right, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column or margin for text.',
+  decorations: ['food-bowl', 'confetti'],
+  notes: 'Featured image auto-générée pour l\'article chien-peut-manger-pates le 2026-07-09.',
 }
 
 const ART_CONSERVER_PATEE_CHIEN_APRES_OUVERTURE: ImageSlot = {
@@ -1296,6 +1309,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_MEILLEURES_CROQUETTES_PETIT_CHIEN,
   ART_CHIEN_A_BU_EAU_DE_MER_QUE_FAIRE,
   ART_CONSERVER_PATEE_CHIEN_APRES_OUVERTURE,
+  ART_CHIEN_PEUT_MANGER_PATES,
   OG_DEFAULT,
 ] as const
 
