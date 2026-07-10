@@ -204,6 +204,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-a-bu-eau-de-mer-que-faire': 'art-chien-a-bu-eau-de-mer-que-faire',
   'conserver-patee-chien-apres-ouverture': 'art-conserver-patee-chien-apres-ouverture',
   'chien-peut-manger-pates': 'art-chien-peut-manger-pates',
+  'chien-boit-beaucoup-eau-causes': 'art-chien-boit-beaucoup-eau-causes',
 }
 
 /**
