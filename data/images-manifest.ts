@@ -468,6 +468,20 @@ const ART_TRANSITION: ImageSlot = {
   decorations: ['confetti', 'sparkle'],
 }
 
+const ART_CHIEN_BOIT_BEAUCOUP_EAU_CAUSES: ImageSlot = {
+  id: 'art-chien-boit-beaucoup-eau-causes',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'green',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media lifestyle photograph: a short-coated fawn-and-white medium dog eagerly drinking from a large off-white ceramic water bowl on a warm cream kitchen floor, tongue touching the water surface with small ripples, a second empty bowl nearby, soft natural daylight from upper-left. Mixed-media: photographic lifestyle base with hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, green #C2F0D5 water-droplet accent, blue #C8DCFF paw print, amber #FFE8B5 sparkle.',
+  composition: 'Full-bleed: the photographic kitchen-floor scene fills the entire frame edge-to-edge, drinking dog and full water bowl centre-left, empty bowl lower-right, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column or margin for text.',
+  decorations: ['water-droplet', 'paw-print', 'sparkle'],
+  notes: 'Featured image auto-générée pour l\'article chien-boit-beaucoup-eau-causes le 2026-07-10.',
+}
+
 const ART_CHIEN_PEUT_MANGER_PATES: ImageSlot = {
   id: 'art-chien-peut-manger-pates',
   group: 'articles',
@@ -1310,6 +1324,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHIEN_A_BU_EAU_DE_MER_QUE_FAIRE,
   ART_CONSERVER_PATEE_CHIEN_APRES_OUVERTURE,
   ART_CHIEN_PEUT_MANGER_PATES,
+  ART_CHIEN_BOIT_BEAUCOUP_EAU_CAUSES,
   OG_DEFAULT,
 ] as const
 
