@@ -1,4 +1,3 @@
-
 /**
  * Images manifest — Toutou Gourmet V2
  *
