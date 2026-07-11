@@ -1216,6 +1216,21 @@ const ART_MEILLEURES_CROQUETTES_PETIT_CHIEN: ImageSlot = {
   notes: "Featured image auto-générée pour l'article meilleures-croquettes-petit-chien le 2026-07-06.",
 }
 
+const ART_RECETTE_BISCUITS_SARDINE_CHIEN: ImageSlot = {
+  id: 'art-recette-biscuits-sardine-chien',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    "Plateau de cuisson en bois avec biscuits maison dorés en forme d'os et de poisson, boîte de sardines ouverte, bol de flocons d'avoine et œuf, cuisine crème, lumière naturelle douce",
+  composition:
+    'Full-bleed : la scène photographique remplit tout le cadre bord à bord, plateau décentré règle des tiers, bokeh crème photographique réparti sur les quatre bords, aucune zone de texte ni marge réservée',
+  decorations: ['bone', 'sparkle', 'confetti'],
+  notes: "Featured image auto-générée pour l'article recette-biscuits-sardine-chien le 2026-07-11.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1325,6 +1340,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CONSERVER_PATEE_CHIEN_APRES_OUVERTURE,
   ART_CHIEN_PEUT_MANGER_PATES,
   ART_CHIEN_BOIT_BEAUCOUP_EAU_CAUSES,
+  ART_RECETTE_BISCUITS_SARDINE_CHIEN,
   OG_DEFAULT,
 ] as const
 
