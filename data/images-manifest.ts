@@ -468,6 +468,21 @@ const ART_TRANSITION: ImageSlot = {
   decorations: ['confetti', 'sparkle'],
 }
 
+const ART_NOURRITURE_AMERICAN_STAFFORDSHIRE_TERRIER: ImageSlot = {
+  id: 'art-nourriture-american-staffordshire-terrier',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'amber',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Chest-up portrait of an American Staffordshire Terrier with a short glossy blue-grey coat and white chest blaze, broad muscular head with pronounced cheek muscles, natural rose ears, dark round eyes, black nose, calm friendly inquisitive expression, warm cream studio backdrop, soft natural daylight from upper-left, slight 3/4 angle. Mixed-media editorial: photographic breed portrait combined with a hand-drawn gouache party hat in pill amber, contour #1A1109, palette cream #FAFAF8 dominant.',
+  composition:
+    'Full-bleed: the dog and the warm cream studio scene fill the entire frame edge-to-edge, dog framed head-shoulders slightly off-centre per rule-of-thirds, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column or margin for text.',
+  decorations: ['party-hat'],
+  notes: 'Featured image auto-générée pour l\'article nourriture-american-staffordshire-terrier le 2026-07-12.',
+}
+
 const ART_CHIEN_BOIT_BEAUCOUP_EAU_CAUSES: ImageSlot = {
   id: 'art-chien-boit-beaucoup-eau-causes',
   group: 'articles',
@@ -1341,6 +1356,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHIEN_PEUT_MANGER_PATES,
   ART_CHIEN_BOIT_BEAUCOUP_EAU_CAUSES,
   ART_RECETTE_BISCUITS_SARDINE_CHIEN,
+  ART_NOURRITURE_AMERICAN_STAFFORDSHIRE_TERRIER,
   OG_DEFAULT,
 ] as const
 
