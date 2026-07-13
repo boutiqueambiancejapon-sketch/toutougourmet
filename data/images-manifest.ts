@@ -1246,6 +1246,21 @@ const ART_RECETTE_BISCUITS_SARDINE_CHIEN: ImageSlot = {
   notes: "Featured image auto-générée pour l'article recette-biscuits-sardine-chien le 2026-07-11.",
 }
 
+const ART_RECETTE_FRIANDISES_EDUCATION_CHIEN: ImageSlot = {
+  id: 'art-recette-friandises-education-chien',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay about homemade dog training treats: a parchment-lined baking tray covered with tiny golden-baked soft treat cubes, a small speckled ceramic bowl holding a handful of the same mini-cubes, a few scattered cubes, a little bowl of rice flour and a brown egg on a warm cream linen tabletop; soft natural daylight from the upper-left.',
+  composition:
+    'Full-bleed: the tray and the cream linen scene fill the entire frame edge-to-edge, reaching all four edges; tray off-centre left per rule-of-thirds, bowl of cubes centre-right; shallow depth of field with soft cream photographic linen texture spread across the whole frame; no reserved blank cream band or text margin.',
+  decorations: ['bone', 'confetti', 'sparkle'],
+  notes: "Featured image auto-générée pour l'article recette-friandises-education-chien le 2026-07-13.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1357,6 +1372,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHIEN_BOIT_BEAUCOUP_EAU_CAUSES,
   ART_RECETTE_BISCUITS_SARDINE_CHIEN,
   ART_NOURRITURE_AMERICAN_STAFFORDSHIRE_TERRIER,
+  ART_RECETTE_FRIANDISES_EDUCATION_CHIEN,
   OG_DEFAULT,
 ] as const
 
