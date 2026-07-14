@@ -1261,6 +1261,21 @@ const ART_RECETTE_FRIANDISES_EDUCATION_CHIEN: ImageSlot = {
   notes: "Featured image auto-générée pour l'article recette-friandises-education-chien le 2026-07-13.",
 }
 
+const ART_PICA_CHIEN_CAUSES_SOLUTIONS: ImageSlot = {
+  id: 'art-pica-chien-causes-solutions',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'blue',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'A young curious beagle lying on a warm cream studio floor, head tilted, nose lowered toward a small cluster of smooth grey pebbles, a short wooden stick and a folded grey sock in front of its paws, inspecting without eating; soft natural daylight from upper-left.',
+  composition:
+    'Full-bleed: the dog and the cream studio scene fill the entire frame edge-to-edge, dog off-centre per rule-of-thirds, shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank band, column or text margin.',
+  decorations: ['paw-print', 'sparkle', 'confetti'],
+  notes: "Featured image auto-générée pour l'article pica-chien-causes-solutions le 2026-07-14.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1373,6 +1388,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_RECETTE_BISCUITS_SARDINE_CHIEN,
   ART_NOURRITURE_AMERICAN_STAFFORDSHIRE_TERRIER,
   ART_RECETTE_FRIANDISES_EDUCATION_CHIEN,
+  ART_PICA_CHIEN_CAUSES_SOLUTIONS,
   OG_DEFAULT,
 ] as const
 
