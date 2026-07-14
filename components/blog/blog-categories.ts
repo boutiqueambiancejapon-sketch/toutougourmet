@@ -208,6 +208,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-boit-beaucoup-eau-causes': 'art-chien-boit-beaucoup-eau-causes',
   'recette-biscuits-sardine-chien': 'art-recette-biscuits-sardine-chien',
   'recette-friandises-education-chien': 'art-recette-friandises-education-chien',
+  'pica-chien-causes-solutions': 'art-pica-chien-causes-solutions',
 }
 
 /**
