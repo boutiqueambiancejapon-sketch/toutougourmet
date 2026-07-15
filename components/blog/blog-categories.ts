@@ -147,12 +147,16 @@ const BREED_SLOT_BY_SLUG: Record<string, string> = {
  * Articles génériques (non-race) avec featured image dédiée.
  * Alimenté par la tâche planifiée `toutougourmet-daily-article` qui génère
  * une image unique par article via Nano Banana et ajoute le slot correspondant
- * à `data/images-manifest.ts`. Le slot suit la convention `art-{slug}` (.jpeg).
+ * à `data/images-manifest.ts` (ou `data/extra-image-slots.ts` quand le manifest
+ * principal est trop volumineux pour être réécrit via l'API). Le slot suit la
+ * convention `art-{slug}` (.jpeg).
  *
  * La présence d'une entrée ici remplace la cover de catégorie par défaut
  * (cf. `getArticleSlot`) — c'est le mécanisme « featured image » par article.
+ * Elle écrase aussi la cover breed historique pour les articles de race.
  */
 const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
+  'nourriture-berger-blanc-suisse': 'art-nourriture-berger-blanc-suisse',
   'choisir-taille-croquettes-chien': 'art-choisir-taille-croquettes-chien',
   'chien-peut-manger-thon': 'art-chien-peut-manger-thon',
   'quelle-quantite-patee-chien-par-jour': 'art-quelle-quantite-patee-chien-par-jour',
