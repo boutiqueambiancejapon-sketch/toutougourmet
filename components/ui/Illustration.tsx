@@ -4,6 +4,7 @@ import {
   RATIO_DIMENSIONS,
   type ImageGroup,
 } from '@/data/images-manifest'
+import { getExtraSlotById } from '@/data/extra-image-slots'
 import { getSlotPath } from '@/data/image-utils'
 import { DecorativeOverlay } from './DecorativeOverlay'
 import { IllustratedPlaceholder, type PlaceholderVariant } from './IllustratedPlaceholder'
@@ -48,10 +49,13 @@ export function Illustration({
   className,
   overlayIntensity = 'normal',
 }: IllustrationProps) {
-  const slot = getSlotById(slotId)
+  // Résolution : manifest principal, puis registre additionnel
+  // (data/extra-image-slots.ts) pour les slots featured déclarés hors du gros
+  // manifest.
+  const slot = getSlotById(slotId) ?? getExtraSlotById(slotId)
   if (!slot) {
     throw new Error(
-      `Illustration: unknown slot "${slotId}". Declare it in data/images-manifest.ts.`
+      `Illustration: unknown slot "${slotId}". Declare it in data/images-manifest.ts or data/extra-image-slots.ts.`
     )
   }
 
