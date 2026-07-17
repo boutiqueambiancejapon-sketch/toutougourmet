@@ -157,6 +157,7 @@ const BREED_SLOT_BY_SLUG: Record<string, string> = {
  */
 const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'nourriture-berger-blanc-suisse': 'art-nourriture-berger-blanc-suisse',
+  'nourriture-dogue-de-bordeaux': 'art-nourriture-dogue-de-bordeaux',
   'choisir-taille-croquettes-chien': 'art-choisir-taille-croquettes-chien',
   'chien-peut-manger-thon': 'art-chien-peut-manger-thon',
   'quelle-quantite-patee-chien-par-jour': 'art-quelle-quantite-patee-chien-par-jour',
