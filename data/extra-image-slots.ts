@@ -45,6 +45,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article chien-peut-manger-noix-de-coco le 2026-07-16. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-nourriture-dogue-de-bordeaux',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'amber',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'A chest-up editorial portrait of a Dogue de Bordeaux (French Mastiff), massive brachycephalic head with deep symmetrical wrinkles, short fawn-to-mahogany self-coloured coat, brown mask and brown nose, hazel eyes set wide, loose pendulous jowls and small drooping ears, powerful neck, calm friendly inquisitive expression, warm cream studio backdrop, soft natural daylight from the upper-left.',
+    composition:
+      'Full-bleed: the dog and the warm cream studio scene fill the entire frame edge-to-edge, dog framed head-shoulders slightly off-centre per rule-of-thirds, shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank band, column or text margin.',
+    decorations: ['paw-print'],
+    notes:
+      "Featured image auto-générée pour l'article nourriture-dogue-de-bordeaux le 2026-07-17. Race brachycéphale, empreinte de patte au lieu du chapeau. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
