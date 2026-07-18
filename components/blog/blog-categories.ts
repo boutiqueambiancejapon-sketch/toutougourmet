@@ -215,6 +215,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'recette-friandises-education-chien': 'art-recette-friandises-education-chien',
   'pica-chien-causes-solutions': 'art-pica-chien-causes-solutions',
   'chien-peut-manger-noix-de-coco': 'art-chien-peut-manger-noix-de-coco',
+  'avis-butternut-box': 'art-avis-butternut-box',
 }
 
 /**
