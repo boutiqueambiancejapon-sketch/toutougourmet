@@ -60,6 +60,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article nourriture-dogue-de-bordeaux le 2026-07-17. Race brachycéphale, empreinte de patte au lieu du chapeau. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-avis-butternut-box',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'blue',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'An editorial lifestyle food-photography scene: a pale ceramic dog bowl filled with gently cooked fresh dog food (minced meat with visible diced carrots, green beans and peas, light steam), a few fresh ingredients beside it (carrot, green beans, rosemary sprig), and a friendly curious dog head leaning in from the right to sniff the bowl, warm natural daylight from the upper-left.',
+    composition:
+      'Full-bleed: the photographic scene fills the entire frame edge-to-edge, bowl slightly off-centre per rule-of-thirds, shallow depth of field with warm cream photographic bokeh spread across the whole frame; no reserved blank band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['sparkle', 'paw-print'],
+    notes:
+      "Featured image auto-générée pour l'article avis-butternut-box le 2026-07-18. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
