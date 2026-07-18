@@ -41,7 +41,7 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
       'An editorial lifestyle scene: a fresh coconut split in half showing white flesh, with a few pieces of coconut meat and light shavings on a pale cream surface next to a small ceramic dog bowl, and a friendly golden-coated dog head leaning in from the right to sniff the coconut, warm natural daylight from the upper-left.',
     composition:
       'Full-bleed: the photographic scene fills the entire frame edge-to-edge, cream tones from real photographic bokeh spread across the whole frame; no reserved blank band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
-    decorations: ['dog-bowl', 'sparkle', 'paw-print'],
+    decorations: ['food-bowl', 'sparkle', 'paw-print'],
     notes:
       "Featured image auto-générée pour l'article chien-peut-manger-noix-de-coco le 2026-07-16. Slot déclaré hors manifest principal (taille du fichier).",
   },
