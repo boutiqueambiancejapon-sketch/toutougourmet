@@ -75,6 +75,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article avis-butternut-box le 2026-07-18. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-donner-comprime-chien-refuse-medicament',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'green',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'An editorial lifestyle scene on a warm cream surface: a small pale cheese cube and a soft dog treat with a single round white tablet tucked inside it held by out-of-focus fingertips, a tiny ceramic dish holding one white pill, and a friendly light-coated dog leaning its head in from the right with a calm curious expression to sniff the treat, warm natural daylight from the upper-left.',
+    composition:
+      'Full-bleed: the photographic scene fills the entire frame edge-to-edge, treat and dog on rule-of-thirds, shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['food-bowl', 'sparkle'],
+    notes:
+      "Featured image auto-générée pour l'article donner-comprime-chien-refuse-medicament le 2026-07-19. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
