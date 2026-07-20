@@ -217,6 +217,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-peut-manger-noix-de-coco': 'art-chien-peut-manger-noix-de-coco',
   'avis-butternut-box': 'art-avis-butternut-box',
   'donner-comprime-chien-refuse-medicament': 'art-donner-comprime-chien-refuse-medicament',
+  'nourriture-braque-allemand': 'art-nourriture-braque-allemand',
 }
 
 /**
