@@ -218,6 +218,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'avis-butternut-box': 'art-avis-butternut-box',
   'donner-comprime-chien-refuse-medicament': 'art-donner-comprime-chien-refuse-medicament',
   'nourriture-braque-allemand': 'art-nourriture-braque-allemand',
+  'chien-peut-manger-jambon': 'art-chien-peut-manger-jambon',
 }
 
 /**
