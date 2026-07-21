@@ -105,6 +105,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article nourriture-braque-allemand le 2026-07-20. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-chien-peut-manger-jambon',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'An editorial lifestyle food-photography scene on a warm cream linen tablecloth: a few folded slices of cooked pink white ham beside a small empty cream ceramic dog bowl, and a friendly beige-and-white dog leaning its head in from the right, curious, looking down at the ham, warm natural daylight from the upper-left.',
+    composition:
+      'Full-bleed: the photographic scene fills the entire frame edge-to-edge, ham and bowl slightly off-centre per rule-of-thirds, shallow depth of field with warm cream photographic bokeh spread across the whole frame; no reserved blank band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['food-bowl', 'paw-print', 'sparkle'],
+    notes:
+      "Featured image auto-générée pour l'article chien-peut-manger-jambon le 2026-07-21. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
