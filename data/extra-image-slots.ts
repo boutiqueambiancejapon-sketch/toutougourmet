@@ -120,6 +120,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article chien-peut-manger-jambon le 2026-07-21. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-collagene-chien-bienfaits-dosage',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'An editorial lifestyle scene on a warm cream surface about a joint-support collagen supplement for dogs: a small pale ceramic dish holding a heap of fine cream-coloured collagen powder with a wooden measuring scoop beside it, a small cream dog bowl nearby, and a friendly light-golden-coated dog leaning its head in from the right with a calm curious expression to sniff the powder, warm natural daylight from the upper-left.',
+    composition:
+      'Full-bleed: the photographic cream-surface scene fills the entire frame edge-to-edge, dish of powder and scoop slightly off-centre per rule-of-thirds, dog head entering from the right, shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['food-bowl', 'sparkle', 'paw-print'],
+    notes:
+      "Featured image auto-générée pour l'article collagene-chien-bienfaits-dosage le 2026-07-26. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
