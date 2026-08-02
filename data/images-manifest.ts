@@ -1276,6 +1276,22 @@ const ART_PICA_CHIEN_CAUSES_SOLUTIONS: ImageSlot = {
   notes: "Featured image auto-générée pour l'article pica-chien-causes-solutions le 2026-07-14.",
 }
 
+const ART_RECETTE_FRIANDISES_DENTAIRES_MAISON_CHIEN: ImageSlot = {
+  id: 'art-recette-friandises-dentaires-maison-chien',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'A warm editorial lifestyle photo of a happy golden retriever chewing a homemade dental treat biscuit stick, with fresh carrot sticks, celery stalks and sprigs of parsley scattered on a light wooden cutting board in the foreground, a few baked bone-shaped biscuits piled in a cream ceramic bowl nearby, natural warm daylight from the side, soft film grain, shallow depth of field.',
+  composition:
+    'Full-bleed: the dog, the cutting board, the biscuits and the vegetables fill the entire frame edge-to-edge, touching all four borders; subject placed slightly off-centre per rule-of-thirds; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band, column or text margin.',
+  decorations: ['bone', 'confetti'],
+  notes:
+    "Featured image auto-générée pour l'article recette-friandises-dentaires-maison-chien le 2026-08-02.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1389,6 +1405,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_NOURRITURE_AMERICAN_STAFFORDSHIRE_TERRIER,
   ART_RECETTE_FRIANDISES_EDUCATION_CHIEN,
   ART_PICA_CHIEN_CAUSES_SOLUTIONS,
+  ART_RECETTE_FRIANDISES_DENTAIRES_MAISON_CHIEN,
   OG_DEFAULT,
 ] as const
 
