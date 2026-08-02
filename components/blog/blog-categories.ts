@@ -220,6 +220,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'nourriture-braque-allemand': 'art-nourriture-braque-allemand',
   'chien-peut-manger-jambon': 'art-chien-peut-manger-jambon',
   'collagene-chien-bienfaits-dosage': 'art-collagene-chien-bienfaits-dosage',
+  'recette-friandises-dentaires-maison-chien': 'art-recette-friandises-dentaires-maison-chien',
 }
 
 /**
