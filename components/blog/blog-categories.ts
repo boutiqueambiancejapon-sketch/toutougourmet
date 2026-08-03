@@ -221,6 +221,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-peut-manger-jambon': 'art-chien-peut-manger-jambon',
   'collagene-chien-bienfaits-dosage': 'art-collagene-chien-bienfaits-dosage',
   'recette-friandises-dentaires-maison-chien': 'art-recette-friandises-dentaires-maison-chien',
+  'alimentation-poisson-chien-guide': 'art-alimentation-poisson-chien-guide',
 }
 
 /**
