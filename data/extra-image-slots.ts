@@ -135,6 +135,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article collagene-chien-bienfaits-dosage le 2026-07-26. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-alimentation-poisson-chien-guide',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photo on a warm cream linen surface: a fresh cooked salmon fillet on a light wooden board, flaked slightly to show texture, with fresh dill and lemon wedges beside it, a small empty pale ceramic dog bowl nearby, and a friendly curious light-golden-coated dog leaning its head in from the right, sniffing toward the fish. Mixed-media editorial style: lifestyle photo with subtle hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, soft rose #FFD6E3 accent, hints of blue #C8DCFF and amber #FFE8B5 on confetti, small drawn paw-print and sparkle.',
+    composition:
+      'Full-bleed: the fish, board, bowl and dog fill the entire frame edge-to-edge, touching all four borders; subject slightly off-centre per rule-of-thirds; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['paw-print', 'sparkle', 'confetti'],
+    notes:
+      "Featured image auto-générée pour l'article alimentation-poisson-chien-guide le 2026-08-03. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
