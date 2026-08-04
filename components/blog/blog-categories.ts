@@ -222,6 +222,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'collagene-chien-bienfaits-dosage': 'art-collagene-chien-bienfaits-dosage',
   'recette-friandises-dentaires-maison-chien': 'art-recette-friandises-dentaires-maison-chien',
   'alimentation-poisson-chien-guide': 'art-alimentation-poisson-chien-guide',
+  'meilleure-gamelle-anti-glouton-chien': 'art-meilleure-gamelle-anti-glouton-chien',
 }
 
 /**
