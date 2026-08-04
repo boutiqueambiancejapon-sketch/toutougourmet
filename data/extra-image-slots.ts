@@ -150,6 +150,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article alimentation-poisson-chien-guide le 2026-08-03. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-meilleure-gamelle-anti-glouton-chien',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photo: a happy golden retriever eating from a textured slow-feeder dog bowl with maze ridges, snout lowered close to the bowl, kibble scattered on a warm sunlit wooden floor. Mixed-media editorial style: photorealistic dog and bowl with subtle hand-drawn gouache decorations layered on top, contour #1A1109. Palette: cream #FAFAF8 dominant background bokeh, amber #FFE8B5 confetti burst, rose #FFD6E3 paw print, small orange #E8622A sparkle accent.',
+    composition:
+      'Full-bleed: the dog, the slow-feeder bowl and the sunlit wooden floor fill the entire frame edge-to-edge, touching all four borders; dog and bowl slightly off-centre per rule-of-thirds; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['confetti', 'paw-print', 'sparkle'],
+    notes:
+      "Featured image auto-générée pour l'article meilleure-gamelle-anti-glouton-chien le 2026-08-04. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
