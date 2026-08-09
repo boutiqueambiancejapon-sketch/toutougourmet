@@ -223,6 +223,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'recette-friandises-dentaires-maison-chien': 'art-recette-friandises-dentaires-maison-chien',
   'alimentation-poisson-chien-guide': 'art-alimentation-poisson-chien-guide',
   'meilleure-gamelle-anti-glouton-chien': 'art-meilleure-gamelle-anti-glouton-chien',
+  'chien-mange-noix-macadamia-urgence': 'art-chien-mange-noix-macadamia-urgence',
 }
 
 /**
