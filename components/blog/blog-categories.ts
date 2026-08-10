@@ -196,6 +196,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-peut-manger-carottes': 'art-chien-peut-manger-carottes',
   'croquettes-a-volonte-ou-rationnees': 'art-croquettes-a-volonte-ou-rationnees',
   'recette-patee-maison-poulet-chien': 'art-recette-patee-maison-poulet-chien',
+  'recette-patee-maison-poisson-chien': 'art-recette-patee-maison-poisson-chien',
   'chien-peut-manger-pomme': 'art-chien-peut-manger-pomme',
   'gamelle-surelevee-chien': 'art-gamelle-surelevee-chien-v2',
   'recette-patate-douce-sechee-chien': 'art-recette-patate-douce-sechee-chien',
