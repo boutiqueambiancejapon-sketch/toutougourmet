@@ -109,11 +109,9 @@ const BRAND_ELMUT: ImageSlot = {
   tone: 'green',
   subject:
     'A shallow ceramic bowl filled with fresh cooked dog food (visible pieces of meat, carrots, peas, rice), shot from above, with fresh herbs scattered around on a cream linen surface.',
-  composition:
-    'Bowl centered. Herbs (rosemary, parsley) scattered at the edges. Shot 3/4 high angle.',
+  composition: 'Bowl centered. Herbs (rosemary, parsley) scattered at the edges. Shot 3/4 high angle.',
   decorations: ['sparkle', 'confetti'],
-  notes:
-    'Evokes home-cooked freshness. Green-forward palette. Do NOT imitate Elmut packaging.',
+  notes: 'Evokes home-cooked freshness. Green-forward palette. Do NOT imitate Elmut packaging.',
 }
 
 const BRAND_PETTY_WELL: ImageSlot = {
@@ -1286,10 +1284,24 @@ const ART_RECETTE_FRIANDISES_DENTAIRES_MAISON_CHIEN: ImageSlot = {
   subject:
     'A warm editorial lifestyle photo of a happy golden retriever chewing a homemade dental treat biscuit stick, with fresh carrot sticks, celery stalks and sprigs of parsley scattered on a light wooden cutting board in the foreground, a few baked bone-shaped biscuits piled in a cream ceramic bowl nearby, natural warm daylight from the side, soft film grain, shallow depth of field.',
   composition:
-    'Full-bleed: the dog, the cutting board, the biscuits and the vegetables fill the entire frame edge-to-edge, touching all four borders; subject placed slightly off-centre per rule-of-thirds; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band, column or text margin.',
+    'Full-bleed: the dog, the cutting board, the biscuits and the vegetables fill the entire frame edge-to-edge, touching all four borders; subject placed slightly off-centre per rule-of-thirds; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band, column or margin for text.',
   decorations: ['bone', 'confetti'],
   notes:
     "Featured image auto-générée pour l'article recette-friandises-dentaires-maison-chien le 2026-08-02.",
+}
+
+const ART_RECETTE_PATEE_MAISON_POISSON_CHIEN: ImageSlot = {
+  id: 'art-recette-patee-maison-poisson-chien',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media flat-lay on warm cream linen: a warm cream ceramic bowl holding a freshly made homemade fish pâté for dogs — flaked white fish and pink salmon, cooked rice, steamed diced carrot and spinach, with a light drizzle of oil, a few whole sardines, a lemon half and fresh dill sprigs arranged beside the bowl, a small linen napkin tucked under it. A curious light-golden dog leans into the frame from the upper-right, sniffing toward the bowl. Style: mixed-media editorial — photo lifestyle combined with subtle hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, soft rose #FFD6E3 and amber #FFE8B5 sparkle accents, gentle blue #C8DCFF hint on a drawn paw print.',
+  composition: 'Full-bleed: the bowl of food and the warm cream linen scene fill the entire frame edge-to-edge, reaching all four edges; bowl centred-left, dog upper-right, sardines and lemon lower-left, soft cream photographic bokeh spread across the whole frame; no reserved blank cream band or text margin.',
+  decorations: ['paw-print', 'sparkle', 'confetti'],
+  notes: "Featured image auto-générée pour l'article recette-patee-maison-poisson-chien le 2026-08-11.",
 }
 
 // ============================================================
@@ -1406,6 +1418,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_RECETTE_FRIANDISES_EDUCATION_CHIEN,
   ART_PICA_CHIEN_CAUSES_SOLUTIONS,
   ART_RECETTE_FRIANDISES_DENTAIRES_MAISON_CHIEN,
+  ART_RECETTE_PATEE_MAISON_POISSON_CHIEN,
   OG_DEFAULT,
 ] as const
 
