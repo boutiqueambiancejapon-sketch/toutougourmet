@@ -226,6 +226,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'meilleure-gamelle-anti-glouton-chien': 'art-meilleure-gamelle-anti-glouton-chien',
   'chien-mange-noix-macadamia-urgence': 'art-chien-mange-noix-macadamia-urgence',
   'nourriture-setter-irlandais': 'art-nourriture-setter-irlandais',
+  'alimentation-chien-sportif-avant-apres-effort': 'art-alimentation-chien-sportif-avant-apres-effort',
 }
 
 /**
