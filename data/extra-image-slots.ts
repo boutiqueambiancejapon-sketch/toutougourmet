@@ -195,6 +195,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article nourriture-setter-irlandais le 2026-08-10. Portrait race unique (règle Race), pas de fallback breed générique. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-alimentation-chien-sportif-avant-apres-effort',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'blue',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photo on a rustic light wood table: homemade oat-and-chicken recovery bites for an active dog, stacked and scattered, next to rolled oats, a halved sweet potato, shredded cooked chicken, a cracked egg, a small ceramic jug of oil, and a softly coiled dog leash in the background suggesting sport and activity. Mixed-media editorial style: photorealistic food scene with hand-drawn gouache decorations layered on top, contour #1A1109. Palette: cream #FAFAF8 dominant background bokeh, blue #C8DCFF pill, rose #FFD6E3 paw print, green #C2F0D5 running-dog silhouette, small orange #E8622A sparkle accent.',
+    composition:
+      'Full-bleed: the food, ingredients and leash fill the entire frame edge-to-edge, touching all four borders; subject slightly off-centre per rule-of-thirds; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['paw-print', 'sparkle', 'confetti'],
+    notes:
+      "Featured image auto-générée pour l'article alimentation-chien-sportif-avant-apres-effort le 2026-08-12. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
