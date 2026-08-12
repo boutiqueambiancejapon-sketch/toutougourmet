@@ -1304,6 +1304,22 @@ const ART_RECETTE_PATEE_MAISON_POISSON_CHIEN: ImageSlot = {
   notes: "Featured image auto-générée pour l'article recette-patee-maison-poisson-chien le 2026-08-11.",
 }
 
+const ART_RECETTE_PATEE_MAISON_BOEUF_CHIEN: ImageSlot = {
+  id: 'art-recette-patee-maison-boeuf-chien',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial lifestyle photo in a warm home kitchen: a rustic ceramic bowl freshly filled with homemade lean ground beef, cooked white rice and steamed courgette and green beans, sitting on a wooden countertop, with a calm curious golden retriever-type dog sitting just behind the bowl looking at camera, one paw resting on the counter edge, soft natural window light from the upper-left, cream cabinets in the background. Style: mixed-media editorial — photo lifestyle combined with hand-drawn gouache decorations, contour #1A1109.',
+  composition:
+    'Full-bleed: the kitchen counter, bowl of food and dog fill the entire frame edge-to-edge, touching all four borders; bowl in the lower third, dog head-shoulders in the upper two-thirds, soft cream photographic bokeh spread across the whole frame; no reserved blank cream band, column or margin for text.',
+  decorations: ['bone', 'sparkle'],
+  notes:
+    "Featured image auto-générée pour l'article recette-patee-maison-boeuf-chien le 2026-08-13.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1419,6 +1435,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_PICA_CHIEN_CAUSES_SOLUTIONS,
   ART_RECETTE_FRIANDISES_DENTAIRES_MAISON_CHIEN,
   ART_RECETTE_PATEE_MAISON_POISSON_CHIEN,
+  ART_RECETTE_PATEE_MAISON_BOEUF_CHIEN,
   OG_DEFAULT,
 ] as const
 
