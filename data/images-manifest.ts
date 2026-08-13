@@ -466,6 +466,21 @@ const ART_TRANSITION: ImageSlot = {
   decorations: ['confetti', 'sparkle'],
 }
 
+const ART_COUP_DE_CHALEUR_CHIEN_SYMPTOMES_PREMIERS_GESTES: ImageSlot = {
+  id: 'art-coup-de-chaleur-chien-symptomes-premiers-gestes',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'green',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media lifestyle photograph: a calm panting cream-and-tan medium dog lying on a cool shaded tile floor in a garden, tongue out, being gently cooled with lukewarm water poured from a real ceramic bowl by a hand, dappled warm natural daylight filtering through tree leaves overhead. Mixed-media: photographic lifestyle base with hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, green #C2F0D5 accent on the bowl, blue #C8DCFF sparkle droplet.',
+  composition:
+    'Full-bleed: the photographic shaded garden scene fills the entire frame edge-to-edge, dog lying lower-left to centre, hand pouring water from bowl centre-right, dappled shade and soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column or margin for text.',
+  decorations: ['food-bowl', 'sparkle'],
+  notes: 'Featured image auto-générée pour l\'article coup-de-chaleur-chien-symptomes-premiers-gestes le 2026-08-14.',
+}
+
 const ART_NOURRITURE_AMERICAN_STAFFORDSHIRE_TERRIER: ImageSlot = {
   id: 'art-nourriture-american-staffordshire-terrier',
   group: 'articles',
@@ -1436,6 +1451,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_RECETTE_FRIANDISES_DENTAIRES_MAISON_CHIEN,
   ART_RECETTE_PATEE_MAISON_POISSON_CHIEN,
   ART_RECETTE_PATEE_MAISON_BOEUF_CHIEN,
+  ART_COUP_DE_CHALEUR_CHIEN_SYMPTOMES_PREMIERS_GESTES,
   OG_DEFAULT,
 ] as const
 
