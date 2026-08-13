@@ -228,6 +228,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-mange-noix-macadamia-urgence': 'art-chien-mange-noix-macadamia-urgence',
   'nourriture-setter-irlandais': 'art-nourriture-setter-irlandais',
   'alimentation-chien-sportif-avant-apres-effort': 'art-alimentation-chien-sportif-avant-apres-effort',
+  'coup-de-chaleur-chien-symptomes-premiers-gestes': 'art-coup-de-chaleur-chien-symptomes-premiers-gestes',
 }
 
 /**
