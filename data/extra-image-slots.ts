@@ -210,6 +210,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article alimentation-chien-sportif-avant-apres-effort le 2026-08-12. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-nourriture-bull-terrier',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'amber',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'A chest-up editorial portrait of a Bull Terrier dog, distinctive long egg-shaped downward-sloping head profile, small deep-set dark triangular eyes set close together, small thin erect ears carried close together, short glossy pure-white coat, black nose, calm friendly inquisitive expression, warm cream studio backdrop, soft natural daylight from the upper-left, gentle catch-light in the eyes, slight 3/4 angle.',
+    composition:
+      'Full-bleed: the dog and the warm cream studio scene fill the entire frame edge-to-edge, dog framed head-shoulders slightly off-centre per rule-of-thirds, shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank band, column or text margin.',
+    decorations: ['paw-print'],
+    notes:
+      "Featured image auto-générée pour l'article nourriture-bull-terrier le 2026-08-15. Portrait race unique (règle Race), pas de fallback breed générique. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
