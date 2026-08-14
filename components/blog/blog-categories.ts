@@ -229,6 +229,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'nourriture-setter-irlandais': 'art-nourriture-setter-irlandais',
   'alimentation-chien-sportif-avant-apres-effort': 'art-alimentation-chien-sportif-avant-apres-effort',
   'coup-de-chaleur-chien-symptomes-premiers-gestes': 'art-coup-de-chaleur-chien-symptomes-premiers-gestes',
+  'nourriture-bull-terrier': 'art-nourriture-bull-terrier',
 }
 
 /**
