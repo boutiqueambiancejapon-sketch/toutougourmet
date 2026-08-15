@@ -225,6 +225,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article nourriture-bull-terrier le 2026-08-15. Portrait race unique (règle Race), pas de fallback breed générique. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-recette-biscuits-pomme-cannelle-chien',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photo shot from a slightly elevated angle on a warm rustic light wood table: a small baking tray of freshly baked round dog biscuits in a warm golden-oat color, next to a halved red apple showing its core removed, a cinnamon stick, a scattering of rolled oats, and a cracked egg, and leaning in from the right a friendly curious light-golden-coated dog with head tilted, nose close to the tray, calm and inquisitive. Mixed-media editorial style: photorealistic lifestyle photo base combined with subtle hand-drawn gouache decorations layered on top, contour #1A1109. Palette: cream #FAFAF8 dominant background bokeh, amber #FFE8B5 on the biscuits and oats, soft rose #FFD6E3 paw-print accent, small orange #E8622A sparkle accent, hint of green #C2F0D5 on a small drawn leaf.',
+    composition:
+      'Full-bleed: the tray, apple, ingredients and dog fill the entire frame edge-to-edge, touching all four borders; subject slightly off-centre per rule-of-thirds; shallow depth of field with soft warm cream photographic bokeh spread across the whole frame; no reserved blank cream band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['paw-print', 'sparkle', 'confetti'],
+    notes:
+      "Featured image auto-générée pour l'article recette-biscuits-pomme-cannelle-chien le 2026-08-16. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
