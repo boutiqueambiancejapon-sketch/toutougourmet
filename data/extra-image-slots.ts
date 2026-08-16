@@ -240,6 +240,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article recette-biscuits-pomme-cannelle-chien le 2026-08-16. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-alimentation-chien-grande-race-adulte-guide',
+    group: 'articles',
+    ratio: '4:3',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photo in a sunlit warm cream kitchen: a large adult German-Shepherd-type dog with tan-and-black coat standing beside a large round cream ceramic bowl generously filled with kibble, calm attentive expression, natural daylight from the upper-left, soft film grain, shallow depth of field. Mixed-media editorial style: photorealistic dog and bowl with hand-drawn gouache decorations layered on top, contour #1A1109. Palette: cream #FAFAF8 dominant background bokeh, amber #FFE8B5 drawn bone near the bowl, small orange #E8622A sparkle accent above the bowl.',
+    composition:
+      'Full-bleed: the dog, the bowl and the sunlit kitchen scene fill the entire frame edge-to-edge, touching all four borders; dog slightly off-centre per rule-of-thirds, bowl in the lower third; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['bone', 'sparkle'],
+    notes:
+      "Featured image auto-générée pour l'article alimentation-chien-grande-race-adulte-guide le 2026-08-17. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
