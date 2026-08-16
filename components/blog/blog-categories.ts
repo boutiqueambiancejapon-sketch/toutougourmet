@@ -231,6 +231,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'coup-de-chaleur-chien-symptomes-premiers-gestes': 'art-coup-de-chaleur-chien-symptomes-premiers-gestes',
   'nourriture-bull-terrier': 'art-nourriture-bull-terrier',
   'recette-biscuits-pomme-cannelle-chien': 'art-recette-biscuits-pomme-cannelle-chien',
+  'alimentation-chien-grande-race-adulte-guide': 'art-alimentation-chien-grande-race-adulte-guide',
 }
 
 /**
