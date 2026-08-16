@@ -243,7 +243,7 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
     id: 'art-alimentation-chien-grande-race-adulte-guide',
     group: 'articles',
-    ratio: '4:3',
+    ratio: '3:2',
     tone: 'rose',
     imageReady: true,
     ext: 'jpeg',
