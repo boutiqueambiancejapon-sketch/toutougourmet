@@ -255,6 +255,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article alimentation-chien-grande-race-adulte-guide le 2026-08-17. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-nourriture-braque-hongrois',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'amber',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'A chest-up editorial portrait of a Vizsla (Braque Hongrois), sleek short golden-rust copper coat, lean elegant athletic build, refined long muzzle, medium-set rounded drop ears held close to the head, warm amber-hazel eyes, calm friendly inquisitive expression, warm cream studio backdrop, soft natural daylight from the upper-left, gentle catch-light in the eyes, slight 3/4 angle.',
+    composition:
+      'Full-bleed: the dog and the warm cream studio scene fill the entire frame edge-to-edge, dog framed head-shoulders slightly off-centre per rule-of-thirds, shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank band, column or text margin.',
+    decorations: ['party-hat'],
+    notes:
+      "Featured image auto-générée pour l'article nourriture-braque-hongrois le 2026-08-18. Portrait race unique (règle Race), pas de fallback breed générique. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
