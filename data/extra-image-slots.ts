@@ -270,6 +270,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article nourriture-braque-hongrois le 2026-08-18. Portrait race unique (règle Race), pas de fallback breed générique. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-chien-peut-boire-lait',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photo in a warm sunlit kitchen: a happy calm friendly dog sitting beside a small ceramic bowl filled with milk on a light wooden table, a few drops of milk visible on the table surface, soft natural daylight from the side, warm cream kitchen backdrop softly blurred. Mixed-media editorial style: photorealistic dog and bowl with hand-drawn gouache decorations layered on top, contour #1A1109. Palette: cream #FAFAF8 dominant background bokeh, rose #FFD6E3 confetti scattered above, small amber #FFE8B5 sparkle accent near the bowl.',
+    composition:
+      'Full-bleed: the dog, the bowl of milk and the sunlit kitchen scene fill the entire frame edge-to-edge, touching all four borders; dog slightly off-centre per rule-of-thirds, bowl in the lower third; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['confetti', 'sparkle'],
+    notes:
+      "Featured image auto-générée pour l'article chien-peut-boire-lait le 2026-08-19. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
