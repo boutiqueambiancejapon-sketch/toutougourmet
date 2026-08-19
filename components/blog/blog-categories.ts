@@ -234,6 +234,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'alimentation-chien-grande-race-adulte-guide': 'art-alimentation-chien-grande-race-adulte-guide',
   'nourriture-braque-hongrois': 'art-nourriture-braque-hongrois',
   'chien-peut-boire-lait': 'art-chien-peut-boire-lait',
+  'nourriture-coton-de-tulear': 'art-nourriture-coton-de-tulear',
 }
 
 /**
