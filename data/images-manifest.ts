@@ -466,6 +466,21 @@ const ART_TRANSITION: ImageSlot = {
   decorations: ['confetti', 'sparkle'],
 }
 
+const ART_RECETTE_PATEE_MAISON_AGNEAU_CHIEN: ImageSlot = {
+  id: 'art-recette-patee-maison-agneau-chien',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media lifestyle photograph: raw lean lamb pieces trimmed of visible fat on a warm wooden cutting board, next to a small pile of cooked white rice and steamed courgette rounds, a calm curious cream-and-fawn medium dog watching from the side, warm natural daylight from upper-left, soft film grain. Mixed-media: photographic lifestyle base with hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, rose #FFD6E3 accent on the illustrated bone, amber #FFE8B5 sparkle, orange #E8622A tiny sparkle detail.',
+  composition:
+    'Full-bleed: the photographic kitchen scene fills the entire frame edge-to-edge with zero border, board and dog reaching all four edges, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column, margin or frame for text.',
+  decorations: ['bone', 'sparkle'],
+  notes: 'Featured image auto-générée pour l\'article recette-patee-maison-agneau-chien le 2026-08-21.',
+}
+
 const ART_COUP_DE_CHALEUR_CHIEN_SYMPTOMES_PREMIERS_GESTES: ImageSlot = {
   id: 'art-coup-de-chaleur-chien-symptomes-premiers-gestes',
   group: 'articles',
@@ -1405,6 +1420,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_BARF,
   ART_BCS,
   ART_TRANSITION,
+  ART_RECETTE_PATEE_MAISON_AGNEAU_CHIEN,
   // Featured per-article (auto-générés par la tâche planifiée)
   ART_RECETTE_BOUILLON_OS_MAISON_CHIEN,
   ART_CHIEN_PEUT_MANGER_BEURRE_DE_CACAHUETE,
