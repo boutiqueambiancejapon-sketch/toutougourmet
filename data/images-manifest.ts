@@ -467,7 +467,7 @@ const ART_TRANSITION: ImageSlot = {
 }
 
 const ART_RECETTE_PATEE_MAISON_AGNEAU_CHIEN: ImageSlot = {
-  id: 'art-recette-patee-maison-agneau-chien',
+  id: 'art-recette-patee-maison-agneau-chien-v2',
   group: 'articles',
   ratio: '3:2',
   tone: 'rose',
@@ -478,7 +478,7 @@ const ART_RECETTE_PATEE_MAISON_AGNEAU_CHIEN: ImageSlot = {
   composition:
     'Full-bleed: the photographic kitchen scene fills the entire frame edge-to-edge with zero border, board and dog reaching all four edges, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column, margin or frame for text.',
   decorations: ['bone', 'sparkle'],
-  notes: 'Featured image auto-générée pour l\'article recette-patee-maison-agneau-chien le 2026-08-21.',
+  notes: 'Featured image auto-générée pour l\'article recette-patee-maison-agneau-chien le 2026-08-21. Regénérée en v2 après rejet de la première génération (bordure crème visible violant la règle plein-cadre).',
 }
 
 const ART_COUP_DE_CHALEUR_CHIEN_SYMPTOMES_PREMIERS_GESTES: ImageSlot = {
@@ -548,7 +548,7 @@ const ART_CONSERVER_PATEE_CHIEN_APRES_OUVERTURE: ImageSlot = {
   ext: 'jpeg',
   subject:
     'Editorial mixed-media kitchen still-life on a warm cream counter: an opened plain metal tin of wet dog food with its lid lifted, a beige ceramic bowl filled with chunky meat pate in the foreground, and a small glass storage container with a lid beside them, suggesting fridge storage of leftovers. Soft natural daylight from upper-left, shallow depth of field, warm cream photographic bokeh of a kitchen behind. Mixed-media: photographic lifestyle base with hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, amber #FFE8B5 sparkle, rose #FFD6E3 and blue #C8DCFF confetti.',
-  composition: 'Full-bleed: the photographic kitchen scene fills the entire frame edge-to-edge, bowl of pate lower-left, opened tin centre-right, glass storage container right, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column or margin for text.',
+  composition: 'Full-bleed: the photographic kitchen scene fills the entire frame edge-to-edge, bowl of pate lower-left, opened tin centre-right, glass storage container right, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band or text margin.',
   decorations: ['sparkle', 'confetti'],
   notes: 'Featured image auto-générée pour l\'article conserver-patee-chien-apres-ouverture le 2026-07-08.',
 }
@@ -1420,7 +1420,6 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_BARF,
   ART_BCS,
   ART_TRANSITION,
-  ART_RECETTE_PATEE_MAISON_AGNEAU_CHIEN,
   // Featured per-article (auto-générés par la tâche planifiée)
   ART_RECETTE_BOUILLON_OS_MAISON_CHIEN,
   ART_CHIEN_PEUT_MANGER_BEURRE_DE_CACAHUETE,
@@ -1455,7 +1454,6 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_CHARDON_MARIE_CHIEN_BIENFAITS_DOSAGE,
   ART_CHIEN_TOUJOURS_FAIM_CAUSES_SOLUTIONS,
   ART_CHIEN_PEUT_MANGER_CAROTTES,
-  // Social (1)
   ART_CROQUETTES_A_VOLONTE_OU_RATIONNEES,
   ART_RECETTE_PATEE_MAISON_POULET_CHIEN,
   ART_CHIEN_PEUT_MANGER_POMME,
@@ -1484,6 +1482,8 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_RECETTE_PATEE_MAISON_BOEUF_CHIEN,
   ART_NOURRITURE_COTON_DE_TULEAR,
   ART_COUP_DE_CHALEUR_CHIEN_SYMPTOMES_PREMIERS_GESTES,
+  ART_RECETTE_PATEE_MAISON_AGNEAU_CHIEN,
+  // Social (1)
   OG_DEFAULT,
 ] as const
 
