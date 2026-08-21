@@ -534,7 +534,7 @@ const ART_CHIEN_PEUT_MANGER_PATES: ImageSlot = {
   ext: 'jpeg',
   subject:
     'Editorial mixed-media kitchen still-life on a warm cream counter: a beige ceramic bowl filled with plain well-cooked white pasta (short pasta shapes, no sauce) in the foreground, and a calm curious short-coated fawn dog just behind tilting its head toward the bowl in soft natural daylight from the upper-left. Shallow depth of field, dog and bowl crisp, warm cream photographic kitchen bokeh spread across the whole frame. Mixed-media: photographic lifestyle base with hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, rose #FFD6E3 drawn bowl accent, rose and blue #C8DCFF confetti.',
-  composition: 'Full-bleed: the photographic kitchen scene fills the entire frame edge-to-edge, bowl of cooked pasta lower-centre, curious dog head-tilted upper-right, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column or margin for text.',
+  composition: 'Full-bleed: the photographic kitchen scene fills the entire frame edge-to-edge, bowl of cooked pasta lower-centre, curious dog head-tilted upper-right, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band or margin for text.',
   decorations: ['food-bowl', 'confetti'],
   notes: 'Featured image auto-générée pour l\'article chien-peut-manger-pates le 2026-07-09.',
 }
@@ -1365,6 +1365,21 @@ const ART_NOURRITURE_COTON_DE_TULEAR: ImageSlot = {
   notes: "Featured image auto-générée pour l'article nourriture-coton-de-tulear le 2026-08-20.",
 }
 
+const ART_NOURRITURE_MALAMUTE_ALASKA: ImageSlot = {
+  id: 'art-nourriture-malamute-alaska',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'amber',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'A chest-up portrait of an Alaskan Malamute dog: thick plush double coat, classic wolf-grey and white coloring with a distinctive facial mask over the eyes and a white blaze down the muzzle, erect triangular ears held alert, warm brown almond-shaped eyes, calm friendly inquisitive expression, warm cream studio backdrop, soft natural daylight from the upper-left, gentle catch-light in the eyes, slight three-quarter angle, head-and-shoulders framing. Mixed-media editorial: photographic breed portrait combined with a hand-drawn gouache party hat in pill amber, contour #1A1109, palette cream #FAFAF8 dominant.',
+  composition:
+    'Full-bleed: the dog and the warm cream studio scene fill the entire frame edge-to-edge, dog framed head-and-shoulders slightly off-centre per rule-of-thirds, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column or margin for text.',
+  decorations: ['party-hat'],
+  notes: "Featured image auto-générée pour l'article nourriture-malamute-alaska le 2026-08-22.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1481,6 +1496,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_RECETTE_PATEE_MAISON_POISSON_CHIEN,
   ART_RECETTE_PATEE_MAISON_BOEUF_CHIEN,
   ART_NOURRITURE_COTON_DE_TULEAR,
+  ART_NOURRITURE_MALAMUTE_ALASKA,
   ART_COUP_DE_CHALEUR_CHIEN_SYMPTOMES_PREMIERS_GESTES,
   ART_RECETTE_PATEE_MAISON_AGNEAU_CHIEN,
   // Social (1)
