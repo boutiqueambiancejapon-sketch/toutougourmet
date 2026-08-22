@@ -151,6 +151,7 @@ export const brands: Brand[] = [
     cons: [
       'Uniquement pour les chiens (pas de chat)',
       'Prix plus élevé que les croquettes classiques',
+      'Inscription avec profil détaillé obligatoire avant de pouvoir commander',
     ],
     priceRange: '€€€',
     discountOffer: "-35% sur la box d'essai avec le code WZU7090",
