@@ -73,10 +73,6 @@ const brandFaqs: Record<string, { q: string; a: string }[]> = {
     { q: "Combien de temps se conservent les repas Dog Chef ?", a: "Les boudins non ouverts se conservent 7 jours au réfrigérateur et 4 mois au congélateur — une durée supérieure à la plupart des concurrents. Une fois ouvert, consommer dans les 24h. La box d'essai couvre 2 semaines complètes pour une transition sereine." },
     { q: "La livraison Dog Chef est-elle gratuite ?", a: "Oui, la livraison est gratuite en France métropolitaine, incluse dans le tarif de l'abonnement. Les repas arrivent en camionnette réfrigérée sous forme de boudins portionnés. Pas de mauvaise surprise sur la facture finale." },
     { q: "Quel est le code promo Dog Chef ?", a: "Le code WZU7090 donne -35% sur la box d'essai. Tu peux l'entrer directement sur le site Dog Chef ou passer par notre lien affilié qui l'applique automatiquement à la commande." },
-    { q: "Où sont fabriqués les repas Dog Chef ?", a: "Dans l'atelier propre de Dog Chef à Huldenberg, en Belgique, où travaillent plus de 100 employés. La marque a été fondée en 2017 et livre depuis ce site unique de production vers la France, la Belgique et le Luxembourg." },
-    { q: "Dog Chef propose-t-il des repas pour chat ?", a: "Non, Dog Chef est formulé exclusivement pour les chiens. Pour un chat, Elmut est l'alternative la plus proche en repas frais personnalisé : la marque propose aussi une gamme féline complète, ce que Dog Chef ne fait pas." },
-    { q: "Quels sont les avis négatifs sur Dog Chef ?", a: "Le point le plus cité est le prix : entre 45 et 165 €/mois selon le gabarit du chien, contre beaucoup moins pour des croquettes classiques. L'inscription impose aussi de remplir un profil détaillé (race, poids, activité, antécédents de santé) avant de commander, ce qui rallonge la première commande. Autre limite réelle : aucune formule pour chat. Ces contraintes n'empêchent pas la note de 4,8/5 sur plus de 7 800 avis, portée surtout par la personnalisation et le suivi du poids." },
-    { q: "Que disent les vétérinaires de Dog Chef ?", a: "Dog Chef n'a pas publié d'étude clinique indépendante sur ses recettes. Dans les avis clients de cette page, deux vétérinaires traitants sont cités indirectement : chez un Labrador senior sous Senior Booster, le vétérinaire a réduit la médication anti-inflammatoire de 30% en six semaines ; chez un chiot, le vétérinaire s'est dit rassuré par les ratios calcium-phosphore du plan personnalisé. Pour un chien avec une pathologie diagnostiquée, une validation du plan par le vétérinaire traitant reste recommandée avant de démarrer." },
   ],
 }
 
@@ -169,19 +165,6 @@ const brandDescriptions: Record<string, string[]> = {
     "Un vrai différenciant par rapport aux concurrents : les Boosters. Ces compléments ciblés s'ajoutent à la ration selon le profil — Puppy Booster (calcium/phosphore pour la croissance), Senior Booster (glucosamine + curcuma anti-inflammatoire), Mobility Booster (cartilages), Pro Transit Booster (pré et probiotiques). Du sur-mesure au niveau nutritionnel, pas juste sur la portion.",
     "Pour la transition : Dog Chef recommande 7 jours progressifs. Les repas se conservent 7 jours au réfrigérateur (vs 5 pour Elmut) et jusqu'à 4 mois au congélateur. La box d'essai couvre 2 semaines complètes — largement assez pour voir les premiers effets.",
   ],
-}
-
-const brandMetaOverrides: Record<string, { title: string; description: string }> = {
-  'dog-chef': {
-    title: "Dog Chef : Avis, Prix & Code Promo 2026",
-    description: "Avis Dog Chef complet : prix par gabarit, avis négatifs, avis vétérinaire, atelier de Huldenberg. -35% sur la box d'essai avec le code WZU7090.",
-  },
-}
-
-const relatedComparatifs: Record<string, { slug: string; label: string }[]> = {
-  'dog-chef': [{ slug: 'elmut-vs-dog-chef', label: 'Dog Chef vs Elmut : notre comparatif' }],
-  elmut: [{ slug: 'elmut-vs-dog-chef', label: 'Elmut vs Dog Chef : notre comparatif' }],
-  franklin: [{ slug: 'franklin-vs-elmut', label: 'Franklin vs Elmut : notre comparatif' }],
 }
 
 const brandVerdicts: Record<string, string> = {
@@ -371,9 +354,6 @@ function BrandPage({ brand }: { brand: Brand }) {
           </div>
 
           <div className="flex flex-wrap gap-3 text-sm">
-            {(relatedComparatifs[brand.slug] ?? []).map((c) => (
-              <Link key={c.slug} href={`/chien/marque/${c.slug}`} className="text-[var(--accent-1)] hover:underline">→ {c.label}</Link>
-            ))}
             <Link href="/comparateur" className="text-[var(--accent-1)] hover:underline">→ Comparateur complet</Link>
             <Link href="/quiz" className="text-[var(--accent-1)] hover:underline">→ Quiz personnalisé</Link>
             <Link href="/chien/marque" className="text-[var(--accent-1)] hover:underline">→ Toutes les marques</Link>
@@ -657,10 +637,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const brand = getBrandBySlug(slug)
   if (!brand) return {}
-  const override = brandMetaOverrides[slug]
   return {
-    title: override?.title ?? `${brand.name} : Avis Complet, Test & Promo 2026`,
-    description: override?.description ?? `Notre avis honnête sur ${brand.name} : composition, prix, avantages et inconvénients. ${brand.discountOffer}.`,
+    title: `${brand.name} : avis, prix, code promo`,
+    description: `Avis ${brand.name} : composition, prix, avantages et inconvénients. ${brand.discountOffer}.`,
     alternates: { canonical: `https://www.toutou-gourmet.com/chien/marque/${slug}` },
   }
 }
