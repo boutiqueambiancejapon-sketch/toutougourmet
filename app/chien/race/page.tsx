@@ -4,7 +4,7 @@ import { getArticlesByCategory } from '@/lib/mdx'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 
 export const metadata: Metadata = {
-  title: 'Alimentation par race de chien — Guides nutritionnels | Toutou Gourmet',
+  title: 'Alimentation par race de chien — guides nutritionnels',
   description:
     'Labrador, Golden Retriever, Berger Allemand, Bouledogue Français… Trouvez les conseils nutritionnels adaptés à la race de votre chien.',
   alternates: { canonical: 'https://www.toutou-gourmet.com/chien/race' },
