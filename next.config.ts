@@ -63,6 +63,30 @@ const nextConfig: NextConfig = {
 
       // Article alimentation chat (anciennement catégorie "Guide", à /blog/) → reclassé en Alimentation
       { source: '/blog/choisir-alimentation-chat-guide', destination: '/chien/alimentation-quotidienne/choisir-alimentation-chat-guide', permanent: true },
+
+      // ── Audit SEO 22/08/2026 — 404 confirmées : mauvais préfixe de catégorie ─
+      // Ces 13 URL utilisaient un ancien slug de catégorie ou un slug plausible
+      // mais faux (categorySlug réel du frontmatter vérifié article par article).
+      { source: '/chien/alimentation/alimentation-chiot-0-2-mois', destination: '/chien/alimentation-quotidienne/alimentation-chiot-0-2-mois', permanent: true },
+      { source: '/chien/alimentation/alimentation-chiot-2-6-mois', destination: '/chien/alimentation-quotidienne/alimentation-chiot-2-6-mois', permanent: true },
+      { source: '/chien/alimentation/alimentation-chiot-6-12-mois', destination: '/chien/alimentation-quotidienne/alimentation-chiot-6-12-mois', permanent: true },
+      { source: '/chien/peut-manger/chien-peut-manger-piment', destination: '/chien/urgences/chien-peut-manger-piment', permanent: true },
+      { source: '/chien/peut-manger/chien-peut-manger-riz', destination: '/chien/legumes/chien-peut-manger-riz', permanent: true },
+      { source: '/chien/peut-manger/chien-peut-manger-oeufs', destination: '/chien/viandes/chien-peut-manger-oeufs', permanent: true },
+      { source: '/chien/peut-manger/chien-peut-manger-champignons', destination: '/chien/legumes/chien-peut-manger-champignons', permanent: true },
+      { source: '/chien/peut-manger/chien-peut-manger-cerises', destination: '/chien/fruit/chien-peut-manger-cerises', permanent: true },
+      { source: '/chien/peut-manger/chien-peut-manger-pates', destination: '/chien/legumes/chien-peut-manger-pates', permanent: true },
+      { source: '/chien/peut-manger/chien-peut-manger-sardines', destination: '/chien/viandes/chien-peut-manger-sardines', permanent: true },
+      { source: '/chien/peut-manger/chien-peut-manger-pain', destination: '/chien/legumes/chien-peut-manger-pain', permanent: true },
+      { source: '/chien/comportement-alimentaire/chien-mange-trop-vite-solutions', destination: '/chien/alimentation-quotidienne/chien-mange-trop-vite-solutions', permanent: true },
+      { source: '/chien/alimentation-quotidienne/chien-barbecue-securite-aliments-eviter', destination: '/chien/sante/chien-barbecue-securite-aliments-eviter', permanent: true },
+
+      // Marques comparatif → Petty Well retiré (voir plus haut) : les 3 pages
+      // de comparaison "-vs-petty-well" n'ont plus d'équivalent direct après
+      // le remplacement de la marque. On redirige vers le comparatif général.
+      { source: '/chien/marque/elmut-vs-petty-well', destination: '/chien/marque/comparatif', permanent: true },
+      { source: '/chien/marque/dog-chef-vs-petty-well', destination: '/chien/marque/comparatif', permanent: true },
+      { source: '/chien/marque/franklin-vs-petty-well', destination: '/chien/marque/comparatif', permanent: true },
     ]
   },
 
