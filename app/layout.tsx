@@ -65,6 +65,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="fr" className={`${fraunces.variable} ${dmSans.variable}`}>
       <head>
+        {/* Google tag (gtag.js) — GA4 */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-MDHMHXVJRZ"
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-MDHMHXVJRZ');
+          `}
+        </Script>
+
         {/* Google AdSense — dans <head> pour validation par le robot Google */}
         {/* @cdc §CSP — script tiers approuvé, exception documentée */}
         <script
