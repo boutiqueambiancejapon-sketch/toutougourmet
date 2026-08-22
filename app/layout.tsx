@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/next'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import ScrollToTop from '@/components/layout/ScrollToTop'
+import GoogleAnalyticsPageView from '@/components/layout/GoogleAnalyticsPageView'
 import './globals.css'
 
 const fraunces = Fraunces({
@@ -76,7 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-MDHMHXVJRZ');
+            gtag('config', 'G-MDHMHXVJRZ', { send_page_view: false });
           `}
         </Script>
 
@@ -117,6 +118,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
 
         <ScrollToTop />
+        <GoogleAnalyticsPageView />
         <Header />
         <main id="main-content">{children}</main>
         <Footer />
