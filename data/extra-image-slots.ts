@@ -285,6 +285,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article chien-peut-boire-lait le 2026-08-19. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-chien-mange-poireau-urgence',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photo in a warm home kitchen: a curious medium-sized tan dog with a tilted head sits beside a wooden countertop where whole fresh leeks and sliced leek rounds are laid out, a small kitchen knife nearby, soft natural daylight from a window, shallow depth of field. Mixed-media editorial style: photorealistic dog and leeks with hand-drawn gouache decorations layered on top, contour #1A1109. Palette: cream #FAFAF8 dominant background bokeh, rose #FFD6E3 paw print, small orange #E8622A sparkle as a gentle alert accent above the leeks.',
+    composition:
+      'Full-bleed: the dog, the countertop and the leeks fill the entire frame edge-to-edge, touching all four borders; dog and leeks slightly off-centre per rule-of-thirds; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['sparkle', 'paw-print'],
+    notes:
+      "Featured image auto-générée pour l'article chien-mange-poireau-urgence le 2026-08-23. Catégorie Urgences & Intoxications — ton rose + accent orange. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
