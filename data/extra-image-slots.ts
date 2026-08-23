@@ -300,6 +300,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article chien-mange-poireau-urgence le 2026-08-23. Catégorie Urgences & Intoxications — ton rose + accent orange. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-recette-patee-maison-dinde-chien',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photo in a warm sunlit kitchen: a rustic ceramic bowl filled with a homemade turkey stew for a dog (shredded cooked turkey breast, mashed sweet potato, chopped green beans) on a wooden countertop, with a curious golden-coated dog leaning in from the side, nose reaching toward the bowl, calm happy expression, soft natural daylight from the upper-left, shallow depth of field. Mixed-media editorial style: photorealistic dog and bowl with hand-drawn gouache decorations layered on top, contour #1A1109. Palette: cream #FAFAF8 dominant background bokeh, amber #FFE8B5 illustrated food bowl icon, rose #FFD6E3 paw print.',
+    composition:
+      'Full-bleed: the dog, the bowl of turkey stew and the sunlit kitchen counter fill the entire frame edge-to-edge, touching all four borders; dog and bowl on rule-of-thirds on opposite sides; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['food-bowl', 'paw-print'],
+    notes:
+      "Featured image auto-générée pour l'article recette-patee-maison-dinde-chien le 2026-08-24. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
