@@ -238,6 +238,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'nourriture-coton-de-tulear': 'art-nourriture-coton-de-tulear',
   'nourriture-malamute-alaska': 'art-nourriture-malamute-alaska',
   'chien-mange-poireau-urgence': 'art-chien-mange-poireau-urgence',
+  'recette-patee-maison-dinde-chien': 'art-recette-patee-maison-dinde-chien',
 }
 
 /**
