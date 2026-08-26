@@ -466,6 +466,21 @@ const ART_TRANSITION: ImageSlot = {
   decorations: ['confetti', 'sparkle'],
 }
 
+const ART_RECETTE_FRIANDISES_MAISON_OCCUPER_CHIEN_RENTREE: ImageSlot = {
+  id: 'art-recette-friandises-maison-occuper-chien-rentree',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'blue',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media lifestyle photograph: a golden-brown medium dog lying on a woven cream rug in a sunlit living room, paws and nose engaged with a plain cream silicone treat-dispensing toy, a small canvas school backpack and colored pencils resting nearby evoking back-to-school season, warm late-afternoon light through a window. Mixed-media: photographic lifestyle base with hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, rose #FFD6E3 and blue #C8DCFF pastel pills scattered, amber #FFE8B5 and green #C2F0D5 accents, orange #E8622A tiny punctual dot.',
+  composition:
+    'Full-bleed: the photographic living-room scene fills the entire frame edge-to-edge, dog off-centre right per rule-of-thirds, backpack and pencils lower-left, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column or margin for text.',
+  decorations: ['paw-print', 'confetti'],
+  notes: 'Featured image auto-générée pour l\'article recette-friandises-maison-occuper-chien-rentree le 2026-08-26. Regénérée après rejet de la première génération (texte embossé visible sur le jouet, type logo).',
+}
+
 const ART_RECETTE_PATEE_MAISON_AGNEAU_CHIEN: ImageSlot = {
   id: 'art-recette-patee-maison-agneau-chien-v2',
   group: 'articles',
@@ -1499,6 +1514,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_NOURRITURE_MALAMUTE_ALASKA,
   ART_COUP_DE_CHALEUR_CHIEN_SYMPTOMES_PREMIERS_GESTES,
   ART_RECETTE_PATEE_MAISON_AGNEAU_CHIEN,
+  ART_RECETTE_FRIANDISES_MAISON_OCCUPER_CHIEN_RENTREE,
   // Social (1)
   OG_DEFAULT,
 ] as const
