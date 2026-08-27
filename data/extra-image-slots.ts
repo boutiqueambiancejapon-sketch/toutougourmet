@@ -315,6 +315,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article recette-patee-maison-dinde-chien le 2026-08-24. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-fontaine-eau-chien-comment-choisir',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photo in a warm sunlit kitchen corner: a friendly golden-coated dog drinking from a modern circulating pet water fountain, tongue touching a small flowing stream of water, water droplets caught mid-air, fountain on a light wood floor beside a pale rug. Mixed-media editorial style: photorealistic dog and fountain with hand-drawn gouache decorations layered on top, contour #1A1109. Palette: cream #FAFAF8 dominant background bokeh, blue #C8DCFF hand-drawn water-drop shapes, rose #FFD6E3 paw print, small orange #E8622A sparkle accent near the water stream.',
+    composition:
+      'Full-bleed: the dog, the fountain and the sunlit kitchen floor fill the entire frame edge-to-edge, touching all four borders; dog and fountain slightly off-centre per rule-of-thirds; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['sparkle', 'paw-print'],
+    notes:
+      "Featured image auto-générée pour l'article fontaine-eau-chien-comment-choisir le 2026-08-28. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
