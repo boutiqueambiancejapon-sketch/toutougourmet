@@ -240,6 +240,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-mange-poireau-urgence': 'art-chien-mange-poireau-urgence',
   'recette-patee-maison-dinde-chien': 'art-recette-patee-maison-dinde-chien',
   'recette-friandises-maison-occuper-chien-rentree': 'art-recette-friandises-maison-occuper-chien-rentree',
+  'fontaine-eau-chien-comment-choisir': 'art-fontaine-eau-chien-comment-choisir',
 }
 
 /**
