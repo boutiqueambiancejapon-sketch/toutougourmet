@@ -330,6 +330,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article fontaine-eau-chien-comment-choisir le 2026-08-28. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-recette-patee-maison-lapin-chien-2',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'A single full-frame editorial lifestyle photograph: a rustic ceramic bowl filled with homemade dog food (shredded cooked rabbit meat mixed with mashed orange sweet potato) on a warm wooden table, a small glass bottle of oil beside it, and a curious golden-cream dog with floppy ears resting its chin on the table edge next to the bowl. Mixed-media editorial style: photorealistic lifestyle photo base combined with hand-drawn gouache decorations layered on top (paw print, stylised bone, sparkle), contour #1A1109. Palette: cream #FAFAF8 dominant background bokeh, soft rose #FFD6E3 paw print, amber #FFE8B5 bone doodle, small orange #E8622A sparkle accent.',
+    composition:
+      'Full-bleed: the bowl, oil bottle and dog fill the entire frame edge-to-edge, touching all four borders; subject slightly off-centre per rule-of-thirds; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['paw-print', 'bone', 'sparkle'],
+    notes:
+      "Featured image auto-générée pour l'article recette-patee-maison-lapin-chien le 2026-08-30. Filename suffixé -2 (collision de nom locale côté outil Nano Banana lors de la régénération pour obtenir un cadrage plein-cadre correct). Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
