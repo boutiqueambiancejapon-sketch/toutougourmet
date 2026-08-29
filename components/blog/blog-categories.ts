@@ -241,6 +241,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'recette-patee-maison-dinde-chien': 'art-recette-patee-maison-dinde-chien',
   'recette-friandises-maison-occuper-chien-rentree': 'art-recette-friandises-maison-occuper-chien-rentree',
   'fontaine-eau-chien-comment-choisir': 'art-fontaine-eau-chien-comment-choisir',
+  'recette-patee-maison-lapin-chien': 'art-recette-patee-maison-lapin-chien-2',
 }
 
 /**
