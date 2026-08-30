@@ -242,6 +242,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'recette-friandises-maison-occuper-chien-rentree': 'art-recette-friandises-maison-occuper-chien-rentree',
   'fontaine-eau-chien-comment-choisir': 'art-fontaine-eau-chien-comment-choisir',
   'recette-patee-maison-lapin-chien': 'art-recette-patee-maison-lapin-chien-2',
+  'chien-peut-manger-figue': 'art-chien-peut-manger-figue',
 }
 
 /**
