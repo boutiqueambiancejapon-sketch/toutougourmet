@@ -345,6 +345,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article recette-patee-maison-lapin-chien le 2026-08-30. Filename suffixé -2 (collision de nom locale côté outil Nano Banana lors de la régénération pour obtenir un cadrage plein-cadre correct). Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-chien-peut-manger-figue',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photo on a warm sunlit wooden table: a few ripe purple figs, one cut in half showing pink flesh, arranged next to a small pale ceramic dog bowl, and a friendly curious light-golden-coated dog leaning its head in from the right, sniffing toward the figs, calm happy expression, soft natural daylight from the upper-left, shallow depth of field. Mixed-media editorial style: photorealistic dog and figs with hand-drawn gouache decorations layered on top, contour #1A1109. Palette: cream #FAFAF8 dominant background bokeh, rose #FFD6E3 paw print, amber #FFE8B5 sparkle accent, green #C2F0D5 drawn leaf.',
+    composition:
+      'Full-bleed: the figs, bowl and dog fill the entire frame edge-to-edge, touching all four borders; figs and bowl slightly off-centre per rule-of-thirds, dog entering frame from the right; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['paw-print', 'sparkle', 'leaf'],
+    notes:
+      "Featured image auto-générée pour l'article chien-peut-manger-figue le 2026-08-31. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
