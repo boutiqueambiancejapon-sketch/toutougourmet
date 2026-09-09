@@ -243,6 +243,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'fontaine-eau-chien-comment-choisir': 'art-fontaine-eau-chien-comment-choisir',
   'recette-patee-maison-lapin-chien': 'art-recette-patee-maison-lapin-chien-2',
   'chien-peut-manger-figue': 'art-chien-peut-manger-figue',
+  'nourriture-bichon-havanais': 'art-nourriture-bichon-havanais',
 }
 
 /**
