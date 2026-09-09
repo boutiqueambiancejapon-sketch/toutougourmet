@@ -1395,6 +1395,21 @@ const ART_NOURRITURE_MALAMUTE_ALASKA: ImageSlot = {
   notes: "Featured image auto-générée pour l'article nourriture-malamute-alaska le 2026-08-22.",
 }
 
+const ART_CHUTE_POILS_CHIEN_CAUSES_ALIMENTATION: ImageSlot = {
+  id: 'art-chute-poils-chien-causes-alimentation',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'amber',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial lifestyle photo of a fluffy Golden Retriever type dog being brushed at home, calm and content, loose fur tufts drifting in the air near a slicker brush held by an unseen hand, warm cream domestic interior with wooden floor and soft window light. Mixed-media editorial: photographic lifestyle scene combined with a hand-drawn gouache sparkle near the floating fur and a hand-drawn paw print stamped on the floor, contour #1A1109, palette cream #FAFAF8 dominant with rose and amber accents.',
+  composition:
+    'Full-bleed: the domestic scene fills the entire frame edge-to-edge, dog and brushing hand slightly off-centre per rule-of-thirds, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column or margin for text.',
+  decorations: ['sparkle', 'paw-print'],
+  notes: "Featured image auto-générée pour l'article chute-poils-chien-causes-alimentation le 2026-09-10.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1515,6 +1530,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_COUP_DE_CHALEUR_CHIEN_SYMPTOMES_PREMIERS_GESTES,
   ART_RECETTE_PATEE_MAISON_AGNEAU_CHIEN,
   ART_RECETTE_FRIANDISES_MAISON_OCCUPER_CHIEN_RENTREE,
+  ART_CHUTE_POILS_CHIEN_CAUSES_ALIMENTATION,
   // Social (1)
   OG_DEFAULT,
 ] as const
