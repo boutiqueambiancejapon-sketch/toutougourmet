@@ -1,16 +1,21 @@
 import Link from 'next/link'
 import type { Author } from '@/data/authors'
+import { DEFAULT_LOCALE, type Locale } from '@/lib/i18n/config'
+import { getDictionary } from '@/lib/i18n/dictionary'
 
 interface AuthorBoxProps {
   author: Author
+  locale?: Locale
 }
 
 // @cdc eeat — auteur signé avec lien vers page auteur
-export function AuthorBox({ author }: AuthorBoxProps) {
+export function AuthorBox({ author, locale = DEFAULT_LOCALE }: AuthorBoxProps) {
+  const t = getDictionary(locale)
+
   return (
     <aside
       className="flex gap-4 items-start mt-10 pt-8 border-t border-[var(--border)]"
-      aria-label="À propos de l'auteur"
+      aria-label={t.authorSectionLabel}
     >
       {/* Avatar initiales */}
       <div
@@ -60,7 +65,7 @@ export function AuthorBox({ author }: AuthorBoxProps) {
             href={author.url}
             className="text-xs font-semibold text-[var(--accent-1)] hover:underline"
           >
-            Tous ses articles →
+            {t.authorAllArticles}
           </Link>
           {author.linkedin && (
             <Link

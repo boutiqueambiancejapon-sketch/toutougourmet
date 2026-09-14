@@ -2,10 +2,15 @@ import Link from 'next/link'
 import { formatDate, estimateReadTime } from '@/lib/utils'
 import type { Article } from '@/lib/mdx'
 import { getCategoryVisual } from './blog-categories'
+import { DEFAULT_LOCALE, LOCALE_CONFIG, type Locale } from '@/lib/i18n/config'
+import { localizeCategoryLabel } from '@/lib/i18n/categories'
 
 interface ArticleCardProps {
   article: Article
   variant?: 'vertical' | 'horizontal'
+  locale?: Locale
+  /** Override du href — sert aux listes NL, dont les URLs ne sont pas les FR */
+  href?: string
 }
 
 /**
@@ -18,13 +23,20 @@ interface ArticleCardProps {
  *
  * Couleurs sourcées depuis `blog-categories.ts` — ne pas hardcoder.
  */
-export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps) {
+export function ArticleCard({
+  article,
+  variant = 'vertical',
+  locale = DEFAULT_LOCALE,
+  href: hrefOverride,
+}: ArticleCardProps) {
   const { frontmatter, slug, content } = article
   const visual = getCategoryVisual(frontmatter.category)
   const readTime = estimateReadTime(content)
-  const href = frontmatter.categorySlug
-    ? `/chien/${frontmatter.categorySlug}/${slug}`
-    : `/blog/${slug}`
+  const categoryLabel = localizeCategoryLabel(frontmatter.category, locale)
+  const intlLocale = LOCALE_CONFIG[locale].htmlLang
+  const href =
+    hrefOverride ??
+    (frontmatter.categorySlug ? `/chien/${frontmatter.categorySlug}/${slug}` : `/blog/${slug}`)
 
   if (variant === 'horizontal') {
     return (
@@ -42,7 +54,7 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
             className="text-[10px] font-bold uppercase tracking-widest"
             style={{ color: visual.textOnVar }}
           >
-            {frontmatter.category}
+            {categoryLabel}
           </span>
           <h2
             className="font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-1)] leading-snug text-sm line-clamp-2 transition-colors m-0"
@@ -51,7 +63,7 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
             {frontmatter.title}
           </h2>
           <p className="text-xs text-[var(--text-muted)] m-0">
-            {formatDate(frontmatter.date)} · {readTime} min
+            {formatDate(frontmatter.date, intlLocale)} · {readTime} min
           </p>
         </div>
       </Link>
@@ -89,7 +101,7 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
             color: visual.textOnVar,
           }}
         >
-          {frontmatter.category}
+          {categoryLabel}
         </span>
       </div>
 
@@ -105,7 +117,7 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
           {frontmatter.description}
         </p>
         <div className="flex items-center gap-2 mt-auto pt-2 text-xs text-[var(--text-muted)] flex-wrap">
-          <span>{formatDate(frontmatter.date)}</span>
+          <span>{formatDate(frontmatter.date, intlLocale)}</span>
           <span>·</span>
           <span style={{ fontFamily: "'JetBrains Mono', monospace" }}>{readTime} min</span>
         </div>

@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { brands } from '@/data/brands'
+import { DEFAULT_LOCALE, type Locale } from '@/lib/i18n/config'
+import { getDictionary } from '@/lib/i18n/dictionary'
 
 const BRAND_PILL: Record<string, { pill: string; emoji: string }> = {
   franklin: { pill: 'var(--pill-amber)', emoji: '🔥' },
@@ -13,7 +15,8 @@ const BRAND_PILL: Record<string, { pill: string; emoji: string }> = {
  * recommandées + CTA quiz. Les marques sont celles du site,
  * triées par note décroissante.
  */
-export function RelatedBrands() {
+export function RelatedBrands({ locale = DEFAULT_LOCALE }: { locale?: Locale }) {
+  const t = getDictionary(locale)
   const top = [...brands]
     .sort((a, b) => b.scores.global - a.scores.global)
     .slice(0, 3)
@@ -21,7 +24,7 @@ export function RelatedBrands() {
   return (
     <aside className="lg:sticky lg:top-[100px] lg:self-start">
       <p className="text-xs font-bold uppercase tracking-widest text-[var(--accent-1)] mb-4">
-        Recommandées pour ce profil
+        {t.brandsSidebarTitle}
       </p>
       <ul className="flex flex-col gap-3 m-0 p-0 list-none">
         {top.map((b) => {
@@ -71,24 +74,26 @@ export function RelatedBrands() {
         })}
       </ul>
 
+      {t.cta && (
       <div className="mt-6 p-5 bg-[var(--bg-dark)] rounded-[var(--radius-xl)] text-[var(--text-on-dark)]">
         <p
           className="m-0 mb-2 text-lg font-black leading-tight"
           style={{ fontFamily: "'Fraunces', serif" }}
         >
-          Pas sûr(e) du bon choix&nbsp;?
+          {t.brandsSidebarQuizTitle}
         </p>
         <p className="m-0 mb-4 text-sm leading-relaxed" style={{ opacity: 0.75 }}>
-          2&nbsp;min de quiz et on te recommande la marque la plus alignée avec ton animal.
+          {t.brandsSidebarQuizText}
         </p>
         <Link
-          href="/quiz"
+          href={t.cta.href}
           className="btn-primary text-sm w-full justify-center"
           style={{ padding: '10px 14px' }}
         >
-          Faire le quiz →
+          {t.cta.label}
         </Link>
       </div>
+      )}
     </aside>
   )
 }

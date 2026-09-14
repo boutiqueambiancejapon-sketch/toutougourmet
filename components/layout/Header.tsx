@@ -3,18 +3,12 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import { DEFAULT_LOCALE, localePath, type Locale } from '@/lib/i18n/config'
+import { getDictionary } from '@/lib/i18n/dictionary'
 
-const navLinks = [
-  { href: '/chien', label: 'Guides' },
-  { href: '/chien/race', label: 'Races' },
-  { href: '/comparateur', label: 'Comparateur' },
-  { href: '/chien/marque', label: 'Marques' },
-  { href: '/outils', label: 'Outils' },
-  { href: '/blog', label: 'Blog' },
-]
-
-export default function Header() {
+export default function Header({ locale = DEFAULT_LOCALE }: { locale?: Locale }) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const t = getDictionary(locale)
 
   return (
     <header className="sticky top-0 z-50 bg-[var(--bg-surface)]/95 backdrop-blur-sm border-b border-[var(--border)]">
@@ -22,7 +16,7 @@ export default function Header() {
 
         {/* Logo textuel */}
         <Link
-          href="/"
+          href={localePath(locale, '/')}
           className="flex items-center gap-2"
           style={{ fontFamily: "'Fraunces', serif" }}
         >
@@ -37,8 +31,8 @@ export default function Header() {
         </Link>
 
         {/* Nav desktop */}
-        <nav className="hidden md:flex items-center gap-1" aria-label="Navigation principale">
-          {navLinks.map((link) => (
+        <nav className="hidden md:flex items-center gap-1" aria-label={t.mainNavLabel}>
+          {t.nav.map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -51,16 +45,18 @@ export default function Header() {
 
         {/* CTA desktop */}
         <div className="hidden md:flex items-center gap-3">
-          <Link href="/quiz" className="btn-primary text-sm py-2 px-5">
-            Faire le quiz →
-          </Link>
+          {t.cta && (
+            <Link href={t.cta.href} className="btn-primary text-sm py-2 px-5">
+              {t.cta.label}
+            </Link>
+          )}
         </div>
 
         {/* Burger mobile */}
         <button
           className="md:hidden p-2 rounded-[var(--radius-md)] hover:bg-[var(--bg-surface-2)]"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+          aria-label={menuOpen ? t.closeMenu : t.openMenu}
           aria-expanded={menuOpen}
         >
           {menuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -70,7 +66,7 @@ export default function Header() {
       {/* Menu mobile */}
       {menuOpen && (
         <div className="md:hidden border-t border-[var(--border)] bg-[var(--bg-surface)] px-6 py-5 flex flex-col gap-1">
-          {navLinks.map((link) => (
+          {t.nav.map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -80,9 +76,11 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
-          <Link href="/quiz" onClick={() => setMenuOpen(false)} className="btn-primary text-center mt-4">
-            Faire le quiz →
-          </Link>
+          {t.cta && (
+            <Link href={t.cta.href} onClick={() => setMenuOpen(false)} className="btn-primary text-center mt-4">
+              {t.cta.label}
+            </Link>
+          )}
         </div>
       )}
     </header>

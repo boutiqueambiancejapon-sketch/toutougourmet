@@ -10,6 +10,8 @@ import { getArticleSlot } from './blog-categories'
 import { Badge } from '@/components/ui/Badge'
 import { DEFAULT_AUTHOR } from '@/data/authors'
 import type { Article } from '@/lib/mdx'
+import { DEFAULT_LOCALE, type Locale } from '@/lib/i18n/config'
+import { getDictionary } from '@/lib/i18n/dictionary'
 
 export interface ArticleLayoutProps {
   article: Article
@@ -23,6 +25,10 @@ export interface ArticleLayoutProps {
   currentSlug?: string
   /** Category slug for RelatedArticles filter (optional) */
   categorySlug?: string
+  /** Locale de rendu — défaut `fr` */
+  locale?: Locale
+  /** Construit le href des articles liés — défaut : routes FR */
+  relatedHrefBuilder?: (article: Article) => string
   /** MDX rendered content goes here */
   children: React.ReactNode
 }
@@ -37,10 +43,15 @@ export function ArticleLayout({
   allArticles,
   currentSlug,
   categorySlug,
+  locale = DEFAULT_LOCALE,
+  relatedHrefBuilder,
   children,
 }: ArticleLayoutProps) {
   const { frontmatter, slug } = article
-  const coverSlot = getArticleSlot(slug, frontmatter.category)
+  const t = getDictionary(locale)
+  // La cover est indexée sur le slug FR : pour une traduction, on résout depuis
+  // `translationOf`, jamais depuis le slug traduit.
+  const coverSlot = getArticleSlot(frontmatter.translationOf ?? slug, frontmatter.category)
 
   return (
     <article className="bg-[var(--bg-primary)] pb-20">
@@ -52,16 +63,18 @@ export function ArticleLayout({
         readTime={readTime}
         title={frontmatter.title}
         description={frontmatter.description}
+        locale={locale}
       />
 
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-8">
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_320px] gap-12 items-start">
           <div className="min-w-0">
-            {tldrItems.length > 0 && <TLDR items={tldrItems} />}
+            {tldrItems.length > 0 && <TLDR items={tldrItems} locale={locale} />}
             <SummarizeWithAI
               title={frontmatter.title}
               url={canonicalUrl}
               domain="toutou-gourmet.com"
+              locale={locale}
             />
             <div className="mdx-content mt-6">{children}</div>
 
@@ -75,29 +88,36 @@ export function ArticleLayout({
               </div>
             )}
 
-            <div className="flex flex-wrap gap-4 mt-6 text-sm font-medium">
-              <Link href="/quiz" className="text-[var(--accent-1)] hover:underline">
-                → Faire le quiz personnalisé
-              </Link>
-              <Link href="/comparateur" className="text-[var(--accent-1)] hover:underline">
-                → Voir le comparateur complet
-              </Link>
-            </div>
+            {t.articleCtas.length > 0 && (
+              <div className="flex flex-wrap gap-4 mt-6 text-sm font-medium">
+                {t.articleCtas.map((cta) => (
+                  <Link
+                    key={cta.href}
+                    href={cta.href}
+                    className="text-[var(--accent-1)] hover:underline"
+                  >
+                    {cta.label}
+                  </Link>
+                ))}
+              </div>
+            )}
 
-            <AuthorBox author={DEFAULT_AUTHOR} />
+            <AuthorBox author={DEFAULT_AUTHOR} locale={locale} />
 
             <RelatedArticles
               currentSlug={currentSlug ?? slug}
               categorySlug={categorySlug ?? frontmatter.categorySlug}
               allArticles={allArticles}
+              locale={locale}
+              hrefBuilder={relatedHrefBuilder}
             />
 
             <div className="mt-12">
-              <NewsletterBlock />
+              <NewsletterBlock title={t.newsletterTitle} description={t.newsletterDescription} />
             </div>
           </div>
 
-          <RelatedBrands />
+          {t.showBrandsSidebar && <RelatedBrands locale={locale} />}
         </div>
       </div>
     </article>

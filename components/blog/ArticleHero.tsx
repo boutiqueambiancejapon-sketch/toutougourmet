@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import { Illustration } from '@/components/ui/Illustration'
 import { getCategoryVisual } from './blog-categories'
+import { DEFAULT_LOCALE, type Locale } from '@/lib/i18n/config'
+import { localizeCategoryLabel } from '@/lib/i18n/categories'
+import { getDictionary } from '@/lib/i18n/dictionary'
 
 export interface BreadcrumbItem {
   label: string
@@ -16,12 +19,13 @@ interface ArticleHeroProps {
   readTime: number
   title: string
   description: string
+  locale?: Locale
 }
 
-function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
+function Breadcrumb({ items, label }: { items: BreadcrumbItem[]; label: string }) {
   return (
     <nav
-      aria-label="Fil d'Ariane"
+      aria-label={label}
       className="flex flex-wrap items-center gap-1.5 text-sm text-[var(--text-muted)] mb-5"
     >
       {items.map((item, i) => (
@@ -52,12 +56,14 @@ export function ArticleHero({
   readTime,
   title,
   description,
+  locale = DEFAULT_LOCALE,
 }: ArticleHeroProps) {
   const visual = getCategoryVisual(category)
+  const t = getDictionary(locale)
 
   return (
     <header className="max-w-[1200px] mx-auto px-6 md:px-10 pt-10 md:pt-14 pb-8">
-      <Breadcrumb items={breadcrumb} />
+      <Breadcrumb items={breadcrumb} label={t.breadcrumbLabel} />
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-8 lg:gap-12 items-center">
         <div className="min-w-0">
@@ -66,7 +72,7 @@ export function ArticleHero({
               className="text-[11px] font-bold uppercase tracking-widest px-3 py-1 rounded-full text-[var(--text-primary)]"
               style={{ background: visual.pillVar }}
             >
-              {category}
+              {localizeCategoryLabel(category, locale)}
             </span>
             <span className="text-sm text-[var(--text-muted)]">{dateDisplay}</span>
             <span className="text-sm text-[var(--text-muted)]">·</span>
@@ -74,7 +80,7 @@ export function ArticleHero({
               className="text-sm text-[var(--text-muted)]"
               style={{ fontFamily: "'JetBrains Mono', monospace" }}
             >
-              {readTime} min de lecture
+              {readTime} {t.readTime}
             </span>
           </div>
 
@@ -99,7 +105,7 @@ export function ArticleHero({
         <div className="relative w-full aspect-[16/9] rounded-[var(--radius-2xl)] overflow-hidden border border-[var(--border)]">
           <Illustration
             slot={coverSlot}
-            alt={`Illustration de couverture — ${title}`}
+            alt={`${t.coverAltPrefix} — ${title}`}
             fill
             sizes="(max-width: 1024px) 100vw, 600px"
             className="!rounded-none"

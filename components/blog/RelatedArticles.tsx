@@ -12,12 +12,17 @@
 
 import { ArticleCard } from '@/components/blog/ArticleCard'
 import type { Article } from '@/lib/mdx'
+import { DEFAULT_LOCALE, type Locale } from '@/lib/i18n/config'
+import { getDictionary } from '@/lib/i18n/dictionary'
 
 // @cdc alimentation — composant maillage interne
 interface Props {
   currentSlug: string
   categorySlug: string
   allArticles: Article[]
+  locale?: Locale
+  /** Construit le href d'une card — défaut : route FR `/chien/[cat]/[slug]` */
+  hrefBuilder?: (article: Article) => string
 }
 
 /** Pseudo-aléatoire déterministe — stable entre les renders côté serveur */
@@ -35,7 +40,14 @@ function slugToSeed(slug: string): number {
   return slug.split('').reduce((acc, c, i) => acc + c.charCodeAt(0) * (i + 1), 0)
 }
 
-export function RelatedArticles({ currentSlug, categorySlug, allArticles }: Props) {
+export function RelatedArticles({
+  currentSlug,
+  categorySlug,
+  allArticles,
+  locale = DEFAULT_LOCALE,
+  hrefBuilder,
+}: Props) {
+  const t = getDictionary(locale)
   const others = allArticles.filter((a) => a.slug !== currentSlug)
 
   // Même catégorie en priorité (max 3)
@@ -54,12 +66,12 @@ export function RelatedArticles({ currentSlug, categorySlug, allArticles }: Prop
   if (related.length === 0) return null
 
   return (
-    <section aria-label="Articles similaires" className="mt-14">
+    <section aria-label={t.relatedLabel} className="mt-14">
       <h2
         className="mb-6 text-xl font-bold text-[var(--text-primary)]"
         style={{ fontFamily: "'Fraunces', serif" }}
       >
-        Continuer votre lecture…
+        {t.relatedTitle}
       </h2>
 
       {/* Carousel scroll-snap sur mobile · grille sur md+ */}
@@ -76,7 +88,12 @@ export function RelatedArticles({ currentSlug, categorySlug, allArticles }: Prop
             key={article.slug}
             className="snap-start shrink-0 w-[280px] sm:w-[300px] md:w-auto"
           >
-            <ArticleCard article={article} variant="vertical" />
+            <ArticleCard
+              article={article}
+              variant="vertical"
+              locale={locale}
+              href={hrefBuilder?.(article)}
+            />
           </div>
         ))}
       </div>

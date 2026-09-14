@@ -2,6 +2,8 @@ import type { MetadataRoute } from 'next'
 import { getAllArticles } from '@/lib/mdx'
 import { brands } from '@/data/brands'
 import { categories } from '@/data/categories'
+import { getNlCategoryByFrSlug, nlCategories } from '@/lib/i18n/categories'
+import { alternatesForFrArticle, alternatesForNlArticle } from '@/lib/i18n/alternates'
 
 const BASE = 'https://www.toutou-gourmet.com'
 const NOW = new Date().toISOString()
@@ -52,13 +54,55 @@ export default function sitemap(): MetadataRoute.Sitemap {
     const url = frontmatter.categorySlug
       ? `${BASE}/chien/${frontmatter.categorySlug}/${slug}`
       : `${BASE}/blog/${slug}`
+    // @cdc i18n — alternates publiés seulement quand la traduction NL existe
+    const languages = frontmatter.categorySlug
+      ? alternatesForFrArticle(slug, frontmatter.categorySlug)
+      : alternatesForFrArticle(slug)
     return {
       url,
       lastModified: new Date(lastmod).toISOString(),
       changeFrequency: 'monthly',
       priority: 0.75,
+      ...(languages ? { alternates: { languages } } : {}),
     }
   })
 
-  return [...staticPages, ...brandPages, ...categoryPages, ...articlePages]
+  // ── Miroir NL-BE ─────────────────────────────────────────────────────────────
+  const nlArticles = getAllArticles('nl')
+
+  const nlStaticPages: MetadataRoute.Sitemap = [
+    { url: `${BASE}/nl`, lastModified: NOW, changeFrequency: 'daily', priority: 0.9 },
+    { url: `${BASE}/nl/hond`, lastModified: NOW, changeFrequency: 'weekly', priority: 0.7 },
+  ]
+
+  const nlCategoryPages: MetadataRoute.Sitemap = nlCategories.map((c) => ({
+    url: `${BASE}/nl/hond/${c.slug}`,
+    lastModified: NOW,
+    changeFrequency: 'weekly',
+    priority: 0.6,
+  }))
+
+  const nlArticlePages: MetadataRoute.Sitemap = nlArticles.flatMap((a) => {
+    const category = getNlCategoryByFrSlug(a.frontmatter.categorySlug)
+    if (!category) return []
+    const lastmod = a.frontmatter.updatedAt || a.frontmatter.date || NOW
+    const languages = alternatesForNlArticle(a)
+    return [{
+      url: `${BASE}/nl/hond/${category.slug}/${a.slug}`,
+      lastModified: new Date(lastmod).toISOString(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.75,
+      ...(languages ? { alternates: { languages } } : {}),
+    }]
+  })
+
+  return [
+    ...staticPages,
+    ...brandPages,
+    ...categoryPages,
+    ...articlePages,
+    ...nlStaticPages,
+    ...nlCategoryPages,
+    ...nlArticlePages,
+  ]
 }

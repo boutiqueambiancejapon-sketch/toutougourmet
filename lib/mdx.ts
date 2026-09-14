@@ -1,8 +1,14 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import { DEFAULT_LOCALE, LOCALE_CONFIG, type Locale } from '@/lib/i18n/config'
 
 const contentDir = path.join(process.cwd(), 'content')
+
+/** Dossier MDX d'une locale — `content/blog` (fr) ou `content/nl/blog` (nl) */
+function localeDir(locale: Locale): string {
+  return path.join(contentDir, LOCALE_CONFIG[locale].contentDir)
+}
 
 // Remplace l'année de rédaction dans les titres/descriptions par l'année courante
 // Ex: "Avis Royal Canin : notre test complet 2026" → "…2027" en 2027
@@ -87,6 +93,13 @@ export interface ArticleFrontmatter {
   affiliateB?: AffiliateLink
   /** Optionnel — active l'injection de Product/Review/AggregateRating JSON-LD */
   review?: ReviewFrontmatter
+  /**
+   * Articles traduits uniquement — slug de l'article FR source.
+   * Sert à (1) construire les hreflang réciproques FR ↔ NL et (2) résoudre la
+   * cover, dont le mapping (`getArticleSlot`) est indexé sur les slugs FR.
+   * @cdc i18n — obligatoire dans tout frontmatter de `content/nl/blog`.
+   */
+  translationOf?: string
 }
 
 export interface Article {
@@ -94,32 +107,45 @@ export interface Article {
   frontmatter: ArticleFrontmatter
   content: string      // MDX brut pour next-mdx-remote
   rawContent: string   // même chose (alias pour compat TL;DR)
+  /** Locale du fichier source — `fr` par défaut */
+  locale: Locale
 }
 
-export function getAllArticles(): Article[] {
-  const blogDir = path.join(contentDir, 'blog')
+function readArticle(dir: string, file: string, locale: Locale): Article {
+  const slug = file.replace(/\.mdx$/, '')
+  const raw = fs.readFileSync(path.join(dir, file), 'utf-8')
+  const { data, content } = matter(raw)
+  return {
+    slug,
+    frontmatter: injectCurrentYear(data as ArticleFrontmatter),
+    content,
+    rawContent: content,
+    locale,
+  }
+}
+
+export function getAllArticles(locale: Locale = DEFAULT_LOCALE): Article[] {
+  const blogDir = localeDir(locale)
   if (!fs.existsSync(blogDir)) return []
-  const files = fs.readdirSync(blogDir).filter((f) => f.endsWith('.mdx'))
-  return files
-    .map((file) => {
-      const slug = file.replace(/\.mdx$/, '')
-      const raw = fs.readFileSync(path.join(blogDir, file), 'utf-8')
-      const { data, content } = matter(raw)
-      return { slug, frontmatter: injectCurrentYear(data as ArticleFrontmatter), content, rawContent: content }
-    })
+  return fs
+    .readdirSync(blogDir)
+    .filter((f) => f.endsWith('.mdx'))
+    .map((file) => readArticle(blogDir, file, locale))
     .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
 }
 
-export function getArticleBySlug(slug: string): Article | null {
-  const filePath = path.join(contentDir, 'blog', `${slug}.mdx`)
+export function getArticleBySlug(slug: string, locale: Locale = DEFAULT_LOCALE): Article | null {
+  const blogDir = localeDir(locale)
+  const filePath = path.join(blogDir, `${slug}.mdx`)
   if (!fs.existsSync(filePath)) return null
-  const raw = fs.readFileSync(filePath, 'utf-8')
-  const { data, content } = matter(raw)
-  return { slug, frontmatter: injectCurrentYear(data as ArticleFrontmatter), content, rawContent: content }
+  return readArticle(blogDir, `${slug}.mdx`, locale)
 }
 
-export function getArticlesByCategory(categorySlug: string): Article[] {
-  return getAllArticles().filter((a) => a.frontmatter.categorySlug === categorySlug)
+export function getArticlesByCategory(
+  categorySlug: string,
+  locale: Locale = DEFAULT_LOCALE,
+): Article[] {
+  return getAllArticles(locale).filter((a) => a.frontmatter.categorySlug === categorySlug)
 }
 
 // Extrait les items TL;DR depuis le contenu MDX brut

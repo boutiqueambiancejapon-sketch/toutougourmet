@@ -5,8 +5,8 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatDate(dateStr: string): string {
-  return new Intl.DateTimeFormat('fr-FR', {
+export function formatDate(dateStr: string, intlLocale: string = 'fr-FR'): string {
+  return new Intl.DateTimeFormat(intlLocale, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
