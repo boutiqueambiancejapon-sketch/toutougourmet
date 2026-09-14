@@ -1,30 +1,43 @@
-# TODO — Miroir NL-BE (lot 1 : infrastructure)
+# TODO — Miroir NL-BE
 
 Décisions utilisateur (2026-09-14) :
-- Périmètre phase 1 : **blog uniquement** (pas d'outils / quiz / comparateur)
-- URLs : **sous-dossier** `/nl/…` sur www.toutou-gourmet.com
-- Slugs : traduits en néerlandais (hypothèse — meilleur SEO NL, mapping via `translationOf`)
+- Périmètre : **tout le site**, progressivement (phase A socle applicatif + phase B contenu)
+- URLs : sous-dossier `/nl/…` sur www.toutou-gourmet.com
+- Slugs : traduits en néerlandais
+- Livraison : **push direct sur la branche de production** `claude/toutou-gourmet-setup-3mRbP`
+  (pas de `main` dans ce repo — cette branche est la branche par défaut et celle que Vercel
+  déploie). Choix assumé par le propriétaire après signalement du risque sur la phase A.
 
-## Lot 1 — infrastructure (cette session)
+## Prérequis — à faire avant le premier run planifié
 
-- [x] `lib/i18n/config.ts` — locales, `lang` HTML (`fr` / `nl-BE`), locale OG, préfixe d'URL
-- [x] `lib/i18n/categories.ts` — mapping catégorie FR ↔ slug + libellé NL
-- [x] `lib/i18n/dictionary.ts` — chaînes UI FR/NL (défaut FR = aucun changement de rendu côté FR)
-- [x] `lib/mdx.ts` — chargement conscient de la locale (`content/blog` vs `content/nl/blog`)
-- [x] `lib/i18n/alternates.ts` — index bidirectionnel `translationOf` → `alternates.languages`
-- [x] Route groups `app/(fr)` / `app/(nl)` — deux root layouts, URLs FR inchangées
-- [x] `app/(nl)/layout.tsx` — `<html lang="nl-BE">`, OG `nl_BE`
-- [x] Routes NL : `/nl`, `/nl/hond/[category]`, `/nl/hond/[category]/[slug]`
-- [x] hreflang réciproque (FR ↔ NL ↔ x-default) sur les 2 routes article FR + la route NL
-- [x] `app/sitemap.ts` — entrées NL + `alternates.languages`
-- [x] Header/Footer/ArticleLayout : prop `locale` optionnelle (défaut `fr`)
-- [x] 1 article pilote NL-BE traduit
-- [x] `tsc --noEmit` + `npx eslint app components lib` + `next build` + `next start` vérifiés
-      (`next lint` n'existe plus en Next 16 — utiliser `npx eslint`. 9 erreurs eslint
-      subsistent, toutes antérieures et hors périmètre : `app/(fr)/a-propos/page.tsx`,
-      `app/(fr)/chien/marque/[slug]/page.tsx`, `components/blog/StickyCta.tsx`)
-- [x] Effet de bord : `public/sitemap.xml` figé masquait `app/sitemap.ts` — artefacts +
-      hook `postbuild: next-sitemap` supprimés, `app/robots.ts` ajouté (cf. DECISIONS.md)
+- [ ] Merger `claude/jolly-brahmagupta-742x33` (lots 1 et 3 du miroir NL) dans
+      `claude/toutou-gourmet-setup-3mRbP`. Tant que ce n'est pas fait, un run quotidien
+      poserait des articles NL sur une branche dépourvue des routes `/nl`. Le garde-fou
+      du prompt de routine détecte ce cas et s'arrête sans rien pousser.
+- [ ] Créer les deux tâches planifiées à partir de `tasks/routines/` (voir ce dossier).
+
+## Phase A — socle applicatif (une zone par run hebdomadaire)
+
+Ordre d'exécution. Pour chaque zone : extraire les chaînes vers `lib/i18n/dictionary.ts`
+(FR par défaut, rendu FR inchangé), ajouter le NL, créer la route `/nl/…`, une seule
+implémentation avec une prop `locale`.
+
+- [ ] A1 — Home + `components/home` (~23 chaînes)
+- [ ] A2 — Hubs `/chien`, `/chien/[category]`, `/chien/race` + `data/categories.ts` (~16)
+- [ ] A3 — Hub blog : filtres, pagination, recherche, tri (~8)
+- [ ] A4 — Outils : 6 calculateurs + `lib/calculators.ts` + `data/bien-nourri.ts` (~280) — prévoir 2 runs
+- [ ] A5 — Quiz + `data/quiz.ts`
+- [ ] A6 — Comparateur (~15)
+- [ ] A7 — Marques : fiches + `data/brands.ts` (~190) — **décision à prendre** : les avis
+      clients sont des témoignages réels, ne pas les traduire sans arbitrage
+- [ ] A8 — Légal, à propos, contact, plan du site, page auteur — **décision à prendre** :
+      mentions légales et politique de confidentialité ont une portée juridique
+
+## Phase B — contenu (2 articles par run quotidien)
+
+- [ ] 329 contenus FR à traduire (327 articles + 2 comparatifs) — suivi via
+      `node scripts/translation-queue.mjs --status`
+- [ ] À 2 par jour : ~5,5 mois. Chaque nouvel article FR publié creuse la dette d'un cran.
 
 ## Lot 3 — pipeline & rédaction NL (fait le 2026-09-14)
 
