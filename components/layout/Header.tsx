@@ -5,10 +5,19 @@ import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { DEFAULT_LOCALE, localePath, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionary'
+import { LanguageSwitcher } from './LanguageSwitcher'
 
-export default function Header({ locale = DEFAULT_LOCALE }: { locale?: Locale }) {
+export default function Header({
+  locale = DEFAULT_LOCALE,
+  languageHref,
+}: {
+  locale?: Locale
+  /** Miroir exact de la page courante — défaut : accueil de l'autre langue */
+  languageHref?: string
+}) {
   const [menuOpen, setMenuOpen] = useState(false)
   const t = getDictionary(locale)
+  const switchHref = languageHref ?? t.languageSwitchHref
 
   return (
     <header className="sticky top-0 z-50 bg-[var(--bg-surface)]/95 backdrop-blur-sm border-b border-[var(--border)]">
@@ -45,6 +54,7 @@ export default function Header({ locale = DEFAULT_LOCALE }: { locale?: Locale })
 
         {/* CTA desktop */}
         <div className="hidden md:flex items-center gap-3">
+          <LanguageSwitcher locale={locale} href={switchHref} />
           {t.cta && (
             <Link href={t.cta.href} className="btn-primary text-sm py-2 px-5">
               {t.cta.label}
@@ -76,6 +86,11 @@ export default function Header({ locale = DEFAULT_LOCALE }: { locale?: Locale })
               {link.label}
             </Link>
           ))}
+          <LanguageSwitcher
+            locale={locale}
+            href={switchHref}
+            className="!px-0 py-3 border-b border-[var(--border)] text-base"
+          />
           {t.cta && (
             <Link href={t.cta.href} onClick={() => setMenuOpen(false)} className="btn-primary text-center mt-4">
               {t.cta.label}

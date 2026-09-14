@@ -5,13 +5,14 @@ Lis le fichier /docs/ correspondant à ta tâche.
 Pour tâche transversale : lis docs/CDC.md uniquement.
 **Rédaction de contenu (article, page pilier, page cluster) : lis docs/09-seo-geo-guide.md en entier avant d'écrire la première ligne.**
 **Toute rédaction française (article MDX, page, FAQ, méta, copy, scheduled task de génération) : charger le skill `boileau` (`.claude/skills/boileau/SKILL.md`) AVANT d'écrire — règles préventives à appliquer dès le premier jet, pas une correction post-rédaction.**
+**Toute rédaction ou traduction néerlandaise (`content/nl/**`, pages `/nl`) : charger le skill `boileau-nl` (`.claude/skills/boileau-nl/SKILL.md`) AVANT d'écrire, et lire docs/10-traduction-nl.md pour la procédure.**
 
 ## Projet
 
 Domaine : www.toutou-gourmet.com
 Stack : Next.js 16.1.6 + React 19 + TypeScript strict + Tailwind v4 + MDX
 Next.js : 16.1.6 — ne jamais changer sans PR dédiée
-Langue défaut : français (monolangue, pas de i18n)
+Langues : français à la racine (défaut) + miroir néerlandais de Belgique sous `/nl` (blog uniquement) — pas de lib i18n, dictionnaire maison dans `lib/i18n/`
 Déploiement : Vercel · prod sur main · GitHub
 
 ## Comportement agent
@@ -26,7 +27,7 @@ Déploiement : Vercel · prod sur main · GitHub
 ## Filtre qualité — vérifier avant chaque commit
 
 - [ ] TypeScript : zéro `any`, zéro erreur `tsc --noEmit`
-- [ ] Lint : zéro erreur `next lint`
+- [ ] Lint : zéro **nouvelle** erreur `npx eslint app components lib` (`next lint` n'existe plus en Next 16 — 9 erreurs antérieures subsistent dans `a-propos/page.tsx`, `chien/marque/[slug]/page.tsx`, `StickyCta.tsx`)
 - [ ] next/image : jamais de `<img>` natif · width+height sur toutes les images · priority sur LCP uniquement
 - [ ] Variables CSS : jamais de valeur hardcodée
 - [ ] Composants : aucun > 150 lignes
@@ -38,6 +39,7 @@ Déploiement : Vercel · prod sur main · GitHub
 - [ ] Above-fold : aucun import Framer Motion sur composants visibles sans scroll
 - [ ] Dette technique : adjustFontFallback absent sur Fraunces + DM_Sans — ajouter si on touche layout.tsx
 - [ ] **Article MDX : `frontmatter.category` aligné avec le mapping de `components/blog/blog-categories.ts` — sinon cover + OG tombent sur le fallback `cat-nutrition`**
+- [ ] **Article MDX NL : `node scripts/translation-queue.mjs --lint` vert · `translationOf`, `categorySlug` et `category` restent en FR · `draft: true` retiré seulement après relecture**
 
 ## Règles Git absolues
 

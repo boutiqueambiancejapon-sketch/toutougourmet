@@ -1,0 +1,62 @@
+[
+  {
+    "frSlug": "peut-manger",
+    "slug": "mag-mijn-hond-eten",
+    "label": "Wat mag een hond eten?",
+    "description": "Fruit, groenten, vlees, zetmeel — welke voeding mag je hond wel en niet, met de juiste hoeveelheden en waarschuwingen."
+  },
+  {
+    "frSlug": "alimentation-quotidienne",
+    "slug": "dagelijkse-voeding",
+    "label": "Je hond goed voeden",
+    "description": "Brokken, natvoeding, verse maaltijden, BARF… Welke voeding kies je, in welke hoeveelheid en hoe vaak? Onze praktische gidsen."
+  },
+  {
+    "frSlug": "fruit",
+    "slug": "fruit",
+    "label": "Welk fruit mag een hond?",
+    "description": "Aardbeien, mango, peer, abrikoos… Welk fruit mag je hond zonder risico eten? Hoeveelheden, delen die je weglaat en verboden fruit."
+  },
+  {
+    "frSlug": "legumes",
+    "slug": "groenten",
+    "label": "Welke groenten mag een hond?",
+    "description": "Broccoli, bloemkool, paprika, witloof… Welke groenten mag je hond eten, welke laat je beter staan, en hoe bereid je ze."
+  },
+  {
+    "frSlug": "viandes",
+    "slug": "vlees-en-vis",
+    "label": "Vlees en vis voor honden",
+    "description": "Kip, rund, lam, zalm, lever… Welk vlees en welke vis mag een hond eten, rauw of gaar, en in welke hoeveelheden."
+  },
+  {
+    "frSlug": "urgences",
+    "slug": "gevaarlijke-voeding",
+    "label": "Gevaarlijke en giftige voeding voor honden",
+    "description": "Chocolade, druiven, look, gekookte botten, cashewnoten… De voeding die je hond kan vergiftigen, en wat je doet na inname."
+  },
+  {
+    "frSlug": "comportement-alimentaire",
+    "slug": "eetgedrag",
+    "label": "Mijn hond eet niet meer, eet te snel…",
+    "description": "Weigert zijn brokken, haalt het eten uit de kom, eet uitwerpselen, schrokt te snel… Eetgedrag begrijpen en bijsturen."
+  },
+  {
+    "frSlug": "race",
+    "slug": "voeding-per-ras",
+    "label": "Voeding per ras",
+    "description": "Labrador, Golden Retriever, Duitse Herder, Franse Bulldog… Voedingsadvies afgestemd op het ras van je hond."
+  },
+  {
+    "frSlug": "sante",
+    "slug": "gezondheid",
+    "label": "Voeding voor zieke honden",
+    "description": "Nierinsufficiëntie, artrose, dermatitis, kanker, hartproblemen… Welke voeding kies je bij de aandoening van je hond?"
+  },
+  {
+    "frSlug": "avis-marques",
+    "slug": "merken-reviews",
+    "label": "Reviews & vergelijking",
+    "description": "Royal Canin, Hill's, Orijen, Farmina, Belcando… Onze volledige tests van de grote merken en gedetailleerde vergelijkingen."
+  }
+]

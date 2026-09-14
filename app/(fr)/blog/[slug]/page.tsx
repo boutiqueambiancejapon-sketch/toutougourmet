@@ -11,7 +11,7 @@ import {
   extractFaqs,
 } from '@/lib/mdx'
 import { formatDate } from '@/lib/utils'
-import { alternatesForFrArticle } from '@/lib/i18n/alternates'
+import { alternatesForFrArticle, nlCounterpartPath } from '@/lib/i18n/alternates'
 import { StickyCta } from '@/components/blog/StickyCta'
 import { StickyCtaDouble } from '@/components/blog/StickyCtaDouble'
 import { getStickyCtaForArticle } from '@/lib/sticky-cta-config'
@@ -172,6 +172,7 @@ export default async function ArticlePage({ params }: Props) {
         readTime={readTime}
         tldrItems={tldrItems}
         allArticles={allArticles}
+        translationHref={nlCounterpartPath(slug) ?? undefined}
       >
         <MDXRemote
           source={stripTldr(content)}

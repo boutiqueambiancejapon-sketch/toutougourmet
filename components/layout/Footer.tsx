@@ -1,8 +1,16 @@
 import Link from 'next/link'
 import { DEFAULT_LOCALE, localePath, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionary'
+import { LanguageSwitcher } from './LanguageSwitcher'
 
-export default function Footer({ locale = DEFAULT_LOCALE }: { locale?: Locale }) {
+export default function Footer({
+  locale = DEFAULT_LOCALE,
+  languageHref,
+}: {
+  locale?: Locale
+  /** Miroir exact de la page courante — défaut : accueil de l'autre langue */
+  languageHref?: string
+}) {
   const t = getDictionary(locale)
 
   return (
@@ -48,7 +56,15 @@ export default function Footer({ locale = DEFAULT_LOCALE }: { locale?: Locale })
           ))}
         </div>
 
-        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/40">
+        <div className="border-t border-white/10 pt-6 pb-4 mb-2">
+          <LanguageSwitcher
+            locale={locale}
+            href={languageHref ?? t.languageSwitchHref}
+            variant="footer"
+          />
+        </div>
+
+        <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/40">
           <p>© {new Date().getFullYear()} Toutou Gourmet — {t.footerRights}</p>
           <p>
             {t.footerDisclosure}{' '}

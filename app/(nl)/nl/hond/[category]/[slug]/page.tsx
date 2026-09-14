@@ -15,7 +15,7 @@ import { formatDate } from '@/lib/utils'
 import { StickyCta } from '@/components/blog/StickyCta'
 import { ArticleLayout } from '@/components/blog/ArticleLayout'
 import { getNlCategoryByFrSlug, getNlCategoryBySlug } from '@/lib/i18n/categories'
-import { alternatesForNlArticle } from '@/lib/i18n/alternates'
+import { alternatesForNlArticle, frCounterpartPath } from '@/lib/i18n/alternates'
 import { LOCALE_CONFIG, SITE_URL } from '@/lib/i18n/config'
 import { getArticleSlot } from '@/components/blog/blog-categories'
 import { getSlotById } from '@/data/images-manifest'
@@ -186,6 +186,7 @@ export default async function NlArticlePage({ params }: Props) {
         currentSlug={slug}
         categorySlug={frontmatter.categorySlug}
         relatedHrefBuilder={nlHref}
+        translationHref={frCounterpartPath(article) ?? undefined}
       >
         <MDXRemote
           source={stripTldr(content)}

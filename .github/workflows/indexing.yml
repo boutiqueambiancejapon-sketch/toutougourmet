@@ -16,6 +16,7 @@ on:
     paths:
       - 'content/blog/**.mdx'
       - 'content/comparatifs/**.mdx'
+      - 'content/nl/blog/**.mdx'
 
   workflow_dispatch:
     inputs:

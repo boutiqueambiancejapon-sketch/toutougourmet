@@ -12,6 +12,7 @@ import { DEFAULT_AUTHOR } from '@/data/authors'
 import type { Article } from '@/lib/mdx'
 import { DEFAULT_LOCALE, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionary'
+import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher'
 
 export interface ArticleLayoutProps {
   article: Article
@@ -29,6 +30,12 @@ export interface ArticleLayoutProps {
   locale?: Locale
   /** Construit le href des articles liés — défaut : routes FR */
   relatedHrefBuilder?: (article: Article) => string
+  /**
+   * Miroir exact de cet article dans l'autre langue. Absent quand la traduction
+   * n'existe pas — on ne propose jamais un lien vers une page qui n'existe pas,
+   * c'est d'ailleurs la même condition que l'émission des hreflang.
+   */
+  translationHref?: string
   /** MDX rendered content goes here */
   children: React.ReactNode
 }
@@ -45,6 +52,7 @@ export function ArticleLayout({
   categorySlug,
   locale = DEFAULT_LOCALE,
   relatedHrefBuilder,
+  translationHref,
   children,
 }: ArticleLayoutProps) {
   const { frontmatter, slug } = article
@@ -55,6 +63,12 @@ export function ArticleLayout({
 
   return (
     <article className="bg-[var(--bg-primary)] pb-20">
+      {translationHref && (
+        <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-6">
+          <LanguageSwitcher locale={locale} href={translationHref} variant="banner" />
+        </div>
+      )}
+
       <ArticleHero
         breadcrumb={breadcrumb}
         category={frontmatter.category}

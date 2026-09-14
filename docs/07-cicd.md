@@ -60,7 +60,7 @@ jobs:
 |--------|---------|-----------|
 | dev | ✓ | — |
 | build | ✓ | — |
-| postbuild | ✓ (next-sitemap) | — |
+| postbuild | — (retiré le 2026-09-14, sitemap natif) | — |
 | start | ✓ | — |
 | lint | ✓ | — |
 | type-check | ✗ | `tsc --noEmit` |

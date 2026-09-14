@@ -4,7 +4,7 @@
 
 - Métadonnées via Next.js Metadata API · generateMetadata sur chaque page indexée
 - JSON-LD WebSite en place dans layout.tsx · Article + BreadcrumbList sur pages chien
-- Sitemap dynamique via next-sitemap (postbuild)
+- Sitemap dynamique via `app/sitemap.ts` (next-sitemap retiré le 2026-09-14 — cf. DECISIONS.md)
 - Plausible Analytics · Search Console à configurer
 - Cibles LCP < 2.5s · CLS < 0.1 · INP < 200ms
 
@@ -45,8 +45,8 @@ Injection côté serveur uniquement — jamais useEffect.
 
 ## 7.3 Fichiers techniques
 
-- `app/sitemap.ts` : sitemap dynamique généré par next-sitemap (postbuild)
-- `robots.txt` : à créer via next-sitemap config ou app/robots.ts
+- `app/sitemap.ts` : sitemap dynamique — source unique, FR + miroir NL avec `xhtml:link` hreflang
+- `app/robots.ts` : robots.txt servi par l'App Router, pointe vers `/sitemap.xml`
 - Manifest PWA : non prévu (V2)
 
 ---

@@ -5,9 +5,14 @@
  * `categorySlug: <slug FR>` dans son frontmatter. Le slug NL n'existe que dans
  * l'URL publique. Ça évite de dupliquer la taxonomie et garantit que la
  * résolution de cover (`getArticleSlot`, indexée sur le FR) continue de marcher.
+ *
+ * La table vit dans `data/nl-categories.json` et pas ici : `scripts/*.mjs`
+ * (zéro dépendance, donc incapables d'importer du TS) la lisent aussi pour
+ * construire les URLs NL. Une seule source, pas de dérive silencieuse.
  */
 
 import { categories, type Category } from '@/data/categories'
+import nlCategoriesData from '@/data/nl-categories.json'
 import type { Locale } from './config'
 
 export interface NlCategory {
@@ -19,78 +24,7 @@ export interface NlCategory {
   description: string
 }
 
-export const nlCategories: NlCategory[] = [
-  {
-    frSlug: 'peut-manger',
-    slug: 'mag-mijn-hond-eten',
-    label: 'Wat mag een hond eten?',
-    description:
-      'Fruit, groenten, vlees, zetmeel — welke voeding mag je hond wel en niet, met de juiste hoeveelheden en waarschuwingen.',
-  },
-  {
-    frSlug: 'alimentation-quotidienne',
-    slug: 'dagelijkse-voeding',
-    label: 'Je hond goed voeden',
-    description:
-      'Brokken, natvoeding, verse maaltijden, BARF… Welke voeding kies je, in welke hoeveelheid en hoe vaak? Onze praktische gidsen.',
-  },
-  {
-    frSlug: 'fruit',
-    slug: 'fruit',
-    label: 'Welk fruit mag een hond?',
-    description:
-      'Aardbeien, mango, peer, abrikoos… Welk fruit mag je hond zonder risico eten? Hoeveelheden, delen die je weglaat en verboden fruit.',
-  },
-  {
-    frSlug: 'legumes',
-    slug: 'groenten',
-    label: 'Welke groenten mag een hond?',
-    description:
-      'Broccoli, bloemkool, paprika, witloof… Welke groenten mag je hond eten, welke laat je beter staan, en hoe bereid je ze.',
-  },
-  {
-    frSlug: 'viandes',
-    slug: 'vlees-en-vis',
-    label: 'Vlees en vis voor honden',
-    description:
-      'Kip, rund, lam, zalm, lever… Welk vlees en welke vis mag een hond eten, rauw of gaar, en in welke hoeveelheden.',
-  },
-  {
-    frSlug: 'urgences',
-    slug: 'gevaarlijke-voeding',
-    label: 'Gevaarlijke en giftige voeding voor honden',
-    description:
-      'Chocolade, druiven, look, gekookte botten, cashewnoten… De voeding die je hond kan vergiftigen, en wat je doet na inname.',
-  },
-  {
-    frSlug: 'comportement-alimentaire',
-    slug: 'eetgedrag',
-    label: 'Mijn hond eet niet meer, eet te snel…',
-    description:
-      'Weigert zijn brokken, haalt het eten uit de kom, eet uitwerpselen, schrokt te snel… Eetgedrag begrijpen en bijsturen.',
-  },
-  {
-    frSlug: 'race',
-    slug: 'voeding-per-ras',
-    label: 'Voeding per ras',
-    description:
-      'Labrador, Golden Retriever, Duitse Herder, Franse Bulldog… Voedingsadvies afgestemd op het ras van je hond.',
-  },
-  {
-    frSlug: 'sante',
-    slug: 'gezondheid',
-    label: 'Voeding voor zieke honden',
-    description:
-      'Nierinsufficiëntie, artrose, dermatitis, kanker, hartproblemen… Welke voeding kies je bij de aandoening van je hond?',
-  },
-  {
-    frSlug: 'avis-marques',
-    slug: 'merken-reviews',
-    label: 'Reviews & vergelijking',
-    description:
-      'Royal Canin, Hill\'s, Orijen, Farmina, Belcando… Onze volledige tests van de grote merken en gedetailleerde vergelijkingen.',
-  },
-]
+export const nlCategories: NlCategory[] = nlCategoriesData
 
 const BY_FR_SLUG = new Map(nlCategories.map((c) => [c.frSlug, c]))
 const BY_NL_SLUG = new Map(nlCategories.map((c) => [c.slug, c]))

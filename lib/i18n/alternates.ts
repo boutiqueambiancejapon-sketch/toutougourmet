@@ -93,3 +93,22 @@ export function alternatesForNlArticle(article: Article): HreflangMap | undefine
   if (!frSlug) return undefined
   return buildLanguages(frSlug, article.frontmatter.categorySlug)
 }
+
+// ─── Liens miroir (sélecteur de langue) ──────────────────────────────────────
+
+/** Chemin relatif de la version NL d'un article FR, ou `null` si non traduit */
+export function nlCounterpartPath(frSlug: string): string | null {
+  const pair = getIndex().get(frSlug)
+  if (!pair) return null
+  const category = getNlCategoryByFrSlug(pair.categorySlug)
+  if (!category) return null
+  return `${LOCALE_CONFIG.nl.prefix}/${LOCALE_CONFIG.nl.dogSegment}/${category.slug}/${pair.nlSlug}`
+}
+
+/** Chemin relatif de la version FR d'un article NL, ou `null` si introuvable */
+export function frCounterpartPath(article: Article): string | null {
+  const frSlug = article.frontmatter.translationOf
+  if (!frSlug) return null
+  const categorySlug = article.frontmatter.categorySlug
+  return categorySlug ? `/chien/${categorySlug}/${frSlug}` : `/blog/${frSlug}`
+}

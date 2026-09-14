@@ -27,7 +27,7 @@ import {
   BodyImage,
 } from '@/components/mdx/MdxComponents'
 import { BrandCTA } from '@/components/marques/BrandCTA'
-import { alternatesForFrArticle } from '@/lib/i18n/alternates'
+import { alternatesForFrArticle, nlCounterpartPath } from '@/lib/i18n/alternates'
 import rehypeAutolinkTerms from '@/lib/rehype-autolink-terms'
 import { AUTOLINK_DICTIONARY } from '@/lib/autolink-dictionary'
 import remarkGfm from 'remark-gfm'
@@ -224,6 +224,7 @@ export default async function ArticleCategoryPage({ params }: Props) {
         allArticles={allArticles}
         currentSlug={slug}
         categorySlug={category}
+        translationHref={nlCounterpartPath(slug) ?? undefined}
       >
         <MDXRemote
           source={stripTldr(content)}

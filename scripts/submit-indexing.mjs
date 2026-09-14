@@ -113,6 +113,20 @@ function parseFrontmatter(text) {
   return out
 }
 
+// ─── Mapping catégories NL ───────────────────────────────────────────────────
+// Lu depuis le JSON partagé avec `lib/i18n/categories.ts` : une seule source,
+// pas de table dupliquée qui dérive en silence.
+
+let NL_CATEGORY_BY_FR_SLUG = null
+
+function nlCategorySlug(frSlug) {
+  if (!NL_CATEGORY_BY_FR_SLUG) {
+    const raw = JSON.parse(readFileSync(join(ROOT, 'data/nl-categories.json'), 'utf-8'))
+    NL_CATEGORY_BY_FR_SLUG = new Map(raw.map((c) => [c.frSlug, c.slug]))
+  }
+  return NL_CATEGORY_BY_FR_SLUG.get(frSlug) ?? null
+}
+
 // ─── URL building ────────────────────────────────────────────────────────────
 
 function urlFromMdxFile(relPath) {
@@ -122,6 +136,20 @@ function urlFromMdxFile(relPath) {
   const text = readFileSync(abs, 'utf-8')
   const fm = parseFrontmatter(text)
 
+  // Le test NL passe avant celui du FR : `content/nl/blog/` commencerait
+  // sinon par matcher… rien, mais l'ordre rend l'intention explicite.
+  if (relPath.startsWith('content/nl/blog/')) {
+    if (!fm.categorySlug) {
+      console.warn(`⚠️  ${relPath} → pas de categorySlug dans le frontmatter, skip`)
+      return null
+    }
+    const nlCat = nlCategorySlug(fm.categorySlug)
+    if (!nlCat) {
+      console.warn(`⚠️  ${relPath} → categorySlug "${fm.categorySlug}" absent de data/nl-categories.json, skip`)
+      return null
+    }
+    return `${SITE_URL}/nl/hond/${nlCat}/${slug}`
+  }
   if (relPath.startsWith('content/blog/')) {
     const cat = fm.categorySlug
     if (!cat) {
@@ -138,7 +166,7 @@ function urlFromMdxFile(relPath) {
 
 function collectAllMdx() {
   const paths = []
-  for (const sub of ['blog', 'comparatifs']) {
+  for (const sub of ['blog', 'comparatifs', 'nl/blog']) {
     const dir = join(ROOT, 'content', sub)
     if (!existsSync(dir)) continue
     for (const f of readdirSync(dir)) {
@@ -152,7 +180,7 @@ function collectChangedMdx(since) {
   let out
   try {
     out = execSync(
-      `git diff --name-only --diff-filter=AM ${since} HEAD -- content/blog content/comparatifs`,
+      `git diff --name-only --diff-filter=AM ${since} HEAD -- content/blog content/comparatifs content/nl/blog`,
       { cwd: ROOT, encoding: 'utf-8' }
     )
   } catch (err) {

@@ -26,6 +26,18 @@ Décisions utilisateur (2026-09-14) :
 - [x] Effet de bord : `public/sitemap.xml` figé masquait `app/sitemap.ts` — artefacts +
       hook `postbuild: next-sitemap` supprimés, `app/robots.ts` ajouté (cf. DECISIONS.md)
 
+## Lot 3 — pipeline & rédaction NL (fait le 2026-09-14)
+
+- [x] Skill `.claude/skills/boileau-nl/SKILL.md` (localisation belge, lexique NL-BE vs NL-NL,
+      typographie néerlandaise, tics d'IA en NL, règles frontmatter et liens internes)
+- [x] `scripts/translation-queue.mjs` — `--status`, `--next N [--category]`, `--scaffold`, `--lint`
+- [x] `draft: true` supporté par `lib/mdx.ts` : un scaffold non relu est hors build, hors sitemap,
+      hors hreflang, hors sélecteur de langue
+- [x] `data/nl-categories.json` — table FR→NL partagée entre `lib/i18n/categories.ts` et les scripts
+- [x] `.github/workflows/indexing.yml` + `scripts/submit-indexing.mjs` étendus à `content/nl/blog/**`
+- [x] `docs/10-traduction-nl.md` — procédure quotidienne
+- [x] Sélecteur de langue HTML (menu + footer + miroir en tête d'article)
+
 ## Lot 2 (prochaine session)
 
 - [ ] Hub `/nl/blog` complet (filtres, pagination, recherche) — actuellement `/nl` sert de hub
@@ -33,8 +45,12 @@ Décisions utilisateur (2026-09-14) :
 - [ ] `RelatedBrands` / `NewsletterBlock` : copies NL relues (traduction littérale à revoir)
 - [ ] Dimension langue côté GA4 / Plausible
 
-## Lot 3
+## Signalé, non traité (hors périmètre)
 
-- [ ] Skill `boileau-nl` (règles de rédaction NL-BE : AFSCA ≠ NVWA, lexique belge, tutoiement `je`)
-- [ ] Pipeline de traduction 1-2 articles/jour (script + scheduled task)
-- [ ] `.github/workflows/indexing.yml` étendu à `content/nl/**`
+- [ ] 8 articles FR portent `categorySlug: "alimentation"`, catégorie absente de `data/categories.ts` :
+      `/chien/alimentation/<slug>` répond 200 mais le hub `/chien/alimentation` renvoie 404 et le
+      fil d'Ariane perd son niveau catégorie. Ces 8 articles sont aussi exclus de la file de
+      traduction NL. Correctif = décision de taxonomie (fusion dans `alimentation-quotidienne`
+      + redirects, ou création de la catégorie).
+- [ ] 9 erreurs eslint antérieures : `app/(fr)/a-propos/page.tsx`,
+      `app/(fr)/chien/marque/[slug]/page.tsx`, `components/blog/StickyCta.tsx`

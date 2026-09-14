@@ -100,6 +100,13 @@ export interface ArticleFrontmatter {
    * @cdc i18n — obligatoire dans tout frontmatter de `content/nl/blog`.
    */
   translationOf?: string
+  /**
+   * Brouillon — exclu du build, du sitemap et des listes.
+   * @cdc i18n — `scripts/translation-queue.mjs --scaffold` pose `draft: true` sur
+   * le fichier qu'il génère : tant que la traduction n'est pas relue, le texte
+   * français qu'il contient ne peut pas partir en production par inadvertance.
+   */
+  draft?: boolean
 }
 
 export interface Article {
@@ -131,6 +138,7 @@ export function getAllArticles(locale: Locale = DEFAULT_LOCALE): Article[] {
     .readdirSync(blogDir)
     .filter((f) => f.endsWith('.mdx'))
     .map((file) => readArticle(blogDir, file, locale))
+    .filter((a) => a.frontmatter.draft !== true)
     .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
 }
 
@@ -138,7 +146,8 @@ export function getArticleBySlug(slug: string, locale: Locale = DEFAULT_LOCALE):
   const blogDir = localeDir(locale)
   const filePath = path.join(blogDir, `${slug}.mdx`)
   if (!fs.existsSync(filePath)) return null
-  return readArticle(blogDir, `${slug}.mdx`, locale)
+  const article = readArticle(blogDir, `${slug}.mdx`, locale)
+  return article.frontmatter.draft === true ? null : article
 }
 
 export function getArticlesByCategory(

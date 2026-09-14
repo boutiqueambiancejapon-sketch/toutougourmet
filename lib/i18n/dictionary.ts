@@ -39,7 +39,19 @@ export interface Dictionary {
   footerDisclosure: string
   footerDisclosureLink: string
   footerColumns: { title: string; links: { href: string; label: string }[] }[]
+  /**
+   * Libellés du sélecteur de langue. Ils sont rédigés **dans la langue cible**,
+   * pas dans celle de la page : le lien porte `lang` sur la langue de
+   * destination, donc un lecteur d'écran prononcerait un libellé français avec
+   * la phonétique néerlandaise. C'est aussi plus utile pour le visiteur qui
+   * cherche sa langue.
+   */
   languageSwitchLabel: string
+  languageSwitchAriaLabel: string
+  /** Point d'entrée de l'autre langue, quand la page n'a pas de miroir exact */
+  languageSwitchHref: string
+  /** Lien miroir affiché en tête d'article quand la traduction existe */
+  articleSwitchLabel: string
   hubTitle: string
   hubDescription: string
   hubLatest: string
@@ -117,6 +129,9 @@ const fr: Dictionary = {
     },
   ],
   languageSwitchLabel: 'Nederlands (België)',
+  languageSwitchAriaLabel: 'Bekijk deze site in het Nederlands (België)',
+  languageSwitchHref: '/nl',
+  articleSwitchLabel: 'Lees dit artikel in het Nederlands',
   hubTitle: 'Le blog',
   hubDescription: 'Nos guides nutrition pour chien.',
   hubLatest: 'Derniers articles',
@@ -179,6 +194,9 @@ const nl: Dictionary = {
     },
   ],
   languageSwitchLabel: 'Français',
+  languageSwitchAriaLabel: 'Voir ce site en français',
+  languageSwitchHref: '/',
+  articleSwitchLabel: 'Lire cet article en français',
   hubTitle: 'Hondenvoeding, eerlijk uitgelegd',
   hubDescription:
     'Onze voedingsgidsen voor honden, geschreven voor Belgische baasjes. Elke dag komen er artikels bij.',
