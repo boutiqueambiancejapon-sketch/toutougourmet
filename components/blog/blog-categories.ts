@@ -246,6 +246,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'nourriture-bichon-havanais': 'art-nourriture-bichon-havanais',
   'chute-poils-chien-causes-alimentation': 'art-chute-poils-chien-causes-alimentation',
   'chien-peut-manger-cannelle': 'art-chien-peut-manger-cannelle',
+  'comment-nourrir-chien-sans-dents': 'art-comment-nourrir-chien-sans-dents',
 }
 
 /**
