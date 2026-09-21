@@ -1425,6 +1425,21 @@ const ART_CHIEN_PEUT_MANGER_CANNELLE: ImageSlot = {
   notes: "Featured image auto-générée pour l'article chien-peut-manger-cannelle le 2026-09-21.",
 }
 
+const ART_COMMENT_NOURRIR_CHIEN_SANS_DENTS: ImageSlot = {
+  id: 'art-comment-nourrir-chien-sans-dents',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media lifestyle photograph: a senior cream-and-tan medium-size dog with a greying muzzle eats softened kibble soaking in warm water from a simple ceramic bowl, close three-quarter angle, warm natural side light, cozy kitchen-adjacent interior with soft cream tones. Mixed-media: photographic lifestyle base with hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, pastel steam-swirl sparkle in rose #FFD6E3 and blue #C8DCFF rising from the bowl, a small green #C2F0D5 paw print and a blue/rose bone doodle, orange #E8622A tiny punctual accent.',
+  composition:
+    'Full-bleed: the dog and bowl scene fill the entire frame edge-to-edge, dog framed left-of-centre per rule-of-thirds, bowl in the lower-left foreground, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column or margin for text.',
+  decorations: ['bone', 'sparkle', 'paw-print'],
+  notes: "Featured image auto-générée pour l'article comment-nourrir-chien-sans-dents le 2026-09-22.",
+}
+
 // ============================================================
 // GROUPE D — SOCIAL / OG (1 slot)
 // ============================================================
@@ -1547,6 +1562,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_RECETTE_FRIANDISES_MAISON_OCCUPER_CHIEN_RENTREE,
   ART_CHUTE_POILS_CHIEN_CAUSES_ALIMENTATION,
   ART_CHIEN_PEUT_MANGER_CANNELLE,
+  ART_COMMENT_NOURRIR_CHIEN_SANS_DENTS,
   // Social (1)
   OG_DEFAULT,
 ] as const
