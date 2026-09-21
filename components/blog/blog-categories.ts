@@ -245,6 +245,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-peut-manger-figue': 'art-chien-peut-manger-figue',
   'nourriture-bichon-havanais': 'art-nourriture-bichon-havanais',
   'chute-poils-chien-causes-alimentation': 'art-chute-poils-chien-causes-alimentation',
+  'chien-peut-manger-cannelle': 'art-chien-peut-manger-cannelle',
 }
 
 /**
