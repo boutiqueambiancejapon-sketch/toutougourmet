@@ -1289,8 +1289,6 @@ const ART_RECETTE_BISCUITS_SARDINE_CHIEN: ImageSlot = {
   notes: "Featured image auto-générée pour l'article recette-biscuits-sardine-chien le 2026-07-11.",
 }
 
-const ART_NOURRITURE_AMERICAN_STAFFORDSHIRE_TERRIER_UNUSED_PLACEHOLDER = null as any // removed duplicate marker
-
 const ART_RECETTE_FRIANDISES_EDUCATION_CHIEN: ImageSlot = {
   id: 'art-recette-friandises-education-chien',
   group: 'articles',
