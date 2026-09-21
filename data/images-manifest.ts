@@ -1289,6 +1289,8 @@ const ART_RECETTE_BISCUITS_SARDINE_CHIEN: ImageSlot = {
   notes: "Featured image auto-générée pour l'article recette-biscuits-sardine-chien le 2026-07-11.",
 }
 
+const ART_NOURRITURE_AMERICAN_STAFFORDSHIRE_TERRIER_UNUSED_PLACEHOLDER = null as any // removed duplicate marker
+
 const ART_RECETTE_FRIANDISES_EDUCATION_CHIEN: ImageSlot = {
   id: 'art-recette-friandises-education-chien',
   group: 'articles',
@@ -1408,6 +1410,21 @@ const ART_CHUTE_POILS_CHIEN_CAUSES_ALIMENTATION: ImageSlot = {
     'Full-bleed: the domestic scene fills the entire frame edge-to-edge, dog and brushing hand slightly off-centre per rule-of-thirds, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column or margin for text.',
   decorations: ['sparkle', 'paw-print'],
   notes: "Featured image auto-générée pour l'article chute-poils-chien-causes-alimentation le 2026-09-10.",
+}
+
+const ART_CHIEN_PEUT_MANGER_CANNELLE: ImageSlot = {
+  id: 'art-chien-peut-manger-cannelle',
+  group: 'articles',
+  ratio: '3:2',
+  tone: 'rose',
+  imageReady: true,
+  ext: 'jpeg',
+  subject:
+    'Editorial mixed-media lifestyle photograph: a curious tan-and-black crossbreed dog with perked ears sits attentively beside a small rustic wooden bowl filled with cinnamon sticks and a light dusting of ground cinnamon powder, on a warm wooden kitchen counter with soft cream cabinetry behind, natural daylight from the upper-left. Mixed-media: photographic lifestyle base with hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, rose #FFD6E3 and amber #FFE8B5 confetti, amber sparkle near the cinnamon bowl.',
+  composition:
+    'Full-bleed: the dog, the cinnamon bowl and the kitchen counter scene fill the entire frame edge-to-edge, dog framed right-of-centre per rule-of-thirds, cinnamon bowl in the foreground lower-left at muzzle level, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column or margin for text.',
+  decorations: ['confetti', 'sparkle'],
+  notes: "Featured image auto-générée pour l'article chien-peut-manger-cannelle le 2026-09-21.",
 }
 
 // ============================================================
@@ -1531,6 +1548,7 @@ export const imageSlots: readonly ImageSlot[] = [
   ART_RECETTE_PATEE_MAISON_AGNEAU_CHIEN,
   ART_RECETTE_FRIANDISES_MAISON_OCCUPER_CHIEN_RENTREE,
   ART_CHUTE_POILS_CHIEN_CAUSES_ALIMENTATION,
+  ART_CHIEN_PEUT_MANGER_CANNELLE,
   // Social (1)
   OG_DEFAULT,
 ] as const
