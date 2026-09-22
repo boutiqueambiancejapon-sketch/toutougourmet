@@ -375,6 +375,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article nourriture-bichon-havanais le 2026-09-09. Portrait race unique (règle Race), pas de fallback breed générique. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-recette-croquettes-maison-chien',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photo on a warm rustic light-wood kitchen table: a parchment-lined baking tray covered in small homemade golden-brown square dog kibble cubes, freshly oven-dried, a small cream ceramic dog bowl filled with the same cubes, a halved carrot, courgette slices, a cracked egg shell and a light dusting of rice flour, and a friendly curious light-golden-coated dog leaning its head in from the right, nose close to the tray, soft natural daylight from the upper-left. Mixed-media editorial style: photorealistic scene with hand-drawn gouache decorations layered on top, contour #1A1109. Palette: cream #FAFAF8 dominant background bokeh, amber #FFE8B5 bone doodle, rose #FFD6E3 paw print, small orange #E8622A sparkle accent.',
+    composition:
+      'Full-bleed: the tray, bowl, ingredients and dog fill the entire frame edge-to-edge, touching all four borders; tray left-of-centre and dog on the right third per rule-of-thirds; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank cream band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['bone', 'paw-print', 'sparkle'],
+    notes:
+      "Featured image auto-générée pour l'article recette-croquettes-maison-chien le 2026-09-23. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
