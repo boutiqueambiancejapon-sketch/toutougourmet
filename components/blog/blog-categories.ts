@@ -248,6 +248,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-peut-manger-cannelle': 'art-chien-peut-manger-cannelle',
   'comment-nourrir-chien-sans-dents': 'art-comment-nourrir-chien-sans-dents',
   'recette-croquettes-maison-chien': 'art-recette-croquettes-maison-chien',
+  'megaoesophage-chien-alimentation': 'art-megaoesophage-chien-alimentation',
 }
 
 /**
