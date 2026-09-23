@@ -390,6 +390,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article recette-croquettes-maison-chien le 2026-09-23. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-megaoesophage-chien-alimentation',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'green',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photo in a warm sunlit home kitchen: a calm friendly light-golden Labrador-type dog sitting fully upright inside a simple light-wood upright feeding chair (Bailey-chair style), front paws resting on a wooden ledge, and on the ledge a small cream ceramic bowl holding a few round soft meatball-shaped portions of wet dog food, warm natural daylight from the upper-left, shallow depth of field. Mixed-media editorial style: photorealistic photo base with hand-drawn gouache decorations layered on top, contour #1A1109. Palette: cream #FAFAF8 dominant, rose #FFD6E3 paw print, amber #FFE8B5 sparkle with a tiny orange #E8622A accent.',
+    composition:
+      'Full-bleed: the dog, the wooden feeding chair, the bowl and the sunlit kitchen fill the entire frame edge-to-edge, touching all four borders; dog slightly right of centre per rule-of-thirds, bowl in the lower-left third; shallow depth of field with soft photographic kitchen bokeh spread across the whole frame; no reserved blank band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['paw-print', 'sparkle'],
+    notes:
+      "Featured image auto-générée pour l'article megaoesophage-chien-alimentation le 2026-09-24. Catégorie Santé — ton green. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
