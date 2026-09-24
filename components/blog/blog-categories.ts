@@ -249,6 +249,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'comment-nourrir-chien-sans-dents': 'art-comment-nourrir-chien-sans-dents',
   'recette-croquettes-maison-chien': 'art-recette-croquettes-maison-chien',
   'megaoesophage-chien-alimentation': 'art-megaoesophage-chien-alimentation',
+  'chien-peut-manger-clementine-orange': 'art-chien-peut-manger-clementine-orange',
 }
 
 /**
