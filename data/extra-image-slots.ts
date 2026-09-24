@@ -405,6 +405,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article megaoesophage-chien-alimentation le 2026-09-24. Catégorie Santé — ton green. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-chien-peut-manger-clementine-orange',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photo on a warm sunlit light-wood kitchen table: a few fresh clementines and a halved orange, one clementine peeled and opened into segments with the peel set aside, two or three single segments placed in a small cream ceramic dog bowl, and a friendly curious light-golden-coated dog leaning its head in from the right, nose close to the bowl, calm inquisitive expression, soft natural daylight from the upper-left. Mixed-media editorial style: photorealistic photo base with hand-drawn gouache decorations layered on top, contour #1A1109. Palette: cream #FAFAF8 dominant, soft rose #FFD6E3 paw print, amber #FFE8B5 confetti, green #C2F0D5 drawn leaf, tiny orange #E8622A sparkle accent.',
+    composition:
+      'Full-bleed: the table, fruit, bowl and dog fill the entire frame edge-to-edge, touching all four borders; bowl slightly left of centre and dog on the right third per rule-of-thirds; shallow depth of field with warm cream photographic kitchen bokeh spread across the whole frame; no reserved blank band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['paw-print', 'sparkle', 'confetti'],
+    notes:
+      "Featured image auto-générée pour l'article chien-peut-manger-clementine-orange le 2026-09-25. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
