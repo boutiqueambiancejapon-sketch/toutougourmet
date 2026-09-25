@@ -250,6 +250,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'recette-croquettes-maison-chien': 'art-recette-croquettes-maison-chien',
   'megaoesophage-chien-alimentation': 'art-megaoesophage-chien-alimentation',
   'chien-peut-manger-clementine-orange': 'art-chien-peut-manger-clementine-orange',
+  'nourriture-shar-pei': 'art-nourriture-shar-pei',
 }
 
 /**
