@@ -103,7 +103,7 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
       'Full-bleed: the dog and the warm cream studio scene fill the entire frame edge-to-edge, dog framed head-shoulders slightly off-centre per rule-of-thirds, shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank band, column or text margin.',
     decorations: ['party-hat'],
     notes:
-      "Featured image auto-générée pour l'article nourriture-braque-allemand le 2026-07-20. Slot déclaré hors manifest principal (taille du fichier).",
+      "Featured image auto-générée pour l'article nourriture-braque-allemand le 2026-07-20. Portrait race unique (règle Race), pas de fallback breed générique. Slot déclaré hors manifest principal (taille du fichier).",
   },
   {
     id: 'art-chien-peut-manger-jambon',
@@ -419,6 +419,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     decorations: ['paw-print', 'sparkle', 'confetti'],
     notes:
       "Featured image auto-générée pour l'article chien-peut-manger-clementine-orange le 2026-09-25. Slot déclaré hors manifest principal (taille du fichier).",
+  },
+  {
+    id: 'art-nourriture-shar-pei',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'amber',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'A chest-up editorial portrait of a Chinese Shar-Pei dog, deep wrinkled loose skin covering the face and shoulders, small triangular folded ears, broad hippopotamus-shaped muzzle with a blue-black tongue slightly visible, short bristly sandy coat, small dark almond eyes framed by skin folds, calm friendly inquisitive expression, warm cream studio backdrop, soft natural daylight from the upper-left, gentle catch-light in the eyes, slight 3/4 angle, head-and-shoulders framing.',
+    composition:
+      'Full-bleed: the dog and the warm cream studio scene fill the entire frame edge-to-edge, dog framed head-shoulders slightly off-centre per rule-of-thirds, shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank band, column or text margin.',
+    decorations: ['paw-print'],
+    notes:
+      "Featured image auto-générée pour l'article nourriture-shar-pei le 2026-09-25. Portrait race unique (règle Race), pas de fallback breed générique. Slot déclaré hors manifest principal (taille du fichier).",
   },
 ]
 
