@@ -435,6 +435,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article nourriture-shar-pei le 2026-09-25. Portrait race unique (règle Race), pas de fallback breed générique. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-distributeur-croquettes-automatique-chien',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      "Editorial mixed-media lifestyle photograph: a curious golden-cream medium-size dog sits attentively on a warm wooden kitchen floor watching croquettes drop from a white-and-cream automatic pet food dispenser into its bowl, warm natural daylight from the upper-left, cozy home interior with soft cream cabinetry. Mixed-media: photographic lifestyle base with hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, rose #FFD6E3 paw print near the dog's paws, amber #FFE8B5 sparkle above the dispenser chute.",
+    composition:
+      'Full-bleed: the dog, dispenser and kitchen scene fill the entire frame edge-to-edge, dog framed left-of-centre per rule-of-thirds, dispenser and falling croquettes in the right third at bowl height, soft cream photographic bokeh spread across the whole frame. No reserved blank cream band, column or margin for text.',
+    decorations: ['paw-print', 'sparkle'],
+    notes:
+      "Featured image auto-générée pour l'article distributeur-croquettes-automatique-chien le 2026-09-26. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
