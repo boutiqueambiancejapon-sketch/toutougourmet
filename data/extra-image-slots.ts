@@ -450,6 +450,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article distributeur-croquettes-automatique-chien le 2026-09-26. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-congeler-repas-maison-chien-guide',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      "Editorial mixed-media lifestyle photograph on a warm kitchen counter: several labeled resealable freezer bags and small stackable freezer-safe glass containers filled with visible portions of home-cooked dog food (shredded meat, rice, diced carrots and green beans), a light dusting of frost visible on one bag, arranged next to an open chest freezer drawer softly blurred in the background, and a curious light-golden-coated dog leaning its head in from the right, nose close to the containers, calm attentive expression, warm natural daylight from the upper-left. Mixed-media: photographic lifestyle base with hand-drawn gouache decorations, contour #1A1109. Palette: cream #FAFAF8 dominant, blue #C8DCFF hand-drawn snowflake-like sparkle above the frost, rose #FFD6E3 illustrated food bowl icon, amber #FFE8B5 paw print.",
+    composition:
+      'Full-bleed: the counter, bags, containers and dog fill the entire frame edge-to-edge, touching all four borders; containers and bags slightly off-centre per rule-of-thirds, dog entering frame from the right at container height; shallow depth of field with soft warm cream photographic bokeh spread across the whole frame; no reserved blank cream band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['sparkle', 'food-bowl', 'paw-print'],
+    notes:
+      "Featured image auto-générée pour l'article congeler-repas-maison-chien-guide le 2026-09-27. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
