@@ -117,6 +117,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Aller au contenu principal
         </a>
 
+        {/* Code de vérification de propriété du site (commentaire HTML brut, les commentaires JSX ne sont pas rendus) */}
+        <div hidden dangerouslySetInnerHTML={{ __html: '<!-- 5a788ca4d5c1972a86be2ed1757febf2 -->' }} />
+
         <ScrollToTop />
         <GoogleAnalyticsPageView />
         <Header />
