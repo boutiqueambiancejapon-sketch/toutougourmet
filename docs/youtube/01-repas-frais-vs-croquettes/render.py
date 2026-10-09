@@ -35,27 +35,28 @@ def clip(src, secs, out, kb):
     else:
         vf = f"scale={W}:{H},fps={FPS}"
     run("ffmpeg","-y","-loop","1","-i",src,"-t",f"{secs:.3f}","-vf",vf+",format=yuv420p","-c:v","libx264","-preset","medium","-crf","30","-r",str(FPS),out)
-clips=[]; audio=[]
-for i,c in enumerate(CHAPTERS):
-    a = f"{D}/vo/{i+1:02d}-{c['id']}.wav"; d = dur(a) + 0.6
-    audio.append(a)
-    per = d / len(c["screens"])
-    for j,(kind,key,desc) in enumerate(c["screens"]):
-        out = f"{R}/clips/{i:02d}-{j}.mp4"
-        if kind=="img": src=f"{D}/out/img-{key}.jpg"; kb=True
-        elif kind=="gfx": src=f"{R}/frames/{c['id']}-{j}.png"; gfx_frame(key,src); kb=False
-        else: src=f"{R}/frames/{c['id']}-{j}.png"; txt_frame(desc,src,c['id']); kb=False
-        clip(src, per, out, kb); clips.append(out)
-    print(c["id"], round(d,1), flush=True)
-open(f"{R}/clips.txt","w").write("".join(f"file '{p}'\n" for p in clips))
-# audio: chapitres + 0,6 s de silence
-parts=[]; 
-for a in audio: parts += ["-i",a]
-fc = "".join(f"[{k}]apad=pad_dur=0.6[a{k}];" for k in range(len(audio))) + "".join(f"[a{k}]" for k in range(len(audio))) + f"concat=n={len(audio)}:v=0:a=1[out]"
-run("ffmpeg","-y",*parts,"-filter_complex",fc,"-map","[out]","-ar","24000","-ac","1",f"{R}/vo-full.wav")
-run("ffmpeg","-y","-f","concat","-safe","0","-i",f"{R}/clips.txt","-i",f"{R}/vo-full.wav","-c:v","copy","-c:a","aac","-b:a","80k","-shortest","-movflags","+faststart",f"{R}/rendu-v1.mp4")
-run("ffmpeg","-y","-i",f"{R}/vo-full.wav","-b:a","96k",f"{R}/voix-off-complete.mp3")
-# miniature A finale
-shot('<figure class="thumb" style="width:1280px;height:720px;border-radius:0;margin:0"><img src="'+f"{D}/out/img-thumb-a.jpg"+'" style="width:1280px;height:720px;object-fit:cover"><div class="t" style="left:4%;top:9%;font-size:96px"><span>Croquettes</span><br><span class="hl">ou frais ?</span></div></figure>', f"{R}/miniature-A.png")
-run("ffmpeg","-y","-i",f"{R}/miniature-A.png","-q:v","2",f"{R}/miniature-A.jpg")
-print("done", dur(f"{R}/rendu-v1.mp4"))
+if __name__ == "__main__":
+    clips=[]; audio=[]
+    for i,c in enumerate(CHAPTERS):
+        a = f"{D}/vo/{i+1:02d}-{c['id']}.wav"; d = dur(a) + 0.6
+        audio.append(a)
+        per = d / len(c["screens"])
+        for j,(kind,key,desc) in enumerate(c["screens"]):
+            out = f"{R}/clips/{i:02d}-{j}.mp4"
+            if kind=="img": src=f"{D}/out/img-{key}.jpg"; kb=True
+            elif kind=="gfx": src=f"{R}/frames/{c['id']}-{j}.png"; gfx_frame(key,src); kb=False
+            else: src=f"{R}/frames/{c['id']}-{j}.png"; txt_frame(desc,src,c['id']); kb=False
+            clip(src, per, out, kb); clips.append(out)
+        print(c["id"], round(d,1), flush=True)
+    open(f"{R}/clips.txt","w").write("".join(f"file '{p}'\n" for p in clips))
+    # audio: chapitres + 0,6 s de silence
+    parts=[]; 
+    for a in audio: parts += ["-i",a]
+    fc = "".join(f"[{k}]apad=pad_dur=0.6[a{k}];" for k in range(len(audio))) + "".join(f"[a{k}]" for k in range(len(audio))) + f"concat=n={len(audio)}:v=0:a=1[out]"
+    run("ffmpeg","-y",*parts,"-filter_complex",fc,"-map","[out]","-ar","24000","-ac","1",f"{R}/vo-full.wav")
+    run("ffmpeg","-y","-f","concat","-safe","0","-i",f"{R}/clips.txt","-i",f"{R}/vo-full.wav","-c:v","copy","-c:a","aac","-b:a","80k","-shortest","-movflags","+faststart",f"{R}/rendu-v1.mp4")
+    run("ffmpeg","-y","-i",f"{R}/vo-full.wav","-b:a","96k",f"{R}/voix-off-complete.mp3")
+    # miniature A finale
+    shot('<figure class="thumb" style="width:1280px;height:720px;border-radius:0;margin:0"><img src="'+f"{D}/out/img-thumb-a.jpg"+'" style="width:1280px;height:720px;object-fit:cover"><div class="t" style="left:4%;top:9%;font-size:96px"><span>Croquettes</span><br><span class="hl">ou frais ?</span></div></figure>', f"{R}/miniature-A.png")
+    run("ffmpeg","-y","-i",f"{R}/miniature-A.png","-q:v","2",f"{R}/miniature-A.jpg")
+    print("done", dur(f"{R}/rendu-v1.mp4"))
