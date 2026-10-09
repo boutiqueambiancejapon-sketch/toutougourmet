@@ -25,7 +25,8 @@ def voice(v, label, style):
     raw = f"{D}/gen/{v}.wav"; open(raw,"wb").write(base64.b64decode(p["data"]))
     subprocess.run(["ffmpeg","-y","-loglevel","error","-i",raw,"-ac","1","-b:a","64k",out],check=True)
     return v, "ok"
-with cf.ThreadPoolExecutor(8) as ex:
+if __name__ == "__main__":
+  with cf.ThreadPoolExecutor(8) as ex:
     fs = [ex.submit(img,n,p) for n,p in IMAGES.items()] + [ex.submit(voice,*v) for v in VOICES]
     for f in cf.as_completed(fs):
         try: print(f.result())
