@@ -11,7 +11,7 @@ CHAPTERS = [
   },
   {
     "id": "intro", "title": "Présentation et transparence",
-    "vo": "Bienvenue sur Toutou Gourmet. Sur le site, on compare les marques d'alimentation pour chien et on décortique leurs étiquettes. Une précision avant de commencer : certains liens dans la description sont des liens affiliés. Si tu commandes par eux, on touche une commission, et toi tu profites d'une réduction. Ça ne change rien à ce qu'on dit des marques. Tu vas d'ailleurs entendre parler de leurs défauts.",
+    "vo": "Salut, et bienvenue sur la chaîne Toutou Gourmet. Ici, on compare les marques d'alimentation pour chien et on décortique leurs étiquettes, sans se laisser impressionner par les emballages. Et si tu veux aller plus loin, tous nos tests sont aussi en détail sur toutou-gourmet point com. Une précision avant de commencer : certains liens dans la description sont des liens affiliés. Si tu commandes par eux, on touche une commission, et toi tu profites d'une réduction. Ça ne change rien à ce qu'on dit des marques. Tu vas d'ailleurs entendre parler de leurs défauts.",
     "screens": [
       ("gfx", "logo", "Logo Toutou Gourmet animé + URL toutou-gourmet.com."),
       ("txt", None, "Bandeau permanent pendant 5 s : « Contient des liens affiliés »."),
