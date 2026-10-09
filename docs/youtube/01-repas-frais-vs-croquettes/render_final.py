@@ -4,7 +4,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from script import CHAPTERS
 import render as R0  # réutilise shot(), gfx_frame(), txt_frame()
 D = R0.D; F = f"{D}/final"; os.makedirs(f"{F}/seg", exist_ok=True); os.makedirs(f"{F}/vo", exist_ok=True)
-W, H, FPS = 1280, 720, 25
+W, H, FPS = 1920, 1080, 25
 TEMPO = 0.93          # voix ralentie de 7 %
 GAP = 1.0             # blanc entre chapitres
 CREAM = "0xF5F0EA"
@@ -18,7 +18,40 @@ ENC = ["-c:v","libx264","-preset","medium","-crf","18","-pix_fmt","yuv420p","-r"
 def fades(secs):
     return f"fade=in:st=0:d=0.3:color={CREAM},fade=out:st={max(0,secs-0.3):.3f}:d=0.3:color={CREAM}"
 
+
+def kenburns(src, secs, out, fade_in=True):
+    """Zoom lent calculé au sous-pixel (le zoompan de ffmpeg arrondit au pixel et fait vibrer l'image)."""
+    from PIL import Image
+    im = Image.open(src).convert("RGB"); iw, ih = im.size
+    # recadre la source au 16:9 exact
+    th = iw * H / W
+    if th <= ih: box0 = (0, (ih - th) / 2, iw, (ih + th) / 2)
+    else: tw = ih * W / H; box0 = ((iw - tw) / 2, 0, (iw + tw) / 2, ih)
+    bw, bh = box0[2] - box0[0], box0[3] - box0[1]; cx, cy = box0[0] + bw / 2, box0[1] + bh / 2
+    n = max(1, round(secs * FPS))
+    fd = []
+    if fade_in: fd.append(f"fade=in:st=0:d=0.3:color={CREAM}")
+    fd.append(f"fade=out:st={max(0,secs-0.3):.3f}:d=0.3:color={CREAM}")
+    p = subprocess.Popen(["ffmpeg","-y","-loglevel","error","-f","rawvideo","-pix_fmt","rgb24","-s",f"{W}x{H}","-r",str(FPS),"-i","-",
+                          "-vf",",".join(fd),*ENC,out], stdin=subprocess.PIPE)
+    for f in range(n):
+        k = f / max(1, n - 1); k = k * k * (3 - 2 * k)      # ease in-out
+        z = 1 + 0.08 * k
+        w2, h2 = bw / z / 2, bh / z / 2
+        frame = im.transform((W, H), Image.EXTENT, (cx - w2, cy - h2, cx + w2, cy + h2), Image.BICUBIC)
+        p.stdin.write(frame.tobytes())
+    p.stdin.close()
+    if p.wait(): raise RuntimeError("ffmpeg kenburns")
+
+import motion as M
+_seen = {}
+def motion_txt(desc, cid):
+    n = _seen.get(cid, 0); _seen[cid] = n + 1
+    if n == 0: return R0.TXT.get(cid, desc)
+    return "Axelsson et al., Nature, 2013" if cid == "mythes" else "Elmut vs Dog Chef : le comparatif" if cid == "marques" else desc[:60]
+
 def still(src, secs, out, kb):
+    if kb: return kenburns(src, secs, out)
     n = max(1, round(secs*FPS))
     vf = (f"scale=2560:-2,zoompan=z='min(zoom+0.0005,1.10)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={n}:s={W}x{H}:fps={FPS}" if kb
           else f"scale={W}:{H},fps={FPS}")
@@ -31,8 +64,8 @@ def veo_then_still(key, secs, out):
     if secs - vd < 0.5: os.replace(a, out); return
     # suite : dernière image du clip Veo, zoom lent (continuité visuelle)
     last = out + ".last.png"; run("ffmpeg","-y","-sseof","-0.1","-i",v,"-frames:v","1","-update","1",last)
-    b = out + ".b.mp4"; rest = secs - vd; n = max(1, round(rest*FPS))
-    run("ffmpeg","-y","-loop","1","-i",last,"-t",f"{rest:.3f}","-vf",f"scale=2560:-2,zoompan=z='min(zoom+0.0005,1.10)':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={n}:s={W}x{H}:fps={FPS},fade=out:st={max(0,rest-0.3):.3f}:d=0.3:color={CREAM}",*ENC,b)
+    b = out + ".b.mp4"; rest = secs - vd
+    kenburns(last, rest, b, fade_in=False)
     lst = out + ".txt"; open(lst,"w").write(f"file '{a}'\nfile '{b}'\n")
     run("ffmpeg","-y","-f","concat","-safe","0","-i",lst,"-c","copy",out)
 
@@ -62,11 +95,11 @@ for i, c in enumerate(CHAPTERS):
     for j, (kind, key, desc) in enumerate(c["screens"]):
         out = f"{F}/seg/{i:02d}-{j}.mp4"
         if kind == "img" and key in VEO: veo_then_still(key, per, out)
-        elif kind == "img": still(f"{D}/out/img-{key}.jpg", per, out, True)
+        elif kind == "img": still(f"{D}/gen/{key}.raw", per, out, True)
         elif kind == "gfx":
-            png = f"{D}/render/frames/{c['id']}-{j}.png"; R0.gfx_frame(key, png); still(png, per, out, False)
+            M.render(M.SCENES[key], per, out, ENC, fades(per))
         else:
-            png = f"{D}/render/frames/{c['id']}-{j}.png"; R0.txt_frame(desc, png, c["id"]); still(png, per, out, False)
+            M.render(M.sc_text(motion_txt(desc, c["id"])), per, out, ENC, fades(per))
         segs.append(out)
     t += d
     print(c["id"], round(d, 1), flush=True)
@@ -90,7 +123,7 @@ for p in voice_parts: inp += ["-i", p]
 n = len(voice_parts)
 run("ffmpeg","-y",*inp,"-filter_complex","".join(f"[{k}]" for k in range(n)) + f"concat=n={n}:v=0:a=1,apad=pad_dur={END}[v]","-map","[v]",f"{F}/voice.wav")
 run("ffmpeg","-y","-stream_loop","-1","-i",f"{D}/music/raw.mpeg","-t",f"{total:.3f}","-af",
-    f"volume='if(lt(t,{t:.3f}),0.07,0.35)':eval=frame,afade=in:st=0:d=2,afade=out:st={total-3:.3f}:d=3","-ar","48000","-ac","2",f"{F}/music.wav")
+    f"volume='if(lt(t,30),0.055,if(lt(t,{t:.3f}),0.03,0.3))':eval=frame,afade=in:st=0:d=2,afade=out:st={total-3:.3f}:d=3","-ar","48000","-ac","2",f"{F}/music.wav")
 run("ffmpeg","-y","-i",f"{F}/voice.wav","-i",f"{F}/music.wav","-filter_complex","[0]aformat=channel_layouts=stereo[v];[v][1]amix=inputs=2:duration=first:normalize=0,alimiter=limit=0.95[a]","-map","[a]","-ar","48000",f"{F}/mix.wav")
 
 # --- sous-titres ---
@@ -98,8 +131,8 @@ with open(f"{F}/sous-titres.srt","w") as fh:
     for k,(a,b,txt) in enumerate(srt,1): fh.write(f"{k}\n{ts(a)} --> {ts(b)}\n{txt}\n\n")
 style = "FontName=DM Sans,FontSize=17,PrimaryColour=&H0009111A&,BackColour=&H00EAF0F5&,OutlineColour=&H00EAF0F5&,BorderStyle=3,Outline=6,Shadow=0,MarginV=28,Bold=1"
 sub = f"subtitles={F}/sous-titres.srt:fontsdir={D}/fonts:force_style='{style}'"
-run("ffmpeg","-y","-i",f"{F}/video-nosub.mp4","-i",f"{F}/mix.wav","-vf",sub,"-c:v","libx264","-preset","medium","-crf","21","-pix_fmt","yuv420p",
-    "-c:a","aac","-b:a","160k","-shortest","-movflags","+faststart",f"{F}/toutou-gourmet-repas-frais-vs-croquettes.mp4")
-run("ffmpeg","-y","-i",f"{F}/toutou-gourmet-repas-frais-vs-croquettes.mp4","-c:v","libx264","-preset","slow","-crf","31","-vf","scale=960:540",
+run("ffmpeg","-y","-i",f"{F}/video-nosub.mp4","-i",f"{F}/mix.wav","-vf",sub,"-c:v","libx264","-preset","medium","-crf","19","-pix_fmt","yuv420p",
+    "-c:a","aac","-b:a","160k","-shortest","-movflags","+faststart",f"{F}/toutou-gourmet-repas-frais-vs-croquettes-1080p.mp4")
+run("ffmpeg","-y","-i",f"{F}/toutou-gourmet-repas-frais-vs-croquettes-1080p.mp4","-c:v","libx264","-preset","slow","-crf","31","-vf","scale=960:540",
     "-c:a","aac","-b:a","80k","-movflags","+faststart",f"{F}/apercu.mp4")
 print("total", round(total,1))
