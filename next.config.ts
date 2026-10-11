@@ -51,7 +51,7 @@ const nextConfig: NextConfig = {
       { source: '/blog/meilleure-nourriture-bichon-maltais', destination: '/chien/alimentation-quotidienne/meilleure-nourriture-bichon-maltais', permanent: true },
       { source: '/blog/meilleures-croquettes-chien-de-chasse', destination: '/chien/alimentation-quotidienne/meilleures-croquettes-chien-de-chasse', permanent: true },
       { source: '/blog/croquettes-ou-patee', destination: '/chien/alimentation-quotidienne/croquettes-ou-patee', permanent: true },
-      { source: '/blog/repas-frais-vs-croquettes-chien', destination: '/chien/alimentation-quotidienne/repas-frais-vs-croquettes-chien', permanent: true },
+      { source: '/blog/repas-frais-vs-croquettes-chien', destination: '/chien/avis-marques/repas-frais-vs-croquettes-chien', permanent: true },
       { source: '/blog/chien-mange-couche-normal', destination: '/chien/comportement-alimentaire/chien-mange-couche-normal', permanent: true },
       { source: '/blog/chien-peut-manger-abricots', destination: '/chien/fruit/chien-peut-manger-abricots', permanent: true },
       { source: '/blog/chien-peut-manger-fraises', destination: '/chien/fruit/chien-peut-manger-fraises', permanent: true },
@@ -64,12 +64,16 @@ const nextConfig: NextConfig = {
       // Article alimentation chat (anciennement catégorie "Guide", à /blog/) → reclassé en Alimentation
       { source: '/blog/choisir-alimentation-chat-guide', destination: '/chien/alimentation-quotidienne/choisir-alimentation-chat-guide', permanent: true },
 
+      // ── Audit maillage 11/10/2026 — catégorie fantôme « alimentation » ─────
+      // 8 articles avaient categorySlug: alimentation (absente de data/categories.ts) :
+      // ni hub, ni fil d'Ariane, et 3 guides chiot redirigeaient vers une 404.
+      // Ils sont passés en alimentation-quotidienne.
+      { source: '/chien/alimentation', destination: '/chien/alimentation-quotidienne', permanent: true },
+      { source: '/chien/alimentation/:slug', destination: '/chien/alimentation-quotidienne/:slug', permanent: true },
+
       // ── Audit SEO 22/08/2026 — 404 confirmées : mauvais préfixe de catégorie ─
       // Ces 13 URL utilisaient un ancien slug de catégorie ou un slug plausible
       // mais faux (categorySlug réel du frontmatter vérifié article par article).
-      { source: '/chien/alimentation/alimentation-chiot-0-2-mois', destination: '/chien/alimentation-quotidienne/alimentation-chiot-0-2-mois', permanent: true },
-      { source: '/chien/alimentation/alimentation-chiot-2-6-mois', destination: '/chien/alimentation-quotidienne/alimentation-chiot-2-6-mois', permanent: true },
-      { source: '/chien/alimentation/alimentation-chiot-6-12-mois', destination: '/chien/alimentation-quotidienne/alimentation-chiot-6-12-mois', permanent: true },
       { source: '/chien/peut-manger/chien-peut-manger-piment', destination: '/chien/urgences/chien-peut-manger-piment', permanent: true },
       { source: '/chien/peut-manger/chien-peut-manger-riz', destination: '/chien/legumes/chien-peut-manger-riz', permanent: true },
       { source: '/chien/peut-manger/chien-peut-manger-oeufs', destination: '/chien/viandes/chien-peut-manger-oeufs', permanent: true },

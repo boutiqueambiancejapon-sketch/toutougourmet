@@ -126,8 +126,8 @@ export default function BienNourriPage() {
               <p>
                 Le scoring pondère chaque facteur selon son impact réel sur la santé.
                 La recommandation finale ({' '}
-                <Link href="/marques/elmut" className="underline">Elmut</Link>,{' '}
-                <Link href="/marques/dog-chef" className="underline">Dog Chef</Link> ou{' '}
+                <Link href="/chien/marque/elmut" className="underline">Elmut</Link>,{' '}
+                <Link href="/chien/marque/dog-chef" className="underline">Dog Chef</Link> ou{' '}
                 <Link href="/comparateur" className="underline">comparateur</Link>
                 ) est routée selon le profil — on ne pousse pas la même marque à tout le monde.
               </p>

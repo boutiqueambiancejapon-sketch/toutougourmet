@@ -7,7 +7,7 @@ import { Breadcrumb } from '@/components/ui/Breadcrumb'
 export const metadata: Metadata = {
   title: 'Comparatif croquettes pour chien',
   description:
-    "Dog Chef vs Elmut, Franklin vs Petty Well... Tous nos comparatifs détaillés pour choisir la meilleure alimentation pour ton chien.",
+    "Dog Chef vs Elmut, Franklin vs Elmut… Tous nos comparatifs détaillés pour choisir la meilleure alimentation pour ton chien.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/chien/marque/comparatif' },
 }
 

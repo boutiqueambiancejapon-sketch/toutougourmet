@@ -4,61 +4,74 @@ import { brands } from '@/data/brands'
 import { categories } from '@/data/categories'
 
 const BASE = 'https://www.toutou-gourmet.com'
-const NOW = new Date().toISOString()
+
+// @cdc seo — sitemap = uniquement des URL finales (200, canoniques).
+// Jamais d'URL qui redirige (/marques/*) ni de route inexistante.
+// Pas de lastModified sur les pages statiques : une date de build répétée à
+// chaque déploiement apprend à Google à ignorer ce champ. Les articles gardent
+// leur vraie date (updatedAt || date).
+
+type Entry = MetadataRoute.Sitemap[number]
+const page = (path: string, changeFrequency: Entry['changeFrequency'], priority: number): Entry => ({
+  url: `${BASE}${path}`,
+  changeFrequency,
+  priority,
+})
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // ── Pages statiques ─────────────────────────────────────────────────────────
   const staticPages: MetadataRoute.Sitemap = [
-    { url: BASE, lastModified: NOW, changeFrequency: 'daily', priority: 1.0 },
-    { url: `${BASE}/comparateur`, lastModified: NOW, changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${BASE}/quiz`, lastModified: NOW, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${BASE}/marques`, lastModified: NOW, changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${BASE}/chien`, lastModified: NOW, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${BASE}/blog`, lastModified: NOW, changeFrequency: 'weekly', priority: 0.75 },
-    { url: `${BASE}/outils`, lastModified: NOW, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${BASE}/outils/budget`, lastModified: NOW, changeFrequency: 'monthly', priority: 0.65 },
-    { url: `${BASE}/outils/ration`, lastModified: NOW, changeFrequency: 'monthly', priority: 0.65 },
-    { url: `${BASE}/outils/cout`, lastModified: NOW, changeFrequency: 'monthly', priority: 0.65 },
-    { url: `${BASE}/outils/poids`, lastModified: NOW, changeFrequency: 'monthly', priority: 0.65 },
-    { url: `${BASE}/comparatifs/elmut-vs-dog-chef`, lastModified: NOW, changeFrequency: 'monthly', priority: 0.75 },
-    { url: `${BASE}/plan-du-site`, lastModified: NOW, changeFrequency: 'weekly', priority: 0.3 },
-    { url: `${BASE}/a-propos`, lastModified: NOW, changeFrequency: 'monthly', priority: 0.4 },
-    { url: `${BASE}/mentions-legales`, lastModified: NOW, changeFrequency: 'yearly', priority: 0.2 },
-    { url: `${BASE}/politique-de-confidentialite`, lastModified: NOW, changeFrequency: 'yearly', priority: 0.2 },
+    page('', 'daily', 1.0),
+    page('/comparateur', 'weekly', 0.9),
+    page('/quiz', 'monthly', 0.9),
+    page('/chien', 'weekly', 0.8),
+    page('/blog', 'weekly', 0.75),
+    page('/outils', 'monthly', 0.7),
+    page('/outils/budget', 'monthly', 0.65),
+    page('/outils/ration', 'monthly', 0.65),
+    page('/outils/cout', 'monthly', 0.65),
+    page('/outils/poids', 'monthly', 0.65),
+    page('/outils/age', 'monthly', 0.65),
+    page('/outils/bien-nourri', 'monthly', 0.65),
+    page('/auteurs/mathias-c', 'monthly', 0.4),
+    page('/plan-du-site', 'weekly', 0.3),
+    page('/a-propos', 'monthly', 0.4),
+    page('/mentions-legales', 'yearly', 0.2),
+    page('/politique-de-confidentialite', 'yearly', 0.2),
   ]
 
-  // ── Pages marques ────────────────────────────────────────────────────────────
-  const brandPages: MetadataRoute.Sitemap = brands.map((b) => ({
-    url: `${BASE}/marques/${b.slug}`,
-    lastModified: NOW,
-    changeFrequency: 'weekly',
-    priority: 0.85,
-  }))
+  // ── Marques et comparatifs (/chien/marque/*) ────────────────────────────────
+  const brandPages: MetadataRoute.Sitemap = [
+    page('/chien/marque', 'weekly', 0.85),
+    page('/chien/marque/comparatif', 'weekly', 0.8),
+    ...brands.map((b) => page(`/chien/marque/${b.slug}`, 'weekly', 0.85)),
+  ]
+  const vsPages: MetadataRoute.Sitemap = []
+  for (let i = 0; i < brands.length; i++) {
+    for (let j = i + 1; j < brands.length; j++) {
+      vsPages.push(page(`/chien/marque/${brands[i].slug}-vs-${brands[j].slug}`, 'monthly', 0.75))
+    }
+  }
 
-  // ── Pages catégories chien ───────────────────────────────────────────────────
-  const categoryPages: MetadataRoute.Sitemap = categories.map((c) => ({
-    url: `${BASE}/chien/${c.slug}`,
-    lastModified: NOW,
-    changeFrequency: 'weekly',
-    priority: 0.7,
-  }))
+  // ── Hubs catégories chien ───────────────────────────────────────────────────
+  const categoryPages: MetadataRoute.Sitemap = categories.map((c) =>
+    page(`/chien/${c.slug}`, 'weekly', 0.7),
+  )
 
   // ── Articles ─────────────────────────────────────────────────────────────────
-  const articles = getAllArticles()
-  const articlePages: MetadataRoute.Sitemap = articles.map((a) => {
-    const { frontmatter, slug } = a
-    const lastmod = frontmatter.updatedAt || frontmatter.date || NOW
+  const articlePages: MetadataRoute.Sitemap = getAllArticles().map(({ frontmatter, slug }) => {
     // Les articles avec categorySlug sont canoniques sur /chien/[cat]/[slug]
     const url = frontmatter.categorySlug
       ? `${BASE}/chien/${frontmatter.categorySlug}/${slug}`
       : `${BASE}/blog/${slug}`
+    const lastmod = frontmatter.updatedAt || frontmatter.date
     return {
       url,
-      lastModified: new Date(lastmod).toISOString(),
+      ...(lastmod ? { lastModified: new Date(lastmod).toISOString() } : {}),
       changeFrequency: 'monthly',
       priority: 0.75,
     }
   })
 
-  return [...staticPages, ...brandPages, ...categoryPages, ...articlePages]
+  return [...staticPages, ...brandPages, ...vsPages, ...categoryPages, ...articlePages]
 }

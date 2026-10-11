@@ -7,7 +7,7 @@ import { Breadcrumb } from '@/components/ui/Breadcrumb'
 export const metadata: Metadata = {
   title: 'Avis croquettes premium pour chien',
   description:
-    "Dog Chef, Elmut, Franklin, Petty Well : avis complets, comparatifs et codes promo. Trouve la meilleure alimentation pour ton chien.",
+    "Dog Chef, Elmut, Franklin, Ultra Premium Direct : avis complets, comparatifs et codes promo. Trouve la meilleure alimentation pour ton chien.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/chien/marque' },
 }
 

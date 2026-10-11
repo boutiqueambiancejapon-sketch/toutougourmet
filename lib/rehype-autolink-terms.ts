@@ -24,6 +24,10 @@ const rehypeAutolinkTerms: Plugin<[AutolinkTermsOptions], Root> = (options) => {
 
   // Trier par longueur décroissante : "repas frais" matche avant "frais"
   const sortedTerms = Object.keys(terms).sort((a, b) => b.length - a.length)
+  const escape = (t: string) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const termPatterns = new Map<string, RegExp>(
+    sortedTerms.map((t) => [t, new RegExp(`(?<![\\p{L}\\p{N}])${escape(t)}(?![\\p{L}\\p{N}])`, 'iu')]),
+  )
 
   return (tree) => {
     let linksAdded = 0
@@ -49,10 +53,10 @@ const rehypeAutolinkTerms: Plugin<[AutolinkTermsOptions], Root> = (options) => {
         for (const term of sortedTerms) {
           if (linkedTerms.has(term)) continue
 
-          const lowerText = textNode.value.toLowerCase()
-          const lowerTerm = term.toLowerCase()
-          const idx = lowerText.indexOf(lowerTerm)
-          if (idx === -1) continue
+          // Mot entier uniquement : « quiz » ne doit pas matcher « quizz », ni « BARF » un fragment de mot
+          const found = termPatterns.get(term)!.exec(textNode.value)
+          if (!found) continue
+          const idx = found.index
 
           const before = textNode.value.slice(0, idx)
           const match = textNode.value.slice(idx, idx + term.length)

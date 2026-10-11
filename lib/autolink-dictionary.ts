@@ -13,17 +13,17 @@
 // @cdc alimentation — dictionnaire maillage interne
 export const AUTOLINK_DICTIONARY: Record<string, string> = {
   // — Marques —
-  'Dog Chef':           '/marques/dog-chef',
-  'Elmut':              '/marques/elmut',
-  'Franklin Pet Food':  '/marques/franklin',
-  'Petty Well':         '/marques/petty-well',
+  'Dog Chef':           '/chien/marque/dog-chef',
+  'Elmut':              '/chien/marque/elmut',
+  'Franklin Pet Food':  '/chien/marque/franklin',
+  'Ultra Premium Direct': '/chien/marque/ultra-premium-direct',
 
   // — Pages outils —
   'comparateur':        '/comparateur',
   'quiz':               '/quiz',
 
   // — Articles piliers —
-  'repas frais':                      '/chien/alimentation-quotidienne/repas-frais-vs-croquettes-chien',
+  'repas frais':                      '/chien/avis-marques/repas-frais-vs-croquettes-chien',
   'BARF':                             '/chien/viandes/chien-peut-manger-viande-crue-barf',
   'croquettes sans céréales':         '/chien/alimentation-quotidienne/croquettes-sans-cereales-chien',
   'os de poulet':                     '/chien/urgences/os-poulet-chien-danger',

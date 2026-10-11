@@ -2,10 +2,10 @@ import Link from 'next/link'
 
 const footerLinks = {
   'Les marques': [
-    { href: '/marques/franklin', label: 'Franklin Pet Food' },
-    { href: '/marques/elmut', label: 'Elmut' },
-    { href: '/marques/petty-well', label: 'Petty Well' },
-    { href: '/marques/dog-chef', label: 'Dog Chef' },
+    { href: '/chien/marque/franklin', label: 'Franklin Pet Food' },
+    { href: '/chien/marque/elmut', label: 'Elmut' },
+    { href: '/chien/marque/ultra-premium-direct', label: 'Ultra Premium Direct' },
+    { href: '/chien/marque/dog-chef', label: 'Dog Chef' },
   ],
   'Outils': [
     { href: '/quiz', label: 'Le quiz personnalisé' },
