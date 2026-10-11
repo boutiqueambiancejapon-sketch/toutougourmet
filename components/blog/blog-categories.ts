@@ -253,6 +253,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'nourriture-shar-pei': 'art-nourriture-shar-pei',
   'distributeur-croquettes-automatique-chien': 'art-distributeur-croquettes-automatique-chien',
   'congeler-repas-maison-chien-guide': 'art-congeler-repas-maison-chien-guide',
+  'chien-peut-manger-petits-pois': 'art-chien-peut-manger-petits-pois',
 }
 
 /**
