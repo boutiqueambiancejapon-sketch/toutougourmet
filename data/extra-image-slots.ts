@@ -480,6 +480,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article chien-peut-manger-petits-pois le 2026-10-11. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-recette-muffins-sales-poulet-courgette-chien',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photograph shot from a slightly elevated angle on a warm rustic light-wood kitchen table: a metal muffin tin holding freshly baked golden-brown savory mini muffins for dogs with flecks of grated courgette, carrot and shredded chicken visible in the crumb, one muffin broken open in the foreground, a halved courgette, a carrot, a cracked egg and a small bowl of rolled oats beside the tin, and a friendly curious light-golden-coated dog leaning its head in from the right, nose close to the muffins, calm inquisitive expression, soft natural daylight from the upper-left. Hand-drawn gouache overlay with contour #1A1109: amber paw print, orange sparkle above the muffins, pastel rose and green confetti dots.',
+    composition:
+      'Full-bleed: the tin, ingredients and dog fill the entire frame edge-to-edge, touching all four borders; tin left-of-centre and dog on the right third per rule-of-thirds; shallow depth of field with warm cream photographic bokeh spread across the whole frame; no reserved blank band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['paw-print', 'sparkle', 'confetti'],
+    notes:
+      "Featured image auto-générée pour l'article recette-muffins-sales-poulet-courgette-chien le 2026-10-11. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
