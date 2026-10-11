@@ -25,6 +25,7 @@ import {
   BodyImage,
 } from '@/components/mdx/MdxComponents'
 import { BrandCTA } from '@/components/marques/BrandCTA'
+import { AnchoredH2, AnchoredH3 } from '@/components/mdx/AnchoredHeadings'
 import { DEFAULT_AUTHOR } from '@/data/authors'
 import rehypeAutolinkTerms from '@/lib/rehype-autolink-terms'
 import remarkGfm from 'remark-gfm'
@@ -42,6 +43,8 @@ const mdxComponents = {
   CompareTr, CompareTd, Verdict, ProsConsList, ProsBlock, ConsBlock, ProItem, ConItem, SectionDivider, FaqList, FaqItem,
   BrandCTA,
   BodyImage,
+  h2: AnchoredH2,
+  h3: AnchoredH3,
   table: (props: React.ComponentProps<'table'>) => (
     <div className="table-scroll">
       <table {...props} />
