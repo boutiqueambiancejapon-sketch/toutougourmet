@@ -118,7 +118,7 @@ export function ComparisonTable() {
             </div>
             {sorted.map((b) => (
               <div key={`cta-${b.slug}`} className="px-4 py-4 border-l border-[var(--border)] bg-[var(--bg-primary)]">
-                <Link href={`/marques/${b.slug}`} className="btn-primary text-sm w-full justify-center" style={{ padding: '8px 14px' }}>
+                <Link href={`/chien/marque/${b.slug}`} className="btn-primary text-sm w-full justify-center" style={{ padding: '8px 14px' }}>
                   Voir la fiche →
                 </Link>
               </div>

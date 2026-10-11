@@ -81,7 +81,7 @@ export function BrandsGrid() {
 
                 <header className="flex items-start justify-between gap-3">
                   <Link
-                    href={`/marques/${brand.slug}`}
+                    href={`/chien/marque/${brand.slug}`}
                     className="font-black text-2xl hover:underline"
                     style={{ fontFamily: "'Fraunces', serif", letterSpacing: '-0.01em', color: d.textVar }}
                   >
@@ -132,7 +132,7 @@ export function BrandsGrid() {
                     Essayer →
                   </a>
                   <Link
-                    href={`/marques/${brand.slug}`}
+                    href={`/chien/marque/${brand.slug}`}
                     className="text-xs font-semibold text-center opacity-70 hover:opacity-100"
                     style={{ color: d.textVar }}
                   >

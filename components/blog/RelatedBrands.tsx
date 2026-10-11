@@ -30,7 +30,7 @@ export function RelatedBrands() {
           return (
             <li key={b.slug}>
               <Link
-                href={`/marques/${b.slug}`}
+                href={`/chien/marque/${b.slug}`}
                 className="group flex items-center gap-3 p-4 bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] hover:-translate-y-0.5 hover:border-[var(--accent-1)] hover:shadow-[var(--shadow-sm)]"
               >
                 <span

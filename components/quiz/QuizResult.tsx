@@ -43,7 +43,7 @@ export function QuizResult({ sortedBrands }: QuizResultProps) {
         </div>
 
         <Link
-          href={`/marques/${recommendedBrand.slug}`}
+          href={`/chien/marque/${recommendedBrand.slug}`}
           className="block text-center text-sm text-[var(--accent-1)] hover:underline"
         >
           Voir notre avis complet sur {recommendedBrand.name} →
@@ -74,7 +74,7 @@ export function QuizResult({ sortedBrands }: QuizResultProps) {
                     Essayer →
                   </Link>
                   <Link
-                    href={`/marques/${brand.slug}`}
+                    href={`/chien/marque/${brand.slug}`}
                     className="text-sm font-medium text-[var(--accent-1)] self-center"
                   >
                     Avis →

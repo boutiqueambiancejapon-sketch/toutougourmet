@@ -12,7 +12,7 @@ import { NewsletterBlock } from '@/components/blog/NewsletterBlock'
 export const metadata: Metadata = {
   title: 'Toutou Gourmet - Meilleure alimentation pour chien & chat',
   description:
-    'Comparez les meilleures marques de nourriture pour chien : Franklin, Elmut, Petty Well, Dog Chef. Quiz personnalisé, notes, prix et codes promo exclusifs.',
+    'Comparez les meilleures marques de nourriture pour chien : Franklin, Elmut, Ultra Premium Direct, Dog Chef. Quiz personnalisé, notes, prix et codes promo exclusifs.',
   alternates: { canonical: 'https://www.toutou-gourmet.com' },
 }
 

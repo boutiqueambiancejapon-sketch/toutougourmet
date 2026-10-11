@@ -21,7 +21,7 @@ const MAIN_PAGES = [
   { href: '/chien', label: 'Hub alimentation chien', desc: 'Toutes nos thématiques' },
   { href: '/comparateur', label: 'Comparateur', desc: 'Les meilleures marques en face-à-face' },
   { href: '/quiz', label: 'Quiz personnalisé', desc: 'Trouver la nourriture idéale' },
-  { href: '/marques', label: 'Toutes les marques', desc: 'Franklin, Dog Chef, Elmut…' },
+  { href: '/chien/marque', label: 'Toutes les marques', desc: 'Franklin, Dog Chef, Elmut…' },
   { href: '/outils', label: 'Calculateurs & Outils', desc: 'Budget, ration, poids, coût mensuel' },
 ]
 
@@ -32,7 +32,7 @@ const TOOLS = [
   { href: '/outils/poids', label: 'Suivi & courbe de poids' },
   { href: '/quiz', label: 'Quiz — trouver la croquette idéale' },
   { href: '/comparateur', label: 'Comparateur de croquettes' },
-  { href: '/comparatifs/elmut-vs-dog-chef', label: 'Elmut vs Dog Chef — comparatif complet' },
+  { href: '/chien/marque/elmut-vs-dog-chef', label: 'Elmut vs Dog Chef — comparatif complet' },
 ]
 
 const LEGAL = [
@@ -149,7 +149,7 @@ export default function PlanDuSitePage() {
             {brands.map((b) => (
               <Link
                 key={b.slug}
-                href={`/marques/${b.slug}`}
+                href={`/chien/marque/${b.slug}`}
                 className="group flex flex-col gap-1 p-4 rounded-xl bg-gray-50 border border-gray-100 hover:border-gray-200 hover:shadow-sm transition-all"
               >
                 <span
@@ -164,7 +164,7 @@ export default function PlanDuSitePage() {
             ))}
           </div>
           <Link
-            href="/marques"
+            href="/chien/marque"
             className="inline-block mt-4 text-sm font-medium text-gray-400 hover:text-gray-700 underline underline-offset-2"
           >
             → Toutes les marques
