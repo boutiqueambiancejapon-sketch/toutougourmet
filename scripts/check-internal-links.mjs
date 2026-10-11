@@ -22,6 +22,10 @@ for (const block of categoryBlocks) {
   categorySlugs.add(slug)
   if (block.includes('subCategorySlugs')) hubOnly.add(slug)
 }
+// Hubs de collection (data/collections.ts) : thèmes et profils
+const collectionKinds = new Map(
+  [...read('data/collections.ts').matchAll(/slug:\s*'([\w-]+)',\s*\n\s*kind:\s*'(theme|profil)'/g)].map((m) => [m[1], m[2]]),
+)
 const brandSlugs = [...read('data/brands.ts').matchAll(/^\s{4}slug:\s*'([\w-]+)'/gm)].map((m) => m[1])
 const brandPaths = new Set(['/chien/marque', '/chien/marque/comparatif', ...brandSlugs.map((b) => `/chien/marque/${b}`)])
 brandSlugs.forEach((a, i) => brandSlugs.slice(i + 1).forEach((b) => brandPaths.add(`/chien/marque/${a}-vs-${b}`)))
@@ -32,7 +36,9 @@ for (const file of fs.readdirSync(blogDir).filter((f) => f.endsWith('.mdx'))) {
   const raw = fs.readFileSync(path.join(blogDir, file), 'utf-8')
   const fm = raw.split('---')[1] ?? ''
   const cat = fm.match(/^categorySlug:\s*['"]?([\w-]+)['"]?\s*$/m)?.[1] ?? null
-  articles.set(file.replace(/\.mdx$/, ''), { file, cat, raw })
+  const theme = fm.match(/^theme:\s*['"]?([\w-]+)['"]?\s*$/m)?.[1] ?? null
+  const profils = [...(fm.match(/^profils:\s*\[(.*)\]\s*$/m)?.[1] ?? '').matchAll(/['"]([\w-]+)['"]/g)].map((m) => m[1])
+  articles.set(file.replace(/\.mdx$/, ''), { file, cat, raw, theme, profils })
 }
 const canonical = (slug) => {
   const a = articles.get(slug)
@@ -42,6 +48,10 @@ const canonical = (slug) => {
 const errors = []
 
 for (const a of articles.values()) {
+  if (a.theme && collectionKinds.get(a.theme) !== 'theme') errors.push(`${a.file} : theme « ${a.theme} » absent de data/collections.ts`)
+  for (const p of a.profils) {
+    if (collectionKinds.get(p) !== 'profil') errors.push(`${a.file} : profil « ${p} » absent de data/collections.ts`)
+  }
   if (a.cat && !categorySlugs.has(a.cat)) errors.push(`${a.file} : categorySlug « ${a.cat} » absent de data/categories.ts`)
   else if (a.cat && hubOnly.has(a.cat)) errors.push(`${a.file} : categorySlug « ${a.cat} » est un hub qui n'affiche que ses sous-catégories`)
 }
@@ -59,7 +69,7 @@ function check(url, where) {
     if (!brandPaths.has(clean)) errors.push(`${where} : ${clean} → page marque inexistante`)
     return
   }
-  if (parts.length === 3 && !categorySlugs.has(parts[2])) errors.push(`${where} : ${clean} → catégorie inexistante`)
+  if (parts.length === 3 && !categorySlugs.has(parts[2]) && !collectionKinds.has(parts[2])) errors.push(`${where} : ${clean} → catégorie inexistante`)
   if (parts.length === 4) {
     if (!articles.has(parts[3])) errors.push(`${where} : ${clean} → article inexistant`)
     else if (canonical(parts[3]) !== clean) errors.push(`${where} : ${clean} → 404, bonne URL ${canonical(parts[3])}`)

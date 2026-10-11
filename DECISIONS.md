@@ -28,6 +28,8 @@
 - [x] **Maillage interne — garde-fou au build (2026-10-11)** : `npm run build` lance `scripts/check-internal-links.mjs` en `prebuild` et échoue si un MDX, le dictionnaire d'autoliens ou une redirection pointe vers `/chien/<catégorie>/<slug>` avec une catégorie différente du `categorySlug` de l'article (= 404), vers un article inexistant, vers `/marques/*` (301), ou si un `categorySlug` est absent de `data/categories.ts`. Raison : 208 liens cassés s'étaient accumulés via les pipelines de rédaction qui devinaient la catégorie. Un lien interne se construit toujours depuis le `categorySlug` du frontmatter de la cible.
 - [x] **Sitemap unique (2026-10-11)** : `app/sitemap.ts` + `app/robots.ts` seuls ; next-sitemap retiré. Le sitemap ne liste que des URL finales en 200 ; pas de `lastModified` sur les pages statiques.
 
+- [x] **Hubs de collection plutôt que nouvelles catégories (2026-10-11)** : les sous-hubs de « Bien nourrir » et les hubs profil (chiot, senior…) regroupent des articles sans changer leur URL (frontmatter `theme` / `profils`). Raison : aucune redirection, aucune perte d'historique, un article peut appartenir à plusieurs profils. Un hub n'est indexé, listé dans le sitemap et lié depuis le site qu'à partir de 8 contenus (dont 3 dédiés pour un profil). Pas de hub « adulte » (cas par défaut, doublon avec Bien nourrir).
+
 ## À valider
 
 - [ ] DM_Sans : 3 weights chargés (400, 500, 600) — CDC impose max 2 — supprimer 500 ou 600 ?

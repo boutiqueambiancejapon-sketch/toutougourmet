@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getAllArticles } from '@/lib/mdx'
+import { HubsOverview } from '@/components/hubs/HubLinks'
 import { categories } from '@/data/categories'
 import { brands } from '@/data/brands'
 
@@ -169,6 +170,11 @@ export default function PlanDuSitePage() {
           >
             → Toutes les marques
           </Link>
+        </section>
+
+        {/* ── Dossiers par profil et par thème ─────────────────────────── */}
+        <section id="dossiers">
+          <HubsOverview all={articles} />
         </section>
 
         {/* ── Articles par thème ────────────────────────────────────────── */}

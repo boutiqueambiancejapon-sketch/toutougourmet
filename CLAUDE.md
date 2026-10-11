@@ -87,6 +87,9 @@ composant `<Illustration slot="..." />` qui résout le fichier via le manifest.
 - `frontmatter.category` **doit** matcher une clé existante de `CATEGORY_TABLE` (sinon fallback silencieux sur `cat-nutrition` — bug visuel)
 - `frontmatter.categorySlug` pilote la route finale (`/chien/{categorySlug}/{slug}`)
 - Aucune image de cover à ajouter dans le MDX : la cover est résolue automatiquement depuis la catégorie
+- `theme` (optionnel, articles `alimentation-quotidienne`) : un sous-hub de `data/collections.ts` — `croquettes-patees`, `recettes-maison`, `quantites-repas`, `complements-nutriments`
+- `profils` (optionnel) : liste de hubs profil si l'article est **consacré** à ce profil — `chiot`, `senior`, `gestation-allaitement`, `chien-sportif`. Une simple section chiot dans un autre article n'a pas besoin du tag : le hub la repère via son H2/H3
+- Lien interne vers un article : toujours `/chien/{categorySlug de la cible}/{slug}` — `npm run check:links` (lancé au build) refuse sinon
 
 ## Annotation dans le code
 

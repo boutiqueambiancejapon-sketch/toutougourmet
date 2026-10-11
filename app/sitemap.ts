@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next'
 import { getAllArticles } from '@/lib/mdx'
 import { brands } from '@/data/brands'
 import { categories } from '@/data/categories'
+import { getPublishedCollections } from '@/lib/collections'
 
 const BASE = 'https://www.toutou-gourmet.com'
 
@@ -58,8 +59,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     page(`/chien/${c.slug}`, 'weekly', 0.7),
   )
 
+  // ── Hubs profil et sous-hubs thématiques (publiés uniquement, sinon noindex) ──
+  const all = getAllArticles()
+  const hubPages: MetadataRoute.Sitemap = getPublishedCollections(all).map((h) =>
+    page(`/chien/${h.collection.slug}`, 'weekly', 0.75),
+  )
+
   // ── Articles ─────────────────────────────────────────────────────────────────
-  const articlePages: MetadataRoute.Sitemap = getAllArticles().map(({ frontmatter, slug }) => {
+  const articlePages: MetadataRoute.Sitemap = all.map(({ frontmatter, slug }) => {
     // Les articles avec categorySlug sont canoniques sur /chien/[cat]/[slug]
     const url = frontmatter.categorySlug
       ? `${BASE}/chien/${frontmatter.categorySlug}/${slug}`
@@ -73,5 +80,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   })
 
-  return [...staticPages, ...brandPages, ...vsPages, ...categoryPages, ...articlePages]
+  return [...staticPages, ...brandPages, ...vsPages, ...categoryPages, ...hubPages, ...articlePages]
 }
