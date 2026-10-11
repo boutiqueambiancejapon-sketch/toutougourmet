@@ -25,6 +25,9 @@
 - [x] **Redesign V2 — marques partenaires (2026-04-24, màj 2026-05-25)** : les 4 cartes marques (Franklin, Elmut, Ultra Premium Direct, Dog Chef) n'imitent **pas** les packshots réels. Chaque image évoque la catégorie (croquettes mono-protéine / repas frais cuisinés / croquettes vente directe / repas frais sur-mesure) via une scène moodboard neutre, sans logo ni packaging reconnaissable. Décision pour éviter tout risque légal/ayants droit. Les vrais visuels marques pourront arriver en V2+ sur les fiches produits via accord affilié formel. **Note màj 2026-05-25** : Petty Well a été remplacé par Ultra Premium Direct (nouveau partenariat affilié, cf. commit a6eb6cf).
 - [x] **Redesign V2 — tone par catégorie de contenu (2026-04-24)** : Nutrition → ambre, Santé → vert, Alimentation → rose, Comportement → bleu, Enquêtes → ambre + accent orange, Urgences → rose + sparkle orange, Avis marques → bleu, Par race → ambre. Le ton guide Gemini à la génération **et** le composant `<IllustratedImage>` (overlay runtime) au rendu.
 
+- [x] **Maillage interne — garde-fou au build (2026-10-11)** : `npm run build` lance `scripts/check-internal-links.mjs` en `prebuild` et échoue si un MDX, le dictionnaire d'autoliens ou une redirection pointe vers `/chien/<catégorie>/<slug>` avec une catégorie différente du `categorySlug` de l'article (= 404), vers un article inexistant, vers `/marques/*` (301), ou si un `categorySlug` est absent de `data/categories.ts`. Raison : 208 liens cassés s'étaient accumulés via les pipelines de rédaction qui devinaient la catégorie. Un lien interne se construit toujours depuis le `categorySlug` du frontmatter de la cible.
+- [x] **Sitemap unique (2026-10-11)** : `app/sitemap.ts` + `app/robots.ts` seuls ; next-sitemap retiré. Le sitemap ne liste que des URL finales en 200 ; pas de `lastModified` sur les pages statiques.
+
 ## À valider
 
 - [ ] DM_Sans : 3 weights chargés (400, 500, 600) — CDC impose max 2 — supprimer 500 ou 600 ?
