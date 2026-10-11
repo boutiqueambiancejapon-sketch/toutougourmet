@@ -4,18 +4,24 @@ import Link from 'next/link'
 import { ArticleCard } from '@/components/blog/ArticleCard'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 import { categories, getCategoryBySlug } from '@/data/categories'
-import { getArticlesByCategory } from '@/lib/mdx'
+import { getAllArticles, getArticlesByCategory } from '@/lib/mdx'
+import { collections, getCollectionBySlug, PARENT_THEME_CATEGORY } from '@/data/collections'
+import { collectionMetadata, getCollectionContent, getPublishedCollections } from '@/lib/collections'
+import { CollectionPage } from '@/components/hubs/CollectionPage'
+import { ThemedCategoryHub } from '@/components/hubs/ThemedCategoryHub'
 
 interface Props {
   params: Promise<{ category: string }>
 }
 
 export async function generateStaticParams() {
-  return categories.map((c) => ({ category: c.slug }))
+  return [...categories, ...collections].map((c) => ({ category: c.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category } = await params
+  const col = getCollectionBySlug(category)
+  if (col) return collectionMetadata(col, getAllArticles())
   const cat = getCategoryBySlug(category)
   if (!cat) return {}
   return {
@@ -27,8 +33,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CategoryPage({ params }: Props) {
   const { category } = await params
+  const col = getCollectionBySlug(category)
+  if (col) {
+    const all = getAllArticles()
+    const content = getCollectionContent(col, all)
+    const siblings = getPublishedCollections(all, col.kind).filter((s) => s.collection.slug !== col.slug)
+    return <CollectionPage content={content} siblings={siblings} />
+  }
   const cat = getCategoryBySlug(category)
   if (!cat) notFound()
+  const isThemed = category === PARENT_THEME_CATEGORY
 
   const isHub = Boolean(cat.subCategorySlugs?.length)
 
@@ -106,6 +120,8 @@ export default async function CategoryPage({ params }: Props) {
               ) : null
             )}
           </div>
+        ) : isThemed ? (
+          <ThemedCategoryHub articles={articles} all={getAllArticles()} />
         ) : articles.length === 0 ? (
           <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-10 text-center">
             <p className="text-[var(--text-muted)]">Les premiers articles arrivent très bientôt.</p>

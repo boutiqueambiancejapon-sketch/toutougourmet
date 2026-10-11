@@ -87,6 +87,10 @@ export interface ArticleFrontmatter {
   affiliateB?: AffiliateLink
   /** Optionnel — active l'injection de Product/Review/AggregateRating JSON-LD */
   review?: ReviewFrontmatter
+  /** Sous-hub thématique (data/collections.ts, kind 'theme') */
+  theme?: string
+  /** Hubs profil (data/collections.ts, kind 'profil') : chiot, senior… */
+  profils?: string[]
 }
 
 export interface Article {

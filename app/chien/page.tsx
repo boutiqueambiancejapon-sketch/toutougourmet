@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getArticlesByCategory } from '@/lib/mdx'
+import { getAllArticles, getArticlesByCategory } from '@/lib/mdx'
+import { HubsOverview } from '@/components/hubs/HubLinks'
 import { categories } from '@/data/categories'
 
 export const metadata: Metadata = {
@@ -45,6 +46,9 @@ export default function ChienPage() {
           </p>
         </div>
 
+        <HubsOverview all={getAllArticles()} />
+
+        <h2 className="text-xl font-bold text-[var(--text-primary)] mb-4">Tous nos guides par thème</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {allCats.map(({ slug, label, description, emoji, count, colors }) => (
             <Link

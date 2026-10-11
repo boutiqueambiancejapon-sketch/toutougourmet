@@ -5,6 +5,7 @@ import { SummarizeWithAI } from './SummarizeWithAI'
 import { RelatedBrands } from './RelatedBrands'
 import { AuthorBox } from './AuthorBox'
 import { RelatedArticles } from './RelatedArticles'
+import { ArticleHubLinks } from '@/components/hubs/HubLinks'
 import { NewsletterBlock } from './NewsletterBlock'
 import { getArticleSlot } from './blog-categories'
 import { Badge } from '@/components/ui/Badge'
@@ -83,6 +84,8 @@ export function ArticleLayout({
                 → Voir le comparateur complet
               </Link>
             </div>
+
+            <ArticleHubLinks article={article} allArticles={allArticles} />
 
             <AuthorBox author={DEFAULT_AUTHOR} />
 
