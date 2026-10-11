@@ -465,6 +465,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article congeler-repas-maison-chien-guide le 2026-09-27. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-chien-peut-manger-petits-pois',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photograph in a warm cream kitchen: a curious golden-coated dog with soft floppy ears and a calm inquisitive expression rests a paw on a rustic oak table beside a white ceramic bowl filled with bright green fresh peas, a few loose peas and an open pea pod on the table, soft natural daylight from the upper-left. Hand-drawn gouache overlay with contour #1A1109: small amber party hat on the dog, sparkle and pastel green and pink confetti dots near the bowl.',
+    composition:
+      'Full-bleed: the dog, the bowl of peas and the cream kitchen fill the entire frame edge-to-edge, dog slightly left of centre and bowl in the lower-right third per rule-of-thirds, shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['party-hat', 'sparkle', 'confetti'],
+    notes:
+      "Featured image auto-générée pour l'article chien-peut-manger-petits-pois le 2026-10-11. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
