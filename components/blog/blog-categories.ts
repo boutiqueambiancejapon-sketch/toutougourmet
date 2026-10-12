@@ -255,6 +255,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'congeler-repas-maison-chien-guide': 'art-congeler-repas-maison-chien-guide',
   'chien-peut-manger-petits-pois': 'art-chien-peut-manger-petits-pois',
   'recette-muffins-sales-poulet-courgette-chien': 'art-recette-muffins-sales-poulet-courgette-chien',
+  'gamelle-chien-inox-ceramique-plastique-silicone': 'art-gamelle-chien-inox-ceramique-plastique-silicone',
 }
 
 /**
