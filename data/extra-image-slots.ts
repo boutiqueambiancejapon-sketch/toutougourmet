@@ -495,6 +495,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article recette-muffins-sales-poulet-courgette-chien le 2026-10-11. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-gamelle-chien-inox-ceramique-plastique-silicone',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photograph on a warm sunlit light-wood kitchen counter: four empty dog bowls in a gentle row, each in a different material (brushed stainless steel, cream glazed ceramic, pale blue plastic, sage-green foldable silicone), and a friendly curious light-golden-coated dog leaning its head in from the right with a calm inquisitive expression, nose near the bowls. Hand-drawn gouache overlay with contour #1A1109: rose paw print, amber sparkle above the steel bowl, small blue and amber confetti.',
+    composition:
+      'Full-bleed: the counter, the four bowls and the dog fill the entire frame edge-to-edge, touching all four borders; bowls left-of-centre and dog on the right third per rule-of-thirds; shallow depth of field with soft cream photographic kitchen bokeh spread across the whole frame; no reserved blank band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['paw-print', 'sparkle', 'confetti'],
+    notes:
+      "Featured image auto-générée pour l'article gamelle-chien-inox-ceramique-plastique-silicone le 2026-10-12. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
