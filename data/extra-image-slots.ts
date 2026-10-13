@@ -510,6 +510,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article gamelle-chien-inox-ceramique-plastique-silicone le 2026-10-12. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-chataignes-marrons-inde-chien-difference-danger',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photograph on a warm sunlit rustic light-wood table in autumn: a small cream ceramic dog bowl holding a few peeled cooked golden-beige chestnuts, beside an open spiky green chestnut husk showing glossy brown chestnuts, dry autumn leaves, and a friendly curious light-golden-coated dog leaning its head in from the right with a calm inquisitive expression, nose close to the bowl, soft natural daylight from the upper-left. Hand-drawn gouache overlay with contour #1A1109: amber sparkle above the bowl, rose paw print, small pastel green drawn leaf, tiny orange accent.',
+    composition:
+      'Full-bleed: the table, bowl, chestnut husk and dog fill the entire frame edge-to-edge, touching all four borders; bowl and husk left-of-centre and dog on the right third per rule-of-thirds; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['sparkle', 'paw-print'],
+    notes:
+      "Featured image auto-générée pour l'article chataignes-marrons-inde-chien-difference-danger le 2026-10-13. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
