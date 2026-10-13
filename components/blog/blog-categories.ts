@@ -256,6 +256,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-peut-manger-petits-pois': 'art-chien-peut-manger-petits-pois',
   'recette-muffins-sales-poulet-courgette-chien': 'art-recette-muffins-sales-poulet-courgette-chien',
   'gamelle-chien-inox-ceramique-plastique-silicone': 'art-gamelle-chien-inox-ceramique-plastique-silicone',
+  'chataignes-marrons-inde-chien-difference-danger': 'art-chataignes-marrons-inde-chien-difference-danger',
 }
 
 /**
