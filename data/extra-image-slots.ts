@@ -525,6 +525,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article chataignes-marrons-inde-chien-difference-danger le 2026-10-13. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-recette-patee-maison-canard-chien',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photograph on a warm cream kitchen surface: a handmade ceramic bowl of homemade dog pâté (shredded cooked duck meat, mashed orange sweet potato, small carrot cubes) in the lower right, a golden retriever with head tilted looking curiously at the bowl from the left, a wooden board with a few cooked duck slices and a sprig of thyme behind, soft natural daylight from the upper-left. Hand-drawn gouache overlay with contour #1A1109: amber stylised bone, sparkle, rose paw print.',
+    composition:
+      'Full-bleed: the dog, the bowl and the wooden board fill the entire frame edge-to-edge, touching all four borders; dog on the left third and bowl in the lower right per rule-of-thirds; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['bone', 'sparkle', 'paw-print'],
+    notes:
+      "Featured image auto-générée pour l'article recette-patee-maison-canard-chien le 2026-10-14. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
