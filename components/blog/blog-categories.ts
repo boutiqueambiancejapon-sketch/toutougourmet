@@ -257,6 +257,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'recette-muffins-sales-poulet-courgette-chien': 'art-recette-muffins-sales-poulet-courgette-chien',
   'gamelle-chien-inox-ceramique-plastique-silicone': 'art-gamelle-chien-inox-ceramique-plastique-silicone',
   'chataignes-marrons-inde-chien-difference-danger': 'art-chataignes-marrons-inde-chien-difference-danger',
+  'recette-patee-maison-canard-chien': 'art-recette-patee-maison-canard-chien',
 }
 
 /**
