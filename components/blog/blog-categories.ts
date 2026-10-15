@@ -258,6 +258,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'gamelle-chien-inox-ceramique-plastique-silicone': 'art-gamelle-chien-inox-ceramique-plastique-silicone',
   'chataignes-marrons-inde-chien-difference-danger': 'art-chataignes-marrons-inde-chien-difference-danger',
   'recette-patee-maison-canard-chien': 'art-recette-patee-maison-canard-chien',
+  'nourriture-springer-spaniel-anglais': 'art-nourriture-springer-spaniel-anglais',
 }
 
 /**
