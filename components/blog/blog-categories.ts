@@ -259,6 +259,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chataignes-marrons-inde-chien-difference-danger': 'art-chataignes-marrons-inde-chien-difference-danger',
   'recette-patee-maison-canard-chien': 'art-recette-patee-maison-canard-chien',
   'nourriture-springer-spaniel-anglais': 'art-nourriture-springer-spaniel-anglais',
+  'biotine-chien-bienfaits-dosage': 'art-biotine-chien-bienfaits-dosage-v2',
 }
 
 /**
