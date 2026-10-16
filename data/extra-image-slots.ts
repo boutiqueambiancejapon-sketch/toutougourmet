@@ -555,6 +555,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article nourriture-springer-spaniel-anglais le 2026-10-15. Portrait race unique (règle Race), pas de fallback breed générique. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-biotine-chien-bienfaits-dosage-v2',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photograph: a glossy golden Labrador retriever sitting on a warm cream wooden floor at a 3/4 angle, shiny healthy short coat in soft natural daylight from the upper-left, calm curious expression, a small cream ceramic bowl in front holding egg yolks with a slice of beef liver beside it. Hand-drawn gouache overlay with contour #1A1109: small amber party hat on the dog, stylised rose bone floating near the bowl, tiny green and orange sparkles.',
+    composition:
+      'Full-bleed: the dog, the bowl and the sunlit cream wooden floor fill the entire frame edge-to-edge, dog left-of-centre and bowl in the lower-right third per rule-of-thirds; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['party-hat', 'bone', 'sparkle'],
+    notes:
+      "Featured image auto-générée pour l'article biotine-chien-bienfaits-dosage le 2026-10-16. Filename suffixé -v2 (une image orpheline art-biotine-chien-bienfaits-dosage.jpeg existait déjà sur le repo). Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
