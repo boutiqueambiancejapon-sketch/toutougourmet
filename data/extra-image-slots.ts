@@ -570,6 +570,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article biotine-chien-bienfaits-dosage le 2026-10-16. Filename suffixé -v2 (une image orpheline art-biotine-chien-bienfaits-dosage.jpeg existait déjà sur le repo). Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-chien-peut-manger-amandes',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photograph on a warm cream linen surface: a small rustic wooden bowl of whole raw almonds with a few almonds scattered in the foreground, and a curious light-golden-coated dog leaning in from the right with its nose close to the bowl, calm inquisitive expression, soft natural daylight from the upper-left. Hand-drawn gouache overlay with contour #1A1109: rose paw print and amber sparkle near the bowl, tiny orange accent.',
+    composition:
+      'Full-bleed: the bowl, almonds, linen surface and dog fill the entire frame edge-to-edge, touching all four borders; bowl slightly left of centre and dog on the right third per rule-of-thirds; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['paw-print', 'sparkle'],
+    notes:
+      "Featured image auto-générée pour l'article chien-peut-manger-amandes le 2026-10-17. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
