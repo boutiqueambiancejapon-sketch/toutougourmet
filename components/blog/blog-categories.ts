@@ -262,6 +262,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'biotine-chien-bienfaits-dosage': 'art-biotine-chien-bienfaits-dosage-v2',
   'chien-peut-manger-amandes': 'art-chien-peut-manger-amandes',
   'recette-riz-poulet-chien-diete-legere': 'art-recette-riz-poulet-chien-diete-legere',
+  'chien-peut-manger-cacahuetes': 'art-chien-peut-manger-cacahuetes',
 }
 
 /**
