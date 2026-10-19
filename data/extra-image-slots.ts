@@ -600,6 +600,21 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     notes:
       "Featured image auto-générée pour l'article recette-riz-poulet-chien-diete-legere le 2026-10-18. Slot déclaré hors manifest principal (taille du fichier).",
   },
+  {
+    id: 'art-chien-peut-manger-cacahuetes',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'jpeg',
+    subject:
+      'Editorial mixed-media lifestyle photograph on a warm cream linen surface: a small rustic wooden bowl of shelled raw peanuts with a few peanuts scattered in the foreground, and a calm friendly golden-coated dog with a slightly tilted head leaning in from the right, nose near the bowl, curious inquisitive expression, soft natural daylight from the upper-left. Hand-drawn gouache overlay with contour #1A1109: rose paw print and amber sparkle near the bowl, tiny orange accent.',
+    composition:
+      'Full-bleed: the bowl, peanuts, linen surface and dog fill the entire frame edge-to-edge, touching all four borders; bowl slightly left of centre and dog on the right third per rule-of-thirds; shallow depth of field with soft cream photographic bokeh spread across the whole frame; no reserved blank band, column or text margin; composed to survive a centred 16:9 / 4:3 / square crop.',
+    decorations: ['paw-print', 'sparkle'],
+    notes:
+      "Featured image auto-générée pour l'article chien-peut-manger-cacahuetes le 2026-10-19. Slot déclaré hors manifest principal (taille du fichier).",
+  },
 ]
 
 /** Résout un slot additionnel par id (fallback de `getSlotById`). */
