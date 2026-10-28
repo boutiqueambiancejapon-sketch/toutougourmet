@@ -1,0 +1,396 @@
+# File de réécriture SEO/GEO des articles existants
+
+> Lue et mise à jour par la tâche planifiée « Toutou Gourmet · réécriture 2 articles/jour ».
+> Méthode : `docs/09-seo-geo-guide.md` §2.7 (fan-out), §6.4 (race × question) et §9 (réécriture). Écriture : skill `boileau`.
+
+## Règles de la file
+
+- On prend les **2 premiers articles non cochés**, de haut en bas.
+- Une fois réécrit, on coche la ligne et on ajoute la date : `- [x] \`slug\` · … · réécrit 2026-11-02`.
+- Un article qui ne peut pas être traité (build cassé, source introuvable) passe en `- [~]` avec la raison en fin de ligne, et on prend le suivant.
+- Ordre de priorité : les articles « peut-il manger » d'abord (là où le fan-out et le tableau par gabarit apportent le plus), puis les urgences, les hubs race (section « Que peut manger un [race] »), le reste. Dans chaque groupe, les articles les plus anciens d'abord.
+- Quand un export Search Console sera disponible, on réordonne chaque groupe par impressions décroissantes (positions 5 à 20 en tête).
+- Les nouveaux articles écrits après la mise à jour du guide n'entrent pas dans la file.
+
+## 1. « Peut-il manger » : fruits (17)
+
+- [ ] `chien-peut-manger-abricots` · fruit · màj 2026-03-07
+- [ ] `chien-peut-manger-fraises` · fruit · màj 2026-03-07
+- [ ] `chien-peut-manger-framboises` · fruit · màj 2026-03-07
+- [ ] `chien-peut-manger-mures` · fruit · màj 2026-03-07
+- [ ] `chien-peut-manger-myrtilles` · fruit · màj 2026-03-07
+- [ ] `chien-peut-manger-peches` · fruit · màj 2026-03-07
+- [ ] `chien-peut-manger-poires` · fruit · màj 2026-03-07
+- [ ] `chien-peut-manger-mangue` · fruit · màj 2026-03-12
+- [ ] `chien-peut-manger-banane` · fruit · màj 2026-04-16
+- [ ] `chien-peut-manger-cerises` · fruit · màj 2026-05-28
+- [ ] `chien-peut-manger-kiwi` · fruit · màj 2026-06-11
+- [ ] `chien-peut-manger-melon` · fruit · màj 2026-06-16
+- [ ] `chien-peut-manger-pomme` · fruit · màj 2026-06-24
+- [ ] `chien-peut-manger-prunes` · fruit · màj 2026-07-05
+- [ ] `chien-peut-manger-noix-de-coco` · fruit · màj 2026-07-16
+- [ ] `chien-peut-manger-figue` · fruit · màj 2026-08-31
+- [ ] `chien-peut-manger-clementine-orange` · fruit · màj 2026-09-25
+
+## 2. « Peut-il manger » : légumes (29)
+
+- [ ] `chien-peut-manger-brocoli` · legumes · màj 2026-03-12
+- [ ] `chien-peut-manger-chou-fleur` · legumes · màj 2026-03-12
+- [ ] `chien-peut-manger-endives` · legumes · màj 2026-03-12
+- [ ] `chien-peut-manger-poivron` · legumes · màj 2026-03-12
+- [ ] `meilleurs-legumes-chien` · legumes · màj 2026-03-12
+- [ ] `chien-peut-manger-asperges` · legumes · màj 2026-03-21
+- [ ] `chien-peut-manger-aubergines` · legumes · màj 2026-03-21
+- [ ] `chien-peut-manger-betterave` · legumes · màj 2026-03-21
+- [ ] `chien-peut-manger-butternut-potiron` · legumes · màj 2026-03-21
+- [ ] `chien-peut-manger-celeri` · legumes · màj 2026-03-21
+- [ ] `chien-peut-manger-champignons` · legumes · màj 2026-03-21
+- [ ] `chien-peut-manger-fenouil` · legumes · màj 2026-03-21
+- [ ] `chien-peut-manger-mais` · legumes · màj 2026-03-21
+- [ ] `chien-peut-manger-navet` · legumes · màj 2026-03-21
+- [ ] `chien-peut-manger-olives` · legumes · màj 2026-03-21
+- [ ] `chien-peut-manger-patate-douce` · legumes · màj 2026-03-21
+- [ ] `chien-peut-manger-pissenlits` · legumes · màj 2026-03-21
+- [ ] `chien-peut-manger-pommes-de-terre` · legumes · màj 2026-03-21
+- [ ] `chien-peut-manger-radis` · legumes · màj 2026-03-21
+- [ ] `chien-peut-manger-salade` · legumes · màj 2026-03-21
+- [ ] `chien-peut-manger-riz` · legumes · màj 2026-04-08
+- [ ] `chien-peut-manger-epinards` · legumes · màj 2026-04-29
+- [ ] `chien-peut-manger-concombre` · legumes · màj 2026-05-22
+- [ ] `chien-peut-manger-courgette` · legumes · màj 2026-05-24
+- [ ] `chien-peut-manger-tomate` · legumes · màj 2026-06-01
+- [ ] `chien-peut-manger-pain` · legumes · màj 2026-06-02
+- [ ] `chien-peut-manger-carottes` · legumes · màj 2026-06-21
+- [ ] `chien-peut-manger-haricots-verts` · legumes · màj 2026-06-27
+- [ ] `chien-peut-manger-pates` · legumes · màj 2026-07-09
+
+## 3. « Peut-il manger » : viandes et poissons (14)
+
+- [ ] `chien-peut-manger-saumon` · viandes · màj 2026-03-12
+- [ ] `chien-peut-manger-agneau` · viandes · màj 2026-03-13
+- [ ] `chien-peut-manger-boeuf-cru` · viandes · màj 2026-03-13
+- [ ] `chien-peut-manger-canard` · viandes · màj 2026-03-13
+- [ ] `chien-peut-manger-dinde` · viandes · màj 2026-03-13
+- [ ] `chien-peut-manger-foie` · viandes · màj 2026-03-13
+- [ ] `chien-peut-manger-lapin` · viandes · màj 2026-03-13
+- [ ] `chien-peut-manger-porc` · viandes · màj 2026-03-13
+- [ ] `chien-peut-manger-poulet-cru` · viandes · màj 2026-03-13
+- [ ] `chien-peut-manger-viande-crue-barf` · viandes · màj 2026-03-13
+- [ ] `chien-peut-manger-oeufs` · viandes · màj 2026-04-08
+- [ ] `chien-peut-manger-sardines` · viandes · màj 2026-05-09
+- [ ] `chien-peut-manger-crevettes` · viandes · màj 2026-06-13
+- [ ] `chien-peut-manger-thon` · viandes · màj 2026-06-30
+
+## 4. « Peut-il manger » : autres aliments (18)
+
+- [ ] `chien-peut-manger-miel` · alimentation-quotidienne · màj 2026-04-13
+- [ ] `chien-peut-manger-yaourt` · alimentation-quotidienne · màj 2026-04-13
+- [ ] `chien-peut-manger-avocat` · alimentation-quotidienne · màj 2026-04-17
+- [ ] `chien-peut-manger-pasteque` · alimentation-quotidienne · màj 2026-04-18
+- [ ] `chien-peut-manger-fromage` · alimentation-quotidienne · màj 2026-04-19
+- [ ] `chien-peut-manger-gingembre` · alimentation-quotidienne · màj 2026-04-20
+- [ ] `chien-peut-manger-ananas` · alimentation-quotidienne · màj 2026-05-17
+- [ ] `chien-peut-manger-beurre-de-cacahuete` · alimentation-quotidienne · màj 2026-05-17
+- [ ] `chien-peut-manger-noix` · alimentation-quotidienne · màj 2026-06-08
+- [ ] `chien-peut-manger-lentilles` · alimentation-quotidienne · màj 2026-06-09
+- [ ] `chien-peut-manger-avoine` · alimentation-quotidienne · màj 2026-06-14
+- [ ] `chien-peut-manger-jambon` · alimentation-quotidienne · màj 2026-07-21
+- [ ] `chien-peut-manger-cannelle` · alimentation-quotidienne · màj 2026-09-21
+- [ ] `chien-peut-manger-petits-pois` · alimentation-quotidienne · màj 2026-10-11
+- [ ] `chien-peut-manger-amandes` · alimentation-quotidienne · màj 2026-10-17
+- [ ] `chien-peut-manger-cacahuetes` · alimentation-quotidienne · màj 2026-10-19
+- [ ] `chien-peut-manger-pop-corn` · alimentation-quotidienne · màj 2026-10-24
+- [ ] `chien-peut-manger-persil` · alimentation-quotidienne · màj 2026-10-28
+
+## 5. Urgences (20)
+
+- [ ] `os-poulet-chien-danger` · urgences · màj 2026-03-09
+- [ ] `chien-mange-noix-cajou` · urgences · màj 2026-03-12
+- [ ] `chien-mange-pistaches` · urgences · màj 2026-03-12
+- [ ] `chien-peut-manger-oignons` · urgences · màj 2026-03-21
+- [ ] `chien-peut-manger-piment` · urgences · màj 2026-03-21
+- [ ] `chien-mange-ail-oignon-urgence` · urgences · màj 2026-03-27
+- [ ] `chien-mange-chocolat-urgence` · urgences · màj 2026-03-27
+- [ ] `chien-mange-crapaud-urgence` · urgences · màj 2026-03-27
+- [ ] `chien-mange-glands-chene-urgence` · urgences · màj 2026-03-27
+- [ ] `chien-mange-limace-urgence` · urgences · màj 2026-03-27
+- [ ] `chien-mange-mort-aux-rats-urgence` · urgences · màj 2026-03-27
+- [ ] `chien-mange-os-cuit-urgence` · urgences · màj 2026-03-27
+- [ ] `chien-mange-os-poulet-urgence` · urgences · màj 2026-03-27
+- [ ] `chien-mange-raisin-urgence` · urgences · màj 2026-03-27
+- [ ] `aliments-toxiques-chien-liste-complete` · urgences · màj 2026-04-10
+- [ ] `chien-mange-xylitol-urgence` · urgences · màj 2026-06-17
+- [ ] `chien-a-bu-eau-de-mer-que-faire` · urgences · màj 2026-07-07
+- [ ] `chien-mange-noix-macadamia-urgence` · urgences · màj 2026-08-09
+- [ ] `chien-mange-poireau-urgence` · urgences · màj 2026-08-23
+- [ ] `halloween-chien-bonbons-citrouille-dangers` · urgences · màj 2026-10-22
+
+## 6. Hubs race (58)
+
+- [ ] `nourriture-beagle` · race · màj 2026-03-14
+- [ ] `nourriture-berger-allemand` · race · màj 2026-03-14
+- [ ] `nourriture-berger-australien` · race · màj 2026-03-14
+- [ ] `nourriture-bichon-frise` · race · màj 2026-03-14
+- [ ] `nourriture-border-collie` · race · màj 2026-03-14
+- [ ] `nourriture-bouledogue-anglais` · race · màj 2026-03-14
+- [ ] `nourriture-bouledogue-francais` · race · màj 2026-03-14
+- [ ] `nourriture-boxer` · race · màj 2026-03-14
+- [ ] `nourriture-caniche` · race · màj 2026-03-14
+- [ ] `nourriture-chihuahua` · race · màj 2026-03-14
+- [ ] `nourriture-cocker-spaniel` · race · màj 2026-03-14
+- [ ] `nourriture-dachshund` · race · màj 2026-03-14
+- [ ] `nourriture-doberman` · race · màj 2026-03-14
+- [ ] `nourriture-golden-retriever` · race · màj 2026-03-14
+- [ ] `nourriture-husky-siberien` · race · màj 2026-03-14
+- [ ] `nourriture-labrador-retriever` · race · màj 2026-03-14
+- [ ] `nourriture-rottweiler` · race · màj 2026-03-14
+- [ ] `nourriture-shih-tzu` · race · màj 2026-03-14
+- [ ] `nourriture-teckel` · race · màj 2026-03-14
+- [ ] `nourriture-yorkshire-terrier` · race · màj 2026-03-14
+- [ ] `nourriture-akita-inu` · race · màj 2026-03-18
+- [ ] `nourriture-chow-chow` · race · màj 2026-03-18
+- [ ] `nourriture-dalmatien` · race · màj 2026-03-18
+- [ ] `nourriture-samoyed` · race · màj 2026-03-18
+- [ ] `nourriture-shiba-inu` · race · màj 2026-03-18
+- [ ] `nourriture-basset-hound` · race · màj 2026-03-19
+- [ ] `nourriture-berger-de-beauce` · race · màj 2026-03-19
+- [ ] `nourriture-berger-des-shetland` · race · màj 2026-03-19
+- [ ] `nourriture-saint-bernard` · race · màj 2026-03-19
+- [ ] `nourriture-terre-neuve` · race · màj 2026-03-19
+- [ ] `nourriture-cavalier-king-charles` · race · màj 2026-04-22
+- [ ] `nourriture-berger-belge-malinois` · race · màj 2026-04-23
+- [ ] `nourriture-carlin` · race · màj 2026-04-25
+- [ ] `nourriture-jack-russell-terrier` · race · màj 2026-04-26
+- [ ] `nourriture-cane-corso` · race · màj 2026-04-27
+- [ ] `nourriture-bouvier-bernois` · race · màj 2026-04-28
+- [ ] `nourriture-staffordshire-bull-terrier` · race · màj 2026-04-30
+- [ ] `nourriture-welsh-corgi-pembroke` · race · màj 2026-05-01
+- [ ] `nourriture-schnauzer-nain` · race · màj 2026-05-04
+- [ ] `nourriture-westie` · race · màj 2026-05-05
+- [ ] `nourriture-epagneul-breton` · race · màj 2026-05-07
+- [ ] `nourriture-spitz-nain` · race · màj 2026-05-08
+- [ ] `nourriture-whippet` · race · màj 2026-05-11
+- [ ] `nourriture-dogue-allemand` · race · màj 2026-05-14
+- [ ] `nourriture-patou-montagne-pyrenees` · race · màj 2026-05-19
+- [ ] `nourriture-braque-de-weimar` · race · màj 2026-07-04
+- [ ] `nourriture-american-staffordshire-terrier` · race · màj 2026-07-12
+- [ ] `nourriture-berger-blanc-suisse` · race · màj 2026-07-15
+- [ ] `nourriture-dogue-de-bordeaux` · race · màj 2026-07-17
+- [ ] `nourriture-braque-allemand` · race · màj 2026-07-20
+- [ ] `nourriture-setter-irlandais` · race · màj 2026-08-10
+- [ ] `nourriture-bull-terrier` · race · màj 2026-08-15
+- [ ] `nourriture-braque-hongrois` · race · màj 2026-08-18
+- [ ] `nourriture-coton-de-tulear` · race · màj 2026-08-20
+- [ ] `nourriture-malamute-alaska` · race · màj 2026-08-22
+- [ ] `nourriture-bichon-havanais` · race · màj 2026-09-09
+- [ ] `nourriture-shar-pei` · race · màj 2026-09-25
+- [ ] `nourriture-springer-spaniel-anglais` · race · màj 2026-10-15
+
+## 7. Alimentation quotidienne (quantités, guides) (104)
+
+- [ ] `choisir-alimentation-chat-guide` · alimentation-quotidienne · màj 2026-01-25
+- [ ] `croquettes-ou-patee` · alimentation-quotidienne · màj 2026-03-06
+- [ ] `meilleure-nourriture-bichon-maltais` · alimentation-quotidienne · màj 2026-03-07
+- [ ] `meilleures-croquettes-chien-de-chasse` · alimentation-quotidienne · màj 2026-03-08
+- [ ] `avis-croquettes-orlando-lidl` · alimentation-quotidienne · màj 2026-03-09
+- [ ] `croquettes-sans-cereales-chien` · alimentation-quotidienne · màj 2026-03-10
+- [ ] `croquettes-chien-allergique` · alimentation-quotidienne · màj 2026-03-13
+- [ ] `croquettes-chien-constipation` · alimentation-quotidienne · màj 2026-03-13
+- [ ] `croquettes-chien-diarrhee-chronique` · alimentation-quotidienne · màj 2026-03-13
+- [ ] `croquettes-chien-digestion-sensible` · alimentation-quotidienne · màj 2026-03-13
+- [ ] `croquettes-chien-intolerant-cereales` · alimentation-quotidienne · màj 2026-03-13
+- [ ] `croquettes-chien-reflux-gastrique` · alimentation-quotidienne · màj 2026-03-13
+- [ ] `croquettes-chien-sterilise` · alimentation-quotidienne · màj 2026-03-13
+- [ ] `croquettes-chien-trop-maigre` · alimentation-quotidienne · màj 2026-03-13
+- [ ] `budget-alimentation-chien-par-mois` · alimentation-quotidienne · màj 2026-04-01
+- [ ] `comprendre-etiquette-croquettes-chien` · alimentation-quotidienne · màj 2026-04-01
+- [ ] `transition-alimentaire-chien` · alimentation-quotidienne · màj 2026-04-01
+- [ ] `alimentation-chien-senior-guide` · alimentation-quotidienne · màj 2026-04-02
+- [ ] `friandises-naturelles-chien-guide` · alimentation-quotidienne · màj 2026-04-02
+- [ ] `alimentation-chienne-gestante-allaitante` · alimentation-quotidienne · màj 2026-04-03
+- [ ] `croquettes-pressees-froid-vs-extrudees` · alimentation-quotidienne · màj 2026-04-03
+- [ ] `quantite-eau-chien-par-jour` · alimentation-quotidienne · màj 2026-04-03
+- [ ] `huile-saumon-chien-bienfaits-dosage` · alimentation-quotidienne · màj 2026-04-04
+- [ ] `probiotiques-chien-bienfaits-dosage` · alimentation-quotidienne · màj 2026-04-05
+- [ ] `comment-faire-maigrir-son-chien` · alimentation-quotidienne · màj 2026-04-06
+- [ ] `diarrhee-chien-que-faire-alimentation` · alimentation-quotidienne · màj 2026-04-06
+- [ ] `ration-menagere-chien-guide-recettes` · alimentation-quotidienne · màj 2026-04-06
+- [ ] `alimentation-barf-chien-guide-complet` · alimentation-quotidienne · màj 2026-04-07
+- [ ] `levure-de-biere-chien-bienfaits-dosage` · alimentation-quotidienne · màj 2026-04-08
+- [ ] `alimentation-anxiete-chien-comportement` · alimentation-quotidienne · màj 2026-04-09
+- [ ] `alimentation-beau-pelage-chien-guide` · alimentation-quotidienne · màj 2026-04-09
+- [ ] `alimentation-chien-ete-canicule-guide` · alimentation-quotidienne · màj 2026-04-09
+- [ ] `curcuma-chien-bienfaits-dosage` · alimentation-quotidienne · màj 2026-04-09
+- [ ] `huile-de-coco-chien-bienfaits-dosage` · alimentation-quotidienne · màj 2026-04-09
+- [ ] `spiruline-chien-bienfaits-dosage` · alimentation-quotidienne · màj 2026-04-10
+- [ ] `taurine-chien-carence-cardiomyopathie-dilatee` · alimentation-quotidienne · màj 2026-04-10
+- [ ] `alimentation-chien-hiver-froid-guide` · alimentation-quotidienne · màj 2026-04-11
+- [ ] `microbiote-intestinal-chien-alimentation` · alimentation-quotidienne · màj 2026-04-11
+- [ ] `proteines-insectes-croquettes-chien` · alimentation-quotidienne · màj 2026-04-11
+- [ ] `glucosamine-chondroitine-chien-articulations` · alimentation-quotidienne · màj 2026-04-12
+- [ ] `graine-de-lin-chien-bienfaits-dosage` · alimentation-quotidienne · màj 2026-04-12
+- [ ] `huile-krill-chien-bienfaits-dosage` · alimentation-quotidienne · màj 2026-04-15
+- [ ] `moule-verte-chien-arthrose-dosage` · alimentation-quotidienne · màj 2026-04-15
+- [ ] `recette-gateau-anniversaire-chien-maison` · alimentation-quotidienne · màj 2026-04-20
+- [ ] `recette-biscuits-maison-beurre-cacahuete-chien` · alimentation-quotidienne · màj 2026-04-22
+- [ ] `chien-mange-trop-vite-solutions` · alimentation-quotidienne · màj 2026-04-24
+- [ ] `chien-vegetarien-vegan-science` · alimentation-quotidienne · màj 2026-05-02
+- [ ] `conserver-croquettes-chien-guide-oxydation` · alimentation-quotidienne · màj 2026-05-03
+- [ ] `recette-glace-maison-chien-ete` · alimentation-quotidienne · màj 2026-05-06
+- [ ] `meilleures-patees-chien` · alimentation-quotidienne · màj 2026-05-10
+- [ ] `vinaigre-de-cidre-chien-bienfaits-precautions` · alimentation-quotidienne · màj 2026-05-12
+- [ ] `topping-croquettes-chien-enrichir-gamelle-guide` · alimentation-quotidienne · màj 2026-05-15
+- [ ] `voyager-voiture-chien-alimentation-mal-transports` · alimentation-quotidienne · màj 2026-05-16
+- [ ] `recette-bouillon-os-maison-chien` · alimentation-quotidienne · màj 2026-05-17
+- [ ] `aliments-fermentes-chien-bienfaits-dosage` · alimentation-quotidienne · màj 2026-05-18
+- [ ] `recette-friandises-saumon-patate-douce-chien` · alimentation-quotidienne · màj 2026-05-19
+- [ ] `comprendre-etiquette-patee-chien` · alimentation-quotidienne · màj 2026-05-21
+- [ ] `omega-3-chien-comparatif-sources` · alimentation-quotidienne · màj 2026-05-25
+- [ ] `faut-il-rehydrater-croquettes-chien` · alimentation-quotidienne · màj 2026-05-30
+- [ ] `huile-olive-chien-bienfaits-dosage` · alimentation-quotidienne · màj 2026-06-02
+- [ ] `psyllium-chien-bienfaits-dosage` · alimentation-quotidienne · màj 2026-06-02
+- [ ] `recette-biscuits-potiron-chien` · alimentation-quotidienne · màj 2026-06-03
+- [ ] `proteines-chien-besoins-qualite` · alimentation-quotidienne · màj 2026-06-04
+- [ ] `croquettes-chiot-grande-race` · alimentation-quotidienne · màj 2026-06-05
+- [ ] `recette-poulet-seche-chien` · alimentation-quotidienne · màj 2026-06-10
+- [ ] `recette-friandises-foie-seche-chien` · alimentation-quotidienne · màj 2026-06-12
+- [ ] `croquettes-a-volonte-ou-rationnees` · alimentation-quotidienne · màj 2026-06-22
+- [ ] `recette-patee-maison-poulet-chien` · alimentation-quotidienne · màj 2026-06-23
+- [ ] `recette-patate-douce-sechee-chien` · alimentation-quotidienne · màj 2026-06-26
+- [ ] `quelle-quantite-patee-chien-par-jour` · alimentation-quotidienne · màj 2026-06-28
+- [ ] `glucides-croquettes-chien` · alimentation-quotidienne · màj 2026-06-29
+- [ ] `fibres-alimentaires-chien-role-sources-dosage` · alimentation-quotidienne · màj 2026-07-01
+- [ ] `choisir-taille-croquettes-chien` · alimentation-quotidienne · màj 2026-07-02
+- [ ] `recette-friandises-banane-avoine-chien` · alimentation-quotidienne · màj 2026-07-03
+- [ ] `conserver-patee-chien-apres-ouverture` · alimentation-quotidienne · màj 2026-07-08
+- [ ] `recette-biscuits-sardine-chien` · alimentation-quotidienne · màj 2026-07-11
+- [ ] `recette-friandises-education-chien` · alimentation-quotidienne · màj 2026-07-13
+- [ ] `collagene-chien-bienfaits-dosage` · alimentation-quotidienne · màj 2026-07-26
+- [ ] `recette-friandises-dentaires-maison-chien` · alimentation-quotidienne · màj 2026-08-02
+- [ ] `alimentation-poisson-chien-guide` · alimentation-quotidienne · màj 2026-08-03
+- [ ] `meilleure-gamelle-anti-glouton-chien` · alimentation-quotidienne · màj 2026-08-04
+- [ ] `recette-patee-maison-poisson-chien` · alimentation-quotidienne · màj 2026-08-11
+- [ ] `alimentation-chien-sportif-avant-apres-effort` · alimentation-quotidienne · màj 2026-08-12
+- [ ] `recette-patee-maison-boeuf-chien` · alimentation-quotidienne · màj 2026-08-13
+- [ ] `recette-biscuits-pomme-cannelle-chien` · alimentation-quotidienne · màj 2026-08-16
+- [ ] `alimentation-chien-grande-race-adulte-guide` · alimentation-quotidienne · màj 2026-08-17
+- [ ] `chien-peut-boire-lait` · alimentation-quotidienne · màj 2026-08-19
+- [ ] `recette-patee-maison-agneau-chien` · alimentation-quotidienne · màj 2026-08-21
+- [ ] `recette-patee-maison-dinde-chien` · alimentation-quotidienne · màj 2026-08-24
+- [ ] `fontaine-eau-chien-comment-choisir` · alimentation-quotidienne · màj 2026-08-28
+- [ ] `recette-patee-maison-lapin-chien` · alimentation-quotidienne · màj 2026-08-30
+- [ ] `comment-nourrir-chien-sans-dents` · alimentation-quotidienne · màj 2026-09-22
+- [ ] `recette-croquettes-maison-chien` · alimentation-quotidienne · màj 2026-09-23
+- [ ] `distributeur-croquettes-automatique-chien` · alimentation-quotidienne · màj 2026-09-26
+- [ ] `congeler-repas-maison-chien-guide` · alimentation-quotidienne · màj 2026-09-27
+- [ ] `recette-muffins-sales-poulet-courgette-chien` · alimentation-quotidienne · màj 2026-10-11
+- [ ] `gamelle-chien-inox-ceramique-plastique-silicone` · alimentation-quotidienne · màj 2026-10-12
+- [ ] `chataignes-marrons-inde-chien-difference-danger` · alimentation-quotidienne · màj 2026-10-13
+- [ ] `recette-patee-maison-canard-chien` · alimentation-quotidienne · màj 2026-10-14
+- [ ] `biotine-chien-bienfaits-dosage` · alimentation-quotidienne · màj 2026-10-16
+- [ ] `recette-riz-poulet-chien-diete-legere` · alimentation-quotidienne · màj 2026-10-18
+- [ ] `calcium-phosphore-chien-ratio-besoins` · alimentation-quotidienne · màj 2026-10-20
+- [ ] `croquettes-bio-chien-label-guide-achat` · alimentation-quotidienne · màj 2026-10-21
+- [ ] `faut-il-faire-jeuner-son-chien` · alimentation-quotidienne · màj 2026-10-26
+
+## 8. Santé (46)
+
+- [ ] `croquettes-chien-diabetique` · sante · màj 2026-03-13
+- [ ] `croquettes-chien-surpoids` · sante · màj 2026-03-13
+- [ ] `croquettes-chien-apres-operation` · sante · màj 2026-03-14
+- [ ] `croquettes-chien-arthrose` · sante · màj 2026-03-14
+- [ ] `croquettes-chien-calculs-urinaires` · sante · màj 2026-03-14
+- [ ] `croquettes-chien-cancer` · sante · màj 2026-03-14
+- [ ] `croquettes-chien-convalescence` · sante · màj 2026-03-14
+- [ ] `croquettes-chien-demangeaisons` · sante · màj 2026-03-14
+- [ ] `croquettes-chien-dermatite` · sante · màj 2026-03-14
+- [ ] `croquettes-chien-douleurs-articulaires` · sante · màj 2026-03-14
+- [ ] `croquettes-chien-dysplasie-hanche` · sante · màj 2026-03-14
+- [ ] `croquettes-chien-hypertension` · sante · màj 2026-03-14
+- [ ] `croquettes-chien-hypothyroidie` · sante · màj 2026-03-14
+- [ ] `croquettes-chien-infections-urinaires` · sante · màj 2026-03-14
+- [ ] `croquettes-chien-insuffisance-renale` · sante · màj 2026-03-14
+- [ ] `croquettes-chien-maladie-foie` · sante · màj 2026-03-14
+- [ ] `croquettes-chien-otites` · sante · màj 2026-03-14
+- [ ] `croquettes-chien-problemes-cardiaques` · sante · màj 2026-03-14
+- [ ] `croquettes-chien-sportif` · sante · màj 2026-03-14
+- [ ] `croquettes-chien-travail` · sante · màj 2026-03-14
+- [ ] `croquettes-chien-difficile-nourrir` · sante · màj 2026-03-17
+- [ ] `croquettes-chien-hyperactif` · sante · màj 2026-03-17
+- [ ] `croquettes-chien-mauvaise-haleine` · sante · màj 2026-03-17
+- [ ] `croquettes-chien-perte-appetit` · sante · màj 2026-03-17
+- [ ] `croquettes-chien-stresse-anxieux` · sante · màj 2026-03-17
+- [ ] `croquettes-chien-tartre` · sante · màj 2026-03-17
+- [ ] `chien-vomit-apres-manger-causes` · sante · màj 2026-04-04
+- [ ] `allergie-alimentaire-chien-symptomes-diagnostic` · sante · màj 2026-04-05
+- [ ] `flatulences-chien-causes-solutions-alimentation` · sante · màj 2026-04-07
+- [ ] `pancreatite-chien-alimentation-guide` · sante · màj 2026-04-07
+- [ ] `torsion-estomac-chien-prevention-alimentation` · sante · màj 2026-05-13
+- [ ] `mycotoxines-croquettes-chien-risques-prevention` · sante · màj 2026-05-19
+- [ ] `selles-chien-aspect-couleur-consistance` · sante · màj 2026-05-26
+- [ ] `chien-barbecue-securite-aliments-eviter` · sante · màj 2026-05-27
+- [ ] `croquettes-chien-epilepsie` · sante · màj 2026-06-07
+- [ ] `additifs-croquettes-chien-conservateurs-colorants` · sante · màj 2026-06-15
+- [ ] `chardon-marie-chien-bienfaits-dosage` · sante · màj 2026-06-19
+- [ ] `chien-toujours-faim-causes-solutions` · sante · màj 2026-06-20
+- [ ] `gamelle-surelevee-chien` · sante · màj 2026-06-25
+- [ ] `chien-boit-beaucoup-eau-causes` · sante · màj 2026-07-10
+- [ ] `donner-comprime-chien-refuse-medicament` · sante · màj 2026-07-19
+- [ ] `coup-de-chaleur-chien-symptomes-premiers-gestes` · sante · màj 2026-08-14
+- [ ] `chute-poils-chien-causes-alimentation` · sante · màj 2026-09-10
+- [ ] `megaoesophage-chien-alimentation` · sante · màj 2026-09-24
+- [ ] `canneberge-chien-infection-urinaire-efficacite` · sante · màj 2026-10-23
+- [ ] `note-etat-corporel-chien-evaluer-maison` · sante · màj 2026-10-27
+
+## 9. Comportement alimentaire et alimentation (16)
+
+- [ ] `chien-mange-couche-normal` · comportement-alimentaire · màj 2026-03-07
+- [ ] `chien-sort-croquettes-bol` · comportement-alimentaire · màj 2026-03-14
+- [ ] `a-quelle-heure-donner-manger-chien` · alimentation · màj 2026-03-17
+- [ ] `combien-fois-par-jour-donner-manger-chien` · alimentation · màj 2026-03-17
+- [ ] `comment-preparer-repas-chien-soi-meme` · alimentation · màj 2026-03-17
+- [ ] `quand-promener-chien-apres-manger` · alimentation · màj 2026-03-17
+- [ ] `quelle-quantite-donner-manger-chien-selon-poids` · alimentation · màj 2026-03-17
+- [ ] `alimentation-chiot-0-2-mois` · alimentation · màj 2026-03-21
+- [ ] `alimentation-chiot-2-6-mois` · alimentation · màj 2026-03-21
+- [ ] `alimentation-chiot-6-12-mois` · alimentation · màj 2026-03-21
+- [ ] `chien-mange-herbe-pourquoi` · comportement-alimentaire · màj 2026-04-02
+- [ ] `coprophagie-chien-causes-solutions` · comportement-alimentaire · màj 2026-04-04
+- [ ] `combien-temps-chien-sans-manger` · comportement-alimentaire · màj 2026-04-05
+- [ ] `tapis-de-lechage-chien-guide-utilisation` · comportement-alimentaire · màj 2026-05-18
+- [ ] `pica-chien-causes-solutions` · comportement-alimentaire · màj 2026-07-14
+- [ ] `recette-friandises-maison-occuper-chien-rentree` · comportement-alimentaire · màj 2026-08-26
+
+## 10. Avis marques (à relire à part : pas de fan-out « peut-il manger ») (31)
+
+- [ ] `repas-frais-vs-croquettes-chien` · avis-marques · màj 2026-02-18
+- [ ] `eukanuba-vs-royal-canin` · avis-marques · màj 2026-03-09
+- [ ] `avis-acana` · avis-marques · màj 2026-03-16
+- [ ] `avis-belcando` · avis-marques · màj 2026-03-16
+- [ ] `avis-farmina-nd` · avis-marques · màj 2026-03-16
+- [ ] `avis-happy-dog` · avis-marques · màj 2026-03-16
+- [ ] `avis-hills-science-diet` · avis-marques · màj 2026-03-16
+- [ ] `avis-orijen` · avis-marques · màj 2026-03-16
+- [ ] `avis-purina-pro-plan` · avis-marques · màj 2026-03-16
+- [ ] `avis-royal-canin` · avis-marques · màj 2026-03-16
+- [ ] `avis-taste-of-the-wild` · avis-marques · màj 2026-03-16
+- [ ] `avis-wolfsblut` · avis-marques · màj 2026-03-16
+- [ ] `avis-buddy-pet-foods` · avis-marques · màj 2026-03-19
+- [ ] `avis-japhy` · avis-marques · màj 2026-03-19
+- [ ] `avis-just-russel` · avis-marques · màj 2026-03-19
+- [ ] `butternut-box-vs-dog-chef` · avis-marques · màj 2026-03-20
+- [ ] `dog-chef-vs-japhy` · avis-marques · màj 2026-03-20
+- [ ] `dog-chef-vs-just-russel` · avis-marques · màj 2026-03-20
+- [ ] `dog-chef-vs-royal-canin` · avis-marques · màj 2026-03-20
+- [ ] `elmut-vs-edgard-cooper` · avis-marques · màj 2026-03-20
+- [ ] `just-russel-vs-elmut` · avis-marques · màj 2026-03-20
+- [ ] `just-russel-vs-japhy` · avis-marques · màj 2026-03-20
+- [ ] `just-russel-vs-royal-canin` · avis-marques · màj 2026-03-20
+- [ ] `avis-dog-chef-croquettes-canard-frais` · avis-marques · màj 2026-05-25
+- [ ] `avis-dogfy-diet-repas-frais-chien` · avis-marques · màj 2026-05-25
+- [ ] `avis-fidelis-menus-frais-chien-bocaux` · avis-marques · màj 2026-05-25
+- [ ] `avis-franklin-light-dinde-patate-douce-epinards` · avis-marques · màj 2026-05-25
+- [ ] `avis-ultra-premium-direct` · avis-marques · màj 2026-05-25
+- [ ] `meilleures-croquettes-chien-senior` · avis-marques · màj 2026-06-13
+- [ ] `meilleures-croquettes-petit-chien` · avis-marques · màj 2026-07-06
+- [ ] `avis-butternut-box` · avis-marques · màj 2026-07-18

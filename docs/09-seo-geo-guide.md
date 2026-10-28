@@ -17,6 +17,8 @@
 - Zéro duplication entre pages — chaque page a un angle unique
 - Définir tout terme technique à sa première apparition
 - Longueur cible : 600–900 mots page cluster · 800–1200 mots article blog
+- **Une page par question, qui couvre tout le fan-out des IA** : chien, aliment, quantité, situation, pourquoi, alternatives (§2.7). Le tableau par gabarit cite des races par leur nom
+- **Pas de page « [race] peut-il manger [X] » par défaut** : seulement si la race change la réponse et qu'il y a une demande réelle (§6.4)
 
 ---
 
@@ -218,6 +220,71 @@ Citer des entités reconnues dans le domaine pet food renforce la confiance des 
 - Réviser les comparatifs et notes de marques tous les 12 mois minimum
 - Indiquer l'année dans les titres quand la temporalité est un signal de recherche ("Comparatif croquettes 2026")
 
+### 2.7 Couvrir le fan-out des IA
+
+Quand quelqu'un demande à ChatGPT, Gemini ou à l'AI Mode de Google « mon chihuahua peut-il manger du kiwi ? », le moteur ne cherche pas cette phrase. Il la découpe en sous-requêtes (le « query fan-out ») : le kiwi est-il toxique, quelle quantité pour un petit chien, la peau, les pépins, le risque d'étouffement, que faire s'il en a trop mangé. Puis il assemble une réponse à partir des passages qui répondent à chacune.
+
+Une page est citée si elle contient le passage qui répond à une de ces sous-requêtes. Plus une page en couvre, plus elle a de chances d'être reprise, et pour plusieurs formulations de la même question. On écrit donc **une seule page par question**, qui répond à toutes les sous-questions, plutôt que plusieurs pages minces.
+
+#### Les six dimensions à couvrir
+
+Avant d'écrire, on liste les sous-questions de chaque dimension. Une dimension sans réponse utile est sautée, on n'invente pas.
+
+| Dimension | Sous-questions types | Forme attendue sur la page |
+|---|---|---|
+| Le chien | Chiot, senior, petit gabarit, grand gabarit, races concernées, chien malade (diabète, pancréatite, insuffisance rénale), chienne gestante | Tableau par gabarit + section « Pour quels chiens c'est déconseillé ? » |
+| L'aliment | Quelle partie (peau, noyau, pépins, feuilles), cru ou cuit, frais, sec, en conserve, produits dérivés (jus, compote, gâteau) | Tableau partie par partie ou forme par forme |
+| La quantité | Combien par gabarit, à quelle fréquence, dose toxique en mg/kg | Tableau en grammes par tranche de poids, avec des races citées |
+| La situation | Il en a mangé par accident, il en a mangé beaucoup, il vomit après, combien de temps avant les symptômes | Section « Que faire si… » avec des étapes et les numéros des centres antipoison |
+| Le pourquoi | Quelle molécule, quel mécanisme, quelle étude | Nom de la molécule, dose, étude citée (auteur, année, revue, DOI) |
+| Les alternatives | Que donner à la place, quelle friandise équivalente | Liste courte avec liens internes vers les pages concernées |
+
+#### Le tableau par gabarit avec des races nommées
+
+C'est l'outil qui couvre les variantes par race sans créer de pages dédiées. Chaque ligne nomme deux ou trois races courantes du gabarit. Une IA qui cherche « kiwi chihuahua » trouve alors un passage qui contient « chihuahua » et une quantité.
+
+Exemple de format (les chiffres sont à sourcer pour chaque aliment) :
+
+```
+| Gabarit | Exemples de races | Quantité max par prise | Fréquence |
+|---|---|---|---|
+| Moins de 5 kg | Chihuahua, Yorkshire, Spitz nain | 1 rondelle (5 g) | 1 à 2 fois par semaine |
+| 5 à 10 kg | Bichon, Jack Russell, Shih Tzu | 2 rondelles (10 g) | 2 fois par semaine |
+| 10 à 25 kg | Beagle, Cocker, Border Collie | ¼ de kiwi (20 g) | 2 à 3 fois par semaine |
+| 25 à 40 kg | Labrador, Golden, Berger australien | ½ kiwi (40 g) | 2 à 3 fois par semaine |
+| Plus de 40 kg | Bouvier bernois, Dogue allemand, Leonberg | ½ à 1 kiwi | 2 à 3 fois par semaine |
+```
+
+Les quantités viennent d'une source ou d'un calcul expliqué (règle des 10 % de l'apport calorique quotidien, par exemple). Jamais au hasard.
+
+#### Des passages autonomes
+
+Une IA extrait un paragraphe, rarement la page entière. Chaque paragraphe doit tenir seul.
+
+- On répète l'entité au lieu d'un pronom : « Le kiwi contient 9 g de sucres pour 100 g », pas « Il en contient 9 g ».
+- On place le chiffre et l'unité dans la même phrase que l'entité.
+- Le premier paragraphe sous chaque H2 répond à la question du H2 en une ou deux phrases (§2.1).
+
+```
+❌ "Il ne faut pas en donner trop, surtout aux petits."
+✅ "Un chihuahua de 3 kg peut manger une rondelle de kiwi (5 g) une à deux fois par semaine, peau retirée."
+```
+
+#### Où trouver les sous-questions
+
+- Les « Autres questions posées » de Google sur la requête principale et ses variantes (« chiot », « petit chien », « a mangé »)
+- La saisie semi-automatique de Google : taper « chien kiwi » puis chaque lettre de a à z
+- Les questions posées sur Reddit, les forums et les groupes de propriétaires
+- Les requêtes qui affichent déjà la page dans Search Console (export par page)
+- Les H2 des trois concurrents analysés au §0, pour repérer ce qu'ils n'ont pas traité
+
+#### Ce qu'on ne fait pas
+
+- Pas de remplissage : une sous-question sans réponse sourcée n'a pas sa place.
+- Pas de liste de races sans quantité ni conseil associé, c'est du bourrage de mots-clés.
+- Pas de H2 qui reformule le même sujet trois fois pour placer des variantes.
+- Pas de longueur visée pour elle-même : un article sur le kiwi peut passer à 1 400 mots s'il répond à 25 sous-questions, il ne doit pas y arriver par des répétitions.
+
 ---
 
 ## 3. Hiérarchie des titres
@@ -386,6 +453,35 @@ Elle convient particulièrement aux chiens [profil cible] et se distingue par [c
 [Avantage principal]. [Point de vigilance ou condition d'usage].
 ```
 
+### 6.4 Race × question : quand créer une page dédiée
+
+Les questions posées aux IA sont de plus en plus précises (« mon berger australien peut-il manger du kiwi ? »). Créer une page par race et par question donnerait des dizaines de milliers de pages presque identiques. Google classe ce type de production sous « scaled content abuse » et la cannibalisation diluerait les pages génériques qui rankent déjà.
+
+La règle se joue en trois niveaux.
+
+**Niveau 1, par défaut : la page générique couvre les races.** « Le chien peut-il manger du kiwi ? » reste la seule page sur le sujet. Elle couvre les races par le tableau par gabarit (§2.7) et par une section sur les chiens à qui l'aliment est déconseillé.
+
+**Niveau 2 : la race dans le hub race.** Chaque article race (`categorySlug: "race"`) contient une section « Que peut manger un [race] et que doit-il éviter ? ». Elle reprend les aliments où la race change quelque chose et renvoie vers les pages génériques. Exemples de facteurs réels :
+
+| Facteur de race | Races concernées | Aliments ou sujets touchés |
+|---|---|---|
+| Mutation MDR1 (sensibilité à certains médicaments) | Colley, Berger australien, Berger blanc suisse, Shetland | Antiparasitaires, ivermectine, pas les aliments courants |
+| Calculs d'urate (métabolisme des purines) | Dalmatien, Bouledogue anglais | Abats, sardines, levure de bière, spiruline |
+| Prédisposition à la pancréatite | Schnauzer nain, Yorkshire, Cocker | Aliments gras : fromage, avocat, restes de viande grasse |
+| Brachycéphalie (fausse route, aérophagie) | Bouledogue français, Carlin, Shih Tzu | Taille des morceaux, aliments qui fermentent |
+| Torsion d'estomac (SDTE) | Dogue allemand, Berger allemand, Setter | Volume des repas, gamelle surélevée, eau après le repas |
+| Petit gabarit et hypoglycémie | Chihuahua, Yorkshire, Spitz nain | Xylitol, jeûne prolongé, morceaux trop gros |
+| Accumulation de cuivre | Bedlington terrier, Labrador, Dobermann | Foie, abats, crustacés |
+
+**Niveau 3, exception : une page dédiée race × question.** On la crée seulement si les deux conditions sont réunies :
+
+1. la race change la réponse (un facteur du tableau ci-dessus, documenté par une étude) ;
+2. il existe une demande mesurable : la requête apparaît dans Search Console, dans la saisie semi-automatique de Google ou dans les « Autres questions posées ».
+
+Exemples qui passent : « Dalmatien et purines : quels aliments éviter ? », « Quelle gamelle pour un Dogue allemand contre la torsion d'estomac ? ». Exemple qui ne passe pas : « Mon Labrador peut-il manger une pomme ? » (la réponse est celle de la page pomme, avec la ligne 25-40 kg du tableau).
+
+Une page dédiée a son propre angle (§6.1), lie la page générique et le hub race, et la page générique la lie en retour depuis la ligne de son tableau.
+
 ---
 
 ## 7. Checklist avant publication
@@ -421,6 +517,11 @@ Elle convient particulièrement aux chiens [profil cible] et se distingue par [c
 - [ ] Paragraphes courts (≤ 4 phrases)
 - [ ] Listes et tableaux pour les données nutritionnelles et comparatifs
 - [ ] Date de mise à jour visible
+- [ ] Sous-questions listées pour les six dimensions du fan-out (§2.7), chacune a sa réponse sur la page
+- [ ] Tableau par gabarit avec des races nommées et des quantités chiffrées (articles « peut-il manger » et quantités)
+- [ ] Chaque paragraphe tient seul : entité répétée, chiffre et unité dans la même phrase
+- [ ] Section « Que faire si… » pour tout aliment à risque
+- [ ] Aucune page race × question sans facteur de race documenté ni demande mesurée (§6.4)
 
 ---
 
@@ -439,6 +540,39 @@ Elle convient particulièrement aux chiens [profil cible] et se distingue par [c
 | Meta title identique sur plusieurs pages | Google choisit lui-même — souvent mal | Title unique par page, toujours |
 | H2 utilisés comme mise en forme | Confusion hiérarchique | H2 = structure sémantique uniquement |
 | Affirmations santé sans nuance | Risque médico-légal + perte de crédibilité | Toujours recommander un avis vétérinaire pour les cas spécifiques |
+
+---
+
+## 9. Réécrire un article existant
+
+Les articles déjà publiés gardent leur URL. On les enrichit sur place, dans l'ordre de `docs/seo-rewrite-queue.md`.
+
+### 9.1 Ce qu'on ne touche pas
+
+- Le nom du fichier, donc le slug et l'URL
+- `categorySlug` et `category` (route, cover et image OG en dépendent)
+- `date` (date de première publication)
+- Les chiffres sourcés justes, les études citées, les numéros des centres antipoison
+- Les composants MDX déjà utilisés (`StatRow`, `CompareTable`, `BodyImage`…) : on les garde ou on les complète
+
+### 9.2 Ce qu'on fait
+
+1. Lire l'article en entier et noter ce qu'il couvre déjà.
+2. Lister les sous-questions des six dimensions (§2.7) et repérer celles sans réponse.
+3. Ajouter les sections manquantes, en priorité le tableau par gabarit avec races nommées et la section « Que faire si… ».
+4. Réécrire les passages qui ne tiennent pas seuls (pronoms, chiffres sans entité) et les H2 qui ne sont pas des questions.
+5. Corriger les tics d'écriture IA selon le skill `boileau`, sans réécrire ce qui est déjà propre.
+6. Porter la FAQ à 8 questions si possible, tirées des sous-questions non traitées ailleurs dans l'article.
+7. Ajouter 2 à 4 liens internes vers les pages génériques ou le hub race concernés, avec des ancres descriptives.
+8. Mettre `updatedAt` à la date du jour.
+
+### 9.3 Ce qu'on vérifie avant de committer
+
+- Le build MDX passe (`npm run build`, ou au minimum la compilation de l'article modifié).
+- Le title et la description restent sous 60 et 155 caractères.
+- Aucun lien interne ne pointe vers un slug qui n'existe pas dans `content/blog/` ou `content/comparatifs/`.
+- Aucune quantité ni dose n'a été modifiée sans source.
+- L'article est coché dans `docs/seo-rewrite-queue.md` avec la date.
 
 ---
 
