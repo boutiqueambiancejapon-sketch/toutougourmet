@@ -16,8 +16,8 @@
 
 - [x] `chien-peut-manger-abricots` · fruit · màj 2026-03-07 · réécrit 2026-10-29
 - [x] `chien-peut-manger-fraises` · fruit · màj 2026-03-07 · réécrit 2026-10-29
-- [ ] `chien-peut-manger-framboises` · fruit · màj 2026-03-07
-- [ ] `chien-peut-manger-mures` · fruit · màj 2026-03-07
+- [x] `chien-peut-manger-framboises` · fruit · màj 2026-03-07 · réécrit 2026-10-30
+- [x] `chien-peut-manger-mures` · fruit · màj 2026-03-07 · réécrit 2026-10-30
 - [ ] `chien-peut-manger-myrtilles` · fruit · màj 2026-03-07
 - [ ] `chien-peut-manger-peches` · fruit · màj 2026-03-07
 - [ ] `chien-peut-manger-poires` · fruit · màj 2026-03-07
