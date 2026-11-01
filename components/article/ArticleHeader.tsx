@@ -2,14 +2,12 @@ import Link from 'next/link'
 import { Illustration } from '@/components/ui/Illustration'
 import { getCategoryBySlug } from '@/data/categories'
 import { getCategoryPill, type OgTone } from '@/lib/og/tokens'
+import { BreadcrumbNav, type BreadcrumbItem } from '@/components/ui/BreadcrumbNav'
 
 // @cdc 04-pages — en-tête d'article V2 (prototype) : fil d'Ariane, pastille de rubrique,
 // H1, chapô, auteur + date de mise à jour en <time>, cover à droite.
 
-export interface BreadcrumbItem {
-  label: string
-  href?: string
-}
+export type { BreadcrumbItem }
 
 const TONE_CLASS: Record<OgTone, string> = {
   rose: 'bg-rose text-rose-ink',
@@ -33,32 +31,13 @@ interface ArticleHeaderProps {
   extra?: React.ReactNode
 }
 
-function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
-  return (
-    <nav aria-label="Fil d'Ariane" className="text-sm text-ink-2">
-      <ol role="list" className="m-0 flex list-none flex-wrap items-center gap-1.5 p-0">
-        {items.map((item, i) => (
-          <li key={`${item.label}-${i}`} className="inline-flex items-center gap-1.5">
-            {i > 0 ? <span aria-hidden="true" className="opacity-50">›</span> : null}
-            {item.href ? (
-              <Link href={item.href} className="text-ink-2 no-underline hover:text-ink">{item.label}</Link>
-            ) : (
-              <span aria-current="page" className="text-ink">{item.label}</span>
-            )}
-          </li>
-        ))}
-      </ol>
-    </nav>
-  )
-}
-
 export function ArticleHeader(props: ArticleHeaderProps) {
   const { breadcrumb, categorySlug, coverSlot, title, description, author, updatedIso, updatedDisplay, readTime, extra } = props
   const pill = getCategoryPill(categorySlug)
   const emoji = getCategoryBySlug(categorySlug)?.emoji
   return (
     <header className="v2 mx-auto flex max-w-page flex-col gap-6 px-4 pt-6 md:px-8 md:pt-10">
-      <Breadcrumb items={breadcrumb} />
+      <BreadcrumbNav items={breadcrumb} />
       <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-12">
         <div className="flex min-w-0 flex-col gap-4">
           <Link

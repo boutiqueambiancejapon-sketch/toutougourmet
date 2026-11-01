@@ -1,7 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getArticlesByCategory } from '@/lib/mdx'
-import { Breadcrumb } from '@/components/ui/Breadcrumb'
+import { getBreedForArticle } from '@/data/breeds'
+import { getArticleSlot } from '@/components/blog/blog-categories'
+import { Illustration } from '@/components/ui/Illustration'
+import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
+import { RaceSearch } from '@/components/race/RaceSearch'
 
 export const metadata: Metadata = {
   title: 'Alimentation par race de chien — guides nutritionnels',
@@ -10,105 +14,52 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.toutou-gourmet.com/chien/race' },
 }
 
-// @cdc §3 — catégorie race, route statique prioritaire sur [category]
-function extractBreedName(title: string): string {
-  return title
-    .replace(/^Quelle nourriture pour (un|une) /i, '')
-    .replace(/ \?$/, '')
-    .trim()
+// @cdc 04-pages — hub race V2 (prototype) : recherche + grille de cartes (photo, nom, poids).
+// Route statique prioritaire sur /chien/[category].
+const GRID_ID = 'races'
+
+function nameFromTitle(title: string): string {
+  return title.replace(/^Quelle nourriture pour (un|une) /i, '').replace(/\s*\?$/, '').trim()
 }
 
 export default function RaceHubPage() {
-  const articles = getArticlesByCategory('race')
-
-  const breeds = articles
-    .map((a) => ({
-      slug: a.slug,
-      name: extractBreedName(a.frontmatter.title),
-      description: a.frontmatter.description,
-    }))
-    .sort((a, b) => a.name.localeCompare(b.name, 'fr'))
-
-  // Grouper par première lettre
-  const groups = new Map<string, typeof breeds>()
-  for (const breed of breeds) {
-    const letter = breed.name[0].toUpperCase()
-    if (!groups.has(letter)) groups.set(letter, [])
-    groups.get(letter)!.push(breed)
-  }
-  const letters = Array.from(groups.keys()).sort((a, b) => a.localeCompare(b, 'fr'))
+  const breeds = getArticlesByCategory('race')
+    .map((a) => {
+      const data = getBreedForArticle(a.slug)
+      const [min, max] = data?.weightKg ?? [0, 0]
+      return {
+        slug: a.slug,
+        name: data?.name ?? nameFromTitle(a.frontmatter.title),
+        weight: min && max ? `${min}–${max} kg` : null,
+      }
+    })
+    .sort((x, y) => x.name.localeCompare(y.name, 'fr'))
 
   return (
-    <div className="min-h-screen py-12 px-4 bg-[var(--bg-primary)]">
-      <div className="max-w-[1280px] mx-auto">
-        <Breadcrumb
-          items={[
-            { label: 'Accueil', href: '/' },
-            { label: 'Chien', href: '/chien' },
-            { label: 'Alimentation par race' },
-          ]}
-        />
-
-        <div className="mb-10 max-w-[640px]">
-          <p className="text-sm font-bold uppercase tracking-widest text-[var(--accent-1)] mb-2">
-            🐕 Alimentation par race
-          </p>
-          <h1 className="page-title mb-3">
-            Quelle nourriture selon la race de votre chien ?
-          </h1>
-          <p className="text-[var(--text-secondary)]">
-            Chaque race a des besoins nutritionnels spécifiques liés à sa morphologie, ses
-            prédispositions santé et son niveau d&apos;énergie.{' '}
-            {breeds.length} races référencées — trouvez le guide adapté à votre chien.
-          </p>
-        </div>
-
-        {/* Index alphabétique */}
-        <nav aria-label="Index alphabétique des races" className="mb-12">
-          <div className="flex flex-wrap gap-2">
-            {letters.map((letter) => (
-              <a
-                key={letter}
-                href={`#lettre-${letter}`}
-                className="w-10 h-10 flex items-center justify-center rounded-[var(--radius-md)] bg-[var(--bg-surface)] border border-[var(--border)] text-sm font-bold text-[var(--text-primary)] hover:bg-[var(--accent-1)] hover:text-white hover:border-[var(--accent-1)] transition-colors"
-              >
-                {letter}
-              </a>
-            ))}
-          </div>
-        </nav>
-
-        {/* Sections par lettre */}
-        <div className="space-y-14">
-          {letters.map((letter) => (
-            <section
-              key={letter}
-              id={`lettre-${letter}`}
-              style={{ scrollMarginTop: '80px' }}
-            >
-              <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-6 pb-3 border-b border-[var(--border)]">
-                {letter}
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {groups.get(letter)!.map((breed) => (
-                  <Link
-                    key={breed.slug}
-                    href={`/chien/race/${breed.slug}`}
-                    className="group bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-5 hover:border-[var(--accent-1)] hover:-translate-y-1 hover:shadow-[var(--shadow-md)] transition-all"
-                  >
-                    <p className="font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-1)] transition-colors mb-2">
-                      {breed.name}
-                    </p>
-                    <p className="text-sm text-[var(--text-muted)] line-clamp-2">
-                      {breed.description}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          ))}
-        </div>
+    <div className="v2 mx-auto flex max-w-page flex-col gap-6 px-4 pt-6 pb-16 md:px-8 md:pt-10">
+      <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Chien', href: '/chien' }, { label: 'Alimentation par race' }]} />
+      <div className="flex max-w-prose flex-col gap-3">
+        <h1 className="m-0 font-display text-[clamp(1.9rem,3.6vw,2.6rem)] font-black leading-[1.08] tracking-tight text-ink">
+          Quelle nourriture selon la race de votre chien ?
+        </h1>
+        <p className="m-0 leading-relaxed text-ink-2">
+          Poids adulte, prédispositions, aliments à éviter et ration : {breeds.length} races détaillées, chacune avec son guide.
+        </p>
       </div>
+      <RaceSearch gridId={GRID_ID} total={breeds.length} />
+      <ul id={GRID_ID} role="list" className="m-0 grid list-none grid-cols-2 gap-4 p-0 sm:grid-cols-3 lg:grid-cols-4">
+        {breeds.map((b) => (
+          <li key={b.slug} data-race-name={b.name}>
+            <Link href={`/chien/race/${b.slug}`} className="flex flex-col gap-1.5 text-ink no-underline">
+              <span className="relative block aspect-square overflow-hidden rounded-card bg-cream-2">
+                <Illustration slot={getArticleSlot(b.slug, 'Race')} alt={b.name} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 270px" className="!rounded-none" />
+              </span>
+              <span className="font-semibold">{b.name}</span>
+              {b.weight ? <span className="text-sm text-ink-2">{b.weight}</span> : null}
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
