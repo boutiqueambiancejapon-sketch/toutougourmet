@@ -68,6 +68,8 @@ Décision : même infra que le boulot (DECISIONS.md, « V2 — mode de travail �
 
 Serveur et dossier : le propriétaire travaille sur « VPS - Mathias » (nom dans Termius). Le projet vit dans un dossier « Toutou Gourmet », à côté des autres projets, comme ceux du boulot. À vérifier d'abord : ce serveur est-il celui où `/srv/toutou` a été installé (one.com Cloud Server M, `ls /srv/toutou`) ? Sinon, refaire `deploy/setup-server.sh` sur VPS - Mathias, et le serveur one.com ne sert plus.
 
+Vérifié le 2026-11-01 par le Claude du serveur : VPS - Mathias (`vps-mathias`, 85.190.127.13) est bien le serveur de `/srv/toutou` (`toutou-web`, `caddy`, `postgresql` actifs), pas besoin de relancer `setup-server.sh`. Dossier de travail : `/home/administrator/Toutou` (et non « Toutou Gourmet »). Étape 2 faite : dépôt cloné, `gh` connecté en `boutiqueambiancejapon-sketch` (accès en écriture), branches `v2` et prod suivies. **Le serveur est désormais la seule source : plus aucune session cloud ne pousse sur ce dépôt** (sauf la tâche cloud des 2 articles/jour, jusqu'à ce que la minuterie du serveur prenne le relais à l'étape 4).
+
 Étapes, dans l'ordre :
 1. Installer Claude Code sur le VPS de Toutou (s'il n'y est pas déjà) et lancer `claude remote-control` comme service systemd, dans le dossier du projet (« Toutou Gourmet »), distinct de `releases/` et `current/`, avec le compte Claude du propriétaire. Autorisations : modifications de fichiers acceptées, commandes sensibles (redémarrage de la prod, base de données) sur demande.
 2. Cloner le dépôt dans ce dossier avec un accès en écriture à GitHub (la deploy key actuelle est en lecture seule), branches `v2` et prod. À partir de là, plus aucune session cloud ne pousse sur le dépôt.
