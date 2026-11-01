@@ -8,7 +8,6 @@ import { DidYouKnow } from '@/components/home-v2/DidYouKnow'
 import { ArticleTile } from '@/components/article/ArticleTile'
 import { NewsletterBlock } from '@/components/blog/NewsletterBlock'
 import { getAllArticles } from '@/lib/mdx'
-import { BREEDS } from '@/data/breeds'
 import { getFoodVerdicts } from '@/lib/food-verdicts'
 
 export const metadata: Metadata = {
@@ -20,10 +19,13 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.toutou-gourmet.com' },
 }
 
-// @cdc 04-pages — accueil V2 (prototype docs/v2/prototype) : hero, entrées rapides, derniers guides,
-// races, encart âge, marques recommandées (bande encre pleine largeur). Tout est rendu côté serveur.
+// @cdc 04-pages — accueil V2 : hero avec calculateur de ration, recherche « peut-il manger »,
+// derniers guides, encart âge, races, marques recommandées (bande encre pleine largeur).
+// L'encart orange et la bande encre ne se suivent plus (audit design-CRO, §3 Accueil).
+// Textes indexables rendus côté serveur ; seuls l'outil et la recherche sont des îlots client.
 export default function HomePage() {
   const articles = getAllArticles()
+  const foods = getFoodVerdicts()
   const latest = [...articles]
     .sort((a, b) => (b.frontmatter.updatedAt || b.frontmatter.date).localeCompare(a.frontmatter.updatedAt || a.frontmatter.date))
     .slice(0, 3)
@@ -31,8 +33,8 @@ export default function HomePage() {
   return (
     <div className="v2 flex flex-col gap-14 pb-16">
       <div className="mx-auto flex w-full max-w-page flex-col gap-14 px-4 pt-6 md:px-8 md:pt-10">
-        <HomeHero guides={articles.length} breeds={BREEDS.length} foods={getFoodVerdicts().length} />
-        <StartTiles />
+        <HomeHero />
+        <StartTiles foods={foods} />
         <section aria-labelledby="derniers-guides" className="flex flex-col gap-4">
           <div className="flex items-baseline justify-between gap-4">
             <h2 id="derniers-guides" className="m-0 font-display text-2xl font-black text-ink">Les derniers guides</h2>
@@ -46,8 +48,8 @@ export default function HomePage() {
             ))}
           </ul>
         </section>
-        <HomeBreeds />
         <DidYouKnow />
+        <HomeBreeds />
       </div>
       <HomeBrands />
       <div className="mx-auto flex w-full max-w-page flex-col gap-14 px-4 md:px-8">
