@@ -25,7 +25,7 @@ export function StickyComparatifCTA({ brandA, brandB }: StickyComparatifCTAProps
 
   return (
     <div
-      className="fixed bottom-[calc(var(--tabbar-h)+env(safe-area-inset-bottom))] md:bottom-0 left-0 right-0 z-50 transition-transform duration-300"
+      className="fixed bottom-[calc(var(--tabbar-h)+env(safe-area-inset-bottom))] md:bottom-0 left-0 right-0 z-30 transition-transform duration-300"
       style={{ transform: visible ? 'translateY(0)' : 'translateY(100%)' }}
     >
       <div
