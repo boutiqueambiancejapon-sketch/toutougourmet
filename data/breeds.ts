@@ -20,7 +20,8 @@ export interface Breed {
   weightKg: [number, number]
   /** Espérance de vie en années [min, max] */
   lifeYears: [number, number]
-  activity: ActivityLevel
+  /** Absent quand l'article ne décrit pas le besoin d'exercice */
+  activity?: ActivityLevel
   /** Point d'attention principal, 3 mots maximum (« Prise de poids ») */
   watch: string
   /** Prédispositions qui touchent l'alimentation (3 au maximum) */
@@ -84,11 +85,11 @@ export const BREEDS: Breed[] = [
     activity: 'Élevée',
     watch: 'Prise de poids',
     health: [
-      { title: 'Obésité', text: "Une des races les plus exposées : 1 à 2 kg de trop suffisent à augmenter le risque articulaire, cardiaque et métabolique. La ration se pèse, jamais à l'œil." },
+      { title: 'Obésité', text: "Une des races les plus exposées : 1 à 2 kg de trop suffisent à augmenter le risque articulaire, cardiaque et métabolique. La ration se pèse, jamais à l'œil." },
       { title: 'Hypothyroïdie', text: 'Elle ralentit le métabolisme et fait grossir même avec des rations normales. Un beagle qui prend du poids sans raison justifie une prise de sang thyroïdienne.' },
       { title: 'Épilepsie', text: 'Une alimentation stable, sans variations brutales de ration, limite les déclencheurs métaboliques.' },
     ],
-    foodNote: "Le beagle mendie et vole la nourriture : les restes de table et les friandises grasses font vite grimper son poids. Les extras restent sous 10 % de la ration du jour.",
+    foodNote: "Le beagle mendie et vole la nourriture : les restes de table et les friandises grasses font vite grimper son poids. Les extras restent sous 10 % de la ration du jour.",
     near: ['basset-hound', 'jack-russell-terrier', 'cocker-spaniel'],
   },
   {
@@ -483,7 +484,6 @@ export const BREEDS: Breed[] = [
     name: 'Doberman',
     weightKg: [32, 45],
     lifeYears: [0, 0],
-    activity: 'Modérée',
     watch: 'Cardiomyopathie dilatée',
     health: [
       { title: 'Cardiomyopathie dilatée', text: "Jusqu'à 58 % des dobermans européens. La taurine et la L-carnitine de la viande sont la première protection nutritionnelle." },
@@ -540,7 +540,6 @@ export const BREEDS: Breed[] = [
     name: 'Golden retriever',
     weightKg: [25, 34],
     lifeYears: [0, 0],
-    activity: 'Modérée',
     watch: 'Cancer',
     health: [
       { title: 'Cancer', text: "Environ 60 % des goldens meurent d'un cancer. Antioxydants (vitamines E et C, sélénium, bêta-carotène) et oméga-3 servent de prévention." },
@@ -585,7 +584,6 @@ export const BREEDS: Breed[] = [
     name: 'Labrador retriever',
     weightKg: [25, 36],
     lifeYears: [0, 0],
-    activity: 'Modérée',
     watch: 'Prise de poids',
     health: [
       { title: 'Obésité (mutation POMC)', text: 'Environ 25 % des labradors portent cette mutation qui altère la satiété. La ration se mesure au gramme, jamais en libre-service.' },
