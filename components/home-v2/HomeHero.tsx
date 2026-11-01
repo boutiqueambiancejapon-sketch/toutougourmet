@@ -21,8 +21,7 @@ export function HomeHero({ guides, breeds, foods }: HomeHeroProps) {
           Ce que mange ton <span className="rounded-box bg-rose px-2">chien</span>, calculé pour lui.
         </h1>
         <p className="m-0 max-w-[560px] text-lg leading-relaxed text-ink-2">
-          Ration en grammes, aliments autorisés ou dangereux, besoins de sa race : des réponses chiffrées et sourcées,
-          <strong className="text-ink"> en 30 secondes</strong>.
+          Combien de grammes lui donner, et quels aliments éviter. <strong className="text-ink">Chaque chiffre renvoie à sa source.</strong>
         </p>
         <div className="flex flex-wrap gap-3">
           <Link href="/outils/ration" className="inline-flex min-h-13 items-center rounded-box bg-orange px-5 text-base font-semibold text-ink no-underline">

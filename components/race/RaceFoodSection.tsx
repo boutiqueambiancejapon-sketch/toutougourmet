@@ -20,7 +20,7 @@ export function RaceFoodSection({ breed, foods }: { breed: Breed; foods: FoodVer
       {breed.foodNote ? <p className="m-0 leading-relaxed text-ink">{breed.foodNote}</p> : null}
       <VerdictBoard foods={foods} />
       <p className="m-0 text-sm text-ink-2">
-        {"Chaque aliment renvoie vers son guide : quantités par gabarit, préparation et que faire en cas d'ingestion."}
+        Chaque aliment mène à son guide, avec les quantités par gabarit.
       </p>
     </section>
   )

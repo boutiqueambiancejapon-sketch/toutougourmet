@@ -8,8 +8,8 @@ interface NewsletterBlockProps {
 }
 
 export function NewsletterBlock({
-  title = 'Rejoins la meute 🐾',
-  description = 'Comparatifs, promos et conseils nutrition — sans blabla, sans spam.',
+  title = 'Les nouveaux guides par e-mail',
+  description = 'Les guides publiés et les offres des marques partenaires, dans ta boîte mail.',
 }: NewsletterBlockProps) {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
@@ -43,7 +43,7 @@ export function NewsletterBlock({
 
       {status === 'success' ? (
         <p className="text-[var(--accent-3)] font-semibold">
-          T&apos;es dans la meute ! Check ta boîte mail pour confirmer.
+          C&apos;est noté. Confirme ton inscription dans l&apos;e-mail qu&apos;on vient de t&apos;envoyer.
         </p>
       ) : (
         <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
@@ -73,7 +73,7 @@ export function NewsletterBlock({
       {errorMsg && <p className="text-sm text-[var(--error)] mt-2">{errorMsg}</p>}
       {status === 'error' && <p className="text-sm text-[var(--error)] mt-2">Une erreur est survenue, réessaie.</p>}
       <p className="text-xs text-[var(--text-muted)] mt-3">
-        Double opt-in, désabonnement en 1 clic. Pas de spam.
+        Désinscription en un clic.
       </p>
     </section>
   )

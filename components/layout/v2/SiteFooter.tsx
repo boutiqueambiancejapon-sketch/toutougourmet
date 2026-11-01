@@ -52,7 +52,7 @@ export function SiteFooter() {
           <div className="col-span-2 flex flex-col gap-3 md:col-span-1">
             <Brand onDark />
             <p className="text-sm leading-relaxed text-cream/70">
-              Guides et outils pour nourrir ton chien selon sa race, son âge et son poids.
+              Guides sourcés et calculateurs pour bien nourrir ton chien.
             </p>
           </div>
           {COLUMNS.map((col) => (

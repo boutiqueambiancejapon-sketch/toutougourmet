@@ -43,7 +43,7 @@ export default function RaceHubPage() {
           Quelle nourriture selon la race de votre chien ?
         </h1>
         <p className="m-0 leading-relaxed text-ink-2">
-          Poids adulte, prédispositions, aliments à éviter et ration : {breeds.length} races détaillées, chacune avec son guide.
+          {breeds.length} races, avec pour chacune son poids adulte, ses prédispositions et les aliments à surveiller.
         </p>
       </div>
       <RaceSearch gridId={GRID_ID} total={breeds.length} />

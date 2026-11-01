@@ -261,6 +261,60 @@ Cette règle s'applique en priorité aux articles d'avis (`avis-{marque}`), comp
 
 ---
 
+## 26. Ponctuation et mise en forme signature (données Pangram)
+
+Mesuré sur 10 000 mots, humain contre IA (Pangram, 2025) : gras 2 contre 65, intertitres 0,5 contre 11, tirets cadratins 2 contre 17, listes à puces 3 contre 28, triades 5 contre 19. L'accumulation trahit plus que chaque signe isolé.
+
+- **Deux-points en série** : pas de titres et de phrases bâtis sur « X : Y » à répétition (*« Ration en grammes, aliments, races : des réponses chiffrées »*). Un deux-points par paragraphe au plus, et jamais dans deux titres voisins.
+- **Liste à puces au lieu d'une phrase** : trois éléments courts s'écrivent dans la phrase (*« pommes, poires et bananes »*), pas en liste.
+- **Symboles** : pas de `→`, `≈`, `≥`, `✓`, `✅`, `❌`, `⚠️`, `🚀`, `1️⃣` dans le texte courant. Ils restent possibles dans l'interface (boutons, pastilles) quand ils portent une information.
+- **Point-virgule** : rare. Deux phrases valent mieux.
+
+## 27. Quantificateurs vagues et intensificateurs
+
+`divers`, `nombreux`, `plusieurs`, `multiples`, `une multitude de`, `extrêmement`, `particulièrement`, `considérablement`, `hautement`, `grandement`, `véritablement`, `réellement`, `vraiment`.
+
+Tu donnes le nombre (*« 17 fruits »*, *« 3 fois plus »*) ou tu supprimes l'adverbe.
+
+## 28. Ouvertures et clôtures toutes faites
+
+- **Ouvertures** : `Dans un monde où…`, `À l'ère de…`, `Dans le paysage actuel`, `De nos jours`, `Il est essentiel / important de noter que`, `Avant toute chose`, `Plongeons dans`, `Explorons`, `Découvrons ensemble`, `Vous vous demandez sûrement`.
+- **Clôtures** : `En conclusion`, `En somme`, `En définitive`, `Pour conclure`, `Au final`, `Bref`, `trouver le juste équilibre`, `chaque chien est unique` (comme seule conclusion), `l'essentiel est de…`.
+
+Tu ouvres sur le fait, tu fermes sur le dernier fait utile ou tu coupes.
+
+## 29. Copywriting d'interface et de page d'accueil
+
+Les textes courts (hero, boutons, encarts, méta-descriptions) concentrent les clichés : chaque mot y est lu.
+
+- **Clichés bannis** : `en quelques clics`, `en un clin d'œil`, `sans prise de tête`, `sans blabla`, `sans langue de bois`, `en toute sérénité`, `votre allié`, `le compagnon idéal`, `pensé pour vous`, `sur-mesure` (sauf produit réellement fait sur mesure), `qualité premium`, `on s'occupe de tout`, `simple, rapide et gratuit`, `le secret de`, `tout ce qu'il faut savoir`, `le guide ultime`, `la solution idéale`, `boostez`, `libérez`, `révélez`.
+- **Moules bannis** : `Fini les X`, `Dites adieu à X`, `Et si… ?` en accroche, `Que vous soyez X ou Y`, `X, Y, Z : on s'occupe de tout`, `Pas X. Pas Y. Juste Z.`, `Sans X, sans Y, (et) Z` (anaphore négative).
+- **Promesse vérifiable** : pas de chiffre de durée ou de résultat qu'on ne peut pas tenir (*« en 30 secondes »*, *« 100 % indépendant »*, *« relu par des vétérinaires »* sans relecteur nommé).
+- **Un bouton dit ce qui se passe** : *« Calculer sa ration »*, pas *« C'est parti »* ni *« Découvrir »*.
+- **Titres de section** : varier la forme. Les intertitres d'article restent des questions (règle 25, SEO) ; les titres d'interface (accueil, encarts) sont des libellés courts sans deux-points (*« Les derniers guides »*, *« Par race »*).
+
+## 30. Questions rhétoriques suivies de leur réponse
+
+`Le résultat ? Un chien en forme.` · `Pourquoi ? Parce que…` · `La bonne nouvelle ? …` · `Le hic ? …`
+
+Tu poses l'affirmation directement.
+
+## 31. Calques et verbes de modèle
+
+- **Calques** : `plonger dans`, `explorer` (un sujet), `naviguer` (une situation), `adresser` (un problème), `impacter`, `faire sens`, `au final`, `challenger`, `délivrer` (un résultat), `opérer` (un changement).
+- **Tics de modèle** : `notamment` en série, `approfondi`, `nuancé`, `complet`, `exhaustif`, `global`, `concrètement`, `en clair`, `à la clé`, `le vrai` (*« le vrai problème »*), `c'est là que`, `au passage`.
+- **Acquiescements** en tête de phrase : `Tout à fait`, `Absolument`, `Effectivement`, `En effet`.
+
+## 32. Triades même « justes »
+
+Une énumération de trois éléments réels reste une triade si elle revient à chaque phrase. Sur une page, varier : deux éléments, quatre, une seule idée développée. Les triades de libellés d'interface (*« Autorisé, à limiter, interdit »*) sont admises quand elles décrivent les vraies catégories.
+
+## 33. Sur-attribution et faux sourcing
+
+Ne pas attribuer un fait banal à une source (*« selon le site officiel, le Labrador est un chien »*). Ne pas citer une étude qu'on n'a pas ouverte. Une source = un document précis consulté.
+
+---
+
 ## VOIX ÉDITORIALE TOUTOU GOURMET
 
 Tu écris depuis une voix éditoriale précise :
@@ -278,7 +332,7 @@ Tu écris depuis une voix éditoriale précise :
 
 1. J'ai lu le brief / la SERP / les sources
 2. J'ai en tête la voix éditoriale (sobre, factuel, sources nommées)
-3. J'ai banni mentalement les listes 1-25 ci-dessus
+3. J'ai banni mentalement les listes 1-33 ci-dessus
 4. Je sais quel est le détail concret que je vais donner au lieu d'un mot vague
 5. **J'ai écrit mes H2 sous forme de questions naturelles** (test : un internaute taperait-il ça dans Google ?)
 6. J'attaque la rédaction direct, sans préambule chatbot
@@ -289,9 +343,12 @@ Tu écris depuis une voix éditoriale précise :
 2. Aucun mot de la liste #2 sans détail concret derrière
 3. Aucune des structures de #5 dans le texte
 4. **Aucun H2 du pattern interdit de #25** (*Ce que X fait bien*, *Les limites à connaître*, etc.)
-5. Typographie FR correcte (#16)
-6. Sources scientifiques citées précisément (#12)
-7. Si un dosage / étude / chiffre est cité, il est intact et vérifié
+5. Pas plus d'un deux-points par paragraphe, pas de titres voisins en « X : Y » (#26)
+6. Aucun cliché de copywriting ni promesse invérifiable dans les textes courts (#29)
+7. Pas de question rhétorique suivie de sa réponse (#30), pas de calque (#31)
+8. Typographie FR correcte (#16)
+9. Sources scientifiques citées précisément (#12)
+10. Si un dosage / étude / chiffre est cité, il est intact et vérifié
 
 ---
 
@@ -309,6 +366,9 @@ Si tu te retrouves à écrire un mot interdit, tu t'arrêtes et tu réécris la 
 - [40 marqueurs linguistiques qui trahissent ton écriture (Isma)](https://redigeretvendreavecia.substack.com/p/40-marqueurs-linguistiques-qui-trahissent)
 - [Les tics de langage de ChatGPT (Daria décrypte l'IA)](https://dariadecrypteia.substack.com/p/les-tics-de-langage-de-chatgpt)
 - [Reconnaître un texte d'IA : les tics de ChatGPT (Loumina)](https://www.loumina.fr/blog-reconnaitre-un-texte-d-ia-les-tics-de-chatgpt)
+- [9 signes révélateurs d'un texte rédigé par une IA, chiffres pour 10 000 mots (Pangram)](https://www.pangram.com/fr/signs-of-ai-writing)
+- [Mots typiques de l'IA à éviter, par familles](https://gpt-watermark-remover.com/fr/blog/mots-typiques-ia-eviter)
+- [ChatGPT : les mots les plus utilisés par le chatbot (Blog du Modérateur)](https://www.blogdumoderateur.com/chatgpt-mots-utilises-chatbot/)
 - Skill d'origine (source d'inspiration) : [alxbd/boileau](https://github.com/alxbd/boileau)
 
 Idée centrale : un LLM produit ce qui est statistiquement le plus probable. Écrire humainement, c'est faire des choix qui ne sont pas les plus probables — dès la première ligne, pas en correction.

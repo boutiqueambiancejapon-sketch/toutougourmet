@@ -25,7 +25,7 @@ export function ArticleAside({ toc }: { toc: TocItem[] }) {
         ) : null}
         <div className="flex flex-col gap-2 rounded-card bg-amber-bg p-5">
           <p className="m-0 font-display text-lg font-black text-ink">Et pour ton chien ?</p>
-          <p className="m-0 text-sm text-ink-2">Sa ration en grammes selon son poids, son âge et son activité.</p>
+          <p className="m-0 text-sm text-ink-2">Sa ration en grammes par jour, calculée sur son poids.</p>
           <Link href="/outils/ration" className="mt-1 inline-flex min-h-11 items-center justify-center rounded-control bg-orange px-4 text-[15px] font-semibold text-ink no-underline">
             Calculer sa ration
           </Link>

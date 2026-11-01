@@ -4,7 +4,7 @@ import Link from 'next/link'
 const TILES = [
   { href: '/outils/ration', emoji: '🥣', title: 'Combien doit-il manger ?', sub: 'Sa ration en grammes par jour', tone: 'bg-amber-bg', tile: 'bg-amber' },
   { href: '/chien/urgences', emoji: '⚠️', title: 'Il a mangé un truc louche ?', sub: 'Le niveau de risque et quoi faire', tone: 'bg-rose-bg', tile: 'bg-rose' },
-  { href: '/chien/peut-manger', emoji: '🥕', title: 'Il peut manger ça ?', sub: 'Fruits, légumes, viandes : oui ou non', tone: 'bg-green-bg', tile: 'bg-green' },
+  { href: '/chien/peut-manger', emoji: '🥕', title: 'Il peut manger ça ?', sub: 'Le verdict, aliment par aliment', tone: 'bg-green-bg', tile: 'bg-green' },
   { href: '/chien/marque', emoji: '🔍', title: 'Quelle marque choisir ?', sub: 'Compositions et prix comparés', tone: 'bg-blue-bg', tile: 'bg-blue' },
 ]
 
