@@ -7,7 +7,7 @@ import { RelatedBrands } from '@/components/blog/RelatedBrands'
 // puis les marques recommandées.
 export function ArticleAside({ toc }: { toc: TocItem[] }) {
   return (
-    <aside className="v2 hidden lg:block">
+    <aside className="v2 hidden self-stretch lg:block">
       <div className="sticky top-24 flex max-h-[calc(100vh-7rem)] flex-col gap-5 overflow-y-auto pb-2">
         {toc.length > 1 ? (
           <nav aria-label="Sommaire" className="flex flex-col gap-1 rounded-card border border-line bg-paper p-5">
@@ -15,7 +15,7 @@ export function ArticleAside({ toc }: { toc: TocItem[] }) {
             <ol role="list" className="m-0 flex list-none flex-col gap-0.5 p-0">
               {toc.map((item) => (
                 <li key={item.id}>
-                  <a href={`#${item.id}`} className="block rounded-control px-2 py-1.5 text-[15px] leading-snug text-ink no-underline hover:bg-cream-2">
+                  <a href={`#${item.id}`} className="block rounded-control px-2 py-1 text-sm leading-snug text-ink no-underline hover:bg-cream-2">
                     {item.text}
                   </a>
                 </li>
