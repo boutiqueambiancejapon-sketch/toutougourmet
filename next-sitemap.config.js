@@ -5,18 +5,17 @@ module.exports = {
   changefreq: 'weekly',
   priority: 0.7,
   // /en : édition anglaise non indexée tant qu'elle n'a pas de contenu (lot 8)
-  exclude: ['/api/*', '/contact', '/dev/*', '/en', '/en/*'],
+  // opengraph-image : images de partage, pas des pages
+  exclude: ['/api/*', '/contact', '/dev/*', '/en', '/en/*', '*/opengraph-image*'],
   additionalPaths: async (config) => [
     { loc: '/', priority: 1.0, changefreq: 'daily' },
     { loc: '/quiz', priority: 0.9, changefreq: 'monthly' },
     { loc: '/comparateur', priority: 0.9, changefreq: 'weekly' },
-    { loc: '/marques', priority: 0.8, changefreq: 'weekly' },
   ],
   robotsTxtOptions: {
     additionalSitemaps: [],
     policies: [
-      { userAgent: '*', allow: '/' },
-      { userAgent: '*', disallow: ['/api/', '/dev/'] },
+      { userAgent: '*', allow: '/', disallow: ['/api/', '/dev/'] },
     ],
   },
 }

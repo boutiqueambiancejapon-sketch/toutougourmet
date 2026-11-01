@@ -36,11 +36,9 @@ export const metadata: Metadata = {
     siteName: 'Toutou Gourmet',
     title: 'Toutou Gourmet — La bouffe premium pour ton animal, enfin comparée honnêtement',
     description:
-      'Quiz personnalisé, comparatif des 4 meilleures marques, avis indépendants. Franklin, Elmut, Petty Well, Dog Chef.',
-    images: [{ url: '/images/og/home.webp', width: 1200, height: 630 }],
+      'Quiz personnalisé, comparatif des 4 meilleures marques, avis indépendants. Franklin, Elmut, Ultra Premium Direct, Dog Chef.',
   },
   twitter: { card: 'summary_large_image' },
-  robots: { index: true, follow: true },
   other: {
     linkavista: 'link-6122-9760',
   },
