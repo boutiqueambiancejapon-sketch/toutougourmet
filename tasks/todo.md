@@ -8,7 +8,8 @@ Référence visuelle : prototype navigable https://claude.ai/artifact/JP6w3gr8vX
 
 > Mise à jour 2026-11-01 : la base de prod sera le PostgreSQL du VPS (Neon abandonné). Kit de déploiement dans `deploy/`.
 
-- Previews : Vercel, branche `v2`, jusqu'à la bascule.
+- Mode de travail : le serveur est la source (Claude Code sur le VPS, Remote Control depuis l'iPhone), GitHub garde une copie. Voir DECISIONS.md.
+- Previews : adresse de préversion publique sur le VPS (protégée, `noindex`) ; Vercel continue de construire les branches poussées sur GitHub, en option.
 - Prod : VPS one.com, Caddy + systemd + PostgreSQL local + cron (`deploy/`).
 - Base : PostgreSQL du VPS. Accès via Drizzle uniquement.
 - Auth : Better Auth, mots de passe hachés dans notre base. Aucun fournisseur d'auth tiers.
@@ -86,5 +87,6 @@ Référence visuelle : prototype navigable https://claude.ai/artifact/JP6w3gr8vX
 - [x] VPS one.com prêt (Caddy 2.6.2, Node 22, PostgreSQL 18, ufw 22/80/443)
 - [x] `setup-server.sh`, deploy key, premier build sur le VPS (2026-11-01, branche v2, HTTP 200 en local)
 - [ ] Mettre Caddy à jour (dépôt officiel) avant la bascule
-- [ ] Déploiement automatique de `v2` sur le VPS : clé `github_actions` sur le serveur, secrets `VPS_HOST` + `VPS_SSH_KEY`, variable `VPS_DEPLOY=true` (workflow prêt et réglages GitHub faits le 2026-11-01, premier déploiement à vérifier)
-- [ ] Bascule DNS + variable GitHub `VPS_BRANCH=claude/toutou-gourmet-setup-3mRbP` (sinon un push sur `v2` remplacerait la prod)
+- [ ] Mode « serveur source » : Claude Code + `claude remote-control` en service sur le VPS, dépôt de travail avec droit d'écriture sur GitHub, adresse de préversion (étapes : `PROGRESS.md`, passation)
+- [ ] Tâche des 2 articles par jour déplacée sur le serveur, puis tâche planifiée cloud désactivée le même jour
+- [ ] Bascule DNS

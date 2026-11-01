@@ -15,6 +15,7 @@ Langue défaut : français. V2 multilingue : FR à la racine (URLs actuelles inc
 Déploiement : Vercel aujourd'hui · cible : VPS one.com (Caddy + systemd + PostgreSQL, voir `deploy/README.md`)
 Branche de prod : `claude/toutou-gourmet-setup-3mRbP` (il n'y a pas de `main`)
 Plan V2 : `tasks/todo.md` · décisions : `DECISIONS.md`
+Mode de travail (décidé le 2026-11-01) : comme l'infra du boulot. Le code vit sur le VPS de Toutou, Claude Code y tourne (piloté depuis l'iPhone par Remote Control, ou depuis VS Code en SSH), on construit et on relance sur place, GitHub garde une copie. **Une seule source** : dès que le serveur a son dépôt de travail, plus aucune session cloud ne pousse sur ce dépôt. Passation et étapes : `PROGRESS.md`, section « Passation au Claude du serveur ».
 
 ## Comportement agent
 
