@@ -17,6 +17,13 @@ export function RaceSearch({ gridId, total }: { gridId: string; total: number })
       el.hidden = !match
       if (match) count += 1
     })
+    // Masque les lettres sans résultat (titre de section et lien de l'index)
+    document.querySelectorAll<HTMLElement>(`#${gridId} section`).forEach((sec) => {
+      const empty = !sec.querySelector('[data-race-name]:not([hidden])')
+      sec.hidden = empty
+      const link = document.querySelector<HTMLElement>(`a[href="#${sec.id}"]`)
+      if (link?.parentElement) link.parentElement.hidden = empty
+    })
     setShown(count)
   }
 
