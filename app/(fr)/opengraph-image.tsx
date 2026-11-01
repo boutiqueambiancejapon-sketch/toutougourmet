@@ -12,7 +12,7 @@ export default async function Image() {
   const [fonts, dogFace, photo] = await Promise.all([
     loadOgFonts(),
     loadOgDogFace(),
-    loadOgPhoto('/images/hero/home-hero.webp', PHOTO.width, PHOTO.height),
+    loadOgPhoto('/images/hero/home-hero.webp', PHOTO.width, PHOTO.height, 'entropy'),
   ])
   const png = new ImageResponse(
     (

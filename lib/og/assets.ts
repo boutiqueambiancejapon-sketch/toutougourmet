@@ -30,14 +30,20 @@ export async function loadOgDogFace(): Promise<string> {
  * Le moteur de rendu de next/og n'affiche pas le WebP : tout passe par sharp.
  * Renvoie null si le fichier n'existe pas (slot pas encore généré).
  */
-export async function loadOgPhoto(publicPath: string, width: number, height: number): Promise<string | null> {
+export async function loadOgPhoto(
+  publicPath: string,
+  width: number,
+  height: number,
+  crop: 'centre' | 'entropy' = 'centre',
+): Promise<string | null> {
   const file = path.join(ROOT, 'public', publicPath)
   try {
     await access(file)
   } catch {
     return null
   }
-  const jpeg = await sharp(file).resize(width * 2, height * 2, { fit: 'cover' }).jpeg({ quality: 80 }).toBuffer()
+  const position = crop === 'entropy' ? sharp.strategy.entropy : 'centre'
+  const jpeg = await sharp(file).resize(width * 2, height * 2, { fit: 'cover', position }).jpeg({ quality: 80 }).toBuffer()
   return `data:image/jpeg;base64,${jpeg.toString('base64')}`
 }
 
