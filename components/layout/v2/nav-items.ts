@@ -2,13 +2,16 @@
 // Scanner, Connexion et « Mon chien » arrivent avec les lots 4 et 6 : en attendant,
 // le bouton central mène au test et les onglets pointent vers les pages existantes.
 
+import type { ComponentType } from 'react'
+import { IconBook, IconBowl, IconDog, IconHome, IconTarget, type IconProps } from '@/components/icons'
+
 export type NavMatch = 'home' | 'guides' | 'races' | 'tools' | 'brands' | 'quiz'
 
 export interface NavItem {
   href: string
   label: string
   match: NavMatch
-  emoji?: string
+  icon?: ComponentType<IconProps>
 }
 
 /** En-tête ordinateur. */
@@ -21,11 +24,11 @@ export const DESKTOP_NAV: NavItem[] = [
 
 /** Barre d'onglets mobile (le 3e est le bouton central mis en avant). */
 export const TAB_NAV: NavItem[] = [
-  { href: '/', label: 'Accueil', match: 'home', emoji: '🏠' },
-  { href: '/chien', label: 'Guides', match: 'guides', emoji: '📚' },
-  { href: '/quiz', label: 'Le test', match: 'quiz', emoji: '🎯' },
-  { href: '/outils', label: 'Outils', match: 'tools', emoji: '🥣' },
-  { href: '/chien/race', label: 'Races', match: 'races', emoji: '🐕' },
+  { href: '/', label: 'Accueil', match: 'home', icon: IconHome },
+  { href: '/chien', label: 'Guides', match: 'guides', icon: IconBook },
+  { href: '/quiz', label: 'Le test', match: 'quiz', icon: IconTarget },
+  { href: '/outils', label: 'Outils', match: 'tools', icon: IconBowl },
+  { href: '/chien/race', label: 'Races', match: 'races', icon: IconDog },
 ]
 
 /** Rubrique active d'une adresse (une seule à la fois). */

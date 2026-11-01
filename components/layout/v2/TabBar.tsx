@@ -13,6 +13,7 @@ export function TabBar() {
       >
         {TAB_NAV.map((item, i) => {
           const fab = i === 2
+          const Icon = item.icon
           return (
             <NavLink
               key={item.href}
@@ -24,11 +25,11 @@ export function TabBar() {
                 aria-hidden="true"
                 className={
                   fab
-                    ? '-mt-[26px] grid size-[58px] place-items-center rounded-box border-4 border-cream bg-orange text-[26px] leading-none'
-                    : 'grid h-[30px] w-11 place-items-center rounded-pill text-[21px] leading-none group-aria-[current=page]:bg-amber'
+                    ? '-mt-[26px] grid size-[58px] place-items-center rounded-full border-4 border-cream bg-orange'
+                    : 'grid h-[30px] w-11 place-items-center rounded-pill group-aria-[current=page]:bg-amber'
                 }
               >
-                {item.emoji}
+                {Icon ? <Icon className={fab ? 'size-7' : 'size-[22px]'} /> : null}
               </span>
               <span className="max-w-full truncate">{item.label}</span>
             </NavLink>
