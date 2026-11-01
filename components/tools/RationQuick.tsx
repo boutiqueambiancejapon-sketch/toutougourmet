@@ -1,0 +1,117 @@
+'use client'
+
+import { useId, useState } from 'react'
+import Link from 'next/link'
+import { track } from '@/lib/analytics'
+import {
+  calculateDailyCalories,
+  caloriesToGramsFresh,
+  caloriesToGramsKibble,
+  type ActivityLevel,
+  type AgeGroup,
+} from '@/lib/calculators'
+import { IconChevron } from '@/components/icons'
+import { Segmented } from './Segmented'
+
+// @cdc 04-pages — calculateur de ration compact du hero (audit design-CRO, §3 Accueil).
+// Mêmes formules et densités que l'outil complet /outils/ration (lib/calculators.ts) :
+// croquettes 360 kcal/100 g, repas frais 120 kcal/100 g. Bouton encre et non orange : l'en-tête
+// et la barre d'onglets portent déjà l'aplat orange du test.
+type Food = 'croquettes' | 'frais'
+type YesNo = 'oui' | 'non'
+
+const AGES = [['chiot', 'Chiot'], ['adulte', 'Adulte'], ['senior', 'Senior']] as const
+const ACTIVITIES = [['sedentaire', 'Calme'], ['normal', 'Normale'], ['actif', 'Sportive']] as const
+const STERILIZED = [['non', 'Non'], ['oui', 'Oui']] as const
+const FOODS = [['croquettes', 'Croquettes'], ['frais', 'Repas frais']] as const
+
+const FOOD_TEXT: Record<Food, { what: string; density: string }> = {
+  croquettes: { what: 'de croquettes par jour', density: 'des croquettes à 360 kcal les 100 g' },
+  frais: { what: 'de repas frais par jour', density: 'un repas frais à 120 kcal les 100 g' },
+}
+
+export function RationQuick({ headingId }: { headingId: string }) {
+  const weightId = useId()
+  const [weight, setWeight] = useState('')
+  const [age, setAge] = useState<AgeGroup>('adulte')
+  const [activity, setActivity] = useState<ActivityLevel>('normal')
+  const [sterilized, setSterilized] = useState<YesNo>('non')
+  const [food, setFood] = useState<Food>('croquettes')
+  const [shown, setShown] = useState(false)
+
+  const kg = parseFloat(weight.replace(',', '.'))
+  const valid = Number.isFinite(kg) && kg >= 0.5 && kg <= 100
+  const kcal = valid
+    ? calculateDailyCalories({ animal: 'chien', weightKg: kg, ageGroup: age, activityLevel: activity, sterilized: sterilized === 'oui' })
+    : 0
+  const grams = food === 'croquettes' ? caloriesToGramsKibble(kcal) : caloriesToGramsFresh(kcal)
+
+  return (
+    <form
+      aria-labelledby={headingId}
+      className="flex flex-col gap-3 rounded-card border border-line bg-paper p-4 sm:gap-4 sm:p-6"
+      onSubmit={(e) => {
+        e.preventDefault()
+        if (!valid) return
+        setShown(true)
+        track('Tool Result', { tool: 'ration-accueil' })
+      }}
+    >
+      <h2 id={headingId} className="m-0 font-display text-[1.6rem] font-black leading-tight text-ink">
+        Combien de grammes pour ton chien ?
+      </h2>
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor={weightId} className="text-sm font-semibold text-ink">
+          Son poids (kg)
+        </label>
+        <input
+          id={weightId}
+          type="number"
+          inputMode="decimal"
+          min="0.5"
+          max="100"
+          step="0.1"
+          required
+          placeholder="12"
+          value={weight}
+          onChange={(e) => setWeight(e.target.value)}
+          className="min-h-12 w-full rounded-control border-2 border-ink bg-paper px-4 text-lg text-ink outline-none placeholder:text-ink-2 focus-visible:ring-4 focus-visible:ring-amber"
+        />
+      </div>
+      <Segmented name="age" legend="Son âge" hint="chiot avant 1 an, senior après 7 ans" options={AGES} value={age} onChange={setAge} />
+      <Segmented name="activite" legend="Son activité" options={ACTIVITIES} value={activity} onChange={setActivity} />
+      <div className="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-3">
+        <Segmented name="sterilise" legend="Stérilisé" options={STERILIZED} value={sterilized} onChange={setSterilized} />
+        <Segmented name="aliment" legend="Il mange" options={FOODS} value={food} onChange={setFood} />
+      </div>
+      <button type="submit" className="min-h-12 rounded-control bg-ink px-5 text-base font-semibold text-cream hover:underline">
+        Calculer sa ration
+      </button>
+      <div aria-live="polite">
+        {shown && valid ? (
+          <div className="flex flex-col gap-3 border-t border-line pt-4">
+            <p className="m-0 flex flex-wrap items-baseline gap-x-2 text-ink">
+              <span className="font-display text-4xl font-black">{grams} g</span>
+              <span className="text-base">{FOOD_TEXT[food].what}</span>
+            </p>
+            <p className="m-0 text-sm text-ink-2">
+              {`Soit ${kcal} kcal, calculés avec la formule NRC 2006 pour ${FOOD_TEXT[food].density}. Ajuste selon son poids sur 4 semaines.`}
+            </p>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+              <Link
+                href="/outils/ration"
+                className="inline-flex min-h-11 items-center rounded-control border-[1.5px] border-ink px-4 text-[15px] font-semibold text-ink no-underline"
+              >
+                Voir le calcul détaillé
+              </Link>
+              <Link href="/chien/urgences" className="inline-flex items-center gap-1 text-[15px] font-semibold text-orange-ink no-underline hover:underline">
+                Aliments à éviter pour lui
+                <IconChevron className="size-4" />
+              </Link>
+            </div>
+          </div>
+        ) : null}
+      </div>
+    </form>
+  )
+}
