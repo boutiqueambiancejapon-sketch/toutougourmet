@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 }
 
 // @cdc 04-pages — accueil V2 (prototype docs/v2/prototype) : hero, entrées rapides, derniers guides,
-// races, encart âge, marques recommandées. Tout est rendu côté serveur.
+// races, encart âge, marques recommandées (bande encre pleine largeur). Tout est rendu côté serveur.
 export default function HomePage() {
   const articles = getAllArticles()
   const latest = [...articles]
@@ -29,27 +29,31 @@ export default function HomePage() {
     .slice(0, 3)
 
   return (
-    <div className="v2 mx-auto flex max-w-page flex-col gap-14 px-4 pt-6 pb-16 md:px-8 md:pt-10">
-      <HomeHero guides={articles.length} breeds={BREEDS.length} foods={getFoodVerdicts().length} />
-      <StartTiles />
-      <section aria-labelledby="derniers-guides" className="flex flex-col gap-4">
-        <div className="flex items-baseline justify-between gap-4">
-          <h2 id="derniers-guides" className="m-0 font-display text-2xl font-black text-ink">Les derniers guides</h2>
-          <Link href="/chien" className="text-sm font-semibold text-orange-ink no-underline hover:underline">Tous les guides →</Link>
-        </div>
-        <ul role="list" className="m-0 grid list-none grid-cols-1 gap-6 p-0 md:grid-cols-3">
-          {latest.map((a) => (
-            <li key={a.slug}>
-              <ArticleTile article={a} />
-            </li>
-          ))}
-        </ul>
-      </section>
-      <HomeBreeds />
-      <DidYouKnow />
+    <div className="v2 flex flex-col gap-14 pb-16">
+      <div className="mx-auto flex w-full max-w-page flex-col gap-14 px-4 pt-6 md:px-8 md:pt-10">
+        <HomeHero guides={articles.length} breeds={BREEDS.length} foods={getFoodVerdicts().length} />
+        <StartTiles />
+        <section aria-labelledby="derniers-guides" className="flex flex-col gap-4">
+          <div className="flex items-baseline justify-between gap-4">
+            <h2 id="derniers-guides" className="m-0 font-display text-2xl font-black text-ink">Les derniers guides</h2>
+            <Link href="/chien" className="text-sm font-semibold text-orange-ink no-underline hover:underline">Tous les guides →</Link>
+          </div>
+          <ul role="list" className="m-0 grid list-none grid-cols-1 gap-6 p-0 md:grid-cols-3">
+            {latest.map((a) => (
+              <li key={a.slug}>
+                <ArticleTile article={a} />
+              </li>
+            ))}
+          </ul>
+        </section>
+        <HomeBreeds />
+        <DidYouKnow />
+      </div>
       <HomeBrands />
-      <NewsletterBlock />
-      <p className="m-0 text-sm text-ink-2">Les conseils de ce site ne remplacent pas une consultation vétérinaire.</p>
+      <div className="mx-auto flex w-full max-w-page flex-col gap-14 px-4 md:px-8">
+        <NewsletterBlock />
+        <p className="m-0 text-sm text-ink-2">Les conseils de ce site ne remplacent pas une consultation vétérinaire.</p>
+      </div>
     </div>
   )
 }
