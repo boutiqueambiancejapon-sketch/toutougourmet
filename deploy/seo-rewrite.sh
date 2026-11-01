@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# Réécriture SEO quotidienne (2 articles) sur la branche v2, lancée par toutou-seo-rewrite.timer.
+# Contenu quotidien sur la branche v2, lancé par toutou-seo-rewrite.timer :
+# 1 nouvel article (deploy/new-article-prompt.md) puis 2 réécritures SEO (deploy/seo-rewrite-prompt.md).
 # Travaille dans sa propre copie (~/toutou-seo), jamais dans le dossier de travail interactif ~/Toutou.
-# Consigne : deploy/seo-rewrite-prompt.md. Journal : ~/toutou-seo-logs/AAAA-MM-JJ.log
+# Journal : ~/toutou-seo-logs/AAAA-MM-JJ.log
 set -euo pipefail
 
 REPO_URL=https://github.com/boutiqueambiancejapon-sketch/toutougourmet
@@ -25,7 +26,11 @@ git clean -fdq
 npm ci --no-audit --no-fund --silent
 
 BEFORE=$(git rev-parse HEAD)
-claude -p "$(cat deploy/seo-rewrite-prompt.md)" --permission-mode auto --output-format text || echo "claude a terminé avec une erreur"
+echo "--- nouvel article"
+claude -p "$(cat deploy/new-article-prompt.md)" --permission-mode auto --output-format text || echo "claude (nouvel article) a terminé avec une erreur"
+git clean -fdq -e node_modules
+echo "--- réécritures"
+claude -p "$(cat deploy/seo-rewrite-prompt.md)" --permission-mode auto --output-format text || echo "claude (réécritures) a terminé avec une erreur"
 
 if [[ "$(git rev-parse HEAD)" == "$BEFORE" ]]; then
   echo "Aucun commit : rien à pousser."

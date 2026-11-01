@@ -1,0 +1,44 @@
+Tâche quotidienne : rédiger UN nouvel article pour Toutou Gourmet (www.toutou-gourmet.com), site français sur l'alimentation et la santé du chien. Tu tournes sur le serveur de Toutou, dans une copie de travail de la branche `v2` (la V2 du site). Le site en ligne n'est pas modifié avant la bascule : tu ne touches JAMAIS à la branche de production.
+
+## Avant d'écrire
+1. Lire `CLAUDE.md` et `PROGRESS.md`.
+2. Lire `docs/09-seo-geo-guide.md` EN ENTIER (structure, fan-out §2.7, règle race × question §6.4).
+3. Charger le skill `boileau` (`.claude/skills/boileau/SKILL.md`) et l'appliquer dès le premier jet.
+4. Lire 2 articles récents de `content/blog/` du même format que celui que tu vas écrire, dont l'article pilote V2 `chien-peut-manger-poires.mdx`, pour reproduire exactement le frontmatter et les composants.
+
+## Choisir le sujet
+- Varier le format d'un jour à l'autre (regarder les `date` des 7 derniers articles) : guide pratique, « peut-il manger » (aliment), urgence (« mon chien a mangé… »), recette maison, dossier santé/nutrition, guide d'achat.
+- Utiliser WebSearch pour trouver une requête réelle avec de la demande (autocomplétion, « Autres questions posées », forums) qui n'est PAS déjà couverte : vérifier avec `ls content/blog` et `grep -ril` sur le sujet. Pas de doublon, pas de cannibalisation d'une page existante.
+- Ne créer AUCUNE page « [race] peut-il manger [X] ». Une nouvelle fiche race (`nourriture-{race}`) seulement si la race n'a pas encore d'article ; dans ce cas, ajouter aussi sa fiche dans `data/breeds.ts` (mêmes règles que les autres fiches : rien qui ne soit écrit et sourcé dans l'article).
+
+## Recherche
+- Lire 3 à 5 pages qui rankent sur la requête (WebFetch) : sous-questions traitées, manques, mises en garde vétérinaires.
+- Toute donnée chiffrée vient d'une source vérifiée : auteur, année, revue, DOI/PMID, ou base officielle (USDA FoodData Central, ANSES, FEDIAF). Sans source, ne pas l'écrire.
+
+## Rédiger (`content/blog/{slug}.mdx`)
+- 900 à 1 600 mots, tutoiement comme le reste du site, H2 en questions naturelles, réponse directe en tête de chaque section, paragraphes autonomes (entité répétée, chiffre + unité dans la même phrase).
+- Section `## TL;DR` en tête (puces), puis les composants V2 quand ils ont du sens : `SizeTable` / `SizeRow` (quantités par gabarit avec races nommées), `WhatToDo` / `Step` et `PoisonCenters` pour un aliment à risque, `FaqList` / `FaqItem` (6 à 8 questions). Les composants utilisables sont listés dans `components/mdx/article-components.tsx` : n'en utiliser aucun autre.
+- Santé : rappeler que l'article ne remplace pas l'avis d'un vétérinaire, ne jamais poser de diagnostic ; être ferme sur les aliments dangereux.
+- 2 à 4 liens internes vers des articles qui existent (route `/chien/{categorySlug}/{slug}`, vérifier avec ls/grep).
+- Frontmatter : reproduire le schéma des articles existants. `category` doit être une clé de `CATEGORY_TABLE` (`components/blog/blog-categories.ts`) et `categorySlug` une rubrique existante (voir `data/categories.ts`). `date` et `updatedAt` = date du jour (YYYY-MM-DD). title ≤ 60 caractères, description ≤ 155.
+- Miniature de partage : `ogTitle` (titre court accrocheur, ≤ 40 caractères si possible, modèle « Poire : ton chien peut en manger ? »), et pour un article « peut-il manger » ou urgence `verdict` (`oui` | `moderation` | `danger`, fidèle au texte) et `verdictNote` (≤ 28 caractères pour oui/danger, ≤ 45 pour moderation, minuscule, sans point final). Espace insécable avant `:` et `?`.
+- Marques : seules les marques affiliées sont citées avec un lien, et seulement si le sujet s'y prête : Dog Chef https://www.dogchef.com/fr/code/WZU7090, Elmut https://c3po.link/QWMW4k6mbU, Franklin Pet Food https://c3po.link/Q3xbJhfapn, Ultra Premium Direct https://c3po.link/QqJYNnzYD8, Dogfy Diet https://tidd.ly/4jT3Tqg, Fidelis https://tidd.ly/48rl0Z3 (bocaux en rupture au 1er novembre 2026 : ne pas les mettre en avant). Petty Well n'est plus partenaire : ne jamais le citer.
+
+## Image de couverture (UNE génération, coût payant : ne pas multiplier)
+1. Écrire `/tmp/new-article-image.json` : `[{"slot":"art-{slug}","subject":"…","composition":"…","decorations":["…"],"tone":"…","ratio":"3:2"}]`. Sujet : un chien calme et une scène liée à l'article, sans humain. Composition : plein cadre, sujet bord à bord, au plus 6 à 10 confettis, aucun contour tracé autour du chien ou de l'aliment. Ton selon la rubrique (Alimentation rose, Santé vert, Race ambre, Urgences rose + étoile orange, Comportement bleu, Avis bleu, Nutrition ambre). Race : portrait de la race exacte, un seul élément décoratif (petit chapeau de fête, ou empreinte de patte pour les races brachycéphales).
+2. Lancer `node scripts/generate-images.mjs /tmp/new-article-image.json --out public/images/articles` (une seule variante par défaut), puis renommer `public/images/articles/art-{slug}-1.webp` en `art-{slug}.webp`.
+3. Regarder l'image (outil Read). Si elle a un défaut net (anatomie déformée, bande vide, texte), UNE seule nouvelle génération ; sinon garder. Si la génération échoue deux fois, publier sans image dédiée (la cover de la rubrique sert de repli) et le signaler.
+4. Déclarer le slot dans `data/extra-image-slots.ts` (en tête du tableau, `ext: 'webp'`, `imageReady: true`, même forme que les autres entrées) et ajouter `'{slug}': 'art-{slug}',` dans `ARTICLE_SLOT_BY_SLUG` (`components/blog/blog-categories.ts`).
+
+## Vérifications
+- `npm ci` si nécessaire puis `npm run build` : doit passer. Si le build casse à cause de l'article, corriger ; si impossible, ne rien committer et le signaler.
+- Relire l'article avec la checklist du skill boileau (aucun mot interdit sans détail concret, aucune structure rhétorique bannie, typographie française, zéro emoji).
+
+## Commit
+- Ajouter une ligne datée dans `PROGRESS.md` (section Complété) : slug, format, requête visée.
+- Un commit Conventional Commits en anglais, par ex. `content(blog): add {slug}`, terminé par une ligne vide puis :
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+- NE PAS pousser : le script qui t'a lancé s'en charge.
+
+## Compte rendu
+3 lignes maximum : slug et format, requête visée, état du build et de l'image.

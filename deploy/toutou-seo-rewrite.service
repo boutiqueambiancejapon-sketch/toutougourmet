@@ -1,6 +1,6 @@
-# Réécriture SEO quotidienne de 2 articles sur la branche v2 (deploy/seo-rewrite.sh).
+# Contenu quotidien sur la branche v2 : 1 nouvel article + 2 réécritures (deploy/seo-rewrite.sh).
 [Unit]
-Description=Toutou Gourmet : réécriture SEO de 2 articles (v2)
+Description=Toutou Gourmet : 1 nouvel article + 2 réécritures SEO (v2)
 After=network-online.target
 Wants=network-online.target
 
@@ -10,4 +10,4 @@ User=administrator
 Environment=HOME=/home/administrator
 Environment=LANG=C.UTF-8
 ExecStart=/home/administrator/Toutou/deploy/seo-rewrite.sh
-TimeoutStartSec=2h
+TimeoutStartSec=3h
