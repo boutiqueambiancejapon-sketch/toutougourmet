@@ -23,18 +23,12 @@ function titleSize(title: string): number {
   return 46
 }
 
-/** Logo du prototype V2 : tuile ambre + tête de chien, « Gourmet » en orange. */
-function Logo({ dogFace }: { dogFace: string }) {
+/** Logo V2 : le nom seul, « Gourmet » en orange. */
+function Logo() {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 12, fontFamily: 'Fraunces', fontWeight: 900, fontSize: 34, color: C.ink }}>
-      <div style={{ display: 'flex', width: 52, height: 52, borderRadius: 15, background: C.amber, alignItems: 'center', justifyContent: 'center' }}>
-        {/* eslint-disable-next-line @next/next/no-img-element -- next/og : next/image indisponible */}
-        <img src={dogFace} width={30} height={30} alt="" />
-      </div>
-      <div style={{ display: 'flex', gap: 9 }}>
-        <span>Toutou</span>
-        <span style={{ color: C.orange }}>Gourmet</span>
-      </div>
+    <div style={{ display: 'flex', gap: 10, fontFamily: 'Fraunces', fontWeight: 900, fontSize: 36, color: C.ink }}>
+      <span>Toutou</span>
+      <span style={{ color: C.orange }}>Gourmet</span>
     </div>
   )
 }
@@ -64,10 +58,9 @@ interface VerdictCardProps {
   photo: string | null
   verdict?: Verdict
   verdictNote?: string
-  dogFace: string
 }
 
-export function VerdictCard({ title, pill, photo, verdict, verdictNote, dogFace }: VerdictCardProps) {
+export function VerdictCard({ title, pill, photo, verdict, verdictNote }: VerdictCardProps) {
   const tone = OG_TONES[pill.tone]
   const textWidth = photo ? 640 : OG_SIZE.width
   return (
@@ -80,7 +73,7 @@ export function VerdictCard({ title, pill, photo, verdict, verdictNote, dogFace 
           <span style={{ fontFamily: 'Fraunces', fontWeight: 900, fontSize: titleSize(title), lineHeight: 1, letterSpacing: -2, color: C.ink }}>{title}</span>
           {verdict ? <Badge verdict={verdict} note={verdictNote} /> : null}
         </div>
-        <Logo dogFace={dogFace} />
+        <Logo />
       </div>
       {photo ? (
         <div style={{ display: 'flex', padding: 24 }}>
