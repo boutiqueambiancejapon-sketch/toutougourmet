@@ -57,7 +57,7 @@ export function SiteFooter() {
           </div>
           {COLUMNS.map((col) => (
             <nav key={col.title} aria-label={col.title} className="flex flex-col gap-3">
-              <h2 className="font-body text-xs font-semibold uppercase tracking-wider text-cream/50">{col.title}</h2>
+              <h2 className="m-0 font-body text-sm font-semibold text-cream">{col.title}</h2>
               <ul role="list" className="flex list-none flex-col gap-2 p-0">
                 {col.links.map((link) => (
                   <li key={link.href}>

@@ -42,7 +42,7 @@ export function PillarFaqAndSources({ pillar }: { pillar: PillarContent }) {
       </section>
       {pillar.sources.length > 0 ? (
         <section aria-labelledby="sources" className="v2 flex max-w-prose flex-col gap-2">
-          <h2 id="sources" className="m-0 text-sm font-semibold uppercase tracking-widest text-ink-2">Sources</h2>
+          <h2 id="sources" className="m-0 text-[15px] font-semibold text-ink">Sources</h2>
           <ol className="m-0 flex flex-col gap-1 pl-5 text-sm text-ink-2">
             {pillar.sources.map((s) => (
               <li key={s.url + s.label}>

@@ -61,12 +61,12 @@ export function BodyImage({
 
 type InfoBoxColor = 'rose' | 'blue' | 'green' | 'amber' | 'dark'
 
-const infoBoxStyles: Record<InfoBoxColor, { bg: string; border: string; titleColor: string }> = {
-  rose:  { bg: 'var(--bg-rose)',   border: 'var(--pill-rose)',  titleColor: '#8B1A4A' },
-  blue:  { bg: 'var(--bg-blue)',   border: 'var(--pill-blue)',  titleColor: '#1A4E8B' },
-  green: { bg: '#F0FFF8',          border: 'var(--pill-green)', titleColor: '#1A7A47' },
-  amber: { bg: '#FFFBF0',          border: 'var(--pill-amber)', titleColor: '#C47C00' },
-  dark:  { bg: 'var(--bg-dark)',   border: 'var(--bg-dark)',    titleColor: 'var(--text-on-dark)' },
+const infoBoxStyles: Record<InfoBoxColor, { box: string; title: string; body: string }> = {
+  rose:  { box: 'bg-rose-bg',  title: 'text-rose-ink',  body: 'text-ink-2' },
+  blue:  { box: 'bg-blue-bg',  title: 'text-blue-ink',  body: 'text-ink-2' },
+  green: { box: 'bg-green-bg', title: 'text-green-ink', body: 'text-ink-2' },
+  amber: { box: 'bg-amber-bg', title: 'text-amber-ink', body: 'text-ink-2' },
+  dark:  { box: 'bg-ink',      title: 'text-cream',     body: 'text-cream/85' },
 }
 
 export function InfoBox({
@@ -82,22 +82,14 @@ export function InfoBox({
 }) {
   const s = infoBoxStyles[color]
   return (
-    <div
-      className="rounded-[var(--radius-lg)] p-5 my-6"
-      style={{ background: s.bg }}
-    >
+    <div className={`my-6 rounded-box p-5 ${s.box}`}>
       {(title || emoji) && (
-        <p className="font-bold text-sm mb-2" style={{ color: s.titleColor }}>
+        <p className={`mb-2 text-sm font-bold ${s.title}`}>
           {emoji && <span className="mr-1">{emoji}</span>}
           {title}
         </p>
       )}
-      <div
-        className="text-sm leading-relaxed"
-        style={{ color: color === 'dark' ? 'var(--text-on-dark)' : 'var(--text-secondary)' }}
-      >
-        {children}
-      </div>
+      <div className={`text-sm leading-relaxed ${s.body}`}>{children}</div>
     </div>
   )
 }
@@ -181,7 +173,7 @@ export function Feature({
 
 export function StatRow({ children }: { children: ReactNode }) {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 my-6">
+    <div className="my-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
       {children}
     </div>
   )
@@ -196,27 +188,20 @@ export function Stat({
   label: string
   color?: 'default' | 'rose' | 'blue' | 'green' | 'amber'
 }) {
-  const pillColors = {
-    default: { bg: 'var(--bg-surface-2)', text: 'var(--accent-1)',  accent: 'var(--accent-1)' },
-    rose:    { bg: 'var(--pill-rose)',     text: '#8B1A4A',          accent: '#8B1A4A' },
-    blue:    { bg: 'var(--pill-blue)',     text: '#1A4E8B',          accent: '#1A4E8B' },
-    green:   { bg: 'var(--pill-green)',    text: '#1A7A47',          accent: '#1A7A47' },
-    amber:   { bg: 'var(--pill-amber)',    text: '#C47C00',          accent: '#C47C00' },
+  const tones = {
+    default: 'bg-cream-2 text-orange-ink',
+    rose:    'bg-rose text-rose-ink',
+    blue:    'bg-blue text-blue-ink',
+    green:   'bg-green text-green-ink',
+    amber:   'bg-amber text-amber-ink',
   }
-  const c = pillColors[color]
 
   return (
-    <div
-      className="rounded-[var(--radius-xl)] p-5 flex flex-col items-center gap-3 text-center"
-      style={{ background: c.bg }}
-    >
-      <p
-        className="font-black leading-tight break-words min-w-0 w-full"
-        style={{ fontFamily: "'Fraunces', serif", color: c.text, fontSize: 'clamp(1.25rem, 3vw, 2rem)' }}
-      >
+    <div className={`flex flex-col gap-2 rounded-box p-4 ${tones[color]}`}>
+      <p className="m-0 w-full min-w-0 break-words font-display text-[clamp(1.25rem,3vw,2rem)] font-black leading-tight">
         {value}
       </p>
-      <p className="text-sm leading-snug" style={{ color: c.text, opacity: 0.7 }}>{label}</p>
+      <p className="m-0 text-sm leading-snug text-ink-2">{label}</p>
     </div>
   )
 }

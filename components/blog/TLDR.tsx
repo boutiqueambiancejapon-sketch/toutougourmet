@@ -20,7 +20,7 @@ export function TLDR({ items, locale = 'fr' }: TLDRProps) {
 
   return (
     <section aria-label={title} className="v2 my-7 flex flex-col gap-2 rounded-card bg-amber-bg p-5">
-      <p className="text-xs font-semibold uppercase tracking-widest text-amber-ink">{title}</p>
+      <p className="m-0 text-[15px] font-semibold text-amber-ink">{title}</p>
       <ul className="m-0 flex list-disc flex-col gap-1.5 pl-5 marker:text-amber-ink">
         {items.map((item, i) => (
           <li

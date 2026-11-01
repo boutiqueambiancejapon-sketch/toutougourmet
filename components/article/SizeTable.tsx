@@ -46,7 +46,7 @@ function rowsFrom(children: ReactNode): SizeRowProps[] {
 }
 
 const cell = 'block md:table-cell md:border-b md:border-line md:px-4 md:py-3 md:align-top'
-const mobileLabel = 'block text-xs font-semibold uppercase tracking-wider text-ink-2 md:hidden'
+const mobileLabel = 'block text-[13px] font-semibold text-ink-2 md:hidden'
 
 export function SizeTable({
   caption,
@@ -88,7 +88,7 @@ export function SizeTable({
                   key={h}
                   role="columnheader"
                   scope="col"
-                  className="border-b border-line bg-cream-2 px-4 py-3 text-xs font-semibold uppercase tracking-wider text-ink-2"
+                  className="border-b border-line bg-cream-2 px-4 py-3 text-[13px] font-semibold text-ink-2"
                 >
                   {h}
                 </th>
