@@ -86,4 +86,5 @@ Référence visuelle : prototype navigable https://claude.ai/artifact/JP6w3gr8vX
 - [x] VPS one.com prêt (Caddy 2.6.2, Node 22, PostgreSQL 18, ufw 22/80/443)
 - [x] `setup-server.sh`, deploy key, premier build sur le VPS (2026-11-01, branche v2, HTTP 200 en local)
 - [ ] Mettre Caddy à jour (dépôt officiel) avant la bascule
-- [ ] Bascule DNS + secrets GitHub + `VPS_DEPLOY=true`
+- [ ] Déploiement automatique de `v2` sur le VPS : clé `github_actions` sur le serveur, secrets `VPS_HOST` + `VPS_SSH_KEY`, variable `VPS_DEPLOY=true` (workflow prêt depuis le 2026-11-01)
+- [ ] Bascule DNS + variable GitHub `VPS_BRANCH=claude/toutou-gourmet-setup-3mRbP` (sinon un push sur `v2` remplacerait la prod)

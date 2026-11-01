@@ -1,8 +1,17 @@
 # Déploiement sur le VPS (structure « boulot », sans Coolify)
 
-GitHub est la source. À chaque push sur `claude/toutou-gourmet-setup-3mRbP`, la GitHub Action
-`deploy-vps.yml` se connecte au VPS en SSH et lance `/srv/toutou/deploy.sh`.
-Inactive tant que la variable de repo `VPS_DEPLOY` n'est pas à `true` : d'ici là, la prod reste sur Vercel.
+GitHub est la source. À chaque push sur la branche que suit le VPS, la GitHub Action
+`deploy-vps.yml` se connecte au VPS en SSH et lance `/srv/toutou/deploy.sh` avec `DEPLOY_BRANCH`.
+Avant la bascule, le VPS suit `v2` (il n'est pas public) ; le jour de la bascule, la variable de repo
+`VPS_BRANCH` passe à `claude/toutou-gourmet-setup-3mRbP`.
+Inactive tant que la variable de repo `VPS_DEPLOY` n'est pas à `true` : d'ici là, rien ne part sur le VPS.
+
+Deux clés différentes, une par sens :
+
+| Sens | Clé | Où elle est rangée |
+|---|---|---|
+| VPS → GitHub (le VPS télécharge le code) | `/srv/toutou/.ssh/id_ed25519` | clé publique en *deploy key* lecture seule du repo |
+| GitHub → VPS (l'Action lance le déploiement) | `/srv/toutou/.ssh/github_actions` | clé publique dans `/srv/toutou/.ssh/authorized_keys`, clé privée dans le secret GitHub `VPS_SSH_KEY` |
 
 ## Ce qui tourne sur le serveur
 
@@ -42,6 +51,8 @@ cron (utilisateur toutou) ──► backup-db.sh chaque nuit à 3 h 15
 2. Ajouter la clé publique affichée comme *deploy key* (lecture seule) du repo, puis cloner dans `/srv/toutou/repo`.
 3. Remplir `/srv/toutou/shared/.env` (mêmes variables que sur Vercel + `DATABASE_URL=postgresql:///toutou`).
 4. Premier build : `sudo -u toutou /srv/toutou/deploy.sh`, vérifier `curl -I http://127.0.0.1:3000`.
-5. Jour de la bascule : `deploy/Caddyfile` → `/etc/caddy/Caddyfile`, `systemctl reload caddy`, DNS vers le VPS,
+5. Déploiement automatique de `v2` (avant la bascule) : clé `github_actions` (tableau ci-dessus),
    secrets `VPS_HOST` + `VPS_SSH_KEY` et variable `VPS_DEPLOY=true` dans GitHub.
-6. Copie des sauvegardes hors du serveur : configurer un remote rclone nommé `offsite` (stockage objet S3).
+6. Jour de la bascule : `deploy/Caddyfile` → `/etc/caddy/Caddyfile`, `systemctl reload caddy`, DNS vers le VPS,
+   variable `VPS_BRANCH=claude/toutou-gourmet-setup-3mRbP` dans GitHub (sinon un push sur `v2` remplacerait la prod).
+7. Copie des sauvegardes hors du serveur : configurer un remote rclone nommé `offsite` (stockage objet S3).
