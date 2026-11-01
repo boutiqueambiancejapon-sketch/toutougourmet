@@ -1,44 +1,92 @@
 @import "tailwindcss";
 
+/* ─── Tokens V2 ─────────────────────────────────────────────────────────────
+   @cdc branding — palette V1 épurée (prototype V2) : un fond crème, une encre,
+   un accent orange et quatre tons (pastille / fond / texte). Plus d'ombres :
+   les cartes se détachent par un trait (--line). Les emojis restent le
+   pictogramme des tons (🥩 rose, 💊 vert, 🔍 bleu, 🐕 ambre).
+   Les composants V2 n'utilisent que ces tokens (utilitaires Tailwind mappés
+   dans @theme inline plus bas : bg-cream, text-ink, rounded-card…). */
 :root {
-  --bg-primary:    #FAFAF8;
-  --bg-surface:    #FFFFFF;
-  --bg-surface-2:  #F5F0EA;
-  --bg-dark:       #1A1109;
-  --bg-rose:       #FFF0F5;
-  --bg-blue:       #EEF4FF;
-  --bg-amber:      #FFF8E8;
-  --bg-green:      #E8F5EE;
+  --cream:   #FAFAF8;
+  --cream-2: #F5F0EA;
+  --white:   #FFFFFF;
 
-  --accent-1:      #E8622A;
-  --accent-2:      #F2B85A;
-  --accent-3:      #4CAF7D;
-  --accent-rose:   #FF8FAB;
-  --accent-blue:   #4E8EDB;
+  --ink:   #1A1109;
+  --ink-2: #4A3728;
 
-  --pill-rose:     #FFD6E3;
-  --pill-blue:     #C8DCFF;
-  --pill-amber:    #FFE8B5;
-  --pill-green:    #C2F0D5;
+  --line:   #E2D5C8;
+  --line-2: #C4A98A;
 
-  --text-primary:   #1A1109;
-  --text-secondary: #4A3728;
-  --text-muted:     #8A7264;
-  --text-on-dark:   #F5EEE6;
+  /* Orange : fonds de bouton (texte --ink dessus, contraste 5,5:1).
+     --orange-ink : liens et chiffres orange sur fond clair (contraste AA). */
+  --orange:     #E8622A;
+  --orange-ink: #B4441A;
+
+  --amber: #FFE8B5; --amber-bg: #FFF8E8; --amber-ink: #8B5A0F;
+  --rose:  #FFD6E3; --rose-bg:  #FFF0F5; --rose-ink:  #8B1A4A;
+  --blue:  #C8DCFF; --blue-bg:  #EEF4FF; --blue-ink:  #1A4E8B;
+  --green: #C2F0D5; --green-bg: #E8F5EE; --green-ink: #1A7A47; --green-strong: #4CAF7D;
+
+  --scrim: rgb(26 17 9 / 0.45);
+
+  --r-xs:   11px;  /* petites tuiles emoji */
+  --r-sm:   14px;  /* boutons compacts, champs */
+  --r-md:   18px;  /* encadrés, accordéons, stats */
+  --r-lg:   24px;  /* cartes */
+  --r-xl:   32px;  /* grandes images */
+  --r-pill: 999px; /* chips, pastilles */
+
+  --w-page:  1160px; /* largeur max des pages */
+  --w-prose: 760px;  /* largeur max des pages de texte */
+
+  --display: var(--font-fraunces), Georgia, 'Times New Roman', serif;
+  --body:    var(--font-dm-sans), system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+/* ─── Variables V1 ──────────────────────────────────────────────────────────
+   Alias des tokens V2 quand la valeur est identique (une seule source par
+   couleur). Les variables marquées « V1 seule » n'existent plus dans la
+   palette V2 : à retirer quand plus aucun composant V1 ne les utilise. */
+:root {
+  --bg-primary:    var(--cream);
+  --bg-surface:    var(--white);
+  --bg-surface-2:  var(--cream-2);
+  --bg-dark:       var(--ink);
+  --bg-rose:       var(--rose-bg);
+  --bg-blue:       var(--blue-bg);
+  --bg-amber:      var(--amber-bg);
+  --bg-green:      var(--green-bg);
+
+  --accent-1:      var(--orange);
+  --accent-2:      #F2B85A; /* V1 seule */
+  --accent-3:      var(--green-strong);
+  --accent-rose:   #FF8FAB; /* V1 seule */
+  --accent-blue:   #4E8EDB; /* V1 seule */
+
+  --pill-rose:     var(--rose);
+  --pill-blue:     var(--blue);
+  --pill-amber:    var(--amber);
+  --pill-green:    var(--green);
+
+  --text-primary:   var(--ink);
+  --text-secondary: var(--ink-2);
+  --text-muted:     #8A7264; /* V1 seule : contraste 4,3:1 sur crème, remplacé par --ink-2 */
+  --text-on-dark:   #F5EEE6; /* V1 seule : la V2 écrit en --cream sur --ink */
 
   /* Darkened text colors to pair with their matching pill background */
-  --text-on-rose:   #8B1A4A;
-  --text-on-blue:   #1A4E8B;
-  --text-on-amber:  #8B5A0F;
-  --text-on-green:  #1A7A47;
+  --text-on-rose:   var(--rose-ink);
+  --text-on-blue:   var(--blue-ink);
+  --text-on-amber:  var(--amber-ink);
+  --text-on-green:  var(--green-ink);
 
-  --border:         #E2D5C8;
-  --border-strong:  #C4A98A;
+  --border:         var(--line);
+  --border-strong:  var(--line-2);
 
-  --success: #4CAF7D;
-  --warning: #F2B85A;
-  --error:   #E8622A;
-  --info:    #4E8EDB;
+  --success: var(--green-strong);
+  --warning: #F2B85A; /* V1 seule */
+  --error:   var(--orange);
+  --info:    #4E8EDB; /* V1 seule */
 
   --space-xs: 4px; --space-sm: 8px; --space-md: 16px;
   --space-lg: 24px; --space-xl: 32px; --space-2xl: 48px;
@@ -82,6 +130,47 @@
   --color-text-on-dark:   var(--text-on-dark);
   --color-border:         var(--border);
   --color-border-strong:  var(--border-strong);
+
+  /* V2 : utilitaires bg-cream, text-ink, border-line, bg-amber-bg, text-rose-ink… */
+  --color-cream:        var(--cream);
+  --color-cream-2:      var(--cream-2);
+  --color-paper:        var(--white);
+  --color-ink:          var(--ink);
+  --color-ink-2:        var(--ink-2);
+  --color-line:         var(--line);
+  --color-line-2:       var(--line-2);
+  --color-orange:       var(--orange);
+  --color-orange-ink:   var(--orange-ink);
+  --color-amber:        var(--amber);
+  --color-amber-bg:     var(--amber-bg);
+  --color-amber-ink:    var(--amber-ink);
+  --color-rose:         var(--rose);
+  --color-rose-bg:      var(--rose-bg);
+  --color-rose-ink:     var(--rose-ink);
+  --color-blue:         var(--blue);
+  --color-blue-bg:      var(--blue-bg);
+  --color-blue-ink:     var(--blue-ink);
+  --color-green:        var(--green);
+  --color-green-bg:     var(--green-bg);
+  --color-green-ink:    var(--green-ink);
+  --color-green-strong: var(--green-strong);
+  --color-scrim:        var(--scrim);
+
+  /* V2 : font-display (Fraunces), font-body (DM Sans) */
+  --font-display: var(--display);
+  --font-body:    var(--body);
+
+  /* V2 : rounded-tile, rounded-control, rounded-box, rounded-card, rounded-hero, rounded-pill */
+  --radius-tile:    var(--r-xs);
+  --radius-control: var(--r-sm);
+  --radius-box:     var(--r-md);
+  --radius-card:    var(--r-lg);
+  --radius-hero:    var(--r-xl);
+  --radius-pill:    var(--r-pill);
+
+  /* V2 : max-w-page, max-w-prose */
+  --container-page:  var(--w-page);
+  --container-prose: var(--w-prose);
 }
 
 @keyframes marquee {
@@ -124,9 +213,10 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6 { font-family: var(--font-fraunces), Georgia, serif; }
+/* Titres V1. Les composants V2 (classe .v2) gèrent leurs titres avec les utilitaires. */
+:where(h1, h2, h3, h4, h5, h6):where(:not(.v2, .v2 *)) { font-family: var(--font-fraunces), Georgia, serif; }
 
-h1 {
+h1:where(:not(.v2, .v2 *)) {
   font-size: clamp(2.5rem, 7vw, 6rem);
   font-weight: 900;
   line-height: 1.0;
@@ -142,14 +232,14 @@ h1 {
   letter-spacing: -0.02em;
 }
 
-h2 {
+h2:where(:not(.v2, .v2 *)) {
   font-size: clamp(1.35rem, 3vw, 1.85rem);
   font-weight: 800;
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
-h3 {
+h3:where(:not(.v2, .v2 *)) {
   font-size: clamp(1.1rem, 2vw, 1.35rem);
   font-weight: 700;
   line-height: 1.3;
@@ -259,7 +349,8 @@ h3 {
 }
 
 /* ─── MDX Prose Content ──────────────────────────────────────────────────── */
-.mdx-content h2 {
+/* Les composants V2 (classe .v2) échappent à ces règles V1 : :where() garde la spécificité d'origine. */
+.mdx-content h2:where(:not(.v2, .v2 *)) {
   font-family: var(--font-fraunces), Georgia, serif;
   font-size: clamp(1.35rem, 3vw, 1.75rem);
   font-weight: 800;
@@ -269,7 +360,7 @@ h3 {
   margin-top: 2.5rem;
   margin-bottom: 0.75rem;
 }
-.mdx-content h3 {
+.mdx-content h3:where(:not(.v2, .v2 *)) {
   font-family: var(--font-fraunces), Georgia, serif;
   font-size: clamp(1.1rem, 2vw, 1.35rem);
   font-weight: 700;
@@ -277,29 +368,29 @@ h3 {
   margin-top: 1.75rem;
   margin-bottom: 0.5rem;
 }
-.mdx-content p {
+.mdx-content p:where(:not(.v2, .v2 *)) {
   color: var(--text-secondary);
   line-height: 1.75;
   margin-bottom: 1rem;
   font-size: 1rem;
 }
-.mdx-content a { color: var(--accent-1); text-decoration: underline; text-underline-offset: 3px; }
-.mdx-content strong { color: var(--text-primary); font-weight: 700; }
-.mdx-content em { font-style: italic; }
-.mdx-content ul {
+.mdx-content a:where(:not(.v2, .v2 *)) { color: var(--accent-1); text-decoration: underline; text-underline-offset: 3px; }
+.mdx-content strong:where(:not(.v2, .v2 *)) { color: var(--text-primary); font-weight: 700; }
+.mdx-content em:where(:not(.v2, .v2 *)) { font-style: italic; }
+.mdx-content ul:where(:not(.v2, .v2 *)) {
   list-style: disc;
   padding-left: 1.25rem;
   margin-bottom: 1rem;
   color: var(--text-secondary);
 }
-.mdx-content ol {
+.mdx-content ol:where(:not(.v2, .v2 *)) {
   list-style: decimal;
   padding-left: 1.25rem;
   margin-bottom: 1rem;
   color: var(--text-secondary);
 }
-.mdx-content li { margin-bottom: 0.4rem; line-height: 1.65; }
-.mdx-content blockquote {
+.mdx-content li:where(:not(.v2, .v2 *)) { margin-bottom: 0.4rem; line-height: 1.65; }
+.mdx-content blockquote:where(:not(.v2, .v2 *)) {
   border-left: 4px solid var(--accent-1);
   padding: 0.75rem 1rem;
   margin: 1.5rem 0;
@@ -308,20 +399,20 @@ h3 {
   color: var(--text-secondary);
   font-style: italic;
 }
-.mdx-content .table-scroll {
+.mdx-content .table-scroll:where(:not(.v2, .v2 *)) {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   margin: 1.5rem 0;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
 }
-.mdx-content table {
+.mdx-content table:where(:not(.v2, .v2 *)) {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9rem;
   white-space: nowrap;
 }
-.mdx-content th {
+.mdx-content th:where(:not(.v2, .v2 *)) {
   background: var(--bg-dark);
   color: var(--text-on-dark);
   padding: 0.75rem 1rem;
@@ -331,14 +422,14 @@ h3 {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
-.mdx-content td {
+.mdx-content td:where(:not(.v2, .v2 *)) {
   padding: 0.6rem 1rem;
   border-bottom: 1px solid var(--border);
   color: var(--text-secondary);
 }
-.mdx-content tr:last-child td { border-bottom: none; }
-.mdx-content tr:nth-child(even) td { background: var(--bg-surface-2); }
-.mdx-content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+.mdx-content tr:last-child td:where(:not(.v2, .v2 *)) { border-bottom: none; }
+.mdx-content tr:nth-child(even) td:where(:not(.v2, .v2 *)) { background: var(--bg-surface-2); }
+.mdx-content hr:where(:not(.v2, .v2 *)) { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
 
 /* Verdict block — force text lisible sur fond sombre */
 .verdict-content p,

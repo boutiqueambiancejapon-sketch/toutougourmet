@@ -10,7 +10,29 @@
 
 ---
 
-## Couleurs — variables CSS (app/globals.css)
+## Tokens V2 (app/globals.css)
+
+Palette V1 épurée du prototype V2. Les composants V2 n'utilisent que ces tokens, via les utilitaires Tailwind mappés dans `@theme inline`, et portent la classe `v2` (les règles V1 globales les ignorent).
+
+| Token | Valeur | Utilitaire | Usage |
+|---|---|---|---|
+| `--cream` / `--cream-2` | #FAFAF8 / #F5F0EA | `bg-cream`, `bg-cream-2` | fond de page, fonds secondaires |
+| `--white` | #FFFFFF | `bg-paper` | cartes |
+| `--ink` / `--ink-2` | #1A1109 / #4A3728 | `text-ink`, `text-ink-2` | texte, texte secondaire |
+| `--line` / `--line-2` | #E2D5C8 / #C4A98A | `border-line`, `border-line-2` | traits (pas d'ombres en V2) |
+| `--orange` | #E8622A | `bg-orange` | boutons (texte `--ink` dessus) |
+| `--orange-ink` | #B4441A | `text-orange-ink` | liens et chiffres orange sur fond clair |
+| `--{ton}` / `--{ton}-bg` / `--{ton}-ink` | ambre, rose, bleu, vert | `bg-amber`, `bg-amber-bg`, `text-amber-ink`… | pastille / fond / texte d'un ton |
+| `--scrim` | encre à 45 % | `bg-scrim` | voile sous les feuilles |
+| `--r-xs` → `--r-pill` | 11, 14, 18, 24, 32, 999 px | `rounded-tile`, `-control`, `-box`, `-card`, `-hero`, `-pill` | rayons |
+| `--w-page` / `--w-prose` | 1160 / 760 px | `max-w-page`, `max-w-prose` | largeurs |
+| `--display` / `--body` | Fraunces / DM Sans | `font-display`, `font-body` | titres / texte |
+
+Tons par catégorie dans le prototype (emojis conservés) : 🥩 Alimentation rose, 💊 Santé vert, 🔍 Avis & comparatifs bleu, 🐕 Race ambre, ⚠️ Urgences rose, 🐾 Comportement bleu.
+
+## Couleurs V1 — variables CSS (app/globals.css)
+
+Les variables V1 sont désormais des alias des tokens V2 quand la valeur est identique. Celles marquées « V1 seule » dans `globals.css` disparaissent avec les derniers composants V1.
 
 ```css
 :root {
