@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { track } from '@/lib/analytics'
 import {
   calculateDailyCalories,
   caloriesToGramsKibble,
@@ -49,6 +50,7 @@ export function RationCalculator() {
       gKibble: caloriesToGramsKibble(kcal),
       gFresh: caloriesToGramsFresh(kcal),
     })
+    track('Tool Result', { tool: 'ration' })
   }
 
   function set<K extends keyof FormState>(key: K, value: FormState[K]) {

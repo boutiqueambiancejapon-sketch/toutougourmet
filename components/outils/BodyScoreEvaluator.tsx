@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { evaluateBodyScore, dogSizeRanges, type Animal, type BodyScoreResult } from '@/lib/calculators'
+import { track } from '@/lib/analytics'
 
 const catIdealWeights = [
   { label: 'Petit gabarit (Siamois, Devon...)', idealKg: 3.5 },
@@ -36,6 +37,7 @@ export function BodyScoreEvaluator() {
     const ideal = parseFloat(idealWeight)
     if (!current || !ideal) return
     setResult(evaluateBodyScore(current, ideal))
+    track('Tool Result', { tool: 'etat-corporel' })
   }
 
   const scoreBarWidth = result

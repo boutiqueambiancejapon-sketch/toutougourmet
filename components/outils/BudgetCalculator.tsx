@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { track } from '@/lib/analytics'
 import Link from 'next/link'
 import {
   calculateDailyCalories,
@@ -40,6 +41,7 @@ export function BudgetCalculator() {
     })).sort((a, b) => a.monthly - b.monthly)
 
     setResults(res)
+    track('Tool Result', { tool: 'budget' })
   }
 
   return (

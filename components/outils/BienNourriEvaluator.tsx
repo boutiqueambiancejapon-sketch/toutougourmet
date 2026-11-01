@@ -12,16 +12,8 @@ import {
 } from '@/data/bien-nourri'
 import { cn } from '@/lib/utils'
 
-// Plausible Analytics — déclaration globale pour TypeScript
-// (le script Plausible expose `window.plausible` une fois chargé)
-declare global {
-  interface Window {
-    plausible?: (
-      eventName: string,
-      options?: { props?: Record<string, string | number> },
-    ) => void
-  }
-}
+// window.plausible est typé dans lib/analytics.ts
+import '@/lib/analytics'
 
 export function BienNourriEvaluator() {
   const [currentStep, setCurrentStep] = useState(0)

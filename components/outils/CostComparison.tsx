@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { track } from '@/lib/analytics'
 import {
   calculateDailyCalories,
   buildCostComparisons,
@@ -31,6 +32,7 @@ export function CostComparisonTool() {
     if (!w) return
     const kcal = calculateDailyCalories({ animal, weightKg: w, ageGroup: age, activityLevel: activity, sterilized: false })
     setResults(buildCostComparisons(kcal))
+    track('Tool Result', { tool: 'cout' })
   }
 
   const maxMonthly = results ? Math.max(...results.map((r) => r.monthlyBudget)) : 1

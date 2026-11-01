@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/next'
 import ScrollToTop from './ScrollToTop'
+import { Tracking } from '@/components/analytics/Tracking'
 import GoogleAnalyticsPageView from './GoogleAnalyticsPageView'
 import { fraunces, dmSans } from '@/lib/fonts'
 import { SITE_URL, type Locale } from '@/lib/i18n/config'
@@ -83,7 +84,11 @@ export function SiteDocument({ locale, header, footer, children }: SiteDocumentP
         <main id="main-content">{children}</main>
         {footer}
 
-        {/* Plausible Analytics */}
+        {/* Plausible Analytics : file d'attente pour les événements envoyés avant le chargement */}
+        <Script id="plausible-queue" strategy="afterInteractive">
+          {`window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }`}
+        </Script>
+        <Tracking />
         <Script
           defer
           data-domain="toutou-gourmet.com"

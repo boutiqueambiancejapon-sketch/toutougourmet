@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { track } from '@/lib/analytics'
 
 interface NewsletterBlockProps {
   title?: string
@@ -29,6 +30,7 @@ export function NewsletterBlock({
         body: JSON.stringify({ email, _subject: 'Nouvelle inscription newsletter' }),
       })
       setStatus(res.ok ? 'success' : 'error')
+      if (res.ok) track('Newsletter Signup', { place: title })
     } catch {
       setStatus('error')
     }
