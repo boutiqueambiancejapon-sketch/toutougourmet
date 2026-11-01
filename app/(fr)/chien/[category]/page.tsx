@@ -81,8 +81,6 @@ export default async function CategoryPage({ params }: Props) {
         <p className="m-0 text-lg leading-relaxed text-ink-2">{cat.description}</p>
       </header>
 
-      {pillar ? <PillarIntro pillar={pillar} /> : null}
-
       {subSlugs.length > 0 ? (
         <nav aria-label="Sous-rubriques" className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           {subSlugs.map((slug) => {
@@ -120,6 +118,7 @@ export default async function CategoryPage({ params }: Props) {
         </section>
       ) : null}
 
+      {pillar ? <PillarIntro pillar={pillar} /> : null}
       {pillar ? <PillarFaqAndSources pillar={pillar} /> : null}
     </div>
   )
