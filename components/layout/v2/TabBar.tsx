@@ -18,7 +18,7 @@ export function TabBar() {
               key={item.href}
               href={item.href}
               match={item.match}
-              className="group flex min-h-[52px] flex-col items-center justify-end gap-0.5 overflow-hidden py-1 text-[11px] font-semibold text-ink-2 no-underline aria-[current=page]:text-ink"
+              className="group flex min-h-[52px] min-w-0 flex-col items-center justify-end gap-0.5 py-1 text-[11px] font-semibold text-ink-2 no-underline aria-[current=page]:text-ink"
             >
               <span
                 aria-hidden="true"
