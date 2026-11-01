@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!article) return {}
   const { frontmatter } = article
   const canonical = `${SITE_URL}/chien/${frontmatter.categorySlug}/${slug}`
-  const ogImage = getArticleImageUrl(slug, frontmatter.category)
+  // og:image et twitter:image : générés par opengraph-image.tsx (miniature A1)
   return {
     title: frontmatter.title,
     description: frontmatter.description,
@@ -66,13 +66,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: frontmatter.description,
       url: canonical,
       type: 'article',
-      images: [{ url: ogImage, width: 1500, height: 1000, alt: frontmatter.title }],
     },
     twitter: {
       card: 'summary_large_image',
       title: frontmatter.title,
       description: frontmatter.description,
-      images: [ogImage],
     },
   }
 }

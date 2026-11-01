@@ -87,6 +87,12 @@ export interface ArticleFrontmatter {
   affiliateB?: AffiliateLink
   /** Optionnel — active l'injection de Product/Review/AggregateRating JSON-LD */
   review?: ReviewFrontmatter
+  /** Miniature de partage : titre court et accrocheur (sinon `title`) */
+  ogTitle?: string
+  /** Miniature de partage : badge verdict (oui / avec modération / danger) */
+  verdict?: 'oui' | 'moderation' | 'danger'
+  /** Miniature de partage : précision courte à côté du badge (≈ 25 caractères) */
+  verdictNote?: string
 }
 
 export interface Article {
