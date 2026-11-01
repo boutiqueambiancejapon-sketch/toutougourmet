@@ -1,0 +1,30 @@
+# Déploie sur le VPS à chaque push sur la branche de prod.
+# Inactif tant que la variable de repo VPS_DEPLOY n'est pas à "true" (jour de la bascule).
+# Secrets requis : VPS_HOST, VPS_SSH_KEY (clé privée autorisée pour l'utilisateur toutou).
+name: Deploy VPS
+
+on:
+  push:
+    branches: [claude/toutou-gourmet-setup-3mRbP]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-vps
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: vars.VPS_DEPLOY == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Lancer deploy.sh sur le VPS
+        env:
+          SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          HOST: ${{ secrets.VPS_HOST }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H "$HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          ssh -o BatchMode=yes toutou@"$HOST" /srv/toutou/deploy.sh

@@ -1,0 +1,17 @@
+# /etc/caddy/Caddyfile — à activer seulement le jour de la bascule DNS.
+# Caddy obtient et renouvelle seul les certificats HTTPS dès que le DNS pointe ici.
+
+toutou-gourmet.com {
+	redir https://www.toutou-gourmet.com{uri} permanent
+}
+
+www.toutou-gourmet.com {
+	encode zstd gzip
+	reverse_proxy 127.0.0.1:3000
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+}

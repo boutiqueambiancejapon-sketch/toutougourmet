@@ -1,0 +1,16 @@
+[Unit]
+Description=Toutou Gourmet (Next.js)
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=toutou
+WorkingDirectory=/srv/toutou/current
+EnvironmentFile=/srv/toutou/shared/.env
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/npx next start -H 127.0.0.1 -p 3000
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

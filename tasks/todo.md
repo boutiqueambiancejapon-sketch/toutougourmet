@@ -4,7 +4,9 @@ Branche de travail : `v2` (créée depuis `claude/toutou-gourmet-setup-3mRbP`).
 La V1 reste en production pendant toute la construction. Chaque push sur `v2` donne une preview Vercel.
 Référence visuelle : prototype navigable https://claude.ai/artifact/JP6w3gr8vX4UGCQrZDkj8D
 
-## Principes d'infra (V2 sur Vercel, VPS plus tard)
+## Principes d'infra (previews Vercel, prod sur VPS one.com — voir deploy/README.md)
+
+> Mise à jour 2026-11-01 : la base de prod sera le PostgreSQL du VPS (Neon abandonné). Kit de déploiement dans `deploy/`.
 
 - Hébergement : Vercel (plan Pro requis dès que comptes + affiliation + Premium).
 - Base : PostgreSQL Neon, région UE (Francfort). Accès via Drizzle uniquement.
@@ -78,4 +80,7 @@ Référence visuelle : prototype navigable https://claude.ai/artifact/JP6w3gr8vX
 
 - [ ] Recette complète sur la preview `v2`
 - [ ] Merge `v2` → production, contrôle des redirections et de Search Console
-- [ ] Plus tard : VPS OVH + Coolify, migration Neon → Postgres VPS, R2 → Object Storage OVH
+- [x] VPS one.com prêt (Caddy 2.6.2, Node 22, PostgreSQL 18, ufw 22/80/443)
+- [ ] `setup-server.sh`, deploy key, premier build sur le VPS
+- [ ] Mettre Caddy à jour (dépôt officiel) avant la bascule
+- [ ] Bascule DNS + secrets GitHub + `VPS_DEPLOY=true`
