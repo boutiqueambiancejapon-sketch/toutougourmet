@@ -1,0 +1,24 @@
+# Claude Code Remote Control for Toutou Gourmet (pilot from the iPhone).
+# Runs inside a detached tmux session so the CLI has a terminal, and
+# restarts on crash or reboot. Attach with: tmux attach -t toutou-rc
+# Install: sudo cp deploy/claude-remote-control.service /etc/systemd/system/
+#          sudo systemctl daemon-reload && sudo systemctl enable claude-remote-control
+[Unit]
+Description=Claude Code Remote Control (Toutou Gourmet)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=forking
+User=administrator
+WorkingDirectory=/home/administrator/Toutou
+Environment=HOME=/home/administrator
+Environment=LANG=C.UTF-8
+Environment=PATH=/home/administrator/.local/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/usr/bin/tmux new-session -d -s toutou-rc "while true; do claude remote-control --name 'Toutou Gourmet' --spawn same-dir --permission-mode acceptEdits; sleep 5; done"
+ExecStop=/usr/bin/tmux kill-session -t toutou-rc
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
