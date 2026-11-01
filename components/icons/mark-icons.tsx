@@ -1,6 +1,6 @@
 import { Svg, type IconProps } from './Svg'
 
-// Marques de verdict (oui / danger / modération), étincelle décorative et chevron.
+// Marques de verdict (oui / danger / modération), étincelle décorative, fermer et chevron.
 
 export function IconCheck(props: IconProps) {
   return (
@@ -35,6 +35,14 @@ export function IconSparkle(props: IconProps) {
     <Svg {...props}>
       <path className="fill-amber" d="M10 2.5Q11.8 7.2 16.5 9 11.8 10.8 10 15.5 8.2 10.8 3.5 9 8.2 7.2 10 2.5Z" />
       <path className="fill-orange" d="M17.5 13Q18.4 15.6 21 16.5 18.4 17.4 17.5 20 16.6 17.4 14 16.5 16.6 15.6 17.5 13Z" />
+    </Svg>
+  )
+}
+
+export function IconClose(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="m6.5 6.5 11 11M17.5 6.5l-11 11" strokeWidth={2.2} />
     </Svg>
   )
 }

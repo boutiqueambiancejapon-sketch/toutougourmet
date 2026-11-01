@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Link from 'next/link'
 import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
 import { ArticleTile, articleHref } from '@/components/article/ArticleTile'
 import { VerdictBoard } from '@/components/article/VerdictBoard'
@@ -9,6 +8,7 @@ import { getArticlesByCategory, type Article } from '@/lib/mdx'
 import { getFoodVerdicts } from '@/lib/food-verdicts'
 import { getPillar } from '@/data/pillars'
 import { PillarIntro, PillarFaqAndSources } from '@/components/pillar/PillarSections'
+import { RubricRows } from '@/components/pillar/RubricRows'
 
 // @cdc 04-pages — page pilier V2 d'une rubrique : en-tête, verdicts (rubriques aliments),
 // article à la une, grille d'articles, JSON-LD CollectionPage + ItemList. Les URL ne changent pas.
@@ -73,27 +73,24 @@ export default async function CategoryPage({ params }: Props) {
       <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Guides', href: '/chien' }, { label: cat.label }]} />
 
       <header className="flex max-w-prose flex-col gap-3">
-        <span className="self-start rounded-pill bg-amber px-3.5 py-1.5 text-sm font-semibold text-amber-ink">
-          <span aria-hidden="true">{cat.emoji} </span>
-          {articles.length} guide{articles.length > 1 ? 's' : ''}
-        </span>
         <h1 className="m-0 font-display text-[clamp(1.9rem,3.6vw,2.6rem)] font-black leading-[1.08] tracking-tight text-ink">{cat.label}</h1>
         <p className="m-0 text-lg leading-relaxed text-ink-2">{cat.description}</p>
+        <p className="m-0 text-sm text-ink-2">
+          {articles.length} guide{articles.length > 1 ? 's' : ''} dans cette rubrique, du plus récent au plus ancien.
+        </p>
       </header>
 
       {subSlugs.length > 0 ? (
-        <nav aria-label="Sous-rubriques" className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-          {subSlugs.map((slug) => {
-            const sub = getCategoryBySlug(slug)
-            return (
-              <Link key={slug} href={`/chien/${slug}`} className="flex flex-col gap-1 rounded-card border border-line bg-paper p-5 text-ink no-underline hover:border-ink">
-                <span aria-hidden="true" className="text-2xl">{sub?.emoji}</span>
-                <span className="font-semibold">{sub?.label ?? slug}</span>
-                <span className="text-sm text-ink-2">{getArticlesByCategory(slug).length} guides</span>
-              </Link>
-            )
-          })}
-        </nav>
+        <RubricRows
+          label="Sous-rubriques"
+          columns={3}
+          rows={subSlugs.map((slug) => ({
+            slug,
+            href: `/chien/${slug}`,
+            label: getCategoryBySlug(slug)?.label ?? slug,
+            count: getArticlesByCategory(slug).length,
+          }))}
+        />
       ) : null}
 
       {foods.length > 0 ? (

@@ -1,12 +1,13 @@
 import Link from 'next/link'
 import type { FoodVerdict } from '@/lib/food-verdicts'
+import { VerdictIcon } from '@/components/icons'
 
 // @cdc seo-geo §6.4 — aliments classés par verdict (danger / modération / oui), chacun vers son guide.
 // Utilisé par les pages race et les pages piliers aliments.
-const GROUPS: { verdict: FoodVerdict['verdict']; title: string; tone: string; mark: string }[] = [
-  { verdict: 'danger', title: 'Dangereux', tone: 'bg-rose-bg', mark: '✕' },
-  { verdict: 'moderation', title: 'Avec modération', tone: 'bg-amber-bg', mark: '!' },
-  { verdict: 'oui', title: 'Autorisés', tone: 'bg-green-bg', mark: '✓' },
+const GROUPS: { verdict: FoodVerdict['verdict']; title: string; tone: string }[] = [
+  { verdict: 'danger', title: 'Dangereux', tone: 'bg-rose-bg' },
+  { verdict: 'moderation', title: 'Avec modération', tone: 'bg-amber-bg' },
+  { verdict: 'oui', title: 'Autorisés', tone: 'bg-green-bg' },
 ]
 
 export function VerdictBoard({ foods, max = 18 }: { foods: FoodVerdict[]; max?: number }) {
@@ -17,9 +18,10 @@ export function VerdictBoard({ foods, max = 18 }: { foods: FoodVerdict[]; max?: 
         if (items.length === 0) return null
         return (
           <div key={g.verdict} className={`flex flex-col gap-2 rounded-box p-4 ${g.tone}`}>
-            <h3 className="m-0 text-sm font-semibold uppercase tracking-wider text-ink">
-              <span aria-hidden="true">{g.mark} </span>
-              {g.title} ({items.length})
+            <h3 className="m-0 flex items-center gap-2 text-[15px] font-semibold text-ink">
+              <VerdictIcon verdict={g.verdict} className="size-5" />
+              {g.title}
+              <span className="font-normal text-ink-2">{items.length}</span>
             </h3>
             <ul role="list" className="m-0 flex list-none flex-wrap gap-1.5 p-0">
               {items.map((f) => (
