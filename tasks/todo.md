@@ -81,6 +81,6 @@ Référence visuelle : prototype navigable https://claude.ai/artifact/JP6w3gr8vX
 - [ ] Recette complète sur la preview `v2`
 - [ ] Merge `v2` → production, contrôle des redirections et de Search Console
 - [x] VPS one.com prêt (Caddy 2.6.2, Node 22, PostgreSQL 18, ufw 22/80/443)
-- [ ] `setup-server.sh`, deploy key, premier build sur le VPS
+- [x] `setup-server.sh`, deploy key, premier build sur le VPS (2026-11-01, branche v2, HTTP 200 en local)
 - [ ] Mettre Caddy à jour (dépôt officiel) avant la bascule
 - [ ] Bascule DNS + secrets GitHub + `VPS_DEPLOY=true`

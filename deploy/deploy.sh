@@ -44,7 +44,7 @@ sudo /usr/bin/systemctl restart toutou-web
 
 # Contrôle : le site répond sur le port local
 for i in $(seq 1 30); do
-  if curl -fsS -o /dev/null http://127.0.0.1:3000/; then
+  if curl -fs -o /dev/null http://127.0.0.1:3000/; then
     echo "✓ En ligne : $SHA"
     break
   fi
