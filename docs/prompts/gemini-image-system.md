@@ -209,7 +209,7 @@ Appel via `@google/generative-ai` → `gemini-2.5-flash-image-preview` avec `res
 
 ## 8. Processus d'itération
 
-1. Génère **3 variantes** par slot (seed différent) lors du premier run
-2. Revue humaine → on choisit 1 variante par slot
-3. Si aucune variante ne passe : ajuster `composition` / `decorations` du slot, **jamais** le prompt système (sinon cohérence perdue)
+1. Génère **1 variante** par slot (décision du propriétaire, 2026-11-01 : limiter les coûts)
+2. Revue humaine → l'image est validée ou refusée ; une seule nouvelle génération par refus
+3. Si deux générations ne passent pas : ajuster `composition` / `decorations` du slot, **jamais** le prompt système (sinon cohérence perdue)
 4. Le prompt système évolue uniquement par PR dédiée avec regénération **complète**

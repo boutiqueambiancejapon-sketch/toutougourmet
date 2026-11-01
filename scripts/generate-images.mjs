@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Génère des images de marque avec Gemini (docs/prompts/gemini-image-system.md).
-// Usage : node scripts/generate-images.mjs <jobs.json> [--variants 3] [--model gemini-3.1-flash-image] [--out dir]
+// Usage : node scripts/generate-images.mjs <jobs.json> [--variants 1] [--model gemini-3.1-flash-image] [--out dir]
 // jobs.json : [{ "slot": "art-…", "subject": "…", "composition": "…", "decorations": ["…"], "tone": "rose", "ratio": "3:2" }]
 // La clé est lue dans ~/.config/toutou/gemini.env (GEMINI_API_KEY=…), jamais dans le dépôt.
 // Sortie : <out>/<slot>-<n>.webp (1600 px de large, WebP 85) pour la revue humaine (§8 du prompt).
@@ -16,10 +16,10 @@ const opt = (name, fallback) => {
 }
 const jobsFile = args.find((a) => !a.startsWith('--') && !args[args.indexOf(a) - 1]?.startsWith('--'))
 if (!jobsFile) {
-  console.error('Usage : node scripts/generate-images.mjs <jobs.json> [--variants 3] [--model …] [--out dir]')
+  console.error('Usage : node scripts/generate-images.mjs <jobs.json> [--variants 1] [--model …] [--out dir]')
   process.exit(1)
 }
-const VARIANTS = Number(opt('variants', '3'))
+const VARIANTS = Number(opt('variants', '1'))
 const MODEL = opt('model', 'gemini-3.1-flash-image')
 const OUT = opt('out', path.join(homedir(), 'toutou-preview/current/public/maquettes-img'))
 
