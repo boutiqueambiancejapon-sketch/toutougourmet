@@ -66,8 +66,10 @@ Décision : même infra que le boulot (DECISIONS.md, « V2 — mode de travail �
 - GitHub, branche de prod `claude/toutou-gourmet-setup-3mRbP` : V1 en ligne sur Vercel ; la tâche planifiée cloud y pousse 2 articles réécrits par jour.
 - VPS one.com de Toutou : `/srv/toutou` (utilisateur `toutou`, `releases/` + `current`, service `toutou-web`, PostgreSQL base `toutou`, sauvegarde à 3 h 15). Caddy n'est pas encore configuré pour Toutou.
 
+Serveur et dossier : le propriétaire travaille sur « VPS - Mathias » (nom dans Termius). Le projet vit dans un dossier « Toutou Gourmet », à côté des autres projets, comme ceux du boulot. À vérifier d'abord : ce serveur est-il celui où `/srv/toutou` a été installé (one.com Cloud Server M, `ls /srv/toutou`) ? Sinon, refaire `deploy/setup-server.sh` sur VPS - Mathias, et le serveur one.com ne sert plus.
+
 Étapes, dans l'ordre :
-1. Installer Claude Code sur le VPS de Toutou et lancer `claude remote-control` comme service systemd, dans un dossier de travail distinct de `releases/` et `current/`, avec le compte Claude du propriétaire. Autorisations : modifications de fichiers acceptées, commandes sensibles (redémarrage de la prod, base de données) sur demande.
+1. Installer Claude Code sur le VPS de Toutou (s'il n'y est pas déjà) et lancer `claude remote-control` comme service systemd, dans le dossier du projet (« Toutou Gourmet »), distinct de `releases/` et `current/`, avec le compte Claude du propriétaire. Autorisations : modifications de fichiers acceptées, commandes sensibles (redémarrage de la prod, base de données) sur demande.
 2. Cloner le dépôt dans ce dossier avec un accès en écriture à GitHub (la deploy key actuelle est en lecture seule), branches `v2` et prod. À partir de là, plus aucune session cloud ne pousse sur le dépôt.
 3. Préversion : construire la V2 et la servir sur une adresse publique protégée et `noindex` (Caddy + `sslip.io`, comme sur l'infra du boulot), pour la vérifier depuis l'iPhone.
 4. Tâche des 2 articles par jour : la refaire en minuterie systemd sur le serveur, avec la même consigne que la tâche cloud « Toutou Gourmet · réécriture SEO 2 articles/jour » (tâches planifiées du compte, 3 h 47 heure de Bruxelles). Le jour où la minuterie tourne, désactiver la tâche cloud.
