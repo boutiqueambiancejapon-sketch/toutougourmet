@@ -8,5 +8,5 @@ Organisation : un agent par chantier dans sa propre copie du projet ; à la fin 
 
 | Heure (Bruxelles) | Étape | État |
 |---|---|---|
-| 01:05 | Lancement : passe globale anti-IA (code) et titres « Ce que… » (contenu), en parallèle | en cours |
+| 00:20 | Lancement : passe globale anti-IA (code) et titres « Ce que… » (contenu), en parallèle | en cours |
 | — | Ménage des marques (Petty Well, Dogfy, Fidelis), lancé plus tôt | en cours |
