@@ -20,8 +20,8 @@
 - [x] `chien-peut-manger-mures` · fruit · màj 2026-03-07 · réécrit 2026-10-30
 - [x] `chien-peut-manger-myrtilles` · fruit · màj 2026-03-07 · réécrit 2026-10-31
 - [x] `chien-peut-manger-peches` · fruit · màj 2026-03-07 · réécrit 2026-10-31
-- [ ] `chien-peut-manger-poires` · fruit · màj 2026-03-07
-- [ ] `chien-peut-manger-mangue` · fruit · màj 2026-03-12
+- [x] `chien-peut-manger-poires` · fruit · màj 2026-03-07 · réécrit 2026-11-01
+- [x] `chien-peut-manger-mangue` · fruit · màj 2026-03-12 · réécrit 2026-11-01
 - [ ] `chien-peut-manger-banane` · fruit · màj 2026-04-16
 - [ ] `chien-peut-manger-cerises` · fruit · màj 2026-05-28
 - [ ] `chien-peut-manger-kiwi` · fruit · màj 2026-06-11
