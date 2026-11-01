@@ -8,6 +8,7 @@ export interface FoodVerdict {
   label: string
   href: string
   verdict: 'oui' | 'moderation' | 'danger'
+  categorySlug: string
 }
 
 const URGENCY = /^Ton chien a \S+ (?:du |de la |de l'|des |un |une |d')(.+?)\s*\?$/
@@ -35,7 +36,7 @@ export function getFoodVerdicts(): FoodVerdict[] {
     const label = foodLabel(ogTitle)
     if (!label || seen.has(label.toLowerCase())) continue
     seen.add(label.toLowerCase())
-    foods.push({ label, href: `/chien/${categorySlug}/${a.slug}`, verdict })
+    foods.push({ label, href: `/chien/${categorySlug}/${a.slug}`, verdict, categorySlug })
   }
   return foods.sort((x, y) => x.label.localeCompare(y.label, 'fr'))
 }
