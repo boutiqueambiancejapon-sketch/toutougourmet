@@ -27,6 +27,8 @@
 
 - [x] **SEO V2 — une page par question, fan-out IA (2026-10-28)** : pas de migration d'URL, les articles existants sont enrichis sur place. Chaque page couvre les sous-questions du fan-out (chien, aliment, quantité, situation, pourquoi, alternatives) avec un tableau par gabarit qui nomme des races. Pas de pages « [race] peut-il manger [X] » en masse (risque scaled content abuse + cannibalisation) : page dédiée seulement si facteur de race documenté et demande mesurée. Réécriture de 2 articles existants par jour via tâche planifiée, file `docs/seo-rewrite-queue.md`.
 
+- [x] **V2 — infra (2026-11-01)** : V2 construite sur la branche `v2`, hébergée sur Vercel (plan Pro) avec Neon Postgres UE, Better Auth, Cloudflare R2 UE, Brevo, Vercel Cron. Aucun service propre à Vercel (KV, Blob, Edge Config) pour pouvoir migrer plus tard vers VPS OVH + Coolify en changeant seulement les variables d'environnement. Le VPS est reporté. Plan détaillé : `tasks/todo.md`.
+
 ## À valider
 
 - [ ] DM_Sans : 3 weights chargés (400, 500, 600) — CDC impose max 2 — supprimer 500 ou 600 ?
