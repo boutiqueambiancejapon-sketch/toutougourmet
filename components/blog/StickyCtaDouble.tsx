@@ -1,7 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { StickyBar, STICKY_BUTTON } from './StickyBar'
 
+// @cdc 04-pages — bandeau collant à deux marques : sur mobile, deux boutons côte à côte sur une
+// seule ligne ; l'accroche et la preuve n'apparaissent qu'à partir de md.
 interface CtaBrand {
   label: string
   href: string
@@ -11,100 +13,32 @@ interface StickyCtaDoubleProps {
   brandA: CtaBrand
   brandB: CtaBrand
   eyebrow?: string
-  /** Ligne sous l'eyebrow — affichée uniquement en lg+ pour ne pas surcharger mobile */
+  /** Ligne sous l'accroche — affichée uniquement en lg+ pour ne pas surcharger */
   subProof?: string
 }
 
-export function StickyCtaDouble({
-  brandA,
-  brandB,
-  eyebrow,
-  subProof,
-}: StickyCtaDoubleProps) {
-  const [dismissed, setDismissed] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  // Le bandeau n'apparaît qu'une fois l'en-tête de l'article dépassé (il cachait le début)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 80)
-      setVisible((v) => v || window.scrollY > 700)
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  if (dismissed || !visible) return null
-
+export function StickyCtaDouble({ brandA, brandB, eyebrow, subProof }: StickyCtaDoubleProps) {
   return (
-    <div className="fixed bottom-[calc(var(--tabbar-h)+env(safe-area-inset-bottom))] md:bottom-0 left-0 right-0 z-30 px-4 pb-4 pointer-events-none">
-      <div
-        className={[
-          'max-w-[720px] mx-auto rounded-[var(--radius-xl)] border shadow-[var(--shadow-xl)] pointer-events-auto transition-all duration-500',
-          scrolled
-            ? 'backdrop-blur-xl bg-white/10 border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.12)]'
-            : 'border-[var(--border)]',
-        ].join(' ')}
-        style={scrolled ? {} : { background: 'var(--bg-dark)' }}
-      >
-        {/* Header : eyebrow + sub-proof (lg+) + close */}
-        <div className="flex items-start gap-3 px-4 pt-3 pb-1">
-          {(eyebrow || subProof) && (
-            <div className="hidden sm:block flex-1 min-w-0">
-              {eyebrow && (
-                <p
-                  className={`text-sm font-semibold leading-snug transition-colors duration-500 ${
-                    scrolled ? 'text-[var(--text-secondary)]' : ''
-                  }`}
-                  style={scrolled ? {} : { color: 'var(--text-on-dark)' }}
-                >
-                  {eyebrow}
-                </p>
-              )}
-              {subProof && (
-                <p
-                  className={`hidden lg:block text-xs leading-snug mt-0.5 transition-colors duration-500`}
-                  style={scrolled ? { color: 'var(--text-muted)' } : { color: 'var(--text-muted)', opacity: 0.85 }}
-                >
-                  {subProof}
-                </p>
-              )}
-            </div>
-          )}
-          <button
-            onClick={() => setDismissed(true)}
-            aria-label="Fermer"
-            className={`ml-auto shrink-0 transition-colors text-lg leading-none ${
-              scrolled
-                ? 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
-                : 'text-[var(--text-muted)] hover:text-[var(--text-on-dark)]'
-            }`}
-          >
-            ✕
-          </button>
+    <StickyBar>
+      {eyebrow || subProof ? (
+        <div className="hidden min-w-0 flex-1 md:block">
+          {eyebrow ? <p className="m-0 truncate text-sm font-semibold leading-snug text-cream">{eyebrow}</p> : null}
+          {subProof ? <p className="m-0 mt-0.5 hidden truncate text-xs leading-snug text-cream/70 lg:block">{subProof}</p> : null}
         </div>
-
-        {/* CTAs — empilés sur mobile, côte à côte sm+ */}
-        <div className="flex flex-col sm:flex-row gap-2 px-4 pb-4">
-          <a
-            href={brandA.href}
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            className="btn-primary text-sm px-4 py-2.5 text-center flex-1"
-          >
-            {brandA.label} →
-          </a>
-          <a
-            href={brandB.href}
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            className="btn-outline text-sm px-4 py-2.5 text-center flex-1"
-          >
-            {brandB.label} →
-          </a>
-        </div>
+      ) : null}
+      <div className="flex min-w-0 flex-1 gap-2 md:flex-none">
+        <a href={brandA.href} target="_blank" rel="noopener noreferrer sponsored" className={`${STICKY_BUTTON} min-w-0 flex-1 md:flex-none`}>
+          <span className="truncate">{brandA.label}</span>
+        </a>
+        <a
+          href={brandB.href}
+          target="_blank"
+          rel="noopener noreferrer sponsored"
+          className="inline-flex min-h-10 min-w-0 flex-1 items-center justify-center whitespace-nowrap rounded-control border border-cream/40 px-3.5 text-sm font-semibold text-cream no-underline hover:border-cream md:flex-none md:px-4"
+        >
+          <span className="truncate">{brandB.label}</span>
+        </a>
       </div>
-    </div>
+    </StickyBar>
   )
 }
