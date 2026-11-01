@@ -18,8 +18,11 @@ export function resolveSlot(id: string): ImageSlot | undefined {
  * (2026-11-01), pas de génération payante pour eux. Les covers des autres rubriques sont exclues
  * (elles illustrent un sujet précis).
  */
+/** Portraits exclus de la réserve : défaut visible (texte écrit dans l'image). */
+const POOL_EXCLUDED = new Set(['breed-berger-de-beauce'])
+
 const NEUTRAL_POOL: readonly string[] = imageSlots
-  .filter((s) => s.imageReady && s.group === 'breeds')
+  .filter((s) => s.imageReady && s.group === 'breeds' && !POOL_EXCLUDED.has(s.id))
   .map((s) => s.id)
 
 /** Hash FNV-1a d'un slug : même article → même image à chaque build. */
