@@ -15,7 +15,7 @@ interface DualBrandCTAProps {
 export function DualBrandCTA({ brandA, brandB }: DualBrandCTAProps) {
   return (
     <div className="p-4 bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] mb-8">
-      <div className="grid grid-cols-2 gap-3 mb-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
         {[brandA, brandB].map((brand) => (
           <div key={brand.name} className="flex flex-col items-center gap-1.5">
             <a

@@ -441,7 +441,7 @@ function VsPage({ brandA, brandB }: { brandA: Brand; brandB: Brand }) {
           </div>
 
           {/* Scores côte à côte */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[brandA, brandB].map((brand, i) => {
               const accent = i === 0 ? accentA : accentB
               return (
