@@ -47,7 +47,6 @@ export function Illustration({
   fill = false,
   sizes = DEFAULT_SIZES,
   className,
-  overlayIntensity = 'normal',
 }: IllustrationProps) {
   // Résolution : manifest principal, puis registre additionnel
   // (data/extra-image-slots.ts) pour les slots featured déclarés hors du gros
@@ -102,12 +101,11 @@ export function Illustration({
       ) : (
         <IllustratedPlaceholder variant={variant} tone={slot.tone} />
       )}
-      <DecorativeOverlay
-        tone={slot.tone}
-        decorations={slot.decorations}
-        hasImage={hasRealImage}
-        intensity={hasRealImage ? overlayIntensity : 'normal'}
-      />
+      {/* Les images générées portent déjà leurs décorations dessinées (prompt de marque) :
+          la surcouche ne sert qu'aux placeholders, sinon le chapeau ou les confettis s'affichent deux fois. */}
+      {hasRealImage ? null : (
+        <DecorativeOverlay tone={slot.tone} decorations={slot.decorations} hasImage={false} intensity="normal" />
+      )}
     </div>
   )
 }
