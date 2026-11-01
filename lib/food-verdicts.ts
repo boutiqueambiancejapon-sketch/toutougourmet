@@ -10,18 +10,32 @@ export interface FoodVerdict {
   verdict: 'oui' | 'moderation' | 'danger'
 }
 
-/** « Poire : ton chien peut en manger ? » → « Poire » */
-function foodLabel(ogTitle: string): string {
-  return ogTitle.split(/\s*:\s*/)[0].trim()
+const URGENCY = /^Ton chien a \S+ (?:du |de la |de l'|des |un |une |d')(.+?)\s*\?$/
+
+/**
+ * Nom de l'aliment tiré du titre de miniature, ou null si le titre n'en nomme pas un seul :
+ * « Poire : ton chien peut en manger ? » → « Poire » ;
+ * « Ton chien a mangé du raisin ? » → « Raisin ».
+ */
+function foodLabel(ogTitle: string): string | null {
+  const urgency = URGENCY.exec(ogTitle)
+  const raw = urgency ? urgency[1] : ogTitle.includes(':') ? ogTitle.split(/\s*:\s*/)[0] : null
+  if (!raw) return null
+  const label = raw.trim().replace(/ ou (?:du |de la |de l'|des )/, ' ou ')
+  return label.charAt(0).toUpperCase() + label.slice(1)
 }
 
 export function getFoodVerdicts(): FoodVerdict[] {
-  return getAllArticles()
-    .filter((a) => a.slug.includes('peut-manger') && a.frontmatter.verdict && a.frontmatter.ogTitle && a.frontmatter.categorySlug)
-    .map((a) => ({
-      label: foodLabel(a.frontmatter.ogTitle as string),
-      href: `/chien/${a.frontmatter.categorySlug}/${a.slug}`,
-      verdict: a.frontmatter.verdict as FoodVerdict['verdict'],
-    }))
-    .sort((x, y) => x.label.localeCompare(y.label, 'fr'))
+  const seen = new Set<string>()
+  const foods: FoodVerdict[] = []
+  for (const a of getAllArticles()) {
+    const { verdict, ogTitle, categorySlug } = a.frontmatter
+    if (!verdict || !ogTitle || !categorySlug) continue
+    if (!a.slug.includes('peut-manger') && categorySlug !== 'urgences') continue
+    const label = foodLabel(ogTitle)
+    if (!label || seen.has(label.toLowerCase())) continue
+    seen.add(label.toLowerCase())
+    foods.push({ label, href: `/chien/${categorySlug}/${a.slug}`, verdict })
+  }
+  return foods.sort((x, y) => x.label.localeCompare(y.label, 'fr'))
 }

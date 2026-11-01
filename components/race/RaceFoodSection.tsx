@@ -8,7 +8,7 @@ import type { FoodVerdict } from '@/lib/food-verdicts'
 export const RACE_FOOD_ID = 'que-peut-manger'
 
 const GROUPS: { verdict: FoodVerdict['verdict']; title: string; max: number; tone: string; mark: string }[] = [
-  { verdict: 'danger', title: 'À ne jamais lui donner', max: 12, tone: 'bg-rose-bg', mark: '✕' },
+  { verdict: 'danger', title: 'Dangereux pour lui', max: 18, tone: 'bg-rose-bg', mark: '✕' },
   { verdict: 'moderation', title: 'Avec modération', max: 10, tone: 'bg-amber-bg', mark: '!' },
   { verdict: 'oui', title: 'Autorisés', max: 14, tone: 'bg-green-bg', mark: '✓' },
 ]

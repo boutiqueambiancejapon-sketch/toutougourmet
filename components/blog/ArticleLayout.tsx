@@ -53,14 +53,14 @@ export function ArticleLayout({
   const breed = getBreedForArticle(slug)
   const toc = [
     ...(tldrItems.length > 0 ? [{ id: TLDR_ID, text: "L'essentiel" }] : []),
-    ...extractToc(article.rawContent).filter((item) => !/^tl;?dr$/i.test(item.text)),
     ...(breed
       ? [
           { id: RACE_FOOD_ID, text: raceFoodHeading(breed) },
           ...(breed.health.length > 0 ? [{ id: RACE_HEALTH_ID, text: 'Points de vigilance' }] : []),
-          { id: RACE_NEAR_ID, text: 'Races proches' },
+          ...(breed.near.length > 0 ? [{ id: RACE_NEAR_ID, text: 'Races proches' }] : []),
         ]
       : []),
+    ...extractToc(article.rawContent).filter((item) => !/^tl;?dr$/i.test(item.text)),
   ]
 
   return (
@@ -86,7 +86,6 @@ export function ArticleLayout({
                 <TLDR items={tldrItems} />
               </div>
             ) : null}
-            <div className="mdx-content mt-6">{children}</div>
             {breed ? (
               <>
                 <RaceFoodSection breed={breed} foods={getFoodVerdicts()} />
@@ -94,6 +93,7 @@ export function ArticleLayout({
                 <RaceNear breed={breed} />
               </>
             ) : null}
+            <div className="mdx-content mt-6">{children}</div>
             <SummarizeWithAI title={frontmatter.title} url={canonicalUrl} domain="toutou-gourmet.com" />
             <AuthorBox author={DEFAULT_AUTHOR} />
             <RelatedArticles currentSlug={currentSlug ?? slug} categorySlug={catSlug} allArticles={allArticles} />
