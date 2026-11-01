@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   // layout racine s'appliquerait. En V1 il ne s'appliquait pas (même segment) : on garde ce titre.
   title: { absolute: 'Toutou Gourmet : bien nourrir son chien, calculs et guides' },
   description:
-    'Ce que ton chien peut manger et en quelle quantité, race par race. Plus de 350 guides sourcés et des calculateurs gratuits.',
+    'Ration en grammes et aliments à éviter, race par race : plus de 350 guides sourcés et des calculateurs gratuits pour nourrir ton chien.',
   alternates: { canonical: 'https://www.toutou-gourmet.com' },
 }
 

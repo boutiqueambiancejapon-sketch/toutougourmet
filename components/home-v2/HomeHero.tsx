@@ -18,7 +18,7 @@ export function HomeHero({ guides, breeds, foods }: HomeHeroProps) {
     <section className="v2 grid grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-12">
       <div className="order-2 flex flex-col gap-5 lg:order-1">
         <h1 className="m-0 font-display text-[clamp(2.4rem,5.2vw,4rem)] font-black leading-[1.02] tracking-tight text-ink">
-          Ce que mange ton <span className="rounded-box bg-rose px-2">chien</span>, calculé pour lui.
+          Bien nourrir ton <span className="rounded-box bg-rose px-2">chien</span>, chiffres à l&apos;appui.
         </h1>
         <p className="m-0 max-w-[560px] text-lg leading-relaxed text-ink-2">
           Combien de grammes lui donner, et quels aliments éviter. <strong className="text-ink">Chaque chiffre renvoie à sa source.</strong>

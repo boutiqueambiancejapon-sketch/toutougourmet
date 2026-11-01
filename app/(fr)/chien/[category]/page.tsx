@@ -98,7 +98,7 @@ export default async function CategoryPage({ params }: Props) {
 
       {foods.length > 0 ? (
         <section aria-labelledby="verdicts" className="flex flex-col gap-3">
-          <h2 id="verdicts" className="m-0 font-display text-2xl font-black text-ink">{"Ce qu'il peut manger, aliment par aliment"}</h2>
+          <h2 id="verdicts" className="m-0 font-display text-2xl font-black text-ink">Le verdict, aliment par aliment</h2>
           <VerdictBoard foods={foods} max={60} />
         </section>
       ) : null}

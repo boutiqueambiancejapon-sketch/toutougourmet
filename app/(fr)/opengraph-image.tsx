@@ -6,7 +6,7 @@ import { OG_SIZE } from '@/lib/og/tokens'
 // @cdc 06-seo — miniature de l'accueil, reprise par les pages françaises sans miniature propre
 export const size = OG_SIZE
 export const contentType = 'image/jpeg'
-export const alt = 'Toutou Gourmet : ce que mange ton chien, calculé pour lui'
+export const alt = "Toutou Gourmet : bien nourrir ton chien, chiffres à l'appui"
 
 export default async function Image() {
   const [fonts, photo] = await Promise.all([
@@ -16,7 +16,7 @@ export default async function Image() {
   const png = new ImageResponse(
     (
       <VerdictCard
-        title="Ce que mange ton chien, calculé pour lui."
+        title="Bien nourrir ton chien, chiffres à l'appui."
         pill={{ label: 'Guides et outils gratuits', tone: 'amber' }}
         photo={photo}
       />
