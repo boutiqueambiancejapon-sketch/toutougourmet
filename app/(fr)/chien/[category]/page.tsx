@@ -7,6 +7,8 @@ import { VerdictBoard } from '@/components/article/VerdictBoard'
 import { categories, getCategoryBySlug } from '@/data/categories'
 import { getArticlesByCategory, type Article } from '@/lib/mdx'
 import { getFoodVerdicts } from '@/lib/food-verdicts'
+import { getPillar } from '@/data/pillars'
+import { PillarIntro, PillarFaqAndSources } from '@/components/pillar/PillarSections'
 
 // @cdc 04-pages — page pilier V2 d'une rubrique : en-tête, verdicts (rubriques aliments),
 // article à la une, grille d'articles, JSON-LD CollectionPage + ItemList. Les URL ne changent pas.
@@ -50,6 +52,7 @@ export default async function CategoryPage({ params }: Props) {
   const isFood = subSlugs.length > 0 || FOOD_CATEGORIES.has(category)
   const foods = isFood ? getFoodVerdicts().filter((f) => sourceSlugs.includes(f.categorySlug)) : []
   const [featured, ...rest] = articles
+  const pillar = getPillar(category)
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -77,6 +80,8 @@ export default async function CategoryPage({ params }: Props) {
         <h1 className="m-0 font-display text-[clamp(1.9rem,3.6vw,2.6rem)] font-black leading-[1.08] tracking-tight text-ink">{cat.label}</h1>
         <p className="m-0 text-lg leading-relaxed text-ink-2">{cat.description}</p>
       </header>
+
+      {pillar ? <PillarIntro pillar={pillar} /> : null}
 
       {subSlugs.length > 0 ? (
         <nav aria-label="Sous-rubriques" className="grid grid-cols-1 gap-3 sm:grid-cols-3">
@@ -114,6 +119,8 @@ export default async function CategoryPage({ params }: Props) {
           </ul>
         </section>
       ) : null}
+
+      {pillar ? <PillarFaqAndSources pillar={pillar} /> : null}
     </div>
   )
 }
