@@ -124,10 +124,15 @@ function pickDynamicTier(
 export function StickyCta({ config }: StickyCtaProps) {
   const [dismissed, setDismissed] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  // Le bandeau n'apparaît qu'une fois l'en-tête de l'article dépassé (il cachait le début)
+  const [visible, setVisible] = useState(false)
   const [dynData, setDynData] = useState<Record<string, number> | null>(null)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 80)
+      setVisible((v) => v || window.scrollY > 700)
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -160,7 +165,7 @@ export function StickyCta({ config }: StickyCtaProps) {
     }
   }, [config.dynamicSocialProof?.endpoint])
 
-  if (dismissed) return null
+  if (dismissed || !visible) return null
 
   // Internal route (/...) → no target=_blank, no sponsored rel
   const isInternal = config.url.startsWith('/')

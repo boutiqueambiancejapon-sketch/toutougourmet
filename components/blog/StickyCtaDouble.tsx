@@ -23,14 +23,19 @@ export function StickyCtaDouble({
 }: StickyCtaDoubleProps) {
   const [dismissed, setDismissed] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  // Le bandeau n'apparaît qu'une fois l'en-tête de l'article dépassé (il cachait le début)
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 80)
+      setVisible((v) => v || window.scrollY > 700)
+    }
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  if (dismissed) return null
+  if (dismissed || !visible) return null
 
   return (
     <div className="fixed bottom-[calc(var(--tabbar-h)+env(safe-area-inset-bottom))] md:bottom-0 left-0 right-0 z-50 px-4 pb-4 pointer-events-none">

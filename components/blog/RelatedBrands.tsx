@@ -13,13 +13,13 @@ const BRAND_PILL: Record<string, { pill: string; emoji: string }> = {
  * recommandées + CTA quiz. Les marques sont celles du site,
  * triées par note décroissante.
  */
-export function RelatedBrands() {
+export function RelatedBrands({ sticky = true }: { sticky?: boolean } = {}) {
   const top = [...brands]
     .sort((a, b) => b.scores.global - a.scores.global)
     .slice(0, 3)
 
   return (
-    <aside className="lg:sticky lg:top-[100px] lg:self-start">
+    <aside className={sticky ? 'lg:sticky lg:top-[100px] lg:self-start' : undefined}>
       <p className="text-xs font-bold uppercase tracking-widest text-[var(--accent-1)] mb-4">
         Recommandées pour ce profil
       </p>
