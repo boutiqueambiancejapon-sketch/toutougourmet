@@ -1,0 +1,973 @@
+<title>Toutou Gourmet App</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap">
+<style>
+/* Layout : un seul site, deux visages. Vue mobile = colonne façon app avec barre d'onglets ; vue ordinateur = en-tête de navigation et grilles larges. Charte Toutou Gourmet V1, un seul thème clair assumé. */
+:root {
+  --cream: #FAFAF8;
+  --cream-2: #F5F0EA;
+  --white: #FFFFFF;
+  --ink: #1A1109;
+  --ink-2: #4A3728;
+  --line: #E2D5C8;
+  --line-2: #C4A98A;
+  --orange: #E8622A;
+  --orange-ink: #B4441A;
+  --amber: #FFE8B5; --amber-bg: #FFF8E8; --amber-ink: #8B5A0F;
+  --rose: #FFD6E3; --rose-bg: #FFF0F5; --rose-ink: #8B1A4A;
+  --blue: #C8DCFF; --blue-bg: #EEF4FF; --blue-ink: #1A4E8B;
+  --green: #C2F0D5; --green-bg: #E8F5EE; --green-ink: #1A7A47; --green-strong: #4CAF7D;
+  --scrim: rgba(26, 17, 9, 0.45);
+  --display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --r-sm: 14px;
+  --r-lg: 24px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { background: var(--cream-2); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.5; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+img { max-width: 100%; }
+:focus-visible { outline: 3px solid var(--blue-ink); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 900; margin: 0; text-wrap: balance; letter-spacing: -0.02em; }
+p { margin: 0; }
+
+/* ---------- coquille du prototype ---------- */
+.shell { height: 100%; display: flex; flex-direction: column; }
+.protobar { display: flex; align-items: center; gap: 8px; padding: 8px max(12px, env(safe-area-inset-right, 0px)) 8px max(12px, env(safe-area-inset-left, 0px)); background: var(--ink); color: var(--cream); flex-wrap: wrap; }
+.protobar .pt { font-size: 13px; font-weight: 600; margin-right: auto; }
+.protobar .seg2 { display: flex; background: rgba(255,255,255,0.12); border-radius: 999px; padding: 3px; }
+.protobar .seg2 button { border: 0; background: none; color: var(--cream); padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; min-height: 34px; }
+.protobar .seg2 button[aria-pressed="true"] { background: var(--cream); color: var(--ink); }
+.protobar .pb { border: 1px solid rgba(255,255,255,0.3); background: none; color: var(--cream); padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; min-height: 34px; }
+.stage { flex: 1; min-height: 0; display: flex; justify-content: center; }
+.app { position: relative; width: 100%; height: 100%; background: var(--cream); display: flex; flex-direction: column; overflow: hidden; }
+@media (min-width: 600px) {
+  .shell.mob .stage { padding-block: 20px; }
+  .shell.mob .app { max-width: 430px; border-radius: 30px; border: 1px solid var(--line); }
+}
+.main { flex: 1; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; scroll-behavior: auto; }
+.screen { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 4px 40px; display: flex; flex-direction: column; gap: 22px; width: 100%; margin: 0 auto; }
+.desk .screen { max-width: 1160px; padding-left: max(32px, env(safe-area-inset-left, 0px)); padding-right: max(32px, env(safe-area-inset-right, 0px)); padding-block: 8px 64px; gap: 32px; }
+.desk .screen.narrow { max-width: 760px; }
+.d-only { display: none !important; }
+.desk .d-only { display: revert !important; }
+.desk .d-only.flex { display: flex !important; }
+.desk .m-only { display: none !important; }
+
+/* ---------- en-têtes ---------- */
+.topbar { position: sticky; top: 0; z-index: 5; background: var(--cream); display: flex; align-items: center; gap: 8px; min-height: 56px; padding-left: max(8px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.desk .topbar { position: static; max-width: 1160px; width: 100%; margin: 0 auto; padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(32px, env(safe-area-inset-right, 0px)); }
+.topbar .t { font-family: var(--display); font-weight: 700; font-size: 18px; flex: 1; }
+.iconbtn { width: 44px; height: 44px; border-radius: 12px; border: 0; background: none; font-size: 22px; display: grid; place-items: center; flex-shrink: 0; }
+.iconbtn:hover { background: var(--cream-2); }
+.brand { display: flex; align-items: center; gap: 8px; background: none; border: 0; padding: 0; }
+.brand .logo { width: 36px; height: 36px; border-radius: 11px; background: var(--amber); display: grid; place-items: center; font-size: 19px; }
+.brand .w { font-family: var(--display); font-weight: 900; font-size: 19px; white-space: nowrap; }
+.brand .w span { color: var(--orange); }
+.dhead { background: var(--cream); border-bottom: 1px solid var(--line); }
+.dhead-in { max-width: 1160px; margin: 0 auto; padding: 12px max(32px, env(safe-area-inset-right, 0px)) 12px max(32px, env(safe-area-inset-left, 0px)); display: flex; align-items: center; gap: 28px; }
+.dnav { display: flex; gap: 4px; flex: 1; }
+.dnav button { background: none; border: 0; padding: 10px 14px; border-radius: 12px; font-weight: 600; font-size: 15px; }
+.dnav button:hover { background: var(--cream-2); }
+.dnav button[aria-current="page"] { background: var(--amber); }
+
+/* ---------- barre d'onglets ---------- */
+.tabbar { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: end; background: var(--white); border-top: 1px solid var(--line); padding: 6px max(8px, env(safe-area-inset-right, 0px)) calc(8px + env(safe-area-inset-bottom, 0px)) max(8px, env(safe-area-inset-left, 0px)); }
+.tab { background: none; border: 0; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 4px 0; font-size: 11px; font-weight: 600; color: var(--ink-2); min-height: 52px; justify-content: flex-end; overflow: hidden; }
+.tab > span:last-child { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tab .ic { font-size: 21px; line-height: 1; width: 44px; height: 30px; display: grid; place-items: center; border-radius: 999px; }
+.tab[aria-current="page"] { color: var(--ink); }
+.tab[aria-current="page"] .ic { background: var(--amber); }
+.tab.fab .ic { width: 58px; height: 58px; border-radius: 20px; background: var(--orange); font-size: 26px; margin-top: -26px; border: 4px solid var(--cream); }
+.desk .tabbar, .desk .ctabar.m-cta { display: none; }
+
+/* ---------- composants ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 20px; border-radius: 16px; border: 0; font-weight: 600; font-size: 16px; text-decoration: none; white-space: nowrap; }
+.btn.primary { background: var(--orange); color: var(--ink); }
+.btn.dark { background: var(--ink); color: var(--cream); }
+.btn.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+.btn.soft { background: var(--white); color: var(--ink); border: 1px solid var(--line); }
+.btn.block { width: 100%; }
+.btn.sm { min-height: 44px; padding: 0 14px; font-size: 15px; border-radius: 14px; }
+.btn:active { transform: translateY(1px); }
+.link { background: none; border: 0; padding: 8px 0; color: var(--orange-ink); font-weight: 600; font-size: 15px; text-align: left; }
+.card { background: var(--white); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 18px; display: flex; flex-direction: column; gap: 12px; position: relative; overflow: hidden; }
+.card.amber { background: var(--amber-bg); border-color: transparent; }
+.card.rose { background: var(--rose-bg); border-color: transparent; }
+.card.blue { background: var(--blue-bg); border-color: transparent; }
+.card.green { background: var(--green-bg); border-color: transparent; }
+.card.orange { background: var(--orange); border-color: transparent; color: var(--ink); }
+.card.inkcard { background: var(--ink); border-color: transparent; color: var(--cream); }
+.wm { position: absolute; right: -10px; bottom: -18px; font-size: 96px; opacity: 0.16; pointer-events: none; line-height: 1; }
+.tile { width: 48px; height: 48px; border-radius: var(--r-sm); display: grid; place-items: center; font-size: 24px; flex-shrink: 0; background: var(--amber); }
+.tile.s { width: 36px; height: 36px; border-radius: 11px; font-size: 18px; }
+.tile.l { width: 64px; height: 64px; border-radius: 20px; font-size: 32px; }
+.tile.rose { background: var(--rose); } .tile.blue { background: var(--blue); } .tile.green { background: var(--green); } .tile.white { background: var(--white); }
+.row { display: flex; align-items: center; gap: 12px; }
+.row.top { align-items: flex-start; }
+.grow { flex: 1; min-width: 0; }
+.eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+.muted { color: var(--ink-2); font-size: 14px; }
+.small { font-size: 13px; }
+.big { font-family: var(--display); font-weight: 900; letter-spacing: -0.03em; line-height: 0.95; font-variant-numeric: tabular-nums; }
+.h-sec { font-size: 24px; }
+.desk .h-sec { font-size: 30px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; background: var(--white); border: 1px solid var(--line); white-space: nowrap; }
+button.chip { min-height: 36px; }
+.chip.amber { background: var(--amber); color: var(--amber-ink); border-color: transparent; }
+.chip.green { background: var(--green); color: var(--green-ink); border-color: transparent; }
+.chip.rose { background: var(--rose); color: var(--rose-ink); border-color: transparent; }
+.chip.blue { background: var(--blue); color: var(--blue-ink); border-color: transparent; }
+.chip.ink { background: var(--ink); color: var(--cream); border-color: transparent; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.seg { display: flex; flex-wrap: wrap; gap: 8px; }
+.seg button { min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--white); font-weight: 600; font-size: 15px; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+.list-btn { width: 100%; text-align: left; background: var(--white); border: 1px solid var(--line); border-radius: 20px; padding: 14px; display: flex; align-items: center; gap: 14px; position: relative; overflow: hidden; }
+.list-btn .chev { font-size: 22px; color: var(--ink-2); }
+.list-btn.amber { background: var(--amber-bg); border-color: transparent; }
+.list-btn.rose { background: var(--rose-bg); border-color: transparent; }
+.list-btn.blue { background: var(--blue-bg); border-color: transparent; }
+.list-btn.green { background: var(--green-bg); border-color: transparent; }
+.lb-t { font-family: var(--display); font-weight: 700; font-size: 17px; display: block; line-height: 1.2; }
+.lb-s { font-size: 14px; color: var(--ink-2); display: block; }
+
+.img { position: relative; border-radius: var(--r-lg); overflow: hidden; background: var(--cream-2); max-width: 100%; }
+.img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.ph { position: relative; border-radius: var(--r-lg); background: var(--cream-2); display: flex; align-items: flex-end; padding: 10px; overflow: hidden; max-width: 100%; }
+.ph.amber { background: var(--amber); } .ph.blue { background: var(--blue); } .ph.rose { background: var(--rose); } .ph.green { background: var(--green); }
+.ph .lbl { background: var(--white); border-radius: 999px; padding: 4px 10px; font-size: 11px; font-weight: 600; position: relative; }
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label, .field .fl { font-size: 14px; font-weight: 600; }
+.input { min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--white); font-size: 16px; width: 100%; }
+.input:focus { border-color: var(--ink); outline: none; }
+.stepper { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.stepper button { width: 56px; height: 56px; border-radius: 18px; border: 0; background: var(--white); font-size: 26px; font-weight: 600; box-shadow: inset 0 0 0 1.5px var(--line); flex-shrink: 0; }
+.progress { height: 8px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.progress > span { display: block; height: 100%; background: var(--orange); border-radius: 999px; transition: width .3s ease; }
+.bar { height: 10px; border-radius: 999px; background: var(--line); overflow: hidden; }
+.bar > span { display: block; height: 100%; border-radius: 999px; }
+.check { display: flex; align-items: center; gap: 12px; width: 100%; background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 12px 14px; text-align: left; min-height: 60px; }
+.check .box { width: 28px; height: 28px; border-radius: 9px; border: 2px solid var(--line-2); display: grid; place-items: center; font-size: 16px; flex-shrink: 0; color: var(--white); }
+.check[aria-pressed="true"] .box { background: var(--green-strong); border-color: var(--green-strong); }
+.check[aria-pressed="true"] .ct { text-decoration: line-through; color: var(--ink-2); }
+.partner { border: 1.5px dashed var(--line-2) !important; background: var(--white) !important; }
+.tag-partner { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+
+/* ---------- grilles responsives ---------- */
+.split { display: grid; gap: 22px; }
+.desk .split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+.desk .split.wide-left { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+.g2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.desk .g2.to4 { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.desk .g2.to3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.stack { display: flex; flex-direction: column; gap: 10px; }
+.desk .stack.to2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.arts { display: flex; flex-direction: column; gap: 16px; }
+.desk .arts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.hscroll { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+.hscroll::-webkit-scrollbar { display: none; }
+.desk .hscroll.to-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; overflow: visible; }
+.desk .hscroll.to-grid > * { width: auto !important; }
+
+/* ---------- accueil ---------- */
+.hero { position: relative; }
+.hero-img { position: relative; height: 230px; margin: 0 calc(-1 * max(16px, env(safe-area-inset-left, 0px))); overflow: hidden; }
+.hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(250,250,248,0) 40%, rgba(250,250,248,0.85) 85%, var(--cream) 100%); }
+.blob { position: absolute; border-radius: 50%; filter: blur(40px); opacity: .35; pointer-events: none; }
+.hero-txt { position: relative; margin-top: -48px; display: flex; flex-direction: column; gap: 16px; }
+.desk .hero-wrap { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 48px; align-items: center; padding-top: 24px; }
+.desk .hero-img { margin: 0; height: 440px; border-radius: 32px; order: 2; }
+.desk .hero-img::after { display: none; }
+.desk .hero-txt { margin-top: 0; }
+.h1hero { font-size: 40px; line-height: 1.02; }
+.desk .h1hero { font-size: 64px; }
+.hl { display: inline-block; background: var(--rose); border-radius: 16px; padding: 0 12px 4px; line-height: 1; }
+.stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding-top: 18px; border-top: 1px solid var(--line); }
+.desk .stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.stats .v { font-family: var(--display); font-weight: 900; font-size: 32px; line-height: 1.05; letter-spacing: -0.02em; }
+
+/* ---------- articles ---------- */
+.acard { background: none; border: 0; padding: 0; text-align: left; display: flex; flex-direction: column; gap: 10px; }
+.acard .img { aspect-ratio: 4 / 3; }
+.acard .tt { font-family: var(--display); font-weight: 700; font-size: 19px; line-height: 1.2; }
+.alist { display: flex; gap: 14px; align-items: center; background: none; border: 0; padding: 0; text-align: left; }
+.alist .img { width: 104px; flex-shrink: 0; aspect-ratio: 4 / 3; border-radius: 16px; }
+.art-layout { display: grid; gap: 28px; }
+.desk .art-layout { grid-template-columns: minmax(0, 1fr) 320px; gap: 56px; align-items: start; }
+.art-aside { display: none; }
+.desk .art-aside { display: flex; flex-direction: column; gap: 16px; position: sticky; top: 16px; }
+.prose { display: flex; flex-direction: column; gap: 16px; font-size: 17px; line-height: 1.7; max-width: 68ch; }
+.prose h2 { font-size: 28px; line-height: 1.15; margin-top: 8px; }
+.tldr { background: var(--amber-bg); border-radius: 22px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; }
+.tldr ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 16px; }
+.statrow { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.desk .statrow { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.stat { border-radius: 18px; padding: 14px; display: flex; flex-direction: column; gap: 4px; }
+.stat .v { font-family: var(--display); font-weight: 900; font-size: 26px; line-height: 1; }
+.stat .l { font-size: 13px; line-height: 1.35; }
+.toc a, .toc button { display: block; background: none; border: 0; padding: 6px 0; text-align: left; color: var(--ink-2); font-size: 15px; }
+
+/* ---------- carte d'identité, scanner, chat ---------- */
+.idcard { background: var(--orange); border-radius: 28px; padding: 18px; display: flex; flex-direction: column; gap: 14px; color: var(--ink); }
+.idcard .photo { aspect-ratio: 1 / 1; max-width: 100%; border-radius: 22px; border: 4px solid var(--ink); position: relative; overflow: hidden; background: var(--amber); }
+.idcard .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.idcard .age { background: var(--ink); color: var(--cream); border-radius: 20px; padding: 14px 18px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.steps { display: flex; flex-direction: column; gap: 10px; }
+.step { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 16px; background: var(--white); border: 1px solid var(--line); }
+.step .dot { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: 14px; font-weight: 600; flex-shrink: 0; border: 2px solid var(--line-2); }
+.step.done .dot { background: var(--green-strong); border-color: var(--green-strong); color: var(--white); }
+.step.run .dot { border-color: var(--orange); border-top-color: transparent; animation: spin .8s linear infinite; }
+.step.wait { opacity: .55; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.scanframe { position: relative; aspect-ratio: 3 / 4; max-width: 100%; border-radius: var(--r-lg); background: var(--blue); overflow: hidden; display: flex; align-items: flex-end; padding: 12px; }
+.desk .scanframe { aspect-ratio: 4 / 3; }
+.scanframe .beam { position: absolute; left: 6%; right: 6%; height: 3px; background: var(--orange); border-radius: 3px; top: 10%; animation: beam 1.6s ease-in-out infinite alternate; }
+@keyframes beam { to { top: 88%; } }
+.scanframe img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.bubble { max-width: 85%; padding: 12px 14px; border-radius: 18px; font-size: 15px; line-height: 1.45; }
+.bubble.me { align-self: flex-end; background: var(--ink); color: var(--cream); border-bottom-right-radius: 6px; }
+.bubble.ai { align-self: flex-start; background: var(--white); border: 1px solid var(--line); border-bottom-left-radius: 6px; }
+details.acc { background: var(--white); border: 1px solid var(--line); border-radius: 18px; }
+details.acc summary { list-style: none; padding: 14px 16px; display: flex; align-items: center; gap: 12px; font-weight: 600; cursor: pointer; min-height: 56px; }
+details.acc summary::-webkit-details-marker { display: none; }
+details.acc summary::after { content: '+'; margin-left: auto; font-size: 22px; color: var(--ink-2); }
+details.acc[open] summary::after { content: '−'; }
+details.acc .acc-b { padding: 0 16px 16px; font-size: 15px; color: var(--ink-2); display: flex; flex-direction: column; gap: 6px; }
+
+/* ---------- feuilles, toasts, barres d'action ---------- */
+.sheet-wrap { position: absolute; inset: 0; z-index: 30; display: flex; flex-direction: column; justify-content: flex-end; background: var(--scrim); animation: fade .2s ease; }
+.sheet { background: var(--cream); border-radius: 28px 28px 0 0; padding: 10px max(16px, env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); display: flex; flex-direction: column; gap: 16px; max-height: 88%; overflow-y: auto; animation: up .25s ease; }
+.sheet .grab { width: 44px; height: 5px; border-radius: 999px; background: var(--line-2); align-self: center; }
+.desk .sheet-wrap { justify-content: center; align-items: center; padding: 24px; }
+.desk .sheet { border-radius: 28px; width: 100%; max-width: 520px; padding: 24px; }
+.desk .sheet .grab { display: none; }
+@keyframes up { from { transform: translateY(40px); opacity: 0; } }
+@keyframes fade { from { opacity: 0; } }
+.toast { position: absolute; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 40; background: var(--ink); color: var(--cream); padding: 12px 18px; border-radius: 999px; font-size: 14px; font-weight: 600; white-space: nowrap; max-width: 92%; overflow: hidden; text-overflow: ellipsis; animation: up .2s ease; }
+.desk .toast { bottom: 32px; }
+.ctabar { padding: 10px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px)); background: var(--white); border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px; }
+.ctabar .small { text-align: center; color: var(--ink-2); }
+.desk .ctabar.inline { background: none; border: 0; max-width: 760px; width: 100%; margin: 0 auto 24px; }
+.tool { text-align: left; border: 0; border-radius: 22px; padding: 16px; display: flex; flex-direction: column; gap: 10px; min-height: 150px; position: relative; overflow: hidden; }
+.tool .tt { font-family: var(--display); font-weight: 700; font-size: 17px; line-height: 1.15; }
+.tool .badge { margin-top: auto; align-self: flex-start; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; background: var(--white); }
+.racecard { background: none; border: 0; text-align: left; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.racecard .img { aspect-ratio: 1 / 1; }
+.note-ex { font-size: 12px; color: var(--ink-2); font-style: italic; }
+.plan-sheet button { display: flex; gap: 10px; align-items: center; width: 100%; background: none; border: 0; padding: 10px 6px; border-radius: 10px; text-align: left; font-size: 15px; }
+.plan-sheet button:hover { background: var(--white); }
+.plan-sheet .n { font-variant-numeric: tabular-nums; color: var(--ink-2); width: 24px; font-size: 13px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }
+</style>
+
+<div class="shell mob" id="shell">
+  <div class="protobar">
+    <span class="pt">Prototype Toutou Gourmet V2</span>
+    <div class="seg2" role="group" aria-label="Affichage">
+      <button type="button" data-mode="mob" aria-pressed="true">📱 Mobile</button>
+      <button type="button" data-mode="desk" aria-pressed="false">💻 Ordinateur</button>
+    </div>
+    <button class="pb" type="button" data-action="planSheet">Écrans</button>
+  </div>
+  <div class="stage">
+    <div class="app" id="app">
+      <div id="dhead"></div>
+      <div class="main" id="main"></div>
+      <div id="bottom"></div>
+      <div id="overlay"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var BREEDS = {
+    'berger-australien': { name: 'Berger australien', w: '18–29 kg', life: '12–15 ans', act: 'Très élevée', watch: 'Gène MDR1', min: 18, max: 29,
+      health: [['Mutation MDR1', 'Sensibilité à certains médicaments : à signaler au vétérinaire.'], ['Dysplasie de la hanche', 'Le poids pendant la croissance compte.'], ['Maladies oculaires héréditaires', 'Dépistage chez l\'éleveur, suivi régulier.']],
+      near: ['border-collie', 'malinois', 'labrador'] },
+    'labrador': { name: 'Labrador', w: '25–36 kg', life: '10–12 ans', act: 'Élevée', watch: 'Prise de poids', min: 25, max: 36, health: [], near: ['golden', 'berger-australien', 'border-collie'] },
+    'golden': { name: 'Golden retriever', w: '25–34 kg', life: '10–12 ans', act: 'Élevée', watch: 'Prise de poids', min: 25, max: 34, health: [], near: ['labrador', 'berger-australien', 'border-collie'] },
+    'bouledogue-francais': { name: 'Bouledogue français', w: '8–14 kg', life: '10–12 ans', act: 'Modérée', watch: 'Respiration', min: 8, max: 14, health: [], near: ['jack-russell', 'labrador', 'golden'] },
+    'border-collie': { name: 'Border collie', w: '12–20 kg', life: '12–15 ans', act: 'Très élevée', watch: 'Besoin d\'activité', min: 12, max: 20, health: [], near: ['berger-australien', 'malinois', 'labrador'] },
+    'jack-russell': { name: 'Jack Russell', w: '5–8 kg', life: '13–16 ans', act: 'Élevée', watch: 'Prise de poids', min: 5, max: 8, health: [], near: ['bouledogue-francais', 'border-collie', 'labrador'] },
+    'malinois': { name: 'Malinois', w: '20–30 kg', life: '12–14 ans', act: 'Très élevée', watch: 'Besoin d\'activité', min: 20, max: 30, health: [], near: ['berger-australien', 'border-collie', 'labrador'] }
+  };
+  var ACT = { calme: { label: 'Calme', f: 1.4, type: 'Roi du canapé' }, normal: { label: 'Normal', f: 1.8, type: 'Gourmet équilibré' }, sportif: { label: 'Sportif', f: 2.0, type: 'Athlète' }, travail: { label: 'Chien de travail', f: 3.0, type: 'Chef de troupeau' } };
+  var CAT = {
+    'Alimentation': ['rose', '🥩'], 'Santé': ['green', '💊'], 'Avis & Comparatif': ['blue', '🔍'], 'Race': ['amber', '🐕'], 'Urgences & Intoxications': ['rose', '⚠️'], 'Comportement': ['blue', '🐾']
+  };
+  var ARTS = [
+    ['chien-peut-manger-pomme', 'Alimentation', 'Les chiens peuvent-ils manger de la pomme ?'],
+    ['quelle-quantite-patee-chien-par-jour', 'Alimentation', 'Quelle quantité de pâtée donner à son chien : le calcul par les calories'],
+    ['chien-toujours-faim-causes-solutions', 'Santé', 'Mon chien a toujours faim : causes médicales, comportement et solutions'],
+    ['chien-mange-xylitol-urgence', 'Urgences & Intoxications', 'Mon chien a mangé du xylitol : que faire ?'],
+    ['meilleures-croquettes-chien-senior', 'Avis & Comparatif', 'Les meilleures croquettes pour chien senior : comparatif 2026'],
+    ['croquettes-chiot-grande-race', 'Alimentation', 'Croquettes pour chiot de grande race : les 5 critères à vérifier sur l\'étiquette'],
+    ['coup-de-chaleur-chien-symptomes-premiers-gestes', 'Santé', 'Coup de chaleur chez le chien : symptômes, gestes qui sauvent et prévention'],
+    ['recette-patate-douce-sechee-chien', 'Alimentation', 'Recette de patate douce séchée pour chien'],
+    ['additifs-croquettes-chien-conservateurs-colorants', 'Santé', 'Additifs dans les croquettes : BHA, BHT, éthoxyquine, ce que disent les données'],
+    ['pica-chien-causes-solutions', 'Comportement', 'Pica du chien : pourquoi il mange des cailloux, de la terre ou du tissu'],
+    ['alimentation-chien-sportif-avant-apres-effort', 'Alimentation', 'Chien sportif : que manger avant et après l\'effort ?'],
+    ['avis-ultra-premium-direct', 'Avis & Comparatif', 'Avis Ultra Premium Direct : test complet 2026']
+  ];
+  var TOX = {
+    raisin: { lvl: 'call', title: 'Appelle maintenant', txt: 'Le raisin et les raisins secs sont toxiques pour le chien. Aucune quantité n\'est considérée comme sûre.' },
+    chocolat: { lvl: 'call', title: 'Appelle ton vétérinaire', txt: 'Le chocolat est toxique. La gravité dépend du type (noir, au lait, blanc), de la quantité et du poids du chien.' },
+    'chewing-gum': { lvl: 'call', title: 'Appelle maintenant', txt: 'Les chewing-gums et bonbons « sans sucre » contiennent souvent du xylitol, très dangereux pour le chien, même en petite quantité.' },
+    oignon: { lvl: 'vet', title: 'Appelle ton vétérinaire', txt: 'L\'oignon et l\'ail sont toxiques, crus comme cuits. Les effets peuvent apparaître plusieurs jours après.' },
+    pomme: { lvl: 'ok', title: 'Sans danger en petite quantité', txt: 'La chair de pomme convient, sans le trognon ni les pépins.', art: 'chien-peut-manger-pomme' },
+    carotte: { lvl: 'ok', title: 'Sans danger', txt: 'Crue ou cuite, en petits morceaux pour éviter les fausses routes.' }
+  };
+  var SAMPLE_FOOD = { name: '[Nom de la croquette]', protein: 26, fat: 14, fiber: 3, ash: 7, moisture: 9, meatFirst: true, additives: 2 };
+  var WORDS = ['chien', 'Labrador', 'Golden', 'bouledogue', 'toutou', 'Aussie'];
+
+  function fresh() {
+    return {
+      screen: 'home', stack: [], hasProfile: false, logged: false, premium: false,
+      profile: { name: 'Pepper', breed: 'berger-australien', age: 4, weight: 22, ster: true, activity: 'sportif', kcalkg: 3800, food: '[Ta marque actuelle]' },
+      draft: null, step: 0, scansUsed: 3, msgs: 2, meals: { matin: true, soir: false },
+      weights: [20.6, 21.2, 21.7, 21.9, 22.1, 22.0],
+      album: null, journal: false, sitter: { matin: true, promenade: true, soir: false, medoc: false }, sitterPhoto: null,
+      scanImg: null, scanStep: 0, lastFood: null, tox: 'raisin', chrono: 0, chronoOn: false, annual: true,
+      chat: [['me', 'Pepper peut-il manger des carottes crues ?'], ['ai', 'Oui, en petits morceaux et en friandise : quelques bâtonnets par jour suffisent pour un chien de sa taille. (Réponse d\'exemple)']],
+      raceQuery: '', race: 'berger-australien', lang: 'fr', cat: 'Tous', art: 'chien-peut-manger-pomme', word: 0
+    };
+  }
+  var S = fresh();
+  var MODE = (window.innerWidth >= 900) ? 'desk' : 'mob';
+  var timers = [];
+
+  /* ---------- calculs ---------- */
+  function humanAge(a) { return Math.round(16 * Math.log(Math.max(a, 0.5)) + 31); }
+  function factor(p) { if (p.age < 0.34) return 3.0; if (p.age < 1) return 2.5; return ACT[p.activity].f * (p.ster ? 0.9 : 1); }
+  function kcal(p) { return Math.round(70 * Math.pow(p.weight, 0.75) * factor(p) / 10) * 10; }
+  function grams(p, kk) { return Math.round(kcal(p) / ((kk || p.kcalkg) / 1000) / 5) * 5; }
+  function meals(p) { return p.age < 1 ? 3 : 2; }
+  function ptype(p) { return p.age < 1 ? 'Petit explorateur' : ACT[p.activity].type; }
+  function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+  function dec(n) { return String(Math.round(n * 10) / 10).replace('.', ','); }
+  function ageLabel(a) { if (a < 1) return Math.round(a * 12) + ' mois'; return dec(a) + (a < 2 ? ' an' : ' ans'); }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function foodScore(v) {
+    var dm = 100 - v.moisture, nfe = 100 - v.protein - v.fat - v.fiber - v.ash - v.moisture;
+    var pDM = v.protein / dm * 100, cDM = nfe / dm * 100;
+    var pP = pDM >= 32 ? 3 : pDM >= 26 ? 2 : 1, pC = cDM <= 35 ? 3 : cDM <= 45 ? 2 : 1, pM = v.meatFirst ? 2 : 0, pA = v.additives === 0 ? 2 : v.additives <= 2 ? 1 : 0;
+    return { total: pP + pC + pM + pA, pDM: pDM, cDM: cDM, pP: pP, pC: pC, pM: pM, pA: pA, kcalkg: Math.round((3.5 * v.protein + 8.5 * v.fat + 3.5 * nfe) * 10) };
+  }
+  function breed() { return BREEDS[S.profile.breed] || BREEDS['berger-australien']; }
+  function nm() { return esc(S.profile.name); }
+  function bimg(k) { return 'img/b-' + k + '.webp'; }
+  function aimg(s) { return 'img/a-' + s + '.webp'; }
+  function art(s) { for (var i = 0; i < ARTS.length; i++) if (ARTS[i][0] === s) return ARTS[i]; return ARTS[0]; }
+
+  /* ---------- briques ---------- */
+  function img(src, alt, cls, style) { return '<div class="img ' + (cls || '') + '" style="' + (style || '') + '"><img src="' + src + '" alt="' + esc(alt || '') + '" loading="lazy"></div>'; }
+  function top(title, opts) {
+    opts = opts || {};
+    return '<header class="topbar">' + (opts.noBack ? '' : '<button class="iconbtn" type="button" data-action="back" aria-label="Retour">←</button>') + '<span class="t">' + title + '</span>' + (opts.right || '') + '</header>';
+  }
+  function mobBrand(right) {
+    return '<header class="topbar m-only" style="padding-left:max(16px, env(safe-area-inset-left, 0px))"><button class="brand grow" type="button" data-go="home" aria-label="Accueil"><span class="logo">🐶</span><span class="w">Toutou <span>Gourmet</span></span></button>' + (right || '') + '</header>';
+  }
+  function pageTitle(t, right) { return '<header class="topbar"><h1 class="grow" style="font-size:28px">' + t + '</h1>' + (right || '') + '</header>'; }
+  function catChip(c) { var v = CAT[c] || ['amber', '📚']; return '<span class="chip ' + v[0] + '">' + v[1] + ' ' + c + '</span>'; }
+  function acard(a) { return '<button class="acard" type="button" data-art="' + a[0] + '">' + img(aimg(a[0]), '', '') + catChip(a[1]) + '<span class="tt">' + a[2] + '</span></button>'; }
+  function alist(a) { return '<button class="alist" type="button" data-art="' + a[0] + '">' + img(aimg(a[0]), '', '') + '<span class="grow" style="display:flex;flex-direction:column;gap:6px">' + catChip(a[1]) + '<span class="lb-t" style="font-size:16px">' + a[2] + '</span></span></button>'; }
+  function partnerCard(title, sub) {
+    return '<div class="card partner"><span class="tag-partner">Offre partenaire</span>' +
+      '<div class="row top"><div class="ph amber" style="width:72px;height:72px;flex-shrink:0;border-radius:16px;padding:6px"><span class="lbl" style="font-size:10px">4:3</span></div>' +
+      '<div class="grow"><div class="lb-t">' + title + '</div><div class="lb-s">' + sub + '</div></div></div>' +
+      '<button class="btn soft sm" type="button" data-action="toast" data-msg="Ouverture du site partenaire (lien affilié)">Voir l\'offre chez [Partenaire]</button></div>';
+  }
+  function racecard(k, w) { return '<button class="racecard" type="button" data-race="' + k + '"' + (w ? ' style="width:' + w + 'px;flex-shrink:0"' : '') + '>' + img(bimg(k), BREEDS[k].name) + '<span style="font-weight:600;font-size:14px">' + BREEDS[k].name + '</span></button>'; }
+
+  /* ---------- écrans ---------- */
+  var V = {};
+
+  V.home = function () {
+    var p = S.profile;
+    var perso = S.hasProfile ? '<button class="card amber" type="button" data-go="dog" style="text-align:left;flex-direction:row;align-items:center"><span class="tile white">🥣</span><span class="grow"><span class="eyebrow">Aujourd\'hui pour ' + nm() + '</span><span class="lb-t">' + fmt(grams(p)) + ' g de croquettes · ' + (S.meals.matin ? 'matin donné ✓' : 'matin à donner') + '</span></span><span class="chev">›</span></button>' : '';
+    return mobBrand('<button class="btn soft sm" type="button" data-go="' + (S.logged ? 'compte' : 'signup') + '">' + (S.logged ? 'Mon compte' : 'Connexion') + '</button>') +
+    '<div class="screen">' +
+      '<section class="hero"><div class="hero-wrap">' +
+        '<div class="hero-img"><img src="img/hero.webp" alt="Chien devant sa gamelle, illustrations dessinées à la main"></div>' +
+        '<div class="hero-txt"><span class="blob" style="width:220px;height:220px;background:var(--rose);right:-40px;top:-80px"></span>' +
+          '<span class="chip" style="align-self:flex-start;color:var(--orange-ink)"><span style="width:6px;height:6px;border-radius:50%;background:var(--orange)"></span>Indépendant · relu par des vétérinaires</span>' +
+          '<h1 class="h1hero">Ce que mange ton <span class="hl" id="word">' + WORDS[S.word % WORDS.length] + '</span>, calculé pour lui.</h1>' +
+          '<p style="font-size:18px;color:var(--ink-2);max-width:560px">Sa race, son âge, son poids : on s\'occupe des calculs. Sans blabla, sans langue de bois, <b style="color:var(--ink)">et en 30 secondes</b>.</p>' +
+          '<div class="row" style="flex-wrap:wrap"><button class="btn primary" type="button" data-go="onboard">Créer le profil de mon chien</button><button class="btn ghost d-only" type="button" data-go="guides">Lire les guides</button></div>' +
+          '<div class="stats"><div><div class="v">350+</div><div class="muted">guides vérifiés</div></div><div><div class="v">40+</div><div class="muted">races détaillées</div></div><div><div class="v">0 €</div><div class="muted">de sponsoring</div></div><div><div class="v">100 %</div><div class="muted">indépendant</div></div></div>' +
+        '</div>' +
+      '</div></section>' +
+      perso +
+      '<section style="display:flex;flex-direction:column;gap:12px"><h2 class="h-sec">Par où commencer ?</h2><div class="stack to2">' +
+        '<button class="list-btn amber" type="button" data-go="ration"><span class="tile">🥣</span><span class="grow"><span class="lb-t">Combien doit-il manger ?</span><span class="lb-s">La ration en grammes, en 20 secondes</span></span><span class="chev">›</span><span class="wm" aria-hidden="true">🥣</span></button>' +
+        '<button class="list-btn blue" type="button" data-go="scan"><span class="tile blue">🔍</span><span class="grow"><span class="lb-t">Ses croquettes sont-elles bonnes ?</span><span class="lb-s">Une photo de l\'étiquette, une note sur 10</span></span><span class="chev">›</span><span class="wm" aria-hidden="true">🔍</span></button>' +
+        '<button class="list-btn rose" type="button" data-go="urgence"><span class="tile rose">⚠️</span><span class="grow"><span class="lb-t">Il a mangé un truc louche ?</span><span class="lb-s">Le niveau de risque, tout de suite</span></span><span class="chev">›</span><span class="wm" aria-hidden="true">⚠️</span></button>' +
+        '<button class="list-btn green" type="button" data-go="garde"><span class="tile green">🐾</span><span class="grow"><span class="lb-t">Tu pars en vacances ?</span><span class="lb-s">La fiche de garde, prête en 2 minutes</span></span><span class="chev">›</span><span class="wm" aria-hidden="true">🐾</span></button>' +
+      '</div></section>' +
+      '<section style="display:flex;flex-direction:column;gap:12px"><div class="row"><h2 class="h-sec grow">Les derniers guides</h2><button class="link" type="button" data-go="guides">Tous les guides →</button></div>' +
+        '<div class="arts">' + ARTS.slice(0, 3).map(acard).join('') + '</div></section>' +
+      '<section style="display:flex;flex-direction:column;gap:12px"><div class="row"><h2 class="h-sec grow">Par race</h2><button class="link" type="button" data-go="races">Toutes les races →</button></div>' +
+        '<div class="hscroll to-grid">' + Object.keys(BREEDS).slice(0, 6).map(function (k) { return racecard(k, 132); }).join('') + '</div></section>' +
+      '<button class="card orange" type="button" data-go="onboard" style="text-align:left;border:0;flex-direction:row;align-items:center;gap:16px">' +
+        img(bimg('berger-australien'), 'Berger australien', '', 'width:84px;height:84px;flex-shrink:0;border-radius:20px;border:3px solid var(--ink)') +
+        '<span class="grow"><span class="eyebrow" style="color:var(--ink)">Le savais-tu ?</span><span style="display:block;font-family:var(--display);font-weight:900;font-size:22px;line-height:1.1">Un chien de 4 ans a ' + humanAge(4) + ' ans humains. Pas 28.</span><span style="font-weight:600;font-size:14px">Calcule l\'âge du tien →</span></span>' +
+      '</button>' +
+      '<p class="muted">Les conseils ne remplacent pas une consultation vétérinaire.</p>' +
+    '</div>';
+  };
+
+  V.guides = function () {
+    var cats = ['Tous'].concat(Object.keys(CAT));
+    var list = ARTS.filter(function (a) { return S.cat === 'Tous' || a[1] === S.cat; });
+    var feat = list[0];
+    return pageTitle('Guides', '<button class="iconbtn" type="button" data-action="toast" data-msg="Recherche dans les 350+ guides" aria-label="Rechercher">⌕</button>') +
+    '<div class="screen">' +
+      '<p class="muted" style="margin-top:-12px">350+ guides vérifiés, sourcés et relus. Ici, une sélection.</p>' +
+      '<div class="hscroll">' + cats.map(function (c) { var v = CAT[c] || ['ink', '📚']; return '<button class="chip' + (S.cat === c ? ' ink' : '') + '" type="button" data-cat="' + c + '">' + v[1] + ' ' + c + '</button>'; }).join('') + '</div>' +
+      (feat ? '<button class="acard" type="button" data-art="' + feat[0] + '"><div class="split wide-left" style="width:100%">' + img(aimg(feat[0]), '', '', 'aspect-ratio:16 / 10') + '<div style="display:flex;flex-direction:column;gap:10px;justify-content:center">' + catChip(feat[1]) + '<span class="big" style="font-size:28px;line-height:1.1;letter-spacing:-0.02em">' + feat[2] + '</span><span class="muted">À la une · lecture 6 min</span></div></div></button>' : '') +
+      '<div class="arts">' + list.slice(1).map(function (a) { return MODE === 'desk' ? acard(a) : alist(a); }).join('') + '</div>' +
+      '<div class="card amber"><div class="wm" aria-hidden="true">🐕</div><div class="lb-t">Des guides adaptés à ton chien</div><p class="muted">Avec son profil, chaque guide te donne ses chiffres à lui : quantités, risques selon sa race, alternatives.</p><button class="btn primary sm" type="button" data-go="' + (S.hasProfile ? 'dog' : 'onboard') + '" style="align-self:flex-start">' + (S.hasProfile ? 'Voir le profil de ' + nm() : 'Créer son profil') + '</button></div>' +
+    '</div>';
+  };
+
+  V.article = function () {
+    var a = art(S.art), p = S.profile, isPomme = a[0] === 'chien-peut-manger-pomme';
+    var appleMax = Math.round(kcal(p) * 0.1 / 0.52 / 10) * 10;
+    var toc = isPomme ? [['tldr', 'L\'essentiel'], ['court', 'La réponse courte'], ['dose', 'Combien pour ' + (S.hasProfile ? nm() : 'ton chien')], ['prepa', 'Comment la préparer']] : [['tldr', 'L\'essentiel'], ['court', 'Le contenu']];
+    var toolBox = '<div class="card amber" id="dose"><div class="wm" aria-hidden="true">🍎</div><div class="eyebrow">Calcul pour ' + (S.hasProfile ? nm() : 'ton chien') + '</div>' +
+      (S.hasProfile ? '<div class="big" style="font-size:44px;color:var(--orange-ink)">' + appleMax + ' g</div><p>de pomme par jour au maximum, en comptant ses autres friandises (10 % de ses ' + fmt(kcal(p)) + ' kcal).</p>' :
+      '<p>La pomme compte dans les 10 % de friandises de la journée. Combien ça fait pour ton chien ?</p><button class="btn primary sm" type="button" data-go="onboard" style="align-self:flex-start">Calculer pour mon chien</button>') + '</div>';
+    var body = isPomme ? (
+      '<div class="tldr" id="tldr"><div class="eyebrow">L\'essentiel</div><ul><li>La <b>chair de pomme</b> est sans danger, avec ou sans peau.</li><li>Peu calorique : <b>52 kcal pour 100 g</b>, dont 10,4 g de sucres.</li><li><b>Pépins et trognon à retirer</b> : les pépins contiennent de l\'amygdaline.</li><li>La pomme compte dans les <b>10 % de friandises</b> de la journée.</li></ul></div>' +
+      '<div class="statrow"><div class="stat" style="background:var(--green-bg)"><span class="v">✅</span><span class="l">Chair autorisée, sans pépins ni trognon</span></div><div class="stat" style="background:var(--amber-bg)"><span class="v">52 kcal</span><span class="l">pour 100 g, fruit léger</span></div><div class="stat" style="background:var(--blue-bg)"><span class="v">10,4 g</span><span class="l">de sucres pour 100 g</span></div><div class="stat" style="background:var(--rose-bg)"><span class="v">⚠️</span><span class="l">Pépins : amygdaline à retirer</span></div></div>' +
+      '<div class="prose"><h2 id="court">La réponse courte</h2><p>Oui, ton chien peut manger de la pomme. La chair n\'a aucune toxicité connue chez le chien et reste une friandise légère. Une seule règle de préparation : on enlève le trognon et les pépins.</p><p>Les pépins contiennent de l\'amygdaline, qui libère du cyanure une fois broyée. La quantité reste minuscule, mais la précaution coûte trente secondes.</p></div>' +
+      img('img/body-pomme.webp', 'Gamelle et quartiers de pomme épépinés', '', 'aspect-ratio:4 / 3') +
+      toolBox +
+      '<div class="prose"><h2 id="prepa">Comment la préparer</h2><p>[Suite de l\'article V1 : quartiers, compote sans sucre, pomme séchée, questions fréquentes.]</p></div>'
+    ) : (
+      '<div class="tldr" id="tldr"><div class="eyebrow">L\'essentiel</div><ul><li>[Points clés de l\'article V1]</li></ul></div><div class="prose" id="court"><p>[Contenu de l\'article V1, avec ses tableaux, chiffres et sources.]</p></div>' + toolBox
+    );
+    return top('', { right: '<button class="iconbtn" type="button" data-action="toast" data-msg="Guide enregistré dans tes favoris" aria-label="Enregistrer">♡</button><button class="iconbtn" type="button" data-action="toast" data-msg="Lien du guide copié" aria-label="Partager">↗</button>' }) +
+    '<div class="screen">' +
+      '<div class="split wide-left"><div style="display:flex;flex-direction:column;gap:14px">' + catChip(a[1]) + '<h1 style="font-size:34px;line-height:1.08" class="art-h1">' + a[2] + '</h1><div class="row small muted" style="flex-wrap:wrap;gap:8px"><span>Équipe Toutou Gourmet</span><span>·</span><span>' + (isPomme ? 'Mis à jour le 24 juin 2026' : 'Mis à jour récemment') + '</span><span>·</span><span class="chip green">Relu par [vétérinaire]</span></div></div>' + img(aimg(a[0]), '', '', 'aspect-ratio:4 / 3') + '</div>' +
+      '<div class="art-layout"><div style="display:flex;flex-direction:column;gap:22px;min-width:0">' + body +
+        '<div class="card"><div class="lb-t">Résumer cet article avec une IA</div><div class="chips">' + ['ChatGPT', 'Claude', 'Mistral', 'Grok'].map(function (x) { return '<button class="chip" type="button" data-action="toast" data-msg="Ouvre ' + x + ' avec un résumé de l\'article">' + x + '</button>'; }).join('') + '</div></div>' +
+        '<div class="card" style="flex-direction:row;align-items:center"><span class="tile">🐶</span><div class="grow"><div class="lb-t">Équipe Toutou Gourmet</div><div class="lb-s">Des maîtres de quatre chiens, des sources vérifiées, une relecture vétérinaire.</div></div></div>' +
+        '<section style="display:flex;flex-direction:column;gap:12px"><h2 class="h-sec">À lire aussi</h2><div class="stack">' + ARTS.filter(function (x) { return x[0] !== a[0]; }).slice(0, 3).map(alist).join('') + '</div></section>' +
+      '</div>' +
+      '<aside class="art-aside"><div class="card"><div class="eyebrow">Sommaire</div><nav class="toc">' + toc.map(function (t) { return '<button type="button" data-anchor="' + t[0] + '">' + t[1] + '</button>'; }).join('') + '</nav></div>' +
+        (S.hasProfile ? '<div class="card amber"><div class="row"><span class="tile white">🐕</span><div class="grow"><div class="lb-t">' + nm() + '</div><div class="lb-s">' + breed().name + ' · ' + dec(p.weight) + ' kg</div></div></div><button class="btn dark sm" type="button" data-go="dog">Son tableau de bord</button></div>' :
+        '<div class="card amber"><div class="wm" aria-hidden="true">🐶</div><div class="lb-t">Et pour ton chien ?</div><p class="muted">Ses quantités à lui, dans chaque guide.</p><button class="btn primary sm" type="button" data-go="onboard">Créer son profil</button></div>') +
+        partnerCard('Friandises naturelles', 'Sélection [Partenaire] · −[X] %') +
+      '</aside></div>' +
+    '</div>';
+  };
+  V.article.bottom = function () { return S.hasProfile ? '' : '<div class="ctabar m-cta"><button class="btn primary block" type="button" data-go="onboard">Calculer pour mon chien</button></div>'; };
+
+  V.onboard = function () {
+    var d = S.draft, st = S.step, total = 4, body = '';
+    if (st === 0) {
+      body = '<h1 style="font-size:30px">Comment s\'appelle ton chien ?</h1><div class="field"><label for="ob-name">Son prénom</label><input class="input" id="ob-name" value="' + esc(d.name) + '" autocomplete="off" autocapitalize="words"></div><p class="muted">On l\'utilisera partout : « la ration de ' + esc(d.name || 'ton chien') + ' », « la carte de ' + esc(d.name || 'ton chien') + ' ».</p>';
+    } else if (st === 1) {
+      body = '<h1 style="font-size:30px">' + esc(d.name) + ' est de quelle race ?</h1><div class="g2 to4">' + Object.keys(BREEDS).map(function (k) {
+        return '<button class="racecard" type="button" data-set="breed" data-val="' + k + '" aria-pressed="' + (d.breed === k) + '" style="' + (d.breed === k ? 'outline:3px solid var(--ink);outline-offset:3px;border-radius:24px' : '') + '">' + img(bimg(k), BREEDS[k].name) + '<span style="font-weight:600;font-size:14px">' + BREEDS[k].name + '</span></button>';
+      }).join('') + '<button class="racecard" type="button" data-action="toast" data-msg="Mode chien croisé : prévu avec la courbe de croissance"><div class="ph" style="aspect-ratio:1 / 1;align-items:center;justify-content:center;font-size:44px">🐾</div><span style="font-weight:600;font-size:14px">Croisé</span></button></div>';
+    } else if (st === 2) {
+      body = '<h1 style="font-size:30px">Quel âge a ' + esc(d.name) + ' ?</h1><div class="stepper"><button type="button" data-action="age" data-d="-1" aria-label="Moins">−</button><div class="big" style="font-size:60px">' + ageLabel(d.age) + '</div><button type="button" data-action="age" data-d="1" aria-label="Plus">+</button></div>' +
+        '<div class="card amber"><div class="row"><span class="tile white">🐶</span><div class="grow"><div class="lb-t">' + humanAge(d.age) + ' ans en âge humain</div><div class="lb-s">Formule de l\'université de Californie : ce n\'est pas ×7.</div></div></div></div>';
+    } else {
+      body = '<h1 style="font-size:30px">Combien pèse ' + esc(d.name) + ' ?</h1><div class="stepper"><button type="button" data-action="w" data-d="-0.5" aria-label="Moins">−</button><div class="big" style="font-size:60px">' + dec(d.weight) + ' kg</div><button type="button" data-action="w" data-d="0.5" aria-label="Plus">+</button></div>' +
+        '<div class="field"><span class="fl">Stérilisé</span><div class="seg"><button type="button" data-set="ster" data-val="1" aria-pressed="' + d.ster + '">Oui</button><button type="button" data-set="ster" data-val="0" aria-pressed="' + !d.ster + '">Non</button></div></div>' +
+        '<div class="field"><span class="fl">Son activité</span><div class="seg">' + Object.keys(ACT).map(function (k) { return '<button type="button" data-set="activity" data-val="' + k + '" aria-pressed="' + (d.activity === k) + '">' + ACT[k].label + '</button>'; }).join('') + '</div></div>' +
+        '<p class="muted small">Tes réponses restent sur cet appareil tant que tu ne crées pas de compte.</p>';
+    }
+    return '<header class="topbar"><button class="iconbtn" type="button" data-action="obback" aria-label="Retour">←</button><div class="grow progress" role="progressbar" aria-valuenow="' + (st + 1) + '" aria-valuemin="1" aria-valuemax="' + total + '"><span style="width:' + ((st + 1) / total * 100) + '%"></span></div><span class="muted small" style="font-variant-numeric:tabular-nums">' + (st + 1) + '/' + total + '</span></header>' +
+      '<div class="screen narrow" style="padding-top:12px">' + body + '</div>';
+  };
+  V.onboard.bottom = function () { return '<div class="ctabar inline"><button class="btn primary block" type="button" data-action="obnext">' + (S.step === 3 ? 'Voir la carte de ' + esc(S.draft.name) : 'Continuer') + '</button></div>'; };
+
+  V.carte = function () {
+    var p = S.profile, b = breed();
+    return top('Carte d\'identité', { right: '<button class="iconbtn" type="button" data-action="share" data-what="carte" aria-label="Partager">↗</button>' }) +
+    '<div class="screen"><div class="split">' +
+      '<div class="idcard">' +
+        '<div class="row"><span class="eyebrow" style="color:var(--ink)">Carte d\'identité</span><span class="grow"></span><span style="font-family:var(--display);font-weight:900;font-size:14px">Toutou Gourmet</span></div>' +
+        '<div class="photo"><img src="' + bimg(p.breed) + '" alt="' + b.name + '"></div>' +
+        '<div><div class="big" style="font-size:60px">' + nm() + '</div><div style="font-weight:600;font-size:17px;margin-top:14px">' + b.name + ' · ' + ageLabel(p.age) + ' · ' + dec(p.weight) + ' kg</div></div>' +
+        '<div class="age"><span class="big" style="font-size:52px">' + humanAge(p.age) + ' ans</span><span style="color:var(--amber);font-weight:600">en âge humain</span></div>' +
+        '<div class="chips"><span class="chip">🥣 ' + fmt(kcal(p)) + ' kcal/j</span><span class="chip">Profil ' + ptype(p) + '</span></div>' +
+      '</div>' +
+      '<div style="display:flex;flex-direction:column;gap:18px">' +
+        '<h2 class="d-only" style="font-size:40px">La carte de ' + nm() + ' est prête.</h2>' +
+        '<p class="muted small">Âge humain : formule de l\'université de Californie (UCSD), pas la règle ×7. Photo : image de la race en attendant celle de ' + nm() + '.</p>' +
+        '<button class="btn dark block" type="button" data-action="share" data-what="carte">Partager la carte de ' + nm() + '</button>' +
+        (S.logged ? '<div class="card green"><div class="row"><span class="tile s green">✓</span><div class="grow"><div class="lb-t">Carte enregistrée</div><div class="lb-s">Elle évoluera à chaque pesée et à chaque anniversaire.</div></div></div></div>' :
+        '<div class="card amber"><div class="lb-t">Garde la carte de ' + nm() + '</div><p class="muted">Elle évolue à chaque pesée et à chaque anniversaire, et elle débloque son suivi.</p><button class="btn primary block" type="button" data-go="signup">Enregistrer ' + nm() + '</button><span class="muted small" style="text-align:center">Gratuit · 20 secondes</span></div>') +
+        '<h2 class="h-sec">Et maintenant ?</h2>' +
+        '<button class="list-btn amber" type="button" data-go="ration"><span class="tile">🥣</span><span class="grow"><span class="lb-t">' + fmt(grams(p)) + ' g par jour</span><span class="lb-s">La ration de ' + nm() + ' avec ses croquettes</span></span><span class="chev">›</span></button>' +
+        '<button class="list-btn blue" type="button" data-go="scan"><span class="tile blue">🔍</span><span class="grow"><span class="lb-t">Ses croquettes, notées</span><span class="lb-s">Une photo de l\'étiquette suffit</span></span><span class="chev">›</span></button>' +
+      '</div>' +
+    '</div></div>';
+  };
+
+  V.signup = function () {
+    var p = S.profile;
+    return top('Enregistrer ' + nm()) +
+    '<div class="screen narrow">' +
+      (S.hasProfile ? '<div class="card amber" style="flex-direction:row;align-items:center">' + img(bimg(p.breed), '', '', 'width:64px;height:64px;flex-shrink:0;border-radius:18px') + '<div class="grow"><div class="lb-t">' + nm() + '</div><div class="lb-s">' + breed().name + ' · ' + ageLabel(p.age) + ' · ' + dec(p.weight) + ' kg</div><div class="small" style="color:var(--green-ink);font-weight:600">Déjà rempli, rien à retaper</div></div></div>' : '') +
+      '<div style="display:flex;flex-direction:column;gap:10px"><button class="btn soft block" type="button" data-action="signup">Continuer avec Apple</button><button class="btn soft block" type="button" data-action="signup">Continuer avec Google</button></div>' +
+      '<div class="row"><span class="grow" style="height:1px;background:var(--line)"></span><span class="muted small">ou avec ton email</span><span class="grow" style="height:1px;background:var(--line)"></span></div>' +
+      '<form id="signupForm" style="display:flex;flex-direction:column;gap:14px">' +
+        '<div class="field"><label for="su-mail">Email</label><input class="input" id="su-mail" type="email" inputmode="email" autocomplete="email" placeholder="toi@exemple.com"></div>' +
+        '<div class="field"><label for="su-pass">Mot de passe</label><input class="input" id="su-pass" type="password" autocomplete="new-password" placeholder="8 caractères minimum"></div>' +
+        '<label class="row" for="su-stay" style="font-size:15px"><input id="su-stay" type="checkbox" checked style="width:22px;height:22px;accent-color:#1A1109"> Rester connecté</label>' +
+        '<button class="btn primary block" type="submit">Créer mon compte gratuit</button>' +
+      '</form>' +
+      '<div class="card"><div class="eyebrow">Gratuit avec un compte</div>' + ['Plusieurs chiens et partage avec la famille', 'La ration qui s\'ajuste à chaque pesée', '5 analyses d\'étiquette par mois', 'Fiche de garde en lien, QR code et PDF', 'Rappels santé par email'].map(function (t) { return '<div class="row small"><span style="color:var(--green-ink);font-weight:600">✓</span>' + t + '</div>'; }).join('') + '</div>' +
+      '<p class="muted small">En créant un compte, tu acceptes les conditions d\'utilisation et la politique de confidentialité.</p>' +
+    '</div>';
+  };
+
+  V.dog = function () {
+    var p = S.profile, b = breed(), g = grams(p), m = meals(p), per = Math.round(g / m);
+    var w = S.weights, mn = Math.min.apply(null, w) - 0.6, mx = Math.max.apply(null, w) + 0.6;
+    var pts = w.map(function (v, i) { return (12 + i * (276 / (w.length - 1))).toFixed(1) + ',' + (84 - (v - mn) / (mx - mn) * 68).toFixed(1); });
+    var last = pts[pts.length - 1].split(','), inZone = p.weight >= b.min && p.weight <= b.max;
+    return '<header class="topbar" style="padding-left:max(16px, env(safe-area-inset-left, 0px))"><div class="grow chips" style="flex-wrap:nowrap;overflow:hidden"><span class="chip ink">🐕 ' + nm() + '</span><button class="chip" type="button" data-action="addDog">＋ Ajouter un chien</button></div><button class="iconbtn" type="button" data-go="compte" aria-label="Compte">⚙︎</button></header>' +
+    '<div class="screen">' +
+      (S.logged ? '' : '<button class="card amber" type="button" data-go="signup" style="text-align:left;flex-direction:row;align-items:center"><span class="tile white">💾</span><span class="grow"><span class="lb-t">Enregistre ' + nm() + '</span><span class="lb-s">Sinon son suivi reste sur cet appareil uniquement</span></span><span class="chev">›</span></button>') +
+      '<div class="split wide-left"><div style="display:flex;flex-direction:column;gap:18px">' +
+        '<button class="card" type="button" data-go="carte" style="text-align:left;flex-direction:row;align-items:center;gap:14px">' + img(bimg(p.breed), '', '', 'width:88px;height:88px;flex-shrink:0;border-radius:22px') +
+          '<span class="grow"><span class="big" style="font-size:34px;display:block">' + nm() + '</span><span class="lb-s">' + humanAge(p.age) + ' ans humains · Profil ' + ptype(p) + '</span><span class="small" style="color:var(--orange-ink);font-weight:600">Voir sa carte →</span></span></button>' +
+        '<section class="card amber"><div class="row"><span class="tile white">🥣</span><div class="grow"><div class="eyebrow">Aujourd\'hui</div><div class="big" style="font-size:40px">' + fmt(g) + ' g</div></div><button class="btn soft sm" type="button" data-go="ration">Détail</button></div>' +
+          '<div class="g2"><button class="check" type="button" data-meal="matin" aria-pressed="' + S.meals.matin + '"><span class="box">✓</span><span class="ct grow"><b>Matin</b><br><span class="small">' + per + ' g</span></span></button><button class="check" type="button" data-meal="soir" aria-pressed="' + S.meals.soir + '"><span class="box">✓</span><span class="ct grow"><b>Soir</b><br><span class="small">' + per + ' g</span></span></button></div><p class="muted small">Partagé avec la famille : chacun voit qui l\'a nourri.</p></section>' +
+        '<section class="card"><div class="row"><span class="tile s green">⚖️</span><div class="grow"><div class="lb-t">' + dec(p.weight) + ' kg</div><div class="small" style="color:' + (inZone ? 'var(--green-ink)' : 'var(--orange-ink)') + ';font-weight:600">' + (inZone ? 'Dans la fourchette de la race (' + b.w + ')' : 'Hors de la fourchette de la race (' + b.w + ')') + '</div></div><button class="btn soft sm" type="button" data-action="weigh">Peser</button></div>' +
+          '<svg viewBox="0 0 300 96" role="img" aria-label="Courbe de poids, exemple" style="width:100%;height:auto"><line x1="0" y1="90" x2="300" y2="90" stroke="#E2D5C8"></line><polyline points="' + pts.join(' ') + '" fill="none" stroke="#1A1109" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"></polyline><circle cx="' + last[0] + '" cy="' + last[1] + '" r="5" fill="#E8622A"></circle></svg><p class="note-ex">Pesées d\'exemple. Chaque nouvelle pesée recalcule la ration.</p></section>' +
+      '</div><div style="display:flex;flex-direction:column;gap:18px">' +
+        '<section style="display:flex;flex-direction:column;gap:10px"><h2 class="h-sec">À venir</h2><div class="list-btn"><span class="tile s green">⚖️</span><span class="grow"><span class="lb-t" style="font-size:16px">Pesée du mois</span><span class="lb-s">Dimanche · rappel par email</span></span></div><div class="list-btn"><span class="tile s green">💊</span><span class="grow"><span class="lb-t" style="font-size:16px">Vermifuge</span><span class="lb-s">[date]</span></span></div></section>' +
+        '<section class="card"><div class="row"><span class="tile s">📸</span><div class="grow"><div class="lb-t">La photo du mois</div><div class="lb-s">Pour la frise de croissance · ' + (S.album ? '1' : '0') + ' / 12 en gratuit</div></div></div>' + (S.album ? '<div class="img" style="aspect-ratio:1 / 1"><img alt="Photo du mois" src="' + S.album + '"></div>' : '') + '<label class="btn soft sm" for="albumInput" style="cursor:pointer">Ajouter la photo de ce mois</label><input id="albumInput" type="file" accept="image/*" hidden></section>' +
+        '<div class="g2"><button class="tool" type="button" data-go="assistant" style="background:var(--blue-bg)"><span class="tile blue">💬</span><span class="tt">Poser une question</span><span class="badge">Assistant IA</span></button><button class="tool" type="button" data-go="garde" style="background:var(--green-bg)"><span class="tile green">🐾</span><span class="tt">Fiche de garde</span><span class="badge">Vacances</span></button></div>' +
+        '<section style="display:flex;flex-direction:column;gap:10px"><h2 class="h-sec">Pour ' + nm() + '</h2>' + alist(art('alimentation-chien-sportif-avant-apres-effort')) + '</section>' +
+        partnerCard('Adaptée aux ' + b.name, 'Sélection pour ' + nm() + ' · −[X] % sur la première commande') +
+      '</div></div>' +
+    '</div>';
+  };
+
+  V.tools = function () {
+    var T = [['ration', '🥣', 'Ration du jour', 'amber', 'Gratuit'], ['scan', '🔍', 'Scanner d\'étiquette', 'blue', 'Compte'], ['urgence', '⚠️', 'Mon chien a mangé…', 'rose', 'Gratuit'], ['croissance', '⚖️', 'Courbe de croissance', 'green', 'Compte'], ['garde', '🐾', 'Fiche de garde', 'green', 'Compte'], ['transition', '🥩', 'Changer de croquettes', 'rose', 'Compte'], ['carte', '🐶', 'Âge humain et carte', 'amber', 'Gratuit'], ['budget', '💰', 'Budget annuel', 'amber', 'Bientôt']];
+    return pageTitle('Outils') +
+    '<div class="screen"><div class="g2 to4">' + T.map(function (t) {
+        var act = ['croissance', 'transition', 'budget'].indexOf(t[0]) > -1 ? 'data-action="soon" data-what="' + t[0] + '"' : (t[0] === 'carte' && !S.hasProfile ? 'data-go="onboard"' : 'data-go="' + t[0] + '"');
+        return '<button class="tool" type="button" ' + act + ' style="background:var(--' + t[3] + '-bg)"><span class="wm" aria-hidden="true">' + t[1] + '</span><span class="tile ' + t[3] + '">' + t[1] + '</span><span class="tt">' + t[2] + '</span><span class="badge">' + t[4] + '</span></button>';
+      }).join('') + '</div><p class="muted small">« Compte » : gratuit avec un compte. Les fonctions qui appellent une IA ne s\'ouvrent jamais sans compte.</p></div>';
+  };
+
+  V.ration = function () {
+    var p = S.profile, g = grams(p), m = meals(p);
+    return top('Ration de ' + nm()) +
+    '<div class="screen"><div class="split">' +
+      '<div style="display:flex;flex-direction:column;gap:18px"><section class="card amber" style="gap:6px"><div class="wm" aria-hidden="true">🥣</div><div class="eyebrow">Par jour</div><div class="big" style="font-size:80px;color:var(--orange-ink)">' + fmt(g) + ' g</div><div style="font-weight:600">de croquettes · ' + m + ' × ' + Math.round(g / m) + ' g</div><div class="muted">' + fmt(kcal(p)) + ' kcal par jour</div></section>' +
+        (S.logged ? '<button class="btn dark block" type="button" data-action="toast" data-msg="Ration mise à jour dans le profil">Mettre à jour son profil</button>' : '<button class="btn primary block" type="button" data-go="signup">Enregistrer la ration de ' + nm() + '</button>') +
+        '<section class="card"><div class="lb-t">Ce que ça coûte</div><div class="row"><div class="big" style="font-size:30px">[X] €</div><div class="muted">par jour avec ses croquettes actuelles</div></div></section></div>' +
+      '<div style="display:flex;flex-direction:column;gap:18px">' +
+        '<div class="field"><span class="fl">Activité</span><div class="seg">' + Object.keys(ACT).map(function (k) { return '<button type="button" data-pset="activity" data-val="' + k + '" aria-pressed="' + (p.activity === k) + '">' + ACT[k].label + '</button>'; }).join('') + '</div></div>' +
+        '<div class="field"><span class="fl">Poids</span><div class="stepper"><button type="button" data-action="pw" data-d="-0.5" aria-label="Moins">−</button><div class="big" style="font-size:40px">' + dec(p.weight) + ' kg</div><button type="button" data-action="pw" data-d="0.5" aria-label="Plus">+</button></div></div>' +
+        '<div class="list-btn"><span class="tile s blue">🔍</span><span class="grow"><span class="lb-t" style="font-size:16px">' + esc(p.food) + '</span><span class="lb-s">' + fmt(p.kcalkg) + ' kcal/kg' + (S.lastFood ? ' · calculées par le scanner' : ' · valeur par défaut') + '</span></span><button class="btn soft sm" type="button" data-go="scan">Scanner</button></div>' +
+        '<details class="acc"><summary>Pourquoi c\'est différent du paquet ?</summary><div class="acc-b"><p>Le tableau du paquet vise un chien « moyen ». Ici on part du besoin au repos de ' + nm() + ' (70 × poids<sup>0,75</sup>), multiplié par son activité' + (p.ster ? ' et corrigé pour la stérilisation' : '') + ', puis converti avec les kcal de ses croquettes.</p><p>Pèse-le toutes les deux semaines : la ration s\'ajuste toute seule.</p></div></details>' +
+        alist(art('quelle-quantite-patee-chien-par-jour')) +
+        partnerCard('Croquettes adaptées aux ' + breed().name + ' (' + breed().w + ')', 'Le prix ramené au jour pour ' + nm() + ' : [X] € · −[X] % la première commande') +
+      '</div></div></div>';
+  };
+
+  V.scan = function () {
+    var left = Math.max(0, 5 - S.scansUsed);
+    return pageTitle('Scanner', S.logged ? '<span class="chip blue">' + (S.premium ? 'Premium' : left + ' / 5 ce mois') + '</span>' : '') +
+    '<div class="screen"><div class="split">' +
+      '<div class="scanframe">' + (S.scanImg ? '<img alt="Étiquette choisie" src="' + S.scanImg + '">' : '') + '<span class="beam" aria-hidden="true"></span><span class="ph" style="padding:0;background:none"><span class="lbl">Dos du paquet : composition + constituants analytiques</span></span></div>' +
+      '<div style="display:flex;flex-direction:column;gap:14px"><h2 class="d-only" style="font-size:36px">Ses croquettes sont-elles bonnes ?</h2>' +
+        '<label class="btn primary block" for="scanInput" style="cursor:pointer">📷 Photographier l\'étiquette</label><input id="scanInput" type="file" accept="image/*" hidden>' +
+        '<button class="btn soft block" type="button" data-action="scanSample">Essayer avec une étiquette d\'exemple</button>' +
+        '<div class="card blue"><div class="lb-t">Comment ça marche</div><div class="small">1. On lit l\'étiquette. 2. On calcule les kcal (formule d\'Atwater modifiée). 3. L\'algorithme Toutou Gourmet note la croquette, avec une méthode publique. 4. On compare avec les besoins de ' + nm() + '.</div></div>' +
+        '<p class="muted small">Une croquette déjà analysée par un autre utilisateur ne compte pas dans ton quota.</p>' + alist(art('additifs-croquettes-chien-conservateurs-colorants')) +
+      '</div></div></div>';
+  };
+
+  V.scanning = function () {
+    var labels = ['Lecture de l\'étiquette', 'Composition et constituants analytiques', 'Calcul des kcal par kilo', 'Comparaison avec les besoins de ' + nm(), 'Note Toutou Gourmet'];
+    return top('Analyse en cours', { noBack: true }) + '<div class="screen"><div class="split">' +
+      '<div class="scanframe" style="aspect-ratio:4 / 3">' + (S.scanImg ? '<img alt="Étiquette analysée" src="' + S.scanImg + '">' : '') + '<span class="beam" aria-hidden="true"></span></div>' +
+      '<div class="steps" aria-live="polite">' + labels.map(function (l, i) { var c = i < S.scanStep ? 'done' : i === S.scanStep ? 'run' : 'wait'; return '<div class="step ' + c + '"><span class="dot">' + (c === 'done' ? '✓' : '') + '</span><span class="grow">' + l + '</span></div>'; }).join('') + '</div>' +
+    '</div></div>';
+  };
+
+  V.score = function () {
+    var f = SAMPLE_FOOD, r = foodScore(f), p = S.profile, gg = grams(p, r.kcalkg);
+    var verdict = r.total >= 8 ? ['Très bien pour ' + nm(), 'green'] : r.total >= 6 ? ['Correct pour ' + nm(), 'amber'] : ['Moyen pour ' + nm(), 'rose'];
+    function line(name, pts, max, txt) { var pc = pts / max * 100, col = pts / max >= 0.66 ? 'var(--green-strong)' : pts / max >= 0.34 ? '#F2B85A' : 'var(--orange)'; return '<div style="display:flex;flex-direction:column;gap:6px"><div class="row"><span class="grow" style="font-weight:600">' + name + '</span><span class="small" style="font-variant-numeric:tabular-nums">' + pts + ' / ' + max + '</span></div><div class="bar"><span style="width:' + pc + '%;background:' + col + '"></span></div><span class="muted small">' + txt + '</span></div>'; }
+    return top('Résultat', { right: '<button class="iconbtn" type="button" data-action="share" data-what="score" aria-label="Partager">↗</button>' }) +
+    '<div class="screen"><div class="split"><div style="display:flex;flex-direction:column;gap:18px">' +
+      '<div class="row top"><div class="ph blue" style="width:120px;aspect-ratio:4 / 3;flex-shrink:0;border-radius:18px"><span class="lbl">Gemini · bol</span></div><div class="grow"><div class="lb-t">' + f.name + '</div><div class="muted small">Analysée à l\'instant</div></div></div>' +
+      '<section class="card inkcard" style="gap:6px"><div class="eyebrow" style="color:var(--blue)">Note Toutou Gourmet</div><div class="row" style="align-items:baseline;gap:6px"><span class="big" style="font-size:92px;color:var(--orange)">' + r.total + '</span><span class="big" style="font-size:36px">/10</span></div><span class="chip ' + verdict[1] + '" style="align-self:flex-start">' + verdict[0] + '</span><p class="note-ex" style="color:var(--line)">Étiquette d\'exemple : valeurs fictives pour le prototype.</p></section>' +
+      '<section class="card amber"><div class="row"><span class="tile white">🥣</span><div class="grow"><div class="lb-t">' + fmt(r.kcalkg) + ' kcal/kg</div><div class="lb-s">Avec celle-ci : ' + fmt(gg) + ' g par jour pour ' + nm() + '</div></div></div><button class="btn dark block sm" type="button" data-action="useFood" data-kk="' + r.kcalkg + '">Utiliser pour sa ration</button></section>' +
+    '</div><div style="display:flex;flex-direction:column;gap:18px">' +
+      '<section class="card">' + line('Protéines', r.pP, 3, dec(r.pDM) + ' % sur matière sèche') + line('Glucides', r.pC, 3, dec(r.cDM) + ' % sur matière sèche (calculés)') + line('Viande en premier ingrédient', r.pM, 2, f.meatFirst ? 'Oui, nommée' : 'Non') + line('Additifs', r.pA, 2, f.additives + ' additifs à surveiller') + '<button class="link" type="button" data-action="soon" data-what="methode">Comment on note ? La méthode publique →</button></section>' +
+      '<section style="display:flex;flex-direction:column;gap:10px"><h2 class="h-sec">Mieux notées pour son profil</h2><p class="muted small">Classées par note, jamais par commission.</p>' +
+        [['[Croquette A]', '[8,x]', true], ['[Croquette B]', '[7,x]', false], ['[Croquette C]', '[7,x]', false]].map(function (a) { return '<div class="list-btn' + (a[2] ? ' partner' : '') + '"><span class="ph blue" style="width:56px;height:56px;flex-shrink:0;border-radius:14px;padding:4px"></span><span class="grow"><span class="lb-t" style="font-size:16px">' + a[0] + '</span><span class="lb-s">' + (a[2] ? '<span class="tag-partner">Partenaire</span> · −[X] % la 1re commande' : 'Score ' + a[1] + ' / 10') + '</span></span><span class="big" style="font-size:24px">' + a[1] + '</span></div>'; }).join('') + '</section>' +
+      '<div class="g2"><button class="btn soft" type="button" data-go="scan">Comparer</button><button class="btn dark" type="button" data-action="share" data-what="score">Partager</button></div>' +
+    '</div></div></div>';
+  };
+
+  V.premium = function () {
+    var a = S.annual;
+    return top('Toutou Gourmet Premium') + '<div class="screen narrow">' +
+      (S.scansUsed >= 5 && !S.premium ? '<section class="card blue"><div class="row"><span class="tile blue">🔍</span><div class="grow"><div class="lb-t">Tes 5 analyses du mois sont utilisées</div><div class="lb-s">Elles reviennent le 1er du mois prochain.</div></div></div></section>' : '') +
+      '<h1 style="font-size:32px">Tout le suivi de ' + nm() + ', sans limite.</h1>' +
+      '<div style="display:flex;flex-direction:column;gap:10px">' + [['🔍', 'blue', '50 analyses d\'étiquette par mois'], ['🐾', 'green', 'Journal de séjour avec photos pour le gardien'], ['📸', 'amber', 'Album illimité et vidéo de croissance'], ['💊', 'green', 'Historique complet et PDF pour le vétérinaire'], ['💬', 'blue', '300 questions à l\'assistant par mois']].map(function (x) { return '<div class="row"><span class="tile s ' + x[1] + '">' + x[0] + '</span><span style="font-weight:600">' + x[2] + '</span></div>'; }).join('') + '</div>' +
+      '<div style="display:flex;flex-direction:column;gap:10px" role="radiogroup" aria-label="Formule">' +
+        '<button class="list-btn" type="button" role="radio" aria-checked="' + a + '" data-action="plan" data-val="1" style="' + (a ? 'border:2px solid var(--ink)' : '') + '"><span class="grow"><span class="lb-t">Annuel · 29,99 € par an</span><span class="lb-s">Soit 2,50 € par mois</span></span><span class="chip amber">2 mois offerts</span></button>' +
+        '<button class="list-btn" type="button" role="radio" aria-checked="' + !a + '" data-action="plan" data-val="0" style="' + (!a ? 'border:2px solid var(--ink)' : '') + '"><span class="grow"><span class="lb-t">Mensuel · 3,99 € par mois</span><span class="lb-s">Sans engagement</span></span></button>' +
+      '</div>' +
+      '<button class="btn primary block" type="button" data-action="goPremium">Essayer 14 jours gratuitement</button><p class="muted small" style="text-align:center">Aucun débit pendant l\'essai. Annulable en un geste depuis ton compte.</p><button class="btn soft block" type="button" data-action="back">Plus tard</button>' +
+    '</div>';
+  };
+
+  V.urgence = function () {
+    var t = TOX[S.tox], p = S.profile, mm = Math.floor(S.chrono / 60), ss = S.chrono % 60, col = t.lvl === 'ok' ? 'green' : 'rose';
+    return top('Mon chien a mangé…') + '<div class="screen"><div class="split"><div style="display:flex;flex-direction:column;gap:16px">' +
+      '<div class="field"><label for="toxq">Qu\'a-t-il mangé ?</label><input class="input" id="toxq" list="toxlist" value="' + esc(S.tox) + '" placeholder="raisin, chocolat, oignon…" autocomplete="off"><datalist id="toxlist">' + Object.keys(TOX).map(function (k) { return '<option value="' + k + '"></option>'; }).join('') + '</datalist></div>' +
+      '<div class="chips">' + Object.keys(TOX).map(function (k) { return '<button class="chip' + (S.tox === k ? ' ink' : '') + '" type="button" data-tox="' + k + '">' + k + '</button>'; }).join('') + '</div>' +
+      '<section class="card ' + col + '" style="border:2px solid var(--' + col + '-ink)"><div class="row"><span class="tile ' + col + '">' + (t.lvl === 'ok' ? '✓' : '⚠️') + '</span><div class="big grow" style="font-size:28px;color:var(--' + col + '-ink)">' + t.title + '</div></div><p>' + t.txt + '</p>' + (t.art ? '<button class="link" type="button" data-art="' + t.art + '">Lire le guide complet →</button>' : '') + '</section>' +
+      '</div><div style="display:flex;flex-direction:column;gap:16px">' +
+      (t.lvl !== 'ok' ? (
+        '<section class="card"><div class="row"><div class="grow"><div class="eyebrow">Ingéré il y a</div><div class="big" style="font-size:44px">' + (mm < 10 ? '0' : '') + mm + ':' + (ss < 10 ? '0' : '') + ss + '</div></div><button class="btn soft sm" type="button" data-action="chrono">' + (S.chronoOn ? 'Arrêter' : 'Démarrer') + '</button></div><p class="muted small">Le délai compte : le vétérinaire te le demandera.</p></section>' +
+        '<div class="card rose"><div class="lb-t">Centre antipoison vétérinaire</div><div class="big" style="font-size:24px;user-select:all">[numéro vérifié selon le pays]</div><p class="muted small">Le bon numéro s\'affiche selon ton pays.</p></div>' +
+        '<button class="btn dark block" type="button" data-action="toast" data-msg="Recherche du vétérinaire de garde le plus proche">Vétérinaire de garde près de moi</button>' +
+        '<section class="card"><div class="lb-t">À montrer au vétérinaire</div><div class="small" style="display:grid;grid-template-columns:auto 1fr;gap:4px 12px"><span class="muted">Chien</span><span>' + nm() + ', ' + breed().name + '</span><span class="muted">Poids</span><span>' + dec(p.weight) + ' kg</span><span class="muted">Aliment</span><span>' + esc(S.tox) + '</span><span class="muted">Quantité</span><span>[à saisir]</span><span class="muted">Heure</span><span>[heure de l\'ingestion]</span></div></section>' +
+        '<p class="muted small">Ne fais pas vomir ton chien sans l\'avis d\'un vétérinaire.</p>'
+      ) : '<p class="muted">En cas de doute ou de symptômes, appelle ton vétérinaire.</p>' + alist(art('chien-peut-manger-pomme'))) +
+    '</div></div></div>';
+  };
+
+  V.races = function () {
+    var q = S.raceQuery.toLowerCase(), keys = Object.keys(BREEDS).filter(function (k) { return BREEDS[k].name.toLowerCase().indexOf(q) > -1; });
+    return pageTitle('Races') + '<div class="screen">' +
+      '<div class="field" style="max-width:520px"><label for="raceq">Rechercher une race</label><input class="input" id="raceq" value="' + esc(S.raceQuery) + '" placeholder="Labrador, Berger…" autocomplete="off"></div>' +
+      '<div class="g2 to4">' + (keys.length ? keys.map(function (k) { return '<button class="racecard" type="button" data-race="' + k + '">' + img(bimg(k), BREEDS[k].name) + '<span style="font-weight:600">' + BREEDS[k].name + '</span><span class="muted small">' + BREEDS[k].w + '</span></button>'; }).join('') : '<p class="muted">Aucune race trouvée. Plus de 40 races au lancement.</p>') + '</div></div>';
+  };
+
+  V.race = function () {
+    var k = S.race, b = BREEDS[k], p = S.profile, mine = S.hasProfile && p.breed === k;
+    return top(b.name) + '<div class="screen">' +
+      '<div class="split">' + img(bimg(k), b.name, '', 'aspect-ratio:1 / 1') +
+        '<div style="display:flex;flex-direction:column;gap:14px"><span class="chip amber" style="align-self:flex-start">🐕 Race</span><h1 style="font-size:34px;line-height:1.08">' + b.name + ' : alimentation, poids et santé</h1><span class="chip green" style="align-self:flex-start">Relu par [Nom du vétérinaire]</span>' +
+          '<div class="g2">' + [['Poids adulte', b.w], ['Espérance de vie', b.life], ['Activité', b.act], ['À surveiller', b.watch]].map(function (x, i) { return '<div class="card" style="gap:2px;padding:14px"><span class="eyebrow">' + x[0] + '</span><span class="big" style="font-size:24px' + (i === 3 ? ';color:var(--orange-ink)' : '') + '">' + x[1] + '</span></div>'; }).join('') + '</div>' +
+          (mine ? '<section class="card amber"><div class="row"><span class="tile white">🐕</span><div class="grow"><div class="lb-t">' + nm() + ' pèse ' + dec(p.weight) + ' kg</div><div class="lb-s">' + (p.weight >= b.min && p.weight <= b.max ? 'Dans la fourchette de la race' : 'Hors de la fourchette : à surveiller') + '</div></div></div><button class="btn dark sm" type="button" data-go="ration">Sa ration : ' + fmt(grams(p)) + ' g par jour</button></section>' :
+            '<section class="card amber"><div class="lb-t">Tu as un ' + b.name + ' ?</div><p class="muted">Sa ration, sa courbe de poids et sa carte d\'identité en 30 secondes.</p><button class="btn primary sm" type="button" data-action="startWithBreed" data-val="' + k + '" style="align-self:flex-start">Appliquer à mon chien</button></section>') +
+        '</div></div>' +
+      '<div class="chips"><span class="chip ink">Chiot</span><span class="chip">Adulte</span><span class="chip">Senior</span><span class="chip">Santé</span><span class="chip">Coût annuel</span></div>' +
+      '<div class="split"><div style="display:flex;flex-direction:column;gap:16px">' +
+        '<section style="display:flex;flex-direction:column;gap:10px"><h2 class="h-sec">Le poids des chiens de la communauté</h2><div class="ph" style="aspect-ratio:16 / 10;border:2px dashed var(--line-2);background:var(--white);align-items:center;justify-content:center;text-align:center"><span class="muted small" style="max-width:260px">Graphique : poids médian par âge, mâles et femelles, à partir des profils Toutou Gourmet</span></div><p class="muted small">La donnée que personne d\'autre n\'a, citable par Google et par les IA.</p></section>' +
+        '<section style="display:flex;flex-direction:column;gap:8px"><div class="row"><span class="tile s green">💊</span><h2 class="h-sec">Points de vigilance</h2></div>' + (b.health.length ? b.health.map(function (h) { return '<details class="acc"><summary>' + h[0] + '</summary><div class="acc-b">' + h[1] + '</div></details>'; }).join('') : '<p class="muted">[Contenu à rédiger et faire relire par le vétérinaire]</p>') + '</section>' +
+      '</div><div style="display:flex;flex-direction:column;gap:16px">' +
+        '<section style="display:flex;flex-direction:column;gap:10px"><h2 class="h-sec">Les guides pour cette race</h2>' + alist(art('croquettes-chiot-grande-race')) + alist(art('alimentation-chien-sportif-avant-apres-effort')) + '</section>' +
+        partnerCard('Les croquettes les mieux notées pour ' + b.name, 'Classement du scanner · liens partenaires signalés') +
+      '</div></div>' +
+      '<section style="display:flex;flex-direction:column;gap:10px"><h2 class="h-sec">Races proches</h2><div class="hscroll to-grid">' + b.near.map(function (n) { return racecard(n, 120); }).join('') + '</div></section>' +
+    '</div>';
+  };
+
+  V.garde = function () {
+    var p = S.profile, g = grams(p), m = meals(p);
+    function item(ok, t, s) { return '<div class="list-btn"><span class="tile s ' + (ok ? 'green' : '') + '">' + (ok ? '✓' : '…') + '</span><span class="grow"><span class="lb-t" style="font-size:16px">' + t + '</span><span class="lb-s">' + s + '</span></span></div>'; }
+    return top('Fiche de garde') + '<div class="screen narrow">' +
+      '<div><h1 style="font-size:30px">' + nm() + ' part en garde</h1><p class="muted">Pré-remplie depuis son profil. Il reste à compléter ses habitudes.</p></div>' +
+      '<div class="g2"><div class="field"><label for="g-from">Du</label><input class="input" id="g-from" type="date" value="2027-08-12"></div><div class="field"><label for="g-to">Au</label><input class="input" id="g-to" type="date" value="2027-08-19"></div></div>' +
+      '<div class="field"><label for="g-who">Gardé par</label><input class="input" id="g-who" placeholder="Prénom du gardien ou nom de la pension"></div>' +
+      '<section style="display:flex;flex-direction:column;gap:8px">' + item(true, 'Repas', m + ' × ' + Math.round(g / m) + ' g · 7 h 30 et 18 h 30 · ' + esc(p.food)) + item(true, 'Interdits', 'Raisin, chocolat, oignon, xylitol') + item(true, 'Urgence', 'Vétérinaire habituel, urgences 24 h/24, puce') + item(false, 'Habitudes', 'Peurs, promenades, règles de la maison · à compléter') + item(false, 'Autorisation de soins', 'Signée en ligne, plafond de [montant] €') + '</section>' +
+      '<button class="list-btn green" type="button" data-action="journal"><span class="tile green">📸</span><span class="grow"><span class="lb-t" style="font-size:16px">Journal de séjour avec photos</span><span class="lb-s">Le gardien coche repas et promenades, tu reçois la carte du jour par email</span></span><span class="chip ' + (S.journal ? 'green' : 'amber') + '">' + (S.journal ? 'Activé' : 'Premium') + '</span></button>' +
+      '<section class="card"><div class="lb-t">Envoyer au gardien</div><div class="g2" style="grid-template-columns:repeat(3,minmax(0,1fr))"><button class="btn soft sm" type="button" data-action="copyLink">Lien</button><button class="btn soft sm" type="button" data-action="qr">QR code</button><button class="btn soft sm" type="button" data-action="toast" data-msg="PDF A4 prêt (aperçu)">PDF</button></div><p class="muted small">Le lien expire après le séjour, n\'est jamais indexé et se révoque en un geste.</p></section>' +
+      '<button class="btn dark block" type="button" data-go="gardien">Voir comme le gardien</button>' +
+    '</div>';
+  };
+
+  V.gardien = function () {
+    var p = S.profile, g = grams(p), m = meals(p), sp = S.sitter;
+    function chk(k, t, s) { return '<button class="check" type="button" data-sit="' + k + '" aria-pressed="' + sp[k] + '"><span class="box">✓</span><span class="ct grow"><b>' + t + '</b><br><span class="small">' + s + '</span></span></button>'; }
+    return '<div style="background:var(--green-bg)"><div style="max-width:760px;margin:0 auto;padding:10px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px));display:flex;align-items:center;gap:8px"><span class="small grow" style="color:var(--green-ink);font-weight:600">Vue du gardien · sans compte ni application</span><button class="link" type="button" data-action="back" style="padding:4px 0">Quitter</button></div></div>' +
+    '<div class="screen narrow" style="padding-top:16px">' +
+      '<div class="row">' + img(bimg(p.breed), '', '', 'width:76px;height:76px;flex-shrink:0;border-radius:20px') + '<div class="grow"><h1 style="font-size:28px">Salut ! Voici ' + nm() + '.</h1><p class="muted small">Du 12 au 19 août · fiche de [Prénom du maître]</p></div></div>' +
+      '<section style="display:flex;flex-direction:column;gap:8px"><h2 class="h-sec">Aujourd\'hui</h2>' + chk('matin', 'Repas du matin', Math.round(g / m) + ' g · 7 h 30') + chk('promenade', 'Promenade', '45 minutes, en laisse près de la route') + chk('soir', 'Repas du soir', Math.round(g / m) + ' g · 18 h 30') + chk('medoc', 'Médicament', '[nom, dose] · pendant le repas du soir') + '</section>' +
+      '<section class="card"><div class="lb-t">La photo du jour</div>' + (S.sitterPhoto ? '<div class="img" style="aspect-ratio:4 / 3"><img alt="Photo du jour" src="' + S.sitterPhoto + '"></div><p class="muted small">Envoyée à [Prénom du maître]. Conservée 30 jours après le séjour.</p>' : '<p class="muted small">Elle part directement au maître avec la carte du jour.</p>') + '<label class="btn primary sm" for="sitPhoto" style="cursor:pointer">📷 Ajouter la photo du jour</label><input id="sitPhoto" type="file" accept="image/*" hidden></section>' +
+      '<section style="display:flex;flex-direction:column;gap:8px"><h2 class="h-sec">Les consignes</h2>' +
+        '<details class="acc"><summary><span class="tile s">🥣</span>Repas</summary><div class="acc-b"><p>' + m + ' repas de ' + Math.round(g / m) + ' g de ' + esc(p.food) + '. Pas de restes de table.</p><p>Friandises autorisées : carotte, pomme sans pépins.</p></div></details>' +
+        '<details class="acc"><summary><span class="tile s rose">⚠️</span>Interdits</summary><div class="acc-b"><p>Raisin, chocolat, oignon, ail, chewing-gum sans sucre.</p><button class="link" type="button" data-go="urgence">Il a mangé quelque chose ? →</button></div></details>' +
+        '<details class="acc"><summary><span class="tile s blue">🐾</span>Habitudes</summary><div class="acc-b"><p>[Peurs, promenades, règles de la maison, ce qu\'il ne faut pas faire]</p></div></details>' +
+        '<details class="acc"><summary><span class="tile s green">💊</span>Urgence</summary><div class="acc-b"><p>Vétérinaire habituel : [nom, numéro]</p><p>Urgences 24 h/24 : [numéro]</p><p>Autorisation de soins signée jusqu\'à [montant] € (PDF)</p></div></details>' +
+      '</section>' +
+      '<button class="card green" type="button" data-action="viral" style="text-align:left;border:0"><span class="wm" aria-hidden="true">🐾</span><span class="lb-t">Tu gardes des chiens ?</span><span class="lb-s">Crée les fiches de tes clients gratuitement, à tes couleurs avec l\'offre pro.</span><span class="small" style="color:var(--green-ink);font-weight:600">Découvrir Toutou Gourmet →</span></button>' +
+    '</div>';
+  };
+
+  V.assistant = function () {
+    var lim = S.premium ? 300 : 20;
+    return top('Assistant', { right: '<span class="chip blue">' + S.msgs + ' / ' + lim + '</span>' }) + '<div class="screen narrow" style="gap:12px">' +
+      '<div class="card blue" style="flex-direction:row;align-items:center;padding:12px"><span class="tile s blue">💬</span><span class="small grow">Assistant IA Toutou Gourmet. Il connaît le profil de ' + nm() + ' et ne répond qu\'aux questions sur ton chien.</span></div>' +
+      '<div style="display:flex;flex-direction:column;gap:10px">' + S.chat.map(function (c) { return '<div class="bubble ' + c[0] + '">' + esc(c[1]) + '</div>'; }).join('') + '</div></div>';
+  };
+  V.assistant.bottom = function () { return '<form class="ctabar inline" id="chatForm" style="flex-direction:row;gap:8px"><label for="chatIn" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Ta question</label><input class="input" id="chatIn" placeholder="Ta question sur ' + nm() + '…" autocomplete="off"><button class="btn primary" type="submit" aria-label="Envoyer" style="padding:0 16px">↑</button></form>'; };
+
+  V.compte = function () {
+    var p = S.profile;
+    if (!S.logged) return pageTitle('Compte') + '<div class="screen narrow"><div class="card amber"><div class="lb-t">Crée ton compte gratuit</div><p class="muted">Plusieurs chiens, suivi du poids, fiche de garde, 5 analyses par mois.</p><button class="btn primary block" type="button" data-go="signup">Créer mon compte</button><button class="btn soft block" type="button" data-go="signup">J\'ai déjà un compte</button></div>' + langBlock() + '</div>';
+    var lim = S.premium ? 50 : 5, ml = S.premium ? 300 : 20;
+    return pageTitle('Compte') + '<div class="screen narrow">' +
+      '<div class="card"><div class="row"><span class="tile">🙂</span><div class="grow"><div class="lb-t">toi@exemple.com</div><div class="lb-s">1 chien · ' + nm() + '</div></div><span class="chip ' + (S.premium ? 'amber' : '') + '">' + (S.premium ? 'Premium (essai)' : 'Gratuit') + '</span></div></div>' +
+      '<section class="card"><div class="lb-t">Ce mois-ci</div>' +
+        '<div style="display:flex;flex-direction:column;gap:6px"><div class="row small"><span class="grow">Analyses d\'étiquette</span><span style="font-variant-numeric:tabular-nums">' + S.scansUsed + ' / ' + lim + '</span></div><div class="bar"><span style="width:' + Math.min(100, S.scansUsed / lim * 100) + '%;background:var(--blue-ink)"></span></div></div>' +
+        '<div style="display:flex;flex-direction:column;gap:6px"><div class="row small"><span class="grow">Questions à l\'assistant</span><span style="font-variant-numeric:tabular-nums">' + S.msgs + ' / ' + ml + '</span></div><div class="bar"><span style="width:' + Math.min(100, S.msgs / ml * 100) + '%;background:var(--blue-ink)"></span></div></div>' +
+        (S.premium ? '' : '<button class="btn primary block sm" type="button" data-go="premium">Passer Premium</button>') + '</section>' +
+      langBlock() +
+      '<section style="display:flex;flex-direction:column;gap:8px"><button class="list-btn" type="button" data-action="toast" data-msg="Export du compte (données + photos) en préparation"><span class="grow"><span class="lb-t" style="font-size:16px">Exporter mes données</span></span><span class="chev">›</span></button><button class="list-btn" type="button" data-action="toast" data-msg="Suppression : confirmation demandée par email"><span class="grow"><span class="lb-t" style="font-size:16px">Supprimer mon compte</span><span class="lb-s">Efface aussi toutes les photos</span></span><span class="chev">›</span></button></section>' +
+    '</div>';
+  };
+  function langBlock() {
+    var L = [['fr', 'Français'], ['en', 'English'], ['nl', 'Nederlands'], ['de', 'Deutsch'], ['es', 'Español']];
+    return '<section class="card"><div class="lb-t">Langue</div><div class="seg">' + L.map(function (l) { return '<button type="button" data-lang="' + l[0] + '" aria-pressed="' + (S.lang === l[0]) + '">' + l[1] + '</button>'; }).join('') + '</div><p class="muted small">Unités, devise, centres antipoison et partenaires s\'adaptent au pays. Dans ce prototype, seul le français est rédigé.</p></section>';
+  }
+
+  var PLAN = [
+    ['home', 'Accueil (public)'], ['guides', 'Guides'], ['article', 'Article'], ['races', 'Races'], ['race', 'Hub race'],
+    ['onboard', 'Création du profil'], ['carte', 'Carte d\'identité'], ['signup', 'Inscription'], ['dog', 'Mon chien'],
+    ['tools', 'Outils'], ['ration', 'Ration'], ['scan', 'Scanner'], ['score', 'Résultat du scan'], ['premium', 'Premium'],
+    ['urgence', 'Mon chien a mangé…'], ['garde', 'Fiche de garde'], ['gardien', 'Vue du gardien'], ['assistant', 'Assistant IA'], ['compte', 'Compte']
+  ];
+
+  /* ---------- navigation ---------- */
+  var TABS = [['home', '🏠', 'Accueil'], ['guides', '📚', 'Guides'], ['scan', '🔍', 'Scanner'], ['tools', '🥣', 'Outils'], ['dog', '🐕', 'Mon chien']];
+  var TABOF = { home: 'home', races: 'home', race: 'home', guides: 'guides', article: 'guides', scan: 'scan', scanning: 'scan', score: 'scan', tools: 'tools', ration: 'tools', urgence: 'tools', dog: 'dog', carte: 'dog', assistant: 'dog', garde: 'dog', compte: 'dog', premium: 'dog' };
+  var NAVOF = { home: 'home', guides: 'guides', article: 'guides', races: 'races', race: 'races', tools: 'tools', ration: 'tools', urgence: 'tools', scan: 'scan', scanning: 'scan', score: 'scan', dog: 'dog', carte: 'dog', garde: 'dog', assistant: 'dog' };
+  var NOTAB = { onboard: 1, signup: 1, gardien: 1, scanning: 1 };
+  function tabbar() {
+    var cur = TABOF[S.screen];
+    return '<nav class="tabbar" aria-label="Navigation principale">' + TABS.map(function (t) {
+      var label = t[0] === 'dog' && S.hasProfile ? nm() : t[2];
+      return '<button class="tab' + (t[0] === 'scan' ? ' fab' : '') + '" type="button" data-tab="' + t[0] + '"' + (cur === t[0] ? ' aria-current="page"' : '') + '><span class="ic" aria-hidden="true">' + t[1] + '</span><span>' + label + '</span></button>';
+    }).join('') + '</nav>';
+  }
+  function dhead() {
+    if (MODE !== 'desk' || S.screen === 'gardien') return '';
+    var cur = NAVOF[S.screen];
+    var nav = [['guides', 'Guides'], ['races', 'Races'], ['tools', 'Outils'], ['scan', 'Scanner']];
+    return '<header class="dhead"><div class="dhead-in"><button class="brand" type="button" data-tab="home" aria-label="Accueil"><span class="logo">🐶</span><span class="w">Toutou <span>Gourmet</span></span></button>' +
+      '<nav class="dnav" aria-label="Navigation principale">' + nav.map(function (n) { return '<button type="button" data-tab="' + n[0] + '"' + (cur === n[0] ? ' aria-current="page"' : '') + '>' + n[1] + '</button>'; }).join('') + '</nav>' +
+      (S.hasProfile ? '<button class="chip ink" type="button" data-tab="dog" style="min-height:44px;padding:0 16px">🐕 ' + nm() + '</button>' : '') +
+      (S.logged ? '<button class="iconbtn" type="button" data-tab="compte" aria-label="Compte">🙂</button>' : '<button class="btn soft sm" type="button" data-go="signup">Connexion</button>' + (S.hasProfile ? '' : '<button class="btn primary sm" type="button" data-go="onboard">Créer le profil de mon chien</button>')) +
+    '</div></header>';
+  }
+  function guard(s) {
+    if (s === 'dog' && !S.hasProfile) return 'onboard';
+    if (s === 'onboard' && !S.draft) startDraft();
+    return s;
+  }
+  function startDraft(breedKey) {
+    if (S.hasProfile) S.draft = { name: 'Biscotte', breed: breedKey || 'jack-russell', age: 0.5, weight: 4, ster: false, activity: 'normal' };
+    else S.draft = { name: 'Pepper', breed: breedKey || 'berger-australien', age: 4, weight: 22, ster: true, activity: 'sportif' };
+    S.step = 0;
+  }
+  function go(s, push) {
+    if (s === 'onboard') S.draft = null;
+    s = guard(s);
+    if (push !== false && S.screen !== s) S.stack.push(S.screen);
+    S.screen = s; render(true);
+  }
+  function back() { var prev = S.stack.pop() || 'home'; S.screen = guard(prev); render(true); }
+  function needAccount(next) {
+    if (S.logged) return false;
+    sheet('<div class="row"><span class="tile blue">🔍</span><div class="lb-t grow">Un compte gratuit, et c\'est parti</div></div><p class="muted">Les analyses, l\'assistant et la fiche de garde demandent un compte : ça nous protège des robots, et tes données sont gardées.</p>' +
+      '<div class="card" style="gap:6px"><div class="small">✓ 5 analyses d\'étiquette par mois</div><div class="small">✓ 20 questions à l\'assistant</div><div class="small">✓ Fiche de garde en lien, QR code et PDF</div></div>' +
+      '<button class="btn primary block" type="button" data-action="gateSignup">Créer mon compte gratuit</button><button class="btn soft block" type="button" data-action="closeSheet">Plus tard</button>');
+    return true;
+  }
+
+  /* ---------- rendu ---------- */
+  var shell = document.getElementById('shell'), main = document.getElementById('main'), bottom = document.getElementById('bottom'), overlay = document.getElementById('overlay'), dh = document.getElementById('dhead');
+  function render(scrollTop) {
+    shell.className = 'shell ' + MODE;
+    document.querySelectorAll('[data-mode]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.mode === MODE)); });
+    var v = V[S.screen] || V.home, y = main.scrollTop;
+    dh.innerHTML = dhead();
+    main.innerHTML = v();
+    var b = v.bottom ? v.bottom() : '';
+    if (MODE === 'desk' && (S.screen === 'onboard' || S.screen === 'assistant')) { main.insertAdjacentHTML('beforeend', b); b = ''; }
+    if (!NOTAB[S.screen]) b += tabbar();
+    if (S.screen === 'home' && !S.hasProfile) b = '<div class="ctabar m-cta"><button class="btn primary block" type="button" data-go="onboard">Créer le profil de mon chien</button><span class="small">Gratuit · 30 secondes · sans compte</span></div>' + b;
+    bottom.innerHTML = b;
+    main.scrollTop = scrollTop ? 0 : y;
+    try { if (location.hash.slice(1) !== S.screen) history.replaceState(null, '', '#' + S.screen); } catch (e) { }
+    if (S.screen === 'assistant') main.scrollTop = main.scrollHeight;
+  }
+  function sheet(html) { overlay.innerHTML = '<div class="sheet-wrap" data-action="closeSheetBg"><div class="sheet" role="dialog" aria-modal="true"><span class="grab" aria-hidden="true"></span>' + html + '</div></div>'; }
+  function closeSheet() { overlay.innerHTML = ''; }
+  var toastT;
+  function toast(msg) {
+    var old = document.querySelector('.toast'); if (old) old.remove();
+    var el = document.createElement('div'); el.className = 'toast'; el.setAttribute('role', 'status'); el.textContent = msg;
+    document.getElementById('app').appendChild(el);
+    clearTimeout(toastT); toastT = setTimeout(function () { el.remove(); }, 2400);
+  }
+  function clearTimers() { timers.forEach(clearTimeout); timers = []; }
+  function runScan() {
+    if (needAccount('scan')) return;
+    if (!S.premium && S.scansUsed >= 5) { go('premium'); return; }
+    S.scanStep = 0; go('scanning'); clearTimers();
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches, d = reduce ? 150 : 750;
+    for (var i = 1; i <= 5; i++) (function (i) {
+      timers.push(setTimeout(function () {
+        if (S.screen !== 'scanning') return;
+        S.scanStep = i;
+        if (i < 5) render(false); else { S.scansUsed++; S.lastFood = SAMPLE_FOOD; S.stack.pop(); S.screen = 'scan'; go('score'); }
+      }, d * i));
+    })(i);
+  }
+  function readImg(file, cb) { if (!file) return; var r = new FileReader(); r.onload = function () { cb(r.result); }; r.readAsDataURL(file); }
+  var chronoT;
+  function tickChrono() { clearInterval(chronoT); if (!S.chronoOn) return; chronoT = setInterval(function () { S.chrono++; if (S.screen === 'urgence') render(false); }, 1000); }
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion) setInterval(function () { S.word++; var w = document.getElementById('word'); if (w) w.textContent = WORDS[S.word % WORDS.length]; }, 2000);
+
+  /* ---------- événements ---------- */
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest('button, [data-action="closeSheetBg"]');
+    if (!t) return;
+    var d = t.dataset;
+    if (d.action === 'closeSheetBg') { if (e.target === t) closeSheet(); return; }
+    if (d.mode) { MODE = d.mode; render(true); return; }
+    if (d.go) {
+      closeSheet();
+      if ((d.go === 'garde' || d.go === 'assistant') && needAccount(d.go)) return;
+      go(d.go); return;
+    }
+    if (d.plan) {
+      closeSheet(); var s = d.plan;
+      if (['dog', 'carte', 'garde', 'gardien', 'assistant', 'score', 'compte'].indexOf(s) > -1) S.hasProfile = true;
+      if (['garde', 'assistant', 'compte'].indexOf(s) > -1) S.logged = true;
+      if (s === 'score') S.lastFood = SAMPLE_FOOD;
+      if (s === 'onboard') S.draft = null;
+      S.stack = s === 'home' ? [] : ['home']; S.screen = guard(s); render(true); return;
+    }
+    if (d.tab) { closeSheet(); S.stack = d.tab === 'home' ? [] : ['home']; if (d.tab === 'dog' && !S.hasProfile) S.draft = null; S.screen = guard(d.tab); render(true); return; }
+    if (d.art) { S.art = d.art; go('article'); return; }
+    if (d.cat) { S.cat = d.cat; render(false); return; }
+    if (d.anchor) { var el = document.getElementById(d.anchor); if (el) main.scrollTop = el.getBoundingClientRect().top - main.getBoundingClientRect().top + main.scrollTop - 16; return; }
+    if (d.race) { S.race = d.race; go('race'); return; }
+    if (d.set) { var v = d.val; if (d.set === 'ster') v = v === '1'; S.draft[d.set] = v; render(false); return; }
+    if (d.pset) { S.profile[d.pset] = d.val; render(false); return; }
+    if (d.meal) { S.meals[d.meal] = !S.meals[d.meal]; render(false); if (S.meals[d.meal]) toast('Noté : repas du ' + d.meal + ' donné'); return; }
+    if (d.sit) { S.sitter[d.sit] = !S.sitter[d.sit]; render(false); if (S.sitter[d.sit]) toast('Le maître est prévenu'); return; }
+    if (d.tox) { S.tox = d.tox; S.chrono = 0; S.chronoOn = false; tickChrono(); render(false); return; }
+    if (d.lang) { S.lang = d.lang; render(false); if (d.lang !== 'fr') toast('Aperçu : seul le français est rédigé'); return; }
+    switch (d.action) {
+      case 'back': clearTimers(); back(); break;
+      case 'planSheet':
+        sheet('<div class="lb-t">Écrans du prototype</div><div class="plan-sheet">' + PLAN.map(function (x, i) { return '<button type="button" data-plan="' + x[0] + '"><span class="n">' + (i + 1 < 10 ? '0' : '') + (i + 1) + '</span>' + x[1] + '</button>'; }).join('') + '</div><button class="btn soft block" type="button" data-action="reset">Recommencer comme un visiteur</button>');
+        break;
+      case 'obback': if (S.step > 0) { S.step--; render(true); } else back(); break;
+      case 'obnext':
+        var ni = document.getElementById('ob-name'); if (ni) S.draft.name = ni.value.trim() || 'Pepper';
+        if (S.step < 3) { S.step++; render(true); }
+        else {
+          var dr = S.draft;
+          S.profile = { name: dr.name, breed: dr.breed, age: dr.age, weight: dr.weight, ster: dr.ster, activity: dr.activity, kcalkg: S.profile.kcalkg, food: S.profile.food };
+          S.hasProfile = true; S.draft = null; S.weights = [dr.weight - 1.2, dr.weight - 0.8, dr.weight - 0.5, dr.weight - 0.2, dr.weight - 0.1, dr.weight];
+          S.stack = ['home', 'dog']; S.screen = 'carte'; render(true);
+        }
+        break;
+      case 'addDog': S.draft = null; startDraft(); S.stack.push(S.screen); S.screen = 'onboard'; render(true); break;
+      case 'age':
+        var a = S.draft.age, st = +d.d;
+        a = a < 1 ? (st > 0 ? (a >= 11 / 12 - 0.01 ? 1 : a + 1 / 12) : Math.max(2 / 12, a - 1 / 12)) : (st < 0 && a <= 1 ? 11 / 12 : a + st);
+        S.draft.age = Math.min(20, Math.round(a * 1000) / 1000); render(false); break;
+      case 'w': S.draft.weight = Math.max(1, Math.round((S.draft.weight + +d.d) * 10) / 10); render(false); break;
+      case 'pw': S.profile.weight = Math.max(1, Math.round((S.profile.weight + +d.d) * 10) / 10); render(false); break;
+      case 'signup': doSignup(); break;
+      case 'gateSignup': closeSheet(); go('signup'); break;
+      case 'closeSheet': closeSheet(); break;
+      case 'share':
+        var what = d.what, p = S.profile;
+        sheet('<div class="lb-t">Partager ' + (what === 'score' ? 'le score' : 'la carte de ' + nm()) + '</div>' +
+          (what === 'score' ? '<div class="card inkcard" style="padding:14px;gap:6px"><div class="eyebrow" style="color:var(--blue)">Analyse d\'étiquette</div><div class="big" style="font-size:54px;color:var(--orange)">' + foodScore(SAMPLE_FOOD).total + '<span style="font-size:24px;color:var(--cream)">/10</span></div><div class="small">Scanne la tienne sur Toutou Gourmet</div></div>' :
+          '<div class="idcard" style="padding:14px;gap:8px;flex-direction:row;align-items:center">' + img(bimg(p.breed), '', '', 'width:90px;height:90px;flex-shrink:0;border-radius:16px;border:3px solid var(--ink)') + '<div class="grow"><div class="big" style="font-size:34px">' + nm() + '</div><div class="big" style="font-size:24px">' + humanAge(p.age) + ' ans humains</div><div class="small" style="font-weight:600">Crée la carte de ton chien</div></div></div>') +
+          '<div class="g2"><button class="btn soft" type="button" data-action="toast" data-msg="Image 9:16 prête pour les stories">Story 9:16</button><button class="btn soft" type="button" data-action="toast" data-msg="Image 1200×630 prête pour WhatsApp">WhatsApp</button></div>' +
+          '<button class="btn dark block" type="button" data-action="copyLink">Copier le lien</button><p class="muted small">Le lien ouvre la carte, puis « Et ton chien ? » avec le formulaire prêt.</p>');
+        break;
+      case 'copyLink':
+        var url = 'https://www.toutou-gourmet.com/' + (S.screen === 'garde' ? 'garde/x7k2' : 'carte/' + String(S.profile.name || 'chien').toLowerCase() + '-x7k2');
+        try { navigator.clipboard.writeText(url).then(function () { toast('Lien copié'); }, function () { toast(url); }); } catch (er) { toast(url); }
+        break;
+      case 'qr': sheet('<div class="lb-t">QR code à coller sur le frigo</div><div class="ph" style="aspect-ratio:1 / 1;max-width:240px;align-self:center;width:100%;background:var(--white);border:2px dashed var(--line-2);align-items:center;justify-content:center"><span class="muted small">[QR code du lien de garde]</span></div><button class="btn soft block" type="button" data-action="closeSheet">Fermer</button>'); break;
+      case 'journal': if (!S.premium) go('premium'); else { S.journal = !S.journal; render(false); } break;
+      case 'scanSample': S.scanImg = null; runScan(); break;
+      case 'useFood': S.profile.kcalkg = +d.kk; S.profile.food = SAMPLE_FOOD.name; toast('Croquette enregistrée pour la ration'); go('ration'); break;
+      case 'plan': S.annual = d.val === '1'; render(false); break;
+      case 'goPremium': S.premium = true; S.logged = true; S.hasProfile = true; toast('Essai Premium activé · aucun débit pendant 14 jours'); back(); break;
+      case 'weigh': sheet('<div class="lb-t">Nouvelle pesée de ' + nm() + '</div><div class="field"><label for="wIn">Poids en kg</label><input class="input" id="wIn" type="number" inputmode="decimal" step="0.1" value="' + S.profile.weight + '"></div><button class="btn primary block" type="button" data-action="saveW">Enregistrer</button>'); break;
+      case 'saveW':
+        var wv = parseFloat((document.getElementById('wIn') || {}).value);
+        if (wv > 0) { S.profile.weight = Math.round(wv * 10) / 10; S.weights.push(S.profile.weight); if (S.weights.length > 8) S.weights.shift(); }
+        closeSheet(); render(false); toast('Pesée enregistrée · ration recalculée : ' + grams(S.profile) + ' g'); break;
+      case 'chrono': S.chronoOn = !S.chronoOn; tickChrono(); render(false); break;
+      case 'soon':
+        var SOON = { croissance: ['⚖️', 'Courbe de croissance', 'Fourchette de poids adulte selon la race, mode chien croisé, alerte si le chiot sort de la zone. Phase 2.'], transition: ['🥩', 'Changer de croquettes', 'Plan jour par jour sur 7 à 10 jours et suivi des selles. Phase 3, avec offres de bienvenue des partenaires.'], budget: ['💰', 'Budget annuel', 'Coût de l\'alimentation, des soins et de l\'assurance, par pays. Prévu plus tard.'], methode: ['🔍', 'La méthode publique', 'Protéines et glucides sur matière sèche, viande en premier ingrédient, additifs. Relue par un vétérinaire, jamais influencée par l\'affiliation.'] }[d.what];
+        sheet('<div class="row"><span class="tile">' + SOON[0] + '</span><div class="lb-t grow">' + SOON[1] + '</div></div><p class="muted">' + SOON[2] + '</p><button class="btn soft block" type="button" data-action="closeSheet">Fermer</button>');
+        break;
+      case 'startWithBreed': S.draft = null; startDraft(d.val); S.draft.breed = d.val; S.stack.push(S.screen); S.screen = 'onboard'; render(true); break;
+      case 'viral': S.hasProfile = false; S.logged = false; S.stack = []; S.screen = 'home'; render(true); toast('Le gardien découvre Toutou Gourmet'); break;
+      case 'toast': toast(d.msg); break;
+      case 'reset': clearTimers(); clearInterval(chronoT); S = fresh(); closeSheet(); render(true); break;
+    }
+  });
+  function doSignup() { S.logged = true; S.hasProfile = true; S.stack = ['home']; S.screen = 'dog'; render(true); toast('Compte créé · ' + S.profile.name + ' est enregistré'); }
+  document.addEventListener('input', function (e) {
+    var t = e.target;
+    if (t.id === 'ob-name') S.draft.name = t.value;
+    if (t.id === 'raceq') { S.raceQuery = t.value; var pos = t.selectionStart; render(false); var n = document.getElementById('raceq'); n.focus(); try { n.setSelectionRange(pos, pos); } catch (er) { } }
+    if (t.id === 'toxq') { var k = t.value.trim().toLowerCase(); if (TOX[k]) { S.tox = k; render(false); document.getElementById('toxq').focus(); } }
+  });
+  document.addEventListener('change', function (e) {
+    var t = e.target;
+    if (t.id === 'scanInput') readImg(t.files[0], function (u) { S.scanImg = u; runScan(); });
+    if (t.id === 'albumInput') readImg(t.files[0], function (u) { S.album = u; render(false); toast('Photo du mois ajoutée'); });
+    if (t.id === 'sitPhoto') readImg(t.files[0], function (u) { S.sitterPhoto = u; render(false); toast('Photo envoyée au maître'); });
+  });
+  document.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (e.target.id === 'signupForm') doSignup();
+    if (e.target.id === 'chatForm') {
+      var inp = document.getElementById('chatIn'), q = inp.value.trim(); if (!q) return;
+      if (needAccount('assistant')) return;
+      if (S.msgs >= (S.premium ? 300 : 20)) { go('premium'); return; }
+      S.chat.push(['me', q]); S.msgs++;
+      S.chat.push(['ai', 'Réponse d\'exemple : dans l\'app, l\'assistant répond en tenant compte du profil de ' + S.profile.name + ' (' + breed().name + ', ' + dec(S.profile.weight) + ' kg). Pour un symptôme, il oriente toujours vers le vétérinaire.']);
+      render(false); var ci = document.getElementById('chatIn'); if (ci) ci.focus();
+    }
+  });
+  window.addEventListener('hashchange', function () {
+    var h = location.hash.slice(1);
+    if (V[h] && h !== S.screen && h !== 'scanning') { if (['dog', 'carte', 'garde', 'gardien', 'assistant', 'score'].indexOf(h) > -1) S.hasProfile = true; if (h === 'onboard') S.draft = null; S.screen = guard(h); render(true); }
+  });
+  var h0 = location.hash.slice(1);
+  if (V[h0] && h0 !== 'scanning') { if (['dog', 'carte', 'garde', 'gardien', 'assistant', 'score'].indexOf(h0) > -1) S.hasProfile = true; if (h0 === 'score') S.lastFood = SAMPLE_FOOD; S.screen = guard(h0); if (h0 !== 'home') S.stack = ['home']; }
+  render(true);
+})();
+</script>
