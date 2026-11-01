@@ -185,7 +185,7 @@ export default async function ArticleCategoryPage({ params }: Props) {
         article={article}
         breadcrumb={[
           { label: 'Accueil', href: '/' },
-          { label: 'Chien', href: '/chien' },
+          { label: 'Guides', href: '/chien' },
           ...(cat ? [{ label: cat.label, href: `/chien/${category}` }] : []),
           { label: frontmatter.title },
         ]}

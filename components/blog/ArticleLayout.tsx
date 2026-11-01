@@ -86,6 +86,7 @@ export function ArticleLayout({
                 <TLDR items={tldrItems} />
               </div>
             ) : null}
+            <SummarizeWithAI title={frontmatter.title} url={canonicalUrl} domain="toutou-gourmet.com" />
             {breed ? (
               <>
                 <RaceFoodSection breed={breed} foods={getFoodVerdicts()} />
@@ -94,7 +95,6 @@ export function ArticleLayout({
               </>
             ) : null}
             <div className="mdx-content mt-6">{children}</div>
-            <SummarizeWithAI title={frontmatter.title} url={canonicalUrl} domain="toutou-gourmet.com" />
             <AuthorBox author={DEFAULT_AUTHOR} />
             <RelatedArticles currentSlug={currentSlug ?? slug} categorySlug={catSlug} allArticles={allArticles} />
             <div className="mt-12">

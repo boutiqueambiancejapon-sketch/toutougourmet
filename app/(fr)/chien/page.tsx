@@ -1,7 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getArticlesByCategory } from '@/lib/mdx'
+import { getAllArticles, getArticlesByCategory } from '@/lib/mdx'
 import { categories } from '@/data/categories'
+import { getCategoryPill, type OgTone } from '@/lib/og/tokens'
+import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
+import { ArticleTile } from '@/components/article/ArticleTile'
 
 export const metadata: Metadata = {
   title: 'Alimentation et santé du chien — Guides & Conseils',
@@ -10,79 +13,69 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.toutou-gourmet.com/chien' },
 }
 
-const SECTION_COLORS: Record<string, { band: string; accent: string }> = {
-  'peut-manger':              { band: 'var(--pill-rose)',  accent: 'var(--accent-rose)' },
-  'alimentation-quotidienne': { band: 'var(--pill-amber)', accent: 'var(--accent-2)'   },
-  'urgences':                 { band: '#FFE0D5',           accent: 'var(--accent-1)'   },
-  'comportement-alimentaire': { band: 'var(--pill-blue)',  accent: 'var(--accent-blue)' },
-  'fruit':                    { band: 'var(--pill-rose)',  accent: 'var(--accent-rose)' },
-  'legumes':                  { band: 'var(--pill-green)', accent: 'var(--accent-3)'   },
-  'viandes':                  { band: '#FFE0D5',           accent: 'var(--accent-1)'   },
+// @cdc 04-pages — hub Guides V2 (prototype) : rubriques en tuiles colorées, puis les derniers guides.
+const TONE: Record<OgTone, string> = {
+  rose: 'bg-rose-bg hover:border-rose-ink',
+  green: 'bg-green-bg hover:border-green-ink',
+  amber: 'bg-amber-bg hover:border-amber-ink',
+  blue: 'bg-blue-bg hover:border-blue-ink',
 }
 
+/** Ordre d'affichage : questions les plus fréquentes d'abord. */
+const ORDER = ['peut-manger', 'urgences', 'alimentation-quotidienne', 'sante', 'race', 'comportement-alimentaire', 'avis-marques']
+
 export default function ChienPage() {
-  const allCats = categories.map((cat) => {
-    const count = cat.subCategorySlugs
-      ? cat.subCategorySlugs.reduce((acc, s) => acc + getArticlesByCategory(s).length, 0)
-      : getArticlesByCategory(cat.slug).length
-    const colors = SECTION_COLORS[cat.slug] ?? { band: 'var(--bg-surface-2)', accent: 'var(--text-muted)' }
-    return { ...cat, count, colors }
-  })
+  const rubriques = ORDER.map((slug) => categories.find((c) => c.slug === slug))
+    .filter((c): c is (typeof categories)[number] => Boolean(c))
+    .map((cat) => {
+      const slugs = cat.subCategorySlugs?.length ? cat.subCategorySlugs : [cat.slug]
+      const count = slugs.reduce((n, s) => n + getArticlesByCategory(s).length, 0)
+      const href = cat.slug === 'race' ? '/chien/race' : `/chien/${cat.slug}`
+      return { ...cat, count, href, tone: getCategoryPill(slugs[0]).tone }
+    })
+  const latest = [...getAllArticles()]
+    .sort((a, b) => (b.frontmatter.updatedAt || b.frontmatter.date).localeCompare(a.frontmatter.updatedAt || a.frontmatter.date))
+    .slice(0, 6)
 
   return (
-    <div className="min-h-screen py-10 px-6 md:px-10 bg-[var(--bg-primary)]">
-      <div className="max-w-[1280px] mx-auto">
+    <div className="v2 mx-auto flex max-w-page flex-col gap-10 px-4 pt-6 pb-16 md:px-8 md:pt-10">
+      <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Guides' }]} />
+      <header className="flex max-w-prose flex-col gap-3">
+        <h1 className="m-0 font-display text-[clamp(1.9rem,3.6vw,2.6rem)] font-black leading-[1.08] tracking-tight text-ink">
+          Guides nutrition et santé pour chien
+        </h1>
+        <p className="m-0 text-lg leading-relaxed text-ink-2">
+          Choisis une rubrique, ou commence par les derniers guides mis à jour.
+        </p>
+      </header>
 
-        <div className="mb-10 max-w-[640px]">
-          <p className="text-sm font-bold uppercase tracking-widest text-[var(--accent-1)] mb-2">
-            Alimentation chien
-          </p>
-          <h1 className="page-title mb-3">
-            Guides nutrition & santé pour chien
-          </h1>
-          <p className="text-base text-[var(--text-secondary)]">
-            Explore nos guides par thème — aliments autorisés, bien nourrir au quotidien, urgences et comportements.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {allCats.map(({ slug, label, description, emoji, count, colors }) => (
-            <Link
-              key={slug}
-              href={`/chien/${slug}`}
-              className="group flex flex-col rounded-[var(--radius-xl)] overflow-hidden border border-[var(--border)] hover:-translate-y-2 hover:shadow-[var(--shadow-xl)] hover:border-transparent transition-all duration-300"
-            >
-              <div
-                className="px-5 pt-5 pb-4 flex items-start justify-between"
-                style={{ background: colors.band }}
-              >
-                <span className="text-3xl leading-none">{emoji}</span>
-                <span
-                  className="text-xs font-bold uppercase tracking-wide opacity-0 group-hover:opacity-100 transition-opacity"
-                  style={{ color: colors.accent }}
-                >
-                  Voir →
+      <nav aria-label="Rubriques">
+        <ul role="list" className="m-0 grid list-none grid-cols-1 gap-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
+          {rubriques.map((r) => (
+            <li key={r.slug}>
+              <Link href={r.href} className={`flex h-full items-start gap-4 rounded-card border border-transparent p-5 text-ink no-underline ${TONE[r.tone]}`}>
+                <span aria-hidden="true" className="grid size-12 shrink-0 place-items-center rounded-control bg-paper text-2xl">{r.emoji}</span>
+                <span className="flex flex-col gap-1">
+                  <span className="font-display text-lg font-black leading-tight">{r.label}</span>
+                  <span className="line-clamp-2 text-sm text-ink-2">{r.description}</span>
+                  <span className="text-xs font-semibold text-ink-2">{r.count} guides</span>
                 </span>
-              </div>
-              <div className="flex flex-col flex-1 bg-[var(--bg-surface)] px-5 pt-4 pb-5 gap-2">
-                <p
-                  className="font-bold text-[var(--text-primary)] leading-snug"
-                  style={{ fontFamily: "'Fraunces', serif", fontSize: '0.9375rem' }}
-                >
-                  {label}
-                </p>
-                <p className="text-xs text-[var(--text-secondary)] line-clamp-2 leading-relaxed flex-1">
-                  {description}
-                </p>
-                <p className="text-xs font-semibold mt-1" style={{ color: colors.accent }}>
-                  {count} article{count > 1 ? 's' : ''}
-                </p>
-              </div>
-            </Link>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
+      </nav>
 
-      </div>
+      <section aria-labelledby="derniers" className="flex flex-col gap-4">
+        <h2 id="derniers" className="m-0 font-display text-2xl font-black text-ink">Les derniers guides</h2>
+        <ul role="list" className="m-0 grid list-none grid-cols-1 gap-6 p-0 sm:grid-cols-2 lg:grid-cols-3">
+          {latest.map((a) => (
+            <li key={a.slug}>
+              <ArticleTile article={a} />
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   )
 }

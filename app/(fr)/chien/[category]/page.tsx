@@ -70,7 +70,7 @@ export default async function CategoryPage({ params }: Props) {
   return (
     <div className="v2 mx-auto flex max-w-page flex-col gap-8 px-4 pt-6 pb-16 md:px-8 md:pt-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Chien', href: '/chien' }, { label: cat.label }]} />
+      <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Guides', href: '/chien' }, { label: cat.label }]} />
 
       <header className="flex max-w-prose flex-col gap-3">
         <span className="self-start rounded-pill bg-amber px-3.5 py-1.5 text-sm font-semibold text-amber-ink">

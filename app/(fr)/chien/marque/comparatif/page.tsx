@@ -29,7 +29,7 @@ export default function ComparatifHubPage() {
       <div className="max-w-[860px] mx-auto">
         <Breadcrumb items={[
           { label: 'Accueil', href: '/' },
-          { label: 'Chien', href: '/chien' },
+          { label: 'Guides', href: '/chien' },
           { label: 'Marques', href: '/chien/marque' },
           { label: 'Comparatifs' },
         ]} />

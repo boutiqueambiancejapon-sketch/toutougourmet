@@ -235,7 +235,7 @@ function BrandPage({ brand }: { brand: Brand }) {
         <div className="max-w-[860px] mx-auto flex flex-col gap-10">
           <Breadcrumb items={[
             { label: 'Accueil', href: '/' },
-            { label: 'Chien', href: '/chien' },
+            { label: 'Guides', href: '/chien' },
             { label: 'Marques', href: '/chien/marque' },
             { label: brand.name },
           ]} />
@@ -426,7 +426,7 @@ function VsPage({ brandA, brandB }: { brandA: Brand; brandB: Brand }) {
         <div className="max-w-[860px] mx-auto flex flex-col gap-10">
           <Breadcrumb items={[
             { label: 'Accueil', href: '/' },
-            { label: 'Chien', href: '/chien' },
+            { label: 'Guides', href: '/chien' },
             { label: 'Marques', href: '/chien/marque' },
             { label: `${brandA.name} vs ${brandB.name}` },
           ]} />
@@ -575,7 +575,7 @@ function ComparatifMdxPage({
       <article className="max-w-[720px] mx-auto">
         <Breadcrumb items={[
           { label: 'Accueil', href: '/' },
-          { label: 'Chien', href: '/chien' },
+          { label: 'Guides', href: '/chien' },
           { label: 'Marques', href: '/chien/marque' },
           { label: `${brandA?.name ?? ''} vs ${brandB?.name ?? ''}` },
         ]} />

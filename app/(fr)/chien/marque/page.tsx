@@ -26,7 +26,7 @@ export default function MarqueHubPage() {
       <div className="max-w-[1280px] mx-auto">
         <Breadcrumb items={[
           { label: 'Accueil', href: '/' },
-          { label: 'Chien', href: '/chien' },
+          { label: 'Guides', href: '/chien' },
           { label: 'Marques' },
         ]} />
 

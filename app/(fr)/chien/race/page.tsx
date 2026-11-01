@@ -45,7 +45,7 @@ export default function RaceHubPage() {
 
   return (
     <div className="v2 mx-auto flex max-w-page flex-col gap-6 px-4 pt-6 pb-16 md:px-8 md:pt-10">
-      <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Chien', href: '/chien' }, { label: 'Alimentation par race' }]} />
+      <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Guides', href: '/chien' }, { label: 'Alimentation par race' }]} />
       <div className="flex max-w-prose flex-col gap-3">
         <h1 className="m-0 font-display text-[clamp(1.9rem,3.6vw,2.6rem)] font-black leading-[1.08] tracking-tight text-ink">
           Quelle nourriture selon la race de votre chien ?
