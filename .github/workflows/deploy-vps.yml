@@ -8,6 +8,8 @@ name: Deploy VPS
 on:
   push:
     branches: [v2, claude/toutou-gourmet-setup-3mRbP]
+    # Un push qui ne touche que de la documentation ne reconstruit pas le site.
+    paths-ignore: ['**/*.md', 'docs/**', 'tasks/**']
   workflow_dispatch:
 
 concurrency:
