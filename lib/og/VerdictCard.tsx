@@ -23,11 +23,16 @@ function titleSize(title: string): number {
   return 46
 }
 
-function Logo() {
+/** Logo du prototype V2 : tuile ambre + tête de chien, « Gourmet » en orange. */
+function Logo({ dogFace }: { dogFace: string }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: 'Fraunces', fontWeight: 900, fontSize: 32, color: C.ink }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 12, fontFamily: 'Fraunces', fontWeight: 900, fontSize: 34, color: C.ink }}>
+      <div style={{ display: 'flex', width: 52, height: 52, borderRadius: 15, background: C.amber, alignItems: 'center', justifyContent: 'center' }}>
+        {/* eslint-disable-next-line @next/next/no-img-element -- next/og : next/image indisponible */}
+        <img src={dogFace} width={30} height={30} alt="" />
+      </div>
       <span>Toutou</span>
-      <span style={{ background: C.rose, borderRadius: 12, padding: '2px 12px' }}>Gourmet</span>
+      <span style={{ color: C.orange }}>Gourmet</span>
     </div>
   )
 }
@@ -57,9 +62,10 @@ interface VerdictCardProps {
   photo: string | null
   verdict?: Verdict
   verdictNote?: string
+  dogFace: string
 }
 
-export function VerdictCard({ title, pill, photo, verdict, verdictNote }: VerdictCardProps) {
+export function VerdictCard({ title, pill, photo, verdict, verdictNote, dogFace }: VerdictCardProps) {
   const tone = OG_TONES[pill.tone]
   const textWidth = photo ? 640 : OG_SIZE.width
   return (
@@ -72,7 +78,7 @@ export function VerdictCard({ title, pill, photo, verdict, verdictNote }: Verdic
           <span style={{ fontFamily: 'Fraunces', fontWeight: 900, fontSize: titleSize(title), lineHeight: 1, letterSpacing: -2, color: C.ink }}>{title}</span>
           {verdict ? <Badge verdict={verdict} note={verdictNote} /> : null}
         </div>
-        <Logo />
+        <Logo dogFace={dogFace} />
       </div>
       {photo ? (
         <div style={{ display: 'flex', padding: 24 }}>

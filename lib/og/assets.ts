@@ -19,6 +19,12 @@ export async function loadOgFonts() {
   ]
 }
 
+/** Logo (emoji Twemoji, CC-BY 4.0 — voir assets/og/README.md) en data URI. */
+export async function loadOgDogFace(): Promise<string> {
+  const svg = await readFile(path.join(ROOT, 'assets/og/dog-face.svg'))
+  return `data:image/svg+xml;base64,${svg.toString('base64')}`
+}
+
 /**
  * Photo d'une miniature en data URI JPEG, recadrée au format du panneau photo.
  * Le moteur de rendu de next/og n'affiche pas le WebP : tout passe par sharp.

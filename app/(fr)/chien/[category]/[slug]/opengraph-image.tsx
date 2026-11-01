@@ -4,7 +4,7 @@ import { getArticleSlot } from '@/components/blog/blog-categories'
 import { getSlotById } from '@/data/images-manifest'
 import { getSlotPath } from '@/data/image-utils'
 import { VerdictCard, PHOTO } from '@/lib/og/VerdictCard'
-import { loadOgFonts, loadOgPhoto, pngResponseToJpeg } from '@/lib/og/assets'
+import { loadOgDogFace, loadOgFonts, loadOgPhoto, pngResponseToJpeg } from '@/lib/og/assets'
 import { OG_SIZE, getCategoryPill } from '@/lib/og/tokens'
 
 // @cdc 06-seo — miniature de partage par article, générée au build (1200×630, JPEG)
@@ -29,8 +29,9 @@ export default async function Image({ params }: { params: Promise<{ category: st
   const { slug } = await params
   const article = getArticleBySlug(slug)
   const fm = article?.frontmatter
-  const [fonts, photo] = await Promise.all([
+  const [fonts, dogFace, photo] = await Promise.all([
     loadOgFonts(),
+    loadOgDogFace(),
     fm ? loadOgPhoto(photoPath(slug, fm.category), PHOTO.width, PHOTO.height) : Promise.resolve(null),
   ])
   const png = new ImageResponse(
@@ -41,6 +42,7 @@ export default async function Image({ params }: { params: Promise<{ category: st
         photo={photo}
         verdict={fm?.verdict}
         verdictNote={fm?.verdictNote}
+        dogFace={dogFace}
       />
     ),
     { ...OG_SIZE, fonts },
