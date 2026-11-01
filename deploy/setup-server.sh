@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Installation unique sur le VPS (Ubuntu 26.04, Caddy/Node/PostgreSQL déjà installés).
-# Usage : sudo bash setup-server.sh
+# Usage : sudo bash -c 'cd /srv/toutou/repo/deploy && bash setup-server.sh'
 # Sans risque à relancer : chaque étape vérifie si elle est déjà faite.
 set -euo pipefail
 ROOT=/srv/toutou
@@ -41,7 +41,7 @@ sudo -u postgres psql -tAc "SELECT 1 FROM pg_database WHERE datname='toutou'" | 
   || sudo -u postgres createdb -O toutou toutou
 
 # 7. Sauvegarde chaque nuit à 3 h 15
-( crontab -u toutou -l 2>/dev/null | grep -v backup-db.sh; echo "15 3 * * * $ROOT/backup-db.sh >> $ROOT/backups/backup.log 2>&1" ) | crontab -u toutou -
+{ crontab -u toutou -l 2>/dev/null | grep -v backup-db.sh || true; echo "15 3 * * * $ROOT/backup-db.sh >> $ROOT/backups/backup.log 2>&1"; } | crontab -u toutou -
 
 echo
 echo "=== Clé publique de déploiement (à ajouter sur GitHub, lecture seule) ==="
