@@ -31,8 +31,10 @@ function Logo({ dogFace }: { dogFace: string }) {
         {/* eslint-disable-next-line @next/next/no-img-element -- next/og : next/image indisponible */}
         <img src={dogFace} width={30} height={30} alt="" />
       </div>
-      <span>Toutou</span>
-      <span style={{ color: C.orange }}>Gourmet</span>
+      <div style={{ display: 'flex', gap: 9 }}>
+        <span>Toutou</span>
+        <span style={{ color: C.orange }}>Gourmet</span>
+      </div>
     </div>
   )
 }

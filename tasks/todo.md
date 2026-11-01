@@ -30,7 +30,9 @@ Référence visuelle : prototype navigable https://claude.ai/artifact/JP6w3gr8vX
 
 Règles : aucune URL existante ne change (788 adresses) ; les pages race existantes sont enrichies sur place, pas de pages « [race] peut-il manger [X] » (guide SEO §6.4). Le design (header, footer, barre d'onglets mobile) se construit avec les gabarits, façon prototype.
 
-- [ ] Miniatures de partage façon YouTube (next/og, 1200×630) : article, race, catégorie, outil, accueil. Titre court en Fraunces, badge verdict (oui / attention / danger), ton de la catégorie, illustration du manifest, logo. 3 modèles sur `chien-peut-manger-poires`, choix du propriétaire, puis généralisation (corrige au passage l'OG cassé de l'accueil)
+- [ ] Miniatures de partage façon YouTube (next/og, 1200×630) : article, race, catégorie, outil, accueil.
+  - [x] Articles (modèle A1, 2026-11-01) : `app/(fr)/chien/[category]/[slug]/opengraph-image.tsx` + `lib/og/`, JPEG ~65 Ko, champs frontmatter `ogTitle`, `verdict` (oui / moderation / danger), `verdictNote` ; pilotes : poires, chocolat
+  - [ ] Remplir `ogTitle` / `verdict` / `verdictNote` sur les articles (consigne à ajouter à la tâche des 2 articles/jour) ; alt par article (`generateImageMetadata`) ; miniatures race, catégorie, outil, accueil Titre court en Fraunces, badge verdict (oui / attention / danger), ton de la catégorie, illustration du manifest, logo. 3 modèles sur `chien-peut-manger-poires`, choix du propriétaire, puis généralisation (corrige au passage l'OG cassé de l'accueil)
 - [ ] Gabarit article : TL;DR, StatRow, tableau par gabarit avec races (composant `SizeTable`), « Que faire si… », FAQ + JSON-LD, liens d'entités
   - [x] `SizeTable` / `SizeRow`, `WhatToDo` / `Step`, `PoisonCenters`, FAQ V2, TL;DR V2, JSON-LD FAQ nettoyé (2 157 questions, 356 articles) — 2026-11-01, pilote : `chien-peut-manger-poires`
   - [ ] StatRow V2, liens d'entités, en-tête d'article (catégorie, date, relecture) et sommaire façon prototype
