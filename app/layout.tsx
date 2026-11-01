@@ -1,26 +1,10 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
-import { Fraunces, DM_Sans } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
-import ScrollToTop from '@/components/layout/ScrollToTop'
-import GoogleAnalyticsPageView from '@/components/layout/GoogleAnalyticsPageView'
 import './globals.css'
 
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  weight: ['700', '900'],
-  display: 'swap',
-  variable: '--font-fraunces',
-})
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  display: 'swap',
-  variable: '--font-dm-sans',
-})
+// @cdc i18n — layout racine neutre. Chaque langue a son layout qui rend <html lang> :
+// app/(fr)/layout.tsx (racine, URLs V1 inchangées) et app/(en)/layout.tsx (/en).
+// Les métadonnées par défaut restent ici pour que les pages françaises et la page 404
+// globale (app/not-found.tsx) gardent exactement celles de la V1.
 
 export const metadata: Metadata = {
   title: {
@@ -63,80 +47,5 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="fr" className={`${fraunces.variable} ${dmSans.variable}`}>
-      <head>
-        {/* Google tag (gtag.js) — GA4 */}
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-MDHMHXVJRZ"
-          strategy="afterInteractive"
-        />
-        <Script id="ga4-init" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-MDHMHXVJRZ', { send_page_view: false });
-          `}
-        </Script>
-
-        {/* Google AdSense — dans <head> pour validation par le robot Google */}
-        {/* @cdc §CSP — script tiers approuvé, exception documentée */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7295690633751101"
-          crossOrigin="anonymous"
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'WebSite',
-              name: 'Toutou Gourmet',
-              url: 'https://www.toutou-gourmet.com',
-              description:
-                "Comparateur et guide d'alimentation premium pour chiens et chats en France",
-              potentialAction: {
-                '@type': 'SearchAction',
-                target: 'https://www.toutou-gourmet.com/recherche?q={search_term_string}',
-                'query-input': 'required name=search_term_string',
-              },
-            }),
-          }}
-        />
-      </head>
-      <body>
-        {/* Skip link accessibilité */}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:rounded-md focus:font-semibold"
-          style={{ backgroundColor: 'var(--accent-1)', color: '#fff' }}
-        >
-          Aller au contenu principal
-        </a>
-
-        {/* Code de vérification de propriété du site (commentaire HTML brut, les commentaires JSX ne sont pas rendus) */}
-        <div hidden dangerouslySetInnerHTML={{ __html: '<!-- 5a788ca4d5c1972a86be2ed1757febf2 -->' }} />
-
-        <ScrollToTop />
-        <GoogleAnalyticsPageView />
-        <Header />
-        <main id="main-content">{children}</main>
-        <Footer />
-
-        {/* Plausible Analytics */}
-        <Script
-          defer
-          data-domain="toutou-gourmet.com"
-          src="https://plausible.io/js/script.js"
-          strategy="afterInteractive"
-        />
-
-        {/* Vercel Web Analytics */}
-        <Analytics />
-      </body>
-    </html>
-  )
+  return children
 }

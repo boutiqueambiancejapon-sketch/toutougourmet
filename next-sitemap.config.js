@@ -4,7 +4,8 @@ module.exports = {
   generateRobotsTxt: true,
   changefreq: 'weekly',
   priority: 0.7,
-  exclude: ['/api/*', '/contact', '/dev/*'],
+  // /en : édition anglaise non indexée tant qu'elle n'a pas de contenu (lot 8)
+  exclude: ['/api/*', '/contact', '/dev/*', '/en', '/en/*'],
   additionalPaths: async (config) => [
     { loc: '/', priority: 1.0, changefreq: 'daily' },
     { loc: '/quiz', priority: 0.9, changefreq: 'monthly' },

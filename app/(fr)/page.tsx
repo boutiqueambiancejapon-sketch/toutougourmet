@@ -10,7 +10,9 @@ import { TrustSection } from '@/components/home/TrustSection'
 import { NewsletterBlock } from '@/components/blog/NewsletterBlock'
 
 export const metadata: Metadata = {
-  title: 'Toutou Gourmet - Meilleure alimentation pour chien & chat',
+  // absolute : la page est sous le groupe (fr), le gabarit « %s | Toutou Gourmet » du
+  // layout racine s'appliquerait. En V1 il ne s'appliquait pas (même segment) : on garde ce titre.
+  title: { absolute: 'Toutou Gourmet - Meilleure alimentation pour chien & chat' },
   description:
     'Comparez les meilleures marques de nourriture pour chien : Franklin, Elmut, Petty Well, Dog Chef. Quiz personnalisé, notes, prix et codes promo exclusifs.',
   alternates: { canonical: 'https://www.toutou-gourmet.com' },

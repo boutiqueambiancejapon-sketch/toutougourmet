@@ -5,7 +5,26 @@
 - 4 sections principales : /chien/ · /outils/ · /comparateur/ · /blog/ (legacy)
 - Contenu MDX dans /content/ organisé par catégorie
 - Redirects actifs : /blog/[slug] → /chien/[cat]/[slug] · /marques/ → /chien/marque/
-- Pas de i18n · pas de [locale]/ · lang="fr" dans layout.tsx
+- V2 : français à la racine (groupe `app/(fr)`, URLs V1 inchangées), anglais sous `/en` (groupe `app/(en)`) · chaque langue a son layout `<html lang>`
+
+---
+
+## Langues (V2)
+
+```
+app/
+  layout.tsx          ← neutre : métadonnées par défaut, globals.css, pas de <html>
+  not-found.tsx       ← 404 des adresses inconnues (document français complet)
+  (fr)/layout.tsx     ← <html lang="fr"> via components/layout/SiteDocument.tsx
+  (fr)/...            ← toutes les pages françaises (le groupe n'apparaît pas dans l'URL)
+  (en)/layout.tsx     ← <html lang="en">, noindex jusqu'au lot 8
+  (en)/en/page.tsx    ← /en
+  api/, sitemap.ts, icon.svg ← hors langues
+```
+
+- Textes d'interface partagés : `lib/i18n/dictionaries.ts` ; configuration : `lib/i18n/config.ts`
+- Lien vers l'autre langue : balise `<a>` (rechargement complet, deux layouts `<html>`)
+- Une page anglaise se crée dans `app/(en)/en/` avec un slug anglais
 
 ---
 
