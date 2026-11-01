@@ -83,8 +83,8 @@ export function InfoBox({
   const s = infoBoxStyles[color]
   return (
     <div
-      className="rounded-[var(--radius-lg)] p-5 my-6 border-l-4"
-      style={{ background: s.bg, borderLeftColor: s.border }}
+      className="rounded-[var(--radius-lg)] p-5 my-6"
+      style={{ background: s.bg }}
     >
       {(title || emoji) && (
         <p className="font-bold text-sm mb-2" style={{ color: s.titleColor }}>
@@ -208,7 +208,7 @@ export function Stat({
   return (
     <div
       className="rounded-[var(--radius-xl)] p-5 flex flex-col items-center gap-3 text-center"
-      style={{ background: c.bg, borderTop: `3px solid ${c.accent}` }}
+      style={{ background: c.bg }}
     >
       <p
         className="font-black leading-tight break-words min-w-0 w-full"

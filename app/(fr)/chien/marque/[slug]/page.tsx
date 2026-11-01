@@ -445,7 +445,7 @@ function VsPage({ brandA, brandB }: { brandA: Brand; brandB: Brand }) {
             {[brandA, brandB].map((brand, i) => {
               const accent = i === 0 ? accentA : accentB
               return (
-                <div key={brand.slug} className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-5 flex flex-col gap-3" style={{ borderTop: `3px solid ${accent}` }}>
+                <div key={brand.slug} className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-5 flex flex-col gap-3">
                   <div>
                     <p className="font-black text-lg" style={{ fontFamily: "'Fraunces', serif", color: accent }}>{brand.name}</p>
                     <p className="text-sm text-[var(--text-muted)]">{brand.tagline}</p>
@@ -502,7 +502,7 @@ function VsPage({ brandA, brandB }: { brandA: Brand; brandB: Brand }) {
           {/* Avantages de chaque marque */}
           <div className="grid md:grid-cols-2 gap-6">
             {[{ brand: brandA, accent: accentA }, { brand: brandB, accent: accentB }].map(({ brand, accent }) => (
-              <div key={brand.slug} className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-5" style={{ borderTop: `3px solid ${accent}` }}>
+              <div key={brand.slug} className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-5">
                 <p className="font-bold mb-3" style={{ color: accent }}>Points forts — {brand.name}</p>
                 <ul className="space-y-1.5">
                   {brand.pros.map((pro, i) => (

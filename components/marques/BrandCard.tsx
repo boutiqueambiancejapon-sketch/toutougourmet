@@ -16,7 +16,7 @@ interface BrandCardProps {
 export function BrandCard({ brand, showCTA = true }: BrandCardProps) {
   const accent = accentBySlug[brand.slug] ?? 'var(--accent-1)'
   return (
-    <div className="card p-5 flex flex-col gap-3" style={{ borderTop: `3px solid ${accent}` }}>
+    <div className="card p-5 flex flex-col gap-3">
       {/* Nom + score */}
       <div className="flex items-start justify-between gap-2">
         <h2 className="text-lg font-black leading-tight" style={{ fontFamily: "'Fraunces', serif", color: accent }}>

@@ -35,7 +35,7 @@ export default function ComparateurPage() {
             <div
               key={brand.slug}
               className="rounded-[var(--radius-xl)] p-5 flex flex-col"
-              style={{ background: brandBgs[i], borderTop: `3px solid ${brandAccents[i]}` }}
+              style={{ background: brandBgs[i] }}
             >
               {/* Nom + score */}
               <div className="flex items-start justify-between gap-2 mb-1">

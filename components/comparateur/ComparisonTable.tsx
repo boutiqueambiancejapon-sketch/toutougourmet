@@ -45,7 +45,7 @@ export function ComparisonTable() {
               <th
                 key={brand.slug}
                 className="px-4 pt-0 pb-4 text-center border-b"
-                style={{ borderColor: 'var(--border)', borderTop: `3px solid ${brandAccents[i]}` }}
+                style={{ borderColor: 'var(--border)' }}
               >
                 <div
                   className="font-black text-base leading-tight mt-3"
