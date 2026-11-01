@@ -16,6 +16,216 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-chien-mange-raisin-urgence',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, curious beagle sitting on a warm cream kitchen floor, looking down at a small bunch of fresh red and green grapes and a few single grapes in front of its paws. The dog has not eaten them.',
+    composition:
+      'Medium shot, dog on the right third, grapes lower-left foreground, crisp focus on grapes and the dog\'s face, soft cream kitchen bokeh. Only a few scattered confetti pieces (6 to 10 maximum). Do NOT trace any outline or contour line around the dog or the food: the photo subjects stay purely photographic, only the small decorative elements are drawn.',
+    decorations: ['sparkle', 'confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini 3.1 Flash Image) le 2026-11-01 pour l'article chien-mange-raisin-urgence.",
+  },
+  {
+    id: 'art-chien-mange-ail-oignon-urgence',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm golden retriever sniffing with curiosity towards a wooden kitchen board with whole garlic bulbs, a few peeled garlic cloves and a halved yellow onion, on a light kitchen counter edge.',
+    composition:
+      'Close-medium shot from the side, dog\'s muzzle entering from the right, garlic and onion crisp in the lower centre, soft cream kitchen bokeh. Only a few scattered confetti pieces (6 to 10 maximum). Do NOT trace any outline or contour line around the dog or the food: the photo subjects stay purely photographic, only the small decorative elements are drawn.',
+    decorations: ['sparkle', 'confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini 3.1 Flash Image) le 2026-11-01 pour l'article chien-mange-ail-oignon-urgence.",
+  },
+  {
+    id: 'art-aliments-toxiques-chien-liste-complete',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm attentive border collie lying on a cream linen floor rug looking at an editorial flat-lay of common foods that are toxic for dogs: a few squares of dark chocolate, a small bunch of grapes, a halved onion, garlic cloves, a few macadamia nuts and an avocado half.',
+    composition:
+      'Slightly elevated three-quarter view, foods arranged loosely in the foreground across the frame, dog in the background on the right, shallow depth of field. Only a few scattered confetti pieces (6 to 10 maximum). Do NOT trace any outline or contour line around the dog or the food: the photo subjects stay purely photographic, only the small decorative elements are drawn.',
+    decorations: ['sparkle', 'confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini 3.1 Flash Image) le 2026-11-01 pour l'article aliments-toxiques-chien-liste-complete.",
+  },
+  {
+    id: 'art-chien-mange-noix-cajou',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A curious small French bulldog sitting next to a small ceramic bowl of plain cashew nuts on a cream wooden floor, a few cashews spilled near its paws.',
+    composition:
+      'Low angle at dog height, bowl lower-left, dog right third, soft daylight. Only a few scattered confetti pieces (6 to 10 maximum). Do NOT trace any outline or contour line around the dog or the food: the photo subjects stay purely photographic, only the small decorative elements are drawn.',
+    decorations: ['sparkle', 'confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini 3.1 Flash Image) le 2026-11-01 pour l'article chien-mange-noix-cajou.",
+  },
+  {
+    id: 'art-chien-mange-crapaud-urgence',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A curious young Jack Russell terrier in a sunny green garden at golden hour, looking at a small brown common toad sitting on a stone at a safe distance.',
+    composition:
+      'Low angle at grass level, toad crisp in the lower-left foreground, dog slightly out of focus on the right, warm creamy garden bokeh, calm mood. Only a few scattered confetti pieces (6 to 10 maximum). Do NOT trace any outline or contour line around the dog or the food: the photo subjects stay purely photographic, only the small decorative elements are drawn.',
+    decorations: ['sparkle', 'confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini 3.1 Flash Image) le 2026-11-01 pour l'article chien-mange-crapaud-urgence.",
+  },
+  {
+    id: 'art-chien-mange-pistaches',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm cocker spaniel sitting by a low coffee table on which a small bowl of pistachios in their shells sits, a few shells on the floor.',
+    composition:
+      'Medium shot, bowl and pistachios crisp in the foreground left, dog on the right third, cream living-room bokeh. Only a few scattered confetti pieces (6 to 10 maximum). Do NOT trace any outline or contour line around the dog or the food: the photo subjects stay purely photographic, only the small decorative elements are drawn.',
+    decorations: ['sparkle', 'confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini 3.1 Flash Image) le 2026-11-01 pour l'article chien-mange-pistaches.",
+  },
+  {
+    id: 'art-chien-mange-limace-urgence',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A curious labrador puppy on a damp green lawn in soft morning light, looking down at a small garden slug on a lettuce leaf.',
+    composition:
+      'Low angle at grass level, slug and leaf crisp in the lower-left, puppy on the right, soft green and cream garden bokeh. Only a few scattered confetti pieces (6 to 10 maximum). Do NOT trace any outline or contour line around the dog or the food: the photo subjects stay purely photographic, only the small decorative elements are drawn.',
+    decorations: ['sparkle', 'confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini 3.1 Flash Image) le 2026-11-01 pour l'article chien-mange-limace-urgence.",
+  },
+  {
+    id: 'art-chien-mange-os-cuit-urgence',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm German shepherd sitting in a bright kitchen looking at a plate with leftover cooked roast bones (beef rib bones) on a cream countertop edge.',
+    composition:
+      'Medium shot from slightly below the counter, plate of cooked bones crisp at upper left, dog\'s head right, warm daylight. Only a few scattered confetti pieces (6 to 10 maximum). Do NOT trace any outline or contour line around the dog or the food: the photo subjects stay purely photographic, only the small decorative elements are drawn.',
+    decorations: ['sparkle', 'confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini 3.1 Flash Image) le 2026-11-01 pour l'article chien-mange-os-cuit-urgence.",
+  },
+  {
+    id: 'art-chien-mange-glands-chene-urgence',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm brown and white springer spaniel walking in an autumn oak forest path, sniffing a scatter of fallen acorns with caps and oak leaves on the ground.',
+    composition:
+      'Low angle at ground level, acorns crisp in the foreground, dog on the right, warm autumn cream and amber bokeh. Only a few scattered confetti pieces (6 to 10 maximum). Do NOT trace any outline or contour line around the dog or the food: the photo subjects stay purely photographic, only the small decorative elements are drawn.',
+    decorations: ['sparkle', 'confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini 3.1 Flash Image) le 2026-11-01 pour l'article chien-mange-glands-chene-urgence.",
+  },
+  {
+    id: 'art-chien-mange-mort-aux-rats-urgence',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm beagle in a tidy bright garden shed doorway, sniffing towards a closed plastic bait box placed against the wall, a broom and garden tools softly blurred behind.',
+    composition:
+      'Medium shot, closed bait box crisp lower-left (no pellets visible), dog right third, warm daylight, reassuring mood. Only a few scattered confetti pieces (6 to 10 maximum). Do NOT trace any outline or contour line around the dog or the food: the photo subjects stay purely photographic, only the small decorative elements are drawn.',
+    decorations: ['sparkle', 'confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini 3.1 Flash Image) le 2026-11-01 pour l'article chien-mange-mort-aux-rats-urgence.",
+  },
+  {
+    id: 'art-chien-mange-os-poulet-urgence',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm golden retriever sitting next to a kitchen table looking up at a plate with a roast chicken carcass and small cooked chicken bones.',
+    composition:
+      'Low angle from the dog\'s height, plate at the table edge upper-left crisp, dog\'s face right, cream kitchen bokeh. Only a few scattered confetti pieces (6 to 10 maximum). Do NOT trace any outline or contour line around the dog or the food: the photo subjects stay purely photographic, only the small decorative elements are drawn.',
+    decorations: ['sparkle', 'confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini 3.1 Flash Image) le 2026-11-01 pour l'article chien-mange-os-poulet-urgence.",
+  },
+  {
+    id: 'art-chien-peut-manger-oignons',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A curious dachshund sitting on a cream kitchen floor looking at a wicker basket of whole yellow and red onions, one red onion halved beside it.',
+    composition:
+      'Low angle, basket and onions crisp left, dog right third, soft daylight. Only a few scattered confetti pieces (6 to 10 maximum). Do NOT trace any outline or contour line around the dog or the food: the photo subjects stay purely photographic, only the small decorative elements are drawn.',
+    decorations: ['sparkle', 'confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini 3.1 Flash Image) le 2026-11-01 pour l'article chien-peut-manger-oignons.",
+  },
+  {
+    id: 'art-chien-peut-manger-piment',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A curious shiba inu sniffing towards a small ceramic dish of fresh red and green chili peppers on a low wooden table.',
+    composition:
+      'Close-medium shot, chilies crisp lower-left, shiba\'s face entering from the right, warm cream bokeh. Only a few scattered confetti pieces (6 to 10 maximum). Do NOT trace any outline or contour line around the dog or the food: the photo subjects stay purely photographic, only the small decorative elements are drawn.',
+    decorations: ['sparkle', 'confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini 3.1 Flash Image) le 2026-11-01 pour l'article chien-peut-manger-piment.",
+  },
+  {
+    id: 'art-halloween-chien-bonbons-citrouille-dangers',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A happy calm corgi sitting next to a small carved Halloween pumpkin and a little pile of wrapped candies and chocolate bars spilled on a cream wooden floor, soft autumn daylight, cosy and friendly mood (not spooky).',
+    composition:
+      'Medium shot, pumpkin and candies crisp in the left foreground, corgi right third, warm amber and cream bokeh. Only a few scattered confetti pieces (6 to 10 maximum). Do NOT trace any outline or contour line around the dog or the food: the photo subjects stay purely photographic, only the small decorative elements are drawn.',
+    decorations: ['sparkle', 'confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini 3.1 Flash Image) le 2026-11-01 pour l'article halloween-chien-bonbons-citrouille-dangers.",
+  },
+  {
+    id: 'art-os-poulet-chien-danger',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm Labrador retriever lying on a cream rug looking at a small ceramic plate holding cooked chicken drumstick bones.',
+    composition:
+      'Low angle at floor level, plate crisp in the lower-left foreground, dog lying on the right, soft daylight. Only a few scattered confetti pieces (6 to 10 maximum). Do NOT trace any outline or contour line around the dog or the food: the photo subjects stay purely photographic, only the small decorative elements are drawn.',
+    decorations: ['sparkle', 'confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini 3.1 Flash Image) le 2026-11-01 pour l'article os-poulet-chien-danger.",
+  },
+  {
     id: 'art-nourriture-berger-blanc-suisse',
     group: 'articles',
     ratio: '3:2',

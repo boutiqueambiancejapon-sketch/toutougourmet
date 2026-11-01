@@ -156,6 +156,22 @@ const BREED_SLOT_BY_SLUG: Record<string, string> = {
  * Elle écrase aussi la cover breed historique pour les articles de race.
  */
 const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
+  // Urgences : covers dédiées générées le 2026-11-01 (remplacent la photo chocolat partagée)
+  'chien-mange-raisin-urgence': 'art-chien-mange-raisin-urgence',
+  'chien-mange-ail-oignon-urgence': 'art-chien-mange-ail-oignon-urgence',
+  'aliments-toxiques-chien-liste-complete': 'art-aliments-toxiques-chien-liste-complete',
+  'chien-mange-noix-cajou': 'art-chien-mange-noix-cajou',
+  'chien-mange-crapaud-urgence': 'art-chien-mange-crapaud-urgence',
+  'chien-mange-pistaches': 'art-chien-mange-pistaches',
+  'chien-mange-limace-urgence': 'art-chien-mange-limace-urgence',
+  'chien-mange-os-cuit-urgence': 'art-chien-mange-os-cuit-urgence',
+  'chien-mange-glands-chene-urgence': 'art-chien-mange-glands-chene-urgence',
+  'chien-mange-mort-aux-rats-urgence': 'art-chien-mange-mort-aux-rats-urgence',
+  'chien-mange-os-poulet-urgence': 'art-chien-mange-os-poulet-urgence',
+  'chien-peut-manger-oignons': 'art-chien-peut-manger-oignons',
+  'chien-peut-manger-piment': 'art-chien-peut-manger-piment',
+  'halloween-chien-bonbons-citrouille-dangers': 'art-halloween-chien-bonbons-citrouille-dangers',
+  'os-poulet-chien-danger': 'art-os-poulet-chien-danger',
   'nourriture-berger-blanc-suisse': 'art-nourriture-berger-blanc-suisse',
   'nourriture-dogue-de-bordeaux': 'art-nourriture-dogue-de-bordeaux',
   'choisir-taille-croquettes-chien': 'art-choisir-taille-croquettes-chien',
