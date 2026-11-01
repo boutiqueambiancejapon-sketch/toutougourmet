@@ -21,14 +21,17 @@ Référence visuelle : prototype navigable https://claude.ai/artifact/JP6w3gr8vX
 
 - [x] Brancher la preview Vercel sur `v2` (automatique, URL stable : toutougourmet-git-v2-boutiqueambiancejapon-sketchs-projects.vercel.app)
 - [x] Mettre `CLAUDE.md` à jour pour la V2 (multilingue, Vercel puis VPS, règles de push)
-- [ ] Tokens de design V2 dans `globals.css` (palette V1 épurée, emojis conservés)
-- [ ] Structure multilingue : FR à la racine (URLs actuelles inchangées), EN sous `/en`. Choisir la lib (next-intl) et documenter dans DECISIONS.md
+- [x] Tokens de design V2 dans `globals.css` (palette V1 épurée, emojis conservés) — 2026-11-01, voir `docs/01-branding.md`
+- [x] Structure multilingue : FR à la racine (URLs actuelles inchangées), EN sous `/en` — 2026-11-01 : groupes de routes `app/(fr)` et `app/(en)`, sans next-intl ni proxy (raisons dans DECISIONS.md). `/en` en noindex jusqu'au lot 8
 - [ ] Vérifier qu'aucune URL V1 indexée ne change (export sitemap V1 vs V2)
 
 ## Lot 1 — DA et gabarits qui portent le SEO
 
 - [ ] Header, footer, navigation mobile façon app (barre d'onglets en bas sur mobile)
 - [ ] Gabarit article : TL;DR, StatRow, tableau par gabarit avec races (composant `SizeTable`), « Que faire si… », FAQ + JSON-LD, liens d'entités
+  - [x] `SizeTable` / `SizeRow`, `WhatToDo` / `Step`, `PoisonCenters`, FAQ V2, TL;DR V2, JSON-LD FAQ nettoyé (2 157 questions, 356 articles) — 2026-11-01, pilote : `chien-peut-manger-poires`
+  - [ ] StatRow V2, liens d'entités, en-tête d'article (catégorie, date, relecture) et sommaire façon prototype
+  - [ ] Migrer les articles déjà réécrits (`CompareTable` → `SizeTable`) après la bascule ou par lots
 - [ ] Gabarit hub race (section « Que peut manger un [race] ? »)
 - [ ] Home V2
 - [ ] Images OG dynamiques façon miniature (next/og) : article, race, outil
