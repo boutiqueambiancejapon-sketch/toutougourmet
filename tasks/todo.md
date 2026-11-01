@@ -8,14 +8,14 @@ Référence visuelle : prototype navigable https://claude.ai/artifact/JP6w3gr8vX
 
 > Mise à jour 2026-11-01 : la base de prod sera le PostgreSQL du VPS (Neon abandonné). Kit de déploiement dans `deploy/`.
 
-- Hébergement : Vercel (plan Pro requis dès que comptes + affiliation + Premium).
-- Base : PostgreSQL Neon, région UE (Francfort). Accès via Drizzle uniquement.
+- Previews : Vercel, branche `v2`, jusqu'à la bascule.
+- Prod : VPS one.com, Caddy + systemd + PostgreSQL local + cron (`deploy/`).
+- Base : PostgreSQL du VPS. Accès via Drizzle uniquement.
 - Auth : Better Auth, mots de passe hachés dans notre base. Aucun fournisseur d'auth tiers.
-- Photos : Cloudflare R2 (API S3), juridiction UE. Compression sharp côté serveur.
+- Photos : stockage objet compatible S3 en UE (R2 ou Object Storage). Compression sharp côté serveur.
 - Mails : Brevo SMTP.
-- Tâches récurrentes : Vercel Cron.
-- Interdit : Vercel KV, Vercel Blob, Edge Config, Supabase ou tout service propre à un hébergeur. Le code doit passer sur le VPS OVH + Coolify en changeant seulement les variables d'environnement.
-- Fonctions Vercel en région `fra1`.
+- Tâches récurrentes : cron sur le VPS.
+- Interdit : Vercel KV, Vercel Blob, Edge Config, Vercel Cron, Supabase ou tout service propre à un hébergeur.
 
 ## Lot 0 — Fondations
 
