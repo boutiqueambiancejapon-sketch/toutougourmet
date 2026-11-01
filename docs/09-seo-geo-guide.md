@@ -278,6 +278,33 @@ Une IA extrait un paragraphe, rarement la page entière. Chaque paragraphe doit 
 - Les requêtes qui affichent déjà la page dans Search Console (export par page)
 - Les H2 des trois concurrents analysés au §0, pour repérer ce qu'ils n'ont pas traité
 
+#### Composants MDX V2 (branche `v2` uniquement jusqu'à la bascule)
+
+Sur la branche de production, ces composants n'existent pas encore : la tâche quotidienne de réécriture garde `CompareTable` et une liste numérotée. Sur `v2`, on écrit :
+
+```mdx
+<SizeTable
+  caption="Quantité de poire par gabarit, pour un chien adulte en bonne santé"
+  source="Une tranche : 1/8 de poire moyenne, environ 22 g et 13 kcal (USDA). Plafond : 10 % de l'apport calorique quotidien (FEDIAF)."
+>
+  <SizeRow weight="Moins de 5 kg" breeds="Chihuahua, Yorkshire, Spitz nain" amount="1 petite tranche (20 à 30 g)" frequency="2 fois par semaine" detail="11 à 17 kcal" />
+</SizeTable>
+
+## Que faire si mon chien a mangé un trognon de poire ?
+
+<WhatToDo>
+  <Step title="Retire ce qui reste à portée">Poires, trognons, fruits tombés au jardin.</Step>
+  <Step title="Appelle ton vétérinaire ou un centre antipoison vétérinaire" urgent>Donne le poids du chien.</Step>
+</WhatToDo>
+
+<PoisonCenters />
+```
+
+- `SizeTable` rend un vrai tableau (légende, en-têtes) ; sur mobile, chaque ligne devient une carte. `frequency` et `detail` sont facultatifs : la colonne n'apparaît que si une ligne la remplit. `amountLabel`, `frequencyLabel` et `detailLabel` changent les en-têtes.
+- `Step urgent` met l'étape d'appel en avant. Le titre d'une étape est une action à l'impératif.
+- `PoisonCenters` affiche le CNITV et le CAPAE-Ouest en liens `tel:` (données : `data/poison-centers.ts`).
+- La FAQ reste `<FaqList>` / `<FaqItem question="…">` : le JSON-LD FAQPage est généré à partir de ces balises (liens et gras retirés du texte).
+
 #### Ce qu'on ne fait pas
 
 - Pas de remplissage : une sous-question sans réponse sourcée n'a pas sa place.

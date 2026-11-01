@@ -135,17 +135,28 @@ export function stripTldr(content: string): string {
   return content.replace(/##?\s*TL;DR[^\n]*\n([\s\S]*?)(?=\n##)/i, '')
 }
 
-// Extrait les paires question/réponse des composants <FaqItem> du MDX
+/**
+ * Texte brut d'une réponse MDX pour le JSON-LD (§4.3 : texte sans balises).
+ * Retire les balises, garde l'ancre des liens markdown et retire le gras.
+ */
+export function mdxToPlainText(mdx: string): string {
+  return mdx
+    .replace(/<\/?[A-Za-z][^>]*>/g, '')      // balises MDX/HTML (pas les « < 5 kg »)
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')  // [ancre](/url) → ancre
+    .replace(/\*\*(.+?)\*\*/g, '$1')          // **gras** → gras
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+// Extrait les paires question/réponse des composants <FaqItem> du MDX.
+// \s* avant « > » : quelques articles écrivent <FaqItem question="…" > avec une espace.
 export function extractFaqs(rawContent: string): { question: string; answer: string }[] {
   const faqs: { question: string; answer: string }[] = []
-  const regex = /<FaqItem\s+question="([^"]+)">([\s\S]*?)<\/FaqItem>/g
+  const regex = /<FaqItem\s+question="([^"]+)"\s*>([\s\S]*?)<\/FaqItem>/g
   let match
   while ((match = regex.exec(rawContent)) !== null) {
     const question = match[1].trim()
-    const answer = match[2]
-      .replace(/<[^>]+>/g, '')   // strip balises MDX/HTML
-      .replace(/\s+/g, ' ')
-      .trim()
+    const answer = mdxToPlainText(match[2])
     if (question && answer) faqs.push({ question, answer })
   }
   return faqs

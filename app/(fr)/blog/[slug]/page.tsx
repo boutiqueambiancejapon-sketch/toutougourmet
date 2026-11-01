@@ -1,4 +1,3 @@
-import React from 'react'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { MDXRemote } from 'next-mdx-remote/rsc'
@@ -18,13 +17,7 @@ import { ArticleLayout } from '@/components/blog/ArticleLayout'
 import { getArticleSlot } from '@/components/blog/blog-categories'
 import { getSlotById } from '@/data/images-manifest'
 import { getSlotPath } from '@/data/image-utils'
-import {
-  InfoBox, Callout, FeatureGrid, Feature,
-  StatRow, Stat, CompareTable, CompareThead, CompareTh,
-  CompareTr, CompareTd, Verdict, ProsConsList, ProsBlock, ConsBlock, ProItem, ConItem, SectionDivider, FaqList, FaqItem,
-  BodyImage,
-} from '@/components/mdx/MdxComponents'
-import { BrandCTA } from '@/components/marques/BrandCTA'
+import { articleMdxComponents } from '@/components/mdx/article-components'
 import { DEFAULT_AUTHOR } from '@/data/authors'
 import rehypeAutolinkTerms from '@/lib/rehype-autolink-terms'
 import remarkGfm from 'remark-gfm'
@@ -35,19 +28,6 @@ interface Props {
 }
 
 const SITE_URL = 'https://www.toutou-gourmet.com'
-
-const mdxComponents = {
-  InfoBox, Callout, FeatureGrid, Feature,
-  StatRow, Stat, CompareTable, CompareThead, CompareTh,
-  CompareTr, CompareTd, Verdict, ProsConsList, ProsBlock, ConsBlock, ProItem, ConItem, SectionDivider, FaqList, FaqItem,
-  BrandCTA,
-  BodyImage,
-  table: (props: React.ComponentProps<'table'>) => (
-    <div className="table-scroll">
-      <table {...props} />
-    </div>
-  ),
-}
 
 function getArticleImageUrl(slug: string, category: string): string {
   const slotId = getArticleSlot(slug, category)
@@ -168,7 +148,7 @@ export default async function ArticlePage({ params }: Props) {
       >
         <MDXRemote
           source={stripTldr(content)}
-          components={mdxComponents}
+          components={articleMdxComponents}
           options={{
             mdxOptions: {
               remarkPlugins: [remarkGfm],

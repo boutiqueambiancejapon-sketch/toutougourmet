@@ -1,4 +1,3 @@
-import React from 'react'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { MDXRemote } from 'next-mdx-remote/rsc'
@@ -20,13 +19,7 @@ import { getArticleSlot } from '@/components/blog/blog-categories'
 import { getSlotById } from '@/data/images-manifest'
 import { getSlotPath } from '@/data/image-utils'
 import { DEFAULT_AUTHOR } from '@/data/authors'
-import {
-  InfoBox, Callout, FeatureGrid, Feature,
-  StatRow, Stat, CompareTable, CompareThead, CompareTh,
-  CompareTr, CompareTd, Verdict, ProsConsList, ProsBlock, ConsBlock, ProItem, ConItem, SectionDivider, FaqList, FaqItem,
-  BodyImage,
-} from '@/components/mdx/MdxComponents'
-import { BrandCTA } from '@/components/marques/BrandCTA'
+import { articleMdxComponents } from '@/components/mdx/article-components'
 import rehypeAutolinkTerms from '@/lib/rehype-autolink-terms'
 import { AUTOLINK_DICTIONARY } from '@/lib/autolink-dictionary'
 import remarkGfm from 'remark-gfm'
@@ -36,19 +29,6 @@ interface Props {
 }
 
 const SITE_URL = 'https://www.toutou-gourmet.com'
-
-const mdxComponents = {
-  InfoBox, Callout, FeatureGrid, Feature,
-  StatRow, Stat, CompareTable, CompareThead, CompareTh,
-  CompareTr, CompareTd, Verdict, ProsConsList, ProsBlock, ConsBlock, ProItem, ConItem, SectionDivider, FaqList, FaqItem,
-  BrandCTA,
-  BodyImage,
-  table: (props: React.ComponentProps<'table'>) => (
-    <div className="table-scroll">
-      <table {...props} />
-    </div>
-  ),
-}
 
 /**
  * Construit l'URL absolue de l'image cover pour un article — manifest-aware.
@@ -222,7 +202,7 @@ export default async function ArticleCategoryPage({ params }: Props) {
       >
         <MDXRemote
           source={stripTldr(content)}
-          components={mdxComponents}
+          components={articleMdxComponents}
           options={{
             mdxOptions: {
               remarkPlugins: [remarkGfm],
