@@ -1,39 +1,55 @@
 import type { Metadata } from 'next'
-
-import { HeroSection } from '@/components/home/HeroSection'
-import { BrandsGrid } from '@/components/home/BrandsGrid'
-import { ComparisonTable } from '@/components/home/ComparisonTable'
-import { BreedsGuides } from '@/components/home/BreedsGuides'
-import { QuizTeaser } from '@/components/home/QuizTeaser'
-import { BlogSections } from '@/components/home/BlogSections'
-import { TrustSection } from '@/components/home/TrustSection'
+import Link from 'next/link'
+import { HomeHero } from '@/components/home-v2/HomeHero'
+import { StartTiles } from '@/components/home-v2/StartTiles'
+import { HomeBreeds } from '@/components/home-v2/HomeBreeds'
+import { HomeBrands } from '@/components/home-v2/HomeBrands'
+import { DidYouKnow } from '@/components/home-v2/DidYouKnow'
+import { ArticleTile } from '@/components/article/ArticleTile'
 import { NewsletterBlock } from '@/components/blog/NewsletterBlock'
+import { getAllArticles } from '@/lib/mdx'
+import { BREEDS } from '@/data/breeds'
+import { getFoodVerdicts } from '@/lib/food-verdicts'
 
 export const metadata: Metadata = {
   // absolute : la page est sous le groupe (fr), le gabarit « %s | Toutou Gourmet » du
   // layout racine s'appliquerait. En V1 il ne s'appliquait pas (même segment) : on garde ce titre.
-  title: { absolute: 'Toutou Gourmet - Meilleure alimentation pour chien & chat' },
+  title: { absolute: 'Toutou Gourmet : bien nourrir son chien, calculs et guides' },
   description:
-    'Comparez les meilleures marques de nourriture pour chien : Franklin, Elmut, Ultra Premium Direct, Dog Chef. Quiz personnalisé, notes, prix et codes promo exclusifs.',
+    'Ration en grammes, aliments autorisés ou toxiques, besoins par race : plus de 350 guides sourcés pour nourrir ton chien, des outils gratuits et des marques comparées.',
   alternates: { canonical: 'https://www.toutou-gourmet.com' },
 }
 
+// @cdc 04-pages — accueil V2 (prototype docs/v2/prototype) : hero, entrées rapides, derniers guides,
+// races, encart âge, marques recommandées. Tout est rendu côté serveur.
 export default function HomePage() {
-  return (
-    <>
-      <HeroSection />
-      <BrandsGrid />
-      <ComparisonTable />
-      <BreedsGuides />
-      <QuizTeaser />
-      <BlogSections />
-      <TrustSection />
+  const articles = getAllArticles()
+  const latest = [...articles]
+    .sort((a, b) => (b.frontmatter.updatedAt || b.frontmatter.date).localeCompare(a.frontmatter.updatedAt || a.frontmatter.date))
+    .slice(0, 3)
 
-      <section className="py-20 px-6 bg-[var(--bg-primary)]">
-        <div className="max-w-[640px] mx-auto">
-          <NewsletterBlock />
+  return (
+    <div className="v2 mx-auto flex max-w-page flex-col gap-14 px-4 pt-6 pb-16 md:px-8 md:pt-10">
+      <HomeHero guides={articles.length} breeds={BREEDS.length} foods={getFoodVerdicts().length} />
+      <StartTiles />
+      <section aria-labelledby="derniers-guides" className="flex flex-col gap-4">
+        <div className="flex items-baseline justify-between gap-4">
+          <h2 id="derniers-guides" className="m-0 font-display text-2xl font-black text-ink">Les derniers guides</h2>
+          <Link href="/chien" className="text-sm font-semibold text-orange-ink no-underline hover:underline">Tous les guides →</Link>
         </div>
+        <ul role="list" className="m-0 grid list-none grid-cols-1 gap-6 p-0 md:grid-cols-3">
+          {latest.map((a) => (
+            <li key={a.slug}>
+              <ArticleTile article={a} />
+            </li>
+          ))}
+        </ul>
       </section>
-    </>
+      <HomeBreeds />
+      <DidYouKnow />
+      <HomeBrands />
+      <NewsletterBlock />
+      <p className="m-0 text-sm text-ink-2">Les conseils de ce site ne remplacent pas une consultation vétérinaire.</p>
+    </div>
   )
 }
