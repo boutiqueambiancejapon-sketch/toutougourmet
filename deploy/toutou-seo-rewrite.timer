@@ -1,0 +1,11 @@
+# Chaque nuit à 3 h 47, heure de Bruxelles (même horaire que l'ancienne tâche cloud).
+[Unit]
+Description=Toutou Gourmet : réécriture SEO quotidienne
+
+[Timer]
+OnCalendar=*-*-* 03:47:00 Europe/Brussels
+Persistent=true
+RandomizedDelaySec=120
+
+[Install]
+WantedBy=timers.target
