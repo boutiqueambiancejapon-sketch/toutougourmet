@@ -3,8 +3,8 @@
 /* ─── Tokens V2 ─────────────────────────────────────────────────────────────
    @cdc branding — palette V1 épurée (prototype V2) : un fond crème, une encre,
    un accent orange et quatre tons (pastille / fond / texte). Plus d'ombres :
-   les cartes se détachent par un trait (--line). Les emojis restent le
-   pictogramme des tons (🥩 rose, 💊 vert, 🔍 bleu, 🐕 ambre).
+   les cartes se détachent par un trait (--line). Les pictogrammes V2 sont
+   les icônes maison de components/icons (plus d'emojis dans l'interface).
    Les composants V2 n'utilisent que ces tokens (utilitaires Tailwind mappés
    dans @theme inline plus bas : bg-cream, text-ink, rounded-card…). */
 :root {
@@ -30,11 +30,13 @@
 
   --scrim: rgb(26 17 9 / 0.45);
 
-  --r-xs:   11px;  /* petites tuiles emoji */
-  --r-sm:   14px;  /* boutons compacts, champs */
-  --r-md:   18px;  /* encadrés, accordéons, stats */
-  --r-lg:   24px;  /* cartes */
-  --r-xl:   32px;  /* grandes images */
+  /* Rayons réduits et hiérarchisés (audit design 2026-11-02, §2.5) :
+     petits éléments 8-12 px, cartes 16 px, grandes images 20 px. */
+  --r-xs:    8px;  /* petites tuiles d'icône */
+  --r-sm:   10px;  /* boutons compacts, champs */
+  --r-md:   12px;  /* encadrés, accordéons, stats */
+  --r-lg:   16px;  /* cartes */
+  --r-xl:   20px;  /* grandes images */
   --r-pill: 999px; /* chips, pastilles */
 
   --w-page:  1160px; /* largeur max des pages */
