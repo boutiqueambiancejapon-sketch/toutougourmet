@@ -7,6 +7,11 @@ import { getArticleSlot } from './blog-categories'
 import { ArticleHeader, type BreadcrumbItem } from '@/components/article/ArticleHeader'
 import { ArticleAside } from '@/components/article/ArticleAside'
 import { DEFAULT_AUTHOR } from '@/data/authors'
+import { getBreedForArticle } from '@/data/breeds'
+import { getFoodVerdicts } from '@/lib/food-verdicts'
+import { RaceFacts } from '@/components/race/RaceFacts'
+import { RaceFoodSection, RACE_FOOD_ID, raceFoodHeading } from '@/components/race/RaceFoodSection'
+import { RaceHealth, RaceNear, RACE_HEALTH_ID, RACE_NEAR_ID } from '@/components/race/RaceHealthAndNear'
 import { extractToc } from '@/lib/article-toc'
 import type { Article } from '@/lib/mdx'
 
@@ -45,9 +50,17 @@ export function ArticleLayout({
 }: ArticleLayoutProps) {
   const { frontmatter, slug } = article
   const catSlug = categorySlug ?? frontmatter.categorySlug
+  const breed = getBreedForArticle(slug)
   const toc = [
     ...(tldrItems.length > 0 ? [{ id: TLDR_ID, text: "L'essentiel" }] : []),
     ...extractToc(article.rawContent).filter((item) => !/^tl;?dr$/i.test(item.text)),
+    ...(breed
+      ? [
+          { id: RACE_FOOD_ID, text: raceFoodHeading(breed) },
+          ...(breed.health.length > 0 ? [{ id: RACE_HEALTH_ID, text: 'Points de vigilance' }] : []),
+          { id: RACE_NEAR_ID, text: 'Races proches' },
+        ]
+      : []),
   ]
 
   return (
@@ -62,6 +75,7 @@ export function ArticleLayout({
         updatedIso={frontmatter.updatedAt || frontmatter.date}
         updatedDisplay={dateDisplay}
         readTime={readTime}
+        extra={breed ? <RaceFacts breed={breed} /> : undefined}
       />
 
       <div className="mx-auto max-w-page px-4 pt-8 md:px-8">
@@ -73,6 +87,13 @@ export function ArticleLayout({
               </div>
             ) : null}
             <div className="mdx-content mt-6">{children}</div>
+            {breed ? (
+              <>
+                <RaceFoodSection breed={breed} foods={getFoodVerdicts()} />
+                <RaceHealth breed={breed} />
+                <RaceNear breed={breed} />
+              </>
+            ) : null}
             <SummarizeWithAI title={frontmatter.title} url={canonicalUrl} domain="toutou-gourmet.com" />
             <AuthorBox author={DEFAULT_AUTHOR} />
             <RelatedArticles currentSlug={currentSlug ?? slug} categorySlug={catSlug} allArticles={allArticles} />

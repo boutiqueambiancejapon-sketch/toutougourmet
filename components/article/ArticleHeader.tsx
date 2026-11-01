@@ -29,6 +29,8 @@ interface ArticleHeaderProps {
   updatedIso: string
   updatedDisplay: string
   readTime: number
+  /** Bloc affiché sous l'auteur (fiche chiffrée des pages race) */
+  extra?: React.ReactNode
 }
 
 function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
@@ -51,7 +53,7 @@ function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
 }
 
 export function ArticleHeader(props: ArticleHeaderProps) {
-  const { breadcrumb, categorySlug, coverSlot, title, description, author, updatedIso, updatedDisplay, readTime } = props
+  const { breadcrumb, categorySlug, coverSlot, title, description, author, updatedIso, updatedDisplay, readTime, extra } = props
   const pill = getCategoryPill(categorySlug)
   const emoji = getCategoryBySlug(categorySlug)?.emoji
   return (
@@ -79,6 +81,7 @@ export function ArticleHeader(props: ArticleHeaderProps) {
             <span aria-hidden="true">·</span>
             <span>{readTime} min de lecture</span>
           </p>
+          {extra}
         </div>
         <div className="relative aspect-[4/3] w-full overflow-hidden rounded-hero">
           <Illustration
