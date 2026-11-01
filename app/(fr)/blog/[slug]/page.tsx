@@ -15,8 +15,7 @@ import { StickyCtaDouble } from '@/components/blog/StickyCtaDouble'
 import { getStickyCtaForArticle } from '@/lib/sticky-cta-config'
 import { ArticleLayout } from '@/components/blog/ArticleLayout'
 import { getArticleSlot } from '@/components/blog/blog-categories'
-import { getSlotById } from '@/data/images-manifest'
-import { getSlotPath } from '@/data/image-utils'
+import { getSlotPath, resolveSlot } from '@/data/image-utils'
 import { articleMdxComponents } from '@/components/mdx/article-components'
 import { DEFAULT_AUTHOR } from '@/data/authors'
 import rehypeAutolinkTerms from '@/lib/rehype-autolink-terms'
@@ -31,7 +30,7 @@ const SITE_URL = 'https://www.toutou-gourmet.com'
 
 function getArticleImageUrl(slug: string, category: string): string {
   const slotId = getArticleSlot(slug, category)
-  const slot = getSlotById(slotId)
+  const slot = resolveSlot(slotId)
   const path = slot
     ? getSlotPath(slot)
     : `/images/${slotId.startsWith('breed-') ? 'breeds' : 'articles'}/${slotId}.webp`

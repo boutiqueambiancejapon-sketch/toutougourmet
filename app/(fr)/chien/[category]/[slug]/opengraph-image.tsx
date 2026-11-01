@@ -1,8 +1,7 @@
 import { ImageResponse } from 'next/og'
 import { getAllArticles, getArticleBySlug } from '@/lib/mdx'
 import { getArticleSlot } from '@/components/blog/blog-categories'
-import { getSlotById } from '@/data/images-manifest'
-import { getSlotPath } from '@/data/image-utils'
+import { getSlotPath, resolveSlot } from '@/data/image-utils'
 import { VerdictCard, PHOTO } from '@/lib/og/VerdictCard'
 import { loadOgFonts, loadOgPhoto, pngResponseToJpeg } from '@/lib/og/assets'
 import { OG_SIZE, getCategoryPill } from '@/lib/og/tokens'
@@ -21,7 +20,7 @@ export async function generateStaticParams() {
 const FALLBACK_SLOT = 'cat-nutrition'
 
 function photoPath(slug: string, category: string): string {
-  const slot = getSlotById(getArticleSlot(slug, category)) ?? getSlotById(FALLBACK_SLOT)
+  const slot = resolveSlot(getArticleSlot(slug, category)) ?? resolveSlot(FALLBACK_SLOT)
   return slot ? getSlotPath(slot) : `/images/articles/${FALLBACK_SLOT}.webp`
 }
 
