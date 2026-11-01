@@ -194,7 +194,7 @@ export function StickyCta({ config }: StickyCtaProps) {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 px-4 pb-4 pointer-events-none">
+    <div className="fixed bottom-[calc(var(--tabbar-h)+env(safe-area-inset-bottom))] md:bottom-0 left-0 right-0 z-50 px-4 pb-4 pointer-events-none">
       <div
         className={[
           'max-w-[720px] mx-auto rounded-[var(--radius-xl)] border shadow-[var(--shadow-xl)] p-4 pointer-events-auto transition-all duration-500',

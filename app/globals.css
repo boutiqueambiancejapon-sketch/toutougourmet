@@ -38,6 +38,7 @@
   --r-pill: 999px; /* chips, pastilles */
 
   --w-page:  1160px; /* largeur max des pages */
+  --tabbar-h: 72px;  /* barre d'onglets mobile V2 (hors zone de sécurité iPhone) */
   --w-prose: 760px;  /* largeur max des pages de texte */
 
   --display: var(--font-fraunces), Georgia, 'Times New Roman', serif;

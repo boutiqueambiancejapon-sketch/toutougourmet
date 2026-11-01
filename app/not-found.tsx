@@ -1,5 +1,6 @@
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+import { SiteHeader } from '@/components/layout/v2/SiteHeader'
+import { SiteFooter } from '@/components/layout/v2/SiteFooter'
+import { TabBar } from '@/components/layout/v2/TabBar'
 import { SiteDocument } from '@/components/layout/SiteDocument'
 import { NotFoundFr } from '@/components/layout/NotFoundFr'
 
@@ -7,7 +8,16 @@ import { NotFoundFr } from '@/components/layout/NotFoundFr'
 // (pas de <html>), cette page rend donc le document français complet, comme en V1.
 export default function GlobalNotFound() {
   return (
-    <SiteDocument locale="fr" header={<Header />} footer={<Footer />}>
+    <SiteDocument
+      locale="fr"
+      header={<SiteHeader />}
+      footer={
+        <>
+          <SiteFooter />
+          <TabBar />
+        </>
+      }
+    >
       <NotFoundFr />
     </SiteDocument>
   )
