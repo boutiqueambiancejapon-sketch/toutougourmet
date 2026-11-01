@@ -1,0 +1,15 @@
+# /etc/caddy/Caddyfile until the DNS switch (then use deploy/Caddyfile, plus this preview block if still needed).
+# The real file lives in /home/administrator/toutou-preview/Caddyfile with the password hash
+# (generated with `caddy hash-password`); the hash never goes into git.
+
+toutou.85-190-127-13.sslip.io {
+	encode zstd gzip
+	basicauth {
+		toutou __PASSWORD_HASH__
+	}
+	header {
+		X-Robots-Tag "noindex, nofollow"
+		-Server
+	}
+	reverse_proxy 127.0.0.1:3001
+}

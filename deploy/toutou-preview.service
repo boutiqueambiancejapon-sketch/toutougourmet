@@ -1,0 +1,16 @@
+# Private V2 preview, built by deploy/preview.sh, served behind Caddy (basic auth + noindex).
+[Unit]
+Description=Toutou Gourmet V2 preview (Next.js)
+After=network.target
+
+[Service]
+Type=simple
+User=administrator
+WorkingDirectory=/home/administrator/toutou-preview/current
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/npx next start -H 127.0.0.1 -p 3001
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
