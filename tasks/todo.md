@@ -1,7 +1,7 @@
 # V2 Toutou Gourmet — plan par lots
 
 Branche de travail : `v2` (créée depuis `claude/toutou-gourmet-setup-3mRbP`).
-La V1 reste en production pendant toute la construction. Chaque push sur `v2` donne une preview Vercel.
+La V1 reste en production pendant toute la construction. Préversion sur le VPS : https://toutou.85-190-127-13.sslip.io (`deploy/preview.sh`).
 Référence visuelle : prototype navigable https://claude.ai/artifact/JP6w3gr8vX4UGCQrZDkj8D
 
 ## Principes d'infra (previews Vercel, prod sur VPS one.com — voir deploy/README.md)
@@ -26,16 +26,23 @@ Référence visuelle : prototype navigable https://claude.ai/artifact/JP6w3gr8vX
 - [x] Structure multilingue : FR à la racine (URLs actuelles inchangées), EN sous `/en` — 2026-11-01 : groupes de routes `app/(fr)` et `app/(en)`, sans next-intl ni proxy (raisons dans DECISIONS.md). `/en` en noindex jusqu'au lot 8
 - [ ] Vérifier qu'aucune URL V1 indexée ne change (export sitemap V1 vs V2)
 
-## Lot 1 — DA et gabarits qui portent le SEO
+## Lot 1 — SEO et gabarits (réordonné le 2026-11-01 : le maillage du lot 3 remonte ici)
 
-- [ ] Header, footer, navigation mobile façon app (barre d'onglets en bas sur mobile)
+Règles : aucune URL existante ne change (788 adresses) ; les pages race existantes sont enrichies sur place, pas de pages « [race] peut-il manger [X] » (guide SEO §6.4). Le design (header, footer, barre d'onglets mobile) se construit avec les gabarits, façon prototype.
+
+- [ ] Miniatures de partage façon YouTube (next/og, 1200×630) : article, race, catégorie, outil, accueil. Titre court en Fraunces, badge verdict (oui / attention / danger), ton de la catégorie, illustration du manifest, logo. 3 modèles sur `chien-peut-manger-poires`, choix du propriétaire, puis généralisation (corrige au passage l'OG cassé de l'accueil)
 - [ ] Gabarit article : TL;DR, StatRow, tableau par gabarit avec races (composant `SizeTable`), « Que faire si… », FAQ + JSON-LD, liens d'entités
   - [x] `SizeTable` / `SizeRow`, `WhatToDo` / `Step`, `PoisonCenters`, FAQ V2, TL;DR V2, JSON-LD FAQ nettoyé (2 157 questions, 356 articles) — 2026-11-01, pilote : `chien-peut-manger-poires`
   - [ ] StatRow V2, liens d'entités, en-tête d'article (catégorie, date, relecture) et sommaire façon prototype
-  - [ ] Migrer les articles déjà réécrits (`CompareTable` → `SizeTable`) après la bascule ou par lots
-- [ ] Gabarit hub race (section « Que peut manger un [race] ? »)
+  - [ ] Migrer les articles déjà réécrits (`CompareTable` → `SizeTable`) par lots
+- [ ] Gabarit race appliqué aux 58 pages `/chien/race/*` existantes (section « Que peut manger un [race] et que doit-il éviter ? ») + hub `/chien/race`
+- [ ] Pages catégories `/chien/[category]` transformées en pages piliers (8 piliers) + hub Outils
+- [ ] Maillage par entités (aliment, race, problème de santé) automatique entre articles
+- [ ] Header, footer, navigation mobile façon app (barre d'onglets en bas sur mobile)
 - [ ] Home V2
-- [ ] Images OG dynamiques façon miniature (next/og) : article, race, outil
+- [ ] Technique : robots en double sur la 404 (`noindex` + `index, follow`), `robots.txt` à nettoyer, description de l'accueil (Petty Well remplacé par Ultra Premium Direct, « chien & chat »)
+- [ ] À décider avec le propriétaire : doublon de catégories `alimentation` (8 articles) / `alimentation-quotidienne` (124) — fusion = redirections 301, risque SEO
+- [ ] Pilote SEO : 10 pages enrichies, hub Chiot, 1 hub race, groupe témoin Search Console
 
 ## Lot 2 — Outils sans compte
 
@@ -46,21 +53,19 @@ Référence visuelle : prototype navigable https://claude.ai/artifact/JP6w3gr8vX
 
 ## Lot 3 — Hubs et maillage
 
-- [ ] 8 piliers + hub Outils
-- [ ] Maillage par entités (aliment, race, problème de santé) automatique entre articles
-- [ ] Pilote SEO : 10 pages enrichies, hub Chiot, 1 hub race, groupe témoin Search Console
+- Remonté dans le lot 1 (2026-11-01).
 
 ## Lot 4 — Comptes
 
-- [ ] Neon UE + Drizzle (schéma user, session, dog, weight_log)
+- [ ] PostgreSQL du VPS + Drizzle (schéma user, session, dog, weight_log)
 - [ ] Better Auth (mail + mot de passe, vérification mail, mot de passe oublié via Brevo)
 - [ ] Profil chien (race, âge, poids, activité, castration) qui personnalise articles et outils
 - [ ] CTA création de compte aux points de friction (CRO)
 
 ## Lot 5 — Photos
 
-- [ ] Upload → sharp (WebP, 1600 px max) → R2 UE
-- [ ] Photos de garde temporaires (durée affichée à l'upload) + purge Vercel Cron
+- [ ] Upload → sharp (WebP, 1600 px max) → stockage objet S3 en UE
+- [ ] Photos de garde temporaires (durée affichée à l'upload) + purge par cron sur le VPS
 - [ ] Album croissance durable
 
 ## Lot 6 — IA (compte obligatoire, quotas)
