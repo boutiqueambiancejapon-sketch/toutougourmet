@@ -19,8 +19,8 @@ Référence visuelle : prototype navigable https://claude.ai/artifact/JP6w3gr8vX
 
 ## Lot 0 — Fondations
 
-- [ ] Brancher la preview Vercel sur `v2`
-- [ ] Mettre `CLAUDE.md` à jour pour la V2 (multilingue, Vercel puis VPS, règles de push)
+- [x] Brancher la preview Vercel sur `v2` (automatique, URL stable : toutougourmet-git-v2-boutiqueambiancejapon-sketchs-projects.vercel.app)
+- [x] Mettre `CLAUDE.md` à jour pour la V2 (multilingue, Vercel puis VPS, règles de push)
 - [ ] Tokens de design V2 dans `globals.css` (palette V1 épurée, emojis conservés)
 - [ ] Structure multilingue : FR à la racine (URLs actuelles inchangées), EN sous `/en`. Choisir la lib (next-intl) et documenter dans DECISIONS.md
 - [ ] Vérifier qu'aucune URL V1 indexée ne change (export sitemap V1 vs V2)

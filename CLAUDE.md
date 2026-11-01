@@ -11,8 +11,10 @@ Pour tâche transversale : lis docs/CDC.md uniquement.
 Domaine : www.toutou-gourmet.com
 Stack : Next.js 16.1.6 + React 19 + TypeScript strict + Tailwind v4 + MDX
 Next.js : 16.1.6 — ne jamais changer sans PR dédiée
-Langue défaut : français (monolangue, pas de i18n)
-Déploiement : Vercel · prod sur main · GitHub
+Langue défaut : français. V2 multilingue : FR à la racine (URLs actuelles inchangées), EN sous `/en`
+Déploiement : Vercel aujourd'hui · cible : VPS one.com (Caddy + systemd + PostgreSQL, voir `deploy/README.md`)
+Branche de prod : `claude/toutou-gourmet-setup-3mRbP` (il n'y a pas de `main`)
+Plan V2 : `tasks/todo.md` · décisions : `DECISIONS.md`
 
 ## Comportement agent
 
@@ -31,7 +33,8 @@ Déploiement : Vercel · prod sur main · GitHub
 - [ ] Variables CSS : jamais de valeur hardcodée
 - [ ] Composants : aucun > 150 lignes
 - [ ] TODO : aucun sans numéro d'issue GitHub
-- [ ] Secrets : aucun dans le code, tout dans Vercel Dashboard
+- [ ] Secrets : aucun dans le code · Vercel Dashboard aujourd'hui, `/srv/toutou/shared/.env` sur le VPS
+- [ ] Portabilité : aucun service propre à Vercel (KV, Blob, Edge Config, Cron) — le code doit tourner sur le VPS
 - [ ] Bots : `curl -s [PREVIEW_URL]/[page]` retourne H1 + premier paragraphe sans JS
 - [ ] CSP : unsafe-eval présent → exception documentée dans DECISIONS.md (Plausible Analytics)
 - [ ] Polices : zéro requête fonts.googleapis.com · max 2 familles · DM_Sans 3 weights (exception documentée DECISIONS.md)
@@ -41,10 +44,11 @@ Déploiement : Vercel · prod sur main · GitHub
 
 ## Règles Git absolues
 
-- Jamais de push direct sur main
-- Une feature = une branche = une PR
+- Push direct sur la branche de prod autorisé (choix du propriétaire) pour le contenu MDX et les petits correctifs, à condition que `npm run build` passe
+- Chantier V2 : tout sur la branche `v2` (preview Vercel), merge vers la prod seulement à la bascule
+- Changement risqué hors V2 (dépendances, config Next, routes) : branche dédiée + PR
 - Conventional Commits en anglais
-- Chaque PR déclenche un preview Vercel automatiquement
+- Jamais de force-push sur la branche de prod ni sur `v2`
 
 ## Règles absolues code
 
@@ -99,4 +103,4 @@ composant `<Illustration slot="..." />` qui résout le fichier via le manifest.
 1. Mettre à jour PROGRESS.md
 2. Mettre à jour DECISIONS.md si nouvelle décision
 3. `git add PROGRESS.md DECISIONS.md && git commit -m "docs: update PROGRESS and DECISIONS"`
-4. Pusher la branche courante (jamais main directement)
+4. Pusher la branche courante
