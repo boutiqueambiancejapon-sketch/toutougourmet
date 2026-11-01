@@ -55,7 +55,7 @@ export default function RaceHubPage() {
         </p>
       </div>
       <RaceSearch gridId={GRID_ID} total={breeds.length} />
-      <nav aria-label="Races par lettre" className="sticky top-[61px] z-30 -mx-4 overflow-x-auto bg-cream px-4 py-2 md:top-[69px]">
+      <nav aria-label="Races par lettre" className="sticky top-[65px] z-30 -mx-4 overflow-x-auto bg-cream px-4 py-2 md:top-[70px]">
         <ol role="list" className="m-0 flex list-none gap-1.5 p-0">
           {letters.map((letter) => (
             <li key={letter}>
