@@ -1,3 +1,5 @@
+import { fallbackSlotFor } from '@/data/image-utils'
+
 /**
  * Mapping catégorie (libellé frontmatter) → présentation blog hub.
  * Utilisé pour les chips, les covers Illustration et les cards.
@@ -296,5 +298,6 @@ export function getArticleSlot(slug: string, category: string): string {
     const breed = slug.slice('nourriture-'.length)
     return BREED_SLOT_BY_SLUG[breed] ?? 'breed-generic'
   }
-  return getCategoryVisual(category).slot
+  // 4. Pas d'image dédiée : cover de rubrique ou image neutre existante, stable par slug (pas de génération)
+  return fallbackSlotFor(slug, getCategoryVisual(category).slot)
 }
