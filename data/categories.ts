@@ -13,7 +13,7 @@ export const categories: Category[] = [
     label: 'Que peut manger un chien ?',
     description: 'Fruits, légumes, viandes, féculents — tous les aliments autorisés et interdits pour ton chien, expliqués clairement avec les quantités et précautions.',
     emoji: '🥕',
-    subCategorySlugs: ['fruit', 'legumes', 'viandes'],
+    subCategorySlugs: ['fruit', 'legumes', 'feculents', 'viandes'],
   },
   {
     slug: 'alimentation-quotidienne',
@@ -32,6 +32,12 @@ export const categories: Category[] = [
     label: 'Quels légumes pour un chien ?',
     description: 'Brocoli, chou-fleur, poivron, endives… Les légumes que ton chien peut manger, ceux à éviter, et les meilleures façons de les préparer.',
     emoji: '🥦',
+  },
+  {
+    slug: 'feculents',
+    label: 'Féculents et céréales pour chien',
+    description: 'Pain, pâtes, riz, maïs et avoine : lesquels un chien peut manger, sous quelle forme et en quelle quantité.',
+    emoji: '🍞',
   },
   {
     slug: 'viandes',

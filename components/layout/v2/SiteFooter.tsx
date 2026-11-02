@@ -20,6 +20,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
       { href: '/chien/marque/elmut', label: 'Elmut' },
       { href: '/chien/marque/ultra-premium-direct', label: 'Ultra Premium Direct' },
       { href: '/chien/marque/dog-chef', label: 'Dog Chef' },
+      { href: '/chien/marque/dogfy-diet', label: 'Dogfy Diet' },
       { href: '/comparateur', label: 'Comparateur' },
     ],
   },

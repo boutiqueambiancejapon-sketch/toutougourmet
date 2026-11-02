@@ -181,7 +181,7 @@ export function ComparisonTable() {
                   href={brand.affiliateUrl}
                   target="_blank"
                   rel="noopener noreferrer sponsored"
-                  className="btn-primary text-xs py-2 px-4 inline-block"
+                  className="btn-primary text-xs py-2 px-4 inline-block whitespace-nowrap"
                 >
                   Voir le site
                 </Link>

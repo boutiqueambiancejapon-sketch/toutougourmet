@@ -48,6 +48,7 @@ const CAT_PILL: Record<string, { bg: string; color: string }> = {
   'peut-manger':              { bg: 'var(--pill-amber)', color: 'var(--text-on-amber)' },
   fruit:                      { bg: 'var(--pill-amber)', color: 'var(--text-on-amber)' },
   legumes:                    { bg: 'var(--pill-green)', color: 'var(--text-on-green)' },
+  feculents:                  { bg: 'var(--pill-amber)', color: 'var(--text-on-amber)' },
   viandes:                    { bg: 'var(--pill-rose)',  color: 'var(--text-on-rose)'  },
   urgences:                   { bg: 'var(--pill-rose)',  color: 'var(--text-on-rose)'  },
   'comportement-alimentaire': { bg: 'var(--pill-blue)',  color: 'var(--text-on-blue)'  },
