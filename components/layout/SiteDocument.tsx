@@ -47,18 +47,13 @@ export function SiteDocument({ locale, header, footer, children }: SiteDocumentP
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
+            // Sans bannière de consentement : stockage refusé, GA4 mesure sans déposer de cookie.
+            gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
             gtag('js', new Date());
             gtag('config', 'G-MDHMHXVJRZ', { send_page_view: false });
           `}
         </Script>
 
-        {/* Google AdSense — dans <head> pour validation par le robot Google */}
-        {/* @cdc §CSP — script tiers approuvé, exception documentée */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7295690633751101"
-          crossOrigin="anonymous"
-        />
         {locale === 'fr' && (
           <script
             type="application/ld+json"

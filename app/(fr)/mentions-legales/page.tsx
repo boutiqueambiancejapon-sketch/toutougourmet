@@ -33,8 +33,9 @@ export default function MentionsLegalesPage() {
             </h2>
             <p>
               Le site est hébergé par :<br />
-              <strong className="text-[var(--text-primary)]">Vercel Inc.</strong><br />
-              340 Pine Street, Suite 701, San Francisco, CA 94104, USA
+              <strong className="text-[var(--text-primary)]">one.com</strong>, serveur privé virtuel
+              exploité par Hostnet B.V.<br />
+              De Ruyterkade 6, 1013 AA Amsterdam, Pays-Bas
             </p>
           </section>
 

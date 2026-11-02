@@ -61,3 +61,7 @@
 
 - **2025 — CSP unsafe-eval** : activé dans `next.config.ts` script-src. Raison d'origine (script Plausible) disparue le 2026-11-02 avec l'abandon de Plausible. Conservé par prudence : Google Tag Manager (variables JavaScript personnalisées) et les scripts publicitaires Google (AdSense, Funding Choices) peuvent recourir à `eval`. À retirer après un test en préversion sans `unsafe-eval` (console du navigateur sans erreur CSP sur GA4, annonces et bandeau de consentement).
 - **2025 — DM_Sans 3 weights** : chargé avec 400, 500, 600 au lieu du max 2 du CDC. Décision de design (500 utilisé pour UI intermédiaire). DÉCISION À VALIDER pour réduire à 2.
+
+
+## 2026-11-02 — AdSense retiré, GA4 gardé en mode sans cookie
+Décision du propriétaire : on garde Google Analytics 4, on abandonne AdSense. Sans bannière de consentement, GA4 tourne avec le Consent Mode « refusé » par défaut (aucun cookie déposé, mesure modélisée côté Google). CSP réduite à googletagmanager et google-analytics, frame-src 'none'. Une bannière de consentement (CNIL) permettrait de mesurer pleinement les visiteurs qui acceptent : à proposer au propriétaire avant toute mise en place (changement visuel).

@@ -37,6 +37,12 @@ export default function PolitiqueConfidentialitePage() {
               avec notre propre outil, hébergé sur notre serveur. Il ne dépose aucun cookie et n&apos;enregistre
               pas ton adresse IP. Aucune de ces données ne part chez un service tiers.
             </p>
+            <p className="mb-2">
+              Nous utilisons aussi Google Analytics 4 (Google Ireland Ltd), réglé pour ne déposer aucun
+              cookie ni identifiant sur ton appareil : Google reçoit des signaux de visite sans pouvoir te
+              reconnaître d&apos;une visite à l&apos;autre. Ces signaux peuvent être traités hors de l&apos;Union
+              européenne, dans le cadre du Data Privacy Framework UE–États-Unis.
+            </p>
             <p>
               Les messages envoyés par le formulaire de contact restent dans notre base de données. Ils
               servent uniquement à te répondre et ne sont jamais partagés.
@@ -72,8 +78,9 @@ export default function PolitiqueConfidentialitePage() {
               Cookies
             </h2>
             <p>
-              Ce site n&apos;utilise pas de cookies de traçage ou publicitaires. Aucun consentement
-              cookie n&apos;est requis.
+              Ce site ne dépose aucun cookie de mesure ni de publicité. Les seuls cookies sont ceux
+              nécessaires au fonctionnement du site (par exemple, rester connecté à ton compte quand cette
+              fonction sera ouverte).
             </p>
           </section>
         </div>
