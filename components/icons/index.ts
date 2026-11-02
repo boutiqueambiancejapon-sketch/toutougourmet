@@ -1,6 +1,8 @@
 export type { IconProps } from './Svg'
-export { IconHome, IconBook, IconTarget, IconBowl, IconDog, IconSearch } from './nav-icons'
-export { IconCarrot, IconFruit, IconBone, IconAlert, IconHeart, IconScale, IconPaw, IconBread } from './food-icons'
-export { IconCheck, IconCross, IconBang, IconSparkle, IconChevron, IconClose } from './mark-icons'
+export {
+  IconHome, IconBook, IconTarget, IconBowl, IconDog, IconSearch,
+  IconCarrot, IconFruit, IconBone, IconAlert, IconHeart, IconScale, IconPaw, IconBread,
+  IconCheck, IconCross, IconBang, IconSparkle, IconChevron, IconClose,
+  IconCoins, IconBars, IconCake,
+} from './line-icons'
 export { CategoryIcon, VerdictIcon, type VerdictKind } from './semantic'
-export { IconCoins, IconBars, IconCake } from './tool-icons'

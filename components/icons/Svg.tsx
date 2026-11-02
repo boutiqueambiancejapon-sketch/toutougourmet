@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
-// @cdc branding — jeu d'icônes maison (audit design 2026-11-02, §2.2) : trait encre arrondi
-// (currentColor, épaisseur 2), aplats de la palette via les utilitaires fill-* (tokens CSS).
+// @cdc branding — base des icônes (voir line-icons.tsx) : trait fin arrondi d'une seule couleur
+// (currentColor, épaisseur 1,75), aucun aplat.
 // Décoratives par défaut (aria-hidden) ; passer `title` pour une icône porteuse de sens.
 
 export interface IconProps {
@@ -17,7 +17,7 @@ export function Svg({ className = 'size-6', title, children }: IconProps & { chi
       height="24"
       fill="none"
       stroke="currentColor"
-      strokeWidth={2}
+      strokeWidth={1.75}
       strokeLinecap="round"
       strokeLinejoin="round"
       focusable="false"
