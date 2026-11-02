@@ -12,6 +12,7 @@ const SECTIONS = [
   { id: 'ia', label: 'IA' },
   { id: 'messages', label: 'Messages' },
   { id: 'nuit', label: 'Tâche de nuit' },
+  { id: 'serveur', label: 'Serveur' },
 ]
 
 export function DashboardHeader({ period }: { period: Period }) {
