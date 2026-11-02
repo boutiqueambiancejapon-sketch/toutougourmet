@@ -60,3 +60,16 @@ Principe : l'IA recopie l'étiquette (`ExtractedLabel`), elle ne note pas. La no
 ## Version 1.1 (2026-11-02)
 
 Après le premier test réel : les ingrédients animaux sans espèce comptent désormais (avant, seules les catégories « sous-produits » étaient pénalisées), plusieurs céréales en tête de liste sont additionnées (fractionnement), et des antioxygènes non nommés ne valent plus la note pleine, puisqu'on ne peut pas exclure BHA, BHT ou éthoxyquine. Les analyses en cache sont recalculées à la lecture.
+
+## Provenance des données (scanner v2, 2026-11-02)
+
+La note ne change pas selon la provenance : le même barème s'applique à une étiquette `ExtractedLabel`, d'où qu'elle vienne. La colonne `food_analysis.source` (migration `0002_scanner_source.sql`) garde l'origine.
+
+1. **Cache** (`food_analysis`, par EAN) : résultat immédiat, sans IA, non décompté, accessible sans compte.
+2. **Open Pet Food Facts** (`source = 'openpetfoodfacts'`, `model = 'openpetfoodfacts'`) : requête serveur à `https://world.openpetfoodfacts.org/api/v2/product/{ean}.json`. Seul le code-barres part, avec un User-Agent qui identifie le site et un délai de 4 s. Conversion dans `lib/scanner/opff.ts` :
+   - ingrédients : `ingredients_text_fr`, sinon `ingredients_text`, découpés par `lib/scanner/ingredient-text.ts` (virgules hors parenthèses, virgule décimale gardée, premier pourcentage de l'ingrédient, bloc des additifs à partir de « Additifs », « Vitamine A », « Antioxygènes ») ; les codes E de `additives_tags` s'ajoutent aux additifs ;
+   - constituants : `crude-protein`, `crude-fat`, `crude-fibre`, `crude-ash`, `moisture` (en %), à défaut les champs `proteins`, `fat`, `fiber` ; calcium et phosphore repris seulement si leur unité est le % (la base mélange g et %) ;
+   - fiche exploitable : aliment pour chien d'après les catégories, 3 ingrédients au moins, protéines et matières grasses présentes et plausibles (croquettes : protéines de 12 à 70 %, matières grasses de 3 à 45 %, somme des constituants ≤ 100), note calculable. Sinon, passage aux photos avec marque et produit préremplis ;
+   - couverture mesurée le 2026-11-02 (`npx tsx scripts/opff-coverage.ts 2`) : 13 croquettes chien notables sur 105 vendues en France présentes dans la base (12 %) ;
+   - mention « Données : Open Pet Food Facts, licence ODbL » sur le résultat, la fiche, la fiche A4 et l'image de partage.
+3. **Photos** (`source = 'photo'`, compte requis, quota mensuel) : lecture par l'IA (`lib/scanner/label-schema.ts`). La sortie donne aussi `typeImage` (aliment chien, aliment chat, friandise, autre), `lisibilite` (nette, floue) et `champsDouteux`. Tri dans `lib/scanner/outcome.ts` : pas une étiquette, texte flou, aliment pour chat ou friandise donnent un refus non décompté ; une partie manquante (composition ou constituants) garde la session ouverte (jeton signé valable 30 min, `lib/server/scan-session.ts`) et la photo manquante n'est pas décomptée une seconde fois ; rien de lisible (devant du sac seul) n'est pas décompté. Un champ douteux s'affiche « à vérifier » sous la note : la personne peut corriger le chiffre (recalcul dans le navigateur) et l'envoyer comme signalement.

@@ -88,6 +88,14 @@ Tables `app.food_analysis`, `app.scan_history`, `app.scan_usage`, `app.scan_repo
 | `SCANNER_TIMEOUT_MS` | facultatif, délai d'attente de la lecture, défaut 30000. |
 | `SCANNER_RECENT_MIN` | facultatif, produits distincts avant d'afficher « Derniers scans », défaut 5. |
 
+Scanner v2 (code-barres, Open Pet Food Facts, fiches de partage) : migration `db/migrations/0002_scanner_source.sql` (colonne `food_analysis.source`), même commande `npx drizzle-kit migrate`. Le serveur doit pouvoir joindre `world.openpetfoodfacts.org` en HTTPS (sortie). Le décodeur de code-barres `public/vendor/zxing/zxing_reader-3.1.6.wasm` est servi par le site : si `barcode-detector` change de version dans `package.json`, recopier le fichier depuis `node_modules/zxing-wasm/dist/reader/` et mettre à jour `ZXING_WASM_URL` (`lib/scanner/barcode-client.ts`). `/scanner` autorise la caméra (`Permissions-Policy: camera=(self)`, `next.config.ts`) : ne pas réécrire cet en-tête dans Caddy. Le jeton de session de scan est signé avec `BETTER_AUTH_SECRET`.
+
+| Variable | Valeur |
+| --- | --- |
+| `OPFF_DISABLED` | facultatif, `1` coupe l'appel à Open Pet Food Facts (le code-barres inconnu passe directement aux photos). |
+| `OPFF_TIMEOUT_MS` | facultatif, délai d'attente d'Open Pet Food Facts, défaut 4000. |
+| `OPFF_API_URL` | facultatif, défaut `https://world.openpetfoodfacts.org/api/v2/product`. |
+
 Relire une fiche (la rendre indexable et l'ajouter à `/croquettes/sitemap.xml`) : `UPDATE app.food_analysis SET reviewed = true WHERE slug = '…';`. Signalements : `SELECT * FROM app.scan_report ORDER BY created_at DESC;`.
 
 Purge des comptes non confirmés (promise par la politique de confidentialité : 30 jours). Le script supprime aussi les jetons de vérification et les sessions expirés. Aucune minuterie n'est installée : lancer à la main, ou créer plus tard un timer systemd quotidien sur le modèle de `toutou-ingest.timer`.
