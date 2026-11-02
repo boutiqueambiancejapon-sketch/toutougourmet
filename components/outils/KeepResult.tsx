@@ -1,11 +1,17 @@
 'use client'
 
-import { useId, useState } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useId, useState, useSyncExternalStore } from 'react'
+import { hasSessionHint } from '@/lib/account-hint'
 import { track } from '@/lib/analytics'
 
 // @cdc 04-pages — « Garder ce résultat » sous chaque outil (audit design-cro §3 Outils) :
 // e-mail seul, même route que BonusFiche (/api/contact → Brevo).
 // En cas d'erreur, l'adresse tapée et le résultat restent à l'écran.
+// Lot 4 : sous le formulaire, lien vers la création de compte (masqué si un compte est connecté).
+
+const noop = () => () => {}
 
 interface KeepResultProps {
   /** Nom court de l'outil, envoyé comme `source` et dans l'événement `tool-<nom>` */
@@ -18,6 +24,8 @@ export function KeepResult({ tool, summary }: KeepResultProps) {
   const id = useId()
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const pathname = usePathname()
+  const signedIn = useSyncExternalStore(noop, hasSessionHint, () => false)
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -80,6 +88,17 @@ export function KeepResult({ tool, summary }: KeepResultProps) {
         </p>
       ) : null}
       {status !== 'success' ? <p className="m-0 text-xs text-ink-2">On ne transmet ton e-mail à personne.</p> : null}
+      {signedIn ? null : (
+        <p className="m-0 border-t border-line pt-3 text-[15px] text-ink-2">
+          <Link
+            href={`/compte/inscription?retour=${encodeURIComponent(pathname)}`}
+            className="font-semibold text-orange-ink underline underline-offset-2"
+          >
+            Crée un compte pour garder ses résultats
+          </Link>
+          . Le profil de ton chien remplit les outils à ta place et tu suis son poids.
+        </p>
+      )}
     </section>
   )
 }
