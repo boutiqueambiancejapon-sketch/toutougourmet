@@ -42,7 +42,7 @@ test('toujours 2 ou 3 offres, sans doublon, jamais Fidelis', () => {
 })
 
 test('remises : seulement celles confirmées, liens de data/brands.ts', () => {
-  assert.equal(CONFIRMED_DISCOUNTS['ultra-premium-direct'], null)
+  assert.equal(CONFIRMED_DISCOUNTS['ultra-premium-direct'], '−20 % sur la première commande en abonnement')
   for (const o of [...offersFor(base), weightGainOffer(), betterKibbleOffer()]) {
     const brand = brands.find((b) => b.slug === o.slug)
     assert.ok(brand, o.slug)

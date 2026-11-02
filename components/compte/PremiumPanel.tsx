@@ -24,7 +24,7 @@ export function PremiumPanel({ premium, activatedAt, missing }: { premium: boole
           Ta formule <PremiumBadge />
         </h2>
         <p className="m-0 text-[15px] leading-relaxed text-ink-2">
-          {`${PREMIUM_MONTHLY_SCANS} analyses par photo par mois, alertes de poids, historique complet des scans et alternatives aux croquettes mal notées.`}
+          {`${PREMIUM_MONTHLY_SCANS} analyses par photo par mois, alertes de poids et historique complet des scans.`}
           {activatedAt ? ` Activé le ${activatedAt.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' })}.` : ''}
         </p>
         <p className="m-0 text-sm text-ink-2">Gratuit pendant le lancement. Si Premium devient payant, on te prévient avant : rien ne sera prélevé automatiquement.</p>
@@ -35,7 +35,7 @@ export function PremiumPanel({ premium, activatedAt, missing }: { premium: boole
     <section aria-labelledby="premium" className="flex flex-col gap-3 rounded-card border-2 border-ink bg-paper p-4">
       <h2 id="premium" className="m-0 font-display text-xl font-black text-ink">Premium, gratuit pendant le lancement</h2>
       <p className="m-0 text-[15px] leading-relaxed text-ink-2">
-        {`${PREMIUM_MONTHLY_SCANS} analyses par photo par mois au lieu de ${FREE_MONTHLY_SCANS}, alertes quand son poids change vite, historique complet des scans et meilleures alternatives à ses croquettes. Sans carte bancaire.`}{' '}
+        {`${PREMIUM_MONTHLY_SCANS} analyses par photo par mois au lieu de ${FREE_MONTHLY_SCANS}, alertes quand son poids change vite et historique complet des scans. Sans carte bancaire.`}{' '}
         <Link href="/premium" className="font-semibold text-orange-ink underline underline-offset-2">
           Le détail de Premium
         </Link>

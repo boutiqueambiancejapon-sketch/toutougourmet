@@ -8,7 +8,7 @@ const ROWS: [string, string, string][] = [
   ['Courbe de poids', 'Oui', 'Oui'],
   ['Alertes de prise ou de perte de poids', 'Non', 'Oui'],
   ['Historique des scans', '20 dernières analyses', 'Complet'],
-  ['Alternative à une croquette notée sous 55', 'Non', 'Oui'],
+  ['Alternative à une croquette notée sous 55', 'Oui', 'Oui'],
   ['Offres partenaires selon son profil', 'Oui', 'Oui'],
   ['Outils pré-remplis avec son profil', 'Oui', 'Oui'],
 ]

@@ -14,7 +14,7 @@ export const CONFIRMED_DISCOUNTS: Record<OfferSlug, string | null> = {
   'dogfy-diet': "−50 % sur la box d'essai de 14 jours",
   elmut: '−40 % sur la première commande',
   franklin: '−30 % en abonnement',
-  'ultra-premium-direct': null,
+  'ultra-premium-direct': '−20 % sur la première commande en abonnement',
 }
 
 export interface AccountOffer {

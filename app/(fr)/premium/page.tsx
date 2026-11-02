@@ -11,7 +11,7 @@ const URL = 'https://www.toutou-gourmet.com/premium'
 
 export const metadata: Metadata = {
   title: { absolute: `Toutou Gourmet Premium, gratuit pendant le lancement` },
-  description: `${PREMIUM_MONTHLY_SCANS} analyses de croquettes par mois, courbe de poids avec alertes, historique complet des scans et meilleures alternatives. Gratuit pendant le lancement, sans carte bancaire.`,
+  description: `${PREMIUM_MONTHLY_SCANS} analyses de croquettes par mois, courbe de poids avec alertes, historique complet des scans. Gratuit pendant le lancement, sans carte bancaire.`,
   alternates: { canonical: URL },
   openGraph: {
     title: 'Toutou Gourmet Premium, gratuit pendant le lancement',
@@ -89,12 +89,6 @@ export default function PremiumPage() {
             <li className="flex flex-col gap-1">
               <h3 className="m-0 text-lg font-semibold text-ink">L&apos;historique complet des scans</h3>
               <p className="m-0 leading-relaxed text-ink-2">Toutes tes analyses restent listées dans ton compte. Le compte gratuit garde les 20 dernières.</p>
-            </li>
-            <li className="flex flex-col gap-1">
-              <h3 className="m-0 text-lg font-semibold text-ink">De meilleures alternatives à ses croquettes</h3>
-              <p className="m-0 leading-relaxed text-ink-2">
-                Sous une croquette notée moins de 55 sur 100, une alternative mieux composée s&apos;affiche, avec la raison de ce choix.
-              </p>
             </li>
           </ul>
         </section>
