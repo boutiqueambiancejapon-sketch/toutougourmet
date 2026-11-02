@@ -8,6 +8,7 @@ import { ActionsSection } from '@/components/dashboard/ActionsSection'
 import { AiSection } from '@/components/dashboard/AiSection'
 import { NightSection } from '@/components/dashboard/NightSection'
 import { MessagesSection } from '@/components/dashboard/MessagesSection'
+import { LiveSection } from '@/components/dashboard/LiveSection'
 
 // @cdc tableau de bord — page privée du propriétaire, protégée par proxy.ts (HTTP Basic).
 // Lue à chaque visite, jamais mise en cache ni indexée, absente du sitemap.
@@ -40,6 +41,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
             {data.notice}
           </p>
         )}
+        <LiveSection />
         <ActionsSection data={data.summary} period={period} />
         <AiSection data={data.ai} period={period} unread={data.unread} articleCount={data.articleCount} />
         <MessagesSection messages={data.messages} />

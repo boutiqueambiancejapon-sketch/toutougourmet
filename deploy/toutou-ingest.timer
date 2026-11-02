@@ -1,9 +1,9 @@
 [Unit]
-Description=Toutou Gourmet - ingestion des journaux Caddy toutes les 15 minutes
+Description=Toutou Gourmet - ingestion des journaux Caddy toutes les minutes
 
 [Timer]
 OnBootSec=2min
-OnUnitActiveSec=15min
+OnUnitActiveSec=1min
 Persistent=true
 
 [Install]

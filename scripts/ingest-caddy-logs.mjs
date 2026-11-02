@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // @cdc mesure — lit les journaux d'accès de Caddy (JSON, dans journald) et les range dans
-// analytics.hits. Lancé toutes les 15 minutes par toutou-ingest.timer. Reprend là où il
+// analytics.hits. Lancé toutes les minutes par toutou-ingest.timer. Reprend là où il
 // s'était arrêté grâce au curseur journald (analytics.ingest_state).
 // Humains : seules les pages sont gardées (pas les fichiers statiques), sans IP ni User-Agent.
 // Robots : toutes les requêtes, avec IP et User-Agent (repérage des faux robots).

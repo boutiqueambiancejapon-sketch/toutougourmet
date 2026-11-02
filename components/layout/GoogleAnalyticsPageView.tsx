@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
+import { track } from '@/lib/analytics'
 
 const GA_MEASUREMENT_ID = 'G-MDHMHXVJRZ'
 
@@ -25,7 +26,10 @@ function GoogleAnalyticsPageViewInner() {
   const searchParams = useSearchParams()
 
   useEffect(() => {
-    if (!pathname || typeof window.gtag !== 'function') return
+    if (!pathname) return
+    // Vue de page pour notre tableau de bord (direct) : sans cookie ni IP, voir /api/e.
+    track('Pageview')
+    if (typeof window.gtag !== 'function') return
 
     const query = searchParams?.toString()
     const url = query ? `${pathname}?${query}` : pathname

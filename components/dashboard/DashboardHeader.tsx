@@ -4,6 +4,7 @@ import { PERIODS, type Period, type PeriodKey } from '@/lib/dashboard/period'
 // @cdc tableau de bord — en-tête collant : sélecteur de période (?periode=) et accès aux sections.
 
 const SECTIONS = [
+  { id: 'direct', label: 'En direct' },
   { id: 'chiffres', label: 'Chiffres' },
   { id: 'partenaires', label: 'Partenaires' },
   { id: 'lecteurs', label: 'Lecteurs' },

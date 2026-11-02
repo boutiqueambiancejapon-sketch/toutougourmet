@@ -8,6 +8,7 @@ export const ANALYTICS_EVENTS = [
   'Food Search',
   'Quiz Complete',
   'Account Signup',
+  'Pageview',
 ] as const
 
 export type AnalyticsEvent = (typeof ANALYTICS_EVENTS)[number]
