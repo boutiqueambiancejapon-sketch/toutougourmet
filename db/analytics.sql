@@ -80,3 +80,10 @@ CREATE INDEX IF NOT EXISTS contact_messages_handled_ts_idx ON analytics.contact_
 ALTER TABLE analytics.contact_messages OWNER TO toutou;
 GRANT SELECT, INSERT, UPDATE ON analytics.contact_messages TO administrator;
 GRANT USAGE ON SEQUENCE analytics.contact_messages_id_seq TO administrator;
+
+-- Pays du visiteur (code ISO à 2 lettres), déduit de l'IP au moment de la visite avec une base
+-- locale (DB-IP country lite, CC BY 4.0) ; l'IP elle-même n'est jamais enregistrée pour les humains.
+ALTER TABLE analytics.events ADD COLUMN IF NOT EXISTS country char(2);
+ALTER TABLE analytics.hits ADD COLUMN IF NOT EXISTS country char(2);
+CREATE INDEX IF NOT EXISTS events_country_ts_idx ON analytics.events (country, ts) WHERE country IS NOT NULL;
+CREATE INDEX IF NOT EXISTS hits_country_ts_idx ON analytics.hits (country, ts) WHERE country IS NOT NULL;
