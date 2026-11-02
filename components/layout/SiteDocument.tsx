@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react'
 import Script from 'next/script'
-import { Analytics } from '@vercel/analytics/next'
 import ScrollToTop from './ScrollToTop'
 import { Tracking } from '@/components/analytics/Tracking'
 import GoogleAnalyticsPageView from './GoogleAnalyticsPageView'
@@ -96,8 +95,6 @@ export function SiteDocument({ locale, header, footer, children }: SiteDocumentP
           strategy="afterInteractive"
         />
 
-        {/* Vercel Web Analytics */}
-        <Analytics />
       </body>
     </html>
   )
