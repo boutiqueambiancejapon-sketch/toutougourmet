@@ -85,3 +85,6 @@ Décision du propriétaire : on garde Google Analytics 4, on abandonne AdSense. 
 - QR code des images de partage : `qrcode-generator` (sans dépendance) plutôt que `qrcode` (tire `yargs` et `pngjs`).
 - Mauvaises photos : refus non décomptés (pas une étiquette, floue, chat, friandise). Une lecture marquée floue avec la liste ou 3 chiffres douteux est refusée : au test réel, Gemini a « lu » une photo illisible en marquant tout douteux. Partie manquante : session signée de 30 min, la photo manquante n'est pas décomptée.
 - Corrections : recalcul de la note dans le navigateur, envoi comme signalement (`scan_report`) ; la fiche publique ne change qu'après relecture.
+
+## 2026-11-02 — Offres partenaires en cours (confirmées par le propriétaire)
+Dog Chef −30 % sur la box d'essai + livraison gratuite ; Dogfy Diet −50 % sur la box d'essai de 14 jours ; Elmut −40 % sur la première commande ; Franklin Pet Food −30 % en abonnement. Maxi Zoo partenaire (liens tidd.ly). Fidelis : bocaux en rupture, ne pas mettre en avant. Petty Well n'est plus partenaire. Toute autre remise affichée est une erreur.
