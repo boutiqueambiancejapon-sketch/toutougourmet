@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { evaluateBodyScore, dogSizeRanges, type Animal, type BodyScoreResult } from '@/lib/calculators'
+import { evaluateBodyScore, dogSizeRanges, type Animal, type BodyScore, type BodyScoreResult } from '@/lib/calculators'
 import { track } from '@/lib/analytics'
+import { NextSteps, type NextStep } from './NextSteps'
 
 const catIdealWeights = [
   { label: 'Petit gabarit (Siamois, Devon...)', idealKg: 3.5 },
@@ -16,6 +17,25 @@ const scoreEmojis: Record<string, string> = {
   ideal: '😊',
   surpoids: '😐',
   obese: '😟',
+}
+
+/** Suite logique selon le score : guides chien (les guides chat n'existent pas encore). */
+function nextSteps(score: BodyScore, animal: Animal, idealKg: string): NextStep[] {
+  const ration: NextStep = { href: `/outils/ration?poids=${idealKg}`, label: 'Calculer sa ration à son poids de forme' }
+  if (animal === 'chat') return [{ href: '/outils/ration', label: 'Calculer sa ration' }]
+  if (score === 'surpoids' || score === 'obese') {
+    return [
+      { href: '/chien/alimentation-quotidienne/comment-faire-maigrir-son-chien', label: 'Faire maigrir son chien', sub: 'Le programme alimentaire semaine par semaine' },
+      { href: '/chien/sante/croquettes-chien-surpoids', label: 'Quelle croquette pour un chien en surpoids ?' },
+    ]
+  }
+  if (score === 'maigre' || score === 'sous-poids') {
+    return [
+      { href: '/chien/alimentation-quotidienne/croquettes-chien-trop-maigre', label: 'Quelle croquette pour un chien trop maigre ?' },
+      ration,
+    ]
+  }
+  return [ration, { href: '/chien/urgences', label: 'Aliments à éviter' }]
 }
 
 export function BodyScoreEvaluator() {
@@ -194,6 +214,7 @@ export function BodyScoreEvaluator() {
           <p className="text-xs text-[var(--text-muted)] mt-3 italic">
             Estimation indicative. Pour un bilan précis, consulte ton vétérinaire.
           </p>
+          <NextSteps steps={nextSteps(result.score, animal, idealWeight)} />
         </div>
       )}
     </div>

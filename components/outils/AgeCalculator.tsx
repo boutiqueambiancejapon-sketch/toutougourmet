@@ -2,7 +2,8 @@
 'use client'
 
 import { useState, useMemo } from 'react'
-import { calculateDogHumanAge, type SizeCategory } from '@/lib/calculators'
+import { calculateDogHumanAge, type DogAgeResult, type SizeCategory } from '@/lib/calculators'
+import { NextSteps, type NextStep } from './NextSteps'
 
 const SIZES: { value: SizeCategory; label: string; desc: string }[] = [
   { value: 'petit',      label: 'Petit',      desc: '< 10 kg · Yorkshire, Chihuahua, Carlin' },
@@ -17,6 +18,30 @@ const PILL_COLORS: Record<string, string> = {
   adulte:      'bg-[var(--pill-green,#d1f5e0)] text-[var(--text-primary)]',
   senior:      'bg-[var(--bg-surface-2)] text-[var(--text-secondary)]',
   'tres-senior': 'bg-[var(--bg-surface-2)] text-[var(--text-muted)]',
+}
+
+/** Suite logique selon l'étape de vie : ration pré-réglée et guide de l'âge quand il existe. */
+function nextSteps(stage: DogAgeResult['stagePill'], size: SizeCategory): NextStep[] {
+  if (stage === 'chiot') {
+    // Les guides chiot par tranche d'âge (/chien/alimentation/…) ne répondent pas en V2 : pas de lien.
+    const big = size === 'grand' || size === 'tres-grand'
+    return [
+      { href: '/outils/ration?age=chiot', label: 'Calculer sa ration de chiot' },
+      big
+        ? { href: '/chien/alimentation-quotidienne/croquettes-chiot-grande-race', label: 'Croquettes pour chiot de grande race' }
+        : { href: '/chien/urgences', label: 'Aliments à éviter' },
+    ]
+  }
+  if (stage === 'senior' || stage === 'tres-senior') {
+    return [
+      { href: '/chien/alimentation-quotidienne/alimentation-chien-senior-guide', label: 'Adapter sa ration après 7 ans', sub: 'Le guide du chien senior' },
+      { href: '/outils/ration?age=senior', label: 'Calculer sa ration de senior' },
+    ]
+  }
+  return [
+    { href: '/outils/ration?age=adulte', label: 'Calculer sa ration' },
+    { href: '/outils/poids', label: 'Vérifier son état corporel' },
+  ]
 }
 
 export function AgeCalculator() {
@@ -110,6 +135,7 @@ export function AgeCalculator() {
               {result.context}
             </p>
           </div>
+          <NextSteps steps={nextSteps(result.stagePill, size)} />
         </div>
       )}
     </div>

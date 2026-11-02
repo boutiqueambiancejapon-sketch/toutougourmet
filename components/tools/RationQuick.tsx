@@ -12,12 +12,13 @@ import {
 } from '@/lib/calculators'
 import { IconChevron } from '@/components/icons'
 import { Segmented } from './Segmented'
+import { rationHref, type RationFood } from '@/components/outils/ration-params'
 
 // @cdc 04-pages — calculateur de ration compact du hero (audit design-CRO, §3 Accueil).
 // Mêmes formules et densités que l'outil complet /outils/ration (lib/calculators.ts) :
 // croquettes 360 kcal/100 g, repas frais 120 kcal/100 g. Bouton encre et non orange : l'en-tête
 // et la barre d'onglets portent déjà l'aplat orange du test.
-type Food = 'croquettes' | 'frais'
+type Food = RationFood
 type YesNo = 'oui' | 'non'
 
 const AGES = [['chiot', 'Chiot'], ['adulte', 'Adulte'], ['senior', 'Senior']] as const
@@ -99,7 +100,7 @@ export function RationQuick({ headingId }: { headingId: string }) {
             </p>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
               <Link
-                href="/outils/ration"
+                href={rationHref({ weightKg: kg, ageGroup: age, activityLevel: activity, sterilized: sterilized === 'oui', food })}
                 className="inline-flex min-h-11 items-center rounded-control border-[1.5px] border-ink px-4 text-[15px] font-semibold text-ink no-underline"
               >
                 Voir le calcul détaillé

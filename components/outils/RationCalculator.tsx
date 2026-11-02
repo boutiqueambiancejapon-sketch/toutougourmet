@@ -1,7 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { track } from '@/lib/analytics'
+import { RationResult, type RationValues } from './RationResult'
+import { parseRationParams, type RationPrefill } from './ration-params'
 import {
   calculateDailyCalories,
   caloriesToGramsKibble,
@@ -29,27 +32,48 @@ const defaultForm: FormState = {
   isHighEnergy: false,
 }
 
-export function RationCalculator() {
-  const [form, setForm] = useState<FormState>(defaultForm)
-  const [result, setResult] = useState<{ kcal: number; gKibble: number; gFresh: number } | null>(null)
+function compute(form: FormState): RationValues | null {
+  const weight = parseFloat(form.weightKg)
+  if (!weight || weight <= 0) return null
+  const kcal = calculateDailyCalories({
+    animal: form.animal,
+    weightKg: weight,
+    ageGroup: form.ageGroup,
+    activityLevel: form.activityLevel,
+    sterilized: form.sterilized,
+    isRaceHighEnergy: form.isHighEnergy,
+  })
+  return { kcal, gKibble: caloriesToGramsKibble(kcal), gFresh: caloriesToGramsFresh(kcal) }
+}
+
+/**
+ * Lit les paramètres d'URL (?poids=…) pour pré-remplir le formulaire. useSearchParams impose
+ * une limite <Suspense> dans la page : la page reste statique, son repli est <RationCalculator />.
+ */
+export function RationCalculatorFromUrl() {
+  const params = useSearchParams()
+  const prefill = parseRationParams(params)
+  return <RationCalculator key={params.toString()} prefill={prefill} />
+}
+
+export function RationCalculator({ prefill = {} }: { prefill?: RationPrefill }) {
+  const { food, ...fields } = prefill
+  // Les clés absentes de l'URL valent undefined : elles ne doivent pas écraser les valeurs par défaut.
+  const initial: FormState = { ...defaultForm, ...Object.fromEntries(Object.entries(fields).filter(([, v]) => v !== undefined)) }
+  const [form, setForm] = useState<FormState>(initial)
+  // Poids reçu dans l'URL : le résultat s'affiche tout de suite.
+  const [result, setResult] = useState<RationValues | null>(() => (fields.weightKg ? compute(initial) : null))
+  const fromUrl = Boolean(fields.weightKg)
+
+  useEffect(() => {
+    if (fromUrl) track('Tool Result', { tool: 'ration', source: 'lien' })
+  }, [fromUrl])
 
   function handleCalculate(e: React.FormEvent) {
     e.preventDefault()
-    const weight = parseFloat(form.weightKg)
-    if (!weight || weight <= 0) return
-    const kcal = calculateDailyCalories({
-      animal: form.animal,
-      weightKg: weight,
-      ageGroup: form.ageGroup,
-      activityLevel: form.activityLevel,
-      sterilized: form.sterilized,
-      isRaceHighEnergy: form.isHighEnergy,
-    })
-    setResult({
-      kcal,
-      gKibble: caloriesToGramsKibble(kcal),
-      gFresh: caloriesToGramsFresh(kcal),
-    })
+    const values = compute(form)
+    if (!values) return
+    setResult(values)
     track('Tool Result', { tool: 'ration' })
   }
 
@@ -189,38 +213,7 @@ export function RationCalculator() {
         </button>
       </form>
 
-      {/* Résultat */}
-      {result && (
-        <div className="mt-6 pt-6 border-t border-[var(--border)]">
-          <h3 className="font-bold text-[var(--text-primary)] mb-4" style={{ fontFamily: "'Fraunces', serif" }}>
-            Besoins journaliers estimés
-          </h3>
-          <div className="grid grid-cols-3 gap-3 mb-4">
-            <div className="bg-[var(--bg-surface-2)] rounded-[var(--radius-lg)] p-4 text-center">
-              <p className="text-2xl font-black text-[var(--accent-1)]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                {result.kcal}
-              </p>
-              <p className="text-xs text-[var(--text-muted)] mt-1">kcal / jour</p>
-            </div>
-            <div className="bg-[var(--bg-surface-2)] rounded-[var(--radius-lg)] p-4 text-center">
-              <p className="text-2xl font-black text-[var(--accent-2)]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                {result.gKibble}g
-              </p>
-              <p className="text-xs text-[var(--text-muted)] mt-1">croquettes / jour</p>
-            </div>
-            <div className="bg-[var(--bg-surface-2)] rounded-[var(--radius-lg)] p-4 text-center">
-              <p className="text-2xl font-black text-[var(--accent-3)]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                {result.gFresh}g
-              </p>
-              <p className="text-xs text-[var(--text-muted)] mt-1">repas frais / jour</p>
-            </div>
-          </div>
-          <p className="text-xs text-[var(--text-muted)] italic">
-            Estimation basée sur les formules vétérinaires standard (NRC 2006). Ajuste en fonction
-            du poids de ton animal sur 4 semaines. En cas de doute, consulte un vétérinaire.
-          </p>
-        </div>
-      )}
+      {result && <RationResult result={result} food={food} />}
     </div>
   )
 }
