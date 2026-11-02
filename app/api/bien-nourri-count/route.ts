@@ -32,12 +32,19 @@ const SQL = `
 
 const headers = { 'Cache-Control': 'no-store' }
 
+// Route publique appelée à chaque page : le comptage est gardé une minute en mémoire, pour qu'une
+// rafale de requêtes ne relance pas la requête SQL à chaque fois.
+const CACHE_MS = 60_000
+let cached: { at: number; value: BienNourriCountResponse } | null = null
+
 export async function GET() {
   const pool = getPool()
   if (!pool) return NextResponse.json(EMPTY, { headers })
+  if (cached && Date.now() - cached.at < CACHE_MS) return NextResponse.json(cached.value, { headers })
   try {
     const res = await pool.query<BienNourriCountResponse>(SQL)
-    return NextResponse.json(res.rows[0] ?? EMPTY, { headers })
+    cached = { at: Date.now(), value: res.rows[0] ?? EMPTY }
+    return NextResponse.json(cached.value, { headers })
   } catch (err) {
     console.warn('[bien-nourri-count] query failed', err instanceof Error ? err.message : err)
     return NextResponse.json(EMPTY, { headers })

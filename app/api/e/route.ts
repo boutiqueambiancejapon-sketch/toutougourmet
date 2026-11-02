@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { getPool } from '@/lib/server/db'
 import { BOT_UA, deviceOf, isAnalyticsEvent } from '@/lib/analytics-events'
 import { countryOf } from '@/lib/server/geo'
+import { clientIp } from '@/lib/server/rate-window'
 
 // @cdc mesure — reçoit les actions des visiteurs (clic partenaire, outil, inscription, recherche)
 // et les range dans analytics.events. Aucun cookie, aucune IP stockée : seul le pays déduit
@@ -65,7 +66,7 @@ export async function POST(req: NextRequest) {
   const host = req.headers.get('host')
   if (origin && host && hostOf(origin) !== host.replace(/^www\./, '').split(':')[0]) return done()
 
-  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'local'
+  const ip = clientIp(req.headers)
   if (rateLimited(ip)) return done()
 
   const text = await req.text()
