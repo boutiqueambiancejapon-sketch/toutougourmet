@@ -8,7 +8,9 @@ User=toutou
 WorkingDirectory=/srv/toutou/current
 EnvironmentFile=/srv/toutou/shared/.env
 Environment=NODE_ENV=production
-ExecStart=/usr/bin/npx next start -H 127.0.0.1 -p 3000
+# Lancement direct (sans npx, ~80 Mo de moins) et tas Node plafonné.
+Environment=NODE_OPTIONS=--max-old-space-size=768
+ExecStart=/usr/bin/node node_modules/next/dist/bin/next start -H 127.0.0.1 -p 3000
 Restart=always
 RestartSec=3
 
