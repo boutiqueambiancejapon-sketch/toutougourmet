@@ -4,12 +4,14 @@
 // s'était arrêté grâce au curseur journald (analytics.ingest_state).
 // Humains : seules les pages sont gardées (pas les fichiers statiques), sans IP ni User-Agent.
 // Robots : toutes les requêtes, avec IP et User-Agent (repérage des faux robots).
+// Pays (code ISO, base locale DB-IP, scripts/lib/geo.mjs) pour tous ; l'IP humaine sert à le lire puis est oubliée.
 // Usage : DATABASE_URL=postgresql:///toutou?host=/var/run/postgresql node scripts/ingest-caddy-logs.mjs [--dry]
 
 import { spawn } from 'node:child_process'
 import readline from 'node:readline'
 import pg from 'pg'
 import { aiReferrer, classifyUa, deviceOf } from './lib/bots.mjs'
+import { countryOf } from './lib/geo.mjs'
 
 const DRY = process.argv.includes('--dry')
 // Adresses gardées (ex. « www.toutou-gourmet.com,toutou-gourmet.com ») ; vide = toutes.
@@ -42,6 +44,7 @@ function toHit(entry) {
   const { kind, bot, operator } = classifyUa(ua)
   if (kind === 'human' && (STATIC.test(path) || req.method !== 'GET' || path.startsWith('/api/'))) return null
   const refHost = hostOf(header(req.headers, 'Referer'))
+  const clientIp = req.client_ip || req.remote_ip || null
   return {
     ts: new Date(entry.ts * 1000).toISOString(),
     host: (req.host || '').slice(0, 100),
@@ -54,12 +57,13 @@ function toHit(entry) {
     device: kind === 'human' ? deviceOf(ua) : null,
     ref_host: refHost && refHost !== (req.host || '').replace(/^www\./, '') ? refHost.slice(0, 100) : null,
     ref_ai: kind === 'human' ? aiReferrer(refHost, uri) : null,
-    ip: kind === 'human' ? null : (req.client_ip || req.remote_ip || null),
+    ip: kind === 'human' ? null : clientIp,
     ua: kind === 'human' ? null : ua.slice(0, 300),
+    country: countryOf(clientIp),
   }
 }
 
-const COLS = ['ts', 'host', 'method', 'path', 'status', 'bytes', 'duration_ms', 'kind', 'bot', 'operator', 'device', 'ref_host', 'ref_ai', 'ip', 'ua']
+const COLS = ['ts', 'host', 'method', 'path', 'status', 'bytes', 'duration_ms', 'kind', 'bot', 'operator', 'device', 'ref_host', 'ref_ai', 'ip', 'ua', 'country']
 
 async function flush(rows, cursor) {
   if (DRY) { for (const r of rows.slice(0, 5)) console.log(r); return }

@@ -1,9 +1,11 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { getPool } from '@/lib/server/db'
 import { BOT_UA, deviceOf, isAnalyticsEvent } from '@/lib/analytics-events'
+import { countryOf } from '@/lib/server/geo'
 
 // @cdc mesure — reçoit les actions des visiteurs (clic partenaire, outil, inscription, recherche)
-// et les range dans analytics.events. Aucun cookie, aucune IP stockée. Répond toujours 204 :
+// et les range dans analytics.events. Aucun cookie, aucune IP stockée : seul le pays déduit
+// de l'adresse (base locale, lib/server/geo.ts) est écrit. Répond toujours 204 :
 // la mesure ne doit jamais casser la page. Sans base (Vercel), ne fait rien.
 
 export const runtime = 'nodejs'
@@ -79,8 +81,8 @@ export async function POST(req: NextRequest) {
   const refHost = hostOf(body.r)
   try {
     await pool.query(
-      'INSERT INTO analytics.events (name, page, props, ref_host, device) VALUES ($1, $2, $3, $4, $5)',
-      [body.n, body.p.slice(0, 300), JSON.stringify(cleanProps(body.props)), refHost, deviceOf(ua)],
+      'INSERT INTO analytics.events (name, page, props, ref_host, device, country) VALUES ($1, $2, $3, $4, $5, $6)',
+      [body.n, body.p.slice(0, 300), JSON.stringify(cleanProps(body.props)), refHost, deviceOf(ua), countryOf(ip)],
     )
   } catch (err) {
     console.error('[api/e] insert failed', err instanceof Error ? err.message : err)
