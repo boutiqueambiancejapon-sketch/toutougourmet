@@ -1,9 +1,32 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
+import type { ReactNode } from 'react'
 
 export const metadata: Metadata = {
   title: 'Politique de confidentialité',
   description: 'Politique de confidentialité de Toutou Gourmet.',
   robots: { index: false },
+}
+
+const linkClass = 'text-[var(--accent-1)] underline'
+
+function Section({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <section>
+      <h2 className="text-xl font-bold text-[var(--text-primary)] mb-3" style={{ fontFamily: "'Fraunces', serif" }}>
+        {title}
+      </h2>
+      {children}
+    </section>
+  )
+}
+
+function ContactLink() {
+  return (
+    <Link href="/contact" className={linkClass}>
+      formulaire de contact
+    </Link>
+  )
 }
 
 export default function PolitiqueConfidentialitePage() {
@@ -13,25 +36,20 @@ export default function PolitiqueConfidentialitePage() {
         <h1 className="page-title mb-8">
           Politique de confidentialité
         </h1>
-        <p className="text-sm text-[var(--text-muted)] mb-8">Dernière mise à jour : mars 2026</p>
+        <p className="text-sm text-[var(--text-muted)] mb-8">Dernière mise à jour : novembre 2026</p>
 
         <div className="flex flex-col gap-8 text-[var(--text-secondary)]">
-          <section>
-            <h2 className="text-xl font-bold text-[var(--text-primary)] mb-3" style={{ fontFamily: "'Fraunces', serif" }}>
-              Données collectées
-            </h2>
+          <Section title="Données collectées">
             <p className="mb-2">Toutou Gourmet collecte uniquement :</p>
             <ul className="list-disc pl-5 space-y-1 text-sm">
-              <li>Ton adresse email (si tu t&apos;inscris à la newsletter) — avec double opt-in obligatoire</li>
+              <li>Ton adresse email si tu t&apos;inscris à la newsletter, avec double opt-in obligatoire</li>
               <li>Ton prénom, ton adresse email et ton message si tu nous écris par le formulaire de contact</li>
+              <li>Ton prénom, ton adresse email, ton mot de passe haché et les profils de tes chiens si tu ouvres un compte</li>
               <li>Des statistiques de visite anonymes, mesurées sur nos propres serveurs (sans cookie)</li>
             </ul>
-          </section>
+          </Section>
 
-          <section>
-            <h2 className="text-xl font-bold text-[var(--text-primary)] mb-3" style={{ fontFamily: "'Fraunces', serif" }}>
-              Mesure d&apos;audience et formulaire de contact
-            </h2>
+          <Section title="Mesure d'audience et formulaire de contact">
             <p className="mb-2">
               Nous comptons les pages vues, les clics sur les liens partenaires et les résultats des outils
               avec notre propre outil, hébergé sur notre serveur. Il ne dépose aucun cookie et n&apos;enregistre
@@ -47,42 +65,62 @@ export default function PolitiqueConfidentialitePage() {
               Les messages envoyés par le formulaire de contact restent dans notre base de données. Ils
               servent uniquement à te répondre et ne sont jamais partagés.
             </p>
-          </section>
+          </Section>
 
-          <section>
-            <h2 className="text-xl font-bold text-[var(--text-primary)] mb-3" style={{ fontFamily: "'Fraunces', serif" }}>
-              Newsletter
-            </h2>
+          <Section title="Ton compte">
+            <p className="mb-2">Quand tu ouvres un compte, nous gardons dans notre base de données, sur notre serveur :</p>
+            <ul className="list-disc pl-5 space-y-1 text-sm mb-2">
+              <li>ton adresse email et ton prénom ;</li>
+              <li>ton mot de passe, haché : nous ne le connaissons pas et ne pouvons pas le lire ;</li>
+              <li>les profils de tes chiens (nom, race, date de naissance, poids, activité, stérilisation) et leurs pesées ;</li>
+              <li>pour chaque connexion, sa date, ton adresse IP et le nom de ton navigateur, qui servent à protéger le compte.</li>
+            </ul>
+            <p className="mb-2">
+              Ces données servent à faire fonctionner ton compte : te connecter, pré-remplir les outils avec
+              le profil de ton chien, suivre son poids. Elles ne sont ni vendues, ni utilisées pour de la publicité.
+            </p>
+            <p className="mb-2">
+              Nous les gardons tant que ton compte existe. Un compte dont l&apos;adresse n&apos;a jamais été
+              confirmée est supprimé au bout de 30 jours. Une connexion expire après 30 jours, puis ses
+              données sont effacées.
+            </p>
+            <p className="mb-2">
+              Les emails liés au compte (confirmation d&apos;adresse, mot de passe oublié, confirmation de
+              suppression) partent par Brevo (Sendinblue SAS, France), qui reçoit ton adresse email et le
+              contenu du message pour l&apos;envoyer. Ces emails ne contiennent aucune publicité.
+            </p>
+            <p>
+              Depuis <Link href="/compte" className={linkClass}>ton compte</Link>, tu peux télécharger toutes
+              tes données dans un fichier JSON, corriger les profils de tes chiens et leurs pesées, et supprimer
+              ton compte : l&apos;effacement est immédiat et complet, et un email te le confirme. Pour corriger
+              ton prénom ou ton adresse email, écris-nous par le <ContactLink />.
+            </p>
+          </Section>
+
+          <Section title="Newsletter">
             <p>
               Si tu t&apos;inscris à notre newsletter, ton email est uniquement utilisé pour t&apos;envoyer nos
               communications. Il n&apos;est jamais vendu, ni partagé avec des tiers à des fins commerciales.
               Tu peux te désabonner à tout moment en un clic.
             </p>
-          </section>
+          </Section>
 
-          <section>
-            <h2 className="text-xl font-bold text-[var(--text-primary)] mb-3" style={{ fontFamily: "'Fraunces', serif" }}>
-              Tes droits
-            </h2>
+          <Section title="Tes droits">
             <p>
-              Conformément au RGPD, tu disposes d&apos;un droit d&apos;accès, de rectification et de suppression
-              de tes données. Pour exercer ces droits, contacte-nous à :{' '}
-              <a href="mailto:contact@toutou-gourmet.com" className="text-[var(--accent-1)] underline">
-                contact@toutou-gourmet.com
-              </a>
+              Conformément au RGPD, tu disposes d&apos;un droit d&apos;accès, de rectification, de suppression
+              et de portabilité de tes données. Pour les exercer, écris-nous par le <ContactLink /> du site.
+              Tu peux aussi adresser une réclamation à la CNIL (cnil.fr).
             </p>
-          </section>
+          </Section>
 
-          <section>
-            <h2 className="text-xl font-bold text-[var(--text-primary)] mb-3" style={{ fontFamily: "'Fraunces', serif" }}>
-              Cookies
-            </h2>
+          <Section title="Cookies">
             <p>
-              Ce site ne dépose aucun cookie de mesure ni de publicité. Les seuls cookies sont ceux
-              nécessaires au fonctionnement du site (par exemple, rester connecté à ton compte quand cette
-              fonction sera ouverte).
+              Ce site ne dépose aucun cookie de mesure ni de publicité. Les seuls cookies servent au compte
+              et n&apos;apparaissent que si tu te connectes : un cookie de session, illisible par les scripts
+              de la page, et un témoin qui indique au site qu&apos;un compte est ouvert, sans aucune donnée
+              personnelle. Ils disparaissent quand tu te déconnectes.
             </p>
-          </section>
+          </Section>
         </div>
       </div>
     </div>
