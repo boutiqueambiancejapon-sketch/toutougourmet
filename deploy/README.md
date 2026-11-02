@@ -90,6 +90,8 @@ Tables `app.food_analysis`, `app.scan_history`, `app.scan_usage`, `app.scan_repo
 
 Scanner v2 (code-barres, Open Pet Food Facts, fiches de partage) : migration `db/migrations/0002_scanner_source.sql` (colonne `food_analysis.source`), même commande `npx drizzle-kit migrate`. Le serveur doit pouvoir joindre `world.openpetfoodfacts.org` en HTTPS (sortie). Le décodeur de code-barres `public/vendor/zxing/zxing_reader-3.1.6.wasm` est servi par le site : si `barcode-detector` change de version dans `package.json`, recopier le fichier depuis `node_modules/zxing-wasm/dist/reader/` et mettre à jour `ZXING_WASM_URL` (`lib/scanner/barcode-client.ts`). `/scanner` autorise la caméra (`Permissions-Policy: camera=(self)`, `next.config.ts`) : ne pas réécrire cet en-tête dans Caddy. Le jeton de session de scan est signé avec `BETTER_AUTH_SECRET`.
 
+Relecture des fiches (tableau de bord, section « Fiches à relire ») : migration `db/migrations/0003_scan_report_handled.sql` (colonne `scan_report.handled_at`), même commande `npx drizzle-kit migrate`, à passer avant de servir ce code (sinon l'envoi d'un signalement échoue).
+
 | Variable | Valeur |
 | --- | --- |
 | `OPFF_DISABLED` | facultatif, `1` coupe l'appel à Open Pet Food Facts (le code-barres inconnu passe directement aux photos). |
