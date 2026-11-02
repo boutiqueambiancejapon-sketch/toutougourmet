@@ -2,6 +2,7 @@
 
 ## Complété
 
+- **Nouvel article : `chien-mange-cafe-urgence`** (2026-11-02) : format urgence, requête visée « mon chien a mangé du café / marc de café ». Seuils caféine 20, 40-50 et 60 mg/kg et demi-vie 4,5 h (Merck), DL50 140 mg/kg (Hoffberg 2016 via AHL Guelph 2024), marc d'espresso 4,5 mg/g (Cruz 2012 J Agric Food Chem, doi:10.1021/jf3018854), teneurs USDA FDC (filtre, espresso, soluble, grains enrobés, thé, cola, boissons énergisantes, déca) ; tableau par gabarit avec races ; WhatToDo + PoisonCenters ; FAQ 7 ; 4 liens internes. Cover dédiée `art-chien-mange-cafe-urgence` (1 génération). Build OK.
 - **V2 lot 0 (fondations) et lot 1 (gabarit article), branche `v2`** (2026-11-01) :
   - Tokens V2 dans `app/globals.css` : palette V1 épurée du prototype, utilitaires Tailwind (`bg-cream`, `text-ink`, `rounded-card`, `max-w-page`…), variables V1 devenues alias (mêmes couleurs), classe `v2` qui soustrait les composants V2 aux règles V1 globales (titres, prose MDX). Doc : `docs/01-branding.md`.
   - Structure multilingue sans bibliothèque ni proxy : pages françaises dans le groupe `app/(fr)` (URLs inchangées), édition anglaise dans `app/(en)/en` (page `/en` d'attente, noindex, hors sitemap), layout racine neutre, document HTML commun `components/layout/SiteDocument.tsx`, dictionnaires typés `lib/i18n`, polices dans `lib/fonts.ts`. Doc : `docs/03-architecture.md`, décision dans DECISIONS.md.

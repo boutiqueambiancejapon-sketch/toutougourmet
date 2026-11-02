@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-chien-mange-cafe-urgence',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, attentive beagle lying on a warm cream kitchen floor next to a knocked-over small cup of coffee beans and a little heap of used coffee grounds, looking up. The dog is not eating.',
+    composition:
+      'Full frame, dog on the right half, coffee beans and grounds lower-left foreground, soft cream kitchen background. Only a few scattered confetti pieces (6 to 10 maximum). Do NOT trace any outline or contour line around the dog or the food.',
+    decorations: ['confetti', 'sparkle'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-02 pour l'article chien-mange-cafe-urgence.",
+  },
+  {
     id: 'art-chien-mange-raisin-urgence',
     group: 'articles',
     ratio: '3:2',
