@@ -38,8 +38,8 @@ export function affiliateBrand(href: string): string | null {
     [/tidd\.ly\/(4jT3Tqg|42O6yHG)/, 'Dogfy Diet'],
     [/tidd\.ly\/(48rl0Z3|43sUPyF)/, 'Fidelis'],
     [/(amzn\.to|amazon\.fr\/.*tag=toutougourmet)/, 'Amazon'],
-    [/tidd\.ly\/3PnVz4E/, 'Maxi Zoo'],
-    [/tidd\.ly\//, 'Autre (tidd.ly)'],
+    // Les autres liens tidd.ly sont des fiches Maxi Zoo (Royal Canin, Eukanuba…)
+    [/tidd\.ly\//, 'Maxi Zoo'],
     [/c3po\.link\//, 'Autre (c3po)'],
   ]
   return rules.find(([re]) => re.test(href))?.[1] ?? null
