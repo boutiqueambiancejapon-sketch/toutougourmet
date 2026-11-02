@@ -35,7 +35,9 @@ function FoodList({ title, hint, verdict, foods }: { title: string; hint: string
 }
 
 export default function FicheAlimentsDangereuxPage() {
-  const foods = getFoodVerdicts()
+  // Fiche « aliments » : on retire ce qui n'est pas un aliment et le doublon « Ail ou oignon »
+  const NOT_FOOD = new Set(['Crapaud', 'Limace', 'Mort-aux-rats', 'Eau de mer', 'Ail ou oignon'])
+  const foods = getFoodVerdicts().filter((f) => !NOT_FOOD.has(f.label))
   const danger = foods.filter((f) => f.verdict === 'danger')
   const moderation = foods.filter((f) => f.verdict === 'moderation')
   const version = new Intl.DateTimeFormat('fr-FR', { month: 'long', year: 'numeric' }).format(new Date())

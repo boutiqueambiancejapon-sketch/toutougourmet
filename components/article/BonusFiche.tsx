@@ -96,7 +96,7 @@ export function BonusFiche({ slug, dangerCount, moderationCount }: BonusFichePro
       ) : null}
       {status !== 'success' ? (
         <p className="m-0 text-xs text-ink-2">
-          Ton e-mail sert aussi à t&apos;envoyer les nouveaux guides. Désinscription en un clic.
+          On ne transmet ton e-mail à personne.
         </p>
       ) : null}
     </section>
