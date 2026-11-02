@@ -16,6 +16,8 @@ export interface PoisonCenter {
   hours?: string
   /** Précision affichée sous le centre (service payant, etc.). */
   note?: string
+  /** Article devant le nom dans une phrase (« appelle la Pet Poison Helpline »), « le » par défaut. */
+  article?: 'le' | 'la'
 }
 
 export const POISON_CENTERS: Record<Locale, PoisonCenter[]> = {
@@ -74,6 +76,7 @@ export const POISON_COUNTRIES: { code: PoisonCountry; label: string; centers: Po
         tel: '+18557647661',
         hours: '24\u00a0h/24',
         note: 'Service payant, environ 89\u00a0$ par cas.',
+        article: 'la',
       },
     ],
     advice: "Le Centre antipoison du Québec ne traite pas les animaux. Appelle aussi ton vétérinaire ou une urgence vétérinaire 24\u00a0h.",
