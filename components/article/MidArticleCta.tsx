@@ -23,7 +23,7 @@ export function MidArticleCta({ cta }: { cta: MidCtaConfig }) {
     >
       <p
         aria-hidden="true"
-        className="tg-stamp absolute -top-6 -right-3 m-0 flex size-20 rotate-6 flex-col items-center justify-center rounded-full bg-orange text-ink shadow-[3px_3px_0_var(--ink)] md:-top-8 md:-right-5 md:size-28"
+        className="tg-stamp absolute -top-6 -right-2 m-0 flex size-20 rotate-6 flex-col items-center justify-center rounded-full bg-orange text-ink shadow-[3px_3px_0_var(--ink)] md:-top-8 md:-right-5 md:size-28"
       >
         <span className="font-display text-xl font-black leading-none md:text-3xl">{cta.badge.big}</span>
         <span className="mt-1 text-[10px] font-bold leading-none md:text-xs">{cta.badge.small}</span>
@@ -45,7 +45,7 @@ export function MidArticleCta({ cta }: { cta: MidCtaConfig }) {
         <a
           href={cta.button.href}
           {...(external ? { target: '_blank', rel: 'sponsored noopener' } : {})}
-          className="rounded-control inline-flex items-center bg-amber px-6 py-4 text-lg font-bold text-ink no-underline shadow-[5px_5px_0_var(--orange)] transition-transform hover:-translate-y-0.5 active:translate-x-[3px] active:translate-y-[3px] active:shadow-[2px_2px_0_var(--orange)]"
+          className="rounded-control inline-flex shrink-0 items-center whitespace-nowrap bg-amber px-6 py-4 text-lg font-bold text-ink no-underline shadow-[5px_5px_0_var(--orange)] transition-transform hover:-translate-y-0.5 active:translate-x-[3px] active:translate-y-[3px] active:shadow-[2px_2px_0_var(--orange)]"
         >
           {cta.button.label}&nbsp;→
         </a>
