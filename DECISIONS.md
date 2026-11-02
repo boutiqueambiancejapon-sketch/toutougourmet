@@ -70,3 +70,6 @@
 
 ## 2026-11-02 — AdSense retiré, GA4 gardé en mode sans cookie
 Décision du propriétaire : on garde Google Analytics 4, on abandonne AdSense. Sans bannière de consentement, GA4 tourne avec le Consent Mode « refusé » par défaut (aucun cookie déposé, mesure modélisée côté Google). CSP réduite à googletagmanager et google-analytics, frame-src 'none'. Une bannière de consentement (CNIL) permettrait de mesurer pleinement les visiteurs qui acceptent : à proposer au propriétaire avant toute mise en place (changement visuel).
+
+## 2026-11-02 — Offres partenaires en cours (confirmées par le propriétaire)
+Dog Chef −30 % sur la box d'essai + livraison gratuite ; Dogfy Diet −50 % sur la box d'essai de 14 jours ; Elmut −40 % sur la première commande ; Franklin Pet Food −30 % en abonnement. Maxi Zoo partenaire (liens tidd.ly). Fidelis : bocaux en rupture, ne pas mettre en avant. Petty Well n'est plus partenaire. Toute autre remise affichée est une erreur.
