@@ -6,7 +6,7 @@ module.exports = {
   priority: 0.7,
   // /en : édition anglaise non indexée tant qu'elle n'a pas de contenu (lot 8)
   // opengraph-image : images de partage, pas des pages
-  exclude: ['/api/*', '/contact', '/fiche-aliments-dangereux', '/dev/*', '/en', '/en/*', '*/opengraph-image*', '/marques'],
+  exclude: ['/api/*', '/blog/*', '/marques/*', '/comparatifs/*', '/contact', '/fiche-aliments-dangereux', '/dev/*', '/en', '/en/*', '*/opengraph-image*', '/marques'],
   additionalPaths: async (config) => [
     { loc: '/', priority: 1.0, changefreq: 'daily' },
     { loc: '/quiz', priority: 0.9, changefreq: 'monthly' },
