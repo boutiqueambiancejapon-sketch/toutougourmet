@@ -1,0 +1,9 @@
+[Unit]
+Description=Toutou Gourmet - purge hebdomadaire des comptes non confirmés
+
+[Timer]
+OnCalendar=Mon *-*-* 04:40:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

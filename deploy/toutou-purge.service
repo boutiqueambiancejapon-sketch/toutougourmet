@@ -1,0 +1,11 @@
+# Supprime les comptes jamais confirmés (plus de 30 jours), les jetons et sessions expirés.
+[Unit]
+Description=Toutou Gourmet - purge des comptes non confirmés
+After=postgresql.service
+
+[Service]
+Type=oneshot
+User=toutou
+WorkingDirectory=/srv/toutou/current
+EnvironmentFile=/srv/toutou/shared/.env
+ExecStart=/usr/bin/node scripts/purge-unverified.mjs

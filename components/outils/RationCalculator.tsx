@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect, useId, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { track } from '@/lib/analytics'
@@ -8,6 +9,7 @@ import { Segmented } from '@/components/tools/Segmented'
 import { CheckField, NumberField, SubmitButton, ToolCard } from './fields'
 import { RationResult } from './RationResult'
 import { parseRationParams, type RationFood, type RationPrefill } from './ration-params'
+import { useAccountPrefill } from './useAccountPrefill'
 
 // @cdc outils — calculateur complet de /outils/ration. Même fonction que le mini-outil de
 // l'accueil (computeRation, lib/calculators.ts) : mêmes réglages, même résultat.
@@ -55,24 +57,40 @@ function compute(form: FormState): RationValues | null {
 /**
  * Lit les paramètres d'URL (?poids=…) pour pré-remplir le formulaire. useSearchParams impose
  * une limite <Suspense> dans la page : la page reste statique, son repli est <RationCalculator />.
+ * Sans paramètre et avec un compte connecté, le premier chien du compte pré-remplit l'outil (lot 4).
  */
 export function RationCalculatorFromUrl() {
   const params = useSearchParams()
-  return <RationCalculator key={params.toString()} prefill={parseRationParams(params)} />
+  const query = params.toString()
+  const dog = useAccountPrefill(query === '')
+  if (dog) {
+    return (
+      <div className="flex flex-col gap-2">
+        <p className="m-0 text-[15px] text-ink-2">
+          {`Pré-rempli avec le profil de ${dog.name}. `}
+          <Link href={`/compte/chien/${dog.id}/modifier`} className="font-semibold text-orange-ink underline underline-offset-2">
+            Modifier son profil
+          </Link>
+        </p>
+        <RationCalculator key={`compte-${dog.id}`} prefill={dog.prefill} source="compte" />
+      </div>
+    )
+  }
+  return <RationCalculator key={query} prefill={parseRationParams(params)} />
 }
 
-export function RationCalculator({ prefill = {} }: { prefill?: RationPrefill }) {
+export function RationCalculator({ prefill = {}, source = 'lien' }: { prefill?: RationPrefill; source?: 'lien' | 'compte' }) {
   const weightId = useId()
   // Les clés absentes de l'URL valent undefined : elles ne doivent pas écraser les valeurs par défaut.
   const initial: FormState = { ...DEFAULT_FORM, ...Object.fromEntries(Object.entries(prefill).filter(([, v]) => v !== undefined)) }
   const [form, setForm] = useState<FormState>(initial)
-  // Poids reçu dans l'URL : le résultat s'affiche tout de suite.
+  // Poids reçu (URL ou profil du compte) : le résultat s'affiche tout de suite.
   const [result, setResult] = useState<RationValues | null>(() => (prefill.weightKg ? compute(initial) : null))
   const fromUrl = Boolean(prefill.weightKg)
 
   useEffect(() => {
-    if (fromUrl) track('Tool Result', { tool: 'ration', source: 'lien' })
-  }, [fromUrl])
+    if (fromUrl) track('Tool Result', { tool: 'ration', source })
+  }, [fromUrl, source])
 
   function set<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((f) => ({ ...f, [key]: value }))

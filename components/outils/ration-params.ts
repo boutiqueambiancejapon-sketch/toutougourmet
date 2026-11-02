@@ -13,6 +13,11 @@ export interface RationPrefill {
   food?: RationFood
 }
 
+/** Réponse de GET /api/compte/ration : premier chien du compte connecté. */
+export interface AccountRationPrefill {
+  dog: { id: string; name: string; prefill: RationPrefill } | null
+}
+
 const AGES: readonly AgeGroup[] = ['chiot', 'adulte', 'senior']
 const ACTIVITIES: readonly ActivityLevel[] = ['sedentaire', 'normal', 'actif', 'tres-actif']
 const FOODS: readonly RationFood[] = ['croquettes', 'frais']
