@@ -38,7 +38,7 @@ function filterArticles(articles: Article[], query: string, activeCat: string): 
 
 function sortArticles(list: Article[], sort: BlogSort): Article[] {
   const a = [...list]
-  if (sort === 'long') return a.sort((x, y) => estimateReadTime(y.content) - estimateReadTime(x.content))
+  if (sort === 'long') return a.sort((x, y) => (y.readMinutes ?? estimateReadTime(y.content)) - (x.readMinutes ?? estimateReadTime(x.content)))
   if (sort === 'popular') return a
   return a.sort((x, y) => new Date(y.frontmatter.date).getTime() - new Date(x.frontmatter.date).getTime())
 }

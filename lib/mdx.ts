@@ -1,3 +1,4 @@
+import { estimateReadTime as estimateReadTimeUtil } from '@/lib/utils'
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
@@ -102,6 +103,13 @@ export interface Article {
   frontmatter: ArticleFrontmatter
   content: string      // MDX brut pour next-mdx-remote
   rawContent: string   // même chose (alias pour compat TL;DR)
+  /** Temps de lecture précalculé : présent quand le corps a été retiré (listes envoyées au navigateur). */
+  readMinutes?: number
+}
+
+/** Version allégée pour les listes de cartes passées à un composant client : sans le corps MDX. */
+export function toCardArticle(a: Article): Article {
+  return { ...a, content: '', rawContent: '', readMinutes: estimateReadTimeUtil(a.rawContent) }
 }
 
 export function getAllArticles(): Article[] {

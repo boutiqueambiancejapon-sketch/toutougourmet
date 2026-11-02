@@ -21,7 +21,7 @@ function articleHref(article: Article): string {
 export function BlogPostCard({ article }: BlogPostCardProps) {
   const { frontmatter } = article
   const visual = getCategoryVisual(frontmatter.category)
-  const readTime = estimateReadTime(article.content)
+  const readTime = article.readMinutes ?? estimateReadTime(article.content)
 
   return (
     <Link

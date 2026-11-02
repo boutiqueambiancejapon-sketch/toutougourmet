@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { getAllArticles } from '@/lib/mdx'
+import { getAllArticles, toCardArticle } from '@/lib/mdx'
 import { BlogHero } from '@/components/blog/BlogHero'
 import { BlogExplorer } from '@/components/blog/BlogExplorer'
 import { AuthorsBlock } from '@/components/blog/AuthorsBlock'
@@ -34,7 +34,7 @@ export default function BlogPage() {
   return (
     <>
       <BlogHero articleCount={articles.length} />
-      <BlogExplorer articles={articles} featured={featured} />
+      <BlogExplorer articles={articles.map(toCardArticle)} featured={toCardArticle(featured)} />
       <AuthorsBlock />
       <section className="py-20 px-6 bg-[var(--bg-primary)]">
         <div className="max-w-[640px] mx-auto">

@@ -11,6 +11,7 @@ import { WhatToDo, Step } from '@/components/article/WhatToDo'
 import { PoisonCenters } from '@/components/article/PoisonCenters'
 import { BrandCTA } from '@/components/marques/BrandCTA'
 import { Heading2 } from './Heading2'
+import { MdxLink } from './MdxLink'
 
 // Composants utilisables dans les articles MDX (content/blog), pour /chien/[category]/[slug]
 // et /blog/[slug]. Un composant absent de cette liste fait échouer la compilation de l'article.
@@ -25,6 +26,7 @@ export const articleMdxComponents = {
   BrandCTA,
   BodyImage,
   h2: Heading2,
+  a: MdxLink,
   table: (props: ComponentProps<'table'>) => (
     <div className="table-scroll">
       <table {...props} />

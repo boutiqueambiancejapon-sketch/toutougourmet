@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { getAllArticles } from '@/lib/mdx'
+import { getAllArticles, toCardArticle } from '@/lib/mdx'
 import { getAuthorBySlug } from '@/data/authors'
 import { BlogFilter } from '@/components/blog/BlogFilter'
 import { notFound } from 'next/navigation'
@@ -137,7 +137,7 @@ export default function AutheurMathiasPage() {
             <p className="text-xs font-bold uppercase tracking-widest text-[var(--text-muted)] mb-6">
               {articles.length} article{articles.length > 1 ? 's' : ''} publiés
             </p>
-            <BlogFilter articles={articles} />
+            <BlogFilter articles={articles.map(toCardArticle)} />
           </section>
         </div>
 

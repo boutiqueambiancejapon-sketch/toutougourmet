@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import {
   getAllArticles,
@@ -80,7 +80,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ArticleCategoryPage({ params }: Props) {
   const { category, slug } = await params
   const article = getArticleBySlug(slug)
-  if (!article || article.frontmatter.categorySlug !== category) notFound()
+  if (!article) notFound()
+  // @cdc seo — un article demandé sous la mauvaise rubrique (ancien lien, rubrique déplacée)
+  // redirige en 308 vers sa vraie adresse au lieu d'afficher une 404.
+  if (article.frontmatter.categorySlug !== category) {
+    permanentRedirect(`/chien/${article.frontmatter.categorySlug}/${slug}`)
+  }
 
   const allArticles = getAllArticles()
   const cat = getCategoryBySlug(category)

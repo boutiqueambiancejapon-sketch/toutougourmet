@@ -51,7 +51,7 @@ const nextConfig: NextConfig = {
       { source: '/blog/meilleure-nourriture-bichon-maltais', destination: '/chien/alimentation-quotidienne/meilleure-nourriture-bichon-maltais', permanent: true },
       { source: '/blog/meilleures-croquettes-chien-de-chasse', destination: '/chien/alimentation-quotidienne/meilleures-croquettes-chien-de-chasse', permanent: true },
       { source: '/blog/croquettes-ou-patee', destination: '/chien/alimentation-quotidienne/croquettes-ou-patee', permanent: true },
-      { source: '/blog/repas-frais-vs-croquettes-chien', destination: '/chien/alimentation-quotidienne/repas-frais-vs-croquettes-chien', permanent: true },
+      { source: '/blog/repas-frais-vs-croquettes-chien', destination: '/chien/avis-marques/repas-frais-vs-croquettes-chien', permanent: true },
       { source: '/blog/chien-mange-couche-normal', destination: '/chien/comportement-alimentaire/chien-mange-couche-normal', permanent: true },
       { source: '/blog/chien-peut-manger-abricots', destination: '/chien/fruit/chien-peut-manger-abricots', permanent: true },
       { source: '/blog/chien-peut-manger-fraises', destination: '/chien/fruit/chien-peut-manger-fraises', permanent: true },

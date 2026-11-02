@@ -59,7 +59,7 @@ export function ArticleTile({ article, featured = false }: { article: Article; f
               {verdict.label}
             </span>
           ) : null}
-          <span>{estimateReadTime(article.rawContent)} min de lecture</span>
+          <span>{article.readMinutes ?? estimateReadTime(article.rawContent)} min de lecture</span>
         </span>
       </span>
     </Link>

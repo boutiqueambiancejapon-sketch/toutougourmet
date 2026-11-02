@@ -21,7 +21,7 @@ interface ArticleCardProps {
 export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps) {
   const { frontmatter, slug, content } = article
   const visual = getCategoryVisual(frontmatter.category)
-  const readTime = estimateReadTime(content)
+  const readTime = article.readMinutes ?? estimateReadTime(content)
   const href = frontmatter.categorySlug
     ? `/chien/${frontmatter.categorySlug}/${slug}`
     : `/blog/${slug}`
