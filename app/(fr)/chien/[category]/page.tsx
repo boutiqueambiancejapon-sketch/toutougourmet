@@ -23,7 +23,7 @@ interface Props {
 
 const SITE_URL = 'https://www.toutou-gourmet.com'
 /** Rubriques d'aliments : un tableau des verdicts ouvre la page. */
-const FOOD_CATEGORIES = new Set(['fruit', 'legumes', 'viandes', 'urgences'])
+const FOOD_CATEGORIES = new Set(['fruit', 'legumes', 'viandes', 'feculents', 'urgences'])
 /** Ancienne rubrique sans page propre, regroupée ici (ses URL d'articles ne changent pas). */
 const MERGED: Record<string, string[]> = { 'alimentation-quotidienne': ['alimentation'] }
 
