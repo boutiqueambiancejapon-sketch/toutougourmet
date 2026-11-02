@@ -16,6 +16,8 @@ exec 9>"$LOCK"
 flock -n 9 || { echo "Une réécriture est déjà en cours."; exit 0; }
 LOG="$LOGS/$(date +%F).log"
 exec >>"$LOG" 2>&1
+# Copie du compte rendu pour le tableau de bord (dossier lisible par l'utilisateur toutou)
+trap 'install -m 640 "$LOG" /var/lib/toutou-seo-logs/ 2>/dev/null || true' EXIT
 echo "=== $(date -Is) début"
 
 [[ -d "$WORK/.git" ]] || git clone --quiet "$REPO_URL" "$WORK"
