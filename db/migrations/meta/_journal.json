@@ -8,6 +8,20 @@
       "when": 1793621237594,
       "tag": "0000_accounts_init",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793638005871,
+      "tag": "0001_scanner",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793642105604,
+      "tag": "0002_scanner_source",
+      "breakpoints": true
     }
   ]
 }

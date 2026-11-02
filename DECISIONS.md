@@ -73,3 +73,17 @@ Décision du propriétaire : on garde Google Analytics 4, on abandonne AdSense. 
 
 ## 2026-11-02 — Offres partenaires en cours (confirmées par le propriétaire)
 Dog Chef −30 % sur la box d'essai + livraison gratuite ; Dogfy Diet −50 % sur la box d'essai de 14 jours ; Elmut −40 % sur la première commande ; Franklin Pet Food −30 % en abonnement. Maxi Zoo partenaire (liens tidd.ly). Fidelis : bocaux en rupture, ne pas mettre en avant. Petty Well n'est plus partenaire. Toute autre remise affichée est une erreur.
+## 2026-11-02 — Scanner d'étiquette : l'IA lit, notre barème note
+- La lecture de l'étiquette passe par une interface indépendante du fournisseur (`lib/scanner/extract.ts`, `SCANNER_PROVIDER`, schéma commun `ExtractedLabel` avec une confiance par champ et la liste des passages illisibles). Seul Gemini est branché ; un fournisseur Anthropic s'ajoute dans un fichier `lib/scanner/providers/anthropic.ts` (dépendance non ajoutée).
+- Modèle par défaut `gemini-3.1-flash-lite` : `gemini-2.5-flash-lite`, moins cher, refuse les nouveaux comptes (404 le 2026-11-02). Coût mesuré : 1 300 à 2 400 jetons en entrée et ~500 en sortie, soit environ 0,0015 $ par analyse.
+- La note vient uniquement de `lib/scanner/score.ts`, barème publié sur `/scanner` et justifié dans `docs/v2/scanner-score.md`. Humidité non déclarée sur un aliment sec : 10 % retenus, hypothèse affichée.
+- Quota : il compte les appels au fournisseur. Un produit resservi depuis le cache (code-barres tapé ou lu, ou EAN lu déjà connu) ne compte pas ; une lecture en échec est rendue.
+- Aucune photo stockée. Fiches `/croquettes/*` en `noindex` et hors sitemap tant que `reviewed = false` (relecture manuelle en base pour l'instant).
+
+## 2026-11-02 — Scanner v2 : code-barres d'abord, Open Pet Food Facts, fiches de partage
+- Parcours : code-barres (caméra, chiffres ou photo de la galerie) → cache → Open Pet Food Facts → photos guidées. Les deux premiers niveaux sont sans compte, sans IA et non décomptés ; seule l'analyse par photos demande un compte.
+- Open Pet Food Facts : notre barème note la fiche si ingrédients et constituants sont exploitables et plausibles (`lib/scanner/opff.ts`), enregistrée avec `source = 'openpetfoodfacts'` et la mention ODbL partout où elle s'affiche. Couverture mesurée : 12 % des croquettes chien vendues en France présentes dans la base.
+- Lecture du code-barres : API `BarcodeDetector` quand elle lit l'EAN, sinon polyfill `barcode-detector` (zxing-wasm) chargé à la demande. Le `.wasm` (947 Ko, 411 Ko compressé) est servi depuis `public/vendor/zxing` (pas de CDN, CSP inchangée) ; version figée à `barcode-detector@3.2.3`. `/scanner` est la seule page qui autorise la caméra (`Permissions-Policy: camera=(self)`).
+- QR code des images de partage : `qrcode-generator` (sans dépendance) plutôt que `qrcode` (tire `yargs` et `pngjs`).
+- Mauvaises photos : refus non décomptés (pas une étiquette, floue, chat, friandise). Une lecture marquée floue avec la liste ou 3 chiffres douteux est refusée : au test réel, Gemini a « lu » une photo illisible en marquant tout douteux. Partie manquante : session signée de 30 min, la photo manquante n'est pas décomptée.
+- Corrections : recalcul de la note dans le navigateur, envoi comme signalement (`scan_report`) ; la fiche publique ne change qu'après relecture.

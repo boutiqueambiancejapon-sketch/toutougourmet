@@ -11,6 +11,10 @@ const LABELS: Record<string, string> = {
   'Food Search': 'Recherche',
   'Quiz Complete': 'Quiz terminé',
   'Account Signup': 'Compte créé',
+  'Scan Barcode': 'Code-barres scanné',
+  'Scan Result': 'Résultat du scanner',
+  'Scan Share': 'Fiche partagée',
+  'Scan Download': 'Fiche téléchargée',
 }
 
 const KIND: Record<string, string> = { ai_training: 'entraînement', ai_search: 'moteur IA', ai_user: 'lecture en direct' }

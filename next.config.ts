@@ -137,6 +137,12 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        // @cdc lot 6 — le scanner lit le code-barres à la caméra (flux traité dans le navigateur).
+        // Déclaré après la règle générale : pour une même clé, Next garde la dernière.
+        source: '/scanner',
+        headers: [{ key: 'Permissions-Policy', value: 'camera=(self), microphone=(), geolocation=()' }],
+      },
     ]
   },
 }

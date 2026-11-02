@@ -30,6 +30,7 @@ const TOOLS = [
   { href: '/outils/ration', label: 'Calculateur de ration journalière' },
   { href: '/outils/cout', label: 'Simulateur de coût mensuel' },
   { href: '/outils/poids', label: 'Suivi & courbe de poids' },
+  { href: '/scanner', label: "Scanner d'étiquette de croquettes" },
   { href: '/quiz', label: 'Quiz — trouver la croquette idéale' },
   { href: '/comparateur', label: 'Comparateur de croquettes' },
   { href: '/chien/marque/elmut-vs-dog-chef', label: 'Elmut vs Dog Chef — comparatif complet' },

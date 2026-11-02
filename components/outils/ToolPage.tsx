@@ -29,9 +29,11 @@ interface ToolPageProps {
   faqTitle: string
   faq: FaqEntry[]
   app: { name: string; description: string }
+  /** Section facultative entre la méthode et la FAQ (ex. exemple de résultat) */
+  after?: ReactNode
 }
 
-export function ToolPage({ slug, path, crumb, title, lead, children, methodTitle, method, faqTitle, faq, app }: ToolPageProps) {
+export function ToolPage({ slug, path, crumb, title, lead, children, methodTitle, method, faqTitle, faq, app, after }: ToolPageProps) {
   const webAppJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
@@ -76,6 +78,8 @@ export function ToolPage({ slug, path, crumb, title, lead, children, methodTitle
             {method}
           </div>
         </section>
+
+        {after}
 
         <section aria-labelledby="faq" className="flex flex-col">
           <h2 id="faq" className="m-0 font-display text-2xl font-black text-ink">

@@ -48,8 +48,8 @@ function createAuth(db: Db) {
       sendVerificationEmail: async ({ user, url }) => send(verificationEmail(user.email, user.name, url)),
     },
     user: {
-      // Droit à l'effacement : suppression depuis /compte/supprimer, mot de passe exigé. Les chiens
-      // et les pesées partent avec l'utilisateur (clés étrangères ON DELETE CASCADE).
+      // Droit à l'effacement : suppression depuis /compte/supprimer, mot de passe exigé. Les chiens,
+      // les pesées et l'historique du scanner partent avec l'utilisateur (ON DELETE CASCADE).
       deleteUser: {
         enabled: true,
         afterDelete: async (deleted) => send(accountDeletedEmail(deleted.email, deleted.name)),

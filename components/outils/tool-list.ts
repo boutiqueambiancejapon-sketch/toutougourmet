@@ -1,9 +1,9 @@
-import { IconBars, IconBowl, IconCake, IconCoins, IconHeart, IconScale, IconTarget, type IconProps } from '@/components/icons'
+import { IconBars, IconBowl, IconCake, IconCoins, IconHeart, IconScale, IconScan, IconTarget, type IconProps } from '@/components/icons'
 
 // @cdc 04-pages — liste des outils, partagée par le hub /outils et la rubrique « Autres outils »
 // en bas de chaque page outil. Chaque outil est présenté par la question à laquelle il répond.
 
-export type ToolSlug = 'ration' | 'age' | 'poids' | 'budget' | 'cout' | 'bien-nourri' | 'quiz'
+export type ToolSlug = 'ration' | 'age' | 'poids' | 'budget' | 'cout' | 'bien-nourri' | 'scanner' | 'quiz'
 
 export interface ToolEntry {
   slug: ToolSlug
@@ -38,6 +38,14 @@ export const TOOLS: ToolEntry[] = [
     name: 'Bilan alimentation',
     detail: '6 questions sur sa gamelle, sa silhouette et sa digestion. Score sur 100.',
     Icon: IconHeart,
+  },
+  {
+    slug: 'scanner',
+    href: '/scanner',
+    question: 'Ses croquettes sont-elles de bonne qualité\u00a0?',
+    name: "Scanner d'étiquette",
+    detail: 'Une photo de la composition, une note sur 100 critère par critère. Compte gratuit demandé.',
+    Icon: IconScan,
   },
   {
     slug: 'age',

@@ -1,0 +1,2 @@
+ALTER TABLE "app"."food_analysis" ADD COLUMN "source" text DEFAULT 'photo' NOT NULL;--> statement-breakpoint
+ALTER TABLE "app"."food_analysis" ADD CONSTRAINT "food_analysis_source" CHECK ("app"."food_analysis"."source" IN ('photo', 'openpetfoodfacts'));

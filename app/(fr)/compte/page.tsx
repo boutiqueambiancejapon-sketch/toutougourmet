@@ -3,10 +3,13 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { AccountPage } from '@/components/compte/AccountPage'
 import { DogCard } from '@/components/compte/DogCard'
+import { ScanHistoryList } from '@/components/compte/ScanHistoryList'
 import { FormNotice } from '@/components/compte/fields'
 import { SignOutButton } from '@/components/compte/SignOutButton'
 import { getSessionUser } from '@/lib/server/auth'
 import { listDogs } from '@/lib/server/dogs'
+import { listUserScans, usedThisMonth } from '@/lib/server/scanner'
+import { FREE_MONTHLY_SCANS } from '@/lib/scanner/config'
 
 export const metadata: Metadata = { title: 'Mon compte' }
 
@@ -17,7 +20,7 @@ export default async function AccountHomePage({ searchParams }: { searchParams: 
     // Lien de confirmation périmé : Better Auth renvoie ici avec ?error=…
     redirect(params.error ? `/compte/connexion?error=${encodeURIComponent(String(params.error).toUpperCase())}` : '/compte/connexion')
   }
-  const dogs = await listDogs(user.id)
+  const [dogs, scans, used] = await Promise.all([listDogs(user.id), listUserScans(user.id, 20), usedThisMonth(user.id)])
   return (
     <AccountPage title={`Bonjour ${user.name}`} lead={<p>{user.email}</p>}>
       {params.bienvenue ? <FormNotice tone="info">Adresse confirmée, ton compte est ouvert. Ajoute ton chien pour commencer.</FormNotice> : null}
@@ -55,12 +58,13 @@ export default async function AccountHomePage({ searchParams }: { searchParams: 
           reprend le poids, l&apos;âge et l&apos;activité de {dogs[0]?.name ?? 'ton chien'}.
         </p>
       </section>
+      <ScanHistoryList scans={scans} used={used} limit={FREE_MONTHLY_SCANS} />
       <section aria-labelledby="mes-donnees" className="flex flex-col gap-2">
         <h2 id="mes-donnees" className="m-0 font-display text-2xl font-black text-ink">
           Mes données
         </h2>
         <p className="m-0 text-base leading-relaxed text-ink-2">
-          Récupère tout ce que ton compte contient dans un fichier JSON : profil, chiens et pesées.
+          Récupère tout ce que ton compte contient dans un fichier JSON : profil, chiens, pesées et analyses d&apos;étiquettes.
         </p>
         <a
           href="/api/compte/export"
