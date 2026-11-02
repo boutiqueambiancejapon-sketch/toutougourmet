@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { dashboardCredentials } from '@/lib/dashboard/auth'
+import { dashboardAllowed } from '@/lib/dashboard/guard'
 import { parsePeriod } from '@/lib/dashboard/period'
 import { loadDashboard } from '@/lib/server/dashboard-data'
 import { getNightLogs, nightLogDir } from '@/lib/server/dashboard-logs'
@@ -41,7 +41,7 @@ const updated = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'long', timeStyle:
 
 export default async function DashboardPage({ searchParams }: PageProps) {
   // Double verrou : sans identifiants configurés, la page n'existe pas, même si le proxy saute.
-  if (!dashboardCredentials()) notFound()
+  if (!(await dashboardAllowed())) notFound()
 
   const period = parsePeriod((await searchParams).periode)
   const [data, logs, health, review] = await Promise.all([loadDashboard(period), getNightLogs(7), getServerHealth(), loadReview()])

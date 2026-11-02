@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { dashboardCredentials } from '@/lib/dashboard/auth'
+import { dashboardAllowed } from '@/lib/dashboard/guard'
 import { getAnalysis, listReports } from '@/lib/server/scanner-review'
 import { getDb } from '@/lib/server/drizzle'
 import { ScoreDetail } from '@/components/scanner/ScoreDetail'
@@ -19,7 +19,7 @@ const dateFmt = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'long', timeStyle:
 const SOURCE = { photo: 'photos lues par l\'IA', openpetfoodfacts: 'Open Pet Food Facts' } as const
 
 export default async function FicheReviewPage({ params }: { params: Promise<{ id: string }> }) {
-  if (!dashboardCredentials() || !getDb()) notFound()
+  if (!(await dashboardAllowed()) || !getDb()) notFound()
   const { id } = await params
   const row = await getAnalysis(id)
   if (!row) notFound()

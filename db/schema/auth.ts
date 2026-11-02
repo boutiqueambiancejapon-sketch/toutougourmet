@@ -82,7 +82,7 @@ export const verification = app.table(
   (t) => [index('verification_identifier_idx').on(t.identifier)],
 )
 
-/** Compteurs de la limite de tentatives (rateLimit.storage = 'database') : tiennent aux redémarrages. */
+/** Ancienne table des compteurs de tentatives : inutilisée depuis rateLimit.storage = 'memory' (2026-11, aucune IP en base). */
 export const rateLimit = app.table('rate_limit', {
   id: text('id').primaryKey(),
   key: text('key').notNull().unique(),

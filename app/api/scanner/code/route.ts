@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { getSessionUser } from '@/lib/server/auth'
 import { getDb } from '@/lib/server/drizzle'
 import { fetchOpffProduct } from '@/lib/server/opff'
-import { overLimit } from '@/lib/server/rate-window'
+import { clientIp, overLimit } from '@/lib/server/rate-window'
 import { findByEan, recordScan, saveAnalysis } from '@/lib/server/scanner'
 import { opffToLabel } from '@/lib/scanner/opff'
 import { ERROR_MESSAGES, toScanAnalysis, type Prefill, type ScanResponse } from '@/lib/scanner/result'
@@ -36,7 +36,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   const body = (await request.json().catch(() => null)) as { ean?: unknown } | null
   const ean = cleanEan(body?.ean)
   if (!ean) return fail('bad_request')
-  if (overLimit(`code:${request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'local'}`, LIMITS)) return fail('rate_limited')
+  if (overLimit(`code:${clientIp(request.headers)}`, LIMITS)) return fail('rate_limited')
   const user = await getSessionUser().catch(() => null)
   const reply = (analysis: Parameters<typeof toScanAnalysis>[0], origin: 'cache' | 'openpetfoodfacts') =>
     NextResponse.json({ ok: true, analysis: toScanAnalysis(analysis), fromCache: origin === 'cache', origin } satisfies ScanResponse, { headers: NO_STORE })

@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { SignJWT, importPKCS8 } from 'jose'
+import { rejectBadSecret } from '@/lib/server/api-secret'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 function notConfigured(): NextResponse {
   return NextResponse.json(
-    { error: 'Not configured: INDEXING_API_SECRET and GOOGLE_SERVICE_ACCOUNT_JSON are required' },
+    { error: 'Not configured' },
     { status: 501 },
   )
 }
@@ -118,10 +119,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
   }
 
-  // Vérifier le secret
-  if (body.secret !== apiSecret) {
-    return NextResponse.json({ error: 'Invalid secret' }, { status: 401 })
-  }
+  // Vérifier le secret (temps constant, blocage après 5 échecs par adresse)
+  const rejected = rejectBadSecret(req.headers, 'indexing', body?.secret, apiSecret)
+  if (rejected) return rejected
 
   const { urls, action = 'update' } = body
 
@@ -130,6 +130,14 @@ export async function POST(req: NextRequest) {
       { error: 'urls must be a non-empty array' },
       { status: 400 }
     )
+  }
+
+  // Seules les pages du site peuvent être soumises
+  if (!urls.every((u) => typeof u === 'string' && u.startsWith('https://www.toutou-gourmet.com/') && u.length <= 500)) {
+    return NextResponse.json({ error: 'urls must be https://www.toutou-gourmet.com/ pages' }, { status: 400 })
+  }
+  if (action !== 'update' && action !== 'delete') {
+    return NextResponse.json({ error: 'action must be update or delete' }, { status: 400 })
   }
 
   if (urls.length > 200) {
@@ -144,10 +152,8 @@ export async function POST(req: NextRequest) {
   try {
     sa = JSON.parse(saJson) as ServiceAccount
   } catch {
-    return NextResponse.json(
-      { error: 'GOOGLE_SERVICE_ACCOUNT_JSON is not valid JSON' },
-      { status: 500 }
-    )
+    console.error('[indexing] GOOGLE_SERVICE_ACCOUNT_JSON invalide')
+    return NextResponse.json({ error: 'Server misconfigured' }, { status: 500 })
   }
 
   // Obtenir un token OAuth2
@@ -155,10 +161,8 @@ export async function POST(req: NextRequest) {
   try {
     token = await getAccessToken(sa)
   } catch (err) {
-    return NextResponse.json(
-      { error: `Auth failed: ${err instanceof Error ? err.message : String(err)}` },
-      { status: 500 }
-    )
+    console.error('[indexing] jeton Google refusé', err instanceof Error ? err.message : err)
+    return NextResponse.json({ error: 'Upstream auth failed' }, { status: 502 })
   }
 
   // Soumettre les URLs une par une

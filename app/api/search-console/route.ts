@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { SignJWT, importPKCS8 } from 'jose'
+import { rejectBadSecret } from '@/lib/server/api-secret'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 function notConfigured(): NextResponse {
   return NextResponse.json(
-    { error: 'Not configured: INDEXING_API_SECRET and GOOGLE_SERVICE_ACCOUNT_JSON are required' },
+    { error: 'Not configured' },
     { status: 501 },
   )
 }
@@ -149,30 +150,33 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 })
   }
 
-  if (body.secret !== apiSecret) {
-    return NextResponse.json({ error: 'Invalid secret' }, { status: 401 })
-  }
+  const rejected = rejectBadSecret(req.headers, 'search-console', body?.secret, apiSecret)
+  if (rejected) return rejected
 
+  // Propriétés du site seulement ; période, type et limite bornés.
+  const SITES = ['https://www.toutou-gourmet.com', 'https://www.toutou-gourmet.com/', 'sc-domain:toutou-gourmet.com']
   const siteUrl = body.siteUrl ?? 'https://www.toutou-gourmet.com'
   const period = body.period ?? '28d'
   const type = body.type ?? 'both'
-  const limit = Math.min(body.limit ?? 50, 1000)
+  if (!SITES.includes(siteUrl) || !['7d', '28d', '90d'].includes(period) || !['pages', 'queries', 'both'].includes(type)) {
+    return NextResponse.json({ error: 'Invalid parameters' }, { status: 400 })
+  }
+  const limit = Math.max(1, Math.min(Number.isFinite(body.limit) ? Number(body.limit) : 50, 1000))
 
   let sa: ServiceAccount
   try {
     sa = JSON.parse(saJson) as ServiceAccount
   } catch {
-    return NextResponse.json({ error: 'GOOGLE_SERVICE_ACCOUNT_JSON is not valid JSON' }, { status: 500 })
+    console.error('[search-console] GOOGLE_SERVICE_ACCOUNT_JSON invalide')
+    return NextResponse.json({ error: 'Server misconfigured' }, { status: 500 })
   }
 
   let token: string
   try {
     token = await getAccessToken(sa)
   } catch (err) {
-    return NextResponse.json(
-      { error: `Auth failed: ${err instanceof Error ? err.message : String(err)}` },
-      { status: 500 }
-    )
+    console.error('[search-console] jeton Google refusé', err instanceof Error ? err.message : err)
+    return NextResponse.json({ error: 'Upstream auth failed' }, { status: 502 })
   }
 
   const result: {
@@ -222,10 +226,8 @@ export async function POST(req: NextRequest) {
       }))
     }
   } catch (err) {
-    return NextResponse.json(
-      { error: `API call failed: ${err instanceof Error ? err.message : String(err)}` },
-      { status: 500 }
-    )
+    console.error('[search-console] appel API', err instanceof Error ? err.message : err)
+    return NextResponse.json({ error: 'Upstream API failed' }, { status: 502 })
   }
 
   return NextResponse.json(result)

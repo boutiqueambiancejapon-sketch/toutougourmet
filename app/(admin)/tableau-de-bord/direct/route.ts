@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { dashboardCredentials } from '@/lib/dashboard/auth'
+import { dashboardAllowed } from '@/lib/dashboard/guard'
 import { getPool } from '@/lib/server/db'
 import { getLive } from '@/lib/server/dashboard-live'
 
@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
 export async function GET() {
-  if (!dashboardCredentials()) return new NextResponse(null, { status: 404 })
+  if (!(await dashboardAllowed())) return new NextResponse(null, { status: 404 })
   const pool = getPool()
   if (!pool) return NextResponse.json({ error: 'no-db' }, { status: 503 })
   try {

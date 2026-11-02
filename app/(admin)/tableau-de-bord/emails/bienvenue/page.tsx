@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { dashboardCredentials } from '@/lib/dashboard/auth'
+import { dashboardAllowed } from '@/lib/dashboard/guard'
 import { buildUnsubscribeUrl } from '@/lib/emails/unsubscribe'
 import { welcomeEmail } from '@/lib/emails/welcome'
 import { EmailPreview } from '@/components/dashboard/emails/EmailPreview'
@@ -15,7 +15,7 @@ interface PageProps {
 }
 
 export default async function WelcomePreviewPage({ searchParams }: PageProps) {
-  if (!dashboardCredentials()) notFound()
+  if (!(await dashboardAllowed())) notFound()
   const test = (await searchParams).test
   const mail = welcomeEmail(buildUnsubscribeUrl('apercu@example.com', process.env.NEWSLETTER_SECRET || 'apercu'))
   return (

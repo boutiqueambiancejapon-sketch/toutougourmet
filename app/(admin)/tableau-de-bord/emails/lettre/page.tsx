@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { dashboardCredentials } from '@/lib/dashboard/auth'
+import { dashboardAllowed } from '@/lib/dashboard/guard'
 import { nextFirstTuesday, parisDate, sendInstant } from '@/lib/emails/schedule'
 import { brevoKey, listScheduledCampaigns, type ScheduledCampaign } from '@/lib/server/brevo-newsletter'
 import { monthlyNewsletterFor } from '@/lib/server/newsletter'
@@ -28,7 +28,7 @@ async function loadCampaigns(): Promise<ScheduledCampaign[] | null> {
 }
 
 export default async function MonthlyPreviewPage({ searchParams }: PageProps) {
-  if (!dashboardCredentials()) notFound()
+  if (!(await dashboardAllowed())) notFound()
   const sp = await searchParams
   const send = sendInstant(nextFirstTuesday(parisDate(new Date())))
   const [mail, campaigns] = await Promise.all([monthlyNewsletterFor(send.date), loadCampaigns()])

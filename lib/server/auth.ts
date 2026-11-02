@@ -12,7 +12,7 @@ import { sendTransactionalEmail } from './mailer'
 
 // @cdc lot 4 — Better Auth : e-mail + mot de passe (scrypt, haché dans notre base), adresse à
 // vérifier avant la première connexion, mot de passe oublié. E-mails via Brevo (lib/server/mailer).
-// Protection CSRF (Origin + Fetch Metadata) et limite de tentatives en base : réglages par défaut
+// Protection CSRF (Origin + Fetch Metadata) et limite de tentatives en mémoire : réglages par défaut
 // de Better Auth, resserrés sur les routes sensibles. Sans DATABASE_URL, getAuth() renvoie null.
 
 const BASE_URL = process.env.BETTER_AUTH_URL || 'http://localhost:3000'
@@ -56,9 +56,16 @@ function createAuth(db: Db) {
       },
     },
     session: { expiresIn: 60 * 60 * 24 * 30, updateAge: 60 * 60 * 24 },
+    // @cdc RGPD — aucune adresse IP enregistrée : Better Auth remplit session.ip_address par
+    // défaut, on la vide avant l'écriture (la limite de tentatives lit l'IP sans la garder ici).
+    databaseHooks: {
+      session: { create: { before: async (data) => ({ data: { ...data, ipAddress: null } }) } },
+    },
     rateLimit: {
       enabled: true,
-      storage: 'database',
+      // En mémoire : la clé de Better Auth contient l'adresse IP en clair (« ip|chemin »), on ne
+      // l'écrit pas en base. Un redémarrage remet les compteurs à zéro (fenêtres de 1 à 5 min).
+      storage: 'memory',
       window: 60,
       max: 60,
       customRules: {
