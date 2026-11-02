@@ -14,6 +14,7 @@ Internet ── 80/443 ──► Caddy (service système, HTTPS automatique)
                         └─ www.toutou-gourmet.com ──► Next.js 127.0.0.1:3000 (systemd : toutou-web)
                                                         └─ PostgreSQL local, base « toutou »
 cron (utilisateur toutou) ──► backup-db.sh chaque nuit à 3 h 15
+toutou-alerts.timer ──► alertes ntfy toutes les 10 min · toutou-weekly.timer ──► résumé du lundi (non installés)
 ```
 
 ## Dossiers
@@ -156,3 +157,57 @@ journalctl -u toutou-newsletter -n 50 --no-pager    # ce qu'il a fait
 ```
 
 Arrêt : `sudo systemctl disable --now toutou-newsletter.timer`.
+
+## Alertes et résumé hebdomadaire (préparés, non installés)
+
+Deux minuteries, sous l'utilisateur `toutou`, depuis `/srv/toutou/current` :
+
+| Unité | Rythme | Script |
+| --- | --- | --- |
+| `toutou-alerts.timer` | toutes les 10 minutes | `scripts/alerts.ts` : notification ntfy sur le téléphone |
+| `toutou-weekly.timer` | lundi 8 h 40, heure de Paris | `scripts/weekly-digest.ts` : e-mail de la semaine à `OWNER_EMAIL` |
+
+Variables (déjà dans `/srv/toutou/shared/.env`) : `NTFY_SERVER` (https://ntfy.sh), `NTFY_TOPIC` (canal privé : c'est un secret, il ne doit apparaître ni dans git ni dans un journal), `OWNER_EMAIL`, plus `DATABASE_URL`, `BREVO_API_KEY` et `BREVO_SENDER_EMAIL` déjà présentes. Facultatif : `ALERTS_STATE_FILE` (défaut `/srv/toutou/shared/alerts-state.json`).
+
+### Contrôles des alertes
+
+- Le site ne répond pas 200 sur `http://127.0.0.1:3000/` en 10 s, deux essais à 30 s d'écart (priorité haute).
+- Le site tourne mais `https://www.toutou-gourmet.com/` ne répond pas 200 : Caddy, DNS ou certificat (priorité haute).
+- Une unité `toutou-*` en échec (`systemctl show`, sans sudo).
+- Tâche de nuit : à partir de 7 h (heure de Paris), le compte rendu du jour dans `/var/lib/toutou-seo-logs` manque, s'arrête avant la fin, ou contient « ✗ » ou « a terminé avec une erreur ». Avant 7 h, c'est la nuit précédente qui compte.
+- Disque libre sous 10 %, mémoire disponible sous 10 %, charge sur 15 minutes au-dessus de 150 % des cœurs.
+- Sauvegarde absente ou plus vieille que 36 heures (`/srv/toutou/backups`).
+- Nouveau signalement d'erreur non traité sur une fiche croquette (`app.scan_report`) depuis le passage précédent.
+
+Une notification par incident, puis une autre quand il est réglé ; plusieurs changements dans le même passage partent dans un seul message. L'état tient dans `ALERTS_STATE_FILE`. Les messages ne contiennent aucune donnée personnelle et ouvrent le tableau de bord au toucher. Si ntfy refuse l'envoi, l'état n'est pas mis à jour : le passage suivant renvoie le même message.
+
+### Essais
+
+```bash
+cd /srv/toutou/current
+# Ce que ferait un passage, sans rien envoyer (état dans /tmp)
+sudo -u toutou bash -c 'set -a; . /srv/toutou/shared/.env; set +a; node_modules/.bin/tsx scripts/alerts.ts --dry'
+# Une notification de test sur le téléphone
+sudo -u toutou bash -c 'set -a; . /srv/toutou/shared/.env; set +a; node_modules/.bin/tsx scripts/alerts.ts --test'
+# Résumé de la semaine passée, HTML dans /tmp/weekly-digest-AAAA-MM-JJ.html, sans envoi
+sudo -u toutou bash -c 'set -a; . /srv/toutou/shared/.env; set +a; node_modules/.bin/tsx scripts/weekly-digest.ts --dry'
+```
+
+`alerts.ts --now=2026-11-02T07:05:00+01:00` simule l'heure, `weekly-digest.ts --week=2026-10-26` choisit la semaine (un lundi). Aperçu du résumé et bouton de test : tableau de bord, `/tableau-de-bord/emails/hebdo`.
+
+### Installation
+
+Vérifier d'abord que systemd accepte le fuseau dans `OnCalendar` (systemd 259 sur le serveur : oui) :
+
+```bash
+systemd-analyze calendar "Mon *-*-* 08:40:00 Europe/Paris"   # Next elapse : lundi 07:40 UTC en hiver
+sudo cp deploy/toutou-alerts.service deploy/toutou-alerts.timer deploy/toutou-weekly.service deploy/toutou-weekly.timer /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now toutou-alerts.timer toutou-weekly.timer
+systemctl list-timers 'toutou-*'                  # prochains passages
+journalctl -u toutou-alerts -n 50 --no-pager      # ce qu'a vu le dernier passage
+```
+
+Les deux services tournent durcis (`NoNewPrivileges`, `ProtectSystem=strict`, `ProtectHome`, `PrivateTmp`) ; seul `/srv/toutou/shared` est accessible en écriture, pour le fichier d'état. Tant que le site tourne depuis la préversion, adapter `User=` et `WorkingDirectory=` comme dans `toutou-ingest.service`.
+
+Arrêt : `sudo systemctl disable --now toutou-alerts.timer toutou-weekly.timer`.

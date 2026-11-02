@@ -1,0 +1,24 @@
+# Résumé hebdomadaire par e-mail au propriétaire (scripts/weekly-digest.ts, Brevo transactionnel).
+# NON INSTALLÉ : voir deploy/README.md, section « Alertes et résumé hebdomadaire ».
+# Tant que le site tourne depuis la préversion : adapter User= et WorkingDirectory= comme dans
+# toutou-ingest.service.
+[Unit]
+Description=Toutou Gourmet - résumé hebdomadaire par e-mail
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=toutou
+WorkingDirectory=/srv/toutou/current
+EnvironmentFile=/srv/toutou/shared/.env
+ExecStart=/srv/toutou/current/node_modules/.bin/tsx scripts/weekly-digest.ts
+TimeoutStartSec=5min
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
