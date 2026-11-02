@@ -2,6 +2,8 @@
 
 ## Complété
 
+- 2026-11-02 (journée autonome) — Quiz V2, tableau de bord privé `/tableau-de-bord` (préversion), 64 articles réécrits (tirets, emojis, voix), 100 titles et 163 descriptions raccourcis, deux contrôles qualité complets et leurs corrections (liens cassés, −35 % Dog Chef, `sponsored`, /blog allégé, hydratation, CSP AdSense), ingestion limitée aux hôtes de production. Détail : `docs/v2/journal-2026-11-02.md`.
+
 - 2026-11-02 (après-midi) — Pages outils V2 (gabarit `ToolPage`, « Garder ce résultat », suites logiques, calcul de ration unifié dans `lib/calculators.ts` : la formule affichée était fausse), marques et comparateur V2 (profils sourcés, notes et faux avis retirés, Petty Well retiré, Dog Chef −30 %), 19 articles urgences/aliments réécrits (0 tiret cadratin, blocs « que faire »), encart du milieu d'article (`MidArticleCta` + `remark-mid-cta`), composants MDX V2 sans emojis, articles liés en tuiles V2, Brevo branché dans `/api/contact` (liste 5), plan du site unique sans les 357 `/blog/*` qui redirigent. Restent : quiz V2, comparatifs MDX (25 tirets, notes 4.8/5), page tableau de bord, enregistrement A `dashboard`.
 
 - 2026-11-02 — Tableau de bord maison, étapes 1-2 : schéma `analytics` (base `toutou`, `db/analytics.sql`), route `POST /api/e` alimentée par `track()`, journaux Caddy JSON → `scripts/ingest-caddy-logs.mjs` (timer `toutou-ingest`, 15 min) avec détection des robots IA et des visites envoyées par une IA. DNS : AAAA `dashboard` → VPS créé, A à ajouter (refusé par le filtre). Brevo : clé sur le serveur (`~/.config/toutou/brevo.env`), IP autorisées, liste « Newsletter Toutou Gourmet » id 5 ; domaine déjà authentifié (DKIM/DMARC). Raisin réécrit, couche d'animation CSS, règle cadratins dans boileau et prompts de nuit.
