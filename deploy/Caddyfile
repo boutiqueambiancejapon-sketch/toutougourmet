@@ -7,6 +7,10 @@ toutou-gourmet.com {
 
 www.toutou-gourmet.com {
 	encode zstd gzip
+	log {
+		output stderr
+		format json
+	}
 	reverse_proxy 127.0.0.1:3000
 	header {
 		Strict-Transport-Security "max-age=31536000; includeSubDomains"

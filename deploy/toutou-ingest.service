@@ -1,0 +1,18 @@
+# Range les journaux d'accès de Caddy dans analytics.hits (tableau de bord maison).
+# SupplementaryGroups donne la lecture du journal système à ce seul service, sans changer
+# les groupes du compte. Après la bascule : User=toutou et WorkingDirectory=/srv/toutou/current.
+[Unit]
+Description=Toutou Gourmet - ingestion des journaux Caddy
+After=postgresql.service
+
+[Service]
+Type=oneshot
+User=administrator
+SupplementaryGroups=systemd-journal
+WorkingDirectory=/home/administrator/toutou-preview/current
+Environment=DATABASE_URL=postgresql:///toutou
+ExecStart=/usr/bin/node scripts/ingest-caddy-logs.mjs
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=true

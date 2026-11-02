@@ -87,6 +87,15 @@ Règles : aucune URL existante ne change (788 adresses) ; les pages race existan
 - [ ] EN : pages piliers, outils, hubs race prioritaires
 - [ ] hreflang, sitemap par langue
 
+## Tableau de bord maison (feu vert 2026-11-02)
+
+Objectif : `dashboard.toutou-gourmet.com`, nos chiffres à nous (actions des visiteurs, robots d'IA, Brevo, tâche de nuit), visites lues dans Plausible.
+
+- [ ] 1. Actions des visiteurs : schéma `analytics` dans la base `toutou`, route `POST /api/e` (sans cookie, sans IP stockée, no-op sans `DATABASE_URL`), `track()` envoie aussi à `/api/e`
+- [ ] 2. Journaux Caddy en JSON vers journald ; `scripts/ingest-caddy-logs.mjs` (timer 15 min) classe robots IA (entraînement, recherche, lecture en direct), moteurs, outils SEO, humains, visiteurs envoyés par une IA ; IP gardée pour les robots seulement (détection des faux robots) ; rétention 180 j
+- [ ] 3. Page tableau de bord protégée (sous-domaine, DNS à ajouter chez le registraire)
+- [ ] 4. Brevo, tâche de nuit, Plausible Stats API, alertes
+
 ## Lot 9 — Bascule
 
 - [ ] Recette complète sur la preview `v2`

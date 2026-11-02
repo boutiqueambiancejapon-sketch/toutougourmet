@@ -1,12 +1,10 @@
-// @cdc mesure — événements Plausible (objectifs à créer dans le tableau de bord Plausible
-// avec ces noms exacts). Sans Plausible chargé, l'appel est mis en file puis ignoré.
+// @cdc mesure — chaque action part à deux endroits : Plausible (si chargé) et notre propre
+// base via POST /api/e (tableau de bord maison). sendBeacon survit à la navigation, donc un
+// clic sur un lien partenaire est bien enregistré même si la page change aussitôt.
 
-export type AnalyticsEvent =
-  | 'Affiliate Click'
-  | 'Tool Result'
-  | 'Newsletter Signup'
-  | 'Food Search'
-  | 'Quiz Complete'
+import type { AnalyticsEvent } from './analytics-events'
+
+export type { AnalyticsEvent }
 
 type Props = Record<string, string | number | boolean>
 
@@ -19,6 +17,15 @@ declare global {
 export function track(event: AnalyticsEvent, props: Props = {}): void {
   if (typeof window === 'undefined') return
   window.plausible?.(event, { props: { page: window.location.pathname, ...props } })
+  try {
+    const payload = JSON.stringify({ n: event, p: window.location.pathname, r: document.referrer, props })
+    const blob = new Blob([payload], { type: 'application/json' })
+    if (!navigator.sendBeacon?.('/api/e', blob)) {
+      void fetch('/api/e', { method: 'POST', body: payload, keepalive: true, cache: 'no-store' })
+    }
+  } catch {
+    // La mesure ne doit jamais casser la page.
+  }
 }
 
 /** Marque d'un lien partenaire, sinon null. */

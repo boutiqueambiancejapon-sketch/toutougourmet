@@ -4,6 +4,10 @@
 
 toutou.85-190-127-13.sslip.io {
 	encode zstd gzip
+	log {
+		output stderr
+		format json
+	}
 	basicauth {
 		toutou __PASSWORD_HASH__
 	}

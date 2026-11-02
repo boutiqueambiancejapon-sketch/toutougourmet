@@ -8,6 +8,7 @@ Type=simple
 User=administrator
 WorkingDirectory=/home/administrator/toutou-preview/current
 Environment=NODE_ENV=production
+Environment=DATABASE_URL=postgresql:///toutou
 ExecStart=/usr/bin/npx next start -H 127.0.0.1 -p 3001
 Restart=always
 RestartSec=3
