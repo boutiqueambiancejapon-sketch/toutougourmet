@@ -12,6 +12,8 @@ import pg from 'pg'
 import { aiReferrer, classifyUa, deviceOf } from './lib/bots.mjs'
 
 const DRY = process.argv.includes('--dry')
+// Adresses gardées (ex. « www.toutou-gourmet.com,toutou-gourmet.com ») ; vide = toutes.
+const HOSTS = (process.env.INGEST_HOSTS || '').split(',').map((h) => h.trim().toLowerCase()).filter(Boolean)
 const SOURCE = 'caddy-journal'
 const BATCH = 500
 const RETENTION_DAYS = 180
@@ -33,6 +35,7 @@ function hostOf(url) {
 function toHit(entry) {
   const req = entry.request
   if (!req || !String(entry.logger || '').startsWith('http.log.access')) return null
+  if (HOSTS.length && !HOSTS.includes(String(req.host || '').toLowerCase().split(':')[0])) return null
   const uri = req.uri || '/'
   const path = uri.split('?')[0].slice(0, 300)
   const ua = header(req.headers, 'User-Agent') || ''

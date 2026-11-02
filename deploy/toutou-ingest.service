@@ -10,6 +10,7 @@ Type=oneshot
 User=administrator
 SupplementaryGroups=systemd-journal
 WorkingDirectory=/home/administrator/toutou-preview/current
+Environment=INGEST_HOSTS=www.toutou-gourmet.com,toutou-gourmet.com,dashboard.toutou-gourmet.com
 Environment=DATABASE_URL=postgresql:///toutou?host=/var/run/postgresql
 ExecStart=/usr/bin/node scripts/ingest-caddy-logs.mjs
 NoNewPrivileges=true
