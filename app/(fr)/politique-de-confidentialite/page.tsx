@@ -81,7 +81,7 @@ export default function PolitiqueConfidentialitePage() {
             </p>
             <p className="mb-2">
               Nous les gardons tant que ton compte existe. Un compte dont l&apos;adresse n&apos;a jamais été
-              confirmée est supprimé au bout de 30 jours. Une connexion expire après 30 jours, puis ses
+              confirmée est supprimé après 30 jours, lors du nettoyage hebdomadaire suivant. Une connexion expire après 30 jours, puis ses
               données sont effacées.
             </p>
             <p className="mb-2">
