@@ -103,7 +103,7 @@ export const brandPricings: BrandPricing[] = [
     type: 'repas-frais',
     kcalPer100g: 188,   // densité calorique recettes Dog Chef (viande fraîche)
     affiliateUrl: 'https://www.dogchef.com/fr/code/WZU7090',
-    offer: '-35% box d\'essai',
+    offer: '-30% box d\'essai',
   },
 ]
 

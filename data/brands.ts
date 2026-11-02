@@ -24,6 +24,23 @@ export interface Brand {
   discountCode: string | null
   /** Alerte de disponibilité affichée à la place de l'offre (rupture de stock, etc.) */
   stockNote?: string
+  /** Fiche d'identité affichée dans les tableaux et la bande encre (sources : fiches marques et tests publiés). */
+  facts: BrandFacts
+}
+
+export interface BrandFacts {
+  /** Prix indicatif, tel que publié dans la fiche ou le test de la marque */
+  price: string
+  /** Type d'aliment, en clair */
+  format: string
+  /** Lieu de fabrication */
+  madeIn: string
+  /** Mode de livraison */
+  delivery: string
+  /** Point fort en une phrase courte */
+  strength: string
+  /** Pour quel chien */
+  bestFor: string
 }
 
 export const brands: Brand[] = [
@@ -45,20 +62,28 @@ export const brands: Brand[] = [
       serviceClient: 4.3,
     },
     pros: [
-      "Pionniers du mono-protéine en France — idéal allergies",
-      "Jusqu'à 70% de viande, cuisson basse température 90–110 °C",
+      "Pionniers du mono-protéine en France, pratique pour un chien allergique",
+      "Jusqu'à 70 % de viande, cuisson entre 90 et 110 °C",
       "Formulé avec la Dr Charlotte Dirat (vétérinaire nutritionniste)",
-      "4,7/5 sur 4 700+ avis Trustpilot · 100 000 clients",
-      "-30% sur la 1ère commande en abonnement",
+      '4,7/5 sur plus de 4 700 avis Trustpilot, 100 000 clients revendiqués',
+      'Abonnement sans engagement, de 15 à 20 % moins cher',
     ],
     cons: [
       "Fabriqué en Rép. Tchèque (formulé en France, pas made in France)",
       "Livraison parfois problématique (retards, colis bloqués)",
-      "Transition alimentaire délicate — prévoir 10 jours minimum",
+      "Transition alimentaire délicate : prévoir 10 jours minimum",
     ],
     priceRange: '€€',
     discountOffer: "-30% sur la 1ère commande en abonnement",
     discountCode: null,
+    facts: {
+      price: 'Environ 6,30 à 9 € le kg selon la recette et le sac',
+      format: 'Croquettes et pâtées',
+      madeIn: 'République tchèque (recettes formulées à Paris)',
+      delivery: "Colis, gratuit dès 49 € en point relais avec l'abonnement",
+      strength: 'Une seule source de viande par recette',
+      bestFor: 'Chien allergique ou à la digestion sensible',
+    },
   },
   {
     slug: 'elmut',
@@ -78,25 +103,33 @@ export const brands: Brand[] = [
       serviceClient: 4.7,
     },
     pros: [
-      'Ingrédients qualité humaine',
-      'Sans conservateurs ni additifs controversés',
-      'Cuisson douce préservant les nutriments',
+      'Ingrédients de qualité humaine',
+      'Sans conservateur ni colorant artificiel',
+      'Cuisson douce sous vide à 90 °C',
       'Livraison réfrigérée à domicile',
-      "-40% sur la 1ère commande via notre lien",
+      'Recettes pour chat aussi (poulet, bœuf, dinde)',
     ],
     cons: [
       'Plus onéreux que les croquettes',
-      'Nécessite un frigo — logistique différente',
+      'Nécessite de la place au frigo',
     ],
     priceRange: '€€€',
     discountOffer: "-40% sur la 1ère commande via notre lien",
     discountCode: null,
+    facts: {
+      price: 'Environ 55 à 75 € par mois pour un chien de moins de 10 kg',
+      format: 'Repas frais cuisinés',
+      madeIn: 'Cuisine agréée qualité humaine (lieu non communiqué)',
+      delivery: 'Colis réfrigéré Chronofresh',
+      strength: 'Cuisson douce et ration calculée au profil du chien',
+      bestFor: 'Chien senior ou en surpoids',
+    },
   },
   {
     slug: 'ultra-premium-direct',
     name: 'Ultra Premium Direct',
     logo: '/images/marques/ultrapremiumdirect-logo.webp',
-    tagline: 'Vente directe sans intermédiaire — premium accessible à -40 % vs animalerie',
+    tagline: 'Croquettes vendues en direct, sans animalerie ni intermédiaire',
     affiliateUrl: 'https://c3po.link/QqJYNnzYD8',
     affiliateCode: null,
     animal: ['chien', 'chat'],
@@ -110,20 +143,28 @@ export const brands: Brand[] = [
       serviceClient: 4.6,
     },
     pros: [
-      "Modèle vente directe — jusqu'à -40 % vs marques équivalentes en animalerie",
-      "Prébiotiques FOS et MOS intégrés — soutien du confort digestif",
+      "Vente directe : jusqu'à 40 % de moins que des marques équivalentes en animalerie, selon la marque",
+      "Prébiotiques FOS et MOS ajoutés pour le confort digestif",
       "Sans colorants ni additifs artificiels",
       "Gamme complète chien et chat (croquettes, pâtées, friandises)",
-      "Enrobage final réalisé à Agen (France) — assemblage local",
+      "Enrobage final réalisé à Agen (France)",
     ],
     cons: [
-      "Croquettes semi-finies sourcées chez des sous-traitants européens — pas 100 % Made in France",
+      "Croquettes semi-finies achetées à des sous-traitants européens, donc pas 100 % fabriquées en France",
       "Présence de protéines végétales (pois) sur certaines recettes",
       "Taux de glucides parfois élevé (jusqu'à 35 % MS sur certaines formules)",
     ],
     priceRange: '€€',
     discountOffer: "-20 % sur la 1ère commande en abonnement via notre lien",
     discountCode: null,
+    facts: {
+      price: 'Environ 3 à 5 € le kg selon la gamme',
+      format: 'Croquettes, pâtées et friandises',
+      madeIn: 'Enrobage à Agen, croquettes de sous-traitants européens',
+      delivery: 'Colis en 2 à 4 jours ouvrés, gratuit dès 49 €',
+      strength: 'Le prix au kilo le plus bas de la sélection',
+      bestFor: 'Chien adulte sans souci particulier, budget serré',
+    },
   },
   {
     slug: 'dog-chef',
@@ -143,11 +184,11 @@ export const brands: Brand[] = [
       serviceClient: 4.7,
     },
     pros: [
-      "Élu Produit de l'Année 2026 — 4.8/5 sur 7 800+ avis",
-      '100% personnalisé par profil + ajustement automatique',
+      "Élu Produit de l'Année 2026, 4,8/5 sur plus de 7 800 avis",
+      'Ration calculée sur le profil du chien, recalculée quand son poids change',
       'Boosters ciblés : Puppy, Senior, Mobility, Transit',
-      'Livraison gratuite incluse — 0 frais cachés',
-      'Conservation 7j frigo / 4 mois congélo',
+      'Livraison gratuite incluse',
+      'Se conserve 7 jours au frigo et 4 mois au congélateur',
     ],
     cons: [
       'Uniquement pour les chiens (pas de chat)',
@@ -155,8 +196,16 @@ export const brands: Brand[] = [
       'Inscription avec profil détaillé obligatoire avant de pouvoir commander',
     ],
     priceRange: '€€€',
-    discountOffer: "-35% sur la box d'essai avec le code WZU7090",
+    discountOffer: "-30 % sur la box d'essai, livraison gratuite, sans engagement",
     discountCode: 'WZU7090',
+    facts: {
+      price: 'Environ 1,50 à 5,50 € par jour selon le gabarit',
+      format: 'Repas frais, ou mixte avec croquettes',
+      madeIn: 'Atelier Dog Chef à Huldenberg (Belgique)',
+      delivery: 'Camionnette réfrigérée, livraison gratuite',
+      strength: 'Portions recalculées quand le poids du chien change',
+      bestFor: 'Chiot, chien en surpoids ou senior',
+    },
   },
   {
     slug: 'dogfy-diet',
@@ -190,6 +239,14 @@ export const brands: Brand[] = [
     priceRange: '€€€',
     discountOffer: "-50 % sur la box d'essai de 14 jours, livraison offerte",
     discountCode: null,
+    facts: {
+      price: 'Environ 50 à 200 € par mois, de 5 à 40 kg',
+      format: 'Repas frais cuits sous vide',
+      madeIn: 'Non communiqué',
+      delivery: 'Sachets prédosés livrés congelés',
+      strength: 'Sachets prédosés et suivi nutritionnel gratuit',
+      bestFor: 'Chien difficile à nourrir',
+    },
   },
   {
     slug: 'fidelis',
@@ -222,6 +279,14 @@ export const brands: Brand[] = [
     priceRange: '€€',
     discountOffer: '',
     discountCode: null,
+    facts: {
+      price: 'Environ 11 à 12,50 € le kg',
+      format: 'Menus en bocaux de verre',
+      madeIn: 'Allemagne (Sanadog GmbH)',
+      delivery: "Colis depuis l'Allemagne, 2 à 5 jours ouvrés",
+      strength: 'Bocaux qui se gardent au placard avant ouverture',
+      bestFor: "Chien qui a besoin d'une viande peu courante (cheval, chèvre)",
+    },
     stockNote: 'Bocaux en rupture de stock au 1er novembre 2026',
   },
 ]
