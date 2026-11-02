@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { dashboardCredentials } from '@/lib/dashboard/auth'
+import { dashboardAllowed } from '@/lib/dashboard/guard'
 import { weeklyDigestEmail } from '@/lib/emails/weekly'
 import { getPool } from '@/lib/server/db'
 import { getWeeklyDigestData, lastWeekStart } from '@/lib/server/weekly-digest-data'
@@ -16,7 +16,7 @@ interface PageProps {
 }
 
 export default async function WeeklyPreviewPage({ searchParams }: PageProps) {
-  if (!dashboardCredentials()) notFound()
+  if (!(await dashboardAllowed())) notFound()
   const pool = getPool()
   if (!pool) notFound()
   const test = (await searchParams).test
