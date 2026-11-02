@@ -42,13 +42,13 @@ const STATUS: Record<ScannerErrorCode, number> = {
 }
 
 function fail(error: ScannerErrorCode, quota?: ScanQuota) {
-  // Quota gratuit atteint : on propose Premium (gratuit pendant le lancement, 50 analyses par mois).
+  // Quota gratuit atteint : on propose Premium (gratuit pendant le lancement, 10 analyses par mois).
   const message = error === 'quota_reached' && quota?.plan === 'free' ? QUOTA_FREE_MESSAGE : ERROR_MESSAGES[error]
   const body: ScanResponse = { ok: false, error, message, quota }
   return NextResponse.json(body, { status: STATUS[error], headers: NO_STORE })
 }
 
-// Quota du mois selon la formule du compte (5 en gratuit, 50 en Premium, lib/scanner/config.ts).
+// Quota du mois selon la formule du compte (5 en gratuit, 10 en Premium, lib/scanner/config.ts).
 async function quota(userId: string): Promise<ScanQuota> {
   const [used, { plan, limit }] = await Promise.all([usedThisMonth(userId), scanLimitFor(userId)])
   return { used, limit, plan }
