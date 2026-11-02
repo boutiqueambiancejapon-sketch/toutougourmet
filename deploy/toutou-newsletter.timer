@@ -1,0 +1,11 @@
+# Tous les jours à 9 h (heure du serveur, Europe/Paris) : le script ne crée la campagne que la
+# veille du premier mardi du mois. Persistent : rattrape un passage manqué si le serveur était éteint.
+[Unit]
+Description=Toutou Gourmet - lettre mensuelle, vérification quotidienne à 9 h
+
+[Timer]
+OnCalendar=*-*-* 09:00:00 Europe/Paris
+Persistent=true
+
+[Install]
+WantedBy=timers.target

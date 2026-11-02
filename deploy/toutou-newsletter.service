@@ -1,0 +1,20 @@
+# Lettre mensuelle : la veille du premier mardi du mois, crée la campagne Brevo programmée pour le
+# lendemain 18 h et envoie un test à NEWSLETTER_TEST_EMAIL. Les autres jours, le script ne fait rien.
+# NON INSTALLÉ : voir deploy/README.md, section « Lettre mensuelle ». Annulation : tableau de bord,
+# /tableau-de-bord/emails/lettre. Après la bascule : User=toutou et WorkingDirectory=/srv/toutou/current.
+[Unit]
+Description=Toutou Gourmet - lettre mensuelle (création de la campagne Brevo)
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=toutou
+WorkingDirectory=/srv/toutou/current
+EnvironmentFile=/srv/toutou/shared/.env
+Environment=NEWSLETTER_STATE_FILE=/srv/toutou/shared/newsletter-state.json
+ExecStart=/srv/toutou/current/node_modules/.bin/tsx scripts/newsletter-monthly.ts
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/srv/toutou/shared /tmp
+PrivateTmp=true

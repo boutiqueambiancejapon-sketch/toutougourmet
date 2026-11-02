@@ -14,6 +14,7 @@ import { LiveSection } from '@/components/dashboard/LiveSection'
 import { HealthBanner } from '@/components/dashboard/HealthBanner'
 import { ServerSection } from '@/components/dashboard/ServerSection'
 import { ReviewSection } from '@/components/dashboard/ReviewSection'
+import { EmailsSection } from '@/components/dashboard/EmailsSection'
 import { listToReview, type ReviewRow } from '@/lib/server/scanner-review'
 import { getDb } from '@/lib/server/drizzle'
 
@@ -65,6 +66,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
         <AiSection data={data.ai} period={period} unread={data.unread} articleCount={data.articleCount} />
         <MessagesSection messages={data.messages} />
         <ReviewSection rows={review.rows} error={review.error} />
+        <EmailsSection />
         <NightSection logs={logs} configured={nightLogDir() !== null} />
         <ServerSection health={health} />
       </main>

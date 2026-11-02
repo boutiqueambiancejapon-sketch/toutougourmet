@@ -1,10 +1,14 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { after, NextRequest, NextResponse } from 'next/server'
 import { isBrevoConfigured, subscribe } from '@/lib/server/brevo'
 import { getPool } from '@/lib/server/db'
+import { sendWelcomeOnce } from '@/lib/server/newsletter'
 import { contactRateLimited, parseContactMessage, saveContactMessage } from '@/lib/server/contact'
 
 // @cdc contact — deux usages : inscription (e-mail seul, sans champ « message ») envoyée à Brevo,
 // et message de contact rangé dans analytics.contact_messages (lu dans le tableau de bord).
+// Après une inscription réussie : e-mail de bienvenue envoyé après la réponse (after), une fois
+// par adresse. En double opt-in, Brevo envoie déjà sa confirmation : pas de bienvenue à une adresse
+// non confirmée.
 // Champ piège « website » : rempli par un robot, la requête reçoit 200 sans rien enregistrer.
 
 export const runtime = 'nodejs'
@@ -28,7 +32,11 @@ export async function POST(req: NextRequest) {
     if (!isBrevoConfigured()) return unavailable()
     const source = typeof body.source === 'string' ? body.source : typeof body._subject === 'string' ? body._subject : 'site'
     const result = await subscribe(body.email, source)
-    if (result === 'ok') return NextResponse.json({ ok: true })
+    if (result === 'ok') {
+      const email = body.email
+      if (!process.env.BREVO_DOI_TEMPLATE_ID) after(() => sendWelcomeOnce(email).then(() => undefined))
+      return NextResponse.json({ ok: true })
+    }
     if (result === 'invalid') return NextResponse.json({ error: 'Invalid email' }, { status: 400 })
     return NextResponse.json({ error: 'Subscribe failed' }, { status: 502 })
   }
