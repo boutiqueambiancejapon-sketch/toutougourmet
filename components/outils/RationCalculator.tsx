@@ -1,18 +1,18 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { track } from '@/lib/analytics'
-import { RationResult, type RationValues } from './RationResult'
-import { parseRationParams, type RationPrefill } from './ration-params'
-import {
-  calculateDailyCalories,
-  caloriesToGramsKibble,
-  caloriesToGramsFresh,
-  type Animal,
-  type AgeGroup,
-  type ActivityLevel,
-} from '@/lib/calculators'
+import { computeRation, type ActivityLevel, type AgeGroup, type Animal, type RationValues } from '@/lib/calculators'
+import { Segmented } from '@/components/tools/Segmented'
+import { CheckField, NumberField, SubmitButton, ToolCard } from './fields'
+import { RationResult } from './RationResult'
+import { parseRationParams, type RationFood, type RationPrefill } from './ration-params'
+
+// @cdc outils — calculateur complet de /outils/ration. Même fonction que le mini-outil de
+// l'accueil (computeRation, lib/calculators.ts) : mêmes réglages, même résultat.
+
+type YesNo = 'oui' | 'non'
 
 interface FormState {
   animal: Animal
@@ -21,29 +21,35 @@ interface FormState {
   activityLevel: ActivityLevel
   sterilized: boolean
   isHighEnergy: boolean
+  food: RationFood
 }
 
-const defaultForm: FormState = {
+const DEFAULT_FORM: FormState = {
   animal: 'chien',
   weightKg: '',
   ageGroup: 'adulte',
   activityLevel: 'normal',
   sterilized: false,
   isHighEnergy: false,
+  food: 'croquettes',
 }
 
+const ANIMALS = [['chien', 'Chien'], ['chat', 'Chat']] as const
+const ACTIVITIES = [['sedentaire', 'Calme'], ['normal', 'Normale'], ['actif', 'Sportive'], ['tres-actif', 'Intense']] as const
+const STERILIZED = [['non', 'Non'], ['oui', 'Oui']] as const
+const FOODS = [['croquettes', 'Croquettes'], ['frais', 'Repas frais']] as const
+
 function compute(form: FormState): RationValues | null {
-  const weight = parseFloat(form.weightKg)
-  if (!weight || weight <= 0) return null
-  const kcal = calculateDailyCalories({
+  const weight = parseFloat(form.weightKg.replace(',', '.'))
+  if (!Number.isFinite(weight) || weight < 0.5 || weight > 100) return null
+  return computeRation({
     animal: form.animal,
     weightKg: weight,
     ageGroup: form.ageGroup,
     activityLevel: form.activityLevel,
     sterilized: form.sterilized,
-    isRaceHighEnergy: form.isHighEnergy,
+    isRaceHighEnergy: form.animal === 'chien' && form.isHighEnergy,
   })
-  return { kcal, gKibble: caloriesToGramsKibble(kcal), gFresh: caloriesToGramsFresh(kcal) }
 }
 
 /**
@@ -52,168 +58,61 @@ function compute(form: FormState): RationValues | null {
  */
 export function RationCalculatorFromUrl() {
   const params = useSearchParams()
-  const prefill = parseRationParams(params)
-  return <RationCalculator key={params.toString()} prefill={prefill} />
+  return <RationCalculator key={params.toString()} prefill={parseRationParams(params)} />
 }
 
 export function RationCalculator({ prefill = {} }: { prefill?: RationPrefill }) {
-  const { food, ...fields } = prefill
+  const weightId = useId()
   // Les clés absentes de l'URL valent undefined : elles ne doivent pas écraser les valeurs par défaut.
-  const initial: FormState = { ...defaultForm, ...Object.fromEntries(Object.entries(fields).filter(([, v]) => v !== undefined)) }
+  const initial: FormState = { ...DEFAULT_FORM, ...Object.fromEntries(Object.entries(prefill).filter(([, v]) => v !== undefined)) }
   const [form, setForm] = useState<FormState>(initial)
   // Poids reçu dans l'URL : le résultat s'affiche tout de suite.
-  const [result, setResult] = useState<RationValues | null>(() => (fields.weightKg ? compute(initial) : null))
-  const fromUrl = Boolean(fields.weightKg)
+  const [result, setResult] = useState<RationValues | null>(() => (prefill.weightKg ? compute(initial) : null))
+  const fromUrl = Boolean(prefill.weightKg)
 
   useEffect(() => {
     if (fromUrl) track('Tool Result', { tool: 'ration', source: 'lien' })
   }, [fromUrl])
-
-  function handleCalculate(e: React.FormEvent) {
-    e.preventDefault()
-    const values = compute(form)
-    if (!values) return
-    setResult(values)
-    track('Tool Result', { tool: 'ration' })
-  }
 
   function set<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((f) => ({ ...f, [key]: value }))
     setResult(null)
   }
 
+  const ages = [['chiot', form.animal === 'chien' ? 'Chiot' : 'Chaton'], ['adulte', 'Adulte'], ['senior', 'Senior']] as const
+
   return (
-    <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-6 md:p-8">
-      <form onSubmit={handleCalculate} className="flex flex-col gap-5">
-        {/* Animal */}
-        <div>
-          <p className="text-sm font-semibold text-[var(--text-primary)] mb-2">Mon animal</p>
-          <div className="flex gap-3">
-            {(['chien', 'chat'] as Animal[]).map((a) => (
-              <button
-                key={a}
-                type="button"
-                onClick={() => set('animal', a)}
-                className={`flex-1 py-3 rounded-[var(--radius-lg)] border-2 font-medium text-sm transition-all ${
-                  form.animal === a
-                    ? 'border-[var(--accent-1)] bg-[var(--accent-1)] text-white'
-                    : 'border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--accent-1)]'
-                }`}
-              >
-                {a === 'chien' ? '🐶 Chien' : '🐱 Chat'}
-              </button>
-            ))}
-          </div>
+    <div className="flex flex-col gap-4">
+      <ToolCard
+        label="Calculer la ration"
+        onSubmit={(e) => {
+          e.preventDefault()
+          const values = compute(form)
+          if (!values) return
+          setResult(values)
+          track('Tool Result', { tool: 'ration' })
+        }}
+      >
+        <div className="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] items-end gap-3">
+          <Segmented name="animal" legend="Animal" options={ANIMALS} value={form.animal} onChange={(v) => set('animal', v)} />
+          <NumberField id={weightId} label="Poids (kg)" value={form.weightKg} onChange={(v) => set('weightKg', v)} placeholder="12" min={0.5} max={100} />
         </div>
-
-        {/* Poids */}
-        <div>
-          <label htmlFor="weight" className="block text-sm font-semibold text-[var(--text-primary)] mb-2">
-            Poids actuel (kg)
-          </label>
-          <input
-            id="weight"
-            type="number"
-            min="0.5"
-            max="100"
-            step="0.1"
-            required
-            placeholder="Ex : 12.5"
-            value={form.weightKg}
-            onChange={(e) => set('weightKg', e.target.value)}
-            className="w-full px-4 py-3 rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-surface-2)] focus:outline-none focus:border-[var(--accent-1)]"
-          />
+        <Segmented name="age" legend="Âge" hint="avant 1 an, après 7 ans" options={ages} value={form.ageGroup} onChange={(v) => set('ageGroup', v)} />
+        <Segmented name="activite" legend="Activité" options={ACTIVITIES} value={form.activityLevel} onChange={(v) => set('activityLevel', v)} />
+        <div className="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-3">
+          <Segmented<YesNo> name="sterilise" legend="Stérilisé" options={STERILIZED} value={form.sterilized ? 'oui' : 'non'} onChange={(v) => set('sterilized', v === 'oui')} />
+          <Segmented name="aliment" legend="Il mange" options={FOODS} value={form.food} onChange={(v) => set('food', v)} />
         </div>
-
-        {/* Âge */}
-        <div>
-          <p className="text-sm font-semibold text-[var(--text-primary)] mb-2">Tranche d&apos;âge</p>
-          <div className="grid grid-cols-3 gap-2">
-            {([
-              ['chiot', form.animal === 'chien' ? 'Chiot (< 1 an)' : 'Chaton (< 1 an)'],
-              ['adulte', 'Adulte (1–7 ans)'],
-              ['senior', 'Senior (+ 7 ans)'],
-            ] as [AgeGroup, string][]).map(([val, label]) => (
-              <button
-                key={val}
-                type="button"
-                onClick={() => set('ageGroup', val)}
-                className={`py-2 px-3 rounded-[var(--radius-md)] border-2 text-xs font-medium transition-all ${
-                  form.ageGroup === val
-                    ? 'border-[var(--accent-1)] bg-[var(--accent-1)] text-white'
-                    : 'border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--accent-1)]'
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Activité */}
-        <div>
-          <p className="text-sm font-semibold text-[var(--text-primary)] mb-2">Niveau d&apos;activité</p>
-          <div className="grid grid-cols-2 gap-2">
-            {([
-              ['sedentaire', '🛋️ Sédentaire', 'Peu de sorties, vie en appartement'],
-              ['normal', '🚶 Normal', '2 sorties/jour, 30-60 min'],
-              ['actif', '🏃 Actif', 'Sport régulier, randonnées'],
-              ['tres-actif', '⚡ Très actif', 'Sport intensif, chien de travail'],
-            ] as [ActivityLevel, string, string][]).map(([val, label, desc]) => (
-              <button
-                key={val}
-                type="button"
-                onClick={() => set('activityLevel', val)}
-                className={`py-3 px-4 rounded-[var(--radius-md)] border-2 text-left transition-all ${
-                  form.activityLevel === val
-                    ? 'border-[var(--accent-1)] bg-[var(--accent-1)] text-white'
-                    : 'border-[var(--border)] hover:border-[var(--accent-1)]'
-                }`}
-              >
-                <span className="block text-sm font-semibold">{label}</span>
-                <span className={`text-xs ${form.activityLevel === val ? 'text-white/80' : 'text-[var(--text-muted)]'}`}>
-                  {desc}
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Options */}
-        <div className="flex flex-col gap-2">
-          <label className="flex items-center gap-3 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={form.sterilized}
-              onChange={(e) => set('sterilized', e.target.checked)}
-              className="w-4 h-4 accent-[var(--accent-1)]"
-            />
-            <span className="text-sm text-[var(--text-secondary)]">
-              Stérilisé(e) <span className="text-[var(--text-muted)]">(−15% de calories)</span>
-            </span>
-          </label>
-          {form.animal === 'chien' && (
-            <label className="flex items-center gap-3 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={form.isHighEnergy}
-                onChange={(e) => set('isHighEnergy', e.target.checked)}
-                className="w-4 h-4 accent-[var(--accent-1)]"
-              />
-              <span className="text-sm text-[var(--text-secondary)]">
-                Race à haute énergie{' '}
-                <span className="text-[var(--text-muted)]">(Border Collie, Husky, Terriers...)</span>
-              </span>
-            </label>
-          )}
-        </div>
-
-        <button type="submit" className="btn-primary text-base py-3">
-          Calculer ma ration →
-        </button>
-      </form>
-
-      {result && <RationResult result={result} food={food} />}
+        {form.animal === 'chien' ? (
+          <CheckField checked={form.isHighEnergy} onChange={(v) => set('isHighEnergy', v)}>
+            Race très énergique <span className="text-ink-2">(Border Collie, Husky, Malinois…)</span>
+          </CheckField>
+        ) : null}
+        <SubmitButton>Calculer sa ration</SubmitButton>
+      </ToolCard>
+      <div aria-live="polite">
+        {result ? <RationResult result={result} form={{ ...form, weightKg: parseFloat(form.weightKg.replace(',', '.')) }} /> : null}
+      </div>
     </div>
   )
 }

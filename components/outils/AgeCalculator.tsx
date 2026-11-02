@@ -1,35 +1,33 @@
-// @cdc 6.0 — 'use client' isolé : calculateur âge humain chien
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useId, useState } from 'react'
+import { track } from '@/lib/analytics'
 import { calculateDogHumanAge, type DogAgeResult, type SizeCategory } from '@/lib/calculators'
-import { NextSteps, type NextStep } from './NextSteps'
+import { Segmented } from '@/components/tools/Segmented'
+import { BigResult, NumberField, SubmitButton, ToolCard } from './fields'
+import type { NextStep } from './NextSteps'
+import { ToolResult } from './ToolResult'
 
-const SIZES: { value: SizeCategory; label: string; desc: string }[] = [
-  { value: 'petit',      label: 'Petit',      desc: '< 10 kg · Yorkshire, Chihuahua, Carlin' },
-  { value: 'moyen',      label: 'Moyen',      desc: '10–25 kg · Beagle, Cocker, Bulldog' },
-  { value: 'grand',      label: 'Grand',      desc: '25–45 kg · Labrador, Golden, Husky' },
-  { value: 'tres-grand', label: 'Très grand', desc: '> 45 kg · Berger, Dogue, Saint-Bernard' },
-]
+// @cdc outils — âge humain selon le gabarit (tableau AVMA, lib/calculators.ts). Pas de lien
+// partenaire : l'âge seul ne justifie aucune marque.
 
-const PILL_COLORS: Record<string, string> = {
-  chiot:       'bg-[var(--pill-rose)] text-[var(--text-primary)]',
-  jeune:       'bg-[var(--pill-blue)] text-[var(--text-primary)]',
-  adulte:      'bg-[var(--pill-green,#d1f5e0)] text-[var(--text-primary)]',
-  senior:      'bg-[var(--bg-surface-2)] text-[var(--text-secondary)]',
-  'tres-senior': 'bg-[var(--bg-surface-2)] text-[var(--text-muted)]',
+const SIZES = [['petit', 'Petit'], ['moyen', 'Moyen'], ['grand', 'Grand'], ['tres-grand', 'Très grand']] as const
+const SIZE_HINT: Record<SizeCategory, string> = {
+  petit: 'moins de 10 kg : Yorkshire, Chihuahua, Carlin',
+  moyen: '10 à 25 kg : Beagle, Cocker, Bulldog',
+  grand: '25 à 45 kg : Labrador, Golden, Husky',
+  'tres-grand': 'plus de 45 kg : Dogue allemand, Saint-Bernard',
 }
 
 /** Suite logique selon l'étape de vie : ration pré-réglée et guide de l'âge quand il existe. */
 function nextSteps(stage: DogAgeResult['stagePill'], size: SizeCategory): NextStep[] {
   if (stage === 'chiot') {
-    // Les guides chiot par tranche d'âge (/chien/alimentation/…) ne répondent pas en V2 : pas de lien.
     const big = size === 'grand' || size === 'tres-grand'
     return [
       { href: '/outils/ration?age=chiot', label: 'Calculer sa ration de chiot' },
       big
         ? { href: '/chien/alimentation-quotidienne/croquettes-chiot-grande-race', label: 'Croquettes pour chiot de grande race' }
-        : { href: '/chien/urgences', label: 'Aliments à éviter' },
+        : { href: '/fiche-aliments-dangereux', label: 'Les aliments à ne jamais lui donner' },
     ]
   }
   if (stage === 'senior' || stage === 'tres-senior') {
@@ -40,53 +38,48 @@ function nextSteps(stage: DogAgeResult['stagePill'], size: SizeCategory): NextSt
   }
   return [
     { href: '/outils/ration?age=adulte', label: 'Calculer sa ration' },
-    { href: '/outils/poids', label: 'Vérifier son état corporel' },
+    { href: '/outils/poids', label: 'Vérifier son poids de forme' },
   ]
 }
 
 export function AgeCalculator() {
+  const yearsId = useId()
+  const monthsId = useId()
   const [years, setYears] = useState('')
   const [months, setMonths] = useState('0')
   const [size, setSize] = useState<SizeCategory>('moyen')
+  const [result, setResult] = useState<{ age: DogAgeResult; label: string } | null>(null)
 
-  const result = useMemo(() => {
-    const y = parseFloat(years)
-    if (!years || isNaN(y) || y < 0) return null
-    const totalYears = y + parseInt(months, 10) / 12
-    return calculateDogHumanAge(totalYears, size)
-  }, [years, months, size])
+  function reset<T>(setter: (v: T) => void) {
+    return (v: T) => {
+      setter(v)
+      setResult(null)
+    }
+  }
 
+  function onSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    const y = parseInt(years, 10)
+    const m = parseInt(months, 10) || 0
+    if (!Number.isFinite(y) || y < 0 || y > 25 || y + m === 0) return
+    const label = m > 0 ? `${y} an${y > 1 ? 's' : ''} et ${m} mois` : `${y} an${y > 1 ? 's' : ''}`
+    setResult({ age: calculateDogHumanAge(y + m / 12, size), label })
+    track('Tool Result', { tool: 'age' })
+  }
+
+  const age = result?.age
   return (
-    <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-6 md:p-8">
-      <div className="flex flex-col gap-5">
-
-        {/* Âge */}
+    <div className="flex flex-col gap-4">
+      <ToolCard label="Convertir son âge" onSubmit={onSubmit}>
         <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label htmlFor="dog-years" className="block text-sm font-semibold text-[var(--text-primary)] mb-2">
-              Années
-            </label>
-            <input
-              id="dog-years"
-              type="number"
-              min="0"
-              max="25"
-              step="1"
-              placeholder="Ex : 3"
-              value={years}
-              onChange={(e) => setYears(e.target.value)}
-              className="w-full px-4 py-3 rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-surface-2)] focus:outline-none focus:border-[var(--accent-1)]"
-            />
-          </div>
-          <div>
-            <label htmlFor="dog-months" className="block text-sm font-semibold text-[var(--text-primary)] mb-2">
-              Mois supplémentaires
-            </label>
+          <NumberField id={yearsId} label="Années" value={years} onChange={reset(setYears)} placeholder="3" min={0} max={25} step={1} />
+          <div className="flex min-w-0 flex-col gap-1.5">
+            <label htmlFor={monthsId} className="text-sm font-semibold text-ink">Et des mois</label>
             <select
-              id="dog-months"
+              id={monthsId}
               value={months}
-              onChange={(e) => setMonths(e.target.value)}
-              className="w-full px-4 py-3 rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-surface-2)] focus:outline-none focus:border-[var(--accent-1)]"
+              onChange={(e) => reset(setMonths)(e.target.value)}
+              className="min-h-12 w-full min-w-0 rounded-control border-2 border-ink bg-paper px-3 text-lg text-ink outline-none focus-visible:ring-4 focus-visible:ring-amber"
             >
               {Array.from({ length: 12 }, (_, i) => (
                 <option key={i} value={i}>{i} mois</option>
@@ -94,50 +87,21 @@ export function AgeCalculator() {
             </select>
           </div>
         </div>
-
-        {/* Gabarit */}
-        <div>
-          <p className="text-sm font-semibold text-[var(--text-primary)] mb-2">Gabarit</p>
-          <div className="grid grid-cols-2 gap-2">
-            {SIZES.map((s) => (
-              <button
-                key={s.value}
-                type="button"
-                onClick={() => setSize(s.value)}
-                className={`py-3 px-4 rounded-[var(--radius-md)] border-2 text-left transition-all ${
-                  size === s.value
-                    ? 'border-[var(--accent-1)] bg-[var(--accent-1)] text-white'
-                    : 'border-[var(--border)] hover:border-[var(--accent-1)]'
-                }`}
-              >
-                <span className="block text-sm font-semibold">{s.label}</span>
-                <span className={`text-xs leading-tight ${size === s.value ? 'text-white/80' : 'text-[var(--text-muted)]'}`}>
-                  {s.desc}
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
+        <Segmented name="gabarit" legend="Gabarit" options={SIZES} value={size} onChange={reset(setSize)} />
+        <p className="-mt-2 m-0 text-sm text-ink-2">{SIZE_HINT[size]}</p>
+        <SubmitButton>Convertir son âge</SubmitButton>
+      </ToolCard>
+      <div aria-live="polite">
+        {result && age ? (
+          <ToolResult tool="age" summary={`${result.label}, gabarit ${size} : ${age.humanAge} ans humains (${age.lifeStage})`} steps={nextSteps(age.stagePill, size)}>
+            <BigResult value={`${age.humanAge} ans`} unit="en âge humain">
+              <p>
+                <strong className="font-semibold text-ink">{age.lifeStage}.</strong> {age.context}
+              </p>
+            </BigResult>
+          </ToolResult>
+        ) : null}
       </div>
-
-      {/* Résultat */}
-      {result && (
-        <div className="mt-6 pt-6 border-t border-[var(--border)]">
-          <div className="flex flex-col items-center text-center gap-3">
-            <p className="text-sm text-[var(--text-muted)]">Ton chien a l&apos;équivalent de</p>
-            <p className="text-7xl font-black text-[var(--accent-1)]" style={{ fontFamily: "'Fraunces', serif" }}>
-              {result.humanAge} <span className="text-3xl">ans</span>
-            </p>
-            <span className={`text-sm font-semibold px-3 py-1 rounded-full ${PILL_COLORS[result.stagePill]}`}>
-              {result.lifeStage}
-            </span>
-            <p className="text-sm text-[var(--text-secondary)] leading-relaxed max-w-[400px]">
-              {result.context}
-            </p>
-          </div>
-          <NextSteps steps={nextSteps(result.stagePill, size)} />
-        </div>
-      )}
     </div>
   )
 }

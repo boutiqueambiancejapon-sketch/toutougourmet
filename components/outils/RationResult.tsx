@@ -1,46 +1,62 @@
-import { NextSteps } from './NextSteps'
+import type { ActivityLevel, AgeGroup, Animal, RationValues } from '@/lib/calculators'
+import { BigResult } from './fields'
+import type { NextStep } from './NextSteps'
+import { PARTNERS, type Partner } from './partners'
 import type { RationFood } from './ration-params'
+import { ToolResult } from './ToolResult'
 
-// Résultat de /outils/ration : kcal, grammes de croquettes et de repas frais (l'aliment choisi
-// dans l'URL est encadré), puis la suite logique.
-export interface RationValues {
-  kcal: number
-  gKibble: number
-  gFresh: number
+// Résultat de /outils/ration : les grammes pour l'aliment choisi, les kcal, l'équivalent dans
+// l'autre aliment et la répartition en repas. Lien partenaire seulement pour un chien nourri
+// au repas frais (Dog Chef livre des repas frais dosés selon le profil du chien).
+
+interface RationForm {
+  animal: Animal
+  weightKg: number
+  ageGroup: AgeGroup
+  activityLevel: ActivityLevel
+  sterilized: boolean
+  food: RationFood
 }
 
-const MONO = { fontFamily: "'JetBrains Mono', monospace" }
+const AGE_LABEL: Record<AgeGroup, string> = { chiot: 'jeune', adulte: 'adulte', senior: 'senior' }
 
-function Cell({ value, unit, tone, active }: { value: string; unit: string; tone: string; active: boolean }) {
-  return (
-    <div className={`bg-[var(--bg-surface-2)] rounded-[var(--radius-lg)] p-4 text-center border-2 ${active ? 'border-ink' : 'border-transparent'}`}>
-      <p className={`text-2xl font-black ${tone}`} style={MONO}>{value}</p>
-      <p className="text-xs text-[var(--text-muted)] mt-1">{unit}</p>
-    </div>
-  )
+function steps(form: RationForm): NextStep[] {
+  if (form.animal === 'chat') return [{ href: '/chien/marque', label: 'Comparer les marques', sub: 'Compositions et prix' }]
+  const brands: NextStep =
+    form.ageGroup === 'chiot' && form.weightKg >= 20
+      ? { href: '/chien/alimentation-quotidienne/croquettes-chiot-grande-race', label: 'Quelles croquettes pour un chiot de grande race ?' }
+      : { href: '/chien/marque', label: 'Quelles marques pour lui ?', sub: 'Compositions et prix comparés' }
+  return [
+    { href: '/fiche-aliments-dangereux', label: 'Les aliments à ne jamais lui donner', sub: 'La liste complète, en fiche à imprimer' },
+    brands,
+  ]
 }
 
-export function RationResult({ result, food }: { result: RationValues; food?: RationFood }) {
+function partner(form: RationForm): Partner | null {
+  if (form.animal !== 'chien' || form.food !== 'frais') return null
+  return {
+    ...PARTNERS.dogChef,
+    why: `Tu le nourris au repas frais : Dog Chef livre des repas cuisinés et dosés selon le profil de ton chien, pour ne plus avoir à peser.`,
+    label: 'Essayer Dog Chef',
+  }
+}
+
+export function RationResult({ result, form }: { result: RationValues; form: RationForm }) {
+  const fresh = form.food === 'frais'
+  const grams = fresh ? result.gFresh : result.gKibble
+  const other = fresh ? `${result.gKibble} g de croquettes` : `${result.gFresh} g de repas frais`
+  const meals = form.ageGroup === 'chiot' ? 3 : 2
+  const what = fresh ? 'de repas frais par jour' : 'de croquettes par jour'
+  const summary = `${grams} g ${what} (${result.kcal} kcal) pour un ${form.animal} ${AGE_LABEL[form.ageGroup]} de ${form.weightKg} kg`
+
   return (
-    <div className="mt-6 pt-6 border-t border-[var(--border)]">
-      <h3 className="font-bold text-[var(--text-primary)] mb-4" style={{ fontFamily: "'Fraunces', serif" }}>
-        Besoins journaliers estimés
-      </h3>
-      <div className="grid grid-cols-3 gap-3 mb-4">
-        <Cell value={String(result.kcal)} unit="kcal / jour" tone="text-[var(--accent-1)]" active={false} />
-        <Cell value={`${result.gKibble}g`} unit="croquettes / jour" tone="text-[var(--accent-2)]" active={food === 'croquettes'} />
-        <Cell value={`${result.gFresh}g`} unit="repas frais / jour" tone="text-[var(--accent-3)]" active={food === 'frais'} />
-      </div>
-      <p className="text-xs text-[var(--text-muted)] italic">
-        Estimation basée sur les formules vétérinaires standard (NRC 2006). Ajuste en fonction
-        du poids de ton animal sur 4 semaines. En cas de doute, consulte un vétérinaire.
-      </p>
-      <NextSteps
-        steps={[
-          { href: '/chien/urgences', label: 'Aliments à éviter', sub: 'Le niveau de risque de chaque aliment et quoi faire' },
-          { href: '/chien/marque', label: 'Comparer les marques', sub: 'Compositions et prix comparés' },
-        ]}
-      />
-    </div>
+    <ToolResult tool="ration" summary={summary} steps={steps(form)} partner={partner(form)}>
+      <BigResult value={`${grams} g`} unit={what}>
+        <p>
+          {`Soit ${result.kcal} kcal. En ${meals} repas : environ ${Math.round(grams / meals)} g chacun. Pour la même énergie, il faudrait ${other}.`}
+        </p>
+        <p>Pèse la ration avec une balance de cuisine et compte les friandises dedans. Ajuste de 10 % si son poids bouge sur 4 semaines.</p>
+      </BigResult>
+    </ToolResult>
   )
 }
