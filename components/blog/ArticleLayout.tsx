@@ -13,6 +13,10 @@ import { RaceFacts } from '@/components/race/RaceFacts'
 import { RaceFoodSection, RACE_FOOD_ID, raceFoodHeading } from '@/components/race/RaceFoodSection'
 import { RaceHealth, RaceNear, RACE_HEALTH_ID, RACE_NEAR_ID } from '@/components/race/RaceHealthAndNear'
 import { extractToc } from '@/lib/article-toc'
+import { getPortionCalc, showsBonusFiche } from '@/lib/article-cro'
+import { VerdictHero } from '@/components/article/VerdictHero'
+import { FoodPortionCalc } from '@/components/article/FoodPortionCalc'
+import { BonusFiche } from '@/components/article/BonusFiche'
 import type { Article } from '@/lib/mdx'
 
 // @cdc 04-pages — gabarit d'article V2 (prototype docs/v2/prototype) : en-tête, puis
@@ -62,6 +66,8 @@ export function ArticleLayout({
       : []),
     ...extractToc(article.rawContent).filter((item) => !/^tl;?dr$/i.test(item.text)),
   ]
+  const portion = getPortionCalc(article)
+  const foods = breed || showsBonusFiche(catSlug) ? getFoodVerdicts() : []
 
   return (
     <article className="bg-cream pb-20">
@@ -76,6 +82,7 @@ export function ArticleLayout({
         updatedDisplay={dateDisplay}
         readTime={readTime}
         extra={breed ? <RaceFacts breed={breed} /> : undefined}
+        lead={frontmatter.verdict ? <VerdictHero verdict={frontmatter.verdict} note={frontmatter.verdictNote} /> : undefined}
       />
 
       <div className="mx-auto max-w-page px-4 pt-8 md:px-8">
@@ -86,20 +93,31 @@ export function ArticleLayout({
                 <TLDR items={tldrItems} />
               </div>
             ) : null}
+            {portion ? <FoodPortionCalc {...portion} /> : null}
             <SummarizeWithAI title={frontmatter.title} url={canonicalUrl} domain="toutou-gourmet.com" />
             {breed ? (
               <>
-                <RaceFoodSection breed={breed} foods={getFoodVerdicts()} />
+                <RaceFoodSection breed={breed} foods={foods} />
                 <RaceHealth breed={breed} />
                 <RaceNear breed={breed} />
               </>
             ) : null}
             <div className="mdx-content mt-6">{children}</div>
+            {/* Un seul formulaire e-mail par article : le bonus remplace l'inscription générique. */}
+            {showsBonusFiche(catSlug) ? (
+              <BonusFiche
+                slug={slug}
+                dangerCount={foods.filter((f) => f.verdict === 'danger').length}
+                moderationCount={foods.filter((f) => f.verdict === 'moderation').length}
+              />
+            ) : null}
             <AuthorBox author={DEFAULT_AUTHOR} />
             <RelatedArticles currentSlug={currentSlug ?? slug} categorySlug={catSlug} allArticles={allArticles} />
-            <div className="mt-12">
-              <NewsletterBlock />
-            </div>
+            {showsBonusFiche(catSlug) ? null : (
+              <div className="mt-12">
+                <NewsletterBlock />
+              </div>
+            )}
           </div>
           <ArticleAside toc={toc} />
         </div>
