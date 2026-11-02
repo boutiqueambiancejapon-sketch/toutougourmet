@@ -1,95 +1,92 @@
 import Link from 'next/link'
-import { BrandCTA } from '@/components/marques/BrandCTA'
-import { StarRating } from '@/components/ui/StarRating'
-import { brands } from '@/data/brands'
-import { brandSlugMap, brandLabels, type BrandKey } from '@/lib/quiz'
+import { KeepResult } from '@/components/outils/KeepResult'
+import { NextSteps, type NextStep } from '@/components/outils/NextSteps'
+import {
+  brandLabels,
+  brandReasons,
+  brandSlugMap,
+  computeScores,
+  getSortedBrands,
+  hasClearWinner,
+  quizWeight,
+  type BrandKey,
+  type QuizAnswers,
+} from '@/lib/quiz'
+import { QuizPartner } from './QuizPartner'
 
-interface QuizResultProps {
-  sortedBrands: BrandKey[]
+// @cdc outils — résultat du test, dans l'ordre des outils V2 : la marque en grand et pourquoi,
+// au plus un lien partenaire (seulement si elle devance nettement la suivante), « Garder ce
+// résultat », puis la suite logique (ration pré-remplie, avis complet, aliments dangereux).
+
+function rationLink(answers: QuizAnswers): NextStep {
+  const q = new URLSearchParams()
+  const kg = quizWeight(answers)
+  if (kg) q.set('poids', String(kg))
+  if (typeof answers.age === 'string') q.set('age', answers.age)
+  if (answers.format === 'croquettes' || answers.format === 'frais') q.set('aliment', answers.format)
+  return {
+    href: `/outils/ration?${q.toString()}`,
+    label: 'Combien de grammes par jour ?',
+    sub: kg ? `Sa ration, déjà remplie pour ${String(kg).replace('.', ',')} kg` : 'Le chiffre à peser selon son poids',
+  }
 }
 
-export function QuizResult({ sortedBrands }: QuizResultProps) {
-  const [recommended, ...alternatives] = sortedBrands.slice(0, 3)
-  const recommendedBrand = brands.find((b) => b.slug === brandSlugMap[recommended])
-  const altBrands = alternatives.map((k) => brands.find((b) => b.slug === brandSlugMap[k])).filter(Boolean)
+const reviewHref = (b: BrandKey) => `/chien/marque/${brandSlugMap[b]}`
 
-  if (!recommendedBrand) return null
+export function QuizResult({ answers, onRestart }: { answers: QuizAnswers; onRestart: () => void }) {
+  const scores = computeScores(answers)
+  const sorted = getSortedBrands(scores)
+  const [top, second] = sorted
+  const reasons = brandReasons(top, answers)
+  const clear = hasClearWinner(scores, sorted) && reasons.length > 0
+
+  const steps: NextStep[] = [
+    rationLink(answers),
+    clear
+      ? { href: reviewHref(top), label: `Notre avis complet sur ${brandLabels[top]}`, sub: 'Composition, prix, points faibles' }
+      : { href: '/comparateur', label: 'Comparer les marques', sub: 'Prix, format et composition côte à côte' },
+    { href: '/fiche-aliments-dangereux', label: 'Les aliments dangereux pour lui', sub: 'La fiche à garder sur le frigo' },
+  ]
 
   return (
-    <div className="flex flex-col gap-8">
-      {/* Recommandation principale */}
-      <div className="bg-[var(--bg-surface)] border-2 border-[var(--accent-1)] rounded-[var(--radius-xl)] p-6 md:p-8">
-        <div className="text-center mb-6">
-          <p className="text-sm font-semibold text-[var(--accent-3)] uppercase tracking-wider mb-1">
-            ✅ Notre recommandation pour toi
-          </p>
-          <h2 className="text-3xl font-black" style={{ fontFamily: "'Fraunces', serif" }}>
-            {recommendedBrand.name}
+    <div className="flex flex-col gap-4">
+      <section aria-labelledby="quiz-result" className="flex flex-col gap-5 rounded-card border-2 border-ink bg-paper p-4 sm:p-6">
+        <div className="flex flex-col gap-2">
+          <h2 id="quiz-result" className="m-0 text-base font-semibold text-ink-2">
+            {clear ? 'La marque qui correspond à tes réponses' : 'Deux marques correspondent à tes réponses'}
           </h2>
-          <p className="text-[var(--text-secondary)] mt-1">{recommendedBrand.tagline}</p>
-          <div className="flex justify-center mt-2">
-            <StarRating score={recommendedBrand.scores.global} size={20} />
-          </div>
+          <p className="m-0 font-display text-4xl font-black leading-[1.05] tracking-tight text-ink md:text-5xl">
+            {clear ? brandLabels[top] : `${brandLabels[top]} ou ${brandLabels[second]}`}
+          </p>
+          {clear ? (
+            <ul role="list" className="m-0 mt-1 flex list-disc flex-col gap-1.5 pl-5 text-[15px] leading-relaxed text-ink-2 marker:text-ink">
+              {reasons.map((r) => (
+                <li key={r}>{r}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="m-0 text-[15px] leading-relaxed text-ink-2">
+              Elles sont au coude-à-coude pour ton profil. Lis nos deux avis (
+              <Link href={reviewHref(top)} className="text-orange-ink underline underline-offset-2">
+                {brandLabels[top]}
+              </Link>
+              ,{' '}
+              <Link href={reviewHref(second)} className="text-orange-ink underline underline-offset-2">
+                {brandLabels[second]}
+              </Link>
+              ) avant de choisir.
+            </p>
+          )}
         </div>
-
-        <div className="mb-6">
-          <BrandCTA
-            brandName={recommendedBrand.name}
-            affiliateUrl={recommendedBrand.affiliateUrl}
-            offer={recommendedBrand.discountOffer}
-            code={recommendedBrand.affiliateCode}
-            variant="primary"
-          />
-        </div>
-
-        <Link
-          href={`/marques/${recommendedBrand.slug}`}
-          className="block text-center text-sm text-[var(--accent-1)] hover:underline"
-        >
-          Voir notre avis complet sur {recommendedBrand.name} →
-        </Link>
-      </div>
-
-      {/* Alternatives */}
-      {altBrands.length > 0 && (
-        <div>
-          <h3 className="text-lg font-bold mb-3 text-[var(--text-secondary)]" style={{ fontFamily: "'Fraunces', serif" }}>
-            Et aussi...
-          </h3>
-          <div className="grid sm:grid-cols-2 gap-4">
-            {altBrands.map((brand) => brand && (
-              <div key={brand.slug} className="card p-4 flex flex-col gap-2">
-                <p className="font-bold text-[var(--text-primary)]" style={{ fontFamily: "'Fraunces', serif" }}>
-                  {brand.name}
-                </p>
-                <StarRating score={brand.scores.global} size={14} />
-                <p className="text-sm text-[var(--text-secondary)]">{brand.discountOffer}</p>
-                <div className="flex gap-2 mt-1">
-                  <Link
-                    href={brand.affiliateUrl}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    className="btn-outline text-sm py-1.5 flex-1 text-center"
-                  >
-                    Essayer →
-                  </Link>
-                  <Link
-                    href={`/marques/${brand.slug}`}
-                    className="text-sm font-medium text-[var(--accent-1)] self-center"
-                  >
-                    Avis →
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <div className="text-center">
-        <Link href="/comparateur" className="btn-ghost text-sm">
-          Voir le comparateur complet →
-        </Link>
+        {clear ? <QuizPartner brand={top} /> : null}
+        <KeepResult tool="quiz" summary={clear ? brandLabels[top] : `${brandLabels[top]} ou ${brandLabels[second]}`} />
+        <NextSteps steps={steps} />
+      </section>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <button type="button" onClick={onRestart} className="min-h-11 text-[15px] font-semibold text-ink underline underline-offset-2">
+          Refaire le test
+        </button>
+        <p className="m-0 text-sm text-ink-2">Pour un chien malade, demande d&apos;abord l&apos;avis de ton vétérinaire.</p>
       </div>
     </div>
   )

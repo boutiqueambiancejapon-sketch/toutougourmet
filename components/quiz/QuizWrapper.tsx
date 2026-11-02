@@ -1,125 +1,147 @@
 'use client'
 
-import { useState } from 'react'
-import { quizSteps } from '@/data/quiz'
-import { computeScores, getSortedBrands, type QuizAnswers } from '@/lib/quiz'
+import { useEffect, useRef, useState } from 'react'
+import { track } from '@/lib/analytics'
+import { QUIZ_NONE, quizSteps } from '@/data/quiz'
+import { computeScores, getSortedBrands, hasClearWinner, type QuizAnswers } from '@/lib/quiz'
+import { NumberField } from '@/components/outils/fields'
 import { QuizStep } from './QuizStep'
 import { QuizResult } from './QuizResult'
-import { cn } from '@/lib/utils'
+
+// @cdc outils — test « Quelle marque pour ton chien ? » (audit design-cro §3 Outils) : une
+// question à la fois, bouton « Continuer » (pas de passage automatique, qui gênerait la
+// navigation au clavier dans les boutons radio), focus déplacé sur chaque nouvelle question.
+// « Quiz Complete » part une seule fois par test terminé, au clic qui affiche le résultat.
 
 export function QuizWrapper() {
-  const [currentStep, setCurrentStep] = useState(0)
+  const [index, setIndex] = useState(0)
   const [answers, setAnswers] = useState<QuizAnswers>({})
-  const [showResult, setShowResult] = useState(false)
+  const [done, setDone] = useState(false)
+  const heading = useRef<HTMLHeadingElement>(null)
+  const moved = useRef(false)
 
-  const step = quizSteps[currentStep]
-  const totalSteps = quizSteps.length
-  const progress = ((currentStep) / totalSteps) * 100
+  useEffect(() => {
+    if (!moved.current) return
+    heading.current?.focus()
+  }, [index])
 
-  function handleSelect(value: string) {
-    if (step.type === 'multi') {
-      const current = (answers[step.id] as string[]) || []
-      const isSelected = current.includes(value)
-      if (value === 'aucun') {
-        setAnswers({ ...answers, [step.id]: ['aucun'] })
-        return
-      }
-      const next = isSelected
-        ? current.filter((v) => v !== value)
-        : [...current.filter((v) => v !== 'aucun'), value]
-      setAnswers({ ...answers, [step.id]: next })
-    } else {
-      setAnswers({ ...answers, [step.id]: value })
-      // Auto-advance for single choice
-      setTimeout(() => {
-        if (currentStep < totalSteps - 1) {
-          setCurrentStep(currentStep + 1)
-        } else {
-          setShowResult(true)
-        }
-      }, 300)
+  const total = quizSteps.length
+  const step = quizSteps[index]
+  const value = answers[step.id]
+
+  function go(to: number) {
+    moved.current = true
+    setIndex(to)
+  }
+
+  function next(nextAnswers: QuizAnswers = answers) {
+    if (index < total - 1) {
+      go(index + 1)
+      return
     }
-  }
-
-  function handleNext() {
-    if (currentStep < totalSteps - 1) {
-      setCurrentStep(currentStep + 1)
-    } else {
-      setShowResult(true)
-    }
-  }
-
-  function handleBack() {
-    if (currentStep > 0) setCurrentStep(currentStep - 1)
-  }
-
-  function handleRestart() {
-    setCurrentStep(0)
-    setAnswers({})
-    setShowResult(false)
-  }
-
-  const currentAnswer = answers[step?.id]
-  const canContinue = step?.type === 'multi'
-    ? Array.isArray(currentAnswer) && currentAnswer.length > 0
-    : !!currentAnswer
-
-  if (showResult) {
-    const scores = computeScores(answers)
+    const scores = computeScores(nextAnswers)
     const sorted = getSortedBrands(scores)
+    track('Quiz Complete', { brand: sorted[0], clear: hasClearWinner(scores, sorted) })
+    setDone(true)
+  }
+
+  function toggle(v: string) {
+    if (step.type !== 'multi') {
+      setAnswers({ ...answers, [step.id]: v })
+      return
+    }
+    const list = Array.isArray(value) ? value : []
+    const nextList =
+      v === QUIZ_NONE ? [QUIZ_NONE] : list.includes(v) ? list.filter((x) => x !== v) : [...list.filter((x) => x !== QUIZ_NONE), v]
+    setAnswers({ ...answers, [step.id]: nextList })
+  }
+
+  function skipWeight() {
+    const rest = { ...answers }
+    delete rest.poids
+    setAnswers(rest)
+    next(rest)
+  }
+
+  function restart() {
+    setAnswers({})
+    setDone(false)
+    moved.current = false
+    setIndex(0)
+  }
+
+  if (done) {
     return (
-      <div>
-        <QuizResult sortedBrands={sorted} />
-        <div className="text-center mt-6">
-          <button onClick={handleRestart} className="btn-ghost text-sm">
-            ↺ Recommencer le quiz
-          </button>
-        </div>
+      <div aria-live="polite">
+        <QuizResult answers={answers} onRestart={restart} />
       </div>
     )
   }
 
+  const answered = step.type === 'weight' ? typeof value === 'string' && value !== '' : Array.isArray(value) ? value.length > 0 : !!value
+  const last = index === total - 1
+
   return (
-    <div className="max-w-xl mx-auto">
-      {/* Progress */}
-      <div className="mb-6">
-        <div className="flex justify-between text-xs text-[var(--text-muted)] mb-2">
-          <span>Question {currentStep + 1} sur {totalSteps}</span>
-          <span>{Math.round(progress)}%</span>
-        </div>
-        <div className="h-2 bg-[var(--bg-surface-2)] rounded-full overflow-hidden">
-          <div
-            className="h-full bg-[var(--accent-1)] rounded-full transition-all duration-500"
-            style={{ width: `${progress}%` }}
+    <form
+      aria-label="Test de la marque"
+      onSubmit={(e) => {
+        e.preventDefault()
+        if (answered) next()
+      }}
+      className="flex flex-col gap-4 rounded-card border border-line bg-paper p-4 sm:p-6"
+    >
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="quiz-progress" className="text-sm text-ink-2">{`Question ${index + 1} sur ${total}`}</label>
+        <progress
+          id="quiz-progress"
+          max={total}
+          value={index}
+          className="h-1.5 w-full appearance-none overflow-hidden rounded-pill bg-cream-2 [&::-moz-progress-bar]:bg-ink [&::-webkit-progress-bar]:bg-cream-2 [&::-webkit-progress-value]:bg-ink"
+        />
+      </div>
+      <div className="flex flex-col gap-1">
+        <h2 ref={heading} tabIndex={-1} className="m-0 font-display text-xl font-black leading-snug text-ink outline-none md:text-2xl">
+          {step.question}
+        </h2>
+        {step.help ? <p className="m-0 text-sm leading-relaxed text-ink-2">{step.help}</p> : null}
+      </div>
+
+      {step.type === 'weight' ? (
+        <div className="flex flex-col gap-2">
+          <NumberField
+            id="quiz-poids"
+            label="Son poids"
+            hint="en kg"
+            placeholder="12"
+            min={0.5}
+            max={100}
+            value={typeof value === 'string' ? value : ''}
+            onChange={(v) => setAnswers({ ...answers, poids: v })}
           />
+          <button type="button" onClick={skipWeight} className="min-h-11 self-start text-[15px] font-semibold text-ink-2 underline underline-offset-2">
+            Je ne connais pas son poids
+          </button>
         </div>
-      </div>
+      ) : (
+        <QuizStep step={step} value={value} onToggle={toggle} />
+      )}
 
-      {/* Step */}
-      <QuizStep
-        step={step}
-        currentAnswer={currentAnswer}
-        onSelect={handleSelect}
-      />
-
-      {/* Controls */}
-      <div className="flex items-center justify-between mt-6 gap-3">
-        {currentStep > 0 ? (
-          <button onClick={handleBack} className="btn-ghost text-sm">
-            ← Retour
+      <div className="flex min-h-12 items-center justify-between gap-3">
+        {index > 0 ? (
+          <button type="button" onClick={() => go(index - 1)} className="min-h-11 px-1 text-[15px] font-semibold text-ink-2 hover:underline">
+            Question précédente
           </button>
-        ) : <div />}
-
-        {step.type === 'multi' && (
-          <button
-            onClick={handleNext}
-            disabled={!canContinue}
-            className={cn('btn-primary', !canContinue && 'opacity-40 cursor-not-allowed')}
-          >
-            {currentStep === totalSteps - 1 ? 'Voir mes recommandations →' : 'Continuer →'}
-          </button>
+        ) : (
+          <span />
         )}
+        <button
+          type="submit"
+          disabled={!answered}
+          className="min-h-12 rounded-control bg-ink px-5 text-base font-semibold text-cream hover:underline disabled:opacity-40"
+        >
+          {last ? 'Voir ma marque' : 'Continuer'}
+        </button>
       </div>
-    </div>
+    </form>
   )
 }
