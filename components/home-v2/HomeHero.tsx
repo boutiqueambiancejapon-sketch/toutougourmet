@@ -9,10 +9,10 @@ export function HomeHero() {
     <section className="v2 grid grid-cols-1 gap-6 [grid-template-areas:'text'_'tool'_'photo'] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-x-12 lg:gap-y-8 lg:[grid-template-areas:'text_tool'_'photo_tool']">
       <div className="flex flex-col gap-4 [grid-area:text]">
         <h1 className="m-0 font-display text-[clamp(2rem,5vw,3.6rem)] font-black leading-[1.02] tracking-tight text-ink">
-          Bien nourrir ton <span className="tg-marker rounded-box bg-rose px-2">chien</span>, chiffres à l&apos;appui.
+          Bien nourrir ton <span className="tg-marker rounded-box bg-rose px-2">chien</span>, sans deviner.
         </h1>
         <p className="m-0 max-w-[560px] text-lg leading-relaxed text-ink-2">
-          Combien de grammes lui donner, et quels aliments éviter. <strong className="text-ink">Chaque chiffre renvoie à sa source.</strong>
+          Il fixe ton assiette avec ses yeux de chien battu ? Avant de céder, vérifie ici combien de grammes il lui faut et ce qu&apos;il a le droit de manger. <strong className="text-ink">Chaque chiffre renvoie à son étude.</strong>
         </p>
       </div>
       <div className="[grid-area:tool] lg:self-start">

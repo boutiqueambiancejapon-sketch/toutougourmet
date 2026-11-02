@@ -37,7 +37,7 @@ export default function HomePage() {
         <StartTiles foods={foods} />
         <section aria-labelledby="derniers-guides" className="flex flex-col gap-4">
           <div className="flex items-baseline justify-between gap-4">
-            <h2 id="derniers-guides" className="m-0 font-display text-2xl font-black text-ink">Les derniers guides</h2>
+            <h2 id="derniers-guides" className="m-0 font-display text-2xl font-black text-ink">Tout juste publiés</h2>
             <Link href="/chien" className="text-sm font-semibold text-orange-ink no-underline hover:underline">Tous les guides →</Link>
           </div>
           <ul role="list" className="m-0 grid list-none grid-cols-1 gap-6 p-0 md:grid-cols-3">

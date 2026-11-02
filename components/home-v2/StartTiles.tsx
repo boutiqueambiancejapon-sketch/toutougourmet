@@ -8,8 +8,8 @@ import type { FoodVerdict } from '@/lib/food-verdicts'
 // classés, puis deux entrées secondaires en lignes. Pas d'aplat orange ici : l'action principale
 // de l'écran reste le bouton du calculateur (audit design-CRO, §3 Accueil).
 const SECONDARY: { href: string; icon: ComponentType<IconProps>; title: string; sub: string }[] = [
-  { href: '/chien/urgences', icon: IconAlert, title: 'Il a mangé un truc louche ?', sub: 'Le niveau de risque et quoi faire' },
-  { href: '/chien/marque', icon: IconSearch, title: 'Quelle marque choisir ?', sub: 'Compositions et prix comparés' },
+  { href: '/chien/urgences', icon: IconAlert, title: 'Il a avalé quelque chose de bizarre ?', sub: 'Les gestes à faire tout de suite, et quand appeler le véto' },
+  { href: '/chien/marque', icon: IconSearch, title: 'Quelle marque choisir ?', sub: 'On a lu les étiquettes et comparé les prix au kilo' },
 ]
 
 export function StartTiles({ foods }: { foods: FoodVerdict[] }) {
@@ -20,7 +20,7 @@ export function StartTiles({ foods }: { foods: FoodVerdict[] }) {
         <h2 id="peut-manger" className="m-0 font-display text-2xl font-black text-ink">
           Mon chien peut-il manger… ?
         </h2>
-        <p className="m-0 text-base text-ink-2">{`Le verdict sur ${foods.length} aliments, chacun avec son guide.`}</p>
+        <p className="m-0 text-base text-ink-2">{`Tape l’aliment qu’il vient de chiper. ${foods.length} aliments ont déjà leur verdict.`}</p>
         <FoodSearch foods={entries} />
       </div>
       <ul role="list" className="m-0 flex list-none flex-col self-start border-t border-line p-0 md:mt-10">

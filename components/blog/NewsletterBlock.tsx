@@ -9,8 +9,8 @@ interface NewsletterBlockProps {
 }
 
 export function NewsletterBlock({
-  title = 'Les nouveaux guides par e-mail',
-  description = 'Les guides publiés et les offres des marques partenaires, dans ta boîte mail.',
+  title = 'Un e-mail quand un guide sort',
+  description = 'Les nouveaux guides, de temps en temps, et les offres des marques partenaires quand elles valent le coup.',
 }: NewsletterBlockProps) {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
@@ -19,7 +19,7 @@ export function NewsletterBlock({
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!email.includes('@')) {
-      setErrorMsg('Oups, cet email ne semble pas valide.')
+      setErrorMsg('Cette adresse e-mail n\'a pas l\'air valide.')
       return
     }
     setStatus('loading')
@@ -37,18 +37,18 @@ export function NewsletterBlock({
   }
 
   return (
-    <section className="bg-[var(--bg-surface-2)] border border-[var(--border)] rounded-[var(--radius-xl)] p-8 text-center">
-      <h2 className="text-2xl font-bold mb-2" style={{ fontFamily: "'Fraunces', serif" }}>
+    <section className="v2 flex flex-col gap-3 rounded-card bg-cream-2 p-6 md:p-8">
+      <h2 className="m-0 font-display text-2xl font-black text-ink">
         {title}
       </h2>
-      <p className="text-[var(--text-secondary)] mb-6 text-sm">{description}</p>
+      <p className="m-0 max-w-prose text-[15px] text-ink-2">{description}</p>
 
       {status === 'success' ? (
-        <p className="text-[var(--accent-3)] font-semibold">
-          C&apos;est noté. Confirme ton inscription dans l&apos;e-mail qu&apos;on vient de t&apos;envoyer.
+        <p className="m-0 font-semibold text-green-ink">
+          C&apos;est noté, tu recevras le prochain guide.
         </p>
       ) : (
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+        <form onSubmit={handleSubmit} className="flex max-w-lg flex-col gap-3 sm:flex-row">
           <div className="flex-1">
             <label htmlFor="newsletter-email" className="sr-only">
               Ton adresse email
@@ -60,22 +60,22 @@ export function NewsletterBlock({
               value={email}
               onChange={(e) => { setEmail(e.target.value); setErrorMsg('') }}
               required
-              className="w-full px-4 py-3 rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg-surface)] text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--accent-1)]"
+              className="min-h-12 w-full rounded-control border-2 border-ink bg-paper px-4 text-base text-ink outline-none placeholder:text-ink-2 focus-visible:ring-4 focus-visible:ring-amber"
             />
           </div>
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="btn-primary whitespace-nowrap"
+            className="min-h-12 whitespace-nowrap rounded-control bg-orange px-5 font-semibold text-ink hover:underline disabled:opacity-60"
           >
-            {status === 'loading' ? 'Envoi...' : "Je m'abonne"}
+            {status === 'loading' ? 'Envoi…' : "Je m'abonne"}
           </button>
         </form>
       )}
-      {errorMsg && <p className="text-sm text-[var(--error)] mt-2">{errorMsg}</p>}
-      {status === 'error' && <p className="text-sm text-[var(--error)] mt-2">Une erreur est survenue, réessaie.</p>}
-      <p className="text-xs text-[var(--text-muted)] mt-3">
-        Désinscription en un clic.
+      {errorMsg && <p className="m-0 text-sm text-rose-ink">{errorMsg}</p>}
+      {status === 'error' && <p className="m-0 text-sm text-rose-ink">L&apos;inscription n&apos;est pas passée, réessaie dans un instant.</p>}
+      <p className="m-0 text-xs text-ink-2">
+        Un lien en bas de chaque e-mail pour te désinscrire.
       </p>
     </section>
   )

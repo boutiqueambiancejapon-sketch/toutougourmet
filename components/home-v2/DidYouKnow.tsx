@@ -8,7 +8,7 @@ const HUMAN_AGE = Math.round(16 * Math.log(DOG_AGE) + 31)
 export function DidYouKnow() {
   return (
     <Link href="/outils/age" className="v2 flex flex-col gap-1 rounded-card bg-orange p-6 text-ink no-underline">
-      <span className="text-[15px] font-semibold">Le savais-tu ?</span>
+      <span className="text-[15px] font-semibold">La règle du « fois 7 » est fausse</span>
       <span className="font-display text-2xl font-black leading-tight">
         {`Un chien de ${DOG_AGE} ans a ${HUMAN_AGE} ans en âge humain, pas ${DOG_AGE * 7}.`}
       </span>
