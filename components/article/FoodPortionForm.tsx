@@ -2,6 +2,7 @@
 
 import { useId, useRef, useState } from 'react'
 import { track } from '@/lib/analytics'
+import { bandFor, type SizeBand } from '@/lib/size-bands'
 
 // Besoin du jour : RER = 70 × poids^0,75 (NRC 2006, Nutrient Requirements of Dogs and Cats),
 // multiplié par 1,6 pour un adulte non stérilisé et 1,4 pour un adulte stérilisé
@@ -19,9 +20,10 @@ interface FoodPortionFormProps {
   ofFood: string
   kcal100: number
   moderation: boolean
+  bands: SizeBand[]
 }
 
-export function FoodPortionForm({ ofFood, kcal100, moderation }: FoodPortionFormProps) {
+export function FoodPortionForm({ ofFood, kcal100, moderation, bands }: FoodPortionFormProps) {
   const id = useId()
   const [weight, setWeight] = useState('')
   const [neutered, setNeutered] = useState(true)
@@ -30,6 +32,8 @@ export function FoodPortionForm({ ofFood, kcal100, moderation }: FoodPortionForm
   const kg = Number(weight.replace(',', '.'))
   const valid = weight !== '' && Number.isFinite(kg) && kg >= 1 && kg <= 90
   const grams = valid ? maxGrams(kg, neutered, kcal100, moderation) : null
+  const band = valid && bands.length > 0 ? bandFor(bands, kg) : undefined
+  const ceiling = valid ? maxGrams(kg, neutered, kcal100, false) : null
 
   function onWeight(value: string) {
     setWeight(value)
@@ -73,16 +77,25 @@ export function FoodPortionForm({ ofFood, kcal100, moderation }: FoodPortionForm
       </div>
       <output htmlFor={`${id}-kg ${id}-st`} aria-live="polite" className="flex flex-col gap-1">
         {weight !== '' && !valid ? <span className="text-sm text-ink-2">Indique un poids entre 1 et 90 kg.</span> : null}
-        {grams !== null ? (
+        {band && ceiling !== null ? (
           <>
             <span className={`rounded-box px-4 py-3 text-base font-semibold leading-snug text-ink ${moderation ? 'bg-amber-bg' : 'bg-green-bg'}`}>
-              {grams < 5 ? 'Moins de 5 g' : `Au maximum ${grams} g`} {ofFood} par jour, s&apos;il ne mange pas
-              d&apos;autre friandise.
+              {band.gMin === band.gMax ? `${band.gMin} g` : `${band.gMin} à ${band.gMax} g`} {ofFood}
+              {band.frequency ? `, ${band.frequency}` : ' par prise'}.
             </span>
-            {moderation ? (
-              <span className="text-sm text-ink-2">Plafond divisé par deux, car cet aliment se donne avec modération.</span>
-            ) : null}
-            <span className="text-sm text-ink-2">Repère de calcul : 10 % des calories du jour (WSAVA).</span>
+            <span className="text-sm text-ink-2">
+              Portion conseillée dans ce guide pour un chien de {kg} kg. Plafond de toutes ses friandises du jour :{' '}
+              {ceiling} g de cet aliment au plus (10 % des calories, WSAVA).
+            </span>
+          </>
+        ) : grams !== null ? (
+          <>
+            <span className="rounded-box bg-cream-2 px-4 py-3 text-base font-semibold leading-snug text-ink">
+              Plafond : {grams < 5 ? 'moins de 5 g' : `${grams} g`} {ofFood} par jour au grand maximum, si c&apos;est sa seule friandise.
+            </span>
+            <span className="text-sm text-ink-2">
+              C&apos;est une limite, pas une portion : 10 % de ses calories du jour (WSAVA){moderation ? ', divisés par deux pour un aliment à donner avec modération' : ''}. Pour la quantité courante, suis les portions par gabarit de ce guide.
+            </span>
           </>
         ) : null}
       </output>

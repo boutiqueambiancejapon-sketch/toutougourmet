@@ -1,5 +1,6 @@
 import type { Article } from '@/lib/mdx'
 import { foodLabel } from '@/lib/food-verdicts'
+import { extractSizeBands, type SizeBand } from '@/lib/size-bands'
 
 // @cdc 04-pages — règles d'affichage des blocs de conversion d'article (audit design-cro §3).
 
@@ -14,16 +15,18 @@ export interface PortionCalcData {
   food: string
   kcal100: number
   moderation: boolean
+  /** Portions du tableau de l'article ; vide si l'article n'en a pas */
+  bands: SizeBand[]
 }
 
 /**
  * Données du mini-calculateur, ou null : seulement sur les articles « peut-manger »
  * au verdict oui ou modération dont le frontmatter donne l'énergie pour 100 g.
  */
-export function getPortionCalc({ slug, frontmatter }: Article): PortionCalcData | null {
+export function getPortionCalc({ slug, frontmatter, rawContent }: Article): PortionCalcData | null {
   const { verdict, kcal100, ogTitle } = frontmatter
   if (!slug.includes('peut-manger') || !kcal100 || !ogTitle) return null
   if (verdict !== 'oui' && verdict !== 'moderation') return null
   const food = foodLabel(ogTitle)
-  return food ? { food, kcal100, moderation: verdict === 'moderation' } : null
+  return food ? { food, kcal100, moderation: verdict === 'moderation', bands: extractSizeBands(rawContent) } : null
 }
