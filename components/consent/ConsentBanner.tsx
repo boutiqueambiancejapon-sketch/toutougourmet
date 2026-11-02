@@ -6,6 +6,7 @@ import { CONSENT_OPEN_EVENT, applyConsent, readConsent, saveConsent, type Consen
 
 // @cdc legal — bannière de consentement (CNIL) : deux boutons de même poids, aucun cookie
 // Google Analytics tant que « Accepter » n'a pas été choisi. Rouvrable depuis le pied de page.
+// @cdc perf — lien « En savoir plus » sans prefetch : la bannière s'affiche à chaque première visite.
 const BUTTON = 'min-h-11 flex-1 rounded-control px-4 text-[15px] font-semibold sm:flex-none'
 
 export function ConsentBanner() {
@@ -39,7 +40,7 @@ export function ConsentBanner() {
       <p className="m-0 text-[15px] leading-snug">
         On aimerait mesurer les visites avec Google Analytics, qui dépose un cookie si tu acceptes.
         Refuser ne change rien au site.{' '}
-        <Link href="/politique-de-confidentialite#cookies" className="text-cream underline underline-offset-2">
+        <Link href="/politique-de-confidentialite#cookies" prefetch={false} className="text-cream underline underline-offset-2">
           En savoir plus
         </Link>
       </p>

@@ -7,6 +7,7 @@ import { BreadcrumbNav, type BreadcrumbItem } from '@/components/ui/BreadcrumbNa
 // @cdc 04-pages — en-tête d'article V2 (prototype) : fil d'Ariane, H1, chapô,
 // ligne rubrique · auteur · date de mise à jour en <time>, cover à droite.
 // Pas de pastille au-dessus du titre (audit design 2026-11-02, §2.3).
+// @cdc perf — lien auteur sans prefetch : la page auteur pèse ≈ 50 Ko de données + 35 Ko de JS.
 
 export type { BreadcrumbItem }
 
@@ -46,7 +47,7 @@ export function ArticleHeader(props: ArticleHeaderProps) {
               {pill.label}
             </Link>
             <span aria-hidden="true">·</span>
-            <Link href={author.url} className="font-semibold text-ink no-underline hover:text-orange-ink">{author.name}</Link>
+            <Link href={author.url} prefetch={false} className="font-semibold text-ink no-underline hover:text-orange-ink">{author.name}</Link>
             <span aria-hidden="true">·</span>
             <span>
               Mis à jour le <time dateTime={updatedIso}>{updatedDisplay}</time>

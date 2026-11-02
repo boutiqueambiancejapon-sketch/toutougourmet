@@ -6,6 +6,8 @@ interface AuthorBoxProps {
 }
 
 // @cdc eeat — auteur signé avec lien vers page auteur
+// @cdc perf — prefetch={false} : la page auteur embarque toute la liste d'articles (≈ 50 Ko de données
+// + 35 Ko de JS) ; pas question de la précharger à chaque lecture d'article.
 export function AuthorBox({ author }: AuthorBoxProps) {
   return (
     <aside
@@ -30,6 +32,7 @@ export function AuthorBox({ author }: AuthorBoxProps) {
         <div className="flex flex-wrap items-baseline gap-2">
           <Link
             href={author.url}
+            prefetch={false}
             className="font-bold text-[var(--text-primary)] hover:text-[var(--accent-1)] transition-colors"
             style={{ fontFamily: "'Fraunces', serif" }}
           >
@@ -58,6 +61,7 @@ export function AuthorBox({ author }: AuthorBoxProps) {
         <div className="flex items-center gap-4 mt-1">
           <Link
             href={author.url}
+            prefetch={false}
             className="text-xs font-semibold text-[var(--accent-1)] hover:underline"
           >
             Tous ses articles →
