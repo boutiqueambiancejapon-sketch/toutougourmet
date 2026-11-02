@@ -6,6 +6,7 @@ import { getNightLogs, nightLogDir } from '@/lib/server/dashboard-logs'
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
 import { ActionsSection } from '@/components/dashboard/ActionsSection'
 import { AiSection } from '@/components/dashboard/AiSection'
+import { GeoSection } from '@/components/dashboard/GeoSection'
 import { NightSection } from '@/components/dashboard/NightSection'
 import { MessagesSection } from '@/components/dashboard/MessagesSection'
 import { LiveSection } from '@/components/dashboard/LiveSection'
@@ -43,6 +44,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
         )}
         <LiveSection />
         <ActionsSection data={data.summary} period={period} />
+        <GeoSection data={data.geo} period={period} />
         <AiSection data={data.ai} period={period} unread={data.unread} articleCount={data.articleCount} />
         <MessagesSection messages={data.messages} />
         <NightSection logs={logs} configured={nightLogDir() !== null} />

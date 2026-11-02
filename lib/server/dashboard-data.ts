@@ -1,5 +1,6 @@
 import { getPool } from '@/lib/server/db'
 import { getAi, getSummary, type AiData, type SummaryData } from '@/lib/server/dashboard-queries'
+import { EMPTY_GEO, getGeo, type GeoData } from '@/lib/server/dashboard-geo'
 import { getRecentMessages, type StoredMessage } from '@/lib/server/contact'
 import { getAllArticles } from '@/lib/mdx'
 import type { Period } from '@/lib/dashboard/period'
@@ -34,6 +35,7 @@ const EMPTY_AI: AiData = {
 export interface DashboardData {
   summary: SummaryData
   ai: AiData
+  geo: GeoData
   messages: StoredMessage[]
   notice: string | null
   unread: { path: string; title: string }[]
@@ -47,6 +49,7 @@ export async function loadDashboard(period: Period): Promise<DashboardData> {
 
   let summary = EMPTY_SUMMARY
   let ai = EMPTY_AI
+  let geo = EMPTY_GEO
   let messages: StoredMessage[] = []
   let notice: string | null = null
   const pool = getPool()
@@ -60,7 +63,7 @@ export async function loadDashboard(period: Period): Promise<DashboardData> {
       return []
     })
     try {
-      ;[summary, ai] = await Promise.all([getSummary(pool, period), getAi(pool, period)])
+      ;[summary, ai, geo] = await Promise.all([getSummary(pool, period), getAi(pool, period), getGeo(pool, period)])
     } catch (error) {
       console.error('[tableau-de-bord]', error)
       notice = `Lecture de la base impossible : ${error instanceof Error ? error.message : 'erreur inconnue'}.`
@@ -70,5 +73,5 @@ export async function loadDashboard(period: Period): Promise<DashboardData> {
 
   const read = new Set(ai.aiReadPaths.map((p) => p.replace(/\/$/, '')))
   const unread = articles.filter((a) => !read.has(a.path))
-  return { summary, ai, messages, notice, unread, articleCount: articles.length }
+  return { summary, ai, geo, messages, notice, unread, articleCount: articles.length }
 }

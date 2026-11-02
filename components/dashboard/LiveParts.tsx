@@ -1,4 +1,5 @@
 import type { LiveData, LiveEvent } from '@/lib/server/dashboard-live'
+import { countryName } from '@/lib/dashboard/country'
 
 // @cdc tableau de bord — morceaux d'affichage de la vue « En direct ».
 
@@ -38,13 +39,19 @@ export function MinuteBars({ values }: { values: number[] }) {
   )
 }
 
-export function MiniList({ rows, empty }: { rows: LiveData['pages']; empty: string }) {
+interface MiniListProps {
+  rows: LiveData['pages']
+  empty: string
+  format?: (label: string) => string
+}
+
+export function MiniList({ rows, empty, format }: MiniListProps) {
   if (!rows.length) return <p className="text-sm text-ink-2">{empty}</p>
   return (
     <ul className="flex flex-col gap-1.5 text-sm">
       {rows.map((r) => (
         <li key={r.label} className="flex justify-between gap-3">
-          <span className="min-w-0 break-words [overflow-wrap:anywhere] text-ink">{r.label}</span>
+          <span className="min-w-0 break-words [overflow-wrap:anywhere] text-ink">{format ? format(r.label) : r.label}</span>
           <span className="shrink-0 font-semibold tabular-nums text-ink">{r.value}</span>
         </li>
       ))}
@@ -66,6 +73,7 @@ export function Feed({ items }: { items: LiveEvent[] }) {
               {e.page}
               {e.ref && !e.ref.endsWith('toutou-gourmet.com') ? ` · depuis ${e.ref}` : ''}
               {e.device ? ` · ${e.device === 'mobile' ? 'mobile' : e.device === 'tablet' ? 'tablette' : 'ordinateur'}` : ''}
+              {` · ${countryName(e.country)}`}
             </span>
           </span>
         </li>
