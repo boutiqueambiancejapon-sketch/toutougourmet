@@ -1,0 +1,9 @@
+[Unit]
+Description=Toutou Gourmet - mise à jour du site toutes les heures
+
+[Timer]
+OnCalendar=*-*-* *:20:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

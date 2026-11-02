@@ -1,0 +1,11 @@
+# Remet le site en ligne à jour depuis la branche v2 (la production depuis la bascule du 2026-11-02).
+# deploy.sh ne reconstruit rien si la version servie est déjà la dernière.
+[Unit]
+Description=Toutou Gourmet - mise à jour du site depuis v2
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=toutou
+Environment=DEPLOY_BRANCH=v2
+ExecStart=/srv/toutou/deploy.sh
