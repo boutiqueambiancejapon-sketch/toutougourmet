@@ -19,7 +19,6 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ['lucide-react'],
-    turbopackUseSystemTlsCerts: true,
   },
   async redirects() {
     return [
