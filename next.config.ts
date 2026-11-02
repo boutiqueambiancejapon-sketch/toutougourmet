@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
     formats: ['image/webp', 'image/avif'],
   },
   experimental: {
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
+    optimizePackageImports: ['lucide-react'],
     turbopackUseSystemTlsCerts: true,
   },
   async redirects() {
