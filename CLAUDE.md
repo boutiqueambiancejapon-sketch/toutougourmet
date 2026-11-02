@@ -9,8 +9,8 @@ Pour tâche transversale : lis docs/CDC.md uniquement.
 ## Projet
 
 Domaine : www.toutou-gourmet.com
-Stack : Next.js 16.1.6 + React 19 + TypeScript strict + Tailwind v4 + MDX
-Next.js : 16.1.6 — ne jamais changer sans PR dédiée
+Stack : Next.js 16.4.4 + React 19 + TypeScript strict + Tailwind v4 + MDX
+Next.js : 16.4.4 — ne jamais changer sans PR dédiée
 Langue défaut : français. V2 multilingue : FR à la racine (URLs actuelles inchangées), EN sous `/en`
 Déploiement : Vercel aujourd'hui · cible : VPS one.com (Caddy + systemd + PostgreSQL, voir `deploy/README.md`)
 Branche de prod : `claude/toutou-gourmet-setup-3mRbP` (il n'y a pas de `main`)
