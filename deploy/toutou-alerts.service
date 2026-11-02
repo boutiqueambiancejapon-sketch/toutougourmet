@@ -1,0 +1,27 @@
+# Alertes urgentes vers ntfy (scripts/alerts.ts) : site, services toutou-*, tâche de nuit, disque,
+# mémoire, charge, sauvegarde, signalements du scanner. Une notification par incident.
+# NON INSTALLÉ : voir deploy/README.md, section « Alertes et résumé hebdomadaire ».
+# Tant que le site tourne depuis la préversion : adapter User= et WorkingDirectory= comme dans
+# toutou-ingest.service.
+[Unit]
+Description=Toutou Gourmet - alertes urgentes (ntfy)
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=toutou
+WorkingDirectory=/srv/toutou/current
+EnvironmentFile=/srv/toutou/shared/.env
+Environment=ALERTS_STATE_FILE=/srv/toutou/shared/alerts-state.json
+ExecStart=/srv/toutou/current/node_modules/.bin/tsx scripts/alerts.ts
+TimeoutStartSec=3min
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/srv/toutou/shared
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true

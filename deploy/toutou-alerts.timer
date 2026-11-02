@@ -1,0 +1,11 @@
+# Toutes les 10 minutes, à partir de 2 minutes après le démarrage du serveur.
+[Unit]
+Description=Toutou Gourmet - alertes urgentes, toutes les 10 minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=10min
+AccuracySec=30s
+
+[Install]
+WantedBy=timers.target
