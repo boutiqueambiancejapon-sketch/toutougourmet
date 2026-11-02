@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { ConsentLink } from '@/components/consent/ConsentLink'
 import { Brand } from './Brand'
 
 // @cdc 04-pages — pied de page V2 : liens vers les hubs (maillage) et pages légales.
@@ -72,7 +73,10 @@ export function SiteFooter() {
           ))}
         </div>
         <div className="mt-10 flex flex-col gap-2 border-t border-cream/10 pt-6 text-xs text-cream/50 md:flex-row md:justify-between">
-          <p>© {new Date().getFullYear()} Toutou Gourmet</p>
+          <p>
+            © {new Date().getFullYear()} Toutou Gourmet ·{' '}
+            <ConsentLink className="cursor-pointer bg-transparent p-0 text-xs text-cream/70 underline" />
+          </p>
           <p>
             {"Site indépendant financé par l'affiliation. "}
             <Link href="/a-propos#affiliation" className="text-cream/70 underline">
