@@ -116,3 +116,6 @@ Offre confirmée par le propriétaire : −20 % sur la première commande en abo
 - Désinscription : lien signé HMAC (`NEWSLETTER_SECRET`), retrait de la liste au clic sur « Me désinscrire » et non à l'ouverture du lien (les antivirus de messagerie ouvrent les liens). La campagne mensuelle utilise la balise Brevo `{{ unsubscribe }}`.
 - Lettre mensuelle : premier mardi du mois, 18 h à Paris ; campagne créée la veille par `scripts/newsletter-monthly.ts` (minuterie non installée, aucun envoi à la liste sans validation du propriétaire). Offre en rotation parmi les 5 remises confirmées, Fidelis exclu.
 - Couleurs écrites en dur dans les gabarits d'e-mails (`lib/emails/layout.ts`), comme `auth-emails.ts` : les messageries ignorent les variables CSS. Couverture en WebP (pas d'URL stable en JPEG) : Outlook de bureau ne l'affiche pas, le texte alternatif reste.
+
+## 2026-11-03 — Envoi des e-mails reporté
+Bienvenue automatique (`WELCOME_EMAIL_ENABLED`) et lettre mensuelle (`toutou-newsletter.timer`) prêtes mais non activées : le propriétaire démarrera quand la liste aura des abonnés. Aperçus et tests disponibles dans le tableau de bord, section « E-mails ».
