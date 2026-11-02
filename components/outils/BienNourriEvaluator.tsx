@@ -15,16 +15,18 @@ export function BienNourriEvaluator() {
   const [answers, setAnswers] = useState<BilanAnswers>({})
   const [done, setDone] = useState(false)
 
-  // « bien_nourri_completed » alimente le compteur public du sticky CTA (/api/bien-nourri-count) ;
-  // « Tool Result » est l'événement commun à tous les outils. Une fois par bilan.
+  // « Tool Result » (tool = bien-nourri) alimente le compteur public du sticky CTA
+  // (/api/bien-nourri-count) et le tableau de bord. Une fois par bilan.
   const fired = useRef(false)
   useEffect(() => {
     if (!done || fired.current) return
     const scores = computeBilan(answers)
-    window.plausible?.('bien_nourri_completed', {
-      props: { score_band: getVerdict(scores.normalized).band, reco: recommend(scores).primary, score: scores.normalized },
+    track('Tool Result', {
+      tool: 'bien-nourri',
+      score_band: getVerdict(scores.normalized).band,
+      reco: recommend(scores).primary,
+      score: scores.normalized,
     })
-    track('Tool Result', { tool: 'bien-nourri' })
     fired.current = true
   }, [done, answers])
 

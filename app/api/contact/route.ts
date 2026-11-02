@@ -1,60 +1,52 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { isBrevoConfigured, subscribe } from '@/lib/server/brevo'
+import { getPool } from '@/lib/server/db'
+import { contactRateLimited, parseContactMessage, saveContactMessage } from '@/lib/server/contact'
 
-// @cdc mesure — deux usages : inscription (e-mail seul, sans champ « message ») et formulaire de
-// contact. Les inscriptions vont dans Brevo quand il est configuré (serveur), sinon Formspree
-// comme avant (Vercel). Les messages de contact passent toujours par Formspree.
+// @cdc contact — deux usages : inscription (e-mail seul, sans champ « message ») envoyée à Brevo,
+// et message de contact rangé dans analytics.contact_messages (lu dans le tableau de bord).
+// Champ piège « website » : rempli par un robot, la requête reçoit 200 sans rien enregistrer.
 
 export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 
-interface ContactBody {
-  email?: unknown
-  message?: unknown
-  source?: unknown
-  _subject?: unknown
-}
-
-async function toFormspree(body: ContactBody): Promise<NextResponse> {
-  const formId = process.env.FORMSPREE_ID
-  if (!formId) {
-    console.error('[contact] FORMSPREE_ID manquant')
-    return NextResponse.json({ error: 'Form not configured' }, { status: 500 })
-  }
-  let res: Response
-  try {
-    res = await fetch(`https://formspree.io/f/${formId}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(body),
-      cache: 'no-store',
-    })
-  } catch (err) {
-    console.error('[contact] fetch Formspree échoué :', err)
-    return NextResponse.json({ error: 'Network error' }, { status: 502 })
-  }
-  const text = await res.text()
-  try {
-    return NextResponse.json(JSON.parse(text), { status: res.status })
-  } catch {
-    return NextResponse.json({ error: text }, { status: res.status })
-  }
-}
+const unavailable = () => NextResponse.json({ error: 'Unavailable' }, { status: 503 })
 
 export async function POST(req: NextRequest) {
-  let body: ContactBody
+  let body: Record<string, unknown>
   try {
-    body = (await req.json()) as ContactBody
+    const parsed: unknown = await req.json()
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) throw new Error('not an object')
+    body = parsed as Record<string, unknown>
   } catch {
     return NextResponse.json({ error: 'Bad request' }, { status: 400 })
   }
 
-  const isSignup = typeof body.email === 'string' && !body.message
-  if (isSignup && isBrevoConfigured()) {
+  if (typeof body.website === 'string' && body.website.trim() !== '') return NextResponse.json({ ok: true })
+
+  if (typeof body.email === 'string' && !body.message) {
+    if (!isBrevoConfigured()) return unavailable()
     const source = typeof body.source === 'string' ? body.source : typeof body._subject === 'string' ? body._subject : 'site'
-    const result = await subscribe(body.email as string, source)
+    const result = await subscribe(body.email, source)
     if (result === 'ok') return NextResponse.json({ ok: true })
     if (result === 'invalid') return NextResponse.json({ error: 'Invalid email' }, { status: 400 })
     return NextResponse.json({ error: 'Subscribe failed' }, { status: 502 })
   }
-  return toFormspree(body)
+
+  const pool = getPool()
+  if (!pool) return unavailable()
+
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'local'
+  if (contactRateLimited(ip)) return NextResponse.json({ error: 'Too many requests' }, { status: 429 })
+
+  const parsed = parseContactMessage(body)
+  if (!parsed.ok) return NextResponse.json({ error: parsed.error }, { status: 400 })
+
+  try {
+    await saveContactMessage(pool, parsed.value)
+  } catch (err) {
+    console.error('[contact] insert failed', err instanceof Error ? err.message : err)
+    return unavailable()
+  }
+  return NextResponse.json({ ok: true })
 }

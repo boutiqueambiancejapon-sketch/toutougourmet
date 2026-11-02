@@ -1,5 +1,6 @@
 import { getPool } from '@/lib/server/db'
 import { getAi, getSummary, type AiData, type SummaryData } from '@/lib/server/dashboard-queries'
+import { getRecentMessages, type StoredMessage } from '@/lib/server/contact'
 import { getAllArticles } from '@/lib/mdx'
 import type { Period } from '@/lib/dashboard/period'
 
@@ -33,6 +34,7 @@ const EMPTY_AI: AiData = {
 export interface DashboardData {
   summary: SummaryData
   ai: AiData
+  messages: StoredMessage[]
   notice: string | null
   unread: { path: string; title: string }[]
   articleCount: number
@@ -45,20 +47,28 @@ export async function loadDashboard(period: Period): Promise<DashboardData> {
 
   let summary = EMPTY_SUMMARY
   let ai = EMPTY_AI
+  let messages: StoredMessage[] = []
   let notice: string | null = null
   const pool = getPool()
   if (!pool) {
     notice = 'Base de données non reliée (DATABASE_URL absente) : les chiffres restent à zéro.'
   } else {
+    // Les messages se lisent à part : une panne des statistiques ne les cache pas, et
+    // une table absente (db/analytics.sql pas relancé) ne casse pas les statistiques.
+    const messagesLoad = getRecentMessages(pool).catch((error: unknown) => {
+      console.error('[tableau-de-bord] messages', error)
+      return []
+    })
     try {
       ;[summary, ai] = await Promise.all([getSummary(pool, period), getAi(pool, period)])
     } catch (error) {
       console.error('[tableau-de-bord]', error)
       notice = `Lecture de la base impossible : ${error instanceof Error ? error.message : 'erreur inconnue'}.`
     }
+    messages = await messagesLoad
   }
 
   const read = new Set(ai.aiReadPaths.map((p) => p.replace(/\/$/, '')))
   const unread = articles.filter((a) => !read.has(a.path))
-  return { summary, ai, notice, unread, articleCount: articles.length }
+  return { summary, ai, messages, notice, unread, articleCount: articles.length }
 }

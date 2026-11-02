@@ -1,5 +1,5 @@
-// @cdc mesure — chaque action part à deux endroits : Plausible (si chargé) et notre propre
-// base via POST /api/e (tableau de bord maison). sendBeacon survit à la navigation, donc un
+// @cdc mesure — chaque action part dans notre propre base via POST /api/e (tableau de bord
+// maison). sendBeacon survit à la navigation, donc un
 // clic sur un lien partenaire est bien enregistré même si la page change aussitôt.
 
 import type { AnalyticsEvent } from './analytics-events'
@@ -8,15 +8,8 @@ export type { AnalyticsEvent }
 
 type Props = Record<string, string | number | boolean>
 
-declare global {
-  interface Window {
-    plausible?: ((event: string, options?: { props?: Props }) => void) & { q?: unknown[] }
-  }
-}
-
 export function track(event: AnalyticsEvent, props: Props = {}): void {
   if (typeof window === 'undefined') return
-  window.plausible?.(event, { props: { page: window.location.pathname, ...props } })
   try {
     const payload = JSON.stringify({ n: event, p: window.location.pathname, r: document.referrer, props })
     const blob = new Blob([payload], { type: 'application/json' })

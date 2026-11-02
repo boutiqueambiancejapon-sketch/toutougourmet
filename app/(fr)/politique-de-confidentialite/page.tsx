@@ -23,18 +23,23 @@ export default function PolitiqueConfidentialitePage() {
             <p className="mb-2">Toutou Gourmet collecte uniquement :</p>
             <ul className="list-disc pl-5 space-y-1 text-sm">
               <li>Ton adresse email (si tu t&apos;inscris à la newsletter) — avec double opt-in obligatoire</li>
-              <li>Des données de navigation anonymisées via Plausible Analytics (sans cookie, sans données personnelles)</li>
+              <li>Ton prénom, ton adresse email et ton message si tu nous écris par le formulaire de contact</li>
+              <li>Des statistiques de visite anonymes, mesurées sur nos propres serveurs (sans cookie)</li>
             </ul>
           </section>
 
           <section>
             <h2 className="text-xl font-bold text-[var(--text-primary)] mb-3" style={{ fontFamily: "'Fraunces', serif" }}>
-              Analytics — Plausible
+              Mesure d&apos;audience et formulaire de contact
             </h2>
+            <p className="mb-2">
+              Nous comptons les pages vues, les clics sur les liens partenaires et les résultats des outils
+              avec notre propre outil, hébergé sur notre serveur. Il ne dépose aucun cookie et n&apos;enregistre
+              pas ton adresse IP. Aucune de ces données ne part chez un service tiers.
+            </p>
             <p>
-              Nous utilisons <strong className="text-[var(--text-primary)]">Plausible Analytics</strong>, un outil
-              respectueux de la vie privée qui ne dépose aucun cookie et ne collecte aucune donnée
-              personnelle identifiable. Conforme RGPD par conception. Pas de consentement requis.
+              Les messages envoyés par le formulaire de contact restent dans notre base de données. Ils
+              servent uniquement à te répondre et ne sont jamais partagés.
             </p>
           </section>
 

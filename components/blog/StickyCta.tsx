@@ -35,7 +35,7 @@ function useDynamicData(endpoint: string | undefined): Record<string, number> | 
   useEffect(() => {
     if (!endpoint) return
     let cancelled = false
-    fetch(endpoint)
+    fetch(endpoint, { cache: 'no-store' })
       .then((r) => r.json())
       .then((d: Record<string, unknown>) => {
         if (cancelled) return

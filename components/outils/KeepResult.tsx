@@ -4,7 +4,7 @@ import { useId, useState } from 'react'
 import { track } from '@/lib/analytics'
 
 // @cdc 04-pages — « Garder ce résultat » sous chaque outil (audit design-cro §3 Outils) :
-// e-mail seul, même route que BonusFiche (/api/contact, Formspree aujourd'hui, Brevo demain).
+// e-mail seul, même route que BonusFiche (/api/contact → Brevo).
 // En cas d'erreur, l'adresse tapée et le résultat restent à l'écran.
 
 interface KeepResultProps {
