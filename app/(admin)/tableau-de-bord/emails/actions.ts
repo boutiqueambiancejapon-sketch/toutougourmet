@@ -1,8 +1,7 @@
 'use server'
 
-import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { dashboardCredentials, isAuthorized } from '@/lib/dashboard/auth'
+import { assertDashboardAction as assertDashboard } from '@/lib/dashboard/guard'
 import { nextFirstTuesday, parisDate, sendInstant } from '@/lib/emails/schedule'
 import { suspendCampaign } from '@/lib/server/brevo-newsletter'
 import { sendTestEmail, type TestKind } from '@/lib/server/newsletter'
@@ -10,10 +9,6 @@ import { sendTestEmail, type TestKind } from '@/lib/server/newsletter'
 // @cdc e-mails — actions du tableau de bord : test vers NEWSLETTER_TEST_EMAIL, suspension d'une
 // campagne programmée. Chaque action revérifie l'authentification HTTP Basic (point d'entrée public).
 
-async function assertDashboard(): Promise<void> {
-  const expected = dashboardCredentials()
-  if (!expected || !(await isAuthorized((await headers()).get('authorization'), expected))) throw new Error('Non autorisé')
-}
 
 export async function sendTest(kind: TestKind): Promise<void> {
   await assertDashboard()

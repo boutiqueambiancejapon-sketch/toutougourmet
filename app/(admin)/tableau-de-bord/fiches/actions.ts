@@ -1,9 +1,8 @@
 'use server'
 
-import { headers } from 'next/headers'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { dashboardCredentials, isAuthorized } from '@/lib/dashboard/auth'
+import { assertDashboardAction as assertDashboard } from '@/lib/dashboard/guard'
 import { labelFromForm } from '@/lib/scanner/review-form'
 import { brandSlug } from '@/lib/scanner/seo'
 import { deleteAnalysis, getAnalysis, markReportHandled, updateAnalysis } from '@/lib/server/scanner-review'
@@ -11,10 +10,6 @@ import { deleteAnalysis, getAnalysis, markReportHandled, updateAnalysis } from '
 // @cdc lot 6 — actions de relecture des fiches. Chaque action vérifie elle-même l'authentification
 // HTTP Basic du tableau de bord (le proxy ne suffit pas : une action serveur est un point d'entrée).
 
-async function assertDashboard(): Promise<void> {
-  const expected = dashboardCredentials()
-  if (!expected || !(await isAuthorized((await headers()).get('authorization'), expected))) throw new Error('Non autorisé')
-}
 
 /** Pages publiques touchées par une fiche : elle-même, le classement, sa marque, /scanner, le sitemap. */
 function revalidatePublic(slug: string, brand: string | null): void {
