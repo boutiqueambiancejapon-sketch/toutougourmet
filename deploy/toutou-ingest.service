@@ -10,7 +10,7 @@ Type=oneshot
 User=administrator
 SupplementaryGroups=systemd-journal
 WorkingDirectory=/home/administrator/toutou-preview/current
-Environment=DATABASE_URL=postgresql:///toutou
+Environment=DATABASE_URL=postgresql:///toutou?host=/var/run/postgresql
 ExecStart=/usr/bin/node scripts/ingest-caddy-logs.mjs
 NoNewPrivileges=true
 ProtectSystem=strict

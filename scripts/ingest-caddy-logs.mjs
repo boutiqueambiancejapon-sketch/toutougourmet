@@ -4,7 +4,7 @@
 // s'était arrêté grâce au curseur journald (analytics.ingest_state).
 // Humains : seules les pages sont gardées (pas les fichiers statiques), sans IP ni User-Agent.
 // Robots : toutes les requêtes, avec IP et User-Agent (repérage des faux robots).
-// Usage : DATABASE_URL=postgresql:///toutou node scripts/ingest-caddy-logs.mjs [--dry]
+// Usage : DATABASE_URL=postgresql:///toutou?host=/var/run/postgresql node scripts/ingest-caddy-logs.mjs [--dry]
 
 import { spawn } from 'node:child_process'
 import readline from 'node:readline'
@@ -17,7 +17,7 @@ const BATCH = 500
 const RETENTION_DAYS = 180
 const STATIC = /^\/(_next\/|images\/|fonts\/|favicon|icons?\/|apple-touch|manifest|robots\.txt$|sitemap)|\.(js|css|map|png|jpe?g|webp|avif|gif|svg|ico|woff2?|txt|xml|json)$/i
 
-const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL || 'postgresql:///toutou', max: 2 })
+const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL || 'postgresql:///toutou?host=/var/run/postgresql', max: 2 })
 
 function header(h, name) {
   const v = h?.[name] ?? h?.[name.toLowerCase()]
