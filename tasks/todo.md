@@ -60,8 +60,8 @@ Règles : aucune URL existante ne change (788 adresses) ; les pages race existan
 
 ## Lot 4 — Comptes
 
-- [ ] PostgreSQL du VPS + Drizzle (schéma user, session, dog, weight_log)
-- [ ] Better Auth (mail + mot de passe, vérification mail, mot de passe oublié via Brevo)
+- [x] PostgreSQL du VPS + Drizzle (schéma user, session, dog, weight_log)
+- [x] Better Auth (mail + mot de passe, vérification mail, mot de passe oublié via Brevo)
 - [ ] Profil chien (race, âge, poids, activité, castration) qui personnalise articles et outils
 - [ ] CTA création de compte aux points de friction (CRO)
 
@@ -72,6 +72,11 @@ Fondations (branche `feat/accounts`, non fusionnée tant que le lot n'est pas va
 4. `/outils/ration` pré-rempli avec le premier chien du compte (sans toucher au pré-remplissage par URL)
 5. Points d'entrée : lien compte dans l'en-tête V2, lien sous `KeepResult`
 6. `deploy/README.md` : variables et migration
+7. [x] RGPD : suppression du compte (mot de passe, cascade, e-mail de confirmation), export JSON, section « Ton compte » de la politique de confidentialité
+8. [x] Purge des comptes non confirmés après 30 jours : `scripts/purge-unverified.mjs` (sans minuterie pour l'instant)
+9. [x] Expéditeur `bonjour@toutou-gourmet.com`, pied d'e-mail vers le formulaire de contact
+10. [ ] Avant la mise en ligne : variables dans `/srv/toutou/shared/.env`, migration sur `toutou`, test d'un vrai envoi Brevo, décider d'une minuterie pour la purge
+11. [ ] Plus tard : changement de prénom et d'adresse e-mail depuis `/compte` (aujourd'hui par le formulaire de contact)
 
 ## Lot 5 — Photos
 
