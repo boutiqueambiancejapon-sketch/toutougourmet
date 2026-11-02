@@ -75,6 +75,21 @@ sudo -u postgres psql -d toutou -c '\dt app.*'  # vérifier
 
 RGPD, déjà en place dans le code : export JSON des données (`/api/compte/export`, bouton « Télécharger mes données » sur `/compte`), suppression du compte avec mot de passe (`/compte/supprimer`, cascade sur sessions, comptes, chiens et pesées, e-mail de confirmation), section « Ton compte » de la politique de confidentialité.
 
+## Scanner (lot 6)
+
+Tables `app.food_analysis`, `app.scan_history`, `app.scan_usage`, `app.scan_report` : migration `db/migrations/0001_scanner.sql`, appliquée par la même commande `npx drizzle-kit migrate` que ci-dessus.
+
+| Variable | Valeur |
+| --- | --- |
+| `GEMINI_API_KEY` | clé de l'API Gemini (offre payante). Sans elle, l'analyse répond « indisponible ». |
+| `GEMINI_SCANNER_MODEL` | facultatif, défaut `gemini-3.1-flash-lite`. |
+| `SCANNER_PROVIDER` | facultatif, défaut `gemini` (seul fournisseur branché). |
+| `SCANNER_FREE_MONTHLY` | facultatif, analyses par mois et par compte, défaut 5. |
+| `SCANNER_TIMEOUT_MS` | facultatif, délai d'attente de la lecture, défaut 30000. |
+| `SCANNER_RECENT_MIN` | facultatif, produits distincts avant d'afficher « Derniers scans », défaut 5. |
+
+Relire une fiche (la rendre indexable et l'ajouter à `/croquettes/sitemap.xml`) : `UPDATE app.food_analysis SET reviewed = true WHERE slug = '…';`. Signalements : `SELECT * FROM app.scan_report ORDER BY created_at DESC;`.
+
 Purge des comptes non confirmés (promise par la politique de confidentialité : 30 jours). Le script supprime aussi les jetons de vérification et les sessions expirés. Aucune minuterie n'est installée : lancer à la main, ou créer plus tard un timer systemd quotidien sur le modèle de `toutou-ingest.timer`.
 
 ```bash

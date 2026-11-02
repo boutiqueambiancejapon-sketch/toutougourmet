@@ -70,3 +70,10 @@
 
 ## 2026-11-02 — AdSense retiré, GA4 gardé en mode sans cookie
 Décision du propriétaire : on garde Google Analytics 4, on abandonne AdSense. Sans bannière de consentement, GA4 tourne avec le Consent Mode « refusé » par défaut (aucun cookie déposé, mesure modélisée côté Google). CSP réduite à googletagmanager et google-analytics, frame-src 'none'. Une bannière de consentement (CNIL) permettrait de mesurer pleinement les visiteurs qui acceptent : à proposer au propriétaire avant toute mise en place (changement visuel).
+
+## 2026-11-02 — Scanner d'étiquette : l'IA lit, notre barème note
+- La lecture de l'étiquette passe par une interface indépendante du fournisseur (`lib/scanner/extract.ts`, `SCANNER_PROVIDER`, schéma commun `ExtractedLabel` avec une confiance par champ et la liste des passages illisibles). Seul Gemini est branché ; un fournisseur Anthropic s'ajoute dans un fichier `lib/scanner/providers/anthropic.ts` (dépendance non ajoutée).
+- Modèle par défaut `gemini-3.1-flash-lite` : `gemini-2.5-flash-lite`, moins cher, refuse les nouveaux comptes (404 le 2026-11-02). Coût mesuré : 1 300 à 2 400 jetons en entrée et ~500 en sortie, soit environ 0,0015 $ par analyse.
+- La note vient uniquement de `lib/scanner/score.ts`, barème publié sur `/scanner` et justifié dans `docs/v2/scanner-score.md`. Humidité non déclarée sur un aliment sec : 10 % retenus, hypothèse affichée.
+- Quota : il compte les appels au fournisseur. Un produit resservi depuis le cache (code-barres tapé ou lu, ou EAN lu déjà connu) ne compte pas ; une lecture en échec est rendue.
+- Aucune photo stockée. Fiches `/croquettes/*` en `noindex` et hors sitemap tant que `reviewed = false` (relecture manuelle en base pour l'instant).
