@@ -98,6 +98,8 @@ const nextConfig: NextConfig = {
       // « Alimentation » ; lentilles et petits pois (légumineuses) passent
       // d'« Alimentation » à « Légumes ».
       { source: '/chien/legumes/chien-peut-manger-pain', destination: '/chien/feculents/chien-peut-manger-pain', permanent: true },
+      { source: '/chien/legumes/chien-peut-manger-pommes-de-terre', destination: '/chien/feculents/chien-peut-manger-pommes-de-terre', permanent: true },
+      { source: '/chien/legumes/chien-peut-manger-patate-douce', destination: '/chien/feculents/chien-peut-manger-patate-douce', permanent: true },
       { source: '/chien/legumes/chien-peut-manger-pates', destination: '/chien/feculents/chien-peut-manger-pates', permanent: true },
       { source: '/chien/legumes/chien-peut-manger-riz', destination: '/chien/feculents/chien-peut-manger-riz', permanent: true },
       { source: '/chien/legumes/chien-peut-manger-mais', destination: '/chien/feculents/chien-peut-manger-mais', permanent: true },
