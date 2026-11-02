@@ -115,8 +115,9 @@ interface ShellOptions {
   /** Ligne sous l'en-tête (ex. « Lettre de novembre 2026 ») */
   kicker?: string
   blocks: EmailBlock[]
-  /** Lien de désinscription : URL signée, ou balise Brevo {{ unsubscribe }} pour une campagne */
-  unsubscribeUrl: string
+  /** Lien de désinscription : URL signée, ou balise Brevo {{ unsubscribe }} pour une campagne.
+   *  Absent : e-mail interne au propriétaire (résumé hebdomadaire), pied réduit à la raison. */
+  unsubscribeUrl?: string
   /** Raison de l'envoi, affichée dans le pied */
   reason: string
 }
@@ -128,10 +129,13 @@ export function renderEmail(o: ShellOptions): RenderedEmail {
   const kicker = o.kicker
     ? `<br><span style="font-family:${SANS};font-size:13px;color:${COLORS.ink2};letter-spacing:0.5px;text-transform:uppercase">${escapeText(o.kicker)}</span>`
     : ''
-  const footer = `<tr><td style="padding:20px 32px 28px;font-family:${SANS};font-size:13px;line-height:1.5;color:${COLORS.ink2}">
-<p style="margin:0 0 8px">Pour nous écrire, passe par le formulaire de contact du site&nbsp;: <a href="${CONTACT_URL}" target="_blank" style="color:${COLORS.ink2}">toutou-gourmet.com/contact</a></p>
+  const footerLines = o.unsubscribeUrl
+    ? `<p style="margin:0 0 8px">Pour nous écrire, passe par le formulaire de contact du site&nbsp;: <a href="${CONTACT_URL}" target="_blank" style="color:${COLORS.ink2}">toutou-gourmet.com/contact</a></p>
 <p style="margin:0 0 8px">${escapeText(o.reason)}</p>
-<p style="margin:0"><a href="${escapeHtml(o.unsubscribeUrl)}" target="_blank" style="color:${COLORS.ink2}">Se désinscrire</a></p>
+<p style="margin:0"><a href="${escapeHtml(o.unsubscribeUrl)}" target="_blank" style="color:${COLORS.ink2}">Se désinscrire</a></p>`
+    : `<p style="margin:0">${escapeText(o.reason)}</p>`
+  const footer = `<tr><td style="padding:20px 32px 28px;font-family:${SANS};font-size:13px;line-height:1.5;color:${COLORS.ink2}">
+${footerLines}
 </td></tr>`
   const html = `<!doctype html>
 <html lang="fr" xmlns="http://www.w3.org/1999/xhtml">
@@ -161,9 +165,9 @@ ${footer}
     o.kicker ?? '',
     ...o.blocks.map((b) => b.text),
     '--',
-    `Pour nous écrire, passe par le formulaire de contact du site : ${CONTACT_URL}`,
+    o.unsubscribeUrl ? `Pour nous écrire, passe par le formulaire de contact du site : ${CONTACT_URL}` : '',
     o.reason,
-    `Se désinscrire : ${o.unsubscribeUrl}`,
+    o.unsubscribeUrl ? `Se désinscrire : ${o.unsubscribeUrl}` : '',
   ]
     .filter(Boolean)
     .join('\n\n')

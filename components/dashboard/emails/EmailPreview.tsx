@@ -9,10 +9,14 @@ import { SectionTitle } from '../Panel'
 // servi sur dashboard.toutou-gourmet.com, bloquerait https://www.toutou-gourmet.com/images/….
 const previewHtml = (html: string): string => html.replaceAll(`${SITE_URL}/images/`, '/images/')
 
-const TEST_MESSAGES: Record<string, { text: string; tone: string }> = {
-  ok: { text: 'Test envoyé à NEWSLETTER_TEST_EMAIL.', tone: 'bg-green-bg text-green-ink' },
-  config: { text: 'Test impossible : NEWSLETTER_TEST_EMAIL, NEWSLETTER_SECRET, BREVO_API_KEY ou BREVO_SENDER_EMAIL manque.', tone: 'bg-amber-bg text-amber-ink' },
-  error: { text: "Brevo a refusé l'envoi : voir le journal du site.", tone: 'bg-rose-bg text-rose-ink' },
+const DEFAULT_TARGET = 'NEWSLETTER_TEST_EMAIL'
+const DEFAULT_REQUIREMENTS = 'NEWSLETTER_TEST_EMAIL, NEWSLETTER_SECRET, BREVO_API_KEY ou BREVO_SENDER_EMAIL'
+
+function testMessage(status: string, target: string, requirements: string): { text: string; tone: string } | undefined {
+  if (status === 'ok') return { text: `Test envoyé à ${target}.`, tone: 'bg-green-bg text-green-ink' }
+  if (status === 'config') return { text: `Test impossible : ${requirements} manque.`, tone: 'bg-amber-bg text-amber-ink' }
+  if (status === 'error') return { text: "Brevo a refusé l'envoi : voir le journal du site.", tone: 'bg-rose-bg text-rose-ink' }
+  return undefined
 }
 
 interface EmailPreviewProps {
@@ -24,6 +28,10 @@ interface EmailPreviewProps {
   text: string
   testAction: () => Promise<void>
   testStatus?: string
+  /** Destinataire du test (nom de la variable), NEWSLETTER_TEST_EMAIL par défaut */
+  testTarget?: string
+  /** Variables nécessaires au test, citées si l'une manque */
+  testRequirements?: string
   /** Bloc affiché avant l'aperçu (ex. campagnes programmées) */
   children?: ReactNode
 }
@@ -37,8 +45,10 @@ function Frame({ label, html, widthClass }: { label: string; html: string; width
   )
 }
 
-export function EmailPreview({ title, intro, subject, previewText, html, text, testAction, testStatus, children }: EmailPreviewProps) {
-  const message = testStatus ? TEST_MESSAGES[testStatus] : undefined
+export function EmailPreview(props: EmailPreviewProps) {
+  const { title, intro, subject, previewText, html, text, testAction, testStatus, children } = props
+  const target = props.testTarget ?? DEFAULT_TARGET
+  const message = testStatus ? testMessage(testStatus, target, props.testRequirements ?? DEFAULT_REQUIREMENTS) : undefined
   return (
     <main className="mx-auto flex w-full max-w-page flex-col gap-2 px-4 pb-16 md:px-8">
       <p className="pt-6 text-sm">
@@ -62,7 +72,7 @@ export function EmailPreview({ title, intro, subject, previewText, html, text, t
         <button type="submit" className="min-h-11 rounded-control bg-orange px-4 font-semibold text-ink hover:underline">
           M&apos;envoyer un test
         </button>
-        <span className="text-sm text-ink-2">En transactionnel, à l&apos;adresse de NEWSLETTER_TEST_EMAIL. Jamais à la liste.</span>
+        <span className="text-sm text-ink-2">En transactionnel, à l&apos;adresse de {target}. Jamais à la liste.</span>
       </form>
       {message && (
         <p role="status" className={`rounded-box px-4 py-3 text-sm ${message.tone}`}>

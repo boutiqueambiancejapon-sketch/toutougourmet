@@ -1,0 +1,12 @@
+# Chaque lundi à 8 h 40, heure de Paris (07:40 UTC en hiver, 06:40 UTC en été). Fuseau dans
+# OnCalendar vérifié sur le serveur : systemd-analyze calendar "Mon *-*-* 08:40:00 Europe/Paris".
+# Persistent : rattrape l'envoi si le serveur était éteint à l'heure prévue.
+[Unit]
+Description=Toutou Gourmet - résumé hebdomadaire, lundi 8 h 40
+
+[Timer]
+OnCalendar=Mon *-*-* 08:40:00 Europe/Paris
+Persistent=true
+
+[Install]
+WantedBy=timers.target
