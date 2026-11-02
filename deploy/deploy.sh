@@ -11,7 +11,7 @@ REPO="$ROOT/repo"            # clone git (lecture seule, clé de déploiement)
 RELEASES="$ROOT/releases"
 SHARED="$ROOT/shared"        # .env, partagé entre les versions
 BRANCH="${DEPLOY_BRANCH:-claude/toutou-gourmet-setup-3mRbP}"
-KEEP=3                        # versions gardées pour revenir en arrière
+KEEP=2                        # versions gardées pour revenir en arrière
 LOCK="$ROOT/deploy.lock"
 
 exec 9>"$LOCK"
@@ -34,7 +34,15 @@ git -C "$REPO" archive "origin/$BRANCH" | tar -x -C "$DEST"
 ln -sf "$SHARED/.env" "$DEST/.env.production.local"
 
 cd "$DEST"
-npm ci --no-audit --no-fund
+# Bibliothèques inchangées depuis la version servie : copie par liens physiques (aucun octet
+# dupliqué, pas de téléchargement), sinon installation complète.
+PREV="$(readlink -f "$ROOT/current" 2>/dev/null || true)"
+if [[ -n "$PREV" && -d "$PREV/node_modules" && -f "$PREV/package-lock.json" ]] && cmp -s "$PREV/package-lock.json" package-lock.json; then
+  echo "→ Bibliothèques inchangées : réutilisées"
+  cp -al "$PREV/node_modules" node_modules
+else
+  npm ci --no-audit --no-fund
+fi
 NODE_OPTIONS=--max-old-space-size=4096 npm run build
 
 echo "→ Bascule vers $SHA"

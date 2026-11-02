@@ -8,7 +8,7 @@ set -euo pipefail
 WORK=/home/administrator/Toutou
 ROOT=/home/administrator/toutou-preview
 RELEASES="$ROOT/releases"
-KEEP=3
+KEEP=2
 LOCK="$ROOT/preview.lock"
 
 mkdir -p "$RELEASES"
@@ -29,7 +29,15 @@ mkdir -p "$DEST"
 git -C "$WORK" archive HEAD | tar -x -C "$DEST"
 
 cd "$DEST"
-npm ci --no-audit --no-fund
+# Bibliothèques inchangées depuis la version servie : copie par liens physiques (aucun octet
+# dupliqué, pas de téléchargement), sinon installation complète.
+PREV="$(readlink -f "$ROOT/current" 2>/dev/null || true)"
+if [[ -n "$PREV" && -d "$PREV/node_modules" && -f "$PREV/package-lock.json" ]] && cmp -s "$PREV/package-lock.json" package-lock.json; then
+  echo "→ Bibliothèques inchangées : réutilisées"
+  cp -al "$PREV/node_modules" node_modules
+else
+  npm ci --no-audit --no-fund
+fi
 NODE_OPTIONS=--max-old-space-size=4096 npm run build
 
 ln -sfn "$DEST" "$ROOT/current.new"
