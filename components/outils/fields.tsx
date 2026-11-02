@@ -22,9 +22,11 @@ interface NumberFieldProps {
   max: number
   step?: number
   hint?: string
+  /** false : champ facultatif (valeur par défaut appliquée par l'outil) */
+  required?: boolean
 }
 
-export function NumberField({ id, label, value, onChange, placeholder, min, max, step = 0.1, hint }: NumberFieldProps) {
+export function NumberField({ id, label, value, onChange, placeholder, min, max, step = 0.1, hint, required = true }: NumberFieldProps) {
   return (
     <div className="flex min-w-0 flex-col gap-1.5">
       <label htmlFor={id} className="text-sm font-semibold text-ink">
@@ -38,7 +40,7 @@ export function NumberField({ id, label, value, onChange, placeholder, min, max,
         min={min}
         max={max}
         step={step}
-        required
+        required={required}
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}

@@ -9,6 +9,16 @@ export function scannerFaq(monthlyLimit: number): FaqEntry[] {
       answer: `Non pour le code-barres : un produit déjà analysé, ou présent avec sa composition sur Open Pet Food Facts, s'affiche sans compte. Oui pour l'analyse par photos, qui fait appel à une IA payante : ${monthlyLimit} analyses gratuites par mois avec un compte. Le compteur repart à zéro le 1er de chaque mois.`,
     },
     {
+      question: 'Faut-il installer une application pour scanner des croquettes ?',
+      answer:
+        "Non. Le scanner tourne dans le navigateur du téléphone ou de l'ordinateur, sur iPhone comme sur Android. Si la caméra est refusée ou ne lit pas le code, tu peux taper les chiffres du code-barres ou envoyer une photo prise avant.",
+    },
+    {
+      question: 'Le scanner note-t-il aussi les pâtées pour chien ?',
+      answer:
+        "Oui, si l'étiquette donne l'humidité, obligatoire au-delà de 14 % (règlement CE 767/2009). Protéines et glucides sont ramenés sur matière sèche : une pâtée à 80 % d'eau se compare alors à une croquette. Les aliments pour chat et les friandises ne sont pas notés.",
+    },
+    {
       question: 'Mes photos et l\'image de la caméra sont-elles enregistrées ?',
       answer:
         "Non. L'image de la caméra sert à lire le code-barres dans ton navigateur : rien n'est envoyé. Les photos d'étiquette sont lues en mémoire le temps de l'analyse, via l'API Gemini de Google, puis oubliées. On garde seulement le texte lu et la note, rattachés à ton compte.",
