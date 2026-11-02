@@ -5,7 +5,7 @@ import { Sources, ToolPage, type FaqEntry } from '@/components/outils/ToolPage'
 import { calculateDogHumanAge } from '@/lib/calculators'
 
 export const metadata: Metadata = {
-  title: 'Calculateur âge chien en âge humain : la conversion selon le gabarit',
+  title: { absolute: 'Âge de ton chien en âge humain : calculateur par gabarit' },
   description:
     "Quel âge a vraiment ton chien en âge humain ? Convertis l'âge de ton chien selon son gabarit, plus juste que la règle des 7 ans. Gratuit et instantané.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/outils/age' },

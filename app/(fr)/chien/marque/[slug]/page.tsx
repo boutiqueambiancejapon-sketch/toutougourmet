@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const b = getBrandBySlug(slugB)
     if (!isDuelBrand(a) || !isDuelBrand(b)) return {}
     return {
-      title: `${a.name} vs ${b.name} : comparatif 2026`,
+      title: { absolute: `${a.name} vs ${b.name} : comparatif 2026` },
       description: `Comparaison ${a.name} vs ${b.name} : composition, prix, fabrication, livraison et verdict. Quelle marque choisir pour ton chien ?`,
       alternates: { canonical: `https://www.toutou-gourmet.com/chien/marque/${slug}` },
     }

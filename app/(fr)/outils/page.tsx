@@ -6,7 +6,7 @@ import { IconChevron } from '@/components/icons'
 import { TOOLS } from '@/components/outils/tool-list'
 
 export const metadata: Metadata = {
-  title: 'Calculateurs nutrition chien et chat : ration, poids idéal, budget, âge',
+  title: { absolute: 'Calculateurs pour chien : ration, poids, budget, âge' },
   description:
     'Ration journalière, budget mensuel, poids idéal, coût annuel : des calculateurs gratuits pour mieux nourrir ton chien ou ton chat.',
   alternates: { canonical: 'https://www.toutou-gourmet.com/outils' },

@@ -6,7 +6,7 @@ import { Formula, ToolPage, type FaqEntry } from '@/components/outils/ToolPage'
 import { FOOD_TYPES, buildCostComparisons, calculateDailyCalories } from '@/lib/calculators'
 
 export const metadata: Metadata = {
-  title: 'Comparateur coût alimentation chien : croquettes ou repas frais, le bilan sur un an',
+  title: { absolute: 'Croquettes ou repas frais : le coût sur un an' },
   description:
     "Croquettes standard, premium ou repas frais : compare le coût annuel selon le poids de ton chien, pour la même ration.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/outils/cout' },

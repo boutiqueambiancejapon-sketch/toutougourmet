@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'À propos — Qui sommes-nous et comment on fonctionne',
+  title: 'À propos de Toutou Gourmet',
   description:
     "Toutou Gourmet est un comparateur indépendant de pet food premium. Découvrez notre équipe, notre méthodologie et notre modèle d'affiliation.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/a-propos' },

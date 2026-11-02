@@ -6,7 +6,7 @@ import { AuthorsBlock } from '@/components/blog/AuthorsBlock'
 import { NewsletterBlock } from '@/components/blog/NewsletterBlock'
 
 export const metadata: Metadata = {
-  title: 'Blog alimentation chien et chat — Conseils & Guides',
+  title: 'Tous les guides alimentation chien',
   description:
     "Articles de fond sur l'alimentation premium pour chiens et chats. Comparatifs, guides pratiques, décryptage des étiquettes.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/blog' },

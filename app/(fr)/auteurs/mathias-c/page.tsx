@@ -10,7 +10,7 @@ const AUTHOR_SLUG = 'mathias-c'
 export const metadata: Metadata = {
   title: 'Mathias C., auteur',
   description:
-    "Propriétaire de Charlie (CKC, insuffisance rénale), Oxy (CKC, calculs rénaux) et Milo (Shiba Inu). Mathias écrit sur l'alimentation canine depuis ses expériences terrain avec ses trois chiens.",
+    "Mathias écrit sur l'alimentation canine à partir de ses trois chiens : Charlie (insuffisance rénale), Oxy (calculs rénaux) et Milo, un Shiba Inu.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/auteurs/mathias-c' },
 }
 

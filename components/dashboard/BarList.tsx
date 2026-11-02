@@ -24,7 +24,7 @@ export function BarList({ rows, empty, unit = '', format }: BarListProps) {
         return (
           <li key={r.label} title={`${label} : ${value}`}>
             <div className="flex items-baseline justify-between gap-3 text-sm">
-              <span className="min-w-0 break-all text-ink">{label}</span>
+              <span className="min-w-0 break-words [overflow-wrap:anywhere] text-ink">{label}</span>
               <span className="shrink-0 font-semibold tabular-nums text-ink">{value}</span>
             </div>
             <div className="mt-1 h-2 rounded-pill bg-cream-2" aria-hidden="true">
@@ -45,7 +45,7 @@ export function PlainList({ items, empty }: { items: { key: string; label: strin
       {items.map((i) => (
         <li key={i.key} className="py-2 text-ink">
           {i.href ? (
-            <a href={i.href} className="break-all underline decoration-line-2 underline-offset-2">
+            <a href={i.href} className="break-words underline decoration-line-2 underline-offset-2">
               {i.label}
             </a>
           ) : (

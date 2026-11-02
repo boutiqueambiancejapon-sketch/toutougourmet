@@ -5,9 +5,9 @@ import { QuizWrapper } from '@/components/quiz/QuizWrapper'
 import { ToolPage, type FaqEntry } from '@/components/outils/ToolPage'
 
 export const metadata: Metadata = {
-  title: 'Quelle marque pour ton chien ? Le test en 5 questions',
+  title: 'Quelle marque pour ton chien ? Le test',
   description:
-    "Âge, poids, digestion, budget, croquettes ou repas frais : 5 questions pour savoir quelle marque correspond à ton chien, avec la raison du conseil. Gratuit, sans inscription.",
+    "Âge, digestion, budget, croquettes ou repas frais : 5 questions pour savoir quelle marque convient à ton chien, et pourquoi. Gratuit, sans inscription.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/quiz' },
   openGraph: {
     title: 'Quelle marque pour ton chien ? Le test en 5 questions',

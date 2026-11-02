@@ -4,9 +4,9 @@ import { BodyScoreEvaluator } from '@/components/outils/BodyScoreEvaluator'
 import { Sources, ToolPage, type FaqEntry } from '@/components/outils/ToolPage'
 
 export const metadata: Metadata = {
-  title: 'Calculateur poids idéal chien : surpoids, maigreur ou poids de forme',
+  title: { absolute: 'Poids idéal du chien : calculateur de score corporel' },
   description:
-    "Ton chien est-il en surpoids, trop maigre ou à son poids idéal ? Compare son poids à son poids de forme et vois quoi changer dans sa ration. Gratuit et instantané.",
+    "Ton chien est-il en surpoids, trop maigre ou à son poids idéal ? Compare son poids à son poids de forme et vois quoi changer dans sa ration.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/outils/poids' },
   openGraph: {
     title: 'Calculateur poids idéal chien : surpoids, maigreur ou poids de forme',

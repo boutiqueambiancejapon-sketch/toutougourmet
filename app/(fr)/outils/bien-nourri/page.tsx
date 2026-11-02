@@ -5,7 +5,7 @@ import { BienNourriEvaluator } from '@/components/outils/BienNourriEvaluator'
 import { ToolPage, type FaqEntry } from '@/components/outils/ToolPage'
 
 export const metadata: Metadata = {
-  title: 'Est-ce que ton chien est bien nourri ? Le bilan gratuit en 6 questions',
+  title: { absolute: 'Ton chien est-il bien nourri ? Le bilan gratuit' },
   description:
     "6 questions pour évaluer l'alimentation de ton chien : score sur 100, conseils précis selon tes réponses et recommandation adaptée. Gratuit, sans inscription.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/outils/bien-nourri' },

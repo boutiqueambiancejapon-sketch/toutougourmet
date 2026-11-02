@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const cat = getCategoryBySlug(category)
   if (!cat) return {}
   return {
-    title: `${cat.label} — Guides pour chiens`,
+    title: `${cat.label} : nos guides`,
     description: cat.description,
     alternates: { canonical: `${SITE_URL}/chien/${category}` },
   }

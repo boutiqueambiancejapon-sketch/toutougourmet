@@ -8,7 +8,7 @@ import { TopQuestions } from '@/components/guides/TopQuestions'
 import { RubricRows } from '@/components/pillar/RubricRows'
 
 export const metadata: Metadata = {
-  title: 'Alimentation et santé du chien — Guides & Conseils',
+  title: 'Guides alimentation et santé du chien',
   description:
     'Tout ce que ton chien peut manger, comment bien le nourrir et quels aliments éviter. Guides pratiques par thème.',
   alternates: { canonical: 'https://www.toutou-gourmet.com/chien' },

@@ -6,7 +6,7 @@ import { Formula, ToolPage, type FaqEntry } from '@/components/outils/ToolPage'
 import { brandPricings, calculateDailyCalories, calculateMonthlyBudget } from '@/lib/calculators'
 
 export const metadata: Metadata = {
-  title: 'Simulateur budget chien : Franklin, Elmut et Dog Chef comparés',
+  title: { absolute: 'Budget alimentation chien : Franklin, Elmut, Dog Chef' },
   description:
     'Compare le budget mensuel de Franklin, Elmut et Dog Chef selon le profil de ton chien. Calcul instantané à partir de sa ration.',
   alternates: { canonical: 'https://www.toutou-gourmet.com/outils/budget' },

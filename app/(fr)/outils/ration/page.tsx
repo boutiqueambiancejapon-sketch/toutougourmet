@@ -14,9 +14,9 @@ import {
 } from '@/lib/calculators'
 
 export const metadata: Metadata = {
-  title: 'Calculateur de ration journalière chien et chat : résultat en grammes selon le NRC',
+  title: { absolute: 'Ration journalière du chien : calculateur en grammes' },
   description:
-    'Calcule la ration journalière de ton chien ou chat selon son poids, son âge et son activité. Formule NRC 2006, résultat en grammes de croquettes ou de repas frais. Gratuit.',
+    'Calcule la ration journalière de ton chien selon son poids, son âge et son activité. Formule NRC 2006, résultat en grammes de croquettes ou de repas frais.',
   alternates: { canonical: 'https://www.toutou-gourmet.com/outils/ration' },
   openGraph: {
     title: 'Calculateur de ration journalière chien et chat : résultat en grammes selon le NRC',

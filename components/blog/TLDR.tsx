@@ -12,8 +12,15 @@ interface TLDRProps {
 const escapeHtml = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
-/** Échappe le texte puis rend le seul markdown utilisé dans les puces : **gras**. */
-const renderInline = (item: string) => escapeHtml(item).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+/** Échappe le texte puis rend le markdown des puces : **gras** et [lien](/url ou https://…). */
+const renderInline = (item: string) =>
+  escapeHtml(item)
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\[([^\]]+)\]\((\/[^)\s]*|https:\/\/[^)\s]+)\)/g, (_m, text: string, href: string) =>
+      href.startsWith('/')
+        ? `<a href="${href}">${text}</a>`
+        : `<a href="${href}" target="_blank" rel="noopener">${text}</a>`,
+    )
 
 export function TLDR({ items, locale = 'fr' }: TLDRProps) {
   const title = getDictionary(locale).article.tldrTitle

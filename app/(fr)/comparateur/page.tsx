@@ -9,7 +9,7 @@ import { ComparateurFaq } from '@/components/comparateur/ComparateurFaq'
 export const metadata: Metadata = {
   title: 'Comparatif nourriture pour chien',
   description:
-    "Compare Franklin, Elmut, Ultra Premium Direct, Dog Chef, Dogfy Diet et Fidelis : prix, type d'aliment, fabrication, livraison et offres de bienvenue. Croquettes et repas frais pour chien.",
+    "Franklin, Elmut, Ultra Premium Direct, Dog Chef, Dogfy Diet et Fidelis comparés : prix, type d'aliment, fabrication, livraison et offres de bienvenue.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/comparateur' },
 }
 
