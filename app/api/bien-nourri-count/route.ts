@@ -1,32 +1,16 @@
-// @cdc analytics — route qui retourne le nombre de bilans réalisés sur 4 fenêtres
-// temporelles distinctes (today / last_7d / last_30d / all_time), agrégées depuis
-// Plausible Stats API v2 sur l'event « bien_nourri_completed ».
+// @cdc analytics — nombre de bilans « bien nourri » réalisés sur 4 fenêtres réelles
+// (today / last_7d / last_30d / all_time), lus dans notre base : analytics.events,
+// name = 'Tool Result' et props->>'tool' = 'bien-nourri' (envoyé par BienNourriEvaluator).
 //
-// 4 queries Plausible en parallèle (Promise.all), cachées 1h via ISR + Next fetch
-// cache. Cible : ~4 calls/h vers Plausible (largement sous les 600/h du plan free).
-//
-// Le client (sticky CTA) utilise ces 4 valeurs pour piocher la fenêtre la plus
-// flatteuse selon des seuils — chaque valeur est REELLE pour sa fenêtre, donc
-// aucun mensonge sur le framing « aujourd'hui » vs « cette semaine ».
-//
-// Env vars requises (à set côté Vercel) :
-//   - PLAUSIBLE_API_KEY              (secret) — token Stats API généré dans Plausible UI
-//   - NEXT_PUBLIC_PLAUSIBLE_DOMAIN   (public) — fallback "www.toutou-gourmet.com"
+// Le sticky CTA pioche la fenêtre la plus flatteuse selon ses seuils (lib/sticky-cta-config.ts) ;
+// chaque valeur est vraie pour sa fenêtre. « today » suit le jour civil de Paris.
+// Sans DATABASE_URL ou en cas d'erreur : 0 partout, le compteur reste caché.
 
 import { NextResponse } from 'next/server'
+import { getPool } from '@/lib/server/db'
 
-export const revalidate = 3600 // 1 hour ISR cache
-
-const PLAUSIBLE_QUERY_ENDPOINT = 'https://plausible.io/api/v2/query'
-const EVENT_NAME = 'bien_nourri_completed'
-const DEFAULT_DOMAIN = 'www.toutou-gourmet.com'
-
-interface PlausibleQueryResponse {
-  results?: Array<{
-    metrics?: number[]
-    dimensions?: unknown[]
-  }>
-}
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 
 export interface BienNourriCountResponse {
   today: number
@@ -35,62 +19,27 @@ export interface BienNourriCountResponse {
   all_time: number
 }
 
-/**
- * Query Plausible pour le count d'events sur une fenêtre temporelle donnée.
- * Retourne 0 silencieusement en cas d'échec (la chaîne survit).
- */
-async function queryPlausibleCount(
-  token: string,
-  domain: string,
-  dateRange: string,
-): Promise<number> {
-  try {
-    const response = await fetch(PLAUSIBLE_QUERY_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        site_id: domain,
-        metrics: ['events'],
-        date_range: dateRange,
-        filters: [['is', 'event:name', [EVENT_NAME]]],
-      }),
-      next: { revalidate: 3600 },
-    })
+const EMPTY: BienNourriCountResponse = { today: 0, last_7d: 0, last_30d: 0, all_time: 0 }
 
-    if (!response.ok) {
-      console.warn(`[bien-nourri-count] Plausible API non-OK (${dateRange})`, response.status)
-      return 0
-    }
+const SQL = `
+  SELECT
+    count(*) FILTER (WHERE ts >= date_trunc('day', now() AT TIME ZONE 'Europe/Paris') AT TIME ZONE 'Europe/Paris')::int AS today,
+    count(*) FILTER (WHERE ts >= now() - interval '7 days')::int AS last_7d,
+    count(*) FILTER (WHERE ts >= now() - interval '30 days')::int AS last_30d,
+    count(*)::int AS all_time
+  FROM analytics.events
+  WHERE name = 'Tool Result' AND props->>'tool' = 'bien-nourri'`
 
-    const data = (await response.json()) as PlausibleQueryResponse
-    return Number(data?.results?.[0]?.metrics?.[0]) || 0
-  } catch (err) {
-    console.warn(`[bien-nourri-count] Fetch failed (${dateRange})`, err)
-    return 0
-  }
-}
+const headers = { 'Cache-Control': 'no-store' }
 
 export async function GET() {
-  const token = process.env.PLAUSIBLE_API_KEY
-  const domain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN ?? DEFAULT_DOMAIN
-
-  // Pas de token configuré = pas de stats → on retourne 0 partout silencieusement
-  if (!token) {
-    const empty: BienNourriCountResponse = { today: 0, last_7d: 0, last_30d: 0, all_time: 0 }
-    return NextResponse.json(empty)
+  const pool = getPool()
+  if (!pool) return NextResponse.json(EMPTY, { headers })
+  try {
+    const res = await pool.query<BienNourriCountResponse>(SQL)
+    return NextResponse.json(res.rows[0] ?? EMPTY, { headers })
+  } catch (err) {
+    console.warn('[bien-nourri-count] query failed', err instanceof Error ? err.message : err)
+    return NextResponse.json(EMPTY, { headers })
   }
-
-  // 4 queries Plausible en parallèle, chacune sur sa fenêtre réelle
-  const [today, last_7d, last_30d, all_time] = await Promise.all([
-    queryPlausibleCount(token, domain, 'day'),
-    queryPlausibleCount(token, domain, '7d'),
-    queryPlausibleCount(token, domain, '30d'),
-    queryPlausibleCount(token, domain, 'all'),
-  ])
-
-  const payload: BienNourriCountResponse = { today, last_7d, last_30d, all_time }
-  return NextResponse.json(payload)
 }

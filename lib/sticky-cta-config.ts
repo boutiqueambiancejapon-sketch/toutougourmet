@@ -52,10 +52,11 @@ export const ELMUT_CTA: StickyCtaConfig = {
  * (Urgences, Santé, "chien peut manger X", "chien mange X").
  *
  * Compteur dynamique multi-fenêtres :
- * La route /api/bien-nourri-count interroge Plausible sur 4 fenêtres réelles
+ * La route /api/bien-nourri-count compte les événements « Tool Result »
+ * (tool = bien-nourri) de notre base analytics.events sur 4 fenêtres réelles
  * (today / last_7d / last_30d / all_time). Les tiers ci-dessous sont évalués
  * dans l'ordre — le PREMIER qui dépasse son seuil est affiché. Comme chaque
- * valeur vient de SA vraie fenêtre Plausible, le framing « aujourd'hui » /
+ * valeur vient de SA vraie fenêtre, le framing « aujourd'hui » /
  * « cette semaine » / « ce mois » est strictement honnête.
  *
  * STRATÉGIE COLD START : pas de tier all_time low-threshold (qui aurait affiché
@@ -69,9 +70,9 @@ export const ELMUT_CTA: StickyCtaConfig = {
  *  - last_30d >= 50    → ~1.6/jour sur le mois = adoption régulière
  *  - sinon             → rien d'affiché (cold start)
  *
- * Suivi cold start : utilise directement le dashboard Plausible (l'event
- * `bien_nourri_completed` est tracké dès le 1er bilan). Ne dépend pas du
- * sticky pour savoir où on en est.
+ * Suivi cold start : le tableau de bord maison (/tableau-de-bord, liste des
+ * outils) compte les bilans dès le premier. Ne dépend pas du sticky pour
+ * savoir où on en est.
  */
 export const BIEN_NOURRI_CTA: StickyCtaConfig = {
   brandName: 'Nourrissez-vous bien votre toutou ?',

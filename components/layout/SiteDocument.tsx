@@ -83,17 +83,7 @@ export function SiteDocument({ locale, header, footer, children }: SiteDocumentP
         <main id="main-content">{children}</main>
         {footer}
 
-        {/* Plausible Analytics : file d'attente pour les événements envoyés avant le chargement */}
-        <Script id="plausible-queue" strategy="afterInteractive">
-          {`window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }`}
-        </Script>
         <Tracking />
-        <Script
-          defer
-          data-domain="toutou-gourmet.com"
-          src="https://plausible.io/js/script.js"
-          strategy="afterInteractive"
-        />
 
       </body>
     </html>
