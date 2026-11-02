@@ -62,6 +62,9 @@ export function Illustration({
   const src = getSlotPath(slot)
   const hasRealImage = slot.imageReady === true
   const variant = GROUP_TO_VARIANT[slot.group]
+  // @cdc perf — image LCP : la priorité haute s'ajoute au préchargement (sans elle, le navigateur
+  // la télécharge au même rang que les polices et les scripts).
+  const fetchPriority = priority ? 'high' : undefined
 
   return (
     <div
@@ -86,7 +89,7 @@ export function Illustration({
     >
       {hasRealImage ? (
         fill ? (
-          <Image src={src} alt={alt} fill priority={priority} sizes={sizes} className="object-cover" />
+          <Image src={src} alt={alt} fill priority={priority} fetchPriority={fetchPriority} sizes={sizes} className="object-cover" />
         ) : (
           <Image
             src={src}
@@ -94,6 +97,7 @@ export function Illustration({
             width={w}
             height={h}
             priority={priority}
+            fetchPriority={fetchPriority}
             sizes={sizes}
             className="absolute inset-0 w-full h-full object-cover"
           />

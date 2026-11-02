@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import Script from 'next/script'
 import ScrollToTop from './ScrollToTop'
 import { Tracking } from '@/components/analytics/Tracking'
+import { GtagLoader } from '@/components/analytics/GtagLoader'
 import { ConsentBanner } from '@/components/consent/ConsentBanner'
 import GoogleAnalyticsPageView from './GoogleAnalyticsPageView'
 import { fraunces, dmSans } from '@/lib/fonts'
@@ -38,12 +39,7 @@ export function SiteDocument({ locale, header, footer, children }: SiteDocumentP
     <html lang={locale} className={`${fraunces.variable} ${dmSans.variable}`}>
       {/* eslint-disable-next-line @next/next/no-head-element -- App Router : ce composant n'est rendu que par les layouts de langue et app/not-found.tsx */}
       <head>
-        {/* Google tag (gtag.js) — GA4 */}
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-MDHMHXVJRZ"
-          strategy="afterInteractive"
-        />
+        {/* Google tag — GA4 : file d'attente dataLayer ici, gtag.js chargé par <GtagLoader /> (hors chemin critique) */}
         <Script id="ga4-init" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
@@ -80,6 +76,7 @@ export function SiteDocument({ locale, header, footer, children }: SiteDocumentP
         {footer}
 
         <Tracking />
+        <GtagLoader />
         <ConsentBanner />
 
       </body>
