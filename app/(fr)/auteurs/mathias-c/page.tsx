@@ -8,7 +8,7 @@ import { notFound } from 'next/navigation'
 const AUTHOR_SLUG = 'mathias-c'
 
 export const metadata: Metadata = {
-  title: 'Mathias C. — Auteur Toutou Gourmet',
+  title: 'Mathias C., auteur',
   description:
     "Propriétaire de Charlie (CKC, insuffisance rénale), Oxy (CKC, calculs rénaux) et Milo (Shiba Inu). Mathias écrit sur l'alimentation canine depuis ses expériences terrain avec ses trois chiens.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/auteurs/mathias-c' },

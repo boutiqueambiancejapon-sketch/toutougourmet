@@ -60,7 +60,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonical = `${SITE_URL}/chien/${frontmatter.categorySlug}/${slug}`
   // og:image et twitter:image : générés par opengraph-image.tsx (miniature A1)
   return {
-    title: frontmatter.title,
+    // @cdc seo — sans le suffixe « | Toutou Gourmet » quand il ferait dépasser 60 caractères
+    title: frontmatter.title.length > 42 ? { absolute: frontmatter.title } : frontmatter.title,
     description: frontmatter.description,
     alternates: { canonical },
     openGraph: {

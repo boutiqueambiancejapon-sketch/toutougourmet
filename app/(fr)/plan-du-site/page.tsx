@@ -7,7 +7,7 @@ import { brands } from '@/data/brands'
 export const revalidate = 86400
 
 export const metadata: Metadata = {
-  title: 'Plan du site — Toutou Gourmet',
+  title: 'Plan du site',
   description:
     "Index complet de Toutou Gourmet : guides alimentation chien, avis marques, calculateurs et comparateur. Toutes les pages en un coup d'œil.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/plan-du-site' },
@@ -32,7 +32,7 @@ const TOOLS = [
   { href: '/outils/poids', label: 'Suivi & courbe de poids' },
   { href: '/quiz', label: 'Quiz — trouver la croquette idéale' },
   { href: '/comparateur', label: 'Comparateur de croquettes' },
-  { href: '/comparatifs/elmut-vs-dog-chef', label: 'Elmut vs Dog Chef — comparatif complet' },
+  { href: '/chien/marque/elmut-vs-dog-chef', label: 'Elmut vs Dog Chef — comparatif complet' },
 ]
 
 const LEGAL = [
