@@ -488,6 +488,13 @@ h3 {
     section.v2 > h2,
     .v2 .tg-reveal {
       animation: tg-rise linear both;
+    }
+    /* Règle à part (sélecteur préfixé par html) : sinon le minifieur fusionne la timeline
+       dans le raccourci « animation », que Chrome et Safari rejettent. */
+    html .v2 ul[role='list'] > li,
+    html .v2 section > h2,
+    html section.v2 > h2,
+    html .v2 .tg-reveal {
       animation-timeline: view();
       animation-range: entry 0% entry 55%;
     }

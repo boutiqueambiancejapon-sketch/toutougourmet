@@ -1,10 +1,8 @@
 # *
 User-agent: *
 Allow: /
-
-# *
-User-agent: *
 Disallow: /api/
+Disallow: /dev/
 
 # Host
 Host: https://www.toutou-gourmet.com
