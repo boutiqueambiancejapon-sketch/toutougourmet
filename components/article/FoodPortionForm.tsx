@@ -3,6 +3,7 @@
 import { useId, useRef, useState } from 'react'
 import { track } from '@/lib/analytics'
 import { bandFor, type SizeBand } from '@/lib/size-bands'
+import { useAccountPrefill } from '@/components/outils/useAccountPrefill'
 
 // Besoin du jour : RER = 70 × poids^0,75 (NRC 2006, Nutrient Requirements of Dogs and Cats),
 // multiplié par 1,6 pour un adulte non stérilisé et 1,4 pour un adulte stérilisé
@@ -23,10 +24,22 @@ interface FoodPortionFormProps {
   bands: SizeBand[]
 }
 
-export function FoodPortionForm({ ofFood, kcal100, moderation, bands }: FoodPortionFormProps) {
+/** Compte connecté : poids et stérilisation du premier chien (même mécanisme que /outils/ration). */
+export function FoodPortionForm(props: FoodPortionFormProps) {
+  const dog = useAccountPrefill()
+  if (!dog?.weightKg) return <FoodPortionFields {...props} />
+  return (
+    <>
+      <p className="m-0 text-sm text-ink-2">{`Rempli avec le poids de ${dog.name}.`}</p>
+      <FoodPortionFields key={dog.id} {...props} initialWeight={String(dog.weightKg)} initialNeutered={dog.prefill.sterilized ?? true} />
+    </>
+  )
+}
+
+function FoodPortionFields({ ofFood, kcal100, moderation, bands, initialWeight = '', initialNeutered = true }: FoodPortionFormProps & { initialWeight?: string; initialNeutered?: boolean }) {
   const id = useId()
-  const [weight, setWeight] = useState('')
-  const [neutered, setNeutered] = useState(true)
+  const [weight, setWeight] = useState(initialWeight)
+  const [neutered, setNeutered] = useState(initialNeutered)
   const tracked = useRef(false)
 
   const kg = Number(weight.replace(',', '.'))

@@ -7,6 +7,7 @@ import { Segmented } from '@/components/tools/Segmented'
 import { BigResult, NumberField, SubmitButton, ToolCard } from './fields'
 import type { NextStep } from './NextSteps'
 import { ToolResult } from './ToolResult'
+import type { AccountDog } from './useAccountPrefill'
 
 // @cdc outils — âge humain selon le gabarit (tableau AVMA, lib/calculators.ts). Pas de lien
 // partenaire : l'âge seul ne justifie aucune marque.
@@ -42,12 +43,22 @@ function nextSteps(stage: DogAgeResult['stagePill'], size: SizeCategory): NextSt
   ]
 }
 
-export function AgeCalculator() {
+/** Gabarit d'après le poids, mêmes bornes que SIZE_HINT. */
+function sizeOf(kg: number | null): SizeCategory {
+  if (!kg) return 'moyen'
+  if (kg < 10) return 'petit'
+  if (kg <= 25) return 'moyen'
+  return kg <= 45 ? 'grand' : 'tres-grand'
+}
+
+/** `dog` : profil du compte (components/outils/PrefilledTools.tsx), sinon formulaire vide. */
+export function AgeCalculator({ dog }: { dog?: AccountDog | null }) {
   const yearsId = useId()
   const monthsId = useId()
-  const [years, setYears] = useState('')
-  const [months, setMonths] = useState('0')
-  const [size, setSize] = useState<SizeCategory>('moyen')
+  const known = dog?.ageMonths ?? null
+  const [years, setYears] = useState(known !== null ? String(Math.floor(known / 12)) : '')
+  const [months, setMonths] = useState(known !== null ? String(known % 12) : '0')
+  const [size, setSize] = useState<SizeCategory>(dog?.weightKg ? sizeOf(dog.weightKg) : 'moyen')
   const [result, setResult] = useState<{ age: DogAgeResult; label: string } | null>(null)
 
   function reset<T>(setter: (v: T) => void) {

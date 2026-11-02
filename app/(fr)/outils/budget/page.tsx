@@ -1,7 +1,7 @@
 // @cdc 5.0 — contrat : Outil calculateur · rendu SSG · JSON-LD WebApplication + FAQPage
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { BudgetCalculator } from '@/components/outils/BudgetCalculator'
+import { PrefilledBudgetCalculator } from '@/components/outils/PrefilledTools'
 import { Formula, ToolPage, type FaqEntry } from '@/components/outils/ToolPage'
 import { brandPricings, calculateDailyCalories, calculateMonthlyBudget } from '@/lib/calculators'
 
@@ -81,7 +81,7 @@ export default function BudgetPage() {
         description: 'Compare le budget mensuel de trois marques de nourriture pour chien selon sa ration.',
       }}
     >
-      <BudgetCalculator />
+      <PrefilledBudgetCalculator />
     </ToolPage>
   )
 }

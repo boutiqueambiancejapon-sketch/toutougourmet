@@ -1,0 +1,40 @@
+import { NextResponse } from 'next/server'
+import { breedMidWeight } from '@/components/race/breed-size'
+import type { AccountProfile } from '@/components/outils/ration-params'
+import { getBreedBySlug } from '@/data/breeds'
+import { ageGroupOf, ageInMonths } from '@/lib/dog-profile'
+import { getSessionUser } from '@/lib/server/auth'
+import { listDogs } from '@/lib/server/dogs'
+
+// @cdc premium — profil du premier chien du compte, pour pré-remplir les outils (ration, poids,
+// âge, budget) et le calculateur des articles « peut-il manger ». Appelé par le navigateur
+// seulement si le témoin tg_compte est présent : les pages publiques restent statiques.
+
+export const dynamic = 'force-dynamic'
+
+const headers = { 'Cache-Control': 'private, no-store' }
+
+export async function GET(): Promise<NextResponse> {
+  const user = await getSessionUser()
+  if (!user) return NextResponse.json({ dog: null } satisfies AccountProfile, { status: 401, headers })
+  const [first] = await listDogs(user.id)
+  if (!first) return NextResponse.json({ dog: null } satisfies AccountProfile, { headers })
+  const breed = first.breedSlug ? getBreedBySlug(first.breedSlug) : undefined
+  const body: AccountProfile = {
+    dog: {
+      id: first.id,
+      name: first.name,
+      prefill: {
+        weightKg: first.weightKg ? String(first.weightKg) : undefined,
+        ageGroup: ageGroupOf(first.birthDate),
+        activityLevel: first.activity,
+        sterilized: first.sterilized,
+      },
+      weightKg: first.weightKg,
+      ageMonths: first.birthDate ? ageInMonths(first.birthDate) : null,
+      breedMidKg: breed ? breedMidWeight(breed) : null,
+      breedName: breed?.name ?? null,
+    },
+  }
+  return NextResponse.json(body, { headers })
+}

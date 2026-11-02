@@ -3,10 +3,11 @@ import { getSessionUser } from '@/lib/server/auth'
 import { getDb } from '@/lib/server/drizzle'
 import { overLimit } from '@/lib/server/rate-window'
 import { findByEan, recordScan, releaseQuota, reserveQuota, saveAnalysis, usedThisMonth } from '@/lib/server/scanner'
-import { FREE_MONTHLY_SCANS, MAX_IMAGE_BYTES, MAX_IMAGES, RATE_LIMITS } from '@/lib/scanner/config'
+import { MAX_IMAGE_BYTES, MAX_IMAGES, RATE_LIMITS } from '@/lib/scanner/config'
+import { scanLimitFor } from '@/lib/server/membership'
 import { extractLabel } from '@/lib/scanner/extract'
 import { prepareImage } from '@/lib/scanner/images'
-import { ERROR_MESSAGES, INCOMPLETE_MESSAGE, toScanAnalysis, type ScanResponse } from '@/lib/scanner/result'
+import { ERROR_MESSAGES, INCOMPLETE_MESSAGE, QUOTA_FREE_MESSAGE, toScanAnalysis, type ScanQuota, type ScanResponse } from '@/lib/scanner/result'
 import { classifyExtraction, nothingRead } from '@/lib/scanner/outcome'
 import { createScanSession, consumeScanSession } from '@/lib/server/scan-session'
 import { cleanEan } from '@/lib/scanner/slug'
@@ -40,13 +41,17 @@ const STATUS: Record<ScannerErrorCode, number> = {
   unavailable: 503,
 }
 
-function fail(error: ScannerErrorCode, quota?: { used: number; limit: number }) {
-  const body: ScanResponse = { ok: false, error, message: ERROR_MESSAGES[error], quota }
+function fail(error: ScannerErrorCode, quota?: ScanQuota) {
+  // Quota gratuit atteint : on propose Premium (gratuit pendant le lancement, 50 analyses par mois).
+  const message = error === 'quota_reached' && quota?.plan === 'free' ? QUOTA_FREE_MESSAGE : ERROR_MESSAGES[error]
+  const body: ScanResponse = { ok: false, error, message, quota }
   return NextResponse.json(body, { status: STATUS[error], headers: NO_STORE })
 }
 
-async function quota(userId: string) {
-  return { used: await usedThisMonth(userId), limit: FREE_MONTHLY_SCANS }
+// Quota du mois selon la formule du compte (5 en gratuit, 50 en Premium, lib/scanner/config.ts).
+async function quota(userId: string): Promise<ScanQuota> {
+  const [used, { plan, limit }] = await Promise.all([usedThisMonth(userId), scanLimitFor(userId)])
+  return { used, limit, plan }
 }
 
 export async function GET(): Promise<NextResponse> {
@@ -91,7 +96,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const images = await Promise.all(files.map(prepareImage))
     // Envoi suivant d'une session déjà décomptée (photo manquante ajoutée) : gratuit.
     const paid = consumeScanSession(sessionToken, user.id)
-    if (!paid && !(await reserveQuota(user.id, FREE_MONTHLY_SCANS))) return fail('quota_reached', await quota(user.id))
+    if (!paid && !(await reserveQuota(user.id, (await scanLimitFor(user.id)).limit))) return fail('quota_reached', await quota(user.id))
     const refund = () => (paid ? Promise.resolve() : releaseQuota(user.id))
 
     let result

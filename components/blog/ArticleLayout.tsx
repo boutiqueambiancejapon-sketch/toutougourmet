@@ -12,6 +12,7 @@ import { getFoodVerdicts } from '@/lib/food-verdicts'
 import { RaceFacts } from '@/components/race/RaceFacts'
 import { RaceFoodSection, RACE_FOOD_ID, raceFoodHeading } from '@/components/race/RaceFoodSection'
 import { RaceHealth, RaceNear, RACE_HEALTH_ID, RACE_NEAR_ID } from '@/components/race/RaceHealthAndNear'
+import { RaceAccountInvite } from '@/components/race/RaceAccountInvite'
 import { extractToc } from '@/lib/article-toc'
 import { getPortionCalc, showsBonusFiche } from '@/lib/article-cro'
 import { VerdictHero } from '@/components/article/VerdictHero'
@@ -100,6 +101,7 @@ export function ArticleLayout({
                 <RaceFoodSection breed={breed} foods={foods} />
                 <RaceHealth breed={breed} />
                 <RaceNear breed={breed} />
+                <RaceAccountInvite breed={breed} />
               </>
             ) : null}
             <div className="mdx-content mt-6">{children}</div>

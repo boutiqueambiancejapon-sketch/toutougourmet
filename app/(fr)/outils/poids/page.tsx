@@ -1,6 +1,6 @@
 // @cdc 5.0 — contrat : Outil calculateur · rendu SSG · JSON-LD WebApplication + FAQPage
 import type { Metadata } from 'next'
-import { BodyScoreEvaluator } from '@/components/outils/BodyScoreEvaluator'
+import { PrefilledBodyScoreEvaluator } from '@/components/outils/PrefilledTools'
 import { Sources, ToolPage, type FaqEntry } from '@/components/outils/ToolPage'
 
 export const metadata: Metadata = {
@@ -72,7 +72,7 @@ export default function PoidsPage() {
         description: "Évalue le score de condition corporelle d'un chien selon son poids actuel et son poids idéal.",
       }}
     >
-      <BodyScoreEvaluator />
+      <PrefilledBodyScoreEvaluator />
     </ToolPage>
   )
 }

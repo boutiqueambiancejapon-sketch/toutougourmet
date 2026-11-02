@@ -2,18 +2,40 @@ import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { AccountPage } from '@/components/compte/AccountPage'
 import { DogForm } from '@/components/compte/DogForm'
+import { FormNotice } from '@/components/compte/fields'
 import { BREED_OPTIONS, EMPTY_DOG } from '@/components/compte/dog-form-values'
+import { isKnownBreed } from '@/lib/dog-profile'
 import { getSessionUser } from '@/lib/server/auth'
 import { todayIso } from '@/lib/server/dog-form'
 import { createDogAction } from '../../actions'
 
 export const metadata: Metadata = { title: 'Ajouter mon chien' }
 
-export default async function NewDogPage() {
-  if (!(await getSessionUser())) redirect('/compte/connexion?retour=/compte/chien/nouveau')
+type Search = Record<string, string | string[] | undefined>
+
+const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v)
+
+// Pré-remplissage depuis une invitation (page race : ?race=slug ; résultat du quiz : ?poids=12).
+function prefill(params: Search) {
+  const race = one(params.race)
+  const kg = Number((one(params.poids) ?? '').replace(',', '.'))
+  return {
+    ...EMPTY_DOG,
+    breedSlug: race && isKnownBreed(race) ? race : '',
+    weightKg: Number.isFinite(kg) && kg > 0 && kg <= 120 ? String(kg) : '',
+  }
+}
+
+export default async function NewDogPage({ searchParams }: { searchParams: Promise<Search> }) {
+  const params = await searchParams
+  if (!(await getSessionUser())) {
+    const query = new URLSearchParams(Object.entries(params).flatMap(([k, v]) => (typeof v === 'string' && k !== 'bienvenue' ? [[k, v]] : []))).toString()
+    redirect(`/compte/connexion?retour=${encodeURIComponent(`/compte/chien/nouveau${query ? `?${query}` : ''}`)}`)
+  }
   return (
     <AccountPage title="Ajouter mon chien" back={{ href: '/compte', label: 'Mon compte' }} lead={<p>Tu pourras tout modifier ensuite.</p>}>
-      <DogForm action={createDogAction} initial={EMPTY_DOG} breeds={BREED_OPTIONS} submitLabel="Enregistrer mon chien" today={todayIso()} />
+      {params.bienvenue ? <FormNotice tone="info">Adresse confirmée, ton compte est ouvert. Complète le profil de ton chien.</FormNotice> : null}
+      <DogForm action={createDogAction} initial={prefill(params)} breeds={BREED_OPTIONS} submitLabel="Enregistrer mon chien" today={todayIso()} />
     </AccountPage>
   )
 }
