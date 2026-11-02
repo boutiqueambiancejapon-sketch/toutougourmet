@@ -22,7 +22,7 @@ export const AUTHORS: Record<string, Author> = {
     slug: 'mathias-c',
     name: 'Mathias C.',
     title: 'Fondateur & rédacteur',
-    bio: "Propriétaire de Charlie, Oxy et Milo. Écrit sur l'alimentation canine depuis les tranchées — insuffisance rénale, calculs, repas frais.",
+    bio: "Propriétaire de Charlie, Oxy et Milo. Écrit sur l'alimentation canine depuis les tranchées : insuffisance rénale, calculs, repas frais.",
     bioLong:
       "Mathias a fondé Toutou Gourmet après avoir navigué pendant des années dans le labyrinthe de l'alimentation vétérinaire avec ses trois chiens. Charlie, son cavalier king charles de 12 ans, vit avec une insuffisance rénale chronique et un souffle au cœur — ce qui a transformé chaque repas en équation calcium/phosphore/protéines. Oxy, 2 ans, a développé des calculs rénaux très tôt, forçant un choix alimentaire ultra-précis. Milo, shiba inu de 9 ans, mange des repas frais Dog Chef depuis deux ans et n'a jamais été en meilleure forme. Ces expériences terrain, croisées avec des heures de lecture de littérature vétérinaire, sont la matière première de chaque article publié ici.",
     pets: [

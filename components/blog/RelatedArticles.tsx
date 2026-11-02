@@ -10,7 +10,7 @@
  * Rendu : serveur uniquement — CSS scroll-snap sur mobile, grille sur desktop
  */
 
-import { ArticleCard } from '@/components/blog/ArticleCard'
+import { ArticleTile } from '@/components/article/ArticleTile'
 import type { Article } from '@/lib/mdx'
 
 // @cdc alimentation — composant maillage interne
@@ -54,32 +54,21 @@ export function RelatedArticles({ currentSlug, categorySlug, allArticles }: Prop
   if (related.length === 0) return null
 
   return (
-    <section aria-label="Articles similaires" className="mt-14">
-      <h2
-        className="mb-6 text-xl font-bold text-[var(--text-primary)]"
-        style={{ fontFamily: "'Fraunces', serif" }}
-      >
-        Continuer votre lecture…
+    <section aria-labelledby="a-lire-ensuite" className="v2 mt-14">
+      <h2 id="a-lire-ensuite" className="m-0 mb-5 font-display text-2xl font-black text-ink">
+        À lire ensuite
       </h2>
-
-      {/* Carousel scroll-snap sur mobile · grille sur md+ */}
-      <div
-        className="
-          flex gap-4 overflow-x-auto pb-4
-          snap-x snap-mandatory scroll-smooth
-          md:grid md:grid-cols-3 md:overflow-visible md:pb-0
-          [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
-        "
+      {/* Défilement horizontal sur mobile, grille à partir de md */}
+      <ul
+        role="list"
+        className="m-0 flex list-none snap-x snap-mandatory gap-4 overflow-x-auto p-0 pb-4 [scrollbar-width:none] md:grid md:grid-cols-3 md:overflow-visible md:pb-0 [&::-webkit-scrollbar]:hidden"
       >
         {related.map((article) => (
-          <div
-            key={article.slug}
-            className="snap-start shrink-0 w-[280px] sm:w-[300px] md:w-auto"
-          >
-            <ArticleCard article={article} variant="vertical" />
-          </div>
+          <li key={article.slug} className="w-[280px] shrink-0 snap-start sm:w-[300px] md:w-auto">
+            <ArticleTile article={article} />
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
   )
 }
