@@ -6,6 +6,7 @@ import { getArticleSlot } from '@/components/blog/blog-categories'
 import { Illustration } from '@/components/ui/Illustration'
 import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
 import { RaceSearch } from '@/components/race/RaceSearch'
+import { breedSize } from '@/components/race/breed-size'
 
 export const metadata: Metadata = {
   title: 'Alimentation par race de chien — guides nutritionnels',
@@ -14,7 +15,8 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.toutou-gourmet.com/chien/race' },
 }
 
-// @cdc 04-pages — hub race V2 (prototype) : recherche, index A-Z collant, cartes groupées par lettre.
+// @cdc 04-pages — hub race V2 (prototype) : recherche + filtre par gabarit, index A-Z collant,
+// cartes groupées par lettre.
 // Route statique prioritaire sur /chien/[category].
 const GRID_ID = 'races'
 
@@ -31,6 +33,7 @@ export default function RaceHubPage() {
         slug: a.slug,
         name: data?.name ?? nameFromTitle(a.frontmatter.title),
         weight: min && max ? `${min}–${max} kg` : null,
+        size: data ? breedSize(data) : null,
       }
     })
     .sort((x, y) => x.name.localeCompare(y.name, 'fr'))
@@ -72,7 +75,7 @@ export default function RaceHubPage() {
             <h2 id={`titre-${letter}`} className="m-0 border-b border-line pb-2 font-display text-3xl font-black text-ink">{letter}</h2>
             <ul role="list" className="m-0 grid list-none grid-cols-2 gap-4 p-0 sm:grid-cols-3 lg:grid-cols-4">
               {groups.get(letter)?.map((b) => (
-                <li key={b.slug} data-race-name={b.name}>
+                <li key={b.slug} data-race-name={b.name} data-race-size={b.size ?? undefined}>
                   <Link href={`/chien/race/${b.slug}`} className="flex flex-col gap-1.5 text-ink no-underline">
                     <span className="relative block aspect-square overflow-hidden rounded-card bg-cream-2">
                       <Illustration slot={getArticleSlot(b.slug, 'Race')} alt={b.name} fill sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 270px" className="!rounded-none" />
