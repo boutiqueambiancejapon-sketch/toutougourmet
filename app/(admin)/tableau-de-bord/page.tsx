@@ -3,6 +3,7 @@ import { dashboardCredentials } from '@/lib/dashboard/auth'
 import { parsePeriod } from '@/lib/dashboard/period'
 import { loadDashboard } from '@/lib/server/dashboard-data'
 import { getNightLogs, nightLogDir } from '@/lib/server/dashboard-logs'
+import { getServerHealth } from '@/lib/server/dashboard-health'
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
 import { ActionsSection } from '@/components/dashboard/ActionsSection'
 import { AiSection } from '@/components/dashboard/AiSection'
@@ -10,6 +11,8 @@ import { GeoSection } from '@/components/dashboard/GeoSection'
 import { NightSection } from '@/components/dashboard/NightSection'
 import { MessagesSection } from '@/components/dashboard/MessagesSection'
 import { LiveSection } from '@/components/dashboard/LiveSection'
+import { HealthBanner } from '@/components/dashboard/HealthBanner'
+import { ServerSection } from '@/components/dashboard/ServerSection'
 
 // @cdc tableau de bord — page privée du propriétaire, protégée par proxy.ts (HTTP Basic).
 // Lue à chaque visite, jamais mise en cache ni indexée, absente du sitemap.
@@ -27,7 +30,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
   if (!dashboardCredentials()) notFound()
 
   const period = parsePeriod((await searchParams).periode)
-  const [data, logs] = await Promise.all([loadDashboard(period), getNightLogs(7)])
+  const [data, logs, health] = await Promise.all([loadDashboard(period), getNightLogs(7), getServerHealth()])
 
   return (
     <>
@@ -35,8 +38,9 @@ export default async function DashboardPage({ searchParams }: PageProps) {
       <main className="mx-auto w-full max-w-page px-4 pb-16 md:px-8">
         <div className="pt-6">
           <h1 className="font-display text-3xl font-black text-ink">Tableau de bord</h1>
-          <p className="mt-1 text-sm text-ink-2">Mis à jour le {updated.format(new Date())}, heure de Paris.</p>
+          <p className="mt-1 text-sm text-ink-2">Mis à jour le {updated.format(health.now)}, heure de Paris.</p>
         </div>
+        <HealthBanner alerts={health.alerts} />
         {data.notice && (
           <p role="status" className="mt-4 rounded-box border border-amber bg-amber-bg px-4 py-3 text-sm text-amber-ink">
             {data.notice}
@@ -48,6 +52,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
         <AiSection data={data.ai} period={period} unread={data.unread} articleCount={data.articleCount} />
         <MessagesSection messages={data.messages} />
         <NightSection logs={logs} configured={nightLogDir() !== null} />
+        <ServerSection health={health} />
       </main>
     </>
   )
