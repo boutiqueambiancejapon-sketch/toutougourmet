@@ -64,3 +64,19 @@ GRANT USAGE ON SCHEMA analytics TO administrator;
 GRANT SELECT, INSERT, DELETE ON ALL TABLES IN SCHEMA analytics TO administrator;
 GRANT UPDATE ON analytics.ingest_state TO administrator;
 GRANT USAGE ON ALL SEQUENCES IN SCHEMA analytics TO administrator;
+
+-- Messages du formulaire de contact (app/api/contact → tableau de bord, section « Messages »).
+-- Aucune IP stockée : la limite de débit reste en mémoire dans la route.
+CREATE TABLE IF NOT EXISTS analytics.contact_messages (
+  id      bigserial PRIMARY KEY,
+  ts      timestamptz NOT NULL DEFAULT now(),
+  name    text NOT NULL,
+  email   text NOT NULL,
+  message text NOT NULL,
+  page    text,
+  handled boolean NOT NULL DEFAULT false
+);
+CREATE INDEX IF NOT EXISTS contact_messages_handled_ts_idx ON analytics.contact_messages (handled, ts DESC);
+ALTER TABLE analytics.contact_messages OWNER TO toutou;
+GRANT SELECT, INSERT, UPDATE ON analytics.contact_messages TO administrator;
+GRANT USAGE ON SEQUENCE analytics.contact_messages_id_seq TO administrator;

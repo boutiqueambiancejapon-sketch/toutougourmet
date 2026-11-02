@@ -8,6 +8,7 @@ const SECTIONS = [
   { id: 'partenaires', label: 'Partenaires' },
   { id: 'lecteurs', label: 'Lecteurs' },
   { id: 'ia', label: 'IA' },
+  { id: 'messages', label: 'Messages' },
   { id: 'nuit', label: 'Tâche de nuit' },
 ]
 
