@@ -33,6 +33,9 @@ claude -p "$(cat deploy/new-article-prompt.md)" --permission-mode auto --output-
 git clean -fdq -e node_modules
 echo "--- réécritures"
 claude -p "$(cat deploy/seo-rewrite-prompt.md)" --permission-mode auto --output-format text || echo "claude (réécritures) a terminé avec une erreur"
+git clean -fdq -e node_modules
+echo "--- nettoyage du ton (4 articles)"
+claude -p "$(cat deploy/tone-cleanup-prompt.md)" --permission-mode auto --output-format text || echo "claude (nettoyage du ton) a terminé avec une erreur"
 
 if [[ "$(git rev-parse HEAD)" == "$BEFORE" ]]; then
   echo "Aucun commit : rien à pousser."
