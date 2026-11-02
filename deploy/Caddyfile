@@ -11,6 +11,9 @@ www.toutou-gourmet.com {
 		output stderr
 		format json
 	}
+	# Le tableau de bord ne se sert que sur dashboard.toutou-gourmet.com.
+	@admin path /tableau-de-bord /tableau-de-bord/*
+	respond @admin 404
 	reverse_proxy 127.0.0.1:3000
 	header {
 		Strict-Transport-Security "max-age=31536000; includeSubDomains"
@@ -28,9 +31,19 @@ dashboard.toutou-gourmet.com {
 		output stderr
 		format json
 	}
-	@root path /
-	redir @root /tableau-de-bord
-	reverse_proxy 127.0.0.1:3000
+	# Ne sert que le tableau de bord et ses ressources ; tout le reste renvoie vers lui.
+	handle /robots.txt {
+		respond "User-agent: *
+Disallow: /
+" 200
+	}
+	@allowed path /tableau-de-bord /tableau-de-bord/* /_next/* /images/* /icon.svg /favicon.ico
+	handle @allowed {
+		reverse_proxy 127.0.0.1:3000
+	}
+	handle {
+		redir * /tableau-de-bord
+	}
 	header {
 		Strict-Transport-Security "max-age=31536000; includeSubDomains"
 		X-Robots-Tag "noindex, nofollow"

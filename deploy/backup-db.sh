@@ -2,6 +2,7 @@
 # Sauvegarde quotidienne de la base (cron, 3 h 15).
 # Garde 7 copies locales, puis copie hors du serveur avec rclone si un remote "offsite" existe.
 set -euo pipefail
+umask 077   # sauvegardes lisibles par toutou seulement
 DIR=/srv/toutou/backups
 DB=toutou
 mkdir -p "$DIR"
