@@ -19,3 +19,22 @@ www.toutou-gourmet.com {
 		-Server
 	}
 }
+
+# Tableau de bord privé : la page /tableau-de-bord du site, protégée par DASHBOARD_USER /
+# DASHBOARD_PASSWORD (authentification faite par l'application, pas par Caddy).
+dashboard.toutou-gourmet.com {
+	encode zstd gzip
+	log {
+		output stderr
+		format json
+	}
+	@root path /
+	redir @root /tableau-de-bord
+	reverse_proxy 127.0.0.1:3000
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Robots-Tag "noindex, nofollow"
+		X-Content-Type-Options "nosniff"
+		-Server
+	}
+}
