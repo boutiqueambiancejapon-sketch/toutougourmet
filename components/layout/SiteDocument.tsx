@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import Script from 'next/script'
 import ScrollToTop from './ScrollToTop'
 import { Tracking } from '@/components/analytics/Tracking'
+import { ConsentBanner } from '@/components/consent/ConsentBanner'
 import GoogleAnalyticsPageView from './GoogleAnalyticsPageView'
 import { fraunces, dmSans } from '@/lib/fonts'
 import { SITE_URL, type Locale } from '@/lib/i18n/config'
@@ -79,6 +80,7 @@ export function SiteDocument({ locale, header, footer, children }: SiteDocumentP
         {footer}
 
         <Tracking />
+        <ConsentBanner />
 
       </body>
     </html>

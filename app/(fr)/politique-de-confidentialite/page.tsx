@@ -38,10 +38,10 @@ export default function PolitiqueConfidentialitePage() {
               pas ton adresse IP. Aucune de ces données ne part chez un service tiers.
             </p>
             <p className="mb-2">
-              Nous utilisons aussi Google Analytics 4 (Google Ireland Ltd), réglé pour ne déposer aucun
-              cookie ni identifiant sur ton appareil : Google reçoit des signaux de visite sans pouvoir te
-              reconnaître d&apos;une visite à l&apos;autre. Ces signaux peuvent être traités hors de l&apos;Union
-              européenne, dans le cadre du Data Privacy Framework UE–États-Unis.
+              Nous utilisons aussi Google Analytics 4 (Google Ireland Ltd). Tant que tu n&apos;as pas cliqué
+              sur « Accepter » dans la bannière, il ne dépose aucun cookie : Google reçoit seulement des
+              signaux de visite sans pouvoir te reconnaître d&apos;une visite à l&apos;autre. Ces données peuvent
+              être traitées hors de l&apos;Union européenne, dans le cadre du Data Privacy Framework UE–États-Unis.
             </p>
             <p>
               Les messages envoyés par le formulaire de contact restent dans notre base de données. Ils
@@ -73,14 +73,18 @@ export default function PolitiqueConfidentialitePage() {
             </p>
           </section>
 
-          <section>
+          <section id="cookies">
             <h2 className="text-xl font-bold text-[var(--text-primary)] mb-3" style={{ fontFamily: "'Fraunces', serif" }}>
               Cookies
             </h2>
             <p>
-              Ce site ne dépose aucun cookie de mesure ni de publicité. Les seuls cookies sont ceux
-              nécessaires au fonctionnement du site (par exemple, rester connecté à ton compte quand cette
-              fonction sera ouverte).
+              Si tu acceptes la mesure d&apos;audience, Google Analytics dépose les cookies <code>_ga</code> et
+              <code>_ga_*</code>, conservés 13 mois au plus. Si tu refuses, aucun cookie de mesure n&apos;est
+              déposé et le site fonctionne de la même façon. Ton choix est gardé 6 mois dans ton navigateur ;
+              tu peux le changer à tout moment avec le lien « Gérer les cookies » en bas de chaque page.
+              Aucun cookie publicitaire n&apos;est utilisé. Les autres cookies sont seulement ceux nécessaires
+              au fonctionnement du site (par exemple, rester connecté à ton compte quand cette fonction sera
+              ouverte).
             </p>
           </section>
         </div>
