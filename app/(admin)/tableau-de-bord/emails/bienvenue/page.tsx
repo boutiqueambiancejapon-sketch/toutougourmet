@@ -21,7 +21,7 @@ export default async function WelcomePreviewPage({ searchParams }: PageProps) {
   return (
     <EmailPreview
       title="E-mail de bienvenue"
-      intro="Envoyé une seule fois par adresse, juste après une inscription à la lettre (attribut Brevo WELCOME_SENT). Pas d'envoi en double opt-in ni sans BREVO_SENDER_EMAIL et NEWSLETTER_SECRET."
+      intro="Envoyé une seule fois par adresse, juste après une inscription à la lettre (attribut Brevo WELCOME_SENT). Envoi automatique seulement si WELCOME_EMAIL_ENABLED=1 ; pas d’envoi en double opt-in ni sans BREVO_SENDER_EMAIL et NEWSLETTER_SECRET."
       subject={mail.subject}
       html={mail.html}
       text={mail.text}

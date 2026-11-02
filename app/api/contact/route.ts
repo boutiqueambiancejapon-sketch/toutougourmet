@@ -34,7 +34,8 @@ export async function POST(req: NextRequest) {
     const result = await subscribe(body.email, source)
     if (result === 'ok') {
       const email = body.email
-      if (!process.env.BREVO_DOI_TEMPLATE_ID) after(() => sendWelcomeOnce(email).then(() => undefined))
+      // Bienvenue automatique : seulement quand le propriétaire l'a activée (WELCOME_EMAIL_ENABLED=1).
+      if (process.env.WELCOME_EMAIL_ENABLED === '1' && !process.env.BREVO_DOI_TEMPLATE_ID) after(() => sendWelcomeOnce(email).then(() => undefined))
       return NextResponse.json({ ok: true })
     }
     if (result === 'invalid') return NextResponse.json({ error: 'Invalid email' }, { status: 400 })
