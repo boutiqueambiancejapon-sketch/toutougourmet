@@ -47,3 +47,30 @@ cron (utilisateur toutou) ──► backup-db.sh chaque nuit à 3 h 15
 4. Premier build : `sudo -u toutou /srv/toutou/deploy.sh`, vérifier `curl -I http://127.0.0.1:3000`.
 5. Jour de la bascule : `deploy/Caddyfile` → `/etc/caddy/Caddyfile`, `systemctl reload caddy`, DNS vers le VPS.
 6. Copie des sauvegardes hors du serveur : configurer un remote rclone nommé `offsite` (stockage objet S3).
+
+## Comptes (lot 4)
+
+Les comptes vivent dans la base `toutou`, schéma Postgres `app` (tables Better Auth `user`, `session`, `account`, `verification`, `rate_limit`, plus `dog` et `weight_log`). Mots de passe hachés (scrypt) dans `app.account`, aucun service d'authentification extérieur.
+
+Variables à ajouter dans `/srv/toutou/shared/.env` :
+
+| Variable | Valeur |
+| --- | --- |
+| `BETTER_AUTH_SECRET` | 32 octets aléatoires : `openssl rand -base64 32`. Ne jamais le changer après la mise en ligne (toutes les sessions sauteraient). |
+| `BETTER_AUTH_URL` | `https://www.toutou-gourmet.com` (adresse publique : sert aux liens des e-mails, à la vérification d'origine CSRF et aux cookies `Secure`). Préversion : son adresse à elle. |
+| `BREVO_API_KEY` | déjà présente (newsletter), réutilisée pour les e-mails transactionnels. |
+| `BREVO_SENDER_EMAIL` | expéditeur validé dans Brevo (ex. `bonjour@toutou-gourmet.com`). Sans lui, les e-mails de compte ne partent pas (erreur journalisée). |
+| `BREVO_SENDER_NAME` | facultatif, `Toutou Gourmet` par défaut. |
+| `MAIL_LOG_ONLY` | à laisser vide en production. `1` = e-mails écrits dans le journal au lieu d'être envoyés (tests). |
+
+Migration (à lancer avant le redémarrage, avec le compte propriétaire de la base) :
+
+```bash
+cd /srv/toutou/releases/<nouvelle-version>    # ou le dépôt, après npm ci
+sudo -u toutou env DATABASE_URL='postgresql:///toutou?host=/var/run/postgresql' npx drizzle-kit migrate
+sudo -u postgres psql -d toutou -c '\dt app.*'  # vérifier
+```
+
+`drizzle-kit migrate` est idempotent : il note les migrations appliquées dans `app.__drizzle_migrations` et ne rejoue que les nouvelles (fichiers `db/migrations/`). Une nouvelle migration se génère après un changement de `db/schema/` avec `npx drizzle-kit generate --name <sujet>`. Si la préversion tourne sous `administrator`, lui donner les droits : `GRANT USAGE ON SCHEMA app TO administrator; GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA app TO administrator;`.
+
+Base de développement : `toutou_accounts_dev` (rôle `administrator`), jamais `toutou`.

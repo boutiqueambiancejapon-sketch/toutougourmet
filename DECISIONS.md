@@ -41,6 +41,8 @@
 
 - [x] **V2 — sortie des services tiers hérités de Vercel (2026-11-02)** : Plausible, Formspree et l'API d'indexation Google sont abandonnés (réinstallables plus tard). Les messages du formulaire de contact vont dans `analytics.contact_messages` (route `/api/contact`, validation serveur, limite de débit en mémoire, champ piège) et se lisent dans la section « Messages » du tableau de bord ; sans base, la route répond 503. Les inscriptions (e-mail seul) vont dans Brevo (`lib/server/brevo.ts`), 503 si Brevo n'est pas configuré. Le compteur « bilans réalisés » du sticky CTA lit `analytics.events` (`Tool Result`, `tool = bien-nourri`) via `/api/bien-nourri-count`, sans cache. Le script Plausible, `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`, `PLAUSIBLE_API_KEY` et `FORMSPREE_ID` disparaissent ; `plausible.io` sort de la CSP. Les routes `/api/indexing` et `/api/search-console` restent mais répondent 501 sans leurs variables. Raison : un seul serveur, une seule base, aucun compte tiers à garder pour quitter Vercel.
 
+- [x] **V2 lot 4 — comptes (2026-11-02, branche `feat/accounts`)** : Better Auth 1.7 + Drizzle 0.45 sur le Postgres du VPS (driver `pg` existant), schéma `app` à part de `analytics`, migrations drizzle-kit dans `db/migrations/` (table de suivi `app.__drizzle_migrations`). E-mail + mot de passe uniquement, haché (scrypt) dans `app.account` ; adresse à confirmer avant la première connexion ; e-mails de vérification et de mot de passe oublié via l'API transactionnelle Brevo. Limite de tentatives stockée en base (5 connexions/min, 3 inscriptions/min, 3 demandes de mot de passe/5 min par IP). Pour garder les pages publiques statiques, l'en-tête et `/outils/ration` ne lisent pas la session : un témoin `tg_compte=1` (cookie lisible, sans secret) posé à la connexion et retiré à la déconnexion indique qu'un compte est ouvert ; `/outils/ration` n'appelle `/api/compte/ration` que si ce témoin est présent et que l'URL ne porte aucun paramètre (le pré-remplissage par URL garde la priorité). L'âge du chien est stocké comme date de naissance (estimée quand le maître donne un âge, colonne `birth_date_estimated`), la race comme slug de `data/breeds.ts`, l'activité avec les valeurs de `lib/calculators.ts`.
+
 ## À valider
 
 - [ ] DM_Sans : 3 weights chargés (400, 500, 600) — CDC impose max 2 — supprimer 500 ou 600 ?
@@ -60,6 +62,7 @@
 ## Exceptions documentées
 
 - **2025 — CSP unsafe-eval** : activé dans `next.config.ts` script-src. Raison d'origine (script Plausible) disparue le 2026-11-02 avec l'abandon de Plausible. Conservé par prudence : Google Tag Manager (variables JavaScript personnalisées) et les scripts publicitaires Google (AdSense, Funding Choices) peuvent recourir à `eval`. À retirer après un test en préversion sans `unsafe-eval` (console du navigateur sans erreur CSP sur GA4, annonces et bandeau de consentement).
+- **2026-11 — couleurs en dur dans les e-mails de compte** (`lib/server/auth-emails.ts`) : les messageries ignorent les variables CSS. Exception limitée au HTML des e-mails.
 - **2025 — DM_Sans 3 weights** : chargé avec 400, 500, 600 au lieu du max 2 du CDC. Décision de design (500 utilisé pour UI intermédiaire). DÉCISION À VALIDER pour réduire à 2.
 
 
