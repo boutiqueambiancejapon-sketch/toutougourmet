@@ -89,7 +89,7 @@ Fondations (branche `feat/accounts`, non fusionnée tant que le lot n'est pas va
 - [x] Scanner d'étiquette : l'IA lit l'étiquette, notre algorithme calcule le score ; cache par EAN (branche `feat/scanner`, 2026-11-02)
 - [ ] Scanner : outil de relecture des fiches (`reviewed`) et des signalements, relance des lectures douteuses sur un modèle plus fort
 - [ ] Assistant : mention claire qu'il s'agit d'une IA (AI Act)
-- [ ] Quotas : gratuit 5 analyses + 20 messages/mois ; Premium 50 analyses + 300 messages (30/jour)
+- [ ] Quotas : gratuit 5 analyses + 20 messages/mois ; Premium 10 analyses (décision 2026-11-02) + 300 messages (30/jour)
 - [ ] Pages croquettes indexables générées depuis les analyses en cache (pages et sitemap faits, indexées seulement une fois relues)
 
 ## Lot 7 — Premium et monétisation

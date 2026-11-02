@@ -29,6 +29,13 @@
       "when": 1793646786570,
       "tag": "0003_scan_report_handled",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793649693025,
+      "tag": "0004_premium_membership",
+      "breakpoints": true
     }
   ]
 }

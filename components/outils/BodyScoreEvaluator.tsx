@@ -9,6 +9,7 @@ import type { NextStep } from './NextSteps'
 import { PARTNERS, type Partner } from './partners'
 import { ScoreScale } from './ScoreScale'
 import { ToolResult } from './ToolResult'
+import type { AccountDog } from './useAccountPrefill'
 
 // @cdc outils — poids actuel comparé au poids de forme. Lien partenaire seulement pour un chien
 // en surpoids (Dog Chef dose les repas selon le poids visé).
@@ -38,12 +39,13 @@ function partner(score: BodyScore, animal: Animal): Partner | null {
   return { ...PARTNERS.dogChef, why: 'Pour un chien en surpoids, Dog Chef calcule les portions selon le poids visé et livre les repas déjà dosés.', label: 'Essayer Dog Chef' }
 }
 
-export function BodyScoreEvaluator() {
+/** `dog` : profil du compte. Poids actuel = dernière pesée ; poids de forme = milieu de la fourchette de sa race. */
+export function BodyScoreEvaluator({ dog }: { dog?: AccountDog | null }) {
   const currentId = useId()
   const idealId = useId()
   const [animal, setAnimal] = useState<Animal>('chien')
-  const [current, setCurrent] = useState('')
-  const [ideal, setIdeal] = useState('')
+  const [current, setCurrent] = useState(dog?.weightKg ? String(dog.weightKg) : '')
+  const [ideal, setIdeal] = useState(dog?.breedMidKg ? String(dog.breedMidKg) : '')
   const [result, setResult] = useState<{ score: BodyScoreResult; idealKg: number } | null>(null)
   const sizes = animal === 'chien' ? DOG_SIZES : CAT_SIZES
 

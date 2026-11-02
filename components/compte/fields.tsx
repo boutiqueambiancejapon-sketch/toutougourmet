@@ -39,7 +39,7 @@ export function TextField({ id, label, error, hint, onChange, ...input }: TextFi
         onChange={onChange ? (e) => onChange(e.target.value) : undefined}
         aria-invalid={error ? true : undefined}
         aria-describedby={describedBy}
-        className="min-h-12 w-full min-w-0 rounded-control border-2 border-ink bg-paper px-4 text-base text-ink outline-none placeholder:text-ink-2 focus-visible:ring-4 focus-visible:ring-amber aria-[invalid=true]:border-orange-ink"
+        className="h-12 w-full min-w-0 max-w-full appearance-none rounded-control border-2 border-ink bg-paper px-4 [&::-webkit-date-and-time-value]:text-left text-base text-ink outline-none placeholder:text-ink-2 focus-visible:ring-4 focus-visible:ring-amber aria-[invalid=true]:border-orange-ink"
       />
       {hint ? (
         <p id={`${id}-hint`} className="m-0 text-sm text-ink-2">

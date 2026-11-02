@@ -3,6 +3,12 @@
 
 /** Analyses par mois et par compte gratuit. Une analyse resservie depuis le cache ne compte pas. */
 export const FREE_MONTHLY_SCANS = Number(process.env.SCANNER_FREE_MONTHLY) || 5
+/** Analyses par mois avec Premium (gratuit pendant le lancement). Lu via scanLimitFor() côté serveur. */
+export const PREMIUM_MONTHLY_SCANS = Number(process.env.SCANNER_PREMIUM_MONTHLY) || 10
+
+export function monthlyScanLimit(plan: 'free' | 'premium'): number {
+  return plan === 'premium' ? PREMIUM_MONTHLY_SCANS : FREE_MONTHLY_SCANS
+}
 
 /** Taille maximale d'une photo reçue, en octets (contrôlée dans le navigateur ET sur le serveur). */
 export const MAX_IMAGE_BYTES = 8 * 1024 * 1024

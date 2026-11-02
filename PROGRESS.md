@@ -2,6 +2,8 @@
 
 ## Complété
 
+- 2026-11-02 (nuit, branche `feat/premium`, pas encore fusionnée) — Premium gratuit pendant le lancement : table `app.membership` (migration `0004_premium_membership`, à appliquer en production), page `/premium`, activation depuis `/compte` (adresse confirmée + un chien), quota du scanner 5 → 10 analyses par photo avec Premium (`scanLimitFor`), événement `Premium Activated`, formule dans l'export RGPD et supprimée avec le compte. Offres partenaires du compte choisies par `lib/account-offers.ts` (tests : `npx tsx scripts/test-account-offers.ts`), courbe de poids SVG rendue serveur avec zone de la race, alerte de poids (Premium) avec ration recalculée, alternative sous une croquette notée moins de 55 (Premium). Invitations à créer un compte (résultat du quiz, pages race) avec `?retour=` vers le formulaire du chien pré-rempli ; outils poids, âge, budget et calculateur « peut-il manger » pré-remplis par `/api/compte/profil`. Composant `ScanAccountInvite` prêt pour la fiche croquette et le résultat de scan (fichiers du chantier scanner, non posé). Parcours Playwright 390 px complet sur la base de test.
+
 - 2026-11-02 (soir) — Lot 4 comptes en ligne (Better Auth + Drizzle, schéma `app`, Brevo transactionnel, RGPD), bannière de consentement GA4, AdSense retiré, purge hebdomadaire (`toutou-purge.timer`), mise à jour horaire du site (`toutou-deploy.timer`).
 
 - 2026-11-02 (soir) — **Bascule** : www.toutou-gourmet.com servi par le VPS depuis `v2` (enregistrements `www` explicites chez Vercel DNS, racine redirigée par Vercel). Voir `docs/v2/bascule.md`.

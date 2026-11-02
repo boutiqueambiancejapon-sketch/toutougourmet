@@ -1,9 +1,9 @@
 import { asc, eq, inArray } from 'drizzle-orm'
-import { dog, foodAnalysis, scanHistory, scanReport, session, user, weightLog } from '@/db/schema'
+import { dog, foodAnalysis, membership, scanHistory, scanReport, session, user, weightLog } from '@/db/schema'
 import { getDb } from './drizzle'
 
 // @cdc lot 4 — RGPD : export des données d'un compte (portabilité) et garde-fou de la suppression.
-// Inclut l'historique du scanner (scan_history, scan_report). L'export ne contient jamais le mot de passe haché (app.account) ni les jetons de session.
+// Inclut l'historique du scanner (scan_history, scan_report) et la formule (membership). L'export ne contient jamais le mot de passe haché (app.account) ni les jetons de session.
 
 export interface AccountExport {
   format: 'toutou-gourmet-compte'
@@ -27,6 +27,8 @@ export interface AccountExport {
   /** Scanner d'étiquette (lot 6) : analyses lancées et signalements d'erreur */
   scans: { date: string; fromCache: boolean; product: { slug: string; brand: string | null; product: string | null; ean: string | null; score: number | null } }[]
   scanReports: { date: string; productSlug: string; message: string }[]
+  /** Formule du compte (Premium gratuit pendant le lancement) ; null : jamais activée */
+  membership: { plan: string; source: string; activatedAt: string | null; createdAt: string } | null
 }
 
 export async function exportAccountData(userId: string): Promise<AccountExport | null> {
@@ -64,6 +66,7 @@ export async function exportAccountData(userId: string): Promise<AccountExport |
     .innerJoin(foodAnalysis, eq(foodAnalysis.id, scanReport.foodAnalysisId))
     .where(eq(scanReport.userId, userId))
     .orderBy(asc(scanReport.createdAt))
+  const [plan] = await db.select().from(membership).where(eq(membership.userId, userId)).limit(1)
   return {
     format: 'toutou-gourmet-compte',
     version: 1,
@@ -96,6 +99,9 @@ export async function exportAccountData(userId: string): Promise<AccountExport |
       product: { slug: s.slug, brand: s.brand, product: s.product, ean: s.ean, score: s.score },
     })),
     scanReports: reports.map((r) => ({ date: r.at.toISOString(), productSlug: r.slug, message: r.message })),
+    membership: plan
+      ? { plan: plan.plan, source: plan.source, activatedAt: plan.activatedAt?.toISOString() ?? null, createdAt: plan.createdAt.toISOString() }
+      : null,
   }
 }
 

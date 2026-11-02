@@ -8,6 +8,7 @@ import { deleteAttemptsExceeded } from '@/lib/server/account-data'
 import { getAuth, getSessionUser } from '@/lib/server/auth'
 import { parseDogForm, parseWeightForm, todayIso, type FieldErrors } from '@/lib/server/dog-form'
 import { addWeight, createDog, deleteDog, updateDog } from '@/lib/server/dogs'
+import { activatePremium } from '@/lib/server/membership'
 
 // @cdc lot 4 — actions serveur des pages /compte. La session est relue à chaque appel ;
 // Next vérifie l'origine des actions serveur (protection CSRF intégrée).
@@ -53,6 +54,13 @@ export async function addWeightAction(dogId: string, _prev: FormState, form: For
   const ok = await addWeight(user.id, dogId, parsed.date, parsed.weightKg)
   if (!ok) return { message: "Ce chien n'existe pas ou n'est pas rattaché à ton compte." }
   redirect(`/compte/chien/${dogId}?pesee=1`)
+}
+
+/** Premium gratuit pendant le lancement : conditions vérifiées côté serveur (adresse confirmée, un chien). */
+export async function activatePremiumAction(): Promise<void> {
+  const user = await requireUser()
+  const result = await activatePremium(user.id)
+  redirect(result.ok ? (result.already ? '/compte' : '/compte?premium=active') : '/compte?premium=incomplet#premium')
 }
 
 export async function signOutAction(): Promise<void> {

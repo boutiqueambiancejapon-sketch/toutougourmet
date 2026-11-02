@@ -18,9 +18,11 @@ interface KeepResultProps {
   tool: string
   /** Résumé lisible du résultat, repris dans l'objet du message */
   summary: string
+  /** Invitation à créer un compte propre à l'outil (lien, phrase qui suit, page de retour) */
+  invite?: { label: string; text: string; retour?: string }
 }
 
-export function KeepResult({ tool, summary }: KeepResultProps) {
+export function KeepResult({ tool, summary, invite }: KeepResultProps) {
   const id = useId()
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
@@ -91,12 +93,12 @@ export function KeepResult({ tool, summary }: KeepResultProps) {
       {signedIn ? null : (
         <p className="m-0 border-t border-line pt-3 text-[15px] text-ink-2">
           <Link
-            href={`/compte/inscription?retour=${encodeURIComponent(pathname)}`}
+            href={`/compte/inscription?retour=${encodeURIComponent(invite?.retour ?? pathname)}`}
             className="font-semibold text-orange-ink underline underline-offset-2"
           >
-            Crée un compte pour garder ses résultats
+            {invite?.label ?? 'Crée un compte pour garder ses résultats'}
           </Link>
-          . Le profil de ton chien remplit les outils à ta place et tu suis son poids.
+          {invite?.text ?? '. Le profil de ton chien remplit les outils à ta place et tu suis son poids.'}
         </p>
       )}
     </section>
