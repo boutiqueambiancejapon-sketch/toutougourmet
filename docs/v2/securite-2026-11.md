@@ -279,3 +279,13 @@ sudo -u postgres psql toutou -c "TRUNCATE app.rate_limit;"
 2. B1 (SSH) dès que possible.
 3. Branche `chore/next-16.4` : Next 16.4.4 ou plus récent, plus sharp 0.35.5 via `overrides`, testés en préversion (build, scanner, images OG, optimiseur d'images). Cette branche fermera les 5 avis critiques et l'avis élevé restants.
 4. B5, B7 et B8 ensuite, un par un, avec une vérification du site après chaque étape.
+
+## Fait le 2026-11-02 (soir), avec l'accord du propriétaire
+
+- `sec/audit` fusionnée dans `v2` et en ligne ; la page d'aperçu du résumé hebdomadaire revérifie aussi l'authentification.
+- B9 : IP effacées de `app.session`, `app.rate_limit` vidée.
+- B8 : la sauvegarde de 1,6 Ko datait d'avant la création des tables ; un dump fait en `toutou` contient les 17 tables (373 Ko). `umask 077` dans `backup-db.sh`, fichiers en 600, dossier en 700. Pas de copie hors serveur (décision du propriétaire).
+- B7 : `www` renvoie 404 sur `/tableau-de-bord` ; `dashboard.` ne sert que le tableau de bord, `/_next`, `/images`, `/icon.svg`, `/favicon.ico`, robots.txt `Disallow: /`, le reste redirige vers `/tableau-de-bord`. Ancienne config : `/etc/caddy/Caddyfile.bak-2026-11-02`.
+- B6 : Caddy 2.11.7 depuis le dépôt officiel (clé 6576 0C51 EDEA 2017 CEA2 CA15 155B 6D79 CA56 EA34), configuration gardée, ingestion des journaux vérifiée.
+- B5 : override `toutou-web.service.d/hardening.conf` (copie dans `deploy/`). `.next` entier reste inscriptible (le site réécrit ses pages ISR dans `.next/server`). Score `systemd-analyze security` : 9,2 → 3,1. À étendre aux autres unités plus tard.
+- En attente : B1 (SSH par clé seulement, le propriétaire se connecte encore parfois par mot de passe), mise à jour de Next.js (branche `chore/next-16.4`, PR dédiée).
