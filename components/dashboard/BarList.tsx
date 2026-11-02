@@ -11,16 +11,21 @@ interface BarListProps {
   empty: string
   unit?: string
   format?: (label: string) => string
+  /** Total de référence : ajoute la part en % à côté de chaque valeur. */
+  total?: number
 }
 
-export function BarList({ rows, empty, unit = '', format }: BarListProps) {
+const pf = new Intl.NumberFormat('fr-FR', { style: 'percent', maximumFractionDigits: 1 })
+
+export function BarList({ rows, empty, unit = '', format, total }: BarListProps) {
   if (rows.length === 0) return <Empty>{empty}</Empty>
   const max = Math.max(...rows.map((r) => r.value), 1)
   return (
     <ol className="flex flex-col gap-3">
       {rows.map((r) => {
         const label = format ? format(r.label) : r.label
-        const value = `${nf.format(r.value)}${unit}`
+        const share = total ? ` · ${pf.format(r.value / total)}` : ''
+        const value = `${nf.format(r.value)}${unit}${share}`
         return (
           <li key={r.label} title={`${label} : ${value}`}>
             <div className="flex items-baseline justify-between gap-3 text-sm">

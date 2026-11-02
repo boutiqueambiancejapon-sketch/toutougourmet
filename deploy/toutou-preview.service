@@ -11,6 +11,9 @@ Environment=NODE_ENV=production
 Environment=DATABASE_URL=postgresql:///toutou?host=/var/run/postgresql
 EnvironmentFile=-/home/administrator/.config/toutou/brevo.env
 EnvironmentFile=-/home/administrator/.config/toutou/dashboard.env
+# Préversion : comptes et scanner sur la base de test, secret à part (remplace DATABASE_URL ci-dessus)
+EnvironmentFile=-/home/administrator/.config/toutou/auth-preview.env
+EnvironmentFile=-/home/administrator/.config/toutou/gemini.env
 ExecStart=/usr/bin/npx next start -H 127.0.0.1 -p 3001
 Restart=always
 RestartSec=3

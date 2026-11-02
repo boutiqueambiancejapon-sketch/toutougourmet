@@ -26,6 +26,7 @@
     "jose": "^6.2.2",
     "lucide-react": "^0.577.0",
     "marked": "^17.0.4",
+    "mmdb-lib": "^3.0.4",
     "next": "16.1.6",
     "next-mdx-remote": "^6.0.0",
     "next-sitemap": "^4.2.3",

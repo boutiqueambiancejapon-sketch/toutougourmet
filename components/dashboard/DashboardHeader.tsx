@@ -8,9 +8,11 @@ const SECTIONS = [
   { id: 'chiffres', label: 'Chiffres' },
   { id: 'partenaires', label: 'Partenaires' },
   { id: 'lecteurs', label: 'Lecteurs' },
+  { id: 'pays', label: 'Pays' },
   { id: 'ia', label: 'IA' },
   { id: 'messages', label: 'Messages' },
   { id: 'nuit', label: 'Tâche de nuit' },
+  { id: 'serveur', label: 'Serveur' },
 ]
 
 export function DashboardHeader({ period }: { period: Period }) {

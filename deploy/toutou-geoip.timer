@@ -1,0 +1,10 @@
+[Unit]
+Description=Toutou Gourmet - base de pays DB-IP, mise à jour le 3 de chaque mois
+
+[Timer]
+OnCalendar=*-*-03 04:17:00
+RandomizedDelaySec=1h
+Persistent=true
+
+[Install]
+WantedBy=timers.target
