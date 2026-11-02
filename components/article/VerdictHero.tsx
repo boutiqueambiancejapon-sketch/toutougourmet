@@ -17,7 +17,7 @@ export function VerdictHero({ verdict, note }: { verdict: VerdictKind; note?: st
   return (
     <section aria-label="Verdict" className={`v2 flex flex-col gap-3 rounded-card p-4 md:p-5 ${tone.bg}`}>
       <div className="flex items-center gap-4">
-        <VerdictIcon verdict={verdict} className="size-14 text-ink md:size-16" />
+        <VerdictIcon verdict={verdict} className="tg-stamp size-14 shrink-0 text-ink md:size-16" />
         <p className="m-0 flex min-w-0 flex-col">
           <span className="font-display text-[clamp(1.6rem,4vw,2.1rem)] font-black leading-none tracking-tight text-ink">
             <span className="sr-only">Verdict : </span>

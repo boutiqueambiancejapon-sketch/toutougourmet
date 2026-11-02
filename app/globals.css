@@ -457,3 +457,53 @@ h2,
 h3 {
   text-wrap: balance;
 }
+
+/* ─── Mouvement V2 (2026-11-02) ──────────────────────────────────────────────
+   CSS seul, aucun JS : rien ne bloque l'affichage ni le rendu serveur.
+   Tout est désactivé si l'utilisateur a demandé moins d'animations. */
+@media (prefers-reduced-motion: no-preference) {
+  /* Surligneur du H1 d'accueil : le fond rose se pose de gauche à droite. */
+  @keyframes tg-marker { from { background-size: 0% 100%; } to { background-size: 100% 100%; } }
+  .tg-marker {
+    background-image: linear-gradient(var(--color-rose), var(--color-rose));
+    background-repeat: no-repeat;
+    background-color: transparent !important;
+    animation: tg-marker 600ms 250ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  /* Tampon du verdict : l'icône arrive comme un coup de tampon. */
+  @keyframes tg-stamp {
+    0% { transform: scale(1.6) rotate(-14deg); opacity: 0; }
+    60% { transform: scale(0.92) rotate(3deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0); }
+  }
+  .tg-stamp { animation: tg-stamp 520ms 150ms cubic-bezier(0.3, 1.4, 0.5, 1) both; }
+
+  /* Apparition au défilement des cartes, lignes et titres de section (navigateurs récents ;
+     les autres affichent tout directement). Un bloc déjà visible au chargement ne bouge pas. */
+  @supports (animation-timeline: view()) {
+    @keyframes tg-rise { from { opacity: 0; transform: translateY(24px) scale(0.98); } to { opacity: 1; transform: none; } }
+    .v2 ul[role='list'] > li,
+    .v2 section > h2,
+    section.v2 > h2,
+    .v2 .tg-reveal {
+      animation: tg-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+  }
+
+  /* Cartes : l'image zoome et penche un peu au survol. */
+  .v2 a.group img { transition: transform 450ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .v2 a.group:hover img { transform: scale(1.05) rotate(-0.8deg); }
+  .v2 a.group:hover { transform: translateY(-3px) rotate(-0.3deg); }
+
+  /* Boutons et onglets : retour visuel net à l'appui. */
+  .v2 button:active, .v2 a.rounded-control:active, .v2 a.rounded-box:active { transform: scale(0.96); }
+  @keyframes tg-hop { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-5px); } }
+  .v2 nav a[aria-current='page'] svg { animation: tg-hop 420ms cubic-bezier(0.3, 1.4, 0.5, 1); }
+
+  /* Illustration du hero : un léger balancement au survol. */
+  @keyframes tg-wiggle { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-1.2deg); } 75% { transform: rotate(1.2deg); } }
+  .tg-wiggle:hover img { animation: tg-wiggle 600ms ease-in-out; }
+}

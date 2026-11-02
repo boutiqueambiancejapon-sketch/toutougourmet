@@ -32,6 +32,7 @@ Tâche quotidienne : rédiger UN nouvel article pour Toutou Gourmet (www.toutou-
 
 ## Vérifications
 - `npm ci` si nécessaire puis `npm run build` : doit passer. Si le build casse à cause de l'article, corriger ; si impossible, ne rien committer et le signaler.
+- Tirets cadratins (—) : au plus 2 par article, aucun dans le title, les H2, les puces et la FAQ (compter avec `grep -o '—' fichier | wc -l`). Aucune phrase-chute en fin de paragraphe (« Chaque heure compte. », « Le pronostic est sombre. ») : finir sur un fait.
 - Relire l'article avec la checklist du skill boileau (aucun mot interdit sans détail concret, aucune structure rhétorique bannie, typographie française, zéro emoji).
 
 ## Commit
