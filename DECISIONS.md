@@ -63,7 +63,7 @@
 
 ## Exceptions documentées
 
-- **2025 — CSP unsafe-eval** : activé dans `next.config.ts` script-src. Raison d'origine (script Plausible) disparue le 2026-11-02 avec l'abandon de Plausible. Conservé par prudence : Google Tag Manager (variables JavaScript personnalisées) et les scripts publicitaires Google (AdSense, Funding Choices) peuvent recourir à `eval`. À retirer après un test en préversion sans `unsafe-eval` (console du navigateur sans erreur CSP sur GA4, annonces et bandeau de consentement).
+- **2025 → 2026-11-02 — CSP unsafe-eval** : retiré par l'audit de sécurité (branche `sec/audit`), remplacé par `'wasm-unsafe-eval'` pour le lecteur zxing du scanner. Testé sans violation (GA4, scanner, compte, outils). AdSense est abandonné, donc la raison « scripts publicitaires » ne tient plus.
 - **2026-11 — couleurs en dur dans les e-mails de compte** (`lib/server/auth-emails.ts`) : les messageries ignorent les variables CSS. Exception limitée au HTML des e-mails.
 - **2025 — DM_Sans 3 weights** : chargé avec 400, 500, 600 au lieu du max 2 du CDC. Décision de design (500 utilisé pour UI intermédiaire). DÉCISION À VALIDER pour réduire à 2.
 
@@ -119,3 +119,6 @@ Offre confirmée par le propriétaire : −20 % sur la première commande en abo
 
 ## 2026-11-03 — Envoi des e-mails reporté
 Bienvenue automatique (`WELCOME_EMAIL_ENABLED`) et lettre mensuelle (`toutou-newsletter.timer`) prêtes mais non activées : le propriétaire démarrera quand la liste aura des abonnés. Aperçus et tests disponibles dans le tableau de bord, section « E-mails ».
+
+## 2026-11-02 — Audit de sécurité (branche `sec/audit`)
+Rapport : `docs/v2/securite-2026-11.md`. Décisions : aucune IP en base, ni pour les sessions (`ip_address` vidée) ni pour les compteurs de Better Auth (stockage `memory` au lieu de `database` ; remise à zéro à chaque redémarrage, acceptable pour des fenêtres de 1 à 5 min). Le tableau de bord revérifie l'authentification dans chaque page, route et action (Next 16.1.6 a des contournements connus du proxy). Optimiseur d'images en WebP seul. Next et sharp restent à monter dans une branche dédiée.
