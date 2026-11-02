@@ -10,7 +10,7 @@ import {
   type ActivityLevel,
   type CostComparison,
 } from '@/lib/calculators'
-import Link from 'next/link'
+import { NextSteps } from './NextSteps'
 
 const typeColors: Record<string, string> = {
   'croquettes-standard': '#A08C7A',
@@ -165,14 +165,12 @@ export function CostComparisonTool() {
             ))}
           </div>
 
-          <div className="mt-5 pt-4 border-t border-[var(--border)] flex flex-wrap gap-3">
-            <Link href="/comparateur" className="btn-outline text-sm py-2">
-              Voir nos marques recommandées →
-            </Link>
-            <Link href="/quiz" className="btn-ghost text-sm py-2">
-              Quiz personnalisé →
-            </Link>
-          </div>
+          <NextSteps
+            steps={[
+              { href: '/outils/budget', label: 'Le budget au mois, marque par marque', sub: 'Calculé pour son poids' },
+              { href: '/quiz', label: 'Trouver la formule adaptée à son profil' },
+            ]}
+          />
         </div>
       )}
     </div>

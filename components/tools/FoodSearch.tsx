@@ -39,7 +39,13 @@ function search(foods: Food[], query: string): Food[] {
     .map((x) => x.f)
 }
 
-export function FoodSearch({ foods }: { foods: Food[] }) {
+interface FoodSearchProps {
+  foods: Food[]
+  /** Exemples affichés dans le champ vide (par défaut : aliments de l'accueil) */
+  placeholder?: string
+}
+
+export function FoodSearch({ foods, placeholder = 'Raisin, banane, fromage…' }: FoodSearchProps) {
   const id = useId()
   const router = useRouter()
   const [query, setQuery] = useState('')
@@ -83,7 +89,7 @@ export function FoodSearch({ foods }: { foods: Food[] }) {
             enterKeyHint="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Raisin, banane, fromage…"
+            placeholder={placeholder}
             className="min-h-14 w-full rounded-box border-2 border-ink bg-paper pr-4 pl-13 text-lg text-ink outline-none placeholder:text-ink-2 focus-visible:ring-4 focus-visible:ring-amber"
           />
         </span>

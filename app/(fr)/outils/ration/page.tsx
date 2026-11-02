@@ -1,8 +1,9 @@
 // @cdc 5.0 — contrat : Outil calculateur · rendu SSG · JSON-LD WebApplication + FAQPage
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { RationCalculator } from '@/components/outils/RationCalculator'
-import { InfoBox, Callout } from '@/components/mdx/MdxComponents'
+import { Suspense } from 'react'
+import { RationCalculator, RationCalculatorFromUrl } from '@/components/outils/RationCalculator'
+import { InfoBox } from '@/components/mdx/MdxComponents'
 
 export const metadata: Metadata = {
   title: 'Calculateur de ration journalière chien & chat — Résultat en grammes selon le NRC',
@@ -91,8 +92,10 @@ export default function RationPage() {
             </div>
           </div>
 
-          {/* Calculateur */}
-          <RationCalculator />
+          {/* Calculateur : pré-rempli par l'URL (?poids=12&age=adulte…), rendu statique sans paramètres */}
+          <Suspense fallback={<RationCalculator />}>
+            <RationCalculatorFromUrl />
+          </Suspense>
 
           {/* Explication */}
           <div className="mt-6 flex flex-col">

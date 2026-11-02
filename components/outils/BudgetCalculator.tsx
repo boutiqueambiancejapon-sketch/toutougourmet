@@ -11,6 +11,8 @@ import {
   type AgeGroup,
   type ActivityLevel,
 } from '@/lib/calculators'
+import { NextSteps } from './NextSteps'
+import { rationHref } from './ration-params'
 
 export function BudgetCalculator() {
   const [animal, setAnimal] = useState<Animal>('chien')
@@ -194,6 +196,18 @@ export function BudgetCalculator() {
               En savoir plus
             </Link>
           </p>
+          <NextSteps
+            steps={[
+              {
+                href: animal === 'chien' && parseFloat(weight) > 0
+                  ? rationHref({ weightKg: parseFloat(weight), ageGroup: age, activityLevel: activity, sterilized, food: 'croquettes' })
+                  : '/outils/ration',
+                label: 'Combien de grammes par jour ?',
+                sub: 'La ration détaillée, avec les mêmes réglages',
+              },
+              { href: '/chien/marque', label: 'Comparer les compositions', sub: 'Avant de choisir sur le prix' },
+            ]}
+          />
         </div>
       )}
     </div>
