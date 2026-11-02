@@ -2,6 +2,8 @@
 
 ## Complété
 
+- 2026-11-02 (soir) — Lot 4 comptes en ligne (Better Auth + Drizzle, schéma `app`, Brevo transactionnel, RGPD), bannière de consentement GA4, AdSense retiré, purge hebdomadaire (`toutou-purge.timer`), mise à jour horaire du site (`toutou-deploy.timer`).
+
 - 2026-11-02 (soir) — **Bascule** : www.toutou-gourmet.com servi par le VPS depuis `v2` (enregistrements `www` explicites chez Vercel DNS, racine redirigée par Vercel). Voir `docs/v2/bascule.md`.
 
 - 2026-11-02 (journée autonome) — Quiz V2, tableau de bord privé `/tableau-de-bord` (préversion), 64 articles réécrits (tirets, emojis, voix), 100 titles et 163 descriptions raccourcis, deux contrôles qualité complets et leurs corrections (liens cassés, −35 % Dog Chef, `sponsored`, /blog allégé, hydratation, CSP AdSense), ingestion limitée aux hôtes de production. Détail : `docs/v2/journal-2026-11-02.md`.
