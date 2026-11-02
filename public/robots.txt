@@ -9,3 +9,4 @@ Host: https://www.toutou-gourmet.com
 
 # Sitemaps
 Sitemap: https://www.toutou-gourmet.com/sitemap.xml
+Sitemap: https://www.toutou-gourmet.com/croquettes/sitemap.xml

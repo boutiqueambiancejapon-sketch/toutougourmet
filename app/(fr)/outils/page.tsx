@@ -31,7 +31,7 @@ export default function OutilsPage() {
             Les calculateurs pour bien nourrir ton chien
           </h1>
           <p className="m-0 text-lg leading-relaxed text-ink-2">
-            Chaque outil répond à une question précise, avec sa formule et ses sources. Gratuits, sans inscription.
+            Chaque outil répond à une question précise, avec sa formule et ses sources. Tous sont gratuits. Seul le scanner d&apos;étiquette demande un compte.
           </p>
         </header>
       </div>
