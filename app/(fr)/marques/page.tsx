@@ -6,7 +6,7 @@ import { brands } from '@/data/brands'
 export const metadata: Metadata = {
   title: 'Meilleures marques nourriture pour chien',
   description:
-    "Franklin, Elmut, Petty Well, Dog Chef : notre sélection des meilleures croquettes et repas frais pour chien. Notes, prix et promos.",
+    "Franklin, Elmut, Ultra Premium Direct, Dog Chef, Dogfy Diet, Fidelis : notre sélection de croquettes et de repas frais pour chien. Notes, prix et offres.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/marques' },
 }
 
@@ -19,12 +19,12 @@ export default function MarquesPage() {
             Notre sélection de marques
           </h1>
           <p className="text-[var(--text-secondary)]">
-            On a comparé des dizaines de marques et retenu les 4 meilleures. Critères : qualité des
+            On a comparé des dizaines de marques et retenu les {brands.length} meilleures. Critères : qualité des
             ingrédients, digestibilité, rapport qualité/prix, retours clients.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {brands.map((brand) => (
             <BrandCard key={brand.slug} brand={brand} />
           ))}

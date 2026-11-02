@@ -153,7 +153,6 @@ const brandDescriptions: Record<string, string[]> = {
   elmut: [
     "Elmut a pris le parti radical du repas frais livré à domicile. L'idée : cuisiner pour ton animal comme tu cuisinerais pour toi-même, avec des ingrédients de qualité humaine, sans conservateurs ni additifs controversés.",
     "Le concept est simple mais exigeant : chaque semaine ou quinzaine, tu reçois des barquettes réfrigérées prêtes à servir. La cuisson douce préserve les vitamines et minéraux, souvent détruits dans le processus d'extrusion des croquettes classiques.",
-    "Une étude souvent citée suggère que les chiens nourris à l'alimentation fraîche vivent en moyenne 3 ans de plus que ceux nourris aux croquettes industrielles. Avec Elmut, tu investis dans la santé long-terme de ton animal.",
   ],
   'ultra-premium-direct': [
     "Ultra Premium Direct a fait le pari du circuit court : pas de distribution en animalerie, pas d'intermédiaire — la marque vend exclusivement via son propre site et son système d'abonnement. Résultat : des croquettes et pâtées de qualité premium accessibles à un prix réduit jusqu'à 40 % par rapport à des marques équivalentes en réseau classique.",

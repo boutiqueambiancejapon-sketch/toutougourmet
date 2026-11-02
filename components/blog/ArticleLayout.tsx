@@ -119,7 +119,7 @@ export function ArticleLayout({
               </div>
             )}
           </div>
-          <ArticleAside toc={toc} />
+          <ArticleAside toc={toc} seed={slug} />
         </div>
       </div>
     </article>

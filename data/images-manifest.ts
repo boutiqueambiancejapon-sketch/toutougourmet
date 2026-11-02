@@ -114,20 +114,6 @@ const BRAND_ELMUT: ImageSlot = {
   notes: 'Evokes home-cooked freshness. Green-forward palette. Do NOT imitate Elmut packaging.',
 }
 
-const BRAND_PETTY_WELL: ImageSlot = {
-  id: 'brand-pettywell',
-  group: 'brands',
-  ratio: '4:3',
-  tone: 'blue',
-  subject:
-    'A handful of golden kibble in the foreground with a subtle French countryside feel — wheat stalks or sunflower hints in the soft blurred background, warm daylight.',
-  composition:
-    'Kibble fills lower-right third. Upper half = dreamy cream/blue soft bokeh.',
-  decorations: ['paw-print', 'sparkle'],
-  notes:
-    'Evokes 100% French origin, scientific rigor. Blue-forward palette. Do NOT imitate Petty Well packaging.',
-}
-
 const BRAND_DOG_CHEF: ImageSlot = {
   id: 'brand-dogchef',
   group: 'brands',
@@ -1464,11 +1450,10 @@ const OG_DEFAULT: ImageSlot = {
 // ============================================================
 
 export const imageSlots: readonly ImageSlot[] = [
-  // Home (11)
+  // Home (10)
   HOME_HERO,
   BRAND_FRANKLIN,
   BRAND_ELMUT,
-  BRAND_PETTY_WELL,
   BRAND_DOG_CHEF,
   BREED_LABRADOR,
   BREED_GOLDEN,

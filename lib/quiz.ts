@@ -1,20 +1,20 @@
 export type QuizAnswers = Record<string, string | string[]>
-export type BrandKey = 'franklin' | 'elmut' | 'pettyWell' | 'dogChef'
+export type BrandKey = 'franklin' | 'elmut' | 'ultraPremiumDirect' | 'dogChef'
 export type BrandScores = Record<BrandKey, number>
 
 export const brandSlugMap: Record<BrandKey, string> = {
   franklin: 'franklin',
   elmut: 'elmut',
-  pettyWell: 'petty-well',
+  ultraPremiumDirect: 'ultra-premium-direct',
   dogChef: 'dog-chef',
 }
 
 export function computeScores(answers: QuizAnswers): BrandScores {
-  const scores: BrandScores = { franklin: 0, elmut: 0, pettyWell: 0, dogChef: 0 }
+  const scores: BrandScores = { franklin: 0, elmut: 0, ultraPremiumDirect: 0, dogChef: 0 }
 
   // Format
   if (answers.format === 'frais') { scores.elmut += 3; scores.dogChef += 3 }
-  if (answers.format === 'croquettes') { scores.franklin += 3; scores.pettyWell += 3 }
+  if (answers.format === 'croquettes') { scores.franklin += 3; scores.ultraPremiumDirect += 3 }
   if (answers.format === 'mixte') { scores.dogChef += 3; scores.elmut += 1; scores.franklin += 1 }
   if (answers.format === 'aucune') { scores.dogChef += 1 }
 
@@ -23,14 +23,14 @@ export function computeScores(answers: QuizAnswers): BrandScores {
 
   // Problèmes
   const problemes = answers.probleme as string[]
-  if (problemes?.includes('digestion')) { scores.elmut += 2; scores.dogChef += 2 }
-  if (problemes?.includes('allergie')) { scores.franklin += 2; scores.pettyWell += 2 }
-  if (problemes?.includes('poil')) { scores.franklin += 1; scores.pettyWell += 1 }
+  if (problemes?.includes('digestion')) { scores.elmut += 2; scores.dogChef += 2; scores.ultraPremiumDirect += 1 }
+  if (problemes?.includes('allergie')) { scores.franklin += 2 }
+  if (problemes?.includes('poil')) { scores.franklin += 1 }
   if (problemes?.includes('poids')) { scores.elmut += 1; scores.dogChef += 1 }
 
   // Budget
   if (answers.budget === 'petit' || answers.budget === 'moyen') {
-    scores.franklin += 2; scores.pettyWell += 2
+    scores.franklin += 2; scores.ultraPremiumDirect += 2
   }
   if (answers.budget === 'grand' || answers.budget === 'premium') {
     scores.elmut += 2; scores.dogChef += 2
@@ -39,7 +39,7 @@ export function computeScores(answers: QuizAnswers): BrandScores {
   // Age
   if (answers.age === 'senior') { scores.elmut += 1; scores.dogChef += 1 }
   if (answers.age === 'adulte') { scores.dogChef += 1 }
-  if (answers.age === 'chiot') { scores.franklin += 1; scores.pettyWell += 1 }
+  if (answers.age === 'chiot') { scores.franklin += 1 }
 
   return scores
 }
@@ -51,6 +51,6 @@ export function getSortedBrands(scores: BrandScores): BrandKey[] {
 export const brandLabels: Record<BrandKey, string> = {
   franklin: 'Franklin Pet Food',
   elmut: 'Elmut',
-  pettyWell: 'Petty Well',
+  ultraPremiumDirect: 'Ultra Premium Direct',
   dogChef: 'Dog Chef',
 }

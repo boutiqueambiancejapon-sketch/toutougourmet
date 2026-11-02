@@ -7,7 +7,7 @@ import { InfoBox } from '@/components/mdx/MdxComponents'
 export const metadata: Metadata = {
   title: 'Simulateur budget chien — Franklin, Elmut et Dog Chef comparés',
   description:
-    'Compare le budget mensuel de Franklin, Elmut, Petty Well et Dog Chef selon le profil de ton chien. Calcul instantané avec les offres du moment.',
+    'Compare le budget mensuel de Franklin, Elmut et Dog Chef selon le profil de ton chien. Calcul instantané avec les offres du moment.',
   alternates: { canonical: 'https://www.toutou-gourmet.com/outils/budget' },
   openGraph: {
     title: 'Simulateur budget chien — Franklin, Elmut et Dog Chef comparés',
@@ -24,7 +24,7 @@ const faqItems = [
   },
   {
     question: 'Quelle marque de nourriture pour chien est la plus économique ?',
-    answer: 'En comparant au coût journalier réel (après calcul des rations selon le poids du chien), les croquettes premium comme Franklin ou Petty Well sont souvent plus économiques que les repas frais à volume équivalent. Leur densité calorique élevée signifie qu\'on en donne moins.',
+    answer: 'En comparant au coût journalier réel (après calcul des rations selon le poids du chien), les croquettes premium comme Franklin sont souvent plus économiques que les repas frais à volume équivalent. Leur densité calorique élevée signifie qu\'on en donne moins.',
   },
   {
     question: 'Comment réduire le budget alimentation de mon chien sans rogner sur la qualité ?',

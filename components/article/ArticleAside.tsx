@@ -5,7 +5,7 @@ import { RelatedBrands } from '@/components/blog/RelatedBrands'
 // @cdc 04-pages — colonne de droite d'article V2 (prototype) : sommaire collant,
 // encart « Et pour ton chien ? » (vers le calcul de ration, en attendant les profils du lot 4),
 // puis les marques recommandées.
-export function ArticleAside({ toc }: { toc: TocItem[] }) {
+export function ArticleAside({ toc, seed = '' }: { toc: TocItem[]; seed?: string }) {
   return (
     <aside className="v2 hidden self-stretch lg:block">
       <div className="sticky top-24 flex max-h-[calc(100vh-7rem)] flex-col gap-5 overflow-y-auto pb-2">
@@ -30,7 +30,7 @@ export function ArticleAside({ toc }: { toc: TocItem[] }) {
             Calculer sa ration
           </Link>
         </div>
-        <RelatedBrands sticky={false} />
+        <RelatedBrands sticky={false} seed={seed} />
       </div>
     </aside>
   )
