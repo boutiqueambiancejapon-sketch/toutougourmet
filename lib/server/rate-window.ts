@@ -27,3 +27,9 @@ export function clientIp(headers: Headers): string {
 export function retryAfterSeconds(limits: readonly { windowMs: number }[]): string {
   return String(Math.ceil(Math.min(...limits.map((l) => l.windowMs)) / 1000))
 }
+
+/** Lecture seule : vrai si une des fenêtres est déjà pleine (n'enregistre rien). */
+export function isLimited(key: string, limits: readonly { windowMs: number; max: number }[], now = Date.now()): boolean {
+  const recent = hits.get(key) ?? []
+  return limits.some((l) => recent.filter((t) => now - t < l.windowMs).length >= l.max)
+}
