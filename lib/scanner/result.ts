@@ -1,4 +1,5 @@
 import type { AnalysisSource, FoodAnalysis } from '@/db/schema'
+import { FREE_MONTHLY_SCANS, PREMIUM_MONTHLY_SCANS } from './config'
 import type { ScoreResult } from './score'
 import type { ExtractedLabel, ScannerErrorCode } from './types'
 
@@ -32,6 +33,8 @@ export interface Prefill {
 export interface ScanQuota {
   used: number
   limit: number
+  /** Formule du compte : le message de quota atteint propose Premium aux comptes gratuits */
+  plan?: 'free' | 'premium'
 }
 
 export type ScanResponse =
@@ -56,6 +59,8 @@ export function toScanAnalysis(row: FoodAnalysis): ScanAnalysis {
 }
 
 export const INCOMPLETE_MESSAGE = 'Une partie de l\'étiquette manque sur les photos. On garde ce qui est lu : ajoute la photo manquante, ce nouvel envoi ne sera pas décompté.'
+
+export const QUOTA_FREE_MESSAGE = `Tu as utilisé tes ${FREE_MONTHLY_SCANS} analyses gratuites du mois. Passe Premium depuis ton compte, c'est gratuit pendant le lancement : ${PREMIUM_MONTHLY_SCANS} analyses par mois.`
 
 export const ERROR_MESSAGES: Record<ScannerErrorCode, string> = {
   unauthorized: 'Connecte-toi pour lancer une analyse.',

@@ -11,6 +11,7 @@ const LABELS: Record<string, string> = {
   'Food Search': 'Recherche',
   'Quiz Complete': 'Quiz terminé',
   'Account Signup': 'Compte créé',
+  'Premium Activated': 'Premium activé',
   'Scan Barcode': 'Code-barres scanné',
   'Scan Result': 'Résultat du scanner',
   'Scan Share': 'Fiche partagée',

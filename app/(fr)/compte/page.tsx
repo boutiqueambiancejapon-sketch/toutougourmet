@@ -2,14 +2,22 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { AccountPage } from '@/components/compte/AccountPage'
+import { AccountOffers } from '@/components/compte/AccountOffers'
 import { DogCard } from '@/components/compte/DogCard'
+import { PremiumBadge, PremiumPanel } from '@/components/compte/PremiumPanel'
+import { TrackOnce } from '@/components/compte/TrackOnce'
 import { ScanHistoryList } from '@/components/compte/ScanHistoryList'
 import { FormNotice } from '@/components/compte/fields'
 import { SignOutButton } from '@/components/compte/SignOutButton'
 import { getSessionUser } from '@/lib/server/auth'
 import { listDogs } from '@/lib/server/dogs'
+import { getMembership, premiumMissing } from '@/lib/server/membership'
 import { listUserScans, usedThisMonth } from '@/lib/server/scanner'
-import { FREE_MONTHLY_SCANS } from '@/lib/scanner/config'
+import { monthlyScanLimit } from '@/lib/scanner/config'
+
+// Historique des scans : 20 dernières analyses en gratuit, historique complet avec Premium.
+const FREE_HISTORY = 20
+const PREMIUM_HISTORY = 1000
 
 export const metadata: Metadata = { title: 'Mon compte' }
 
@@ -20,10 +28,27 @@ export default async function AccountHomePage({ searchParams }: { searchParams: 
     // Lien de confirmation périmé : Better Auth renvoie ici avec ?error=…
     redirect(params.error ? `/compte/connexion?error=${encodeURIComponent(String(params.error).toUpperCase())}` : '/compte/connexion')
   }
-  const [dogs, scans, used] = await Promise.all([listDogs(user.id), listUserScans(user.id, 20), usedThisMonth(user.id)])
+  const [dogs, membership, missing, used] = await Promise.all([listDogs(user.id), getMembership(user.id), premiumMissing(user.id), usedThisMonth(user.id)])
+  const premium = membership?.plan === 'premium'
+  const scans = await listUserScans(user.id, premium ? PREMIUM_HISTORY : FREE_HISTORY)
+  const offresFor = typeof params.offres === 'string' ? params.offres : undefined
   return (
-    <AccountPage title={`Bonjour ${user.name}`} lead={<p>{user.email}</p>}>
+    <AccountPage
+      title={`Bonjour ${user.name}`}
+      lead={
+        <p className="flex flex-wrap items-center gap-2">
+          {user.email}
+          {premium ? <PremiumBadge /> : null}
+        </p>
+      }
+    >
       {params.bienvenue ? <FormNotice tone="info">Adresse confirmée, ton compte est ouvert. Ajoute ton chien pour commencer.</FormNotice> : null}
+      {params.premium === 'active' && premium ? (
+        <>
+          <FormNotice tone="info">{`Premium est activé : ${monthlyScanLimit('premium')} analyses par photo par mois, alertes de poids et historique complet des scans.`}</FormNotice>
+          <TrackOnce event="Premium Activated" props={{ source: 'launch-free' }} />
+        </>
+      ) : null}
       <section aria-labelledby="mes-chiens" className="flex flex-col gap-3">
         <h2 id="mes-chiens" className="m-0 font-display text-2xl font-black text-ink">
           {dogs.length > 1 ? 'Mes chiens' : 'Mon chien'}
@@ -46,6 +71,8 @@ export default async function AccountHomePage({ searchParams }: { searchParams: 
           {dogs.length > 0 ? 'Ajouter un autre chien' : 'Ajouter mon chien'}
         </Link>
       </section>
+      <PremiumPanel premium={premium} activatedAt={membership?.activatedAt ?? null} missing={missing} />
+      <AccountOffers dogs={dogs} selectedId={offresFor} />
       <section aria-labelledby="outils" className="flex flex-col gap-2">
         <h2 id="outils" className="m-0 font-display text-2xl font-black text-ink">
           Ses outils
@@ -54,11 +81,23 @@ export default async function AccountHomePage({ searchParams }: { searchParams: 
           Le{' '}
           <Link href="/outils/ration" className="font-semibold text-orange-ink underline underline-offset-2">
             calcul de ration
+          </Link>
+          , le{' '}
+          <Link href="/outils/poids" className="font-semibold text-orange-ink underline underline-offset-2">
+            contrôle du poids
+          </Link>
+          , l&apos;
+          <Link href="/outils/age" className="font-semibold text-orange-ink underline underline-offset-2">
+            âge en années humaines
           </Link>{' '}
-          reprend le poids, l&apos;âge et l&apos;activité de {dogs[0]?.name ?? 'ton chien'}.
+          et le{' '}
+          <Link href="/outils/budget" className="font-semibold text-orange-ink underline underline-offset-2">
+            budget mensuel
+          </Link>{' '}
+          reprennent le profil de {dogs[0]?.name ?? 'ton chien'}.
         </p>
       </section>
-      <ScanHistoryList scans={scans} used={used} limit={FREE_MONTHLY_SCANS} />
+      <ScanHistoryList scans={scans} used={used} limit={monthlyScanLimit(premium ? 'premium' : 'free')} premium={premium} />
       <section aria-labelledby="mes-donnees" className="flex flex-col gap-2">
         <h2 id="mes-donnees" className="m-0 font-display text-2xl font-black text-ink">
           Mes données
