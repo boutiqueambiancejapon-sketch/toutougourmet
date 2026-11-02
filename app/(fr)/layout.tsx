@@ -4,17 +4,22 @@ import { TabBar } from '@/components/layout/v2/TabBar'
 import { SiteDocument } from '@/components/layout/SiteDocument'
 
 // @cdc i18n — français à la racine : le groupe (fr) n'apparaît pas dans l'URL,
-// les adresses V1 ne changent pas. En-tête, pied de page et barre d'onglets V2.
+// les adresses V1 ne changent pas. En-tête, pied de page et barre d'onglets V2,
+// masqués à l'impression (fiche aliments dangereux, pages imprimées par les lecteurs).
 export default function FrenchLayout({ children }: { children: React.ReactNode }) {
   return (
     <SiteDocument
       locale="fr"
-      header={<SiteHeader />}
+      header={
+        <div className="contents print:hidden">
+          <SiteHeader />
+        </div>
+      }
       footer={
-        <>
+        <div className="contents print:hidden">
           <SiteFooter />
           <TabBar />
-        </>
+        </div>
       }
     >
       {children}

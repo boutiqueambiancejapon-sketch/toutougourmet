@@ -93,6 +93,8 @@ export interface ArticleFrontmatter {
   verdict?: 'oui' | 'moderation' | 'danger'
   /** Miniature de partage : précision courte à côté du badge (≈ 25 caractères) */
   verdictNote?: string
+  /** Énergie pour 100 g, reprise de la valeur citée dans l'article (USDA le plus souvent) */
+  kcal100?: number
 }
 
 export interface Article {
