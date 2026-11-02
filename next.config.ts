@@ -10,6 +10,8 @@ const withMDX = createMDX({
 
 const nextConfig: NextConfig = {
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  // @cdc sécurité (audit 2026-11) — pas d'en-tête X-Powered-By: Next.js.
+  poweredByHeader: false,
   images: {
     // @cdc sécurité (audit 2026-11) — WebP seul : l'encodage AVIF de l'optimiseur d'images est visé
     // par des failles de Next 16.1.6 (GHSA-2xp9-vwfh-vxw4) et coûte cher en CPU sur le VPS.
