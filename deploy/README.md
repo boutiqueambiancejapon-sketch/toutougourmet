@@ -109,3 +109,50 @@ sudo -u toutou env DATABASE_URL='postgresql:///toutou?host=/var/run/postgresql' 
 ```
 
 Base de développement : `toutou_accounts_dev` (rôle `administrator`), jamais `toutou`.
+
+## Lettre et e-mails de la newsletter
+
+Code : `lib/emails/` (gabarits, fonctions pures), `lib/server/newsletter.ts` et `lib/server/brevo-newsletter.ts` (appels Brevo), aperçus dans le tableau de bord (`/tableau-de-bord/emails/bienvenue` et `/tableau-de-bord/emails/lettre`). Tests des gabarits : `npx tsx scripts/test-emails.ts`.
+
+Variables à ajouter dans `/srv/toutou/shared/.env` :
+
+| Variable | Valeur |
+| --- | --- |
+| `NEWSLETTER_SECRET` | clé des liens de désinscription signés : `openssl rand -base64 32`. Sans elle, aucun e-mail de la lettre ne part. La changer invalide les liens déjà envoyés (la page renvoie alors vers le formulaire de contact). |
+| `NEWSLETTER_TEST_EMAIL` | adresse qui reçoit les tests (bouton « M'envoyer un test » du tableau de bord, test de la campagne mensuelle). Jamais dans le code. |
+| `NEWSLETTER_STATE_FILE` | facultatif, défaut `/srv/toutou/shared/newsletter-state.json` : identifiants des campagnes créées, un par mois (le script ne recrée pas une campagne déjà notée). |
+| `BREVO_API_KEY`, `BREVO_LIST_ID`, `BREVO_SENDER_EMAIL`, `BREVO_SENDER_NAME` | déjà présentes. La liste de la lettre est `BREVO_LIST_ID` (5). |
+
+E-mail de bienvenue : envoyé après une inscription réussie par `/api/contact`, après la réponse (jamais bloquant), une fois par adresse. La trace est l'attribut Brevo booléen `WELCOME_SENT`, posé avant l'envoi. Le site crée l'attribut s'il manque (idempotent) au premier envoi ; pour le créer à la main :
+
+```bash
+curl -s -X POST https://api.brevo.com/v3/contacts/attributes/normal/WELCOME_SENT \
+  -H "api-key: $BREVO_API_KEY" -H 'content-type: application/json' -d '{"type":"boolean"}'
+```
+
+Pas d'e-mail de bienvenue si `BREVO_DOI_TEMPLATE_ID` est posé (double opt-in : Brevo envoie déjà sa confirmation, l'adresse n'est pas encore confirmée), ni sans `BREVO_SENDER_EMAIL` ou `NEWSLETTER_SECRET`.
+
+Désinscription : lien signé `/newsletter/desinscription?e=…&t=…` (HMAC-SHA256, `NEWSLETTER_SECRET`) dans les e-mails transactionnels, plus l'en-tête `List-Unsubscribe`. La page demande un clic sur « Me désinscrire » (les antivirus de messagerie ouvrent les liens) puis retire l'adresse de la liste 5. La lettre mensuelle, envoyée en campagne Brevo, utilise la balise `{{ unsubscribe }}` de Brevo.
+
+### Lettre mensuelle (préparée, non activée)
+
+`scripts/newsletter-monthly.ts` tourne chaque jour à 9 h et n'agit que la veille du premier mardi du mois : il crée la campagne Brevo (liste 5, programmée le lendemain à 18 h, heure de Paris), envoie un test à `NEWSLETTER_TEST_EMAIL` et note l'identifiant dans `NEWSLETTER_STATE_FILE`. Pour annuler un envoi programmé : tableau de bord, `/tableau-de-bord/emails/lettre`, bouton « Annuler l'envoi » (la campagne est suspendue dans Brevo).
+
+Essai sans rien envoyer (aucun appel à Brevo, HTML écrit dans `/tmp/newsletter-AAAA-MM.html`) :
+
+```bash
+cd /srv/toutou/current
+sudo -u toutou bash -c 'set -a; . /srv/toutou/shared/.env; set +a; node_modules/.bin/tsx scripts/newsletter-monthly.ts --dry --force'
+```
+
+Installation, le jour où le propriétaire valide l'envoi à la liste. Les fichiers visent `/srv/toutou/current` et l'utilisateur `toutou` : tant que le site tourne depuis la préversion, adapter `User=` et `WorkingDirectory=` comme dans `toutou-ingest.service`.
+
+```bash
+sudo cp deploy/toutou-newsletter.service deploy/toutou-newsletter.timer /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now toutou-newsletter.timer
+systemctl list-timers toutou-newsletter.timer       # prochain passage
+journalctl -u toutou-newsletter -n 50 --no-pager    # ce qu'il a fait
+```
+
+Arrêt : `sudo systemctl disable --now toutou-newsletter.timer`.

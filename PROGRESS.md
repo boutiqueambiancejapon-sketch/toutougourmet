@@ -105,6 +105,10 @@ Fait le 2026-11-01 (suite) :
 5. Nettoyage : supprimer la variable GitHub `VPS_DEPLOY` et les secrets `VPS_HOST` et `VPS_SSH_KEY` ; retirer la ligne `github-actions` de `/srv/toutou/.ssh/authorized_keys` et le fichier `/srv/toutou/.ssh/github_actions`.
 6. Jusqu'à la bascule (lot 9), le site public reste sur Vercel et se met à jour à chaque push de la branche de prod sur GitHub.
 
+## E-mails de la lettre (2026-11-02, branche `feat/emails`, non fusionnée)
+
+Gabarits `lib/emails/` (bienvenue, lettre mensuelle), bienvenue après inscription (`/api/contact`), page `/newsletter/desinscription`, aperçus et tests dans `/tableau-de-bord/emails/*`, script `scripts/newsletter-monthly.ts` + `deploy/toutou-newsletter.{service,timer}` (non installés). Tests : `npx tsx scripts/test-emails.ts`. À poser avant fusion : `NEWSLETTER_SECRET`, `NEWSLETTER_TEST_EMAIL` (voir `deploy/README.md`).
+
 ## Prochaine session
 
 1. **V2 lot 1, suite** : header, footer et barre d'onglets mobile façon prototype ; en-tête d'article (catégorie, date `<time>`, relecture) et sommaire ; StatRow V2 ; liens d'entités. Puis gabarit hub race et Home V2 (`tasks/todo.md`).
