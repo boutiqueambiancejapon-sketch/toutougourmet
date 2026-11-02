@@ -7,7 +7,7 @@ import { StickyBar, STICKY_BADGE, STICKY_BUTTON } from './StickyBar'
 export function StickyCtaDogChef() {
   return (
     <StickyBar>
-      <span className={`${STICKY_BADGE} bg-rose`}>-35%</span>
+      <span className={`${STICKY_BADGE} bg-rose`}>-30%</span>
       <p className="m-0 min-w-0 flex-1 truncate text-sm leading-snug text-cream">
         <span className="font-bold">Dog Chef</span>
         <span className="hidden text-cream/75 sm:inline"> · repas frais personnalisés</span>

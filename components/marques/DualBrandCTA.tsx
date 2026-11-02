@@ -1,53 +1,31 @@
-import Link from 'next/link'
+import type { Brand } from '@/data/brands'
+import { brandOfferLabel } from '@/data/brands'
+import { AffiliateNote } from './AffiliateNote'
 
-interface BrandSlot {
-  name: string
-  affiliateUrl: string
-  offer?: string
-  code?: string | null
-}
-
-interface DualBrandCTAProps {
-  brandA: BrandSlot
-  brandB: BrandSlot
-}
-
-export function DualBrandCTA({ brandA, brandB }: DualBrandCTAProps) {
+// @cdc affiliation — les deux offres d'un duel, côte à côte, en liens discrets (pas deux gros boutons
+// identiques, audit design-cro §3). `place` remplit data-cta pour savoir d'où vient le clic.
+export function DualBrandCTA({ brandA, brandB, place }: { brandA: Brand; brandB: Brand; place: string }) {
   return (
-    <div className="p-4 bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] mb-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
-        {[brandA, brandB].map((brand) => (
-          <div key={brand.name} className="flex flex-col items-center gap-1.5">
-            <a
-              href={brand.affiliateUrl}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              className="btn-primary w-full text-center text-sm py-2.5 px-3"
-            >
-              {`Essayer ${brand.name} →`}
-            </a>
-            {brand.offer && (
-              <p className="text-xs font-semibold text-center" style={{ color: 'var(--accent-1)' }}>
-                🎉 {brand.offer}
-              </p>
-            )}
-            {brand.code && (
-              <p
-                className="text-xs bg-[var(--bg-surface-2)] px-2 py-0.5 rounded-[var(--radius-md)]"
-                style={{ fontFamily: "'JetBrains Mono', monospace" }}
+    <div data-cta={`brand-${place}`} className="v2 flex flex-col gap-3 border-y border-line py-4">
+      <ul role="list" className="m-0 grid list-none gap-3 p-0 sm:grid-cols-2 sm:gap-8">
+        {[brandA, brandB].map((b) => (
+          <li key={b.slug} className="flex flex-col gap-1">
+            <span className="font-semibold text-ink">{b.name}</span>
+            <span className={`text-sm ${b.stockNote ? 'text-orange-ink' : 'text-ink-2'}`}>{brandOfferLabel(b)}</span>
+            {b.stockNote ? null : (
+              <a
+                href={b.affiliateUrl}
+                target="_blank"
+                rel="sponsored noopener"
+                className="self-start font-semibold text-orange-ink underline underline-offset-4 hover:text-ink"
               >
-                Code : <strong>{brand.code}</strong>
-              </p>
+                Voir l&apos;offre {b.name}&nbsp;→
+              </a>
             )}
-          </div>
+          </li>
         ))}
-      </div>
-      <p className="text-xs text-center text-[var(--text-muted)] mt-2">
-        🔗 Lien affilié — on perçoit une commission si tu commandes, sans impact sur le prix que tu paies.{' '}
-        <Link href="/a-propos#affiliation" className="underline hover:text-[var(--accent-1)]">
-          En savoir plus
-        </Link>
-      </p>
+      </ul>
+      <AffiliateNote single={false} />
     </div>
   )
 }

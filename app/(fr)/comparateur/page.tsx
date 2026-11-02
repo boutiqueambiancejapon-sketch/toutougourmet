@@ -1,219 +1,62 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ComparisonTable } from '@/components/comparateur/ComparisonTable'
-import { Disclosure } from '@/components/ui/Disclosure'
-import { brands, brandOfferLabel, brandTone } from '@/data/brands'
+import { brands } from '@/data/brands'
+import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
+import { BrandTable } from '@/components/marques/BrandTable'
+import { BrandOfferList } from '@/components/marques/BrandOfferList'
+import { ComparateurFaq } from '@/components/comparateur/ComparateurFaq'
 
 export const metadata: Metadata = {
   title: 'Comparatif nourriture pour chien',
   description:
-    'Comparez Franklin, Elmut, Ultra Premium Direct, Dog Chef, Dogfy Diet et Fidelis : notes, prix, ingrédients, croquettes et nourriture fraîche pour chien. Offres 2026.',
+    "Compare Franklin, Elmut, Ultra Premium Direct, Dog Chef, Dogfy Diet et Fidelis : prix, type d'aliment, fabrication, livraison et offres de bienvenue. Croquettes et repas frais pour chien.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/comparateur' },
 }
 
+// @cdc 04-pages — comparateur V2 (audit design-cro §3) : tableau complet en premier, sans note sur 5,
+// puis les offres (un lien par marque), l'origine des données et la FAQ. Rendu serveur.
+
+const H2 = 'm-0 font-display text-2xl font-black leading-tight text-ink md:text-3xl'
+
 export default function ComparateurPage() {
   return (
-    <div className="min-h-screen py-12 px-4" style={{ background: 'var(--bg-primary)' }}>
-      <div className="max-w-[1280px] mx-auto">
-
-        {/* Header compact */}
-        <div className="mb-10 max-w-[640px]">
-          <h1 className="page-title mb-3">Comparatif nourriture pour chien, {brands.length} marques</h1>
-          <p className="text-base text-[var(--text-secondary)]">
-            Franklin, Elmut, Ultra Premium Direct, Dog Chef, Dogfy Diet et Fidelis : croquettes, repas frais et menus en bocaux, notés sur les mêmes critères.
+    <div className="v2 mx-auto flex max-w-page flex-col gap-14 px-4 pt-6 pb-16 md:px-8 md:pt-10">
+      <div className="flex flex-col gap-6">
+        <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Marques', href: '/chien/marque' }, { label: 'Comparateur' }]} />
+        <header className="flex max-w-prose flex-col gap-3">
+          <h1 className="m-0 font-display text-[clamp(1.9rem,3.6vw,2.6rem)] font-black leading-[1.08] tracking-tight text-ink">
+            Comparatif nourriture pour chien, {brands.length} marques
+          </h1>
+          <p className="m-0 text-lg leading-relaxed text-ink-2">
+            Croquettes, repas frais et menus en bocaux, comparés sur les mêmes points. Mis à jour en novembre 2026.
           </p>
-          <p className="mt-2 text-sm text-[var(--text-secondary)]">Mis à jour en novembre 2026</p>
-        </div>
-
-        {/* Cartes marques */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-          {brands.map((brand) => {
-            const tone = brandTone(brand.slug)
-            return (
-            <div
-              key={brand.slug}
-              className="rounded-[var(--radius-xl)] p-5 flex flex-col"
-              style={{ background: tone.bg }}
-            >
-              {/* Nom + score */}
-              <div className="flex items-start justify-between gap-2 mb-1">
-                <div
-                  className="font-black text-lg leading-tight"
-                  style={{ fontFamily: "'Fraunces', serif", color: tone.ink }}
-                >
-                  {brand.name}
-                </div>
-                <div
-                  className="font-black text-2xl leading-none shrink-0"
-                  style={{ fontFamily: "'Fraunces', serif", color: tone.ink }}
-                >
-                  {brand.scores.global.toFixed(1)}
-                  <span className="text-sm font-normal opacity-60">/5</span>
-                </div>
-              </div>
-
-              {/* Tagline — texte sombre sur fond clair = bon contraste */}
-              <p className="text-sm leading-snug mb-4" style={{ color: 'var(--text-secondary)' }}>
-                {brand.tagline}
-              </p>
-
-              {/* Pros */}
-              <ul className="space-y-2 mb-5 flex-1">
-                {brand.pros.slice(0, 3).map((pro, j) => (
-                  <li key={j} className="flex items-start gap-2 text-sm" style={{ color: 'var(--text-primary)' }}>
-                    <span className="font-bold mt-px shrink-0" style={{ color: tone.ink }}>✓</span>
-                    {pro}
-                  </li>
-                ))}
-              </ul>
-
-              {/* Offre — fond blanc solide pour bon contraste */}
-              <div
-                className="text-sm font-bold text-center px-3 py-1.5 rounded-full mb-3"
-                style={{ background: 'var(--white)', color: tone.ink }}
-              >
-                {brandOfferLabel(brand)}
-              </div>
-              <Link
-                href={brand.affiliateUrl}
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                className="btn-primary text-sm py-2.5 text-center block"
-              >
-                {`Voir le site ${brand.name}`}
-              </Link>
-            </div>
-            )
-          })}
-        </div>
-
-        {/* Tableau */}
-        <div className="rounded-[var(--radius-xl)] overflow-hidden mb-6"
-          style={{ border: '1px solid var(--border)', boxShadow: 'var(--shadow-md)', background: 'var(--bg-surface)' }}>
-          <ComparisonTable />
-        </div>
-
-        <div className="max-w-lg mx-auto mb-8">
-          <Disclosure type="full" />
-        </div>
-
-        {/* Méthodologie */}
-        <div className="rounded-[var(--radius-xl)] p-6 mb-8"
-          style={{ background: 'var(--bg-surface-2)', border: '1px solid var(--border)' }}>
-          <h2 className="text-xl font-bold mb-3" style={{ fontFamily: "'Fraunces', serif" }}>
-            Notre méthodologie de notation
-          </h2>
-          <p className="text-sm mb-3" style={{ color: 'var(--text-secondary)' }}>
-            Chaque marque est notée sur 6 critères, de 0 à 5. Les notes sont calculées sur la base de :
-          </p>
-          <ul className="text-sm space-y-1 list-disc pl-5" style={{ color: 'var(--text-secondary)' }}>
-            <li>L&apos;analyse de la composition des aliments (liste d&apos;ingrédients, taux de protéines)</li>
-            <li>Les retours de propriétaires et avis vérifiés en ligne</li>
-            <li>La comparaison prix/qualité sur les gammes standards</li>
-            <li>Les recommandations vétérinaires disponibles publiquement</li>
-            <li>Notre propre test sur une période de 4 semaines minimum</li>
-          </ul>
-        </div>
-
-        {/* CTA Quiz */}
-        <div className="text-center">
-          <p className="mb-3 text-sm" style={{ color: 'var(--text-muted)' }}>
-            Tu ne sais pas quelle marque choisir pour ton animal ?
-          </p>
-          <Link href="/quiz" className="btn-primary inline-block">
-            Faire le quiz personnalisé →
-          </Link>
-        </div>
-
-        {/* SEO block + FAQ */}
-        <div className="max-w-3xl mx-auto mt-16">
-          <h2 className="page-title mb-4">
-            Quelle nourriture pour chien choisir ?
-          </h2>
-          <p className="text-base leading-relaxed mb-10" style={{ color: 'var(--text-secondary)' }}>
-            Croquettes, pâtées, repas frais, sans céréales… le marché du pet food déborde d&apos;options et les
-            promesses marketing se ressemblent toutes. Ce comparatif nourriture pour chien analyse Franklin,
-            Elmut, Ultra Premium Direct et Dog Chef sur les mêmes critères objectifs. Tu hésite entre croquettes classiques
-            et comparatif nourriture fraîche pour chien ? On détaille les différences ci-dessous pour t&apos;aider
-            à faire le meilleur choix selon le profil de ton chien — sans jargon.
-          </p>
-
-          {/* FAQ */}
-          <div className="space-y-8">
-
-            <div>
-              <h3 className="mb-2">
-                Quelle est la différence entre les croquettes classiques et le repas frais pour chien ?
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                Les croquettes subissent une cuisson à haute température (extrusion) qui concentre les nutriments
-                mais peut dégrader certaines protéines et vitamines. Le repas frais (comme Dog Chef ou Elmut
-                en format barquette) est cuit à basse température, ce qui préserve davantage la valeur nutritive
-                des ingrédients. En pratique, la différence se ressent surtout sur la digestibilité et la qualité
-                du poil pour les chiens sensibles.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="mb-2">
-                Les croquettes sans céréales sont-elles vraiment meilleures ?
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                Pas systématiquement. Les croquettes sans céréales contiennent moins de glucides et plus de
-                protéines animales, ce qui correspond mieux à la physiologie du chien. Mais elles ne sont pas
-                indispensables pour un chien en bonne santé sans sensibilité particulière. En revanche, pour un
-                chien avec des allergies alimentaires, des problèmes digestifs ou un pelage terne, passer au
-                sans-céréales peut faire une vraie différence. Franklin et Elmut proposent toutes deux des gammes
-                sans céréales bien équilibrées.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="mb-2">
-                Comment choisir entre Franklin, Elmut, Ultra Premium Direct et Dog Chef ?
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                Tout dépend du profil de ton chien et de ton budget. Franklin est le meilleur rapport
-                qualité/prix pour un chien standard sans problème particulier. Elmut se distingue sur la
-                personnalisation de la gamme (taille, activité, âge). Ultra Premium Direct mise sur le modèle
-                vente directe sans intermédiaire — jusqu&apos;à 40 % moins cher que des marques équivalentes en
-                animalerie, avec prébiotiques FOS/MOS intégrés. Dog Chef, le plus premium, convient aux chiens
-                très sensibles ou aux propriétaires qui veulent une alimentation la plus proche du fait-maison.
-                Utilise notre quiz pour obtenir une recommandation personnalisée.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="mb-2">
-                Combien coûte en moyenne une alimentation premium pour chien ?
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                Pour un chien de taille moyenne (10–20 kg), compte entre 55 € et 120 € par mois selon la
-                marque et le format. Ultra Premium Direct se positionne en entrée de gamme premium grâce à la
-                vente directe (autour de 55–80 €/mois), Franklin juste au-dessus (60–75 €/mois), Elmut dans une
-                fourchette intermédiaire (90–110 €/mois), et Dog Chef en haut de gamme (100–120 €/mois). Toutes
-                les marques proposent des offres de bienvenue — voir les détails dans le tableau ci-dessus.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="mb-2">
-                Peut-on mélanger croquettes et pâtée pour son chien ?
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                Oui, c&apos;est même recommandé par de nombreux vétérinaires. L&apos;alimentation mixte combine les
-                avantages des deux formats : la densité nutritive et la praticité des croquettes, et l&apos;hydratation
-                supplémentaire apportée par la pâtée. L&apos;idéal est de maintenir les proportions
-                recommandées par le fabricant pour éviter les déséquilibres. Ultra Premium Direct propose à la
-                fois croquettes et pâtées en livraison directe — pratique pour combiner les deux formats avec un
-                seul fournisseur, sans gestion logistique séparée.
-              </p>
-            </div>
-
-          </div>
-        </div>
-
+        </header>
       </div>
+
+      <section aria-labelledby="tableau" className="flex flex-col gap-4">
+        <h2 id="tableau" className={H2}>Quelle marque coûte combien, et pour quel chien&nbsp;?</h2>
+        <BrandTable detailed caption={`Comparatif complet des ${brands.length} marques`} />
+        <p className="m-0 text-sm text-ink-2">
+          Pas sûr de ton choix&nbsp;?{' '}
+          <Link href="/chien/marque" className="font-semibold text-orange-ink underline underline-offset-4">Pars du profil de ton chien</Link>.
+        </p>
+      </section>
+
+      <section aria-labelledby="offres" className="flex flex-col gap-4">
+        <h2 id="offres" className={H2}>Quelles offres de bienvenue en ce moment&nbsp;?</h2>
+        <BrandOfferList place="comparateur" />
+      </section>
+
+      <section aria-labelledby="sources" className="flex max-w-prose flex-col gap-3">
+        <h2 id="sources" className={H2}>D&apos;où viennent ces informations&nbsp;?</h2>
+        <p className="m-0 leading-relaxed text-ink-2">
+          Prix, compositions et lieux de fabrication viennent des sites des marques, relevés pour nos fiches et nos tests publiés dans la rubrique{' '}
+          <Link href="/chien/avis-marques" className="font-semibold text-orange-ink underline underline-offset-4">Avis marques</Link>.
+          Les avis clients cités (Trustpilot) sont repris avec leur nombre. On n&apos;attribue pas de note sur 5&nbsp;: une note sans protocole de test ne t&apos;apprendrait rien. Les prix varient selon le gabarit du chien, la recette et les promotions.
+        </p>
+      </section>
+
+      <ComparateurFaq />
     </div>
   )
 }

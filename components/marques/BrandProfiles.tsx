@@ -1,96 +1,117 @@
 import type { ComponentType } from 'react'
-import Link from 'next/link'
-import { getBrandBySlug, brandTone } from '@/data/brands'
-import { IconBowl, IconDog, IconHeart, IconScale, IconTarget, type IconProps } from '@/components/icons'
+import { getBrandBySlug } from '@/data/brands'
+import { IconBowl, IconDog, IconHeart, IconPaw, IconScale, IconTarget, type IconProps } from '@/components/icons'
+import { AffiliateNote } from './AffiliateNote'
+import { frTypo } from '@/lib/utils'
 
-// @cdc 04-pages — choix des marques par profil de chien (audit design-cro §3 « Marques et comparateur »).
-// Chaque raison reprend un fait déjà publié : data/brands.ts, fiches marques ou tests de la rubrique Avis.
+// @cdc 04-pages — « Quelle marque pour ton chien ? » par profil (audit design-cro §3) : une marque,
+// une raison vérifiable, un seul lien partenaire. Chaque raison reprend un fait déjà publié (source en
+// commentaire). Pas de donnée, pas de profil. Marque absente ou en rupture : ligne masquée.
 
-interface Pick {
+interface Profile {
+  id: string
+  label: string
+  Icon: ComponentType<IconProps>
   slug: string
   why: string
 }
 
-interface Profile {
-  label: string
-  Icon: ComponentType<IconProps>
-  picks: Pick[]
-}
-
 const PROFILES: Profile[] = [
   {
+    // Source : data/brands.ts (pros Dog Chef : ration recalculée quand le poids change).
+    id: 'surpoids',
     label: 'Chien en surpoids',
     Icon: IconScale,
-    picks: [
-      { slug: 'franklin', why: 'La recette Light contient 64 % de dinde et 11 % de matières grasses, pour un surpoids modéré.' },
-      { slug: 'dog-chef', why: 'Les portions sont calculées sur le profil du chien et se réajustent quand son poids change.' },
-    ],
+    slug: 'dog-chef',
+    why: 'La ration est calculée sur le profil du chien et recalculée quand son poids change.',
   },
   {
-    label: 'Chien allergique ou sensible',
+    // Source : data/brands.ts (pros mono-protéine) et fiche Franklin (recette Canard, Pomme & Carotte).
+    id: 'allergique',
+    label: 'Allergie ou digestion sensible',
     Icon: IconHeart,
-    picks: [
-      { slug: 'franklin', why: "Une seule source de viande par recette, ce qui simplifie l'éviction d'un allergène." },
-    ],
+    slug: 'franklin',
+    why: "Une seule source de viande par recette, par exemple le canard seul : plus simple pour écarter un allergène.",
   },
   {
+    // Source : content/blog/avis-dogfy-diet-repas-frais-chien.mdx (appétence citée dans les avis Trustpilot).
+    id: 'difficile',
     label: 'Chien difficile',
     Icon: IconBowl,
-    picks: [
-      { slug: 'dogfy-diet', why: 'Dans les avis Trustpilot, ces repas cuits sous vide sont souvent jugés plus appétents que des croquettes.' },
-    ],
+    slug: 'dogfy-diet',
+    why: 'Dans les avis Trustpilot, ces repas cuits sous vide reviennent souvent comme mieux acceptés que les croquettes.',
   },
   {
-    label: 'Budget serré',
+    // Source : content/blog/avis-ultra-premium-direct.mdx (3 à 5 € le kg, vente directe).
+    id: 'budget',
+    label: 'Petit budget',
     Icon: IconTarget,
-    picks: [
-      { slug: 'ultra-premium-direct', why: "La vente directe ramène le prix jusqu'à 40 % sous celui de marques équivalentes en animalerie." },
-    ],
+    slug: 'ultra-premium-direct',
+    why: 'Vendues en direct, ces croquettes coûtent 3 à 5 € le kilo selon la gamme.',
   },
   {
-    label: 'Chiot',
+    // Source : content/blog/avis-ultra-premium-direct.mdx (FAQ « chiot de grande race », recette N°2).
+    id: 'chiot-grande-race',
+    label: 'Chiot de grande race',
     Icon: IconDog,
-    picks: [
-      { slug: 'dog-chef', why: 'Le Puppy Booster ajoute calcium et phosphore, avec une ration calculée sur le poids adulte estimé.' },
-    ],
+    slug: 'ultra-premium-direct',
+    why: 'La recette N°2 vise les chiots de plus de 25 kg adultes, avec un rapport calcium et phosphore contrôlé.',
+  },
+  {
+    // Source : data/brands.ts (pros « Boosters ciblés : Puppy… ») et fiche Dog Chef (Puppy Booster).
+    id: 'chiot',
+    label: 'Chiot de petite ou moyenne race',
+    Icon: IconPaw,
+    slug: 'dog-chef',
+    why: 'Le Puppy Booster ajoute calcium et phosphore à une ration calculée sur le poids adulte estimé.',
+  },
+  {
+    // Source : fiche Elmut (menu Saumon & Brocoli : 65 % de poisson, oméga-3 EPA et DHA).
+    id: 'senior',
+    label: 'Chien senior',
+    Icon: IconPaw,
+    slug: 'elmut',
+    why: "Le menu Saumon & Brocoli contient 65 % de poisson, source d'oméga-3 EPA et DHA.",
   },
 ]
 
 export function BrandProfiles() {
+  const rows = PROFILES.flatMap((p) => {
+    const brand = getBrandBySlug(p.slug)
+    return brand && !brand.stockNote ? [{ ...p, brand }] : []
+  })
   return (
-    <section aria-labelledby="choisir-selon-ton-chien" className="v2 mb-14 flex flex-col gap-4">
-      <div className="flex max-w-prose flex-col gap-1">
-        <h2 id="choisir-selon-ton-chien" className="m-0 font-display text-2xl font-black text-ink">Choisir selon ton chien</h2>
-        <p className="m-0 text-ink-2">Une ou deux marques par situation, et la raison. Les liens partenaires sont sur chaque fiche.</p>
+    <section aria-labelledby="quelle-marque" className="v2 flex flex-col gap-4">
+      <div className="flex max-w-prose flex-col gap-2">
+        <h2 id="quelle-marque" className="m-0 font-display text-2xl font-black text-ink md:text-3xl">
+          Quelle marque pour ton chien&nbsp;?
+        </h2>
+        <p className="m-0 text-ink-2">Une marque par situation, la raison en une phrase, et le lien vers son offre.</p>
       </div>
-      <ul role="list" className="m-0 flex list-none flex-col p-0">
-        {PROFILES.map(({ label, Icon, picks }) => (
-          <li key={label} className="grid gap-3 border-b border-line py-4 md:grid-cols-[220px_1fr] md:gap-6">
-            <p className="m-0 flex items-center gap-2 font-display text-lg font-black text-ink">
-              <Icon className="size-6 shrink-0" />
+      <ul role="list" className="m-0 list-none border-t border-line p-0">
+        {rows.map(({ id, label, Icon, brand, why }) => (
+          <li key={id} className="grid gap-2 border-b border-line py-5 md:grid-cols-[240px_1fr_auto] md:items-center md:gap-8">
+            <p className="m-0 flex items-center gap-3 font-display text-lg font-black leading-tight text-ink">
+              <Icon className="size-7 shrink-0" />
               {label}
             </p>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {picks.map(({ slug, why }) => {
-                const brand = getBrandBySlug(slug)
-                if (!brand) return null
-                const tone = brandTone(slug)
-                return (
-                  <Link
-                    key={slug}
-                    href={`/chien/marque/${slug}`}
-                    className="flex flex-col gap-1 rounded-box p-4 no-underline hover:outline hover:outline-2 hover:outline-line-2"
-                    style={{ background: tone.bg }}
-                  >
-                    <span className="font-semibold" style={{ color: tone.ink }}>{brand.name} →</span>
-                    <span className="text-sm leading-snug text-ink-2">{why}</span>
-                  </Link>
-                )
-              })}
+            <p className="m-0 leading-relaxed text-ink-2">
+              <strong className="font-semibold text-ink">{brand.name}.</strong> {frTypo(why)}
+            </p>
+            <div data-cta={`brand-profil-${id}`}>
+              <a
+                href={brand.affiliateUrl}
+                target="_blank"
+                rel="sponsored noopener"
+                className="inline-flex min-h-11 items-center whitespace-nowrap font-semibold text-orange-ink underline underline-offset-4 hover:text-ink"
+              >
+                Voir l&apos;offre {brand.name}&nbsp;→
+              </a>
             </div>
           </li>
         ))}
       </ul>
+      <AffiliateNote single={false} />
     </section>
   )
 }

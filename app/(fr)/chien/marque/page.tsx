@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { BrandCard } from '@/components/marques/BrandCard'
 import { brands, getDuelPairs } from '@/data/brands'
+import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
+import { BrandTable } from '@/components/marques/BrandTable'
 import { BrandProfiles } from '@/components/marques/BrandProfiles'
-import { Breadcrumb } from '@/components/ui/Breadcrumb'
+import { IconChevron } from '@/components/icons'
 
 export const metadata: Metadata = {
   title: 'Avis croquettes premium pour chien',
@@ -12,60 +13,51 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.toutou-gourmet.com/chien/marque' },
 }
 
-const vsComparisons = getDuelPairs().map(([a, b]) => ({ a: a.slug, b: b.slug, label: `${a.name} vs ${b.name}` }))
+// @cdc 04-pages — hub Marques V2 (audit design-cro §3) : tableau comparatif sobre en premier, puis
+// le choix par profil de chien (un lien partenaire par profil), puis les duels. Rendu serveur.
 
 export default function MarqueHubPage() {
+  const duels = getDuelPairs()
   return (
-    <div className="min-h-screen py-12 px-4 bg-[var(--bg-primary)]">
-      <div className="max-w-[1280px] mx-auto">
-        <Breadcrumb items={[
-          { label: 'Accueil', href: '/' },
-          { label: 'Guides', href: '/chien' },
-          { label: 'Marques' },
-        ]} />
-
-        <div className="mb-10 max-w-[640px]">
-          <h1 className="page-title mb-3">
-            Les meilleures marques pour ton chien
+    <div className="v2 mx-auto flex max-w-page flex-col gap-14 px-4 pt-6 pb-16 md:px-8 md:pt-10">
+      <div className="flex flex-col gap-6">
+        <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Guides', href: '/chien' }, { label: 'Marques' }]} />
+        <header className="flex max-w-prose flex-col gap-3">
+          <h1 className="m-0 font-display text-[clamp(1.9rem,3.6vw,2.6rem)] font-black leading-[1.08] tracking-tight text-ink">
+            Quelle marque de croquettes ou de repas frais pour ton chien&nbsp;?
           </h1>
-          <p className="text-[var(--text-secondary)]">
-            {brands.length} marques de croquettes, de repas frais et de menus en bocaux, notées sur les mêmes critères : ingrédients, digestibilité, prix, variété et service client. On touche une commission si tu commandes par nos liens, sans surcoût pour toi.
+          <p className="m-0 text-lg leading-relaxed text-ink-2">
+            {brands.length} marques passées au crible&nbsp;: prix, type d&apos;aliment, fabrication, livraison. On touche une commission si tu commandes par nos liens, sans surcoût pour toi.
           </p>
-        </div>
-
-        <BrandProfiles />
-
-        {/* Grille des marques */}
-        <h2 className="font-bold mb-6" style={{ fontFamily: "'Fraunces', serif" }}>
-          Toutes les marques
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
-          {brands.map((brand) => (
-            <BrandCard key={brand.slug} brand={brand} />
-          ))}
-        </div>
-
-        {/* Comparatifs VS */}
-        <section>
-          <h2 className="font-bold mb-6" style={{ fontFamily: "'Fraunces', serif" }}>
-            Comparatifs marque vs marque
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {vsComparisons.map(({ a, b, label }) => (
-              <Link
-                key={`${a}-vs-${b}`}
-                href={`/chien/marque/${a}-vs-${b}`}
-                className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] px-5 py-4 flex items-center justify-between gap-3 hover:border-[var(--accent-1)] hover:shadow-[var(--shadow-md)] transition-all group"
-              >
-                <span className="font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent-1)] transition-colors">
-                  {label}
-                </span>
-                <span className="text-[var(--text-muted)] shrink-0">→</span>
-              </Link>
-            ))}
-          </div>
-        </section>
+        </header>
       </div>
+
+      <section aria-labelledby="tableau" className="flex flex-col gap-4">
+        <h2 id="tableau" className="m-0 font-display text-2xl font-black text-ink md:text-3xl">
+          Comment se comparent les {brands.length} marques&nbsp;?
+        </h2>
+        <BrandTable caption={`Comparatif des ${brands.length} marques : prix, type d'aliment, point fort, pour quel chien`} />
+        <p className="m-0 text-sm text-ink-2">
+          Prix relevés sur les fiches et tests de chaque marque. Fabrication, livraison et offres de bienvenue dans le{' '}
+          <Link href="/comparateur" className="font-semibold text-orange-ink underline underline-offset-4">comparateur complet</Link>.
+        </p>
+      </section>
+
+      <BrandProfiles />
+
+      <section aria-labelledby="duels" className="flex flex-col gap-3">
+        <h2 id="duels" className="m-0 font-display text-2xl font-black text-ink md:text-3xl">Tu hésites entre deux marques&nbsp;?</h2>
+        <ul role="list" className="m-0 grid list-none grid-cols-1 gap-x-8 border-t border-line p-0 md:grid-cols-2">
+          {duels.map(([a, b]) => (
+            <li key={`${a.slug}-${b.slug}`} className="border-b border-line">
+              <Link href={`/chien/marque/${a.slug}-vs-${b.slug}`} className="group flex min-h-14 items-center gap-3 py-2.5 text-ink no-underline">
+                <span className="grow font-semibold group-hover:underline">{a.name} vs {b.name}</span>
+                <IconChevron className="size-4 text-ink-2" />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   )
 }
