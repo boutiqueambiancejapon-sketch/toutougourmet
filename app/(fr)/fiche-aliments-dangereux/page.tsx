@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getFoodVerdicts, type FoodVerdict } from '@/lib/food-verdicts'
-import { POISON_CENTERS } from '@/data/poison-centers'
+import { POISON_COUNTRIES } from '@/data/poison-centers'
 import { VerdictIcon } from '@/components/icons'
 import { PrintButton } from '@/components/fiche/PrintButton'
 
@@ -73,17 +73,21 @@ export default function FicheAlimentsDangereuxPage() {
           <h2 className="m-0 font-display text-xl font-black text-ink print:text-lg">Il en a mangé</h2>
           <p className="m-0 text-sm text-ink-2">Appelle ton vétérinaire ou un centre antipoison vétérinaire, sans attendre les symptômes.</p>
           <ul role="list" className="m-0 flex list-none flex-col gap-1 p-0">
-            {POISON_CENTERS.fr.map((c) => (
-              <li key={c.tel} className="flex flex-wrap items-baseline gap-x-3 text-ink">
-                <a href={`tel:${c.tel}`} className="font-display text-xl font-black tabular-nums text-ink no-underline print:text-lg">
-                  {c.phone}
-                </a>
-                <span className="text-sm">
-                  {c.name}, {c.city}
-                  {c.hours ? `, ${c.hours}` : ''}
-                </span>
-              </li>
-            ))}
+            {POISON_COUNTRIES.flatMap((country) =>
+              country.centers.map((c) => (
+                <li key={c.tel} className="flex flex-wrap items-baseline gap-x-3 text-ink">
+                  <span className="w-16 shrink-0 text-xs font-semibold text-ink-2">{country.label}</span>
+                  <a href={`tel:${c.tel}`} className="font-display text-xl font-black tabular-nums text-ink no-underline print:text-lg">
+                    {c.phone}
+                  </a>
+                  <span className="text-sm">
+                    {c.name}, {c.city}
+                    {c.hours ? `, ${c.hours}` : ''}
+                    {c.note ? ` (${c.note.replace(/\.$/, '').toLowerCase()})` : ''}
+                  </span>
+                </li>
+              )),
+            )}
           </ul>
         </section>
 

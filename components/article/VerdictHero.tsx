@@ -1,5 +1,6 @@
 import { VerdictIcon, type VerdictKind } from '@/components/icons'
 import { POISON_CENTERS } from '@/data/poison-centers'
+import { VerdictPoisonLine } from './VerdictPoisonLine'
 
 // @cdc 04-pages — verdict en tête d'article (audit design-cro §3 « Article ») : la réponse
 // tient sous le titre, en grand, teintée selon le verdict, sans bordure colorée.
@@ -26,16 +27,7 @@ export function VerdictHero({ verdict, note }: { verdict: VerdictKind; note?: st
           {note ? <span className="mt-1.5 text-base leading-snug text-ink">{note}</span> : null}
         </p>
       </div>
-      {center ? (
-        <p className="m-0 text-[15px] leading-snug text-ink">
-          S&apos;il en a mangé, appelle le {center.name} ({center.city}
-          {center.hours ? `, ${center.hours}` : ''}) au{' '}
-          <a href={`tel:${center.tel}`} className="whitespace-nowrap font-semibold text-ink underline underline-offset-2">
-            {center.phone}
-          </a>
-          .
-        </p>
-      ) : null}
+      {center ? <VerdictPoisonLine /> : null}
     </section>
   )
 }
