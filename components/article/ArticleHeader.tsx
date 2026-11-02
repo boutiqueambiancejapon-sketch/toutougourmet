@@ -23,10 +23,12 @@ interface ArticleHeaderProps {
   readTime: number
   /** Bloc affiché sous l'auteur (fiche chiffrée des pages race) */
   extra?: React.ReactNode
+  /** Bloc affiché juste sous le chapô (verdict des articles « peut-il manger ») */
+  lead?: React.ReactNode
 }
 
 export function ArticleHeader(props: ArticleHeaderProps) {
-  const { breadcrumb, categorySlug, coverSlot, title, description, author, updatedIso, updatedDisplay, readTime, extra } = props
+  const { breadcrumb, categorySlug, coverSlot, title, description, author, updatedIso, updatedDisplay, readTime, extra, lead } = props
   const pill = getCategoryPill(categorySlug)
   return (
     <header className="v2 mx-auto flex max-w-page flex-col gap-6 px-4 pt-6 md:px-8 md:pt-10">
@@ -37,6 +39,7 @@ export function ArticleHeader(props: ArticleHeaderProps) {
             {title}
           </h1>
           <p className="m-0 text-base leading-relaxed text-ink-2 md:text-lg">{description}</p>
+          {lead}
           <p className="m-0 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-ink-2">
             <Link href={`/chien/${categorySlug}`} className="inline-flex items-center gap-1.5 text-ink-2 no-underline hover:text-ink">
               <CategoryIcon slug={categorySlug} className="size-[18px]" />
