@@ -38,6 +38,8 @@ interface WeightChartProps {
 
 export function WeightChart({ name, points, ideal }: WeightChartProps) {
   if (points.length === 0) return null
+  if (points.length < 2)
+    return <p className="m-0 rounded-box bg-cream-2 px-4 py-3 text-[15px] text-ink-2">La courbe s&apos;affiche dès la deuxième pesée, à une autre date.</p>
   const weights = points.map((p) => p.weightKg)
   // La zone de la race n'élargit l'échelle que si elle reste proche des pesées (sinon un chiot écrase la courbe).
   const near = ideal && ideal.min <= Math.max(...weights) * 1.5 && ideal.max >= Math.min(...weights) * 0.67

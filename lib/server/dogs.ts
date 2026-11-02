@@ -59,6 +59,8 @@ export async function addWeight(userId: string, dogId: string, date: string, wei
   const owned = await getDog(userId, dogId)
   if (!owned) return false
   await db().transaction(async (tx) => {
+    // Une seule pesée par jour : une nouvelle saisie le même jour remplace la précédente.
+    await tx.delete(weightLog).where(and(eq(weightLog.dogId, dogId), eq(weightLog.date, date)))
     await tx.insert(weightLog).values({ dogId, date, weightKg })
     const [latest] = await tx
       .select({ weightKg: weightLog.weightKg })
