@@ -24,25 +24,3 @@ export async function shrinkPhoto(file: File): Promise<Blob> {
     return file
   }
 }
-
-interface DetectedBarcode {
-  rawValue: string
-}
-interface BarcodeDetectorLike {
-  detect(source: ImageBitmapSource): Promise<DetectedBarcode[]>
-}
-type BarcodeDetectorCtor = new (opts: { formats: string[] }) => BarcodeDetectorLike
-
-/** Lit le code-barres d'une photo quand le navigateur sait le faire (Chrome Android), sinon null. */
-export async function readBarcode(file: File): Promise<string | null> {
-  const Ctor = (globalThis as unknown as { BarcodeDetector?: BarcodeDetectorCtor }).BarcodeDetector
-  if (!Ctor) return null
-  try {
-    const bitmap = await createImageBitmap(file)
-    const codes = await new Ctor({ formats: ['ean_13', 'ean_8'] }).detect(bitmap)
-    bitmap.close()
-    return codes[0]?.rawValue ?? null
-  } catch {
-    return null
-  }
-}

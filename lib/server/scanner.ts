@@ -1,5 +1,6 @@
 import { and, desc, eq, sql } from 'drizzle-orm'
 import { foodAnalysis, scanHistory, scanReport, scanUsage, type FoodAnalysis } from '@/db/schema'
+import type { AnalysisSource } from '@/db/schema/scanner'
 import { scoreLabel, SCORE_VERSION } from '@/lib/scanner/score'
 import { baseSlug } from '@/lib/scanner/slug'
 import type { ExtractedLabel } from '@/lib/scanner/types'
@@ -75,7 +76,7 @@ const isUniqueViolation = (err: unknown, constraint: string) => {
 }
 
 /** Enregistre une nouvelle analyse (ou renvoie celle du même EAN si elle vient d'être créée). */
-export async function saveAnalysis(label: ExtractedLabel, ean: string | null, model: string): Promise<FoodAnalysis> {
+export async function saveAnalysis(label: ExtractedLabel, ean: string | null, model: string, source: AnalysisSource = 'photo'): Promise<FoodAnalysis> {
   const details = scoreLabel(label)
   const base = baseSlug(label.marque, label.produit, ean)
   for (let attempt = 0; attempt < 4; attempt++) {
@@ -83,7 +84,7 @@ export async function saveAnalysis(label: ExtractedLabel, ean: string | null, mo
     try {
       const [row] = await db()
         .insert(foodAnalysis)
-        .values({ ean, slug, brand: label.marque, product: label.produit, extracted: { ...label, ean }, score: details.score, details, algorithmVersion: SCORE_VERSION, model })
+        .values({ ean, slug, brand: label.marque, product: label.produit, extracted: { ...label, ean }, score: details.score, details, algorithmVersion: SCORE_VERSION, model, source })
         .returning()
       return row
     } catch (err) {
@@ -97,8 +98,9 @@ export async function saveAnalysis(label: ExtractedLabel, ean: string | null, mo
   throw new Error('slug introuvable')
 }
 
-export async function recordScan(userId: string, analysisId: string, fromCache: boolean): Promise<void> {
-  await db().insert(scanHistory).values({ userId, foodAnalysisId: analysisId, fromCache })
+/** Historique du compte (si connecté) et compteur de consultations du produit. */
+export async function recordScan(userId: string | null, analysisId: string, fromCache: boolean): Promise<void> {
+  if (userId) await db().insert(scanHistory).values({ userId, foodAnalysisId: analysisId, fromCache })
   if (fromCache)
     await db()
       .update(foodAnalysis)

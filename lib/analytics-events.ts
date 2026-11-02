@@ -8,6 +8,10 @@ export const ANALYTICS_EVENTS = [
   'Food Search',
   'Quiz Complete',
   'Account Signup',
+  'Scan Barcode',
+  'Scan Result',
+  'Scan Share',
+  'Scan Download',
   'Pageview',
 ] as const
 

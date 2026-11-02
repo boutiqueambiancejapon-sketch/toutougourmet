@@ -10,10 +10,10 @@ const CRITERIA: [string, number, string][] = [
   ['Glucides estimés sur matière sèche', 15, 'maximum jusqu\'à 30 %, 2 points au-delà de 50 %'],
   ['Premier ingrédient', 15, '15 pour une viande ou un poisson d\'espèce nommée, 7 si l\'espèce n\'est pas précisée, 3 pour des sous-produits'],
   ['Part de viande ou poisson déclarée', 10, 'selon les pourcentages écrits, 0 si aucun'],
-  ['Sous-produits non nommés', 10, '0 si « viandes et sous-produits animaux » ou une catégorie de ce type apparaît'],
-  ['Céréales en tête', 5, '0 si une céréale est le premier ingrédient, 3 en deuxième ou troisième position'],
+  ['Ingrédients animaux non nommés', 10, '0 si « viandes et sous-produits animaux » ou une catégorie de ce type apparaît, 5 pour un ingrédient animal sans espèce (« graisses animales »), 3 pour deux ou plus'],
+  ['Céréales en tête', 5, '0 si une céréale est le premier ingrédient, 3 en deuxième ou troisième position, 1 si deux céréales ou plus figurent parmi les 5 premiers ingrédients'],
   ['Sucres ajoutés', 5, '0 si un sucre, un sirop ou du caramel est listé'],
-  ['Conservateurs controversés', 5, '0 si BHA, BHT ou éthoxyquine apparaît'],
+  ['Conservateurs controversés', 5, '0 si BHA, BHT ou éthoxyquine apparaît, 3 si des antioxygènes sont cités sans leur nom'],
   ['Colorants', 5, '0 si un colorant est listé'],
   ['Rapport calcium / phosphore', 5, 'compté seulement s\'il est écrit : 5 entre 1 et 2 pour 1'],
 ]
@@ -21,6 +21,16 @@ const CRITERIA: [string, number, string][] = [
 export function ScannerMethod() {
   return (
     <>
+      <p>
+        <strong>D&apos;où viennent les données ?</strong> D&apos;abord de notre base : un produit déjà scanné s&apos;affiche
+        tout de suite. Sinon, le serveur interroge{' '}
+        <a href="https://world.openpetfoodfacts.org" rel="noopener">
+          Open Pet Food Facts
+        </a>
+        , base ouverte remplie par ses contributeurs (licence ODbL), en n&apos;envoyant que le code-barres. Si la fiche contient la
+        composition et les constituants analytiques, notre barème la note sans photo. Sinon, deux photos de l&apos;étiquette
+        prennent le relais.
+      </p>
       <p>
         L&apos;IA ne donne pas la note. Elle recopie l&apos;étiquette (composition, constituants analytiques, additifs) dans un
         format fixe. La note vient ensuite d&apos;un barème écrit par la rédaction, le même pour tous les produits, à partir des

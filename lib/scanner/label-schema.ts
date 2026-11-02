@@ -1,4 +1,4 @@
-import { ANALYTICAL_KEYS, CONFIDENCE, CONFIDENCE_FIELDS, FOOD_TYPES, SPECIES } from './types'
+import { ANALYTICAL_KEYS, CONFIDENCE, CONFIDENCE_FIELDS, DOUBT_FIELDS, FOOD_TYPES, IMAGE_TYPES, LEGIBILITY, SPECIES } from './types'
 
 // @cdc lot 6 — consigne et schéma JSON de sortie, partagés par tous les fournisseurs.
 // Schéma JSON standard (type: [x, 'null'] pour les champs facultatifs) : chaque fournisseur le
@@ -30,6 +30,12 @@ export const LABEL_JSON_SCHEMA: JsonSchema = {
   type: 'object',
   properties: {
     estUneEtiquette: { type: 'boolean', description: "true si les images montrent l'étiquette d'un aliment pour animal" },
+    typeImage: {
+      type: 'string',
+      enum: IMAGE_TYPES,
+      description: 'aliment-chien = aliment complet pour chien (croquettes, pâtée) ; aliment-chat ; friandise = friandise, biscuit, os à mâcher, aliment complémentaire ; autre = pas une étiquette d\'aliment pour animal',
+    },
+    lisibilite: { type: 'string', enum: LEGIBILITY, description: 'floue si le texte de l\'étiquette est flou, trop loin, coupé par un reflet ou trop petit pour être lu' },
     marque: { type: ['string', 'null'], description: 'Marque telle qu\'écrite' },
     produit: { type: ['string', 'null'], description: 'Nom de la recette ou du produit' },
     ean: { type: ['string', 'null'], description: 'Chiffres du code-barres EAN-8 ou EAN-13 s\'ils sont lisibles, sinon null' },
@@ -66,9 +72,16 @@ export const LABEL_JSON_SCHEMA: JsonSchema = {
       required: [...CONFIDENCE_FIELDS],
     },
     illisibles: { type: 'array', description: 'Passages présents mais illisibles (flou, reflet, coupé)', items: { type: 'string' } },
+    champsDouteux: {
+      type: 'array',
+      description: 'Valeurs recopiées dont tu n\'es pas sûr (chiffre en partie caché, 8 ou 3, virgule invisible). ingredients si la liste est en partie illisible',
+      items: { type: 'string', enum: DOUBT_FIELDS },
+    },
   },
   required: [
     'estUneEtiquette',
+    'typeImage',
+    'lisibilite',
     'marque',
     'produit',
     'ean',
@@ -80,6 +93,7 @@ export const LABEL_JSON_SCHEMA: JsonSchema = {
     'partAnimaleDeclaree',
     'confiance',
     'illisibles',
+    'champsDouteux',
   ],
 }
 
@@ -92,4 +106,7 @@ Règles :
 - Les constituants analytiques sont les valeurs « telles quelles » de l'étiquette, sans calcul.
 - Un champ absent des images vaut null (ou liste vide) et sa confiance vaut « absent ».
 - Un passage visible mais illisible va dans « illisibles » et la confiance du champ baisse.
-- Si les images ne montrent pas une étiquette d'aliment pour animal, estUneEtiquette vaut false.`
+- Si les images ne montrent pas une étiquette d'aliment pour animal, estUneEtiquette vaut false et typeImage vaut autre.
+- Texte trop flou pour être lu : lisibilite vaut floue, listes vides, espece inconnu et typeImage aliment-chien si l'emballage ressemble à un aliment pour chien. Ne devine ni l'animal ni le contenu.
+- Un chiffre dont tu n'es pas sûr va dans champsDouteux : ne le devine pas, recopie ce que tu vois.
+- Les photos peuvent montrer des faces différentes du même sac (composition, constituants, devant du sac) : réunis-les.`

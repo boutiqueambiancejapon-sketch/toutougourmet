@@ -98,6 +98,12 @@ export default function PolitiqueConfidentialitePage() {
               une fiche produit publique sans aucune information sur toi, et, dans ton compte, la liste de tes
               analyses, leur nombre ce mois-ci et tes signalements d&apos;erreur. Cet historique part avec ton compte.
             </p>
+            <p className="mb-2">
+              La lecture du code-barres à la caméra se fait dans ton navigateur : aucune image du flux de la caméra
+              n&apos;est envoyée ni gardée, seuls les chiffres lus nous parviennent. Pour un produit que notre base ne
+              connaît pas encore, notre serveur interroge Open Pet Food Facts (association Open Food Facts, France) en
+              n&apos;envoyant que ce code-barres : ni ton adresse IP, ni rien qui te concerne.
+            </p>
             <p>
               Depuis <Link href="/compte" className={linkClass}>ton compte</Link>, tu peux télécharger toutes
               tes données dans un fichier JSON, corriger les profils de tes chiens et leurs pesées, et supprimer

@@ -12,11 +12,18 @@ export const CONFIDENCE_FIELDS = ['marque', 'produit', 'ean', 'ingredients', 'co
 export type ConfidenceField = (typeof CONFIDENCE_FIELDS)[number]
 
 export const SPECIES = ['chien', 'chat', 'autre', 'inconnu'] as const
+/** Ce que montrent les photos : sert à répondre sans décompter une photo inutilisable. */
+export const IMAGE_TYPES = ['aliment-chien', 'aliment-chat', 'friandise', 'autre'] as const
+export type ImageType = (typeof IMAGE_TYPES)[number]
+export const LEGIBILITY = ['nette', 'floue'] as const
 export const FOOD_TYPES = ['sec', 'humide', 'autre', 'inconnu'] as const
 
 /** Constituants analytiques en % du produit tel quel (comme sur l'étiquette). */
 export const ANALYTICAL_KEYS = ['proteines', 'matieresGrasses', 'cellulose', 'cendres', 'humidite', 'calcium', 'phosphore'] as const
 export type AnalyticalKey = (typeof ANALYTICAL_KEYS)[number]
+/** Champs dont une lecture douteuse change la note : affichés « à vérifier », corrigeables. */
+export const DOUBT_FIELDS = [...ANALYTICAL_KEYS, 'ingredients'] as const
+export type DoubtField = (typeof DOUBT_FIELDS)[number]
 
 const pct = z
   .number()
@@ -39,6 +46,8 @@ const confidence = z.enum(CONFIDENCE).catch('absent')
 
 export const extractedLabelSchema = z.object({
   estUneEtiquette: z.boolean().catch(false),
+  typeImage: z.enum(IMAGE_TYPES).catch('autre'),
+  lisibilite: z.enum(LEGIBILITY).catch('nette'),
   marque: text(80),
   produit: text(160),
   ean: z
@@ -70,6 +79,10 @@ export const extractedLabelSchema = z.object({
     .array(text(120))
     .catch([])
     .transform((list) => list.filter((a): a is string => a !== null).slice(0, 20)),
+  champsDouteux: z
+    .array(z.enum(DOUBT_FIELDS).nullable().catch(null))
+    .catch([])
+    .transform((list) => [...new Set(list.filter((f): f is DoubtField => f !== null))]),
 })
 
 export type ExtractedLabel = z.infer<typeof extractedLabelSchema>
@@ -107,6 +120,10 @@ export type ScannerErrorCode =
   | 'too_large'
   | 'bad_type'
   | 'not_a_label'
+  | 'blurry'
+  | 'cat_food'
+  | 'treat'
+  | 'not_found'
   | 'timeout'
   | 'provider_error'
   | 'unavailable'

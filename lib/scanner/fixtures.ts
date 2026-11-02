@@ -7,6 +7,8 @@ const sure = Object.fromEntries(CONFIDENCE_FIELDS.map((k) => [k, 'haute'])) as E
 
 export const PREMIUM_LABEL: ExtractedLabel = {
   estUneEtiquette: true,
+  typeImage: 'aliment-chien',
+  lisibilite: 'nette',
   marque: 'Brindille',
   produit: 'Adulte saumon et poulet',
   ean: '3760000000017',
@@ -27,10 +29,13 @@ export const PREMIUM_LABEL: ExtractedLabel = {
   partAnimaleDeclaree: null,
   confiance: sure,
   illisibles: [],
+  champsDouteux: [],
 }
 
 export const SUPERMARKET_LABEL: ExtractedLabel = {
   estUneEtiquette: true,
+  typeImage: 'aliment-chien',
+  lisibilite: 'nette',
   marque: 'Canivore',
   produit: 'Croquettes au poulet',
   ean: '3760000000024',
@@ -49,10 +54,13 @@ export const SUPERMARKET_LABEL: ExtractedLabel = {
   partAnimaleDeclaree: null,
   confiance: sure,
   illisibles: [],
+  champsDouteux: [],
 }
 
 export const INCOMPLETE_LABEL: ExtractedLabel = {
   estUneEtiquette: true,
+  typeImage: 'aliment-chien',
+  lisibilite: 'nette',
   marque: 'Brindille',
   produit: null,
   ean: null,
@@ -68,4 +76,5 @@ export const INCOMPLETE_LABEL: ExtractedLabel = {
   partAnimaleDeclaree: null,
   confiance: { ...sure, produit: 'absent', ean: 'absent', constituants: 'absent', additifs: 'absent' },
   illisibles: ['constituants analytiques coupés au bord de la photo'],
+  champsDouteux: [],
 }

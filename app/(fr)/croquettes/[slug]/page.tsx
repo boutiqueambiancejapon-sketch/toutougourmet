@@ -1,10 +1,13 @@
 // @cdc lot 6 — fiche produit générée depuis le cache du scanner. noindex et hors sitemap tant
 // que la rédaction ne l'a pas relue (reviewed = false) : une lecture IA brute n'est pas indexée.
+// Image de partage : /croquettes/[slug]/og.png (Open Graph) et story.png (bouton « Partager »).
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
-import { AiNotice } from '@/components/scanner/AiNotice'
+import { DownloadLink } from '@/components/scanner/DownloadLink'
+import { ShareButton } from '@/components/scanner/ShareButton'
+import { SourceNotice } from '@/components/scanner/SourceNotice'
 import { LabelData } from '@/components/scanner/LabelData'
 import { ScoreDetail } from '@/components/scanner/ScoreDetail'
 import { toScanAnalysis } from '@/lib/scanner/result'
@@ -32,6 +35,12 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     title: `${name} : composition et note${row.score !== null ? ` ${row.score}/100` : ''}`,
     description: `Composition, constituants analytiques et note sur 100 de ${name}, calculée par le barème publié de Toutou Gourmet.`,
     alternates: { canonical: `https://www.toutou-gourmet.com/croquettes/${row.slug}` },
+    openGraph: {
+      title: `${name}${row.score !== null ? ` : ${row.score}/100` : ''}`,
+      url: `https://www.toutou-gourmet.com/croquettes/${row.slug}`,
+      type: 'website',
+      images: [{ url: `https://www.toutou-gourmet.com/croquettes/${row.slug}/og.png`, width: 1200, height: 630, alt: `Note de ${name}` }],
+    },
     robots: row.reviewed ? undefined : { index: false, follow: true },
   }
 }
@@ -49,7 +58,7 @@ export default async function CroquettePage({ params }: Params) {
         <header className="flex flex-col gap-2">
           <h1 className="m-0 font-display text-[clamp(1.75rem,4.2vw,2.5rem)] font-black leading-[1.08] tracking-tight text-ink">{name}</h1>
           <p className="m-0 text-base text-ink-2">
-            {`${row.reviewed ? 'Fiche relue' : 'Analyse automatique'} du ${date}`}
+            {`${row.reviewed ? 'Fiche relue' : a.source === 'openpetfoodfacts' ? 'Données Open Pet Food Facts' : 'Analyse automatique'} du ${date}`}
             {a.ean ? ` · code-barres ${a.ean}` : ''}
           </p>
         </header>
@@ -59,8 +68,12 @@ export default async function CroquettePage({ params }: Params) {
           Quelle note pour sa composition ?
         </h2>
         <ScoreDetail details={a.details} />
+        <div className="flex flex-col gap-2 sm:flex-row">
+          <ShareButton slug={a.slug} name={name} score={a.score} />
+          <DownloadLink slug={a.slug} />
+        </div>
       </section>
-      <AiNotice reviewed={row.reviewed} />
+      <SourceNotice source={a.source} reviewed={row.reviewed} />
       <LabelData label={a.label} headingLevel="h2" />
       <p className="m-0 text-[15px] leading-relaxed text-ink-2">
         Tu as ce paquet sous la main ?{' '}

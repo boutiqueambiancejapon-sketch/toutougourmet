@@ -1,3 +1,4 @@
+import { MAX_IMAGES } from './config'
 import { geminiProvider } from './providers/gemini'
 import { ScannerError, type ExtractionResult, type LabelImage, type LabelProvider } from './types'
 
@@ -22,6 +23,6 @@ export function scannerProvider(): LabelProvider {
 }
 
 export async function extractLabel(images: LabelImage[]): Promise<ExtractionResult> {
-  if (images.length === 0 || images.length > 2) throw new ScannerError('bad_request', '1 ou 2 images attendues')
+  if (images.length === 0 || images.length > MAX_IMAGES) throw new ScannerError('bad_request', '1 à 3 images attendues')
   return scannerProvider().extract(images, AbortSignal.timeout(EXTRACT_TIMEOUT_MS))
 }

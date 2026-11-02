@@ -6,13 +6,17 @@ import { findByEan, recordScan, releaseQuota, reserveQuota, saveAnalysis, usedTh
 import { FREE_MONTHLY_SCANS, MAX_IMAGE_BYTES, MAX_IMAGES, RATE_LIMITS } from '@/lib/scanner/config'
 import { extractLabel } from '@/lib/scanner/extract'
 import { prepareImage } from '@/lib/scanner/images'
-import { ERROR_MESSAGES, toScanAnalysis, type ScanResponse } from '@/lib/scanner/result'
+import { ERROR_MESSAGES, INCOMPLETE_MESSAGE, toScanAnalysis, type ScanResponse } from '@/lib/scanner/result'
+import { classifyExtraction, nothingRead } from '@/lib/scanner/outcome'
+import { createScanSession, consumeScanSession } from '@/lib/server/scan-session'
 import { cleanEan } from '@/lib/scanner/slug'
 import { ScannerError, type ScannerErrorCode } from '@/lib/scanner/types'
 
-// @cdc lot 6 — analyse d'une étiquette (compte obligatoire). Ordre : session, débit, cache par
-// EAN (gratuit, sans appel à l'IA), contrôle des photos, réservation du quota, lecture par l'IA,
-// note par notre algorithme, enregistrement. Les photos restent en mémoire le temps de la requête.
+// @cdc lot 6 — analyse d'une étiquette par photos (compte obligatoire). Ordre : session, débit,
+// cache par EAN (gratuit, sans appel à l'IA), contrôle des photos, réservation du quota (sauf
+// envoi suivant d'une session de scan déjà décomptée), lecture par l'IA, tri de la lecture
+// (pas une étiquette, floue, chat, friandise : rendu ; partie manquante : on la demande), note
+// par notre algorithme, enregistrement. Les photos restent en mémoire le temps de la requête.
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -27,6 +31,10 @@ const STATUS: Record<ScannerErrorCode, number> = {
   too_large: 413,
   bad_type: 415,
   not_a_label: 422,
+  blurry: 422,
+  cat_food: 422,
+  treat: 422,
+  not_found: 404,
   timeout: 504,
   provider_error: 502,
   unavailable: 503,
@@ -47,6 +55,12 @@ export async function GET(): Promise<NextResponse> {
   return NextResponse.json({ quota: await quota(user.id) }, { headers: NO_STORE })
 }
 
+function ok(body: ScanResponse) {
+  return NextResponse.json(body, { headers: NO_STORE })
+}
+
+const hint = (v: FormDataEntryValue | null) => (typeof v === 'string' && v.trim() ? v.replace(/\s+/g, ' ').trim().slice(0, 120) : null)
+
 export async function POST(request: NextRequest): Promise<NextResponse> {
   if (!getDb()) return fail('unavailable')
   const user = await getSessionUser()
@@ -64,32 +78,51 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   const files = form.getAll('photo').filter((f): f is File => f instanceof File)
   if (files.length === 0 || files.length > MAX_IMAGES) return fail('bad_request')
   const typedEan = cleanEan(form.get('ean'))
+  const sessionToken = form.get('session')
 
   try {
-    if (typedEan) {
+    if (typedEan && !sessionToken) {
       const cached = await findByEan(typedEan)
       if (cached) {
         await recordScan(user.id, cached.id, true)
-        return NextResponse.json({ ok: true, analysis: toScanAnalysis(cached), fromCache: true, quota: await quota(user.id) } satisfies ScanResponse, { headers: NO_STORE })
+        return ok({ ok: true, analysis: toScanAnalysis(cached), fromCache: true, origin: 'cache', quota: await quota(user.id) })
       }
     }
     const images = await Promise.all(files.map(prepareImage))
-    if (!(await reserveQuota(user.id, FREE_MONTHLY_SCANS))) return fail('quota_reached', await quota(user.id))
+    // Envoi suivant d'une session déjà décomptée (photo manquante ajoutée) : gratuit.
+    const paid = consumeScanSession(sessionToken, user.id)
+    if (!paid && !(await reserveQuota(user.id, FREE_MONTHLY_SCANS))) return fail('quota_reached', await quota(user.id))
+    const refund = () => (paid ? Promise.resolve() : releaseQuota(user.id))
 
     let result
     try {
       result = await extractLabel(images)
-      if (!result.label.estUneEtiquette) throw new ScannerError('not_a_label', 'pas une étiquette')
     } catch (err) {
-      await releaseQuota(user.id)
+      await refund()
       throw err
     }
-    const ean = cleanEan(result.label.ean) ?? typedEan
+    const outcome = classifyExtraction(result.label)
+    const l = result.label
+    console.info(
+      `[scanner] lecture type=${l.typeImage} espece=${l.espece} lisibilite=${l.lisibilite} ingredients=${l.ingredients.length} constituants=${Object.values(l.constituants).filter((v) => v !== null).length} douteux=${l.champsDouteux.join('+') || '-'} → ${outcome.kind === 'reject' ? outcome.code : outcome.kind}`,
+    )
+    if (outcome.kind === 'reject') {
+      await refund()
+      return fail(outcome.code, await quota(user.id))
+    }
+    if (outcome.kind === 'incomplete') {
+      const free = nothingRead(outcome) && !paid
+      if (free) await releaseQuota(user.id)
+      const session = paid && typeof sessionToken === 'string' ? sessionToken : free ? '' : createScanSession(user.id)
+      return ok({ ok: false, error: 'incomplete', message: INCOMPLETE_MESSAGE, missing: outcome.missing, read: outcome.read, session, quota: await quota(user.id) })
+    }
+    const label = { ...result.label, marque: result.label.marque ?? hint(form.get('brand')), produit: result.label.produit ?? hint(form.get('product')) }
+    const ean = cleanEan(label.ean) ?? typedEan
     const existing = ean ? await findByEan(ean) : null
-    if (existing) await releaseQuota(user.id) // déjà en cache : l'analyse ne compte pas
-    const row = existing ?? (await saveAnalysis(result.label, ean, result.model))
+    if (existing) await refund() // déjà en cache : l'analyse ne compte pas
+    const row = existing ?? (await saveAnalysis(label, ean, result.model, 'photo'))
     await recordScan(user.id, row.id, Boolean(existing))
-    return NextResponse.json({ ok: true, analysis: toScanAnalysis(row), fromCache: Boolean(existing), quota: await quota(user.id) } satisfies ScanResponse, { headers: NO_STORE })
+    return ok({ ok: true, analysis: toScanAnalysis(row), fromCache: Boolean(existing), origin: existing ? 'cache' : 'photo', quota: await quota(user.id) })
   } catch (err) {
     if (err instanceof ScannerError) {
       if (!['too_large', 'bad_type', 'bad_request'].includes(err.code)) console.error(`[scanner] ${err.code} ${err.message}`)

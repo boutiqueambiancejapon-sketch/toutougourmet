@@ -6,7 +6,7 @@ export const FREE_MONTHLY_SCANS = Number(process.env.SCANNER_FREE_MONTHLY) || 5
 
 /** Taille maximale d'une photo reçue, en octets (contrôlée dans le navigateur ET sur le serveur). */
 export const MAX_IMAGE_BYTES = 8 * 1024 * 1024
-export const MAX_IMAGES = 2
+export const MAX_IMAGES = 3
 /** Côté le plus long après redimensionnement (navigateur et serveur). */
 export const MAX_IMAGE_SIDE = 2000
 
