@@ -11,7 +11,9 @@ const withMDX = createMDX({
 const nextConfig: NextConfig = {
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   images: {
-    formats: ['image/webp', 'image/avif'],
+    // @cdc sécurité (audit 2026-11) — WebP seul : l'encodage AVIF de l'optimiseur d'images est visé
+    // par des failles de Next 16.1.6 (GHSA-2xp9-vwfh-vxw4) et coûte cher en CPU sur le VPS.
+    formats: ['image/webp'],
   },
   experimental: {
     optimizePackageImports: ['lucide-react'],
@@ -130,10 +132,13 @@ const nextConfig: NextConfig = {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=()',
           },
+          // @cdc sécurité (audit 2026-11) — 'unsafe-eval' retiré (ni Next en production, ni gtag.js
+          // n'en ont besoin) ; 'wasm-unsafe-eval' garde le lecteur zxing (.wasm) du scanner.
+          // 'unsafe-inline' reste : scripts en ligne de Next sans nonce (pages statiques).
           {
             key: 'Content-Security-Policy',
             value:
-              "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com; frame-src 'none';",
+              "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self';",
           },
         ],
       },
