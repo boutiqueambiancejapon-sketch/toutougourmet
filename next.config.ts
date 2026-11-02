@@ -138,6 +138,17 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        // @cdc perf — fichiers de public/images : noms non versionnés (une cover peut être régénérée
+        // sous le même nom), donc 7 jours + revalidation en arrière-plan, pas « immutable ».
+        source: '/images/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=604800, stale-while-revalidate=86400' }],
+      },
+      {
+        // @cdc perf — public/vendor : le numéro de version est dans le nom du fichier (zxing_reader-3.1.6.wasm).
+        source: '/vendor/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
+      {
         // @cdc lot 6 — le scanner lit le code-barres à la caméra (flux traité dans le navigateur).
         // Déclaré après la règle générale : pour une même clé, Next garde la dernière.
         source: '/scanner',
