@@ -29,10 +29,24 @@ export function useScrolledPast(threshold = SHOW_AT): boolean {
   return past
 }
 
+/** Vrai tant que l'encart du milieu d'article est à l'écran : une seule offre visible à la fois. */
+function useMidCtaInView(): boolean {
+  const [inView, setInView] = useState(false)
+  useEffect(() => {
+    const el = document.querySelector('[data-cta^="mid-"]')
+    if (!el) return
+    const io = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting))
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+  return inView
+}
+
 export function StickyBar({ children }: { children: ReactNode }) {
   const visible = useScrolledPast()
+  const midInView = useMidCtaInView()
   const [dismissed, setDismissed] = useState(false)
-  if (!visible || dismissed) return null
+  if (!visible || dismissed || midInView) return null
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-[calc(var(--tabbar-h)+env(safe-area-inset-bottom))] z-30 px-2 pb-8 md:bottom-0 md:px-4 md:pb-4">
       <div className="v2 pointer-events-auto mx-auto flex max-w-[720px] items-center gap-2 rounded-box bg-ink py-1.5 pr-1 pl-3 text-cream md:gap-4 md:py-3 md:pr-2 md:pl-4">
