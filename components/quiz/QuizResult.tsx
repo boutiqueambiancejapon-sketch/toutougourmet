@@ -33,6 +33,12 @@ function rationLink(answers: QuizAnswers): NextStep {
 
 const reviewHref = (b: BrandKey) => `/chien/marque/${brandSlugMap[b]}`
 
+/** Après l'inscription : formulaire du chien pré-rempli avec le poids donné au test. */
+function profileReturn(answers: QuizAnswers): string {
+  const kg = quizWeight(answers)
+  return kg ? `/compte/chien/nouveau?poids=${kg}` : '/compte/chien/nouveau'
+}
+
 export function QuizResult({ answers, onRestart }: { answers: QuizAnswers; onRestart: () => void }) {
   const scores = computeScores(answers)
   const sorted = getSortedBrands(scores)
@@ -79,7 +85,15 @@ export function QuizResult({ answers, onRestart }: { answers: QuizAnswers; onRes
           )}
         </div>
         {clear ? <QuizPartner brand={top} /> : null}
-        <KeepResult tool="quiz" summary={clear ? brandLabels[top] : `${brandLabels[top]} ou ${brandLabels[second]}`} />
+        <KeepResult
+          tool="quiz"
+          summary={clear ? brandLabels[top] : `${brandLabels[top]} ou ${brandLabels[second]}`}
+          invite={{
+            label: 'Garde ce résultat et le profil de ton chien',
+            text: ' dans un compte : sa ration est calculée, son poids suivi et les offres choisies pour lui.',
+            retour: profileReturn(answers),
+          }}
+        />
         <NextSteps steps={steps} />
       </section>
       <div className="flex flex-wrap items-center justify-between gap-3">

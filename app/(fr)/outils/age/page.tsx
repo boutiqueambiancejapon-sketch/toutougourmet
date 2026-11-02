@@ -1,6 +1,6 @@
 // @cdc 5.0 — contrat : Outil calculateur · rendu SSG · JSON-LD WebApplication + FAQPage
 import type { Metadata } from 'next'
-import { AgeCalculator } from '@/components/outils/AgeCalculator'
+import { PrefilledAgeCalculator } from '@/components/outils/PrefilledTools'
 import { Sources, ToolPage, type FaqEntry } from '@/components/outils/ToolPage'
 import { calculateDogHumanAge } from '@/lib/calculators'
 
@@ -81,7 +81,7 @@ export default function AgePage() {
         description: "Convertit l'âge d'un chien en âge humain équivalent selon son gabarit.",
       }}
     >
-      <AgeCalculator />
+      <PrefilledAgeCalculator />
     </ToolPage>
   )
 }

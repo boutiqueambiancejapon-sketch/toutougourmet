@@ -9,6 +9,7 @@ import { BigResult, NumberField, SubmitButton, ToolCard } from './fields'
 import { PARTNERS, type Partner } from './partners'
 import { rationHref } from './ration-params'
 import { ToolResult } from './ToolResult'
+import type { AccountDog } from './useAccountPrefill'
 
 // @cdc outils — budget mensuel par marque pour la ration calculée (computeRation). Un seul lien
 // partenaire : la marque la moins chère pour ce profil ; les autres renvoient à leur fiche.
@@ -31,13 +32,15 @@ interface Row {
   type: 'croquettes' | 'repas-frais'
 }
 
-export function BudgetCalculator() {
+/** `dog` : profil du compte (poids, âge, activité, stérilisation), sinon formulaire vide. */
+export function BudgetCalculator({ dog }: { dog?: AccountDog | null }) {
   const weightId = useId()
+  const p = dog?.prefill
   const [animal, setAnimal] = useState<Animal>('chien')
-  const [weight, setWeight] = useState('')
-  const [age, setAge] = useState<AgeGroup>('adulte')
-  const [activity, setActivity] = useState<ActivityLevel>('normal')
-  const [sterilized, setSterilized] = useState<'oui' | 'non'>('non')
+  const [weight, setWeight] = useState(p?.weightKg ?? '')
+  const [age, setAge] = useState<AgeGroup>(p?.ageGroup ?? 'adulte')
+  const [activity, setActivity] = useState<ActivityLevel>(p?.activityLevel ?? 'normal')
+  const [sterilized, setSterilized] = useState<'oui' | 'non'>(p?.sterilized ? 'oui' : 'non')
   const [rows, setRows] = useState<Row[] | null>(null)
 
   const change = <T,>(setter: (v: T) => void) => (v: T) => { setter(v); setRows(null) }

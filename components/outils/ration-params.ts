@@ -18,6 +18,20 @@ export interface AccountRationPrefill {
   dog: { id: string; name: string; prefill: RationPrefill } | null
 }
 
+/** Réponse de GET /api/compte/profil : le même chien, avec ce qu'il faut aux autres outils. */
+export interface AccountProfile {
+  dog:
+    | (NonNullable<AccountRationPrefill['dog']> & {
+        weightKg: number | null
+        /** Âge en mois révolus, null si inconnu */
+        ageMonths: number | null
+        /** Milieu de la fourchette de poids adulte de sa race (data/breeds.ts), null sans race connue */
+        breedMidKg: number | null
+        breedName: string | null
+      })
+    | null
+}
+
 const AGES: readonly AgeGroup[] = ['chiot', 'adulte', 'senior']
 const ACTIVITIES: readonly ActivityLevel[] = ['sedentaire', 'normal', 'actif', 'tres-actif']
 const FOODS: readonly RationFood[] = ['croquettes', 'frais']
