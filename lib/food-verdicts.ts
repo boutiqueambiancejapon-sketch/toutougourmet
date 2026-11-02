@@ -18,12 +18,18 @@ const URGENCY = /^Ton chien a \S+ (?:du |de la |de l'|des |un |une |d')(.+?)\s*\
  * « Poire : ton chien peut en manger ? » → « Poire » ;
  * « Ton chien a mangé du raisin ? » → « Raisin ».
  */
-function foodLabel(ogTitle: string): string | null {
+export function foodLabel(ogTitle: string): string | null {
   const urgency = URGENCY.exec(ogTitle)
   const raw = urgency ? urgency[1] : ogTitle.includes(':') ? ogTitle.split(/\s*:\s*/)[0] : null
   if (!raw) return null
   const label = raw.trim().replace(/ ou (?:du |de la |de l'|des )/, ' ou ')
   return label.charAt(0).toUpperCase() + label.slice(1)
+}
+
+/** « de poire », « d'abricot » : nom de l'aliment en minuscule avec la préposition élidée. */
+export function withDe(label: string): string {
+  const lower = label.charAt(0).toLowerCase() + label.slice(1)
+  return /^[aeiouyàâéèêîïôûœ]/i.test(lower) ? `d'${lower}` : `de ${lower}`
 }
 
 export function getFoodVerdicts(): FoodVerdict[] {
