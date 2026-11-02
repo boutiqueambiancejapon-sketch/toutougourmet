@@ -87,3 +87,6 @@ Dog Chef −30 % sur la box d'essai + livraison gratuite ; Dogfy Diet −50 % su
 - QR code des images de partage : `qrcode-generator` (sans dépendance) plutôt que `qrcode` (tire `yargs` et `pngjs`).
 - Mauvaises photos : refus non décomptés (pas une étiquette, floue, chat, friandise). Une lecture marquée floue avec la liste ou 3 chiffres douteux est refusée : au test réel, Gemini a « lu » une photo illisible en marquant tout douteux. Partie manquante : session signée de 30 min, la photo manquante n'est pas décomptée.
 - Corrections : recalcul de la note dans le navigateur, envoi comme signalement (`scan_report`) ; la fiche publique ne change qu'après relecture.
+
+## 2026-11-02 — Pas de sauvegarde hors du serveur (décision du propriétaire)
+La base est sauvegardée chaque nuit sur le VPS (`/srv/toutou/backups`, 7 jours gardés), sans copie externe. Risque accepté : une panne totale ou une perte du VPS emporterait aussi les sauvegardes (comptes, analyses du scanner, statistiques). Le contenu du site (articles, code) reste sur GitHub. À reconsidérer si le nombre de comptes grandit.
