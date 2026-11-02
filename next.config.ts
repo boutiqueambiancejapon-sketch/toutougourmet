@@ -39,6 +39,8 @@ const nextConfig: NextConfig = {
 
       // Anciennes URLs marques → nouvelle structure /chien/marque/
       { source: '/marques', destination: '/chien/marque', permanent: true },
+      // Anciens comparatifs V1 (/comparatifs/a-vs-b) : pages déplacées sous /chien/marque
+      { source: '/comparatifs/:slug', destination: '/chien/marque/:slug', permanent: true },
       { source: '/marques/:slug', destination: '/chien/marque/:slug', permanent: true },
 
       // Fusion catégorie "Santé & nutrition" → "Santé"
