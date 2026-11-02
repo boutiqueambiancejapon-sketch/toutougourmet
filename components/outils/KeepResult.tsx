@@ -43,7 +43,7 @@ export function KeepResult({ tool, summary }: KeepResultProps) {
           Garder ce résultat
         </h3>
         <p className="m-0 text-[15px] leading-relaxed text-ink-2">
-          Laisse ton e-mail, on t&apos;envoie ce calcul pour l&apos;avoir sous la main.
+          Laisse ton e-mail, on t&apos;envoie ce résultat pour l&apos;avoir sous la main.
         </p>
       </div>
       {status === 'success' ? (
