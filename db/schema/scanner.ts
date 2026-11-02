@@ -90,6 +90,8 @@ export const scanReport = app.table(
       .references(() => user.id, { onDelete: 'cascade' }),
     message: text('message').notNull(),
     createdAt: ts('created_at').notNull().defaultNow(),
+    /** Traité dans le tableau de bord (fiche corrigée ou signalement écarté) ; null : à traiter */
+    handledAt: ts('handled_at'),
   },
   (t) => [index('scan_report_analysis_idx').on(t.foodAnalysisId)],
 )

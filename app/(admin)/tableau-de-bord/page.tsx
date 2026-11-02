@@ -13,6 +13,19 @@ import { MessagesSection } from '@/components/dashboard/MessagesSection'
 import { LiveSection } from '@/components/dashboard/LiveSection'
 import { HealthBanner } from '@/components/dashboard/HealthBanner'
 import { ServerSection } from '@/components/dashboard/ServerSection'
+import { ReviewSection } from '@/components/dashboard/ReviewSection'
+import { listToReview, type ReviewRow } from '@/lib/server/scanner-review'
+import { getDb } from '@/lib/server/drizzle'
+
+async function loadReview(): Promise<{ rows: ReviewRow[]; error: boolean }> {
+  if (!getDb()) return { rows: [], error: true }
+  return listToReview()
+    .then((rows) => ({ rows, error: false }))
+    .catch((err: unknown) => {
+      console.error('[tableau-de-bord] fiches à relire', err instanceof Error ? err.message : err)
+      return { rows: [], error: true }
+    })
+}
 
 // @cdc tableau de bord — page privée du propriétaire, protégée par proxy.ts (HTTP Basic).
 // Lue à chaque visite, jamais mise en cache ni indexée, absente du sitemap.
@@ -30,7 +43,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
   if (!dashboardCredentials()) notFound()
 
   const period = parsePeriod((await searchParams).periode)
-  const [data, logs, health] = await Promise.all([loadDashboard(period), getNightLogs(7), getServerHealth()])
+  const [data, logs, health, review] = await Promise.all([loadDashboard(period), getNightLogs(7), getServerHealth(), loadReview()])
 
   return (
     <>
@@ -51,6 +64,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
         <GeoSection data={data.geo} period={period} />
         <AiSection data={data.ai} period={period} unread={data.unread} articleCount={data.articleCount} />
         <MessagesSection messages={data.messages} />
+        <ReviewSection rows={review.rows} error={review.error} />
         <NightSection logs={logs} configured={nightLogDir() !== null} />
         <ServerSection health={health} />
       </main>

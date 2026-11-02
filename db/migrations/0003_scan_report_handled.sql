@@ -1,0 +1,1 @@
+ALTER TABLE "app"."scan_report" ADD COLUMN "handled_at" timestamp with time zone;

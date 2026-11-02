@@ -22,6 +22,13 @@
       "when": 1793642105604,
       "tag": "0002_scanner_source",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1793646786570,
+      "tag": "0003_scan_report_handled",
+      "breakpoints": true
     }
   ]
 }
