@@ -1,4 +1,4 @@
-import { animalKind, controversialPreservatives, hasColorant, hasSugar, isByProduct, isCereal } from './ingredients'
+import { animalKind, controversialPreservatives, hasColorant, hasSugar, isByProduct, isCereal, isUnnamedAnimal, unnamedAntioxidants } from './ingredients'
 import type { ExtractedLabel } from './types'
 
 // @cdc lot 6 — NOTRE note sur 100 d'une étiquette de croquettes (l'IA lit, elle ne note pas).
@@ -6,7 +6,7 @@ import type { ExtractedLabel } from './types'
 // source sont décrits dans docs/v2/scanner-score.md : toute modification du barème change
 // SCORE_VERSION (les analyses en cache sont alors recalculées à la lecture).
 
-export const SCORE_VERSION = '1.0'
+export const SCORE_VERSION = '1.1'
 
 /** Humidité retenue pour des croquettes qui ne la déclarent pas (règlement UE 767/2009 : mention obligatoire au-delà de 14 %). */
 export const ASSUMED_DRY_MOISTURE = 10
@@ -167,7 +167,7 @@ function scoreIngredients(label: ExtractedLabel, add: Add, missing: string[]): v
     for (const [id, lbl, max] of [
       ['premier-ingredient', 'Premier ingrédient', 15],
       ['part-animale', 'Part de viande ou poisson déclarée', 10],
-      ['sous-produits', 'Sous-produits non nommés', 10],
+      ['sous-produits', 'Ingrédients animaux non nommés', 10],
       ['cereales', 'Céréales en tête de liste', 5],
       ['sucres', 'Sucres ajoutés', 5],
       ['conservateurs', 'Conservateurs controversés', 5],
@@ -194,11 +194,22 @@ function scoreIngredients(label: ExtractedLabel, add: Add, missing: string[]): v
   }
 
   const byProducts = ing.filter((i) => isByProduct(i.nom))
-  add('sous-produits', 'Sous-produits non nommés', 10, byProducts.length ? 0 : 10,
-    byProducts.length ? `« ${byProducts[0].nom} » : catégorie qui ne dit ni l'espèce ni la partie de l'animal, et peut varier d'un lot à l'autre.` : 'Pas de catégorie générique du type « sous-produits animaux » : les ingrédients sont désignés.')
+  const unnamed = ing.filter((i) => isUnnamedAnimal(i.nom))
+  if (byProducts.length)
+    add('sous-produits', 'Ingrédients animaux non nommés', 10, 0, `« ${byProducts[0].nom} » : catégorie qui ne dit ni l'espèce ni la partie de l'animal, et peut varier d'un lot à l'autre.`)
+  else if (unnamed.length)
+    add('sous-produits', 'Ingrédients animaux non nommés', 10, unnamed.length >= 2 ? 3 : 5,
+      `${unnamed.map((i) => `« ${i.nom} »`).slice(0, 3).join(', ')} : l'espèce n'est pas indiquée, la matière première peut changer d'un lot à l'autre.`)
+  else add('sous-produits', 'Ingrédients animaux non nommés', 10, 10, 'Chaque ingrédient d\'origine animale indique son espèce.')
 
   const cerealPos = ing.slice(0, 3).findIndex((i) => isCereal(i.nom))
-  add('cereales', 'Céréales en tête de liste', 5, cerealPos === 0 ? 0 : cerealPos > 0 ? 3 : 5,
+  // Plusieurs céréales en tête (maïs, farine de maïs, blé…) : séparées, chacune pèse moins que la
+  // viande ; additionnées, elles pèsent probablement plus (pratique dite du fractionnement).
+  const topCereals = ing.slice(0, 5).filter((i) => isCereal(i.nom))
+  if (topCereals.length >= 2)
+    add('cereales', 'Céréales en tête de liste', 5, cerealPos === 0 ? 0 : 1,
+      `${topCereals.length} céréales parmi les 5 premiers ingrédients (${topCereals.map((i) => i.nom).join(', ')}) : additionnées, elles pèsent probablement plus que l'ingrédient animal.`)
+  else add('cereales', 'Céréales en tête de liste', 5, cerealPos === 0 ? 0 : cerealPos > 0 ? 3 : 5,
     cerealPos === 0 ? `« ${first.nom} » : une céréale est l'ingrédient principal.` : cerealPos > 0 ? `Une céréale arrive en position ${cerealPos + 1} (« ${ing[cerealPos].nom} »).` : 'Aucune céréale dans les trois premiers ingrédients.')
 
   const texts = [...ing.map((i) => i.nom), ...label.additifs]
@@ -206,8 +217,11 @@ function scoreIngredients(label: ExtractedLabel, add: Add, missing: string[]): v
   add('sucres', 'Sucres ajoutés', 5, sugar ? 0 : 5, sugar ? `« ${sugar} » : un sucre ajouté, sans utilité nutritionnelle pour le chien.` : 'Aucun sucre ajouté repéré.')
 
   const preservatives = controversialPreservatives(texts)
-  add('conservateurs', 'Conservateurs controversés', 5, preservatives.length ? 0 : 5,
-    preservatives.length ? `${preservatives.join(', ')} repéré : voir la méthode pour le détail.` : 'Ni BHA, ni BHT, ni éthoxyquine repérés.')
+  if (preservatives.length)
+    add('conservateurs', 'Conservateurs controversés', 5, 0, `${preservatives.join(', ')} repéré : voir la méthode pour le détail.`)
+  else if (unnamedAntioxidants(texts))
+    add('conservateurs', 'Conservateurs controversés', 5, 3, 'Conservateurs ou antioxygènes cités sans leur nom : impossible de vérifier qu\'il ne s\'agit pas de BHA, BHT ou éthoxyquine.')
+  else add('conservateurs', 'Conservateurs controversés', 5, 5, 'Ni BHA, ni BHT, ni éthoxyquine repérés.')
 
   const colorant = texts.find(hasColorant)
   add('colorants', 'Colorants', 5, colorant ? 0 : 5, colorant ? `« ${colorant} » : la couleur des croquettes ne sert qu'au maître, pas au chien.` : 'Aucun colorant repéré.')

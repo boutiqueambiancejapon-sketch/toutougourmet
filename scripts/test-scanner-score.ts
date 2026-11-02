@@ -45,6 +45,25 @@ test('croquette de supermarché, céréales en tête : note faible', () => {
   assert.equal(r.criteria.find((c) => c.id === 'calcium-phosphore'), undefined)
 })
 
+test('espèces non nommées, céréales fractionnées, antioxygènes sans nom (cas réel du 2026-11-02)', () => {
+  const r = scoreLabel({
+    ...PREMIUM_LABEL,
+    ingredients: [
+      { nom: 'protéines de volaille déshydratées', pourcentage: null },
+      { nom: 'farine de maïs', pourcentage: null },
+      { nom: 'maïs', pourcentage: null },
+      { nom: 'farine de blé', pourcentage: null },
+      { nom: 'graisses animales', pourcentage: null },
+      { nom: 'hydrolysat de protéines animales', pourcentage: null },
+    ],
+    additifs: ['Vitamine A : 12000 UI', 'Conservateurs', 'Antioxygènes'],
+    partAnimaleDeclaree: null,
+  })
+  assert.equal(pts(r, 'sous-produits'), 3)
+  assert.equal(pts(r, 'cereales'), 1)
+  assert.equal(pts(r, 'conservateurs'), 3)
+})
+
 test('étiquette incomplète : pas de note, informations manquantes listées', () => {
   const r = scoreLabel(INCOMPLETE_LABEL)
   assert.equal(r.score, null)

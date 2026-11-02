@@ -61,6 +61,21 @@ export function animalKind(name: string): AnimalKind {
   return null
 }
 
+/** Ingrédient d'origine animale dont l'espèce n'est pas dite (« graisses animales », « protéines de volaille »). */
+const GENERIC_ANIMAL = words(['animal', 'animale', 'animales', 'animaux', 'volailles?', 'viandes?', 'poissons?', 'meat', 'poultry', 'fish'])
+export const isUnnamedAnimal = (name: string) => {
+  const n = normalize(name)
+  return GENERIC_ANIMAL.test(n) && !NAMED_ANIMAL.test(n) && !/vegetale/.test(n) && !isByProduct(name)
+}
+
+/** Antioxygènes ou conservateurs mentionnés sans être nommés (l'étiquette peut les regrouper). */
+const NAMED_ANTIOX = /(tocopherol|e ?30[67]|romarin|acide citrique|e ?330|acide ascorbique|e ?300|palmitate d ascorbyle|e ?304|lecithine)/
+export function unnamedAntioxidants(texts: string[]): boolean {
+  const all = texts.map(normalize)
+  const generic = all.some((t) => /^(conservateurs?|antioxygenes?|antioxydants?)( |$|:)/.test(t) && !NAMED_ANTIOX.test(t))
+  return generic
+}
+
 export const isByProduct = (name: string) => BY_PRODUCTS.test(normalize(name)) && !NAMED_ANIMAL.test(normalize(name))
 export const isCereal = (name: string) => CEREALS.test(normalize(name)) && animalKind(name) === null
 export const hasSugar = (name: string) => SUGARS.test(normalize(name))
