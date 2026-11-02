@@ -1,6 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { SignJWT, importPKCS8 } from 'jose'
 
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
+function notConfigured(): NextResponse {
+  return NextResponse.json(
+    { error: 'Not configured: INDEXING_API_SECRET and GOOGLE_SERVICE_ACCOUNT_JSON are required' },
+    { status: 501 },
+  )
+}
+
 // ─── Types ───────────────────────────────────────────────────────────────────
 
 interface ServiceAccount {
@@ -51,6 +61,7 @@ async function getAccessToken(sa: ServiceAccount): Promise<string> {
 
   const resp = await fetch(sa.token_uri, {
     method: 'POST',
+    cache: 'no-store',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({
       grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
@@ -99,6 +110,7 @@ async function fetchSearchAnalytics(
     `${SC_API}/${encodedSite}/searchAnalytics/query`,
     {
       method: 'POST',
+      cache: 'no-store',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
@@ -124,15 +136,11 @@ async function fetchSearchAnalytics(
 // ─── Route ───────────────────────────────────────────────────────────────────
 
 export async function POST(req: NextRequest) {
+  // Service abandonné à la sortie de Vercel (DECISIONS.md, 2026-11-02) : sans ses variables,
+  // la route répond 501 au lieu d'échouer.
   const apiSecret = process.env.INDEXING_API_SECRET
-  if (!apiSecret) {
-    return NextResponse.json({ error: 'INDEXING_API_SECRET not configured' }, { status: 500 })
-  }
-
   const saJson = process.env.GOOGLE_SERVICE_ACCOUNT_JSON
-  if (!saJson) {
-    return NextResponse.json({ error: 'GOOGLE_SERVICE_ACCOUNT_JSON not configured' }, { status: 500 })
-  }
+  if (!apiSecret || !saJson) return notConfigured()
 
   let body: SearchConsoleRequest
   try {
