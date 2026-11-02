@@ -11,6 +11,7 @@ const SECTIONS = [
   { id: 'pays', label: 'Pays' },
   { id: 'ia', label: 'IA' },
   { id: 'messages', label: 'Messages' },
+  { id: 'fiches', label: 'Fiches' },
   { id: 'nuit', label: 'Tâche de nuit' },
   { id: 'serveur', label: 'Serveur' },
 ]

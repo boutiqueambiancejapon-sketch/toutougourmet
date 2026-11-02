@@ -1,19 +1,24 @@
 import type { FaqEntry } from '@/components/outils/ToolPage'
 
-// @cdc lot 6 — données structurées de /scanner : WebApplication + FAQPage, mêmes données que l'affichage.
+// @cdc lot 6 — données structurées de /scanner : WebApplication + FAQPage, mêmes données que
+// l'affichage. Le BreadcrumbList est émis par BreadcrumbNav, avec le fil d'Ariane visible.
 
 const URL = 'https://www.toutou-gourmet.com/scanner'
 
-export function ScannerJsonLd({ faq }: { faq: FaqEntry[] }) {
+export function ScannerJsonLd({ faq, description }: { faq: FaqEntry[]; description: string }) {
   const app = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
     name: 'Scanner de croquettes pour chien',
     url: URL,
-    description: 'Lecture du code-barres ou de l\'étiquette et note sur 100 de la composition, calculée par un barème publié.',
+    description,
     applicationCategory: 'UtilitiesApplication',
     operatingSystem: 'Web',
+    browserRequirements: 'Navigateur récent ; caméra facultative',
+    inLanguage: 'fr-FR',
+    isAccessibleForFree: true,
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+    publisher: { '@type': 'Organization', name: 'Toutou Gourmet', url: 'https://www.toutou-gourmet.com' },
   }
   const faqPage = {
     '@context': 'https://schema.org',

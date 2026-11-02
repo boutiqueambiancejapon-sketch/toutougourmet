@@ -74,6 +74,48 @@ function step(value: number, steps: [number, number][], last: number): number {
   return last
 }
 
+export interface DryMatterBasis {
+  /** Humidité retenue (déclarée ou supposée), null si inconnue */
+  moisture: number | null
+  /** true : humidité non déclarée, ASSUMED_DRY_MOISTURE retenu */
+  assumedMoisture: boolean
+  protDm: number | null
+  fatDm: number | null
+  /** Glucides estimés sur le produit tel quel, par différence */
+  carbsAsFed: number | null
+  carbsDm: number | null
+}
+
+type Constituents = Pick<ExtractedLabel['constituants'], 'proteines' | 'matieresGrasses' | 'cendres' | 'cellulose' | 'humidite'>
+
+/** Matière sèche et glucides par différence : le calcul de la note, partagé avec le calculateur de /scanner. */
+export function dryMatterBasis(a: Constituents, typeAliment: ExtractedLabel['typeAliment']): DryMatterBasis {
+  let moisture = a.humidite
+  let assumedMoisture = false
+  if (moisture === null && typeAliment !== 'humide' && a.proteines !== null && a.matieresGrasses !== null) {
+    const sum = a.proteines + a.matieresGrasses + (a.cendres ?? 0) + (a.cellulose ?? 0)
+    if (sum <= 80) {
+      moisture = ASSUMED_DRY_MOISTURE
+      assumedMoisture = true
+    }
+  }
+  const dm = (v: number | null) => (v === null || moisture === null || moisture >= 100 ? null : round1((v * 100) / (100 - moisture)))
+  const carbsAsFed =
+    a.proteines !== null && a.matieresGrasses !== null && a.cendres !== null && a.cellulose !== null && moisture !== null
+      ? Math.max(0, 100 - a.proteines - a.matieresGrasses - a.cendres - a.cellulose - moisture)
+      : null
+  return { moisture, assumedMoisture, protDm: dm(a.proteines), fatDm: dm(a.matieresGrasses), carbsAsFed, carbsDm: dm(carbsAsFed) }
+}
+
+/** Points (sur 15) et phrase de lecture du critère des glucides. */
+export function carbsCriterion(carbsDm: number): { points: number; explanation: string } {
+  const points = carbsDm <= 30 ? 15 : carbsDm <= 40 ? 11 : carbsDm <= 50 ? 6 : 2
+  return {
+    points,
+    explanation: `Environ ${fmt(carbsDm)}${P} (100 moins les autres constituants). Le chien n'a pas de besoin minimal en glucides (NRC 2006)${carbsDm > 40 ? ', ici ils forment la plus grosse part.' : '.'}`,
+  }
+}
+
 export function scoreLabel(label: ExtractedLabel): ScoreResult {
   const a = label.constituants
   const missing: string[] = []
@@ -82,24 +124,11 @@ export function scoreLabel(label: ExtractedLabel): ScoreResult {
   const add = (id: CriterionId, lbl: string, max: number, points: number | null, explanation: string) =>
     criteria.push({ id, label: lbl, max, points, explanation })
 
-  // Matière sèche
-  let moisture = a.humidite
-  if (moisture === null && label.typeAliment !== 'humide' && a.proteines !== null && a.matieresGrasses !== null) {
-    const sum = a.proteines + a.matieresGrasses + (a.cendres ?? 0) + (a.cellulose ?? 0)
-    if (sum <= 80) {
-      moisture = ASSUMED_DRY_MOISTURE
-      assumptions.push(`Humidité non indiquée : on retient ${ASSUMED_DRY_MOISTURE}${P}, valeur courante des croquettes (la mention n'est obligatoire qu'au-delà de 14${P}).`)
-    }
-  }
+  const basis = dryMatterBasis(a, label.typeAliment)
+  const { moisture, protDm, fatDm, carbsDm } = basis
+  if (basis.assumedMoisture)
+    assumptions.push(`Humidité non indiquée : on retient ${ASSUMED_DRY_MOISTURE}${P}, valeur courante des croquettes (la mention n'est obligatoire qu'au-delà de 14${P}).`)
   if (a.humidite === null && moisture === null) missing.push('humidité')
-  const dm = (v: number | null) => (v === null || moisture === null || moisture >= 100 ? null : round1((v * 100) / (100 - moisture)))
-  const protDm = dm(a.proteines)
-  const fatDm = dm(a.matieresGrasses)
-  const carbsAsFed =
-    a.proteines !== null && a.matieresGrasses !== null && a.cendres !== null && a.cellulose !== null && moisture !== null
-      ? Math.max(0, 100 - a.proteines - a.matieresGrasses - a.cendres - a.cellulose - moisture)
-      : null
-  const carbsDm = dm(carbsAsFed)
 
   if (a.proteines === null) missing.push('protéines')
   if (protDm === null) add('proteines', 'Protéines sur matière sèche', 20, null, 'Taux de protéines ou humidité absents : critère non évalué.')
@@ -121,9 +150,8 @@ export function scoreLabel(label: ExtractedLabel): ScoreResult {
   if (a.cellulose === null) missing.push('cellulose ou fibres brutes')
   if (carbsDm === null) add('glucides', 'Glucides estimés sur matière sèche', 15, null, 'Il faut protéines, matières grasses, cendres, fibres et humidité pour estimer les glucides.')
   else {
-    const pts = carbsDm <= 30 ? 15 : carbsDm <= 40 ? 11 : carbsDm <= 50 ? 6 : 2
-    add('glucides', 'Glucides estimés sur matière sèche', 15, pts,
-      `Environ ${fmt(carbsDm)}${P} (100 moins les autres constituants). Le chien n'a pas de besoin minimal en glucides (NRC 2006)${carbsDm > 40 ? ', ici ils forment la plus grosse part.' : '.'}`)
+    const c = carbsCriterion(carbsDm)
+    add('glucides', 'Glucides estimés sur matière sèche', 15, c.points, c.explanation)
   }
 
   scoreIngredients(label, add, missing)

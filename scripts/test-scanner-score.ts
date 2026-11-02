@@ -2,7 +2,8 @@
 import assert from 'node:assert/strict'
 import { INCOMPLETE_LABEL, PREMIUM_LABEL, SUPERMARKET_LABEL } from '../lib/scanner/fixtures'
 import { animalKind, isByProduct, isCereal } from '../lib/scanner/ingredients'
-import { scoreLabel, SCORE_VERSION } from '../lib/scanner/score'
+import { carbsCriterion, dryMatterBasis, scoreLabel, SCORE_VERSION } from '../lib/scanner/score'
+import { alternativesFor, ficheTitle, partnerBrand, shortProduct } from '../lib/scanner/seo'
 import { parseExtractedLabel } from '../lib/scanner/types'
 import { parseIngredientText } from '../lib/scanner/ingredient-text'
 import { opffImageType, opffToLabel } from '../lib/scanner/opff'
@@ -239,6 +240,42 @@ test('couleur des ingrédients sur la fiche A4', () => {
   assert.equal(ingredientClass('Antioxydant : BHA (E320)'), 'controverse')
   assert.equal(ingredientClass('Sucres'), 'controverse')
   assert.equal(ingredientClass('Pulpe de betterave'), 'autre')
+})
+
+test('calcul des glucides partagé avec le calculateur', () => {
+  const b = dryMatterBasis({ proteines: 26, matieresGrasses: 15, cendres: 7, cellulose: 3, humidite: null }, 'sec')
+  assert.equal(b.assumedMoisture, true)
+  assert.equal(b.moisture, 10)
+  assert.equal(b.carbsAsFed, 39)
+  assert.equal(b.carbsDm, 43.3)
+  const c = carbsCriterion(b.carbsDm as number)
+  assert.equal(c.points, 6)
+  assert.match(c.explanation, /43,3/)
+  assert.equal(scoreLabel(SUPERMARKET_LABEL).dryMatter?.glucides, dryMatterBasis(SUPERMARKET_LABEL.constituants, SUPERMARKET_LABEL.typeAliment).carbsDm)
+})
+
+test('title de fiche : 60 caractères au plus, nom du produit coupé au mot', () => {
+  const t = ficheTitle('Royal Canin', 'Royal Canin Medium Adult croquettes pour chien adulte de taille moyenne', 48)
+  assert.ok(t.length <= 60, `${t.length} ${t}`)
+  assert.match(t, /^Croquettes Royal Canin Medium/)
+  assert.match(t, / : avis et note 48\/100$/)
+  assert.equal(ficheTitle('Edgard & Cooper', 'Poulet', 81), 'Croquettes Edgard & Cooper Poulet : avis et note 81/100')
+  assert.equal(ficheTitle(null, null, null), 'Croquettes : avis et composition')
+  assert.equal(ficheTitle('Lidl', 'Orlando multi-croquettes boeuf', 18), 'Croquettes Lidl Orlando : avis et note 18/100')
+  assert.equal(shortProduct('Lidl', 'Lidl Orlando multi-croquettes pour chien'), 'Orlando multi-croquettes')
+  assert.ok(ficheTitle('Une marque au nom vraiment très très long', 'Produit', 12).length <= 60)
+})
+
+test('marque partenaire et alternatives sous 55', () => {
+  assert.equal(partnerBrand('Franklin')?.slug, 'franklin')
+  assert.equal(partnerBrand('Franklin Pet Food')?.slug, 'franklin')
+  assert.equal(partnerBrand('Ultra Premium Direct')?.slug, 'ultra-premium-direct')
+  assert.equal(partnerBrand('Pedigree'), null)
+  assert.deepEqual(alternativesFor('Pedigree', 70), [])
+  const alt = alternativesFor('Pedigree', 30)
+  assert.ok(alt.length >= 1 && alt.length <= 2)
+  assert.ok(alt.every((a) => a.brand.type.includes('croquettes') && !a.brand.stockNote))
+  assert.ok(alternativesFor('Franklin', 30).every((a) => a.brand.slug !== 'franklin'))
 })
 
 if (failed) {

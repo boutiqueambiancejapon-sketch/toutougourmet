@@ -152,10 +152,3 @@ export async function addReport(userId: string, analysisId: string, message: str
   await db().insert(scanReport).values({ userId, foodAnalysisId: analysisId, message })
   return true
 }
-
-/** Fiches relues, pour le sitemap des croquettes. */
-export async function reviewedSlugs(): Promise<{ slug: string; updatedAt: Date }[]> {
-  const d = getDb()
-  if (!d) return []
-  return d.select({ slug: foodAnalysis.slug, updatedAt: foodAnalysis.updatedAt }).from(foodAnalysis).where(eq(foodAnalysis.reviewed, true))
-}
