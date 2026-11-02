@@ -31,3 +31,8 @@ export function slugify(str: string): string {
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)/g, '')
 }
+
+/** Typographie française : espace insécable avant « ? : ; ! € % » et après « (textes de données affichés tels quels). */
+export function frTypo(text: string): string {
+  return text.replace(/ ([?:;!€%»])/g, '\u00a0$1').replace(/« /g, '«\u00a0')
+}

@@ -1,46 +1,43 @@
-import { StarRating } from '@/components/ui/StarRating'
-import { Badge } from '@/components/ui/Badge'
-import { BrandCTA } from './BrandCTA'
-import { formatDate } from '@/lib/utils'
 import type { Brand } from '@/data/brands'
+import { frTypo } from '@/lib/utils'
 
-interface BrandHeroProps {
-  brand: Brand
+// @cdc 04-pages — en-tête V2 d'une fiche marque, puis fiche d'identité en une bande encre
+// (prix, type, fabrication, livraison), comme la fiche race (audit design-cro §3). Rendu serveur.
+
+export function BrandHero({ brand }: { brand: Brand }) {
+  const forWho = brand.animal.includes('chat') ? 'chiens et chats' : 'chiens uniquement'
+  return (
+    <header className="v2 flex max-w-prose flex-col gap-3">
+      <h1 className="m-0 font-display text-[clamp(1.9rem,3.6vw,2.6rem)] font-black leading-[1.08] tracking-tight text-ink">
+        Avis {brand.name}
+      </h1>
+      <p className="m-0 text-lg leading-relaxed text-ink-2">
+        {brand.tagline}. Pour {forWho}.
+      </p>
+      {brand.stockNote ? (
+        <p className="m-0 font-semibold text-orange-ink">{brand.stockNote}.</p>
+      ) : null}
+    </header>
+  )
 }
 
-export function BrandHero({ brand }: BrandHeroProps) {
+export function BrandIdentity({ brand }: { brand: Brand }) {
+  const items: [string, string][] = [
+    ['Prix indicatif', brand.facts.price],
+    ["Type d'aliment", brand.facts.format],
+    ['Fabrication', brand.facts.madeIn],
+    ['Livraison', brand.facts.delivery],
+  ]
   return (
-    <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-6 md:p-8 flex flex-col md:flex-row gap-6 items-start">
-      {/* Infos */}
-      <div className="flex-1">
-        <div className="flex flex-wrap items-center gap-2 mb-2">
-          <h1 className="page-title">
-            Avis {brand.name}
-          </h1>
-          <Badge variant="promo">{brand.priceRange}</Badge>
-          {brand.animal.map((a) => (
-            <Badge key={a} variant={a === 'chat' ? 'cat' : 'default'}>
-              {a === 'chien' ? '🐶 Chien' : '🐱 Chat'}
-            </Badge>
-          ))}
-        </div>
-        <p className="text-[var(--text-secondary)] mb-3">{brand.tagline}</p>
-        <StarRating score={brand.scores.global} size={18} />
-        <p className="text-xs text-[var(--text-muted)] mt-2">
-          Mis à jour le {formatDate(new Date().toISOString())} par l&apos;équipe Toutou Gourmet
-        </p>
-      </div>
-
-      {/* CTA */}
-      <div className="w-full md:w-72">
-        <BrandCTA
-          brandName={brand.name}
-          affiliateUrl={brand.affiliateUrl}
-          offer={brand.discountOffer}
-          code={brand.affiliateCode}
-          variant="primary"
-        />
-      </div>
-    </div>
+    <section aria-label={`Fiche d'identité ${brand.name}`} className="v2 rounded-card bg-ink px-5 py-6 text-cream md:px-8">
+      <dl className="m-0 grid gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
+        {items.map(([label, value]) => (
+          <div key={label} className="flex flex-col gap-1">
+            <dt className="text-sm text-cream/70">{label}</dt>
+            <dd className="m-0 font-semibold leading-snug text-cream">{frTypo(value)}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
   )
 }

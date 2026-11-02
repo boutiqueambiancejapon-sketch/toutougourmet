@@ -1,57 +1,27 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { StickyBar, STICKY_BUTTON } from '@/components/blog/StickyBar'
 
+// @cdc affiliation — bandeau collant d'une fiche marque : même coque que les articles (StickyBar),
+// une ligne, un bouton. Masqué pour une marque en rupture (la page ne l'affiche pas).
 interface StickyBrandCTAProps {
   brandName: string
   affiliateUrl: string
   offer: string
-  code?: string | null
 }
 
-export function StickyBrandCTA({ brandName, affiliateUrl, offer, code }: StickyBrandCTAProps) {
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 400)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
+export function StickyBrandCTA({ brandName, affiliateUrl, offer }: StickyBrandCTAProps) {
   return (
-    <div
-      className="fixed bottom-[calc(var(--tabbar-h)+env(safe-area-inset-bottom))] md:bottom-0 left-0 right-0 z-30 transition-transform duration-300"
-      style={{ transform: visible ? 'translateY(0)' : 'translateY(100%)' }}
-    >
-      <div
-        className="border-t"
-        style={{ background: 'var(--bg-surface)', borderColor: 'var(--border)' }}
-      >
-        <div className="max-w-[860px] mx-auto px-4 py-3 flex items-center justify-between gap-3 flex-wrap">
-          <div className="flex flex-col min-w-0">
-            <span className="font-bold text-sm text-[var(--text-primary)] truncate">{brandName}</span>
-            <span className="text-xs text-[var(--accent-1)] font-semibold">{offer}</span>
-          </div>
-          <div className="flex items-center gap-2 shrink-0">
-            {code && (
-              <span
-                className="hidden sm:block text-xs px-2.5 py-1 rounded-[var(--radius-md)]"
-                style={{ background: 'var(--bg-surface-2)', fontFamily: "'JetBrains Mono', monospace" }}
-              >
-                {code}
-              </span>
-            )}
-            <a
-              href={affiliateUrl}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              className="btn-primary text-sm whitespace-nowrap"
-            >
-              Essayer {brandName} →
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <StickyBar>
+      <p data-cta="brand-sticky" className="m-0 flex min-w-0 flex-1 items-center gap-3">
+        <span className="min-w-0 flex-1 truncate text-sm leading-snug text-cream">
+          <span className="font-bold">{brandName}</span>
+          <span className="text-cream/75"> · {offer}</span>
+        </span>
+        <a href={affiliateUrl} target="_blank" rel="sponsored noopener" className={STICKY_BUTTON}>
+          Voir l&apos;offre →
+        </a>
+      </p>
+    </StickyBar>
   )
 }

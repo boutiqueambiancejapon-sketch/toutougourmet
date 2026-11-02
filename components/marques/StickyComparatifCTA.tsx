@@ -1,63 +1,28 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { StickyBar } from '@/components/blog/StickyBar'
 
+// @cdc affiliation — bandeau collant d'un duel : les deux offres en liens compacts, même coque que
+// les articles (StickyBar). Une marque en rupture n'y figure pas (filtrée par la page).
 interface BrandInfo {
   name: string
   affiliateUrl: string
-  offer: string
-  code?: string | null
 }
 
-interface StickyComparatifCTAProps {
-  brandA: BrandInfo
-  brandB: BrandInfo
-}
+const LINK =
+  'block min-w-0 truncate rounded-control border border-cream/40 px-3 py-2 text-sm font-semibold text-cream no-underline hover:border-cream'
 
-export function StickyComparatifCTA({ brandA, brandB }: StickyComparatifCTAProps) {
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 400)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
+export function StickyComparatifCTA({ brands }: { brands: BrandInfo[] }) {
   return (
-    <div
-      className="fixed bottom-[calc(var(--tabbar-h)+env(safe-area-inset-bottom))] md:bottom-0 left-0 right-0 z-30 transition-transform duration-300"
-      style={{ transform: visible ? 'translateY(0)' : 'translateY(100%)' }}
-    >
-      <div
-        className="border-t"
-        style={{ background: 'var(--bg-surface)', borderColor: 'var(--border)' }}
-      >
-        <div className="max-w-[860px] mx-auto px-4 py-3 grid grid-cols-2 gap-3">
-          {[brandA, brandB].map((brand) => (
-            <div key={brand.name} className="flex flex-col items-center gap-1.5">
-              <span className="text-xs font-semibold text-[var(--accent-1)] text-center leading-tight hidden sm:block">
-                {brand.offer}
-              </span>
-              <a
-                href={brand.affiliateUrl}
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                className="btn-primary text-sm whitespace-nowrap w-full text-center"
-              >
-                Essayer {brand.name} →
-              </a>
-              {brand.code && (
-                <span
-                  className="hidden sm:block text-xs px-2 py-0.5 rounded-[var(--radius-md)]"
-                  style={{ background: 'var(--bg-surface-2)', fontFamily: "'JetBrains Mono', monospace" }}
-                >
-                  Code : {brand.code}
-                </span>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+    <StickyBar>
+      <p data-cta="brand-duel-sticky" className="m-0 flex min-w-0 flex-1 items-center gap-2">
+        <span className="hidden flex-1 text-sm text-cream/75 sm:inline">Voir les offres</span>
+        {brands.map((b) => (
+          <a key={b.name} href={b.affiliateUrl} target="_blank" rel="sponsored noopener" className={LINK}>
+            {b.name}&nbsp;→
+          </a>
+        ))}
+      </p>
+    </StickyBar>
   )
 }
