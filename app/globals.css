@@ -450,3 +450,10 @@ a.rounded-control,
 a.rounded-box {
   text-wrap: pretty;
 }
+
+/* Titres : lignes équilibrées, pour éviter un « ? » ou un mot seul en dernière ligne. */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
