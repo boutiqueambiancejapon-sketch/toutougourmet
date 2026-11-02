@@ -1,9 +1,9 @@
-import { getBrandBySlug } from '@/data/brands'
 import { getSlotPath, resolveSlot } from '@/data/image-utils'
 import { getArticleSlot } from '@/components/blog/blog-categories'
-import { CONFIRMED_DISCOUNTS, type OfferSlug } from '@/lib/account-offers'
+import { type OfferSlug } from '@/lib/account-offers'
+import { offerCard } from './offer-card'
 import { getAllArticles, type Article } from '@/lib/mdx'
-import { COLORS, button, divider, heading, image, label, linkItem, paragraph, renderEmail, siteUrl, smallPrint, type EmailBlock, type RenderedEmail } from './layout'
+import { COLORS, button, divider, heading, image, label, linkItem, paragraph, renderEmail, siteUrl, type EmailBlock, type RenderedEmail } from './layout'
 import { SEASONAL_TIPS } from './seasonal'
 
 // @cdc e-mails — lettre mensuelle générée depuis le site : guide du mois, nouveaux guides avec
@@ -124,17 +124,8 @@ function topFoodBlocks(food: TopFood): EmailBlock[] {
 }
 
 function offerBlocks(slug: OfferSlug): EmailBlock[] {
-  const brand = getBrandBySlug(slug)
-  if (!brand) return []
-  const discount = CONFIRMED_DISCOUNTS[slug]
-  return [
-    divider(),
-    label("L'offre partenaire du mois"),
-    paragraph(discount ? `${brand.name} : ${discount}.` : brand.name),
-    paragraph(`${brand.tagline}. Pour quel chien : ${brand.facts.bestFor.charAt(0).toLowerCase()}${brand.facts.bestFor.slice(1)}.`, true),
-    button(`Voir l'offre ${brand.name}`, brand.affiliateUrl, 'sponsored nofollow'),
-    smallPrint('Lien partenaire : nous touchons une commission si tu commandes, sans surcoût pour toi.'),
-  ]
+  const card = offerCard(slug, 'lettre-mensuelle')
+  return card ? [divider(), label("L'offre partenaire du mois"), card] : []
 }
 
 function seasonalBlocks(articles: Article[], month: number, featuredSlug: string): { blocks: EmailBlock[]; slug: string } {
