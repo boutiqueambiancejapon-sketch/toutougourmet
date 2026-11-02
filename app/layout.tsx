@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
-import { Fraunces, DM_Sans } from 'next/font/google'
+import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/next'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
@@ -8,16 +8,23 @@ import ScrollToTop from '@/components/layout/ScrollToTop'
 import GoogleAnalyticsPageView from '@/components/layout/GoogleAnalyticsPageView'
 import './globals.css'
 
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  weight: ['700', '900'],
+// Polices hébergées dans le site (assets/fonts, Fontsource, licence SIL OFL) : le téléchargement
+// chez Google au build échouait par intermittence et bloquait les déploiements.
+const fraunces = localFont({
+  src: [
+    { path: '../assets/fonts/fraunces-latin-700-normal.woff2', weight: '700', style: 'normal' },
+    { path: '../assets/fonts/fraunces-latin-900-normal.woff2', weight: '900', style: 'normal' },
+  ],
   display: 'swap',
   variable: '--font-fraunces',
 })
 
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
+const dmSans = localFont({
+  src: [
+    { path: '../assets/fonts/dm-sans-latin-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: '../assets/fonts/dm-sans-latin-500-normal.woff2', weight: '500', style: 'normal' },
+    { path: '../assets/fonts/dm-sans-latin-600-normal.woff2', weight: '600', style: 'normal' },
+  ],
   display: 'swap',
   variable: '--font-dm-sans',
 })
