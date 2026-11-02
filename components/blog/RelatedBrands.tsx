@@ -1,92 +1,69 @@
 import Link from 'next/link'
-import { brands } from '@/data/brands'
+import { brands, brandTone, type Brand } from '@/data/brands'
 
-const BRAND_PILL: Record<string, { pill: string; emoji: string }> = {
-  franklin: { pill: 'var(--pill-amber)', emoji: '🔥' },
-  elmut: { pill: 'var(--pill-green)', emoji: '🌿' },
-  'petty-well': { pill: 'var(--pill-blue)', emoji: '⭐' },
-  'dog-chef': { pill: 'var(--pill-rose)', emoji: '👨‍🍳' },
+/** Hash stable d'une chaîne (djb2) : même article, mêmes marques à chaque rendu. */
+function hash(seed: string): number {
+  let h = 5381
+  for (let i = 0; i < seed.length; i++) h = ((h << 5) + h + seed.charCodeAt(i)) >>> 0
+  return h
 }
 
 /**
- * Sidebar sticky proposée sur les pages article : 3 marques
- * recommandées + CTA quiz. Les marques sont celles du site,
- * triées par note décroissante.
+ * Marques proposées : toutes celles qui ont une offre disponible (pas de rupture de stock),
+ * en rotation selon l'article pour que chaque partenaire apparaisse, puis triées par note.
  */
-export function RelatedBrands({ sticky = true }: { sticky?: boolean } = {}) {
-  const top = [...brands]
-    .sort((a, b) => b.scores.global - a.scores.global)
-    .slice(0, 3)
+function pickBrands(seed: string, count: number): Brand[] {
+  const pool = brands.filter((b) => !b.stockNote)
+  if (pool.length <= count) return pool
+  const start = hash(seed) % pool.length
+  const picked = Array.from({ length: count }, (_, i) => pool[(start + i) % pool.length])
+  return picked.sort((a, b) => b.scores.global - a.scores.global)
+}
+
+/**
+ * Colonne de droite des articles : 3 marques partenaires + CTA quiz.
+ */
+export function RelatedBrands({ sticky = true, seed = '' }: { sticky?: boolean; seed?: string } = {}) {
+  const top = pickBrands(seed, 3)
 
   return (
     <aside className={sticky ? 'lg:sticky lg:top-[100px] lg:self-start' : undefined}>
-      <p className="text-xs font-bold uppercase tracking-widest text-[var(--accent-1)] mb-4">
-        Recommandées pour ce profil
-      </p>
-      <ul className="flex flex-col gap-3 m-0 p-0 list-none">
+      <p className="m-0 mb-3 font-display text-lg font-black text-ink">Les marques qu&apos;on recommande</p>
+      <ul className="m-0 flex list-none flex-col gap-2 p-0">
         {top.map((b) => {
-          const d = BRAND_PILL[b.slug]
-          if (!d) return null
+          const tone = brandTone(b.slug)
           return (
             <li key={b.slug}>
               <Link
-                href={`/marques/${b.slug}`}
-                className="group flex items-center gap-3 p-4 bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] hover:-translate-y-0.5 hover:border-[var(--accent-1)] hover:shadow-[var(--shadow-sm)]"
+                href={`/chien/marque/${b.slug}`}
+                className="group flex items-center gap-3 rounded-box border border-line bg-paper p-4 no-underline hover:border-line-2"
               >
-                <span
-                  aria-hidden="true"
-                  className="inline-flex items-center justify-center w-10 h-10 rounded-[var(--radius-md)] text-lg shrink-0"
-                  style={{ background: d.pill }}
-                >
-                  {d.emoji}
-                </span>
-                <div className="flex-1 min-w-0">
-                  <p
-                    className="font-black text-[var(--text-primary)] text-sm m-0 leading-tight mb-1"
-                    style={{ fontFamily: "'Fraunces', serif" }}
-                  >
+                <div className="min-w-0 flex-1">
+                  <p className="m-0 mb-1 font-display text-sm font-black leading-tight" style={{ color: tone.ink }}>
                     {b.name}
                   </p>
-                  <div className="flex items-center gap-1.5">
-                    <div className="flex-1 h-1 rounded-full bg-[var(--border)] overflow-hidden">
-                      <div
-                        className="h-full rounded-full bg-[var(--accent-1)]"
-                        style={{ width: `${(b.scores.global / 5) * 100}%` }}
-                      />
-                    </div>
-                    <span
-                      className="text-xs font-bold text-[var(--accent-1)] shrink-0"
-                      style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                    >
-                      {b.scores.global}
-                    </span>
-                  </div>
+                  <p className="m-0 text-xs leading-snug text-ink-2">{b.tagline}</p>
                 </div>
-                <span aria-hidden="true" className="text-[var(--text-muted)]">
-                  →
-                </span>
+                <span className="shrink-0 text-sm font-semibold text-ink">{b.scores.global.toFixed(1)}/5</span>
               </Link>
             </li>
           )
         })}
       </ul>
+      <p className="m-0 mt-2 text-xs text-ink-2">Liens partenaires sur chaque fiche marque.</p>
 
-      <div className="mt-6 p-5 bg-[var(--bg-dark)] rounded-[var(--radius-xl)] text-[var(--text-on-dark)]">
-        <p
-          className="m-0 mb-2 text-lg font-black leading-tight"
-          style={{ fontFamily: "'Fraunces', serif" }}
-        >
+      <div className="mt-5 rounded-card bg-ink p-5 text-cream">
+        <p className="m-0 mb-2 font-display text-lg font-black leading-tight text-cream">
           Pas sûr(e) du bon choix&nbsp;?
         </p>
-        <p className="m-0 mb-4 text-sm leading-relaxed" style={{ opacity: 0.75 }}>
-          2&nbsp;min de quiz et on te recommande la marque la plus alignée avec ton animal.
+        <p className="m-0 mb-4 text-sm leading-relaxed text-cream/75">
+          Quelques questions sur ton chien, et on te propose la marque la plus adaptée.
         </p>
         <Link
           href="/quiz"
-          className="btn-primary text-sm w-full justify-center"
-          style={{ padding: '10px 14px' }}
+          className="inline-flex min-h-11 w-full items-center justify-center rounded-control bg-orange px-4 text-[15px] font-semibold text-ink no-underline"
         >
-          Faire le quiz →
+          Faire le quiz
         </Link>
       </div>
     </aside>

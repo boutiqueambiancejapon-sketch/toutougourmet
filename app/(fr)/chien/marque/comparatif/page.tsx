@@ -1,28 +1,23 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { brands } from '@/data/brands'
+import { getDuelPairs } from '@/data/brands'
 import { getComparatif } from '@/lib/mdx'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 
 export const metadata: Metadata = {
   title: 'Comparatif croquettes pour chien',
   description:
-    "Dog Chef vs Elmut, Franklin vs Petty Well... Tous nos comparatifs détaillés pour choisir la meilleure alimentation pour ton chien.",
+    "Dog Chef vs Elmut, Franklin vs Ultra Premium Direct : tous nos comparatifs marque contre marque, scores détaillés et verdict.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/chien/marque/comparatif' },
 }
 
 export default function ComparatifHubPage() {
-  const comparisons: { slug: string; label: string; a: string; b: string }[] = []
-  for (let i = 0; i < brands.length; i++) {
-    for (let j = i + 1; j < brands.length; j++) {
-      comparisons.push({
-        slug: `${brands[i].slug}-vs-${brands[j].slug}`,
-        label: `${brands[i].name} vs ${brands[j].name}`,
-        a: brands[i].name,
-        b: brands[j].name,
-      })
-    }
-  }
+  const comparisons = getDuelPairs().map(([a, b]) => ({
+    slug: `${a.slug}-vs-${b.slug}`,
+    label: `${a.name} vs ${b.name}`,
+    a: a.name,
+    b: b.name,
+  }))
 
   return (
     <div className="min-h-screen py-12 px-4 bg-[var(--bg-primary)]">
@@ -35,9 +30,6 @@ export default function ComparatifHubPage() {
         ]} />
 
         <div className="mb-10 max-w-[640px]">
-          <p className="text-sm font-bold uppercase tracking-widest text-[var(--accent-1)] mb-2">
-            Comparatifs
-          </p>
           <h1 className="page-title mb-3">
             X vs Y — Tous les comparatifs
           </h1>
@@ -60,7 +52,7 @@ export default function ComparatifHubPage() {
                     {label}
                   </p>
                   {hasEditorial && (
-                    <span className="text-xs font-bold px-2 py-0.5 rounded-full shrink-0" style={{ background: 'var(--pill-green)', color: '#1A7A47' }}>
+                    <span className="text-xs font-bold px-2 py-0.5 rounded-full shrink-0" style={{ background: 'var(--pill-green)', color: 'var(--green-ink)' }}>
                       Article complet
                     </span>
                   )}

@@ -13,10 +13,11 @@
 // @cdc alimentation — dictionnaire maillage interne
 export const AUTOLINK_DICTIONARY: Record<string, string> = {
   // — Marques —
-  'Dog Chef':           '/marques/dog-chef',
-  'Elmut':              '/marques/elmut',
-  'Franklin Pet Food':  '/marques/franklin',
-  'Petty Well':         '/marques/petty-well',
+  'Dog Chef':             '/chien/marque/dog-chef',
+  'Elmut':                '/chien/marque/elmut',
+  'Franklin Pet Food':    '/chien/marque/franklin',
+  'Ultra Premium Direct': '/chien/marque/ultra-premium-direct',
+  'Dogfy Diet':           '/chien/marque/dogfy-diet',
 
   // — Pages outils —
   'comparateur':        '/comparateur',

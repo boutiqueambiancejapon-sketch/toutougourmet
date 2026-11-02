@@ -88,15 +88,6 @@ export const brandPricings: BrandPricing[] = [
     offer: '-30% 1ère commande',
   },
   {
-    name: 'Petty Well',
-    slug: 'petty-well',
-    pricePerKg: 11.8,
-    type: 'croquettes',
-    kcalPer100g: 370,
-    affiliateUrl: 'https://c3po.link/QHutadCFex',
-    offer: '-34% 1ère box',
-  },
-  {
     name: 'Elmut',
     slug: 'elmut',
     pricePerKg: 6.0,    // tarif abonnement (~6€/kg livré, moins cher que Dog Chef)

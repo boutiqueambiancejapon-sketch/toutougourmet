@@ -1,17 +1,15 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ComparisonTable, brandAccents } from '@/components/comparateur/ComparisonTable'
+import { ComparisonTable } from '@/components/comparateur/ComparisonTable'
 import { Disclosure } from '@/components/ui/Disclosure'
-import { brands } from '@/data/brands'
+import { brands, brandOfferLabel, brandTone } from '@/data/brands'
 
 export const metadata: Metadata = {
   title: 'Comparatif nourriture pour chien',
   description:
-    'Comparez Franklin, Elmut, Ultra Premium Direct et Dog Chef : notes, prix, ingrédients, croquettes et nourriture fraîche pour chien. Offres et promos 2026.',
+    'Comparez Franklin, Elmut, Ultra Premium Direct, Dog Chef, Dogfy Diet et Fidelis : notes, prix, ingrédients, croquettes et nourriture fraîche pour chien. Offres 2026.',
   alternates: { canonical: 'https://www.toutou-gourmet.com/comparateur' },
 }
-
-const brandBgs = ['#C2F0D5', '#FFD6E3', '#C8DCFF', '#FFE8B5']
 
 export default function ComparateurPage() {
   return (
@@ -20,34 +18,34 @@ export default function ComparateurPage() {
 
         {/* Header compact */}
         <div className="mb-10 max-w-[640px]">
-          <p className="text-sm font-bold uppercase tracking-widest text-[var(--accent-1)] mb-2">
-            Mis à jour mars 2026
-          </p>
-          <h1 className="page-title mb-3">Comparatif nourriture pour chien — 4 marques premium</h1>
+          <h1 className="page-title mb-3">Comparatif nourriture pour chien, {brands.length} marques</h1>
           <p className="text-base text-[var(--text-secondary)]">
-            Franklin, Elmut, Ultra Premium Direct et Dog Chef — croquettes et nourriture fraîche pour chien, analysés sur les mêmes critères, sans favoritisme.
+            Franklin, Elmut, Ultra Premium Direct, Dog Chef, Dogfy Diet et Fidelis : croquettes, repas frais et menus en bocaux, notés sur les mêmes critères.
           </p>
+          <p className="mt-2 text-sm text-[var(--text-secondary)]">Mis à jour en novembre 2026</p>
         </div>
 
         {/* Cartes marques */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-          {brands.map((brand, i) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+          {brands.map((brand) => {
+            const tone = brandTone(brand.slug)
+            return (
             <div
               key={brand.slug}
               className="rounded-[var(--radius-xl)] p-5 flex flex-col"
-              style={{ background: brandBgs[i] }}
+              style={{ background: tone.bg }}
             >
               {/* Nom + score */}
               <div className="flex items-start justify-between gap-2 mb-1">
                 <div
                   className="font-black text-lg leading-tight"
-                  style={{ fontFamily: "'Fraunces', serif", color: brandAccents[i] }}
+                  style={{ fontFamily: "'Fraunces', serif", color: tone.ink }}
                 >
                   {brand.name}
                 </div>
                 <div
                   className="font-black text-2xl leading-none shrink-0"
-                  style={{ fontFamily: "'Fraunces', serif", color: brandAccents[i] }}
+                  style={{ fontFamily: "'Fraunces', serif", color: tone.ink }}
                 >
                   {brand.scores.global.toFixed(1)}
                   <span className="text-sm font-normal opacity-60">/5</span>
@@ -63,7 +61,7 @@ export default function ComparateurPage() {
               <ul className="space-y-2 mb-5 flex-1">
                 {brand.pros.slice(0, 3).map((pro, j) => (
                   <li key={j} className="flex items-start gap-2 text-sm" style={{ color: 'var(--text-primary)' }}>
-                    <span className="font-bold mt-px shrink-0" style={{ color: brandAccents[i] }}>✓</span>
+                    <span className="font-bold mt-px shrink-0" style={{ color: tone.ink }}>✓</span>
                     {pro}
                   </li>
                 ))}
@@ -72,9 +70,9 @@ export default function ComparateurPage() {
               {/* Offre — fond blanc solide pour bon contraste */}
               <div
                 className="text-sm font-bold text-center px-3 py-1.5 rounded-full mb-3"
-                style={{ background: '#ffffff', color: brandAccents[i] }}
+                style={{ background: 'var(--white)', color: tone.ink }}
               >
-                {brand.discountOffer}
+                {brandOfferLabel(brand)}
               </div>
               <Link
                 href={brand.affiliateUrl}
@@ -82,10 +80,11 @@ export default function ComparateurPage() {
                 rel="noopener noreferrer sponsored"
                 className="btn-primary text-sm py-2.5 text-center block"
               >
-                Essayer →
+                {`Voir le site ${brand.name}`}
               </Link>
             </div>
-          ))}
+            )
+          })}
         </div>
 
         {/* Tableau */}

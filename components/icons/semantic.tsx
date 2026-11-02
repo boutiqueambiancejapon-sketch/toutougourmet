@@ -1,7 +1,7 @@
 import type { ComponentType } from 'react'
 import type { IconProps } from './Svg'
 import { IconBowl, IconDog, IconSearch } from './nav-icons'
-import { IconAlert, IconBone, IconCarrot, IconFruit, IconHeart, IconPaw } from './food-icons'
+import { IconAlert, IconBone, IconBread, IconCarrot, IconFruit, IconHeart, IconPaw } from './food-icons'
 import { IconBang, IconCheck, IconCross } from './mark-icons'
 
 // Correspondances métier : rubrique → icône, verdict → marque.
@@ -11,6 +11,7 @@ const BY_CATEGORY: Record<string, ComponentType<IconProps>> = {
   alimentation: IconBowl,
   fruit: IconFruit,
   legumes: IconCarrot,
+  feculents: IconBread,
   viandes: IconBone,
   urgences: IconAlert,
   'comportement-alimentaire': IconPaw,

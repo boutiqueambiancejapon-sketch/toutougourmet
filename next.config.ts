@@ -71,15 +71,39 @@ const nextConfig: NextConfig = {
       { source: '/chien/alimentation/alimentation-chiot-2-6-mois', destination: '/chien/alimentation-quotidienne/alimentation-chiot-2-6-mois', permanent: true },
       { source: '/chien/alimentation/alimentation-chiot-6-12-mois', destination: '/chien/alimentation-quotidienne/alimentation-chiot-6-12-mois', permanent: true },
       { source: '/chien/peut-manger/chien-peut-manger-piment', destination: '/chien/urgences/chien-peut-manger-piment', permanent: true },
-      { source: '/chien/peut-manger/chien-peut-manger-riz', destination: '/chien/legumes/chien-peut-manger-riz', permanent: true },
+      { source: '/chien/peut-manger/chien-peut-manger-riz', destination: '/chien/feculents/chien-peut-manger-riz', permanent: true },
       { source: '/chien/peut-manger/chien-peut-manger-oeufs', destination: '/chien/viandes/chien-peut-manger-oeufs', permanent: true },
       { source: '/chien/peut-manger/chien-peut-manger-champignons', destination: '/chien/legumes/chien-peut-manger-champignons', permanent: true },
       { source: '/chien/peut-manger/chien-peut-manger-cerises', destination: '/chien/fruit/chien-peut-manger-cerises', permanent: true },
-      { source: '/chien/peut-manger/chien-peut-manger-pates', destination: '/chien/legumes/chien-peut-manger-pates', permanent: true },
+      { source: '/chien/peut-manger/chien-peut-manger-pates', destination: '/chien/feculents/chien-peut-manger-pates', permanent: true },
       { source: '/chien/peut-manger/chien-peut-manger-sardines', destination: '/chien/viandes/chien-peut-manger-sardines', permanent: true },
-      { source: '/chien/peut-manger/chien-peut-manger-pain', destination: '/chien/legumes/chien-peut-manger-pain', permanent: true },
+      { source: '/chien/peut-manger/chien-peut-manger-pain', destination: '/chien/feculents/chien-peut-manger-pain', permanent: true },
       { source: '/chien/comportement-alimentaire/chien-mange-trop-vite-solutions', destination: '/chien/alimentation-quotidienne/chien-mange-trop-vite-solutions', permanent: true },
       { source: '/chien/alimentation-quotidienne/chien-barbecue-securite-aliments-eviter', destination: '/chien/sante/chien-barbecue-securite-aliments-eviter', permanent: true },
+
+      // ── Ancienne rubrique « alimentation » (2026-11-02) ──────────────────
+      // /chien/alimentation n'a pas de page propre (fusionnée dans
+      // « alimentation-quotidienne »). Les 8 articles restés en
+      // categorySlug "alimentation" passent en "alimentation-quotidienne" ;
+      // les 3 guides chiot étaient déjà redirigés plus haut (audit 22/08),
+      // les 5 autres l'ont été ici.
+      { source: '/chien/alimentation/a-quelle-heure-donner-manger-chien', destination: '/chien/alimentation-quotidienne/a-quelle-heure-donner-manger-chien', permanent: true },
+      { source: '/chien/alimentation/combien-fois-par-jour-donner-manger-chien', destination: '/chien/alimentation-quotidienne/combien-fois-par-jour-donner-manger-chien', permanent: true },
+      { source: '/chien/alimentation/comment-preparer-repas-chien-soi-meme', destination: '/chien/alimentation-quotidienne/comment-preparer-repas-chien-soi-meme', permanent: true },
+      { source: '/chien/alimentation/quand-promener-chien-apres-manger', destination: '/chien/alimentation-quotidienne/quand-promener-chien-apres-manger', permanent: true },
+      { source: '/chien/alimentation/quelle-quantite-donner-manger-chien-selon-poids', destination: '/chien/alimentation-quotidienne/quelle-quantite-donner-manger-chien-selon-poids', permanent: true },
+
+      // ── Rubrique « Féculents et céréales » (2026-11-02) ─────────────────
+      // Pain, pâtes, riz et maïs quittent « Légumes », l'avoine quitte
+      // « Alimentation » ; lentilles et petits pois (légumineuses) passent
+      // d'« Alimentation » à « Légumes ».
+      { source: '/chien/legumes/chien-peut-manger-pain', destination: '/chien/feculents/chien-peut-manger-pain', permanent: true },
+      { source: '/chien/legumes/chien-peut-manger-pates', destination: '/chien/feculents/chien-peut-manger-pates', permanent: true },
+      { source: '/chien/legumes/chien-peut-manger-riz', destination: '/chien/feculents/chien-peut-manger-riz', permanent: true },
+      { source: '/chien/legumes/chien-peut-manger-mais', destination: '/chien/feculents/chien-peut-manger-mais', permanent: true },
+      { source: '/chien/alimentation-quotidienne/chien-peut-manger-avoine', destination: '/chien/feculents/chien-peut-manger-avoine', permanent: true },
+      { source: '/chien/alimentation-quotidienne/chien-peut-manger-lentilles', destination: '/chien/legumes/chien-peut-manger-lentilles', permanent: true },
+      { source: '/chien/alimentation-quotidienne/chien-peut-manger-petits-pois', destination: '/chien/legumes/chien-peut-manger-petits-pois', permanent: true },
 
       // Marques comparatif → Petty Well retiré (voir plus haut) : les 3 pages
       // de comparaison "-vs-petty-well" n'ont plus d'équivalent direct après

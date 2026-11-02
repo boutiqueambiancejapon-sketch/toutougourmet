@@ -24,7 +24,7 @@ const faqItems = [
   },
   {
     question: 'Combien coûte une alimentation premium pour chien sur un an ?',
-    answer: 'Pour un chien de 10 kg avec des croquettes premium (type Franklin ou Petty Well), comptez 480-600€/an. Pour le même chien avec des repas frais (Elmut, Dog Chef), 700-900€/an. Les grandes races multiplient ces chiffres par 2 à 3. Ces estimations incluent les remises de bienvenue disponibles.',
+    answer: 'Pour un chien de 10 kg avec des croquettes premium (type Franklin), comptez 480-600€/an. Pour le même chien avec des repas frais (Elmut, Dog Chef), 700-900€/an. Les grandes races multiplient ces chiffres par 2 à 3. Ces estimations incluent les remises de bienvenue disponibles.',
   },
   {
     question: 'Les croquettes de grande surface sont-elles suffisantes pour mon chien ?',

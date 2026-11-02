@@ -77,3 +77,13 @@ export function IconPaw(props: IconProps) {
     </Svg>
   )
 }
+
+export function IconBread(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path className="fill-amber" d="M5 20v-8.8C3.4 10.6 3 9.4 3 8.4 3 5.6 6.6 4 12 4s9 1.6 9 4.4c0 1-.4 2.2-2 2.8V20Z" />
+      <path className="fill-paper" d="M8 17.6v-6.9c-1-.4-1.4-1-1.4-1.6C6.6 7.6 9 6.8 12 6.8s5.4.8 5.4 2.3c0 .6-.4 1.2-1.4 1.6v6.9Z" />
+      <path d="M10.4 12.4h.01M13.6 14.6h.01" />
+    </Svg>
+  )
+}

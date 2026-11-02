@@ -1,24 +1,18 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BrandCard } from '@/components/marques/BrandCard'
-import { brands } from '@/data/brands'
+import { brands, getDuelPairs } from '@/data/brands'
+import { BrandProfiles } from '@/components/marques/BrandProfiles'
 import { Breadcrumb } from '@/components/ui/Breadcrumb'
 
 export const metadata: Metadata = {
   title: 'Avis croquettes premium pour chien',
   description:
-    "Dog Chef, Elmut, Franklin, Petty Well : avis complets, comparatifs et codes promo. Trouve la meilleure alimentation pour ton chien.",
+    "Dog Chef, Elmut, Franklin, Ultra Premium Direct, Dogfy Diet, Fidelis : avis, comparatifs et offres. Choisis la marque selon le profil de ton chien.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/chien/marque' },
 }
 
-const vsComparisons = [
-  { a: 'dog-chef', b: 'elmut', label: 'Dog Chef vs Elmut' },
-  { a: 'dog-chef', b: 'franklin', label: 'Dog Chef vs Franklin' },
-  { a: 'dog-chef', b: 'petty-well', label: 'Dog Chef vs Petty Well' },
-  { a: 'elmut', b: 'franklin', label: 'Elmut vs Franklin' },
-  { a: 'elmut', b: 'petty-well', label: 'Elmut vs Petty Well' },
-  { a: 'franklin', b: 'petty-well', label: 'Franklin vs Petty Well' },
-]
+const vsComparisons = getDuelPairs().map(([a, b]) => ({ a: a.slug, b: b.slug, label: `${a.name} vs ${b.name}` }))
 
 export default function MarqueHubPage() {
   return (
@@ -31,19 +25,21 @@ export default function MarqueHubPage() {
         ]} />
 
         <div className="mb-10 max-w-[640px]">
-          <p className="text-sm font-bold uppercase tracking-widest text-[var(--accent-1)] mb-2">
-            Avis & Comparatifs
-          </p>
           <h1 className="page-title mb-3">
             Les meilleures marques pour ton chien
           </h1>
           <p className="text-[var(--text-secondary)]">
-            On a testé et comparé les marques premium du marché — repas frais, croquettes sans céréales, pâtées. Avis honnêtes, compositions décryptées, codes promo exclusifs.
+            {brands.length} marques de croquettes, de repas frais et de menus en bocaux, notées sur les mêmes critères : ingrédients, digestibilité, prix, variété et service client. On touche une commission si tu commandes par nos liens, sans surcoût pour toi.
           </p>
         </div>
 
+        <BrandProfiles />
+
         {/* Grille des marques */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
+        <h2 className="font-bold mb-6" style={{ fontFamily: "'Fraunces', serif" }}>
+          Toutes les marques
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
           {brands.map((brand) => (
             <BrandCard key={brand.slug} brand={brand} />
           ))}

@@ -162,7 +162,7 @@ export const PILLARS: Record<string, PillarContent> = {
     heading: "Comment bien nourrir son chien au quotidien ?",
     intro: [
       "Bien nourrir un chien, c'est lui donner un aliment complet adapté à son âge, à son gabarit et à son activité, dans une quantité calculée sur son poids, avec de l'eau fraîche à volonté. Le format compte moins que la composition : croquettes, pâtée, repas frais et ration ménagère conviennent tous si l'aliment est complet et la quantité juste. Le comparatif [croquettes ou pâtée](/chien/alimentation-quotidienne/croquettes-ou-patee) aide à choisir selon le profil du chien.",
-      "La ration se calcule à partir du poids métabolique, c'est-à-dire le poids en kilos à la puissance 0,75, et non du poids brut. FEDIAF retient environ 95 kcal par kilo de poids métabolique et par jour pour un chien adulte peu actif : un chien de 10 kg a besoin d'environ 530 kcal, un chien de 30 kg d'environ 1 220 kcal. Les indications du sac visent souvent un chien entier et actif, et le guide [quelle quantité donner selon le poids](/chien/alimentation/quelle-quantite-donner-manger-chien-selon-poids) explique comment les corriger.",
+      "La ration se calcule à partir du poids métabolique, c'est-à-dire le poids en kilos à la puissance 0,75, et non du poids brut. FEDIAF retient environ 95 kcal par kilo de poids métabolique et par jour pour un chien adulte peu actif : un chien de 10 kg a besoin d'environ 530 kcal, un chien de 30 kg d'environ 1 220 kcal. Les indications du sac visent souvent un chien entier et actif, et le guide [quelle quantité donner selon le poids](/chien/alimentation-quotidienne/quelle-quantite-donner-manger-chien-selon-poids) explique comment les corriger.",
       "Les friandises, les fruits et les restes comptent dans la ration : ensemble, ils restent sous 10 % des calories quotidiennes (WSAVA et AAHA, cités par Príncipe et al., Vet Sci, 2025). Le poids se contrôle à la main plutôt qu'à l'œil. Sur l'échelle d'état corporel en 9 points utilisée par les vétérinaires (Laflamme, 1997), un chien au poids idéal a des côtes que l'on sent sans appuyer et une taille visible vue de dessus ; la méthode est détaillée dans le guide [note d'état corporel](/chien/sante/note-etat-corporel-chien-evaluer-maison).",
       "Sur l'étiquette des croquettes, les ingrédients sont listés par ordre de poids décroissant, comme l'impose le règlement européen CE 767/2009. Le guide pour [lire une étiquette de croquettes](/chien/alimentation-quotidienne/comprendre-etiquette-croquettes-chien) montre aussi comment estimer les glucides, qui ne sont jamais affichés. La ration ménagère demande plus de rigueur : sur 200 recettes maison pour chien tirées de livres et de sites internet, 95 % manquaient d'au moins un nutriment (Stockman et al., JAVMA, 2013). Le guide [ration ménagère pour chien](/chien/alimentation-quotidienne/ration-menagere-chien-guide-recettes) explique le rôle du complément minéral et vitaminé.",
       "Un chien adulte boit environ 50 à 70 ml d'eau par kilo et par jour (NRC, 2006), davantage avec une alimentation sèche, par temps chaud ou après l'effort ; le guide sur la [quantité d'eau par jour](/chien/alimentation-quotidienne/quantite-eau-chien-par-jour) donne le tableau par poids. Un changement d'aliment se fait progressivement, en mélangeant l'ancien et le nouveau sur plusieurs jours, selon le [protocole de transition alimentaire](/chien/alimentation-quotidienne/transition-alimentaire-chien). Une perte de poids, une soif inhabituelle ou un refus de manger qui dure sont des raisons de consulter le vétérinaire.",
@@ -170,7 +170,7 @@ export const PILLARS: Record<string, PillarContent> = {
     faq: [
       {
         q: "Combien de fois par jour faut-il nourrir un chien ?",
-        a: "Un chien adulte mange en général matin et soir ; un chiot a besoin de repas plus fréquents, que l'on espace au fil de la croissance. Les grands chiens à thorax profond gagnent à recevoir leur ration en plusieurs repas et à rester au calme après, à cause du risque de torsion d'estomac. Le guide [combien de repas par jour](/chien/alimentation/combien-fois-par-jour-donner-manger-chien) détaille chaque profil.",
+        a: "Un chien adulte mange en général matin et soir ; un chiot a besoin de repas plus fréquents, que l'on espace au fil de la croissance. Les grands chiens à thorax profond gagnent à recevoir leur ration en plusieurs repas et à rester au calme après, à cause du risque de torsion d'estomac. Le guide [combien de repas par jour](/chien/alimentation-quotidienne/combien-fois-par-jour-donner-manger-chien) détaille chaque profil.",
       },
       {
         q: "Quelle quantité de croquettes donner à un chien de 10 kg ?",
@@ -265,7 +265,7 @@ export const PILLARS: Record<string, PillarContent> = {
       "L'oignon cru provoque des signes à partir d'environ 15 à 30 g par kilo de poids, et l'ail est 3 à 5 fois plus toxique que l'oignon (Merck Veterinary Manual, 2024). La destruction des globules rouges commence en général 3 à 5 jours après l'ingestion, si bien qu'un chien peut sembler normal pendant plusieurs jours. Sauces, bouillons, soupes et plats cuisinés en contiennent souvent : la fiche [chien qui a mangé de l'ail ou de l'oignon](/chien/urgences/chien-mange-ail-oignon-urgence) liste les aliments où ils se cachent.",
       "La préparation change beaucoup selon le légume. La [carotte pour chien](/chien/legumes/chien-peut-manger-carottes) se donne crue ou cuite, alors que la [pomme de terre](/chien/legumes/chien-peut-manger-pommes-de-terre) se donne toujours cuite et épluchée : crue, verte ou germée, elle contient de la solanine. Le légume se sert sans sel, sans beurre, sans huile ni épices, coupé en morceaux adaptés à la taille de la gueule pour éviter la fausse route.",
       "Certains légumes demandent de trier les parties. La [tomate pour chien](/chien/legumes/chien-peut-manger-tomate) mûre n'est pas toxique, mais le plant, les feuilles et les fruits verts contiennent de la solanine (ASPCA). Les champignons de Paris du commerce, cuits, ne posent pas de problème, tandis que les [champignons sauvages](/chien/legumes/chien-peut-manger-champignons) ramassés en promenade peuvent être mortels et justifient un appel immédiat au vétérinaire.",
-      "Les légumes donnés en friandise restent dans les 10 % de calories quotidiennes réservés aux extras (WSAVA et AAHA, cités par Príncipe et al., Vet Sci, 2025). Les légumes riches en amidon, comme la pomme de terre, le maïs ou la patate douce, pèsent plus lourd dans ce calcul que la courgette ou le concombre, composés surtout d'eau. Un chien diabétique, en surpoids ou sujet aux calculs urinaires a des restrictions propres, que son vétérinaire précise.",
+      "Les légumes donnés en friandise restent dans les 10 % de calories quotidiennes réservés aux extras (WSAVA et AAHA, cités par Príncipe et al., Vet Sci, 2025). Les légumes riches en amidon, comme la pomme de terre ou la patate douce, pèsent plus lourd dans ce calcul que la courgette ou le concombre, composés surtout d'eau. Un chien diabétique, en surpoids ou sujet aux calculs urinaires a des restrictions propres, que son vétérinaire précise.",
     ],
     faq: [
       {
@@ -290,7 +290,7 @@ export const PILLARS: Record<string, PillarContent> = {
       },
       {
         q: "Un chien peut-il manger des lentilles, des pois ou des haricots ?",
-        a: "Cuits et nature, oui, en petite quantité : ce sont des légumineuses riches en fibres, qui peuvent donner des gaz. Les conserves salées et les plats cuisinés sont à éviter. Les [lentilles pour chien](/chien/alimentation-quotidienne/chien-peut-manger-lentilles) ont leur fiche détaillée.",
+        a: "Cuits et nature, oui, en petite quantité : ce sont des légumineuses riches en fibres, qui peuvent donner des gaz. Les conserves salées et les plats cuisinés sont à éviter. Les [lentilles pour chien](/chien/legumes/chien-peut-manger-lentilles) ont leur fiche détaillée.",
       },
     ],
     sources: [
@@ -299,6 +299,52 @@ export const PILLARS: Record<string, PillarContent> = {
       SRC.principe,
       SRC.stockman,
       SRC.kealy,
+    ],
+  },
+
+  feculents: {
+    heading: "Quels féculents et quelles céréales un chien peut-il manger ?",
+    intro: [
+      "Un chien peut manger du pain, des pâtes, du riz, du maïs en grains et des flocons d'avoine, à condition qu'ils soient cuits et servis nature. Ces aliments apportent surtout de l'amidon, donc de l'énergie, et peu de protéines : ils complètent une ration sans la remplacer. Le [riz pour chien](/chien/feculents/chien-peut-manger-riz) bien cuit compte parmi les plus digestes, et le riz blanc revient souvent dans les repas légers qui suivent une diarrhée.",
+      "La préparation pèse plus lourd que le choix du féculent. Les [pâtes](/chien/feculents/chien-peut-manger-pates) se donnent très cuites et sans sauce, car l'ail et l'oignon d'une sauce détruisent les globules rouges du chien. La pâte à pain crue est une urgence : la levure continue de fermenter dans l'estomac, produit de l'éthanol et du gaz, et peut distendre l'estomac (ASPCA). Pour le [maïs](/chien/feculents/chien-peut-manger-mais), les grains cuits passent sans problème, alors que l'épi ne se digère pas et peut boucher l'intestin.",
+      "Un chien nourri aux croquettes reçoit déjà de l'amidon. Un morceau de [pain](/chien/feculents/chien-peut-manger-pain) ou une cuillère de riz ajoute surtout des calories, à retirer de la ration du jour, en particulier chez un chien en surpoids ou diabétique. Les céréales sont rarement en cause dans les allergies alimentaires : sur 297 chiens recensés, le blé était impliqué chez 13 %, le maïs chez 4 % et le riz chez 2 %, contre 34 % pour le bœuf (Mueller et al., BMC Vet Res, 2016). L'[avoine pour chien](/chien/feculents/chien-peut-manger-avoine) se donne cuite à l'eau, nature et en petite quantité.",
+    ],
+    faq: [
+      {
+        q: "Un chien peut-il manger du riz tous les jours ?",
+        a: "En petite part, oui, mais varier les sources d'amidon reste plus prudent. Chez 7 Staffordshire bull terriers nourris avec des croquettes au riz, l'arsenic inorganique mesuré dans les poils atteignait 0,143 µg/g, contre 0,086 µg/g chez 9 chiens sans riz (Rosendahl et al., Vet Rec, 2019). Les auteurs précisent que ces taux ne signalent pas d'intoxication.",
+      },
+      {
+        q: "Riz ou pâtes : que donner à un chien qui a la diarrhée ?",
+        a: "Le riz blanc bien cuit, mélangé à une viande maigre cuite, est le choix le plus courant pour un repas léger de un à deux jours. Les pâtes passent moins bien et n'apportent rien de plus. Une diarrhée qui dure plus de 48 heures, avec du sang, des vomissements ou un chien abattu, justifie un appel au vétérinaire.",
+      },
+      {
+        q: "Les céréales sont-elles mauvaises pour le chien ?",
+        a: "Non, chez un chien en bonne santé, une fois cuites. L'amidon cuit se digère, et les allergies aux céréales sont moins fréquentes qu'aux protéines animales : sur 297 chiens allergiques, 13 % réagissaient au blé et 2 % au riz, contre 34 % au bœuf et 15 % au poulet (Mueller et al., BMC Vet Res, 2016).",
+      },
+      {
+        q: "Que faire si mon chien a mangé de la pâte à pain crue ?",
+        a: "Appeler tout de suite le vétérinaire ou un centre antipoison. La levure fabrique de l'éthanol et du gaz dans l'estomac : le chien peut tituber, se refroidir, convulser, et l'estomac peut se dilater. Les signes mettent parfois plusieurs heures à apparaître (ASPCA), d'où l'intérêt d'appeler avant.",
+      },
+      {
+        q: "Un chien peut-il manger des flocons d'avoine ?",
+        a: "Oui, cuits à l'eau, sans sucre ni lait, en petite quantité. Chez 14 Beagles adultes, un aliment enrichi en bêta-glucanes d'avoine a fait baisser le LDL-cholestérol sanguin dès le 28e jour d'un essai de 71 jours (Ferreira et al., PLOS ONE, 2018).",
+      },
+    ],
+    sources: [
+      {
+        label: "ASPCA Pro, Drunk and Disorderly: Ethanol and Yeast Dough Intoxications (fermentation de la pâte crue, éthanol, dilatation de l'estomac)",
+        url: "https://www.aspcapro.org/resource/drunk-and-disorderly-ethanol-and-yeast-dough-intoxications",
+      },
+      SRC.mueller,
+      {
+        label: "Rosendahl S, Anturaniemi J, Hielm-Björkman A, 2019, Hair arsenic level in rice-based diet-fed Staffordshire bull terriers, Vet Rec 186(17):e15",
+        url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC7363027/",
+      },
+      {
+        label: "Ferreira LG et al., 2018, Oat beta-glucan as a dietary supplement for dogs, PLOS ONE 13(7):e0201133",
+        url: "https://doi.org/10.1371/journal.pone.0201133",
+      },
     ],
   },
 

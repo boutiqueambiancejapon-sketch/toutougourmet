@@ -33,6 +33,7 @@ export const OG_TONES: Record<OgTone, { bg: string; ink: string }> = {
 const CATEGORY_PILL: Record<string, { label: string; tone: OgTone }> = {
   fruit: { label: 'Fruits', tone: 'rose' },
   legumes: { label: 'Légumes', tone: 'rose' },
+  feculents: { label: 'Féculents', tone: 'rose' },
   viandes: { label: 'Viandes et poissons', tone: 'rose' },
   'alimentation-quotidienne': { label: 'Alimentation', tone: 'rose' },
   alimentation: { label: 'Alimentation', tone: 'rose' },

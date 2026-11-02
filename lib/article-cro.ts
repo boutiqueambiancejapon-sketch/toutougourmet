@@ -4,7 +4,7 @@ import { foodLabel } from '@/lib/food-verdicts'
 // @cdc 04-pages — règles d'affichage des blocs de conversion d'article (audit design-cro §3).
 
 /** Rubriques où l'article propose la fiche des aliments dangereux contre l'e-mail. */
-const BONUS_CATEGORIES = new Set(['peut-manger', 'fruit', 'legumes', 'viandes', 'urgences', 'alimentation-quotidienne'])
+const BONUS_CATEGORIES = new Set(['peut-manger', 'fruit', 'legumes', 'feculents', 'viandes', 'urgences', 'alimentation-quotidienne'])
 
 export function showsBonusFiche(categorySlug: string): boolean {
   return BONUS_CATEGORIES.has(categorySlug)

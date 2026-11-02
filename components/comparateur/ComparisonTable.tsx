@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { brands, type BrandScores } from '@/data/brands'
+import { brands, brandOfferLabel, brandTone, type BrandScores } from '@/data/brands'
 
 const criteriaLabels: Record<string, string> = {
   qualiteIngredients: 'Qualité ingrédients',
@@ -9,8 +9,7 @@ const criteriaLabels: Record<string, string> = {
   serviceClient: 'Service client',
 }
 
-export const brandAccents = ['#1A7A47', '#8B1A4A', '#1A4E8B', '#C47C00']
-const brandBgs    = ['#C2F0D5', '#FFD6E3', '#C8DCFF', '#FFE8B5']
+const ink = (slug: string) => brandTone(slug).ink
 
 function ScoreBar({ score, accent, muted }: { score: number; accent: string; muted: boolean }) {
   return (
@@ -41,7 +40,7 @@ export function ComparisonTable() {
               style={{ color: 'var(--text-muted)', borderColor: 'var(--border)' }}>
               Critère
             </th>
-            {brands.map((brand, i) => (
+            {brands.map((brand) => (
               <th
                 key={brand.slug}
                 className="px-4 pt-0 pb-4 text-center border-b"
@@ -49,7 +48,7 @@ export function ComparisonTable() {
               >
                 <div
                   className="font-black text-base leading-tight mt-3"
-                  style={{ fontFamily: "'Fraunces', serif", color: brandAccents[i] }}
+                  style={{ fontFamily: "'Fraunces', serif", color: ink(brand.slug) }}
                 >
                   {brand.name}
                 </div>
@@ -69,11 +68,11 @@ export function ComparisonTable() {
               style={{ color: 'var(--text-muted)' }}>
               Note globale
             </td>
-            {brands.map((brand, i) => (
+            {brands.map((brand) => (
               <td key={brand.slug} className="px-4 py-4 text-center">
                 <span
                   className="font-black leading-none"
-                  style={{ fontFamily: "'Fraunces', serif", color: brandAccents[i], fontSize: '2rem' }}
+                  style={{ fontFamily: "'Fraunces', serif", color: ink(brand.slug), fontSize: '2rem' }}
                 >
                   {brand.scores.global.toFixed(1)}
                 </span>
@@ -87,8 +86,7 @@ export function ComparisonTable() {
             <td className="px-5 py-3 font-medium" style={{ color: 'var(--text-secondary)' }}>Pour</td>
             {brands.map((brand) => (
               <td key={brand.slug} className="px-4 py-3 text-center">
-                <div className="text-base">{brand.animal.map((a) => (a === 'chien' ? '🐶' : '🐱')).join(' ')}</div>
-                <div className="text-xs capitalize mt-0.5" style={{ color: 'var(--text-muted)' }}>
+                <div className="text-xs capitalize" style={{ color: 'var(--text-secondary)' }}>
                   {brand.animal.join(' & ')}
                 </div>
               </td>
@@ -116,12 +114,12 @@ export function ComparisonTable() {
               <td className="px-5 py-3 font-medium" style={{ color: 'var(--text-secondary)' }}>
                 {criteriaLabels[key]}
               </td>
-              {brands.map((brand, bi) => {
+              {brands.map((brand) => {
                 const score = brand.scores[key]
                 const isBest = brands.every((b) => b.scores[key] <= score)
                 return (
                   <td key={brand.slug} className="px-4 py-3">
-                    <ScoreBar score={score} accent={brandAccents[bi]} muted={!isBest} />
+                    <ScoreBar score={score} accent={ink(brand.slug)} muted={!isBest} />
                   </td>
                 )
               })}
@@ -131,9 +129,9 @@ export function ComparisonTable() {
           {/* Prix */}
           <tr className="border-b" style={{ borderColor: 'var(--border)' }}>
             <td className="px-5 py-3 font-medium" style={{ color: 'var(--text-secondary)' }}>Prix mensuel</td>
-            {brands.map((brand, i) => (
+            {brands.map((brand) => (
               <td key={brand.slug} className="px-4 py-3 text-center">
-                <span className="font-black text-xl" style={{ fontFamily: "'Fraunces', serif", color: brandAccents[i] }}>
+                <span className="font-black text-xl" style={{ fontFamily: "'Fraunces', serif", color: ink(brand.slug) }}>
                   {brand.priceRange}
                 </span>
               </td>
@@ -143,13 +141,13 @@ export function ComparisonTable() {
           {/* Offre */}
           <tr className="border-b" style={{ borderColor: 'var(--border)', background: 'var(--bg-surface-2)' }}>
             <td className="px-5 py-3 font-medium" style={{ color: 'var(--text-secondary)' }}>Offre bienvenue</td>
-            {brands.map((brand, i) => (
+            {brands.map((brand) => (
               <td key={brand.slug} className="px-4 py-3 text-center">
                 <span
                   className="inline-block text-xs font-bold px-2 py-1 rounded-full leading-snug"
-                  style={{ background: brandBgs[i], color: brandAccents[i] }}
+                  style={{ background: brandTone(brand.slug).bg, color: ink(brand.slug) }}
                 >
-                  {brand.discountOffer}
+                  {brandOfferLabel(brand)}
                 </span>
               </td>
             ))}
@@ -160,12 +158,12 @@ export function ComparisonTable() {
             <td className="px-5 py-4 font-medium align-top" style={{ color: 'var(--text-secondary)' }}>
               Points forts
             </td>
-            {brands.map((brand, i) => (
+            {brands.map((brand) => (
               <td key={brand.slug} className="px-4 py-4 align-top">
                 <ul className="space-y-1.5">
                   {brand.pros.slice(0, 3).map((pro, j) => (
                     <li key={j} className="flex items-start gap-1.5 text-xs" style={{ color: 'var(--text-secondary)' }}>
-                      <span className="font-bold mt-px shrink-0" style={{ color: brandAccents[i] }}>✓</span>
+                      <span className="font-bold mt-px shrink-0" style={{ color: ink(brand.slug) }}>✓</span>
                       {pro}
                     </li>
                   ))}
@@ -183,9 +181,9 @@ export function ComparisonTable() {
                   href={brand.affiliateUrl}
                   target="_blank"
                   rel="noopener noreferrer sponsored"
-                  className="btn-primary text-xs py-2 px-4 inline-block"
+                  className="btn-primary text-xs py-2 px-4 inline-block whitespace-nowrap"
                 >
-                  Essayer →
+                  Voir le site
                 </Link>
               </td>
             ))}

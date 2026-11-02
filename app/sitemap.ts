@@ -29,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // ── Pages marques ────────────────────────────────────────────────────────────
   const brandPages: MetadataRoute.Sitemap = brands.map((b) => ({
-    url: `${BASE}/marques/${b.slug}`,
+    url: `${BASE}/chien/marque/${b.slug}`,
     lastModified: NOW,
     changeFrequency: 'weekly',
     priority: 0.85,

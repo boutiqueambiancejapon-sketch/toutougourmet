@@ -46,7 +46,7 @@ const tools = [
     title: 'Estimateur de budget mensuel',
     description: 'Compare le coût mensuel de nos 4 marques recommandées pour le profil de ton animal. Avec les offres du moment.',
     cta: 'Estimer mon budget',
-    tags: ['Franklin', 'Petty Well', 'Elmut', 'Dog Chef'],
+    tags: ['Franklin', 'Elmut', 'Dog Chef'],
   },
   {
     href: '/outils/poids',
