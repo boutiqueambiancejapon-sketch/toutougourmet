@@ -47,7 +47,7 @@ export function StickyBrandCTA({ brandName, affiliateUrl, offer, code }: StickyB
               rel="noopener noreferrer sponsored"
               className="btn-primary text-sm whitespace-nowrap"
             >
-              Essayer {brandName} →
+              Essayer {brandName} →
             </a>
           </div>
         </div>

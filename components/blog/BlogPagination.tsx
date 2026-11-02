@@ -96,7 +96,7 @@ export function BlogPagination({ page, totalPages, onChange }: BlogPaginationPro
         aria-label="Page suivante"
         className="w-10 h-10 rounded-[var(--radius-md)] text-sm font-semibold border border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--accent-1)] hover:text-[var(--accent-1)] disabled:opacity-30 disabled:cursor-not-allowed inline-flex items-center justify-center"
       >
-        →
+        →
       </button>
     </nav>
   )

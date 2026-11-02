@@ -60,7 +60,7 @@ export default function ComparatifHubPage() {
                 <p className="text-sm text-[var(--text-muted)]">
                   {a} face à {b} — comparatif {hasEditorial ? 'éditorial' : 'automatique'}
                 </p>
-                <span className="text-sm text-[var(--accent-1)] mt-1">Lire le comparatif →</span>
+                <span className="text-sm text-[var(--accent-1)] mt-1">Lire le comparatif →</span>
               </Link>
             )
           })}

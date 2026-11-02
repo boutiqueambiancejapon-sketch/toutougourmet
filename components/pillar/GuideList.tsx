@@ -3,7 +3,7 @@ import { estimateReadTime, type Article } from '@/lib/mdx'
 import { articleHref } from '@/components/article/ArticleTile'
 import { IconChevron, VerdictIcon } from '@/components/icons'
 
-// @cdc 04-pages — liste dense « question → verdict » des pages piliers (audit design-CRO, §3
+// @cdc 04-pages — liste dense « question → verdict » des pages piliers (audit design-CRO, §3
 // Page pilier) : une ligne par guide (titre, icône du verdict, temps de lecture), deux colonnes
 // sur ordinateur. Remplace la grille de cartes identiques.
 const VERDICT_LABEL = { oui: 'Oui', moderation: 'Avec modération', danger: 'Danger' } as const

@@ -59,7 +59,7 @@ export function StickyCta({ config }: { config: StickyCtaConfig }) {
   const dynData = useDynamicData(config.dynamicSocialProof?.endpoint)
   // Route interne (/...) : ni nouvel onglet ni rel sponsored
   const isInternal = config.url.startsWith('/')
-  const buttonLabel = config.buttonLabel ?? (config.code ? "J'en profite →" : 'Acheter →')
+  const buttonLabel = config.buttonLabel ?? (config.code ? "J'en profite →" : 'Acheter →')
   const proof = (config.dynamicSocialProof && dynData ? pickDynamicTier(dynData, config.dynamicSocialProof.tiers) : null) ?? config.socialProof
 
   return (

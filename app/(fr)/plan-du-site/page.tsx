@@ -168,7 +168,7 @@ export default function PlanDuSitePage() {
             href="/marques"
             className="inline-block mt-4 text-sm font-medium text-gray-400 hover:text-gray-700 underline underline-offset-2"
           >
-            → Toutes les marques
+            → Toutes les marques
           </Link>
         </section>
 

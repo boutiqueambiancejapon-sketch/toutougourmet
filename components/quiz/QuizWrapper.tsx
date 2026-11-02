@@ -106,7 +106,7 @@ export function QuizWrapper() {
       <div className="flex items-center justify-between mt-6 gap-3">
         {currentStep > 0 ? (
           <button onClick={handleBack} className="btn-ghost text-sm">
-            ← Retour
+            ← Retour
           </button>
         ) : <div />}
 
@@ -116,7 +116,7 @@ export function QuizWrapper() {
             disabled={!canContinue}
             className={cn('btn-primary', !canContinue && 'opacity-40 cursor-not-allowed')}
           >
-            {currentStep === totalSteps - 1 ? 'Voir mes recommandations →' : 'Continuer →'}
+            {currentStep === totalSteps - 1 ? 'Voir mes recommandations →' : 'Continuer →'}
           </button>
         )}
       </div>

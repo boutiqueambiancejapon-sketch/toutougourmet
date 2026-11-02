@@ -117,7 +117,7 @@ export default function AProposPage() {
               Des questions, des retours, un partenariat à proposer ?
             </p>
             <Link href="/contact" className="btn-primary inline-block">
-              Nous écrire →
+              Nous écrire →
             </Link>
           </section>
         </div>

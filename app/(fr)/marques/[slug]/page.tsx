@@ -371,13 +371,13 @@ export default async function MarquePage({ params }: Props) {
           {/* Liens internes */}
           <div className="flex flex-wrap gap-3 justify-center text-sm">
             <Link href="/comparateur" className="text-[var(--accent-1)] hover:underline">
-              → Voir le comparateur complet
+              → Voir le comparateur complet
             </Link>
             <Link href="/quiz" className="text-[var(--accent-1)] hover:underline">
-              → Faire le quiz personnalisé
+              → Faire le quiz personnalisé
             </Link>
             <Link href="/marques" className="text-[var(--accent-1)] hover:underline">
-              → Voir toutes les marques
+              → Voir toutes les marques
             </Link>
           </div>
         </div>

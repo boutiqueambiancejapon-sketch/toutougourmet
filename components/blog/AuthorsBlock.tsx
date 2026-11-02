@@ -63,7 +63,7 @@ export function AuthorsBlock() {
                 href={author.url}
                 className="text-sm font-bold text-[var(--accent-1)] hover:underline"
               >
-                Sa page auteur →
+                Sa page auteur →
               </Link>
               {author.linkedin && (
                 <Link
@@ -72,7 +72,7 @@ export function AuthorsBlock() {
                   rel="noopener noreferrer"
                   className="text-sm text-[var(--text-muted)] hover:text-[var(--accent-1)]"
                 >
-                  LinkedIn →
+                  LinkedIn →
                 </Link>
               )}
             </div>

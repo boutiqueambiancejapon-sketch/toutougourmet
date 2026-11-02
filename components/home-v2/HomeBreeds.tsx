@@ -12,7 +12,7 @@ export function HomeBreeds() {
     <section aria-labelledby="par-race" className="v2 flex flex-col gap-3">
       <div className="flex items-baseline justify-between gap-4">
         <h2 id="par-race" className="m-0 font-display text-2xl font-black text-ink">Par race</h2>
-        <Link href="/chien/race" className="text-sm font-semibold text-orange-ink no-underline hover:underline">Toutes les races →</Link>
+        <Link href="/chien/race" className="text-sm font-semibold text-orange-ink no-underline hover:underline">Toutes les races →</Link>
       </div>
       <ul role="list" className="m-0 grid list-none grid-cols-3 gap-3 p-0 md:grid-cols-6">
         {breeds.map((b) => (

@@ -12,7 +12,7 @@ export function DidYouKnow() {
       <span className="font-display text-2xl font-black leading-tight">
         {`Un chien de ${DOG_AGE} ans a ${HUMAN_AGE} ans en âge humain, pas ${DOG_AGE * 7}.`}
       </span>
-      <span className="text-sm font-semibold">Calcule l&apos;âge du tien →</span>
+      <span className="text-sm font-semibold">Calcule l&apos;âge du tien →</span>
     </Link>
   )
 }

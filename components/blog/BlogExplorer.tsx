@@ -133,7 +133,7 @@ export function BlogExplorer({ articles, featured }: BlogExplorerProps) {
               </p>
               <p className="text-[var(--text-secondary)] m-0 mb-5">Essaie d&rsquo;autres mots-clés ou réinitialise les filtres.</p>
               <button onClick={reset} className="btn-outline text-sm px-4 py-2">
-                Réinitialiser →
+                Réinitialiser →
               </button>
             </div>
           ) : (

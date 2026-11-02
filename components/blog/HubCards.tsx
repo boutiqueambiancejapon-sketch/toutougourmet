@@ -38,7 +38,7 @@ export function HubCards({ hubs, columns = 4 }: HubCardsProps) {
               className="text-xs font-bold uppercase tracking-wide opacity-0 group-hover:opacity-100 transition-opacity"
               style={{ color: colors.accent }}
             >
-              Voir →
+              Voir →
             </span>
           </div>
 

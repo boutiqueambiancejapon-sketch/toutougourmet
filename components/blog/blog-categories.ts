@@ -1,7 +1,7 @@
 import { fallbackSlotFor } from '@/data/image-utils'
 
 /**
- * Mapping catégorie (libellé frontmatter) → présentation blog hub.
+ * Mapping catégorie (libellé frontmatter) → présentation blog hub.
  * Utilisé pour les chips, les covers Illustration et les cards.
  *
  * Source de vérité unique pour les couleurs par catégorie. Les composants
@@ -93,7 +93,7 @@ export const CATEGORY_ORDER: string[] = [
 ]
 
 /**
- * Articles de race (slugs `nourriture-{breed}`) → slot de cover dédié.
+ * Articles de race (slugs `nourriture-{breed}`) → slot de cover dédié.
  * Chaque race a maintenant son image unique (.webp pour les 6 historiques,
  * .jpg pour le batch Gemini de 36 races). La fallback `breed-generic`
  * reste disponible pour toute future race non encore mappée.
@@ -288,8 +288,8 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
  * Résout le slot Illustration à utiliser pour un article donné.
  * Ordre de priorité :
  *  1. Article générique avec featured dédiée (ARTICLE_SLOT_BY_SLUG)
- *  2. Article de race (`nourriture-{breed}`) → slot breed dédié ou `breed-generic`
- *  3. Autres articles → slot dérivé de `frontmatter.category` (cf. CATEGORY_TABLE)
+ *  2. Article de race (`nourriture-{breed}`) → slot breed dédié ou `breed-generic`
+ *  3. Autres articles → slot dérivé de `frontmatter.category` (cf. CATEGORY_TABLE)
  */
 export function getArticleSlot(slug: string, category: string): string {
   if (ARTICLE_SLOT_BY_SLUG[slug]) {

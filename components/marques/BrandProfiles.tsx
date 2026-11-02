@@ -82,7 +82,7 @@ export function BrandProfiles() {
                     className="flex flex-col gap-1 rounded-box p-4 no-underline hover:outline hover:outline-2 hover:outline-line-2"
                     style={{ background: tone.bg }}
                   >
-                    <span className="font-semibold" style={{ color: tone.ink }}>{brand.name} →</span>
+                    <span className="font-semibold" style={{ color: tone.ink }}>{brand.name} →</span>
                     <span className="text-sm leading-snug text-ink-2">{why}</span>
                   </Link>
                 )

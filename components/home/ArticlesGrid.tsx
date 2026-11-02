@@ -134,7 +134,7 @@ export function ArticlesGrid() {
             href="/blog"
             className="text-sm font-bold text-[var(--accent-blue)] whitespace-nowrap hover:underline"
           >
-            Tous les articles →
+            Tous les articles →
           </Link>
         </div>
 

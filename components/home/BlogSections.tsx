@@ -29,7 +29,7 @@ interface Section {
  * confondues) + 5 sections par catégorie × 4 cards.
  *
  * Remplace l'ancien `ArticlesGrid` qui n'affichait que 4 articles total.
- * Lien "Voir tout" → `/blog?cat={label}` (BlogExplorer pré-sélectionne le
+ * Lien "Voir tout" → `/blog?cat={label}` (BlogExplorer pré-sélectionne le
  * filtre depuis le querystring).
  */
 export function BlogSections() {
@@ -65,7 +65,7 @@ export function BlogSections() {
             href="/blog"
             className="text-sm font-bold text-[var(--accent-blue)] hover:underline whitespace-nowrap"
           >
-            Tous les {all.length} articles →
+            Tous les {all.length} articles →
           </Link>
         </div>
 
@@ -90,7 +90,7 @@ export function BlogSections() {
                   href={`/blog?cat=${encodeURIComponent(section.label)}`}
                   className="text-sm font-bold text-[var(--accent-blue)] hover:underline whitespace-nowrap"
                 >
-                  Voir tout →
+                  Voir tout →
                 </Link>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">

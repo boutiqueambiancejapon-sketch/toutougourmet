@@ -42,7 +42,7 @@ export interface StickyCtaConfig {
   socialProof?: string
   /** Preuve sociale dynamique — fetch côté client, remplace `socialProof` dès qu'un tier matche. */
   dynamicSocialProof?: DynamicSocialProofConfig
-  /** Override du libellé du bouton — défaut: "J'en profite →" si code, "Acheter →" sinon */
+  /** Override du libellé du bouton — défaut: "J'en profite →" si code, "Acheter →" sinon */
   buttonLabel?: string
   /** Sous-label discret sous le bouton (ordinateur seulement). Ex : "Sans inscription · 2 min" */
   subButton?: string

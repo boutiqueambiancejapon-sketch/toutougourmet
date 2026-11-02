@@ -4,7 +4,7 @@ import { IconBowl, IconDog, IconSearch } from './nav-icons'
 import { IconAlert, IconBone, IconBread, IconCarrot, IconFruit, IconHeart, IconPaw } from './food-icons'
 import { IconBang, IconCheck, IconCross } from './mark-icons'
 
-// Correspondances métier : rubrique → icône, verdict → marque.
+// Correspondances métier : rubrique → icône, verdict → marque.
 const BY_CATEGORY: Record<string, ComponentType<IconProps>> = {
   'peut-manger': IconCarrot,
   'alimentation-quotidienne': IconBowl,

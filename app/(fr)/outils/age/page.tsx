@@ -129,7 +129,7 @@ export default function AgePage() {
               Ton chien est senior ? Adapte sa ration.
             </p>
             <Link href="/outils/ration" className="btn-primary text-sm py-2 inline-flex">
-              Calculer sa ration journalière →
+              Calculer sa ration journalière →
             </Link>
           </div>
 
@@ -137,9 +137,9 @@ export default function AgePage() {
           <div className="mt-10 pt-6 border-t border-[var(--border)]">
             <p className="text-sm font-semibold text-[var(--text-muted)] mb-3">Autres outils</p>
             <div className="flex flex-wrap gap-3">
-              <Link href="/outils/ration" className="btn-outline text-sm py-2">🥣 Ration journalière →</Link>
-              <Link href="/outils/budget" className="btn-outline text-sm py-2">💰 Budget mensuel →</Link>
-              <Link href="/outils/poids" className="btn-outline text-sm py-2">⚖️ Score corporel →</Link>
+              <Link href="/outils/ration" className="btn-outline text-sm py-2">🥣 Ration journalière →</Link>
+              <Link href="/outils/budget" className="btn-outline text-sm py-2">💰 Budget mensuel →</Link>
+              <Link href="/outils/poids" className="btn-outline text-sm py-2">⚖️ Score corporel →</Link>
             </div>
           </div>
 

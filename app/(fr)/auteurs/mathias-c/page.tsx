@@ -86,7 +86,7 @@ export default function AutheurMathiasPage() {
                       className="text-xs font-semibold text-[var(--text-muted)] hover:text-[var(--accent-1)] transition-colors"
                       aria-label="Profil LinkedIn de Mathias C."
                     >
-                      LinkedIn →
+                      LinkedIn →
                     </Link>
                   )}
                 </div>

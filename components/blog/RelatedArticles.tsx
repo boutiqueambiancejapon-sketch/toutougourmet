@@ -5,7 +5,7 @@
  *  1. Jusqu'à 3 articles de la même catégorie (pertinence éditoriale)
  *  2. Compléter jusqu'à 6 avec des articles d'autres catégories
  *     sélectionnés via un pseudo-aléatoire seedé sur le slug courant
- *     → résultat stable entre les renders (SSR-safe, pas de CLS)
+ *     → résultat stable entre les renders (SSR-safe, pas de CLS)
  *
  * Rendu : serveur uniquement — CSS scroll-snap sur mobile, grille sur desktop
  */

@@ -109,7 +109,7 @@ export function CostComparisonTool() {
         </div>
 
         <button type="submit" className="btn-primary py-3">
-          Comparer les coûts annuels →
+          Comparer les coûts annuels →
         </button>
       </form>
 

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   // 1. Le binaire app/favicon.ico contient encore le scaffold Next.js (triangle Vercel).
   // 2. Tant qu'il n'est pas remplacé par un vrai .ico DA, on évite de pointer vers lui
   //    pour ne pas obliger les navigateurs à le fetcher (round-trip via la redirect
-  //    /favicon.ico → /icon.svg de next.config.ts).
+  //    /favicon.ico → /icon.svg de next.config.ts).
   // 3. /icon.svg en première position couvre tous les navigateurs modernes (Chrome,
   //    Firefox, Safari 12+, Edge). Pour les navigateurs très anciens qui ignorent le
   //    <link rel="icon"> et requêtent /favicon.ico en aveugle, la redirect prend le relais.

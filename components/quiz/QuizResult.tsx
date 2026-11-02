@@ -46,7 +46,7 @@ export function QuizResult({ sortedBrands }: QuizResultProps) {
           href={`/marques/${recommendedBrand.slug}`}
           className="block text-center text-sm text-[var(--accent-1)] hover:underline"
         >
-          Voir notre avis complet sur {recommendedBrand.name} →
+          Voir notre avis complet sur {recommendedBrand.name} →
         </Link>
       </div>
 
@@ -71,13 +71,13 @@ export function QuizResult({ sortedBrands }: QuizResultProps) {
                     rel="noopener noreferrer sponsored"
                     className="btn-outline text-sm py-1.5 flex-1 text-center"
                   >
-                    Essayer →
+                    Essayer →
                   </Link>
                   <Link
                     href={`/marques/${brand.slug}`}
                     className="text-sm font-medium text-[var(--accent-1)] self-center"
                   >
-                    Avis →
+                    Avis →
                   </Link>
                 </div>
               </div>
@@ -88,7 +88,7 @@ export function QuizResult({ sortedBrands }: QuizResultProps) {
 
       <div className="text-center">
         <Link href="/comparateur" className="btn-ghost text-sm">
-          Voir le comparateur complet →
+          Voir le comparateur complet →
         </Link>
       </div>
     </div>

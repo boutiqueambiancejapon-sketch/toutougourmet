@@ -14,7 +14,7 @@ export function BlogPreview() {
             <h2 className="section-title">Nos derniers articles</h2>
           </div>
           <Link href="/blog" className="text-sm font-semibold text-[var(--accent-1)] hover:underline whitespace-nowrap shrink-0">
-            Voir tout →
+            Voir tout →
           </Link>
         </div>
 

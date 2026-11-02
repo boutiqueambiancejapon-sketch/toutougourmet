@@ -71,8 +71,8 @@ export function Illustration({
         // always wins when both are present. Keep exactly one position
         // class per mode.
         //
-        // fill=false  → normal flow, sized by slot aspect-ratio
-        // fill=true   → absolute inset-0, covers the nearest positioned ancestor
+        // fill=false  → normal flow, sized by slot aspect-ratio
+        // fill=true   → absolute inset-0, covers the nearest positioned ancestor
         //               regardless of whether its height comes from min-height,
         //               aspect-ratio, or an explicit value.
         fill

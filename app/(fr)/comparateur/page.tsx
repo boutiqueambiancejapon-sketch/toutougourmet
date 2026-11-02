@@ -121,7 +121,7 @@ export default function ComparateurPage() {
             Tu ne sais pas quelle marque choisir pour ton animal ?
           </p>
           <Link href="/quiz" className="btn-primary inline-block">
-            Faire le quiz personnalisé →
+            Faire le quiz personnalisé →
           </Link>
         </div>
 

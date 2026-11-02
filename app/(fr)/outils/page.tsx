@@ -130,7 +130,7 @@ export default function OutilsPage() {
 
               <div className="flex items-center justify-between mt-auto pt-2 border-t border-[var(--border)]">
                 <span className="text-sm font-semibold text-[var(--accent-1)]">
-                  {tool.cta} →
+                  {tool.cta} →
                 </span>
                 <span className="text-xs text-[var(--text-muted)]">Gratuit</span>
               </div>
@@ -147,7 +147,7 @@ export default function OutilsPage() {
             Le quiz prend en compte le profil complet de ton animal pour te suggérer la marque la plus adaptée.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="/quiz" className="btn-primary">Faire le quiz →</Link>
+            <Link href="/quiz" className="btn-primary">Faire le quiz →</Link>
             <Link href="/comparateur" className="btn-outline">Voir le comparateur</Link>
           </div>
         </div>

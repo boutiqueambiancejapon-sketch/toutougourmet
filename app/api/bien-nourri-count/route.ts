@@ -77,7 +77,7 @@ export async function GET() {
   const token = process.env.PLAUSIBLE_API_KEY
   const domain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN ?? DEFAULT_DOMAIN
 
-  // Pas de token configuré = pas de stats → on retourne 0 partout silencieusement
+  // Pas de token configuré = pas de stats → on retourne 0 partout silencieusement
   if (!token) {
     const empty: BienNourriCountResponse = { today: 0, last_7d: 0, last_30d: 0, all_time: 0 }
     return NextResponse.json(empty)

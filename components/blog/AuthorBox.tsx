@@ -60,7 +60,7 @@ export function AuthorBox({ author }: AuthorBoxProps) {
             href={author.url}
             className="text-xs font-semibold text-[var(--accent-1)] hover:underline"
           >
-            Tous ses articles →
+            Tous ses articles →
           </Link>
           {author.linkedin && (
             <Link
@@ -70,7 +70,7 @@ export function AuthorBox({ author }: AuthorBoxProps) {
               className="text-xs text-[var(--text-muted)] hover:text-[var(--accent-1)] transition-colors"
               aria-label={`Profil LinkedIn de ${author.name}`}
             >
-              LinkedIn →
+              LinkedIn →
             </Link>
           )}
         </div>

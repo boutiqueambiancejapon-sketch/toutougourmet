@@ -42,7 +42,7 @@ export function BreedsGuides() {
             href="/chien/race"
             className="text-sm font-bold text-[var(--accent-1)] whitespace-nowrap hover:underline"
           >
-            Toutes les races →
+            Toutes les races →
           </Link>
         </div>
 

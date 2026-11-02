@@ -20,7 +20,7 @@ export function StickyCtaDogChef() {
         rel="noopener noreferrer sponsored"
         className={STICKY_BUTTON}
       >
-        J&apos;en profite →
+        J&apos;en profite →
       </Link>
     </StickyBar>
   )

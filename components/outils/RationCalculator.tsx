@@ -209,7 +209,7 @@ export function RationCalculator({ prefill = {} }: { prefill?: RationPrefill }) 
         </div>
 
         <button type="submit" className="btn-primary text-base py-3">
-          Calculer ma ration →
+          Calculer ma ration →
         </button>
       </form>
 

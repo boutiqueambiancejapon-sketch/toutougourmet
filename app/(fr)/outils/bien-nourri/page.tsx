@@ -160,16 +160,16 @@ export default function BienNourriPage() {
             <p className="text-sm font-semibold text-[var(--text-muted)] mb-3">Autres outils</p>
             <div className="flex flex-wrap gap-3">
               <Link href="/outils/ration" className="btn-outline text-sm py-2">
-                🥣 Ration journalière →
+                🥣 Ration journalière →
               </Link>
               <Link href="/outils/poids" className="btn-outline text-sm py-2">
-                ⚖️ Score corporel →
+                ⚖️ Score corporel →
               </Link>
               <Link href="/outils/budget" className="btn-outline text-sm py-2">
-                💰 Budget mensuel →
+                💰 Budget mensuel →
               </Link>
               <Link href="/quiz" className="btn-outline text-sm py-2">
-                🎯 Quiz marque idéale →
+                🎯 Quiz marque idéale →
               </Link>
             </div>
           </div>

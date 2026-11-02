@@ -35,7 +35,7 @@ export function BrandCTA({
         className={`${variant === 'primary' ? 'btn-primary' : 'btn-outline'} w-full text-center`}
         style={variant === 'primary' ? { color: 'var(--bg-dark)' } : undefined}
       >
-        {`${cta} ${brandName} →`}
+        {`${cta} ${brandName} →`}
       </a>
       {code && (
         <p className="text-sm bg-[var(--bg-surface-2)] px-3 py-1 rounded-[var(--radius-md)]"

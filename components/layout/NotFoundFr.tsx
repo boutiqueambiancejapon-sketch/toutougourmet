@@ -16,10 +16,10 @@ export function NotFoundFr() {
       </p>
       <div className="flex flex-col sm:flex-row gap-3">
         <Link href="/" className="btn-primary">
-          Retour à l&apos;accueil →
+          Retour à l&apos;accueil →
         </Link>
         <Link href="/quiz" className="btn-outline">
-          Faire le quiz →
+          Faire le quiz →
         </Link>
       </div>
     </div>

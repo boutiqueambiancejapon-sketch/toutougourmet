@@ -24,7 +24,7 @@ export function DualBrandCTA({ brandA, brandB }: DualBrandCTAProps) {
               rel="noopener noreferrer sponsored"
               className="btn-primary w-full text-center text-sm py-2.5 px-3"
             >
-              {`Essayer ${brand.name} →`}
+              {`Essayer ${brand.name} →`}
             </a>
             {brand.offer && (
               <p className="text-xs font-semibold text-center" style={{ color: 'var(--accent-1)' }}>

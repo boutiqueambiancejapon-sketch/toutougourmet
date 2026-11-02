@@ -14,7 +14,7 @@ import { FoodSearch } from '@/components/tools/FoodSearch'
 import type { FoodVerdict } from '@/lib/food-verdicts'
 
 // @cdc 04-pages — page pilier V2 d'une rubrique : en-tête, recherche d'aliment + verdicts
-// (rubriques aliments), article à la une, 3 cartes récentes, puis liste dense « question →
+// (rubriques aliments), article à la une, 3 cartes récentes, puis liste dense « question →
 // verdict » (audit design-CRO, §3 Page pilier). JSON-LD CollectionPage + ItemList. URL inchangées.
 
 interface Props {

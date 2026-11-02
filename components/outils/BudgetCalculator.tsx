@@ -137,7 +137,7 @@ export function BudgetCalculator() {
         </div>
 
         <button type="submit" className="btn-primary py-3">
-          Comparer les budgets →
+          Comparer les budgets →
         </button>
       </form>
 
@@ -183,7 +183,7 @@ export function BudgetCalculator() {
                   rel="noopener noreferrer sponsored"
                   className="btn-primary text-xs py-1.5 px-3 shrink-0"
                 >
-                  Essayer →
+                  Essayer →
                 </a>
               </div>
             ))}

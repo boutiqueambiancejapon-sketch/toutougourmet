@@ -132,9 +132,9 @@ export default function PoidsPage() {
           <div className="mt-10 pt-6 border-t border-[var(--border)]">
             <p className="text-sm font-semibold text-[var(--text-muted)] mb-3">Autres outils</p>
             <div className="flex flex-wrap gap-3">
-              <Link href="/outils/ration" className="btn-outline text-sm py-2">🥣 Ration journalière →</Link>
-              <Link href="/outils/budget" className="btn-outline text-sm py-2">💰 Budget mensuel →</Link>
-              <Link href="/outils/cout" className="btn-outline text-sm py-2">📊 Coût annuel →</Link>
+              <Link href="/outils/ration" className="btn-outline text-sm py-2">🥣 Ration journalière →</Link>
+              <Link href="/outils/budget" className="btn-outline text-sm py-2">💰 Budget mensuel →</Link>
+              <Link href="/outils/cout" className="btn-outline text-sm py-2">📊 Coût annuel →</Link>
             </div>
           </div>
 

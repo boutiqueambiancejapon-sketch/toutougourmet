@@ -32,7 +32,7 @@ export default function MarquesPage() {
 
         <div className="text-center">
           <Link href="/comparateur" className="btn-outline inline-block">
-            Voir le comparateur complet →
+            Voir le comparateur complet →
           </Link>
         </div>
       </div>

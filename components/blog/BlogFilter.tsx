@@ -135,7 +135,7 @@ export function BlogFilter({ articles }: BlogFilterProps) {
             className="px-3 py-1.5 rounded-[var(--radius-md)] text-sm font-semibold border border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--accent-1)] hover:text-[var(--accent-1)] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
             aria-label="Page suivante"
           >
-            →
+            →
           </button>
         </div>
       )}

@@ -44,7 +44,7 @@ export function StickyComparatifCTA({ brandA, brandB }: StickyComparatifCTAProps
                 rel="noopener noreferrer sponsored"
                 className="btn-primary text-sm whitespace-nowrap w-full text-center"
               >
-                Essayer {brand.name} →
+                Essayer {brand.name} →
               </a>
               {brand.code && (
                 <span

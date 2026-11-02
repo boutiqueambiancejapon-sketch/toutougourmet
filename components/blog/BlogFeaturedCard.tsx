@@ -64,7 +64,7 @@ export function BlogFeaturedCard({ article }: BlogFeaturedCardProps) {
           <span style={{ fontFamily: "'JetBrains Mono', monospace" }}>{readTime} min</span>
         </div>
         <span className="text-sm font-bold text-[var(--accent-1)] mt-2">
-          Lire l&rsquo;article →
+          Lire l&rsquo;article →
         </span>
       </div>
     </Link>

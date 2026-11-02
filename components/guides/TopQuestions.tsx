@@ -3,7 +3,7 @@ import { CategoryIcon, IconChevron, VerdictIcon } from '@/components/icons'
 import { articleHref } from '@/components/article/ArticleTile'
 import type { Article } from '@/lib/mdx'
 
-// @cdc 04-pages — « Questions les plus posées » du hub Guides : liste simple question → guide,
+// @cdc 04-pages — « Questions les plus posées » du hub Guides : liste simple question → guide,
 // avec la marque du verdict quand le guide en a un. Un guide absent est ignoré.
 const QUESTIONS: { slug: string; question: string }[] = [
   { slug: 'chien-mange-chocolat-urgence', question: 'Mon chien a mangé du chocolat, que faire ?' },

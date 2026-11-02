@@ -93,7 +93,7 @@ export function ContactForm() {
       )}
 
       <button type="submit" disabled={status === 'loading'} className="btn-primary">
-        {status === 'loading' ? 'Envoi…' : 'Envoyer →'}
+        {status === 'loading' ? 'Envoi…' : 'Envoyer →'}
       </button>
     </form>
   )

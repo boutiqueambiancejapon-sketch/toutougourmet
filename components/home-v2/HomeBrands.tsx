@@ -9,7 +9,7 @@ export function HomeBrands() {
       <div className="mx-auto flex max-w-page flex-col gap-5 px-4 py-12 md:px-8 md:py-16">
         <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
           <h2 id="marques" className="m-0 font-display text-[clamp(1.6rem,3vw,2.2rem)] font-black text-cream">{"Les marques qu'on recommande"}</h2>
-          <Link href="/chien/marque" className="text-sm font-semibold text-amber no-underline hover:underline">Toutes les marques →</Link>
+          <Link href="/chien/marque" className="text-sm font-semibold text-amber no-underline hover:underline">Toutes les marques →</Link>
         </div>
         <ul role="list" className="m-0 grid list-none grid-cols-1 gap-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
           {brands.map((b) => (

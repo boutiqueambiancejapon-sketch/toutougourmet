@@ -25,7 +25,7 @@ export function QuizTeaser() {
             </p>
             <div className="flex flex-wrap gap-3">
               <Link href="/quiz" className="btn-dark text-base px-8 py-4">
-                Faire le quiz gratuit →
+                Faire le quiz gratuit →
               </Link>
             </div>
           </div>

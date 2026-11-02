@@ -172,7 +172,7 @@ export function BodyScoreEvaluator() {
         </div>
 
         <button type="submit" className="btn-primary py-3">
-          Évaluer le score corporel →
+          Évaluer le score corporel →
         </button>
       </form>
 
