@@ -21,9 +21,10 @@ export default async function DeleteAccountPage() {
         </h2>
         <p className="m-0">
           Ton adresse e-mail ({user.email}), ton mot de passe, tes sessions
-          {dogsPart}. Rien n&apos;est gardé de côté : la
+          {dogsPart}, ton historique d&apos;analyses d&apos;étiquettes et tes signalements. Rien n&apos;est gardé de côté : la
           suppression est immédiate et définitive.
         </p>
+        <p className="m-0">Les fiches produits nées de tes analyses restent en ligne : elles ne contiennent rien sur toi.</p>
         <p className="m-0">
           Pour garder une copie, télécharge d&apos;abord tes données depuis{' '}
           <a href="/api/compte/export" download className="font-semibold text-orange-ink underline underline-offset-2">

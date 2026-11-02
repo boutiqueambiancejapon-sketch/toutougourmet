@@ -89,6 +89,13 @@ export default function PolitiqueConfidentialitePage() {
               suppression) partent par Brevo (Sendinblue SAS, France), qui reçoit ton adresse email et le
               contenu du message pour l&apos;envoyer. Ces emails ne contiennent aucune publicité.
             </p>
+            <p className="mb-2">
+              Scanner d&apos;étiquette : les photos que tu envoies sont traitées en mémoire puis oubliées, jamais
+              enregistrées sur notre serveur. Pour lire l&apos;étiquette, elles sont transmises à l&apos;API Gemini
+              de Google (Google Ireland Limited). Nous gardons le texte lu sur l&apos;étiquette et la note, qui forment
+              une fiche produit publique sans aucune information sur toi, et, dans ton compte, la liste de tes
+              analyses, leur nombre ce mois-ci et tes signalements d&apos;erreur. Cet historique part avec ton compte.
+            </p>
             <p>
               Depuis <Link href="/compte" className={linkClass}>ton compte</Link>, tu peux télécharger toutes
               tes données dans un fichier JSON, corriger les profils de tes chiens et leurs pesées, et supprimer
