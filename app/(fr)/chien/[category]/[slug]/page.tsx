@@ -13,6 +13,9 @@ import { formatDate } from '@/lib/utils'
 import { StickyCta } from '@/components/blog/StickyCta'
 import { StickyCtaDouble } from '@/components/blog/StickyCtaDouble'
 import { getStickyCtaForArticle } from '@/lib/sticky-cta-config'
+import { getMidCta } from '@/lib/mid-cta'
+import { remarkMidCta } from '@/lib/remark-mid-cta'
+import { MidArticleCta } from '@/components/article/MidArticleCta'
 import { ArticleLayout } from '@/components/blog/ArticleLayout'
 import { getCategoryBySlug } from '@/data/categories'
 import { getArticleSlot } from '@/components/blog/blog-categories'
@@ -170,6 +173,16 @@ export default async function ArticleCategoryPage({ params }: Props) {
   const intentSelection = !explicitDouble && !explicitSingle
     ? getStickyCtaForArticle(frontmatter.category, slug)
     : null
+  const midCta = getMidCta({
+    slug,
+    categorySlug: category,
+    category: frontmatter.category,
+    verdict: frontmatter.verdict,
+    hasOwnAffiliate: Boolean(frontmatter.affiliateA),
+  })
+  const mdxComponents = midCta
+    ? { ...articleMdxComponents, MidCta: () => <MidArticleCta cta={midCta} /> }
+    : articleMdxComponents
 
   return (
     <>
@@ -199,10 +212,10 @@ export default async function ArticleCategoryPage({ params }: Props) {
       >
         <MDXRemote
           source={stripTldr(content)}
-          components={articleMdxComponents}
+          components={mdxComponents}
           options={{
             mdxOptions: {
-              remarkPlugins: [remarkGfm],
+              remarkPlugins: midCta ? [remarkGfm, remarkMidCta] : [remarkGfm],
               rehypePlugins: [
                 [rehypeAutolinkTerms, { terms: AUTOLINK_DICTIONARY, maxTotal: 3 }],
               ],

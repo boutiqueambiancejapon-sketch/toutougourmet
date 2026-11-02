@@ -11,7 +11,10 @@ export function Tracking() {
       const link = target?.closest('a[href]')
       if (link instanceof HTMLAnchorElement) {
         const brand = affiliateBrand(link.href)
-        if (brand) track('Affiliate Click', { brand })
+        if (brand) {
+          const place = link.closest<HTMLElement>('[data-cta]')?.dataset.cta
+          track('Affiliate Click', place ? { brand, place } : { brand })
+        }
       }
     }
     document.addEventListener('click', onClick, { capture: true })

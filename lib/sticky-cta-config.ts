@@ -26,7 +26,7 @@ export const DOG_CHEF_CTA: StickyCtaConfig = {
   brandName: 'Dog Chef',
   url: 'https://www.dogchef.com/fr/code/WZU7090',
   label: 'le menu sur-mesure pour ton chien',
-  badge: '-35%',
+  badge: '-30%',
   code: 'WZU7090',
   socialProof: '★★★★★ 4.8/5 · 7 800+ avis Trustpilot',
   buttonLabel: 'Calculer →',
