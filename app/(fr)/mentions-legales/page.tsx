@@ -48,6 +48,17 @@ export default function MentionsLegalesPage() {
               d&apos;auteur. Toute reproduction, même partielle, est interdite sans autorisation écrite
               préalable de l&apos;éditeur.
             </p>
+            <p className="mt-3">
+              Géolocalisation par pays : base DB-IP (
+              <a href="https://db-ip.com" rel="noopener" className="underline underline-offset-2">
+                https://db-ip.com
+              </a>
+              ), licence{' '}
+              <a href="https://creativecommons.org/licenses/by/4.0/deed.fr" rel="noopener" className="underline underline-offset-2">
+                CC BY 4.0
+              </a>
+              .
+            </p>
           </section>
 
           <section>

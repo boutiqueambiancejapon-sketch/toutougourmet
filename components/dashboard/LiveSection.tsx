@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import type { LiveData } from '@/lib/server/dashboard-live'
 import { Panel, SectionTitle } from './Panel'
+import { countryName } from '@/lib/dashboard/country'
 import { Bots, Feed, MiniList, MinuteBars } from './LiveParts'
 
 // @cdc tableau de bord — vue « En direct » : rafraîchie toutes les 10 s, en pause quand
@@ -69,6 +70,9 @@ export function LiveSection() {
               <MiniList rows={data.refs} empty="" />
             </div>
           ) : null}
+        </Panel>
+        <Panel title="Pays en ce moment" hint="Pages vues des 5 dernières minutes" wide>
+          {data ? <MiniList rows={data.countries ?? []} format={countryName} empty="Personne sur le site ces 5 dernières minutes." /> : null}
         </Panel>
         <Panel title="Fil d'activité" hint="Les 25 dernières actions">
           {data ? <Feed items={data.feed} /> : null}

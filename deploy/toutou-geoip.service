@@ -1,0 +1,19 @@
+# Met à jour chaque mois la base de pays DB-IP country lite (CC BY 4.0) lue par le site et par
+# l'ingestion des journaux. Seul /var/lib/toutou-geo est inscriptible. Après la bascule :
+# WorkingDirectory=/srv/toutou/current.
+[Unit]
+Description=Toutou Gourmet - mise à jour de la base de pays DB-IP
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=administrator
+WorkingDirectory=/home/administrator/toutou-preview/current
+Environment=GEOIP_DB=/var/lib/toutou-geo/dbip-country-lite.mmdb
+ExecStart=/usr/bin/bash scripts/update-geoip.sh
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/var/lib/toutou-geo
+PrivateTmp=true
