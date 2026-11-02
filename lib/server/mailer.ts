@@ -10,6 +10,10 @@ export interface TransactionalEmail {
   subject: string
   text: string
   html: string
+  /** En-têtes supplémentaires (ex. List-Unsubscribe pour la lettre) */
+  headers?: Record<string, string>
+  /** Étiquettes Brevo (par défaut : « compte ») */
+  tags?: string[]
 }
 
 function logOnly(): boolean {
@@ -36,7 +40,8 @@ export async function sendTransactionalEmail(mail: TransactionalEmail): Promise<
       subject: mail.subject,
       textContent: mail.text,
       htmlContent: mail.html,
-      tags: ['compte'],
+      tags: mail.tags ?? ['compte'],
+      ...(mail.headers ? { headers: mail.headers } : {}),
     }),
     cache: 'no-store',
   })

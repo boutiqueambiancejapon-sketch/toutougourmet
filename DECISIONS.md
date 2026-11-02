@@ -110,3 +110,9 @@ Dog Chef −30 % sur la box d'essai + livraison gratuite ; Dogfy Diet −50 % su
 
 ## 2026-11-02 — Ultra Premium Direct : −20 % confirmé
 Offre confirmée par le propriétaire : −20 % sur la première commande en abonnement. Elle rejoint la liste des remises autorisées.
+
+## 2026-11-02 — E-mails de la lettre (branche `feat/emails`)
+- Bienvenue : une fois par adresse, trace dans l'attribut Brevo `WELCOME_SENT` (pas de table en base), posé avant l'envoi (au pire aucun e-mail, jamais deux). Pas de bienvenue en double opt-in.
+- Désinscription : lien signé HMAC (`NEWSLETTER_SECRET`), retrait de la liste au clic sur « Me désinscrire » et non à l'ouverture du lien (les antivirus de messagerie ouvrent les liens). La campagne mensuelle utilise la balise Brevo `{{ unsubscribe }}`.
+- Lettre mensuelle : premier mardi du mois, 18 h à Paris ; campagne créée la veille par `scripts/newsletter-monthly.ts` (minuterie non installée, aucun envoi à la liste sans validation du propriétaire). Offre en rotation parmi les 5 remises confirmées, Fidelis exclu.
+- Couleurs écrites en dur dans les gabarits d'e-mails (`lib/emails/layout.ts`), comme `auth-emails.ts` : les messageries ignorent les variables CSS. Couverture en WebP (pas d'URL stable en JPEG) : Outlook de bureau ne l'affiche pas, le texte alternatif reste.
