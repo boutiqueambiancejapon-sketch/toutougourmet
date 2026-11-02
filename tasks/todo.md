@@ -65,6 +65,14 @@ Règles : aucune URL existante ne change (788 adresses) ; les pages race existan
 - [ ] Profil chien (race, âge, poids, activité, castration) qui personnalise articles et outils
 - [ ] CTA création de compte aux points de friction (CRO)
 
+Fondations (branche `feat/accounts`, non fusionnée tant que le lot n'est pas validé) :
+1. Dépendances `drizzle-orm`, `drizzle-kit`, `better-auth` ; schéma Postgres `app` ; migrations `db/migrations/`
+2. Better Auth : e-mail + mot de passe, vérification et mot de passe oublié par Brevo transactionnel, limite de tentatives en base
+3. Pages `/compte/*` (noindex, hors sitemap) : inscription, connexion, mot de passe oublié, tableau de bord, chien (ajout, édition, pesées)
+4. `/outils/ration` pré-rempli avec le premier chien du compte (sans toucher au pré-remplissage par URL)
+5. Points d'entrée : lien compte dans l'en-tête V2, lien sous `KeepResult`
+6. `deploy/README.md` : variables et migration
+
 ## Lot 5 — Photos
 
 - [ ] Upload → sharp (WebP, 1600 px max) → stockage objet S3 en UE
