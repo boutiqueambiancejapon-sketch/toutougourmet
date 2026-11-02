@@ -1,145 +1,78 @@
 // @cdc 5.0 — contrat : Outil calculateur · rendu SSG · JSON-LD WebApplication + FAQPage
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { BodyScoreEvaluator } from '@/components/outils/BodyScoreEvaluator'
-import { InfoBox } from '@/components/mdx/MdxComponents'
+import { Sources, ToolPage, type FaqEntry } from '@/components/outils/ToolPage'
 
 export const metadata: Metadata = {
-  title: 'Calculateur poids idéal chien — Évalue le score de condition corporelle vétérinaire',
+  title: 'Calculateur poids idéal chien : surpoids, maigreur ou poids de forme',
   description:
-    'Ton chien est-il en surpoids, trop maigre ou à son poids idéal ? Évalue son score de condition corporelle (SCC) utilisé par les vétérinaires. Gratuit et instantané.',
+    "Ton chien est-il en surpoids, trop maigre ou à son poids idéal ? Compare son poids à son poids de forme et vois quoi changer dans sa ration. Gratuit et instantané.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/outils/poids' },
   openGraph: {
-    title: 'Calculateur poids idéal chien — Évalue le score de condition corporelle vétérinaire',
-    description: 'Ton animal est-il à son poids de forme ? Découvre son score de condition corporelle vétérinaire.',
+    title: 'Calculateur poids idéal chien : surpoids, maigreur ou poids de forme',
+    description: 'Ton animal est-il à son poids de forme ? Compare son poids actuel à son poids idéal.',
     url: 'https://www.toutou-gourmet.com/outils/poids',
     type: 'website',
   },
 }
 
-const faqItems = [
+const faqItems: FaqEntry[] = [
   {
-    question: 'Comment savoir si mon chien est en surpoids ?',
-    answer: 'La méthode vétérinaire consiste à palper les côtes de ton chien : si tu les sens facilement sans appuyer, son poids est idéal. Si tu dois appuyer fort, il est en surpoids. Si elles sont saillantes, il est trop maigre. Notre évaluateur traduit ce score en pourcentage par rapport au poids idéal pour sa morphologie.',
+    question: 'Comment savoir si mon chien est en surpoids ?',
+    answer: "Passe la main sur ses côtes. Si tu les sens sans appuyer, sous une fine couche de graisse, son poids est bon. S'il faut appuyer pour les trouver, il est en surpoids. Si elles se voient, il est trop maigre. Vu de dessus, la taille doit se dessiner derrière les côtes.",
   },
   {
-    question: 'Quel est le poids idéal pour mon chien ?',
-    answer: 'Il n\'existe pas un poids idéal universel — cela dépend de la race, du gabarit et de la morphologie de ton chien. Les fourchettes générales : moins de 10 kg pour les petites races, 10-25 kg pour les moyennes, 25-45 kg pour les grandes. Ton vétérinaire peut établir un poids cible précis pour la race de ton chien.',
+    question: 'Quel est le poids idéal pour mon chien ?',
+    answer: "Il n'y a pas de poids idéal universel : il dépend de la race et de la morphologie. Repères généraux : moins de 10 kg pour les petites races, 10 à 25 kg pour les moyennes, 25 à 45 kg pour les grandes. Ton vétérinaire peut fixer un poids cible précis lors d'une visite.",
   },
   {
-    question: 'Mon chien est obèse, que faire ?',
-    answer: 'Ne réduis pas les rations brutalement : cela peut provoquer des carences. Réduis progressivement de 10-15% par semaine, augmente l\'activité physique (marches plus longues), et supprime les friandises. Si ton chien dépasse 25% de son poids idéal, consulte un vétérinaire pour un programme adapté. Une alimentation premium pauvre en glucides peut accélérer la perte de poids.',
+    question: 'Mon chien est obèse, que faire ?',
+    answer: "Ne coupe pas sa ration d'un coup. Les recommandations de l'AAHA visent une perte de 1 à 2 % de son poids par semaine, avec une ration calculée pour son poids de forme. Supprime les friandises hors ration et allonge les promenades. Au-delà de 25 % de surpoids, fais établir le programme par ton vétérinaire.",
   },
   {
-    question: 'Pourquoi l\'obésité est-elle dangereuse pour un chien ?',
-    answer: 'L\'obésité chez le chien est associée à une réduction de l\'espérance de vie de 15 à 20%, à des problèmes articulaires précoces (arthrose), au diabète, aux maladies cardiovasculaires et à des troubles respiratoires. C\'est l\'un des problèmes de santé les plus répandus chez les chiens domestiques en France.',
+    question: "Pourquoi l'obésité est-elle dangereuse pour un chien ?",
+    answer: "Elle use les articulations (arthrose précoce), favorise le diabète et gêne la respiration. Elle raccourcit aussi la vie : dans l'étude de Kealy et ses collègues (JAVMA, 2002), des Labradors nourris avec 25 % de moins que leurs frères de portée ont vécu 1,8 an de plus en médiane.",
   },
 ]
 
-const webAppJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebApplication',
-  name: 'Évaluateur score corporel chien — Toutou Gourmet',
-  url: 'https://www.toutou-gourmet.com/outils/poids',
-  description: 'Évalue le score de condition corporelle d\'un chien selon son poids actuel et son poids idéal.',
-  applicationCategory: 'UtilitiesApplication',
-  operatingSystem: 'Web',
-  offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
-}
-
-const faqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqItems.map((item) => ({
-    '@type': 'Question',
-    name: item.question,
-    acceptedAnswer: { '@type': 'Answer', text: item.answer },
-  })),
-}
-
 export default function PoidsPage() {
   return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-
-      <div className="min-h-screen py-12 px-4 bg-[var(--bg-primary)]">
-        <div className="max-w-[720px] mx-auto">
-
-          {/* Breadcrumb */}
-          <nav className="text-sm text-[var(--text-muted)] mb-6 flex items-center gap-2">
-            <Link href="/outils" className="hover:text-[var(--accent-1)]">Outils</Link>
-            <span>/</span>
-            <span className="text-[var(--text-primary)]">Poids & score corporel</span>
-          </nav>
-
-          {/* Header */}
-          <div className="flex items-start gap-4 mb-8">
-            <span className="text-5xl shrink-0">⚖️</span>
-            <div>
-              <h1 className="page-title mb-2">
-                Évaluateur de poids & score corporel
-              </h1>
-              <p className="text-[var(--text-secondary)] leading-relaxed">
-                Ton animal est-il à son poids de forme, en surpoids ou trop maigre ? L&apos;outil compare
-                son poids actuel à son poids idéal et calcule son score de condition corporelle (SCC).
-              </p>
-            </div>
-          </div>
-
-          {/* Évaluateur */}
-          <BodyScoreEvaluator />
-
-          {/* Explications */}
-          <div className="mt-6 flex flex-col">
-            <InfoBox color="blue" emoji="📏" title="Qu'est-ce que le Score de Condition Corporelle (SCC) ?">
-              <p className="mb-2">
-                Le SCC est l&apos;indicateur utilisé par les vétérinaires pour évaluer la composition
-                corporelle d&apos;un animal sur une échelle de 1 (cachectique) à 9 (obèse).
-              </p>
-              <p>
-                Il s&apos;évalue en palpant les côtes, en observant la silhouette de profil (creux abdominal)
-                et de dessus (sablier visible). Le score idéal se situe entre 4 et 5.
-              </p>
-            </InfoBox>
-
-            <InfoBox color="rose" emoji="⚠️" title="Risques du surpoids chez l'animal">
-              <ul className="space-y-1.5 list-disc pl-4">
-                <li>Diabète et résistance à l&apos;insuline</li>
-                <li>Problèmes articulaires et d&apos;arthrose prématurés</li>
-                <li>Maladies cardiovasculaires</li>
-                <li>Réduction de l&apos;espérance de vie de 15 à 20%</li>
-              </ul>
-            </InfoBox>
-          </div>
-
-          {/* FAQ */}
-          <section className="mt-10">
-            <h2 className="text-xl font-black text-[var(--text-primary)] mb-6" style={{ fontFamily: "'Fraunces', serif" }}>
-              Questions fréquentes
-            </h2>
-            <div className="flex flex-col gap-4">
-              {faqItems.map((item) => (
-                <div key={item.question} className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] p-5">
-                  <h3 className="font-bold text-[var(--text-primary)] mb-2">{item.question}</h3>
-                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{item.answer}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Nav outils */}
-          <div className="mt-10 pt-6 border-t border-[var(--border)]">
-            <p className="text-sm font-semibold text-[var(--text-muted)] mb-3">Autres outils</p>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/outils/ration" className="btn-outline text-sm py-2">🥣 Ration journalière →</Link>
-              <Link href="/outils/budget" className="btn-outline text-sm py-2">💰 Budget mensuel →</Link>
-              <Link href="/outils/cout" className="btn-outline text-sm py-2">📊 Coût annuel →</Link>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </>
+    <ToolPage
+      slug="poids"
+      path="/outils/poids"
+      crumb="Poids et état corporel"
+      title="Ton chien est-il à son poids de forme ?"
+      lead={<p>Entre son poids actuel et son poids de forme. Tu sauras s&apos;il faut revoir sa ration, et de combien.</p>}
+      methodTitle="Comment le poids est-il évalué ?"
+      method={
+        <>
+          <p>
+            L&apos;outil calcule l&apos;écart entre son poids actuel et son poids de forme. Moins de 15 % en dessous : trop
+            maigre. De 5 à 15 % en dessous : un peu léger. Jusqu&apos;à 10 % au-dessus : poids de forme. De 10 à 25 % : surpoids.
+            Au-delà : fort surpoids. Ces seuils sont des repères de l&apos;outil.
+          </p>
+          <p>
+            Les vétérinaires notent l&apos;état corporel de 1 à 9 (score de condition corporelle de Laflamme, 4 et 5 étant
+            l&apos;idéal), en palpant les côtes et en regardant la silhouette. Chaque point au-dessus de 5 correspond à environ
+            10 % de poids en trop. Ce score reste la référence : l&apos;outil ne fait que l&apos;approcher par la balance.
+          </p>
+          <Sources
+            items={[
+              'Laflamme D. P., « Development and validation of a body condition score system for dogs », Canine Practice, 1997.',
+              'Kealy R. D. et al., « Effects of diet restriction on life span and age-related changes in dogs », JAVMA, 2002.',
+              'AAHA, Weight Management Guidelines for Dogs and Cats, 2014.',
+            ]}
+          />
+        </>
+      }
+      faqTitle="Questions fréquentes sur le poids du chien"
+      faq={faqItems}
+      app={{
+        name: 'Évaluateur score corporel chien | Toutou Gourmet',
+        description: "Évalue le score de condition corporelle d'un chien selon son poids actuel et son poids idéal.",
+      }}
+    >
+      <BodyScoreEvaluator />
+    </ToolPage>
   )
 }

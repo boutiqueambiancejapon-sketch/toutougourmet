@@ -1,343 +1,126 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import Link from 'next/link'
-import {
-  BILAN_QUESTIONS,
-  computeBilan,
-  getVerdict,
-  recommend,
-  getActiveTips,
-  type BilanAnswers,
-} from '@/data/bien-nourri'
-import { cn } from '@/lib/utils'
+import { useEffect, useRef, useState } from 'react'
+import { track } from '@/lib/analytics'
+import { BILAN_QUESTIONS, computeBilan, getVerdict, recommend, type BilanAnswers } from '@/data/bien-nourri'
+import { BienNourriResult } from './BienNourriResult'
 
-// window.plausible est typé dans lib/analytics.ts
-import '@/lib/analytics'
+// @cdc outils — bilan « bien nourri » en 6 questions (data/bien-nourri.ts). Une question à la
+// fois ; les choix uniques passent à la suivante tout seuls.
+
+const EXCLUSIVE = ['aucun', 'transit_ok']
 
 export function BienNourriEvaluator() {
-  const [currentStep, setCurrentStep] = useState(0)
+  const [stepIndex, setStepIndex] = useState(0)
   const [answers, setAnswers] = useState<BilanAnswers>({})
-  const [showResult, setShowResult] = useState(false)
+  const [done, setDone] = useState(false)
 
-  // Track le completion du bilan dans Plausible (une seule fois par session).
-  // L'event « bien_nourri_completed » alimente le compteur public sur le sticky CTA
-  // via /api/bien-nourri-count (cf. route handler).
-  const eventFired = useRef(false)
+  // « bien_nourri_completed » alimente le compteur public du sticky CTA (/api/bien-nourri-count) ;
+  // « Tool Result » est l'événement commun à tous les outils. Une fois par bilan.
+  const fired = useRef(false)
   useEffect(() => {
-    if (!showResult || eventFired.current) return
-    if (typeof window === 'undefined' || typeof window.plausible !== 'function') return
-
+    if (!done || fired.current) return
     const scores = computeBilan(answers)
-    const verdict = getVerdict(scores.normalized)
-    const reco = recommend(scores)
-
-    window.plausible('bien_nourri_completed', {
-      props: {
-        score_band: verdict.band,
-        reco: reco.primary,
-        score: scores.normalized,
-      },
+    window.plausible?.('bien_nourri_completed', {
+      props: { score_band: getVerdict(scores.normalized).band, reco: recommend(scores).primary, score: scores.normalized },
     })
-    eventFired.current = true
-  }, [showResult, answers])
+    track('Tool Result', { tool: 'bien-nourri' })
+    fired.current = true
+  }, [done, answers])
 
-  const totalSteps = BILAN_QUESTIONS.length
-  const step = BILAN_QUESTIONS[currentStep]
-  const progress = (currentStep / totalSteps) * 100
+  const total = BILAN_QUESTIONS.length
+  const step = BILAN_QUESTIONS[stepIndex]
+  const current = answers[step.id]
 
-  function handleSelect(value: string) {
-    if (step.type === 'multi') {
-      const current = (answers[step.id] as string[]) || []
-      const isSelected = current.includes(value)
-      // « Aucun »/positifs sont mutuellement exclusifs avec les négatifs dans le même multi
-      const exclusiveValues = ['aucun', 'transit_ok']
-      if (exclusiveValues.includes(value)) {
-        setAnswers({ ...answers, [step.id]: [value] })
-        return
-      }
-      const next = isSelected
-        ? current.filter((v) => v !== value)
-        : [...current.filter((v) => !exclusiveValues.includes(v)), value]
-      setAnswers({ ...answers, [step.id]: next })
-    } else {
+  function next() {
+    if (stepIndex < total - 1) setStepIndex(stepIndex + 1)
+    else setDone(true)
+  }
+
+  function select(value: string) {
+    if (step.type === 'single') {
       setAnswers({ ...answers, [step.id]: value })
-      // Auto-advance single choice
-      setTimeout(() => {
-        if (currentStep < totalSteps - 1) {
-          setCurrentStep(currentStep + 1)
-        } else {
-          setShowResult(true)
-        }
-      }, 250)
+      setTimeout(next, 250)
+      return
     }
-  }
-
-  function handleNext() {
-    if (currentStep < totalSteps - 1) {
-      setCurrentStep(currentStep + 1)
-    } else {
-      setShowResult(true)
+    const list = Array.isArray(current) ? current : []
+    if (EXCLUSIVE.includes(value)) {
+      setAnswers({ ...answers, [step.id]: [value] })
+      return
     }
+    const nextList = list.includes(value) ? list.filter((v) => v !== value) : [...list.filter((v) => !EXCLUSIVE.includes(v)), value]
+    setAnswers({ ...answers, [step.id]: nextList })
   }
 
-  function handleBack() {
-    if (currentStep > 0) setCurrentStep(currentStep - 1)
-  }
-
-  function handleRestart() {
-    setCurrentStep(0)
-    setAnswers({})
-    setShowResult(false)
-    eventFired.current = false // re-permettre tracking si refait dans la même session
-  }
-
-  const currentAnswer = answers[step?.id]
-  const canContinue =
-    step?.type === 'multi'
-      ? Array.isArray(currentAnswer) && currentAnswer.length > 0
-      : !!currentAnswer
-
-  // ────────────────────────────────────────────────────────────
-  // Vue Résultat
-  // ────────────────────────────────────────────────────────────
-  if (showResult) {
-    const scores = computeBilan(answers)
-    const verdict = getVerdict(scores.normalized)
-    const reco = recommend(scores)
-    const tips = getActiveTips(answers, scores)
-
-    const isExternal = reco.url.startsWith('http')
-
+  if (done) {
     return (
-      <div className="flex flex-col gap-6">
-        {/* Verdict principal */}
-        <div
-          className="rounded-[var(--radius-xl)] p-6 md:p-8 border-2"
-          style={{
-            borderColor: verdict.colorVar,
-            background: `color-mix(in srgb, ${verdict.colorVar} 15%, var(--bg-surface))`,
+      <div aria-live="polite">
+        <BienNourriResult
+          answers={answers}
+          onRestart={() => {
+            setStepIndex(0)
+            setAnswers({})
+            setDone(false)
+            fired.current = false
           }}
-        >
-          <div className="flex items-start gap-4 mb-4">
-            <span className="text-4xl shrink-0">{verdict.emoji}</span>
-            <div className="min-w-0">
-              <p
-                className="text-xs font-bold uppercase tracking-widest"
-                style={{ color: 'var(--text-muted)' }}
-              >
-                Ton bilan
-              </p>
-              <h2
-                className="text-2xl font-black leading-tight"
-                style={{ fontFamily: "'Fraunces', serif", color: 'var(--text-primary)' }}
-              >
-                {verdict.label}
-              </h2>
-            </div>
-          </div>
-
-          {/* Score */}
-          <div className="mb-4">
-            <div className="flex justify-between text-xs text-[var(--text-muted)] mb-1">
-              <span>Score d&apos;alimentation</span>
-              <span className="font-mono font-bold">{scores.normalized}/100</span>
-            </div>
-            <div className="h-3 bg-[var(--bg-surface-2)] rounded-full overflow-hidden">
-              <div
-                className="h-full rounded-full transition-all duration-700"
-                style={{
-                  width: `${scores.normalized}%`,
-                  background: verdict.colorVar,
-                }}
-              />
-            </div>
-          </div>
-
-          <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
-            {verdict.summary}
-          </p>
-        </div>
-
-        {/* Conseils actionnables */}
-        {tips.length > 0 && (
-          <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-6">
-            <h3
-              className="text-lg font-black mb-4"
-              style={{ fontFamily: "'Fraunces', serif", color: 'var(--text-primary)' }}
-            >
-              💡 {tips.length} action{tips.length > 1 ? 's' : ''} concrète{tips.length > 1 ? 's' : ''} pour toi
-            </h3>
-            <ul className="flex flex-col gap-3">
-              {tips.map((tip) => (
-                <li
-                  key={tip.title}
-                  className="flex gap-3 pb-3 border-b border-[var(--border)] last:border-0 last:pb-0"
-                >
-                  <span
-                    className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold"
-                    style={{ background: 'var(--pill-amber)', color: 'var(--text-primary)' }}
-                  >
-                    ✓
-                  </span>
-                  <div className="min-w-0">
-                    <p className="font-bold text-sm text-[var(--text-primary)] mb-0.5">
-                      {tip.title}
-                    </p>
-                    <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                      {tip.detail}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {/* Recommandation marque */}
-        <div
-          className="rounded-[var(--radius-xl)] p-6 md:p-7 border-2 border-[var(--accent-1)]"
-          style={{ background: 'var(--bg-surface)' }}
-        >
-          <p
-            className="text-xs font-bold uppercase tracking-widest mb-2"
-            style={{ color: 'var(--accent-3)' }}
-          >
-            ✅ Notre recommandation
-          </p>
-          <p className="text-sm leading-relaxed text-[var(--text-secondary)] mb-5">
-            {reco.rationale}
-          </p>
-
-          <Link
-            href={reco.url}
-            target={isExternal ? '_blank' : undefined}
-            rel={isExternal ? 'noopener noreferrer sponsored' : undefined}
-            className="btn-primary block text-center py-3"
-          >
-            {reco.badge && (
-              <span
-                className="inline-block mr-2 text-xs font-black px-2 py-0.5 rounded-[var(--radius-sm)]"
-                style={{ background: 'var(--pill-rose)', color: 'var(--text-primary)' }}
-              >
-                {reco.badge}
-              </span>
-            )}
-            {reco.buttonLabel}
-          </Link>
-
-          {isExternal && (
-            <p className="text-xs text-[var(--text-muted)] mt-3 text-center italic">
-              Lien affilié — on perçoit une commission si tu passes commande, sans surcoût pour toi.
-            </p>
-          )}
-        </div>
-
-        {/* Restart */}
-        <div className="text-center">
-          <button onClick={handleRestart} className="btn-ghost text-sm">
-            ↺ Refaire le bilan
-          </button>
-        </div>
-
-        {/* Disclaimer */}
-        <p className="text-xs text-[var(--text-muted)] text-center italic">
-          Ce bilan est indicatif et ne remplace pas l&apos;avis d&apos;un vétérinaire. Pour toute pathologie ou doute clinique, consulte un professionnel.
-        </p>
+        />
       </div>
     )
   }
 
-  // ────────────────────────────────────────────────────────────
-  // Vue Question
-  // ────────────────────────────────────────────────────────────
+  const canContinue = Array.isArray(current) && current.length > 0
   return (
-    <div className="max-w-xl mx-auto">
-      {/* Progress */}
-      <div className="mb-6">
-        <div className="flex justify-between text-xs text-[var(--text-muted)] mb-2">
-          <span>
-            Question {currentStep + 1} sur {totalSteps}
-          </span>
-          <span>{Math.round(progress)}%</span>
-        </div>
-        <div className="h-2 bg-[var(--bg-surface-2)] rounded-full overflow-hidden">
-          <div
-            className="h-full bg-[var(--accent-1)] rounded-full transition-all duration-500"
-            style={{ width: `${progress}%` }}
-          />
+    <section aria-label="Bilan" className="flex flex-col gap-4 rounded-card border border-line bg-paper p-4 sm:p-6">
+      <div className="flex flex-col gap-1.5">
+        <p className="m-0 text-sm text-ink-2">{`Question ${stepIndex + 1} sur ${total}`}</p>
+        <div className="h-1.5 overflow-hidden rounded-pill bg-cream-2">
+          <div className="h-full bg-ink" style={{ width: `${(stepIndex / total) * 100}%` }} />
         </div>
       </div>
-
-      {/* Question */}
-      <div className="mb-5">
-        <h2
-          className="text-xl md:text-2xl font-black leading-snug mb-1"
-          style={{ fontFamily: "'Fraunces', serif", color: 'var(--text-primary)' }}
-        >
-          {step.prompt}
-        </h2>
-        {step.helpText && (
-          <p className="text-sm text-[var(--text-muted)] leading-relaxed">{step.helpText}</p>
-        )}
+      <div className="flex flex-col gap-1">
+        <h2 className="m-0 font-display text-xl font-black leading-snug text-ink md:text-2xl">{step.prompt}</h2>
+        {step.helpText ? <p className="m-0 text-sm leading-relaxed text-ink-2">{step.helpText}</p> : null}
       </div>
-
-      {/* Options */}
-      <div className="flex flex-col gap-2">
+      <ul role="list" className="m-0 flex list-none flex-col gap-2 p-0">
         {step.options.map((opt) => {
-          const isSelected = step.type === 'multi'
-            ? Array.isArray(currentAnswer) && currentAnswer.includes(opt.value)
-            : currentAnswer === opt.value
-
+          const selected = Array.isArray(current) ? current.includes(opt.value) : current === opt.value
           return (
-            <button
-              key={opt.value}
-              type="button"
-              onClick={() => handleSelect(opt.value)}
-              className={cn(
-                'text-left px-4 py-3 rounded-[var(--radius-lg)] border-2 text-sm transition-all',
-                isSelected
-                  ? 'border-[var(--accent-1)] bg-[var(--accent-1)]/10 font-semibold'
-                  : 'border-[var(--border)] hover:border-[var(--accent-1)]',
-              )}
-            >
-              <div className="flex items-center gap-3">
+            <li key={opt.value}>
+              <button
+                type="button"
+                aria-pressed={selected}
+                onClick={() => select(opt.value)}
+                className="flex min-h-12 w-full items-center gap-3 rounded-control border border-line bg-paper px-4 py-2.5 text-left text-[15px] text-ink aria-pressed:border-2 aria-pressed:border-ink aria-pressed:font-semibold"
+              >
                 <span
-                  className={cn(
-                    'shrink-0 w-5 h-5 flex items-center justify-center text-xs font-bold border-2',
-                    step.type === 'multi' ? 'rounded-[var(--radius-sm)]' : 'rounded-full',
-                    isSelected ? 'border-[var(--accent-1)] bg-[var(--accent-1)] text-white' : 'border-[var(--border)]',
-                  )}
-                >
-                  {isSelected && (step.type === 'multi' ? '✓' : '●')}
-                </span>
-                <span className="text-[var(--text-primary)]">{opt.label}</span>
-              </div>
-            </button>
+                  aria-hidden="true"
+                  className={`size-5 shrink-0 border-2 border-ink ${step.type === 'multi' ? 'rounded-sm' : 'rounded-full'} ${selected ? 'bg-ink' : 'bg-paper'}`}
+                />
+                {opt.label}
+              </button>
+            </li>
           )
         })}
-      </div>
-
-      {/* Controls */}
-      <div className="flex items-center justify-between mt-6 gap-3">
-        {currentStep > 0 ? (
-          <button onClick={handleBack} className="btn-ghost text-sm">
-            ← Retour
+      </ul>
+      <div className="flex min-h-12 items-center justify-between gap-3">
+        {stepIndex > 0 ? (
+          <button type="button" onClick={() => setStepIndex(stepIndex - 1)} className="min-h-11 px-1 text-[15px] font-semibold text-ink-2 hover:underline">
+            Question précédente
           </button>
         ) : (
-          <div />
+          <span />
         )}
-
-        {step.type === 'multi' && (
+        {step.type === 'multi' ? (
           <button
-            onClick={handleNext}
+            type="button"
+            onClick={next}
             disabled={!canContinue}
-            className={cn('btn-primary', !canContinue && 'opacity-40 cursor-not-allowed')}
+            className="min-h-12 rounded-control bg-ink px-5 text-base font-semibold text-cream hover:underline disabled:opacity-40"
           >
-            {currentStep === totalSteps - 1 ? 'Voir mon bilan →' : 'Continuer →'}
+            {stepIndex === total - 1 ? 'Voir mon bilan' : 'Continuer'}
           </button>
-        )}
+        ) : null}
       </div>
-    </div>
+    </section>
   )
 }

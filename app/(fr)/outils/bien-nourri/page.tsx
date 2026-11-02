@@ -2,179 +2,79 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BienNourriEvaluator } from '@/components/outils/BienNourriEvaluator'
-import { InfoBox } from '@/components/mdx/MdxComponents'
+import { ToolPage, type FaqEntry } from '@/components/outils/ToolPage'
 
 export const metadata: Metadata = {
-  title: 'Est-ce que ton chien est bien nourri ? — Bilan gratuit en 2 minutes',
+  title: 'Est-ce que ton chien est bien nourri ? Le bilan gratuit en 6 questions',
   description:
-    "6 questions pour évaluer la qualité de l'alimentation de ton chien. Score sur 100, conseils actionnables et recommandation personnalisée. Gratuit, sans inscription.",
+    "6 questions pour évaluer l'alimentation de ton chien : score sur 100, conseils précis selon tes réponses et recommandation adaptée. Gratuit, sans inscription.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/outils/bien-nourri' },
   openGraph: {
-    title: 'Est-ce que ton chien est bien nourri ? — Bilan gratuit',
-    description:
-      "Évalue l'alimentation de ton chien en 6 questions. Score, diagnostic, conseils actionnables et reco personnalisée.",
+    title: 'Est-ce que ton chien est bien nourri ? Le bilan gratuit',
+    description: "Évalue l'alimentation de ton chien en 6 questions : score, conseils et recommandation adaptée.",
     url: 'https://www.toutou-gourmet.com/outils/bien-nourri',
     type: 'website',
   },
 }
 
-const faqItems = [
+const faqItems: FaqEntry[] = [
   {
-    question: 'Combien de temps prend le bilan ?',
-    answer:
-      'Le bilan se fait en 2 minutes environ : 6 questions courtes, sans inscription ni coordonnées à laisser. Tu obtiens immédiatement un score sur 100, un verdict et 3 à 4 conseils concrets adaptés à ton profil.',
+    question: 'Combien de temps prend le bilan ?',
+    answer: "Six questions courtes, sans inscription. Le score sur 100, le verdict et les conseils liés à tes réponses s'affichent tout de suite.",
   },
   {
-    question: 'Le bilan remplace-t-il un avis vétérinaire ?',
-    answer:
-      "Non. C'est un outil de sensibilisation et d'auto-évaluation, pas un diagnostic. Pour toute pathologie, doute clinique ou changement majeur d'alimentation (chiot, gestation, pathologie chronique), consulte un vétérinaire.",
+    question: 'Le bilan remplace-t-il un avis vétérinaire ?',
+    answer: "Non. C'est une auto-évaluation, pas un diagnostic. Pour une maladie, un doute ou un changement d'alimentation délicat (chiot, gestation, maladie chronique), demande l'avis de ton vétérinaire.",
   },
   {
-    question: 'Comment est calculé le score ?',
-    answer:
-      "Chaque réponse contribue positivement ou négativement à un score brut. Le total est normalisé sur 100. Quatre bandes : Excellent (≥ 80), Bon (60-79), À améliorer (40-59), À revoir d'urgence (< 40). Le score reflète la qualité globale de l'alimentation et les signes physiques associés.",
+    question: 'Comment est calculé le score ?',
+    answer: "Chaque réponse ajoute ou retire des points. Le total est ramené sur 100. Quatre niveaux : très bien nourri (80 et plus), bien nourri (60 à 79), à améliorer (40 à 59), à revoir (moins de 40).",
   },
   {
-    question: 'Pourquoi recommandez-vous Dog Chef ou Elmut selon les cas ?',
-    answer:
-      "On recommande Elmut quand le profil révèle des signes santé (pelage, peau, digestion) — leur cuisson douce et leurs ingrédients qualité humaine aident à rétablir l'équilibre. On recommande Dog Chef quand l'objectif est un upgrade simple depuis une alimentation industrielle ou une correction de poids — leur sur-mesure ajuste automatiquement la ration. Si tout va déjà bien, on ne pousse aucune marque et on renvoie vers le comparateur.",
+    question: 'Pourquoi recommandez-vous Dog Chef ou Elmut selon les cas ?',
+    answer: "Elmut quand tu coches des signes de peau ou de digestion : ses repas frais sont cuits à basse température, sans conservateurs. Dog Chef quand le poids est à corriger ou que l'alimentation actuelle est basique : les portions sont dosées selon le profil du chien. Si tout va bien, on ne conseille aucune marque et on renvoie vers le comparateur.",
   },
   {
-    question: 'Mes réponses sont-elles enregistrées ?',
-    answer:
-      "Non. Tout se passe dans ton navigateur, en local. On ne stocke aucune donnée, ne demande aucun email et n'envoie rien à des tiers. Tu peux recommencer le bilan autant de fois que tu veux.",
+    question: 'Mes réponses sont-elles enregistrées ?',
+    answer: "Tes réponses restent dans ton navigateur. On compte seulement, sans rien qui t'identifie, le nombre de bilans terminés et leur niveau de score. Si tu laisses ton e-mail pour garder le résultat, il sert uniquement à t'écrire et n'est transmis à personne.",
   },
 ]
 
-const webAppJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebApplication',
-  name: 'Bilan alimentation chien — Est-ce que ton chien est bien nourri ?',
-  url: 'https://www.toutou-gourmet.com/outils/bien-nourri',
-  description:
-    "Bilan gratuit en 6 questions pour évaluer la qualité de l'alimentation de ton chien.",
-  applicationCategory: 'UtilitiesApplication',
-  operatingSystem: 'Web',
-  offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
-}
-
-const faqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqItems.map((item) => ({
-    '@type': 'Question',
-    name: item.question,
-    acceptedAnswer: { '@type': 'Answer', text: item.answer },
-  })),
-}
-
 export default function BienNourriPage() {
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-      />
-
-      <div className="min-h-screen py-12 px-4 bg-[var(--bg-primary)]">
-        <div className="max-w-[720px] mx-auto">
-
-          {/* Breadcrumb */}
-          <nav className="text-sm text-[var(--text-muted)] mb-6 flex items-center gap-2">
-            <Link href="/outils" className="hover:text-[var(--accent-1)]">
-              Outils
-            </Link>
-            <span>/</span>
-            <span className="text-[var(--text-primary)]">Bilan alimentation</span>
-          </nav>
-
-          {/* Header */}
-          <div className="flex items-start gap-4 mb-8">
-            <span className="text-5xl shrink-0">🐶</span>
-            <div>
-              <p className="text-sm font-bold uppercase tracking-widest text-[var(--accent-1)] mb-1">
-                ⚡ Bilan gratuit · 2 minutes · sans inscription
-              </p>
-              <h1 className="page-title mb-2">
-                Est-ce que ton chien est bien nourri ?
-              </h1>
-              <p className="text-[var(--text-secondary)] leading-relaxed">
-                6 questions pour évaluer la qualité de son alimentation actuelle. Tu obtiens
-                un score sur 100, un diagnostic clair et 3 à 4 actions concrètes — adaptées
-                à ton profil.
-              </p>
-            </div>
-          </div>
-
-          {/* Bilan */}
-          <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-xl)] p-6 md:p-10 shadow-[var(--shadow-md)]">
-            <BienNourriEvaluator />
-          </div>
-
-          {/* Info */}
-          <div className="mt-6">
-            <InfoBox color="blue" emoji="ℹ️" title="Comment ce bilan a-t-il été conçu ?">
-              <p className="mb-2">
-                Les 6 questions s&apos;appuient sur les indicateurs reconnus par la nutrition
-                vétérinaire : qualité de la source, état corporel (BCS),
-                signes cliniques visibles, transit digestif, dosage et fréquence.
-              </p>
-              <p>
-                Le scoring pondère chaque facteur selon son impact réel sur la santé.
-                La recommandation finale ({' '}
-                <Link href="/marques/elmut" className="underline">Elmut</Link>,{' '}
-                <Link href="/marques/dog-chef" className="underline">Dog Chef</Link> ou{' '}
-                <Link href="/comparateur" className="underline">comparateur</Link>
-                ) est routée selon le profil — on ne pousse pas la même marque à tout le monde.
-              </p>
-            </InfoBox>
-          </div>
-
-          {/* FAQ */}
-          <section className="mt-10">
-            <h2
-              className="text-xl font-black text-[var(--text-primary)] mb-6"
-              style={{ fontFamily: "'Fraunces', serif" }}
-            >
-              Questions fréquentes
-            </h2>
-            <div className="flex flex-col gap-4">
-              {faqItems.map((item) => (
-                <div
-                  key={item.question}
-                  className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] p-5"
-                >
-                  <h3 className="font-bold text-[var(--text-primary)] mb-2">{item.question}</h3>
-                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{item.answer}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Nav vers autres outils */}
-          <div className="mt-10 pt-6 border-t border-[var(--border)]">
-            <p className="text-sm font-semibold text-[var(--text-muted)] mb-3">Autres outils</p>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/outils/ration" className="btn-outline text-sm py-2">
-                🥣 Ration journalière →
-              </Link>
-              <Link href="/outils/poids" className="btn-outline text-sm py-2">
-                ⚖️ Score corporel →
-              </Link>
-              <Link href="/outils/budget" className="btn-outline text-sm py-2">
-                💰 Budget mensuel →
-              </Link>
-              <Link href="/quiz" className="btn-outline text-sm py-2">
-                🎯 Quiz marque idéale →
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+    <ToolPage
+      slug="bien-nourri"
+      path="/outils/bien-nourri"
+      crumb="Bilan alimentation"
+      title="Ton chien est-il bien nourri ?"
+      lead={<p>6 questions sur sa gamelle, sa silhouette et sa digestion. Tu obtiens un score sur 100 et les points à changer.</p>}
+      methodTitle="Sur quoi repose le bilan ?"
+      method={
+        <>
+          <p>
+            Les questions reprennent les repères d&apos;un bilan nutritionnel vétérinaire : le type d&apos;aliment,
+            l&apos;état corporel (côtes palpables, taille visible), les signes de peau et de pelage, le transit, la façon de
+            doser et le nombre de repas.
+          </p>
+          <p>
+            Le type d&apos;aliment, l&apos;état corporel et la digestion pèsent le plus dans le score. La recommandation dépend du profil : <Link href="/chien/marque/elmut">Elmut</Link> pour des signes de peau ou de
+            digestion, <Link href="/chien/marque/dog-chef">Dog Chef</Link> pour un poids à corriger, sinon le{' '}
+            <Link href="/comparateur">comparateur</Link>.
+          </p>
+          <p>
+            Le bilan s&apos;inspire des WSAVA Nutritional Assessment Guidelines (Freeman et al., Journal of Small Animal
+            Practice, 2011). Les points attribués à chaque réponse sont un choix de la rédaction.
+          </p>
+        </>
+      }
+      faqTitle="Questions fréquentes sur le bilan alimentation"
+      faq={faqItems}
+      app={{
+        name: 'Bilan alimentation chien : est-ce que ton chien est bien nourri ?',
+        description: "Bilan gratuit en 6 questions pour évaluer la qualité de l'alimentation de ton chien.",
+      }}
+    >
+      <BienNourriEvaluator />
+    </ToolPage>
   )
 }

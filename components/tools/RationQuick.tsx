@@ -3,20 +3,14 @@
 import { useId, useState } from 'react'
 import Link from 'next/link'
 import { track } from '@/lib/analytics'
-import {
-  calculateDailyCalories,
-  caloriesToGramsFresh,
-  caloriesToGramsKibble,
-  type ActivityLevel,
-  type AgeGroup,
-} from '@/lib/calculators'
+import { computeRation, FRESH_KCAL_100G, KIBBLE_KCAL_100G, type ActivityLevel, type AgeGroup } from '@/lib/calculators'
 import { IconChevron } from '@/components/icons'
 import { Segmented } from './Segmented'
 import { rationHref, type RationFood } from '@/components/outils/ration-params'
 
 // @cdc 04-pages — calculateur de ration compact du hero (audit design-CRO, §3 Accueil).
-// Mêmes formules et densités que l'outil complet /outils/ration (lib/calculators.ts) :
-// croquettes 360 kcal/100 g, repas frais 120 kcal/100 g. Bouton encre et non orange : l'en-tête
+// Même fonction que l'outil complet /outils/ration (computeRation, lib/calculators.ts) : mêmes
+// réglages, même résultat. Bouton encre et non orange : l'en-tête
 // et la barre d'onglets portent déjà l'aplat orange du test.
 type Food = RationFood
 type YesNo = 'oui' | 'non'
@@ -27,8 +21,8 @@ const STERILIZED = [['non', 'Non'], ['oui', 'Oui']] as const
 const FOODS = [['croquettes', 'Croquettes'], ['frais', 'Repas frais']] as const
 
 const FOOD_TEXT: Record<Food, { what: string; density: string }> = {
-  croquettes: { what: 'de croquettes par jour', density: 'des croquettes à 360 kcal les 100 g' },
-  frais: { what: 'de repas frais par jour', density: 'un repas frais à 120 kcal les 100 g' },
+  croquettes: { what: 'de croquettes par jour', density: `des croquettes à ${KIBBLE_KCAL_100G} kcal les 100 g` },
+  frais: { what: 'de repas frais par jour', density: `un repas frais à ${FRESH_KCAL_100G} kcal les 100 g` },
 }
 
 export function RationQuick({ headingId }: { headingId: string }) {
@@ -42,10 +36,11 @@ export function RationQuick({ headingId }: { headingId: string }) {
 
   const kg = parseFloat(weight.replace(',', '.'))
   const valid = Number.isFinite(kg) && kg >= 0.5 && kg <= 100
-  const kcal = valid
-    ? calculateDailyCalories({ animal: 'chien', weightKg: kg, ageGroup: age, activityLevel: activity, sterilized: sterilized === 'oui' })
-    : 0
-  const grams = food === 'croquettes' ? caloriesToGramsKibble(kcal) : caloriesToGramsFresh(kcal)
+  const ration = valid
+    ? computeRation({ animal: 'chien', weightKg: kg, ageGroup: age, activityLevel: activity, sterilized: sterilized === 'oui' })
+    : { kcal: 0, gKibble: 0, gFresh: 0 }
+  const { kcal } = ration
+  const grams = food === 'croquettes' ? ration.gKibble : ration.gFresh
 
   return (
     <form
@@ -105,7 +100,7 @@ export function RationQuick({ headingId }: { headingId: string }) {
               >
                 Voir le calcul détaillé
               </Link>
-              <Link href="/chien/urgences" className="inline-flex items-center gap-1 text-[15px] font-semibold text-orange-ink no-underline hover:underline">
+              <Link href="/chien/urgences" className="inline-flex min-h-11 items-center gap-1 text-[15px] font-semibold text-orange-ink no-underline hover:underline">
                 Aliments à éviter pour lui
                 <IconChevron className="size-4" />
               </Link>

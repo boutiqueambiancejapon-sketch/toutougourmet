@@ -39,6 +39,7 @@ Règles : aucune URL existante ne change (788 adresses) ; les pages race existan
   - [ ] Migrer les articles déjà réécrits (`CompareTable` → `SizeTable`) par lots
 - [ ] Gabarit race appliqué aux 58 pages `/chien/race/*` existantes (section « Que peut manger un [race] et que doit-il éviter ? ») + hub `/chien/race`
 - [ ] Pages catégories `/chien/[category]` transformées en pages piliers (8 piliers) + hub Outils
+- [ ] Pages outils en V2 (2026-11-02) : gabarit commun `components/outils/ToolPage.tsx` (fil d'Ariane, H1, outil au-dessus de la ligne de flottaison, « Comment on calcule » sourcé, FAQ, autres outils en lignes) ; calculateurs au style `RationQuick` ; après chaque résultat « Garder ce résultat » (e-mail → `/api/contact`), suite logique, au plus un lien partenaire justifié ; ration et mini-outil d'accueil sur la même fonction `computeRation` ; hub `/outils` en liste de questions
 - [ ] Maillage par entités (aliment, race, problème de santé) automatique entre articles
 - [ ] Header, footer, navigation mobile façon app (barre d'onglets en bas sur mobile)
 - [ ] Home V2

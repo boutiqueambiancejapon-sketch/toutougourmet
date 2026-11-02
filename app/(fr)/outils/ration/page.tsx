@@ -1,155 +1,107 @@
 // @cdc 5.0 — contrat : Outil calculateur · rendu SSG · JSON-LD WebApplication + FAQPage
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { Suspense } from 'react'
 import { RationCalculator, RationCalculatorFromUrl } from '@/components/outils/RationCalculator'
-import { InfoBox } from '@/components/mdx/MdxComponents'
+import { Formula, Sources, ToolPage, type FaqEntry } from '@/components/outils/ToolPage'
+import {
+  ACTIVITY_FACTORS,
+  FRESH_KCAL_100G,
+  KIBBLE_KCAL_100G,
+  PUPPY_FACTOR,
+  RER_COEFF,
+  STERILIZED_FACTOR,
+  computeRation,
+} from '@/lib/calculators'
 
 export const metadata: Metadata = {
-  title: 'Calculateur de ration journalière chien & chat — Résultat en grammes selon le NRC',
+  title: 'Calculateur de ration journalière chien et chat : résultat en grammes selon le NRC',
   description:
-    'Calcule la ration journalière de ton chien ou chat selon son poids, âge et activité. Formule vétérinaire NRC 2006, résultat en grammes. Gratuit et instantané.',
+    'Calcule la ration journalière de ton chien ou chat selon son poids, son âge et son activité. Formule NRC 2006, résultat en grammes de croquettes ou de repas frais. Gratuit.',
   alternates: { canonical: 'https://www.toutou-gourmet.com/outils/ration' },
   openGraph: {
-    title: 'Calculateur de ration journalière chien & chat — Résultat en grammes selon le NRC',
-    description: 'Combien de grammes par jour pour ton animal ? La formule vétérinaire NRC adaptée à ton chien ou chat.',
+    title: 'Calculateur de ration journalière chien et chat : résultat en grammes selon le NRC',
+    description: 'Combien de grammes par jour pour ton animal ? La formule NRC adaptée à ton chien ou chat.',
     url: 'https://www.toutou-gourmet.com/outils/ration',
     type: 'website',
   },
 }
 
-const faqItems = [
+const fr = (n: number) => String(n).replace('.', ',')
+const adult = (kg: number, activityLevel: 'normal' | 'actif') =>
+  computeRation({ animal: 'chien', weightKg: kg, ageGroup: 'adulte', activityLevel, sterilized: false })
+const ten = adult(10, 'normal')
+const twentyFive = adult(25, 'normal')
+const tenActive = adult(10, 'actif')
+
+const faqItems: FaqEntry[] = [
   {
-    question: 'Combien de grammes de croquettes donner à mon chien par jour ?',
-    answer: 'Cela dépend du poids, de l\'âge et de l\'activité de ton chien. En moyenne : un chien de 10 kg adulte actif a besoin d\'environ 180-200g de croquettes premium par jour, un chien de 25 kg environ 340-380g. Notre calculateur donne le résultat précis selon la formule vétérinaire NRC 2006.',
+    question: 'Combien de grammes de croquettes donner à mon chien par jour ?',
+    answer: `Ça dépend de son poids, de son âge et de son activité. Avec notre calcul, un chien adulte non stérilisé de 10 kg à activité normale a besoin d'environ ${ten.kcal} kcal, soit ${ten.gKibble} g de croquettes à ${KIBBLE_KCAL_100G} kcal les 100 g (${tenActive.gKibble} g s'il est sportif). Un chien de 25 kg : environ ${twentyFive.gKibble} g.`,
   },
   {
-    question: 'La quantité indiquée sur le sac de croquettes est-elle fiable ?',
-    answer: 'Les indications sur les emballages sont souvent surestimées de 10 à 30% — c\'est dans l\'intérêt commercial des marques que tu consommes plus. La formule vétérinaire BEE (Besoin Énergétique d\'Entretien) est plus précise car elle tient compte du poids réel et de l\'activité de ton animal.',
+    question: 'La quantité indiquée sur le sac de croquettes est-elle fiable ?',
+    answer: `Le tableau du sac est calculé pour la densité énergétique de ces croquettes-là, que notre outil ne connaît pas : il prend une moyenne de ${KIBBLE_KCAL_100G} kcal pour 100 g. Si ton sac indique une autre valeur, divise les kcal du résultat par cette valeur et multiplie par 100. Le sac, lui, ne tient compte ni de l'activité ni de la stérilisation.`,
   },
   {
-    question: 'Mon chien mange-t-il trop ou pas assez ?',
-    answer: 'La meilleure façon de le savoir est de combiner ce calculateur avec notre évaluateur de score corporel. Si ton chien prend du poids avec la ration calculée, réduis de 10%. S\'il en perd, augmente de 10%. Un suivi sur 4 semaines suffit généralement pour trouver le bon équilibre.',
+    question: 'Mon chien mange-t-il trop ou pas assez ?',
+    answer: "Combine ce calcul avec l'évaluateur de poids. Si ton chien prend du poids avec la ration calculée, réduis de 10 %. S'il en perd, augmente de 10 %. Un suivi de 4 semaines suffit en général pour trouver la bonne quantité.",
   },
   {
-    question: 'Faut-il donner la même ration été comme hiver ?',
-    answer: 'Pas nécessairement. En hiver, un chien qui sort moins peut avoir besoin de moins de calories. En période de forte chaleur, l\'appétit diminue naturellement. Les chiens très actifs (randonnées, sports) ont des besoins ponctuellement plus élevés. Notre calculateur te donne une base — observe ensuite ton animal.',
+    question: 'Faut-il donner la même ration été comme hiver ?',
+    answer: "Pas forcément. Un chien qui sort moins en hiver dépense moins. Par forte chaleur, l'appétit baisse. Un chien qui part en randonnée a besoin de plus ce jour-là. Le calcul donne une base, son poids te dit ensuite s'il faut ajuster.",
   },
   {
-    question: 'En combien de repas diviser la ration journalière ?',
-    answer: 'Pour un adulte : 2 repas par jour (matin et soir) est idéal. Pour un chiot de moins de 6 mois : 3 repas. Pour les chiens âgés ayant des problèmes digestifs : 3 petits repas peuvent aussi être bénéfiques. Évite de donner toute la ration en une seule fois pour les grandes races (risque de torsion gastrique).',
+    question: 'En combien de repas diviser la ration journalière ?',
+    answer: "Deux repas par jour pour un adulte, matin et soir. Trois pour un chiot de moins de 6 mois, et parfois pour un chien âgé qui digère mal. Évite de donner toute la ration en une fois à un chien de grande race, à cause du risque de torsion de l'estomac.",
   },
 ]
 
-const webAppJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebApplication',
-  name: 'Calculateur ration journalière chien — Toutou Gourmet',
-  url: 'https://www.toutou-gourmet.com/outils/ration',
-  description: 'Calcule la ration journalière d\'un chien ou chat selon son poids, âge et niveau d\'activité.',
-  applicationCategory: 'UtilitiesApplication',
-  operatingSystem: 'Web',
-  offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
-}
-
-const faqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqItems.map((item) => ({
-    '@type': 'Question',
-    name: item.question,
-    acceptedAnswer: { '@type': 'Answer', text: item.answer },
-  })),
-}
+const activityList = Object.values(ACTIVITY_FACTORS).map(fr).join(' ; ')
 
 export default function RationPage() {
   return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-
-      <div className="min-h-screen py-12 px-4 bg-[var(--bg-primary)]">
-        <div className="max-w-[720px] mx-auto">
-
-          {/* Breadcrumb */}
-          <nav className="text-sm text-[var(--text-muted)] mb-6 flex items-center gap-2">
-            <Link href="/outils" className="hover:text-[var(--accent-1)]">Outils</Link>
-            <span>/</span>
-            <span className="text-[var(--text-primary)]">Ration journalière</span>
-          </nav>
-
-          {/* Header */}
-          <div className="flex items-start gap-4 mb-8">
-            <span className="text-5xl shrink-0">🥣</span>
-            <div>
-              <h1 className="page-title mb-2">
-                Calculateur de ration journalière
-              </h1>
-              <p className="text-[var(--text-secondary)] leading-relaxed">
-                Calcule les besoins caloriques de ton animal et la quantité à donner par jour, selon
-                son poids, son âge, son niveau d&apos;activité et son statut reproducteur.
-              </p>
-            </div>
-          </div>
-
-          {/* Calculateur : pré-rempli par l'URL (?poids=12&age=adulte…), rendu statique sans paramètres */}
-          <Suspense fallback={<RationCalculator />}>
-            <RationCalculatorFromUrl />
-          </Suspense>
-
-          {/* Explication */}
-          <div className="mt-6 flex flex-col">
-            <InfoBox color="blue" emoji="💡" title="Comment bien utiliser ce résultat ?">
-              <ul className="space-y-1.5 list-disc pl-4">
-                <li>Pèse les croquettes avec une <strong>balance de cuisine</strong> plutôt qu&apos;une cuillère.</li>
-                <li>Divise la ration en <strong>2 repas</strong> pour un adulte, <strong>3 repas</strong> pour un chiot.</li>
-                <li>Surveille le poids de ton animal sur <strong>4 semaines</strong> et ajuste de ±10% si besoin.</li>
-                <li>Les friandises comptent dans la ration quotidienne — réduis en conséquence.</li>
-              </ul>
-            </InfoBox>
-
-            <InfoBox color="amber" emoji="📐" title="La formule utilisée">
-              <p className="mb-2">
-                Basé sur la formule vétérinaire <strong>BEE (Besoin Énergétique d&apos;Entretien)</strong> du National
-                Research Council (NRC 2006) :
-              </p>
-              <div className="bg-[var(--bg-surface-2)] rounded-[var(--radius-md)] p-3 font-mono text-sm text-center my-2">
-                BEE = 130 × Poids(kg)^0,75 × Facteur activité
-              </div>
-              <p className="text-xs text-[var(--text-muted)]">
-                Coefficients ajustés pour les seniors (95), les races à haute énergie (180), les chiots (×2) et
-                les animaux stérilisés (−15%).
-              </p>
-            </InfoBox>
-          </div>
-
-          {/* FAQ */}
-          <section className="mt-10">
-            <h2 className="text-xl font-black text-[var(--text-primary)] mb-6" style={{ fontFamily: "'Fraunces', serif" }}>
-              Questions fréquentes
-            </h2>
-            <div className="flex flex-col gap-4">
-              {faqItems.map((item) => (
-                <div key={item.question} className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] p-5">
-                  <h3 className="font-bold text-[var(--text-primary)] mb-2">{item.question}</h3>
-                  <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{item.answer}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Nav outils */}
-          <div className="mt-10 pt-6 border-t border-[var(--border)]">
-            <p className="text-sm font-semibold text-[var(--text-muted)] mb-3">Autres outils</p>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/outils/budget" className="btn-outline text-sm py-2">💰 Budget mensuel →</Link>
-              <Link href="/outils/poids" className="btn-outline text-sm py-2">⚖️ Score corporel →</Link>
-              <Link href="/outils/cout" className="btn-outline text-sm py-2">📊 Coût annuel →</Link>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </>
+    <ToolPage
+      slug="ration"
+      path="/outils/ration"
+      crumb="Ration journalière"
+      title="Combien de grammes donner à ton chien par jour ?"
+      lead={<p>Son poids, son âge et son activité suffisent. Le résultat est en grammes de croquettes ou de repas frais.</p>}
+      methodTitle="Comment la ration est-elle calculée ?"
+      method={
+        <>
+          <p>
+            On part du besoin au repos, le RER du National Research Council (NRC 2006), puis on le multiplie par un facteur
+            d&apos;activité :
+          </p>
+          <Formula>{`kcal par jour = ${RER_COEFF.chien} × poids (kg)^0,75 × facteur d'activité`}</Formula>
+          <p>
+            {`Facteurs d'activité, de calme à intense : ${activityList}. Pour un adulte à activité normale, cela donne ${fr(RER_COEFF.chien * ACTIVITY_FACTORS.normal)} kcal par kg^0,75, entre les 95 et 110 kcal que la FEDIAF retient pour un chien peu actif et un chien modérément actif.`}
+          </p>
+          <p>
+            {`Ajustements : chiot × ${fr(PUPPY_FACTOR)} ; stérilisé × ${fr(STERILIZED_FACTOR)} ; senior ${RER_COEFF.chienSenior} au lieu de ${RER_COEFF.chien} ; race très énergique ${RER_COEFF.hauteEnergie}. Pour le chat, le coefficient de départ est ${RER_COEFF.chat} (${RER_COEFF.chatSenior} après 7 ans).`}
+          </p>
+          <p>
+            {`Les grammes viennent de densités moyennes : ${KIBBLE_KCAL_100G} kcal pour 100 g de croquettes, ${FRESH_KCAL_100G} kcal pour 100 g de repas frais. Le mini-calculateur de l'accueil utilise exactement la même formule.`}
+          </p>
+          <Sources
+            items={[
+              'National Research Council, Nutrient Requirements of Dogs and Cats, National Academies Press, 2006 (besoin au repos : 70 × poids^0,75).',
+              "FEDIAF, Nutritional Guidelines for Complete and Complementary Pet Food for Cats and Dogs, 2021 (besoins d'entretien selon l'activité).",
+            ]}
+          />
+        </>
+      }
+      faqTitle="Questions fréquentes sur la ration du chien"
+      faq={faqItems}
+      app={{
+        name: 'Calculateur ration journalière chien | Toutou Gourmet',
+        description: "Calcule la ration journalière d'un chien ou chat selon son poids, âge et niveau d'activité.",
+      }}
+    >
+      {/* Calculateur : pré-rempli par l'URL (?poids=12&age=adulte…), rendu statique sans paramètres */}
+      <Suspense fallback={<RationCalculator />}>
+        <RationCalculatorFromUrl />
+      </Suspense>
+    </ToolPage>
   )
 }

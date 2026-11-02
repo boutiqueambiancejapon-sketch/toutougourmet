@@ -7,62 +7,78 @@ export type SizeCategory = 'petit' | 'moyen' | 'grand' | 'tres-grand'
 
 // ─── Besoin Énergétique ───────────────────────────────────────────────────────
 
-/**
- * Calcule le Besoin Énergétique d'Entretien (BEE) en kcal/jour.
- * Source : formule vétérinaire standard (NRC 2006)
- */
-export function calculateDailyCalories(params: {
+// @cdc outils — formule unique de la ration, partagée par /outils/ration, le mini-outil de
+// l'accueil (components/tools/RationQuick.tsx), le budget et le coût annuel. Les textes
+// « Comment on calcule » lisent ces constantes : changer un chiffre ici change aussi l'affichage.
+//
+// Besoin au repos (RER) : 70 × poids^0,75 pour le chien (NRC 2006, Nutrient Requirements of Dogs
+// and Cats, chap. 3). Le besoin d'entretien = RER × facteur d'activité ; avec 70 × 1,5 = 105 pour
+// une activité normale, on reste dans la fourchette FEDIAF 2021 (95 kcal/kg^0,75 pour un chien peu
+// actif, 110 pour une activité modérée).
+
+/** Coefficient du besoin au repos (kcal par kg^0,75), avant facteur d'activité. */
+export const RER_COEFF = { chien: 70, chat: 50, chienSenior: 55, chatSenior: 40, hauteEnergie: 90 } as const
+
+/** Facteurs d'activité appliqués au besoin au repos. */
+export const ACTIVITY_FACTORS: Record<ActivityLevel, number> = {
+  sedentaire: 1.2,
+  normal: 1.5,
+  actif: 1.8,
+  'tres-actif': 2.3,
+}
+
+/** Multiplicateur chiot / chaton (croissance) et réduction après stérilisation. */
+export const PUPPY_FACTOR = 1.8
+export const STERILIZED_FACTOR = 0.85
+
+/** Densités énergétiques moyennes (kcal pour 100 g) utilisées pour convertir en grammes. */
+export const KIBBLE_KCAL_100G = 360
+export const FRESH_KCAL_100G = 120
+
+export interface RationInput {
   animal: Animal
   weightKg: number
   ageGroup: AgeGroup
   activityLevel: ActivityLevel
   sterilized: boolean
   isRaceHighEnergy?: boolean // ex: Border Collie, Husky, Terriers
-}): number {
+}
+
+/** Besoin énergétique journalier en kcal (voir la formule en tête de section). */
+export function calculateDailyCalories(params: RationInput): number {
   const { animal, weightKg, ageGroup, activityLevel, sterilized, isRaceHighEnergy } = params
 
-  // Base RER (Resting Energy Requirement) — FEDIAF/NRC 2006
-  // Chien : 70 × W^0.75 | Chat : 50 × W^0.75
-  // NB : le facteur 130 anciennement utilisé incluait déjà l'activité,
-  //      ce qui causait un double-comptage avec les facteurs ci-dessous.
-  let baseCoeff = animal === 'chat' ? 50 : 70
-  if (ageGroup === 'senior') baseCoeff = animal === 'chien' ? 55 : 40
-  if (isRaceHighEnergy) baseCoeff = 90
+  let baseCoeff: number = animal === 'chat' ? RER_COEFF.chat : RER_COEFF.chien
+  if (ageGroup === 'senior') baseCoeff = animal === 'chien' ? RER_COEFF.chienSenior : RER_COEFF.chatSenior
+  if (isRaceHighEnergy) baseCoeff = RER_COEFF.hauteEnergie
 
-  let ber = baseCoeff * Math.pow(weightKg, 0.75)
+  let kcal = baseCoeff * Math.pow(weightKg, 0.75) * ACTIVITY_FACTORS[activityLevel]
+  if (ageGroup === 'chiot') kcal *= PUPPY_FACTOR
+  if (sterilized) kcal *= STERILIZED_FACTOR
 
-  // Facteur d'activité appliqué sur le RER
-  const activityFactors: Record<ActivityLevel, number> = {
-    sedentaire:   1.2,
-    normal:       1.5,
-    actif:        1.8,
-    'tres-actif': 2.3,
-  }
-  ber *= activityFactors[activityLevel]
-
-  // Chiots : besoins augmentés (~1.8× adulte)
-  if (ageGroup === 'chiot') ber *= 1.8
-
-  // Stérilisé : -15%
-  if (sterilized) ber *= 0.85
-
-  return Math.round(ber)
+  return Math.round(kcal)
 }
 
-/**
- * Convertit les kcal/jour en grammes de croquettes.
- * Densité énergétique moyenne : 360 kcal/100g (premium sans céréales)
- */
-export function caloriesToGramsKibble(kcal: number, kcalPer100g = 360): number {
+/** Convertit les kcal/jour en grammes de croquettes. */
+export function caloriesToGramsKibble(kcal: number, kcalPer100g = KIBBLE_KCAL_100G): number {
   return Math.round((kcal / kcalPer100g) * 100)
 }
 
-/**
- * Convertit les kcal/jour en grammes de repas frais.
- * Densité énergétique moyenne : 120 kcal/100g
- */
-export function caloriesToGramsFresh(kcal: number, kcalPer100g = 120): number {
+/** Convertit les kcal/jour en grammes de repas frais. */
+export function caloriesToGramsFresh(kcal: number, kcalPer100g = FRESH_KCAL_100G): number {
   return Math.round((kcal / kcalPer100g) * 100)
+}
+
+export interface RationValues {
+  kcal: number
+  gKibble: number
+  gFresh: number
+}
+
+/** Ration complète : kcal et grammes. Même résultat partout pour les mêmes réglages. */
+export function computeRation(params: RationInput): RationValues {
+  const kcal = calculateDailyCalories(params)
+  return { kcal, gKibble: caloriesToGramsKibble(kcal), gFresh: caloriesToGramsFresh(kcal) }
 }
 
 // ─── Budget mensuel ───────────────────────────────────────────────────────────
@@ -85,7 +101,7 @@ export const brandPricings: BrandPricing[] = [
     type: 'croquettes',
     kcalPer100g: 380,
     affiliateUrl: 'https://c3po.link/Q3xbJhfapn',
-    offer: '-30% 1ère commande',
+    offer: '-30 % 1re commande',
   },
   {
     name: 'Elmut',
@@ -94,7 +110,7 @@ export const brandPricings: BrandPricing[] = [
     type: 'repas-frais',
     kcalPer100g: 170,   // densité calorique recettes viande fraîche Elmut
     affiliateUrl: 'https://c3po.link/QWMW4k6mbU',
-    offer: '-40% 1ère commande',
+    offer: '-40 % 1re commande',
   },
   {
     name: 'Dog Chef',
@@ -103,7 +119,7 @@ export const brandPricings: BrandPricing[] = [
     type: 'repas-frais',
     kcalPer100g: 188,   // densité calorique recettes Dog Chef (viande fraîche)
     affiliateUrl: 'https://www.dogchef.com/fr/code/WZU7090',
-    offer: '-35% box d\'essai',
+    offer: '-30 % box d\'essai',
   },
 ]
 
@@ -120,61 +136,32 @@ export type BodyScore = 'maigre' | 'sous-poids' | 'ideal' | 'surpoids' | 'obese'
 export interface BodyScoreResult {
   score: BodyScore
   label: string
-  description: string
+  /** Écart au poids de forme, en % (négatif = en dessous) */
+  gapPct: number
   advice: string
-  color: string
 }
 
 /**
- * Évalue le score de condition corporelle selon le poids actuel vs idéal.
- * Basé sur l'échelle BCS (Body Condition Score) vétérinaire 1-9.
+ * Situe le poids actuel par rapport au poids de forme. Les seuils (-15 %, -5 %, +10 %, +25 %)
+ * sont des repères de l'outil, pas l'échelle BCS 1-9 qui s'évalue à la palpation.
  */
 export function evaluateBodyScore(currentWeight: number, idealWeight: number): BodyScoreResult {
   const ratio = currentWeight / idealWeight
+  const gapPct = Math.round((ratio - 1) * 100)
 
   if (ratio < 0.85) {
-    return {
-      score: 'maigre',
-      label: 'Trop maigre',
-      description: 'Ton animal est significativement en dessous de son poids idéal.',
-      advice: 'Augmente les rations progressivement et consulte un vétérinaire pour écarter une cause médicale.',
-      color: '#5B9BD5',
-    }
+    return { score: 'maigre', label: 'Trop maigre', gapPct, advice: 'Augmente sa ration progressivement et montre-le à ton vétérinaire pour écarter une cause médicale.' }
   }
   if (ratio < 0.95) {
-    return {
-      score: 'sous-poids',
-      label: 'Légèrement sous le poids idéal',
-      description: 'Ton animal est légèrement en dessous de son poids de forme.',
-      advice: 'Augmente légèrement les rations (+10%) et surveille l\'évolution sur 4 semaines.',
-      color: '#F2B85A',
-    }
+    return { score: 'sous-poids', label: 'Un peu sous son poids de forme', gapPct, advice: 'Augmente sa ration de 10\u00a0% et repèse-le dans 4 semaines.' }
   }
   if (ratio <= 1.1) {
-    return {
-      score: 'ideal',
-      label: 'Poids idéal',
-      description: 'Ton animal est à son poids de forme.',
-      advice: 'Continue avec les rations actuelles. Bravo !',
-      color: '#4CAF7D',
-    }
+    return { score: 'ideal', label: 'À son poids de forme', gapPct, advice: 'Garde la même ration et repèse-le tous les mois.' }
   }
   if (ratio <= 1.25) {
-    return {
-      score: 'surpoids',
-      label: 'Légèrement en surpoids',
-      description: 'Ton animal dépasse son poids idéal de 10 à 25%.',
-      advice: 'Réduis les rations de 10-15% et augmente l\'activité physique. Évite les friandises en dehors des repas.',
-      color: '#F2B85A',
-    }
+    return { score: 'surpoids', label: 'En surpoids', gapPct, advice: 'Calcule sa ration pour son poids de forme, pas pour son poids actuel, et compte les friandises dedans.' }
   }
-  return {
-    score: 'obese',
-    label: 'Surpoids important',
-    description: 'Ton animal dépasse son poids idéal de plus de 25%. C\'est un facteur de risque sérieux.',
-    advice: 'Consulte un vétérinaire pour un programme de perte de poids adapté. Une alimentation pauvre en glucides (comme les croquettes sans céréales) peut aider.',
-    color: '#E8622A',
-  }
+  return { score: 'obese', label: 'En fort surpoids', gapPct, advice: "Plus de 25\u00a0% au-dessus de son poids de forme\u00a0: demande un programme d'amaigrissement à ton vétérinaire avant de réduire sa ration." }
 }
 
 /**
@@ -191,7 +178,7 @@ export const dogSizeRanges: Record<SizeCategory, { label: string; minKg: number;
 // ─── Calculateur d'âge humain équivalent ─────────────────────────────────────
 
 // Tables de conversion âge chien → âge humain selon la taille
-// Source : consensus vétérinaire international (WSAVA / AVMA)
+// Source : tableau par gabarit diffusé par l'AVMA (American Veterinary Medical Association)
 const AGE_TABLES: Record<SizeCategory, number[]> = {
   // index 0 = 1 an, index 1 = 2 ans, etc.
   petit:      [15, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80],
@@ -236,19 +223,19 @@ export function calculateDogHumanAge(dogYears: number, size: SizeCategory): DogA
 
   // Stade de vie et contexte
   if (dogYears < 1) {
-    return { humanAge, lifeStage: 'Chiot', stagePill: 'chiot', context: 'Ton chien est encore en pleine croissance — c\'est la période la plus décisive pour une bonne alimentation.' }
+    return { humanAge, lifeStage: 'Chiot', stagePill: 'chiot', context: 'Il est encore en croissance : sa ration se calcule avec un besoin presque doublé et des croquettes adaptées à son gabarit adulte.' }
   }
   if (dogYears < 3) {
-    return { humanAge, lifeStage: 'Jeune adulte', stagePill: 'jeune', context: 'Ton chien est dans la fleur de l\'âge — plein d\'énergie, sa croissance est presque terminée.' }
+    return { humanAge, lifeStage: 'Jeune adulte', stagePill: 'jeune', context: 'Sa croissance est terminée ou presque (jusqu\'à 18 à 24 mois pour les très grandes races). Il passe à une ration d\'adulte.' }
   }
   if (size === 'petit' || size === 'moyen') {
-    if (dogYears < 8) return { humanAge, lifeStage: 'Adulte', stagePill: 'adulte', context: 'Ton chien est en pleine maturité. Les petites races vieillissent plus lentement que les grandes.' }
-    if (dogYears < 12) return { humanAge, lifeStage: 'Senior', stagePill: 'senior', context: 'Ton chien entre dans sa phase senior. Un suivi vétérinaire annuel et une alimentation adaptée sont importants.' }
-    return { humanAge, lifeStage: 'Très senior', stagePill: 'tres-senior', context: 'Ton chien est un véritable vétéran ! Les petites races peuvent vivre jusqu\'à 18-20 ans en bonne santé.' }
+    if (dogYears < 8) return { humanAge, lifeStage: 'Adulte', stagePill: 'adulte', context: 'Les petits et moyens gabarits vieillissent plus lentement que les grands : il a encore plusieurs années avant de passer senior.' }
+    if (dogYears < 12) return { humanAge, lifeStage: 'Senior', stagePill: 'senior', context: 'Il entre dans sa phase senior. Prévois une visite chez le vétérinaire chaque année, et revois sa ration si son activité baisse.' }
+    return { humanAge, lifeStage: 'Très senior', stagePill: 'tres-senior', context: 'Les petites races dépassent souvent 15 ans. Surveille son poids et sa masse musculaire, qui fond plus vite à cet âge.' }
   }
-  if (dogYears < 7) return { humanAge, lifeStage: 'Adulte', stagePill: 'adulte', context: 'Ton chien est en pleine maturité. Les grandes races vieillissent plus vite que les petites.' }
-  if (dogYears < 10) return { humanAge, lifeStage: 'Senior', stagePill: 'senior', context: 'Ton grand chien entre en phase senior. Consulte ton vétérinaire pour adapter son alimentation.' }
-  return { humanAge, lifeStage: 'Très senior', stagePill: 'tres-senior', context: 'À cet âge, les grandes races sont de véritables champions de longévité. Bravo !' }
+  if (dogYears < 7) return { humanAge, lifeStage: 'Adulte', stagePill: 'adulte', context: 'Les grands gabarits vieillissent plus vite que les petits : la phase senior arrive vers 7 ans.' }
+  if (dogYears < 10) return { humanAge, lifeStage: 'Senior', stagePill: 'senior', context: 'Il entre dans sa phase senior. Parle de sa ration avec ton vétérinaire au prochain rendez-vous annuel.' }
+  return { humanAge, lifeStage: 'Très senior', stagePill: 'tres-senior', context: 'Peu de chiens de grande taille atteignent cet âge. Surveille son poids, ses articulations et sa masse musculaire.' }
 }
 
 // ─── Comparateur coût annuel ─────────────────────────────────────────────────
@@ -262,47 +249,20 @@ export interface CostComparison {
   kcalPer100g: number
   monthlyBudget: number
   annualBudget: number
-  pros: string[]
-  cons: string[]
 }
 
-export function buildCostComparisons(dailyCalories: number): CostComparison[] {
-  const types: Array<Omit<CostComparison, 'monthlyBudget' | 'annualBudget'>> = [
-    {
-      type: 'croquettes-standard',
-      label: 'Croquettes standard (grande surface)',
-      pricePerKg: 4.5,
-      kcalPer100g: 340,
-      pros: ['Le moins cher', 'Facile à trouver'],
-      cons: ['Qualité nutritionnelle faible', 'Beaucoup de céréales', 'Digestibilité basse'],
-    },
-    {
-      type: 'croquettes-premium',
-      label: 'Croquettes premium sans céréales',
-      pricePerKg: 12.0,
-      kcalPer100g: 375,
-      pros: ['Meilleure qualité', 'Plus digestible', 'Moins de selles'],
-      cons: ['Plus cher', 'Moins disponible en magasin'],
-    },
-    {
-      type: 'repas-frais',
-      label: 'Repas frais (livraison)',
-      pricePerKg: 7.0,     // moyenne marché abonnement (Elmut ~6€, Dog Chef ~8€)
-      kcalPer100g: 145,    // densité moyenne repas frais premium
-      pros: ['Meilleure digestibilité', 'Ingrédients qualité humaine', 'Sans conservateurs'],
-      cons: ['Le plus cher', 'Nécessite un frigo', 'Logistique de livraison'],
-    },
-    {
-      type: 'mixte',
-      label: 'Mix croquettes premium + repas frais',
-      pricePerKg: 7.0,     // prix moyen pondéré ~70% croquettes + 30% frais
-      kcalPer100g: 200,    // densité intermédiaire
-      pros: ['Bon compromis qualité/prix', 'Variété appréciée des animaux'],
-      cons: ['Calcul des rations plus complexe'],
-    },
-  ]
+/** Hypothèses de prix et de densité par type d'aliment (affichées dans « Comment on calcule »). */
+export const FOOD_TYPES: Array<Omit<CostComparison, 'monthlyBudget' | 'annualBudget'>> = [
+  { type: 'croquettes-standard', label: 'Croquettes de grande surface', pricePerKg: 4.5, kcalPer100g: 340 },
+  { type: 'croquettes-premium', label: 'Croquettes premium', pricePerKg: 12.0, kcalPer100g: 375 },
+  // moyenne des abonnements repas frais (Elmut ~6 €/kg, Dog Chef ~8 €/kg)
+  { type: 'repas-frais', label: 'Repas frais livrés', pricePerKg: 7.0, kcalPer100g: 145 },
+  // ~70 % croquettes premium + 30 % frais, prix et densité intermédiaires
+  { type: 'mixte', label: 'Mix croquettes premium et repas frais', pricePerKg: 7.0, kcalPer100g: 200 },
+]
 
-  return types.map((t) => {
+export function buildCostComparisons(dailyCalories: number): CostComparison[] {
+  return FOOD_TYPES.map((t) => {
     const dailyGrams = (dailyCalories / t.kcalPer100g) * 100
     const dailyCost = (dailyGrams / 1000) * t.pricePerKg
     const monthlyBudget = Math.round(dailyCost * 30)

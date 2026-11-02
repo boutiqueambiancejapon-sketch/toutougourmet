@@ -20,7 +20,7 @@ export function Segmented<T extends string>({ name, legend, hint, options, value
       </legend>
       <div className="flex gap-1 rounded-control bg-cream-2 p-1">
         {options.map(([val, label]) => (
-          <label key={val} className="relative flex min-h-10 flex-1 cursor-pointer">
+          <label key={val} className="relative flex min-h-11 flex-1 cursor-pointer">
             <input
               type="radio"
               name={name}
