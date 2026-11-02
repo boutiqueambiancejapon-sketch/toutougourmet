@@ -441,12 +441,12 @@ h3:where(:not(.v2, .v2 *)) {
 .verdict-content ol { color: var(--text-on-dark); }
 .verdict-content strong { color: #ffffff; }
 
-/* Boutons : coupure équilibrée sur 2 lignes plutôt qu'un mot ou une flèche orpheline
-   (texte agrandi sur iPhone, libellés longs). Les flèches sont collées par une espace insécable. */
+/* Boutons : pas de mot ni de flèche orpheline en dernière ligne (texte agrandi sur iPhone,
+   libellés longs), sans resserrer les lignes. Les flèches sont collées par une espace insécable. */
 button,
 a[class*="btn"],
 [class*="btn-"],
 a.rounded-control,
 a.rounded-box {
-  text-wrap: balance;
+  text-wrap: pretty;
 }
