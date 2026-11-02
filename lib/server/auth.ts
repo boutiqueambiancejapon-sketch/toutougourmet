@@ -7,7 +7,7 @@ import { nextCookies } from 'better-auth/next-js'
 import * as schema from '@/db/schema'
 import { SESSION_HINT_COOKIE } from '@/lib/account-hint'
 import { getDb, type Db } from './drizzle'
-import { resetPasswordEmail, verificationEmail } from './auth-emails'
+import { accountDeletedEmail, resetPasswordEmail, verificationEmail } from './auth-emails'
 import { sendTransactionalEmail } from './mailer'
 
 // @cdc lot 4 — Better Auth : e-mail + mot de passe (scrypt, haché dans notre base), adresse à
@@ -47,6 +47,14 @@ function createAuth(db: Db) {
       expiresIn: 60 * 60 * 24,
       sendVerificationEmail: async ({ user, url }) => send(verificationEmail(user.email, user.name, url)),
     },
+    user: {
+      // Droit à l'effacement : suppression depuis /compte/supprimer, mot de passe exigé. Les chiens
+      // et les pesées partent avec l'utilisateur (clés étrangères ON DELETE CASCADE).
+      deleteUser: {
+        enabled: true,
+        afterDelete: async (deleted) => send(accountDeletedEmail(deleted.email, deleted.name)),
+      },
+    },
     session: { expiresIn: 60 * 60 * 24 * 30, updateAge: 60 * 60 * 24 },
     rateLimit: {
       enabled: true,
@@ -59,6 +67,7 @@ function createAuth(db: Db) {
         '/request-password-reset': { window: 300, max: 3 },
         '/send-verification-email': { window: 300, max: 3 },
         '/reset-password': { window: 300, max: 5 },
+        '/delete-user': { window: 300, max: 5 },
       },
     },
     advanced: { useSecureCookies: secure, cookiePrefix: 'tg' },

@@ -55,6 +55,24 @@ export default async function AccountHomePage({ searchParams }: { searchParams: 
           reprend le poids, l&apos;âge et l&apos;activité de {dogs[0]?.name ?? 'ton chien'}.
         </p>
       </section>
+      <section aria-labelledby="mes-donnees" className="flex flex-col gap-2">
+        <h2 id="mes-donnees" className="m-0 font-display text-2xl font-black text-ink">
+          Mes données
+        </h2>
+        <p className="m-0 text-base leading-relaxed text-ink-2">
+          Récupère tout ce que ton compte contient dans un fichier JSON : profil, chiens et pesées.
+        </p>
+        <a
+          href="/api/compte/export"
+          download
+          className="inline-flex min-h-12 items-center justify-center self-start rounded-control border-2 border-ink px-5 text-[15px] font-semibold text-ink no-underline"
+        >
+          Télécharger mes données
+        </a>
+        <Link href="/compte/supprimer" className="inline-flex min-h-11 items-center self-start text-[15px] font-semibold text-orange-ink underline underline-offset-2">
+          Supprimer mon compte
+        </Link>
+      </section>
       <div className="border-t border-line pt-4">
         <SignOutButton />
       </div>
