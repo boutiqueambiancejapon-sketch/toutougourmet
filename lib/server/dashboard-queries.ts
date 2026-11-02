@@ -95,12 +95,9 @@ export async function getSummary(pool: Pool, period: Period): Promise<SummaryDat
   const i = period.interval
   const [pageViews, affiliateClicks, signups, toolResults, clicksByBrand, clicksByPlace, clicksByPage, signupsByPlace, tools, foodSearches, foodMisses] =
     await Promise.all([
-      kpi(
-        pool,
-        `SELECT ${KPI_COLUMNS} FROM analytics.hits
-         WHERE kind = 'human' AND status < 400 AND ts >= now() - 2 * $1::interval`,
-        [i],
-      ),
+      // Pages vues confirmées par le navigateur (événement Pageview) : les journaux du serveur
+      // comptent aussi les préchargements et les robots déguisés en navigateurs.
+      eventKpi(pool, i, 'Pageview'),
       eventKpi(pool, i, 'Affiliate Click'),
       eventKpi(pool, i, 'Newsletter Signup'),
       eventKpi(pool, i, 'Tool Result'),

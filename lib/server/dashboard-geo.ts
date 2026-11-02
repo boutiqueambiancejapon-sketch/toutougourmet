@@ -33,13 +33,13 @@ export async function getGeo(pool: Pool, period: Period): Promise<GeoData> {
   const i = period.interval
   const [total, views, clicks, signups, tools] = await Promise.all([
     pool.query<{ n: number }>(
-      `SELECT count(*)::int AS n FROM analytics.hits
-       WHERE kind = 'human' AND status < 400 AND ts >= now() - $1::interval`,
+      `SELECT count(*)::int AS n FROM analytics.events
+       WHERE name = 'Pageview' AND ts >= now() - $1::interval`,
       [i],
     ),
     pool.query<Row>(
-      `SELECT coalesce(country, '') AS label, count(*)::int AS value FROM analytics.hits
-       WHERE kind = 'human' AND status < 400 AND ts >= now() - $1::interval
+      `SELECT coalesce(country, '') AS label, count(*)::int AS value FROM analytics.events
+       WHERE name = 'Pageview' AND ts >= now() - $1::interval
        GROUP BY 1 ORDER BY 2 DESC, 1 LIMIT $2`,
       [i, VIEW_LIMIT],
     ),

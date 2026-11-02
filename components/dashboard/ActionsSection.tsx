@@ -12,7 +12,7 @@ export function ActionsSection({ data, period }: { data: SummaryData; period: Pe
     <>
       <SectionTitle id="chiffres" title="Chiffres clés" intro={`Sur ${period.long}, par rapport ${period.previous}.`} />
       <dl className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
-        <StatTile label="Pages vues (humains)" kpi={kpis.pageViews} />
+        <StatTile label="Pages vues" kpi={kpis.pageViews} />
         <StatTile label="Clics partenaires" kpi={kpis.affiliateClicks} />
         <StatTile label="Inscriptions" kpi={kpis.signups} />
         <StatTile label="Résultats d’outils" kpi={kpis.toolResults} />

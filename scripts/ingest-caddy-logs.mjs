@@ -43,6 +43,12 @@ function toHit(entry) {
   const ua = header(req.headers, 'User-Agent') || ''
   const { kind, bot, operator } = classifyUa(ua)
   if (kind === 'human' && (STATIC.test(path) || req.method !== 'GET' || path.startsWith('/api/'))) return null
+  // Préchargements de Next.js (liens du menu chargés en arrière-plan) et tableau de bord du
+  // propriétaire : ce ne sont pas des visites.
+  const prefetch = header(req.headers, 'RSC') || header(req.headers, 'Next-Router-Prefetch') ||
+    /prefetch/i.test(header(req.headers, 'Sec-Purpose') || header(req.headers, 'Purpose') || '') || /[?&]_rsc=/.test(uri)
+  if (kind === 'human' && prefetch) return null
+  if (String(req.host || '').startsWith('dashboard.')) return null
   const refHost = hostOf(header(req.headers, 'Referer'))
   const clientIp = req.client_ip || req.remote_ip || null
   return {

@@ -16,7 +16,7 @@ export function GeoSection({ data, period }: { data: GeoData; period: Period }) 
         intro={`Sur ${period.long}. Le pays vient de l’adresse IP lue au moment de la visite, puis l’adresse est oubliée. « Inconnu » regroupe les visites d’avant le relevé du pays et les adresses non reconnues.`}
       />
       <div className="mt-4 grid gap-3 md:grid-cols-2">
-        <Panel title="Pages vues par pays" hint="Visiteurs humains, part du total des pages vues." wide>
+        <Panel title="Pages vues par pays" hint="Pages affichées dans un navigateur, part du total." wide>
           <BarList rows={data.views} total={data.viewsTotal} format={countryName} empty="Aucune page vue sur la période." />
         </Panel>
         <Panel title="Clics partenaires par pays">
