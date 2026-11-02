@@ -11,7 +11,7 @@
 - [x] Langue : français à la racine, anglais sous `/en` (V2, voir « V2 — structure multilingue »)
 - [x] Budget JS : objectif 80kb First Load gzippé (à surveiller avec `next build`)
 - [x] CSP : `unsafe-eval` activé dans script-src — voir exception ci-dessous
-- [x] Analytics : Plausible (script externe) + Vercel Analytics
+- [x] Analytics : tableau de bord maison (`analytics.*` dans PostgreSQL, `/tableau-de-bord`) + GA4 · Plausible et Vercel Analytics abandonnés (voir « V2 — sortie des services tiers hérités de Vercel »)
 - [x] Sitemap : next-sitemap (postbuild)
 - [x] MDX : @next/mdx + next-mdx-remote + gray-matter + rehype-pretty-code
 - [x] Icons : lucide-react — SVG uniquement, pas d'icon font
@@ -39,6 +39,8 @@
 
 - [x] **V2 — hébergement cible (2026-11-01, remplace la décision « Vercel + Neon » du même jour pour la prod)** : VPS one.com Cloud Server M (4 vCPU, 8 Go, Ubuntu 26.04). Structure calquée sur l'infra MentionBox : Caddy + systemd + PostgreSQL installé directement + cron. Pas de Coolify (installé puis retiré : l'utilisateur ne le voulait pas). Déploiement par GitHub Action SSH → `deploy/deploy.sh` (build dans `releases/<sha>`, bascule de lien, retour arrière `rollback.sh`). Vercel garde les previews de la branche `v2` jusqu'à la bascule. Neon abandonné : la base sera le Postgres du VPS. Mise à jour du même jour : le déploiement par GitHub Action est abandonné au profit du mode de travail « serveur source » (voir « V2 — mode de travail »).
 
+- [x] **V2 — sortie des services tiers hérités de Vercel (2026-11-02)** : Plausible, Formspree et l'API d'indexation Google sont abandonnés (réinstallables plus tard). Les messages du formulaire de contact vont dans `analytics.contact_messages` (route `/api/contact`, validation serveur, limite de débit en mémoire, champ piège) et se lisent dans la section « Messages » du tableau de bord ; sans base, la route répond 503. Les inscriptions (e-mail seul) vont dans Brevo (`lib/server/brevo.ts`), 503 si Brevo n'est pas configuré. Le compteur « bilans réalisés » du sticky CTA lit `analytics.events` (`Tool Result`, `tool = bien-nourri`) via `/api/bien-nourri-count`, sans cache. Le script Plausible, `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`, `PLAUSIBLE_API_KEY` et `FORMSPREE_ID` disparaissent ; `plausible.io` sort de la CSP. Les routes `/api/indexing` et `/api/search-console` restent mais répondent 501 sans leurs variables. Raison : un seul serveur, une seule base, aucun compte tiers à garder pour quitter Vercel.
+
 ## À valider
 
 - [ ] DM_Sans : 3 weights chargés (400, 500, 600) — CDC impose max 2 — supprimer 500 ou 600 ?
@@ -57,5 +59,5 @@
 
 ## Exceptions documentées
 
-- **2025 — CSP unsafe-eval** : activé dans `next.config.ts` script-src. Requis par le script Plausible Analytics (`plausible.io/js/script.js`). Vérifier à chaque mise à jour Plausible si l'exception est encore nécessaire.
+- **2025 — CSP unsafe-eval** : activé dans `next.config.ts` script-src. Raison d'origine (script Plausible) disparue le 2026-11-02 avec l'abandon de Plausible. Conservé par prudence : Google Tag Manager (variables JavaScript personnalisées) et les scripts publicitaires Google (AdSense, Funding Choices) peuvent recourir à `eval`. À retirer après un test en préversion sans `unsafe-eval` (console du navigateur sans erreur CSP sur GA4, annonces et bandeau de consentement).
 - **2025 — DM_Sans 3 weights** : chargé avec 400, 500, 600 au lieu du max 2 du CDC. Décision de design (500 utilisé pour UI intermédiaire). DÉCISION À VALIDER pour réduire à 2.
