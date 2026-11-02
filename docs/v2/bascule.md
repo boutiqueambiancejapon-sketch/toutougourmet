@@ -29,3 +29,11 @@ Décision du propriétaire (2026-11-02) : plus aucun service hérité de Vercel.
 ## Retour arrière (TTL 60 s)
 
 Remettre les deux ALIAS Vercel (valeurs dans le journal du 2 novembre : racine `c624be6d665fb4b7.vercel-dns-017.com`, `*` `cname.vercel-dns-016.com.`) et rattacher les domaines au projet Vercel. Le site V1 sur Vercel n'a pas bougé pendant toute l'opération.
+
+## Fait le 2026-11-02 (soir)
+
+- `.env` de production rempli (base, Brevo, tableau de bord), production construite depuis `v2` (`DEPLOY_BRANCH=v2`), Caddy de production activé (copie hors dépôt, sur le serveur : `~/toutou-preview/Caddyfile.live`, elle contient l'empreinte du mot de passe de la préversion).
+- DNS : enregistrements explicites `www` A `85.190.127.13` et AAAA `2001:880:a:343::419` (TTL 60), prioritaires sur l'ALIAS `*` géré par Vercel. La racine reste chez Vercel, qui redirige déjà en 301 vers www.
+- Contrôles : certificat valide, 385 URL connues de Google en 200 (dont 20 via une redirection 308 vers l'article déplacé), inscription Brevo et enregistrement des événements testés en production.
+- Retour arrière : repointer les deux enregistrements `www` créés vers Vercel (ou les supprimer) ; Vercel sert de nouveau www en une minute.
+- Mises à jour : la production ne se reconstruit pas toute seule : `sudo -u toutou env DEPLOY_BRANCH=v2 /srv/toutou/deploy.sh` après chaque fusion (à automatiser après la tâche de nuit).
