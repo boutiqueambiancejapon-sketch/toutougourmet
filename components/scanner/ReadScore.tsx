@@ -15,9 +15,12 @@ export function ReadScore() {
   return (
     <section aria-labelledby="lire-note" className="flex flex-col gap-4">
       <h2 id="lire-note" className="m-0 font-display text-2xl font-black text-ink">
-        Comment lire la note sur 100 ?
+        Quelle est une bonne note pour des croquettes ?
       </h2>
-      <p className="m-0 text-[15px] leading-relaxed text-ink-2">Chaque tranche, avec le profil d&apos;étiquette qu&apos;on y trouve le plus souvent.</p>
+      <p className="m-0 text-[15px] leading-relaxed text-ink-2">
+        Une note de 75 ou plus signale une très bonne composition, 55 à 74 une composition correcte. Chaque tranche, avec le
+        profil d&apos;étiquette qu&apos;on y trouve le plus souvent :
+      </p>
       <ul role="list" className="m-0 flex list-none flex-col gap-3 p-0">
         {LEVELS.map((l) => (
           <li key={l.band} className="flex flex-col items-start gap-2 rounded-card sm:flex-row sm:gap-4 border border-line bg-paper p-4">

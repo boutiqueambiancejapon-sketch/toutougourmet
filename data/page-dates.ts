@@ -2,14 +2,15 @@
 // dans les sitemaps (lib/sitemaps). À mettre à jour à la main quand le contenu visible d'une page
 // change vraiment (texte, outil, données), pas pour un simple correctif de style.
 // Les articles prennent leur frontmatter (updatedAt, sinon date), les hubs la date de leur
-// dernier article, les fiches croquettes la date de mise à jour de l'analyse.
+// dernier article, les fiches croquettes la date de mise à jour de l'analyse, les classements
+// /croquettes et /croquettes/friandises la date de leur fiche la plus récente (lib/sitemaps).
 
 /** Pages principales et outils : chemin → date (AAAA-MM-JJ). */
 export const PAGE_DATES: Record<string, string> = {
   '/': '2026-11-02',
   '/quiz': '2026-11-02',
   '/comparateur': '2026-11-02',
-  '/scanner': '2026-11-02',
+  '/scanner': '2026-11-03',
   '/scanner/alternative-yuka-animaux': '2026-11-03',
   '/guide-alimentation': '2026-11-03',
   '/premium': '2026-11-03',
