@@ -68,7 +68,7 @@ export function SubmitButton({ children, pending, pendingLabel = 'Envoi…' }: {
     <button
       type="submit"
       disabled={busy}
-      className="min-h-12 rounded-control bg-ink px-5 text-base font-semibold text-cream hover:underline disabled:opacity-60"
+      className="min-h-12 whitespace-nowrap rounded-control bg-ink px-4 text-base font-semibold text-cream hover:underline disabled:opacity-60"
     >
       {busy ? pendingLabel : children}
     </button>

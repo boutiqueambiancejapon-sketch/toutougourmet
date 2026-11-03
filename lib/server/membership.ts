@@ -1,3 +1,4 @@
+import { cache } from 'react'
 import { count, eq } from 'drizzle-orm'
 import { dog, membership, user, type Membership, type Plan } from '@/db/schema'
 import { monthlyScanLimit } from '@/lib/scanner/config'
@@ -13,10 +14,11 @@ function db() {
   return d
 }
 
-export async function getMembership(userId: string): Promise<Membership | null> {
+/** Mémorisée le temps d'une requête : le gabarit de l'espace compte et la page la lisent tous deux. */
+export const getMembership = cache(async (userId: string): Promise<Membership | null> => {
   const [row] = await db().select().from(membership).where(eq(membership.userId, userId)).limit(1)
   return row ?? null
-}
+})
 
 export async function planOf(userId: string): Promise<Plan> {
   return (await getMembership(userId))?.plan ?? 'free'

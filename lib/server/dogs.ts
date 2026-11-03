@@ -1,4 +1,4 @@
-import { and, asc, desc, eq } from 'drizzle-orm'
+import { and, asc, desc, eq, inArray } from 'drizzle-orm'
 import { dog, weightLog, type Dog, type WeightEntry } from '@/db/schema'
 import { getDb } from './drizzle'
 
@@ -52,6 +52,19 @@ export async function deleteDog(userId: string, dogId: string): Promise<void> {
 
 export async function listWeights(dogId: string): Promise<WeightEntry[]> {
   return db().select().from(weightLog).where(eq(weightLog.dogId, dogId)).orderBy(desc(weightLog.date), desc(weightLog.createdAt))
+}
+
+/** Dernière pesée de chaque chien (clé : id du chien). Les chiens sans pesée sont absents. */
+export async function latestWeights(dogIds: string[]): Promise<Map<string, WeightEntry>> {
+  const latest = new Map<string, WeightEntry>()
+  if (dogIds.length === 0) return latest
+  const rows = await db()
+    .select()
+    .from(weightLog)
+    .where(inArray(weightLog.dogId, dogIds))
+    .orderBy(desc(weightLog.date), desc(weightLog.createdAt))
+  for (const row of rows) if (!latest.has(row.dogId)) latest.set(row.dogId, row)
+  return latest
 }
 
 /** Ajoute une pesée ; le poids du profil suit la pesée la plus récente. */
