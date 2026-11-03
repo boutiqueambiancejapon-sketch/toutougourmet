@@ -1,5 +1,6 @@
 import { parseIngredientText } from './ingredient-text'
 import { analyseLabel } from './analyse'
+import { WET_MOISTURE } from './food-noun'
 import { CONFIDENCE_FIELDS, type AnalyticalKey, type ExtractedLabel, type ImageType } from './types'
 
 // @cdc lot 6 — conversion d'une fiche Open Pet Food Facts (API v2, licence ODbL) vers le format
@@ -76,6 +77,24 @@ export function opffImageType(tags: string[] = [], name = ''): ImageType {
   return TREAT_NAME.test(n) && !COMPLETE_NAME.test(n) ? 'friandise' : 'aliment-chien'
 }
 
+// Pâtée : catégories ou nom « wet », « pâtée », « boîte », « terrine », « mousse »… (sans accents)
+const WET_WORDS = /\b(wet|humide|patees?|pate|terrines?|mousses?|boites?|conserves?|gelee|en sauce|loaf|canned|tins?|chunks|bouchees|eminces|effiloches)\b/i
+const DRY_WORDS = /\b(dry|croquettes?|kibbles?|seche?s?|trocken|secco)\b/i
+
+/**
+ * Sec, humide ou inconnu : l'humidité déclarée d'abord (≥ 60 % : pâtée, ≤ 14 % : croquettes),
+ * puis les catégories, puis le nom. Sans indice : « inconnu » (la note le traite comme un sec).
+ */
+export function opffFoodType(tags: string[] = [], name: string, moisture: number | null): ExtractedLabel['typeAliment'] {
+  if (moisture !== null && moisture >= WET_MOISTURE) return 'humide'
+  if (moisture !== null && moisture <= 14) return 'sec'
+  for (const text of [stripAccents(tags.join(' ')), stripAccents(name)]) {
+    if (WET_WORDS.test(text)) return 'humide'
+    if (DRY_WORDS.test(text)) return 'sec'
+  }
+  return 'inconnu'
+}
+
 const firstBrand = (b?: string) => b?.split(',')[0]?.trim() || null
 const clean = (s?: string) => s?.replace(/\s+/g, ' ').trim().slice(0, 160) || null
 
@@ -109,7 +128,7 @@ export function opffLabel(p: OpffProduct, ean: string): ExtractedLabel {
     produit: product,
     ean,
     espece: type === 'aliment-chat' ? 'chat' : 'chien',
-    typeAliment: /wet|humide|pate|terrine/.test((p.categories_tags ?? []).join(' ')) ? 'humide' : 'sec',
+    typeAliment: opffFoodType(p.categories_tags, opffName(p), constituants.humidite),
     ingredients: parsed.ingredients,
     constituants,
     additifs: additifs.slice(0, 60),

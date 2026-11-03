@@ -7,7 +7,7 @@ import { TreatAllowance } from '../treat/TreatAllowance'
 
 const pct = (n: number | null) => (n === null ? 'non calculé' : `${n.toLocaleString('fr-FR', { maximumFractionDigits: 1 })} %`)
 
-export function FichePrintBottom({ details }: { details: ScoreResult }) {
+export function FichePrintBottom({ details, these }: { details: ScoreResult; these: string }) {
   if (details.treat)
     return (
       <div className="rounded-card border border-line bg-paper p-4 print:break-inside-avoid print:p-3">
@@ -32,7 +32,7 @@ export function FichePrintBottom({ details }: { details: ScoreResult }) {
       <section className="flex flex-col gap-2 rounded-card bg-amber-bg p-4 print:break-inside-avoid print:p-3">
         <h2 className="m-0 font-display text-lg font-black text-ink print:text-[14px]">Combien lui en donner ?</h2>
         <p className="m-0 text-[15px] leading-snug text-ink-2 print:text-[11px]">
-          La ration dépend du poids, de l&apos;âge, de l&apos;activité et de l&apos;énergie de ces croquettes. Calcule-la en
+          La ration dépend du poids, de l&apos;âge, de l&apos;activité et de l&apos;énergie de {these}. Calcule-la en
           grammes par jour : toutou-gourmet.com/outils/ration
         </p>
         <Link href="/outils/ration" className="text-[15px] font-semibold text-orange-ink underline underline-offset-2 print:hidden">

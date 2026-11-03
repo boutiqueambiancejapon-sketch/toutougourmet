@@ -66,9 +66,7 @@ function completePanels(d: FicheA4Data) {
       <Panel key="ration" bg={C.amberBg}>
         <Heading>Combien lui en donner ?</Heading>
         <span style={{ ...small, fontSize: u(10.5) }}>
-          La ration dépend du poids, de l&apos;âge, de l&apos;activité et de
-          l&apos;énergie de ces croquettes. Calcule-la en grammes par jour :
-          toutou-gourmet.com/outils/ration
+          {`La ration dépend du poids, de l'âge, de l'activité et de l'énergie de ${d.these}. Calcule-la en grammes par jour : toutou-gourmet.com/outils/ration`}
         </span>
       </Panel>
     ),

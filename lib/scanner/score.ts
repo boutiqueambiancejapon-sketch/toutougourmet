@@ -301,5 +301,5 @@ function scoreIngredients(label: ExtractedLabel, add: Add, missing: string[]): v
   else add('conservateurs', 'Conservateurs controversés', 5, 5, 'Ni BHA, ni BHT, ni éthoxyquine repérés.')
 
   const colorant = texts.find(hasColorant)
-  add('colorants', 'Colorants', 5, colorant ? 0 : 5, colorant ? `« ${colorant} » : la couleur des croquettes ne sert qu'au maître, pas au chien.` : 'Aucun colorant repéré.')
+  add('colorants', 'Colorants', 5, colorant ? 0 : 5, colorant ? `« ${colorant} » : la couleur de l'aliment ne sert qu'au maître, pas au chien.` : 'Aucun colorant repéré.')
 }

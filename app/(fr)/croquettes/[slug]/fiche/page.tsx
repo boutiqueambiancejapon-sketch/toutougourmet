@@ -11,6 +11,7 @@ import { FicheStamp } from '@/components/scanner/fiche/FicheStamp'
 import { FichePrintBottom } from '@/components/scanner/fiche/FichePrintBottom'
 import { openDataCredit } from '@/components/scanner/SourceNotice'
 import { TreatAlerts } from '@/components/scanner/treat/TreatAlerts'
+import { nounWords } from '@/lib/scanner/food-noun'
 import { getDb } from '@/lib/server/drizzle'
 import { getBySlug } from '@/lib/server/scanner'
 
@@ -24,7 +25,7 @@ async function load(slug: string) {
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const row = await load((await params).slug)
-  const name = row ? [row.brand, row.product].filter(Boolean).join(' ') || 'Croquettes' : 'Fiche introuvable'
+  const name = row ? [row.brand, row.product].filter(Boolean).join(' ') || nounWords(row.extracted, row.details).forDog : 'Fiche introuvable'
   return { title: `${name}, fiche à imprimer`, robots: { index: false, follow: false } }
 }
 
@@ -32,6 +33,7 @@ export default async function FichePage({ params }: Params) {
   const row = await load((await params).slug)
   if (!row) notFound()
   const name = row.product ?? row.brand ?? 'Produit sans nom lisible'
+  const words = nounWords(row.extracted, row.details)
   const date = row.createdAt.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' })
   return (
     <div className="v2 bg-cream print:bg-paper print:[print-color-adjust:exact]">
@@ -66,13 +68,13 @@ export default async function FichePage({ params }: Params) {
         <FicheCriteria details={row.details} />
         <FicheIngredients label={row.extracted} />
 
-        <FichePrintBottom details={row.details} />
+        <FichePrintBottom details={row.details} these={words.these} />
 
         <footer className="flex flex-col gap-1 border-t border-line pt-3 text-xs text-ink-2 print:pt-2 print:text-[9px]">
           <p className="m-0 font-semibold text-ink">
             {openDataCredit(row.source)
-              ? `${openDataCredit(row.source)}. Note calculée par le barème publié de Toutou Gourmet : vérifie sur ton sac.`
-              : 'Lecture automatique de l\'étiquette par une IA, vérifie sur ton sac. Note calculée par le barème publié de Toutou Gourmet.'}
+              ? `${openDataCredit(row.source)}. Note calculée par le barème publié de Toutou Gourmet : vérifie sur ${words.pack}.`
+              : `Lecture automatique de l'étiquette par une IA, vérifie sur ${words.pack}. Note calculée par le barème publié de Toutou Gourmet.`}
           </p>
           <p className="m-0">Méthode et sources : toutou-gourmet.com/scanner. Cette fiche juge la composition, elle ne remplace pas l&apos;avis d&apos;un vétérinaire.</p>
         </footer>

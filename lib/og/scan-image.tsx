@@ -3,6 +3,7 @@ import { getSlotPath, resolveSlot } from '@/data/image-utils'
 import { BAND_SHORT, highlights } from '@/lib/scanner/highlights'
 import type { AnalysisSource } from '@/db/schema'
 import { openDataCredit } from '@/components/scanner/SourceNotice'
+import { NOUNS, type FoodNoun } from '@/lib/scanner/food-noun'
 import { kindOf, type ScoreResult } from '@/lib/scanner/score'
 import { loadOgFonts, loadOgPhoto } from './assets'
 import { qrDataUri } from './qr'
@@ -20,25 +21,27 @@ export interface ScanImageInput {
   product: string | null
   details: ScoreResult
   source: AnalysisSource
+  /** Mot du produit (pâtée, croquettes…) : lib/scanner/food-noun.ts. Défaut : d'après la note. */
+  noun?: FoodNoun
 }
 
 async function cardData(input: ScanImageInput): Promise<ScanCardData> {
   const slot = resolveSlot(DOG_SLOT)
   const dog = slot?.imageReady ? await loadOgPhoto(getSlotPath(slot), 160, 160) : null
   const { strengths, weaknesses } = highlights(input.details)
-  const treat = kindOf(input.details) === 'treat'
+  const words = NOUNS[input.noun ?? (kindOf(input.details) === 'treat' ? 'friandise' : 'croquettes')]
   return {
     score: input.details.score,
     band: input.details.band ? BAND_SHORT[input.details.band] : 'Pas de note',
-    product: input.product ?? input.brand ?? (treat ? 'Friandise pour chien' : 'Croquettes pour chien'),
+    product: input.product ?? input.brand ?? words.forDog,
     brand: input.product ? input.brand : null,
     strengths,
     weaknesses,
     credit: openDataCredit(input.source) ?? 'Lecture automatique, vérifie sur ton sac',
     dog,
     qr: qrDataUri(SCANNER_URL),
-    tag: treat ? 'Friandise notée sur 100' : 'Scanner de croquettes',
-    cta: treat ? 'Scanne ses friandises' : 'Scanne tes croquettes',
+    tag: words.tag,
+    cta: words.cta,
   }
 }
 

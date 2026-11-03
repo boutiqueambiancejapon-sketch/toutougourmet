@@ -2,6 +2,7 @@ import { openDataCredit } from '@/components/scanner/SourceNotice'
 import type { FoodAnalysis } from '@/db/schema'
 import { BAND_SHORT, verdictText } from '@/lib/scanner/highlights'
 import { ingredientClass, type IngredientClass } from '@/lib/scanner/ingredient-class'
+import { foodNoun, NOUNS } from '@/lib/scanner/food-noun'
 import { kindOf } from '@/lib/scanner/score'
 import { ALTERNATIVE_BELOW, alternativesFor, HOMEMADE_TREATS } from '@/lib/scanner/seo'
 import { allowanceText, TREAT_SHARE } from '@/lib/scanner/treat-allowance'
@@ -16,6 +17,8 @@ export const SITE = 'https://www.toutou-gourmet.com'
 export interface FicheA4Data {
   name: string
   meta: string
+  /** « ces croquettes », « cette pâtée », « cet aliment » (lib/scanner/food-noun.ts) */
+  these: string
   score: number | null
   band: string | null
   verdict: string
@@ -99,9 +102,11 @@ export function ficheA4Data(row: FoodAnalysis): FicheA4Data {
   ]
   const { shown, hidden } = fitPills(items, COMPOSITION_BUDGET)
   const url = `${SITE}/croquettes/${row.slug}`
+  const noun = foodNoun(label, d)
   return {
     name: clipWords(row.product ?? row.brand ?? 'Produit sans nom lisible', 90),
-    meta: [kindOf(d) === 'treat' ? 'Friandise' : null, row.product ? row.brand : null, row.ean ? `code-barres ${row.ean}` : null, `fiche du ${date}`].filter(Boolean).join(' · '),
+    meta: [noun === 'croquettes' || noun === 'aliment' ? null : NOUNS[noun].title, row.product ? row.brand : null, row.ean ? `code-barres ${row.ean}` : null, `fiche du ${date}`].filter(Boolean).join(' · '),
+    these: NOUNS[noun].these,
     score: d.score,
     band: d.band ? BAND_SHORT[d.band] : null,
     verdict: verdictText(d),
@@ -125,7 +130,7 @@ export function ficheA4Data(row: FoodAnalysis): FicheA4Data {
     qr: qrDataUri(url),
     credit:
       openDataCredit(row.source)
-        ? `${openDataCredit(row.source)}. Note calculée par le barème publié de Toutou Gourmet : vérifie sur ton sac.`
-        : "Lecture automatique de l'étiquette par une IA, vérifie sur ton sac. Note calculée par le barème publié de Toutou Gourmet.",
+        ? `${openDataCredit(row.source)}. Note calculée par le barème publié de Toutou Gourmet : vérifie sur ${NOUNS[noun].pack}.`
+        : `Lecture automatique de l'étiquette par une IA, vérifie sur ${NOUNS[noun].pack}. Note calculée par le barème publié de Toutou Gourmet.`,
   }
 }

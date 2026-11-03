@@ -6,7 +6,8 @@ import { carbsCriterion, dryMatterBasis, scoreLabel, SCORE_VERSION } from '../li
 import { alternativesFor, ficheTitle, partnerBrand, shortProduct } from '../lib/scanner/seo'
 import { parseExtractedLabel } from '../lib/scanner/types'
 import { parseIngredientText } from '../lib/scanner/ingredient-text'
-import { opffImageType, opffToLabel } from '../lib/scanner/opff'
+import { opffFoodType, opffImageType, opffToLabel } from '../lib/scanner/opff'
+import { foodNoun, NOUNS } from '../lib/scanner/food-noun'
 import { classifyExtraction, nothingRead } from '../lib/scanner/outcome'
 import { highlights } from '../lib/scanner/highlights'
 import { ingredientClass } from '../lib/scanner/ingredient-class'
@@ -177,6 +178,26 @@ test('texte d\'ingrédients : additifs et constituants collés à la composition
   assert.deepEqual(edgard.additifs, ['vitamine A 15 000 UI', 'vitamine D3 1 500 UI', 'taurine 1 000 mg'])
   // Sans bloc additifs ni constituants : rien ne change, « sans additifs » reste dans le nom
   assert.deepEqual(parseIngredientText('poulet (sans additifs), riz').ingredients.map((i) => i.nom), ['poulet (sans additifs)', 'riz'])
+})
+
+test('pâtée, croquettes ou aliment : le mot de la fiche suit le type et l\'humidité', () => {
+  assert.equal(opffFoodType(['en:dog-food', 'en:wet-dog-food'], 'Bouchées au bœuf', null), 'humide')
+  assert.equal(opffFoodType(['en:dog-food'], 'Terrine au poulet', null), 'humide')
+  assert.equal(opffFoodType(['en:dog-food'], 'Mousse au saumon', null), 'humide')
+  assert.equal(opffFoodType(['en:dog-food'], 'Menu en boîte', null), 'humide')
+  assert.equal(opffFoodType(['en:dog-food', 'en:dry-dog-food'], 'Adult poulet', null), 'sec')
+  assert.equal(opffFoodType(['en:dog-food'], 'Adult poulet', 78), 'humide')
+  assert.equal(opffFoodType(['en:dog-food'], 'Adult poulet', 9), 'sec')
+  assert.equal(opffFoodType(['en:dog-food'], 'Adult poulet', null), 'inconnu')
+  const wet = { ...PREMIUM_LABEL, typeAliment: 'humide' as const }
+  assert.equal(foodNoun(wet), 'patee')
+  assert.equal(foodNoun({ ...PREMIUM_LABEL, typeAliment: 'inconnu', constituants: { ...PREMIUM_LABEL.constituants, humidite: 75 } }), 'patee')
+  assert.equal(foodNoun(PREMIUM_LABEL), 'croquettes')
+  assert.equal(foodNoun({ ...PREMIUM_LABEL, typeAliment: 'inconnu' }), 'aliment')
+  assert.equal(foodNoun(PREMIUM_LABEL, { kind: 'treat' }), 'friandise')
+  assert.equal(NOUNS.patee.question('Atavik'), 'La pâtée Atavik est-elle bonne pour ton chien ?')
+  assert.equal(ficheTitle('Atavik', 'Pâtée pour chien poulet', 64, 'patee'), 'Pâtée Atavik poulet : avis et note 64/100')
+  assert.equal(ficheTitle(null, null, null, 'aliment'), 'Aliment : avis et composition')
 })
 
 const OPFF_COMPLETE = {

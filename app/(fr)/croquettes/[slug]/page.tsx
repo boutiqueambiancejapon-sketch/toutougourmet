@@ -23,6 +23,7 @@ import { FicheVerdict } from '@/components/scanner/fiche/FicheVerdict'
 import { KindTag } from '@/components/scanner/treat/KindTag'
 import { TreatAlerts } from '@/components/scanner/treat/TreatAlerts'
 import { TreatHomemade } from '@/components/scanner/treat/TreatHomemade'
+import { foodNoun, NOUNS } from '@/lib/scanner/food-noun'
 import { kindOf } from '@/lib/scanner/score'
 import { toScanAnalysis } from '@/lib/scanner/result'
 import { alternativesFor, brandSlug, ficheTitle } from '@/lib/scanner/seo'
@@ -50,11 +51,12 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const row = await load((await params).slug)
   if (!row) return { title: 'Fiche introuvable', robots: { index: false, follow: false } }
   const treat = kindOf(row.details) === 'treat'
-  const name = [row.brand, row.product].filter(Boolean).join(' ') || (treat ? 'cette friandise' : 'ces croquettes')
+  const noun = foodNoun(row.extracted, row.details)
+  const name = [row.brand, row.product].filter(Boolean).join(' ') || NOUNS[noun].these
   const url = `${SITE}/croquettes/${row.slug}`
   const what = treat ? 'premier ingrédient, part de viande, sucre, sel et additifs' : 'protéines et glucides sur matière sèche, premier ingrédient, additifs'
   return {
-    title: { absolute: ficheTitle(row.brand, row.product, row.score, kindOf(row.details)) },
+    title: { absolute: ficheTitle(row.brand, row.product, row.score, noun) },
     description: `Avis et composition de ${name} : ${what}${row.score !== null ? `, note de ${row.score}/100` : ''} selon notre barème publié.`.slice(0, 160),
     alternates: { canonical: url },
     openGraph: {
@@ -72,8 +74,9 @@ export default async function CroquettePage({ params }: Params) {
   if (!row) notFound()
   const a = toScanAnalysis(row)
   const treat = kindOf(a.details) === 'treat'
+  const words = NOUNS[foodNoun(a.label, a.details)]
   const name = [a.brand, a.product].filter(Boolean).join(' ') || 'Produit sans nom lisible'
-  const h1 = a.product ? `${a.product}${a.brand ? ` (${a.brand})` : ''} : notre analyse` : `${a.brand ?? (treat ? 'Friandise sans nom lisible' : 'Croquettes sans nom lisible')} : notre analyse`
+  const h1 = a.product ? `${a.product}${a.brand ? ` (${a.brand})` : ''} : notre analyse` : `${a.brand ?? words.unnamed} : notre analyse`
   const date = row.createdAt.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' })
   const bSlug = brandSlug(a.brand)
   const brandListed = bSlug !== null && (await reviewedItemsSafe('complete')).some((it) => it.brandSlug === bSlug)
@@ -105,7 +108,7 @@ export default async function CroquettePage({ params }: Params) {
 
       <section aria-labelledby="contenu" className="flex flex-col gap-4">
         <h2 id="contenu" className="m-0 font-display text-2xl font-black text-ink">
-          {treat ? 'Que contient cette friandise ?' : 'Que contiennent ces croquettes ?'}
+          {words.contains}
         </h2>
         <p className="m-0 text-base leading-relaxed text-ink-2">
           {first
@@ -118,7 +121,7 @@ export default async function CroquettePage({ params }: Params) {
 
       {treat ? null : <FicheNutrition label={a.label} />}
 
-      <FicheVerdict brand={a.brand} details={a.details}>
+      <FicheVerdict brand={a.brand} details={a.details} words={words}>
         <div className="flex gap-2 sm:max-w-md">
           <DownloadLink slug={a.slug} className="flex-1" />
           <ShareButton slug={a.slug} name={name} score={a.score} className="flex-1" />
