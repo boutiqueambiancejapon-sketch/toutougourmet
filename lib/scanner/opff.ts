@@ -1,5 +1,5 @@
 import { parseIngredientText } from './ingredient-text'
-import { scoreLabel } from './score'
+import { analyseLabel } from './analyse'
 import { CONFIDENCE_FIELDS, type AnalyticalKey, type ExtractedLabel, type ImageType } from './types'
 
 // @cdc lot 6 — conversion d'une fiche Open Pet Food Facts (API v2, licence ODbL) vers le format
@@ -33,6 +33,12 @@ const NUTRIMENTS: Record<AnalyticalKey, string[]> = {
   phosphore: ['phosphorus'],
 }
 
+/** Énergie de la fiche en kcal pour 100 g (friandises surtout), si elle est plausible. */
+function energyKcal100g(n: OpffProduct['nutriments']): number | null {
+  const v = Number(n?.['energy-kcal_100g'])
+  return Number.isFinite(v) && v >= 20 && v <= 900 ? Math.round(v * 10) / 10 : null
+}
+
 function nutriment(n: OpffProduct['nutriments'], key: AnalyticalKey): number | null {
   if (!n) return null
   for (const name of NUTRIMENTS[key]) {
@@ -46,8 +52,9 @@ function nutriment(n: OpffProduct['nutriments'], key: AnalyticalKey): number | n
 
 export function opffImageType(tags: string[] = []): ImageType {
   const t = tags.join(' ')
-  if (/cat-food|aliments?-pour-chats?|:chats?\b/.test(t) && !/dog-food/.test(t)) return 'aliment-chat'
-  if (/treat|friandise|biscuit|snack|chew|os-a-macher|complementary/.test(t)) return 'friandise'
+  if (/cat-(food|treats?|snacks?)|(aliments?|friandises?)-pour-chats?|:chats?\b/.test(t) && !/dog-(food|treats?|snacks?)/.test(t)) return 'aliment-chat'
+  // Friandises, snacks, os à mâcher, aliments complémentaires : barème friandise
+  if (/treat|friandise|biscuit|snack|chew|os-a-macher|complementar|complementaire/.test(t)) return 'friandise'
   return 'aliment-chien'
 }
 
@@ -85,6 +92,7 @@ export function opffToLabel(p: OpffProduct, ean: string): OpffVerdict {
     constituants,
     additifs: additifs.slice(0, 60),
     partAnimaleDeclaree: null,
+    energie: { kcalKg: null, kcal100g: energyKcal100g(p.nutriments), kcalPiece: null, poidsPieceG: null },
     confiance: Object.fromEntries(
       CONFIDENCE_FIELDS.map((k) => [k, has(k === 'marque' ? brand : k === 'produit' ? product : k === 'ean' ? ean : k === 'ingredients' ? parsed.ingredients : k === 'additifs' ? additifs : constituants.proteines)]),
     ) as ExtractedLabel['confiance'],
@@ -101,6 +109,10 @@ export function opffToLabel(p: OpffProduct, ean: string): OpffVerdict {
     c.matieresGrasses !== null &&
     sum <= 100 &&
     (label.typeAliment === 'humide' ? c.proteines >= 3 : c.proteines >= 12 && c.proteines <= 70 && c.matieresGrasses >= 3 && c.matieresGrasses <= 45)
-  const usable = type === 'aliment-chien' && label.ingredients.length >= 3 && plausible && scoreLabel(label).score !== null
+  // Friandise : son barème ne lit que la composition (et l'énergie, si elle est donnée).
+  const usable =
+    type === 'friandise'
+      ? label.ingredients.length >= 1 && analyseLabel(label).score !== null
+      : type === 'aliment-chien' && label.ingredients.length >= 3 && plausible && analyseLabel(label).score !== null
   return usable ? { kind: 'complete', label } : { kind: 'incomplete', brand, product, type }
 }

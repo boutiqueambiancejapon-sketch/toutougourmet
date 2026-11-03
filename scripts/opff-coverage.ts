@@ -1,7 +1,7 @@
 // Couverture d'Open Pet Food Facts pour le scanner : part des croquettes chien vendues en France
 // que notre barème peut noter sans photo. npx tsx scripts/opff-coverage.ts [pages]
 import { OPFF_FIELDS, opffToLabel, type OpffProduct } from '../lib/scanner/opff'
-import { scoreLabel } from '../lib/scanner/score'
+import { analyseLabel } from '../lib/scanner/analyse'
 
 const UA = 'ToutouGourmet/1.0 (https://www.toutou-gourmet.com/scanner; contact@toutou-gourmet.com)'
 
@@ -19,7 +19,7 @@ async function main() {
     const v = opffToLabel(p, p.code ?? '')
     if (v.kind === 'complete') {
       complete++
-      console.log(`${p.code}  ${scoreLabel(v.label).score}/100  ${v.label.marque} · ${v.label.produit}`)
+      console.log(`${p.code}  ${analyseLabel(v.label).score}/100  ${v.label.marque} · ${v.label.produit}`)
     }
   }
   console.log(`\n${complete} notées sur ${products.length} croquettes chien (France) : ${Math.round((complete / Math.max(1, products.length)) * 100)} %`)

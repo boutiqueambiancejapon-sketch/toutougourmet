@@ -27,7 +27,7 @@ type Step =
   | { name: 'idle' }
   | { name: 'camera' }
   | { name: 'looking'; ean: string }
-  | { name: 'photos'; prefill: Prefill; notice?: { code: 'not_found' | 'cat_food' | 'treat'; message: string } }
+  | { name: 'photos'; prefill: Prefill; notice?: { code: 'not_found' | 'cat_food'; message: string } }
   | { name: 'result'; analysis: ScanAnalysis; origin: ResultOrigin }
 
 const noop = () => () => {}
@@ -82,7 +82,7 @@ export function ScannerTool({ monthlyLimit }: { monthlyLimit: number }) {
       .catch(() => null)
     if (data?.ok) return showResult(data.analysis, data.origin)
     const code = data && !data.ok && data.error !== 'incomplete' ? data.error : null
-    const notice = code === 'not_found' || code === 'cat_food' || code === 'treat' ? { code, message: data?.message ?? '' } : undefined
+    const notice = code === 'not_found' || code === 'cat_food' ? { code, message: data?.message ?? '' } : undefined
     const prefill = data && !data.ok && data.error !== 'incomplete' && data.prefill ? data.prefill : { ...EMPTY, ean }
     setStep({ name: 'photos', prefill, notice })
   }
@@ -100,7 +100,7 @@ export function ScannerTool({ monthlyLimit }: { monthlyLimit: number }) {
       {step.name === 'photos' ? (
         <>
           {step.notice ? <ScanProblem code={step.notice.code} message={step.notice.message} /> : null}
-          {step.notice?.code === 'cat_food' || step.notice?.code === 'treat' ? (
+          {step.notice?.code === 'cat_food' ? (
             <button type="button" onClick={restart} className="min-h-12 rounded-control bg-orange px-5 text-base font-semibold text-ink">
               Scanner un autre produit
             </button>

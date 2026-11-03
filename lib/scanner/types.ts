@@ -12,7 +12,8 @@ export const CONFIDENCE_FIELDS = ['marque', 'produit', 'ean', 'ingredients', 'co
 export type ConfidenceField = (typeof CONFIDENCE_FIELDS)[number]
 
 export const SPECIES = ['chien', 'chat', 'autre', 'inconnu'] as const
-/** Ce que montrent les photos : sert à répondre sans décompter une photo inutilisable. */
+/** Ce que montrent les photos : aliment complet (barème principal), friandise ou aliment
+ * complémentaire (barème friandise), aliment pour chat (refusé) ou autre chose (refusé). */
 export const IMAGE_TYPES = ['aliment-chien', 'aliment-chat', 'friandise', 'autre'] as const
 export type ImageType = (typeof IMAGE_TYPES)[number]
 export const LEGIBILITY = ['nette', 'floue'] as const
@@ -44,6 +45,28 @@ const text = (max: number) =>
 
 const confidence = z.enum(CONFIDENCE).catch('absent')
 
+/** Nombre positif borné (énergie, poids d'une pièce), null hors bornes. */
+const bounded = (max: number) =>
+  z
+    .number()
+    .finite()
+    .nullable()
+    .catch(null)
+    .transform((v) => (v === null || v <= 0 || v > max ? null : Math.round(v * 10) / 10))
+
+/** Énergie écrite sur l'étiquette (surtout les friandises), dans l'unité où elle est écrite. */
+export const energySchema = z
+  .object({
+    kcalKg: bounded(10_000),
+    kcal100g: bounded(1_000),
+    kcalPiece: bounded(2_000),
+    poidsPieceG: bounded(1_000),
+  })
+  .nullable()
+  .optional()
+  .catch(null)
+export type LabelEnergy = NonNullable<z.infer<typeof energySchema>>
+
 export const extractedLabelSchema = z.object({
   estUneEtiquette: z.boolean().catch(false),
   typeImage: z.enum(IMAGE_TYPES).catch('autre'),
@@ -72,6 +95,8 @@ export const extractedLabelSchema = z.object({
     .catch([])
     .transform((list) => list.filter((a): a is string => a !== null).slice(0, 60)),
   partAnimaleDeclaree: pct,
+  /** Absent des analyses enregistrées avant le barème friandise (2026-11-03) */
+  energie: energySchema,
   confiance: z.object(Object.fromEntries(CONFIDENCE_FIELDS.map((k) => [k, confidence])) as Record<ConfidenceField, typeof confidence>).catch(
     Object.fromEntries(CONFIDENCE_FIELDS.map((k) => [k, 'absent'])) as Record<ConfidenceField, 'absent'>,
   ),
@@ -123,7 +148,6 @@ export type ScannerErrorCode =
   | 'not_a_label'
   | 'blurry'
   | 'cat_food'
-  | 'treat'
   | 'not_found'
   | 'timeout'
   | 'provider_error'

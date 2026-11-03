@@ -14,6 +14,20 @@ const ROWS: [AnalyticalKey, string][] = [
   ['phosphore', 'Phosphore'],
 ]
 
+const num = (n: number) => n.toLocaleString('fr-FR', { maximumFractionDigits: 1 })
+
+/** Énergie écrite sur l'étiquette (friandises surtout), dans ses unités d'origine. */
+function energyText(e: ScanAnalysis['label']['energie']): string | null {
+  if (!e) return null
+  const parts = [
+    e.kcalKg !== null ? `${num(e.kcalKg)} kcal/kg` : null,
+    e.kcal100g !== null ? `${num(e.kcal100g)} kcal/100 g` : null,
+    e.kcalPiece !== null ? `${num(e.kcalPiece)} kcal par pièce` : null,
+    e.poidsPieceG !== null ? `pièce de ${num(e.poidsPieceG)} g` : null,
+  ].filter(Boolean)
+  return parts.length ? parts.join(', ') : null
+}
+
 const pct = (n: number) => `${n.toLocaleString('fr-FR', { maximumFractionDigits: 2 })} %`
 
 export function LabelData({ label, headingLevel = 'h3' }: { label: ScanAnalysis['label']; headingLevel?: 'h2' | 'h3' }) {
@@ -55,6 +69,7 @@ export function LabelData({ label, headingLevel = 'h3' }: { label: ScanAnalysis[
           <p className="m-0 text-[15px] text-ink-2">Constituants absents des photos.</p>
         )}
       </section>
+      {energyText(label.energie) ? <p className="m-0 text-[15px] text-ink">{`Énergie : ${energyText(label.energie)}.`}</p> : null}
       {label.additifs.length > 0 ? (
         <section className="flex flex-col gap-2">
           <H className="m-0 font-display text-xl font-black text-ink">Additifs</H>

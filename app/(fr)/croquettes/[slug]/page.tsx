@@ -1,6 +1,8 @@
 // @cdc lot 6 — fiche produit générée depuis le cache du scanner. noindex et hors sitemap tant
 // que la rédaction ne l'a pas relue (reviewed = false) : une lecture IA brute n'est pas indexée.
 // JSON-LD Product + Review seulement si relue. Sous 55/100 : marques partenaires en remplacement.
+// Friandise (barème à part) : pastille « Friandise », alertes de sécurité en tête, nombre par
+// jour à la place de la matière sèche, recettes maison sous 55/100 (pas de partenaire friandise).
 // Image de partage : /croquettes/[slug]/og.png (Open Graph) et story.png (bouton « Partager »).
 // « Télécharger le PDF » : /croquettes/[slug]/fiche.pdf, une page A4.
 import type { Metadata } from 'next'
@@ -16,6 +18,10 @@ import { FicheAlternatives } from '@/components/scanner/fiche/FicheAlternatives'
 import { FicheJsonLd } from '@/components/scanner/fiche/FicheJsonLd'
 import { FicheNutrition } from '@/components/scanner/fiche/FicheNutrition'
 import { FicheVerdict } from '@/components/scanner/fiche/FicheVerdict'
+import { KindTag } from '@/components/scanner/treat/KindTag'
+import { TreatAlerts } from '@/components/scanner/treat/TreatAlerts'
+import { TreatHomemade } from '@/components/scanner/treat/TreatHomemade'
+import { kindOf } from '@/lib/scanner/score'
 import { toScanAnalysis } from '@/lib/scanner/result'
 import { alternativesFor, brandSlug, ficheTitle } from '@/lib/scanner/seo'
 import { getBySlug } from '@/lib/server/scanner'
@@ -40,11 +46,13 @@ async function load(slug: string) {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const row = await load((await params).slug)
   if (!row) return { title: 'Fiche introuvable', robots: { index: false, follow: false } }
-  const name = [row.brand, row.product].filter(Boolean).join(' ') || 'ces croquettes'
+  const treat = kindOf(row.details) === 'treat'
+  const name = [row.brand, row.product].filter(Boolean).join(' ') || (treat ? 'cette friandise' : 'ces croquettes')
   const url = `${SITE}/croquettes/${row.slug}`
+  const what = treat ? 'premier ingrédient, part de viande, sucre, sel et additifs' : 'protéines et glucides sur matière sèche, premier ingrédient, additifs'
   return {
-    title: { absolute: ficheTitle(row.brand, row.product, row.score) },
-    description: `Avis et composition de ${name} : protéines et glucides sur matière sèche, premier ingrédient, additifs${row.score !== null ? `, note de ${row.score}/100` : ''} selon notre barème publié.`.slice(0, 160),
+    title: { absolute: ficheTitle(row.brand, row.product, row.score, kindOf(row.details)) },
+    description: `Avis et composition de ${name} : ${what}${row.score !== null ? `, note de ${row.score}/100` : ''} selon notre barème publié.`.slice(0, 160),
     alternates: { canonical: url },
     openGraph: {
       title: `${name}${row.score !== null ? ` : ${row.score}/100` : ''}`,
@@ -60,12 +68,13 @@ export default async function CroquettePage({ params }: Params) {
   const row = await load((await params).slug)
   if (!row) notFound()
   const a = toScanAnalysis(row)
+  const treat = kindOf(a.details) === 'treat'
   const name = [a.brand, a.product].filter(Boolean).join(' ') || 'Produit sans nom lisible'
-  const h1 = a.product ? `${a.product}${a.brand ? ` (${a.brand})` : ''} : notre analyse` : `${a.brand ?? 'Croquettes sans nom lisible'} : notre analyse`
+  const h1 = a.product ? `${a.product}${a.brand ? ` (${a.brand})` : ''} : notre analyse` : `${a.brand ?? (treat ? 'Friandise sans nom lisible' : 'Croquettes sans nom lisible')} : notre analyse`
   const date = row.createdAt.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' })
   const bSlug = brandSlug(a.brand)
-  const brandListed = bSlug !== null && (await reviewedItemsSafe()).some((it) => it.brandSlug === bSlug)
-  const crumbs: BreadcrumbItem[] = [{ label: 'Accueil', href: '/' }, { label: 'Croquettes notées', href: '/croquettes' }]
+  const brandListed = bSlug !== null && (await reviewedItemsSafe('complete')).some((it) => it.brandSlug === bSlug)
+  const crumbs: BreadcrumbItem[] = [{ label: 'Accueil', href: '/' }, treat ? { label: 'Friandises notées', href: '/croquettes?type=friandises' } : { label: 'Croquettes notées', href: '/croquettes' }]
   if (a.brand) crumbs.push(brandListed ? { label: a.brand, href: `/croquettes/marque/${bSlug}` } : { label: a.brand })
   crumbs.push({ label: a.product ?? name })
   const first = a.label.ingredients[0]
@@ -77,8 +86,9 @@ export default async function CroquettePage({ params }: Params) {
         <BreadcrumbNav items={crumbs} />
         <header className="flex flex-col gap-3">
           <h1 className="m-0 font-display text-[clamp(1.75rem,4.2vw,2.5rem)] font-black leading-[1.08] tracking-tight text-ink">{h1}</h1>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <ScoreBadge score={a.score} />
+            <KindTag details={a.details} />
             <p className="m-0 text-base text-ink-2">
               {`${row.reviewed ? 'Fiche relue' : a.source === 'openpetfoodfacts' ? 'Données Open Pet Food Facts' : 'Analyse automatique'} du `}
               <time dateTime={row.createdAt.toISOString()}>{date}</time>
@@ -87,11 +97,12 @@ export default async function CroquettePage({ params }: Params) {
           </div>
         </header>
         <SourceNotice source={a.source} reviewed={row.reviewed} />
+        {a.details.treat ? <TreatAlerts alerts={a.details.treat.alerts} /> : null}
       </div>
 
       <section aria-labelledby="contenu" className="flex flex-col gap-4">
         <h2 id="contenu" className="m-0 font-display text-2xl font-black text-ink">
-          Que contiennent ces croquettes ?
+          {treat ? 'Que contient cette friandise ?' : 'Que contiennent ces croquettes ?'}
         </h2>
         <p className="m-0 text-base leading-relaxed text-ink-2">
           {first
@@ -102,7 +113,7 @@ export default async function CroquettePage({ params }: Params) {
         <LabelData label={a.label} headingLevel="h3" />
       </section>
 
-      <FicheNutrition label={a.label} />
+      {treat ? null : <FicheNutrition label={a.label} />}
 
       <FicheVerdict brand={a.brand} details={a.details}>
         <div className="flex gap-2 sm:max-w-md">
@@ -111,7 +122,8 @@ export default async function CroquettePage({ params }: Params) {
         </div>
       </FicheVerdict>
 
-      <FicheAlternatives alternatives={alternativesFor(a.brand, a.score)} />
+      <FicheAlternatives alternatives={alternativesFor(a.brand, a.score, kindOf(a.details))} />
+      {treat ? <TreatHomemade score={a.score} /> : null}
 
       <p className="m-0 text-[15px] leading-relaxed text-ink-2">
         Tu as ce paquet sous la main ?{' '}
@@ -119,8 +131,8 @@ export default async function CroquettePage({ params }: Params) {
           Scanne son étiquette
         </Link>{' '}
         pour vérifier la lecture, ou compare avec les{' '}
-        <Link href="/croquettes" className="font-semibold text-orange-ink underline underline-offset-2">
-          croquettes notées sur 100
+        <Link href={treat ? '/croquettes?type=friandises' : '/croquettes'} className="font-semibold text-orange-ink underline underline-offset-2">
+          {treat ? 'friandises notées sur 100' : 'croquettes notées sur 100'}
         </Link>
         .
       </p>

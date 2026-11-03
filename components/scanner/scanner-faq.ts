@@ -16,7 +16,12 @@ export function scannerFaq(monthlyLimit: number): FaqEntry[] {
     {
       question: 'Le scanner note-t-il aussi les pâtées pour chien ?',
       answer:
-        "Oui, si l'étiquette donne l'humidité, obligatoire au-delà de 14 % (règlement CE 767/2009). Protéines et glucides sont ramenés sur matière sèche : une pâtée à 80 % d'eau se compare alors à une croquette. Les aliments pour chat et les friandises ne sont pas notés.",
+        "Oui, si l'étiquette donne l'humidité, obligatoire au-delà de 14 % (règlement CE 767/2009). Protéines et glucides sont ramenés sur matière sèche : une pâtée à 80 % d'eau se compare alors à une croquette. Les aliments pour chat ne sont pas notés.",
+    },
+    {
+      question: 'Le scanner note-t-il les friandises pour chien ?',
+      answer:
+        "Oui, avec un barème à part sur 100 points, publié dans la méthode : viande ou poisson nommé en premier, part de viande déclarée, ni sucre ni sel ajoutés, pas de colorant, de conservateur sans nom ni d'arôme artificiel, liste courte, ni glycérine ni farine en tête. Si l'étiquette donne les calories, le résultat indique combien en donner par jour selon le gabarit, sans dépasser 10 % de l'apport calorique (FEDIAF). Xylitol, raisin, chocolat, oignon ou ail, peau de buffle et os cuits déclenchent une alerte.",
     },
     {
       question: 'Mes photos et l\'image de la caméra sont-elles enregistrées ?',
@@ -26,12 +31,12 @@ export function scannerFaq(monthlyLimit: number): FaqEntry[] {
     {
       question: 'Une photo floue ou ratée me coûte-t-elle une analyse ?',
       answer:
-        "Non. Une photo floue, une image qui n'est pas une étiquette, un aliment pour chat ou une friandise ne sont pas décomptés. S'il manque une partie (la composition ou les constituants), on garde la session ouverte : la photo manquante ne compte pas une deuxième fois.",
+        "Non. Une photo floue, une image qui n'est pas une étiquette ou un aliment pour chat ne sont pas décomptés. S'il manque une partie (la composition ou les constituants), on garde la session ouverte : la photo manquante ne compte pas une deuxième fois.",
     },
     {
       question: "L'IA peut-elle se tromper en lisant l'étiquette ?",
       answer:
-        "Oui : un chiffre mal lu sur un sac plié, une virgule invisible. Les chiffres douteux sont marqués « à vérifier » et tu peux les corriger : la note se recalcule tout de suite. La correction part ensuite à la rédaction, qui vérifie avant de modifier la fiche.",
+        "Oui : un chiffre mal lu sur un sac plié, une virgule invisible. Les chiffres douteux sont marqués « à vérifier » et tu peux les corriger : la note se recalcule tout de suite. La correction part ensuite à la rédaction, qui vérifie avant de modifier la fiche.",
     },
     {
       question: 'Que vaut une note calculée avec Open Pet Food Facts ?',

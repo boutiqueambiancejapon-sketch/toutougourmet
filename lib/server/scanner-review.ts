@@ -1,6 +1,6 @@
 import { and, asc, count, desc, eq, isNull, or, sql } from 'drizzle-orm'
 import { foodAnalysis, scanReport, type FoodAnalysis } from '@/db/schema'
-import { scoreLabel, SCORE_VERSION } from '@/lib/scanner/score'
+import { analyseLabel, scoreVersionFor } from '@/lib/scanner/analyse'
 import type { ExtractedLabel } from '@/lib/scanner/types'
 import { getDb } from './drizzle'
 
@@ -78,7 +78,7 @@ export async function listReports(analysisId: string): Promise<ReportRow[]> {
 
 /** Enregistre l'étiquette corrigée et recalcule la note. `reviewed` : validée (true), retirée (false) ou inchangée. */
 export async function updateAnalysis(id: string, label: ExtractedLabel, reviewed?: boolean): Promise<FoodAnalysis | null> {
-  const details = scoreLabel(label)
+  const details = analyseLabel(label)
   const [row] = await db()
     .update(foodAnalysis)
     .set({
@@ -87,7 +87,7 @@ export async function updateAnalysis(id: string, label: ExtractedLabel, reviewed
       extracted: label,
       details,
       score: details.score,
-      algorithmVersion: SCORE_VERSION,
+      algorithmVersion: scoreVersionFor(label),
       ...(reviewed === undefined ? {} : { reviewed }),
     })
     .where(eq(foodAnalysis.id, id))

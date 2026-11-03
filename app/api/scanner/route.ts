@@ -17,8 +17,8 @@ import { ScannerError, type ScannerErrorCode } from '@/lib/scanner/types'
 // @cdc lot 6 — analyse d'une étiquette par photos (compte obligatoire). Ordre : session, débit,
 // cache par EAN (gratuit, sans appel à l'IA), contrôle des photos, réservation du quota (sauf
 // envoi suivant d'une session de scan déjà décomptée), lecture par l'IA, tri de la lecture
-// (pas une étiquette, floue, chat, friandise : rendu ; partie manquante : on la demande), note
-// par notre algorithme, enregistrement. Les photos restent en mémoire le temps de la requête.
+// (pas une étiquette, floue, chat : rendu ; partie manquante : on la demande), note par le
+// barème de l'aliment complet ou celui des friandises (lib/scanner/analyse.ts), enregistrement. Les photos restent en mémoire le temps de la requête.
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -36,7 +36,6 @@ const STATUS: Record<ScannerErrorCode, number> = {
   not_a_label: 422,
   blurry: 422,
   cat_food: 422,
-  treat: 422,
   not_found: 404,
   timeout: 504,
   provider_error: 502,

@@ -6,9 +6,10 @@ import { BAND_FILTERS } from '@/lib/scanner/seo'
 
 const select = 'min-h-12 w-full rounded-control border-2 border-ink bg-paper px-3 text-base text-ink outline-none focus-visible:ring-4 focus-visible:ring-amber'
 
-export function RankingFilters({ brands, brand, band }: { brands: { slug: string; name: string }[]; brand: string; band: Band | null }) {
+export function RankingFilters({ brands, brand, band, type = '' }: { brands: { slug: string; name: string }[]; brand: string; band: Band | null; type?: string }) {
   return (
     <form method="get" action="/croquettes" aria-label="Filtrer le classement" className="grid grid-cols-2 items-end gap-3 sm:grid-cols-[1fr_1fr_auto]">
+      {type ? <input type="hidden" name="type" value={type} /> : null}
       <label className="flex min-w-0 flex-col gap-1.5 text-sm font-semibold text-ink">
         Marque
         <select name="marque" defaultValue={brand} className={select}>
@@ -36,7 +37,7 @@ export function RankingFilters({ brands, brand, band }: { brands: { slug: string
           Filtrer
         </button>
         {brand || band ? (
-          <Link href="/croquettes" className="text-sm text-ink-2 underline underline-offset-2">
+          <Link href={type ? `/croquettes?type=${type}` : '/croquettes'} className="text-sm text-ink-2 underline underline-offset-2">
             Tout afficher
           </Link>
         ) : null}

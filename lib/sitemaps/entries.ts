@@ -89,10 +89,12 @@ function contentEntries(): SitemapEntry[] {
 /** Fiches du scanner relues, classement /croquettes et pages marque au-delà des seuils. */
 async function croquettesEntries(): Promise<SitemapEntry[]> {
   const items = await reviewedItemsSafe()
+  // Classement et pages marque : aliments complets seulement (les friandises ont leur barème)
+  const complete = items.filter((i) => i.kind === 'complete')
   const entries: SitemapEntry[] = []
-  if (items.length >= RANKING_MIN_REVIEWED)
-    entries.push({ path: '/croquettes', lastmod: latest(items.map((i) => i.updatedAt)) })
-  for (const b of groupByBrand(items))
+  if (complete.length >= RANKING_MIN_REVIEWED)
+    entries.push({ path: '/croquettes', lastmod: latest(complete.map((i) => i.updatedAt)) })
+  for (const b of groupByBrand(complete))
     if (b.items.length >= BRAND_MIN_REVIEWED)
       entries.push({ path: `/croquettes/marque/${b.slug}`, lastmod: latest(b.items.map((i) => i.updatedAt)) })
   for (const i of items) entries.push({ path: `/croquettes/${i.slug}`, lastmod: i.updatedAt })

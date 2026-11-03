@@ -208,7 +208,7 @@ test('tri des lectures : refus non décomptés, partie manquante demandée', () 
   assert.equal(classifyExtraction(PREMIUM_LABEL).kind, 'complete')
   assert.deepEqual(classifyExtraction(read({ estUneEtiquette: false })), { kind: 'reject', code: 'not_a_label' })
   assert.deepEqual(classifyExtraction(read({ typeImage: 'aliment-chat' })), { kind: 'reject', code: 'cat_food' })
-  assert.deepEqual(classifyExtraction(read({ typeImage: 'friandise' })), { kind: 'reject', code: 'treat' })
+  assert.equal(classifyExtraction(read({ typeImage: 'friandise', constituants: EMPTY_ANALYSIS })).kind, 'complete', 'friandise : barème friandise, la composition suffit')
   assert.deepEqual(classifyExtraction(read({ ingredients: [], constituants: EMPTY_ANALYSIS, lisibilite: 'floue' })), { kind: 'reject', code: 'blurry' })
   // Cas réel : photo floue « lue » quand même, tout marqué douteux
   assert.deepEqual(classifyExtraction(read({ lisibilite: 'floue', champsDouteux: ['ingredients', 'proteines'] })), { kind: 'reject', code: 'blurry' })
