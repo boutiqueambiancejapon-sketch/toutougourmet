@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ConsentLink } from '@/components/consent/ConsentLink'
 import { Brand } from './Brand'
 import { FooterGuide } from './FooterGuide'
+import { FooterScanner } from './FooterScanner'
 
 // @cdc 04-pages — pied de page V2 : liens vers les hubs (maillage) et pages légales.
 const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
@@ -31,6 +32,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
   {
     title: 'Outils',
     links: [
+      { href: '/scanner', label: 'Scanner de croquettes' },
       { href: '/quiz', label: 'Le test de mon chien' },
       { href: '/outils/ration', label: 'Calcul de la ration' },
       { href: '/outils/age', label: 'Âge humain du chien' },
@@ -53,7 +55,10 @@ export function SiteFooter() {
   return (
     <footer className="v2 mt-16 bg-ink text-cream">
       <div className="mx-auto max-w-page px-4 py-12 md:px-8">
-        <FooterGuide />
+        <div className="mb-10 grid gap-4 lg:grid-cols-[1.2fr_1fr]">
+          <FooterScanner />
+          <FooterGuide />
+        </div>
         <div className="grid grid-cols-2 gap-8 md:grid-cols-5">
           <div className="col-span-2 flex flex-col gap-3 md:col-span-1">
             <Brand onDark />
