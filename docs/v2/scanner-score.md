@@ -31,6 +31,7 @@ Principe : l'IA recopie l'étiquette (`ExtractedLabel`), elle ne note pas. La no
 - Un critère sans l'information nécessaire est « non évalué » : il sort du calcul, la note est ramenée sur 100 à partir des critères évalués, et le résultat liste ce qui manque.
 - Moins de 60 points évaluables (hors Ca/P) : pas de note, message « trop d'informations manquent ».
 - Aliment pour chat : pas de note (seuils différents : FEDIAF 25 g de protéines/100 g MS chez le chat adulte).
+- Friandise, snack, os à mâcher ou aliment complémentaire : barème friandise (section suivante), jamais ce barème.
 
 ## Tranches d'affichage
 
@@ -72,4 +73,50 @@ La note ne change pas selon la provenance : le même barème s'applique à une �
    - fiche exploitable : aliment pour chien d'après les catégories, 3 ingrédients au moins, protéines et matières grasses présentes et plausibles (croquettes : protéines de 12 à 70 %, matières grasses de 3 à 45 %, somme des constituants ≤ 100), note calculable. Sinon, passage aux photos avec marque et produit préremplis ;
    - couverture mesurée le 2026-11-02 (`npx tsx scripts/opff-coverage.ts 2`) : 13 croquettes chien notables sur 105 vendues en France présentes dans la base (12 %) ;
    - mention « Données : Open Pet Food Facts, licence ODbL » sur le résultat, la fiche, la fiche A4 et l'image de partage.
-3. **Photos** (`source = 'photo'`, compte requis, quota mensuel) : lecture par l'IA (`lib/scanner/label-schema.ts`). La sortie donne aussi `typeImage` (aliment chien, aliment chat, friandise, autre), `lisibilite` (nette, floue) et `champsDouteux`. Tri dans `lib/scanner/outcome.ts` : pas une étiquette, texte flou, aliment pour chat ou friandise donnent un refus non décompté ; une partie manquante (composition ou constituants) garde la session ouverte (jeton signé valable 30 min, `lib/server/scan-session.ts`) et la photo manquante n'est pas décomptée une seconde fois ; rien de lisible (devant du sac seul) n'est pas décompté. Un champ douteux s'affiche « à vérifier » sous la note : la personne peut corriger le chiffre (recalcul dans le navigateur) et l'envoyer comme signalement.
+3. **Photos** (`source = 'photo'`, compte requis, quota mensuel) : lecture par l'IA (`lib/scanner/label-schema.ts`). La sortie donne aussi `typeImage` (aliment chien, aliment chat, friandise, autre), `lisibilite` (nette, floue) et `champsDouteux`. Tri dans `lib/scanner/outcome.ts` : pas une étiquette, texte flou ou aliment pour chat donnent un refus non décompté ; une friandise passe au barème friandise (ci-dessous), sans constituants exigés ; une partie manquante (composition ou constituants) garde la session ouverte (jeton signé valable 30 min, `lib/server/scan-session.ts`) et la photo manquante n'est pas décomptée une seconde fois ; rien de lisible (devant du sac seul) n'est pas décompté. Un champ douteux s'affiche « à vérifier » sous la note : la personne peut corriger le chiffre (recalcul dans le navigateur) et l'envoyer comme signalement.
+
+
+## Barème friandise (version 1.0, 2026-11-03)
+
+Code : `lib/scanner/score-treat.ts` (fonction pure `scoreTreat`, version `TREAT_SCORE_VERSION = 'friandise-1.0'`), reconnaissance propre aux friandises dans `lib/scanner/treat-ingredients.ts`, nombre par jour dans `lib/scanner/treat-allowance.ts`, aiguillage dans `lib/scanner/analyse.ts`. Tests : `npx tsx --test scripts/test-scanner-treat.ts`. Page publique : `/scanner#methode-friandises`.
+
+Champ d'application : `typeImage = 'friandise'` (lecture des photos : friandise, biscuit, snack, os ou bâton à mâcher, viande séchée, mention « aliment complémentaire ») ou catégories Open Pet Food Facts contenant `treat`, `snack`, `chew`, `biscuit`, `os-a-macher`, `complementary` / `complementaire`. Les friandises pour chat (`cat-treats`, espèce chat) restent refusées. Une friandise ne nourrit pas seule le chien : on ne juge ni protéines ni glucides sur matière sèche, seulement la recette. La composition suffit (pas de constituants exigés) ; sans composition, pas de note.
+
+Type stocké avec l'analyse : `details.kind` (`'complete'` ou `'treat'`) dans la colonne jsonb `food_analysis.details`, et `algorithm_version` vaut `friandise-1.0`. Pas de migration : une analyse enregistrée avant ce barème n'a pas de `kind` et compte comme aliment complet. Le classement `/croquettes` sépare les deux (onglet `?type=friandises`) ; pages marque, « meilleures notes » de `/scanner` et sitemap du classement ne gardent que les aliments complets.
+
+| Critère | Points | Règle exacte |
+|---|---|---|
+| Premier ingrédient | 20 | viande ou poisson d'espèce nommée : 20 · origine animale sans espèce (« viande », « volaille ») : 9 · sous-produits : 4 · autre : 0 (mêmes listes que le barème principal) |
+| Part de viande ou de poisson déclarée | 15 | somme des % des ingrédients animaux (hors graisses, huiles, hydrolysats) ou part annoncée, la plus haute : rien d'écrit : 0 · < 4 % : 1 · 4-14 : 3 · 14-30 : 6 · 30-50 : 9 · 50-70 : 12 · ≥ 70 : 15. Recette faite seulement d'ingrédients animaux (« filet de poulet ») : 100 %, donc 15 |
+| Sucres ajoutés | 15 | sucre, saccharose, glucose, fructose, dextrose, sirop, caramel, mélasse, miel (composition ou additifs) : 0, sinon 15 |
+| Colorants, conservateurs et arômes | 15 | défauts comptés : un colorant ; un conservateur ou antioxygène cité sans nom (« conservateurs », « antioxygènes autorisés CE ») ou BHA, BHT, éthoxyquine ; un arôme artificiel. Aucun : 15 · un : 7 · deux ou trois : 0 |
+| Sel ajouté | 10 | « sel », « sel marin », « sel de mer », « chlorure de sodium » : 0, sinon 10. Les « sels minéraux » ne comptent pas |
+| Longueur de la liste | 10 | ingrédients de la composition, additifs non comptés : ≤ 5 : 10, puis 2 de moins par ingrédient (6 : 8 · 7 : 6 · 8 : 4 · 9 : 2 · ≥ 10 : 0) |
+| Glycérine et origine animale non nommée | 10 | défauts comptés : glycérine ou glycérol (E422) ; sous-produits (« viandes et sous-produits animaux », « dérivés d'origine animale ») ; ingrédient animal sans espèce. Aucun : 10 · un : 5 · deux ou trois : 0 |
+| Céréale ou farine en tête | 5 | premier ingrédient céréale, farine, amidon ou fécule d'origine végétale : 0, sinon 5 (« farine de poisson » est animale) |
+
+Justifications : ordre des ingrédients par poids décroissant (règlement CE 767/2009, art. 17) ; pourcentages de mise en avant (FEDIAF Code of Good Labelling Practice 2019 : « au poulet » ≥ 4 %, « riche en poulet » ≥ 14 %) ; sucres, sel, colorants et arômes artificiels n'ont pas d'utilité nutritionnelle pour le chien (NRC 2006) et servent l'appétence ou l'acheteur ; la glycérine sert d'humectant (texture moelleuse) ; les catégories de la directive 82/475/CEE ne disent ni l'espèce ni la partie de l'animal. Le seuil de 70 % de part animale correspond à une friandise faite surtout de viande ou de poisson ; au-dessus de 14 %, la mention « riche en » est permise.
+
+Un critère « sans… ni… » compte les défauts par famille, pas par ingrédient : trois colorants valent un seul défaut.
+
+Tranches : les mêmes que le barème principal (≥ 75, 55-74, 35-54, < 35) et la même pastille de couleur, accompagnée de la mention « Friandise ». Une friandise à 80 ne se compare pas à une croquette à 80.
+
+Alternative partenaire sous 55/100 : jamais pour une friandise (pas de partenaire friandise). À la place, la fiche propose deux recettes maison du site (foie séché, saumon et patate douce).
+
+### Nombre de friandises par jour
+
+- Énergie lue sur l'étiquette (`ExtractedLabel.energie`, champ facultatif ajouté le 2026-11-03) : `kcalKg`, `kcal100g`, `kcalPiece`, `poidsPieceG`, recopiés dans l'unité écrite, sans conversion par l'IA (kJ seuls : rien). Open Pet Food Facts : `energy-kcal_100g` si entre 20 et 900.
+- kcal pour 100 g = `kcal100g`, sinon `kcalKg ÷ 10`. kcal par pièce = `kcalPiece`, sinon kcal pour 100 g × poids de la pièce ÷ 100.
+- Besoin du jour : formule du calculateur de ration (`calculateDailyCalories`, lib/calculators.ts : 70 × poids^0,75 × 1,5, NRC 2006), chien adulte non stérilisé, activité normale, au poids de référence du gabarit (`dogSizeRanges.midKg`) : petit 5 kg, moyen 15 kg, grand 32 kg.
+- Plafond : 10 % de ce besoin (FEDIAF), arrondi à la kcal. Friandises par jour = plafond ÷ kcal par pièce, arrondi à l'entier inférieur (0 : « moins d'une friandise »). Sans kcal par pièce mais avec kcal au poids : grammes par jour.
+- Aucune énergie écrite : « Calories non indiquées sur l'étiquette », sans chiffre.
+
+### Alertes de sécurité (hors note)
+
+Affichées au-dessus de la note quand l'ingrédient est repéré dans la composition ou les additifs, quelle que soit la note : xylitol (« xylitol », E967, « sucre de bouleau ») ; raisin (« raisin », « raisins secs », « sultanine » ; l'extrait de pépins de raisin ne compte pas) ; chocolat ou cacao ; oignon ou ail (et échalote, poireau, ciboulette, de la même famille) ; peau de buffle ou de bœuf, cuir, rawhide (risque d'occlusion, à surveiller) ; os cuits ou fumés, os de jambon. Sur la story et l'image de partage, l'alerte passe en premier point faible.
+
+### Limites connues
+
+- Pas de critère sur la dureté (fracture dentaire) ni sur la taille de la pièce.
+- Le besoin du jour est celui d'un adulte de référence : un chien en surpoids ou très actif s'écarte du tableau ; le calculateur de ration donne son besoin exact.
+- Reconnaissance par listes de mots en français (et quelques mots anglais), comme le barème principal.
