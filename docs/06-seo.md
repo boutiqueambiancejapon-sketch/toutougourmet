@@ -4,7 +4,7 @@
 
 - Métadonnées via Next.js Metadata API · generateMetadata sur chaque page indexée
 - JSON-LD WebSite en place dans layout.tsx · Article + BreadcrumbList sur pages chien
-- Sitemap dynamique via next-sitemap (postbuild)
+- Sitemaps par type de page, générés à la demande (`/sitemap.xml` = index), `lastmod` réel · robots.txt par `app/robots.ts`
 - Plausible Analytics · Search Console à configurer
 - Cibles LCP < 2.5s · CLS < 0.1 · INP < 200ms
 
@@ -45,9 +45,16 @@ Injection côté serveur uniquement — jamais useEffect.
 
 ## 7.3 Fichiers techniques
 
-- `app/sitemap.ts` : sitemap dynamique généré par next-sitemap (postbuild)
-- `robots.txt` : à créer via next-sitemap config ou app/robots.ts
+- `robots.txt` : `app/robots.ts` (Allow `/`, Disallow `/api/` et `/dev/`, une seule ligne `Sitemap:` vers l'index)
 - Manifest PWA : non prévu (V2)
+
+### Sitemaps (depuis le 2026-11-03, remplace next-sitemap)
+
+- `/sitemap.xml` (`app/sitemap.xml/route.ts`) : index qui liste un sitemap par type de page, `/sitemaps/{type}.xml` (`app/sitemaps/[type]/route.ts`) : `aliments`, `urgences`, `sante-nutrition`, `races`, `marques` (fiches marque, duels, avis, `/comparateur`), `recettes`, `pages` (accueil, quiz, outils, scanner, guide, hubs de rubrique, à propos, auteur, plan du site) et `croquettes` (fiches du scanner relues ; l'ancienne adresse `/croquettes/sitemap.xml` sert le même contenu).
+- Route handlers revalidés toutes les heures (`revalidate = 3600`), rien n'est écrit dans `public/` au build.
+- Classement : `lib/sitemaps/types.ts` (dérivé de `lib/page-type.ts`) ; liste des URL : `lib/sitemaps/entries.ts`. Seulement des adresses finales en 200, indexables : pas de `/compte`, `/tableau-de-bord`, `/blog/*`, `/marques*`, `/comparatifs/*`, pages légales, `/contact`, `/fiche-aliments-dangereux`, `/guide-alimentation/livre`, `/newsletter/*`, `/dev/*`, `/en`, images.
+- `lastmod` : articles = `updatedAt` du frontmatter, sinon `date` ; hubs = date de leur article le plus récent ; fiches croquettes = mise à jour de l'analyse ; pages sans frontmatter = `data/page-dates.ts`, **à mettre à jour à la main** quand le contenu d'une page change. Jamais la date du build. Pas de `priority` ni de `changefreq` (ignorés par Google).
+- Nouvelle page statique indexable : l'ajouter à `data/page-dates.ts`, sinon elle n'entre dans aucun sitemap. Nouvelle rubrique ou nouvel article : rien à faire.
 
 ---
 

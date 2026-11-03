@@ -12,7 +12,7 @@
 - [x] Budget JS : objectif 80kb First Load gzippé (à surveiller avec `next build`)
 - [x] CSP : `unsafe-eval` activé dans script-src — voir exception ci-dessous
 - [x] Analytics : tableau de bord maison (`analytics.*` dans PostgreSQL, `/tableau-de-bord`) + GA4 · Plausible et Vercel Analytics abandonnés (voir « V2 — sortie des services tiers hérités de Vercel »)
-- [x] Sitemap : next-sitemap (postbuild)
+- [x] Sitemap : route handlers maison, un sitemap par type de page sous l'index `/sitemap.xml` (2026-11-03, remplace next-sitemap, voir « Sitemaps par type de page »)
 - [x] MDX : @next/mdx + next-mdx-remote + gray-matter + rehype-pretty-code
 - [x] Icons : lucide-react — SVG uniquement, pas d'icon font
 - [x] Animations : framer-motion 12 — wrappers décoratifs uniquement
@@ -91,7 +91,7 @@ Dog Chef −30 % sur la box d'essai + livraison gratuite ; Dogfy Diet −50 % su
 ## 2026-11-02 — Pas de sauvegarde hors du serveur (décision du propriétaire)
 La base est sauvegardée chaque nuit sur le VPS (`/srv/toutou/backups`, 7 jours gardés), sans copie externe. Risque accepté : une panne totale ou une perte du VPS emporterait aussi les sauvegardes (comptes, analyses du scanner, statistiques). Le contenu du site (articles, code) reste sur GitHub. À reconsidérer si le nombre de comptes grandit.
 ## 2026-11-02 — Scanner : référencement et relecture des fiches
-- Seules les fiches relues (`reviewed = true`) et notées entrent dans le classement `/croquettes`, les pages marque `/croquettes/marque/[slug]`, les « meilleures notes » de `/scanner` et `/croquettes/sitemap.xml`. Seuils d'indexation (`lib/scanner/seo.ts`) : classement à partir de 5 fiches relues, page marque à partir de 2, bloc de `/scanner` affiché à partir de 3. Pages filtrées du classement en noindex, canonique vers `/croquettes`. `/croquettes` est exclu du sitemap statique : le sitemap des croquettes le porte quand il est indexable.
+- Seules les fiches relues (`reviewed = true`) et notées entrent dans le classement `/croquettes`, les pages marque `/croquettes/marque/[slug]`, les « meilleures notes » de `/scanner` et `/sitemaps/croquettes.xml` (ancienne adresse `/croquettes/sitemap.xml` conservée). Seuils d'indexation (`lib/scanner/seo.ts`) : classement à partir de 5 fiches relues, page marque à partir de 2, bloc de `/scanner` affiché à partir de 3. Pages filtrées du classement en noindex, canonique vers `/croquettes`. `/croquettes` n'apparaît que dans le sitemap des croquettes, quand il est indexable.
 - JSON-LD `Product` + `Review` (auteur : l'organisation, note sur 100) seulement sur une fiche relue ; jamais d'`aggregateRating` (aucun avis d'utilisateurs).
 - Sous 55/100, la fiche propose deux marques partenaires qui vendent des croquettes (hors rupture, hors marque de la fiche), triées par la note « qualité des ingrédients » de `data/brands.ts`, lien `rel="sponsored noopener"` déclaré.
 - Relecture dans le tableau de bord : la correction repasse par `parseExtractedLabel` et la note est recalculée par le barème ; l'adresse de la fiche ne change pas. Chaque action serveur revérifie l'authentification HTTP Basic (le proxy ne protège pas un point d'entrée d'action). Un signalement « traité » est daté (`scan_report.handled_at`, migration 0003), pas supprimé.
@@ -137,3 +137,9 @@ Mise à jour approuvée par le propriétaire pour fermer les avis de sécurité 
 - Bandeau noir collé en bas : seulement sur les pages nutrition, croquettes, marques et avis sans autre offre visible (carte `BrandCTA`, comparatif, encart du milieu partenaire). Fermeture mémorisée 7 jours (localStorage). `StickyCtaDogChef`, jamais affiché, est supprimé.
 - Fiches races : comparatif `BreedBrandCompare` (maquette A, « Notre choix » en carte sur mobile) dans les 25 fiches qui avaient « Quelles marques pour un … ? ». Pastilles résumées du texte de chaque article : « Très adapté » sans réserve, « Adapté » avec condition ou mise en garde, « Correct » quand l'article écrit « correct » ou « à vérifier ». « Notre choix » : la première marque citée par l'article. Prix par jour seulement là où l'article le chiffrait (5 fiches).
 - Tableau de bord : section « Conversions par type de page ». Un compte créé est rattaché par son emplacement d'origine ; bouton du haut et inscriptions directes restent non attribués.
+
+## 2026-11-03 — Sitemaps par type de page (branche `feat/sitemaps`)
+- next-sitemap n'est plus appelé (postbuild retiré) : il donnait la date du build à toutes les URL, ce qui rend `lastmod` inutile pour Google. Le paquet reste dans `package.json` (retrait = PR de dépendances dédiée).
+- Index `/sitemap.xml` + un sitemap par type sous `/sitemaps/{type}.xml` (aliments, urgences, santé et nutrition, races, marques, recettes, pages principales, croquettes), route handlers revalidés toutes les heures. Classement dérivé de `lib/page-type.ts` : « nutrition-marques » coupé en deux (alimentation au quotidien avec la santé, marques et avis à part), hubs de rubrique avec les pages principales.
+- `lastmod` réel : frontmatter des articles, dernier article pour un hub, mise à jour de l'analyse pour une fiche croquettes, `data/page-dates.ts` (tenu à la main) pour les autres pages. Pas de `priority` ni de `changefreq`.
+- Même périmètre que l'ancien sitemap (401 URL au 2026-11-03), `robots.txt` par `app/robots.ts` avec une seule ligne `Sitemap:`. Détails : `docs/06-seo.md`, « Sitemaps ».

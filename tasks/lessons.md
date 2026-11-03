@@ -6,3 +6,7 @@ Règle : `npm run build > log 2>&1 || { tail log; exit 1; }` avant tout commit, 
 ## 2026-11-03 — serveurs de test oubliés
 - Des `next start` / `next dev` lancés par les chantiers (ports 3093, 3099, 3199) sont restés allumés des heures après la fin, ~500 Mo de mémoire.
 - Règle : tout chantier arrête son serveur de test par son PID (`ss -ltnp | grep :PORT`) avant son compte rendu ; le coordinateur vérifie `ss -ltnp | grep next-server` après chaque compte rendu.
+
+## 2026-11-03 — `public/sitemap*.xml` : plus rien à restaurer après un build
+- Avant, le postbuild next-sitemap réécrivait `public/sitemap.xml`, `public/sitemap-0.xml` et `public/robots.txt` à chaque build (date du build partout) ; il fallait les restaurer avant de committer.
+- Depuis `feat/sitemaps`, les sitemaps et robots.txt sont des routes (`app/sitemap.xml`, `app/sitemaps/[type]`, `app/robots.ts`) et ces fichiers n'existent plus. Règle : ne jamais recréer de `sitemap*.xml` ni de `robots.txt` dans `public/` (ils passeraient devant les routes). Nouvelle page statique indexable : l'ajouter à `data/page-dates.ts`.
