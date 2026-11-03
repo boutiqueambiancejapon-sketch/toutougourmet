@@ -19,7 +19,7 @@ export function SiteHeader() {
               key={item.href}
               href={item.href}
               match={item.match}
-              className="rounded-control px-2 py-2.5 text-[15px] lg:px-3.5 font-semibold text-ink no-underline hover:bg-cream-2 aria-[current=page]:bg-amber"
+              className="rounded-control px-2 py-2.5 text-sm lg:px-3.5 lg:text-[15px] font-semibold text-ink no-underline hover:bg-cream-2 aria-[current=page]:bg-amber"
             >
               {item.icon ? (
                 <span className="inline-flex items-center gap-1.5">
