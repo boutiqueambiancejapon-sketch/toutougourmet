@@ -1,4 +1,4 @@
-import { animalKind, isCereal, normalize } from './ingredients'
+import { animalKind, isCereal, mainName, normalize } from './ingredients'
 import type { TreatAlert, TreatAlertId } from './score'
 
 // @cdc lot 6 — reconnaissance propre au barème friandise (lib/scanner/score-treat.ts) : sel,
@@ -21,6 +21,17 @@ export const hasGlycerin = (name: string) => GLYCERIN.test(normalize(name))
 
 const ARTIFICIAL_FLAVOR = /(aromes?|aromatisants?) (artificiels?|de synthese|synthetiques?)|artificial flavou?rs?/
 export const hasArtificialFlavor = (name: string) => ARTIFICIAL_FLAVOR.test(normalize(name))
+
+/**
+ * Partie à mâcher : peau, cuir, corne, sabot, oreille, tendon, nerf (« pizzle »), os, bois de cerf.
+ * Jugée sur le nom principal (« poulet (avec os) » reste de la viande). Pour le barème friandise,
+ * ce n'est pas de la viande : un sous-produit au premier ingrédient, hors de la part de viande.
+ */
+const CHEW_PART = words([
+  'peaux?', 'cuirs?', 'cornes?', 'sabots?', 'oreilles?', 'tendons?', 'nerfs?', 'pizzles?', 'os', 'bois de (cerf|renne|daim|chevreuil)',
+  'rawhide', 'skins?', 'hides?', 'horns?', 'hoof', 'hooves', 'ears?', 'bones?', 'antlers?', 'bully sticks?',
+])
+export const isChewPart = (name: string) => CHEW_PART.test(mainName(name))
 
 /** Céréale, farine, amidon ou fécule d'origine végétale (« farine de poisson » est animale). */
 const FLOUR = words(['farines?', 'flour', 'amidons?', 'fecules?', 'starch'])

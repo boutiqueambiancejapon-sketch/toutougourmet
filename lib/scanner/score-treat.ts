@@ -1,7 +1,7 @@
-import { animalKind, controversialPreservatives, hasColorant, hasSugar, isByProduct, isUnnamedAnimal } from './ingredients'
+import { animalKind, controversialPreservatives, hasColorant, hasSugar, isByProduct, isUnnamedAnimal, speciesInDetailOnly } from './ingredients'
 import { bandFor, type Criterion, type CriterionId, type ScoreResult } from './score'
 import { treatAllowance } from './treat-allowance'
-import { hasArtificialFlavor, hasGlycerin, hasSalt, isCerealOrFlour, treatAlerts, unnamedPreservative } from './treat-ingredients'
+import { hasArtificialFlavor, hasGlycerin, hasSalt, isCerealOrFlour, isChewPart, treatAlerts, unnamedPreservative } from './treat-ingredients'
 import type { ExtractedLabel } from './types'
 
 // @cdc lot 6 — NOTRE note sur 100 d'une friandise, d'un snack ou d'un aliment complémentaire.
@@ -10,7 +10,7 @@ import type { ExtractedLabel } from './types'
 // Fonction pure, testée par scripts/test-scanner-treat.ts. Règles et sources :
 // docs/v2/scanner-score.md, « Barème friandise ». Toute modification change TREAT_SCORE_VERSION.
 
-export const TREAT_SCORE_VERSION = 'friandise-1.0'
+export const TREAT_SCORE_VERSION = 'friandise-1.1'
 
 const P = ' %'
 const fmt = (n: number) => n.toLocaleString('fr-FR', { maximumFractionDigits: 1 })
@@ -65,21 +65,30 @@ export function scoreTreat(label: ExtractedLabel): ScoreResult {
   const add = (id: CriterionId, points: number, explanation: string) => criteria.push({ id, label: LABELS[id], max: MAX[id], points, explanation })
 
   const first = ing[0]
-  const kind = animalKind(first.nom)
-  if (kind === 'nommee') add('friandise-premier-ingredient', 20, `${quote(first.nom)} : une viande ou un poisson dont l'espèce est nommée.`)
+  // Peau, cuir, corne, sabot, oreille, tendon, nerf, os : une partie à mâcher, pas de la viande
+  const meat = (name: string) => (isChewPart(name) ? null : animalKind(name))
+  const kind = meat(first.nom)
+  if (isChewPart(first.nom))
+    add('friandise-premier-ingredient', 4, `${quote(first.nom)} : une partie à mâcher (peau, cuir, corne, os…), comptée comme un sous-produit, pas comme de la viande.`)
+  else if (kind === 'nommee') add('friandise-premier-ingredient', 20, `${quote(first.nom)} : une viande ou un poisson dont l'espèce est nommée.`)
   else if (kind === 'non-nommee')
-    add('friandise-premier-ingredient', isByProduct(first.nom) ? 4 : 9, `${quote(first.nom)} : origine animale, mais l'espèce n'est pas précisée.`)
+    add('friandise-premier-ingredient', isByProduct(first.nom) ? 4 : 9, `${quote(first.nom)} : origine animale, mais l'espèce n'est pas précisée${speciesInDetailOnly(first.nom) ? ' (celle citée entre parenthèses n\'en désigne qu\'une partie)' : ''}.`)
   else add('friandise-premier-ingredient', 0, `${quote(first.nom)} : l'ingrédient le plus lourd de la recette n'est ni une viande ni un poisson.`)
 
-  // Part animale : pourcentages écrits, part annoncée, ou recette faite seulement d'ingrédients animaux.
-  const animal = ing.filter((i) => animalKind(i.nom) !== null)
+  // Part animale : pourcentages écrits, part annoncée, ou recette faite seulement de viande ou de
+  // poisson. Les parties à mâcher n'y entrent pas.
+  const animal = ing.filter((i) => meat(i.nom) !== null)
+  const chew = ing.find((i) => isChewPart(i.nom))
   const declared = animal.filter((i) => i.pourcentage !== null).reduce((s, i) => s + (i.pourcentage ?? 0), 0)
   const onlyAnimal = animal.length === ing.length
-  const share = onlyAnimal ? 100 : Math.min(100, Math.max(declared, label.partAnimaleDeclaree ?? 0))
-  if (share <= 0) add('friandise-part-animale', 0, 'Aucun pourcentage de viande ou de poisson n\'est écrit : impossible de savoir combien la friandise en contient.')
+  const share = onlyAnimal ? 100 : Math.min(100, Math.max(declared, chew ? 0 : label.partAnimaleDeclaree ?? 0))
+  if (share <= 0)
+    add('friandise-part-animale', 0, chew
+      ? `${quote(chew.nom)} est une partie à mâcher : elle ne compte pas comme viande, et aucune part de viande ou de poisson n'est écrite.`
+      : 'Aucun pourcentage de viande ou de poisson n\'est écrit : impossible de savoir combien la friandise en contient.')
   else
     add('friandise-part-animale', meatSharePoints(share), onlyAnimal
-      ? `Tous les ingrédients sont d'origine animale : la recette en contient 100${P}.`
+      ? `Tous les ingrédients sont de la viande ou du poisson : la recette en contient 100${P}.`
       : `${fmt(share)}${P} de viande ou de poisson déclarés sur l'étiquette.`)
 
   const sugar = texts.find(hasSugar)

@@ -8,8 +8,8 @@ import { TREAT_SHARE } from '@/lib/scanner/treat-allowance'
 
 const NB = ' '
 const CRITERIA: [string, number, string][] = [
-  ['Premier ingrédient', 20, `20 pour une viande ou un poisson d'espèce nommée, 9 si l'espèce n'est pas précisée, 4 pour des sous-produits, 0 sinon`],
-  ['Part de viande ou de poisson déclarée', 15, `0 si rien n'est écrit, 1 sous 4${NB}%, 3 de 4 à 14${NB}%, 6 de 14 à 30${NB}%, 9 de 30 à 50${NB}%, 12 de 50 à 70${NB}%, 15 à partir de 70${NB}% ou quand tous les ingrédients sont animaux`],
+  ['Premier ingrédient', 20, `20 pour une viande ou un poisson d'espèce nommée, 9 si l'espèce n'est pas précisée, 4 pour des sous-produits ou une partie à mâcher (peau, cuir, corne, sabot, oreille, tendon, nerf, os), 0 sinon`],
+  ['Part de viande ou de poisson déclarée', 15, `0 si rien n'est écrit, 1 sous 4${NB}%, 3 de 4 à 14${NB}%, 6 de 14 à 30${NB}%, 9 de 30 à 50${NB}%, 12 de 50 à 70${NB}%, 15 à partir de 70${NB}% ou quand la recette n'est faite que de viande ou de poisson. Les parties à mâcher ne comptent pas comme viande`],
   ['Sucres ajoutés', 15, '0 si un sucre, du miel, de la mélasse, un sirop, du dextrose ou du caramel est listé'],
   ['Colorants, conservateurs et arômes', 15, '15 sans défaut, 7 avec un défaut, 0 avec deux ou plus. Défauts : un colorant, un conservateur ou antioxygène cité sans nom (ou BHA, BHT, éthoxyquine), un arôme artificiel'],
   ['Sel ajouté', 10, '0 si du sel ou du chlorure de sodium est listé (les « sels minéraux » ne comptent pas)'],

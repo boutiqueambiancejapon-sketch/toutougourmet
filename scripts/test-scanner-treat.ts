@@ -232,3 +232,34 @@ test('fiche : titre « Friandise … », pas d\'alternative partenaire, onglet d
   assert.equal(parseKind(undefined), 'complete')
   assert.match(verdictText(scoreTreat(GOOD)), /pour une friandise/)
 })
+
+test('parties à mâcher : ni viande nommée au premier ingrédient, ni part de viande', () => {
+  // « Peau de bœuf » (os à mâcher en cuir, fiche Open Pet Food Facts) : 100 avant la version 1.1
+  const hide = scoreTreat(treat({ ingredients: [{ nom: 'Peau de bœuf', pourcentage: null }] }))
+  assert.equal(pts(hide, 'friandise-premier-ingredient'), 4, 'compté comme un sous-produit')
+  assert.equal(pts(hide, 'friandise-part-animale'), 0, 'hors de la part de viande')
+  assert.match(hide.criteria[1].explanation, /partie à mâcher/)
+  assert.equal(hide.treat?.alerts[0]?.id, 'rawhide', 'l\'alerte cuir reste')
+  assert.ok(hide.score !== null && hide.score < 75, `note ${hide.score}`)
+  const pctHide = scoreTreat(treat({ ingredients: [{ nom: '100% peau de bœuf séchée', pourcentage: 100 }], partAnimaleDeclaree: 100 }))
+  assert.equal(pts(pctHide, 'friandise-part-animale'), 0, '« 100 % » de peau ne fait pas 100 % de viande')
+  for (const nom of ['Oreilles de porc séchées', 'Sabots de veau séchés', 'Cornes de buffle', 'Tendons de bœuf', 'Nerfs de bœuf', 'Bull pizzle', 'Os à moelle de bœuf', 'Morceaux de peau de tête de bœuf séchés', 'Bois de cerf', 'Beef hide'])
+    assert.equal(pts(scoreTreat(treat({ ingredients: [{ nom, pourcentage: null }] })), 'friandise-premier-ingredient'), 4, nom)
+  // Vraie viande seule : très bien notée ; « poulet (avec os) » reste de la viande
+  assert.equal(scoreTreat(treat({ ingredients: [{ nom: '100 % poulet séché', pourcentage: 100 }] })).score, 100)
+  assert.equal(pts(scoreTreat(treat({ ingredients: [{ nom: 'Cous de poulet (avec os)', pourcentage: null }] })), 'friandise-premier-ingredient'), 20)
+  // Mélange : seule la viande compte dans la part
+  const mix = scoreTreat(treat({ ingredients: [{ nom: 'Poulet', pourcentage: 60 }, { nom: 'Peau de bœuf', pourcentage: 40 }] }))
+  assert.equal(pts(mix, 'friandise-part-animale'), meatSharePoints(60))
+  // Ingrédient générique qui cite une espèce entre parenthèses : sous-produit, plus 100
+  const vitakraft = scoreTreat(treat({
+    ingredients: [
+      { nom: '72% de viande et sous-produits animaux (dont de poulet)', pourcentage: 72 },
+      { nom: 'légumes', pourcentage: null },
+      { nom: 'levure', pourcentage: null },
+    ],
+  }))
+  assert.equal(pts(vitakraft, 'friandise-premier-ingredient'), 4)
+  assert.match(vitakraft.criteria[0].explanation, /celle citée entre parenthèses n'en désigne qu'une partie/)
+  assert.ok(vitakraft.score !== null && vitakraft.score < 100)
+})

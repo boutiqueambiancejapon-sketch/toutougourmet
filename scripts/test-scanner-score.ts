@@ -1,11 +1,11 @@
 // Tests de la note du scanner (lib/scanner/score.ts), sans framework : npx tsx scripts/test-scanner-score.ts
 import assert from 'node:assert/strict'
 import { INCOMPLETE_LABEL, PREMIUM_LABEL, SUPERMARKET_LABEL } from '../lib/scanner/fixtures'
-import { animalKind, isByProduct, isCereal } from '../lib/scanner/ingredients'
+import { animalKind, isByProduct, isCereal, isUnnamedAnimal } from '../lib/scanner/ingredients'
 import { carbsCriterion, dryMatterBasis, scoreLabel, SCORE_VERSION } from '../lib/scanner/score'
 import { alternativesFor, ficheTitle, partnerBrand, shortProduct } from '../lib/scanner/seo'
 import { parseExtractedLabel } from '../lib/scanner/types'
-import { parseIngredientText } from '../lib/scanner/ingredient-text'
+import { parseIngredientText, percentOf } from '../lib/scanner/ingredient-text'
 import { opffFoodType, opffImageType, opffToLabel } from '../lib/scanner/opff'
 import { foodNoun, NOUNS } from '../lib/scanner/food-noun'
 import { classifyExtraction, nothingRead } from '../lib/scanner/outcome'
@@ -104,6 +104,77 @@ test('reconnaissance des ingrédients', () => {
   assert.ok(isCereal('Farine de maïs'))
   assert.ok(!isCereal('Pommes de terre'))
   assert.ok(!isCereal('Poisson blanc'))
+})
+
+test('ingrédient générique : une espèce entre parenthèses ou après « dont » ne le nomme pas', () => {
+  // Libellés relevés dans Open Pet Food Facts (FR et EN)
+  for (const generic of [
+    'viande et sous-produits animaux (dont poulet)',
+    'Viandes et sous-produits animaux (dont 4 % de poulet)',
+    '72% de viande et sous-produits animaux (dont de poulet)',
+    'viandes et sous-produits animaux (2% de bœuf déshydraté équivaut à de bœuf dans la croquettes au bœuf)',
+    'poisson et sous-produits de poissons (2,5 % huile de saumon)',
+    'poissons et sous-produits de poissons (dont saumon 4 %)',
+    'sous-produits animaux (dont canard)',
+    'Meat and animal derivatives (4% chicken)',
+    'Meat and Animal Derivatives (including 4% Chicken)',
+  ]) {
+    assert.equal(animalKind(generic), 'non-nommee', generic)
+    assert.ok(isByProduct(generic), `${generic} : sous-produit`)
+    assert.equal(ingredientClass(generic), 'non-nommee', `${generic} : couleur`)
+  }
+  assert.equal(animalKind('Viande (dont poulet 30 %)'), 'non-nommee')
+  assert.equal(animalKind('Volaille (dont poulet frais 14%)'), 'non-nommee')
+  // Parenthèse qui détaille tout l'ingrédient, sans « dont » : l'espèce est nommée
+  assert.equal(animalKind('Viandes et abats crus (agneau 56%, jambon italien 10%)'), 'nommee')
+  assert.equal(animalKind('75% Fresh Meat and Wild Caught Fish (45% chicken, Sardines, Anchovies)'), 'nommee')
+  assert.ok(isUnnamedAnimal('Volaille (dont 10 % de dinde)'))
+  for (const named of ['poulet déshydraté', 'Saumon frais (20 %)', 'Poulet (26% dont poulet frais 14%)', 'Viande de poulet séché', 'Dried Chicken (30%)', 'sous-produits de poulet', 'Poulet (dont graisse 5 %)'])
+    assert.equal(animalKind(named), 'nommee', named)
+  assert.equal(animalKind('Graisse de poulet'), null)
+  assert.equal(animalKind('Huile de saumon (dont oméga 3)'), null)
+})
+
+test('pourcentages : virgule décimale, zéros, mention après le chiffre', () => {
+  assert.equal(percentOf('vitamine D3 0,0008 %'), 0.0008, '0,0008 % ne se lit pas 8 %')
+  assert.equal(percentOf('chicorée 0,5 %'), 0.5)
+  assert.equal(percentOf('poulet 12,5%'), 12.5)
+  assert.equal(percentOf('saumon 40 %'), 40)
+  assert.equal(percentOf('foie 4 % (séché)'), 4)
+  assert.equal(percentOf('aloe vera (dried, 0.05%)'), 0.05)
+  assert.equal(percentOf('taurine 1 000 mg/kg'), null)
+  const r = parseIngredientText('poulet 12,5%, sel 0,0008 %, foie 4 % (séché)')
+  assert.deepEqual(r.ingredients, [
+    { nom: 'poulet', pourcentage: 12.5 },
+    { nom: 'sel', pourcentage: 0.0008 },
+    { nom: 'foie (séché)', pourcentage: 4 },
+  ])
+})
+
+test('additifs collés sans ponctuation, en norvégien ou à l\'américaine', () => {
+  const bravo = parseIngredientText('farine de pommes de terre, saumon frais 13%, pomme (séchée) 0,05% antioxygènes, conservateurs')
+  assert.deepEqual(bravo.ingredients.map((i) => i.nom), ['farine de pommes de terre', 'saumon frais', 'pomme (séchée)'])
+  assert.deepEqual(bravo.additifs, ['antioxygènes', 'conservateurs'])
+  const chewies = parseIngredientText('Viande et sous-produits animaux (4 % de panse), céréales, sous-produits végétaux conservateurs, colorants')
+  assert.deepEqual(chewies.ingredients.map((i) => i.nom), ['Viande et sous-produits animaux (4 % de panse)', 'céréales', 'sous-produits végétaux'])
+  assert.deepEqual(chewies.additifs, ['conservateurs', 'colorants'])
+  const dental = parseIngredientText('Potato (dried, 47.5%), cellulose, aloe vera (dried, 0.05%) Nutritional additives/kg antioxidants')
+  assert.deepEqual(dental.ingredients.map((i) => i.nom), ['Potato (dried, 47.5%)', 'cellulose', 'aloe vera (dried, 0.05%)'])
+  const truffy = parseIngredientText('glycerine, poisson et sous-produits de poissons (2,5 % huile de saumon). Fer (oxyde de fer (III)) E1 1.200 mg/kg. Constituants analytiques : Protéine brute : 11,7%')
+  assert.deepEqual(truffy.ingredients.map((i) => i.nom), ['glycerine', 'poisson et sous-produits de poissons (2,5 % huile de saumon)'])
+  assert.deepEqual(truffy.additifs, ['Fer (oxyde de fer (III)) E1 1.200 mg/kg'])
+  const coop = parseIngredientText('SAMMENSETNING: Kjøtt og animalske biprodukter (43% okse), korn, oljer og fettstoffer. TILSETNINGSSTOFFER/kg: Vitaminer: Vitamin A 5000 IE, vitamin D3 500 IE. ANALYTISKE BESTANDDELER: Protein 40%.')
+  assert.deepEqual(coop.ingredients.map((i) => i.nom), ['Kjøtt og animalske biprodukter (43% okse)', 'korn', 'oljer og fettstoffer'])
+  assert.deepEqual(coop.additifs, ['TILSETNINGSSTOFFER/kg: Vitaminer: Vitamin A 5000 IE', 'vitamin D3 500 IE'])
+  const hills = parseIngredientText('Corn Starch, Hydrolyzed Chicken Liver, minerals (Ferrous Sulfate, Zinc Oxide), Taurine, Mixed Tocopherols for freshness, Natural Flavors')
+  assert.deepEqual(hills.ingredients.map((i) => i.nom), ['Corn Starch', 'Hydrolyzed Chicken Liver', 'Natural Flavors'])
+  assert.deepEqual(parseIngredientText('Cereals, minerals (1,5% calcium)').ingredients.map((i) => i.nom), ['Cereals', 'minerals (1,5% calcium)'], 'catégorie « minéraux » de l\'UE : un ingrédient')
+  const nestle = parseIngredientText('Amidon de maïs, avec du TBHQ, huile végétale, oxyde de magnésium, sel, sulfate ferreux')
+  assert.deepEqual(nestle.ingredients.map((i) => i.nom), ['Amidon de maïs', 'huile végétale', 'sel'])
+  // Le mot entre parenthèses, après « sans » ou au singulier reste dans l'ingrédient
+  const kept = parseIngredientText('huile de saumon (conservée avec des antioxygènes), riz sans conservateurs, extrait de romarin antioxydant')
+  assert.equal(kept.ingredients.length, 3)
+  assert.deepEqual(kept.additifs, [])
 })
 
 test('nettoyage de la sortie du fournisseur', () => {

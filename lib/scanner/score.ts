@@ -1,4 +1,4 @@
-import { animalKind, controversialPreservatives, hasColorant, hasSugar, isByProduct, isCereal, isUnnamedAnimal, unnamedAntioxidants } from './ingredients'
+import { animalKind, controversialPreservatives, hasColorant, hasSugar, isByProduct, isCereal, isUnnamedAnimal, speciesInDetailOnly, unnamedAntioxidants } from './ingredients'
 import type { ExtractedLabel } from './types'
 
 // @cdc lot 6 — NOTRE note sur 100 d'une étiquette de croquettes (l'IA lit, elle ne note pas).
@@ -6,7 +6,7 @@ import type { ExtractedLabel } from './types'
 // source sont décrits dans docs/v2/scanner-score.md : toute modification du barème change
 // SCORE_VERSION (les analyses en cache sont alors recalculées à la lecture).
 
-export const SCORE_VERSION = '1.1'
+export const SCORE_VERSION = '1.2'
 
 /** Humidité retenue pour des croquettes qui ne la déclarent pas (règlement UE 767/2009 : mention obligatoire au-delà de 14 %). */
 export const ASSUMED_DRY_MOISTURE = 10
@@ -259,7 +259,7 @@ function scoreIngredients(label: ExtractedLabel, add: Add, missing: string[]): v
   if (kind === 'nommee')
     add('premier-ingredient', 'Premier ingrédient', 15, 15, `« ${first.nom} » : une source animale dont l'espèce est nommée.${fresh ? ` Comptée fraîche, elle contient environ 70${P} d\'eau : une fois sèche, elle pèse bien moins.` : ''}`)
   else if (kind === 'non-nommee')
-    add('premier-ingredient', 'Premier ingrédient', 15, isByProduct(first.nom) ? 3 : 7, `« ${first.nom} » : origine animale, mais l'espèce n'est pas précisée.`)
+    add('premier-ingredient', 'Premier ingrédient', 15, isByProduct(first.nom) ? 3 : 7, `« ${first.nom} » : origine animale, mais l'espèce n'est pas précisée${speciesInDetailOnly(first.nom) ? ' (celle citée entre parenthèses n\'en désigne qu\'une partie)' : ''}.`)
   else add('premier-ingredient', 'Premier ingrédient', 15, 0, `« ${first.nom} » : l'ingrédient le plus lourd de la recette n'est pas une viande ni un poisson.`)
 
   const declared = ing.filter((i) => animalKind(i.nom) !== null && i.pourcentage !== null).reduce((s, i) => s + (i.pourcentage ?? 0), 0)
