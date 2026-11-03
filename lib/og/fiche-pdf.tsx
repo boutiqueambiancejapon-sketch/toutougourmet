@@ -1,6 +1,7 @@
 import { ImageResponse } from 'next/og'
 import sharp from 'sharp'
 import type { FoodAnalysis } from '@/db/schema'
+import { nounWords } from '@/lib/scanner/food-noun'
 import { jpegToPdf } from '@/lib/scanner/pdf'
 import { loadOgFonts } from './assets'
 import { ficheA4Data } from './fiche/data'
@@ -23,7 +24,7 @@ export async function fichePdfResponse(row: FoodAnalysis): Promise<Response> {
   const pdf = jpegToPdf({
     jpeg: new Uint8Array(jpeg),
     ...A4_PX,
-    title: `${[row.brand, row.product].filter(Boolean).join(' ') || 'Croquettes'} : fiche Toutou Gourmet`,
+    title: `${[row.brand, row.product].filter(Boolean).join(' ') || nounWords(row.extracted, row.details).forDog} : fiche Toutou Gourmet`,
     links: [{ ...QR_LINK, url: data.url }],
   })
   return new Response(pdf, {

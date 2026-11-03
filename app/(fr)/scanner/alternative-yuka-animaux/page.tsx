@@ -19,7 +19,7 @@ const PATH = '/scanner/alternative-yuka-animaux'
 const URL = `https://www.toutou-gourmet.com${PATH}`
 const TITLE = 'Yuka pour animaux : alternative pour scanner les croquettes'
 const DESCRIPTION =
-  'Yuka ne note pas l\'alimentation animale. Notre scanner note sur 100 les croquettes et pâtées pour chien, par code-barres ou photo, gratuit et sans appli.'
+  'Yuka ne note pas l\'alimentation animale. Notre scanner note sur 100 croquettes, pâtées et friandises pour chien, par code-barres ou photo, sans appli.'
 const UPDATED = PAGE_DATES[PATH]
 const UPDATED_LABEL = new Date(`${UPDATED}T00:00:00Z`).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
 
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 
 const SUMMARY = [
   'Yuka analyse les aliments et cosmétiques pour humains, pas les aliments pour animaux.',
-  'Notre scanner note les croquettes et pâtées pour chien sur 100, selon 11 critères publiés.',
+  'Notre scanner note sur 100 les croquettes et pâtées (11 critères) et les friandises pour chien (8 critères), avec un barème publié.',
   'Code-barres sans compte, analyses par photo avec un compte gratuit.',
 ]
 
@@ -52,8 +52,8 @@ export default function YukaAlternativePage() {
             </h1>
             <p className="m-0 text-base leading-relaxed text-ink-2 md:text-lg">
               Yuka ne note pas l&apos;alimentation animale&nbsp;: son centre d&apos;aide indique qu&apos;il n&apos;analyse pas les aliments
-              pour animaux. Pour les croquettes et les pâtées de ton chien, le scanner de Toutou Gourmet lit le code-barres ou deux
-              photos de l&apos;étiquette, puis donne une note sur 100 calculée par un barème publié.
+              pour animaux. Pour les croquettes, les pâtées et les friandises de ton chien, le scanner de Toutou Gourmet lit le
+              code-barres ou des photos de l&apos;étiquette, puis donne une note sur 100 calculée par un barème publié.
             </p>
             <p className="m-0 text-sm text-ink-2">
               <time dateTime={UPDATED}>{`Mis à jour le ${UPDATED_LABEL}`}</time>

@@ -4,6 +4,8 @@ import { BACKUP_MAX_AGE_HOURS, getBackupStatus } from '../dashboard-backup'
 import { getHostStats } from '../dashboard-host'
 import { addDays, parisDate } from '@/lib/emails/schedule'
 import { NIGHT_LABELS, nightOk, readNightRun } from '../night-logs'
+import { getPool } from '../db'
+import { OPFF_IMPORT_MAX_AGE_DAYS } from '../opff-store'
 import { dailyCalls, SCANNER_DAILY_CAP } from '../scanner-daily'
 
 // @cdc alertes — contrôles lancés toutes les 10 minutes par scripts/alerts.ts. Chaque contrôle
@@ -128,4 +130,31 @@ export async function checkScannerDaily(): Promise<Incident[]> {
       resolved: 'Scanner : compteur du jour remis à zéro.',
     },
   ]
+}
+
+/** Import hebdomadaire d'Open Pet Food Facts : en échec, bloqué, ou aucun succès depuis 8 jours. */
+export async function checkOpffImport(now: Date): Promise<Incident[]> {
+  const pool = getPool()
+  if (!pool) return []
+  // Une seule requête (le pool est fermé par scripts/alerts.ts dès la fin des contrôles)
+  const res = await pool
+    .query<{ status: string; started_at: Date; last_ok: Date | null }>(
+      `SELECT r.status, r.started_at,
+              (SELECT max(started_at) FROM app.opff_import_run WHERE status = 'ok') AS last_ok
+         FROM app.opff_import_run r ORDER BY r.started_at DESC LIMIT 1`,
+    )
+    .catch(() => null)
+  // Table absente : migration 0005 pas encore appliquée, l'import n'existe pas encore
+  if (!res) return []
+  const resolved = 'Import Open Pet Food Facts : de nouveau en ordre.'
+  const last = res.rows[0]
+  if (!last) return [{ key: 'opff-import', urgent: false, line: "Import Open Pet Food Facts : jamais passé (minuterie toutou-opff-import installée ?).", resolved }]
+  const fmt = (d: Date) => new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', timeZone: 'Europe/Paris' }).format(d)
+  const hours = (now.getTime() - last.started_at.getTime()) / 3_600_000
+  if (last.status === 'error') return [{ key: 'opff-import', urgent: false, line: `Import Open Pet Food Facts du ${fmt(last.started_at)} en échec (journalctl -u toutou-opff-import).`, resolved }]
+  if (last.status === 'running' && hours > 2) return [{ key: 'opff-import', urgent: false, line: `Import Open Pet Food Facts du ${fmt(last.started_at)} bloqué depuis ${Math.floor(hours)} heures.`, resolved }]
+  const days = last.last_ok ? (now.getTime() - last.last_ok.getTime()) / 86_400_000 : Infinity
+  if (days > OPFF_IMPORT_MAX_AGE_DAYS)
+    return [{ key: 'opff-import', urgent: false, line: last.last_ok ? `Import Open Pet Food Facts : aucun passage réussi depuis le ${fmt(last.last_ok)}.` : 'Import Open Pet Food Facts : aucun passage réussi.', resolved }]
+  return []
 }

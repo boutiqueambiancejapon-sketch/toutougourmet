@@ -2,23 +2,24 @@
 
 import { useEffect, useRef, type ReactNode } from 'react'
 
-// @cdc lot 6 — « Méthode » repliée par défaut sur /scanner. Le contenu est dans le HTML servi
-// (indexable) ; un lien vers #methode (fiches, mention IA) l'ouvre et y descend.
+// @cdc lot 6 — « Méthode » repliée par défaut sur /scanner (une par barème : #methode pour les
+// aliments complets, #methode-friandises pour les friandises). Le contenu est dans le HTML servi
+// (indexable) ; un lien vers son ancre (fiches, mention IA) l'ouvre et y descend.
 
-export function MethodDetails({ title, children }: { title: string; children: ReactNode }) {
+export function MethodDetails({ title, children, id = 'methode' }: { title: string; children: ReactNode; id?: string }) {
   const ref = useRef<HTMLDetailsElement>(null)
   useEffect(() => {
     const open = () => {
-      if (window.location.hash !== '#methode' || !ref.current) return
+      if (window.location.hash !== `#${id}` || !ref.current) return
       ref.current.open = true
       ref.current.scrollIntoView({ block: 'start' })
     }
     open()
     window.addEventListener('hashchange', open)
     return () => window.removeEventListener('hashchange', open)
-  }, [])
+  }, [id])
   return (
-    <details ref={ref} id="methode" className="group scroll-mt-24 rounded-card border-2 border-ink bg-paper">
+    <details ref={ref} id={id} className="group scroll-mt-24 rounded-card border-2 border-ink bg-paper">
       <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-3 px-4 py-3 font-display text-xl font-black text-ink sm:px-6 [&::-webkit-details-marker]:hidden">
         <h2 className="m-0 text-xl font-black">{title}</h2>
         <span aria-hidden="true" className="text-2xl leading-none transition-transform group-open:rotate-45">

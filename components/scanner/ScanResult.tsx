@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { ResultOrigin, ScanAnalysis, ScanQuota } from '@/lib/scanner/result'
-import { scoreLabel } from '@/lib/scanner/score'
+import { analyseLabel } from '@/lib/scanner/analyse'
 import { LabelData } from './LabelData'
 import { ReportError } from './ReportError'
 import { ScoreDetail } from './ScoreDetail'
@@ -19,6 +19,7 @@ import { DownloadLink } from './DownloadLink'
 const ORIGIN_TEXT: Record<ResultOrigin, string> = {
   cache: 'Produit déjà analysé : résultat immédiat, non décompté.',
   openpetfoodfacts: 'Calculé à partir des données d\'Open Pet Food Facts, sans photo : non décompté.',
+  openfoodfacts: 'Calculé à partir des données d\'Open Food Facts, sans photo : non décompté.',
   photo: 'Analyse de tes photos terminée.',
 }
 
@@ -34,7 +35,7 @@ export function ScanResult({ analysis, origin, quota, signedIn, onRestart }: Sca
   const heading = useRef<HTMLHeadingElement>(null)
   useEffect(() => heading.current?.focus(), [])
   const [corrected, setCorrected] = useState(analysis.label)
-  const details = useMemo(() => (corrected === analysis.label ? analysis.details : scoreLabel(corrected)), [corrected, analysis])
+  const details = useMemo(() => (corrected === analysis.label ? analysis.details : analyseLabel(corrected)), [corrected, analysis])
   const name = [analysis.brand, analysis.product].filter(Boolean).join(' · ') || 'Produit sans nom lisible'
   const changed = details.score !== analysis.details.score
   // Chiffres douteux : l'encart « à vérifier » passe avant le détail de la note.
@@ -67,7 +68,7 @@ export function ScanResult({ analysis, origin, quota, signedIn, onRestart }: Sca
         </Link>
       </div>
       <SourceNotice source={analysis.source} />
-      <LabelData label={analysis.label} />
+      <LabelData label={analysis.label} source={analysis.source} />
       <button type="button" onClick={onRestart} className="min-h-12 rounded-control bg-orange px-5 text-[15px] font-semibold text-ink">
         Scanner un autre produit
       </button>

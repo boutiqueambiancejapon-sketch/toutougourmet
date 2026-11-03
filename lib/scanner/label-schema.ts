@@ -33,7 +33,8 @@ export const LABEL_JSON_SCHEMA: JsonSchema = {
     typeImage: {
       type: 'string',
       enum: IMAGE_TYPES,
-      description: 'aliment-chien = aliment complet pour chien (croquettes, pâtée) ; aliment-chat ; friandise = friandise, biscuit, os à mâcher, aliment complémentaire ; autre = pas une étiquette d\'aliment pour animal',
+      description:
+        'aliment-chien = aliment complet pour chien (croquettes, pâtée, terrine) ; aliment-chat = aliment pour chat, complet ou non ; friandise = friandise, biscuit, snack, os ou bâton à mâcher, viande séchée, aliment complémentaire pour chien (la mention « aliment complémentaire » sur l\'étiquette suffit) ; autre = pas une étiquette d\'aliment pour animal',
     },
     lisibilite: { type: 'string', enum: LEGIBILITY, description: 'floue si le texte de l\'étiquette est flou, trop loin, coupé par un reflet ou trop petit pour être lu' },
     marque: { type: ['string', 'null'], description: 'Marque telle qu\'écrite' },
@@ -64,6 +65,17 @@ export const LABEL_JSON_SCHEMA: JsonSchema = {
       description: 'Additifs listés (technologiques, nutritionnels, sensoriels), un élément par additif avec son code E s\'il est écrit',
       items: { type: 'string' },
     },
+    energie: {
+      type: 'object',
+      description: 'Énergie (valeur énergétique, énergie métabolisable) recopiée dans le champ de son unité, null pour les unités absentes. Fréquente sur les friandises',
+      properties: {
+        kcalKg: nullableNumber('Énergie écrite en kcal/kg, sinon null'),
+        kcal100g: nullableNumber('Énergie écrite en kcal/100 g, sinon null'),
+        kcalPiece: nullableNumber('Énergie écrite pour une pièce, un biscuit ou un bâtonnet, en kcal, sinon null'),
+        poidsPieceG: nullableNumber('Poids d\'une pièce en grammes s\'il est écrit (ex. « 1 bâtonnet = 12 g »), sinon null'),
+      },
+      required: ['kcalKg', 'kcal100g', 'kcalPiece', 'poidsPieceG'],
+    },
     partAnimaleDeclaree: nullableNumber('Part totale d\'ingrédients d\'origine animale annoncée sur l\'emballage (ex. « 70 % de viande »), sinon null'),
     confiance: {
       type: 'object',
@@ -91,6 +103,7 @@ export const LABEL_JSON_SCHEMA: JsonSchema = {
     'constituants',
     'additifs',
     'partAnimaleDeclaree',
+    'energie',
     'confiance',
     'illisibles',
     'champsDouteux',
@@ -104,6 +117,7 @@ Règles :
 - Un ingrédient = un élément. Les sous-listes entre parenthèses restent dans le nom de l'ingrédient parent.
 - Les pourcentages sont des nombres (ex. 26 pour « 26 % », 0.9 pour « 0,9 % »).
 - Les constituants analytiques sont les valeurs « telles quelles » de l'étiquette, sans calcul.
+- L'énergie va dans le champ de l'unité écrite (kcal/kg, kcal/100 g ou par pièce), sans conversion. Une énergie écrite seulement en kJ vaut null.
 - Un champ absent des images vaut null (ou liste vide) et sa confiance vaut « absent ».
 - Un passage visible mais illisible va dans « illisibles » et la confiance du champ baisse.
 - Si les images ne montrent pas une étiquette d'aliment pour animal, estUneEtiquette vaut false et typeImage vaut autre.

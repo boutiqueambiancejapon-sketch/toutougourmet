@@ -2,7 +2,7 @@ import type { ScannerErrorCode } from '@/lib/scanner/types'
 import { AnalysisArt, IngredientsArt, WrongPhotoArt } from './illustrations'
 
 // @cdc lot 6 — réponse à une photo inutilisable, sans décompte : pas une étiquette (exemple de
-// la bonne photo), texte flou (conseils de prise de vue), aliment pour chat ou friandise
+// la bonne photo), texte flou (conseils de prise de vue), aliment pour chat
 // (explication, pas de note). Les autres erreurs affichent leur message seul.
 
 const BLUR_TIPS = [
@@ -12,7 +12,7 @@ const BLUR_TIPS = [
 ]
 
 export function ScanProblem({ code, message }: { code: ScannerErrorCode; message: string }) {
-  const tone = code === 'cat_food' || code === 'treat' || code === 'not_found' ? 'bg-blue-bg text-blue-ink' : 'bg-rose-bg text-rose-ink'
+  const tone = code === 'cat_food' || code === 'not_found' ? 'bg-blue-bg text-blue-ink' : 'bg-rose-bg text-rose-ink'
   return (
     <div role="alert" className={`flex flex-col gap-3 rounded-box p-3 text-[15px] leading-relaxed ${tone}`}>
       <p className="m-0">{message}</p>

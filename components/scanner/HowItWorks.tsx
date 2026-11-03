@@ -6,17 +6,17 @@ const STEPS = [
   {
     art: <BarcodeArt />,
     title: 'Le code-barres',
-    text: 'La caméra lit le code du sac. Produit déjà connu de notre base ou d\'Open Pet Food Facts : la note s\'affiche aussitôt, sans compte.',
+    text: 'La caméra lit le code du paquet. Produit déjà connu de notre base ou d\'Open Pet Food Facts : la note s\'affiche aussitôt, sans compte.',
   },
   {
     art: <IngredientsArt />,
     title: 'Les photos, si besoin',
-    text: 'Produit inconnu : photographie la composition et les constituants analytiques. Une IA recopie l\'étiquette, la photo est oubliée juste après.',
+    text: 'Produit inconnu : photographie la composition et les constituants analytiques (pour une friandise, la composition suffit). Une IA recopie l\'étiquette, la photo est oubliée juste après.',
   },
   {
     art: <ScoreArt />,
     title: 'La note sur 100',
-    text: 'Notre barème calcule la note à partir de 11 critères, explique chacun et liste ce qui manque sur l\'étiquette.',
+    text: 'Notre barème calcule la note sur 11 critères pour un aliment complet, 8 pour une friandise. Il explique chacun et liste ce qui manque sur l\'étiquette.',
   },
 ]
 
@@ -24,7 +24,7 @@ export function HowItWorks() {
   return (
     <section aria-labelledby="comment" className="flex flex-col gap-4">
       <h2 id="comment" className="m-0 font-display text-2xl font-black text-ink">
-        Comment scanner les croquettes de ton chien ?
+        Comment scanner les croquettes ou les friandises de ton chien ?
       </h2>
       <ol role="list" className="m-0 grid list-none gap-4 p-0 sm:grid-cols-3">
         {STEPS.map((s, i) => (

@@ -1,4 +1,4 @@
-import { animalKind, controversialPreservatives, hasColorant, hasSugar, isByProduct, isCereal, isUnnamedAnimal, unnamedAntioxidants } from './ingredients'
+import { animalKind, controversialPreservatives, hasColorant, hasSugar, isByProduct, isCereal, isUnnamedAnimal, speciesInDetailOnly, unnamedAntioxidants } from './ingredients'
 import type { ExtractedLabel } from './types'
 
 // @cdc lot 6 — NOTRE note sur 100 d'une étiquette de croquettes (l'IA lit, elle ne note pas).
@@ -6,7 +6,7 @@ import type { ExtractedLabel } from './types'
 // source sont décrits dans docs/v2/scanner-score.md : toute modification du barème change
 // SCORE_VERSION (les analyses en cache sont alors recalculées à la lecture).
 
-export const SCORE_VERSION = '1.1'
+export const SCORE_VERSION = '1.2'
 
 /** Humidité retenue pour des croquettes qui ne la déclarent pas (règlement UE 767/2009 : mention obligatoire au-delà de 14 %). */
 export const ASSUMED_DRY_MOISTURE = 10
@@ -25,6 +25,48 @@ export type CriterionId =
   | 'conservateurs'
   | 'colorants'
   | 'calcium-phosphore'
+  // Barème friandise (lib/scanner/score-treat.ts)
+  | 'friandise-premier-ingredient'
+  | 'friandise-part-animale'
+  | 'friandise-sucres'
+  | 'friandise-additifs'
+  | 'friandise-sel'
+  | 'friandise-liste'
+  | 'friandise-glycerine'
+  | 'friandise-cereales'
+
+/** complete : aliment complet (croquettes, pâtée) · treat : friandise, snack, aliment complémentaire */
+export type ProductKind = 'complete' | 'treat'
+
+export type TreatAlertId = 'xylitol' | 'raisin' | 'chocolat' | 'oignon-ail' | 'rawhide' | 'os-cuits'
+
+export interface TreatAlert {
+  id: TreatAlertId
+  /** Libellé court (« Xylitol ») */
+  label: string
+  /** Ingrédient de l'étiquette qui déclenche l'alerte */
+  found: string
+  text: string
+}
+
+export interface TreatAllowanceRow {
+  size: 'petit' | 'moyen' | 'grand'
+  label: string
+  weightKg: number
+  dailyKcal: number
+  /** 10 % du besoin du jour (FEDIAF) */
+  capKcal: number
+  /** Friandises par jour (null si le poids ou l'énergie d'une pièce manque) */
+  pieces: number | null
+  /** Grammes par jour (null si l'énergie au poids manque) */
+  grams: number | null
+}
+
+export interface TreatInfo {
+  /** null : calories non indiquées sur l'étiquette */
+  allowance: { kcalPiece: number | null; kcal100g: number | null; rows: TreatAllowanceRow[] } | null
+  alerts: TreatAlert[]
+}
 
 export interface Criterion {
   id: CriterionId
@@ -39,6 +81,8 @@ export type Band = 'tres-bon' | 'correct' | 'moyen' | 'faible'
 
 export interface ScoreResult {
   version: string
+  /** Absent des analyses enregistrées avant le barème friandise : aliment complet */
+  kind?: ProductKind
   score: number | null
   band: Band | null
   criteria: Criterion[]
@@ -49,7 +93,11 @@ export interface ScoreResult {
   /** Valeurs ramenées sur matière sèche, quand l'humidité est connue ou supposée */
   dryMatter: { proteines: number | null; matieresGrasses: number | null; glucides: number | null } | null
   notice: string | null
+  /** Friandise : nombre par jour selon le gabarit et alertes de sécurité */
+  treat?: TreatInfo
 }
+
+export const kindOf = (d: Pick<ScoreResult, 'kind'>): ProductKind => d.kind ?? 'complete'
 
 export const BAND_LABELS: Record<Band, string> = {
   'tres-bon': 'Très bonne composition',
@@ -176,6 +224,7 @@ export function scoreLabel(label: ExtractedLabel): ScoreResult {
   }
   return {
     version: SCORE_VERSION,
+    kind: 'complete',
     score,
     band: score === null ? null : bandFor(score),
     criteria,
@@ -210,7 +259,7 @@ function scoreIngredients(label: ExtractedLabel, add: Add, missing: string[]): v
   if (kind === 'nommee')
     add('premier-ingredient', 'Premier ingrédient', 15, 15, `« ${first.nom} » : une source animale dont l'espèce est nommée.${fresh ? ` Comptée fraîche, elle contient environ 70${P} d\'eau : une fois sèche, elle pèse bien moins.` : ''}`)
   else if (kind === 'non-nommee')
-    add('premier-ingredient', 'Premier ingrédient', 15, isByProduct(first.nom) ? 3 : 7, `« ${first.nom} » : origine animale, mais l'espèce n'est pas précisée.`)
+    add('premier-ingredient', 'Premier ingrédient', 15, isByProduct(first.nom) ? 3 : 7, `« ${first.nom} » : origine animale, mais l'espèce n'est pas précisée${speciesInDetailOnly(first.nom) ? ' (celle citée entre parenthèses n\'en désigne qu\'une partie)' : ''}.`)
   else add('premier-ingredient', 'Premier ingrédient', 15, 0, `« ${first.nom} » : l'ingrédient le plus lourd de la recette n'est pas une viande ni un poisson.`)
 
   const declared = ing.filter((i) => animalKind(i.nom) !== null && i.pourcentage !== null).reduce((s, i) => s + (i.pourcentage ?? 0), 0)
@@ -252,5 +301,5 @@ function scoreIngredients(label: ExtractedLabel, add: Add, missing: string[]): v
   else add('conservateurs', 'Conservateurs controversés', 5, 5, 'Ni BHA, ni BHT, ni éthoxyquine repérés.')
 
   const colorant = texts.find(hasColorant)
-  add('colorants', 'Colorants', 5, colorant ? 0 : 5, colorant ? `« ${colorant} » : la couleur des croquettes ne sert qu'au maître, pas au chien.` : 'Aucun colorant repéré.')
+  add('colorants', 'Colorants', 5, colorant ? 0 : 5, colorant ? `« ${colorant} » : la couleur de l'aliment ne sert qu'au maître, pas au chien.` : 'Aucun colorant repéré.')
 }

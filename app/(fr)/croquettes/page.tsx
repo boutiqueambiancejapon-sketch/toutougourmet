@@ -2,19 +2,23 @@
 // triées par note. Filtres marque et tranche de note en paramètres d'URL, rendus côté serveur.
 // noindex tant qu'il y a moins de RANKING_MIN_REVIEWED fiches relues ; pages filtrées en noindex
 // (canonique vers le classement complet). Listé par /croquettes/sitemap.xml quand indexable.
+// Onglet « Friandises et snacks » (?type=friandises) : barème friandise, liste séparée, noindex
+// tant que la décision d'indexer un classement de friandises n'est pas prise.
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
 import { RankingFilters } from '@/components/scanner/RankingFilters'
 import { RankingList } from '@/components/scanner/RankingList'
+import { RankingMethod, RankingTabs } from '@/components/scanner/RankingTabs'
 import { Pagination } from '@/components/scanner/Pagination'
-import { BRAND_MIN_REVIEWED, inBand, parseBand, parsePage, RANKING_MIN_REVIEWED, RANKING_PAGE_SIZE } from '@/lib/scanner/seo'
+import { BRAND_MIN_REVIEWED, inBand, parseBand, parseKind, parsePage, RANKING_MIN_REVIEWED, RANKING_PAGE_SIZE } from '@/lib/scanner/seo'
 import { groupByBrand, reviewedItemsSafe } from '@/lib/server/scanner-catalog'
 
-type SearchParams = Promise<{ marque?: string | string[]; note?: string | string[]; page?: string | string[] }>
+type SearchParams = Promise<{ marque?: string | string[]; note?: string | string[]; page?: string | string[]; type?: string | string[] }>
 
 const URL = 'https://www.toutou-gourmet.com/croquettes'
 const TITLE = 'Croquettes pour chien notées sur 100'
+const TREAT_TITLE = 'Friandises pour chien notées sur 100'
 const DESCRIPTION =
   'Classement des croquettes pour chien relues par la rédaction et notées sur 100 : protéines, glucides, viande nommée et additifs, selon un barème publié.'
 
@@ -22,13 +26,13 @@ const first = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v
 
 export async function generateMetadata({ searchParams }: { searchParams: SearchParams }): Promise<Metadata> {
   const sp = await searchParams
-  const items = await reviewedItemsSafe()
+  const items = await reviewedItemsSafe('complete')
   const page = parsePage(sp.page)
-  const filtered = first(sp.marque) !== '' || parseBand(sp.note) !== null
+  const filtered = first(sp.marque) !== '' || parseBand(sp.note) !== null || parseKind(sp.type) === 'treat'
   const indexable = items.length >= RANKING_MIN_REVIEWED && !filtered
   const canonical = page > 1 && !filtered ? `${URL}?page=${page}` : URL
   return {
-    title: { absolute: page > 1 && !filtered ? `${TITLE}, page ${page}` : `${TITLE} | Toutou Gourmet` },
+    title: { absolute: parseKind(sp.type) === 'treat' ? `${TREAT_TITLE} | Toutou Gourmet` : page > 1 && !filtered ? `${TITLE}, page ${page}` : `${TITLE} | Toutou Gourmet` },
     description: DESCRIPTION,
     alternates: { canonical },
     openGraph: { title: TITLE, description: DESCRIPTION, url: canonical, type: 'website' },
@@ -38,7 +42,11 @@ export async function generateMetadata({ searchParams }: { searchParams: SearchP
 
 export default async function CroquettesRankingPage({ searchParams }: { searchParams: SearchParams }) {
   const sp = await searchParams
-  const all = await reviewedItemsSafe()
+  const kind = parseKind(sp.type)
+  const every = await reviewedItemsSafe()
+  const all = every.filter((it) => it.kind === kind)
+  const counts = { complete: every.length - every.filter((it) => it.kind === 'treat').length, treat: every.filter((it) => it.kind === 'treat').length }
+  const treat = kind === 'treat'
   const brands = groupByBrand(all)
   const brand = first(sp.marque)
   const band = parseBand(sp.note)
@@ -53,14 +61,17 @@ export default async function CroquettesRankingPage({ searchParams }: { searchPa
       <div className="flex flex-col gap-4">
         <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Scanner', href: '/scanner' }, { label: 'Croquettes notées' }]} />
         <header className="flex flex-col gap-2">
-          <h1 className="m-0 font-display text-[clamp(2rem,5vw,2.75rem)] font-black leading-[1.05] tracking-tight text-ink">{TITLE}</h1>
+          <h1 className="m-0 font-display text-[clamp(2rem,5vw,2.75rem)] font-black leading-[1.05] tracking-tight text-ink">{treat ? TREAT_TITLE : TITLE}</h1>
           <p className="m-0 text-base leading-relaxed text-ink-2 md:text-lg">
-            {enough
-              ? `${all.length} croquettes pour chien relues par la rédaction et notées sur 100 avec le barème du scanner : protéines et glucides sur matière sèche, premier ingrédient, part de viande déclarée, additifs.`
-              : 'Le classement se remplit au fil des fiches relues par la rédaction. Chaque note vient du barème publié du scanner, appliqué à l\'étiquette vérifiée.'}
+            {treat
+              ? 'Friandises, snacks et os à mâcher relus par la rédaction, notés sur 100 avec le barème friandise : viande nommée en premier, part de viande, sucre, sel, additifs. Ces notes ne se comparent pas à celles des croquettes.'
+              : enough
+                ? `${all.length} croquettes pour chien relues par la rédaction et notées sur 100 avec le barème du scanner : protéines et glucides sur matière sèche, premier ingrédient, part de viande déclarée, additifs.`
+                : 'Le classement se remplit au fil des fiches relues par la rédaction. Chaque note vient du barème publié du scanner, appliqué à l\'étiquette vérifiée.'}
           </p>
         </header>
       </div>
+      <RankingTabs current={kind} counts={counts} />
 
       {!enough ? (
         <section aria-labelledby="bientot" className="flex flex-col gap-3 rounded-card border-2 border-ink bg-paper p-5">
@@ -72,7 +83,7 @@ export default async function CroquettesRankingPage({ searchParams }: { searchPa
           </p>
           <p className="m-0">
             <Link href="/scanner" className="font-semibold text-orange-ink underline underline-offset-2">
-              Scanner un sac de croquettes
+              {treat ? 'Scanner un paquet de friandises' : 'Scanner un sac de croquettes'}
             </Link>
           </p>
         </section>
@@ -81,19 +92,19 @@ export default async function CroquettesRankingPage({ searchParams }: { searchPa
       {all.length > 0 ? (
         <section aria-labelledby="classement" className="flex flex-col gap-4">
           <h2 id="classement" className="m-0 font-display text-2xl font-black text-ink">
-            Quelles croquettes ont la meilleure composition ?
+            {treat ? 'Quelles friandises ont la meilleure recette ?' : 'Quelles croquettes ont la meilleure composition ?'}
           </h2>
-          <RankingFilters brands={brands.map((b) => ({ slug: b.slug, name: b.name }))} brand={brand} band={band} />
+          <RankingFilters brands={brands.map((b) => ({ slug: b.slug, name: b.name }))} brand={brand} band={band} type={treat ? 'friandises' : ''} />
           {list.length > 0 ? (
             <RankingList items={list.slice(offset, offset + RANKING_PAGE_SIZE)} start={offset + 1} />
           ) : (
             <p className="m-0 text-[15px] text-ink-2">Aucune fiche relue ne correspond à ces filtres.</p>
           )}
-          <Pagination page={page} pages={pages} params={{ marque: brand, note: band ?? '' }} base="/croquettes" />
+          <Pagination page={page} pages={pages} params={{ type: treat ? 'friandises' : '', marque: brand, note: band ?? '' }} base="/croquettes" />
         </section>
       ) : null}
 
-      {brands.some((b) => b.items.length >= BRAND_MIN_REVIEWED) ? (
+      {!treat && brands.some((b) => b.items.length >= BRAND_MIN_REVIEWED) ? (
         <section aria-labelledby="marques" className="flex flex-col gap-3">
           <h2 id="marques" className="m-0 font-display text-2xl font-black text-ink">
             Quelle note pour chaque marque de croquettes ?
@@ -113,20 +124,7 @@ export default async function CroquettesRankingPage({ searchParams }: { searchPa
         </section>
       ) : null}
 
-      <section aria-labelledby="methode-classement" className="flex flex-col gap-2">
-        <h2 id="methode-classement" className="m-0 font-display text-2xl font-black text-ink">
-          Comment les croquettes sont-elles notées ?
-        </h2>
-        <p className="m-0 text-[15px] leading-relaxed text-ink-2">
-          Une IA ou la base ouverte Open Pet Food Facts fournit l&apos;étiquette, la rédaction la vérifie, puis le barème calcule la
-          note sur 11 critères. Le même barème s&apos;applique à toutes les marques, partenaires compris. Il est détaillé, sources
-          comprises, sur la{' '}
-          <Link href="/scanner#methode" className="font-semibold text-orange-ink underline underline-offset-2">
-            page du scanner de croquettes
-          </Link>
-          .
-        </p>
-      </section>
+      <RankingMethod treat={treat} />
     </div>
   )
 }

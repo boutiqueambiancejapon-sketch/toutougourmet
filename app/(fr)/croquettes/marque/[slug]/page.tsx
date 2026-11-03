@@ -20,7 +20,7 @@ export function generateStaticParams(): { slug: string }[] {
 }
 
 async function load(slug: string) {
-  return groupByBrand(await reviewedItemsSafe()).find((b) => b.slug === slug) ?? null
+  return groupByBrand(await reviewedItemsSafe('complete')).find((b) => b.slug === slug) ?? null
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {

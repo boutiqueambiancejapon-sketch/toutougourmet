@@ -1,5 +1,6 @@
 import { parseIngredientText } from './ingredient-text'
-import { scoreLabel } from './score'
+import { analyseLabel } from './analyse'
+import { WET_MOISTURE } from './food-noun'
 import { CONFIDENCE_FIELDS, type AnalyticalKey, type ExtractedLabel, type ImageType } from './types'
 
 // @cdc lot 6 — conversion d'une fiche Open Pet Food Facts (API v2, licence ODbL) vers le format
@@ -33,6 +34,12 @@ const NUTRIMENTS: Record<AnalyticalKey, string[]> = {
   phosphore: ['phosphorus'],
 }
 
+/** Énergie de la fiche en kcal pour 100 g (friandises surtout), si elle est plausible. */
+function energyKcal100g(n: OpffProduct['nutriments']): number | null {
+  const v = Number(n?.['energy-kcal_100g'])
+  return Number.isFinite(v) && v >= 20 && v <= 900 ? Math.round(v * 10) / 10 : null
+}
+
 function nutriment(n: OpffProduct['nutriments'], key: AnalyticalKey): number | null {
   if (!n) return null
   for (const name of NUTRIMENTS[key]) {
@@ -44,11 +51,48 @@ function nutriment(n: OpffProduct['nutriments'], key: AnalyticalKey): number | n
   return null
 }
 
-export function opffImageType(tags: string[] = []): ImageType {
+// Friandises, snacks, os à mâcher, aliments complémentaires : barème friandise
+const TREAT_TAG = /treat|friandise|biscuit|snack|chew|os-a-macher|complementar|complementaire/
+const TREAT_NAME = /(friandises?|treats?|snacks?|biscuits?|os[- ]a[- ]macher|chews?|batonnets?|sticks?|dental|rawhide|complementary|complementaire)/i
+const COMPLETE_NAME = /croquettes?|kibble|complet/i
+const CAT_TAG = /cat-(food|treats?|snacks?)|(aliments?|friandises?)-pour-chats?|:chats?\b/
+const DOG_TAG = /dog-(food|treats?|snacks?)/
+
+/** Sans accents, pour comparer les noms saisis dans la base. */
+export const stripAccents = (s: string) => s.normalize('NFD').replace(/\p{M}/gu, '')
+
+/** Nom du produit tel que le lit opffImageType. */
+export const opffName = (p: Pick<OpffProduct, 'product_name' | 'product_name_fr'>) => [p.product_name_fr, p.product_name].filter(Boolean).join(' ')
+
+/**
+ * Seule détection du type d'une fiche Open Pet Food Facts, pour le scan par code-barres comme
+ * pour l'import : aliment pour chat (refusé), friandise (barème friandise) ou aliment complet.
+ * Catégories d'abord ; à défaut, le nom (« Friandises au poulet » rangé en simple dog-food).
+ */
+export function opffImageType(tags: string[] = [], name = ''): ImageType {
   const t = tags.join(' ')
-  if (/cat-food|aliments?-pour-chats?|:chats?\b/.test(t) && !/dog-food/.test(t)) return 'aliment-chat'
-  if (/treat|friandise|biscuit|snack|chew|os-a-macher|complementary/.test(t)) return 'friandise'
-  return 'aliment-chien'
+  if (CAT_TAG.test(t) && !DOG_TAG.test(t)) return 'aliment-chat'
+  if (TREAT_TAG.test(t)) return 'friandise'
+  const n = stripAccents(name)
+  return TREAT_NAME.test(n) && !COMPLETE_NAME.test(n) ? 'friandise' : 'aliment-chien'
+}
+
+// Pâtée : catégories ou nom « wet », « pâtée », « boîte », « terrine », « mousse »… (sans accents)
+const WET_WORDS = /\b(wet|humide|patees?|pate|terrines?|mousses?|boites?|conserves?|gelee|en sauce|loaf|canned|tins?|chunks|bouchees|eminces|effiloches)\b/i
+const DRY_WORDS = /\b(dry|croquettes?|kibbles?|seche?s?|trocken|secco)\b/i
+
+/**
+ * Sec, humide ou inconnu : l'humidité déclarée d'abord (≥ 60 % : pâtée, ≤ 14 % : croquettes),
+ * puis les catégories, puis le nom. Sans indice : « inconnu » (la note le traite comme un sec).
+ */
+export function opffFoodType(tags: string[] = [], name: string, moisture: number | null): ExtractedLabel['typeAliment'] {
+  if (moisture !== null && moisture >= WET_MOISTURE) return 'humide'
+  if (moisture !== null && moisture <= 14) return 'sec'
+  for (const text of [stripAccents(tags.join(' ')), stripAccents(name)]) {
+    if (WET_WORDS.test(text)) return 'humide'
+    if (DRY_WORDS.test(text)) return 'sec'
+  }
+  return 'inconnu'
 }
 
 const firstBrand = (b?: string) => b?.split(',')[0]?.trim() || null
@@ -59,8 +103,12 @@ export type OpffVerdict =
   /** Données partielles : on passe aux photos en préremplissant la marque et le produit. */
   | { kind: 'incomplete'; brand: string | null; product: string | null; type: ImageType }
 
-export function opffToLabel(p: OpffProduct, ean: string): OpffVerdict {
-  const type = opffImageType(p.categories_tags)
+/** Pourquoi une fiche ne peut pas être notée sans photo (compteurs de scripts/opff-import.ts). */
+export type OpffUnusableReason = 'pas-aliment-chien' | 'composition' | 'constituants' | 'valeurs-implausibles' | 'note-impossible'
+
+/** Conversion seule, sans juger si la fiche est exploitable. */
+export function opffLabel(p: OpffProduct, ean: string): ExtractedLabel {
+  const type = opffImageType(p.categories_tags, opffName(p))
   const brand = clean(firstBrand(p.brands) ?? undefined)
   const product = clean(p.product_name_fr || p.product_name)
   const text = p.ingredients_text_fr || p.ingredients_text || ''
@@ -72,7 +120,7 @@ export function opffToLabel(p: OpffProduct, ean: string): OpffVerdict {
   }
   const constituants = Object.fromEntries((Object.keys(NUTRIMENTS) as AnalyticalKey[]).map((k) => [k, nutriment(p.nutriments, k)])) as ExtractedLabel['constituants']
   const has = (v: unknown) => (v === null || (Array.isArray(v) && v.length === 0) ? 'absent' : 'haute')
-  const label: ExtractedLabel = {
+  return {
     estUneEtiquette: true,
     typeImage: type,
     lisibilite: 'nette',
@@ -80,27 +128,44 @@ export function opffToLabel(p: OpffProduct, ean: string): OpffVerdict {
     produit: product,
     ean,
     espece: type === 'aliment-chat' ? 'chat' : 'chien',
-    typeAliment: /wet|humide|pate|terrine/.test((p.categories_tags ?? []).join(' ')) ? 'humide' : 'sec',
+    typeAliment: opffFoodType(p.categories_tags, opffName(p), constituants.humidite),
     ingredients: parsed.ingredients,
     constituants,
     additifs: additifs.slice(0, 60),
     partAnimaleDeclaree: null,
+    energie: { kcalKg: null, kcal100g: energyKcal100g(p.nutriments), kcalPiece: null, poidsPieceG: null },
     confiance: Object.fromEntries(
       CONFIDENCE_FIELDS.map((k) => [k, has(k === 'marque' ? brand : k === 'produit' ? product : k === 'ean' ? ean : k === 'ingredients' ? parsed.ingredients : k === 'additifs' ? additifs : constituants.proteines)]),
     ) as ExtractedLabel['confiance'],
     illisibles: [],
     champsDouteux: [],
   }
-  // Exploitable : ingrédients ET protéines ET matières grasses plausibles, et notre barème arrive
-  // à noter. Des valeurs hors de toute croquette (ex. 2 % de protéines, saisie erronée dans la
-  // base) renvoient aux photos plutôt que de produire une note fausse.
-  const c = constituants
+}
+
+/**
+ * Exploitable : null, sinon la raison. Aliment complet : ingrédients ET protéines ET matières
+ * grasses plausibles, et notre barème arrive à noter. Des valeurs hors de toute croquette (ex. 2 %
+ * de protéines, saisie erronée dans la base) renvoient aux photos plutôt que de produire une note
+ * fausse. Friandise : son barème ne lit que la composition (et l'énergie, si elle est donnée).
+ */
+export function opffUnusableReason(label: ExtractedLabel): OpffUnusableReason | null {
+  if (label.typeImage === 'friandise') {
+    if (label.ingredients.length < 1) return 'composition'
+    return analyseLabel(label).score === null ? 'note-impossible' : null
+  }
+  if (label.typeImage !== 'aliment-chien') return 'pas-aliment-chien'
+  if (label.ingredients.length < 3) return 'composition'
+  const c = label.constituants
+  if (c.proteines === null || c.matieresGrasses === null) return 'constituants'
   const sum = (c.proteines ?? 0) + (c.matieresGrasses ?? 0) + (c.cellulose ?? 0) + (c.cendres ?? 0) + (c.humidite ?? 0)
   const plausible =
-    c.proteines !== null &&
-    c.matieresGrasses !== null &&
     sum <= 100 &&
     (label.typeAliment === 'humide' ? c.proteines >= 3 : c.proteines >= 12 && c.proteines <= 70 && c.matieresGrasses >= 3 && c.matieresGrasses <= 45)
-  const usable = type === 'aliment-chien' && label.ingredients.length >= 3 && plausible && scoreLabel(label).score !== null
-  return usable ? { kind: 'complete', label } : { kind: 'incomplete', brand, product, type }
+  if (!plausible) return 'valeurs-implausibles'
+  return analyseLabel(label).score === null ? 'note-impossible' : null
+}
+
+export function opffToLabel(p: OpffProduct, ean: string): OpffVerdict {
+  const label = opffLabel(p, ean)
+  return opffUnusableReason(label) === null ? { kind: 'complete', label } : { kind: 'incomplete', brand: label.marque, product: label.produit, type: label.typeImage }
 }

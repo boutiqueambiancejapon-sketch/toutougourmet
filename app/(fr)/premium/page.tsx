@@ -14,7 +14,7 @@ const URL = 'https://www.toutou-gourmet.com/premium'
 
 export const metadata: Metadata = {
   title: { absolute: `Toutou Gourmet Premium, gratuit pendant le lancement` },
-  description: `Sans compte, compte gratuit ou Premium : ${PREMIUM_MONTHLY_SCANS} analyses de croquettes par mois, courbe de poids avec alertes, historique complet des scans. Premium à 0 € pendant le lancement, sans carte bancaire.`,
+  description: `Sans compte, compte gratuit ou Premium : ${PREMIUM_MONTHLY_SCANS} analyses d'étiquettes par mois, courbe de poids avec alertes, historique complet des scans. Premium à 0 € pendant le lancement, sans carte bancaire.`,
   alternates: { canonical: URL },
   openGraph: {
     title: 'Toutou Gourmet Premium, gratuit pendant le lancement',

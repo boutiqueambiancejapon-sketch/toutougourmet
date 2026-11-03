@@ -15,6 +15,7 @@ Internet ── 80/443 ──► Caddy (service système, HTTPS automatique)
                                                         └─ PostgreSQL local, base « toutou »
 cron (utilisateur toutou) ──► backup-db.sh chaque nuit à 3 h 15
 toutou-alerts.timer ──► alertes ntfy toutes les 10 min · toutou-weekly.timer ──► résumé du lundi (non installés)
+toutou-opff-import.timer ──► copie Open Pet Food Facts, dimanche 1 h 10 (non installé)
 ```
 
 ## Dossiers
@@ -111,6 +112,38 @@ sudo -u toutou env DATABASE_URL='postgresql:///toutou?host=/var/run/postgresql' 
 
 Base de développement : `toutou_accounts_dev` (rôle `administrator`), jamais `toutou`.
 
+## Copie Open Pet Food Facts (préparée, non installée)
+
+Chaque dimanche à 1 h 10 (heure de Paris, hors de la plage 02:30-05:00 de la tâche de nuit, de la sauvegarde et de la purge), `scripts/opff-import.ts` télécharge l'export officiel `https://static.openpetfoodfacts.org/data/openpetfoodfacts-products.jsonl.gz` (19 Mo compressé, 165 Mo décompressé, mis à jour chaque nuit par Open Pet Food Facts), le lit ligne à ligne, garde les aliments pour chien dans `app.opff_product` et pré-note avec le barème les fiches complètes (`food_analysis`, `source = 'openpetfoodfacts'`, `scan_count = 0`). Seules les fiches dont le contenu a changé sont retraitées ; si l'export n'a pas changé depuis le dernier import réussi (`Last-Modified`), rien n'est relu. Le fichier téléchargé est supprimé à la fin. Mesuré en dev le 2026-11-03 : 16 s, 250 Mo de mémoire au plus.
+
+Migration `db/migrations/0005_opff_import.sql` (tables `app.opff_product`, `app.opff_import_run`, et source `openfoodfacts` acceptée dans `food_analysis`) : même commande `npx drizzle-kit migrate`, à passer avant de servir ce code (sans elle, le scan par code-barres saute simplement la copie locale).
+
+| Variable | Valeur |
+| --- | --- |
+| `OPFF_INDEX_POLICY` | facultatif, `off` par défaut : seules les fiches relues sont indexées. `complete` : les fiches Open Pet Food Facts non relues qui ont marque, nom, composition et 5 constituants sur 7 deviennent indexables et entrent dans le sitemap, le classement et les pages marque. |
+| `OPFF_EXPORT_URL` | facultatif, adresse de l'export (défaut ci-dessus). |
+| `OFF_DISABLED` | facultatif, `1` coupe le dernier recours Open Food Facts du scan par code-barres. |
+| `OFF_API_URL` | facultatif, défaut `https://world.openfoodfacts.org/api/v2/product`. |
+
+Ordre du scan par code-barres : fiche déjà notée (`food_analysis`) → copie locale → API Open Pet Food Facts → API Open Food Facts (seulement un aliment pour animaux). Le serveur doit pouvoir joindre `static.openpetfoodfacts.org` et `world.openfoodfacts.org` en HTTPS.
+
+```bash
+cd /srv/toutou/current
+# Essai sans écriture sur 2 000 lignes, puis import complet à la main
+sudo -u toutou bash -c 'set -a; . /srv/toutou/shared/.env; set +a; nice -n 15 node_modules/.bin/tsx scripts/opff-import.ts --dry --limit=2000'
+sudo -u toutou bash -c 'set -a; . /srv/toutou/shared/.env; set +a; nice -n 15 node_modules/.bin/tsx scripts/opff-import.ts'
+# Installation de la minuterie
+systemd-analyze calendar "Sun *-*-* 01:10:00 Europe/Paris"   # Next elapse : dimanche 00:10 UTC en hiver
+sudo cp deploy/toutou-opff-import.service deploy/toutou-opff-import.timer /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now toutou-opff-import.timer
+journalctl -u toutou-opff-import -n 60 --no-pager    # compteurs du dernier passage
+```
+
+Autres options : `--file=/chemin.jsonl.gz` (export déjà téléchargé, gardé), `--all` (retraite aussi les fiches inchangées), `--force` (relit un export inchangé). Suivi : tableau de bord, onglet Contenu, « Copie Open Pet Food Facts » ; alerte ntfy si le dernier passage a échoué, est bloqué depuis 2 heures, ou si aucun passage n'a réussi depuis 8 jours. Le service tourne durci comme les alertes, avec `Nice=10`, entrées-sorties en priorité basse et `MemoryMax=700M`.
+
+Arrêt : `sudo systemctl disable --now toutou-opff-import.timer`. Les données restent en base ; `TRUNCATE app.opff_product` vide la copie (les fiches déjà créées restent).
+
 ## Lettre et e-mails de la newsletter
 
 Code : `lib/emails/` (gabarits, fonctions pures), `lib/server/newsletter.ts` et `lib/server/brevo-newsletter.ts` (appels Brevo), aperçus dans le tableau de bord (`/tableau-de-bord/emails/bienvenue` et `/tableau-de-bord/emails/lettre`). Tests des gabarits : `npx tsx scripts/test-emails.ts`.
@@ -202,6 +235,7 @@ Variables (déjà dans `/srv/toutou/shared/.env`) : `NTFY_SERVER` (https://ntfy.
 - Disque libre sous 10 %, mémoire disponible sous 10 %, charge sur 15 minutes au-dessus de 150 % des cœurs.
 - Sauvegarde absente ou plus vieille que 36 heures (`/srv/toutou/backups`).
 - Nouveau signalement d'erreur non traité sur une fiche croquette (`app.scan_report`) depuis le passage précédent.
+- Import Open Pet Food Facts en échec, bloqué depuis 2 heures, ou sans passage réussi depuis 8 jours (une fois la migration 0005 appliquée).
 
 Une notification par incident, puis une autre quand il est réglé ; plusieurs changements dans le même passage partent dans un seul message. L'état tient dans `ALERTS_STATE_FILE`. Les messages ne contiennent aucune donnée personnelle et ouvrent le tableau de bord au toucher. Si ntfy refuse l'envoi, l'état n'est pas mis à jour : le passage suivant renvoie le même message.
 

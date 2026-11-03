@@ -3,6 +3,7 @@ import type { Period } from '@/lib/dashboard/period'
 import type { Pair } from '@/lib/dashboard/compare'
 import { checkNight } from './alerts/checks'
 import { getServerHealth } from './dashboard-health'
+import { AWAITING_REVIEW_SQL } from './scanner-published'
 
 // @cdc tableau de bord — données de l'accueil, choisies pour être légères : une requête pour les
 // cinq chiffres (période + période d'avant), une pour l'histogramme des clics, trois comptes
@@ -90,7 +91,7 @@ export async function getTodoCounts(pool: Pool): Promise<TodoCounts> {
       })
   const [messages, toReview, reports] = await Promise.all([
     one('SELECT count(*)::int AS n FROM analytics.contact_messages WHERE NOT handled'),
-    one('SELECT count(*)::int AS n FROM app.food_analysis WHERE NOT reviewed'),
+    one(`SELECT count(*)::int AS n FROM app.food_analysis WHERE ${AWAITING_REVIEW_SQL}`),
     one('SELECT count(*)::int AS n FROM app.scan_report WHERE handled_at IS NULL'),
   ])
   return { messages, toReview, reports }

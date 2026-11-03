@@ -1,23 +1,36 @@
 import { BAND_LABELS, type ScoreResult } from '@/lib/scanner/score'
 import { ScoreBadge } from './ScoreBadge'
+import { KindTag } from './treat/KindTag'
+import { TreatAlerts } from './treat/TreatAlerts'
+import { TreatAllowance } from './treat/TreatAllowance'
 
 // @cdc lot 6 — note sur 100 et détail critère par critère, avec ce qui manque sur l'étiquette.
 // Sans état : rendu serveur (fiche, exemple de /scanner) ou dans le résultat du scanner.
+// Friandise : pastille « Friandise », alertes de sécurité (sauf si la page les montre déjà en
+// tête : alerts={false}) et nombre de friandises par jour sous le détail.
 
-export function ScoreDetail({ details, headingLevel = 'h3' }: { details: ScoreResult; headingLevel?: 'h2' | 'h3' }) {
+interface ScoreDetailProps {
+  details: ScoreResult
+  headingLevel?: 'h2' | 'h3'
+  alerts?: boolean
+}
+
+export function ScoreDetail({ details, headingLevel = 'h3', alerts = true }: ScoreDetailProps) {
   const H = headingLevel
   const { score, band } = details
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-4">
         <ScoreBadge score={score} size="lg" />
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col items-start gap-1">
           <p className="m-0 font-display text-2xl font-black leading-tight text-ink">
             {score === null ? 'Pas de note' : `${score}/100`}
           </p>
           <p className="m-0 text-[15px] text-ink-2">{band ? BAND_LABELS[band] : details.notice}</p>
+          <KindTag details={details} />
         </div>
       </div>
+      {alerts && details.treat ? <TreatAlerts alerts={details.treat.alerts} /> : null}
       {details.missing.length > 0 ? (
         <p className="m-0 rounded-box bg-amber-bg p-3 text-[15px] leading-relaxed text-amber-ink">
           {`Absent de l'étiquette ou illisible : ${details.missing.join(', ')}.`}
@@ -45,6 +58,7 @@ export function ScoreDetail({ details, headingLevel = 'h3' }: { details: ScoreRe
           ))}
         </ul>
       </section>
+      {details.treat ? <TreatAllowance allowance={details.treat.allowance} headingLevel={H} /> : null}
     </div>
   )
 }

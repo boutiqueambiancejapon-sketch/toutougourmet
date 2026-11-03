@@ -8,7 +8,7 @@ const CRITERIA: [string, number, string][] = [
   ['Protéines sur matière sèche', 20, '0 sous 18 % (minimum FEDIAF et AAFCO pour un adulte), 20 à partir de 36 %'],
   ['Matières grasses sur matière sèche', 10, '0 sous 5,5 %, maximum entre 10 et 22 %'],
   ['Glucides estimés sur matière sèche', 15, 'maximum jusqu\'à 30 %, 2 points au-delà de 50 %'],
-  ['Premier ingrédient', 15, '15 pour une viande ou un poisson d\'espèce nommée, 7 si l\'espèce n\'est pas précisée, 3 pour des sous-produits'],
+  ['Premier ingrédient', 15, '15 pour une viande ou un poisson d\'espèce nommée, 7 si l\'espèce n\'est pas précisée, 3 pour des sous-produits (« viandes et sous-produits animaux (dont poulet) » en reste un)'],
   ['Part de viande ou poisson déclarée', 10, 'selon les pourcentages écrits, 0 si aucun'],
   ['Ingrédients animaux non nommés', 10, '0 si « viandes et sous-produits animaux » ou une catégorie de ce type apparaît, 5 pour un ingrédient animal sans espèce (« graisses animales »), 3 pour deux ou plus'],
   ['Céréales en tête', 5, '0 si une céréale est le premier ingrédient, 3 en deuxième ou troisième position, 1 si deux céréales ou plus figurent parmi les 5 premiers ingrédients'],

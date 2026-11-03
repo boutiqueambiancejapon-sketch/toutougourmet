@@ -16,7 +16,7 @@ import { handleReport, removeFiche, saveFiche } from '../actions'
 export const dynamic = 'force-dynamic'
 
 const dateFmt = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'long', timeStyle: 'short', timeZone: 'Europe/Paris' })
-const SOURCE = { photo: 'photos lues par l\'IA', openpetfoodfacts: 'Open Pet Food Facts' } as const
+const SOURCE = { photo: 'photos lues par l\'IA', openpetfoodfacts: 'Open Pet Food Facts', openfoodfacts: 'Open Food Facts' } as const
 
 export default async function FicheReviewPage({ params }: { params: Promise<{ id: string }> }) {
   if (!(await dashboardAllowed()) || !getDb()) notFound()
@@ -35,7 +35,7 @@ export default async function FicheReviewPage({ params }: { params: Promise<{ id
       <header className="flex flex-col gap-1">
         <h1 className="font-display text-3xl font-black text-ink">{[row.brand, row.product].filter(Boolean).join(' · ') || 'Fiche sans nom'}</h1>
         <p className="text-sm text-ink-2">
-          {`${row.reviewed ? 'Relue, indexable' : 'Non relue, noindex'} · source : ${SOURCE[row.source]} · ${row.model} · créée le ${dateFmt.format(row.createdAt)}`}
+          {`${row.discarded ? 'Écartée, jamais indexée' : row.reviewed ? 'Relue, indexable' : 'Non relue, noindex'} · source : ${SOURCE[row.source]} · ${row.model} · créée le ${dateFmt.format(row.createdAt)}`}
           {row.ean ? ` · EAN ${row.ean}` : ''}
           {` · ${row.scanCount} consultation${row.scanCount > 1 ? 's' : ''} · `}
           <Link href={`/croquettes/${row.slug}`} className="underline underline-offset-2">
