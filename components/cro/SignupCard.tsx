@@ -78,7 +78,7 @@ export function SignupCard({ place, title, text, cta, ctaShort, Icon, checks, re
         )}
       </Link>
       {reassurance ? (
-        <p className="m-0 text-center text-[13px] text-ink-2">Gratuit, sans carte bancaire. Suppression en un clic.</p>
+        <p className="m-0 text-center text-[13px] text-ink-2">Gratuit, sans carte bancaire. Compte supprimable à tout moment.</p>
       ) : null}
     </aside>
   )
