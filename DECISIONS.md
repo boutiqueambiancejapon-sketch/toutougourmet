@@ -169,3 +169,8 @@ Mise à jour approuvée par le propriétaire pour fermer les avis de sécurité 
 ## 2026-11-03 — Classement des friandises à son adresse propre (branche `feat/scanner-seo`)
 - Le classement des friandises quitte l'onglet `/croquettes?type=friandises` (noindex) pour `/croquettes/friandises`, indexable dès 5 fiches publiées, dans `/sitemaps/croquettes.xml`. Raison : la requête « meilleures friandises chien » est une intention distincte des croquettes, et les premiers résultats n'offrent aucun classement fondé sur la composition (comparatifs éditoriaux, fiches de boutiques). Sous `/croquettes/` plutôt qu'une nouvelle racine : les fiches friandise y vivent déjà (`/croquettes/{slug}`), même sitemap, même fil d'Ariane. L'ancienne adresse redirige (308) en gardant les filtres.
 - Textes des classements neutres vis-à-vis d'`OPFF_INDEX_POLICY` : « fiche publiée » et règle affichée selon la politique en vigueur, plus « relue par la rédaction » quand ce n'est pas vrai.
+
+## 2026-11-03 — Remises partenaires : une seule table
+- `data/partner-discounts.ts` (`CONFIRMED_DISCOUNTS`) est la seule source des remises affichées : fiches marque (`data/brands.ts` en dérive), offres du compte (`lib/account-offers.ts` la réexporte), boutons `BrandCTA` des articles (la remise du partenaire remplace celle écrite dans `offer`), outils, encarts du milieu et bandeaux collants. Franklin : « −30 % en abonnement » (ni « permanent », ni « première commande »).
+- Les MDX gardent du texte écrit à la main, aligné sur la table et en typographie française (« −30 % », « 1re »).
+- Carte des conversions appliquée : plus de bloc lettre seul (articles, accueil, `/blog`), plus de ligne e-mail sous un outil qui a sa carte compte, plus d'e-mail au résultat du quiz.

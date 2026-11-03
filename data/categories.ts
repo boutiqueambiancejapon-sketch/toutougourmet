@@ -11,7 +11,7 @@ export const categories: Category[] = [
   {
     slug: 'peut-manger',
     label: 'Que peut manger un chien ?',
-    description: 'Fruits, légumes, viandes, féculents — tous les aliments autorisés et interdits pour ton chien, expliqués clairement avec les quantités et précautions.',
+    description: 'Fruits, légumes, viandes, féculents : les aliments autorisés et interdits pour ton chien, avec la quantité à donner et les précautions.',
     emoji: '🥕',
     subCategorySlugs: ['fruit', 'legumes', 'feculents', 'viandes'],
   },
