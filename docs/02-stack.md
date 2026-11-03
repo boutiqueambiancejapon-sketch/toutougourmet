@@ -28,7 +28,7 @@
 | Animations | framer-motion | 12.35.0 | wrappers décoratifs |
 | Analytics | @vercel/analytics | 1.6.1 | — |
 | Analytics | Plausible | script externe | plausible.io/js/script.js |
-| Sitemap | next-sitemap | 4.2.3 | postbuild |
+| Sitemap | route handlers maison (`lib/sitemaps`) | — | à la demande, revalidés 1 h (next-sitemap encore en dépendance, plus appelé) |
 | Forms | react-hook-form | 7.71.2 | — |
 | Validation | zod | 4.3.6 | — |
 | UI | @radix-ui/react-accordion | 1.2.12 | — |

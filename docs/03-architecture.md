@@ -19,7 +19,7 @@ app/
   (fr)/...            ← toutes les pages françaises (le groupe n'apparaît pas dans l'URL)
   (en)/layout.tsx     ← <html lang="en">, noindex jusqu'au lot 8
   (en)/en/page.tsx    ← /en
-  api/, sitemap.ts, icon.svg ← hors langues
+  api/, sitemap.xml/, sitemaps/, robots.ts, icon.svg ← hors langues
 ```
 
 - Textes d'interface partagés : `lib/i18n/dictionaries.ts` ; configuration : `lib/i18n/config.ts`

@@ -167,7 +167,7 @@ Le contenu vient du site : verdicts et notes du frontmatter des articles (`verdi
 Régénérer le PDF après une modification de contenu (article, recette, numéro) : construire le site, le lancer, puis une commande.
 
 ```bash
-nice npm run build                                  # puis restaurer public/sitemap*.xml si on ne veut pas les committer
+nice npm run build
 npx next start -p 3098 &                            # un port libre
 GUIDE_BASE_URL=http://127.0.0.1:3098 npm run guide:pdf
 # option : --shots /tmp/guide pour une capture PNG de chaque page

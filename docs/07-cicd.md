@@ -60,7 +60,6 @@ jobs:
 |--------|---------|-----------|
 | dev | ✓ | — |
 | build | ✓ | — |
-| postbuild | ✓ (next-sitemap) | — |
 | start | ✓ | — |
 | lint | ✓ | — |
 | type-check | ✗ | `tsc --noEmit` |

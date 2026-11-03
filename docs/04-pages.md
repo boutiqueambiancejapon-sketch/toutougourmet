@@ -19,7 +19,7 @@ app/
 ├── layout.tsx                              ← RACINE : fonts, html lang="fr", body, Header, Footer, Analytics
 ├── globals.css
 ├── not-found.tsx                           ← 404
-├── sitemap.ts                              ← Sitemap dynamique
+├── sitemap.xml/ + sitemaps/[type]/        ← Index et sitemaps par type (docs/06-seo.md)
 ├── page.tsx                                ← Home (SSG)
 │
 ├── a-propos/
