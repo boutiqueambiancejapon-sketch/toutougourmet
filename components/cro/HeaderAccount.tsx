@@ -24,7 +24,7 @@ function SignedIn() {
       <span aria-hidden="true" className="grid size-9 place-items-center rounded-pill bg-amber font-display text-base font-black text-ink">
         {initial || <IconPaw className="size-5" />}
       </span>
-      Mon chien
+      <span className="hidden min-[360px]:inline">Mon chien</span>
     </Link>
   )
 }
