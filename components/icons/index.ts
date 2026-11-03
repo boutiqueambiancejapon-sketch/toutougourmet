@@ -6,4 +6,4 @@ export {
   IconCoins, IconBars, IconCake, IconScan,
 } from './line-icons'
 export { CategoryIcon, VerdictIcon, type VerdictKind } from './semantic'
-export { IconGear, IconTag, IconMail, IconLock, IconDownload, IconLogout, IconTrash, IconPlus, IconMinus, IconShare } from './app-icons'
+export { IconGear, IconTag, IconMail, IconLock, IconDownload, IconLogout, IconTrash, IconPlus, IconMinus, IconShare, IconPhone, IconClipboard } from './app-icons'

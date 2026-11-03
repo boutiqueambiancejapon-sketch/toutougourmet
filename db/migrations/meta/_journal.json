@@ -36,6 +36,13 @@
       "when": 1793649693025,
       "tag": "0004_premium_membership",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1793706628665,
+      "tag": "0005_sitter_sheet",
+      "breakpoints": true
     }
   ]
 }

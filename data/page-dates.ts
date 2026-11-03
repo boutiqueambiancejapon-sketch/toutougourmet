@@ -18,6 +18,7 @@ export const PAGE_DATES: Record<string, string> = {
   '/outils/bien-nourri': '2026-11-02',
   '/outils/budget': '2026-11-02',
   '/outils/cout': '2026-11-03',
+  '/outils/fiche-de-garde': '2026-11-03',
   '/outils/poids': '2026-11-02',
   '/outils/ration': '2026-11-03',
   '/a-propos': '2026-11-02',
