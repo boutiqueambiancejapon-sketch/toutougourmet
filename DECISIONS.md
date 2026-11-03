@@ -177,3 +177,15 @@ Mise à jour approuvée par le propriétaire pour fermer les avis de sécurité 
 - Les comptes passés Premium gratuitement pendant le lancement **passent au payant** (prévenus par e-mail avant la fin de la gratuité).
 - L'entreprise est **assujettie à la TVA belge** : siège en Belgique, Stripe Tax avec enregistrement Belgique ; ventes aux particuliers des autres pays de l'UE (France surtout) au taux belge jusqu'à 10 000 € par an de ventes transfrontalières, puis TVA du pays du client via le guichet OSS. Régime et code de taxe à confirmer avec le comptable.
 - Plan technique : `docs/v2/stripe-plan.md`.
+
+## 2026-11-03 — Premium payant : choix d'intégration (branche `feat/stripe-premium`)
+
+- **Source `launch-free` gardée** pour le Premium du lancement (au lieu de la renommer `launch`) : la contrainte de la table l'accepte déjà, aucune ligne de production à réécrire. Nouvelle source `stripe`.
+- **Fin de la gratuité** par `PREMIUM_LAUNCH_ENDS_AT` (date ISO dans l'environnement, pas en base) : un compte du lancement garde Premium jusque-là. L'activation gratuite disparaît dès que le paiement est configuré.
+- **Abonnement d'un compte du lancement avant la fin** : `trial_end` Stripe à `PREMIUM_LAUNCH_ENDS_AT`, premier prélèvement à la fin de la gratuité (pas de double période payée).
+- **`past_due` donne encore accès** pendant les relances de Stripe ; à la fin des relances, Stripe résilie (réglage Dashboard) et l'accès s'arrête.
+- **Renonciation au droit de rétractation** : case côté site, obligatoire (navigateur et serveur), date enregistrée (`withdrawal_waiver_at`, métadonnées de l'abonnement), rappel dans le texte du bouton de Checkout. Pas de `consent_collection` Stripe (exigerait une URL de CGV réglée dans le Dashboard avant tout test).
+- **Annuel affiché honnêtement** : « 58 % moins cher, soit 2,50 € par mois, 41,89 € de moins que 12 mois au tarif mensuel », calculé dans `lib/premium/pricing.ts`. Pas de « 2 mois offerts » (l'économie réelle approche 7 mois).
+- **CSP `form-action`** étendue à `https://checkout.stripe.com https://billing.stripe.com` : Chrome applique `form-action` à la redirection d'une action serveur vers une page hébergée par Stripe.
+- **Suppression d'un compte abonné** : abonnement résilié immédiatement (sans prorata) avant l'effacement ; si Stripe ne répond pas, l'effacement continue et une alerte ntfy demande de résilier à la main.
+- **`/premium` régénérée chaque heure** (`revalidate = 3600`) : l'offre suit les variables d'environnement sans reconstruction.

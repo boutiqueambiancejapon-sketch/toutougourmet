@@ -42,6 +42,7 @@ const LEGAL = [
   { href: '/contact', label: 'Contact' },
   { href: '/mentions-legales', label: 'Mentions légales' },
   { href: '/politique-de-confidentialite', label: 'Politique de confidentialité' },
+  { href: '/conditions-generales-de-vente', label: 'Conditions générales de vente' },
 ]
 
 // Category pill colours aligned with blog-categories.ts

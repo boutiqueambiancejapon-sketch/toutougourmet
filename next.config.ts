@@ -136,10 +136,12 @@ const nextConfig: NextConfig = {
           // @cdc sécurité (audit 2026-11) — 'unsafe-eval' retiré (ni Next en production, ni gtag.js
           // n'en ont besoin) ; 'wasm-unsafe-eval' garde le lecteur zxing (.wasm) du scanner.
           // 'unsafe-inline' reste : scripts en ligne de Next sans nonce (pages statiques).
+          // @cdc premium — form-action : les actions de paiement redirigent vers les pages hébergées
+          // de Stripe (Checkout, portail client) ; Chrome applique form-action à cette redirection.
           {
             key: 'Content-Security-Policy',
             value:
-              "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self';",
+              "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com; frame-src 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://checkout.stripe.com https://billing.stripe.com;",
           },
         ],
       },

@@ -6,6 +6,7 @@ const LINKS = [
   { href: '/tableau-de-bord/emails/bienvenue', title: 'E-mail de bienvenue', note: 'Envoyé une fois après chaque inscription à la lettre.' },
   { href: '/tableau-de-bord/emails/lettre', title: 'Lettre mensuelle', note: 'Prochaine lettre, envois programmés et annulation.' },
   { href: '/tableau-de-bord/emails/hebdo', title: 'Résumé hebdomadaire', note: 'Chiffres de la semaine, envoyés au propriétaire chaque lundi à 8 h 40.' },
+  { href: '/tableau-de-bord/emails/premium-lancement', title: 'Fin du Premium gratuit', note: 'Prévenance des comptes Premium du lancement. Préparé, pas envoyé.' },
 ] as const
 
 export function EmailLinks() {

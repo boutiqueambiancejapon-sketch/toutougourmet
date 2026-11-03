@@ -3,6 +3,7 @@ import { getAllArticles } from '@/lib/mdx'
 import { getRecentMessages, type StoredMessage } from './contact'
 import { EMPTY_CONVERSIONS, getConversions, type ConversionsData } from './dashboard-conversions'
 import { EMPTY_GEO, getGeo, type GeoData } from './dashboard-geo'
+import { EMPTY_PREMIUM, getPremium, type PremiumData } from './dashboard-premium'
 import { getAi, getAudience, getPartners, EMPTY_AUDIENCE, EMPTY_PARTNERS, type AiData, type AudienceData, type PartnerData } from './dashboard-queries'
 import { safeRead } from './dashboard-safe'
 import { EMPTY_SIGNUPS, getSignups, type SignupsData } from './dashboard-signups'
@@ -37,17 +38,19 @@ export interface ConversionsTabData {
   conversions: ConversionsData
   partners: PartnerData
   signups: SignupsData
+  premium: PremiumData
 }
 
 export async function loadConversionsTab(period: Period): Promise<Loaded<ConversionsTabData>> {
-  const [conversions, partners, signups] = await Promise.all([
+  const [conversions, partners, signups, premium] = await Promise.all([
     safeRead('conversions', EMPTY_CONVERSIONS, (pool) => getConversions(pool, period)),
     safeRead('partenaires', EMPTY_PARTNERS, (pool) => getPartners(pool, period)),
     safeRead('inscriptions', EMPTY_SIGNUPS, (pool) => getSignups(pool, period)),
+    safeRead('premium', EMPTY_PREMIUM, (pool) => getPremium(pool, period)),
   ])
   return {
-    data: { conversions: conversions.value, partners: partners.value, signups: signups.value },
-    ok: conversions.ok && partners.ok && signups.ok,
+    data: { conversions: conversions.value, partners: partners.value, signups: signups.value, premium: premium.value },
+    ok: conversions.ok && partners.ok && signups.ok && premium.ok,
   }
 }
 

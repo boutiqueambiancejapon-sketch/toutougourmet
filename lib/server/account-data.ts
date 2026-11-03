@@ -1,8 +1,9 @@
 import { asc, eq, inArray } from 'drizzle-orm'
-import { foodAnalysis, membership, scanHistory, scanReport, session, sitterSheet, user, weightLog } from '@/db/schema'
+import { foodAnalysis, scanHistory, scanReport, session, sitterSheet, user, weightLog } from '@/db/schema'
 import type { SheetData } from '@/lib/garde/sheet'
 import { listDogs } from './dogs'
 import { getDb } from './drizzle'
+import { getMembership } from './membership'
 
 // @cdc lot 4 — RGPD : export des données d'un compte (portabilité) et garde-fou de la suppression.
 // Inclut l'historique du scanner (scan_history, scan_report), la formule (membership) et les fiches de garde (sitter_sheet). L'export ne contient jamais le mot de passe haché (app.account) ni les jetons de session.
@@ -33,8 +34,14 @@ export interface AccountExport {
   /** Scanner d'étiquette (lot 6) : analyses lancées et signalements d'erreur */
   scans: { date: string; fromCache: boolean; product: { slug: string; brand: string | null; product: string | null; ean: string | null; score: number | null } }[]
   scanReports: { date: string; productSlug: string; message: string }[]
-  /** Formule du compte (Premium gratuit pendant le lancement) ; null : jamais activée */
-  membership: { plan: string; source: string; activatedAt: string | null; createdAt: string } | null
+  /** Formule du compte (Premium du lancement ou abonnement Stripe) ; null : jamais activée */
+  membership: {
+    plan: string
+    source: string
+    activatedAt: string | null
+    createdAt: string
+    subscription: { status: string | null; interval: string | null; currentPeriodEnd: string | null; cancelAtPeriodEnd: boolean; withdrawalWaiverAt: string | null } | null
+  } | null
   /** Fiches de garde : contenu, dates et lien privé (le jeton fait partie des données du compte) */
   sitterSheets: { dogId: string; startsOn: string; endsOn: string; createdAt: string; expiresAt: string; link: string; content: SheetData }[]
 }
@@ -75,7 +82,7 @@ export async function exportAccountData(userId: string): Promise<AccountExport |
     .innerJoin(foodAnalysis, eq(foodAnalysis.id, scanReport.foodAnalysisId))
     .where(eq(scanReport.userId, userId))
     .orderBy(asc(scanReport.createdAt))
-  const [plan] = await db.select().from(membership).where(eq(membership.userId, userId)).limit(1)
+  const plan = await getMembership(userId)
   const sheets = await db.select().from(sitterSheet).where(eq(sitterSheet.userId, userId)).orderBy(asc(sitterSheet.createdAt))
   return {
     format: 'toutou-gourmet-compte',
@@ -113,7 +120,21 @@ export async function exportAccountData(userId: string): Promise<AccountExport |
     })),
     scanReports: reports.map((r) => ({ date: r.at.toISOString(), productSlug: r.slug, message: r.message })),
     membership: plan
-      ? { plan: plan.plan, source: plan.source, activatedAt: plan.activatedAt?.toISOString() ?? null, createdAt: plan.createdAt.toISOString() }
+      ? {
+          plan: plan.plan,
+          source: plan.source,
+          activatedAt: plan.activatedAt?.toISOString() ?? null,
+          createdAt: plan.createdAt.toISOString(),
+          subscription: plan.stripeCustomerId
+            ? {
+                status: plan.status,
+                interval: plan.billingInterval,
+                currentPeriodEnd: plan.currentPeriodEnd?.toISOString() ?? null,
+                cancelAtPeriodEnd: plan.cancelAtPeriodEnd,
+                withdrawalWaiverAt: plan.withdrawalWaiverAt?.toISOString() ?? null,
+              }
+            : null,
+        }
       : null,
     sitterSheets: sheets.map((s) => ({
       dogId: s.dogId,

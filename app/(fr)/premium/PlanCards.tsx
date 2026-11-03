@@ -1,9 +1,12 @@
 import { IconCheck, IconSparkle } from '@/components/icons'
 import { PlanCta, type PlanId } from '@/components/compte/PremiumCta'
+import { formatEuros, PRICE_CENTS } from '@/lib/premium/pricing'
 import { FREE_MONTHLY_SCANS, PREMIUM_MONTHLY_SCANS } from '@/lib/scanner/config'
+import type { PremiumMode } from '@/lib/server/membership'
 
-// @cdc premium — cartes des trois formules de /premium (rendu serveur). Premium est gratuit pendant
-// le lancement : on affiche 0 €, jamais un prix futur. Sur téléphone, Premium passe en premier.
+// @cdc premium — cartes des trois formules de /premium (rendu serveur). Offre du lancement : 0 €,
+// sans carte. Paiement en service ou bientôt : prix mensuel TTC, l'annuel en dessous (section
+// #tarifs pour le détail). Sur téléphone, Premium passe en premier.
 
 interface Plan {
   id: PlanId
@@ -14,7 +17,27 @@ interface Plan {
   features: string[]
 }
 
-const PLANS: Plan[] = [
+const PREMIUM_FEATURES = [
+  `${PREMIUM_MONTHLY_SCANS} analyses d'étiquette par photo par mois`,
+  'Une alerte si son poids varie de plus de 5\u00a0% en moins de deux mois',
+  'Toutes tes analyses gardées',
+]
+
+function premiumPlan(mode: PremiumMode): Plan {
+  if (mode === 'launch') {
+    return { id: 'premium', name: 'Premium', price: '0\u00a0€', priceNote: 'pendant le lancement', pitch: 'Sans carte bancaire. Tout le compte gratuit, plus\u00a0:', features: PREMIUM_FEATURES }
+  }
+  return {
+    id: 'premium',
+    name: 'Premium',
+    price: formatEuros(PRICE_CENTS.month),
+    priceNote: 'par mois, TTC',
+    pitch: `Ou ${formatEuros(PRICE_CENTS.year)} par an. Sans engagement. Tout le compte gratuit, plus\u00a0:`,
+    features: PREMIUM_FEATURES,
+  }
+}
+
+const BASE_PLANS: Plan[] = [
   {
     id: 'none',
     name: 'Sans compte',
@@ -37,21 +60,9 @@ const PLANS: Plan[] = [
       'Offres partenaires choisies selon son profil',
     ],
   },
-  {
-    id: 'premium',
-    name: 'Premium',
-    price: '0\u00a0€',
-    priceNote: 'pendant le lancement',
-    pitch: 'Sans carte bancaire. Tout le compte gratuit, plus\u00a0:',
-    features: [
-      `${PREMIUM_MONTHLY_SCANS} analyses d'étiquette par photo par mois`,
-      'Une alerte si son poids varie de plus de 5\u00a0% en moins de deux mois',
-      'Toutes tes analyses gardées',
-    ],
-  },
 ]
 
-function PlanCard({ plan }: { plan: Plan }) {
+function PlanCard({ plan, mode }: { plan: Plan; mode: PremiumMode }) {
   const premium = plan.id === 'premium'
   return (
     <article
@@ -85,22 +96,23 @@ function PlanCard({ plan }: { plan: Plan }) {
         ))}
       </ul>
       <div className="mt-auto pt-2">
-        <PlanCta plan={plan.id} />
+        <PlanCta plan={plan.id} mode={mode} />
       </div>
     </article>
   )
 }
 
-export function PlanCards() {
+export function PlanCards({ mode }: { mode: PremiumMode }) {
+  const plans = [...BASE_PLANS, premiumPlan(mode)]
   return (
     <section aria-labelledby="formules" className="flex flex-col gap-4">
       <h2 id="formules" className="sr-only">
         Les trois formules
       </h2>
       <ul role="list" className="m-0 grid list-none grid-cols-1 gap-4 p-0 lg:grid-cols-3">
-        {PLANS.map((p) => (
+        {plans.map((p) => (
           <li key={p.id} className={`m-0 ${p.id === 'premium' ? 'order-first lg:order-none' : ''}`}>
-            <PlanCard plan={p} />
+            <PlanCard plan={p} mode={mode} />
           </li>
         ))}
       </ul>

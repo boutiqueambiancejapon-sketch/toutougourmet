@@ -6,18 +6,18 @@ import { Panel } from '@/components/compte/espace/Panel'
 import { PasswordLinkButton } from '@/components/compte/espace/PasswordLinkButton'
 import { btnDanger, btnOutline, linkInline } from '@/components/compte/espace/ui'
 import { PremiumPanel } from '@/components/compte/PremiumPanel'
+import { PaymentNotice } from '@/components/compte/premium/PaymentNotice'
 import { SignOutButton } from '@/components/compte/SignOutButton'
 import { IconDownload, IconTrash } from '@/components/icons'
 import { getSessionUser } from '@/lib/server/auth'
-import { getMembership, premiumMissing } from '@/lib/server/membership'
+import { getPremiumState, premiumMissing, premiumMode } from '@/lib/server/membership'
 
 export const metadata: Metadata = { title: 'Réglages du compte' }
 
-export default async function SettingsPage() {
+export default async function SettingsPage({ searchParams }: { searchParams: Promise<{ paiement?: string | string[] }> }) {
   const user = await getSessionUser()
   if (!user) redirect('/compte/connexion?retour=/compte/reglages')
-  const [membership, missing] = await Promise.all([getMembership(user.id), premiumMissing(user.id)])
-  const premium = membership?.plan === 'premium'
+  const [premiumState, missing, { paiement }] = await Promise.all([getPremiumState(user.id), premiumMissing(user.id), searchParams])
   return (
     <>
       <PageHeading title="Réglages" />
@@ -44,7 +44,8 @@ export default async function SettingsPage() {
         <p className="m-0 text-base leading-relaxed text-ink-2">On t&apos;envoie un lien pour choisir un nouveau mot de passe.</p>
         <PasswordLinkButton email={user.email} />
       </Panel>
-      <PremiumPanel premium={premium} activatedAt={membership?.activatedAt ?? null} missing={missing} />
+      <PaymentNotice code={Array.isArray(paiement) ? paiement[0] : paiement} />
+      <PremiumPanel state={premiumState} mode={premiumMode()} missing={missing} />
       <Panel id="mes-donnees" title="Mes données">
         <p className="m-0 text-base leading-relaxed text-ink-2">
           Un fichier JSON avec tout ce que contient ton compte : profil, chiens, pesées et analyses d&apos;étiquettes.
@@ -60,7 +61,7 @@ export default async function SettingsPage() {
       </Panel>
       <Panel id="zone-sensible" title="Supprimer le compte" tone="danger">
         <p className="m-0 text-base leading-relaxed text-ink-2">
-          Tout part tout de suite et pour de bon : chiens, pesées, analyses, formule Premium. Le mot de passe est demandé à l&apos;étape suivante.
+          Tout part tout de suite et pour de bon : chiens, pesées, analyses, formule Premium. Un abonnement en cours est résilié, sans autre prélèvement. Le mot de passe est demandé à l&apos;étape suivante.
         </p>
         <Link href="/compte/supprimer" className={`${btnDanger} self-start`}>
           <IconTrash className="size-5" />

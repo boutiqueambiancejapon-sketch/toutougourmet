@@ -24,10 +24,17 @@ export const ANALYTICS_EVENTS = [
 ] as const
 
 /**
- * Écrits par le serveur seulement (lib/server/signup-source.ts), jamais acceptés de /api/e :
- * un visiteur ne peut pas gonfler les comptes créés ou confirmés.
+ * Écrits par le serveur seulement (lib/server/signup-source.ts, lib/server/premium-events.ts),
+ * jamais acceptés de /api/e : un visiteur ne peut pas gonfler les comptes créés ou confirmés,
+ * ni les paiements Premium.
  */
-export const SERVER_EVENTS = ['Account Created', 'Account Verified'] as const
+export const SERVER_EVENTS = [
+  'Account Created',
+  'Account Verified',
+  'Premium Checkout Started',
+  'Premium Subscribed',
+  'Premium Canceled',
+] as const
 
 export type ServerEvent = (typeof SERVER_EVENTS)[number]
 

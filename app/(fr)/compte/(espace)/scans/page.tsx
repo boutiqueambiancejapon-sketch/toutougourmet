@@ -8,7 +8,7 @@ import { btnPrimary, linkInline } from '@/components/compte/espace/ui'
 import { ScanHistoryList } from '@/components/compte/ScanHistoryList'
 import { IconScan } from '@/components/icons'
 import { getSessionUser } from '@/lib/server/auth'
-import { getMembership } from '@/lib/server/membership'
+import { getPremiumState } from '@/lib/server/membership'
 import { listUserScans, usedThisMonth } from '@/lib/server/scanner'
 import { monthlyScanLimit } from '@/lib/scanner/config'
 
@@ -21,8 +21,7 @@ export const metadata: Metadata = { title: 'Mes scans' }
 export default async function ScansPage() {
   const user = await getSessionUser()
   if (!user) redirect('/compte/connexion?retour=/compte/scans')
-  const [membership, used] = await Promise.all([getMembership(user.id), usedThisMonth(user.id)])
-  const premium = membership?.plan === 'premium'
+  const [{ active: premium }, used] = await Promise.all([getPremiumState(user.id), usedThisMonth(user.id)])
   const limit = monthlyScanLimit(premium ? 'premium' : 'free')
   const scans = await listUserScans(user.id, premium ? PREMIUM_HISTORY : FREE_HISTORY)
   return (

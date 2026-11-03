@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
+import { CookiesSection } from './CookiesSection'
+import { PaymentSection } from './PaymentSection'
 
 export const metadata: Metadata = {
   title: 'Politique de confidentialité',
@@ -45,6 +47,7 @@ export default function PolitiqueConfidentialitePage() {
               <li>Ton adresse email si tu t&apos;inscris à la newsletter, avec double opt-in obligatoire</li>
               <li>Ton prénom, ton adresse email et ton message si tu nous écris par le formulaire de contact</li>
               <li>Ton prénom, ton adresse email, ton mot de passe haché et les profils de tes chiens si tu ouvres un compte</li>
+              <li>L&apos;état de ton abonnement si tu passes à Premium (le paiement lui-même est traité par Stripe)</li>
               <li>Des statistiques de visite anonymes, mesurées sur nos propres serveurs (sans cookie)</li>
             </ul>
           </Section>
@@ -113,6 +116,8 @@ export default function PolitiqueConfidentialitePage() {
             </p>
           </Section>
 
+          <PaymentSection />
+
           <Section title="Newsletter">
             <p className="mb-2">
               Si tu t&apos;inscris à notre newsletter, ton email est uniquement utilisé pour t&apos;envoyer nos
@@ -134,20 +139,7 @@ export default function PolitiqueConfidentialitePage() {
             </p>
           </Section>
 
-          <Section title="Cookies" id="cookies">
-            <p>
-              Si tu acceptes la mesure d&apos;audience, Google Analytics dépose les cookies <code>_ga</code> et
-              <code>_ga_*</code>, conservés 13 mois au plus. Si tu refuses, aucun cookie de mesure n&apos;est
-              déposé et le site fonctionne de la même façon. Ton choix est gardé 6 mois dans ton navigateur ;
-              tu peux le changer à tout moment avec le lien « Gérer les cookies » en bas de chaque page.
-              Aucun cookie publicitaire n&apos;est utilisé.
-            </p>
-            <p>
-              Le compte utilise deux cookies, seulement si tu te connectes : un cookie de session, illisible
-              par les scripts de la page, et un témoin qui indique au site qu&apos;un compte est ouvert, sans
-              aucune donnée personnelle. Ils disparaissent quand tu te déconnectes.
-            </p>
-          </Section>
+          <CookiesSection />
         </div>
       </div>
     </div>

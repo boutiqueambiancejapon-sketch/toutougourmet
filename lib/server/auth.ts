@@ -9,6 +9,7 @@ import { SESSION_HINT_COOKIE } from '@/lib/account-hint'
 import { isDisposableEmail } from './disposable-email'
 import { getDb, type Db } from './drizzle'
 import { clientIp, overLimit } from './rate-window'
+import { cancelSubscriptionBeforeDelete } from './billing-account'
 import { accountDeletedEmail, resetPasswordEmail, verificationEmail } from './auth-emails'
 import { sendTransactionalEmail } from './mailer'
 import { recordSignup, recordVerified } from './signup-source'
@@ -62,6 +63,8 @@ function createAuth(db: Db) {
       // les pesées et l'historique du scanner partent avec l'utilisateur (ON DELETE CASCADE).
       deleteUser: {
         enabled: true,
+        // @cdc premium — abonnement Stripe résilié avant l'effacement (lib/server/billing-account.ts).
+        beforeDelete: async (deleted) => cancelSubscriptionBeforeDelete(deleted.id),
         afterDelete: async (deleted) => send(accountDeletedEmail(deleted.email, deleted.name)),
       },
     },

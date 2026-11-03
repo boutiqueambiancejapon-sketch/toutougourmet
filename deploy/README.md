@@ -269,3 +269,60 @@ journalctl -u toutou-alerts -n 50 --no-pager      # ce qu'a vu le dernier passag
 Les deux services tournent durcis (`NoNewPrivileges`, `ProtectSystem=strict`, `ProtectHome`, `PrivateTmp`) ; seul `/srv/toutou/shared` est accessible en écriture, pour le fichier d'état. Tant que le site tourne depuis la préversion, adapter `User=` et `WorkingDirectory=` comme dans `toutou-ingest.service`.
 
 Arrêt : `sudo systemctl disable --now toutou-alerts.timer toutou-weekly.timer`.
+
+## Premium payant (Stripe, préparé en mode test)
+
+Code : `lib/server/stripe.ts` (client), `app/(fr)/compte/premium-actions.ts` (Checkout et portail), `app/api/stripe/webhook/route.ts` + `lib/server/stripe-webhook.ts` (webhook), `lib/premium/access.ts` (règle d'accès). Plan et suivi : `docs/v2/stripe-plan.md`.
+
+Sans les quatre variables Stripe, le paiement reste fermé : `/premium` affiche les prix et « Paiement en ligne bientôt disponible », aucun bouton de paiement, aucune erreur. Tant que `PREMIUM_LAUNCH_ENDS_AT` n'est pas passée, l'activation gratuite du lancement reste proposée ; elle disparaît dès que le paiement est configuré.
+
+### Variables (`/srv/toutou/shared/.env`, jamais dans git)
+
+| Variable | Valeur |
+| --- | --- |
+| `STRIPE_SECRET_KEY` | Clé **restreinte** `rk_test_…` (puis `rk_live_…`). Droits en écriture : Customers, Checkout Sessions, Customer portal, Subscriptions ; en lecture : Prices, Products, Charges, Invoices, Tax Settings et Registrations, Tax Codes. Droits en écriture sur Products et Prices seulement le temps de `scripts/stripe-setup.ts` |
+| `STRIPE_WEBHOOK_SECRET` | `whsec_…` de l'endpoint (ou celui affiché par `stripe listen` en local) |
+| `STRIPE_PRICE_MONTHLY` / `STRIPE_PRICE_YEARLY` | `price_…` affichés par `scripts/stripe-setup.ts` |
+| `PREMIUM_LAUNCH_ENDS_AT` | Fin du Premium gratuit du lancement, date ISO (`2027-02-01` ou `2027-01-31T23:59:59+01:00`). Vide : gratuité sans fin |
+
+`/premium` se régénère chaque heure : une variable ajoutée y apparaît dans l'heure (ou tout de suite avec `FORCE=1 deploy.sh`). Les pages du compte et les actions lisent les variables à chaque requête.
+
+### Mise en route en mode test
+
+1. Migration `0009_stripe_premium` (colonnes Stripe sur `app.membership`, table `app.stripe_event`) : `sudo /usr/local/sbin/toutou-migrate`. Sans elle, le paiement reste fermé et le webhook répond 503.
+2. Catalogue (idempotent, relançable) :
+   ```bash
+   set -a; . ~/.config/toutou/stripe.env; set +a
+   node_modules/.bin/tsx scripts/stripe-setup.ts
+   ```
+   Il crée ou retrouve le Product `toutou_gourmet_premium` et ses deux Prices (599 et 2999 centimes, EUR, `tax_behavior: inclusive`), affiche les `price_…`, liste des codes de taxe candidats (aucun n'est posé), puis l'état de Stripe Tax. Code choisi avec le comptable : `… scripts/stripe-setup.ts --tax-code=txcd_…`.
+3. Dashboard › Settings › Billing › **Customer portal** : activer la mise à jour du moyen de paiement, l'historique des factures et la résiliation **à la fin de la période** ; pas de changement de formule pour l'instant.
+4. Dashboard › Settings › Billing › **Subscriptions and emails** : relances des paiements échoués (Smart Retries), puis à la fin des relances « résilier l'abonnement » ; e-mails de reçu et **rappel avant renouvellement** pour l'annuel (promis par les CGV).
+5. Dashboard › Settings › Payment methods : moyens de paiement proposés par Checkout (le code ne fixe jamais `payment_method_types`).
+6. Webhook en local :
+   ```bash
+   stripe listen --forward-to localhost:3080/api/stripe/webhook \
+     --events checkout.session.completed,checkout.session.async_payment_succeeded,customer.subscription.created,customer.subscription.updated,customer.subscription.deleted,invoice.paid,invoice.payment_failed,charge.refunded,charge.dispute.created,radar.early_fraud_warning.created
+   ```
+   Le `whsec_…` affiché va dans `STRIPE_WEBHOOK_SECRET` du serveur de test. Renouvellements et échecs : horloges de test (Dashboard › Billing › Test clocks).
+7. Webhook du serveur : Dashboard › Developers › Webhooks › Add endpoint, URL `https://www.toutou-gourmet.com/api/stripe/webhook`, version d'API `2026-10-28.endive`, exactement ces 10 événements : `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `customer.subscription.created`, `customer.subscription.updated`, `customer.subscription.deleted`, `invoice.paid`, `invoice.payment_failed`, `charge.refunded`, `charge.dispute.created`, `radar.early_fraud_warning.created`.
+
+Alertes ntfy (`NTFY_TOPIC`, déjà présent) : litige, alerte de fraude précoce, deuxième échec de paiement d'une facture, résiliation impossible lors d'une suppression de compte. Journal : `journalctl -u toutou-web | grep '\[stripe\]'` (identifiants Stripe et types d'événements seulement, jamais de clé).
+
+### Stripe Tax (TVA belge)
+
+Le code active `automatic_tax` sur chaque Checkout, prix TTC. **Sans enregistrement actif, Stripe ne collecte aucune TVA, sans erreur.** Rien n'est créé par le code ni par le script :
+
+1. Dashboard › Tax › Settings : adresse du siège en Belgique (sans elle, le statut reste `pending` et rien n'est calculé) ; code de taxe par défaut et comportement « inclusive ».
+2. Dashboard › Tax › Locations › Add registration : Belgique, avec le numéro de TVA. Le régime pour les particuliers des autres pays de l'UE (TVA belge sous 10 000 € par an de ventes transfrontalières, puis guichet OSS) se décide avec le comptable : Stripe surveille les seuils (Tax › Locations › Needs attention), il n'enregistre rien tout seul.
+3. Settings › Business › Public details : nom, adresse et numéro de TVA (repris sur les factures).
+4. Vérification : un calcul de taxe test avec une adresse belge puis française doit donner un `taxability_reason` autre que `not_collecting`.
+
+### Passage en live
+
+Avant : CGV complétées (`[À compléter]` de `/conditions-generales-de-vente` : entreprise, BCE, TVA, médiateur), enregistrement fiscal live, portail et e-mails réglés en live, e-mail de fin du lancement relu (`/tableau-de-bord/emails/premium-lancement`, préparé, non envoyé).
+
+1. Clé restreinte live (`rk_live_…`), mêmes droits ; `scripts/stripe-setup.ts --live` pour le catalogue live ; nouveaux `price_…`.
+2. Endpoint webhook live avec les 10 événements ; nouveau `whsec_…`.
+3. Remplacer les quatre variables, `FORCE=1 deploy.sh`, un paiement réel de 5,99 € puis remboursement depuis le Dashboard.
+4. Checklist « Go live » de Stripe : https://docs.stripe.com/get-started/checklist/go-live

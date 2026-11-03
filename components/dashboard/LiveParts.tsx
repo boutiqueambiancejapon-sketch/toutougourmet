@@ -20,6 +20,9 @@ const LABELS: Record<string, string> = {
   'Account Invite Click': 'Invitation compte cliquée',
   'Account Created': 'Compte créé (serveur)',
   'Account Verified': 'E-mail confirmé',
+  'Premium Checkout Started': 'Paiement Premium commencé',
+  'Premium Subscribed': 'Abonnement Premium',
+  'Premium Canceled': 'Fin d’abonnement Premium',
   'Guide Signup': 'Inscription au guide',
   'Guide Download': 'Guide téléchargé',
 }

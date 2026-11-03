@@ -54,3 +54,25 @@ Premium devient un abonnement payant : **un produit « Toutou Gourmet Premium »
 4. Stripe Tax configuré et vérifié par un calcul test.
 5. CGV et pages légales.
 6. Passage en live : clé restreinte live, webhook live, prix live, checklist « Go live » de Stripe.
+
+## Fait (2026-11-03, branche `feat/stripe-premium`, PR vers `v2`, mode test, sans clé)
+
+- Dépendance `stripe` 23.1 ; client unique `lib/server/stripe.ts` (`apiVersion: '2026-10-28.endive'`) ; paiement fermé sans les quatre variables (`stripeConfig()` → null).
+- Migration `0009_stripe_premium` : colonnes `stripe_customer_id`, `stripe_subscription_id`, `status`, `billing_interval`, `current_period_end`, `cancel_at_period_end`, `withdrawal_waiver_at`, `updated_at` sur `app.membership`, source `stripe` ajoutée à côté de `launch-free` (valeur existante gardée pour le Premium du lancement : pas de réécriture des lignes), table `app.stripe_event`. Le code tolère son absence (`billingReady()`), appliquée en dev seulement.
+- `scripts/stripe-setup.ts` : Product `toutou_gourmet_premium` (identifiant fixe), Prices par `lookup_key`, codes de taxe candidats relus dans l'API, état de Stripe Tax en lecture ; aucun code de taxe ni enregistrement posé.
+- Checkout (`startCheckoutAction`) : `mode: 'subscription'`, `automatic_tax`, `billing_address_collection: 'required'` + `customer_update.address: 'auto'`, client Stripe créé une fois (clé d'idempotence) et enregistré avant le paiement, `integration_identifier: 'toutou-premium-qkvbrwze'`, adresse confirmée exigée, case de renonciation obligatoire (navigateur et serveur, date enregistrée dans `withdrawal_waiver_at` et dans les métadonnées de l'abonnement). Compte Premium du lancement : `trial_end` = `PREMIUM_LAUNCH_ENDS_AT` (premier prélèvement à la fin de la gratuité, si elle est à plus de 49 h).
+- Portail client (`openPortalAction`) : « Gérer mon abonnement » dans Réglages et sur `/premium` pour un abonné.
+- Webhook : signature vérifiée sur le corps brut, idempotence transactionnelle, abonnement toujours relu chez Stripe, compte retrouvé par Customer puis Subscription (métadonnées en repli), alertes ntfy (litige, fraude, 2e échec de paiement).
+- Accès (`lib/premium/access.ts`) : `active`, `trialing`, `past_due` pour un abonnement ; Premium du lancement jusqu'à `PREMIUM_LAUNCH_ENDS_AT`. `planOf`, `scanLimitFor`, gabarit du compte, historique des scans passent par cette règle.
+- Pages : `/premium` (trois offres selon l'environnement, section `#tarifs`, économie de l'annuel calculée : 41,89 € soit 58 %, 2,50 € par mois ; « 2 mois offerts » aurait été faux), `/compte?premium=merci` (attente du webhook, rechargement toutes les 3 s), `/conditions-generales-de-vente` (champs `[À compléter]`), section Stripe de la politique de confidentialité, liens pied de page et plan du site. Suppression du compte : abonnement résilié avant l'effacement.
+- Mesure : `Premium Checkout Started`, `Premium Subscribed`, `Premium Canceled` (serveur), bloc « Premium payant » de l'onglet Conversions.
+- E-mail de fin du Premium du lancement : gabarit et aperçu (`/tableau-de-bord/emails/premium-lancement`), jamais envoyé automatiquement.
+- Tests : `node_modules/.bin/tsx scripts/test-stripe-premium.ts` (14 tests, événements signés avec `generateTestHeaderString`).
+
+## Reste
+
+1. Clé restreinte de test rangée par le propriétaire, `scripts/stripe-setup.ts`, réglages Dashboard (portail, relances, rappel de renouvellement, moyens de paiement), `stripe listen` puis endpoint du serveur : étapes dans `deploy/README.md`, section « Premium payant ».
+2. Stripe Tax : siège en Belgique, enregistrement Belgique, code de taxe choisi avec le comptable, calcul test.
+3. CGV complétées et relues (juriste conseillé), médiateur choisi.
+4. Envoi de l'e-mail de fin du lancement (script ou campagne Brevo à écrire quand la date sera fixée).
+5. Passage en live (même section de `deploy/README.md`).

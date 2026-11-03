@@ -47,6 +47,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
       { href: '/contact', label: 'Contact' },
       { href: '/mentions-legales', label: 'Mentions légales' },
       { href: '/politique-de-confidentialite', label: 'Politique de confidentialité' },
+      { href: '/conditions-generales-de-vente', label: 'Conditions générales de vente' },
       { href: '/plan-du-site', label: 'Plan du site' },
     ],
   },

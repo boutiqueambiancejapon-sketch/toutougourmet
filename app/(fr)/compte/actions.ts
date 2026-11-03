@@ -64,11 +64,12 @@ export async function addWeightAction(dogId: string, _prev: FormState, form: For
   redirect(`/compte/chien/${dogId}?pesee=1`)
 }
 
-/** Premium gratuit pendant le lancement : conditions vérifiées côté serveur (adresse confirmée, un chien). */
+/** Premium gratuit du lancement : conditions vérifiées côté serveur (adresse confirmée, un chien, offre encore ouverte). */
 export async function activatePremiumAction(): Promise<void> {
   const user = await requireUser()
   const result = await activatePremium(user.id)
-  redirect(result.ok ? (result.already ? '/compte' : '/compte?premium=active') : '/compte?premium=incomplet#premium')
+  if (result.ok) redirect(result.already ? '/compte' : '/compte?premium=active')
+  redirect('closed' in result ? '/compte/reglages#premium' : '/compte?premium=incomplet#premium')
 }
 
 export async function signOutAction(): Promise<void> {

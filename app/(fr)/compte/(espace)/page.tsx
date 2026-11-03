@@ -10,12 +10,13 @@ import { ToolLinks } from '@/components/compte/espace/ToolLinks'
 import { btnOutline, linkAction } from '@/components/compte/espace/ui'
 import { FormNotice } from '@/components/compte/fields'
 import { PremiumPanel } from '@/components/compte/PremiumPanel'
+import { PaymentWaiter } from '@/components/compte/premium/PaymentWaiter'
 import { ScanRows } from '@/components/compte/ScanHistoryList'
 import { TrackOnce } from '@/components/compte/TrackOnce'
 import { getSessionUser } from '@/lib/server/auth'
 import { latestWeights, listDogs } from '@/lib/server/dogs'
 import { getFoodLinks } from '@/lib/server/food-suggest'
-import { getMembership, premiumMissing } from '@/lib/server/membership'
+import { getPremiumState, premiumMissing, premiumMode } from '@/lib/server/membership'
 import { listUserScans, usedThisMonth } from '@/lib/server/scanner'
 import { monthlyScanLimit } from '@/lib/scanner/config'
 
@@ -28,14 +29,15 @@ export default async function AccountHomePage({ searchParams }: { searchParams: 
     // Lien de confirmation périmé : Better Auth renvoie ici avec ?error=…
     redirect(params.error ? `/compte/connexion?error=${encodeURIComponent(String(params.error).toUpperCase())}` : '/compte/connexion')
   }
-  const [dogs, membership, missing, used, scans] = await Promise.all([
+  const [dogs, premiumState, missing, used, scans] = await Promise.all([
     listDogs(user.id),
-    getMembership(user.id),
+    getPremiumState(user.id),
     premiumMissing(user.id),
     usedThisMonth(user.id),
     listUserScans(user.id, 3),
   ])
-  const premium = membership?.plan === 'premium'
+  const premium = premiumState.active
+  const subscribed = premium && premiumState.membership?.source === 'stripe'
   const [latest, foodLinks] = await Promise.all([latestWeights(dogs.map((d) => d.id)), getFoodLinks(dogs.map((d) => d.foodSlug))])
   const lastWeigh = [...latest.values()].sort((a, b) => b.date.localeCompare(a.date))[0]
   const lastDog = lastWeigh ? dogs.find((d) => d.id === lastWeigh.dogId) : undefined
@@ -49,13 +51,17 @@ export default async function AccountHomePage({ searchParams }: { searchParams: 
           <TrackOnce event="Premium Activated" props={{ source: 'launch-free' }} />
         </>
       ) : null}
+      {params.premium === 'merci' && subscribed ? (
+        <FormNotice tone="info">{`Merci ! Premium est actif : ${monthlyScanLimit('premium')} analyses par photo par mois, alertes de poids et historique complet des scans. Le reçu arrive par e-mail.`}</FormNotice>
+      ) : null}
+      {params.premium === 'merci' && !subscribed ? <PaymentWaiter /> : null}
       <StatTiles
         used={used}
         limit={monthlyScanLimit(premium ? 'premium' : 'free')}
         dogs={dogs.length}
         lastWeigh={lastWeigh && lastDog ? { dogName: lastDog.name, date: lastWeigh.date, weightKg: lastWeigh.weightKg } : null}
       />
-      {premium ? null : <PremiumPanel premium={false} activatedAt={null} missing={missing} />}
+      {premium ? null : <PremiumPanel state={premiumState} mode={premiumMode()} missing={missing} />}
       <Panel id="mes-chiens" title={dogs.length > 1 ? 'Mes chiens' : 'Mon chien'}>
         {dogs.length === 0 ? (
           <p className="m-0 text-base leading-relaxed text-ink-2">Son profil pré-remplit le calcul de ration et garde la courbe de ses pesées.</p>

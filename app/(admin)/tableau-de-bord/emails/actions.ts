@@ -3,6 +3,7 @@
 import { redirect } from 'next/navigation'
 import { assertDashboardAction as assertDashboard } from '@/lib/dashboard/guard'
 import { nextFirstTuesday, parisDate, sendInstant } from '@/lib/emails/schedule'
+import { premiumLaunchEndEmail, premiumLaunchPreviewInput } from '@/lib/emails/premium-launch-end'
 import { weeklyDigestEmail } from '@/lib/emails/weekly'
 import { suspendCampaign } from '@/lib/server/brevo-newsletter'
 import { getPool } from '@/lib/server/db'
@@ -30,6 +31,24 @@ export async function cancelCampaign(campaignId: number): Promise<void> {
     result = 'erreur'
   }
   redirect(`/tableau-de-bord/emails/lettre?annulation=${result}`)
+}
+
+/** Test de l'e-mail de fin du Premium du lancement vers OWNER_EMAIL (jamais vers les comptes). */
+export async function sendPremiumLaunchTest(): Promise<void> {
+  await assertDashboard()
+  const to = process.env.OWNER_EMAIL
+  let result = 'config'
+  if (to && process.env.BREVO_API_KEY && process.env.BREVO_SENDER_EMAIL) {
+    try {
+      const mail = premiumLaunchEndEmail(premiumLaunchPreviewInput())
+      await sendTransactionalEmail({ to, subject: `[Test] ${mail.subject}`, html: mail.html, text: mail.text, tags: ['interne'] })
+      result = 'ok'
+    } catch (err) {
+      console.error('[premium-lancement] test non envoyé', err instanceof Error ? err.message : err)
+      result = 'error'
+    }
+  }
+  redirect(`/tableau-de-bord/emails/premium-lancement?test=${result}`)
 }
 
 export async function sendWeeklyTest(): Promise<void> {
