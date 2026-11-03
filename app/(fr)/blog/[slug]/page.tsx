@@ -21,6 +21,7 @@ import { DEFAULT_AUTHOR } from '@/data/authors'
 import rehypeAutolinkTerms from '@/lib/rehype-autolink-terms'
 import remarkGfm from 'remark-gfm'
 import { signupInvitePlugins } from '@/lib/article-signup'
+import { guideTopPlugins } from '@/lib/remark-guide-top'
 import { getBreedForArticle } from '@/data/breeds'
 import { AUTOLINK_DICTIONARY } from '@/lib/autolink-dictionary'
 
@@ -83,6 +84,7 @@ export default async function ArticlePage({ params }: Props) {
   const allArticles = getAllArticles()
   const { frontmatter, content, rawContent } = article
   // @cdc CRO compte (maquette 3A) — encart compte avant la FAQ, selon le sujet (lib/article-signup).
+  const guidePlugins = guideTopPlugins({ slug, categorySlug: frontmatter.categorySlug ?? '', verdict: frontmatter.verdict })
   const signupPlugins = signupInvitePlugins({
     slug,
     categorySlug: frontmatter.categorySlug ?? '',
@@ -162,7 +164,7 @@ export default async function ArticlePage({ params }: Props) {
           components={articleMdxComponents}
           options={{
             mdxOptions: {
-              remarkPlugins: [remarkGfm, ...signupPlugins],
+              remarkPlugins: [remarkGfm, ...signupPlugins, ...guidePlugins],
               rehypePlugins: [
                 [rehypeAutolinkTerms, { terms: AUTOLINK_DICTIONARY, maxTotal: 3 }],
               ],

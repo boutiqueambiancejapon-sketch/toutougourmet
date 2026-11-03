@@ -1,5 +1,6 @@
 import { IconChevron } from '@/components/icons'
 import { CONFIRMED_DISCOUNTS } from '@/data/partner-discounts'
+import { PartnerButton } from '@/components/cro/PartnerButton'
 
 // @cdc affiliation — liens partenaires autorisés sous les outils (un au plus par résultat,
 // et seulement quand le résultat le justifie). Les clics sont mesurés par
@@ -28,15 +29,16 @@ export function PartnerLink({ partner, tool }: { partner: Partner; tool: string 
     <div data-cta={`tool-${tool}`} className="flex flex-col gap-3 rounded-box bg-ink p-4 text-cream shadow-[5px_5px_0_var(--orange)] sm:p-5">
       <p className="m-0 text-[15px] leading-relaxed text-cream">{partner.why}</p>
       {partner.offer ? <p className="m-0 text-sm font-bold text-amber">{partner.offer}</p> : null}
-      <a
-        href={partner.href}
-        target="_blank"
-        rel="sponsored noopener"
-        className="inline-flex min-h-12 items-center justify-center gap-2 self-start rounded-control bg-amber px-5 text-base font-bold text-ink no-underline hover:underline"
-      >
-        {partner.label}
-        <IconChevron className="size-4" />
-      </a>
+      <span className="flex flex-col items-start gap-1.5">
+        <PartnerButton
+          href={partner.href}
+          fallback={partner.label}
+          srLabel={`(${partner.brand}, nouvel onglet)`}
+          after={<IconChevron className="size-4" />}
+          statusClassName="text-amber"
+          className="inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-control bg-amber px-5 text-base font-bold text-ink no-underline hover:underline"
+        />
+      </span>
       <p className="m-0 text-xs text-cream/70">Lien partenaire&nbsp;: on touche une commission si tu commandes, sans surcoût pour toi.</p>
     </div>
   )

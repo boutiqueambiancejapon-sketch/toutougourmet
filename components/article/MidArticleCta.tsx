@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { MidCtaConfig } from '@/lib/mid-cta'
+import { PartnerButton } from '@/components/cro/PartnerButton'
 
 // @cdc affiliation — encart du milieu d'article, inséré par lib/remark-mid-cta.ts.
 // Bloc encre avec ombre orange décalée, pastille ronde en tampon, un seul bouton principal.
@@ -12,6 +13,9 @@ function Check() {
     </svg>
   )
 }
+
+const BUTTON =
+  'rounded-control inline-flex max-w-full items-center text-balance bg-amber px-6 py-4 text-lg font-bold text-ink no-underline shadow-[5px_5px_0_var(--orange)] transition-transform hover:-translate-y-0.5 active:translate-x-[3px] active:translate-y-[3px] active:shadow-[2px_2px_0_var(--orange)]'
 
 export function MidArticleCta({ cta }: { cta: MidCtaConfig }) {
   const external = cta.button.href.startsWith('http')
@@ -42,13 +46,21 @@ export function MidArticleCta({ cta }: { cta: MidCtaConfig }) {
         ))}
       </ul>
       <div className="mt-7 flex flex-col items-start gap-4 md:flex-row md:items-center md:gap-7">
-        <a
-          href={cta.button.href}
-          {...(external ? { target: '_blank', rel: 'sponsored noopener' } : {})}
-          className="rounded-control inline-flex max-w-full items-center text-balance bg-amber px-6 py-4 text-lg font-bold text-ink no-underline shadow-[5px_5px_0_var(--orange)] transition-transform hover:-translate-y-0.5 active:translate-x-[3px] active:translate-y-[3px] active:shadow-[2px_2px_0_var(--orange)]"
-        >
-          {cta.button.label}&nbsp;→
-        </a>
+        {external ? (
+          <span className="flex flex-col items-start gap-2">
+            <PartnerButton
+              href={cta.button.href}
+              fallback={cta.button.label}
+              after={<span aria-hidden="true">&nbsp;→</span>}
+              statusClassName="text-amber"
+              className={BUTTON}
+            />
+          </span>
+        ) : (
+          <Link href={cta.button.href} className={BUTTON}>
+            {cta.button.label}&nbsp;→
+          </Link>
+        )}
         {cta.secondary ? (
           <Link href={cta.secondary.href} className="text-[15px] font-semibold text-cream underline underline-offset-4">
             {cta.secondary.label}

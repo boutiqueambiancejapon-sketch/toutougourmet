@@ -38,6 +38,7 @@ const PLACE_TYPE: Record<string, PageType> = {
   'tool-bilan': 'outils',
   'tool-age': 'outils',
   'tool-scanner': 'scanner',
+  'tool-email': 'outils',
   'article-poids': 'sante',
   'article-croquettes': 'nutrition-marques',
   'article-aliments': 'aliments',

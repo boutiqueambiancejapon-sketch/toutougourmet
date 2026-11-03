@@ -37,7 +37,7 @@ export function BodyScoreEvaluator({ dog }: { dog?: AccountDog | null }) {
   const idealId = useId()
   const [current, setCurrent] = useState(dog?.weightKg ? String(dog.weightKg) : '')
   const [ideal, setIdeal] = useState(dog?.breedMidKg ? String(dog.breedMidKg) : '')
-  const [result, setResult] = useState<{ score: BodyScoreResult; idealKg: number } | null>(null)
+  const [result, setResult] = useState<{ score: BodyScoreResult; idealKg: number; currentKg: number } | null>(null)
   const sizes = DOG_SIZES
 
   function onSubmit(e: React.FormEvent) {
@@ -45,7 +45,7 @@ export function BodyScoreEvaluator({ dog }: { dog?: AccountDog | null }) {
     const c = parseFloat(current.replace(',', '.'))
     const i = parseFloat(ideal.replace(',', '.'))
     if (!(c > 0) || !(i > 0)) return
-    setResult({ score: evaluateBodyScore(c, i), idealKg: i })
+    setResult({ score: evaluateBodyScore(c, i), idealKg: i, currentKg: c })
     track('Tool Result', { tool: 'etat-corporel' })
   }
 
@@ -83,6 +83,7 @@ export function BodyScoreEvaluator({ dog }: { dog?: AccountDog | null }) {
             summary={`${r.label} (${gap} par rapport à ${result.idealKg} kg)`}
             steps={nextSteps(r.score, result.idealKg)}
             partner={partner(r.score)}
+            emailInput={{ tool: 'poids', currentKg: result.currentKg, idealKg: result.idealKg }}
           >
             <BigResultScore label={r.label} gap={gap} advice={r.advice} score={r.score} />
           </ToolResult>

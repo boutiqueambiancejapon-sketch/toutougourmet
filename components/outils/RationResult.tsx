@@ -1,13 +1,15 @@
 import type { ActivityLevel, AgeGroup, RationValues } from '@/lib/calculators'
 import { BigResult } from './fields'
 import type { NextStep } from './NextSteps'
-import { PARTNERS, type Partner } from './partners'
+import { rationOffer } from '@/lib/ration-offer'
+import type { Partner } from './partners'
 import type { RationFood } from './ration-params'
 import { ToolResult } from './ToolResult'
 
 // Résultat de /outils/ration : les grammes pour l'aliment choisi, les kcal, l'équivalent dans
-// l'autre aliment et la répartition en repas. Lien partenaire seulement pour un chien nourri
-// au repas frais (Dog Chef livre des repas frais dosés selon le profil du chien).
+// l'autre aliment et la répartition en repas. Offre partenaire calculée sur ces grammes
+// (lib/ration-offer.ts) : Franklin pour les croquettes, Dog Chef pour le repas frais, sous la
+// carte compte (carte des conversions : compte d'abord, partenaire ensuite).
 
 interface RationForm {
   animal: 'chien'
@@ -15,6 +17,7 @@ interface RationForm {
   ageGroup: AgeGroup
   activityLevel: ActivityLevel
   sterilized: boolean
+  highEnergy: boolean
   food: RationFood
 }
 
@@ -31,16 +34,13 @@ function steps(form: RationForm): NextStep[] {
   ]
 }
 
-function partner(form: RationForm): Partner | null {
-  if (form.food !== 'frais') return null
-  return {
-    ...PARTNERS.dogChef,
-    why: `Tu le nourris au repas frais : Dog Chef livre des repas cuisinés et dosés selon le profil de ton chien, pour ne plus avoir à peser.`,
-    label: 'Essayer Dog Chef',
-  }
+function partner(grams: number, form: RationForm, dogName?: string | null): Partner | null {
+  const offer = rationOffer({ grams, fresh: form.food === 'frais', dogName })
+  if (!offer) return null
+  return { ...offer, label: `Voir l'offre ${offer.brand}` }
 }
 
-export function RationResult({ result, form }: { result: RationValues; form: RationForm }) {
+export function RationResult({ result, form, dogName }: { result: RationValues; form: RationForm; dogName?: string | null }) {
   const fresh = form.food === 'frais'
   const grams = fresh ? result.gFresh : result.gKibble
   const other = fresh ? `${result.gKibble} g de croquettes` : `${result.gFresh} g de repas frais`
@@ -49,7 +49,14 @@ export function RationResult({ result, form }: { result: RationValues; form: Rat
   const summary = `${grams} g ${what} (${result.kcal} kcal) pour un chien ${AGE_LABEL[form.ageGroup]} de ${form.weightKg} kg`
 
   return (
-    <ToolResult tool="ration" summary={summary} steps={steps(form)} partner={partner(form)}>
+    <ToolResult
+      tool="ration"
+      summary={summary}
+      steps={steps(form)}
+      partner={partner(grams, form, dogName)}
+      dogName={dogName}
+      emailInput={{ tool: 'ration', weightKg: form.weightKg, ageGroup: form.ageGroup, activityLevel: form.activityLevel, sterilized: form.sterilized, highEnergy: form.highEnergy, food: form.food }}
+    >
       <BigResult value={`${grams} g`} unit={what}>
         <p>
           {`Soit ${result.kcal} kcal. En ${meals} repas : environ ${Math.round(grams / meals)} g chacun. Pour la même énergie, il faudrait ${other}.`}

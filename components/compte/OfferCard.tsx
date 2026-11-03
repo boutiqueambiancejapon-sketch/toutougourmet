@@ -1,4 +1,5 @@
 import type { AccountOffer } from '@/lib/account-offers'
+import { PartnerButton } from '@/components/cro/PartnerButton'
 
 // @cdc premium — une offre partenaire dans le compte : marque, remise confirmée, raison tirée de
 // data/brands.ts, lien sponsorisé. Clics mesurés par components/analytics/Tracking.tsx (data-cta).
@@ -13,15 +14,14 @@ export function OfferCard({ offer, cta = 'account-offer' }: { offer: AccountOffe
         {offer.discount ? <span className="rounded-pill bg-amber px-3 py-0.5 text-sm font-semibold text-ink">{offer.discount}</span> : null}
       </p>
       <p className="m-0 text-[15px] leading-relaxed text-ink-2">{offer.reason}</p>
-      <a
-        href={offer.url}
-        rel="sponsored noopener"
-        target="_blank"
-        className="inline-flex min-h-11 w-full items-center justify-center whitespace-nowrap rounded-control sm:w-auto sm:self-start bg-orange px-4 text-[15px] font-semibold text-ink no-underline"
-      >
-        Voir l&apos;offre
-        <span className="sr-only"> {offer.brand} (nouvel onglet)</span>
-      </a>
+      <span className="flex flex-col gap-1 sm:items-start">
+        <PartnerButton
+          href={offer.url}
+          fallback="Voir l'offre"
+          srLabel={`(${offer.brand}, nouvel onglet)`}
+          className="inline-flex min-h-11 w-full items-center justify-center whitespace-nowrap rounded-control bg-orange px-4 text-[15px] font-semibold text-ink no-underline sm:w-auto"
+        />
+      </span>
     </div>
   )
 }

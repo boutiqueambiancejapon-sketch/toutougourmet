@@ -71,9 +71,11 @@ export function ArticleLayout({
   const portion = getPortionCalc(article)
   const foods = breed ? getFoodVerdicts() : []
   const endCta = articleEndCta({ slug, categorySlug: catSlug, verdict: frontmatter.verdict })
+  // Aliment « danger », urgence, « mon chien a mangé… » : jamais le panneau du guide (lib/guide/use-guide-popup.ts).
+  const noPopup = endCta === 'fiche-link' || slug.startsWith('chien-mange-')
 
   return (
-    <article className="bg-cream pb-20">
+    <article className="bg-cream pb-20" {...(noPopup ? { 'data-no-popup': '' } : {})}>
       <ArticleHeader
         breadcrumb={breadcrumb}
         categorySlug={catSlug}
