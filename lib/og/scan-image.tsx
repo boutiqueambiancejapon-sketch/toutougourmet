@@ -1,6 +1,8 @@
 import { ImageResponse } from 'next/og'
 import { getSlotPath, resolveSlot } from '@/data/image-utils'
 import { BAND_SHORT, highlights } from '@/lib/scanner/highlights'
+import type { AnalysisSource } from '@/db/schema'
+import { openDataCredit } from '@/components/scanner/SourceNotice'
 import type { ScoreResult } from '@/lib/scanner/score'
 import { loadOgFonts, loadOgPhoto } from './assets'
 import { qrDataUri } from './qr'
@@ -16,7 +18,7 @@ export interface ScanImageInput {
   brand: string | null
   product: string | null
   details: ScoreResult
-  source: 'photo' | 'openpetfoodfacts'
+  source: AnalysisSource
 }
 
 async function cardData(input: ScanImageInput): Promise<ScanCardData> {
@@ -30,7 +32,7 @@ async function cardData(input: ScanImageInput): Promise<ScanCardData> {
     brand: input.product ? input.brand : null,
     strengths,
     weaknesses,
-    credit: input.source === 'openpetfoodfacts' ? 'Données : Open Pet Food Facts, licence ODbL' : 'Lecture automatique, vérifie sur ton sac',
+    credit: openDataCredit(input.source) ?? 'Lecture automatique, vérifie sur ton sac',
     dog,
     qr: qrDataUri(SCANNER_URL),
   }

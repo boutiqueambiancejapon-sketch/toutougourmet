@@ -1,5 +1,7 @@
 // @cdc lot 6 — fiche produit générée depuis le cache du scanner. noindex et hors sitemap tant
 // que la rédaction ne l'a pas relue (reviewed = false) : une lecture IA brute n'est pas indexée.
+// Exception réglable : fiche Open Pet Food Facts complète si OPFF_INDEX_POLICY=complete
+// (lib/server/scanner-published.ts), désactivée par défaut.
 // JSON-LD Product + Review seulement si relue. Sous 55/100 : marques partenaires en remplacement.
 // Image de partage : /croquettes/[slug]/og.png (Open Graph) et story.png (bouton « Partager »).
 // « Télécharger le PDF » : /croquettes/[slug]/fiche.pdf, une page A4.
@@ -21,6 +23,7 @@ import { alternativesFor, brandSlug, ficheTitle } from '@/lib/scanner/seo'
 import { getBySlug } from '@/lib/server/scanner'
 import { reviewedItemsSafe } from '@/lib/server/scanner-catalog'
 import { getDb } from '@/lib/server/drizzle'
+import { isPublished } from '@/lib/server/scanner-published'
 
 export const revalidate = 300
 
@@ -52,7 +55,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       type: 'website',
       images: [{ url: `${url}/og.png`, width: 1200, height: 630, alt: `Note de ${name}` }],
     },
-    robots: row.reviewed ? undefined : { index: false, follow: true },
+    robots: (await isPublished(row)) ? undefined : { index: false, follow: true },
   }
 }
 
@@ -80,7 +83,7 @@ export default async function CroquettePage({ params }: Params) {
           <div className="flex items-center gap-3">
             <ScoreBadge score={a.score} />
             <p className="m-0 text-base text-ink-2">
-              {`${row.reviewed ? 'Fiche relue' : a.source === 'openpetfoodfacts' ? 'Données Open Pet Food Facts' : 'Analyse automatique'} du `}
+              {`${row.reviewed ? 'Fiche relue' : a.source === 'openpetfoodfacts' ? 'Données Open Pet Food Facts' : a.source === 'openfoodfacts' ? 'Données Open Food Facts' : 'Analyse automatique'} du `}
               <time dateTime={row.createdAt.toISOString()}>{date}</time>
               {a.ean ? ` · code-barres ${a.ean}` : ''}
             </p>

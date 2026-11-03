@@ -1,7 +1,8 @@
 // Alertes urgentes vers ntfy, toutes les 10 minutes (deploy/toutou-alerts.timer). Contrôle le site
 // (local et public), les services toutou-*, la tâche de nuit, le disque, la mémoire, la charge,
-// la sauvegarde et les nouveaux signalements du scanner. Une notification par incident, une autre
-// quand il est réglé ; tout ce qui change pendant un passage part dans un seul message.
+// la sauvegarde, l'import Open Pet Food Facts et les nouveaux signalements du scanner. Une
+// notification par incident, une autre quand il est réglé ; tout ce qui change pendant un
+// passage part dans un seul message.
 //
 // Lancer depuis la racine du site, variables de /srv/toutou/shared/.env chargées :
 //   node_modules/.bin/tsx scripts/alerts.ts          (passage normal)
@@ -13,7 +14,7 @@
 // ALERTS_LOCAL_URL, ALERTS_PUBLIC_URL, ALERTS_RETRY_MS, SEO_LOGS_DIR, DASHBOARD_BACKUP_DIR.
 
 import { checkBackup,
-  checkScannerDaily, checkHost, checkNight, checkSites, checkUnits, type Incident } from '../lib/server/alerts/checks'
+  checkOpffImport, checkScannerDaily, checkHost, checkNight, checkSites, checkUnits, type Incident } from '../lib/server/alerts/checks'
 import { composeMessage, DASHBOARD_URL, diffIncidents, printMessage, readState, sendNtfy, writeState } from '../lib/server/alerts/notify'
 import { getPool } from '../lib/server/db'
 
@@ -55,17 +56,18 @@ async function main(): Promise<void> {
   if (Number.isNaN(now.getTime())) throw new Error(`--now invalide : ${nowArg}`)
 
   const state = readState(stateFile)
-  const [sites, units, night, host, backup, scanner, reports] = await Promise.all([
+  const [sites, units, night, host, backup, scanner, opff, reports] = await Promise.all([
     checkSites(),
     checkUnits(),
     checkNight(now),
     checkHost(),
     checkBackup(now),
     checkScannerDaily(),
+    checkOpffImport(now),
     newReports(state.reportsSince),
   ])
   const reportCount = 'count' in reports ? reports.count : 0
-  const current = [...sites, ...units, ...night, ...host, ...backup, ...scanner, ...('count' in reports ? [] : [reports])]
+  const current = [...sites, ...units, ...night, ...host, ...backup, ...scanner, ...opff, ...('count' in reports ? [] : [reports])]
   const diff = diffIncidents(state, current)
   const msg = composeMessage(diff, reportCount)
 

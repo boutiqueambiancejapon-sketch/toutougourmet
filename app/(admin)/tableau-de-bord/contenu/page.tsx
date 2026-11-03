@@ -4,10 +4,11 @@ import { loadContent } from '@/lib/server/dashboard-tabs'
 import { DashboardShell } from '@/components/dashboard/DashboardShell'
 import { MessagesSection } from '@/components/dashboard/MessagesSection'
 import { NightSection } from '@/components/dashboard/NightSection'
+import { OpffImportSection } from '@/components/dashboard/OpffImportSection'
 import { ReviewSection } from '@/components/dashboard/ReviewSection'
 
 // @cdc tableau de bord — onglet Contenu : comptes rendus de la tâche de nuit, fiches croquettes
-// à relire (avec les signalements), messages du formulaire de contact.
+// à relire (avec les signalements), copie Open Pet Food Facts, messages du formulaire de contact.
 
 export const dynamic = 'force-dynamic'
 
@@ -18,6 +19,7 @@ export default async function ContentTab(props: TabPageProps) {
     <DashboardShell period={period.key} current="contenu" notice={ok ? null : READ_FAILED}>
       <NightSection logs={logs} configured={nightLogDir() !== null} />
       <ReviewSection rows={data.review} error={data.reviewError} />
+      <OpffImportSection status={data.opff} policy={data.opffPolicy} />
       <MessagesSection messages={data.messages} />
     </DashboardShell>
   )

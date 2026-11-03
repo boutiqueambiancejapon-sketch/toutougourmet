@@ -59,7 +59,11 @@ export type OpffVerdict =
   /** Données partielles : on passe aux photos en préremplissant la marque et le produit. */
   | { kind: 'incomplete'; brand: string | null; product: string | null; type: ImageType }
 
-export function opffToLabel(p: OpffProduct, ean: string): OpffVerdict {
+/** Pourquoi une fiche ne peut pas être notée sans photo (compteurs de scripts/opff-import.ts). */
+export type OpffUnusableReason = 'pas-aliment-chien' | 'composition' | 'constituants' | 'valeurs-implausibles' | 'note-impossible'
+
+/** Conversion seule, sans juger si la fiche est exploitable. */
+export function opffLabel(p: OpffProduct, ean: string): ExtractedLabel {
   const type = opffImageType(p.categories_tags)
   const brand = clean(firstBrand(p.brands) ?? undefined)
   const product = clean(p.product_name_fr || p.product_name)
@@ -72,7 +76,7 @@ export function opffToLabel(p: OpffProduct, ean: string): OpffVerdict {
   }
   const constituants = Object.fromEntries((Object.keys(NUTRIMENTS) as AnalyticalKey[]).map((k) => [k, nutriment(p.nutriments, k)])) as ExtractedLabel['constituants']
   const has = (v: unknown) => (v === null || (Array.isArray(v) && v.length === 0) ? 'absent' : 'haute')
-  const label: ExtractedLabel = {
+  return {
     estUneEtiquette: true,
     typeImage: type,
     lisibilite: 'nette',
@@ -91,16 +95,27 @@ export function opffToLabel(p: OpffProduct, ean: string): OpffVerdict {
     illisibles: [],
     champsDouteux: [],
   }
-  // Exploitable : ingrédients ET protéines ET matières grasses plausibles, et notre barème arrive
-  // à noter. Des valeurs hors de toute croquette (ex. 2 % de protéines, saisie erronée dans la
-  // base) renvoient aux photos plutôt que de produire une note fausse.
-  const c = constituants
+}
+
+/**
+ * Exploitable : ingrédients ET protéines ET matières grasses plausibles, et notre barème arrive
+ * à noter. Des valeurs hors de toute croquette (ex. 2 % de protéines, saisie erronée dans la
+ * base) renvoient aux photos plutôt que de produire une note fausse. null : exploitable.
+ */
+export function opffUnusableReason(label: ExtractedLabel): OpffUnusableReason | null {
+  if (label.typeImage !== 'aliment-chien') return 'pas-aliment-chien'
+  if (label.ingredients.length < 3) return 'composition'
+  const c = label.constituants
+  if (c.proteines === null || c.matieresGrasses === null) return 'constituants'
   const sum = (c.proteines ?? 0) + (c.matieresGrasses ?? 0) + (c.cellulose ?? 0) + (c.cendres ?? 0) + (c.humidite ?? 0)
   const plausible =
-    c.proteines !== null &&
-    c.matieresGrasses !== null &&
     sum <= 100 &&
     (label.typeAliment === 'humide' ? c.proteines >= 3 : c.proteines >= 12 && c.proteines <= 70 && c.matieresGrasses >= 3 && c.matieresGrasses <= 45)
-  const usable = type === 'aliment-chien' && label.ingredients.length >= 3 && plausible && scoreLabel(label).score !== null
-  return usable ? { kind: 'complete', label } : { kind: 'incomplete', brand, product, type }
+  if (!plausible) return 'valeurs-implausibles'
+  return scoreLabel(label).score === null ? 'note-impossible' : null
+}
+
+export function opffToLabel(p: OpffProduct, ean: string): OpffVerdict {
+  const label = opffLabel(p, ean)
+  return opffUnusableReason(label) === null ? { kind: 'complete', label } : { kind: 'incomplete', brand: label.marque, product: label.produit, type: label.typeImage as ImageType }
 }

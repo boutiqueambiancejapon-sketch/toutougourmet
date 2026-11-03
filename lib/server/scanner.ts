@@ -75,8 +75,17 @@ const isUniqueViolation = (err: unknown, constraint: string) => {
   return e.code === '23505' && e.constraint === constraint
 }
 
-/** Enregistre une nouvelle analyse (ou renvoie celle du même EAN si elle vient d'être créée). */
-export async function saveAnalysis(label: ExtractedLabel, ean: string | null, model: string, source: AnalysisSource = 'photo'): Promise<FoodAnalysis> {
+/**
+ * Enregistre une nouvelle analyse (ou renvoie celle du même EAN si elle vient d'être créée).
+ * scanCount 0 : fiche pré-notée par l'import Open Pet Food Facts, que personne n'a encore scannée.
+ */
+export async function saveAnalysis(
+  label: ExtractedLabel,
+  ean: string | null,
+  model: string,
+  source: AnalysisSource = 'photo',
+  { scanCount = 1 }: { scanCount?: number } = {},
+): Promise<FoodAnalysis> {
   const details = scoreLabel(label)
   const base = baseSlug(label.marque, label.produit, ean)
   for (let attempt = 0; attempt < 4; attempt++) {
@@ -84,7 +93,7 @@ export async function saveAnalysis(label: ExtractedLabel, ean: string | null, mo
     try {
       const [row] = await db()
         .insert(foodAnalysis)
-        .values({ ean, slug, brand: label.marque, product: label.produit, extracted: { ...label, ean }, score: details.score, details, algorithmVersion: SCORE_VERSION, model, source })
+        .values({ ean, slug, brand: label.marque, product: label.produit, extracted: { ...label, ean }, score: details.score, details, algorithmVersion: SCORE_VERSION, model, source, scanCount })
         .returning()
       return row
     } catch (err) {

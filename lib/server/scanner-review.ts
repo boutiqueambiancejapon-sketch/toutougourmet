@@ -3,6 +3,7 @@ import { foodAnalysis, scanReport, type FoodAnalysis } from '@/db/schema'
 import { scoreLabel, SCORE_VERSION } from '@/lib/scanner/score'
 import type { ExtractedLabel } from '@/lib/scanner/types'
 import { getDb } from './drizzle'
+import { awaitingReviewWhere } from './scanner-published'
 
 // @cdc lot 6 — relecture des fiches dans le tableau de bord privé : fiches non relues et
 // signalements à traiter, correction de l'étiquette (la note est toujours recalculée par le
@@ -27,7 +28,7 @@ export interface ReviewRow {
   openReports: number
 }
 
-/** Fiches non relues, puis fiches relues qui ont un signalement à traiter. Les plus récentes d'abord. */
+/** Fiches non relues (hors fiches importées jamais scannées), puis fiches qui ont un signalement à traiter. Les plus récentes d'abord. */
 export async function listToReview(limit = 100): Promise<ReviewRow[]> {
   const open = db()
     .select({ id: scanReport.foodAnalysisId, n: count().as('n') })
@@ -49,7 +50,7 @@ export async function listToReview(limit = 100): Promise<ReviewRow[]> {
     })
     .from(foodAnalysis)
     .leftJoin(open, eq(open.id, foodAnalysis.id))
-    .where(or(eq(foodAnalysis.reviewed, false), sql`${open.n} > 0`))
+    .where(or(awaitingReviewWhere(), sql`${open.n} > 0`))
     .orderBy(asc(foodAnalysis.reviewed), desc(foodAnalysis.createdAt))
     .limit(limit)
   return rows

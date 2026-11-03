@@ -6,7 +6,7 @@ import { Empty, SectionTitle } from './Panel'
 // qui ont un signalement à traiter. Chaque ligne ouvre la page de relecture privée.
 
 const dateFmt = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium', timeZone: 'Europe/Paris' })
-const SOURCE: Record<ReviewRow['source'], string> = { photo: 'Photos (IA)', openpetfoodfacts: 'Open Pet Food Facts' }
+const SOURCE: Record<ReviewRow['source'], string> = { photo: 'Photos (IA)', openpetfoodfacts: 'Open Pet Food Facts', openfoodfacts: 'Open Food Facts' }
 
 export function ReviewSection({ rows, error }: { rows: ReviewRow[]; error: boolean }) {
   return (

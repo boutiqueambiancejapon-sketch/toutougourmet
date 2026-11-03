@@ -2,6 +2,7 @@ import type { Pool } from 'pg'
 import { addDays, parisDate } from '@/lib/emails/schedule'
 import { getServerHealth, type ServerHealth } from './dashboard-health'
 import { readNightRun, type NightRun } from './night-logs'
+import { AWAITING_REVIEW_SQL } from './scanner-published'
 
 // @cdc e-mails — chiffres du résumé hebdomadaire (lundi 8 h 40). Semaine civile de Paris, du lundi
 // 0 h au lundi suivant 0 h, comparée à la semaine d'avant. Requêtes paramétrées, aucune donnée
@@ -84,7 +85,7 @@ export async function getWeeklyDigestData(pool: Pool, weekStart: string): Promis
                   WHERE name = 'Pageview' AND ${week} GROUP BY 1 ORDER BY 2 DESC, 1 LIMIT 5`, w),
       pool.query<{ total: number; new_this_week: number }>(
         `SELECT count(*)::int AS total, count(*) FILTER (WHERE created_at >= ${S} AND created_at < ${E})::int AS new_this_week
-         FROM app.food_analysis WHERE NOT reviewed`,
+         FROM app.food_analysis WHERE ${AWAITING_REVIEW_SQL}`,
         [w],
       ),
       pool.query<{ n: number }>(`SELECT count(*)::int AS n FROM app.scan_report WHERE handled_at IS NULL`),

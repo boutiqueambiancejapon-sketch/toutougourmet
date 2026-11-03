@@ -10,8 +10,11 @@ import { user } from './auth'
 // scan_history relie un compte à ses analyses ; scan_usage compte les appels au fournisseur
 // d'IA par mois (quota). Tout ce qui touche un compte part avec lui (ON DELETE CASCADE).
 
-/** photo : étiquette lue par l'IA · openpetfoodfacts : données de la base ouverte, sans IA */
-export type AnalysisSource = 'photo' | 'openpetfoodfacts'
+/**
+ * photo : étiquette lue par l'IA · openpetfoodfacts : données de la base ouverte, sans IA ·
+ * openfoodfacts : produit pour animaux rangé dans Open Food Facts (dernier recours du code-barres)
+ */
+export type AnalysisSource = 'photo' | 'openpetfoodfacts' | 'openfoodfacts'
 
 const ts = (name: string) => timestamp(name, { withTimezone: true })
 
@@ -29,7 +32,7 @@ export const foodAnalysis = app.table(
     algorithmVersion: text('algorithm_version').notNull(),
     /** Fournisseur et modèle qui ont lu l'étiquette (ex. gemini:gemini-2.5-flash-lite) */
     model: text('model').notNull(),
-    /** Provenance des données : photo lue par l'IA ou fiche Open Pet Food Facts (licence ODbL) */
+    /** Provenance des données : photo lue par l'IA, fiche Open Pet Food Facts ou Open Food Facts (licence ODbL) */
     source: text('source').$type<AnalysisSource>().notNull().default('photo'),
     scanCount: integer('scan_count').notNull().default(1),
     /** Relue par la rédaction : seule une fiche relue est indexée et listée dans le sitemap */
@@ -43,7 +46,7 @@ export const foodAnalysis = app.table(
   (t) => [
     check('food_analysis_score_range', sql`${t.score} IS NULL OR (${t.score} >= 0 AND ${t.score} <= 100)`),
     check('food_analysis_ean_format', sql`${t.ean} IS NULL OR ${t.ean} ~ '^([0-9]{8}|[0-9]{13})$'`),
-    check('food_analysis_source', sql`${t.source} IN ('photo', 'openpetfoodfacts')`),
+    check('food_analysis_source', sql`${t.source} IN ('photo', 'openpetfoodfacts', 'openfoodfacts')`),
   ],
 )
 
