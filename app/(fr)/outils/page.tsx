@@ -7,11 +7,11 @@ import { TOOLS } from '@/components/outils/tool-list'
 export const metadata: Metadata = {
   title: { absolute: 'Calculateurs pour chien : ration, poids, budget, âge' },
   description:
-    'Ration journalière, budget mensuel, poids idéal, coût annuel : des calculateurs gratuits pour mieux nourrir ton chien ou ton chat.',
+    'Ration journalière en grammes, budget mensuel par marque, poids de forme et âge humain : des calculateurs gratuits pour nourrir ton chien.',
   alternates: { canonical: 'https://www.toutou-gourmet.com/outils' },
   openGraph: {
-    title: 'Calculateurs nutrition chien et chat : ration, poids idéal, budget, âge',
-    description: 'Ration journalière, budget par marque, poids idéal, coût annuel : des outils concrets pour mieux nourrir ton animal.',
+    title: 'Calculateurs pour chien : ration, poids, budget, âge',
+    description: 'Ration journalière en grammes, budget mensuel par marque, poids de forme et âge humain : des calculateurs gratuits pour nourrir ton chien.',
     url: 'https://www.toutou-gourmet.com/outils',
     type: 'website',
   },

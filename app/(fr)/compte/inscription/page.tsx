@@ -5,7 +5,10 @@ import { SignUpBenefits, signUpTitle } from '@/components/compte/SignUpBenefits'
 import { SignUpForm } from '@/components/compte/SignUpForm'
 import { getSessionUser } from '@/lib/server/auth'
 
-export const metadata: Metadata = { title: 'Créer un compte' }
+export const metadata: Metadata = {
+  title: 'Créer un compte',
+  description: 'Un compte gratuit garde le profil de ton chien, sa ration, ses pesées et tes scans de croquettes.',
+}
 
 export default async function SignUpPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const returnTo = safeReturnPath((await searchParams).retour)

@@ -24,7 +24,7 @@ const websiteJsonLd = {
   '@type': 'WebSite',
   name: 'Toutou Gourmet',
   url: SITE_URL,
-  description: "Comparateur et guide d'alimentation premium pour chiens et chats en France",
+  description: "Guide de l'alimentation du chien en France : ration, aliments, races et marques comparées",
   potentialAction: {
     '@type': 'SearchAction',
     target: `${SITE_URL}/recherche?q={search_term_string}`,
