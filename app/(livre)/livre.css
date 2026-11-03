@@ -1,0 +1,296 @@
+/* @cdc guide — feuille d'impression du livre « Le guide de la gamelle » (route privée
+   /guide-alimentation/livre, imprimée en PDF par scripts/build-guide.mjs). Pages A4 de taille
+   fixe : chaque page est une <section class="bk-page">, son contenu ne déborde jamais (le script
+   vérifie chaque page et échoue sinon). Couleurs : variables du thème uniquement. Tailles en mm
+   et en pt, unités d'impression. À l'écran, les pages s'empilent pour la relecture. */
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+.bk {
+  margin: 0;
+  background: var(--cream-2);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 10.5pt;
+  line-height: 1.4;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.bk-book {
+  padding: 8mm 0;
+}
+
+.bk-page {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  margin: 0 auto 8mm;
+  overflow: hidden;
+  background: var(--cream);
+  display: flex;
+  flex-direction: column;
+  break-after: page;
+}
+
+.bk-page:last-child {
+  break-after: auto;
+}
+
+@media print {
+  .bk { background: var(--cream); }
+  .bk-book { padding: 0; }
+  .bk-page { margin: 0; }
+}
+
+.bk-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 4mm;
+  padding: 14mm 15mm 17mm;
+}
+
+.bk-foot {
+  position: absolute;
+  left: 15mm;
+  right: 15mm;
+  bottom: 8mm;
+  display: flex;
+  justify-content: space-between;
+  gap: 6mm;
+  padding-top: 2mm;
+  border-top: 0.3mm solid var(--line);
+  font-size: 7.5pt;
+  color: var(--ink-2);
+}
+
+/* ─── Typographie ─────────────────────────────────────────────── */
+
+.bk-kicker {
+  margin: 0;
+  font-size: 7.5pt;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange-ink);
+}
+
+.bk-h1, .bk-h2, .bk-h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 900;
+  line-height: 1.05;
+  color: var(--ink);
+}
+
+.bk-h1 { font-size: 30pt; }
+.bk-h2 { font-size: 24pt; }
+.bk-h3 { font-size: 13pt; line-height: 1.15; }
+
+.bk-lead {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 10.5pt;
+}
+
+.bk-small {
+  margin: 0;
+  font-size: 8.5pt;
+  color: var(--ink-2);
+}
+
+.bk-src {
+  margin: 0;
+  font-size: 8pt;
+  color: var(--ink-2);
+}
+
+.bk-src a, .bk-link {
+  color: var(--orange-ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.bk-head {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5mm;
+}
+
+/* Image qui occupe la place restante de la page ; masquée si cette place est trop petite. */
+.bk-fill {
+  flex: 1 1 0;
+  min-height: 0;
+  container-type: size;
+  border-radius: 4mm;
+  overflow: hidden;
+}
+
+.bk-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@container (max-height: 28mm) {
+  .bk-img { display: none; }
+}
+
+/* ─── Couverture ──────────────────────────────────────────────── */
+
+.bk-cover { background: var(--ink); color: var(--cream); }
+.bk-cover .bk-body { padding: 18mm 18mm 0; gap: 6mm; flex: 0 0 auto; }
+.bk-logo { font-family: var(--display); font-weight: 900; font-size: 16pt; color: var(--cream); }
+.bk-logo b { color: var(--orange); font-weight: 900; }
+.bk-cover-title { margin: 6mm 0 0; font-family: var(--display); font-weight: 900; font-size: 56pt; line-height: 0.95; color: var(--cream); }
+.bk-cover-title b { color: var(--orange); font-weight: 900; }
+.bk-cover-lead { margin: 0; max-width: 140mm; font-size: 14pt; line-height: 1.35; color: var(--cream-2); }
+.bk-badge {
+  align-self: flex-start;
+  border-radius: var(--r-pill);
+  background: var(--orange);
+  color: var(--ink);
+  padding: 1.2mm 4mm;
+  font-size: 9pt;
+  font-weight: 600;
+}
+.bk-cover-img { position: absolute; left: 0; right: 0; bottom: 0; height: 50%; }
+.bk-cover-img .bk-img { height: 100%; }
+
+/* ─── Sommaire ────────────────────────────────────────────────── */
+
+.bk-toc { list-style: none; margin: 4mm 0 0; padding: 0; display: flex; flex-direction: column; gap: 3.5mm; }
+.bk-toc > li { border-bottom: 0.3mm solid var(--line); padding-bottom: 3mm; }
+.bk-toc-row { display: flex; align-items: baseline; gap: 3mm; color: var(--ink); text-decoration: none; }
+.bk-toc-row .t { flex: 1 1 auto; }
+.bk-toc-main { font-family: var(--display); font-weight: 900; font-size: 15pt; }
+.bk-toc-num { font-family: var(--display); font-weight: 900; font-size: 15pt; color: var(--orange-ink); font-variant-numeric: tabular-nums; }
+.bk-toc-sub { list-style: none; margin: 2mm 0 0; padding: 0 0 0 8mm; display: grid; grid-template-columns: 1fr 1fr; gap: 1mm 8mm; }
+.bk-toc-sub .bk-toc-row { font-size: 10pt; color: var(--ink-2); }
+.bk-toc-sub .n { font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+.bk-legend { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3mm; }
+.bk-legend > div { border-radius: 3mm; padding: 3mm 4mm; }
+.bk-legend b { display: block; font-family: var(--display); font-weight: 900; font-size: 11pt; }
+.bk-legend span { font-size: 8.5pt; color: var(--ink-2); }
+
+.bk-tone-oui { background: var(--green-bg); }
+.bk-tone-oui b, .bk-tone-oui h3 { color: var(--green-ink); }
+.bk-tone-moderation { background: var(--amber-bg); }
+.bk-tone-moderation b, .bk-tone-moderation h3 { color: var(--amber-ink); }
+.bk-tone-danger { background: var(--rose-bg); }
+.bk-tone-danger b, .bk-tone-danger h3 { color: var(--rose-ink); }
+
+/* ─── Tableaux ────────────────────────────────────────────────── */
+
+.bk-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border: 0.3mm solid var(--line);
+  border-radius: 2.5mm;
+  overflow: hidden;
+  font-size: 9.5pt;
+}
+.bk-table th, .bk-table td { padding: 1.6mm 3mm; border-bottom: 0.3mm solid var(--line); text-align: left; vertical-align: top; }
+.bk-table th { font-size: 8pt; font-weight: 600; color: var(--ink-2); background: var(--cream-2); }
+.bk-table tr:last-child td { border-bottom: 0; }
+.bk-table .r { text-align: right; font-variant-numeric: tabular-nums; }
+.bk-table .strong { font-weight: 600; }
+
+.bk-tips { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+.bk-tip { background: var(--white); border: 0.3mm solid var(--line); border-radius: 3mm; padding: 3mm 4mm; }
+.bk-tip p { margin: 1mm 0 0; font-size: 9pt; color: var(--ink-2); }
+
+/* ─── Aliments ────────────────────────────────────────────────── */
+
+.bk-family { display: flex; flex-direction: column; gap: 2.5mm; }
+.bk-family + .bk-family { margin-top: 3mm; }
+.bk-verdict { border-radius: 3mm; padding: 2.5mm 3.5mm 3mm; }
+.bk-verdict h3 { margin: 0 0 1.5mm; font-family: var(--display); font-weight: 900; font-size: 11pt; }
+.bk-foods { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8mm 4mm; }
+.bk-foods li { break-inside: avoid; line-height: 1.25; }
+.bk-foods a { color: var(--ink); text-decoration: none; font-weight: 600; font-size: 9.5pt; }
+.bk-foods span { display: block; color: var(--ink-2); font-size: 8pt; }
+
+/* ─── Ouvertures de chapitre ──────────────────────────────────── */
+
+.bk-opener .bk-body { gap: 5mm; }
+.bk-chap-num { font-family: var(--display); font-weight: 900; font-size: 60pt; line-height: 1; color: var(--orange); }
+.bk-index { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.bk-index li { display: flex; align-items: baseline; gap: 3mm; padding: 2mm 0; border-bottom: 0.3mm solid var(--line); }
+.bk-index .t { flex: 1 1 auto; font-weight: 600; }
+.bk-index .c { color: var(--ink-2); font-size: 9pt; }
+.bk-index .n { font-family: var(--display); font-weight: 900; color: var(--orange-ink); }
+
+/* ─── Urgences ────────────────────────────────────────────────── */
+
+.bk-urg { background: var(--rose-bg); }
+.bk-urg .bk-kicker { color: var(--rose-ink); }
+.bk-steps { margin: 0; padding-left: 7mm; list-style: decimal; display: flex; flex-direction: column; gap: 2.5mm; font-size: 12.5pt; }
+.bk-steps li::marker { font-weight: 600; color: var(--rose-ink); }
+.bk-steps span { display: block; font-size: 10pt; color: var(--ink-2); }
+.bk-nums { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+.bk-num {
+  background: var(--white);
+  border: 0.5mm solid var(--ink);
+  border-radius: 3mm;
+  padding: 2.5mm 4mm;
+  box-shadow: 1mm 1mm 0 var(--orange);
+}
+.bk-num span { display: block; font-size: 8.5pt; color: var(--ink-2); }
+.bk-num b { display: block; font-family: var(--display); font-weight: 900; font-size: 22pt; color: var(--ink); font-variant-numeric: tabular-nums; }
+.bk-num em { display: block; font-style: normal; font-size: 8pt; color: var(--ink-2); }
+.bk-write { margin: 0; font-size: 11pt; line-height: 2.2; }
+.bk-write .line { display: inline-block; width: 70mm; border-bottom: 0.3mm dotted var(--ink-2); }
+.bk-write .line.s { width: 45mm; }
+
+/* ─── Recettes ────────────────────────────────────────────────── */
+
+.bk-meta { display: flex; flex-wrap: wrap; gap: 2mm; margin: 0; padding: 0; list-style: none; }
+.bk-meta li { background: var(--amber); border-radius: var(--r-pill); padding: 0.8mm 3mm; font-size: 8.5pt; font-weight: 600; }
+.bk-rec-img { flex: 1 1 62mm; max-height: 105mm; min-height: 0; container-type: size; border-radius: 4mm; overflow: hidden; }
+.bk-two { display: grid; grid-template-columns: 1fr 1.35fr; gap: 6mm; }
+.bk-two h3 { margin: 0 0 1.5mm; font-family: var(--display); font-weight: 900; font-size: 11pt; }
+.bk-two ul, .bk-two ol { margin: 0; padding-left: 4.5mm; list-style: disc; display: flex; flex-direction: column; gap: 1.2mm; font-size: 9.5pt; }
+.bk-warn { margin: 0; color: var(--rose-ink); font-weight: 600; font-size: 9.5pt; }
+
+/* ─── Dernière page ───────────────────────────────────────────── */
+
+.bk-links { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3mm; }
+.bk-links li { background: var(--white); border: 0.3mm solid var(--line); border-radius: 3mm; padding: 3mm 4mm; }
+.bk-links b { display: block; font-family: var(--display); font-weight: 900; font-size: 12pt; }
+.bk-links p { margin: 0.8mm 0 0; font-size: 9pt; color: var(--ink-2); }
+.bk-links a { display: inline-block; margin-top: 1mm; }
+
+.bk-two ol { list-style: decimal; }
+.bk-two li::marker { color: var(--orange-ink); font-weight: 600; }
+/* Recette sans photo d'article : le texte prend la place. */
+.bk-recipe-text .bk-two ul, .bk-recipe-text .bk-two ol { font-size: 11pt; gap: 2mm; }
+.bk-recipe-text .bk-two h3 { font-size: 13pt; }
+.bk-recipe-text .bk-table { font-size: 10.5pt; }
+.bk-recipe-text .bk-table th, .bk-recipe-text .bk-table td { padding: 2.2mm 3.5mm; }
+
+/* Page frigo : lisible de loin, elle occupe toute la feuille. */
+.bk-urg .bk-body { gap: 7mm; }
+.bk-urg .bk-steps { font-size: 15pt; gap: 4mm; }
+.bk-urg .bk-steps span { font-size: 11.5pt; }
+.bk-urg .bk-nums { gap: 5mm; }
+.bk-urg .bk-num { padding: 4mm 5mm; }
+.bk-urg .bk-num span { font-size: 10pt; }
+.bk-urg .bk-num b { font-size: 28pt; }
+.bk-urg .bk-write { font-size: 13pt; line-height: 2.6; }
+.bk-urg .bk-verdict h3 { font-size: 13pt; }
+.bk-urg .bk-verdict .bk-small { font-size: 11pt; line-height: 1.5; }
+.bk-urg .bk-small { font-size: 10pt; }
+.bk-recipe-text .bk-two ul, .bk-recipe-text .bk-two ol { font-size: 12pt; gap: 2.5mm; }
+.bk-recipe-text .bk-table { font-size: 11.5pt; }
+.bk-urg .bk-write .line { width: 55mm; }
+.bk-urg .bk-write .line.s { width: 38mm; }

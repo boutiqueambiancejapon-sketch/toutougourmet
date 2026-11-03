@@ -1,8 +1,11 @@
 import type { Root, RootContent, Heading } from 'mdast'
+import { articleEndCta } from './article-cro'
 
 // @cdc CRO compte (maquette 3A) — encart « compte » de fin d'article, juste avant la FAQ, selon
 // le sujet. Urgences et aliments « danger » : aucun encart (on ne vend rien à quelqu'un qui
 // s'inquiète). Pages race : l'encart race existe déjà (RaceAccountInvite), un seul par article.
+// Aliments autorisés ou à limiter et recettes : le guide PDF est l'encart de fin (un seul appel à
+// l'action principal, docs/v2/cro-carte.md), donc pas d'encart compte (lib/article-cro.ts).
 
 export type ArticleSignupTopic = 'kilos' | 'poids' | 'croquettes' | 'aliments'
 
@@ -18,6 +21,7 @@ const KIBBLE = /croquette|marque|avis|comparatif|etiquette|composition|additif|g
 
 export function articleSignupTopic({ slug, categorySlug, verdict, hasBreed }: TopicInput): ArticleSignupTopic | null {
   if (categorySlug === 'urgences' || verdict === 'danger' || hasBreed) return null
+  if (articleEndCta({ slug, categorySlug, verdict }) !== null) return null
   if (WEIGHT.test(slug)) return 'kilos'
   if (categorySlug === 'avis-marques' || KIBBLE.test(slug)) return 'croquettes'
   if (categorySlug === 'sante') return 'poids'

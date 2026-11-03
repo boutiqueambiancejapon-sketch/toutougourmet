@@ -16,6 +16,7 @@ const EMPTY_SUMMARY: SummaryData = {
   clicksByPlace: [],
   clicksByPage: [],
   signupsByPlace: [],
+  guide: [],
   tools: [],
   foodSearches: [],
   foodMisses: [],
