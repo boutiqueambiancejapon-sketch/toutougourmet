@@ -33,7 +33,9 @@ export const STERILIZED_FACTOR = 0.85
 
 /** Densités énergétiques moyennes (kcal pour 100 g) utilisées pour convertir en grammes. */
 export const KIBBLE_KCAL_100G = 360
-export const FRESH_KCAL_100G = 120
+// @cdc outils — repas frais : 133 kcal/100 g, moyenne publiée par Dog Chef (help.dogchef.com,
+// « How many kcal are in the Dog Chef fresh meals? »). L'ancienne valeur (120) gonflait les grammes de 11 %.
+export const FRESH_KCAL_100G = 133
 
 export interface RationInput {
   animal: Animal
