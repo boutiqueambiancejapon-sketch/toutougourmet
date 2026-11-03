@@ -11,7 +11,7 @@ import { DESKTOP_NAV } from './nav-items'
 export function SiteHeader() {
   return (
     <header className="v2 sticky top-0 z-40 border-b border-line bg-cream">
-      <div className="mx-auto flex max-w-page items-center gap-3 px-4 py-2.5 md:gap-7 md:px-8 md:py-3">
+      <div className="mx-auto flex max-w-page items-center gap-3 px-4 py-2.5 md:gap-4 md:px-8 md:py-3 xl:gap-7">
         <Brand />
         <nav aria-label="Navigation principale" className="hidden flex-1 gap-1 md:flex">
           {DESKTOP_NAV.map((item) => (
@@ -19,7 +19,7 @@ export function SiteHeader() {
               key={item.href}
               href={item.href}
               match={item.match}
-              className="rounded-control px-3.5 py-2.5 text-[15px] font-semibold text-ink no-underline hover:bg-cream-2 aria-[current=page]:bg-amber"
+              className="rounded-control px-2 py-2.5 text-[15px] lg:px-3.5 font-semibold text-ink no-underline hover:bg-cream-2 aria-[current=page]:bg-amber"
             >
               {item.icon ? (
                 <span className="inline-flex items-center gap-1.5">
@@ -35,7 +35,7 @@ export function SiteHeader() {
         <HeaderAccount />
         <Link
           href="/quiz"
-          className="hidden min-h-11 shrink-0 items-center whitespace-nowrap rounded-control bg-orange px-4 text-[15px] font-semibold text-ink no-underline md:inline-flex"
+          className="hidden min-h-11 shrink-0 items-center whitespace-nowrap rounded-control bg-orange px-4 text-[15px] font-semibold text-ink no-underline lg:inline-flex"
         >
           <span className="hidden 2xl:inline">Faire le test de mon chien</span>
           <span className="2xl:hidden">Le test</span>
