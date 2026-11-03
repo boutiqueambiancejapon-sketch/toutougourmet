@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState, useSyncExternalStore } from 'react'
 import type { Article } from '@/lib/mdx'
 import { estimateReadTime } from '@/lib/utils'
 import { BlogFeaturedCard } from './BlogFeaturedCard'
@@ -11,6 +11,7 @@ import { BlogSortButtons, type BlogSort } from './BlogSortButtons'
 import { BlogPagination } from './BlogPagination'
 import { CATEGORY_ORDER } from './blog-categories'
 
+const noop = () => () => {}
 const PAGE_SIZE = 16 // 4 rows × 4 cols on desktop
 
 interface BlogExplorerProps {
@@ -57,26 +58,14 @@ function buildCategoryCounts(articles: Article[]): Array<{ label: string; count:
 
 export function BlogExplorer({ articles, featured }: BlogExplorerProps) {
   const [query, setQuery] = useState('')
-  const [activeCat, setActiveCat] = useState<string>('all')
+  const [picked, setActiveCat] = useState<string | null>(null)
+  // Filtre pré-sélectionné par ?cat=Santé (liens « Voir tout » de l'accueil), lu sans effet
+  const urlCat = useSyncExternalStore(noop, () => new URLSearchParams(window.location.search).get('cat'), () => null)
+  const activeCat = picked ?? (urlCat && articles.some((a) => a.frontmatter.category === urlCat) ? urlCat : 'all')
   const [sort, setSort] = useState<BlogSort>('recent')
   const [page, setPage] = useState(1)
 
-  // Pré-sélection du filtre catégorie depuis le querystring (ex: /blog?cat=Santé)
-  // Permet aux liens "Voir tout" de la home de pointer directement vers la
-  // bonne catégorie sans réimplémenter la liste filtrée ailleurs.
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-    const params = new URLSearchParams(window.location.search)
-    const cat = params.get('cat')
-    if (!cat) return
-    // Vérifier que le libellé existe dans les articles (évite les valeurs invalides)
-    const exists = articles.some((a) => a.frontmatter.category === cat)
-    if (exists) setActiveCat(cat)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
   const categoryChips = useMemo(() => buildCategoryCounts(articles), [articles])
-
   const filtered = useMemo(
     () => sortArticles(filterArticles(articles, query, activeCat), sort),
     [articles, query, activeCat, sort]

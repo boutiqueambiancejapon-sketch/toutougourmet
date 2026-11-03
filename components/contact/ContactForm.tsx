@@ -46,7 +46,6 @@ export function ContactForm() {
   if (status === 'success') {
     return (
       <div className="bg-[var(--bg-surface-2)] border border-[var(--accent-3)] rounded-[var(--radius-xl)] p-8 text-center">
-        <span className="text-4xl block mb-3">🐾</span>
         <p className="font-bold text-[var(--text-primary)] text-lg mb-1">Message envoyé !</p>
         <p className="text-[var(--text-secondary)] text-sm">
           On reviendra vers toi dans les meilleurs délais.

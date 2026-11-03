@@ -25,8 +25,7 @@ export function Disclosure({ type = 'short' }: DisclosureProps) {
 
   return (
     <p className="caption text-center text-[var(--text-muted)] text-xs">
-      🔗 Lien affilié — on perçoit une commission si tu commandes, sans impact sur le prix que tu
-      paies.{' '}
+      Lien partenaire&nbsp;: on touche une commission si tu commandes, sans surcoût pour toi.{' '}
       <Link href="/a-propos#affiliation" className="underline hover:text-orange-ink">
         En savoir plus
       </Link>

@@ -1,5 +1,7 @@
 'use client'
 
+import { IconSearch } from '@/components/icons'
+
 interface BlogSearchBarProps {
   value: string
   onChange: (v: string) => void
@@ -12,7 +14,7 @@ export function BlogSearchBar({ value, onChange }: BlogSearchBarProps) {
         aria-hidden="true"
         className="absolute left-4 top-1/2 -translate-y-1/2 text-sm text-[var(--text-muted)]"
       >
-        🔍
+        <IconSearch className="size-4" />
       </span>
       <span className="sr-only">Rechercher un article</span>
       <input

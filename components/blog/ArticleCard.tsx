@@ -11,7 +11,7 @@ interface ArticleCardProps {
 /**
  * Card d'article — pattern "Option C".
  *
- * - `vertical` : fond pâle teinté par catégorie + emoji watermark + chip
+ * - `vertical` : fond pâle teinté par catégorie + chip
  *   (cf. BlogPostCard, même look pour cohérence sur tout le blog)
  * - `horizontal` : version compacte avec accent latéral coloré, sans watermark
  *   (utilisée pour les sidebars / listes en colonne étroite)
@@ -58,27 +58,13 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
     )
   }
 
-  // Variant `vertical` — pattern Option C : fond pastel + emoji watermark + chip
+  // Variant `vertical` — pattern Option C : fond pastel + chip
   return (
     <Link
       href={href}
       className="group relative flex flex-col rounded-[var(--radius-xl)] overflow-hidden border border-[var(--border)] hover:-translate-y-1 hover:shadow-[var(--shadow-md)] hover:border-[var(--accent-1)] transition-all duration-300 h-full"
       style={{ background: visual.bgVar }}
     >
-      {/* Emoji watermark */}
-      <span
-        aria-hidden="true"
-        className="absolute pointer-events-none select-none leading-none"
-        style={{
-          right: '-12px',
-          bottom: '-26px',
-          fontSize: '130px',
-          opacity: 0.16,
-          transform: 'rotate(-8deg)',
-        }}
-      >
-        {visual.emoji}
-      </span>
 
       {/* Header : chip catégorie */}
       <div className="relative px-5 pt-5">

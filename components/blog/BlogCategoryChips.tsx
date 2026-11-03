@@ -19,14 +19,12 @@ function Chip({
   count,
   active,
   pillVar,
-  emoji,
   onClick,
 }: {
   label: string
   count: number
   active: boolean
   pillVar: string
-  emoji: string
   onClick: () => void
 }) {
   return (
@@ -39,7 +37,6 @@ function Chip({
         color: active ? 'var(--text-on-dark)' : 'var(--text-secondary)',
       }}
     >
-      <span aria-hidden="true">{emoji}</span>
       {label}
       <span
         className="text-[11px] font-bold px-2 py-0.5 rounded-full"
@@ -63,7 +60,6 @@ export function BlogCategoryChips({ total, categories, active, onChange }: BlogC
         count={total}
         active={active === 'all'}
         pillVar="var(--bg-surface-2)"
-        emoji="📚"
         onClick={() => onChange('all')}
       />
       {categories.map((c) => {
@@ -75,7 +71,6 @@ export function BlogCategoryChips({ total, categories, active, onChange }: BlogC
             count={c.count}
             active={active === c.label}
             pillVar={v.pillVar}
-            emoji={v.emoji}
             onClick={() => onChange(c.label)}
           />
         )

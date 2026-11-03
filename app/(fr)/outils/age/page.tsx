@@ -7,7 +7,7 @@ import { calculateDogHumanAge } from '@/lib/calculators'
 export const metadata: Metadata = {
   title: { absolute: 'Âge de ton chien en âge humain : calculateur par gabarit' },
   description:
-    "Quel âge a vraiment ton chien en âge humain ? Convertis l'âge de ton chien selon son gabarit, plus juste que la règle des 7 ans. Gratuit et instantané.",
+    "Quel âge a vraiment ton chien en âge humain ? Convertis l'âge de ton chien selon son gabarit, plus juste que la règle des 7 ans.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/outils/age' },
   openGraph: {
     title: 'Calculateur âge chien en âge humain : la conversion selon le gabarit',

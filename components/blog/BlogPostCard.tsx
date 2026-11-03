@@ -13,7 +13,7 @@ function articleHref(article: Article): string {
 }
 
 /**
- * Card "Option C" — fond pâle teinté par catégorie + emoji watermark
+ * Card "Option C" — fond pâle teinté par catégorie
  * en bas-droite + chip catégorie en haut-gauche.
  *
  * Couleurs sourcées depuis `blog-categories.ts` (pas de hardcoding).
@@ -29,20 +29,6 @@ export function BlogPostCard({ article }: BlogPostCardProps) {
       className="group relative flex flex-col rounded-[var(--radius-xl)] overflow-hidden border border-[var(--border)] hover:-translate-y-1 hover:shadow-[var(--shadow-md)] hover:border-[var(--accent-1)] transition-all duration-300 h-full"
       style={{ background: visual.bgVar }}
     >
-      {/* Emoji watermark — caractère visuel sans surcharger le scan */}
-      <span
-        aria-hidden="true"
-        className="absolute pointer-events-none select-none leading-none"
-        style={{
-          right: '-12px',
-          bottom: '-26px',
-          fontSize: '130px',
-          opacity: 0.16,
-          transform: 'rotate(-8deg)',
-        }}
-      >
-        {visual.emoji}
-      </span>
 
       {/* Header : chip catégorie */}
       <div className="relative px-5 pt-5">
