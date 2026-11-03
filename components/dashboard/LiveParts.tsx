@@ -22,6 +22,8 @@ const LABELS: Record<string, string> = {
   'Account Verified': 'E-mail confirmé',
   'Guide Signup': 'Inscription au guide',
   'Guide Download': 'Guide téléchargé',
+  'Guide Popup View': 'Panneau du guide affiché',
+  'Tool Email Sent': 'Résultat d’outil envoyé par e-mail',
 }
 
 const KIND: Record<string, string> = { ai_training: 'entraînement', ai_search: 'moteur IA', ai_user: 'lecture en direct' }

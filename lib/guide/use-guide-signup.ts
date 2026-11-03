@@ -4,9 +4,11 @@ import { useState } from 'react'
 import { track } from '@/lib/analytics'
 import { isDisposableRejection } from '@/lib/subscribe-client'
 import { GUIDE_SOURCE, type GuidePlace } from './config'
+import { rememberSubscribed } from './popup-state'
 
 // @cdc guide — envoi de l'inscription au guide vers /api/contact (source « guide ») : partagé par
-// la page /guide-alimentation et l'encart de fin d'article. Succès mesuré : Guide Signup + place.
+// la page /guide-alimentation, les encarts d'article et le panneau. Succès mesuré : Guide Signup +
+// place ; l'inscription est mémorisée (le panneau du guide ne s'ouvre plus).
 
 export type GuideSignupStatus = 'idle' | 'loading' | 'success' | 'error' | 'disposable'
 
@@ -27,6 +29,7 @@ export function useGuideSignup(place: GuidePlace, article?: string) {
       if (await isDisposableRejection(res)) return setStatus('disposable')
       if (!res.ok) throw new Error(String(res.status))
       setStatus('success')
+      rememberSubscribed()
       track('Guide Signup', article ? { place, article } : { place })
     } catch {
       setStatus('error')

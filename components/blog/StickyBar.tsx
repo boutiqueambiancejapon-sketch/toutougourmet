@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useState, useSyncExternalStore, type ReactNode } from 'react'
 import { IconClose } from '@/components/icons'
+import { isPopupOpen, POPUP_EVENT } from '@/lib/guide/popup-state'
 
 // @cdc 04-pages — coque commune des bandeaux collants d'affiliation (StickyCta, StickyCtaDouble,
 // bandeau Dog Chef de lib/sticky-cta-config) : une seule ligne compacte sur mobile, au-dessus de la barre d'onglets,
@@ -66,13 +67,20 @@ function rememberClosed(): void {
   }
 }
 
+function onPopupChange(cb: () => void): () => void {
+  window.addEventListener(POPUP_EVENT, cb)
+  return () => window.removeEventListener(POPUP_EVENT, cb)
+}
+
 export function StickyBar({ children }: { children: ReactNode }) {
   const visible = useScrolledPast()
+  // Panneau du guide ouvert (components/guide/GuidePopup.tsx) : le bandeau s'efface le temps qu'il est là.
+  const popupOpen = useSyncExternalStore(onPopupChange, isPopupOpen, () => false)
   const midInView = useMidCtaInView()
   const [dismissed, setDismissed] = useState(false)
   // `visible` n'est vrai que dans le navigateur, après défilement : lire le stockage ici ne crée
   // aucun écart avec le rendu serveur.
-  const shown = visible && !dismissed && !midInView && !closedRecently()
+  const shown = visible && !dismissed && !midInView && !popupOpen && !closedRecently()
   useEffect(() => {
     if (!shown) return
     document.documentElement.dataset.sticky = '1'
@@ -83,7 +91,7 @@ export function StickyBar({ children }: { children: ReactNode }) {
   if (!shown) return null
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 px-2 pb-[calc(8px+env(safe-area-inset-bottom))] md:px-4 md:pb-4">
-      <div className="v2 pointer-events-auto mx-auto flex max-w-[720px] items-center gap-2 rounded-box bg-ink py-1.5 pr-1 pl-3 text-cream md:gap-4 md:py-3 md:pr-2 md:pl-4">
+      <div data-cta="sticky" className="v2 pointer-events-auto mx-auto flex max-w-[720px] items-center gap-2 rounded-box bg-ink py-1.5 pr-1 pl-3 text-cream md:gap-4 md:py-3 md:pr-2 md:pl-4">
         {children}
         <button
           type="button"

@@ -73,14 +73,22 @@ export function RationCalculatorFromUrl() {
             Modifier son profil
           </Link>
         </p>
-        <RationCalculator key={`compte-${dog.id}`} prefill={dog.prefill} source="compte" />
+        <RationCalculator key={`compte-${dog.id}`} prefill={dog.prefill} source="compte" dogName={dog.name} />
       </div>
     )
   }
   return <RationCalculator key={query} prefill={parseRationParams(params)} />
 }
 
-export function RationCalculator({ prefill = {}, source = 'lien' }: { prefill?: RationPrefill; source?: 'lien' | 'compte' }) {
+export function RationCalculator({
+  prefill = {},
+  source = 'lien',
+  dogName,
+}: {
+  prefill?: RationPrefill
+  source?: 'lien' | 'compte'
+  dogName?: string
+}) {
   const weightId = useId()
   // Les clés absentes de l'URL valent undefined : elles ne doivent pas écraser les valeurs par défaut.
   const initial: FormState = { ...DEFAULT_FORM, ...Object.fromEntries(Object.entries(prefill).filter(([, v]) => v !== undefined)) }
@@ -124,7 +132,13 @@ export function RationCalculator({ prefill = {}, source = 'lien' }: { prefill?: 
         <SubmitButton>Calculer sa ration</SubmitButton>
       </ToolCard>
       <div aria-live="polite">
-        {result ? <RationResult result={result} form={{ ...form, weightKg: parseFloat(form.weightKg.replace(',', '.')) }} /> : null}
+        {result ? (
+          <RationResult
+            result={result}
+            form={{ ...form, highEnergy: form.isHighEnergy, weightKg: parseFloat(form.weightKg.replace(',', '.')) }}
+            dogName={dogName}
+          />
+        ) : null}
       </div>
     </div>
   )

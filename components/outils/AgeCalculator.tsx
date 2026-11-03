@@ -59,7 +59,7 @@ export function AgeCalculator({ dog }: { dog?: AccountDog | null }) {
   const [years, setYears] = useState(known !== null ? String(Math.floor(known / 12)) : '')
   const [months, setMonths] = useState(known !== null ? String(known % 12) : '0')
   const [size, setSize] = useState<SizeCategory>(dog?.weightKg ? sizeOf(dog.weightKg) : 'moyen')
-  const [result, setResult] = useState<{ age: DogAgeResult; label: string } | null>(null)
+  const [result, setResult] = useState<{ age: DogAgeResult; label: string; years: number; months: number; size: SizeCategory } | null>(null)
 
   function reset<T>(setter: (v: T) => void) {
     return (v: T) => {
@@ -74,7 +74,7 @@ export function AgeCalculator({ dog }: { dog?: AccountDog | null }) {
     const m = parseInt(months, 10) || 0
     if (!Number.isFinite(y) || y < 0 || y > 25 || y + m === 0) return
     const label = m > 0 ? `${y} an${y > 1 ? 's' : ''} et ${m} mois` : `${y} an${y > 1 ? 's' : ''}`
-    setResult({ age: calculateDogHumanAge(y + m / 12, size), label })
+    setResult({ age: calculateDogHumanAge(y + m / 12, size), label, years: y, months: m, size })
     track('Tool Result', { tool: 'age' })
   }
 
@@ -104,7 +104,9 @@ export function AgeCalculator({ dog }: { dog?: AccountDog | null }) {
       </ToolCard>
       <div aria-live="polite">
         {result && age ? (
-          <ToolResult tool="age" summary={`${result.label}, gabarit ${size} : ${age.humanAge} ans humains (${age.lifeStage})`} steps={nextSteps(age.stagePill, size)}>
+          <ToolResult tool="age" summary={`${result.label}, gabarit ${size} : ${age.humanAge} ans humains (${age.lifeStage})`} steps={nextSteps(age.stagePill, size)}
+            emailInput={{ tool: 'age', years: result.years, months: result.months, size: result.size }}
+          >
             <BigResult value={`${age.humanAge} ans`} unit="en âge humain">
               <p>
                 <strong className="font-semibold text-ink">{age.lifeStage}.</strong> {age.context}

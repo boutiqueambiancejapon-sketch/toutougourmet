@@ -354,6 +354,8 @@ h3:where(:not(.v2, .v2 *)) {
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
+/* Titre du panneau du guide : focus posé par le script à l'ouverture (annonce du dialogue), hors tabulation. */
+[data-popup-title]:focus-visible { outline: none; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0ms !important; animation-duration: 0ms !important; }
@@ -525,6 +527,10 @@ h3 {
   .v2 button:active, .v2 a.rounded-control:active, .v2 a.rounded-box:active { transform: scale(0.96); }
   @keyframes tg-hop { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-5px); } }
   .v2 nav a[aria-current='page'] svg { animation: tg-hop 420ms cubic-bezier(0.3, 1.4, 0.5, 1); }
+
+  /* Panneau du guide (components/guide/GuidePopup.tsx) : monte du bas. */
+  @keyframes tg-sheet { from { transform: translateY(100%); opacity: 0; } to { transform: none; opacity: 1; } }
+  .tg-sheet { animation: tg-sheet 280ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 
   /* Illustration du hero : un léger balancement au survol. */
   @keyframes tg-wiggle { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-1.2deg); } 75% { transform: rotate(1.2deg); } }

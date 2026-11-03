@@ -34,6 +34,7 @@ export function ConsentBanner() {
 
   return (
     <section
+      data-consent-banner
       aria-label="Cookies de mesure d'audience"
       className="v2 fixed inset-x-2 bottom-[calc(var(--tabbar-h)+env(safe-area-inset-bottom)+8px)] z-50 mx-auto flex max-w-[640px] flex-col gap-3 rounded-card bg-ink p-4 text-cream shadow-[4px_4px_0_var(--orange)] md:bottom-4 md:p-5 print:hidden"
     >

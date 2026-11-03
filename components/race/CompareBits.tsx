@@ -1,3 +1,4 @@
+import { PartnerButton } from '@/components/cro/PartnerButton'
 import { FIT_LABELS, type CompareOffer, type CompareRow, type Fit } from './compare-data'
 
 // @cdc affiliation — petites pièces du comparatif des fiches races : pastilles, remise, boutons.
@@ -48,27 +49,19 @@ export function Discount({ offer }: { offer: CompareOffer }) {
 const BUTTON =
   'inline-flex min-h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-control px-4 font-semibold text-ink no-underline'
 
-/** Bouton orange plein (« Notre choix ») ou bordé (les autres). */
+/** Bouton orange plein (« Notre choix ») ou bordé (les autres) : components/cro/PartnerButton. */
 export function OfferButton({ row, full = false }: { row: CompareRow; full?: boolean }) {
   if (!row.offer) return null
   const solid = row.pick
   return (
-    <a
-      href={row.offer.url}
-      target="_blank"
-      rel="sponsored noopener"
-      className={`${BUTTON} ${solid ? 'bg-orange shadow-[0_3px_0_var(--orange-ink)]' : 'border-[1.5px] border-ink bg-paper'} ${full ? 'w-full' : ''}`}
-    >
-      {solid ? (
-        <>
-          Voir l&apos;offre<span className={full ? '' : 'sr-only'}>&nbsp;{row.name}</span>
-        </>
-      ) : (
-        <>
-          Voir<span className="sr-only"> l&apos;offre {row.name}</span>
-        </>
-      )}
-    </a>
+    <span className={`flex flex-col gap-1 ${full ? 'w-full' : 'items-end'}`}>
+      <PartnerButton
+        href={row.offer.url}
+        fallback={solid && full ? `Voir l'offre ${row.name}` : "Voir l'offre"}
+        srLabel={`(${row.name}, nouvel onglet)`}
+        className={`${BUTTON} ${solid ? 'bg-orange shadow-[0_3px_0_var(--orange-ink)]' : 'border-[1.5px] border-ink bg-paper'} ${full ? 'w-full' : ''}`}
+      />
+    </span>
   )
 }
 

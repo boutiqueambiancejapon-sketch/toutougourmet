@@ -1,9 +1,13 @@
-import type { PartnerData } from '@/lib/server/dashboard-queries'
+import type { PartnerData, Row } from '@/lib/server/dashboard-queries'
+import { clickPlaceLabel, emailPlaceLabel } from '@/lib/dashboard/place-labels'
 import { BarList } from './BarList'
 import { Panel, SectionTitle } from './Panel'
 
 // @cdc tableau de bord — onglet Conversions : clics partenaires au détail (marque, emplacement,
-// page de départ), puis panneaux des inscriptions à la lettre et au guide.
+// page de départ), puis panneaux des inscriptions à la lettre et au guide. Emplacements en clair
+// (lib/dashboard/place-labels.ts) : panneau du guide, haut d'article, e-mail de résultat d'outil…
+
+const named = (rows: Row[], label: (raw: string) => string): Row[] => rows.map((r) => ({ ...r, label: label(r.label) }))
 
 export function PartnersSection({ data }: { data: PartnerData }) {
   return (
@@ -14,7 +18,7 @@ export function PartnersSection({ data }: { data: PartnerData }) {
           <BarList rows={data.clicksByBrand} empty="Aucun clic partenaire sur la période." />
         </Panel>
         <Panel title="Par emplacement" hint="Bouton, encart ou tableau d’où part le clic.">
-          <BarList rows={data.clicksByPlace} empty="Aucun emplacement à classer pour l’instant." />
+          <BarList rows={named(data.clicksByPlace, clickPlaceLabel)} empty="Aucun emplacement à classer pour l’instant." />
         </Panel>
         <Panel title="Pages qui envoient le plus de clics" wide>
           <BarList rows={data.clicksByPage} empty="Aucune page n’a encore envoyé de clic." />
@@ -27,8 +31,8 @@ export function PartnersSection({ data }: { data: PartnerData }) {
 export function EmailSignupPanels({ data }: { data: PartnerData }) {
   return (
     <>
-      <Panel title="Inscriptions à la lettre par source" hint="« guide · … » : inscription au guide PDF, selon l’encart.">
-        <BarList rows={data.signupsByPlace} empty="Aucune inscription sur la période." />
+      <Panel title="Inscriptions à la lettre par source" hint="« Guide · … » : inscription au guide PDF, selon l’encart (panneau, haut ou fin d’article…).">
+        <BarList rows={named(data.signupsByPlace, emailPlaceLabel)} empty="Aucune inscription sur la période." />
       </Panel>
       <Panel title="Le guide de la gamelle" hint="Téléchargements : clics sur « Télécharger le PDF » du site (le lien de l’e-mail n’est pas compté).">
         <BarList rows={data.guide} empty="Aucune inscription au guide sur la période." />
