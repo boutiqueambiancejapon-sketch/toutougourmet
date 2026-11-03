@@ -114,10 +114,15 @@ export default function PolitiqueConfidentialitePage() {
           </Section>
 
           <Section title="Newsletter">
-            <p>
+            <p className="mb-2">
               Si tu t&apos;inscris à notre newsletter, ton email est uniquement utilisé pour t&apos;envoyer nos
               communications. Il n&apos;est jamais vendu, ni partagé avec des tiers à des fins commerciales.
               Tu peux te désabonner à tout moment en un clic.
+            </p>
+            <p>
+              Seul le responsable du site voit les adresses inscrites à la lettre et celles des comptes, dans
+              un espace privé protégé par mot de passe. Il s&apos;en sert pour gérer la lettre et les comptes
+              (répondre à une demande, retirer une adresse), et pour rien d&apos;autre.
             </p>
           </Section>
 
