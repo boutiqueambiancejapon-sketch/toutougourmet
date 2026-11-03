@@ -126,7 +126,7 @@ Objectif : `dashboard.toutou-gourmet.com`, nos chiffres à nous (actions des vis
 
 ## Reste à faire (point du 2026-11-03)
 
-- [ ] Mettre en ligne `release/scanner-garde` (friandises, copie Open Pet Food Facts, fiche de garde, SEO scanner) : 3 tables à créer par le propriétaire (journal du 2026-11-03).
+- [x] Mettre en ligne `release/scanner-garde` (friandises, copie Open Pet Food Facts, fiche de garde, SEO scanner) : 3 tables à créer par le propriétaire (journal du 2026-11-03).
 - [ ] « Il a mangé quoi ? » (lot 2) : outil niveau de risque + renvoi article et centres antipoison. Pas commencé.
 - [ ] Miniatures de partage par type de page (lot 1) : article, race, outil existent ; catégorie et accueil à vérifier.
 - [ ] Maillage par entités automatique (lot 1) : articles liés en place ; encarts outils ajoutés la nuit ; liens aliment ↔ race ↔ santé à automatiser.
@@ -137,3 +137,11 @@ Objectif : `dashboard.toutou-gourmet.com`, nos chiffres à nous (actions des vis
 - [ ] Paiement Premium (lot 7) : en attente, pas de Stripe pour l'instant (Premium gratuit).
 - [ ] Anglais (lot 8) : en attente (« pas d'anglais pour le moment »).
 - [ ] Bascule, fin (lot 9) : fusionner `v2` dans la branche de prod GitHub (385 commits d'écart au 2026-11-03), repasser `DEPLOY_BRANCH`, fermer le projet Vercel (domaines à retirer par le propriétaire), racine `toutou-gourmet.com` vers le VPS.
+
+## Fiche de garde (2026-11-03, `feat/fiche-garde`)
+
+- [x] Page outil `/outils/fiche-de-garde`, formulaire sans compte, modèle vierge A4
+- [x] Espace compte : fiches par chien, table `app.sitter_sheet`, export RGPD
+- [x] Page du gardien `/garde/[jeton]` + PDF A4
+- [x] Article `faire-garder-son-chien-vacances-alimentation`
+- [ ] Fusion dans `v2`, migration en production (numéro à harmoniser avec `0005_opff_import`)

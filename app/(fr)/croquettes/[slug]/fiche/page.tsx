@@ -1,6 +1,6 @@
 // @cdc lot 6 — fiche A4 imprimable d'un produit scanné, pour l'impression depuis un ordinateur.
 // Bouton principal : le PDF d'une page (route fiche.pdf). L'impression tient aussi sur une page
-// A4 (tailles print: réduites). noindex, hors sitemap.
+// A4 (tailles print: réduites). noindex, hors sitemap. Friandise : alertes sous l'en-tête.
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -8,7 +8,10 @@ import { DownloadLink, PrintFicheButton } from '@/components/scanner/DownloadLin
 import { FicheCriteria } from '@/components/scanner/fiche/FicheCriteria'
 import { FicheIngredients } from '@/components/scanner/fiche/FicheIngredients'
 import { FicheStamp } from '@/components/scanner/fiche/FicheStamp'
-import { OPFF_CREDIT } from '@/components/scanner/SourceNotice'
+import { FichePrintBottom } from '@/components/scanner/fiche/FichePrintBottom'
+import { openDataCredit } from '@/components/scanner/SourceNotice'
+import { TreatAlerts } from '@/components/scanner/treat/TreatAlerts'
+import { nounWords } from '@/lib/scanner/food-noun'
 import { getDb } from '@/lib/server/drizzle'
 import { getBySlug } from '@/lib/server/scanner'
 
@@ -22,18 +25,16 @@ async function load(slug: string) {
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const row = await load((await params).slug)
-  const name = row ? [row.brand, row.product].filter(Boolean).join(' ') || 'Croquettes' : 'Fiche introuvable'
+  const name = row ? [row.brand, row.product].filter(Boolean).join(' ') || nounWords(row.extracted, row.details).forDog : 'Fiche introuvable'
   return { title: `${name}, fiche à imprimer`, robots: { index: false, follow: false } }
 }
-
-const pct = (n: number | null) => (n === null ? 'non calculé' : `${n.toLocaleString('fr-FR', { maximumFractionDigits: 1 })} %`)
 
 export default async function FichePage({ params }: Params) {
   const row = await load((await params).slug)
   if (!row) notFound()
   const name = row.product ?? row.brand ?? 'Produit sans nom lisible'
+  const words = nounWords(row.extracted, row.details)
   const date = row.createdAt.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' })
-  const dm = row.details.dryMatter
   return (
     <div className="v2 bg-cream print:bg-paper print:[print-color-adjust:exact]">
       <style>{'@page { size: A4; margin: 8mm; }'}</style>
@@ -63,39 +64,17 @@ export default async function FichePage({ params }: Params) {
           <p className="m-0 rounded-box bg-amber-bg p-3 text-sm text-amber-ink print:p-2 print:text-[10px]">{`Absent de l'étiquette : ${row.details.missing.join(', ')}. La note porte sur les critères évalués.`}</p>
         ) : null}
 
+        {row.details.treat ? <TreatAlerts alerts={row.details.treat.alerts} /> : null}
         <FicheCriteria details={row.details} />
         <FicheIngredients label={row.extracted} />
 
-        <div className="grid gap-4 sm:grid-cols-2 print:grid-cols-2 print:gap-3">
-          <section className="flex flex-col gap-2 rounded-card border border-line bg-paper p-4 print:break-inside-avoid print:p-3">
-            <h2 className="m-0 font-display text-lg font-black text-ink print:text-[14px]">Sur matière sèche</h2>
-            <dl className="m-0 grid grid-cols-[1fr_auto] gap-x-3 gap-y-1 text-[15px] print:text-[11px]">
-              <dt className="text-ink-2">Protéines</dt>
-              <dd className="m-0 text-right font-semibold text-ink">{pct(dm?.proteines ?? null)}</dd>
-              <dt className="text-ink-2">Matières grasses</dt>
-              <dd className="m-0 text-right font-semibold text-ink">{pct(dm?.matieresGrasses ?? null)}</dd>
-              <dt className="text-ink-2">Glucides estimés</dt>
-              <dd className="m-0 text-right font-semibold text-ink">{pct(dm?.glucides ?? null)}</dd>
-            </dl>
-            <p className="m-0 text-xs text-ink-2 print:text-[9px]">{row.details.assumptions[0] ?? 'Valeurs de l\'étiquette, eau retirée.'}</p>
-          </section>
-          <section className="flex flex-col gap-2 rounded-card bg-amber-bg p-4 print:break-inside-avoid print:p-3">
-            <h2 className="m-0 font-display text-lg font-black text-ink print:text-[14px]">Combien lui en donner ?</h2>
-            <p className="m-0 text-[15px] leading-snug text-ink-2 print:text-[11px]">
-              La ration dépend du poids, de l&apos;âge, de l&apos;activité et de l&apos;énergie de ces croquettes. Calcule-la en
-              grammes par jour : toutou-gourmet.com/outils/ration
-            </p>
-            <Link href="/outils/ration" className="text-[15px] font-semibold text-orange-ink underline underline-offset-2 print:hidden">
-              Calculer sa ration
-            </Link>
-          </section>
-        </div>
+        <FichePrintBottom details={row.details} these={words.these} />
 
         <footer className="flex flex-col gap-1 border-t border-line pt-3 text-xs text-ink-2 print:pt-2 print:text-[9px]">
           <p className="m-0 font-semibold text-ink">
-            {row.source === 'openpetfoodfacts'
-              ? `${OPFF_CREDIT}. Note calculée par le barème publié de Toutou Gourmet : vérifie sur ton sac.`
-              : 'Lecture automatique de l\'étiquette par une IA, vérifie sur ton sac. Note calculée par le barème publié de Toutou Gourmet.'}
+            {openDataCredit(row.source)
+              ? `${openDataCredit(row.source)}. Note calculée par le barème publié de Toutou Gourmet : vérifie sur ${words.pack}.`
+              : `Lecture automatique de l'étiquette par une IA, vérifie sur ${words.pack}. Note calculée par le barème publié de Toutou Gourmet.`}
           </p>
           <p className="m-0">Méthode et sources : toutou-gourmet.com/scanner. Cette fiche juge la composition, elle ne remplace pas l&apos;avis d&apos;un vétérinaire.</p>
         </footer>

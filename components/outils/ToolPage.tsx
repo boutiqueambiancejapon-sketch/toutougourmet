@@ -31,9 +31,13 @@ interface ToolPageProps {
   app: { name: string; description: string }
   /** Section facultative entre la méthode et la FAQ (ex. exemple de résultat) */
   after?: ReactNode
+  /** Sections facultatives entre l'outil et la méthode (ex. à quoi sert l'outil) */
+  before?: ReactNode
+  /** JSON-LD supplémentaires (ex. HowTo), rendus côté serveur avec les autres */
+  jsonLd?: object[]
 }
 
-export function ToolPage({ slug, path, crumb, title, lead, children, methodTitle, method, faqTitle, faq, app, after }: ToolPageProps) {
+export function ToolPage({ slug, path, crumb, title, lead, children, methodTitle, method, faqTitle, faq, app, after, before, jsonLd = [] }: ToolPageProps) {
   const webAppJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
@@ -58,6 +62,9 @@ export function ToolPage({ slug, path, crumb, title, lead, children, methodTitle
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      {jsonLd.map((item, i) => (
+        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(item) }} />
+      ))}
       <div className="v2 mx-auto flex max-w-prose flex-col gap-12 px-4 pt-4 pb-16 md:px-8 md:pt-8">
         <div className="flex flex-col gap-4">
           <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Outils', href: '/outils' }, { label: crumb }]} />
@@ -69,6 +76,8 @@ export function ToolPage({ slug, path, crumb, title, lead, children, methodTitle
           </header>
           {children}
         </div>
+
+        {before}
 
         <section aria-labelledby="methode" className="flex flex-col gap-3">
           <h2 id="methode" className="m-0 font-display text-2xl font-black text-ink">

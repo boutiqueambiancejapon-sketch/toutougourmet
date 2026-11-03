@@ -2,11 +2,12 @@ import type { PhotoPart } from './result'
 import type { ExtractedLabel } from './types'
 
 // @cdc lot 6 — que faire d'une lecture de photos : la refuser sans la décompter (pas une
-// étiquette, floue, chat, friandise), demander la partie manquante, ou la noter.
+// étiquette, floue, chat), demander la partie manquante, ou la noter. Une friandise est notée par
+// son propre barème (lib/scanner/score-treat.ts), qui n'a besoin que de la composition.
 // Fonction pure, testée par scripts/test-scanner-score.ts.
 
 export type ExtractionOutcome =
-  | { kind: 'reject'; code: 'not_a_label' | 'blurry' | 'cat_food' | 'treat' }
+  | { kind: 'reject'; code: 'not_a_label' | 'blurry' | 'cat_food' }
   | { kind: 'incomplete'; missing: PhotoPart[]; read: { ingredients: number; constituants: number } }
   | { kind: 'complete' }
 
@@ -22,10 +23,9 @@ export function classifyExtraction(label: ExtractedLabel): ExtractionOutcome {
   if (label.lisibilite === 'floue' && ((ingredients === 0 && !hasAnalysis) || unreliable)) return { kind: 'reject', code: 'blurry' }
   if (!label.estUneEtiquette || label.typeImage === 'autre') return { kind: 'reject', code: 'not_a_label' }
   if (label.typeImage === 'aliment-chat' || (label.espece === 'chat' && label.typeImage !== 'aliment-chien')) return { kind: 'reject', code: 'cat_food' }
-  if (label.typeImage === 'friandise') return { kind: 'reject', code: 'treat' }
   const missing: PhotoPart[] = []
   if (ingredients === 0) missing.push('ingredients')
-  if (!hasAnalysis) missing.push('analyse')
+  if (!hasAnalysis && label.typeImage !== 'friandise') missing.push('analyse')
   return missing.length ? { kind: 'incomplete', missing, read: { ingredients, constituants } } : { kind: 'complete' }
 }
 

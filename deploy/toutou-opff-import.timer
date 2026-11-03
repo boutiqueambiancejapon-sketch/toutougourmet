@@ -1,0 +1,13 @@
+# Chaque dimanche à 1 h 10, heure de Paris : avant la tâche de nuit, la sauvegarde et la purge
+# (02:30-05:00). Fuseau à vérifier : systemd-analyze calendar "Sun *-*-* 01:10:00 Europe/Paris".
+# Persistent : rattrape le passage si le serveur était éteint ; RandomizedDelaySec étale l'appel.
+[Unit]
+Description=Toutou Gourmet - copie Open Pet Food Facts, dimanche 1 h 10
+
+[Timer]
+OnCalendar=Sun *-*-* 01:10:00 Europe/Paris
+RandomizedDelaySec=10min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

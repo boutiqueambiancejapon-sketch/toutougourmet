@@ -27,7 +27,10 @@ const NAMED_ANIMAL = words([
 const UNNAMED_ANIMAL = words(['viandes?', 'volailles?', 'poissons?', 'proteines? animales?', 'gibier', 'animal', 'animale', 'animaux', 'meat', 'poultry', 'fish'])
 
 /** Catégories opaques de la directive 82/475/CEE. */
-const BY_PRODUCTS = words(['sous-produits?', 'sous produits?', 'derives? d origine animale', 'derives? d origine vegetale', 'by-products?'])
+const BY_PRODUCTS = words([
+  'sous-produits?', 'sous produits?', 'derives? d origine animale', 'derives? d origine vegetale', 'by-products?',
+  'derivatives? of animal origin', '(animal|meat|fish) derivatives?',
+])
 
 const FATS = words(['graisses?', 'huiles?', 'gras', 'suif', 'saindoux', 'bouillon', 'hydrolysat', 'hydrolysats', 'digest', 'arome', 'aromes'])
 
@@ -50,21 +53,53 @@ const COLORANTS = /(^|[^a-z0-9])(colorants?|e ?1[0-8][0-9][a-z]?|oxydes? de fer|
 
 export type AnimalKind = 'nommee' | 'non-nommee' | null
 
+/**
+ * Nom principal d'un ingrédient (texte normalisé) : sans parenthèses ni crochets, et sans la
+ * précision « dont… » (« viandes et sous-produits animaux (dont 4 % de poulet) » : « viandes et
+ * sous-produits animaux »). Une espèce citée seulement dans la précision ne nomme pas l'ingrédient.
+ */
+export function mainName(name: string): string {
+  let n = normalize(name)
+  for (let i = 0; i < 3; i++) n = n.replace(/\([^()]*\)|\[[^[\]]*\]/g, ' ')
+  return n
+    .replace(/[([].*$/, ' ') // parenthèse non refermée (texte tronqué)
+    .replace(/(^|[^a-z])(dont|including|incl|of which|containing|contenant)([^a-z].*|$)/, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+/**
+ * Texte sur lequel juger l'origine animale. Le nom principal s'il cite une espèce ou une catégorie
+ * de sous-produits : « viandes et sous-produits animaux (dont poulet) » reste sans espèce. Sinon
+ * (« Viandes et abats crus (agneau 56 %, jambon 10 %) », « Morceaux (poulet 80 %) »), le nom entier
+ * sans la précision « dont… » : une parenthèse qui détaille l'ingrédient nomme son espèce, un
+ * « dont 4 % de poulet » n'en nomme qu'une partie.
+ */
+function animalText(name: string): string {
+  const head = mainName(name)
+  if (BY_PRODUCTS.test(head) || NAMED_ANIMAL.test(head)) return head
+  return normalize(name).replace(/(^|[^a-z])(dont|including|incl|of which|containing|contenant)([^a-z][^()[\]]*|$)/g, ' ')
+}
+
 /** Source animale d'un ingrédient, hors graisses et huiles (qui n'apportent pas de protéines). */
 export function animalKind(name: string): AnimalKind {
-  const n = normalize(name)
-  if (FATS.test(n) && !/proteines?/.test(n)) return null
-  if (/vegetale?s?([^a-z]|$)/.test(n)) return null
+  const n = animalText(name)
+  const head = mainName(name) || n
+  if (FATS.test(head) && !/proteines?/.test(head)) return null
+  if (/vegetale?s?([^a-z]|$)/.test(head)) return null
   if (BY_PRODUCTS.test(n) && !NAMED_ANIMAL.test(n)) return 'non-nommee'
   if (NAMED_ANIMAL.test(n)) return 'nommee'
   if (UNNAMED_ANIMAL.test(n) && !/vegetale/.test(n)) return 'non-nommee'
   return null
 }
 
+/** Espèce citée seulement dans la précision d'un ingrédient générique (« viandes et sous-produits animaux (dont poulet) »). */
+export const speciesInDetailOnly = (name: string) => animalKind(name) === 'non-nommee' && NAMED_ANIMAL.test(normalize(name))
+
 /** Ingrédient d'origine animale dont l'espèce n'est pas dite (« graisses animales », « protéines de volaille »). */
 const GENERIC_ANIMAL = words(['animal', 'animale', 'animales', 'animaux', 'volailles?', 'viandes?', 'poissons?', 'meat', 'poultry', 'fish'])
 export const isUnnamedAnimal = (name: string) => {
-  const n = normalize(name)
+  const n = animalText(name)
   return GENERIC_ANIMAL.test(n) && !NAMED_ANIMAL.test(n) && !/vegetale/.test(n) && !isByProduct(name)
 }
 
@@ -76,7 +111,10 @@ export function unnamedAntioxidants(texts: string[]): boolean {
   return generic
 }
 
-export const isByProduct = (name: string) => BY_PRODUCTS.test(normalize(name)) && !NAMED_ANIMAL.test(normalize(name))
+export const isByProduct = (name: string) => {
+  const n = animalText(name)
+  return BY_PRODUCTS.test(n) && !NAMED_ANIMAL.test(n)
+}
 export const isCereal = (name: string) => CEREALS.test(normalize(name)) && animalKind(name) === null
 export const hasSugar = (name: string) => SUGARS.test(normalize(name))
 export const hasColorant = (name: string) => COLORANTS.test(normalize(name))

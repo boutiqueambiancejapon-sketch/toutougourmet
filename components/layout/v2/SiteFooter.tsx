@@ -36,6 +36,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
       { href: '/quiz', label: 'Le test de mon chien' },
       { href: '/outils/ration', label: 'Calcul de la ration' },
       { href: '/outils/age', label: 'Âge humain du chien' },
+      { href: '/outils/fiche-de-garde', label: 'Fiche de garde' },
       { href: '/outils', label: 'Tous les outils' },
     ],
   },

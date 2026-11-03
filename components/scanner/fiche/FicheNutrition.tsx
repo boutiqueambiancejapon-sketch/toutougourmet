@@ -31,7 +31,7 @@ export function FicheNutrition({ label }: { label: ExtractedLabel }) {
         <thead>
           <tr className="border-b-2 border-ink text-left">
             <th scope="col" className="py-2 pr-2 font-semibold text-ink">Constituant</th>
-            <th scope="col" className="py-2 pr-2 text-right font-semibold text-ink">Sur le sac</th>
+            <th scope="col" className="py-2 pr-2 text-right font-semibold text-ink">Sur l&apos;étiquette</th>
             <th scope="col" className="py-2 text-right font-semibold text-ink">Sur matière sèche</th>
           </tr>
         </thead>

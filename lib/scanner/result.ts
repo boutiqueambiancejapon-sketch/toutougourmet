@@ -18,8 +18,8 @@ export interface ScanAnalysis {
   analysedAt: string
 }
 
-/** D'où vient le résultat affiché : cache (déjà analysé), Open Pet Food Facts ou photos lues par l'IA. */
-export type ResultOrigin = 'cache' | 'openpetfoodfacts' | 'photo'
+/** D'où vient le résultat affiché : cache (déjà analysé), Open Pet Food Facts (copie locale ou API), Open Food Facts ou photos lues par l'IA. */
+export type ResultOrigin = 'cache' | 'openpetfoodfacts' | 'openfoodfacts' | 'photo'
 
 /** Parties de l'étiquette demandées en photo. */
 export type PhotoPart = 'ingredients' | 'analyse' | 'face'
@@ -73,7 +73,6 @@ export const ERROR_MESSAGES: Record<ScannerErrorCode, string> = {
   not_a_label: 'Ces photos ne montrent pas une étiquette d\'aliment pour chien. Photographie le dos du sac, là où sont écrits la composition et les constituants analytiques. Analyse non décomptée.',
   blurry: 'Le texte est trop flou pour être lu. Rapproche-toi à 15 ou 20 cm, coupe le flash pour éviter le reflet et cadre seulement le texte. Analyse non décomptée.',
   cat_food: 'Cet aliment est destiné au chat. Notre barème note les aliments pour chien : les besoins du chat ne sont pas les mêmes (FEDIAF : 25 g de protéines pour 100 g de matière sèche chez le chat adulte, 18 g chez le chien). Analyse non décomptée.',
-  treat: 'Ce produit est une friandise ou un aliment complémentaire. Il ne nourrit pas seul le chien : notre barème, fait pour les aliments complets, ne le note pas. Analyse non décomptée.',
   not_found: 'Ce code-barres n\'est pas encore dans notre base. Prends l\'étiquette en photo pour l\'analyser.',
   timeout: 'La lecture a pris trop de temps. Réessaie : l\'analyse ne t\'a pas été décomptée.',
   provider_error: 'La lecture de l\'étiquette a échoué. Réessaie dans un instant : l\'analyse ne t\'a pas été décomptée.',

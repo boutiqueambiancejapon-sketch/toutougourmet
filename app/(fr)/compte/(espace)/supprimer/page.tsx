@@ -22,7 +22,7 @@ export default async function DeleteAccountPage() {
         <div className="flex flex-col gap-2 text-base leading-relaxed text-ink-2">
         <p className="m-0">
           Ton adresse e-mail ({user.email}), ton mot de passe, tes sessions
-          {dogsPart}, ton historique d&apos;analyses d&apos;étiquettes et tes signalements. Rien n&apos;est gardé de côté : la
+          {dogsPart}, tes fiches de garde (leurs liens cessent de fonctionner), ton historique d&apos;analyses d&apos;étiquettes et tes signalements. Rien n&apos;est gardé de côté : la
           suppression est immédiate et définitive.
         </p>
         <p className="m-0">Les fiches produits nées de tes analyses restent en ligne : elles ne contiennent rien sur toi.</p>

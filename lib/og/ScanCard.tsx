@@ -16,6 +16,10 @@ export interface ScanCardData {
   credit: string
   dog: string | null
   qr: string
+  /** Pastille d'en-tête : « Scanner de croquettes » ou « Friandise notée sur 100 » */
+  tag: string
+  /** Appel en bas de la story */
+  cta: string
 }
 
 function Logo({ size }: { size: number }) {
@@ -26,6 +30,9 @@ function Logo({ size }: { size: number }) {
     </div>
   )
 }
+
+/** Trois chiffres (100) : « /100 » passe sous la note, sinon le tampon coupe le texte. */
+const isFull = (score: number | null) => score !== null && score >= 100
 
 export function Stamp({ score, band, size }: { score: number | null; band: string; size: number }) {
   return (
@@ -45,9 +52,9 @@ export function Stamp({ score, band, size }: { score: number | null; band: strin
         color: C.ink,
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'flex-end', fontFamily: 'Fraunces', fontWeight: 900, lineHeight: 0.9 }}>
-        <span style={{ fontSize: size * 0.42 }}>{score === null ? '?' : String(score)}</span>
-        <span style={{ fontSize: size * 0.11, paddingBottom: size * 0.04 }}>/100</span>
+      <div style={{ display: 'flex', flexDirection: isFull(score) ? 'column' : 'row', alignItems: isFull(score) ? 'center' : 'flex-end', fontFamily: 'Fraunces', fontWeight: 900, lineHeight: 0.9 }}>
+        <span style={{ fontSize: size * (isFull(score) ? 0.34 : 0.42) }}>{score === null ? '?' : String(score)}</span>
+        <span style={{ fontSize: size * 0.11, paddingBottom: isFull(score) ? 0 : size * 0.04 }}>/100</span>
       </div>
       <span style={{ fontFamily: 'DM Sans', fontWeight: 700, fontSize: size * 0.1, marginTop: size * 0.03 }}>{band}</span>
     </div>
@@ -78,7 +85,7 @@ export function ScanStoryCard(d: ScanCardData) {
     <div style={page}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Logo size={60} />
-        <span style={{ display: 'flex', background: C.ink, color: C.cream, fontWeight: 700, fontSize: 28, padding: '12px 26px', borderRadius: 999 }}>Scanner de croquettes</span>
+        <span style={{ display: 'flex', background: C.ink, color: C.cream, fontWeight: 700, fontSize: 28, padding: '12px 26px', borderRadius: 999 }}>{d.tag}</span>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 50 }}>
         <Stamp score={d.score} band={d.band} size={480} />
@@ -97,7 +104,7 @@ export function ScanStoryCard(d: ScanCardData) {
           <img src={d.dog} width={160} height={160} alt="" style={{ borderRadius: 160, objectFit: 'cover' }} />
         ) : null}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10, flex: 1 }}>
-          <span style={{ fontFamily: 'Fraunces', fontWeight: 900, fontSize: 44, lineHeight: 1.05, color: C.ink }}>Scanne tes croquettes</span>
+          <span style={{ fontFamily: 'Fraunces', fontWeight: 900, fontSize: 44, lineHeight: 1.05, color: C.ink }}>{d.cta}</span>
           <span style={{ fontWeight: 700, fontSize: 29, color: C.orange }}>toutou-gourmet.com/scanner</span>
           <span style={{ fontWeight: 500, fontSize: 22, color: C.ink2 }}>{d.credit}</span>
         </div>
@@ -112,7 +119,10 @@ export function ScanOgCard(d: ScanCardData) {
   return (
     <div style={{ display: 'flex', width: 1200, height: 630, background: C.cream, fontFamily: 'DM Sans', padding: '56px 64px', gap: 48, alignItems: 'center' }}>
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', flex: 1, height: '100%' }}>
-        <Logo size={40} />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+          <Logo size={40} />
+          <span style={{ display: 'flex', background: C.ink, color: C.cream, fontWeight: 700, fontSize: 22, padding: '8px 18px', borderRadius: 999 }}>{d.tag}</span>
+        </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           <span style={{ fontFamily: 'Fraunces', fontWeight: 900, fontSize: productSize(d.product) * 0.82, lineHeight: 1.02, letterSpacing: -1.5, color: C.ink }}>{clip(d.product, 70)}</span>
           {d.brand ? <span style={{ fontWeight: 700, fontSize: 34, color: C.ink2 }}>{clip(d.brand, 40)}</span> : null}

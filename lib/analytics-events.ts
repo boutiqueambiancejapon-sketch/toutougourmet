@@ -17,6 +17,9 @@ export const ANALYTICS_EVENTS = [
   'Account Invite Click',
   'Guide Signup',
   'Guide Download',
+  'Sitter Sheet Started',
+  'Sitter Sheet Created',
+  'Sitter Template Download',
   'Pageview',
 ] as const
 

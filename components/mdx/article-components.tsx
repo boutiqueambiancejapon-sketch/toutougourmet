@@ -13,6 +13,7 @@ import { BrandCTA } from '@/components/marques/BrandCTA'
 import { BreedBrandCompare, BrandGroup, BrandRow } from '@/components/race/BreedBrandCompare'
 import { ArticleSignupInvite } from '@/components/cro/ArticleSignupInvite'
 import { ToolCta } from '@/components/article/ToolCta'
+import { SitterSheetCta } from '@/components/garde/SitterSheetCta'
 import { Heading2 } from './Heading2'
 import { MdxLink } from './MdxLink'
 
@@ -31,6 +32,7 @@ export const articleMdxComponents = {
   BodyImage,
   ArticleSignupInvite,
   ToolCta,
+  SitterSheetCta,
   h2: Heading2,
   a: MdxLink,
   table: (props: ComponentProps<'table'>) => (

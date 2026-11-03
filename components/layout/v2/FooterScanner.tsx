@@ -15,10 +15,10 @@ export function FooterScanner() {
       <div className="flex min-w-0 grow flex-col gap-2 md:flex-row md:items-center md:justify-between md:gap-6">
         <div className="flex flex-col gap-1">
           <p id="footer-scanner" className="m-0 font-display text-lg font-black leading-tight md:text-xl">
-            Scanne les croquettes de ton chien
+            Scanne ce que mange ton chien
           </p>
           <p className="m-0 text-sm leading-snug text-ink">
-            Une note sur 100, critère par critère. Code-barres ou photo de l&apos;étiquette.
+            Croquettes, pâtées, friandises : une note sur 100. Code-barres ou photo de l&apos;étiquette.
           </p>
         </div>
         <Link

@@ -3,7 +3,7 @@
 import { readFileSync } from 'node:fs'
 import { extractLabel } from '../lib/scanner/extract'
 import { prepareImage } from '../lib/scanner/images'
-import { scoreLabel } from '../lib/scanner/score'
+import { analyseLabel } from '../lib/scanner/analyse'
 
 async function main() {
   const files = process.argv.slice(2)
@@ -12,8 +12,8 @@ async function main() {
   const started = Date.now()
   const { label, model } = await extractLabel(images)
   console.log(JSON.stringify({ model, ms: Date.now() - started, label }, null, 2))
-  const score = scoreLabel(label)
-  console.log(`Note : ${score.score} (${score.band}) · manque : ${score.missing.join(', ') || 'rien'}`)
+  const score = analyseLabel(label)
+  console.log(`Note (${score.kind}) : ${score.score} (${score.band}) · manque : ${score.missing.join(', ') || 'rien'}`)
   for (const c of score.criteria) console.log(`- ${c.label} : ${c.points ?? '—'}/${c.max} · ${c.explanation}`)
 }
 

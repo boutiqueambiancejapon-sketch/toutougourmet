@@ -75,6 +75,7 @@ export default function PolitiqueConfidentialitePage() {
               <li>ton adresse email et ton prénom ;</li>
               <li>ton mot de passe, haché : nous ne le connaissons pas et ne pouvons pas le lire ;</li>
               <li>les profils de tes chiens (nom, race, date de naissance, poids, activité, stérilisation) et leurs pesées ;</li>
+              <li>les fiches de garde que tu crées (repas, friandises, allergies, médicaments, habitudes, ton téléphone, celui de ton vétérinaire, dates d&apos;absence). Elles sont lisibles par toute personne à qui tu envoies leur lien privé, jusqu&apos;au lendemain de ton retour. Rien n&apos;est gardé sur la personne qui garde ton chien ;</li>
               <li>pour chaque connexion, sa date, ton adresse IP et le nom de ton navigateur, qui servent à protéger le compte.</li>
             </ul>
             <p className="mb-2">

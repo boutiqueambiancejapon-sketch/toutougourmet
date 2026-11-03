@@ -1,0 +1,1 @@
+ALTER TABLE "app"."food_analysis" ADD COLUMN "discarded" boolean DEFAULT false NOT NULL;
