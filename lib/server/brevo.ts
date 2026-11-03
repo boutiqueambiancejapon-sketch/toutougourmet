@@ -1,12 +1,16 @@
 // @cdc mesure — inscription à la newsletter via l'API Brevo (contacts).
 // Avec BREVO_DOI_TEMPLATE_ID : double opt-in (e-mail de confirmation envoyé par Brevo).
 // Sans : ajout direct à la liste BREVO_LIST_ID. Clé dans l'environnement, jamais dans le code.
+// BREVO_DRY_RUN=1 (tests, préversion) : rien n'est envoyé à Brevo, l'inscription est journalisée
+// et répond « ok ». Ne jamais le poser en production.
 
 const API = 'https://api.brevo.com/v3'
 const EMAIL = /^[^\s@]{1,64}@[^\s@]{1,190}\.[a-z]{2,}$/i
 
+const dryRun = (): boolean => process.env.BREVO_DRY_RUN === '1'
+
 export function isBrevoConfigured(): boolean {
-  return Boolean(process.env.BREVO_API_KEY && process.env.BREVO_LIST_ID)
+  return dryRun() || Boolean(process.env.BREVO_API_KEY && process.env.BREVO_LIST_ID)
 }
 
 export function isValidEmail(email: unknown): email is string {
@@ -17,6 +21,10 @@ export type SubscribeResult = 'ok' | 'invalid' | 'error'
 
 export async function subscribe(email: string, source: string): Promise<SubscribeResult> {
   if (!isValidEmail(email)) return 'invalid'
+  if (dryRun()) {
+    console.info(`[brevo] (à blanc) inscription non envoyée, source=${source.slice(0, 80)}`)
+    return 'ok'
+  }
   const key = process.env.BREVO_API_KEY ?? ''
   const listId = Number(process.env.BREVO_LIST_ID)
   const doiTemplate = Number(process.env.BREVO_DOI_TEMPLATE_ID || 0)
