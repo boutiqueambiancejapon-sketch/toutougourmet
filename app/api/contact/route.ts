@@ -1,5 +1,6 @@
 import { after, NextRequest, NextResponse } from 'next/server'
 import { isBrevoConfigured, subscribe } from '@/lib/server/brevo'
+import { isDisposableEmail } from '@/lib/server/disposable-email'
 import { getPool } from '@/lib/server/db'
 import { sendWelcomeOnce } from '@/lib/server/newsletter'
 import { contactRateLimited, parseContactMessage, saveContactMessage } from '@/lib/server/contact'
@@ -42,6 +43,7 @@ export async function POST(req: NextRequest) {
     if (!isBrevoConfigured()) return unavailable()
     if (overLimit(`subscribe:${ip}`, SUBSCRIBE_LIMITS)) return tooMany(retryAfterSeconds(SUBSCRIBE_LIMITS))
     if (body.email.length > 254) return NextResponse.json({ error: 'Invalid email' }, { status: 400 })
+    if (isDisposableEmail(body.email)) return NextResponse.json({ error: 'Disposable email' }, { status: 400 })
     const source = (typeof body.source === 'string' ? body.source : typeof body._subject === 'string' ? body._subject : 'site').slice(0, 60)
     const result = await subscribe(body.email, source)
     if (result === 'ok') {
