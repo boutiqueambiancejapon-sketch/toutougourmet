@@ -1,5 +1,6 @@
 import { NavLink } from './NavLink'
 import { TAB_NAV } from './nav-items'
+import { TabBarViewportFix } from './TabBarViewportFix'
 
 // @cdc 04-pages — barre d'onglets mobile façon app (prototype V2), masquée sur ordinateur.
 // Hauteur réservée : --tabbar-h (globals.css), reprise par le spacer et les bandeaux collants.
@@ -8,6 +9,7 @@ export function TabBar() {
     <>
       <div aria-hidden="true" className="h-[var(--tabbar-h)] md:hidden" />
       <nav
+        data-tabbar
         aria-label="Navigation mobile"
         className="v2 fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 items-end border-t border-line bg-paper px-2 pt-1.5 pb-[calc(8px+env(safe-area-inset-bottom))] md:hidden"
       >
@@ -36,6 +38,7 @@ export function TabBar() {
           )
         })}
       </nav>
+      <TabBarViewportFix />
     </>
   )
 }
