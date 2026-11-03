@@ -14,7 +14,7 @@ export function ActionsSection({ data, period }: { data: SummaryData; period: Pe
       <dl className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
         <StatTile label="Pages vues" kpi={kpis.pageViews} />
         <StatTile label="Clics partenaires" kpi={kpis.affiliateClicks} />
-        <StatTile label="Inscriptions" kpi={kpis.signups} />
+        <StatTile label="Inscriptions newsletter" kpi={kpis.signups} />
         <StatTile label="Résultats d’outils" kpi={kpis.toolResults} />
       </dl>
 
@@ -31,9 +31,9 @@ export function ActionsSection({ data, period }: { data: SummaryData; period: Pe
         </Panel>
       </div>
 
-      <SectionTitle id="lecteurs" title="Lecteurs" intro="Inscriptions, outils et recherches faites sur le site." />
+      <SectionTitle id="lecteurs" title="Lecteurs" intro="Inscriptions à la newsletter, outils et recherches faites sur le site." />
       <div className="mt-4 grid gap-3 md:grid-cols-2">
-        <Panel title="Inscriptions par source">
+        <Panel title="Inscriptions newsletter par source">
           <BarList rows={data.signupsByPlace} empty="Aucune inscription sur la période." />
         </Panel>
         <Panel title="Outils les plus utilisés" hint="Un résultat affiché compte pour une utilisation.">

@@ -16,6 +16,10 @@ const LABELS: Record<string, string> = {
   'Scan Result': 'Résultat du scanner',
   'Scan Share': 'Fiche partagée',
   'Scan Download': 'Fiche téléchargée',
+  'Account Invite View': 'Invitation compte vue',
+  'Account Invite Click': 'Invitation compte cliquée',
+  'Account Created': 'Compte créé (serveur)',
+  'Account Verified': 'E-mail confirmé',
 }
 
 const KIND: Record<string, string> = { ai_training: 'entraînement', ai_search: 'moteur IA', ai_user: 'lecture en direct' }
