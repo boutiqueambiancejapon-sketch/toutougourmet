@@ -12,7 +12,7 @@ import {
 import { formatDate } from '@/lib/utils'
 import { StickyCta } from '@/components/blog/StickyCta'
 import { StickyCtaDouble } from '@/components/blog/StickyCtaDouble'
-import { getStickyCtaForArticle } from '@/lib/sticky-cta-config'
+import { getStickyCtaForArticle, stickyAllowed } from '@/lib/sticky-cta-config'
 import { getMidCta } from '@/lib/mid-cta'
 import { remarkMidCta } from '@/lib/remark-mid-cta'
 import { MidArticleCta } from '@/components/article/MidArticleCta'
@@ -191,9 +191,16 @@ export default async function ArticleCategoryPage({ params }: Props) {
   const midCta = getMidCta({
     slug,
     categorySlug: category,
-    category: frontmatter.category,
     verdict: frontmatter.verdict,
     hasOwnAffiliate: Boolean(frontmatter.affiliateA),
+    hasBrandCompare: rawContent.includes('<BreedBrandCompare'),
+  })
+  // @cdc cro-carte — bandeau collant : pages de choix d'achat sans autre offre visible (lib/sticky-cta-config).
+  const showSticky = stickyAllowed({
+    categorySlug: category,
+    slug,
+    rawContent,
+    midIsPartner: Boolean(midCta?.button.href.startsWith('http')),
   })
   const mdxComponents = midCta
     ? { ...articleMdxComponents, MidCta: () => <MidArticleCta cta={midCta} /> }
@@ -239,7 +246,7 @@ export default async function ArticleCategoryPage({ params }: Props) {
         />
       </ArticleLayout>
 
-      {explicitDouble ? (
+      {!showSticky ? null : explicitDouble ? (
         <StickyCtaDouble
           eyebrow="Comparer les deux"
           brandA={{ label: `Acheter ${frontmatter.affiliateA!.name}`, href: frontmatter.affiliateA!.url }}
