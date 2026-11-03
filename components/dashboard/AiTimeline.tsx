@@ -1,4 +1,5 @@
 import type { BucketRow } from '@/lib/server/dashboard-queries'
+import { bucketLabel } from '@/lib/dashboard/buckets'
 import { Empty } from './Panel'
 
 // @cdc tableau de bord — colonnes empilées par type de robot IA, rendues serveur.
@@ -12,12 +13,6 @@ export const AI_SERIES = [
 ] as const
 
 const nf = new Intl.NumberFormat('fr-FR')
-
-function bucketLabel(bucket: string, hourly: boolean): string {
-  const [date, time] = bucket.split('T')
-  const [, m, d] = date.split('-')
-  return hourly ? `${time.slice(0, 2)} h` : `${d}/${m}`
-}
 
 export function AiTimeline({ rows, hourly }: { rows: BucketRow[]; hourly: boolean }) {
   const totals = rows.map((r) => r.training + r.search + r.user)
