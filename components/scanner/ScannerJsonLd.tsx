@@ -9,7 +9,7 @@ export function ScannerJsonLd({ faq, description }: { faq: FaqEntry[]; descripti
   const app = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: 'Scanner de croquettes pour chien',
+    name: 'Scanner de croquettes, pâtées et friandises pour chien',
     url: URL,
     description,
     applicationCategory: 'UtilitiesApplication',

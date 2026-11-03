@@ -86,14 +86,18 @@ function contentEntries(): SitemapEntry[] {
   ]
 }
 
-/** Fiches du scanner relues, classement /croquettes et pages marque au-delà des seuils. */
+/** Fiches du scanner publiées, classements /croquettes et /croquettes/friandises, pages marque au-delà des seuils. */
 async function croquettesEntries(): Promise<SitemapEntry[]> {
   const items = await reviewedItemsSafe()
   // Classement et pages marque : aliments complets seulement (les friandises ont leur barème)
   const complete = items.filter((i) => i.kind === 'complete')
+  const treats = items.filter((i) => i.kind === 'treat')
   const entries: SitemapEntry[] = []
   if (complete.length >= RANKING_MIN_REVIEWED)
     entries.push({ path: '/croquettes', lastmod: latest(complete.map((i) => i.updatedAt)) })
+  // Classement des friandises : même seuil, date de la fiche friandise la plus récente
+  if (treats.length >= RANKING_MIN_REVIEWED)
+    entries.push({ path: '/croquettes/friandises', lastmod: latest(treats.map((i) => i.updatedAt)) })
   for (const b of groupByBrand(complete))
     if (b.items.length >= BRAND_MIN_REVIEWED)
       entries.push({ path: `/croquettes/marque/${b.slug}`, lastmod: latest(b.items.map((i) => i.updatedAt)) })

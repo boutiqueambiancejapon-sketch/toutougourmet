@@ -9,7 +9,7 @@ export function ExampleFiche() {
   return (
     <section aria-labelledby="exemple" className="flex flex-col gap-4">
       <h2 id="exemple" className="m-0 font-display text-2xl font-black text-ink">
-        À quoi ressemble une fiche ?
+        À quoi ressemble l&apos;analyse d&apos;une croquette ?
       </h2>
       <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
         <Image

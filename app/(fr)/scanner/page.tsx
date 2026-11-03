@@ -16,6 +16,7 @@ import { ReadScore } from '@/components/scanner/ReadScore'
 import { RecentScans } from '@/components/scanner/RecentScans'
 import { ScanAgainButton } from '@/components/scanner/ScanStart'
 import { ScannerJsonLd } from '@/components/scanner/ScannerJsonLd'
+import { ScannerGuides } from '@/components/scanner/ScannerGuides'
 import { ScannerMethod } from '@/components/scanner/ScannerMethod'
 import { TreatMethod } from '@/components/scanner/treat/TreatMethod'
 import { ScannerTool } from '@/components/scanner/ScannerTool'
@@ -25,15 +26,18 @@ import { FREE_MONTHLY_SCANS } from '@/lib/scanner/config'
 
 export const revalidate = 60
 
+// Mots clés (recherche du 2026-11-03) : scanner / application croquettes chien, analyse et note
+// de composition, pâtée et friandises. « Yuka » est visé par /scanner/alternative-yuka-animaux.
+const TITLE = 'Scanner de croquettes, pâtées et friandises pour chien'
 const DESCRIPTION =
-  'Croquettes, pâtées, friandises et snacks pour chien : scanne le code-barres ou l\'étiquette. Viande nommée, glucides, sucre et additifs, note sur 100 gratuite.'
+  'Scanne le code-barres de tes croquettes, pâtées ou friandises pour chien : analyse de la composition et note sur 100 gratuite, selon un barème publié.'
 
 export const metadata: Metadata = {
-  title: { absolute: 'Scanner de croquettes et friandises : note sur 100 gratuite' },
+  title: { absolute: TITLE },
   description: DESCRIPTION,
   alternates: { canonical: 'https://www.toutou-gourmet.com/scanner' },
   openGraph: {
-    title: 'Croquettes, pâtées, friandises et snacks : la note sur 100 en une photo',
+    title: 'Croquettes, pâtées et friandises : la note sur 100 en une photo',
     description: DESCRIPTION,
     url: 'https://www.toutou-gourmet.com/scanner',
     type: 'website',
@@ -51,12 +55,13 @@ export default function ScannerPage() {
           <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Outils', href: '/outils' }, { label: 'Scanner de croquettes' }]} />
           <header className="flex flex-col gap-2">
             <h1 className="m-0 font-display text-[clamp(2rem,5vw,2.75rem)] font-black leading-[1.05] tracking-tight text-ink">
-              Scanner de croquettes et friandises pour chien : la note sur 100 en une photo
+              Scanner de croquettes, pâtées et friandises pour chien : note sur 100
             </h1>
             <p className="m-0 text-base leading-relaxed text-ink-2 md:text-lg">
-              Croquettes, pâtées, friandises et snacks : scanne le code-barres du paquet. Si le produit est déjà connu, sa note sur
-              100 s&apos;affiche aussitôt. Sinon, deux photos de l&apos;étiquette suffisent et notre barème publié fait le calcul,
-              avec une grille à part pour les friandises.
+              Le scanner analyse la composition des croquettes, pâtées et friandises pour chien et lui donne une note sur 100.
+              Scanne le code-barres du paquet : si le produit est déjà connu, la note s&apos;affiche aussitôt, sans compte. Sinon,
+              deux photos de l&apos;étiquette suffisent (une seule pour une friandise) avec un compte gratuit, et notre barème publié
+              fait le calcul.
             </p>
           </header>
           <ScannerTool monthlyLimit={FREE_MONTHLY_SCANS} />
@@ -78,6 +83,7 @@ export default function ScannerPage() {
 
         <CarbsSection />
         <CompositionGuide />
+        <ScannerGuides />
         <TopRated />
 
         <section aria-labelledby="faq" className="flex flex-col">
@@ -91,10 +97,14 @@ export default function ScannerPage() {
               </FaqItem>
             ))}
           </FaqList>
-          <p className="m-0 text-sm text-ink-2">
+          <p className="m-0 text-sm leading-relaxed text-ink-2">
             {'Yuka ne note pas les aliments pour animaux\u00a0: '}
             <Link href="/scanner/alternative-yuka-animaux" className="font-semibold text-orange-ink underline underline-offset-2">
               notre scanner comparé à Yuka pour les croquettes
+            </Link>
+            {'. Les fiches marque du site suivent une autre grille, sur 6 critères, décrite dans notre '}
+            <Link href="/a-propos#methodologie" className="font-semibold text-orange-ink underline underline-offset-2">
+              méthodologie d&apos;évaluation des marques
             </Link>
             .
           </p>

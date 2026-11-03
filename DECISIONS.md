@@ -165,3 +165,7 @@ Mise à jour approuvée par le propriétaire pour fermer les avis de sécurité 
 - La page du gardien vit dans son propre groupe de routes (`app/(garde)`) : sans GA ni `/api/e`, `referrer: no-referrer`, pour que le jeton de l'adresse ne parte ni dans la mesure ni dans un Referer.
 - Sans compte, la saisie reste dans le navigateur (localStorage) jusqu'à la confirmation de l'inscription. Si le lien de confirmation est ouvert dans un autre navigateur, la saisie est perdue : le visiteur repart du profil de son chien.
 - Le profil chien n'a ni croquettes ni allergies : la première fiche les apprend, les suivantes les reprennent (`lib/garde/prefill.ts`).
+
+## 2026-11-03 — Classement des friandises à son adresse propre (branche `feat/scanner-seo`)
+- Le classement des friandises quitte l'onglet `/croquettes?type=friandises` (noindex) pour `/croquettes/friandises`, indexable dès 5 fiches publiées, dans `/sitemaps/croquettes.xml`. Raison : la requête « meilleures friandises chien » est une intention distincte des croquettes, et les premiers résultats n'offrent aucun classement fondé sur la composition (comparatifs éditoriaux, fiches de boutiques). Sous `/croquettes/` plutôt qu'une nouvelle racine : les fiches friandise y vivent déjà (`/croquettes/{slug}`), même sitemap, même fil d'Ariane. L'ancienne adresse redirige (308) en gardant les filtres.
+- Textes des classements neutres vis-à-vis d'`OPFF_INDEX_POLICY` : « fiche publiée » et règle affichée selon la politique en vigueur, plus « relue par la rédaction » quand ce n'est pas vrai.
