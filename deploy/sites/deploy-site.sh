@@ -24,7 +24,8 @@ PREV=$(readlink -f "$ROOT/current" 2>/dev/null || true)
 if [[ -n "$PREV" && -d "$PREV/node_modules" ]] && cmp -s "$PREV/package-lock.json" "$DEST/package-lock.json"; then
   cp -al "$PREV/node_modules" "$DEST/node_modules"
 else
-  (cd "$DEST" && npm ci --no-audit --no-fund --silent)
+  # npm ci exige un package-lock à jour ; certains dépôts (construits par Vercel avec npm install) ne le sont pas.
+  (cd "$DEST" && { npm ci --no-audit --no-fund --loglevel=error || { echo "package-lock désynchronisé : npm install"; npm install --no-audit --no-fund --loglevel=error; }; })
 fi
 set -a; [[ -f "$ROOT/shared/.env" ]] && . "$ROOT/shared/.env"; set +a
 (cd "$DEST" && NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 nice -n 10 npx next build)
