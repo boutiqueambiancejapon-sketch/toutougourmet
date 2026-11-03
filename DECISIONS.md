@@ -143,3 +143,10 @@ Mise à jour approuvée par le propriétaire pour fermer les avis de sécurité 
 - Index `/sitemap.xml` + un sitemap par type sous `/sitemaps/{type}.xml` (aliments, urgences, santé et nutrition, races, marques, recettes, pages principales, croquettes), route handlers revalidés toutes les heures. Classement dérivé de `lib/page-type.ts` : « nutrition-marques » coupé en deux (alimentation au quotidien avec la santé, marques et avis à part), hubs de rubrique avec les pages principales.
 - `lastmod` réel : frontmatter des articles, dernier article pour un hub, mise à jour de l'analyse pour une fiche croquettes, `data/page-dates.ts` (tenu à la main) pour les autres pages. Pas de `priority` ni de `changefreq`.
 - Même périmètre que l'ancien sitemap (401 URL au 2026-11-03), `robots.txt` par `app/robots.ts` avec une seule ligne `Sitemap:`. Détails : `docs/06-seo.md`, « Sitemaps ».
+
+## 2026-11-03 — Fiche de garde (branche `feat/fiche-garde`)
+
+- Le gardien n'a pas de compte et rien n'est stocké sur lui. Le lien privé (jeton de 144 bits) expire le lendemain du retour (minuit, heure de Paris) ; supprimer la fiche le coupe aussitôt.
+- La page du gardien vit dans son propre groupe de routes (`app/(garde)`) : sans GA ni `/api/e`, `referrer: no-referrer`, pour que le jeton de l'adresse ne parte ni dans la mesure ni dans un Referer.
+- Sans compte, la saisie reste dans le navigateur (localStorage) jusqu'à la confirmation de l'inscription. Si le lien de confirmation est ouvert dans un autre navigateur, la saisie est perdue : le visiteur repart du profil de son chien.
+- Le profil chien n'a ni croquettes ni allergies : la première fiche les apprend, les suivantes les reprennent (`lib/garde/prefill.ts`).
