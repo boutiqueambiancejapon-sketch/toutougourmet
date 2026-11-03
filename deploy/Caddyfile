@@ -81,6 +81,9 @@ www.klarolab.be {
 
 klarolab.be {
 	encode zstd gzip
+	# Le site ajoute un « / » final à toutes ses adresses : sans lui, l'image de partage passerait par une redirection 308.
+	@ogimg path_regexp og ^(.*/(?:opengraph|twitter)-image)$
+	rewrite @ogimg {re.og.1}/?{query}
 	log {
 		output stderr
 		format json
