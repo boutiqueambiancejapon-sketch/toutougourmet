@@ -7,6 +7,7 @@ import { BREED_OPTIONS, EMPTY_DOG } from '@/components/compte/dog-form-values'
 import { isKnownBreed } from '@/lib/dog-profile'
 import { getSessionUser } from '@/lib/server/auth'
 import { todayIso } from '@/lib/server/dog-form'
+import { dogExtrasReady } from '@/lib/server/dogs'
 import { createDogAction } from '@/app/(fr)/compte/actions'
 
 export const metadata: Metadata = { title: 'Ajouter mon chien' }
@@ -42,7 +43,7 @@ export default async function NewDogPage({ searchParams }: { searchParams: Promi
               <span className="xs:hidden">Enregistrer</span>
               <span className="hidden xs:inline">Enregistrer mon chien</span>
             </>
-          } today={todayIso()} />
+          } today={todayIso()} extras={await dogExtrasReady()} />
       </div>
     </>
   )

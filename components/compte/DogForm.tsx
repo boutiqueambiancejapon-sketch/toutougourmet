@@ -5,10 +5,13 @@ import { useActionState, useId, useState } from 'react'
 import type { ActivityLevel } from '@/lib/calculators'
 import type { FormState } from '@/app/(fr)/compte/actions'
 import { Segmented } from '@/components/tools/Segmented'
+import { AllergyField } from './AllergyField'
 import { FieldError, FormNotice, SubmitButton, TextField } from './fields'
+import { FoodField } from './FoodField'
 
 // @cdc lot 4 — formulaire du profil chien (ajout et édition). Envoi par action serveur,
 // erreurs renvoyées champ par champ. Âge : date de naissance, ou âge approximatif en années.
+// Croquettes et allergies : affichées seulement quand la base les connaît (`extras`, migration 0008).
 
 export interface DogFormValues {
   name: string
@@ -19,6 +22,9 @@ export interface DogFormValues {
   weightKg: string
   activity: ActivityLevel
   sterilized: 'oui' | 'non'
+  food: string
+  foodSlug: string
+  allergies: string[]
 }
 
 interface DogFormProps {
@@ -27,13 +33,14 @@ interface DogFormProps {
   breeds: { slug: string; name: string }[]
   submitLabel: ReactNode
   today: string
+  extras: boolean
 }
 
 const AGE_MODES = [['naissance', 'Date de naissance'], ['age', 'Âge approximatif']] as const
 const ACTIVITIES = [['sedentaire', 'Calme'], ['normal', 'Normale'], ['actif', 'Sportive'], ['tres-actif', 'Intense']] as const
 const YES_NO = [['non', 'Non'], ['oui', 'Oui']] as const
 
-export function DogForm({ action, initial, breeds, submitLabel, today }: DogFormProps) {
+export function DogForm({ action, initial, breeds, submitLabel, today, extras }: DogFormProps) {
   const id = useId()
   const [state, formAction] = useActionState(action, {})
   const [v, setV] = useState(initial)
@@ -73,6 +80,12 @@ export function DogForm({ action, initial, breeds, submitLabel, today }: DogForm
       <TextField id={`${id}-weight`} name="weightKg" label="Poids (kg)" type="number" inputMode="decimal" min="0.5" max="120" step="0.1" value={v.weightKg} onChange={(x) => set('weightKg', x)} error={err.weightKg} hint="Facultatif. Chaque pesée ajoutée ensuite le met à jour." />
       <Segmented name="activity" legend="Son activité" options={ACTIVITIES} value={v.activity} onChange={(x) => set('activity', x)} />
       <Segmented name="sterilized" legend="Stérilisé" options={YES_NO} value={v.sterilized} onChange={(x) => set('sterilized', x)} />
+      {extras ? (
+        <>
+          <FoodField id={`${id}-food`} value={{ food: v.food, foodSlug: v.foodSlug }} onChange={(x) => setV((s) => ({ ...s, ...x }))} error={err.food} />
+          <AllergyField id={`${id}-allergies`} name="allergies" value={v.allergies} onChange={(x) => set('allergies', x)} error={err.allergies} />
+        </>
+      ) : null}
       <SubmitButton pendingLabel="Enregistrement…">{submitLabel}</SubmitButton>
     </form>
   )

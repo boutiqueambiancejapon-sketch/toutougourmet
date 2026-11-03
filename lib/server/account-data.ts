@@ -1,6 +1,7 @@
 import { asc, eq, inArray } from 'drizzle-orm'
-import { dog, foodAnalysis, membership, scanHistory, scanReport, session, sitterSheet, user, weightLog } from '@/db/schema'
+import { foodAnalysis, membership, scanHistory, scanReport, session, sitterSheet, user, weightLog } from '@/db/schema'
 import type { SheetData } from '@/lib/garde/sheet'
+import { listDogs } from './dogs'
 import { getDb } from './drizzle'
 
 // @cdc lot 4 — RGPD : export des données d'un compte (portabilité) et garde-fou de la suppression.
@@ -21,6 +22,10 @@ export interface AccountExport {
     weightKg: number | null
     activity: string
     sterilized: boolean
+    /** Ce qu'il mange (texte) et la fiche /croquettes liée, null si aucune */
+    food: string | null
+    foodSlug: string | null
+    allergies: string[]
     createdAt: string
     updatedAt: string
     weights: { date: string; weightKg: number; createdAt: string }[]
@@ -44,7 +49,8 @@ export async function exportAccountData(userId: string): Promise<AccountExport |
     .from(session)
     .where(eq(session.userId, userId))
     .orderBy(asc(session.createdAt))
-  const dogs = await db.select().from(dog).where(eq(dog.userId, userId)).orderBy(asc(dog.createdAt))
+  // listDogs : mêmes colonnes avant et après la migration 0008 (croquettes et allergies vides avant).
+  const dogs = await listDogs(userId)
   const weights = dogs.length
     ? await db
         .select()
@@ -93,6 +99,9 @@ export async function exportAccountData(userId: string): Promise<AccountExport |
       weightKg: d.weightKg,
       activity: d.activity,
       sterilized: d.sterilized,
+      food: d.food,
+      foodSlug: d.foodSlug,
+      allergies: d.allergies,
       createdAt: d.createdAt.toISOString(),
       updatedAt: d.updatedAt.toISOString(),
       weights: weights.filter((w) => w.dogId === d.id).map((w) => ({ date: w.date, weightKg: w.weightKg, createdAt: w.createdAt.toISOString() })),

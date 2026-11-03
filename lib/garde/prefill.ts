@@ -5,8 +5,8 @@ import { defaultGrams } from './sheet'
 
 // @cdc fiche de garde — formulaire pré-rempli dans l'espace compte : le profil du chien (nom,
 // race, poids, âge, activité, stérilisation, donc la ration), puis la dernière fiche du chien
-// (croquettes, friandises, allergies, médicaments, habitudes, numéros). Le profil n'a pas encore
-// de champ croquettes ni allergies : la première fiche les apprend, les suivantes les reprennent.
+// (friandises, médicaments, habitudes, numéros). Croquettes et allergies : celles du profil
+// d'abord, sinon celles de la dernière fiche (la fiche peut ensuite les garder dans le profil).
 
 export function draftForDog(dog: Dog, last: SitterSheet | null): SheetDraft {
   const fromProfile: SheetDraft = {
@@ -17,6 +17,8 @@ export function draftForDog(dog: Dog, last: SitterSheet | null): SheetDraft {
     ageGroup: ageGroupOf(dog.birthDate) ?? 'adulte',
     activity: dog.activity,
     sterilized: dog.sterilized,
+    food: dog.food ?? '',
+    allergies: dog.allergies.join(', '),
   }
   if (!last) return fromProfile
   const p = last.data
@@ -29,9 +31,9 @@ export function draftForDog(dog: Dog, last: SitterSheet | null): SheetDraft {
     gramsPerDay: custom ? String(p.gramsPerDay) : '',
     meals: p.meals,
     mealTimes: p.mealTimes,
-    food: p.food,
+    food: fromProfile.food || p.food,
     treats: p.treats,
-    allergies: p.allergies,
+    allergies: fromProfile.allergies || p.allergies,
     meds: p.meds,
     notes: p.notes,
     ownerPhone: p.ownerPhone,

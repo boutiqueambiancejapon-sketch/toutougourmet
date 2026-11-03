@@ -33,7 +33,8 @@ export const sheetSchema = z.object({
   gramsPerDay: z.number().int().min(10, 'Entre 10 et 3 000 g.').max(3000, 'Entre 10 et 3 000 g.'),
   meals: z.number().int().min(1).max(4),
   mealTimes: z.array(z.string().regex(TIME, 'Heure invalide.')).min(1).max(4),
-  food: text(120),
+  /** Même longueur que app.dog.food : le profil et la fiche s'échangent ce texte */
+  food: text(160),
   treats: text(200),
   allergies: text(200),
   meds: text(300),

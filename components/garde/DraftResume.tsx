@@ -8,17 +8,26 @@ import { FormNotice } from '@/components/compte/fields'
 import { btnPrimaryBlock, linkInline } from '@/components/compte/espace/ui'
 import { track } from '@/lib/analytics'
 import { clearDraft, draftToRaw, gramsOf, loadDraft, type SheetDraft } from '@/lib/garde/draft'
+import { KeepInProfile, keepable, type ProfileGaps } from './KeepInProfile'
 
 // @cdc fiche de garde — reprise de la saisie faite sans compte sur /outils/fiche-de-garde, après
 // l'inscription (ou la connexion). Le brouillon est lu dans ce navigateur, envoyé une seule fois,
-// puis effacé. Le visiteur choisit le chien du compte, ou ajoute celui de la fiche.
+// puis effacé. Le visiteur choisit le chien du compte, ou ajoute celui de la fiche. Croquettes et
+// allergies de la saisie : proposées pour le profil du chien choisi s'il ne les a pas.
 
-export function DraftResume({ dogs }: { dogs: { id: string; name: string }[] }) {
+interface DraftResumeProps {
+  dogs: { id: string; name: string; gaps: ProfileGaps }[]
+  /** Chien ajouté depuis la fiche : profil vide (tout faux avant la migration 0008) */
+  newDogGaps: ProfileGaps
+}
+
+export function DraftResume({ dogs, newDogGaps }: DraftResumeProps) {
   const router = useRouter()
   const [draft, setDraft] = useState<SheetDraft | null | undefined>(undefined)
   const [target, setTarget] = useState('new')
   const [error, setError] = useState('')
   const [pending, setPending] = useState(false)
+  const [keep, setKeep] = useState(true)
 
   useEffect(() => {
     const t = window.setTimeout(() => {
@@ -51,7 +60,7 @@ export function DraftResume({ dogs }: { dogs: { id: string; name: string }[] }) 
     if (!draft) return
     setPending(true)
     setError('')
-    const res = await createSheetFromDraftAction(target, draftToRaw(draft))
+    const res = await createSheetFromDraftAction(target, draftToRaw(draft), keep && (what.food || what.allergies))
     if (!res.ok) {
       setPending(false)
       return setError(Object.values(res.errors)[0] ?? 'La fiche n’a pas pu être créée.')
@@ -62,6 +71,8 @@ export function DraftResume({ dogs }: { dogs: { id: string; name: string }[] }) 
   }
 
   const grams = gramsOf(draft)
+  const chosen = dogs.find((d) => d.id === target)
+  const what = keepable(chosen ? chosen.gaps : newDogGaps, draft)
   return (
     <div className="flex flex-col gap-4 rounded-card border border-line bg-paper p-4 md:p-6">
       <p className="m-0 text-base text-ink">
@@ -81,6 +92,7 @@ export function DraftResume({ dogs }: { dogs: { id: string; name: string }[] }) 
           {`Ajouter ${draft.dogName || 'ce chien'} à mes chiens`}
         </label>
       </fieldset>
+      <KeepInProfile name={chosen ? chosen.name : draft.dogName} what={what} checked={keep} onChange={setKeep} />
       {error ? <FormNotice tone="error">{error}</FormNotice> : null}
       <button type="button" onClick={create} disabled={pending} className={`${btnPrimaryBlock} disabled:opacity-60`}>
         {pending ? 'Création…' : 'Créer la fiche'}

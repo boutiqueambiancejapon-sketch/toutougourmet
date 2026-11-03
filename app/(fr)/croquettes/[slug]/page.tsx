@@ -7,10 +7,12 @@
 // jour à la place de la matière sèche, recettes maison sous 55/100 (pas de partenaire friandise).
 // Image de partage : /croquettes/[slug]/og.png (Open Graph) et story.png (bouton « Partager »).
 // « Télécharger le PDF » : /croquettes/[slug]/fiche.pdf, une page A4.
+// Allergies des chiens du compte : encadré rendu dans le navigateur (components/scanner/AllergyAlert).
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { BreadcrumbNav, type BreadcrumbItem } from '@/components/ui/BreadcrumbNav'
+import { AllergyAlert } from '@/components/scanner/AllergyAlert'
 import { DownloadLink } from '@/components/scanner/DownloadLink'
 import { ShareButton } from '@/components/scanner/ShareButton'
 import { SourceNotice } from '@/components/scanner/SourceNotice'
@@ -104,6 +106,7 @@ export default async function CroquettePage({ params }: Params) {
         </header>
         <SourceNotice source={a.source} reviewed={row.reviewed} />
         {a.details.treat ? <TreatAlerts alerts={a.details.treat.alerts} /> : null}
+        <AllergyAlert ingredients={a.label.ingredients.map((i) => i.nom)} />
       </div>
 
       <section aria-labelledby="contenu" className="flex flex-col gap-4">

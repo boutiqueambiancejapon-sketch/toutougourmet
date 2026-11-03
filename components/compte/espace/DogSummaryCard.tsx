@@ -1,19 +1,24 @@
 import Link from 'next/link'
 import type { Dog, WeightEntry } from '@/db/schema'
 import { IconDog, IconPlus } from '@/components/icons'
+import { DogDiet } from '@/components/compte/DogDiet'
 import { rationHref } from '@/components/outils/ration-params'
 import { computeRation, KIBBLE_KCAL_100G } from '@/lib/calculators'
 import { ageGroupOf, breedName, formatAge, formatKg } from '@/lib/dog-profile'
+import type { FoodSuggestion } from '@/lib/server/food-suggest'
 import { shortDateFr } from './dates'
 import { btnOutline, linkAction } from './ui'
 
 // @cdc compte — carte d'un chien dans l'espace compte : race, âge, dernier poids, ration du jour
-// (même calcul que /outils/ration, croquettes à 360 kcal pour 100 g), lien vers sa fiche.
+// (même calcul que /outils/ration, croquettes à 360 kcal pour 100 g), ce qu'il mange et ses
+// allergies, lien vers sa fiche.
 
 interface DogSummaryCardProps {
   dog: Dog
   last?: WeightEntry
   heading?: 'h2' | 'h3'
+  /** Fiche du produit qu'il mange, si le profil en lie une */
+  foodLink?: FoodSuggestion | null
 }
 
 function Fact({ label, value, detail }: { label: string; value: string; detail: string }) {
@@ -26,7 +31,7 @@ function Fact({ label, value, detail }: { label: string; value: string; detail: 
   )
 }
 
-export function DogSummaryCard({ dog, last, heading: H = 'h3' }: DogSummaryCardProps) {
+export function DogSummaryCard({ dog, last, heading: H = 'h3', foodLink = null }: DogSummaryCardProps) {
   const ageGroup = ageGroupOf(dog.birthDate) ?? 'adulte'
   const weight = last?.weightKg ?? dog.weightKg
   const ration = weight ? computeRation({ animal: 'chien', weightKg: weight, ageGroup, activityLevel: dog.activity, sterilized: dog.sterilized }) : null
@@ -50,6 +55,7 @@ export function DogSummaryCard({ dog, last, heading: H = 'h3' }: DogSummaryCardP
           detail={ration ? `croquettes à ${KIBBLE_KCAL_100G} kcal/100 g` : 'il faut son poids'}
         />
       </dl>
+      <DogDiet dog={dog} link={foodLink} compact />
       <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2">
         <Link href={`/compte/chien/${dog.id}`} className={btnOutline}>
           Ouvrir sa fiche
