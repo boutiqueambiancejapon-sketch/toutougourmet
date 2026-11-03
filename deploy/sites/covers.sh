@@ -14,6 +14,17 @@ flock -n 9 || { echo "Un passage est déjà en cours." | tee -a "$LOG"; exit 0; 
 node "$HERE/cover-images.mjs" "$@" 2>&1 | tee -a "$LOG"
 STATUS=${PIPESTATUS[0]}
 
+# Rattrapage des anciens articles sans image (validé par le propriétaire le 2026-11-03) : 3 par jour
+# et par site listé, jusqu'à épuisement (l'état empêche toute double génération). Retirer la ligne
+# du site quand le journal indique « 0 sans couverture ».
+CATCHUP="travel-belgium:220"
+if [[ $# -eq 0 ]]; then
+  for entry in $CATCHUP; do
+    node "$HERE/cover-images.mjs" --site="${entry%%:*}" --days="${entry##*:}" --max=3 2>&1 | tee -a "$LOG"
+    [[ ${PIPESTATUS[0]} -ne 0 ]] && STATUS=1
+  done
+fi
+
 if [[ $STATUS -ne 0 && " $* " != *" --dry "* ]]; then
   if [[ -f $HOME/.config/toutou/alerts.env ]]; then
     set -a; . "$HOME/.config/toutou/alerts.env"; set +a
