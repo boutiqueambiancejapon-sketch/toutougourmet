@@ -8,7 +8,7 @@ import { computeRation, type ActivityLevel, type AgeGroup, type RationValues } f
 import { Segmented } from '@/components/tools/Segmented'
 import { CheckField, NumberField, SubmitButton, ToolCard } from './fields'
 import { RationResult } from './RationResult'
-import { parseRationParams, type RationFood, type RationPrefill } from './ration-params'
+import { FOOD_OPTIONS, parseRationParams, type RationFood, type RationPrefill } from './ration-params'
 import { useAccountPrefill } from './useAccountPrefill'
 
 // @cdc outils — calculateur complet de /outils/ration. Même fonction que le mini-outil de
@@ -40,7 +40,6 @@ const DEFAULT_FORM: FormState = {
 const AGES = [['chiot', 'Chiot'], ['adulte', 'Adulte'], ['senior', 'Senior']] as const
 const ACTIVITIES = [['sedentaire', 'Calme'], ['normal', 'Normale'], ['actif', 'Sportive'], ['tres-actif', 'Intense']] as const
 const STERILIZED = [['non', 'Non'], ['oui', 'Oui']] as const
-const FOODS = [['croquettes', 'Croquettes'], ['frais', 'Repas frais']] as const
 
 function compute(form: FormState): RationValues | null {
   const weight = parseFloat(form.weightKg.replace(',', '.'))
@@ -122,10 +121,8 @@ export function RationCalculator({
         <NumberField id={weightId} label="Poids (kg)" value={form.weightKg} onChange={(v) => set('weightKg', v)} placeholder="ex. 12" min={0.5} max={100} />
         <Segmented name="age" legend="Âge" hint="avant 1 an, après 7 ans" options={AGES} value={form.ageGroup} onChange={(v) => set('ageGroup', v)} />
         <Segmented name="activite" legend="Activité" options={ACTIVITIES} value={form.activityLevel} onChange={(v) => set('activityLevel', v)} />
-        <div className="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-3">
-          <Segmented<YesNo> name="sterilise" legend="Stérilisé" options={STERILIZED} value={form.sterilized ? 'oui' : 'non'} onChange={(v) => set('sterilized', v === 'oui')} />
-          <Segmented name="aliment" legend="Il mange" options={FOODS} value={form.food} onChange={(v) => set('food', v)} />
-        </div>
+        <Segmented<YesNo> name="sterilise" legend="Stérilisé" options={STERILIZED} value={form.sterilized ? 'oui' : 'non'} onChange={(v) => set('sterilized', v === 'oui')} />
+        <Segmented name="aliment" legend="Il mange" options={FOOD_OPTIONS} value={form.food} onChange={(v) => set('food', v)} />
         <CheckField checked={form.isHighEnergy} onChange={(v) => set('isHighEnergy', v)}>
           Race très énergique <span className="text-ink-2">(Border Collie, Husky, Malinois…)</span>
         </CheckField>

@@ -5,6 +5,7 @@ import { RationCalculator, RationCalculatorFromUrl } from '@/components/outils/R
 import { Formula, Sources, ToolPage, type FaqEntry } from '@/components/outils/ToolPage'
 import {
   ACTIVITY_FACTORS,
+  BARF_KCAL_100G,
   FRESH_KCAL_100G,
   KIBBLE_KCAL_100G,
   PUPPY_FACTOR,
@@ -81,7 +82,7 @@ export default function RationPage() {
             {`Ajustements : chiot × ${fr(PUPPY_FACTOR)} ; stérilisé × ${fr(STERILIZED_FACTOR)} ; senior ${RER_COEFF.chienSenior} au lieu de ${RER_COEFF.chien} ; race très énergique ${RER_COEFF.hauteEnergie}.`}
           </p>
           <p>
-            {`Les grammes viennent de densités moyennes : ${KIBBLE_KCAL_100G} kcal pour 100 g de croquettes, ${FRESH_KCAL_100G} kcal pour 100 g de repas frais. Le mini-calculateur de l'accueil utilise exactement la même formule.`}
+            {`Les grammes viennent de densités moyennes : ${KIBBLE_KCAL_100G} kcal pour 100 g de croquettes, ${FRESH_KCAL_100G} kcal pour 100 g de repas frais cuits (moyenne Dog Chef), ${BARF_KCAL_100G} kcal pour 100 g de BARF cru (viande, os charnus et abats, valeurs USDA). Le frais cuit contient plus d'eau que le cru, d'où plus de grammes. Le mini-calculateur de l'accueil utilise exactement la même formule.`}
           </p>
           <Sources
             items={[

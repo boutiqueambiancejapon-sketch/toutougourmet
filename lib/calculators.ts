@@ -38,6 +38,12 @@ export const KIBBLE_KCAL_100G = 360
 // @cdc outils — repas frais : 133 kcal/100 g, moyenne publiée par Dog Chef (help.dogchef.com,
 // « How many kcal are in the Dog Chef fresh meals? »). L'ancienne valeur (120) gonflait les grammes de 11 %.
 export const FRESH_KCAL_100G = 133
+// @cdc outils — BARF (viande crue, os charnus, abats) : 200 kcal/100 g, mélange type 80/10/10 calculé
+// sur USDA FoodData Central (poulet cru avec peau 215, bœuf haché cru 15 % MG 215, foie de bœuf cru 135).
+// Le cru est plus dense que le frais cuit livré : sans cette valeur, la ration BARF était gonflée de 50 %.
+export const BARF_KCAL_100G = 200
+/** Repère des rations BARF : 2 à 3 % du poids d'un chien adulte par jour (Billinghurst, Give Your Dog a Bone, 1993). */
+export const BARF_BODY_PCT = { min: 2, max: 3 } as const
 
 export interface RationInput {
   animal: Animal
@@ -77,12 +83,13 @@ export interface RationValues {
   kcal: number
   gKibble: number
   gFresh: number
+  gBarf: number
 }
 
 /** Ration complète : kcal et grammes. Même résultat partout pour les mêmes réglages. */
 export function computeRation(params: RationInput): RationValues {
   const kcal = calculateDailyCalories(params)
-  return { kcal, gKibble: caloriesToGramsKibble(kcal), gFresh: caloriesToGramsFresh(kcal) }
+  return { kcal, gKibble: caloriesToGramsKibble(kcal), gFresh: caloriesToGramsFresh(kcal), gBarf: Math.round((kcal / BARF_KCAL_100G) * 100) }
 }
 
 // ─── Budget mensuel ───────────────────────────────────────────────────────────

@@ -3,10 +3,10 @@
 import { useId, useState } from 'react'
 import Link from 'next/link'
 import { track } from '@/lib/analytics'
-import { computeRation, FRESH_KCAL_100G, KIBBLE_KCAL_100G, type ActivityLevel, type AgeGroup } from '@/lib/calculators'
+import { computeRation, BARF_KCAL_100G, FRESH_KCAL_100G, KIBBLE_KCAL_100G, type ActivityLevel, type AgeGroup } from '@/lib/calculators'
 import { IconChevron } from '@/components/icons'
 import { Segmented } from './Segmented'
-import { rationHref, type RationFood } from '@/components/outils/ration-params'
+import { FOOD_OPTIONS, gramsFor, rationHref, type RationFood } from '@/components/outils/ration-params'
 
 // @cdc 04-pages — calculateur de ration compact du hero (audit design-CRO, §3 Accueil).
 // Même fonction que l'outil complet /outils/ration (computeRation, lib/calculators.ts) : mêmes
@@ -18,11 +18,11 @@ type YesNo = 'oui' | 'non'
 const AGES = [['chiot', 'Chiot'], ['adulte', 'Adulte'], ['senior', 'Senior']] as const
 const ACTIVITIES = [['sedentaire', 'Calme'], ['normal', 'Normale'], ['actif', 'Sportive']] as const
 const STERILIZED = [['non', 'Non'], ['oui', 'Oui']] as const
-const FOODS = [['croquettes', 'Croquettes'], ['frais', 'Repas frais']] as const
 
 const FOOD_TEXT: Record<Food, { what: string; density: string }> = {
   croquettes: { what: 'de croquettes par jour', density: `des croquettes à ${KIBBLE_KCAL_100G} kcal les 100 g` },
-  frais: { what: 'de repas frais par jour', density: `un repas frais à ${FRESH_KCAL_100G} kcal les 100 g` },
+  frais: { what: 'de repas frais cuits par jour', density: `un repas frais cuit à ${FRESH_KCAL_100G} kcal les 100 g` },
+  barf: { what: 'de BARF (cru) par jour', density: `un BARF à ${BARF_KCAL_100G} kcal les 100 g` },
 }
 
 export function RationQuick({ headingId }: { headingId: string }) {
@@ -38,9 +38,9 @@ export function RationQuick({ headingId }: { headingId: string }) {
   const valid = Number.isFinite(kg) && kg >= 0.5 && kg <= 100
   const ration = valid
     ? computeRation({ animal: 'chien', weightKg: kg, ageGroup: age, activityLevel: activity, sterilized: sterilized === 'oui' })
-    : { kcal: 0, gKibble: 0, gFresh: 0 }
+    : { kcal: 0, gKibble: 0, gFresh: 0, gBarf: 0 }
   const { kcal } = ration
-  const grams = food === 'croquettes' ? ration.gKibble : ration.gFresh
+  const grams = gramsFor(ration, food)
 
   return (
     <form
@@ -76,10 +76,8 @@ export function RationQuick({ headingId }: { headingId: string }) {
       </div>
       <Segmented name="age" legend="Son âge" hint="chiot avant 1 an, senior après 7 ans" options={AGES} value={age} onChange={setAge} />
       <Segmented name="activite" legend="Son activité" options={ACTIVITIES} value={activity} onChange={setActivity} />
-      <div className="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-3">
-        <Segmented name="sterilise" legend="Stérilisé" options={STERILIZED} value={sterilized} onChange={setSterilized} />
-        <Segmented name="aliment" legend="Il mange" options={FOODS} value={food} onChange={setFood} />
-      </div>
+      <Segmented name="sterilise" legend="Stérilisé" options={STERILIZED} value={sterilized} onChange={setSterilized} />
+      <Segmented name="aliment" legend="Il mange" options={FOOD_OPTIONS} value={food} onChange={setFood} />
       <button type="submit" className="min-h-12 rounded-control bg-ink px-5 text-base font-semibold text-cream hover:underline">
         Calculer sa ration
       </button>

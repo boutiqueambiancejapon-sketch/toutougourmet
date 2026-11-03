@@ -1,6 +1,6 @@
 import { calculateDogHumanAge, computeRation, evaluateBodyScore, type ActivityLevel, type AgeGroup, type SizeCategory } from '@/lib/calculators'
 import { BILAN_QUESTIONS, computeBilan, getActiveTips, getVerdict, type BilanAnswers } from '@/data/bien-nourri'
-import { rationHref, type RationFood } from '@/components/outils/ration-params'
+import { FOOD_WHAT, barfCheck, gramsFor, otherFood, rationHref, type RationFood } from '@/components/outils/ration-params'
 
 // @cdc outils — « Reçois ton résultat par e-mail » : le navigateur envoie les réglages de l'outil,
 // jamais le texte du résultat. Le serveur (app/api/outils/email) recalcule avec les mêmes
@@ -55,7 +55,7 @@ export function parseToolEmailInput(raw: unknown): ToolEmailInput | null {
   const r = raw as Record<string, unknown>
   if (r.tool === 'ration') {
     if (!isNum(r.weightKg, 0.5, 100) || !oneOf(AGES, r.ageGroup) || !oneOf(ACTIVITIES, r.activityLevel)) return null
-    if (typeof r.sterilized !== 'boolean' || typeof r.highEnergy !== 'boolean' || (r.food !== 'croquettes' && r.food !== 'frais')) return null
+    if (typeof r.sterilized !== 'boolean' || typeof r.highEnergy !== 'boolean' || (r.food !== 'croquettes' && r.food !== 'frais' && r.food !== 'barf')) return null
     return { tool: 'ration', weightKg: r.weightKg, ageGroup: r.ageGroup, activityLevel: r.activityLevel, sterilized: r.sterilized, highEnergy: r.highEnergy, food: r.food }
   }
   if (r.tool === 'poids') {
@@ -77,16 +77,16 @@ export function describeToolResult(input: ToolEmailInput): ToolResultText {
   switch (input.tool) {
     case 'ration': {
       const r = computeRation({ animal: 'chien', ...input, isRaceHighEnergy: input.highEnergy })
-      const fresh = input.food === 'frais'
-      const grams = fresh ? r.gFresh : r.gKibble
+      const grams = gramsFor(r, input.food)
       const meals = input.ageGroup === 'chiot' ? 3 : 2
-      const what = fresh ? 'de repas frais' : 'de croquettes'
+      const what = FOOD_WHAT[input.food]
       return {
         subject: `Sa ration : ${grams} g ${what} par jour`,
         headline: `${grams} g ${what} par jour`,
         details: [
           `Pour un chien ${input.ageGroup === 'chiot' ? 'jeune' : input.ageGroup} de ${kg(input.weightKg)}, soit ${r.kcal} kcal par jour.`,
-          `En ${meals} repas : environ ${Math.round(grams / meals)} g chacun. Pour la même énergie, il faudrait ${fresh ? `${r.gKibble} g de croquettes` : `${r.gFresh} g de repas frais`}.`,
+          `En ${meals} repas : environ ${Math.round(grams / meals)}\u00a0g chacun. Pour la même énergie, il faudrait ${otherFood(r, input.food)}.`,
+          ...(input.food === 'barf' && input.ageGroup !== 'chiot' ? [barfCheck(input.weightKg)] : []),
           'Pèse la ration avec une balance de cuisine et compte les friandises dedans. Ajuste de 10 % si son poids bouge sur 4 semaines.',
         ],
         redoPath: rationHref(input),
