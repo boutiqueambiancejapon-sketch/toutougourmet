@@ -169,3 +169,11 @@ Mise à jour approuvée par le propriétaire pour fermer les avis de sécurité 
 ## 2026-11-03 — Classement des friandises à son adresse propre (branche `feat/scanner-seo`)
 - Le classement des friandises quitte l'onglet `/croquettes?type=friandises` (noindex) pour `/croquettes/friandises`, indexable dès 5 fiches publiées, dans `/sitemaps/croquettes.xml`. Raison : la requête « meilleures friandises chien » est une intention distincte des croquettes, et les premiers résultats n'offrent aucun classement fondé sur la composition (comparatifs éditoriaux, fiches de boutiques). Sous `/croquettes/` plutôt qu'une nouvelle racine : les fiches friandise y vivent déjà (`/croquettes/{slug}`), même sitemap, même fil d'Ariane. L'ancienne adresse redirige (308) en gardant les filtres.
 - Textes des classements neutres vis-à-vis d'`OPFF_INDEX_POLICY` : « fiche publiée » et règle affichée selon la politique en vigueur, plus « relue par la rédaction » quand ce n'est pas vrai.
+
+## 2026-11-03 — Premium payant (Stripe)
+
+- Prix : **5,99 € par mois sans engagement** ou **29,99 € par an**, TTC.
+- Premium comprendra un **assistant (chat)** qui répond aux questions sur l'alimentation du chien : à développer (lot 6), mention claire qu'il s'agit d'une IA.
+- Les comptes passés Premium gratuitement pendant le lancement **passent au payant** (prévenus par e-mail avant la fin de la gratuité).
+- L'entreprise est **assujettie à la TVA belge** : siège en Belgique, Stripe Tax avec enregistrement Belgique ; ventes aux particuliers des autres pays de l'UE (France surtout) au taux belge jusqu'à 10 000 € par an de ventes transfrontalières, puis TVA du pays du client via le guichet OSS. Régime et code de taxe à confirmer avec le comptable.
+- Plan technique : `docs/v2/stripe-plan.md`.
