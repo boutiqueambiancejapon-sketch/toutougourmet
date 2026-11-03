@@ -10,3 +10,8 @@ Règle : `npm run build > log 2>&1 || { tail log; exit 1; }` avant tout commit, 
 ## 2026-11-03 — `public/sitemap*.xml` : plus rien à restaurer après un build
 - Avant, le postbuild next-sitemap réécrivait `public/sitemap.xml`, `public/sitemap-0.xml` et `public/robots.txt` à chaque build (date du build partout) ; il fallait les restaurer avant de committer.
 - Depuis `feat/sitemaps`, les sitemaps et robots.txt sont des routes (`app/sitemap.xml`, `app/sitemaps/[type]`, `app/robots.ts`) et ces fichiers n'existent plus. Règle : ne jamais recréer de `sitemap*.xml` ni de `robots.txt` dans `public/` (ils passeraient devant les routes). Nouvelle page statique indexable : l'ajouter à `data/page-dates.ts`.
+
+## 2026-11-03 — Ration : « repas frais » n'est pas du BARF
+- Le propriétaire (chien de 17 kg au BARF, 250 g par jour) a lu 661 g de « repas frais » : l'outil ne connaissait que le frais cuit livré (133 kcal/100 g, beaucoup d'eau).
+- Règle : chaque type d'aliment a sa densité sourcée (croquettes 360, frais cuit 133, BARF cru 200). Un nouveau type d'aliment = une option et une densité, jamais un réemploi d'une autre.
+- Contrôle : comparer le résultat au repère courant du type (BARF : 2 à 3 % du poids) avant de mettre en ligne.
