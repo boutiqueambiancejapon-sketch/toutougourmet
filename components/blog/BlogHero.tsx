@@ -53,21 +53,18 @@ export function BlogHero({ articleCount }: BlogHeroProps) {
             lineHeight: 1,
           }}
         >
-          On écrit.{' '}
+          Tous nos guides sur l&apos;alimentation du{' '}
           <span
             className="inline-block px-4 pb-1.5 rounded-[var(--radius-lg)] align-baseline"
             style={{ background: 'var(--pill-rose)', lineHeight: 1 }}
           >
-            Tu apprends.
+            chien
           </span>
-          <br />
-          Personne ne paie pour ça.
         </h1>
 
         <p className="text-lg max-w-[680px] leading-relaxed text-[var(--text-secondary)] m-0">
-          Nutrition, santé, comportement, enquêtes. Des guides qu&rsquo;on écrit
-          nous-mêmes, sans sponsoring ni langue de bois. Tu cherches ? Utilise
-          la recherche et les filtres ci-dessous.
+          Aliments autorisés ou toxiques, ration, santé, races et marques de croquettes, avec les
+          sources citées. Cherche un sujet ou filtre par rubrique ci-dessous.
         </p>
       </div>
     </section>

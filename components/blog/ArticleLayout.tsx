@@ -2,7 +2,6 @@ import { TLDR } from './TLDR'
 import { SummarizeWithAI } from './SummarizeWithAI'
 import { AuthorBox } from './AuthorBox'
 import { RelatedArticles } from './RelatedArticles'
-import { NewsletterBlock } from './NewsletterBlock'
 import { getArticleSlot } from './blog-categories'
 import { ArticleHeader, type BreadcrumbItem } from '@/components/article/ArticleHeader'
 import { ArticleAside } from '@/components/article/ArticleAside'
@@ -14,7 +13,7 @@ import { RaceFoodSection, RACE_FOOD_ID, raceFoodHeading } from '@/components/rac
 import { RaceHealth, RaceNear, RACE_HEALTH_ID, RACE_NEAR_ID } from '@/components/race/RaceHealthAndNear'
 import { RaceAccountInvite } from '@/components/race/RaceAccountInvite'
 import { extractToc } from '@/lib/article-toc'
-import { articleEndCta, getPortionCalc, showsNewsletterBlock } from '@/lib/article-cro'
+import { articleEndCta, getPortionCalc } from '@/lib/article-cro'
 import { VerdictHero } from '@/components/article/VerdictHero'
 import { FoodPortionCalc } from '@/components/article/FoodPortionCalc'
 import { GuideOffer } from '@/components/guide/GuideOffer'
@@ -116,11 +115,6 @@ export function ArticleLayout({
             {endCta === 'fiche-link' ? <GuideFicheLink /> : null}
             <AuthorBox author={DEFAULT_AUTHOR} />
             <RelatedArticles currentSlug={currentSlug ?? slug} categorySlug={catSlug} allArticles={allArticles} />
-            {endCta === null && showsNewsletterBlock(catSlug) ? (
-              <div className="mt-12">
-                <NewsletterBlock />
-              </div>
-            ) : null}
           </div>
           <ArticleAside toc={toc} seed={slug} />
         </div>

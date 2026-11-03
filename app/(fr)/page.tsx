@@ -6,7 +6,8 @@ import { HomeBreeds } from '@/components/home-v2/HomeBreeds'
 import { HomeBrands } from '@/components/home-v2/HomeBrands'
 import { DidYouKnow } from '@/components/home-v2/DidYouKnow'
 import { ArticleTile } from '@/components/article/ArticleTile'
-import { NewsletterBlock } from '@/components/blog/NewsletterBlock'
+import { GuideOffer } from '@/components/guide/GuideOffer'
+import { bookSummary } from '@/lib/guide/book'
 import { getAllArticles } from '@/lib/mdx'
 import { getFoodVerdicts } from '@/lib/food-verdicts'
 
@@ -20,7 +21,8 @@ export const metadata: Metadata = {
 }
 
 // @cdc 04-pages — accueil V2 : hero avec calculateur de ration, recherche « peut-il manger »,
-// derniers guides, encart âge, races, marques recommandées (bande encre pleine largeur).
+// derniers guides, encart âge, races, marques recommandées (bande encre pleine largeur), puis le
+// guide (objectif secondaire de l'accueil, à la place de la lettre seule : carte des conversions).
 // L'encart orange et la bande encre ne se suivent plus (audit design-CRO, §3 Accueil).
 // Textes indexables rendus côté serveur ; seuls l'outil et la recherche sont des îlots client.
 export default function HomePage() {
@@ -53,7 +55,7 @@ export default function HomePage() {
       </div>
       <HomeBrands />
       <div className="mx-auto flex w-full max-w-page flex-col gap-14 px-4 md:px-8">
-        <NewsletterBlock />
+        <GuideOffer place="accueil" summary={bookSummary()} className="" />
         <p className="m-0 text-sm text-ink-2">Les conseils de ce site ne remplacent pas une consultation vétérinaire.</p>
       </div>
     </div>

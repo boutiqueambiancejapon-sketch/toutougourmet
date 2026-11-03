@@ -143,7 +143,7 @@ export function BlogExplorer({ articles, featured }: BlogExplorerProps) {
                   {activeCat === 'all' ? 'Tous les articles' : activeCat}
                 </h2>
                 <span className="text-sm text-[var(--text-muted)]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                  {list.length} résultat{list.length > 1 ? 's' : ''}
+                  {filtered.length} résultat{filtered.length > 1 ? 's' : ''}
                 </span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
