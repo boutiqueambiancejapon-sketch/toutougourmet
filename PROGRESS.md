@@ -128,3 +128,8 @@ Gabarits `lib/emails/` (bienvenue, lettre mensuelle), bienvenue après inscripti
 4. **Migrer les articles déjà réécrits** (`CompareTable` par gabarit → `SizeTable`, listes « Que faire si » → `WhatToDo`) par lots, sur `v2`.
 5. Plan d'images V2 (anciennes « Batch 2 à 7 ») : à replanifier dans les lots de `tasks/todo.md`.
 6. Dette technique : scripts `package.json` (`type-check`, `test`), CI, `.env.example` ; 9 erreurs ESLint V1 existantes (`a-propos`, `marque/[slug]`, `StickyCta`).
+
+## 2026-11-03 — Corrections de l'audit UX (branche `fix/audit-ux`, non fusionnée)
+
+Rapport : `docs/v2/audit-ux-2026-11-03.md`. Corrigés : remises partenaires depuis `data/partner-discounts.ts` (118 MDX normalisés), boutons d'offre qui passent à la ligne, contrastes AA par les jetons, accueil (bouton du test, guide à la place de la lettre, un seul chiffre d'aliments), une demande par page (quiz, races, avis, outils), site 100 % chien, bandeau collant à la place de la barre d'onglets, cibles de 44 px, fiche de garde (une colonne, résumé d'erreurs), plan du site tiré des sitemaps, textes boileau. Contrôles : `/tmp/audit-fix/` (captures avant/après, `controles.txt`, `debordements.txt`, `liens.txt`).
+Reste : mode de consentement GA (décision du propriétaire), publication des fiches produit (`/croquettes` vide), suffixe « | Toutou Gourmet » des titres, 1 px de pied de page à 320 px + 120 % (sans défilement possible), faits « chiens et chats » des marques dans les comparatifs.

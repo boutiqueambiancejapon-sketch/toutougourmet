@@ -11,8 +11,8 @@ import { extractSizeBands, type SizeBand } from '@/lib/size-bands'
  *   lib/article-signup.ts).
  * - Urgence ou aliment « danger » : rien à vendre ; un lien discret vers la fiche frigo du guide,
  *   tout en bas, après la FAQ.
- * - Autres articles : l'encart compte du sujet (lib/article-signup.ts) et, hors rubriques
- *   aliments, l'inscription à la lettre en bas de page comme avant.
+ * - Autres articles : l'encart compte du sujet (lib/article-signup.ts). La lettre seule a disparu
+ *   (races, avis, santé…) : l'e-mail se demande contre le guide, qui inscrit à la lettre.
  */
 export type ArticleEndCta = 'guide-aliment' | 'guide-recette' | 'fiche-link' | null
 
@@ -31,12 +31,6 @@ export function articleEndCta({ slug, categorySlug, verdict }: EndCtaInput): Art
   return null
 }
 
-/** Rubriques aliments : jamais l'encart lettre seul en bas de page (le guide le remplace). */
-const FOOD_CATEGORIES = new Set(['peut-manger', 'fruit', 'legumes', 'feculents', 'viandes', 'urgences', 'alimentation-quotidienne'])
-
-export function showsNewsletterBlock(categorySlug: string): boolean {
-  return !FOOD_CATEGORIES.has(categorySlug)
-}
 
 export interface PortionCalcData {
   food: string

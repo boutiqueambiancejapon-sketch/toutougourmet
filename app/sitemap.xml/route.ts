@@ -15,5 +15,6 @@ export async function GET(): Promise<Response> {
       return { path: sitemapPath(type), lastmod }
     }),
   )
-  return xmlResponse(indexXml(sitemaps))
+  // Un sitemap vide (fiches croquettes pas encore publiées) n'est pas déclaré (audit 2026-11-03, E14).
+  return xmlResponse(indexXml(sitemaps.filter((s) => s.lastmod !== null)))
 }

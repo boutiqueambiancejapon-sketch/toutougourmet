@@ -1,3 +1,5 @@
+import { CONFIRMED_DISCOUNTS } from './partner-discounts'
+
 export interface BrandScores {
   global: number
   qualiteIngredients: number
@@ -20,6 +22,7 @@ export interface Brand {
   pros: string[]
   cons: string[]
   priceRange: '€' | '€€' | '€€€'
+  /** Remise affichée : toujours tirée de data/partner-discounts.ts (seule source) */
   discountOffer: string
   discountCode: string | null
   /** Alerte de disponibilité affichée à la place de l'offre (rupture de stock, etc.) */
@@ -74,7 +77,7 @@ export const brands: Brand[] = [
       "Transition alimentaire délicate : prévoir 10 jours minimum",
     ],
     priceRange: '€€',
-    discountOffer: "-30% sur la 1ère commande en abonnement",
+    discountOffer: CONFIRMED_DISCOUNTS.franklin ?? "",
     discountCode: null,
     facts: {
       price: 'Environ 6,30 à 9 € le kg selon la recette et le sac',
@@ -114,7 +117,7 @@ export const brands: Brand[] = [
       'Nécessite de la place au frigo',
     ],
     priceRange: '€€€',
-    discountOffer: "-40% sur la 1ère commande via notre lien",
+    discountOffer: CONFIRMED_DISCOUNTS.elmut ?? "",
     discountCode: null,
     facts: {
       price: 'Environ 55 à 75 € par mois pour un chien de moins de 10 kg',
@@ -155,7 +158,7 @@ export const brands: Brand[] = [
       "Taux de glucides parfois élevé (jusqu'à 35 % MS sur certaines formules)",
     ],
     priceRange: '€€',
-    discountOffer: "-20 % sur la 1ère commande en abonnement via notre lien",
+    discountOffer: CONFIRMED_DISCOUNTS["ultra-premium-direct"] ?? "",
     discountCode: null,
     facts: {
       price: 'Environ 3 à 5 € le kg selon la gamme',
@@ -196,7 +199,7 @@ export const brands: Brand[] = [
       'Inscription avec profil détaillé obligatoire avant de pouvoir commander',
     ],
     priceRange: '€€€',
-    discountOffer: "-30 % sur la box d'essai, livraison gratuite, sans engagement",
+    discountOffer: CONFIRMED_DISCOUNTS["dog-chef"] ?? "",
     discountCode: 'WZU7090',
     facts: {
       price: 'Environ 1,50 à 5,50 € par jour selon le gabarit',
@@ -237,7 +240,7 @@ export const brands: Brand[] = [
       'Menu bœuf riche (environ 31 % de matières grasses sur matière sèche) : à doser avec soin chez un chien en surpoids',
     ],
     priceRange: '€€€',
-    discountOffer: "-50 % sur la box d'essai de 14 jours, livraison offerte",
+    discountOffer: CONFIRMED_DISCOUNTS["dogfy-diet"] ?? "",
     discountCode: null,
     facts: {
       price: 'Environ 50 à 200 € par mois, de 5 à 40 kg',

@@ -24,7 +24,7 @@ export function ScanStart({ monthlyLimit, onStart }: { monthlyLimit: number; onS
         Scanner le code-barres
       </button>
       <p className="m-0 text-sm leading-relaxed text-ink-2">
-        {`Sans compte si le produit est déjà connu. ${monthlyLimit} analyses par photo gratuites chaque mois · ta photo n'est jamais enregistrée.`}
+        {`Sans compte si le produit est déjà connu. Pour un produit inconnu, l'analyse par photo demande un compte gratuit (${monthlyLimit} par mois). Ta photo n'est jamais enregistrée.`}
       </p>
     </div>
   )

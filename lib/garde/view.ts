@@ -69,9 +69,10 @@ export const EXAMPLE_SHEET: SheetData = {
   allergies: 'bœuf',
   meds: '',
   notes: "A peur de l'orage.\nPromenade avant chaque repas.",
-  ownerPhone: '06 12 34 56 78',
+  // Numéros fictifs réservés par l'Arcep à la fiction (plages 06 39 98 et 04 65 71) : aucun vrai abonné.
+  ownerPhone: '06 39 98 12 34',
   vetName: 'Clinique des Lilas',
-  vetPhone: '04 72 00 00 00',
+  vetPhone: '04 65 71 12 34',
   country: 'FR',
   startsOn: '2027-07-12',
   endsOn: '2027-07-26',

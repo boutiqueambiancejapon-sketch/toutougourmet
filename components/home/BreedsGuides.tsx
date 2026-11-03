@@ -24,7 +24,7 @@ export function BreedsGuides() {
       <div className="max-w-[1280px] mx-auto">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-[var(--accent-blue)] mb-2.5">
+            <p className="text-xs font-bold uppercase tracking-widest text-blue-ink mb-2.5">
               Guides par race
             </p>
             <h2 className="section-title m-0">
@@ -40,7 +40,7 @@ export function BreedsGuides() {
           </div>
           <Link
             href="/chien/race"
-            className="text-sm font-bold text-[var(--accent-1)] whitespace-nowrap hover:underline"
+            className="text-sm font-bold text-orange-ink whitespace-nowrap hover:underline"
           >
             Toutes les races →
           </Link>

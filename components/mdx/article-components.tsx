@@ -35,9 +35,13 @@ export const articleMdxComponents = {
   SitterSheetCta,
   h2: Heading2,
   a: MdxLink,
+  // Tableau Markdown : défilement horizontal sur mobile, signalé par une ligne (audit 2026-11-03, E33).
   table: (props: ComponentProps<'table'>) => (
-    <div className="table-scroll">
-      <table {...props} />
-    </div>
+    <>
+      <span aria-hidden="true" className="mt-6 -mb-4 block text-xs text-ink-2 md:hidden">Fais glisser le tableau sur le côté pour tout voir&nbsp;→</span>
+      <div className="table-scroll">
+        <table {...props} />
+      </div>
+    </>
   ),
 }

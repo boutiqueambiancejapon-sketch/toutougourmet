@@ -85,7 +85,7 @@ export function SiteFooter() {
         <div className="mt-10 flex flex-col gap-2 border-t border-cream/10 pt-6 text-xs text-cream/50 md:flex-row md:justify-between">
           <p>
             © {new Date().getFullYear()} Toutou Gourmet ·{' '}
-            <ConsentLink className="cursor-pointer bg-transparent p-0 text-xs text-cream/70 underline" />
+            <ConsentLink className="inline-flex min-h-11 cursor-pointer items-center bg-transparent p-0 text-xs text-cream/70 underline" />
           </p>
           <p>
             {"Site indépendant financé par l'affiliation. "}

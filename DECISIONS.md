@@ -177,3 +177,7 @@ Mise à jour approuvée par le propriétaire pour fermer les avis de sécurité 
 - Les comptes passés Premium gratuitement pendant le lancement **passent au payant** (prévenus par e-mail avant la fin de la gratuité).
 - L'entreprise est **assujettie à la TVA belge** : siège en Belgique, Stripe Tax avec enregistrement Belgique ; ventes aux particuliers des autres pays de l'UE (France surtout) au taux belge jusqu'à 10 000 € par an de ventes transfrontalières, puis TVA du pays du client via le guichet OSS. Régime et code de taxe à confirmer avec le comptable.
 - Plan technique : `docs/v2/stripe-plan.md`.
+## 2026-11-03 — Remises partenaires : une seule table
+- `data/partner-discounts.ts` (`CONFIRMED_DISCOUNTS`) est la seule source des remises affichées : fiches marque (`data/brands.ts` en dérive), offres du compte (`lib/account-offers.ts` la réexporte), boutons `BrandCTA` des articles (la remise du partenaire remplace celle écrite dans `offer`), outils, encarts du milieu et bandeaux collants. Franklin : « −30 % en abonnement » (ni « permanent », ni « première commande »).
+- Les MDX gardent du texte écrit à la main, aligné sur la table et en typographie française (« −30 % », « 1re »).
+- Carte des conversions appliquée : plus de bloc lettre seul (articles, accueil, `/blog`), plus de ligne e-mail sous un outil qui a sa carte compte, plus d'e-mail au résultat du quiz.

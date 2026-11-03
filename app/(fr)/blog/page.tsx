@@ -3,12 +3,13 @@ import { getAllArticles, toCardArticle } from '@/lib/mdx'
 import { BlogHero } from '@/components/blog/BlogHero'
 import { BlogExplorer } from '@/components/blog/BlogExplorer'
 import { AuthorsBlock } from '@/components/blog/AuthorsBlock'
-import { NewsletterBlock } from '@/components/blog/NewsletterBlock'
+import { GuideOffer } from '@/components/guide/GuideOffer'
+import { bookSummary } from '@/lib/guide/book'
 
 export const metadata: Metadata = {
   title: 'Tous les guides alimentation chien',
   description:
-    "Articles de fond sur l'alimentation premium pour chiens et chats. Comparatifs, guides pratiques, décryptage des étiquettes.",
+    "Les articles de Toutou Gourmet sur l'alimentation du chien : aliments autorisés ou toxiques, ration, santé, races et marques de croquettes comparées.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/blog' },
 }
 
@@ -38,7 +39,7 @@ export default function BlogPage() {
       <AuthorsBlock />
       <section className="py-20 px-6 bg-[var(--bg-primary)]">
         <div className="max-w-[640px] mx-auto">
-          <NewsletterBlock />
+          <GuideOffer place="blog" summary={bookSummary()} className="" />
         </div>
       </section>
     </>

@@ -4,11 +4,12 @@ import Link from 'next/link'
 import { PrefilledBudgetCalculator } from '@/components/outils/PrefilledTools'
 import { Formula, ToolPage, type FaqEntry } from '@/components/outils/ToolPage'
 import { brandPricings, calculateDailyCalories, calculateMonthlyBudget } from '@/lib/calculators'
+import { CONFIRMED_DISCOUNTS } from '@/data/partner-discounts'
 
 export const metadata: Metadata = {
   title: { absolute: 'Budget alimentation chien : Franklin, Elmut, Dog Chef' },
   description:
-    'Compare le budget mensuel de Franklin, Elmut et Dog Chef selon le profil de ton chien. Calcul instantané à partir de sa ration.',
+    'Compare le budget mensuel de Franklin, Elmut et Dog Chef selon le profil de ton chien. Calcul à partir de sa ration.',
   alternates: { canonical: 'https://www.toutou-gourmet.com/outils/budget' },
   openGraph: {
     title: 'Simulateur budget chien : Franklin, Elmut et Dog Chef comparés',
@@ -38,7 +39,7 @@ const faqItems: FaqEntry[] = [
   },
   {
     question: 'Comment réduire le budget alimentation de mon chien sans rogner sur la qualité ?',
-    answer: "Pèse la ration pour ne pas suralimenter, compte les friandises dedans et profite des offres de bienvenue : -30 % sur la 1re commande en abonnement chez Franklin, -40 % sur la 1re commande chez Elmut, -30 % sur la box d'essai chez Dog Chef.",
+    answer: `Pèse la ration pour ne pas suralimenter, compte les friandises dedans et profite des offres de bienvenue de Franklin (${CONFIRMED_DISCOUNTS.franklin}), d'Elmut (${CONFIRMED_DISCOUNTS.elmut}) et de Dog Chef (${CONFIRMED_DISCOUNTS['dog-chef']}).`,
   },
   {
     question: 'Les repas frais sont-ils vraiment plus chers que les croquettes ?',

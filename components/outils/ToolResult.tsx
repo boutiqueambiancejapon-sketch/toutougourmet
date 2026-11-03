@@ -8,7 +8,8 @@ import { PartnerLink, type Partner } from './partners'
 // au plus un lien partenaire justifié par ce résultat, la suite logique, puis « Garder ce
 // résultat ». L'outil l'enveloppe dans une zone aria-live présente dès le chargement.
 // CRO compte (maquette 2A) : sous le résultat de la ration, du poids, du bilan et de l'âge, carte
-// « Créer mon compte gratuit » ; le lien compte de « Garder ce résultat » s'efface alors (un seul).
+// « Créer mon compte gratuit » ; la ligne e-mail « Garder ce résultat » s'efface alors (carte des
+// conversions : une seule demande, le compte).
 
 const SIGNUP_TOOL: Record<string, SignupTool> = { ration: 'ration', 'etat-corporel': 'poids', 'bien-nourri': 'bilan', age: 'age' }
 
@@ -28,7 +29,7 @@ export function ToolResult({ tool, summary, steps, partner, children }: ToolResu
       {partner ? <PartnerLink partner={partner} tool={tool} /> : null}
       {signup ? <ToolSignupCard tool={signup} /> : null}
       <NextSteps steps={steps} />
-      <KeepResult tool={tool} summary={summary} accountLink={!signup} />
+      {signup ? null : <KeepResult tool={tool} summary={summary} />}
     </section>
   )
 }

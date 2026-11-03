@@ -25,12 +25,12 @@ export function TrustSection() {
       <div className="max-w-[1280px] mx-auto">
 
         <div className="text-center mb-12">
-          <p className="text-sm font-bold uppercase tracking-widest text-[var(--accent-blue)] mb-2">
+          <p className="text-sm font-bold uppercase tracking-widest text-blue-ink mb-2">
             Pourquoi nous faire confiance ?
           </p>
           <h2 className="section-title">
             On est chiants.{' '}
-            <span style={{ color: 'var(--accent-blue)' }}>C&apos;est voulu.</span>
+            <span style={{ color: 'var(--blue-ink)' }}>C&apos;est voulu.</span>
           </h2>
         </div>
 

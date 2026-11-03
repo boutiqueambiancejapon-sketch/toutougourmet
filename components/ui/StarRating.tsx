@@ -26,7 +26,7 @@ export function StarRating({ score, max = 5, size = 16 }: StarRatingProps) {
               >
                 <Star
                   size={size}
-                  className="text-[var(--accent-2)]"
+                  className="text-amber-ink"
                   fill="currentColor"
                 />
               </span>

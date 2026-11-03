@@ -7,11 +7,11 @@ import type { Article } from '@/lib/mdx'
 const ARTICLES_PER_PAGE = 9
 
 const CATEGORY_COLORS: Record<string, string> = {
-  'Alimentation':            'var(--accent-rose)',
-  'Comparatif':              'var(--accent-blue)',
-  'Guide':                   'var(--accent-2)',
-  'Santé':                   'var(--accent-3)',
-  'Urgences & Intoxications':'var(--accent-rose)',
+  'Alimentation':            'var(--rose-ink)',
+  'Comparatif':              'var(--blue-ink)',
+  'Guide':                   'var(--amber-ink)',
+  'Santé':                   'var(--green-ink)',
+  'Urgences & Intoxications':'var(--rose-ink)',
 }
 
 interface BlogFilterProps {
@@ -49,7 +49,7 @@ export function BlogFilter({ articles }: BlogFilterProps) {
           className="px-4 py-1.5 rounded-full text-sm font-semibold border transition-all"
           style={{
             background: active === null ? 'var(--accent-1)' : 'transparent',
-            color: active === null ? '#fff' : 'var(--text-secondary)',
+            color: active === null ? 'var(--ink)' : 'var(--text-secondary)',
             borderColor: active === null ? 'var(--accent-1)' : 'var(--border)',
           }}
         >
@@ -67,7 +67,7 @@ export function BlogFilter({ articles }: BlogFilterProps) {
               className="px-4 py-1.5 rounded-full text-sm font-semibold border transition-all"
               style={{
                 background: isActive ? color : 'transparent',
-                color: isActive ? '#fff' : color,
+                color: isActive ? 'var(--cream)' : color,
                 borderColor: color,
               }}
             >
@@ -90,7 +90,7 @@ export function BlogFilter({ articles }: BlogFilterProps) {
           <button
             onClick={() => setPage((p) => Math.max(1, p - 1))}
             disabled={page === 1}
-            className="px-3 py-1.5 rounded-[var(--radius-md)] text-sm font-semibold border border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--accent-1)] hover:text-[var(--accent-1)] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+            className="px-3 py-1.5 rounded-[var(--radius-md)] text-sm font-semibold border border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--accent-1)] hover:text-orange-ink disabled:opacity-30 disabled:cursor-not-allowed transition-all"
             aria-label="Page précédente"
           >
             ←
@@ -118,7 +118,7 @@ export function BlogFilter({ articles }: BlogFilterProps) {
                   className="w-9 h-9 rounded-[var(--radius-md)] text-sm font-semibold border transition-all"
                   style={{
                     background: page === n ? 'var(--accent-1)' : 'transparent',
-                    color: page === n ? '#fff' : 'var(--text-secondary)',
+                    color: page === n ? 'var(--ink)' : 'var(--text-secondary)',
                     borderColor: page === n ? 'var(--accent-1)' : 'var(--border)',
                   }}
                   aria-label={`Page ${n}`}
@@ -132,7 +132,7 @@ export function BlogFilter({ articles }: BlogFilterProps) {
           <button
             onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
             disabled={page === totalPages}
-            className="px-3 py-1.5 rounded-[var(--radius-md)] text-sm font-semibold border border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--accent-1)] hover:text-[var(--accent-1)] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+            className="px-3 py-1.5 rounded-[var(--radius-md)] text-sm font-semibold border border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--accent-1)] hover:text-orange-ink disabled:opacity-30 disabled:cursor-not-allowed transition-all"
             aria-label="Page suivante"
           >
             →

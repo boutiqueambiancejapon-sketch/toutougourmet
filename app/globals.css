@@ -14,6 +14,7 @@
 
   --ink:   #1A1109;
   --ink-2: #4A3728;
+  --ink-3: #7A6656; /* exemples des champs (placeholder) : 5,4:1 sur blanc, nettement plus clair que la saisie */
 
   --line:   #E2D5C8;
   --line-2: #C4A98A;
@@ -74,7 +75,7 @@
 
   --text-primary:   var(--ink);
   --text-secondary: var(--ink-2);
-  --text-muted:     #8A7264; /* V1 seule : contraste 4,3:1 sur crème, remplacé par --ink-2 */
+  --text-muted:     var(--ink-2); /* ancien #8A7264 (4,3:1 sur crème, audit 2026-11-03) : aligné sur --ink-2 */
   --text-on-dark:   #F5EEE6; /* V1 seule : la V2 écrit en --cream sur --ink */
 
   /* Darkened text colors to pair with their matching pill background */
@@ -140,6 +141,7 @@
   --color-paper:        var(--white);
   --color-ink:          var(--ink);
   --color-ink-2:        var(--ink-2);
+  --color-ink-3:        var(--ink-3);
   --color-line:         var(--line);
   --color-line-2:       var(--line-2);
   --color-orange:       var(--orange);
@@ -209,6 +211,10 @@
 }
 
 html { scroll-behavior: smooth; }
+/* Exemple d'un champ : plus clair que la saisie pour ne pas faire croire le champ rempli (audit 2026-11-03, E9). */
+::placeholder { color: var(--ink-3); opacity: 1; }
+/* Bandeau partenaire collant affiché (components/blog/StickyBar.tsx) : il remplace la barre d'onglets. */
+html[data-sticky] [data-tabbar] { display: none; }
 
 body {
   background-color: var(--bg-primary);
@@ -273,7 +279,7 @@ h3:where(:not(.v2, .v2 *)) {
 
 .btn-primary {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-  background-color: var(--accent-1); color: #ffffff;
+  background-color: var(--accent-1); color: var(--ink); /* encre sur orange : 5,6:1 (blanc : 3,4:1) */
   padding: 0.875rem 1.75rem; border-radius: var(--radius-md);
   font-weight: 700; font-size: 1rem; cursor: pointer;
   border: 2px solid transparent; text-decoration: none; letter-spacing: -0.01em;
@@ -285,13 +291,13 @@ h3:where(:not(.v2, .v2 *)) {
 
 .btn-outline {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-  background-color: transparent; color: var(--accent-1);
+  background-color: transparent; color: var(--orange-ink);
   padding: 0.875rem 1.75rem; border-radius: var(--radius-md);
   font-weight: 700; font-size: 1rem; cursor: pointer;
   border: 2px solid var(--accent-1); text-decoration: none;
   transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
 }
-.btn-outline:hover { background-color: var(--accent-1); color: #ffffff; transform: translateY(-3px); box-shadow: 0 12px 32px rgba(232,98,42,0.35); }
+.btn-outline:hover { background-color: var(--accent-1); color: var(--ink); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(232,98,42,0.35); }
 
 .btn-ghost {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
@@ -380,7 +386,7 @@ h3:where(:not(.v2, .v2 *)) {
   margin-bottom: 1rem;
   font-size: 1rem;
 }
-.mdx-content a:where(:not(.v2, .v2 *)) { color: var(--accent-1); text-decoration: underline; text-underline-offset: 3px; }
+.mdx-content a:where(:not(.v2, .v2 *)) { color: var(--orange-ink); text-decoration: underline; text-underline-offset: 3px; }
 .mdx-content strong:where(:not(.v2, .v2 *)) { color: var(--text-primary); font-weight: 700; }
 .mdx-content em:where(:not(.v2, .v2 *)) { font-style: italic; }
 .mdx-content ul:where(:not(.v2, .v2 *)) {

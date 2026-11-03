@@ -38,7 +38,7 @@ export function BodyImage({
           alt={alt}
           width={width}
           height={height}
-          sizes="(max-width: 768px) 100vw, 800px"
+          sizes="(max-width: 800px) calc(100vw - 2rem), 760px"
           className="w-full h-auto"
           priority={priority}
           loading={priority ? 'eager' : 'lazy'}
@@ -307,7 +307,7 @@ export function ProsConsList({
         <ul className="space-y-2">
           {consItems.map((c, i) => (
             <li key={i} className="text-sm text-[var(--text-secondary)] flex gap-2">
-              <span style={{ color: 'var(--accent-1)' }} className="shrink-0 font-bold">✗</span>
+              <span style={{ color: 'var(--orange-ink)' }} className="shrink-0 font-bold">✗</span>
               {c}
             </li>
           ))}
@@ -349,7 +349,7 @@ export function ProItem({ children }: { children: ReactNode }) {
 export function ConItem({ children }: { children: ReactNode }) {
   return (
     <li className="text-sm text-[var(--text-secondary)] flex gap-2">
-      <span style={{ color: 'var(--accent-1)' }} className="shrink-0 font-bold">✗</span>
+      <span style={{ color: 'var(--orange-ink)' }} className="shrink-0 font-bold">✗</span>
       {children}
     </li>
   )

@@ -2,7 +2,7 @@
 
 import { useId, useState } from 'react'
 import { track } from '@/lib/analytics'
-import { buildCostComparisons, calculateDailyCalories, type ActivityLevel, type AgeGroup, type Animal, type CostComparison } from '@/lib/calculators'
+import { buildCostComparisons, calculateDailyCalories, type ActivityLevel, type AgeGroup, type CostComparison } from '@/lib/calculators'
 import { Segmented } from '@/components/tools/Segmented'
 import { BigResult, NumberField, SubmitButton, ToolCard } from './fields'
 import { ToolResult } from './ToolResult'
@@ -10,13 +10,11 @@ import { ToolResult } from './ToolResult'
 // @cdc outils — coût annuel de quatre façons de nourrir, pour la même ration (computeRation).
 // Pas de lien partenaire : le résultat compare des types d'aliment, pas des marques.
 
-const ANIMALS = [['chien', 'Chien'], ['chat', 'Chat']] as const
 const AGES = [['chiot', 'Jeune'], ['adulte', 'Adulte'], ['senior', 'Senior']] as const
 const ACTIVITIES = [['sedentaire', 'Calme'], ['normal', 'Normale'], ['actif', 'Sportive'], ['tres-actif', 'Intense']] as const
 
 export function CostComparisonTool() {
   const weightId = useId()
-  const [animal, setAnimal] = useState<Animal>('chien')
   const [weight, setWeight] = useState('')
   const [age, setAge] = useState<AgeGroup>('adulte')
   const [activity, setActivity] = useState<ActivityLevel>('normal')
@@ -28,7 +26,7 @@ export function CostComparisonTool() {
     e.preventDefault()
     const kg = parseFloat(weight.replace(',', '.'))
     if (!(kg >= 0.5 && kg <= 100)) return
-    const kcal = calculateDailyCalories({ animal, weightKg: kg, ageGroup: age, activityLevel: activity, sterilized: false })
+    const kcal = calculateDailyCalories({ animal: 'chien', weightKg: kg, ageGroup: age, activityLevel: activity, sterilized: false })
     setRows(buildCostComparisons(kcal))
     track('Tool Result', { tool: 'cout' })
   }
@@ -39,10 +37,7 @@ export function CostComparisonTool() {
   return (
     <div className="flex flex-col gap-4">
       <ToolCard label="Comparer les coûts" onSubmit={onSubmit}>
-        <div className="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] items-end gap-3">
-          <Segmented name="animal" legend="Animal" options={ANIMALS} value={animal} onChange={change(setAnimal)} />
-          <NumberField id={weightId} label="Poids (kg)" value={weight} onChange={change(setWeight)} placeholder="12" min={0.5} max={100} />
-        </div>
+        <NumberField id={weightId} label="Poids (kg)" value={weight} onChange={change(setWeight)} placeholder="ex. 12" min={0.5} max={100} />
         <Segmented name="age" legend="Âge" options={AGES} value={age} onChange={change(setAge)} />
         <Segmented name="activite" legend="Activité" options={ACTIVITIES} value={activity} onChange={change(setActivity)} />
         <SubmitButton>Comparer sur un an</SubmitButton>

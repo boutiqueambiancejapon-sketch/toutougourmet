@@ -68,10 +68,10 @@ export function RationQuick({ headingId }: { headingId: string }) {
           max="100"
           step="0.1"
           required
-          placeholder="12"
+          placeholder="ex. 12"
           value={weight}
           onChange={(e) => setWeight(e.target.value)}
-          className="min-h-12 w-full rounded-control border-2 border-ink bg-paper px-4 text-lg text-ink outline-none placeholder:text-ink-2 focus-visible:ring-4 focus-visible:ring-amber"
+          className="min-h-12 w-full rounded-control border-2 border-ink bg-paper px-4 text-lg text-ink outline-none placeholder:text-ink-3 focus-visible:ring-4 focus-visible:ring-amber"
         />
       </div>
       <Segmented name="age" legend="Son âge" hint="chiot avant 1 an, senior après 7 ans" options={AGES} value={age} onChange={setAge} />

@@ -8,13 +8,14 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Toutou Gourmet — Comparateur de nourriture premium pour chiens et chats',
+    default: 'Toutou Gourmet, bien nourrir son chien',
     template: '%s | Toutou Gourmet',
   },
   description:
-    'Le comparateur indépendant et honnête du pet food premium en France. Quiz personnalisé, comparatif des meilleures marques, avis vétérinaires.',
+    'Ration en grammes, aliments à éviter et croquettes comparées, avec les sources citées, pour nourrir ton chien sans deviner.',
   metadataBase: new URL('https://www.toutou-gourmet.com'),
-  alternates: { canonical: 'https://www.toutou-gourmet.com' },
+  // Pas de canonical par défaut : chaque page indexable déclare la sienne ; une page en noindex
+  // (compte, mentions, 404) n'en a pas, au lieu de pointer vers l'accueil (audit 2026-11-03, E28).
   // Icônes — on ne déclare PLUS /favicon.ico ici. Raison :
   // 1. Le binaire app/favicon.ico contient encore le scaffold Next.js (triangle Vercel).
   // 2. Tant qu'il n'est pas remplacé par un vrai .ico DA, on évite de pointer vers lui
@@ -34,9 +35,9 @@ export const metadata: Metadata = {
     locale: 'fr_FR',
     url: 'https://www.toutou-gourmet.com',
     siteName: 'Toutou Gourmet',
-    title: 'Toutou Gourmet — La bouffe premium pour ton animal, enfin comparée honnêtement',
+    title: 'Toutou Gourmet, bien nourrir son chien',
     description:
-      'Quiz personnalisé, comparatif des 4 meilleures marques, avis indépendants. Franklin, Elmut, Ultra Premium Direct, Dog Chef.',
+      'Ration en grammes, aliments à éviter et croquettes comparées, avec les sources citées, pour nourrir ton chien sans deviner.',
   },
   twitter: { card: 'summary_large_image' },
   other: {

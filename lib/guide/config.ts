@@ -19,6 +19,8 @@ export const GUIDE_SOURCE = 'guide'
 /** Emplacements mesurés de l'inscription au guide (événement Guide Signup, propriété place). */
 export const GUIDE_PLACES = {
   'page-guide': 'Page du guide',
+  accueil: 'Accueil',
+  blog: 'Page des articles',
   'article-aliment': 'Fin d’article (aliment)',
   'article-recette': 'Fin d’article (recette)',
   'fiche-frigo': 'Fiche aliments dangereux',

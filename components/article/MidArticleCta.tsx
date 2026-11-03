@@ -45,7 +45,7 @@ export function MidArticleCta({ cta }: { cta: MidCtaConfig }) {
         <a
           href={cta.button.href}
           {...(external ? { target: '_blank', rel: 'sponsored noopener' } : {})}
-          className="rounded-control inline-flex shrink-0 items-center whitespace-nowrap bg-amber px-6 py-4 text-lg font-bold text-ink no-underline shadow-[5px_5px_0_var(--orange)] transition-transform hover:-translate-y-0.5 active:translate-x-[3px] active:translate-y-[3px] active:shadow-[2px_2px_0_var(--orange)]"
+          className="rounded-control inline-flex max-w-full items-center text-balance bg-amber px-6 py-4 text-lg font-bold text-ink no-underline shadow-[5px_5px_0_var(--orange)] transition-transform hover:-translate-y-0.5 active:translate-x-[3px] active:translate-y-[3px] active:shadow-[2px_2px_0_var(--orange)]"
         >
           {cta.button.label}&nbsp;→
         </a>

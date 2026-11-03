@@ -16,7 +16,7 @@ export function BrandOfferList({ place }: { place: string }) {
                 href={b.affiliateUrl}
                 target="_blank"
                 rel="sponsored noopener"
-                className="self-start whitespace-nowrap font-semibold text-orange-ink underline underline-offset-4 hover:text-ink sm:self-auto"
+                className="inline-flex min-h-11 items-center self-start whitespace-nowrap font-semibold text-orange-ink underline underline-offset-4 hover:text-ink sm:self-auto"
               >
                 Voir l&apos;offre&nbsp;→
               </a>

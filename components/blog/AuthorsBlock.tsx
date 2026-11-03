@@ -10,12 +10,12 @@ export function AuthorsBlock() {
       <div className="max-w-[1280px] mx-auto">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8">
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-[var(--accent-1)] mb-2.5">
+            <p className="text-xs font-bold uppercase tracking-widest text-orange-ink mb-2.5">
               Qui écrit ici
             </p>
             <h2 className="section-title m-0">
               Un humain,{' '}
-              <span style={{ color: 'var(--accent-1)' }}>trois chiens</span>,<br />
+              <span style={{ color: 'var(--orange-ink)' }}>trois chiens</span>,<br />
               zéro pige à 20&nbsp;€.
             </h2>
           </div>
@@ -40,7 +40,7 @@ export function AuthorsBlock() {
               {author.name}
             </p>
             <p
-              className="text-xs font-bold uppercase tracking-widest text-[var(--accent-1)] m-0 mb-3"
+              className="text-xs font-bold uppercase tracking-widest text-orange-ink m-0 mb-3"
             >
               {author.title}
               {author.pets.length > 0 && (
@@ -61,7 +61,7 @@ export function AuthorsBlock() {
             <div className="flex items-center gap-4 flex-wrap">
               <Link
                 href={author.url}
-                className="text-sm font-bold text-[var(--accent-1)] hover:underline"
+                className="text-sm font-bold text-orange-ink hover:underline"
               >
                 Sa page auteur →
               </Link>
@@ -70,7 +70,7 @@ export function AuthorsBlock() {
                   href={author.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-[var(--text-muted)] hover:text-[var(--accent-1)]"
+                  className="text-sm text-[var(--text-muted)] hover:text-orange-ink"
                 >
                   LinkedIn →
                 </Link>

@@ -44,7 +44,7 @@ export function NumberField({ id, label, value, onChange, placeholder, min, max,
         placeholder={placeholder}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="min-h-12 w-full min-w-0 rounded-control border-2 border-ink bg-paper px-4 text-lg text-ink outline-none placeholder:text-ink-2 focus-visible:ring-4 focus-visible:ring-amber"
+        className="min-h-12 w-full min-w-0 rounded-control border-2 border-ink bg-paper px-4 text-lg text-ink outline-none placeholder:text-ink-3 focus-visible:ring-4 focus-visible:ring-amber"
       />
     </div>
   )

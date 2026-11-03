@@ -3,6 +3,7 @@ import type { ComponentType } from 'react'
 import { IconAlert, IconChevron, IconSearch, type IconProps } from '@/components/icons'
 import { FoodSearch } from '@/components/tools/FoodSearch'
 import type { FoodVerdict } from '@/lib/food-verdicts'
+import { bookSummary } from '@/lib/guide/book'
 
 // @cdc 04-pages — première section après le hero : recherche « peut-il manger » sur les aliments
 // classés, puis deux entrées secondaires en lignes. Pas d'aplat orange ici : l'action principale
@@ -20,7 +21,7 @@ export function StartTiles({ foods }: { foods: FoodVerdict[] }) {
         <h2 id="peut-manger" className="m-0 font-display text-2xl font-black text-ink">
           Mon chien peut-il manger… ?
         </h2>
-        <p className="m-0 text-base text-ink-2">{`Tape l’aliment qu’il vient de chiper. ${foods.length} aliments ont déjà leur verdict.`}</p>
+        <p className="m-0 text-base text-ink-2">{`Tape l’aliment qu’il vient de chiper. ${bookSummary().foodCount} aliments ont déjà leur verdict.`}</p>
         <FoodSearch foods={entries} />
       </div>
       <ul role="list" className="m-0 flex list-none flex-col self-start border-t border-line p-0 md:mt-10">

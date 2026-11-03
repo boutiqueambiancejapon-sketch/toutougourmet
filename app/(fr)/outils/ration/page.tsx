@@ -19,8 +19,8 @@ export const metadata: Metadata = {
     'Calcule la ration journalière de ton chien selon son poids, son âge et son activité. Formule NRC 2006, résultat en grammes de croquettes ou de repas frais.',
   alternates: { canonical: 'https://www.toutou-gourmet.com/outils/ration' },
   openGraph: {
-    title: 'Calculateur de ration journalière chien et chat : résultat en grammes selon le NRC',
-    description: 'Combien de grammes par jour pour ton animal ? La formule NRC adaptée à ton chien ou chat.',
+    title: 'Calculateur de ration journalière du chien : résultat en grammes selon le NRC',
+    description: 'Combien de grammes par jour pour ton chien ? La formule NRC selon son poids, son âge et son activité.',
     url: 'https://www.toutou-gourmet.com/outils/ration',
     type: 'website',
   },
@@ -78,7 +78,7 @@ export default function RationPage() {
             {`Facteurs d'activité, de calme à intense : ${activityList}. Pour un adulte à activité normale, cela donne ${fr(RER_COEFF.chien * ACTIVITY_FACTORS.normal)} kcal par kg^0,75, entre les 95 et 110 kcal que la FEDIAF retient pour un chien peu actif et un chien modérément actif.`}
           </p>
           <p>
-            {`Ajustements : chiot × ${fr(PUPPY_FACTOR)} ; stérilisé × ${fr(STERILIZED_FACTOR)} ; senior ${RER_COEFF.chienSenior} au lieu de ${RER_COEFF.chien} ; race très énergique ${RER_COEFF.hauteEnergie}. Pour le chat, le coefficient de départ est ${RER_COEFF.chat} (${RER_COEFF.chatSenior} après 7 ans).`}
+            {`Ajustements : chiot × ${fr(PUPPY_FACTOR)} ; stérilisé × ${fr(STERILIZED_FACTOR)} ; senior ${RER_COEFF.chienSenior} au lieu de ${RER_COEFF.chien} ; race très énergique ${RER_COEFF.hauteEnergie}.`}
           </p>
           <p>
             {`Les grammes viennent de densités moyennes : ${KIBBLE_KCAL_100G} kcal pour 100 g de croquettes, ${FRESH_KCAL_100G} kcal pour 100 g de repas frais. Le mini-calculateur de l'accueil utilise exactement la même formule.`}
@@ -95,7 +95,7 @@ export default function RationPage() {
       faq={faqItems}
       app={{
         name: 'Calculateur ration journalière chien | Toutou Gourmet',
-        description: "Calcule la ration journalière d'un chien ou chat selon son poids, âge et niveau d'activité.",
+        description: "Calcule la ration journalière d'un chien selon son poids, son âge et son activité.",
       }}
     >
       {/* Calculateur : pré-rempli par l'URL (?poids=12&age=adulte…), rendu statique sans paramètres */}

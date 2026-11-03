@@ -11,7 +11,7 @@ export const categories: Category[] = [
   {
     slug: 'peut-manger',
     label: 'Que peut manger un chien ?',
-    description: 'Fruits, légumes, viandes, féculents — tous les aliments autorisés et interdits pour ton chien, expliqués clairement avec les quantités et précautions.',
+    description: 'Fruits, légumes, viandes, féculents : les aliments autorisés et interdits pour ton chien, avec la quantité à donner et les précautions.',
     emoji: '🥕',
     subCategorySlugs: ['fruit', 'legumes', 'feculents', 'viandes'],
   },
@@ -60,13 +60,13 @@ export const categories: Category[] = [
   {
     slug: 'race',
     label: 'Alimentation par race',
-    description: 'Labrador, Golden Retriever, Berger Allemand, Bouledogue Français… Trouvez les conseils nutritionnels adaptés à la race de votre chien.',
+    description: 'Labrador, Golden Retriever, Berger Allemand, Bouledogue Français… Ration, aliments à surveiller et marques adaptées, race par race.',
     emoji: '🐕',
   },
   {
     slug: 'sante',
-    label: 'Croquettes pour chiens malades',
-    description: 'Insuffisance rénale, arthrose, dermatite, cancer, problèmes cardiaques… Quelle alimentation choisir selon la condition de santé de votre chien ?',
+    label: 'Santé et alimentation',
+    description: 'Insuffisance rénale, arthrose, dermatite, cancer, problèmes cardiaques… Quelle alimentation choisir selon la maladie de ton chien ?',
     emoji: '🏥',
   },
   {

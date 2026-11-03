@@ -2,8 +2,7 @@
 
 import { useId, useState } from 'react'
 import { track } from '@/lib/analytics'
-import { dogSizeRanges, evaluateBodyScore, type Animal, type BodyScore, type BodyScoreResult } from '@/lib/calculators'
-import { Segmented } from '@/components/tools/Segmented'
+import { dogSizeRanges, evaluateBodyScore, type BodyScore, type BodyScoreResult } from '@/lib/calculators'
 import { NumberField, SubmitButton, ToolCard } from './fields'
 import type { NextStep } from './NextSteps'
 import { PARTNERS, type Partner } from './partners'
@@ -14,17 +13,10 @@ import type { AccountDog } from './useAccountPrefill'
 // @cdc outils — poids actuel comparé au poids de forme. Lien partenaire seulement pour un chien
 // en surpoids (Dog Chef dose les repas selon le poids visé).
 
-const ANIMALS = [['chien', 'Chien'], ['chat', 'Chat']] as const
 const DOG_SIZES = Object.entries(dogSizeRanges).map(([key, v]) => ({ key, kg: v.midKg, label: `${v.label.split(' (')[0]} (${v.minKg} à ${v.maxKg} kg)` }))
-const CAT_SIZES = [
-  { key: 'petit', kg: 3.5, label: 'Petit (Siamois, Devon Rex), environ 3,5 kg' },
-  { key: 'moyen', kg: 4.5, label: 'Moyen (Européen, Bengal), environ 4,5 kg' },
-  { key: 'grand', kg: 6.5, label: 'Grand (Maine Coon, Ragdoll), environ 6,5 kg' },
-]
 
-function nextSteps(score: BodyScore, animal: Animal, idealKg: number): NextStep[] {
+function nextSteps(score: BodyScore, idealKg: number): NextStep[] {
   const ration: NextStep = { href: `/outils/ration?poids=${idealKg}`, label: 'Calculer sa ration à son poids de forme' }
-  if (animal === 'chat') return [ration]
   if (score === 'surpoids' || score === 'obese') {
     return [ration, { href: '/chien/alimentation-quotidienne/comment-faire-maigrir-son-chien', label: 'Faire maigrir son chien', sub: 'Le programme semaine par semaine' }]
   }
@@ -34,8 +26,8 @@ function nextSteps(score: BodyScore, animal: Animal, idealKg: number): NextStep[
   return [ration, { href: '/fiche-aliments-dangereux', label: 'Les aliments à ne jamais lui donner' }]
 }
 
-function partner(score: BodyScore, animal: Animal): Partner | null {
-  if (animal !== 'chien' || (score !== 'surpoids' && score !== 'obese')) return null
+function partner(score: BodyScore): Partner | null {
+  if (score !== 'surpoids' && score !== 'obese') return null
   return { ...PARTNERS.dogChef, why: 'Pour un chien en surpoids, Dog Chef calcule les portions selon le poids visé et livre les repas déjà dosés.', label: 'Essayer Dog Chef' }
 }
 
@@ -43,11 +35,10 @@ function partner(score: BodyScore, animal: Animal): Partner | null {
 export function BodyScoreEvaluator({ dog }: { dog?: AccountDog | null }) {
   const currentId = useId()
   const idealId = useId()
-  const [animal, setAnimal] = useState<Animal>('chien')
   const [current, setCurrent] = useState(dog?.weightKg ? String(dog.weightKg) : '')
   const [ideal, setIdeal] = useState(dog?.breedMidKg ? String(dog.breedMidKg) : '')
   const [result, setResult] = useState<{ score: BodyScoreResult; idealKg: number } | null>(null)
-  const sizes = animal === 'chien' ? DOG_SIZES : CAT_SIZES
+  const sizes = DOG_SIZES
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -63,10 +54,9 @@ export function BodyScoreEvaluator({ dog }: { dog?: AccountDog | null }) {
   return (
     <div className="flex flex-col gap-4">
       <ToolCard label="Évaluer son poids" onSubmit={onSubmit}>
-        <Segmented name="animal" legend="Animal" options={ANIMALS} value={animal} onChange={(v) => { setAnimal(v); setIdeal(''); setResult(null) }} />
         <div className="grid grid-cols-2 gap-3">
-          <NumberField id={currentId} label="Poids actuel (kg)" value={current} onChange={(v) => { setCurrent(v); setResult(null) }} placeholder="18" min={0.5} max={120} />
-          <NumberField id={idealId} label="Poids de forme (kg)" value={ideal} onChange={(v) => { setIdeal(v); setResult(null) }} placeholder="15" min={0.5} max={120} />
+          <NumberField id={currentId} label="Poids actuel (kg)" value={current} onChange={(v) => { setCurrent(v); setResult(null) }} placeholder="ex. 18" min={0.5} max={120} />
+          <NumberField id={idealId} label="Poids de forme (kg)" value={ideal} onChange={(v) => { setIdeal(v); setResult(null) }} placeholder="ex. 15" min={0.5} max={120} />
         </div>
         <fieldset className="m-0 flex flex-col gap-1 border-0 p-0">
           <legend className="mb-1 p-0 text-sm text-ink-2">Tu ne connais pas son poids de forme&nbsp;? Prends un repère&nbsp;:</legend>
@@ -91,8 +81,8 @@ export function BodyScoreEvaluator({ dog }: { dog?: AccountDog | null }) {
           <ToolResult
             tool="etat-corporel"
             summary={`${r.label} (${gap} par rapport à ${result.idealKg} kg)`}
-            steps={nextSteps(r.score, animal, result.idealKg)}
-            partner={partner(r.score, animal)}
+            steps={nextSteps(r.score, result.idealKg)}
+            partner={partner(r.score)}
           >
             <BigResultScore label={r.label} gap={gap} advice={r.advice} score={r.score} />
           </ToolResult>

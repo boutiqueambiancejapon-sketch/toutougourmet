@@ -26,7 +26,7 @@ export function VerdictBoard({ foods, max = 18 }: { foods: FoodVerdict[]; max?: 
             <ul role="list" className="m-0 flex list-none flex-wrap gap-1.5 p-0">
               {items.map((f) => (
                 <li key={f.href}>
-                  <Link href={f.href} className="inline-block rounded-pill bg-paper px-3 py-1 text-sm text-ink no-underline hover:underline">
+                  <Link href={f.href} className="inline-flex min-h-11 items-center rounded-pill bg-paper px-3 text-sm text-ink no-underline hover:underline">
                     {f.label}
                   </Link>
                 </li>

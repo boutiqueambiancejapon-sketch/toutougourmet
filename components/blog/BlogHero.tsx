@@ -23,7 +23,7 @@ export function BlogHero({ articleCount }: BlogHeroProps) {
           aria-label="Fil d'Ariane"
           className="flex flex-wrap items-center gap-1.5 text-sm text-[var(--text-muted)] mb-5"
         >
-          <Link href="/" className="hover:text-[var(--text-primary)]">
+          <Link href="/" className="inline-flex min-h-11 items-center hover:text-[var(--text-primary)]">
             Accueil
           </Link>
           <span aria-hidden="true" className="opacity-50">
@@ -37,7 +37,7 @@ export function BlogHero({ articleCount }: BlogHeroProps) {
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-blue)]" />
           <span
-            className="text-xs font-bold uppercase tracking-widest text-[var(--accent-blue)]"
+            className="text-xs font-bold uppercase tracking-widest text-blue-ink"
             style={{ fontFamily: "'JetBrains Mono', monospace" }}
           >
             Le blog · {articleCount} articles
@@ -53,21 +53,18 @@ export function BlogHero({ articleCount }: BlogHeroProps) {
             lineHeight: 1,
           }}
         >
-          On écrit.{' '}
+          Tous nos guides sur l&apos;alimentation du{' '}
           <span
             className="inline-block px-4 pb-1.5 rounded-[var(--radius-lg)] align-baseline"
             style={{ background: 'var(--pill-rose)', lineHeight: 1 }}
           >
-            Tu apprends.
+            chien
           </span>
-          <br />
-          Personne ne paie pour ça.
         </h1>
 
         <p className="text-lg max-w-[680px] leading-relaxed text-[var(--text-secondary)] m-0">
-          Nutrition, santé, comportement, enquêtes. Des guides qu&rsquo;on écrit
-          nous-mêmes, sans sponsoring ni langue de bois. Tu cherches ? Utilise
-          la recherche et les filtres ci-dessous.
+          Aliments autorisés ou toxiques, ration, santé, races et marques de croquettes, avec les
+          sources citées. Cherche un sujet ou filtre par rubrique ci-dessous.
         </p>
       </div>
     </section>

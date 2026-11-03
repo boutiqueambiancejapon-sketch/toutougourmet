@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { KeepResult } from '@/components/outils/KeepResult'
+import { QuizAccountInvite } from './QuizAccountInvite'
 import { NextSteps, type NextStep } from '@/components/outils/NextSteps'
 import {
   brandLabels,
@@ -15,8 +15,8 @@ import {
 import { QuizPartner } from './QuizPartner'
 
 // @cdc outils — résultat du test, dans l'ordre des outils V2 : la marque en grand et pourquoi,
-// au plus un lien partenaire (seulement si elle devance nettement la suivante), « Garder ce
-// résultat », puis la suite logique (ration pré-remplie, avis complet, aliments dangereux).
+// au plus un lien partenaire (seulement si elle devance nettement la suivante), l'invitation au
+// compte (sans demande d'e-mail), puis la suite logique (ration pré-remplie, avis complet, aliments dangereux).
 
 function rationLink(answers: QuizAnswers): NextStep {
   const q = new URLSearchParams()
@@ -85,15 +85,7 @@ export function QuizResult({ answers, onRestart }: { answers: QuizAnswers; onRes
           )}
         </div>
         {clear ? <QuizPartner brand={top} /> : null}
-        <KeepResult
-          tool="quiz"
-          summary={clear ? brandLabels[top] : `${brandLabels[top]} ou ${brandLabels[second]}`}
-          invite={{
-            label: 'Garde ce résultat et le profil de ton chien',
-            text: ' dans un compte : sa ration est calculée, son poids suivi et les offres choisies pour lui.',
-            retour: profileReturn(answers),
-          }}
-        />
+        <QuizAccountInvite retour={profileReturn(answers)} />
         <NextSteps steps={steps} />
       </section>
       <div className="flex flex-wrap items-center justify-between gap-3">

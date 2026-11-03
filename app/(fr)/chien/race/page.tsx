@@ -9,9 +9,9 @@ import { RaceSearch } from '@/components/race/RaceSearch'
 import { breedSize } from '@/components/race/breed-size'
 
 export const metadata: Metadata = {
-  title: 'Alimentation par race de chien — guides nutritionnels',
+  title: 'Alimentation par race de chien',
   description:
-    'Labrador, Golden Retriever, Berger Allemand, Bouledogue Français… Trouvez les conseils nutritionnels adaptés à la race de votre chien.',
+    'Labrador, Golden Retriever, Berger Allemand, Bouledogue Français… Ration, aliments à surveiller et marques adaptées, race par race.',
   alternates: { canonical: 'https://www.toutou-gourmet.com/chien/race' },
 }
 
@@ -51,7 +51,7 @@ export default function RaceHubPage() {
       <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Guides', href: '/chien' }, { label: 'Alimentation par race' }]} />
       <div className="flex max-w-prose flex-col gap-3">
         <h1 className="m-0 font-display text-[clamp(1.9rem,3.6vw,2.6rem)] font-black leading-[1.08] tracking-tight text-ink">
-          Quelle nourriture selon la race de votre chien ?
+          Quelle nourriture selon la race de ton chien ?
         </h1>
         <p className="m-0 leading-relaxed text-ink-2">
           {breeds.length} races, avec pour chacune son poids adulte, ses prédispositions et les aliments à surveiller.
@@ -62,7 +62,7 @@ export default function RaceHubPage() {
         <ol role="list" className="m-0 flex list-none gap-1.5 p-0">
           {letters.map((letter) => (
             <li key={letter}>
-              <a href={`#lettre-${letter}`} className="grid size-10 place-items-center rounded-control border border-line bg-paper font-display text-lg font-black text-ink no-underline hover:border-ink">
+              <a href={`#lettre-${letter}`} className="grid size-11 place-items-center rounded-control border border-line bg-paper font-display text-lg font-black text-ink no-underline hover:border-ink">
                 {letter}
               </a>
             </li>

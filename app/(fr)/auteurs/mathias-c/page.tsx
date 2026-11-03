@@ -49,9 +49,9 @@ export default function AutheurMathiasPage() {
 
           {/* Breadcrumb */}
           <nav className="text-sm text-[var(--text-muted)] mb-8" aria-label="Fil d'Ariane">
-            <Link href="/" className="hover:underline">Accueil</Link>
+            <Link href="/" className="inline-flex min-h-11 items-center hover:underline">Accueil</Link>
             <span className="mx-2" aria-hidden="true">›</span>
-            <Link href="/blog" className="hover:underline">Blog</Link>
+            <Link href="/blog" className="inline-flex min-h-11 items-center hover:underline">Blog</Link>
             <span className="mx-2" aria-hidden="true">›</span>
             <span>{author.name}</span>
           </nav>
@@ -61,7 +61,7 @@ export default function AutheurMathiasPage() {
             <div className="flex gap-5 items-center mb-6">
               {/* Avatar */}
               <div
-                className="shrink-0 w-16 h-16 rounded-full flex items-center justify-center text-lg font-bold text-white"
+                className="shrink-0 w-16 h-16 rounded-full flex items-center justify-center text-lg font-bold text-ink"
                 style={{ background: 'var(--accent-1)' }}
                 aria-hidden="true"
               >
@@ -75,7 +75,7 @@ export default function AutheurMathiasPage() {
               <div>
                 <h1 className="page-title leading-tight">{author.name}</h1>
                 <div className="flex items-center gap-3 mt-1 flex-wrap">
-                  <p className="text-sm font-bold uppercase tracking-widest text-[var(--accent-1)]">
+                  <p className="text-sm font-bold uppercase tracking-widest text-orange-ink">
                     {author.title}
                   </p>
                   {author.linkedin && (
@@ -83,7 +83,7 @@ export default function AutheurMathiasPage() {
                       href={author.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs font-semibold text-[var(--text-muted)] hover:text-[var(--accent-1)] transition-colors"
+                      className="text-xs font-semibold text-[var(--text-muted)] hover:text-orange-ink transition-colors"
                       aria-label="Profil LinkedIn de Mathias C."
                     >
                       LinkedIn →
@@ -109,7 +109,7 @@ export default function AutheurMathiasPage() {
                     className="flex items-start gap-3 bg-[var(--bg-surface)] border border-[var(--border)] rounded-[var(--radius-lg)] px-4 py-3"
                   >
                     <div
-                      className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white mt-0.5"
+                      className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-ink mt-0.5"
                       style={{ background: 'var(--accent-1)' }}
                       aria-hidden="true"
                     >

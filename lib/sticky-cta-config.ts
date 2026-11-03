@@ -6,6 +6,7 @@
 
 import type { StickyCtaConfig } from '@/components/blog/StickyCta'
 import { pageTypeOf } from '@/lib/page-type'
+import { shortDiscount } from '@/data/partner-discounts'
 
 export type { StickyCtaConfig }
 
@@ -20,7 +21,7 @@ export const DOG_CHEF_CTA: StickyCtaConfig = {
   brandName: 'Dog Chef',
   url: 'https://www.dogchef.com/fr/code/WZU7090',
   label: 'le menu sur-mesure pour ton chien',
-  badge: '-30%',
+  badge: shortDiscount('dog-chef'),
   code: 'WZU7090',
   socialProof: '★★★★★ 4.8/5 · 7 800+ avis Trustpilot',
   buttonLabel: 'Calculer →',
@@ -35,7 +36,7 @@ export const ELMUT_CTA: StickyCtaConfig = {
   brandName: 'Elmut',
   url: 'https://c3po.link/QWMW4k6mbU',
   label: 'repas frais cuisinés en France',
-  badge: '-40%',
+  badge: shortDiscount('elmut'),
   socialProof: '★★★★★ 4.7/5 selon notre test · cuisson douce',
   buttonLabel: 'Essayer →',
   subButton: 'Livraison réfrigérée incluse',

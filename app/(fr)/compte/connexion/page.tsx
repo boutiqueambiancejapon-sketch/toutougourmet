@@ -5,7 +5,10 @@ import { FormNotice } from '@/components/compte/fields'
 import { SignInForm } from '@/components/compte/SignInForm'
 import { getSessionUser } from '@/lib/server/auth'
 
-export const metadata: Metadata = { title: 'Se connecter' }
+export const metadata: Metadata = {
+  title: 'Se connecter',
+  description: 'Connecte-toi à ton compte Toutou Gourmet pour retrouver le profil de ton chien, ses pesées et tes scans de croquettes.',
+}
 
 export default async function SignInPage({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const params = await searchParams

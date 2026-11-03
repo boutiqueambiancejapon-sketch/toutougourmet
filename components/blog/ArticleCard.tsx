@@ -11,7 +11,7 @@ interface ArticleCardProps {
 /**
  * Card d'article — pattern "Option C".
  *
- * - `vertical` : fond pâle teinté par catégorie + emoji watermark + chip
+ * - `vertical` : fond pâle teinté par catégorie + chip
  *   (cf. BlogPostCard, même look pour cohérence sur tout le blog)
  * - `horizontal` : version compacte avec accent latéral coloré, sans watermark
  *   (utilisée pour les sidebars / listes en colonne étroite)
@@ -45,7 +45,7 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
             {frontmatter.category}
           </span>
           <h2
-            className="font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-1)] leading-snug text-sm line-clamp-2 transition-colors m-0"
+            className="font-bold text-[var(--text-primary)] group-hover:text-orange-ink leading-snug text-sm line-clamp-2 transition-colors m-0"
             style={{ fontFamily: "'Fraunces', serif" }}
           >
             {frontmatter.title}
@@ -58,27 +58,13 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
     )
   }
 
-  // Variant `vertical` — pattern Option C : fond pastel + emoji watermark + chip
+  // Variant `vertical` — pattern Option C : fond pastel + chip
   return (
     <Link
       href={href}
       className="group relative flex flex-col rounded-[var(--radius-xl)] overflow-hidden border border-[var(--border)] hover:-translate-y-1 hover:shadow-[var(--shadow-md)] hover:border-[var(--accent-1)] transition-all duration-300 h-full"
       style={{ background: visual.bgVar }}
     >
-      {/* Emoji watermark */}
-      <span
-        aria-hidden="true"
-        className="absolute pointer-events-none select-none leading-none"
-        style={{
-          right: '-12px',
-          bottom: '-26px',
-          fontSize: '130px',
-          opacity: 0.16,
-          transform: 'rotate(-8deg)',
-        }}
-      >
-        {visual.emoji}
-      </span>
 
       {/* Header : chip catégorie */}
       <div className="relative px-5 pt-5">
@@ -96,7 +82,7 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
       {/* Body */}
       <div className="relative px-5 py-4 flex flex-col gap-2.5 flex-1">
         <h2
-          className="m-0 font-black text-[var(--text-primary)] leading-tight text-lg line-clamp-3 group-hover:text-[var(--accent-1)] transition-colors"
+          className="m-0 font-black text-[var(--text-primary)] leading-tight text-lg line-clamp-3 group-hover:text-orange-ink transition-colors"
           style={{ fontFamily: "'Fraunces', serif", letterSpacing: '-0.01em' }}
         >
           {frontmatter.title}

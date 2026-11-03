@@ -16,7 +16,7 @@ export function AuthorBox({ author }: AuthorBoxProps) {
     >
       {/* Avatar initiales */}
       <div
-        className="shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold text-white"
+        className="shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-sm font-bold text-ink"
         style={{ background: 'var(--accent-1)' }}
         aria-hidden="true"
       >
@@ -33,7 +33,7 @@ export function AuthorBox({ author }: AuthorBoxProps) {
           <Link
             href={author.url}
             prefetch={false}
-            className="font-bold text-[var(--text-primary)] hover:text-[var(--accent-1)] transition-colors"
+            className="font-bold text-[var(--text-primary)] hover:text-orange-ink transition-colors"
             style={{ fontFamily: "'Fraunces', serif" }}
           >
             {author.name}
@@ -62,7 +62,7 @@ export function AuthorBox({ author }: AuthorBoxProps) {
           <Link
             href={author.url}
             prefetch={false}
-            className="text-xs font-semibold text-[var(--accent-1)] hover:underline"
+            className="text-xs font-semibold text-orange-ink hover:underline"
           >
             Tous ses articles →
           </Link>
@@ -71,7 +71,7 @@ export function AuthorBox({ author }: AuthorBoxProps) {
               href={author.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-[var(--text-muted)] hover:text-[var(--accent-1)] transition-colors"
+              className="text-xs text-[var(--text-muted)] hover:text-orange-ink transition-colors"
               aria-label={`Profil LinkedIn de ${author.name}`}
             >
               LinkedIn →

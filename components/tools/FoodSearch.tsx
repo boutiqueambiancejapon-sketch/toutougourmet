@@ -90,7 +90,7 @@ export function FoodSearch({ foods, placeholder = 'Raisin, banane, fromage…' }
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={placeholder}
-            className="min-h-14 w-full rounded-box border-2 border-ink bg-paper pr-4 pl-13 text-lg text-ink outline-none placeholder:text-ink-2 focus-visible:ring-4 focus-visible:ring-amber"
+            className="min-h-14 w-full rounded-box border-2 border-ink bg-paper pr-4 pl-13 text-lg text-ink outline-none placeholder:text-ink-3 focus-visible:ring-4 focus-visible:ring-amber"
           />
         </span>
       </form>

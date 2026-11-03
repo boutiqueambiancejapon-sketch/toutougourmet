@@ -12,6 +12,8 @@
  * anxieux et le requalifie.
  */
 
+import { CONFIRMED_DISCOUNTS } from '@/data/partner-discounts'
+
 export type AnswerKey = string
 
 export interface BilanOption {
@@ -232,7 +234,7 @@ export function recommend(scores: BilanScores): RecommendationOutput {
       rationale:
         "Tu as coché des signes de peau ou de digestion. Elmut cuisine en France des repas frais à basse température, sans conservateurs : une piste à essayer après avoir écarté une cause médicale avec ton vétérinaire.",
       url: 'https://c3po.link/QWMW4k6mbU',
-      offer: '−40 % sur la 1re commande',
+      offer: CONFIRMED_DISCOUNTS.elmut ?? undefined,
       buttonLabel: 'Essayer Elmut',
     }
   }
@@ -253,7 +255,7 @@ export function recommend(scores: BilanScores): RecommendationOutput {
       primary: 'dogchef',
       rationale: "Son poids est à corriger. Dog Chef calcule les portions selon le poids visé (perte, prise ou maintien) et livre les repas déjà dosés.",
       url: 'https://www.dogchef.com/fr/code/WZU7090',
-      offer: "−30 % sur la box d'essai, livraison gratuite, sans engagement",
+      offer: CONFIRMED_DISCOUNTS['dog-chef'] ?? undefined,
       buttonLabel: 'Essayer Dog Chef',
     }
   }
@@ -264,7 +266,7 @@ export function recommend(scores: BilanScores): RecommendationOutput {
       primary: 'dogchef',
       rationale: "Son alimentation actuelle est la réponse qui pèse le plus sur le score. Dog Chef livre des repas frais dosés pour son profil, sans calcul à faire de ton côté.",
       url: 'https://www.dogchef.com/fr/code/WZU7090',
-      offer: "−30 % sur la box d'essai, livraison gratuite, sans engagement",
+      offer: CONFIRMED_DISCOUNTS['dog-chef'] ?? undefined,
       buttonLabel: 'Essayer Dog Chef',
     }
   }

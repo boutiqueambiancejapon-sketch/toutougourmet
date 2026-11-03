@@ -21,13 +21,14 @@ export function ContactFields({ id, v, set, err, today }: PartProps & { today: s
       <TextField
         id={`${id}-phone`}
         name="ownerPhone"
-        label="Ton téléphone"
+        label="Ton téléphone (obligatoire)"
+        required
         type="tel"
         inputMode="tel"
         autoComplete="tel"
         value={v.ownerPhone}
         onChange={(x) => set('ownerPhone', x)}
-        placeholder="ex. 06 12 34 56 78"
+        placeholder="ex. 06 39 98 12 34"
         error={err.ownerPhone}
       />
       <TwoCols>
@@ -40,7 +41,7 @@ export function ContactFields({ id, v, set, err, today }: PartProps & { today: s
           inputMode="tel"
           value={v.vetPhone}
           onChange={(x) => set('vetPhone', x)}
-          placeholder="ex. 04 72 00 00 00"
+          placeholder="ex. 04 65 71 12 34"
           error={err.vetPhone}
         />
       </TwoCols>

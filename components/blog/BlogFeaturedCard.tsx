@@ -37,7 +37,7 @@ export function BlogFeaturedCard({ article }: BlogFeaturedCardProps) {
           {frontmatter.category}
         </span>
         <h2
-          className="m-0 font-black text-[var(--text-primary)] leading-tight group-hover:text-[var(--accent-1)] transition-colors"
+          className="m-0 font-black text-[var(--text-primary)] leading-tight group-hover:text-orange-ink transition-colors"
           style={{
             fontFamily: "'Fraunces', serif",
             fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
@@ -63,7 +63,7 @@ export function BlogFeaturedCard({ article }: BlogFeaturedCardProps) {
           <span>·</span>
           <span style={{ fontFamily: "'JetBrains Mono', monospace" }}>{readTime} min</span>
         </div>
-        <span className="text-sm font-bold text-[var(--accent-1)] mt-2">
+        <span className="text-sm font-bold text-orange-ink mt-2">
           Lire l&rsquo;article →
         </span>
       </div>

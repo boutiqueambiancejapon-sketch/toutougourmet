@@ -1,8 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { bookSummary } from '@/lib/guide/book'
 
 // @cdc cro-carte — le guide (e-mail contre PDF) mis en avant en tête du pied de page, sur toutes les pages.
 export function FooterGuide() {
+  const { foodCount, recipeCount } = bookSummary()
   return (
     <aside
       aria-labelledby="footer-guide"
@@ -23,7 +25,7 @@ export function FooterGuide() {
             Le guide de la gamelle, gratuit
           </p>
           <p className="m-0 text-sm leading-snug text-cream/75">
-            93 aliments classés, la page urgences pour le frigo et 6 recettes, en PDF.
+            {`${foodCount} aliments classés, la page urgences pour le frigo et ${recipeCount} recettes, en PDF.`}
           </p>
         </div>
         <Link

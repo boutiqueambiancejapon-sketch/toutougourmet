@@ -1,4 +1,4 @@
-import type { ActivityLevel, AgeGroup, Animal, RationValues } from '@/lib/calculators'
+import type { ActivityLevel, AgeGroup, RationValues } from '@/lib/calculators'
 import { BigResult } from './fields'
 import type { NextStep } from './NextSteps'
 import { PARTNERS, type Partner } from './partners'
@@ -10,7 +10,7 @@ import { ToolResult } from './ToolResult'
 // au repas frais (Dog Chef livre des repas frais dosés selon le profil du chien).
 
 interface RationForm {
-  animal: Animal
+  animal: 'chien'
   weightKg: number
   ageGroup: AgeGroup
   activityLevel: ActivityLevel
@@ -21,7 +21,6 @@ interface RationForm {
 const AGE_LABEL: Record<AgeGroup, string> = { chiot: 'jeune', adulte: 'adulte', senior: 'senior' }
 
 function steps(form: RationForm): NextStep[] {
-  if (form.animal === 'chat') return [{ href: '/chien/marque', label: 'Comparer les marques', sub: 'Compositions et prix' }]
   const brands: NextStep =
     form.ageGroup === 'chiot' && form.weightKg >= 20
       ? { href: '/chien/alimentation-quotidienne/croquettes-chiot-grande-race', label: 'Quelles croquettes pour un chiot de grande race ?' }
@@ -33,7 +32,7 @@ function steps(form: RationForm): NextStep[] {
 }
 
 function partner(form: RationForm): Partner | null {
-  if (form.animal !== 'chien' || form.food !== 'frais') return null
+  if (form.food !== 'frais') return null
   return {
     ...PARTNERS.dogChef,
     why: `Tu le nourris au repas frais : Dog Chef livre des repas cuisinés et dosés selon le profil de ton chien, pour ne plus avoir à peser.`,
@@ -47,7 +46,7 @@ export function RationResult({ result, form }: { result: RationValues; form: Rat
   const other = fresh ? `${result.gKibble} g de croquettes` : `${result.gFresh} g de repas frais`
   const meals = form.ageGroup === 'chiot' ? 3 : 2
   const what = fresh ? 'de repas frais par jour' : 'de croquettes par jour'
-  const summary = `${grams} g ${what} (${result.kcal} kcal) pour un ${form.animal} ${AGE_LABEL[form.ageGroup]} de ${form.weightKg} kg`
+  const summary = `${grams} g ${what} (${result.kcal} kcal) pour un chien ${AGE_LABEL[form.ageGroup]} de ${form.weightKg} kg`
 
   return (
     <ToolResult tool="ration" summary={summary} steps={steps(form)} partner={partner(form)}>

@@ -1,3 +1,5 @@
+import { CONFIRMED_DISCOUNTS } from '@/data/partner-discounts'
+
 // ─── Types ───────────────────────────────────────────────────────────────────
 
 export type Animal = 'chien' | 'chat'
@@ -103,7 +105,7 @@ export const brandPricings: BrandPricing[] = [
     type: 'croquettes',
     kcalPer100g: 380,
     affiliateUrl: 'https://c3po.link/Q3xbJhfapn',
-    offer: '-30 % 1re commande',
+    offer: CONFIRMED_DISCOUNTS.franklin ?? '',
   },
   {
     name: 'Elmut',
@@ -112,16 +114,16 @@ export const brandPricings: BrandPricing[] = [
     type: 'repas-frais',
     kcalPer100g: 170,   // densité calorique recettes viande fraîche Elmut
     affiliateUrl: 'https://c3po.link/QWMW4k6mbU',
-    offer: '-40 % 1re commande',
+    offer: CONFIRMED_DISCOUNTS.elmut ?? '',
   },
   {
     name: 'Dog Chef',
     slug: 'dog-chef',
-    pricePerKg: 8.5,    // tarif abonnement mensuel hors remise 1ère box
+    pricePerKg: 8.5,    // tarif abonnement mensuel hors remise de la box d'essai
     type: 'repas-frais',
     kcalPer100g: 188,   // densité calorique recettes Dog Chef (viande fraîche)
     affiliateUrl: 'https://www.dogchef.com/fr/code/WZU7090',
-    offer: '-30 % box d\'essai',
+    offer: CONFIRMED_DISCOUNTS['dog-chef'] ?? '',
   },
 ]
 
