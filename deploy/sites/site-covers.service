@@ -1,0 +1,13 @@
+# Couvertures d'articles des sites hébergés (hors Toutou Gourmet) : voir covers.sh.
+[Unit]
+Description=Couvertures d'articles des sites hébergés (Gemini)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=administrator
+Environment=HOME=/home/administrator
+ExecStart=/home/administrator/Toutou/deploy/sites/covers.sh
+Nice=10
+TimeoutStartSec=30min

@@ -1,0 +1,10 @@
+# Chaque matin à 5 h 33 (heure de Paris), après les publications de nuit (0 h 37 à 3 h 17).
+[Unit]
+Description=Couvertures d'articles des sites hébergés, chaque matin
+
+[Timer]
+OnCalendar=*-*-* 05:33:00 Europe/Paris
+Persistent=true
+
+[Install]
+WantedBy=timers.target
