@@ -1,18 +1,23 @@
 import { Section } from './YukaSections'
 
-// @cdc seo-geo §2 — ce que le scanner note, et pourquoi un barème propre au chien (FEDIAF, matière
-// sèche). Chiffres repris de docs/v2/scanner-score.md, sources nommées dans le texte.
+// @cdc seo-geo §2 — ce que le scanner note (aliments complets et friandises pour chien, pas les
+// aliments pour chat), et pourquoi un barème propre au chien (FEDIAF, matière sèche). Chiffres repris de docs/v2/scanner-score.md, sources nommées dans le texte.
 
 export function WhatWeScore() {
   return (
     <Section id="aliments-notes" title="Quels aliments pour chien le scanner note-t-il ?">
       <p className="m-0">
-        Le scanner note les aliments complets pour chien&nbsp;: les croquettes et les pâtées. Une pâtée est notée si
+        Le scanner note les aliments pour chien&nbsp;: croquettes, pâtées, friandises et snacks. Une pâtée est notée si
         l&apos;étiquette donne son humidité, mention obligatoire au-delà de 14&nbsp;% d&apos;eau (règlement CE n°&nbsp;767/2009).
       </p>
       <p className="m-0">
-        Les aliments pour chat et les friandises ne reçoivent pas de note pour l&apos;instant. Une photo de l&apos;un de ces produits
-        est refusée sans être décomptée du quota.
+        Friandises, biscuits, os à mâcher et autres aliments complémentaires ont leur propre barème sur 100, qui juge la
+        recette&nbsp;: premier ingrédient, part de viande ou de poisson, sucres et sel ajoutés, colorants et arômes, longueur de la
+        liste. La composition suffit pour les noter. Une friandise à 80 ne se compare pas à une croquette à 80.
+      </p>
+      <p className="m-0">
+        Les aliments pour chat ne reçoivent pas de note&nbsp;: une photo d&apos;aliment pour chat est refusée sans être décomptée du
+        quota.
       </p>
     </Section>
   )

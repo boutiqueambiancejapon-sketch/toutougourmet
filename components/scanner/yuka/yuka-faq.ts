@@ -8,7 +8,7 @@ export function yukaFaq(freeScans: number, premiumScans: number): FaqEntry[] {
   return [
     {
       question: 'Existe-t-il un Yuka pour les animaux ?',
-      answer: `Non. Yuka analyse les produits alimentaires et les cosmétiques, et son centre d'aide indique qu'il n'analyse pas les aliments pour animaux (vérifié le ${YUKA_CHECKED_LABEL}). Pour les croquettes et les pâtées pour chien, le scanner de Toutou Gourmet donne une note sur 100 à partir du code-barres ou d'une photo de l'étiquette.`,
+      answer: `Non. Yuka analyse les produits alimentaires et les cosmétiques, et son centre d'aide indique qu'il n'analyse pas les aliments pour animaux (vérifié le ${YUKA_CHECKED_LABEL}). Pour les croquettes, les pâtées et les friandises pour chien, le scanner de Toutou Gourmet donne une note sur 100 à partir du code-barres ou d'une photo de l'étiquette.`,
     },
     {
       question: 'Peut-on scanner des croquettes avec Yuka ?',
@@ -25,9 +25,9 @@ export function yukaFaq(freeScans: number, premiumScans: number): FaqEntry[] {
         "Non. Le scanner tourne dans le navigateur du téléphone, sur iPhone comme sur Android, et sur ordinateur. Si la caméra ne lit pas le code-barres, on peut taper ses chiffres.",
     },
     {
-      question: 'Le scanner note-t-il les croquettes pour chat et les friandises ?',
+      question: 'Le scanner note-t-il les friandises et les aliments pour chat ?',
       answer:
-        "Pas encore. Le barème suit les repères du chien adulte : un chat a d'autres besoins (25 g de protéines pour 100 g de matière sèche au minimum chez le chat adulte selon la FEDIAF, contre 18 g chez le chien). Les friandises ne sont pas notées non plus, et une photo refusée pour ces raisons n'est pas décomptée.",
+        "Les friandises pour chien, oui : biscuits, snacks, os à mâcher et autres aliments complémentaires ont leur propre barème sur 100, qui juge la recette (viande, sucres, sel, additifs) et donne un nombre de friandises par jour quand les calories sont écrites. Les aliments pour chat, non : un chat a d'autres besoins (25 g de protéines pour 100 g de matière sèche au minimum chez le chat adulte selon la FEDIAF, contre 18 g chez le chien). Une photo d'aliment pour chat est refusée sans être décomptée.",
     },
     {
       question: 'Toutou Gourmet a-t-il un partenariat avec Yuka ?',

@@ -52,7 +52,7 @@ export function HowWeScore() {
         puis notre barème calcule la note. La photo est oubliée après la lecture.
       </p>
       <p className="m-0">
-        Chaque produit noté a sa fiche, qui se partage en image ou se télécharge en PDF A4 avec le détail des 11 critères. La{' '}
+        Chaque produit noté a sa fiche, qui se partage en image ou se télécharge en PDF A4 avec le détail de chaque critère. La{' '}
         <Link href="/scanner#methode" className={LINK}>
           méthode de calcul de la note des croquettes
         </Link>{' '}

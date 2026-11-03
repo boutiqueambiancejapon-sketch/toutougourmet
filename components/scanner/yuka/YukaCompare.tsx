@@ -3,7 +3,8 @@ import { FREE_MONTHLY_SCANS, PREMIUM_MONTHLY_SCANS } from '@/lib/scanner/config'
 
 // @cdc juridique — tableau comparatif sobre : colonne Yuka limitée aux faits vérifiés le 2026-11-03
 // (voir yuka-facts.ts), sans coche ni croix, sans couleur d'avantage. Colonne Toutou Gourmet
-// reprise du barème (docs/v2/scanner-score.md) et des quotas réels (lib/scanner/config.ts).
+// reprise des deux barèmes, aliment complet et friandise (docs/v2/scanner-score.md), et des
+// quotas réels (lib/scanner/config.ts).
 
 interface Row {
   label: string
@@ -15,17 +16,17 @@ const ROWS: Row[] = [
   {
     label: 'Produits notés',
     yuka: 'Produits alimentaires et cosmétiques',
-    toutou: 'Croquettes et pâtées pour chien',
+    toutou: 'Croquettes, pâtées, friandises et snacks pour chien',
   },
   {
     label: 'Aliments pour animaux',
     yuka: 'Non analysés, d\'après son centre d\'aide',
-    toutou: 'Aliments complets pour chien. Ni aliments pour chat, ni friandises pour l\'instant',
+    toutou: 'Aliments pour chien, complets ou complémentaires (friandises, biscuits, os à mâcher). Pas les aliments pour chat',
   },
   {
     label: 'Calcul de la note',
     yuka: 'Sur 100 pour un aliment : qualité nutritionnelle 60 %, additifs 30 %, bio 10 %',
-    toutou: 'Sur 100, à partir de 11 critères : protéines, graisses et glucides sur matière sèche, ingrédients, additifs, rapport calcium-phosphore',
+    toutou: 'Sur 100. Croquettes et pâtées : 11 critères (protéines, graisses et glucides sur matière sèche, ingrédients, additifs, rapport calcium-phosphore). Friandises : 8 critères sur la recette (viande, sucres et sel ajoutés, additifs)',
   },
   {
     label: 'Repères nutritionnels',
@@ -78,7 +79,7 @@ export function YukaCompare() {
       <CompareCards />
       <div className="hidden md:block">
         <CompareTable>
-          <caption className="sr-only">Comparaison factuelle entre Yuka et le scanner de croquettes Toutou Gourmet</caption>
+          <caption className="sr-only">Comparaison factuelle entre Yuka et le scanner Toutou Gourmet</caption>
           <CompareThead>
             <tr>
               <CompareTh>
