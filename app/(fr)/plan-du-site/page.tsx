@@ -31,6 +31,7 @@ const TOOLS = [
   { href: '/outils/cout', label: 'Simulateur de coût mensuel' },
   { href: '/outils/poids', label: 'Suivi & courbe de poids' },
   { href: '/scanner', label: "Scanner d'étiquette de croquettes" },
+  { href: '/scanner/alternative-yuka-animaux', label: 'Alternative à Yuka pour les croquettes' },
   { href: '/quiz', label: 'Quiz — trouver la croquette idéale' },
   { href: '/comparateur', label: 'Comparateur de croquettes' },
   { href: '/chien/marque/elmut-vs-dog-chef', label: 'Elmut vs Dog Chef — comparatif complet' },
