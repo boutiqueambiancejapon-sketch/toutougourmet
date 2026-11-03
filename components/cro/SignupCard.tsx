@@ -16,6 +16,8 @@ export interface SignupCardProps {
   title: string
   text: string
   cta: string
+  /** Libellé sous 360 px, pour que le bouton tienne sur une ligne */
+  ctaShort?: string
   Icon: (props: IconProps) => React.JSX.Element
   checks?: string[]
   /** Page où revenir après l'inscription (par défaut : la page courante) */
@@ -25,7 +27,7 @@ export interface SignupCardProps {
   className?: string
 }
 
-export function SignupCard({ place, title, text, cta, Icon, checks, retour, reassurance = false, className = '' }: SignupCardProps) {
+export function SignupCard({ place, title, text, cta, ctaShort, Icon, checks, retour, reassurance = false, className = '' }: SignupCardProps) {
   const id = useId()
   const pathname = usePathname()
   const signedIn = useSignedIn()
@@ -64,9 +66,16 @@ export function SignupCard({ place, title, text, cta, Icon, checks, retour, reas
       <Link
         href={signupHref(place, retour ?? pathname)}
         onClick={onClick}
-        className="flex min-h-12 w-full items-center justify-center whitespace-nowrap rounded-control bg-orange px-4 text-[15px] font-semibold text-ink no-underline shadow-[0_3px_0_var(--orange-ink)] hover:brightness-105"
+        className="flex min-h-12 w-full items-center justify-center whitespace-nowrap rounded-control bg-orange px-3 text-[15px] font-semibold text-ink no-underline shadow-[0_3px_0_var(--orange-ink)] hover:brightness-105"
       >
-        {cta}
+        {ctaShort ? (
+          <>
+            <span className="min-[360px]:hidden">{ctaShort}</span>
+            <span className="hidden min-[360px]:inline">{cta}</span>
+          </>
+        ) : (
+          cta
+        )}
       </Link>
       {reassurance ? (
         <p className="m-0 text-center text-[13px] text-ink-2">Gratuit, sans carte bancaire. Suppression en un clic.</p>

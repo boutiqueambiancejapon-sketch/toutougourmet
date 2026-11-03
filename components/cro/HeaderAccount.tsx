@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { IconPaw } from '@/components/icons'
 import { useAccountPrefill } from '@/components/outils/useAccountPrefill'
 import { signupHref } from '@/lib/signup-places'
@@ -53,5 +54,10 @@ function Visitor() {
 }
 
 export function HeaderAccount() {
-  return useSignedIn() ? <SignedIn /> : <Visitor />
+  const signedIn = useSignedIn()
+  const pathname = usePathname()
+  if (signedIn) return <SignedIn />
+  // Pages du compte (inscription, connexion…) : pas de bouton vers la page où l'on est déjà.
+  if (pathname.startsWith('/compte')) return null
+  return <Visitor />
 }

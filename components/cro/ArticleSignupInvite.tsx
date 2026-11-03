@@ -13,6 +13,7 @@ interface TopicCopy {
   title: string
   text: string
   cta: string
+  ctaShort?: string
   retour: string
   Icon: (props: IconProps) => React.JSX.Element
 }
@@ -25,6 +26,7 @@ const COPY: Record<ArticleSignupTopic, TopicCopy> = {
     title: 'Ton chien a des kilos en trop ?',
     text: WEIGHT_TEXT,
     cta: 'Suivre son poids gratuitement',
+    ctaShort: 'Suivre son poids',
     retour: '/compte/chien/nouveau',
     Icon: IconScale,
   },
@@ -33,6 +35,7 @@ const COPY: Record<ArticleSignupTopic, TopicCopy> = {
     title: 'Suis son poids semaine après semaine',
     text: WEIGHT_TEXT,
     cta: 'Suivre son poids gratuitement',
+    ctaShort: 'Suivre son poids',
     retour: '/compte/chien/nouveau',
     Icon: IconScale,
   },
@@ -41,13 +44,14 @@ const COPY: Record<ArticleSignupTopic, TopicCopy> = {
     title: 'Scanne ses croquettes, 5 analyses par mois offertes',
     text: 'Photographie l’étiquette du sac : une note sur 100, critère par critère, et chaque analyse reste dans ton compte.',
     cta: 'Créer mon compte gratuit',
+    ctaShort: 'Créer mon compte',
     retour: '/scanner',
     Icon: IconScan,
   },
   aliments: {
     place: 'article-aliments',
     title: 'Enregistre ton chien, la ration se calcule toute seule dans chaque outil',
-    text: 'Son poids, son âge et son activité remplissent la ration, le poids de forme et les portions des articles « peut-il manger ».',
+    text: 'Son poids, son âge et son activité remplissent la ration, le poids de forme et les portions des articles «\u00a0peut-il manger\u00a0».',
     cta: 'Enregistrer mon chien',
     retour: '/compte/chien/nouveau',
     Icon: IconBowl,
@@ -63,6 +67,7 @@ export function ArticleSignupInvite({ topic }: { topic: ArticleSignupTopic }) {
       title={copy.title}
       text={copy.text}
       cta={copy.cta}
+      ctaShort={copy.ctaShort}
       retour={copy.retour}
       Icon={copy.Icon}
       className="my-8"

@@ -61,6 +61,7 @@ export function ToolSignupCard({ tool, dogName = null, retour }: { tool: SignupT
       Icon={copy.Icon}
       checks={CHECKS}
       cta="Créer mon compte gratuit"
+      ctaShort="Créer mon compte"
       retour={retour}
       reassurance
     />
