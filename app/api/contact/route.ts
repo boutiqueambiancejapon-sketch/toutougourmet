@@ -3,6 +3,8 @@ import { isBrevoConfigured, subscribe } from '@/lib/server/brevo'
 import { isDisposableEmail } from '@/lib/server/disposable-email'
 import { getPool } from '@/lib/server/db'
 import { sendWelcomeOnce } from '@/lib/server/newsletter'
+import { sendGuideOnce } from '@/lib/server/guide-email'
+import { GUIDE_SOURCE } from '@/lib/guide/config'
 import { contactRateLimited, parseContactMessage, saveContactMessage } from '@/lib/server/contact'
 import { clientIp, overLimit, retryAfterSeconds } from '@/lib/server/rate-window'
 
@@ -11,6 +13,9 @@ import { clientIp, overLimit, retryAfterSeconds } from '@/lib/server/rate-window
 // Après une inscription réussie : e-mail de bienvenue envoyé après la réponse (after), une fois
 // par adresse. En double opt-in, Brevo envoie déjà sa confirmation : pas de bienvenue à une adresse
 // non confirmée.
+// Source « guide » : l'e-mail du guide (lien du PDF) part à la place de la bienvenue, même si la
+// bienvenue est coupée et même en double opt-in (le lecteur a demandé ce fichier), une fois par
+// adresse (lib/server/guide-email.ts).
 // Champ piège « website » : rempli par un robot, la requête reçoit 200 sans rien enregistrer.
 
 export const runtime = 'nodejs'
@@ -48,6 +53,10 @@ export async function POST(req: NextRequest) {
     const result = await subscribe(body.email, source)
     if (result === 'ok') {
       const email = body.email
+      if (source === GUIDE_SOURCE) {
+        after(() => sendGuideOnce(email, ip).then(() => undefined))
+        return NextResponse.json({ ok: true })
+      }
       // Bienvenue automatique : seulement quand le propriétaire l'a activée (WELCOME_EMAIL_ENABLED=1).
       if (process.env.WELCOME_EMAIL_ENABLED === '1' && !process.env.BREVO_DOI_TEMPLATE_ID) after(() => sendWelcomeOnce(email).then(() => undefined))
       return NextResponse.json({ ok: true })

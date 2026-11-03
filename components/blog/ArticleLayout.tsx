@@ -14,10 +14,12 @@ import { RaceFoodSection, RACE_FOOD_ID, raceFoodHeading } from '@/components/rac
 import { RaceHealth, RaceNear, RACE_HEALTH_ID, RACE_NEAR_ID } from '@/components/race/RaceHealthAndNear'
 import { RaceAccountInvite } from '@/components/race/RaceAccountInvite'
 import { extractToc } from '@/lib/article-toc'
-import { getPortionCalc, showsBonusFiche } from '@/lib/article-cro'
+import { articleEndCta, getPortionCalc, showsNewsletterBlock } from '@/lib/article-cro'
 import { VerdictHero } from '@/components/article/VerdictHero'
 import { FoodPortionCalc } from '@/components/article/FoodPortionCalc'
-import { BonusFiche } from '@/components/article/BonusFiche'
+import { GuideOffer } from '@/components/guide/GuideOffer'
+import { GuideFicheLink } from '@/components/guide/GuideFicheLink'
+import { bookSummary } from '@/lib/guide/book'
 import type { Article } from '@/lib/mdx'
 
 // @cdc 04-pages — gabarit d'article V2 (prototype docs/v2/prototype) : en-tête, puis
@@ -68,7 +70,8 @@ export function ArticleLayout({
     ...extractToc(article.rawContent).filter((item) => !/^tl;?dr$/i.test(item.text)),
   ]
   const portion = getPortionCalc(article)
-  const foods = breed || showsBonusFiche(catSlug) ? getFoodVerdicts() : []
+  const foods = breed ? getFoodVerdicts() : []
+  const endCta = articleEndCta({ slug, categorySlug: catSlug, verdict: frontmatter.verdict })
 
   return (
     <article className="bg-cream pb-20">
@@ -105,21 +108,19 @@ export function ArticleLayout({
               </>
             ) : null}
             <div className="mdx-content mt-6">{children}</div>
-            {/* Un seul formulaire e-mail par article : le bonus remplace l'inscription générique. */}
-            {showsBonusFiche(catSlug) ? (
-              <BonusFiche
-                slug={slug}
-                dangerCount={foods.filter((f) => f.verdict === 'danger').length}
-                moderationCount={foods.filter((f) => f.verdict === 'moderation').length}
-              />
+            {/* Un seul appel à l'action de fin d'article (lib/article-cro.ts) : le guide remplace
+                l'encart compte et la lettre ; urgences et « danger » : un lien discret seulement. */}
+            {endCta === 'guide-aliment' || endCta === 'guide-recette' ? (
+              <GuideOffer place={endCta === 'guide-aliment' ? 'article-aliment' : 'article-recette'} summary={bookSummary()} slug={slug} />
             ) : null}
+            {endCta === 'fiche-link' ? <GuideFicheLink /> : null}
             <AuthorBox author={DEFAULT_AUTHOR} />
             <RelatedArticles currentSlug={currentSlug ?? slug} categorySlug={catSlug} allArticles={allArticles} />
-            {showsBonusFiche(catSlug) ? null : (
+            {endCta === null && showsNewsletterBlock(catSlug) ? (
               <div className="mt-12">
                 <NewsletterBlock />
               </div>
-            )}
+            ) : null}
           </div>
           <ArticleAside toc={toc} seed={slug} />
         </div>

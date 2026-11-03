@@ -118,3 +118,12 @@ ALTER TABLE analytics.signup_sources OWNER TO toutou;
 GRANT SELECT, INSERT, DELETE ON analytics.signup_sources TO administrator;
 CREATE INDEX IF NOT EXISTS events_account_place_idx ON analytics.events ((props->>'place'), ts)
   WHERE name IN ('Account Invite View', 'Account Invite Click', 'Account Created', 'Account Verified');
+
+-- E-mail du guide « Le guide de la gamelle » : une seule fois par adresse (lib/server/guide-email.ts).
+-- Empreinte HMAC-SHA256 de l'adresse en minuscules, jamais l'adresse elle-même.
+CREATE TABLE IF NOT EXISTS analytics.guide_sends (
+  email_hash text PRIMARY KEY,
+  sent_at    timestamptz NOT NULL DEFAULT now()
+);
+ALTER TABLE analytics.guide_sends OWNER TO toutou;
+GRANT SELECT, INSERT, DELETE ON analytics.guide_sends TO administrator;

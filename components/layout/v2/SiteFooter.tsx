@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ConsentLink } from '@/components/consent/ConsentLink'
 import { Brand } from './Brand'
+import { FooterGuide } from './FooterGuide'
 
 // @cdc 04-pages — pied de page V2 : liens vers les hubs (maillage) et pages légales.
 const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
@@ -12,6 +13,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
       { href: '/chien/alimentation-quotidienne', label: 'Bien nourrir son chien' },
       { href: '/chien/sante', label: 'Santé et alimentation' },
       { href: '/chien/race', label: 'Alimentation par race' },
+      { href: '/guide-alimentation', label: 'Le guide gratuit (PDF)' },
     ],
   },
   {
@@ -51,6 +53,7 @@ export function SiteFooter() {
   return (
     <footer className="v2 mt-16 bg-ink text-cream">
       <div className="mx-auto max-w-page px-4 py-12 md:px-8">
+        <FooterGuide />
         <div className="grid grid-cols-2 gap-8 md:grid-cols-5">
           <div className="col-span-2 flex flex-col gap-3 md:col-span-1">
             <Brand onDark />

@@ -33,8 +33,11 @@ export function ActionsSection({ data, period }: { data: SummaryData; period: Pe
 
       <SectionTitle id="lecteurs" title="Lecteurs" intro="Inscriptions à la newsletter, outils et recherches faites sur le site." />
       <div className="mt-4 grid gap-3 md:grid-cols-2">
-        <Panel title="Inscriptions newsletter par source">
+        <Panel title="Inscriptions newsletter par source" hint="« guide · … » : inscription au guide PDF, selon l’encart.">
           <BarList rows={data.signupsByPlace} empty="Aucune inscription sur la période." />
+        </Panel>
+        <Panel title="Le guide de la gamelle" hint="Téléchargements : clics sur « Télécharger le PDF » du site (le lien de l’e-mail n’est pas compté).">
+          <BarList rows={data.guide} empty="Aucune inscription au guide sur la période." />
         </Panel>
         <Panel title="Outils les plus utilisés" hint="Un résultat affiché compte pour une utilisation.">
           <BarList rows={data.tools} empty="Aucun outil utilisé sur la période." />

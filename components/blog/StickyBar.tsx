@@ -4,7 +4,7 @@ import { useEffect, useState, type ReactNode } from 'react'
 import { IconClose } from '@/components/icons'
 
 // @cdc 04-pages — coque commune des bandeaux collants d'affiliation (StickyCta, StickyCtaDouble,
-// StickyCtaDogChef) : une seule ligne compacte sur mobile, au-dessus de la barre d'onglets,
+// bandeau Dog Chef de lib/sticky-cta-config) : une seule ligne compacte sur mobile, au-dessus de la barre d'onglets,
 // affichée après 35 % de la page lue (audit design 2026-11-02, page article).
 // pb-8 sur mobile : le bandeau passe au-dessus du bouton central de la barre d'onglets.
 
@@ -42,18 +42,45 @@ function useMidCtaInView(): boolean {
   return inView
 }
 
+// @cdc cro-carte — fermeture mémorisée 7 jours sur l'appareil (localStorage, aucun cookie) :
+// le bandeau ne revient pas à chaque article une fois fermé.
+const CLOSED_KEY = 'tg-sticky-closed'
+const CLOSED_FOR_MS = 7 * 24 * 60 * 60 * 1000
+
+function closedRecently(): boolean {
+  try {
+    const at = Number(window.localStorage.getItem(CLOSED_KEY))
+    return Number.isFinite(at) && at > 0 && Date.now() - at < CLOSED_FOR_MS
+  } catch {
+    return false
+  }
+}
+
+function rememberClosed(): void {
+  try {
+    window.localStorage.setItem(CLOSED_KEY, String(Date.now()))
+  } catch {
+    // Stockage refusé (navigation privée) : fermé pour cette page seulement.
+  }
+}
+
 export function StickyBar({ children }: { children: ReactNode }) {
   const visible = useScrolledPast()
   const midInView = useMidCtaInView()
   const [dismissed, setDismissed] = useState(false)
-  if (!visible || dismissed || midInView) return null
+  // `visible` n'est vrai que dans le navigateur, après défilement : lire le stockage ici ne crée
+  // aucun écart avec le rendu serveur.
+  if (!visible || dismissed || midInView || closedRecently()) return null
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-[calc(var(--tabbar-h)+env(safe-area-inset-bottom))] z-30 px-2 pb-8 md:bottom-0 md:px-4 md:pb-4">
       <div className="v2 pointer-events-auto mx-auto flex max-w-[720px] items-center gap-2 rounded-box bg-ink py-1.5 pr-1 pl-3 text-cream md:gap-4 md:py-3 md:pr-2 md:pl-4">
         {children}
         <button
           type="button"
-          onClick={() => setDismissed(true)}
+          onClick={() => {
+            rememberClosed()
+            setDismissed(true)
+          }}
           aria-label="Fermer"
           className="grid size-9 shrink-0 place-items-center rounded-control text-cream/70 hover:text-cream"
         >

@@ -20,6 +20,8 @@ import { getDb } from '@/lib/server/drizzle'
 import { getPool } from '@/lib/server/db'
 import { EMPTY_SIGNUPS, getSignups, type SignupsData } from '@/lib/server/dashboard-signups'
 import { SignupsSection } from '@/components/dashboard/SignupsSection'
+import { EMPTY_CONVERSIONS, getConversions, type ConversionsData } from '@/lib/server/dashboard-conversions'
+import { ConversionsSection } from '@/components/dashboard/ConversionsSection'
 import type { Period } from '@/lib/dashboard/period'
 
 async function loadReview(): Promise<{ rows: ReviewRow[]; error: boolean }> {
@@ -42,6 +44,16 @@ async function loadSignups(period: Period): Promise<SignupsData> {
   })
 }
 
+/** Section « Conversions par type de page » lue à part, comme les inscriptions. */
+async function loadConversions(period: Period): Promise<ConversionsData> {
+  const pool = getPool()
+  if (!pool) return EMPTY_CONVERSIONS
+  return getConversions(pool, period).catch((err: unknown) => {
+    console.error('[tableau-de-bord] conversions', err instanceof Error ? err.message : err)
+    return EMPTY_CONVERSIONS
+  })
+}
+
 // @cdc tableau de bord — page privée du propriétaire, protégée par proxy.ts (HTTP Basic).
 // Lue à chaque visite, jamais mise en cache ni indexée, absente du sitemap.
 
@@ -58,12 +70,13 @@ export default async function DashboardPage({ searchParams }: PageProps) {
   if (!(await dashboardAllowed())) notFound()
 
   const period = parsePeriod((await searchParams).periode)
-  const [data, logs, health, review, signups] = await Promise.all([
+  const [data, logs, health, review, signups, conversions] = await Promise.all([
     loadDashboard(period),
     getNightLogs(7),
     getServerHealth(),
     loadReview(),
     loadSignups(period),
+    loadConversions(period),
   ])
 
   return (
@@ -83,6 +96,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
         <LiveSection />
         <ActionsSection data={data.summary} period={period} />
         <SignupsSection data={signups} period={period} />
+        <ConversionsSection data={conversions} period={period} />
         <GeoSection data={data.geo} period={period} />
         <AiSection data={data.ai} period={period} unread={data.unread} articleCount={data.articleCount} />
         <MessagesSection messages={data.messages} />

@@ -15,6 +15,8 @@ export const ANALYTICS_EVENTS = [
   'Scan Download',
   'Account Invite View',
   'Account Invite Click',
+  'Guide Signup',
+  'Guide Download',
   'Pageview',
 ] as const
 

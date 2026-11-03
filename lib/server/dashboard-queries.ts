@@ -35,6 +35,8 @@ export interface SummaryData {
   clicksByPlace: Row[]
   clicksByPage: Row[]
   signupsByPlace: Row[]
+  /** Guide PDF : inscriptions et téléchargements (bouton du site) sur la période */
+  guide: Row[]
   tools: Row[]
   foodSearches: Row[]
   foodMisses: Row[]
@@ -91,20 +93,47 @@ function eventsBy(pool: Pool, interval: string, name: string, key: string | null
   )
 }
 
+const SIGNUP_EVENTS = ['Newsletter Signup', 'Guide Signup']
+
+/** Inscriptions à la lettre par source ; celles du guide portent le préfixe « guide · ». */
+function signupsBySource(pool: Pool, interval: string): Promise<Row[]> {
+  return rows(
+    pool,
+    `SELECT CASE WHEN name = 'Guide Signup' THEN 'guide · ' ELSE '' END || coalesce(nullif(props->>'place', ''), '(non précisé)') AS label,
+            count(*)::int AS value
+     FROM analytics.events WHERE name = ANY($2) AND ts >= now() - $1::interval
+     GROUP BY 1 ORDER BY 2 DESC, 1 LIMIT $3`,
+    [interval, SIGNUP_EVENTS, LIMIT],
+  )
+}
+
+function guideRows(pool: Pool, interval: string): Promise<Row[]> {
+  return rows(
+    pool,
+    `SELECT CASE name WHEN 'Guide Signup' THEN 'Inscriptions au guide' ELSE 'Téléchargements du PDF' END AS label,
+            count(*)::int AS value
+     FROM analytics.events WHERE name IN ('Guide Signup', 'Guide Download') AND ts >= now() - $1::interval
+     GROUP BY name ORDER BY name DESC`,
+    [interval],
+  )
+}
+
 export async function getSummary(pool: Pool, period: Period): Promise<SummaryData> {
   const i = period.interval
-  const [pageViews, affiliateClicks, signups, toolResults, clicksByBrand, clicksByPlace, clicksByPage, signupsByPlace, tools, foodSearches, foodMisses] =
+  const [pageViews, affiliateClicks, signups, toolResults, clicksByBrand, clicksByPlace, clicksByPage, signupsByPlace, guide, tools, foodSearches, foodMisses] =
     await Promise.all([
       // Pages vues confirmées par le navigateur (événement Pageview) : les journaux du serveur
       // comptent aussi les préchargements et les robots déguisés en navigateurs.
       eventKpi(pool, i, 'Pageview'),
       eventKpi(pool, i, 'Affiliate Click'),
-      eventKpi(pool, i, 'Newsletter Signup'),
+      // Une inscription au guide inscrit aussi à la lettre : elle compte ici.
+      kpi(pool, `SELECT ${KPI_COLUMNS} FROM analytics.events WHERE name = ANY($2) AND ts >= now() - 2 * $1::interval`, [i, SIGNUP_EVENTS]),
       eventKpi(pool, i, 'Tool Result'),
       eventsBy(pool, i, 'Affiliate Click', 'brand'),
       eventsBy(pool, i, 'Affiliate Click', 'place'),
       eventsBy(pool, i, 'Affiliate Click', null),
-      eventsBy(pool, i, 'Newsletter Signup', 'place'),
+      signupsBySource(pool, i),
+      guideRows(pool, i),
       eventsBy(pool, i, 'Tool Result', 'tool'),
       eventsBy(pool, i, 'Food Search', 'query'),
       rows(
@@ -122,6 +151,7 @@ export async function getSummary(pool: Pool, period: Period): Promise<SummaryDat
     clicksByPlace,
     clicksByPage,
     signupsByPlace,
+    guide,
     tools,
     foodSearches,
     foodMisses,

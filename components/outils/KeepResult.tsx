@@ -8,7 +8,7 @@ import { track } from '@/lib/analytics'
 import { DISPOSABLE_MESSAGE, isDisposableRejection } from '@/lib/subscribe-client'
 
 // @cdc 04-pages — « Garder ce résultat » sous chaque outil (audit design-cro §3 Outils) :
-// e-mail seul, même route que BonusFiche (/api/contact → Brevo).
+// e-mail seul, même route que l’encart du guide (GuideOffer) (/api/contact → Brevo).
 // En cas d'erreur, l'adresse tapée et le résultat restent à l'écran.
 // Lot 4 : sous le formulaire, lien vers la création de compte (masqué si un compte est connecté).
 

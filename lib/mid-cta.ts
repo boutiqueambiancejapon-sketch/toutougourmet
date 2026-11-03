@@ -1,7 +1,9 @@
-// @cdc affiliation — encart du milieu d'article (« façon 10min ») : quelle offre servir.
-// Urgences, santé et aliments « danger » → bilan gratuit (aucune marque poussée sur une page
-// anxiogène). « Peut-il manger » oui/modération → Dogfy Diet. Étiquette, glucides, choix de
-// croquettes et avis de marques de croquettes non partenaires → scanner. Le reste → Dog Chef.
+import { pageTypeOf } from '@/lib/page-type'
+
+// @cdc affiliation — encart du milieu d'article (« façon 10min ») : quelle offre servir, selon la
+// carte des conversions (docs/v2/cro-carte.md, validée le 2026-11-03) : un seul encart au milieu
+// au plus, jamais la même demande que l'encart de fin, rien à vendre sur une page d'inquiétude.
+// Type de page : lib/page-type.ts (même classification que la mesure et le tableau de bord).
 // Offres vérifiées sur les sites des marques le 2026-11-02.
 
 export interface MidCtaConfig {
@@ -17,35 +19,23 @@ export interface MidCtaConfig {
 
 const DOG_CHEF: MidCtaConfig = {
   id: 'dog-chef',
-  eyebrow: 'Nouveau chez Dog Chef ? −30 % avec notre lien',
+  eyebrow: 'Nouveau chez Dog Chef ? −30 % avec notre lien',
   title: 'Un menu calculé pour ton chien, livré frais',
   body: "Tu renseignes son poids, son âge, sa race et son activité. Dog Chef calcule la portion du jour et cuisine les repas à basse température. La box d'essai te montre en deux semaines s'il les aime.",
   checks: ['Portions calculées sur son profil', "Livraison gratuite sur la box d'essai", 'Sans engagement, pause quand tu veux'],
-  button: { label: 'Composer son menu, −30 %', href: 'https://www.dogchef.com/fr/code/WZU7090' },
-  badge: { big: '−30 %', small: 'box d’essai' },
-  secondary: { label: 'Pas sûr de sa ration ? Calcule-la en 30 secondes', href: '/outils/ration' },
+  button: { label: 'Composer son menu, −30 %', href: 'https://www.dogchef.com/fr/code/WZU7090' },
+  badge: { big: '−30 %', small: 'box d’essai' },
+  secondary: { label: 'Pas sûr de sa ration ? Calcule-la en 30 secondes', href: '/outils/ration' },
 }
 
-const DOGFY: MidCtaConfig = {
-  id: 'dogfy',
-  eyebrow: "Nouveau chez Dogfy Diet ? −50 % sur la box d'essai",
-  title: 'Des repas frais déjà dosés, pour ne plus improviser',
-  body: "Dogfy Diet cuit ses menus à la vapeur, sous vide, et les calcule sur le poids et l'activité de ton chien. Un sachet correspond à un repas : tu ne pèses plus rien.",
-  checks: ["Box d'essai de 14 jours", 'Livraison gratuite', 'Sans engagement'],
-  button: { label: 'Tester Dogfy Diet, −50 %', href: 'https://tidd.ly/4jT3Tqg' },
-  badge: { big: '−50 %', small: 'box d’essai' },
-  secondary: { label: 'Un autre aliment en tête ? Vérifie-le ici', href: '/chien/peut-manger' },
-}
-
-const BILAN: MidCtaConfig = {
-  id: 'bilan',
+const POIDS: MidCtaConfig = {
+  id: 'poids',
   eyebrow: 'Gratuit, sans inscription',
-  title: 'Sa gamelle couvre-t-elle vraiment ses besoins ?',
-  body: "Quelques questions sur ce qu'il mange, sa silhouette, son pelage et ses selles. Le bilan te donne les points à corriger en priorité, chiffres à l'appui.",
-  checks: ['2 minutes', 'Aucun e-mail demandé'],
-  button: { label: 'Faire le bilan de mon chien', href: '/outils/bien-nourri' },
-  badge: { big: '2 min', small: 'gratuit' },
-  secondary: { label: 'Ou calcule sa ration exacte', href: '/outils/ration' },
+  title: 'Ton chien est-il à son poids de forme ?',
+  body: "Entre son poids actuel et son poids de forme, l'outil te dit s'il faut revoir sa ration, et de combien. Avec un compte gratuit, tu gardes ses pesées et tu suis sa courbe.",
+  checks: ['Résultat immédiat', 'Pesées gardées avec un compte gratuit'],
+  button: { label: 'Vérifier son poids', href: '/outils/poids' },
+  badge: { big: 'kg', small: 'gratuit' },
 }
 
 const SCANNER: MidCtaConfig = {
@@ -67,18 +57,32 @@ const FRESH_FOOD = /butternut|repas-frais|dog-chef|dogfy|elmut/
 interface MidCtaInput {
   slug: string
   categorySlug: string
-  category: string
   verdict?: string
   hasOwnAffiliate: boolean
+  /** L'article contient déjà le comparatif des marques d'une fiche race (BreedBrandCompare). */
+  hasBrandCompare?: boolean
 }
 
-export function getMidCta({ slug, categorySlug, category, verdict, hasOwnAffiliate }: MidCtaInput): MidCtaConfig | null {
-  if (hasOwnAffiliate) return null
-  // Avis de marques non partenaires (croquettes) : le scanner, aucune marque poussée à côté de l'avis.
+export function getMidCta({ slug, categorySlug, verdict, hasOwnAffiliate, hasBrandCompare = false }: MidCtaInput): MidCtaConfig | null {
+  // @cdc cro-carte — l'article porte déjà sa propre offre (affiliateA, comparatif race) : pas de doublon.
+  if (hasOwnAffiliate || hasBrandCompare) return null
+  const type = pageTypeOf(`/chien/${categorySlug}/${slug}`)
+  // @cdc cro-carte — urgences, aliment « danger » et « mon chien a mangé… » : aucun encart. Rien à
+  // vendre avant que les gestes et les numéros soient lus (l'ancien encart « bilan » est retiré).
+  if (type === 'urgences' || verdict === 'danger' || slug.startsWith('chien-mange-')) return null
+  // @cdc cro-carte — aliments « peut-il manger » (oui, modération) : plus d'offre Dogfy au milieu.
+  // L'objectif de ces pages est le guide, servi en fin d'article (chantier séparé).
+  if (type === 'aliments' || verdict) return null
+  // @cdc cro-carte — santé, poids, maladies : objectif compte. L'encart de fin demande déjà le compte
+  // (lib/article-signup.ts) ; au milieu, l'outil poids, qui mène au compte (pesées gardées).
+  if (type === 'sante') return POIDS
+  // @cdc cro-carte — avis de marques de croquettes non partenaires : le scanner, aucune marque
+  // poussée à côté de l'avis. Avis de repas frais : rien, l'avis porte déjà sa marque.
   if (categorySlug === 'avis-marques') return FRESH_FOOD.test(slug) ? null : SCANNER
-  if (categorySlug === 'urgences' || categorySlug === 'sante' || category === 'Santé' || verdict === 'danger') return BILAN
-  if (slug.startsWith('chien-mange-')) return BILAN
-  if (categorySlug === 'peut-manger' || slug.startsWith('chien-peut-manger-') || verdict) return DOGFY
+  // @cdc cro-carte — étiquette, glucides, choix de croquettes : le scanner y répond directement.
   if (SCANNER_TOPIC.test(slug)) return SCANNER
+  // @cdc cro-carte — nutrition, marques, comparatifs : l'offre partenaire reste (objectif clic).
+  // Recettes : repas frais pour qui n'a pas le temps de cuisiner (objectif secondaire de la carte).
+  // Races sans comparatif et autres articles : Dog Chef, comme avant.
   return DOG_CHEF
 }

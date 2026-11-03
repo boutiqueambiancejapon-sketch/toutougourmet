@@ -8,7 +8,8 @@
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "eslint",
-    "indexing:submit": "node scripts/submit-indexing.mjs"
+    "indexing:submit": "node scripts/submit-indexing.mjs",
+    "guide:pdf": "node scripts/build-guide.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
