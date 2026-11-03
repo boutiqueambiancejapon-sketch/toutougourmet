@@ -13,8 +13,18 @@ export const ANALYTICS_EVENTS = [
   'Scan Result',
   'Scan Share',
   'Scan Download',
+  'Account Invite View',
+  'Account Invite Click',
   'Pageview',
 ] as const
+
+/**
+ * Écrits par le serveur seulement (lib/server/signup-source.ts), jamais acceptés de /api/e :
+ * un visiteur ne peut pas gonfler les comptes créés ou confirmés.
+ */
+export const SERVER_EVENTS = ['Account Created', 'Account Verified'] as const
+
+export type ServerEvent = (typeof SERVER_EVENTS)[number]
 
 export type AnalyticsEvent = (typeof ANALYTICS_EVENTS)[number]
 

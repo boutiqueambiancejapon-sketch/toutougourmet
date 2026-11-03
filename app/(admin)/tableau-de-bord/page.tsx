@@ -17,6 +17,10 @@ import { ReviewSection } from '@/components/dashboard/ReviewSection'
 import { EmailsSection } from '@/components/dashboard/EmailsSection'
 import { listToReview, type ReviewRow } from '@/lib/server/scanner-review'
 import { getDb } from '@/lib/server/drizzle'
+import { getPool } from '@/lib/server/db'
+import { EMPTY_SIGNUPS, getSignups, type SignupsData } from '@/lib/server/dashboard-signups'
+import { SignupsSection } from '@/components/dashboard/SignupsSection'
+import type { Period } from '@/lib/dashboard/period'
 
 async function loadReview(): Promise<{ rows: ReviewRow[]; error: boolean }> {
   if (!getDb()) return { rows: [], error: true }
@@ -26,6 +30,16 @@ async function loadReview(): Promise<{ rows: ReviewRow[]; error: boolean }> {
       console.error('[tableau-de-bord] fiches à relire', err instanceof Error ? err.message : err)
       return { rows: [], error: true }
     })
+}
+
+/** Section « Inscriptions » lue à part : une panne n'efface pas le reste du tableau de bord. */
+async function loadSignups(period: Period): Promise<SignupsData> {
+  const pool = getPool()
+  if (!pool) return EMPTY_SIGNUPS
+  return getSignups(pool, period).catch((err: unknown) => {
+    console.error('[tableau-de-bord] inscriptions', err instanceof Error ? err.message : err)
+    return EMPTY_SIGNUPS
+  })
 }
 
 // @cdc tableau de bord — page privée du propriétaire, protégée par proxy.ts (HTTP Basic).
@@ -44,7 +58,13 @@ export default async function DashboardPage({ searchParams }: PageProps) {
   if (!(await dashboardAllowed())) notFound()
 
   const period = parsePeriod((await searchParams).periode)
-  const [data, logs, health, review] = await Promise.all([loadDashboard(period), getNightLogs(7), getServerHealth(), loadReview()])
+  const [data, logs, health, review, signups] = await Promise.all([
+    loadDashboard(period),
+    getNightLogs(7),
+    getServerHealth(),
+    loadReview(),
+    loadSignups(period),
+  ])
 
   return (
     <>
@@ -62,6 +82,7 @@ export default async function DashboardPage({ searchParams }: PageProps) {
         )}
         <LiveSection />
         <ActionsSection data={data.summary} period={period} />
+        <SignupsSection data={signups} period={period} />
         <GeoSection data={data.geo} period={period} />
         <AiSection data={data.ai} period={period} unread={data.unread} articleCount={data.articleCount} />
         <MessagesSection messages={data.messages} />

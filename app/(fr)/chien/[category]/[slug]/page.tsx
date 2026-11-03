@@ -25,6 +25,8 @@ import { articleMdxComponents } from '@/components/mdx/article-components'
 import rehypeAutolinkTerms from '@/lib/rehype-autolink-terms'
 import { AUTOLINK_DICTIONARY } from '@/lib/autolink-dictionary'
 import remarkGfm from 'remark-gfm'
+import { signupInvitePlugins } from '@/lib/article-signup'
+import { getBreedForArticle } from '@/data/breeds'
 
 interface Props {
   params: Promise<{ category: string; slug: string }>
@@ -91,6 +93,13 @@ export default async function ArticleCategoryPage({ params }: Props) {
   const allArticles = getAllArticles()
   const cat = getCategoryBySlug(category)
   const { frontmatter, content, rawContent } = article
+  // @cdc CRO compte (maquette 3A) — encart compte avant la FAQ, selon le sujet (lib/article-signup).
+  const signupPlugins = signupInvitePlugins({
+    slug,
+    categorySlug: category,
+    verdict: frontmatter.verdict,
+    hasBreed: Boolean(getBreedForArticle(slug)),
+  })
   const canonicalUrl = `${SITE_URL}/chien/${category}/${slug}`
   const articleImageUrl = getArticleImageUrl(slug, frontmatter.category)
   const tldrItems = extractTldr(rawContent)
@@ -221,7 +230,7 @@ export default async function ArticleCategoryPage({ params }: Props) {
           components={mdxComponents}
           options={{
             mdxOptions: {
-              remarkPlugins: midCta ? [remarkGfm, remarkMidCta] : [remarkGfm],
+              remarkPlugins: [remarkGfm, ...(midCta ? [remarkMidCta] : []), ...signupPlugins],
               rehypePlugins: [
                 [rehypeAutolinkTerms, { terms: AUTOLINK_DICTIONARY, maxTotal: 3 }],
               ],

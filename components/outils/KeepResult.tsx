@@ -20,9 +20,11 @@ interface KeepResultProps {
   summary: string
   /** Invitation à créer un compte propre à l'outil (lien, phrase qui suit, page de retour) */
   invite?: { label: string; text: string; retour?: string }
+  /** Faux quand une carte d'inscription est déjà posée à côté (components/cro/ToolSignupCard) */
+  accountLink?: boolean
 }
 
-export function KeepResult({ tool, summary, invite }: KeepResultProps) {
+export function KeepResult({ tool, summary, invite, accountLink = true }: KeepResultProps) {
   const id = useId()
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
@@ -90,7 +92,7 @@ export function KeepResult({ tool, summary, invite }: KeepResultProps) {
         </p>
       ) : null}
       {status !== 'success' ? <p className="m-0 text-xs text-ink-2">On ne transmet ton e-mail à personne.</p> : null}
-      {signedIn ? null : (
+      {signedIn || !accountLink ? null : (
         <p className="m-0 border-t border-line pt-3 text-[15px] text-ink-2">
           <Link
             href={`/compte/inscription?retour=${encodeURIComponent(invite?.retour ?? pathname)}`}

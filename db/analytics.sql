@@ -87,3 +87,25 @@ ALTER TABLE analytics.events ADD COLUMN IF NOT EXISTS country char(2);
 ALTER TABLE analytics.hits ADD COLUMN IF NOT EXISTS country char(2);
 CREATE INDEX IF NOT EXISTS events_country_ts_idx ON analytics.events (country, ts) WHERE country IS NOT NULL;
 CREATE INDEX IF NOT EXISTS hits_country_ts_idx ON analytics.hits (country, ts) WHERE country IS NOT NULL;
+
+-- Emplacement d'où vient chaque compte (invitation « Créer un compte », lib/signup-places.ts).
+-- Pont entre la création du compte et la confirmation de l'e-mail : lu une fois à la confirmation.
+-- Aucune IP, aucun e-mail : l'identifiant du compte et un code d'emplacement. Part avec le compte
+-- (clé étrangère ajoutée seulement si le schéma des comptes est déjà migré).
+CREATE TABLE IF NOT EXISTS analytics.signup_sources (
+  user_id    text PRIMARY KEY,
+  place      text NOT NULL,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+DO $$ BEGIN
+  IF to_regclass('app.user') IS NOT NULL AND NOT EXISTS (
+    SELECT 1 FROM pg_constraint WHERE conname = 'signup_sources_user_fk'
+  ) THEN
+    ALTER TABLE analytics.signup_sources
+      ADD CONSTRAINT signup_sources_user_fk FOREIGN KEY (user_id) REFERENCES app."user"(id) ON DELETE CASCADE;
+  END IF;
+END $$;
+ALTER TABLE analytics.signup_sources OWNER TO toutou;
+GRANT SELECT, INSERT, DELETE ON analytics.signup_sources TO administrator;
+CREATE INDEX IF NOT EXISTS events_account_place_idx ON analytics.events ((props->>'place'), ts)
+  WHERE name IN ('Account Invite View', 'Account Invite Click', 'Account Created', 'Account Verified');

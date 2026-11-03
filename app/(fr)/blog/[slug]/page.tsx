@@ -20,6 +20,8 @@ import { articleMdxComponents } from '@/components/mdx/article-components'
 import { DEFAULT_AUTHOR } from '@/data/authors'
 import rehypeAutolinkTerms from '@/lib/rehype-autolink-terms'
 import remarkGfm from 'remark-gfm'
+import { signupInvitePlugins } from '@/lib/article-signup'
+import { getBreedForArticle } from '@/data/breeds'
 import { AUTOLINK_DICTIONARY } from '@/lib/autolink-dictionary'
 
 interface Props {
@@ -80,6 +82,13 @@ export default async function ArticlePage({ params }: Props) {
 
   const allArticles = getAllArticles()
   const { frontmatter, content, rawContent } = article
+  // @cdc CRO compte (maquette 3A) — encart compte avant la FAQ, selon le sujet (lib/article-signup).
+  const signupPlugins = signupInvitePlugins({
+    slug,
+    categorySlug: frontmatter.categorySlug ?? '',
+    verdict: frontmatter.verdict,
+    hasBreed: Boolean(getBreedForArticle(slug)),
+  })
   const canonicalUrl = `${SITE_URL}/blog/${slug}`
   const articleImageUrl = getArticleImageUrl(slug, frontmatter.category)
   const tldrItems = extractTldr(rawContent)
@@ -150,7 +159,7 @@ export default async function ArticlePage({ params }: Props) {
           components={articleMdxComponents}
           options={{
             mdxOptions: {
-              remarkPlugins: [remarkGfm],
+              remarkPlugins: [remarkGfm, ...signupPlugins],
               rehypePlugins: [
                 [rehypeAutolinkTerms, { terms: AUTOLINK_DICTIONARY, maxTotal: 3 }],
               ],

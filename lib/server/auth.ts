@@ -9,6 +9,7 @@ import { SESSION_HINT_COOKIE } from '@/lib/account-hint'
 import { getDb, type Db } from './drizzle'
 import { accountDeletedEmail, resetPasswordEmail, verificationEmail } from './auth-emails'
 import { sendTransactionalEmail } from './mailer'
+import { recordSignup, recordVerified } from './signup-source'
 
 // @cdc lot 4 — Better Auth : e-mail + mot de passe (scrypt, haché dans notre base), adresse à
 // vérifier avant la première connexion, mot de passe oublié. E-mails via Brevo (lib/server/mailer).
@@ -46,6 +47,8 @@ function createAuth(db: Db) {
       autoSignInAfterVerification: true,
       expiresIn: 60 * 60 * 24,
       sendVerificationEmail: async ({ user, url }) => send(verificationEmail(user.email, user.name, url)),
+      // @cdc mesure — e-mail confirmé, compté avec l'emplacement d'où vient le compte.
+      afterEmailVerification: async (user, request) => recordVerified(user.id, request),
     },
     user: {
       // Droit à l'effacement : suppression depuis /compte/supprimer, mot de passe exigé. Les chiens,
@@ -60,6 +63,8 @@ function createAuth(db: Db) {
     // défaut, on la vide avant l'écriture (la limite de tentatives lit l'IP sans la garder ici).
     databaseHooks: {
       session: { create: { before: async (data) => ({ data: { ...data, ipAddress: null } }) } },
+      // @cdc mesure — emplacement d'origine du compte (?source= de la page d'inscription).
+      user: { create: { after: async (created, ctx) => recordSignup(created.id, ctx) } },
     },
     rateLimit: {
       enabled: true,
