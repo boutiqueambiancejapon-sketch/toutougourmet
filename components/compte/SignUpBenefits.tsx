@@ -45,5 +45,5 @@ export function signUpTitle(returnTo: string): string {
   if (returnTo.startsWith('/croquettes')) return 'Crée ton compte pour garder tes analyses'
   if (returnTo.startsWith('/compte/chien/nouveau')) return 'Crée ton compte pour enregistrer ton chien'
   if (returnTo.startsWith('/outils') || returnTo.startsWith('/quiz')) return 'Crée ton compte pour garder ce résultat'
-  return 'Créer ton compte'
+  return 'Crée ton compte'
 }
