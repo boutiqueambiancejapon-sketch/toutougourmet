@@ -158,6 +158,7 @@ const BREED_SLOT_BY_SLUG: Record<string, string> = {
  * Elle écrase aussi la cover breed historique pour les articles de race.
  */
 const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
+  'zinc-chien-carence-besoins-sources': 'art-zinc-chien-carence-besoins-sources',
   'chien-mange-cafe-urgence': 'art-chien-mange-cafe-urgence',
   // Urgences : covers dédiées générées le 2026-11-01 (remplacent la photo chocolat partagée)
   'chien-mange-raisin-urgence': 'art-chien-mange-raisin-urgence',

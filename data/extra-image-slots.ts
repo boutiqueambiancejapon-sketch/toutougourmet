@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-zinc-chien-carence-besoins-sources',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'green',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm Siberian Husky lying down, healthy shiny coat, next to a ceramic bowl filled with cooked lamb pieces and a small slice of liver, a few pumpkin seeds scattered nearby.',
+    composition:
+      'Full frame, subject edge to edge, dog and bowl filling the whole width, no empty band, no outline drawn around the dog or the food, at most 6 to 8 small confetti, no text, no humans.',
+    decorations: ['confetti', 'sparkle'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-03 pour l'article zinc-chien-carence-besoins-sources.",
+  },
+  {
     id: 'art-chien-mange-cafe-urgence',
     group: 'articles',
     ratio: '3:2',
