@@ -27,8 +27,10 @@ else
   # npm ci exige un package-lock à jour ; certains dépôts (construits par Vercel avec npm install) ne le sont pas.
   (cd "$DEST" && { npm ci --no-audit --no-fund --loglevel=error || { echo "package-lock désynchronisé : npm install"; npm install --no-audit --no-fund --loglevel=error; }; })
 fi
+# Étape propre à un site avant le build (ex. voyance-fiable : « rm -f middleware.ts », comme sa config Vercel).
+[[ -f "$ROOT/shared/prebuild.sh" ]] && (cd "$DEST" && bash "$ROOT/shared/prebuild.sh")
 set -a; [[ -f "$ROOT/shared/.env" ]] && . "$ROOT/shared/.env"; set +a
-(cd "$DEST" && NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 nice -n 10 npx next build)
+(cd "$DEST" && NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 nice -n 10 npx next build ${NEXT_BUILD_FLAGS:-})
 chgrp -R sites "$DEST/.next" && chmod -R g+w "$DEST/.next"
 ln -sfn "$DEST" "$ROOT/current.new" && mv -T "$ROOT/current.new" "$ROOT/current"
 sudo systemctl restart "site@$NAME"
