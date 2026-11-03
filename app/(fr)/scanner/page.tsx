@@ -3,6 +3,7 @@
 // photos) et le calculateur de glucides sont des composants clients ; tout le texte (étapes,
 // méthode repliée, repères de composition, FAQ) est dans le HTML servi.
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
 import { FaqItem, FaqList } from '@/components/article/Faq'
 import { OtherTools } from '@/components/outils/OtherTools'
@@ -83,6 +84,13 @@ export default function ScannerPage() {
               </FaqItem>
             ))}
           </FaqList>
+          <p className="m-0 text-sm text-ink-2">
+            {'Yuka ne note pas les aliments pour animaux\u00a0: '}
+            <Link href="/scanner/alternative-yuka-animaux" className="font-semibold text-orange-ink underline underline-offset-2">
+              notre scanner comparé à Yuka pour les croquettes
+            </Link>
+            .
+          </p>
         </section>
 
         <aside aria-label="Scanner un sac" className="relative mr-2 flex flex-col gap-4 rounded-card bg-ink p-6 text-cream shadow-[8px_8px_0_var(--orange)] md:p-8">

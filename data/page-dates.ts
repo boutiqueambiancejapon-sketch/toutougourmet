@@ -10,6 +10,7 @@ export const PAGE_DATES: Record<string, string> = {
   '/quiz': '2026-11-02',
   '/comparateur': '2026-11-02',
   '/scanner': '2026-11-02',
+  '/scanner/alternative-yuka-animaux': '2026-11-03',
   '/guide-alimentation': '2026-11-03',
   '/premium': '2026-11-03',
   '/outils': '2026-11-03',
