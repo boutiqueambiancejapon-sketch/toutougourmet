@@ -31,6 +31,9 @@ function Logo({ size }: { size: number }) {
   )
 }
 
+/** Trois chiffres (100) : « /100 » passe sous la note, sinon le tampon coupe le texte. */
+const isFull = (score: number | null) => score !== null && score >= 100
+
 export function Stamp({ score, band, size }: { score: number | null; band: string; size: number }) {
   return (
     <div
@@ -49,9 +52,9 @@ export function Stamp({ score, band, size }: { score: number | null; band: strin
         color: C.ink,
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'flex-end', fontFamily: 'Fraunces', fontWeight: 900, lineHeight: 0.9 }}>
-        <span style={{ fontSize: size * 0.42 }}>{score === null ? '?' : String(score)}</span>
-        <span style={{ fontSize: size * 0.11, paddingBottom: size * 0.04 }}>/100</span>
+      <div style={{ display: 'flex', flexDirection: isFull(score) ? 'column' : 'row', alignItems: isFull(score) ? 'center' : 'flex-end', fontFamily: 'Fraunces', fontWeight: 900, lineHeight: 0.9 }}>
+        <span style={{ fontSize: size * (isFull(score) ? 0.34 : 0.42) }}>{score === null ? '?' : String(score)}</span>
+        <span style={{ fontSize: size * 0.11, paddingBottom: isFull(score) ? 0 : size * 0.04 }}>/100</span>
       </div>
       <span style={{ fontFamily: 'DM Sans', fontWeight: 700, fontSize: size * 0.1, marginTop: size * 0.03 }}>{band}</span>
     </div>
