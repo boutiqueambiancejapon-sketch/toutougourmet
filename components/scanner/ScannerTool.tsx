@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import dynamic from 'next/dynamic'
 import { hasSessionHint } from '@/lib/account-hint'
+import { ToolSignupCard } from '@/components/cro/ToolSignupCard'
 import { track } from '@/lib/analytics'
 import type { Prefill, ResultOrigin, ScanAnalysis, ScanQuota, ScanResponse } from '@/lib/scanner/result'
 import { AccountGate, PREFILL_KEY } from './AccountGate'
@@ -111,6 +112,8 @@ export function ScannerTool({ monthlyLimit }: { monthlyLimit: number }) {
         </>
       ) : null}
       {step.name === 'result' ? <ScanResult analysis={step.analysis} origin={step.origin} quota={quota} signedIn={signedIn} onRestart={restart} /> : null}
+      {/* CRO compte (maquette 2A) : résultat par code-barres sans compte → garder l'historique. */}
+      {step.name === 'result' && !signedIn ? <ToolSignupCard tool="scanner" retour="/scanner" /> : null}
     </div>
   )
 }
