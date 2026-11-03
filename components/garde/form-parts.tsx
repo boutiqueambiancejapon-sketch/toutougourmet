@@ -61,5 +61,5 @@ export function AreaField({ id, label, value, onChange, maxLength, placeholder, 
 }
 
 export function TwoCols({ children }: { children: ReactNode }) {
-  return <div className="grid min-w-0 grid-cols-1 gap-4 xs:grid-cols-2">{children}</div>
+  return <div className="grid min-w-0 grid-cols-1 gap-4 sm:grid-cols-2">{children}</div>
 }

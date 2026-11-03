@@ -1,12 +1,12 @@
 'use client'
 
 import { useId, useRef, useState, type ReactNode } from 'react'
-import { FormNotice } from '@/components/compte/fields'
 import { draftToRaw, type SheetDraft } from '@/lib/garde/draft'
 import { parseSheet, type SheetData, type SheetErrors } from '@/lib/garde/sheet'
 import { CareFields } from './CareFields'
 import { ContactFields } from './ContactFields'
 import { DogFields } from './DogFields'
+import { ErrorSummary } from './ErrorSummary'
 import { MealFields } from './MealFields'
 
 // @cdc fiche de garde — formulaire commun à la page publique (/outils/fiche-de-garde) et à
@@ -35,7 +35,9 @@ export function SheetForm({ initial, today, banner, submitLabel, beforeSubmit, f
   const [v, setV] = useState(initial)
   const [err, setErr] = useState<SheetErrors>({})
   const [pending, setPending] = useState(false)
+  const [attempt, setAttempt] = useState(0)
   const touched = useRef(false)
+  const formRef = useRef<HTMLFormElement>(null)
 
   const set = <K extends keyof SheetDraft>(key: K, value: SheetDraft[K]) => {
     if (!touched.current) {
@@ -54,28 +56,29 @@ export function SheetForm({ initial, today, banner, submitLabel, beforeSubmit, f
     const parsed = parseSheet(draftToRaw(v), today)
     if (!parsed.ok) {
       setErr(parsed.errors)
+      setAttempt((n) => n + 1)
       return
     }
     setErr({})
     setPending(true)
     const errors = await onSubmit(parsed.data, v)
     setPending(false)
-    if (errors) setErr(errors)
+    if (errors) {
+      setErr(errors)
+      setAttempt((n) => n + 1)
+    }
   }
 
-  const count = Object.keys(err).length
   const parts = { id, v, set, err }
 
   return (
-    <form noValidate onSubmit={submit} aria-label="Fiche de garde" className="flex flex-col gap-5 rounded-card border border-line bg-paper p-4 sm:p-6">
+    <form ref={formRef} noValidate onSubmit={submit} aria-label="Fiche de garde" className="flex flex-col gap-5 rounded-card border border-line bg-paper p-4 sm:p-6">
       {banner}
       <DogFields {...parts} />
       <MealFields {...parts} />
       <CareFields {...parts} />
       <ContactFields {...parts} today={today} />
-      {count > 0 ? (
-        <FormNotice tone="error">{err.form ?? (count === 1 ? 'Un champ est à corriger plus haut.' : `${count} champs sont à corriger plus haut.`)}</FormNotice>
-      ) : null}
+      <ErrorSummary form={formRef} err={err} attempt={attempt} />
       {beforeSubmit?.(v)}
       <button
         type="submit"
