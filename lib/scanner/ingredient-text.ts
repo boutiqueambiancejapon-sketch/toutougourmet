@@ -1,8 +1,11 @@
 import type { Ingredient } from './types'
 
 // @cdc lot 6 — découpe d'une liste d'ingrédients écrite en texte libre (fiches Open Pet Food
-// Facts) vers le même format que la lecture des photos. Fonction pure, testée par
-// scripts/test-scanner-score.ts. Les sous-listes entre parenthèses restent dans le nom.
+// Facts, formulaire de relecture) vers le même format que la lecture des photos. Fonction pure,
+// testée par scripts/test-scanner-score.ts. Les sous-listes entre parenthèses restent dans le nom.
+// Le bloc « Additifs » et les constituants analytiques sont séparés de la composition avant le
+// découpage, même collés au dernier ingrédient (« huile de lin. 3a671 vitamine D3 200 U.I. ») :
+// ils n'entrent ni dans la liste des ingrédients ni dans les critères qui la lisent.
 
 /** Début du bloc des additifs (vitamines, oligo-éléments, conservateurs…). */
 const ADDITIVES_START =
@@ -53,6 +56,37 @@ function cleanName(item: string): string {
     .slice(0, 160)
 }
 
+// Début du bloc additifs dans le texte entier : le mot « additifs » après une ponctuation (ou
+// en capitales), un numéro d'additif de l'UE (3a671, 3b605, 1b306…) ou une vitamine dosée.
+const ADDITIVES_BLOCK = [
+  /(?:^|[.,;:)\n\r]\s*)(?=(?:additifs?|additives?|additivi|zusatzstoffe|aditivos)(?![\p{L}]))/iu,
+  /(?<![\p{L}])(?=ADDITIFS?(?![\p{L}]))/u,
+  /(?<![\p{L}\d])(?=[1-4][a-n]\d{3,4}[a-z]?(?![\p{L}\d]))/iu,
+  /(?<![\p{L}])(?=vitamin(?:e|a)?s?\s*[a-e]\d{0,2}\s*[:.-]?\s*\d[\d\s.,]*\s*(?:u\.?\s?i\.?|iu|mg|µg))/iu,
+]
+// Constituants analytiques recopiés dans la composition : retirés (ni ingrédient ni additif)
+const ANALYTICAL_BLOCK = /(?:constituants|composants|composition)\s+analytiques?|analytical\s+constituents|analytische\s+bestandteile/i
+
+const firstIndex = (text: string, patterns: RegExp[], from = 0) =>
+  patterns.reduce<number>((min, re) => {
+    const m = re.exec(text.slice(from))
+    return m ? Math.min(min, from + m.index + (m[0].length > 0 ? m[0].length : 0)) : min
+  }, Infinity)
+
+/**
+ * Composition seule, bloc des additifs à part (vide si la liste n'en a pas). Des constituants
+ * recopiés avant les additifs (« … phosphore : 0,9. Additifs par kg : … ») sont écartés des deux.
+ */
+export function splitAdditivesBlock(text: string): { composition: string; additives: string } {
+  const a = firstIndex(text, ADDITIVES_BLOCK)
+  const c = text.search(ANALYTICAL_BLOCK)
+  const analytical = c < 0 ? Infinity : c
+  const additives = a === Infinity ? '' : text.slice(a, analytical > a ? analytical : text.length)
+  return { composition: text.slice(0, Math.min(a, analytical, text.length)), additives }
+}
+
+const isAdditivePiece = (a: string) => a.length > 1 && !/^[\d\s.,]+(u\.?i\.?|mg|g|ufc)?\.?$/i.test(a)
+
 export interface ParsedIngredients {
   ingredients: Ingredient[]
   additifs: string[]
@@ -62,18 +96,23 @@ export function parseIngredientText(text: string): ParsedIngredients {
   const ingredients: Ingredient[] = []
   const additifs: string[] = []
   let inAdditives = false
-  const body = text.replace(/^\s*(composition|ingr[ée]dients?)\s*:?\s*/i, '')
-  for (const raw of splitTopLevel(body)) {
-    if (!inAdditives && ADDITIVES_START.test(raw.normalize('NFC'))) inAdditives = true
+  const body = text.normalize('NFC').replace(/^\s*(composition|ingr[ée]dients?)\s*:?\s*/i, '')
+  const { composition, additives } = splitAdditivesBlock(body)
+  for (const raw of splitTopLevel(composition)) {
+    if (!inAdditives && ADDITIVES_START.test(raw)) inAdditives = true
     if (inAdditives) {
       const a = raw.replace(/\s+/g, ' ').trim().slice(0, 160)
       // « Vitamine A : », « 24 000 U.I. » : morceaux d'un même additif coupés par la saisie
-      if (a.length > 1 && !/^[\d\s.,]+(u\.?i\.?|mg|g|ufc)?\.?$/i.test(a)) additifs.push(a)
+      if (isAdditivePiece(a)) additifs.push(a)
       continue
     }
     const nom = cleanName(raw)
     if (nom.length < 2) continue
     ingredients.push({ nom, pourcentage: percentOf(raw) })
+  }
+  for (const raw of splitTopLevel(additives)) {
+    const a = raw.replace(/\s+/g, ' ').trim().slice(0, 160)
+    if (isAdditivePiece(a)) additifs.push(a)
   }
   return { ingredients: ingredients.slice(0, 80), additifs: additifs.slice(0, 60) }
 }

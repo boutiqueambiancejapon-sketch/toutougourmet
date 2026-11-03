@@ -159,6 +159,26 @@ test('texte d\'ingrédients : pourcentage après le nom, astérisques, antioxyg�
   assert.deepEqual(r.additifs, ['vitamine A 27 000 UI', 'antioxygènes'])
 })
 
+test('texte d\'ingrédients : additifs et constituants collés à la composition, séparés avant le découpage', () => {
+  // Fiches réelles d'Open Pet Food Facts (dev, 2026-11-03) : bloc additifs sans virgule avant lui
+  const atavik = parseIngredientText(
+    'Viandes et abats crus (poulet 45%, chevreuil 20%), jus de cuisson (28,8%), carotte (5%), minéraux (1%), huile de lin. 3a671 vitamine D3 200 U.I. 3b605 zinc 25mg, 3b503 manganèse 1,4mg, 3b405 cuivre 1,5mg.',
+  )
+  assert.deepEqual(atavik.ingredients.map((i) => i.nom), ['Viandes et abats crus (poulet 45%, chevreuil 20%)', 'jus de cuisson', 'carotte', 'minéraux', 'huile de lin'])
+  assert.equal(atavik.additifs.length, 3)
+  assert.ok(atavik.additifs[0].startsWith('3a671 vitamine D3'))
+  const pedigree = parseIngredientText(
+    'céréales (dont blé complet 20%), viandes et sous-produits animaux (18%). Constituants analytiques (%): protéine: 21 ; phosphore: 0.9. Additifs par kg: Antioxygènes; Additifs nutritionnels: vitamine A 13601 UI, Vitamine E: 450 mg',
+  )
+  assert.deepEqual(pedigree.ingredients.map((i) => i.nom), ['céréales (dont blé complet 20%)', 'viandes et sous-produits animaux'])
+  assert.deepEqual(pedigree.additifs, ['Additifs par kg: Antioxygènes', 'Additifs nutritionnels: vitamine A 13601 UI', 'Vitamine E: 450 mg'])
+  const edgard = parseIngredientText('poulet frais 25%, riz complet, mélisse officinale biologique vitamine A 15 000 UI, vitamine D3 1 500 UI, taurine 1 000 mg')
+  assert.deepEqual(edgard.ingredients.map((i) => i.nom), ['poulet frais', 'riz complet', 'mélisse officinale biologique'])
+  assert.deepEqual(edgard.additifs, ['vitamine A 15 000 UI', 'vitamine D3 1 500 UI', 'taurine 1 000 mg'])
+  // Sans bloc additifs ni constituants : rien ne change, « sans additifs » reste dans le nom
+  assert.deepEqual(parseIngredientText('poulet (sans additifs), riz').ingredients.map((i) => i.nom), ['poulet (sans additifs)', 'riz'])
+})
+
 const OPFF_COMPLETE = {
   code: '3616661263714',
   brands: 'Empreintes',
