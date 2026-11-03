@@ -98,6 +98,14 @@ export function opffFoodType(tags: string[] = [], name: string, moisture: number
 const firstBrand = (b?: string) => b?.split(',')[0]?.trim() || null
 const clean = (s?: string) => s?.replace(/\s+/g, ' ').trim().slice(0, 160) || null
 
+// @cdc scanner — Open Pet Food Facts garde souvent les noms saisis en minuscules (« dokaz »,
+// « hühnerbrust ») : on ne touche qu'aux textes sans aucune majuscule. Marque : chaque mot ;
+// produit : la première lettre seulement.
+const hasUpper = (s: string) => s !== s.toLocaleLowerCase('fr')
+const upperFirst = (w: string) => w.charAt(0).toLocaleUpperCase('fr') + w.slice(1)
+export const brandCase = (s: string | null) => (s && !hasUpper(s) ? s.split(/(\s+|-)/).map(upperFirst).join('') : s)
+export const productCase = (s: string | null) => (s && !hasUpper(s) ? upperFirst(s) : s)
+
 export type OpffVerdict =
   | { kind: 'complete'; label: ExtractedLabel }
   /** Données partielles : on passe aux photos en préremplissant la marque et le produit. */
@@ -109,8 +117,8 @@ export type OpffUnusableReason = 'pas-aliment-chien' | 'composition' | 'constitu
 /** Conversion seule, sans juger si la fiche est exploitable. */
 export function opffLabel(p: OpffProduct, ean: string): ExtractedLabel {
   const type = opffImageType(p.categories_tags, opffName(p))
-  const brand = clean(firstBrand(p.brands) ?? undefined)
-  const product = clean(p.product_name_fr || p.product_name)
+  const brand = brandCase(clean(firstBrand(p.brands) ?? undefined))
+  const product = productCase(clean(p.product_name_fr || p.product_name))
   const text = p.ingredients_text_fr || p.ingredients_text || ''
   const parsed = parseIngredientText(text)
   const additifs = [...parsed.additifs]
