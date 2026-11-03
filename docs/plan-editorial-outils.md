@@ -8,6 +8,18 @@ Règles :
 - Un outil absent de `components/outils/tool-list.ts` (ex. fiche de garde tant qu'elle n'est pas en ligne) : sauter ses sujets jusqu'à sa mise en ligne.
 - Liens internes : vers l'outil, vers 2 à 4 articles proches, et depuis 1 à 2 articles existants vers le nouvel article (ajout d'une phrase naturelle).
 
+## Friandises Franklin (`scanner`)
+
+Demande du propriétaire (2026-11-03). Marque partenaire : Franklin Pet Food (lien de `data/brands.ts`). Prix et compositions relevés sur franklinpetfood.com le jour de la rédaction, jamais de mémoire. Encart vers le scanner (les friandises y sont notées) et lien vers `/croquettes/friandises`. Sujet « calendrier de l'Avent » à publier avant le 1er décembre.
+
+- [ ] Calendrier de l'Avent pour chien : que contient-il et est-ce raisonnable (Franklin, 24 surprises)
+- [ ] Friandises Franklin : avis et composition (sticks, viande séchée, snacks, dressage)
+- [ ] Sticks dentaires pour chien : servent-ils vraiment (sticks menthe et sauge, fromage, beurre de cacahuète)
+- [ ] Friandises de dressage pour chien : lesquelles choisir et combien par séance
+- [ ] Viande séchée pour chien (foie de bœuf, canard, faisan) : bonne friandise ou trop riche
+- [ ] Combien de friandises par jour pour un chien : la règle des 10 % des calories
+- [ ] Os, poissons et sticks au collagène à mâcher : sans danger pour le chien ?
+
 ## Fiche de garde (`fiche-de-garde`) et voyage
 
 - [ ] Partir en vacances avec son chien : la liste de ce qu'il faut emporter (alimentation, eau, papiers)

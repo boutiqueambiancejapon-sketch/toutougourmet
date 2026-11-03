@@ -19,7 +19,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: 'Combien coûte une alimentation premium pour chien ?',
-    a: "En croquettes, compte 3 à 5 € le kilo chez Ultra Premium Direct et environ 6,30 à 9 € le kilo chez Franklin. En repas frais, le budget va d'environ 45 € par mois pour un petit chien chez Dog Chef jusqu'à 165 € pour un chien de 40 kg ; Elmut va de 55 à 180 € par mois et Dogfy Diet de 50 à 200 € selon le gabarit.",
+    a: "En croquettes, compte 3 à 5 € le kilo chez Ultra Premium Direct et environ 5,20 à 9 € le kilo chez Franklin. En repas frais, le budget va d'environ 45 € par mois pour un petit chien chez Dog Chef jusqu'à 165 € pour un chien de 40 kg ; Elmut va de 55 à 180 € par mois et Dogfy Diet de 50 à 200 € selon le gabarit.",
   },
   {
     q: 'Peut-on mélanger croquettes et pâtée pour son chien ?',

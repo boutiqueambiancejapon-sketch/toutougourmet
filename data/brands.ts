@@ -80,7 +80,7 @@ export const brands: Brand[] = [
     discountOffer: CONFIRMED_DISCOUNTS.franklin ?? "",
     discountCode: null,
     facts: {
-      price: 'Environ 6,30 à 9 € le kg selon la recette et le sac',
+      price: 'Environ 5,20 à 9 € le kg selon la recette et le sac',
       format: 'Croquettes et pâtées',
       madeIn: 'République tchèque (recettes formulées à Paris)',
       delivery: "Colis, gratuit dès 49 € en point relais avec l'abonnement",

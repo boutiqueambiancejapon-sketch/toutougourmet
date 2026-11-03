@@ -101,7 +101,7 @@ export const brandPricings: BrandPricing[] = [
   {
     name: 'Franklin Pet Food',
     slug: 'franklin',
-    pricePerKg: 12.5,
+    pricePerKg: 7.5, // sac de 6 kg, prix public franklinpetfood.com (novembre 2026 : 5,20 à 9 €/kg)
     type: 'croquettes',
     kcalPer100g: 380,
     affiliateUrl: 'https://c3po.link/Q3xbJhfapn',

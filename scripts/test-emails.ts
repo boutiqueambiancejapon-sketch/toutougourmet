@@ -161,4 +161,11 @@ test('suite de bienvenue : désinscription, remise exacte à J5, pas de « undef
   assert.ok(j5.text.includes(`/codes-promo/${slug}`))
 })
 
+test('suite de bienvenue : le J5 ne répète pas l\'offre de la lettre du mois', () => {
+  for (let m = 0; m < 12; m++) {
+    const date = new Date(Date.UTC(2026, m, 28))
+    assert.notEqual(offerSlugFor(date), offerForMonth(date))
+  }
+})
+
 console.log(`${passed} tests passés`)

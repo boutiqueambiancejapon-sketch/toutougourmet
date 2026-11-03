@@ -45,9 +45,9 @@ export function rationEmail(unsubscribeUrl: string): RenderedEmail {
   })
 }
 
-/** Offre de l'étape J5 : celle du mois de l'envoi, comme la lettre mensuelle. */
+/** Offre de l'étape J5 : celle du mois suivant, pour ne pas répéter la lettre mensuelle. */
 export function offerSlugFor(date: Date): OfferSlug {
-  return offerForMonth(date)
+  return offerForMonth(new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, 1)))
 }
 
 export function offerEmail(unsubscribeUrl: string, date: Date): RenderedEmail {

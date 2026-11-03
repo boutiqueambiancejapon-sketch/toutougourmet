@@ -76,7 +76,7 @@ export function brandReasons(brand: BrandKey, answers: QuizAnswers): string[] {
     case 'franklin':
       if (answers.format === 'croquettes') r.push('Tu préfères les croquettes\u00a0: c’est son cœur de gamme, avec des pâtées en complément.')
       if (p.includes('allergie')) r.push('Une seule source de viande par recette\u00a0: plus simple pour repérer ce qui ne lui convient pas.')
-      if (lowBudget) r.push('Environ 6,30 à 9 € le kilo selon la recette et le sac.')
+      if (lowBudget) r.push('Environ 5,20 à 9 € le kilo selon la recette et le sac.')
       break
     case 'ultraPremiumDirect':
       if (answers.format === 'croquettes') r.push('Tu préfères les croquettes\u00a0: la marque les vend en direct, sans animalerie.')
