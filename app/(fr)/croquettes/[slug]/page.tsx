@@ -116,7 +116,7 @@ export default async function CroquettePage({ params }: Params) {
             : 'La composition n\'a pas pu être lue sur cette étiquette.'}
           {a.label.additifs.length > 0 ? ` L'étiquette cite ${a.label.additifs.length} additif${a.label.additifs.length > 1 ? 's' : ''}.` : ''}
         </p>
-        <LabelData label={a.label} headingLevel="h3" />
+        <LabelData label={a.label} source={a.source} headingLevel="h3" />
       </section>
 
       {treat ? null : <FicheNutrition label={a.label} />}

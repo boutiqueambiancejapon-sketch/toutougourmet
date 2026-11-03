@@ -109,6 +109,12 @@ test('friandise : notée par le barème friandise, sans constituants exigés', (
   assert.equal(a.label.typeImage, 'friandise')
   assert.equal(analyseLabel(a.label).kind, 'treat')
   assert.equal(a.score, analyseLabel(a.label).score)
+  // Règle d'indexation d'une friandise : marque, nom, composition, aucun constituant exigé
+  assert.equal(a.indexable, true, 'friandise sans constituants : indexable')
+  assert.equal(meetsIndexRule({ ...a.label, ingredients: a.label.ingredients.slice(0, 1) }, a.score), true, 'un seul ingrédient suffit')
+  assert.equal(meetsIndexRule({ ...a.label, marque: null }, a.score), false, 'marque exigée')
+  assert.equal(meetsIndexRule({ ...a.label, produit: null }, a.score), false, 'nom exigé')
+  assert.equal(meetsIndexRule({ ...a.label, ingredients: [] }, null), false, 'composition exigée')
   // Même détection pour le scan par code-barres et l'import : le nom suffit sans catégorie friandise
   assert.equal(opffFoodKind({ categories_tags: ['en:dog-food'], product_name: 'Dental sticks' }), 'treat')
   assert.equal(opffImageType(['en:dog-food'], 'Dental sticks'), 'friandise')

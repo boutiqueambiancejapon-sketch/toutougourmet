@@ -68,7 +68,7 @@ export function ScanResult({ analysis, origin, quota, signedIn, onRestart }: Sca
         </Link>
       </div>
       <SourceNotice source={analysis.source} />
-      <LabelData label={analysis.label} />
+      <LabelData label={analysis.label} source={analysis.source} />
       <button type="button" onClick={onRestart} className="min-h-12 rounded-control bg-orange px-5 text-[15px] font-semibold text-ink">
         Scanner un autre produit
       </button>

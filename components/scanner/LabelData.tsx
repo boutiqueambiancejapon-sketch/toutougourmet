@@ -1,5 +1,6 @@
 import type { ScanAnalysis } from '@/lib/scanner/result'
 import type { AnalyticalKey } from '@/lib/scanner/types'
+import type { AnalysisSource } from '@/db/schema'
 
 // @cdc lot 6 — ce que l'IA a lu sur l'étiquette : composition dans l'ordre, constituants
 // analytiques tels quels, additifs. Sans état, utilisable côté serveur comme côté client.
@@ -28,10 +29,18 @@ function energyText(e: ScanAnalysis['label']['energie']): string | null {
   return parts.length ? parts.join(', ') : null
 }
 
+/** D'où vient ce qui est affiché : une fiche des bases ouvertes n'a pas de photos. */
+const ORIGIN: Record<AnalysisSource, string> = {
+  photo: "de l'étiquette lue",
+  openpetfoodfacts: 'de la fiche Open Pet Food Facts',
+  openfoodfacts: 'de la fiche Open Food Facts',
+}
+
 const pct = (n: number) => `${n.toLocaleString('fr-FR', { maximumFractionDigits: 2 })} %`
 
-export function LabelData({ label, headingLevel = 'h3' }: { label: ScanAnalysis['label']; headingLevel?: 'h2' | 'h3' }) {
+export function LabelData({ label, source, headingLevel = 'h3' }: { label: ScanAnalysis['label']; source: AnalysisSource; headingLevel?: 'h2' | 'h3' }) {
   const H = headingLevel
+  const origin = ORIGIN[source]
   const rows = ROWS.filter(([k]) => label.constituants[k] !== null)
   return (
     <div className="flex flex-col gap-6">
@@ -47,7 +56,7 @@ export function LabelData({ label, headingLevel = 'h3' }: { label: ScanAnalysis[
             ))}
           </ol>
         ) : (
-          <p className="m-0 text-[15px] text-ink-2">Composition absente des photos.</p>
+          <p className="m-0 text-[15px] text-ink-2">{`Composition absente ${origin}.`}</p>
         )}
       </section>
       <section className="flex flex-col gap-2">
@@ -66,7 +75,7 @@ export function LabelData({ label, headingLevel = 'h3' }: { label: ScanAnalysis[
             </tbody>
           </table>
         ) : (
-          <p className="m-0 text-[15px] text-ink-2">Constituants absents des photos.</p>
+          <p className="m-0 text-[15px] text-ink-2">{`Constituants absents ${origin}.`}</p>
         )}
       </section>
       {energyText(label.energie) ? <p className="m-0 text-[15px] text-ink">{`Énergie : ${energyText(label.energie)}.`}</p> : null}

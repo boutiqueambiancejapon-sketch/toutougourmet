@@ -5,8 +5,9 @@ import { getDb } from './drizzle'
 // @cdc lot 6 — quelles fiches /croquettes/[slug] sont publiées (indexables, dans le sitemap, le
 // classement, les pages marque, les meilleures notes de /scanner). Toujours : fiche relue.
 // OPFF_INDEX_POLICY=complete ajoute les fiches Open Pet Food Facts non relues qui remplissent la
-// règle d'indexation (marque, nom, composition, 5 constituants : lib/scanner/opff-import.ts,
-// colonne opff_product.indexable). Par défaut (off) : seules les fiches relues, comme avant.
+// règle d'indexation (marque, nom, composition, et 5 constituants pour un aliment complet :
+// lib/scanner/opff-import.ts, colonne opff_product.indexable). Par défaut (off) : seules les
+// fiches relues, comme avant.
 // Une fiche écartée à la relecture (food_analysis.discarded) n'est jamais publiée.
 
 export type OpffIndexPolicy = 'off' | 'complete'

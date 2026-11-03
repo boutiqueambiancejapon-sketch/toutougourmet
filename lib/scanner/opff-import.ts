@@ -1,5 +1,5 @@
 import { classifyExtraction } from './outcome'
-import { analyseLabel } from './analyse'
+import { analyseLabel, productKind } from './analyse'
 import { opffImageType, opffLabel, opffName, opffUnusableReason, stripAccents, type OpffProduct, type OpffUnusableReason } from './opff'
 import { cleanEan } from './slug'
 import type { ExtractedLabel } from './types'
@@ -195,12 +195,16 @@ export type OpffAssessment =
 export const INDEX_MIN_CONSTITUENTS = 5
 
 /**
- * Règle d'indexation proposée pour une fiche importée non relue : marque, nom, composition
- * (3 ingrédients au moins, déjà exigés pour noter) et 5 constituants analytiques sur 7.
+ * Règle d'indexation proposée pour une fiche importée non relue. Aliment complet : marque, nom,
+ * composition (3 ingrédients au moins, déjà exigés pour noter) et 5 constituants analytiques sur 7.
+ * Friandise : marque, nom et composition (1 ingrédient au moins), sans constituants exigés : une
+ * friandise en affiche souvent peu, et son barème n'en lit aucun.
  */
 export function meetsIndexRule(label: ExtractedLabel, score: number | null): boolean {
+  if (score === null || !label.marque || !label.produit) return false
+  if (productKind(label) === 'treat') return label.ingredients.length >= 1
   const constituents = Object.values(label.constituants).filter((v) => v !== null).length
-  return score !== null && !!label.marque && !!label.produit && label.ingredients.length >= 3 && constituents >= INDEX_MIN_CONSTITUENTS
+  return label.ingredients.length >= 3 && constituents >= INDEX_MIN_CONSTITUENTS
 }
 
 /** Même décision que pour un scan par code-barres (friandise comprise), puis la règle d'indexation. */

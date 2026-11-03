@@ -55,7 +55,7 @@ export function OpffImportSection({ status, policy }: Props) {
                 .join(' · ')}
             </p>
             <p className="m-0 mt-2">
-              {`Dans la table : ${status.products} produits chien, ${status.scorable} notés, ${status.indexable} indexables selon la règle (marque, nom, composition, 5 constituants). `}
+              {`Dans la table : ${status.products} produits chien, ${status.scorable} notés, ${status.indexable} indexables selon la règle (marque, nom, composition ; 5 constituants en plus pour un aliment complet). `}
               {policy === 'complete' ? 'Règle activée (OPFF_INDEX_POLICY=complete) : ces fiches sont indexées.' : 'Règle désactivée : seules les fiches relues sont indexées.'}
             </p>
           </div>
