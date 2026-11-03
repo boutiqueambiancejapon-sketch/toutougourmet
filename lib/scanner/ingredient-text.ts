@@ -30,7 +30,7 @@ export function splitTopLevel(text: string): string[] {
     current += ch
   }
   parts.push(current)
-  return parts.map((p) => p.replace(/\s+/g, ' ').replace(/^[\s.:*-]+|[\s.:*]+$/g, '').trim()).filter((p) => p.length > 0)
+  return parts.map((p) => p.replace(/\s+/g, ' ').replace(/^[\s.:*_-]+|[\s.:*_–-]+$/g, '').trim()).filter((p) => p.length > 0)
 }
 
 const PERCENT = /(\d{1,3}(?:[.,]\d{1,2})?)\s?%/
@@ -59,11 +59,27 @@ function cleanName(item: string): string {
 // Début du bloc additifs dans le texte entier : le mot « additifs » après une ponctuation (ou
 // en capitales), un numéro d'additif de l'UE (3a671, 3b605, 1b306…) ou une vitamine dosée.
 const ADDITIVES_BLOCK = [
-  /(?:^|[.,;:)\n\r]\s*)(?=(?:additifs?|additives?|additivi|zusatzstoffe|aditivos)(?![\p{L}]))/iu,
+  /(?:^|[.,;:)\n\r_–-]\s*)_?(?=(?:additifs?|additives?|additivi|zusatzstoffe|aditivos)(?![\p{L}]))/iu,
+  // « … mélisse officinale Additifs nutritionnels : … » : majuscule en milieu de phrase
+  /(?<=\s)(?=Additi(?:fs?|ves?)(?![\p{L}]))/u,
   /(?<![\p{L}])(?=ADDITIFS?(?![\p{L}]))/u,
   /(?<![\p{L}\d])(?=[1-4][a-n]\d{3,4}[a-z]?(?![\p{L}\d]))/iu,
   /(?<![\p{L}])(?=vitamin(?:e|a)?s?\s*[a-e]\d{0,2}\s*[:.-]?\s*\d[\d\s.,]*\s*(?:u\.?\s?i\.?|iu|mg|µg))/iu,
+  // « … chlorure de potassium. Vitamine A, … » : vitamines en début de phrase
+  /\.\s+(?=vitamin(?:e|es|s)?(?![\p{L}]))/iu,
 ]
+// Fin du texte utile : conseils de conservation, mode d'emploi, renvoi au site de la marque
+const TAIL_BLOCK = /[.\n]\s*(?:à |a )?(?:conserver|mode d'emploi|pour plus d'informations|ration journali[eè]re|best before|store in)/i
+// Préambule avant la composition (« Aliment complémentaire pour chiens. Composition : … »)
+// (en capitales, le mot suffit : « FR - Aliment complet … COMPOSITION : riz »)
+const COMPOSITION_LABEL = /(?:(?:^|[.\n]\s*)(?:[Cc]omposition|[Ii]ngr[ée]dients?|INGR[ÉE]DIENTS?)|(?<![\p{L}])COMPOSITION)\s*:\s*/u
+/**
+ * Vitamines, oligo-éléments et acides aminés cités un par un dans une liste à l'américaine
+ * (« niacine (vitamine B3) », « Zinc Sulfate ») : rangés avec les additifs, sans clore la liste.
+ */
+const NUTRITIONAL_ITEM =
+  /^(suppl[ée]ment (de |en )?)?(vitamines?|vitamin|niacine?|biotine?|acide folique|folic acid|thiamine|mononitrate de thiamine|riboflavine?|pyridoxine|chlorhydrate de pyridoxine|pantoth[ée]nate|d-calcium pantothenate|chlorure de choline|choline chloride|taurine|dl-m[ée]thionine|l-carnitine|s[ée]l[ée]nite de sodium|sodium selenite|iod(at|ur)e de (calcium|potassium)|potassium iodide|oxyde de zinc|(sulfate|sulphate) de (zinc|cuivre|fer|mangan[eè]se)|(zinc|copper|ferrous|manganese) sulfate)\b|\(vitamine [a-k]\d{0,2}\)/i
+
 // Constituants analytiques recopiés dans la composition : retirés (ni ingrédient ni additif)
 const ANALYTICAL_BLOCK = /(?:constituants|composants|composition)\s+analytiques?|analytical\s+constituents|analytische\s+bestandteile/i
 
@@ -80,7 +96,8 @@ const firstIndex = (text: string, patterns: RegExp[], from = 0) =>
 export function splitAdditivesBlock(text: string): { composition: string; additives: string } {
   const a = firstIndex(text, ADDITIVES_BLOCK)
   const c = text.search(ANALYTICAL_BLOCK)
-  const analytical = c < 0 ? Infinity : c
+  const t = text.search(TAIL_BLOCK)
+  const analytical = Math.min(c < 0 ? Infinity : c, t < 0 ? Infinity : t)
   const additives = a === Infinity ? '' : text.slice(a, analytical > a ? analytical : text.length)
   return { composition: text.slice(0, Math.min(a, analytical, text.length)), additives }
 }
@@ -96,7 +113,9 @@ export function parseIngredientText(text: string): ParsedIngredients {
   const ingredients: Ingredient[] = []
   const additifs: string[] = []
   let inAdditives = false
-  const body = text.normalize('NFC').replace(/^\s*(composition|ingr[ée]dients?)\s*:?\s*/i, '')
+  const nfc = text.normalize('NFC')
+  const label = COMPOSITION_LABEL.exec(nfc)
+  const body = label ? nfc.slice(label.index + label[0].length) : nfc.replace(/^\s*(composition|ingr[ée]dients?)\s*:?\s*/i, '')
   const { composition, additives } = splitAdditivesBlock(body)
   for (const raw of splitTopLevel(composition)) {
     if (!inAdditives && ADDITIVES_START.test(raw)) inAdditives = true
@@ -104,6 +123,10 @@ export function parseIngredientText(text: string): ParsedIngredients {
       const a = raw.replace(/\s+/g, ' ').trim().slice(0, 160)
       // « Vitamine A : », « 24 000 U.I. » : morceaux d'un même additif coupés par la saisie
       if (isAdditivePiece(a)) additifs.push(a)
+      continue
+    }
+    if (NUTRITIONAL_ITEM.test(raw)) {
+      additifs.push(raw.replace(/\s+/g, ' ').trim().slice(0, 160))
       continue
     }
     const nom = cleanName(raw)

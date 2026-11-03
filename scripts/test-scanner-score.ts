@@ -176,6 +176,17 @@ test('texte d\'ingrédients : additifs et constituants collés à la composition
   const edgard = parseIngredientText('poulet frais 25%, riz complet, mélisse officinale biologique vitamine A 15 000 UI, vitamine D3 1 500 UI, taurine 1 000 mg')
   assert.deepEqual(edgard.ingredients.map((i) => i.nom), ['poulet frais', 'riz complet', 'mélisse officinale biologique'])
   assert.deepEqual(edgard.additifs, ['vitamine A 15 000 UI', 'vitamine D3 1 500 UI', 'taurine 1 000 mg'])
+  // Autres saisies réelles : tiret, majuscule en milieu de phrase, soulignés, préambule, conseils
+  assert.deepEqual(parseIngredientText('riz, Tartrate de L - Carnitine - Additifs nutritionnels pour 1 Kg : Vitamine A : 20 000 UI').ingredients.map((i) => i.nom), ['riz', 'Tartrate de L - Carnitine'])
+  assert.deepEqual(parseIngredientText('blé, mélisse officinale Additifs nutritionnels : vitamine A').ingredients.map((i) => i.nom), ['blé', 'mélisse officinale'])
+  assert.deepEqual(parseIngredientText('céréales, substances minérales. _Additifs :_ colorants').additifs, ['Additifs :_ colorants'])
+  const vitakraft = parseIngredientText('Aliment complémentaire pour chiens. Composition : viande (72 %), légumes, levure. Conserver au sec et à l\'abri de la chaleur')
+  assert.deepEqual(vitakraft.ingredients.map((i) => i.nom), ['viande', 'légumes', 'levure'])
+  assert.deepEqual(parseIngredientText('FR - Aliment complet pour chien adulte COMPOSITION : riz, maïs. Vitamine A, cuivre').ingredients.map((i) => i.nom), ['riz', 'maïs'])
+  // Liste à l'américaine : vitamines et oligo-éléments rangés avec les additifs, la suite reste
+  const us = parseIngredientText('Chicken, Rice, niacine (vitamine B3), Zinc Sulfate, Dried Carrots')
+  assert.deepEqual(us.ingredients.map((i) => i.nom), ['Chicken', 'Rice', 'Dried Carrots'])
+  assert.deepEqual(us.additifs, ['niacine (vitamine B3)', 'Zinc Sulfate'])
   // Sans bloc additifs ni constituants : rien ne change, « sans additifs » reste dans le nom
   assert.deepEqual(parseIngredientText('poulet (sans additifs), riz').ingredients.map((i) => i.nom), ['poulet (sans additifs)', 'riz'])
 })
