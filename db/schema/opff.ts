@@ -27,7 +27,7 @@ export const opffProduct = app.table(
     /** Image de face sur le serveur d'Open Pet Food Facts (jamais copiée chez nous) */
     imageUrl: text('image_url'),
     lang: text('lang'),
-    /** Aliment complet ou friandise (seuls les aliments complets sont notés pour l'instant) */
+    /** Aliment complet ou friandise (chacun noté par son barème) */
     kind: text('kind').$type<OpffFoodKind>().notNull(),
     /** Notre barème peut noter la fiche avec les mêmes règles qu'un scan */
     scorable: boolean('scorable').notNull().default(false),

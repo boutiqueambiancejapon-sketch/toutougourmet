@@ -1,6 +1,8 @@
 // Tests de l'import Open Pet Food Facts (lib/scanner/opff-import.ts), sans framework :
 // npx tsx scripts/test-opff-import.ts
 import assert from 'node:assert/strict'
+import { analyseLabel } from '../lib/scanner/analyse'
+import { opffImageType } from '../lib/scanner/opff'
 import { assessOpff, flattenNutrition, hashInput, meetsIndexRule, normalizeOpffEan, opffFoodKind, opffImageUrl, opffSpecies, toOpffRecord, type OpffDumpProduct } from '../lib/scanner/opff-import'
 
 let failed = 0
@@ -85,13 +87,33 @@ test('fiche complète : notée par le barème, indexable selon la règle propos�
   assert.equal(meetsIndexRule({ ...a.label, constituants: { ...a.label.constituants, cendres: null, humidite: null } }, a.score), false)
 })
 
-test('fiche incomplète ou friandise : non notée, avec la raison', () => {
+test('fiche incomplète : non notée, avec la raison', () => {
   const noText = assessOpff(toOpffRecord('3616661263714', { ...EMPREINTES, ingredients_text_fr: '' }))
   assert.deepEqual(noText, { scorable: false, reason: 'composition' })
   const noAnalysis = assessOpff(toOpffRecord('3616661263714', { ...EMPREINTES, nutrition: {} }))
   assert.deepEqual(noAnalysis, { scorable: false, reason: 'constituants' })
-  const treat = assessOpff(toOpffRecord('3616661263714', { ...EMPREINTES, categories_tags: ['en:dog-food', 'en:dog-treats'] }))
-  assert.deepEqual(treat, { scorable: false, reason: 'friandise' })
+})
+
+test('friandise : notée par le barème friandise, sans constituants exigés', () => {
+  const r = toOpffRecord('3616661263714', {
+    ...EMPREINTES,
+    product_name_fr: 'Bâtonnets au canard',
+    categories_tags: ['en:dog-food', 'en:dog-treats'],
+    ingredients_text_fr: 'Canard (80 %), glycérine, sucre, sel',
+    nutrition: {},
+  })
+  assert.equal(r.kind, 'treat')
+  const a = assessOpff(r)
+  assert.equal(a.scorable, true)
+  if (!a.scorable) return
+  assert.equal(a.label.typeImage, 'friandise')
+  assert.equal(analyseLabel(a.label).kind, 'treat')
+  assert.equal(a.score, analyseLabel(a.label).score)
+  // Même détection pour le scan par code-barres et l'import : le nom suffit sans catégorie friandise
+  assert.equal(opffFoodKind({ categories_tags: ['en:dog-food'], product_name: 'Dental sticks' }), 'treat')
+  assert.equal(opffImageType(['en:dog-food'], 'Dental sticks'), 'friandise')
+  const noText = assessOpff(toOpffRecord('3616661263714', { ...EMPREINTES, categories_tags: ['en:dog-treats'], ingredients_text_fr: '' }))
+  assert.deepEqual(noText, { scorable: false, reason: 'composition' })
 })
 
 test('empreinte : la date de modification seule ne change rien', () => {

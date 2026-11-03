@@ -1,13 +1,14 @@
 import { classifyExtraction } from './outcome'
-import { opffImageType, opffLabel, opffUnusableReason, type OpffProduct, type OpffUnusableReason } from './opff'
-import { scoreLabel } from './score'
+import { analyseLabel } from './analyse'
+import { opffImageType, opffLabel, opffName, opffUnusableReason, stripAccents, type OpffProduct, type OpffUnusableReason } from './opff'
 import { cleanEan } from './slug'
 import type { ExtractedLabel } from './types'
 
 // @cdc lot 6 — copie hebdomadaire d'Open Pet Food Facts (licence ODbL) : fonctions pures qui
 // trient une ligne de l'export JSONL (chien ou non, aliment complet ou friandise), la réduisent
 // aux champs utiles et décident si notre barème peut la noter. La note elle-même vient de
-// opffLabel / opffUnusableReason / classifyExtraction / scoreLabel, comme pour un scan.
+// opffLabel / opffUnusableReason / classifyExtraction / analyseLabel, comme pour un scan : barème
+// principal pour un aliment complet, barème friandise (lib/scanner/score-treat.ts) pour une friandise.
 // Appelé par scripts/opff-import.ts et lib/server/opff-store.ts. Tests : scripts/test-opff-import.ts.
 
 /** Ligne de l'export complet (sur-ensemble de la réponse de l'API v2). */
@@ -31,9 +32,8 @@ export interface OpffNutrient {
 
 export type OpffSpecies = 'chien' | 'chat' | 'autre'
 /**
- * Aliment complet ou friandise, d'après les catégories et le nom. Emplacement prévu pour le
- * barème « friandise » (branche feat/scanner-treats) : aujourd'hui seules les fiches `complete`
- * sont notées, les `treat` sont gardées dans la table sans note.
+ * Aliment complet ou friandise : même détection que le scan par code-barres (opffImageType,
+ * catégories puis nom). Les deux sont notés, chacun par son barème (details.kind).
  */
 export type OpffFoodKind = 'complete' | 'treat'
 
@@ -42,9 +42,7 @@ const DOG = /(^|[-:\s])(dogs?|chiens?|chiots?|canine|puppy|puppies|honden?|hond|
 const CAT = /(^|[-:\s])(cats?|chats?|chatons?|kitten|katten?|katze|gatt[oi]|gatos?|felin[es]*|feline)($|[-\s])/i
 // Catégories communes aux deux espèces : elles ne disent rien de l'animal
 const SHARED = new Set(['en:dog-and-cat-food', 'en:pet-food'])
-const TREAT = /(friandises?|treats?|snacks?|biscuits?|os[- ]a[- ]macher|chews?|batonnets?|sticks?|dental|rawhide|complementary|complementaire)/i
-
-const strip = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '')
+const strip = stripAccents
 
 /** Chien si les catégories (ou à défaut le nom) parlent de chien et pas de chat. */
 export function opffSpecies(p: OpffDumpProduct): OpffSpecies {
@@ -61,9 +59,7 @@ export function opffSpecies(p: OpffDumpProduct): OpffSpecies {
 }
 
 export function opffFoodKind(p: OpffDumpProduct): OpffFoodKind {
-  if (opffImageType(p.categories_tags) === 'friandise') return 'treat'
-  const name = strip([p.product_name_fr, p.product_name].filter(Boolean).join(' '))
-  return TREAT.test(name) && !/croquettes?|kibble|complet/i.test(name) ? 'treat' : 'complete'
+  return opffImageType(p.categories_tags, opffName(p)) === 'friandise' ? 'treat' : 'complete'
 }
 
 /** Code-barres normalisé comme pour un scan : EAN-8 ou EAN-13 valide (UPC-A complété d'un 0). */
@@ -188,6 +184,7 @@ export function hashInput(r: OpffRecord): string {
   return JSON.stringify({ ...r, lastModified: undefined })
 }
 
+/** « friandise » : raison des imports d'avant le barème friandise, effacée au premier ré-import --all. */
 export type OpffSkipReason = OpffUnusableReason | 'friandise' | 'lecture-incomplete'
 
 export type OpffAssessment =
@@ -206,15 +203,13 @@ export function meetsIndexRule(label: ExtractedLabel, score: number | null): boo
   return score !== null && !!label.marque && !!label.produit && label.ingredients.length >= 3 && constituents >= INDEX_MIN_CONSTITUENTS
 }
 
-/** Même décision que pour un scan par code-barres, puis la règle d'indexation. */
+/** Même décision que pour un scan par code-barres (friandise comprise), puis la règle d'indexation. */
 export function assessOpff(r: OpffRecord): OpffAssessment {
-  // Barème friandise (feat/scanner-treats) : à brancher ici une fois fusionné, voir PROGRESS.md
-  if (r.kind === 'treat') return { scorable: false, reason: 'friandise' }
   const label = opffLabel(recordToProduct(r), r.ean)
   const reason = opffUnusableReason(label)
   if (reason) return { scorable: false, reason }
   if (classifyExtraction(label).kind !== 'complete') return { scorable: false, reason: 'lecture-incomplete' }
-  const score = scoreLabel(label).score
+  const score = analyseLabel(label).score
   if (score === null) return { scorable: false, reason: 'note-impossible' }
   return { scorable: true, label, score, indexable: meetsIndexRule(label, score) }
 }

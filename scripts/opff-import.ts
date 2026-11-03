@@ -1,8 +1,8 @@
 // Copie hebdomadaire d'Open Pet Food Facts (licence ODbL), dimanche 01 h 10, heure de Paris
 // (deploy/toutou-opff-import.timer). Télécharge l'export JSONL compressé officiel, le lit ligne à
 // ligne (jamais en entier en mémoire), garde les aliments pour chien dans app.opff_product et
-// pré-note avec notre barème ceux dont la composition et les constituants suffisent (fiches
-// /croquettes/[slug], source openpetfoodfacts). Seules les fiches qui ont changé sont retraitées.
+// pré-note avec notre barème ceux dont la composition et les constituants suffisent, et les
+// friandises dont la composition suffit (barème friandise) : fiches /croquettes/[slug], source openpetfoodfacts. Seules les fiches qui ont changé sont retraitées.
 //
 // Lancer depuis la racine du site, variables de /srv/toutou/shared/.env chargées :
 //   node_modules/.bin/tsx scripts/opff-import.ts             (import complet)
@@ -185,6 +185,7 @@ async function readExport(file: string, db: Db | null): Promise<void> {
     const assessment = assessOpff(record)
     if (assessment.scorable) {
       inc('notes')
+      inc(record.kind === 'treat' ? 'notes_friandises' : 'notes_aliments_complets')
       if (assessment.indexable) inc('indexables_selon_regle')
     } else inc(`non_notes:${assessment.reason}`)
     batch.push({ record, hash, assessment })
