@@ -77,7 +77,7 @@ export default async function DogPage({
       {query.pesee ? <FormNotice tone="info">Pesée enregistrée.</FormNotice> : null}
       {trend ? <WeightAlert dog={dog} trend={trend} /> : null}
       {extras ? (
-        <Panel id="repas" title="Ce qu'il mange">
+        <Panel id="repas" title="Son alimentation">
           <DogDiet dog={dog} link={foodLink} />
         </Panel>
       ) : null}

@@ -1,5 +1,7 @@
 import { and, asc, desc, eq, inArray, sql } from 'drizzle-orm'
-import { dog, weightLog, type Dog, type WeightEntry } from '@/db/schema'
+import { boolean, date, numeric, text, uuid } from 'drizzle-orm/pg-core'
+import { ACTIVITY_VALUES, dog, weightLog, type Dog, type WeightEntry } from '@/db/schema'
+import { app } from '@/db/schema/app'
 import { getDb } from './drizzle'
 
 // @cdc lot 4 — accès aux chiens d'un compte. Chaque lecture et écriture filtre sur user_id :
@@ -32,6 +34,21 @@ const BASE = {
 }
 const FULL = { ...BASE, food: dog.food, foodSlug: dog.foodSlug, allergies: dog.allergies }
 const NO_EXTRAS: DogProfileExtras = { food: null, foodSlug: null, allergies: [] }
+
+// app.dog telle qu'avant la migration 0008, pour les ajouts : un insert Drizzle cite toutes les
+// colonnes de la table (DEFAULT compris), y compris celles qui n'existent pas encore. Hors de
+// db/schema : drizzle-kit ne la voit pas. À retirer une fois 0008 appliquée en production.
+const dogBefore0008 = app.table('dog', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  userId: text('user_id').notNull(),
+  name: text('name').notNull(),
+  breedSlug: text('breed_slug'),
+  birthDate: date('birth_date', { mode: 'string' }),
+  birthDateEstimated: boolean('birth_date_estimated').notNull().default(false),
+  weightKg: numeric('weight_kg', { precision: 5, scale: 2, mode: 'number' }),
+  activity: text('activity', { enum: ACTIVITY_VALUES }).notNull().default('normal'),
+  sterilized: boolean('sterilized').notNull().default(false),
+})
 
 const cache = globalThis as unknown as { tgDogExtras?: { ok: boolean; at: number } }
 
@@ -97,9 +114,12 @@ export async function fillDogExtras(userId: string, dogId: string, extras: Parti
 }
 
 export async function createDog(userId: string, input: DogInput, today: string): Promise<string> {
+  const ready = await dogExtrasReady()
   const values = await writable(input)
   return db().transaction(async (tx) => {
-    const [row] = await tx.insert(dog).values({ ...values, userId }).returning({ id: dog.id })
+    const [row] = ready
+      ? await tx.insert(dog).values({ ...values, userId }).returning({ id: dog.id })
+      : await tx.insert(dogBefore0008).values({ ...values, userId }).returning({ id: dogBefore0008.id })
     if (input.weightKg) await tx.insert(weightLog).values({ dogId: row.id, date: today, weightKg: input.weightKg })
     return row.id
   })
