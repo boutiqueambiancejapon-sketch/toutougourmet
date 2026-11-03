@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation'
 import { assertDashboardAction as assertDashboard } from '@/lib/dashboard/guard'
 import { labelFromForm } from '@/lib/scanner/review-form'
 import { brandSlug } from '@/lib/scanner/seo'
-import { deleteAnalysis, getAnalysis, markReportHandled, updateAnalysis } from '@/lib/server/scanner-review'
+import { decideImported, deleteAnalysis, getAnalysis, markReportHandled, updateAnalysis } from '@/lib/server/scanner-review'
 
 // @cdc lot 6 — actions de relecture des fiches. Chaque action vérifie elle-même l'authentification
 // HTTP Basic du tableau de bord (le proxy ne suffit pas : une action serveur est un point d'entrée).
@@ -45,4 +45,13 @@ export async function handleReport(analysisId: string, reportId: string): Promis
   await assertDashboard()
   await markReportHandled(reportId, analysisId)
   revalidatePath(`/tableau-de-bord/fiches/${analysisId}`)
+}
+
+/** Fiche importée d'Open Pet Food Facts : « Valider » (relue, indexable) ou « Écarter » (jamais indexée, gardée pour le scanner). */
+export async function decideImportedFiche(id: string, decision: 'validate' | 'discard'): Promise<void> {
+  await assertDashboard()
+  if (decision !== 'validate' && decision !== 'discard') throw new Error('Décision inconnue')
+  const row = await decideImported(id, decision)
+  if (row) revalidatePublic(row.slug, row.brand)
+  revalidatePath('/tableau-de-bord/contenu')
 }

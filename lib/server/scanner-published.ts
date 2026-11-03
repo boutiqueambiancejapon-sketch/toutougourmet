@@ -7,6 +7,7 @@ import { getDb } from './drizzle'
 // OPFF_INDEX_POLICY=complete ajoute les fiches Open Pet Food Facts non relues qui remplissent la
 // règle d'indexation (marque, nom, composition, 5 constituants : lib/scanner/opff-import.ts,
 // colonne opff_product.indexable). Par défaut (off) : seules les fiches relues, comme avant.
+// Une fiche écartée à la relecture (food_analysis.discarded) n'est jamais publiée.
 
 export type OpffIndexPolicy = 'off' | 'complete'
 
@@ -16,11 +17,13 @@ const opffIndexable = sql`(${foodAnalysis.source} = 'openpetfoodfacts' AND EXIST
 
 /** Condition SQL sur food_analysis : fiche publiée. */
 export function publishedWhere(): SQL {
-  return opffIndexPolicy() === 'complete' ? sql`(${foodAnalysis.reviewed} OR ${opffIndexable})` : sql`${foodAnalysis.reviewed}`
+  const base = opffIndexPolicy() === 'complete' ? sql`(${foodAnalysis.reviewed} OR ${opffIndexable})` : sql`${foodAnalysis.reviewed}`
+  return sql`(${base} AND NOT ${foodAnalysis.discarded})`
 }
 
 /** Même règle pour une fiche déjà lue (balise robots de la page). */
 export async function isPublished(row: FoodAnalysis): Promise<boolean> {
+  if (row.discarded) return false
   if (row.reviewed) return true
   if (opffIndexPolicy() !== 'complete' || row.source !== 'openpetfoodfacts' || !row.ean) return false
   const d = getDb()
@@ -37,10 +40,11 @@ export async function isPublished(row: FoodAnalysis): Promise<boolean> {
 /**
  * Fiches à relire : non relues, sauf les fiches pré-notées par l'import que personne n'a encore
  * scannées (scan_count = 0) — sinon des milliers de fiches noieraient les vrais scans. Une fiche
- * importée entre dans la liste dès son premier scan. Version SQL brut pour les requêtes pg directes.
+ * importée entre dans la liste dès son premier scan. Une fiche écartée a déjà été jugée : hors liste
+ * (ses signalements restent affichés). Version SQL brut pour les requêtes pg directes.
  */
 export function awaitingReviewWhere(): SQL {
-  return sql`NOT ${foodAnalysis.reviewed} AND NOT (${foodAnalysis.source} = 'openpetfoodfacts' AND ${foodAnalysis.scanCount} = 0)`
+  return sql`NOT ${foodAnalysis.reviewed} AND NOT ${foodAnalysis.discarded} AND NOT (${foodAnalysis.source} = 'openpetfoodfacts' AND ${foodAnalysis.scanCount} = 0)`
 }
 
-export const AWAITING_REVIEW_SQL = "NOT reviewed AND NOT (source = 'openpetfoodfacts' AND scan_count = 0)"
+export const AWAITING_REVIEW_SQL = "NOT reviewed AND NOT discarded AND NOT (source = 'openpetfoodfacts' AND scan_count = 0)"

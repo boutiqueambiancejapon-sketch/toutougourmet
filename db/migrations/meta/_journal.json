@@ -43,6 +43,13 @@
       "when": 1793703942800,
       "tag": "0005_opff_import",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793705825926,
+      "tag": "0006_scanner_discard",
+      "breakpoints": true
     }
   ]
 }

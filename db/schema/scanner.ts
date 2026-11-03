@@ -37,6 +37,11 @@ export const foodAnalysis = app.table(
     scanCount: integer('scan_count').notNull().default(1),
     /** Relue par la rédaction : seule une fiche relue est indexée et listée dans le sitemap */
     reviewed: boolean('reviewed').notNull().default(false),
+    /**
+     * Écartée à la relecture (fiche importée d'Open Pet Food Facts surtout) : reste servie au
+     * scanner, jamais indexée, et un ré-import ne la republie pas. Une validation l'efface.
+     */
+    discarded: boolean('discarded').notNull().default(false),
     createdAt: ts('created_at').notNull().defaultNow(),
     updatedAt: ts('updated_at')
       .notNull()
