@@ -103,7 +103,7 @@ export function BrandProfiles() {
                 href={brand.affiliateUrl}
                 target="_blank"
                 rel="sponsored noopener"
-                className="inline-flex min-h-11 items-center whitespace-nowrap font-semibold text-orange-ink underline underline-offset-4 hover:text-ink"
+                className="inline-flex min-h-11 max-w-full items-center font-semibold text-orange-ink underline underline-offset-4 hover:text-ink"
               >
                 Voir l&apos;offre {brand.name}&nbsp;→
               </a>
