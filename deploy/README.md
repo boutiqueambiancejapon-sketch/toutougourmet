@@ -158,6 +158,30 @@ journalctl -u toutou-newsletter -n 50 --no-pager    # ce qu'il a fait
 
 Arrêt : `sudo systemctl disable --now toutou-newsletter.timer`.
 
+## Le guide de la gamelle (PDF offert contre l'inscription)
+
+Page publique : `/guide-alimentation`. Fichier servi en direct : `public/guides/guide-de-la-gamelle.pdf`, avec trois aperçus `public/guides/apercu-*.webp` (vraies pages du PDF, affichées sur la page du guide). Les quatre fichiers sont dans git : un déploiement ne les reconstruit pas.
+
+Le contenu vient du site : verdicts et notes du frontmatter des articles (`verdict`, `verdictNote`, classement par famille dans `data/guide-foods.ts`), ration de `lib/calculators.ts`, numéros de `data/poison-centers.ts`, recettes reprises dans `data/guide-recipes.ts`. Le livre est la route privée `/guide-alimentation/livre` (noindex, hors sitemap), imprimée en A4 par `scripts/build-guide.mjs`.
+
+Régénérer le PDF après une modification de contenu (article, recette, numéro) : construire le site, le lancer, puis une commande.
+
+```bash
+nice npm run build                                  # puis restaurer public/sitemap*.xml si on ne veut pas les committer
+npx next start -p 3098 &                            # un port libre
+GUIDE_BASE_URL=http://127.0.0.1:3098 npm run guide:pdf
+# option : --shots /tmp/guide pour une capture PNG de chaque page
+git add public/guides && git commit -m "chore(guide): rebuild PDF"
+```
+
+Le script refuse d'écrire le PDF si une page déborde, si une page est presque vide, si un numéro de page est faux ou si le PDF n'a pas autant de pages que le plan (`--force` pour passer outre). Il signale un nouvel article à verdict non classé dans `data/guide-foods.ts` (« aliment non classé »). Poids actuel : environ 1,5 Mo pour 18 pages (images recompressées en JPEG, polices du site embarquées). Playwright n'est pas une dépendance du site : le script le cherche dans le projet, puis dans `PLAYWRIGHT_DIR`, puis dans `~/tools/pw`.
+
+Inscription : formulaire → `/api/contact` avec `source: "guide"` (adresses jetables refusées comme ailleurs). Après succès, l'e-mail du guide (`lib/emails/guide.ts`, lien direct vers le PDF) part aussitôt, même si `WELCOME_EMAIL_ENABLED` est coupé et même en double opt-in, à la place de l'e-mail de bienvenue. Une seule fois par adresse : empreinte HMAC dans la table `analytics.guide_sends` (ajoutée à `db/analytics.sql`, à appliquer avant de servir ce code : `sudo -u postgres psql -d toutou -f db/analytics.sql`, idempotent). Limite : 3 e-mails du guide par adresse réseau et par jour, 60 par heure et 300 par jour pour tout le site.
+
+Tests sans toucher à la vraie liste : `BREVO_DRY_RUN=1` (inscription journalisée, aucun appel à Brevo) et `MAIL_LOG_ONLY=1` (e-mail écrit dans le journal). Ne jamais poser `BREVO_DRY_RUN` en production.
+
+Mesure : événements `Guide Signup` (propriété `place` : `page-guide`, `article-aliment`, `article-recette`, `fiche-frigo`) et `Guide Download` (bouton « Télécharger le PDF » du site ; le lien de l'e-mail n'est pas compté). Tableau de bord, section Lecteurs : « Inscriptions newsletter par source » (lignes `guide · …`) et « Le guide de la gamelle ».
+
 ## Alertes et résumé hebdomadaire (préparés, non installés)
 
 Deux minuteries, sous l'utilisateur `toutou`, depuis `/srv/toutou/current` :
