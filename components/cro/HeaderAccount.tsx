@@ -35,7 +35,7 @@ function Visitor() {
     <>
       <Link
         href="/compte/connexion"
-        className="ml-auto hidden min-h-11 shrink-0 items-center whitespace-nowrap rounded-control px-3 text-[15px] font-semibold text-ink no-underline hover:bg-cream-2 lg:inline-flex"
+        className="ml-auto hidden min-h-11 shrink-0 items-center whitespace-nowrap rounded-control px-3 text-[15px] font-semibold text-ink no-underline hover:bg-cream-2 xl:inline-flex"
       >
         Connexion
       </Link>
@@ -44,7 +44,7 @@ function Visitor() {
         href={signupHref('header', '/compte')}
         onClick={onClick}
         data-cta="signup-header"
-        className={`${BUTTON} ml-auto bg-orange shadow-[0_3px_0_var(--orange-ink)] hover:brightness-105 md:border-2 md:border-ink md:bg-paper md:shadow-none lg:ml-0`}
+        className={`${BUTTON} ml-auto bg-orange shadow-[0_3px_0_var(--orange-ink)] hover:brightness-105 md:border-2 md:border-ink md:bg-paper md:shadow-none xl:ml-0`}
       >
         <span className="min-[360px]:hidden">S&apos;inscrire</span>
         <span className="hidden min-[360px]:inline">Créer un compte</span>
