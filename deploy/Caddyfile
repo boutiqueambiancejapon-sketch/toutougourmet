@@ -51,3 +51,115 @@ Disallow: /
 		-Server
 	}
 }
+
+# Sites hébergés sur le VPS (deploy/sites)
+# --- 10minlanguages.com (deploy/sites, port 3101) ---
+www.10minlanguages.com {
+	redir https://10minlanguages.com{uri} permanent
+}
+
+10minlanguages.com {
+	encode zstd gzip
+	log {
+		output stderr
+		format json
+	}
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+	reverse_proxy 127.0.0.1:3101
+}
+
+
+# --- klarolab.be (deploy/sites, port 3102) ---
+www.klarolab.be {
+	redir https://klarolab.be{uri} permanent
+}
+
+klarolab.be {
+	encode zstd gzip
+	log {
+		output stderr
+		format json
+	}
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+	reverse_proxy 127.0.0.1:3102
+}
+
+
+# --- quel-robot-tondeuse.com (deploy/sites, port 3103) ---
+www.quel-robot-tondeuse.com {
+	redir https://quel-robot-tondeuse.com{uri} permanent
+}
+
+quel-robot-tondeuse.com {
+	encode zstd gzip
+	log {
+		output stderr
+		format json
+	}
+	@cms path /admin /admin/* /api/cms/* /api/images/*
+	respond @cms 404
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+	reverse_proxy 127.0.0.1:3103
+}
+
+
+# --- voyance-fiable.com (deploy/sites, port 3104) ---
+www.voyance-fiable.com {
+	redir https://voyance-fiable.com{uri} permanent
+}
+
+voyance-fiable.com {
+	encode zstd gzip
+	log {
+		output stderr
+		format json
+	}
+	@cms path /admin /admin/* /api/cms/* /api/images/*
+	respond @cms 404
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+	reverse_proxy 127.0.0.1:3104
+}
+
+
+# --- travel-to-belgium.com (deploy/sites, port 3105) ---
+www.travel-to-belgium.com {
+	redir https://travel-to-belgium.com{uri} permanent
+}
+
+travel-to-belgium.com {
+	encode zstd gzip
+	log {
+		output stderr
+		format json
+	}
+	@cms path /admin /admin/* /api/cms/* /api/images/*
+	respond @cms 404
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+	reverse_proxy 127.0.0.1:3105
+}
+
