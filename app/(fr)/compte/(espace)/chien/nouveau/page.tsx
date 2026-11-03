@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
-import { AccountPage } from '@/components/compte/AccountPage'
+import { PageHeading } from '@/components/compte/espace/PageHeading'
 import { DogForm } from '@/components/compte/DogForm'
 import { FormNotice } from '@/components/compte/fields'
 import { BREED_OPTIONS, EMPTY_DOG } from '@/components/compte/dog-form-values'
 import { isKnownBreed } from '@/lib/dog-profile'
 import { getSessionUser } from '@/lib/server/auth'
 import { todayIso } from '@/lib/server/dog-form'
-import { createDogAction } from '../../actions'
+import { createDogAction } from '@/app/(fr)/compte/actions'
 
 export const metadata: Metadata = { title: 'Ajouter mon chien' }
 
@@ -33,9 +33,17 @@ export default async function NewDogPage({ searchParams }: { searchParams: Promi
     redirect(`/compte/connexion?retour=${encodeURIComponent(`/compte/chien/nouveau${query ? `?${query}` : ''}`)}`)
   }
   return (
-    <AccountPage title="Ajouter mon chien" back={{ href: '/compte', label: 'Mon compte' }} lead={<p>Tu pourras tout modifier ensuite.</p>}>
+    <>
+      <PageHeading title="Ajouter mon chien" back={{ href: '/compte/chiens', label: 'Mes chiens' }} lead={<p>Tu pourras tout modifier ensuite.</p>} />
       {params.bienvenue ? <FormNotice tone="info">Adresse confirmée, ton compte est ouvert. Complète le profil de ton chien.</FormNotice> : null}
-      <DogForm action={createDogAction} initial={prefill(params)} breeds={BREED_OPTIONS} submitLabel="Enregistrer mon chien" today={todayIso()} />
-    </AccountPage>
+      <div className="rounded-card border border-line bg-paper p-4 md:p-6">
+        <DogForm action={createDogAction} initial={prefill(params)} breeds={BREED_OPTIONS} submitLabel={
+            <>
+              <span className="xs:hidden">Enregistrer</span>
+              <span className="hidden xs:inline">Enregistrer mon chien</span>
+            </>
+          } today={todayIso()} />
+      </div>
+    </>
   )
 }

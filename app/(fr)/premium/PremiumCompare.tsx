@@ -1,42 +1,88 @@
+import { IconCheck, IconCross } from '@/components/icons'
 import { FREE_MONTHLY_SCANS, PREMIUM_MONTHLY_SCANS } from '@/lib/scanner/config'
 
-// @cdc premium — tableau compte gratuit / Premium de /premium (rendu serveur).
+// @cdc premium — tableau des trois formules de /premium (rendu serveur). Colonnes fixes et valeurs
+// courtes (coches ou deux mots) : il tient à 390 px sans défilement horizontal.
 
-const ROWS: [string, string, string][] = [
-  ['Analyses par photo', `${FREE_MONTHLY_SCANS} par mois`, `${PREMIUM_MONTHLY_SCANS} par mois`],
-  ["Code-barres d'un produit déjà connu", 'Non décompté', 'Non décompté'],
-  ['Courbe de poids', 'Oui', 'Oui'],
-  ['Alertes de prise ou de perte de poids', 'Non', 'Oui'],
-  ['Historique des scans', '20 dernières analyses', 'Complet'],
-  ['Alternative à une croquette notée sous 55', 'Oui', 'Oui'],
-  ['Offres partenaires selon son profil', 'Oui', 'Oui'],
-  ['Outils pré-remplis avec son profil', 'Oui', 'Oui'],
+type Cell = boolean | string
+type Row = [label: string, none: Cell, free: Cell, premium: Cell]
+
+const GROUPS: { title: string; rows: Row[] }[] = [
+  {
+    title: 'Scanner de croquettes',
+    rows: [
+      ['Code-barres et fiches produits', true, true, true],
+      ["Analyse d'étiquette par photo", false, `${FREE_MONTHLY_SCANS} par mois`, `${PREMIUM_MONTHLY_SCANS} par mois`],
+      ['Historique des analyses', false, '20 dernières', 'Toutes'],
+      ['Alternative proposée sous 55/100', false, true, true],
+    ],
+  },
+  {
+    title: 'Suivi du chien',
+    rows: [
+      ['Calcul de ration, poids, âge, budget', true, true, true],
+      ['Outils pré-remplis avec son profil', false, true, true],
+      ['Pesées et courbe de poids', false, true, true],
+      ['Alerte de prise ou de perte de poids', false, false, true],
+      ['Offres partenaires selon son profil', false, true, true],
+    ],
+  },
 ]
+
+const PLANS = ['Sans compte', 'Gratuit', 'Premium']
+
+function Value({ cell }: { cell: Cell }) {
+  if (cell === true) return <IconCheck className="mx-auto size-6 text-green-ink" title="Inclus" />
+  if (cell === false) return <IconCross className="mx-auto size-6 text-ink-2" title="Non inclus" />
+  return <span className="block text-sm font-semibold leading-tight text-ink">{cell}</span>
+}
 
 export function PremiumCompare() {
   return (
-    <section aria-labelledby="comparer" className="flex flex-col gap-3">
-      <h2 id="comparer" className="m-0 font-display text-2xl font-black text-ink">Quelle différence avec le compte gratuit ?</h2>
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-left text-[15px]">
+    <section aria-labelledby="comparer" className="flex flex-col gap-4">
+      <h2 id="comparer" className="m-0 font-display text-2xl font-black text-ink md:text-3xl">
+        Quelle différence entre les formules ?
+      </h2>
+      <div className="overflow-hidden rounded-card border border-line bg-paper">
+        <table className="w-full table-fixed border-collapse text-left">
+          <caption className="sr-only">Fonctions incluses sans compte, avec le compte gratuit et avec Premium</caption>
+          <colgroup>
+            <col className="w-2/5" />
+            <col />
+            <col />
+            <col className="bg-amber-bg" />
+          </colgroup>
           <thead>
             <tr>
-              <th scope="col" className="border-b-2 border-ink py-2 pr-3 font-semibold text-ink">
-                <span className="sr-only">Fonction</span>
-              </th>
-              <th scope="col" className="border-b-2 border-ink px-2 py-2 font-semibold text-ink">Compte gratuit</th>
-              <th scope="col" className="border-b-2 border-ink px-2 py-2 font-semibold text-ink">Premium</th>
+              <td className="p-3" />
+              {PLANS.map((p) => (
+                <th key={p} scope="col" className="px-1 py-3 text-center align-bottom text-sm font-semibold leading-tight text-ink md:text-base">
+                  {p}
+                </th>
+              ))}
             </tr>
           </thead>
-          <tbody>
-            {ROWS.map(([label, free, premium]) => (
-              <tr key={label}>
-                <th scope="row" className="border-b border-line py-2 pr-3 font-normal text-ink">{label}</th>
-                <td className="border-b border-line px-2 py-2 text-ink-2">{free}</td>
-                <td className="border-b border-line px-2 py-2 font-semibold text-ink">{premium}</td>
+          {GROUPS.map((g) => (
+            <tbody key={g.title}>
+              <tr>
+                <th scope="colgroup" colSpan={4} className="border-t border-line bg-cream-2 px-3 py-2 text-xs font-semibold uppercase tracking-wide text-ink-2">
+                  {g.title}
+                </th>
               </tr>
-            ))}
-          </tbody>
+              {g.rows.map(([label, ...cells]) => (
+                <tr key={label}>
+                  <th scope="row" className="border-t border-line px-3 py-3 text-sm font-normal leading-snug text-ink md:text-base">
+                    {label}
+                  </th>
+                  {cells.map((c, i) => (
+                    <td key={PLANS[i]} className="border-t border-line px-1 py-3 text-center">
+                      <Value cell={c} />
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          ))}
         </table>
       </div>
     </section>

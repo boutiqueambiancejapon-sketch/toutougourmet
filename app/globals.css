@@ -171,6 +171,9 @@
   --radius-hero:    var(--r-xl);
   --radius-pill:    var(--r-pill);
 
+  /* V2 : xs (384 px), libellés de bouton raccourcis sur les plus petits téléphones (iPhone SE) */
+  --breakpoint-xs: 24rem;
+
   /* V2 : max-w-page, max-w-prose */
   --container-page:  var(--w-page);
   --container-prose: var(--w-prose);
@@ -449,6 +452,13 @@ a[class*="btn"],
 a.rounded-control,
 a.rounded-box {
   text-wrap: pretty;
+}
+
+/* Le raccourci text-wrap ci-dessus remet text-wrap-mode à « wrap » et, hors couche, l'emporte sur
+   l'utilitaire whitespace-nowrap : on le rétablit pour les boutons qui ne passent jamais à la ligne. */
+button.whitespace-nowrap,
+a.whitespace-nowrap {
+  white-space: nowrap;
 }
 
 /* Titres : lignes équilibrées, pour éviter un « ? » ou un mot seul en dernière ligne. */

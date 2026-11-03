@@ -1,7 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound, redirect } from 'next/navigation'
-import { AccountCard, AccountPage } from '@/components/compte/AccountPage'
+import { PageHeading } from '@/components/compte/espace/PageHeading'
+import { Panel } from '@/components/compte/espace/Panel'
+import { btnOutline, btnPrimary } from '@/components/compte/espace/ui'
 import { dogFacts } from '@/components/compte/DogCard'
 import { FormNotice } from '@/components/compte/fields'
 import { WeightAlert, WeightAlertTeaser } from '@/components/compte/WeightAlert'
@@ -16,7 +18,7 @@ import { weightTrend } from '@/lib/weight-trend'
 import { getSessionUser } from '@/lib/server/auth'
 import { todayIso } from '@/lib/server/dog-form'
 import { getDog, listWeights } from '@/lib/server/dogs'
-import { addWeightAction } from '../../actions'
+import { addWeightAction } from '@/app/(fr)/compte/actions'
 
 export const metadata: Metadata = { title: 'Profil du chien' }
 
@@ -45,33 +47,36 @@ export default async function DogPage({
     : null
 
   return (
-    <AccountPage title={dog.name} back={{ href: '/compte', label: 'Mon compte' }} lead={<p>{dogFacts(dog).join(' · ')}</p>}>
+    <>
+      <PageHeading
+        title={dog.name}
+        back={{ href: '/compte/chiens', label: 'Mes chiens' }}
+        lead={<p>{dogFacts(dog).join(' · ')}</p>}
+      />
       <div className="flex flex-wrap gap-3">
-        <Link href={`/compte/chien/${dog.id}/modifier`} className="inline-flex min-h-11 items-center rounded-control border border-line bg-paper px-4 text-[15px] font-semibold text-ink no-underline">
-          Modifier le profil
-        </Link>
         {ration ? (
-          <Link href={ration} className="inline-flex min-h-11 items-center rounded-control bg-orange px-4 text-[15px] font-semibold text-ink no-underline">
+          <Link href={ration} className={btnPrimary}>
             Calculer sa ration
           </Link>
         ) : null}
+        <Link href={`/compte/chien/${dog.id}/modifier`} className={btnOutline}>
+          Modifier le profil
+        </Link>
       </div>
       {query.pesee ? <FormNotice tone="info">Pesée enregistrée.</FormNotice> : null}
       {trend ? <WeightAlert dog={dog} trend={trend} /> : null}
-      <AccountCard label="Courbe de poids">
-        <h2 className="m-0 font-display text-2xl font-black text-ink">Sa courbe de poids</h2>
+      <Panel id="courbe" title="Sa courbe de poids">
         {points.length > 0 ? (
           <WeightChart name={dog.name} points={points} ideal={ideal} />
         ) : (
           <p className="m-0 text-base text-ink-2">La courbe apparaît dès la première pesée.</p>
         )}
         {plan === 'premium' ? null : <WeightAlertTeaser />}
-      </AccountCard>
-      <AccountCard label="Pesées">
-        <h2 className="m-0 font-display text-2xl font-black text-ink">Ses pesées</h2>
+      </Panel>
+      <Panel id="pesees" title="Ses pesées">
         <WeightForm action={addWeightAction.bind(null, dog.id)} today={todayIso()} />
         <WeightList entries={weights} />
-      </AccountCard>
-    </AccountPage>
+      </Panel>
+    </>
   )
 }

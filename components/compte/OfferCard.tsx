@@ -7,7 +7,7 @@ export const PARTNER_NOTICE = 'Lien partenaire : on touche une commission si tu 
 
 export function OfferCard({ offer, cta = 'account-offer' }: { offer: AccountOffer; cta?: string }) {
   return (
-    <div data-cta={cta} className="flex flex-col gap-2 rounded-box border border-line bg-paper p-4">
+    <div data-cta={cta} className="flex h-full flex-col gap-2 rounded-box border border-line bg-paper p-4">
       <p className="m-0 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <span className="font-display text-lg font-black leading-tight text-ink">{offer.brand}</span>
         {offer.discount ? <span className="rounded-pill bg-amber px-3 py-0.5 text-sm font-semibold text-ink">{offer.discount}</span> : null}
@@ -17,7 +17,7 @@ export function OfferCard({ offer, cta = 'account-offer' }: { offer: AccountOffe
         href={offer.url}
         rel="sponsored noopener"
         target="_blank"
-        className="inline-flex min-h-11 items-center justify-center self-start rounded-control bg-orange px-4 text-[15px] font-semibold text-ink no-underline"
+        className="inline-flex min-h-11 w-full items-center justify-center whitespace-nowrap rounded-control sm:w-auto sm:self-start bg-orange px-4 text-[15px] font-semibold text-ink no-underline"
       >
         Voir l&apos;offre
         <span className="sr-only"> {offer.brand} (nouvel onglet)</span>
