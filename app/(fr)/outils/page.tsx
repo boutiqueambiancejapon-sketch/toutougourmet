@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
-import { RationQuick } from '@/components/tools/RationQuick'
 import { IconChevron } from '@/components/icons'
 import { TOOLS } from '@/components/outils/tool-list'
 
@@ -18,12 +17,11 @@ export const metadata: Metadata = {
   },
 }
 
-// @cdc 04-pages — hub Outils V2 (audit design-cro §3 Outils) : la ration en grand, utilisable
-// sur place, puis chaque outil présenté par la question à laquelle il répond, en lignes.
+// @cdc 04-pages — hub Outils V2 : la liste de tous les outils d'abord (le propriétaire arrivait
+// sur le calculateur de ration et croyait être sur la page ration). La ration a sa page (/outils/ration).
 export default function OutilsPage() {
-  const others = TOOLS.filter((t) => t.slug !== 'ration')
   return (
-    <div className="v2 mx-auto flex max-w-page flex-col gap-12 px-4 pt-4 pb-16 md:px-8 md:pt-8">
+    <div className="v2 mx-auto flex max-w-page flex-col gap-8 px-4 pt-4 pb-16 md:px-8 md:pt-8">
       <div className="flex flex-col gap-4">
         <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Outils' }]} />
         <header className="flex max-w-prose flex-col gap-2">
@@ -31,37 +29,17 @@ export default function OutilsPage() {
             Les calculateurs pour bien nourrir ton chien
           </h1>
           <p className="m-0 text-lg leading-relaxed text-ink-2">
-            Chaque outil répond à une question précise, avec sa formule et ses sources. Tous sont gratuits. Seul le scanner d&apos;étiquette demande un compte.
+            Gratuits, chacun avec sa formule et ses sources. Seul le scanner demande un compte.
           </p>
         </header>
       </div>
 
-      <section aria-labelledby="ration-hub" className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-12">
-        <div className="flex flex-col gap-3 lg:pt-6">
-          <p className="m-0 font-display text-[clamp(1.5rem,3vw,2.1rem)] font-black leading-tight text-ink">
-            Pour commencer, combien de grammes lui donner par jour&nbsp;?
-          </p>
-          <p className="m-0 text-base leading-relaxed text-ink-2 md:text-lg">
-            Le calcul part de son poids avec la formule du NRC (2006), puis tient compte de son âge, de son activité et de
-            la stérilisation.
-          </p>
-          <Link href="/outils/ration" className="inline-flex min-h-11 items-center gap-1 self-start text-[15px] font-semibold text-orange-ink no-underline hover:underline">
-            Le calculateur complet, chats et races très énergiques compris
-            <IconChevron className="size-4" />
-          </Link>
-        </div>
-        {/* Mobile : l'outil d'abord, l'explication ensuite. Bureau : explication à gauche. */}
-        <div className="order-first lg:order-none">
-          <RationQuick headingId="ration-hub" />
-        </div>
-      </section>
-
       <section aria-labelledby="tous-outils" className="flex max-w-prose flex-col gap-2">
         <h2 id="tous-outils" className="m-0 font-display text-2xl font-black text-ink">
-          Les autres questions
+          Tous les outils
         </h2>
         <ul role="list" className="m-0 flex list-none flex-col divide-y divide-line border-y border-line p-0">
-          {others.map(({ slug, href, question, name, detail, Icon }) => (
+          {TOOLS.map(({ slug, href, question, name, detail, Icon }) => (
             <li key={slug}>
               <Link href={href} className="group flex min-h-16 items-center gap-4 py-4 text-ink no-underline">
                 <Icon className="size-10" />
