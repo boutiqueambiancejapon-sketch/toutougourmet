@@ -4,6 +4,8 @@ import { getFoodVerdicts, type FoodVerdict } from '@/lib/food-verdicts'
 import { POISON_COUNTRIES } from '@/data/poison-centers'
 import { VerdictIcon } from '@/components/icons'
 import { PrintButton } from '@/components/fiche/PrintButton'
+import { GuideOffer } from '@/components/guide/GuideOffer'
+import { bookSummary } from '@/lib/guide/book'
 
 // @cdc 04-pages — fiche à imprimer offerte en bonus des articles (audit design-cro §3).
 // Construite à partir des verdicts des guides, hors index et hors sitemap.
@@ -94,6 +96,9 @@ export default function FicheAlimentsDangereuxPage() {
         <p className="m-0 text-xs text-ink-2">
           Cette fiche ne remplace pas l&apos;avis d&apos;un vétérinaire. Le détail de chaque aliment est sur toutou-gourmet.com.
         </p>
+
+        {/* Offre du guide : masquée à l'impression de la fiche */}
+        <GuideOffer place="fiche-frigo" summary={bookSummary()} className="mt-4" />
       </article>
     </div>
   )

@@ -12,6 +12,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
       { href: '/chien/alimentation-quotidienne', label: 'Bien nourrir son chien' },
       { href: '/chien/sante', label: 'Santé et alimentation' },
       { href: '/chien/race', label: 'Alimentation par race' },
+      { href: '/guide-alimentation', label: 'Le guide gratuit (PDF)' },
     ],
   },
   {
