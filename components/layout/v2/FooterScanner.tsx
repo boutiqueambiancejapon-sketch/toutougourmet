@@ -18,7 +18,7 @@ export function FooterScanner() {
             Scanne les croquettes de ton chien
           </p>
           <p className="m-0 text-sm leading-snug text-ink">
-            Une note sur 100, critère par critère. Code-barres ou photo de l&apos;étiquette.
+            Croquettes, pâtées, friandises : une note sur 100. Code-barres ou photo de l&apos;étiquette.
           </p>
         </div>
         <Link

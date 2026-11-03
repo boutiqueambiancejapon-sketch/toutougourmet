@@ -1,8 +1,9 @@
 import { and, desc, eq, sql } from 'drizzle-orm'
 import { foodAnalysis, scanHistory, scanReport, scanUsage, type FoodAnalysis } from '@/db/schema'
 import type { AnalysisSource } from '@/db/schema/scanner'
-import { scoreLabel, SCORE_VERSION } from '@/lib/scanner/score'
+import { analyseLabel, scoreVersionFor } from '@/lib/scanner/analyse'
 import { baseSlug } from '@/lib/scanner/slug'
+import type { ProductKind } from '@/lib/scanner/score'
 import type { ExtractedLabel } from '@/lib/scanner/types'
 import { getDb } from './drizzle'
 
@@ -17,13 +18,14 @@ function db() {
 
 export const currentMonth = (now = new Date()) => now.toISOString().slice(0, 7)
 
-/** Recalcule la note si le barème a changé depuis l'analyse (l'étiquette lue reste la même). */
+/** Recalcule la note si le barème (aliment complet ou friandise) a changé depuis l'analyse (l'étiquette lue reste la même). */
 async function fresh(row: FoodAnalysis): Promise<FoodAnalysis> {
-  if (row.algorithmVersion === SCORE_VERSION) return row
-  const details = scoreLabel(row.extracted)
+  const version = scoreVersionFor(row.extracted)
+  if (row.algorithmVersion === version) return row
+  const details = analyseLabel(row.extracted)
   const [updated] = await db()
     .update(foodAnalysis)
-    .set({ details, score: details.score, algorithmVersion: SCORE_VERSION })
+    .set({ details, score: details.score, algorithmVersion: version })
     .where(eq(foodAnalysis.id, row.id))
     .returning()
   return updated ?? row
@@ -77,14 +79,14 @@ const isUniqueViolation = (err: unknown, constraint: string) => {
 
 /** Enregistre une nouvelle analyse (ou renvoie celle du même EAN si elle vient d'être créée). */
 export async function saveAnalysis(label: ExtractedLabel, ean: string | null, model: string, source: AnalysisSource = 'photo'): Promise<FoodAnalysis> {
-  const details = scoreLabel(label)
+  const details = analyseLabel(label)
   const base = baseSlug(label.marque, label.produit, ean)
   for (let attempt = 0; attempt < 4; attempt++) {
     const slug = attempt === 0 ? base : `${base}-${(ean ?? crypto.randomUUID().replace(/-/g, '')).slice(-4 - attempt)}`
     try {
       const [row] = await db()
         .insert(foodAnalysis)
-        .values({ ean, slug, brand: label.marque, product: label.produit, extracted: { ...label, ean }, score: details.score, details, algorithmVersion: SCORE_VERSION, model, source })
+        .values({ ean, slug, brand: label.marque, product: label.produit, extracted: { ...label, ean }, score: details.score, details, algorithmVersion: scoreVersionFor(label), model, source })
         .returning()
       return row
     } catch (err) {
@@ -114,6 +116,8 @@ export interface ScanSummary {
   product: string | null
   score: number | null
   at: Date
+  /** Friandise (barème à part) ou aliment complet, pour le signaler à côté de la note */
+  kind?: ProductKind
 }
 
 export async function listUserScans(userId: string, limit = 50): Promise<ScanSummary[]> {
@@ -138,12 +142,12 @@ export async function recentScans(limit: number, minDistinct: number): Promise<S
     .groupBy(scanHistory.foodAnalysisId)
     .as('latest')
   const rows = await d
-    .select({ slug: foodAnalysis.slug, brand: foodAnalysis.brand, product: foodAnalysis.product, score: foodAnalysis.score, at: latest.at })
+    .select({ slug: foodAnalysis.slug, brand: foodAnalysis.brand, product: foodAnalysis.product, score: foodAnalysis.score, at: latest.at, kind: sql<string | null>`${foodAnalysis.details}->>'kind'` })
     .from(latest)
     .innerJoin(foodAnalysis, eq(foodAnalysis.id, latest.id))
     .orderBy(desc(latest.at))
     .limit(limit)
-  return rows.map((r) => ({ ...r, at: new Date(r.at) }))
+  return rows.map((r) => ({ ...r, at: new Date(r.at), kind: r.kind === 'treat' ? ('treat' as const) : ('complete' as const) }))
 }
 
 export async function addReport(userId: string, analysisId: string, message: string): Promise<boolean> {

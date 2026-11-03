@@ -12,7 +12,7 @@ import type { ScannerErrorCode } from '@/lib/scanner/types'
 // @cdc lot 6 — résultat par code-barres, accessible sans compte, jamais décompté, sans IA :
 // 1. EAN déjà connu dans food_analysis → résultat immédiat ;
 // 2. sinon fiche Open Pet Food Facts : si ingrédients et constituants sont exploitables, NOTRE
-//    barème la note et elle est enregistrée (source openpetfoodfacts) ;
+//    barème la note (friandise : barème friandise, la composition suffit) et elle est enregistrée (source openpetfoodfacts) ;
 // 3. sinon « not_found » avec marque et produit pour préremplir l'analyse par photos.
 // Seul le code-barres est envoyé à Open Pet Food Facts. Limite de débit par adresse IP.
 
@@ -24,7 +24,7 @@ const LIMITS = [
   { windowMs: 60_000, max: 12 },
   { windowMs: 24 * 60 * 60_000, max: 200 },
 ] as const
-const STATUS: Partial<Record<ScannerErrorCode, number>> = { bad_request: 400, rate_limited: 429, not_found: 404, cat_food: 422, treat: 422, unavailable: 503 }
+const STATUS: Partial<Record<ScannerErrorCode, number>> = { bad_request: 400, rate_limited: 429, not_found: 404, cat_food: 422, unavailable: 503 }
 
 function fail(error: ScannerErrorCode, prefill?: Prefill) {
   const body: ScanResponse = { ok: false, error, message: ERROR_MESSAGES[error], prefill }
@@ -53,7 +53,6 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const verdict = opffToLabel(lookup.product, ean)
     if (verdict.kind === 'incomplete') {
       if (verdict.type === 'aliment-chat') return fail('cat_food')
-      if (verdict.type === 'friandise') return fail('treat')
       return fail('not_found', { ean, brand: verdict.brand, product: verdict.product })
     }
     const row = await saveAnalysis(verdict.label, ean, 'openpetfoodfacts', 'openpetfoodfacts')

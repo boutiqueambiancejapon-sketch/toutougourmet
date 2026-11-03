@@ -7,6 +7,7 @@ import type { FicheA4Data } from './data'
 import { FicheA4Bottom } from './FicheA4Bottom'
 import { FicheA4Composition } from './FicheA4Composition'
 import { FicheA4Criteria } from './FicheA4Criteria'
+import { TreatAlertsA4 } from './FicheA4Treat'
 import { A4_PX, u } from './scale'
 
 const nameSize = (s: string) => (s.length <= 34 ? 30 : s.length <= 60 ? 25 : 21)
@@ -39,6 +40,7 @@ export function FicheA4({ d }: { d: FicheA4Data }) {
       {d.missing ? (
         <div style={{ display: 'flex', background: C.amberBg, borderRadius: u(10), padding: `${u(7)}px ${u(12)}px`, fontWeight: 500, fontSize: u(10.5), lineHeight: 1.35, color: C.amberInk }}>{d.missing}</div>
       ) : null}
+      {d.treat ? <TreatAlertsA4 alerts={d.treat.alerts} /> : null}
       <FicheA4Criteria criteria={d.criteria} />
       <FicheA4Composition items={d.ingredients} hidden={d.hidden} />
       <FicheA4Bottom d={d} />

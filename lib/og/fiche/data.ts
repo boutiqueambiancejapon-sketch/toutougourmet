@@ -2,7 +2,9 @@ import { OPFF_CREDIT } from '@/components/scanner/SourceNotice'
 import type { FoodAnalysis } from '@/db/schema'
 import { BAND_SHORT, verdictText } from '@/lib/scanner/highlights'
 import { ingredientClass, type IngredientClass } from '@/lib/scanner/ingredient-class'
-import { alternativesFor } from '@/lib/scanner/seo'
+import { kindOf } from '@/lib/scanner/score'
+import { ALTERNATIVE_BELOW, alternativesFor, HOMEMADE_TREATS } from '@/lib/scanner/seo'
+import { allowanceText, TREAT_SHARE } from '@/lib/scanner/treat-allowance'
 import { qrDataUri } from '../qr'
 
 // @cdc lot 6 — données de la fiche A4 en PDF, tirées des mêmes sources que la page
@@ -24,6 +26,13 @@ export interface FicheA4Data {
   dryMatter: { label: string; value: string }[]
   dryMatterNote: string
   alternatives: { name: string; reason: string; url: string }[]
+  /** Friandise : alertes de sécurité, nombre par jour par gabarit, recettes maison sous 55/100 */
+  treat: {
+    alerts: { label: string; text: string }[]
+    perDay: { label: string; value: string }[]
+    perDayNote: string
+    homemade: string | null
+  } | null
   url: string
   qr: string
   credit: string
@@ -39,7 +48,7 @@ export function clipWords(text: string, max: number): string {
 
 /**
  * Pastilles qui tiennent dans `budget` (largeur estimée en caractères, marge de pastille comprise).
- * Ce qui dépasse est compté dans `hidden` (affiché « + N autres »).
+ * Ce qui dépasse est compté dans `hidden` (affiché « + N autres »).
  */
 export function fitPills<T extends { text: string }>(items: T[], budget: number, pad = 4): { shown: T[]; hidden: number } {
   const cost = (t: string) => t.length + pad
@@ -62,6 +71,24 @@ const pctDm = (n: number | null) => (n === null ? 'non calculé' : `${n.toLocale
 /** Budget de la composition : environ sept lignes de pastilles sur la largeur de la page. */
 const COMPOSITION_BUDGET = 860
 
+function treatData(row: FoodAnalysis): FicheA4Data['treat'] {
+  const t = row.details.treat
+  if (kindOf(row.details) !== 'treat' || !t) return null
+  const a = t.allowance
+  const share = `${Math.round(TREAT_SHARE * 100)} %`
+  return {
+    alerts: t.alerts.map((x) => ({ label: `${x.label} (« ${clipWords(x.found, 40)} »)`, text: clipWords(x.text, 150) })),
+    perDay: a ? a.rows.map((r) => ({ label: `${r.label} (${r.weightKg} kg)`, value: allowanceText(r) })) : [],
+    perDayNote: a
+      ? `Au plus ${share} de l'apport calorique du jour (FEDIAF), chien adulte d'activité normale.`
+      : `Calories non indiquées sur l'étiquette. Repère FEDIAF : friandises sous ${share} de l'apport calorique du jour.`,
+    homemade:
+      row.score !== null && row.score < ALTERNATIVE_BELOW
+        ? `Recettes maison sans sucre ni sel : ${HOMEMADE_TREATS.map((h) => h.label).join(', ')}, sur toutou-gourmet.com.`
+        : null,
+  }
+}
+
 export function ficheA4Data(row: FoodAnalysis): FicheA4Data {
   const d = row.details
   const label = row.extracted
@@ -74,7 +101,7 @@ export function ficheA4Data(row: FoodAnalysis): FicheA4Data {
   const url = `${SITE}/croquettes/${row.slug}`
   return {
     name: clipWords(row.product ?? row.brand ?? 'Produit sans nom lisible', 90),
-    meta: [row.product ? row.brand : null, row.ean ? `code-barres ${row.ean}` : null, `fiche du ${date}`].filter(Boolean).join(' · '),
+    meta: [kindOf(d) === 'treat' ? 'Friandise' : null, row.product ? row.brand : null, row.ean ? `code-barres ${row.ean}` : null, `fiche du ${date}`].filter(Boolean).join(' · '),
     score: d.score,
     band: d.band ? BAND_SHORT[d.band] : null,
     verdict: verdictText(d),
@@ -88,7 +115,8 @@ export function ficheA4Data(row: FoodAnalysis): FicheA4Data {
       { label: 'Glucides estimés', value: pctDm(d.dryMatter?.glucides ?? null) },
     ],
     dryMatterNote: clipWords(d.assumptions[0] ?? "Valeurs de l'étiquette, eau retirée.", 110),
-    alternatives: alternativesFor(row.brand, d.score).map(({ brand, reason }) => ({
+    treat: treatData(row),
+    alternatives: alternativesFor(row.brand, d.score, kindOf(d)).map(({ brand, reason }) => ({
       name: brand.name,
       reason: clipWords(reason, 110),
       url: `toutou-gourmet.com/chien/marque/${brand.slug}`,

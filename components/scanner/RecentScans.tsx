@@ -28,7 +28,7 @@ export async function RecentScans() {
               <span className="flex min-w-0 grow flex-col">
                 <span className="truncate font-semibold group-hover:underline">{s.brand ?? 'Marque illisible'}</span>
                 <span className="truncate text-[15px] text-ink-2">{s.product ?? 'Produit sans nom lisible'}</span>
-                <span className="text-xs text-ink-2">{`${timeAgo(s.at, now)} · analyse automatique`}</span>
+                <span className="text-xs text-ink-2">{`${timeAgo(s.at, now)} · ${s.kind === 'treat' ? 'friandise, ' : ''}analyse automatique`}</span>
               </span>
             </Link>
           </li>

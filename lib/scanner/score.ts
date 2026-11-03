@@ -25,6 +25,48 @@ export type CriterionId =
   | 'conservateurs'
   | 'colorants'
   | 'calcium-phosphore'
+  // Barème friandise (lib/scanner/score-treat.ts)
+  | 'friandise-premier-ingredient'
+  | 'friandise-part-animale'
+  | 'friandise-sucres'
+  | 'friandise-additifs'
+  | 'friandise-sel'
+  | 'friandise-liste'
+  | 'friandise-glycerine'
+  | 'friandise-cereales'
+
+/** complete : aliment complet (croquettes, pâtée) · treat : friandise, snack, aliment complémentaire */
+export type ProductKind = 'complete' | 'treat'
+
+export type TreatAlertId = 'xylitol' | 'raisin' | 'chocolat' | 'oignon-ail' | 'rawhide' | 'os-cuits'
+
+export interface TreatAlert {
+  id: TreatAlertId
+  /** Libellé court (« Xylitol ») */
+  label: string
+  /** Ingrédient de l'étiquette qui déclenche l'alerte */
+  found: string
+  text: string
+}
+
+export interface TreatAllowanceRow {
+  size: 'petit' | 'moyen' | 'grand'
+  label: string
+  weightKg: number
+  dailyKcal: number
+  /** 10 % du besoin du jour (FEDIAF) */
+  capKcal: number
+  /** Friandises par jour (null si le poids ou l'énergie d'une pièce manque) */
+  pieces: number | null
+  /** Grammes par jour (null si l'énergie au poids manque) */
+  grams: number | null
+}
+
+export interface TreatInfo {
+  /** null : calories non indiquées sur l'étiquette */
+  allowance: { kcalPiece: number | null; kcal100g: number | null; rows: TreatAllowanceRow[] } | null
+  alerts: TreatAlert[]
+}
 
 export interface Criterion {
   id: CriterionId
@@ -39,6 +81,8 @@ export type Band = 'tres-bon' | 'correct' | 'moyen' | 'faible'
 
 export interface ScoreResult {
   version: string
+  /** Absent des analyses enregistrées avant le barème friandise : aliment complet */
+  kind?: ProductKind
   score: number | null
   band: Band | null
   criteria: Criterion[]
@@ -49,7 +93,11 @@ export interface ScoreResult {
   /** Valeurs ramenées sur matière sèche, quand l'humidité est connue ou supposée */
   dryMatter: { proteines: number | null; matieresGrasses: number | null; glucides: number | null } | null
   notice: string | null
+  /** Friandise : nombre par jour selon le gabarit et alertes de sécurité */
+  treat?: TreatInfo
 }
+
+export const kindOf = (d: Pick<ScoreResult, 'kind'>): ProductKind => d.kind ?? 'complete'
 
 export const BAND_LABELS: Record<Band, string> = {
   'tres-bon': 'Très bonne composition',
@@ -176,6 +224,7 @@ export function scoreLabel(label: ExtractedLabel): ScoreResult {
   }
   return {
     version: SCORE_VERSION,
+    kind: 'complete',
     score,
     band: score === null ? null : bandFor(score),
     criteria,

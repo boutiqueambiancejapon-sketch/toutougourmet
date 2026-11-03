@@ -10,7 +10,7 @@ const SHOWN = 5
 const MIN_SHOWN = 3
 
 export async function TopRated() {
-  const items = await reviewedItemsSafe()
+  const items = await reviewedItemsSafe('complete')
   if (items.length < MIN_SHOWN) return null
   return (
     <section aria-labelledby="meilleures-notes" className="flex flex-col gap-3">

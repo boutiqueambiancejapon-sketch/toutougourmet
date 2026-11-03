@@ -1,5 +1,5 @@
 import { brands, type Brand } from '@/data/brands'
-import { bandFor, type Band } from './score'
+import { bandFor, type Band, type ProductKind } from './score'
 import { slugify } from './slug'
 
 // @cdc lot 6 — référencement des fiches du scanner (fonctions pures, testées par
@@ -23,7 +23,7 @@ export function shortProduct(brand: string | null, product: string | null): stri
     p = p.replace(new RegExp(`^${escaped}\\s*[-:,]?\\s*`, 'i'), '')
   }
   return p
-    .replace(/(?<![\p{L}-])croquettes?(?![\p{L}-])/giu, '')
+    .replace(/(?<![\p{L}-])(croquettes?|friandises?)(?![\p{L}-])/giu, '')
     .replace(/\bpour\s+chiens?\b/gi, '')
     .replace(/\s+[-–,:]\s*$/, '')
     .replace(/\s+/g, ' ')
@@ -43,10 +43,11 @@ function cutWords(text: string, max: number): string {
   return out.replace(/\s+(de|du|des|à|au|aux|et|en|la|le|les|pour|avec|sans)$/i, '').replace(/[\s,–-]+$/, '')
 }
 
-/** « Croquettes {Marque} {produit court} : avis et note {note}/100 », 60 caractères au plus. */
-export function ficheTitle(brand: string | null, product: string | null, score: number | null): string {
+/** « Croquettes {Marque} {produit court} : avis et note {note}/100 » (« Friandise … » pour une friandise), 60 caractères au plus. */
+export function ficheTitle(brand: string | null, product: string | null, score: number | null, kind: ProductKind = 'complete'): string {
   const suffix = score === null ? ' : avis et composition' : ` : avis et note ${score}/100`
-  const head = brand ? `Croquettes ${brand.trim()}` : 'Croquettes'
+  const word = kind === 'treat' ? 'Friandise' : 'Croquettes'
+  const head = brand ? `${word} ${brand.trim()}` : word
   const short = shortProduct(brand, product)
   const room = TITLE_MAX - head.length - suffix.length - 1
   const fitted = room >= 4 ? cutWords(short, room) : ''
@@ -72,8 +73,9 @@ export interface Alternative {
 }
 
 /** Une ou deux marques partenaires qui vendent des croquettes, hors marque de la fiche et hors rupture. */
-export function alternativesFor(brand: string | null, score: number | null): Alternative[] {
-  if (score === null || score >= ALTERNATIVE_BELOW) return []
+export function alternativesFor(brand: string | null, score: number | null, kind: ProductKind = 'complete'): Alternative[] {
+  // Pas de marque partenaire de friandises : rien à proposer à la place d'une friandise
+  if (kind === 'treat' || score === null || score >= ALTERNATIVE_BELOW) return []
   const own = partnerBrand(brand)?.slug
   return brands
     .filter((b) => b.slug !== own && !b.stockNote && b.animal.includes('chien') && b.type.includes('croquettes'))
@@ -97,6 +99,17 @@ export function parseBand(value: string | string[] | undefined): Band | null {
 export function inBand(score: number, band: Band | null): boolean {
   return band === null || bandFor(score) === band
 }
+
+/** Onglet du classement /croquettes : aliments complets (défaut) ou friandises (?type=friandises). */
+export function parseKind(value: string | string[] | undefined): ProductKind {
+  return (Array.isArray(value) ? value[0] : value) === 'friandises' ? 'treat' : 'complete'
+}
+
+/** Recettes de friandises maison du site (viande ou poisson en premier), proposées sous une friandise mal notée. */
+export const HOMEMADE_TREATS: { label: string; href: string }[] = [
+  { label: 'friandises au foie séché', href: '/chien/alimentation-quotidienne/recette-friandises-foie-seche-chien' },
+  { label: 'friandises saumon et patate douce', href: '/chien/alimentation-quotidienne/recette-friandises-saumon-patate-douce-chien' },
+]
 
 export function parsePage(value: string | string[] | undefined): number {
   const n = Number(Array.isArray(value) ? value[0] : value)

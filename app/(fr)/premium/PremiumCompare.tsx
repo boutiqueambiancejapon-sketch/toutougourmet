@@ -9,12 +9,12 @@ type Row = [label: string, none: Cell, free: Cell, premium: Cell]
 
 const GROUPS: { title: string; rows: Row[] }[] = [
   {
-    title: 'Scanner de croquettes',
+    title: 'Scanner de croquettes et friandises',
     rows: [
       ['Code-barres et fiches produits', true, true, true],
       ["Analyse d'étiquette par photo", false, `${FREE_MONTHLY_SCANS} par mois`, `${PREMIUM_MONTHLY_SCANS} par mois`],
       ['Historique des analyses', false, '20 dernières', 'Toutes'],
-      ['Alternative proposée sous 55/100', false, true, true],
+      ['Alternative proposée sous 55/100 (croquettes)', false, true, true],
     ],
   },
   {
