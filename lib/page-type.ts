@@ -69,6 +69,7 @@ export function pageTypeOf(pathname: string): PageType {
     case 'outils':
       return 'outils'
     case 'comparateur':
+    case 'codes-promo':
       return 'nutrition-marques'
     case 'chien':
       if (!second) return 'autre'

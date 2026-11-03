@@ -29,6 +29,10 @@ export default function MarqueHubPage() {
           <p className="m-0 text-lg leading-relaxed text-ink-2">
             {brands.length} marques passées au crible&nbsp;: prix, type d&apos;aliment, fabrication, livraison. On touche une commission si tu commandes par nos liens, sans surcoût pour toi.
           </p>
+          <p className="m-0 text-ink-2">
+            Les remises de nos partenaires, de −20&nbsp;% à −50&nbsp;%, et le code Dog Chef sont réunis sur la page{' '}
+            <Link href="/codes-promo" className="font-semibold text-orange-ink underline underline-offset-4">codes promo pour chien</Link>.
+          </p>
         </header>
       </div>
 
