@@ -7,7 +7,9 @@ import { getAi, getAudience, getPartners, EMPTY_AUDIENCE, EMPTY_PARTNERS, type A
 import { safeRead } from './dashboard-safe'
 import { EMPTY_SIGNUPS, getSignups, type SignupsData } from './dashboard-signups'
 import { getDb } from './drizzle'
+import { getOpffImportStatus, type OpffImportStatusData } from './opff-store'
 import { listToReview, type ReviewRow } from './scanner-review'
+import { opffIndexPolicy, type OpffIndexPolicy } from './scanner-published'
 
 // @cdc tableau de bord — une fonction de lecture par onglet : chaque onglet ne lance que ses
 // propres requêtes, l'accueil reste léger. Chaque bloc se lit à part (dashboard-safe).
@@ -72,6 +74,15 @@ export interface ContentData {
   messages: StoredMessage[]
   review: ReviewRow[]
   reviewError: boolean
+  opff: OpffImportStatusData | null
+  opffPolicy: OpffIndexPolicy
+}
+
+async function loadOpff(): Promise<OpffImportStatusData | null> {
+  return getOpffImportStatus().catch((err: unknown) => {
+    console.error('[tableau-de-bord] import Open Pet Food Facts', err instanceof Error ? err.message : err)
+    return null
+  })
 }
 
 async function loadReview(): Promise<{ rows: ReviewRow[]; error: boolean }> {
@@ -85,6 +96,6 @@ async function loadReview(): Promise<{ rows: ReviewRow[]; error: boolean }> {
 }
 
 export async function loadContent(): Promise<Loaded<ContentData>> {
-  const [messages, review] = await Promise.all([safeRead('messages', [] as StoredMessage[], (pool) => getRecentMessages(pool)), loadReview()])
-  return { data: { messages: messages.value, review: review.rows, reviewError: review.error }, ok: messages.ok }
+  const [messages, review, opff] = await Promise.all([safeRead('messages', [] as StoredMessage[], (pool) => getRecentMessages(pool)), loadReview(), loadOpff()])
+  return { data: { messages: messages.value, review: review.rows, reviewError: review.error, opff, opffPolicy: opffIndexPolicy() }, ok: messages.ok }
 }

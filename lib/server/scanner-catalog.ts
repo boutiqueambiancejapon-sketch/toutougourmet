@@ -1,12 +1,14 @@
 import { cache } from 'react'
-import { and, desc, eq, isNotNull, sql } from 'drizzle-orm'
+import { and, desc, isNotNull, sql } from 'drizzle-orm'
 import { foodAnalysis } from '@/db/schema'
 import type { ProductKind } from '@/lib/scanner/score'
 import { brandSlug } from '@/lib/scanner/seo'
 import { getDb } from './drizzle'
+import { publishedWhere } from './scanner-published'
 
-// @cdc lot 6 — fiches relues (reviewed = true) pour les pages publiques : classement /croquettes,
-// pages marque, « meilleures notes » de /scanner et sitemap. Seule une fiche relue et notée y figure.
+// @cdc lot 6 — fiches publiées pour les pages publiques : classement /croquettes, pages marque,
+// « meilleures notes » de /scanner et sitemap. Seule une fiche publiée (relue, ou fiche Open Pet
+// Food Facts complète si OPFF_INDEX_POLICY=complete : lib/server/scanner-published.ts) et notée y figure.
 // Le volume reste faible (relecture manuelle) : une seule requête, filtres et pages en mémoire.
 // kind (details.kind) sépare aliments complets et friandises : deux barèmes, jamais mélangés.
 
@@ -33,7 +35,7 @@ export const reviewedItems = cache(async (): Promise<ReviewedItem[]> => {
       updatedAt: foodAnalysis.updatedAt,
     })
     .from(foodAnalysis)
-    .where(and(eq(foodAnalysis.reviewed, true), isNotNull(foodAnalysis.score)))
+    .where(and(publishedWhere(), isNotNull(foodAnalysis.score)))
     .orderBy(desc(foodAnalysis.score), foodAnalysis.brand, foodAnalysis.product)
   return rows.map((r) => ({ ...r, score: r.score ?? 0, kind: r.kind === 'treat' ? 'treat' : 'complete', brandSlug: brandSlug(r.brand) }))
 })

@@ -120,3 +120,7 @@ Affichées au-dessus de la note quand l'ingrédient est repéré dans la composi
 - Pas de critère sur la dureté (fracture dentaire) ni sur la taille de la pièce.
 - Le besoin du jour est celui d'un adulte de référence : un chien en surpoids ou très actif s'écarte du tableau ; le calculateur de ration donne son besoin exact.
 - Reconnaissance par listes de mots en français (et quelques mots anglais), comme le barème principal.
+
+## Copie hebdomadaire d'Open Pet Food Facts (2026-11-03)
+
+`scripts/opff-import.ts` lit l'export JSONL complet chaque semaine et applique exactement la décision d'un scan par code-barres (`lib/scanner/opff-import.ts`, `assessOpff`) : chien d'après les catégories (à défaut le nom), aliment complet ou friandise (une seule détection : `opffImageType`, catégories puis nom), puis `opffUnusableReason` et `classifyExtraction`, et la note du barème qui convient (`analyseLabel` : `scoreLabel` ou `scoreTreat`, `details.kind`). Les fiches notables deviennent des analyses `source = 'openpetfoodfacts'`, `scan_count = 0`. Une fiche relue ou issue de photos n'est jamais écrasée. Premier import (dev, export du 2026-11-03) : 15 703 lignes, 2 351 produits chien, 95 notables, 64 remplissent la règle d'indexation proposée. Tests : `npx tsx scripts/test-opff-import.ts`.

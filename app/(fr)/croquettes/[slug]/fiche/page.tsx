@@ -9,7 +9,7 @@ import { FicheCriteria } from '@/components/scanner/fiche/FicheCriteria'
 import { FicheIngredients } from '@/components/scanner/fiche/FicheIngredients'
 import { FicheStamp } from '@/components/scanner/fiche/FicheStamp'
 import { FichePrintBottom } from '@/components/scanner/fiche/FichePrintBottom'
-import { OPFF_CREDIT } from '@/components/scanner/SourceNotice'
+import { openDataCredit } from '@/components/scanner/SourceNotice'
 import { TreatAlerts } from '@/components/scanner/treat/TreatAlerts'
 import { getDb } from '@/lib/server/drizzle'
 import { getBySlug } from '@/lib/server/scanner'
@@ -70,8 +70,8 @@ export default async function FichePage({ params }: Params) {
 
         <footer className="flex flex-col gap-1 border-t border-line pt-3 text-xs text-ink-2 print:pt-2 print:text-[9px]">
           <p className="m-0 font-semibold text-ink">
-            {row.source === 'openpetfoodfacts'
-              ? `${OPFF_CREDIT}. Note calculée par le barème publié de Toutou Gourmet : vérifie sur ton sac.`
+            {openDataCredit(row.source)
+              ? `${openDataCredit(row.source)}. Note calculée par le barème publié de Toutou Gourmet : vérifie sur ton sac.`
               : 'Lecture automatique de l\'étiquette par une IA, vérifie sur ton sac. Note calculée par le barème publié de Toutou Gourmet.'}
           </p>
           <p className="m-0">Méthode et sources : toutou-gourmet.com/scanner. Cette fiche juge la composition, elle ne remplace pas l&apos;avis d&apos;un vétérinaire.</p>

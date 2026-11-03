@@ -50,12 +50,30 @@ function nutriment(n: OpffProduct['nutriments'], key: AnalyticalKey): number | n
   return null
 }
 
-export function opffImageType(tags: string[] = []): ImageType {
+// Friandises, snacks, os à mâcher, aliments complémentaires : barème friandise
+const TREAT_TAG = /treat|friandise|biscuit|snack|chew|os-a-macher|complementar|complementaire/
+const TREAT_NAME = /(friandises?|treats?|snacks?|biscuits?|os[- ]a[- ]macher|chews?|batonnets?|sticks?|dental|rawhide|complementary|complementaire)/i
+const COMPLETE_NAME = /croquettes?|kibble|complet/i
+const CAT_TAG = /cat-(food|treats?|snacks?)|(aliments?|friandises?)-pour-chats?|:chats?\b/
+const DOG_TAG = /dog-(food|treats?|snacks?)/
+
+/** Sans accents, pour comparer les noms saisis dans la base. */
+export const stripAccents = (s: string) => s.normalize('NFD').replace(/\p{M}/gu, '')
+
+/** Nom du produit tel que le lit opffImageType. */
+export const opffName = (p: Pick<OpffProduct, 'product_name' | 'product_name_fr'>) => [p.product_name_fr, p.product_name].filter(Boolean).join(' ')
+
+/**
+ * Seule détection du type d'une fiche Open Pet Food Facts, pour le scan par code-barres comme
+ * pour l'import : aliment pour chat (refusé), friandise (barème friandise) ou aliment complet.
+ * Catégories d'abord ; à défaut, le nom (« Friandises au poulet » rangé en simple dog-food).
+ */
+export function opffImageType(tags: string[] = [], name = ''): ImageType {
   const t = tags.join(' ')
-  if (/cat-(food|treats?|snacks?)|(aliments?|friandises?)-pour-chats?|:chats?\b/.test(t) && !/dog-(food|treats?|snacks?)/.test(t)) return 'aliment-chat'
-  // Friandises, snacks, os à mâcher, aliments complémentaires : barème friandise
-  if (/treat|friandise|biscuit|snack|chew|os-a-macher|complementar|complementaire/.test(t)) return 'friandise'
-  return 'aliment-chien'
+  if (CAT_TAG.test(t) && !DOG_TAG.test(t)) return 'aliment-chat'
+  if (TREAT_TAG.test(t)) return 'friandise'
+  const n = stripAccents(name)
+  return TREAT_NAME.test(n) && !COMPLETE_NAME.test(n) ? 'friandise' : 'aliment-chien'
 }
 
 const firstBrand = (b?: string) => b?.split(',')[0]?.trim() || null
@@ -66,8 +84,12 @@ export type OpffVerdict =
   /** Données partielles : on passe aux photos en préremplissant la marque et le produit. */
   | { kind: 'incomplete'; brand: string | null; product: string | null; type: ImageType }
 
-export function opffToLabel(p: OpffProduct, ean: string): OpffVerdict {
-  const type = opffImageType(p.categories_tags)
+/** Pourquoi une fiche ne peut pas être notée sans photo (compteurs de scripts/opff-import.ts). */
+export type OpffUnusableReason = 'pas-aliment-chien' | 'composition' | 'constituants' | 'valeurs-implausibles' | 'note-impossible'
+
+/** Conversion seule, sans juger si la fiche est exploitable. */
+export function opffLabel(p: OpffProduct, ean: string): ExtractedLabel {
+  const type = opffImageType(p.categories_tags, opffName(p))
   const brand = clean(firstBrand(p.brands) ?? undefined)
   const product = clean(p.product_name_fr || p.product_name)
   const text = p.ingredients_text_fr || p.ingredients_text || ''
@@ -79,7 +101,7 @@ export function opffToLabel(p: OpffProduct, ean: string): OpffVerdict {
   }
   const constituants = Object.fromEntries((Object.keys(NUTRIMENTS) as AnalyticalKey[]).map((k) => [k, nutriment(p.nutriments, k)])) as ExtractedLabel['constituants']
   const has = (v: unknown) => (v === null || (Array.isArray(v) && v.length === 0) ? 'absent' : 'haute')
-  const label: ExtractedLabel = {
+  return {
     estUneEtiquette: true,
     typeImage: type,
     lisibilite: 'nette',
@@ -99,20 +121,32 @@ export function opffToLabel(p: OpffProduct, ean: string): OpffVerdict {
     illisibles: [],
     champsDouteux: [],
   }
-  // Exploitable : ingrédients ET protéines ET matières grasses plausibles, et notre barème arrive
-  // à noter. Des valeurs hors de toute croquette (ex. 2 % de protéines, saisie erronée dans la
-  // base) renvoient aux photos plutôt que de produire une note fausse.
-  const c = constituants
+}
+
+/**
+ * Exploitable : null, sinon la raison. Aliment complet : ingrédients ET protéines ET matières
+ * grasses plausibles, et notre barème arrive à noter. Des valeurs hors de toute croquette (ex. 2 %
+ * de protéines, saisie erronée dans la base) renvoient aux photos plutôt que de produire une note
+ * fausse. Friandise : son barème ne lit que la composition (et l'énergie, si elle est donnée).
+ */
+export function opffUnusableReason(label: ExtractedLabel): OpffUnusableReason | null {
+  if (label.typeImage === 'friandise') {
+    if (label.ingredients.length < 1) return 'composition'
+    return analyseLabel(label).score === null ? 'note-impossible' : null
+  }
+  if (label.typeImage !== 'aliment-chien') return 'pas-aliment-chien'
+  if (label.ingredients.length < 3) return 'composition'
+  const c = label.constituants
+  if (c.proteines === null || c.matieresGrasses === null) return 'constituants'
   const sum = (c.proteines ?? 0) + (c.matieresGrasses ?? 0) + (c.cellulose ?? 0) + (c.cendres ?? 0) + (c.humidite ?? 0)
   const plausible =
-    c.proteines !== null &&
-    c.matieresGrasses !== null &&
     sum <= 100 &&
     (label.typeAliment === 'humide' ? c.proteines >= 3 : c.proteines >= 12 && c.proteines <= 70 && c.matieresGrasses >= 3 && c.matieresGrasses <= 45)
-  // Friandise : son barème ne lit que la composition (et l'énergie, si elle est donnée).
-  const usable =
-    type === 'friandise'
-      ? label.ingredients.length >= 1 && analyseLabel(label).score !== null
-      : type === 'aliment-chien' && label.ingredients.length >= 3 && plausible && analyseLabel(label).score !== null
-  return usable ? { kind: 'complete', label } : { kind: 'incomplete', brand, product, type }
+  if (!plausible) return 'valeurs-implausibles'
+  return analyseLabel(label).score === null ? 'note-impossible' : null
+}
+
+export function opffToLabel(p: OpffProduct, ean: string): OpffVerdict {
+  const label = opffLabel(p, ean)
+  return opffUnusableReason(label) === null ? { kind: 'complete', label } : { kind: 'incomplete', brand: label.marque, product: label.produit, type: label.typeImage }
 }

@@ -1,4 +1,4 @@
-import { OPFF_CREDIT } from '@/components/scanner/SourceNotice'
+import { openDataCredit } from '@/components/scanner/SourceNotice'
 import type { FoodAnalysis } from '@/db/schema'
 import { BAND_SHORT, verdictText } from '@/lib/scanner/highlights'
 import { ingredientClass, type IngredientClass } from '@/lib/scanner/ingredient-class'
@@ -124,8 +124,8 @@ export function ficheA4Data(row: FoodAnalysis): FicheA4Data {
     url,
     qr: qrDataUri(url),
     credit:
-      row.source === 'openpetfoodfacts'
-        ? `${OPFF_CREDIT}. Note calculée par le barème publié de Toutou Gourmet : vérifie sur ton sac.`
+      openDataCredit(row.source)
+        ? `${openDataCredit(row.source)}. Note calculée par le barème publié de Toutou Gourmet : vérifie sur ton sac.`
         : "Lecture automatique de l'étiquette par une IA, vérifie sur ton sac. Note calculée par le barème publié de Toutou Gourmet.",
   }
 }

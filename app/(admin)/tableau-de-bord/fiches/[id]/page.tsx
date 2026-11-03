@@ -16,7 +16,7 @@ import { handleReport, removeFiche, saveFiche } from '../actions'
 export const dynamic = 'force-dynamic'
 
 const dateFmt = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'long', timeStyle: 'short', timeZone: 'Europe/Paris' })
-const SOURCE = { photo: 'photos lues par l\'IA', openpetfoodfacts: 'Open Pet Food Facts' } as const
+const SOURCE = { photo: 'photos lues par l\'IA', openpetfoodfacts: 'Open Pet Food Facts', openfoodfacts: 'Open Food Facts' } as const
 
 export default async function FicheReviewPage({ params }: { params: Promise<{ id: string }> }) {
   if (!(await dashboardAllowed()) || !getDb()) notFound()
