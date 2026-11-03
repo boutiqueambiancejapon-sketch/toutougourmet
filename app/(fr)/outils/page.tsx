@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 // sur le calculateur de ration et croyait être sur la page ration), puis la ration utilisable sur place.
 export default function OutilsPage() {
   return (
-    <div className="v2 mx-auto flex max-w-page flex-col gap-12 px-4 pt-4 pb-16 md:px-8 md:pt-8">
+    <div className="v2 mx-auto flex max-w-page flex-col gap-8 px-4 pt-4 pb-16 md:px-8 md:pt-8">
       <div className="flex flex-col gap-4">
         <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Outils' }]} />
         <header className="flex max-w-prose flex-col gap-2">
@@ -30,7 +30,7 @@ export default function OutilsPage() {
             Les calculateurs pour bien nourrir ton chien
           </h1>
           <p className="m-0 text-lg leading-relaxed text-ink-2">
-            Chaque outil répond à une question précise, avec sa formule et ses sources. Tous sont gratuits. Seul le scanner d&apos;étiquette demande un compte.
+            Gratuits, chacun avec sa formule et ses sources. Seul le scanner demande un compte.
           </p>
         </header>
       </div>
