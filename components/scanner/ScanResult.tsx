@@ -14,7 +14,7 @@ import { DownloadLink } from './DownloadLink'
 
 // @cdc lot 6 — résultat d'un scan : produit, provenance (cache, Open Pet Food Facts, photos),
 // note et détail (recalculés dans le navigateur si un chiffre est corrigé), lecture de
-// l'étiquette, partage, fiche imprimable, signalement d'erreur.
+// l'étiquette, partage, fiche en PDF, signalement d'erreur.
 
 const ORIGIN_TEXT: Record<ResultOrigin, string> = {
   cache: 'Produit déjà analysé : résultat immédiat, non décompté.',
@@ -58,8 +58,10 @@ export function ScanResult({ analysis, origin, quota, signedIn, onRestart }: Sca
       <ScoreDetail details={details} />
       {doubtful ? null : verify}
       <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-        <ShareButton slug={analysis.slug} name={name} score={analysis.score} />
-        <DownloadLink slug={analysis.slug} />
+        <div className="flex gap-2">
+          <DownloadLink slug={analysis.slug} className="flex-1" />
+          <ShareButton slug={analysis.slug} name={name} score={analysis.score} className="flex-1" />
+        </div>
         <Link href={`/croquettes/${analysis.slug}`} className="inline-flex min-h-12 items-center justify-center rounded-control border-2 border-ink px-5 text-[15px] font-semibold text-ink no-underline">
           Voir la fiche
         </Link>

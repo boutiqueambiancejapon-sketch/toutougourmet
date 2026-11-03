@@ -1,9 +1,10 @@
-// @cdc lot 6 — fiche A4 imprimable d'un produit scanné (« Télécharger la fiche (PDF) » =
-// impression du navigateur, comme /fiche-aliments-dangereux). noindex, hors sitemap.
+// @cdc lot 6 — fiche A4 imprimable d'un produit scanné, pour l'impression depuis un ordinateur.
+// Bouton principal : le PDF d'une page (route fiche.pdf). L'impression tient aussi sur une page
+// A4 (tailles print: réduites). noindex, hors sitemap.
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { PrintFicheButton } from '@/components/scanner/DownloadLink'
+import { DownloadLink, PrintFicheButton } from '@/components/scanner/DownloadLink'
 import { FicheCriteria } from '@/components/scanner/fiche/FicheCriteria'
 import { FicheIngredients } from '@/components/scanner/fiche/FicheIngredients'
 import { FicheStamp } from '@/components/scanner/fiche/FicheStamp'
@@ -35,9 +36,10 @@ export default async function FichePage({ params }: Params) {
   const dm = row.details.dryMatter
   return (
     <div className="v2 bg-cream print:bg-paper print:[print-color-adjust:exact]">
-      <style>{'@page { size: A4; margin: 10mm; }'}</style>
-      <article className="mx-auto flex max-w-3xl flex-col gap-6 px-4 py-6 md:py-10 print:max-w-none print:gap-3.5 print:p-0">
+      <style>{'@page { size: A4; margin: 8mm; }'}</style>
+      <article className="mx-auto flex max-w-3xl flex-col gap-6 px-4 py-6 md:py-10 print:max-w-none print:gap-2.5 print:p-0 print:[zoom:0.9]">
         <div className="flex flex-wrap items-center gap-3 print:hidden">
+          <DownloadLink slug={row.slug} primary />
           <PrintFicheButton />
           <Link href={`/croquettes/${row.slug}`} className="text-[15px] font-semibold text-ink underline underline-offset-2">
             Revenir à la fiche

@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { IconShare } from '@/components/icons'
 import { track } from '@/lib/analytics'
 
 // @cdc lot 6 — partager la fiche : Web Share API avec l'image story (1080×1920) quand le
@@ -37,12 +38,12 @@ export function ShareButton({ slug, name, score, className = '' }: ShareButtonPr
     const f = file.current
     try {
       if (f && navigator.canShare?.({ files: [f] })) {
-        await navigator.share({ files: [f], title: name, text: `${text} ${url}` })
-        return track('Scan Share', { method: 'image' })
+        await navigator.share({ files: [f], title: name, text, url })
+        return track('Scan Share', { step: 'partage', method: 'image' })
       }
       if (navigator.share) {
         await navigator.share({ title: name, text, url })
-        return track('Scan Share', { method: 'lien' })
+        return track('Scan Share', { step: 'partage', method: 'lien' })
       }
     } catch (err) {
       if (err instanceof DOMException && err.name === 'AbortError') return
@@ -50,15 +51,20 @@ export function ShareButton({ slug, name, score, className = '' }: ShareButtonPr
     try {
       await navigator.clipboard.writeText(url)
       setCopied(true)
-      track('Scan Share', { method: 'copie' })
+      track('Scan Share', { step: 'partage', method: 'copie' })
     } catch {
       window.prompt('Copie le lien de la fiche :', url)
     }
   }
 
   return (
-    <button type="button" onClick={share} className={`inline-flex min-h-12 items-center justify-center rounded-control bg-ink px-5 text-[15px] font-semibold text-cream ${className}`}>
-      {copied ? 'Lien copié' : 'Partager'}
+    <button
+      type="button"
+      onClick={share}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-control bg-ink px-4 text-[15px] font-semibold text-cream ${className}`}
+    >
+      <IconShare className="size-5" />
+      <span aria-live="polite">{copied ? 'Lien copié' : 'Partager'}</span>
     </button>
   )
 }
