@@ -15,5 +15,12 @@ toutou.85-190-127-13.sslip.io {
 		X-Robots-Tag "noindex, nofollow"
 		-Server
 	}
-	reverse_proxy 127.0.0.1:3001
+	# Maquettes statiques à montrer au propriétaire (même mot de passe).
+	handle_path /maquettes/* {
+		root * /var/www/toutou-maquettes
+		file_server
+	}
+	handle {
+		reverse_proxy 127.0.0.1:3001
+	}
 }
