@@ -1,0 +1,35 @@
+# Un site Next.js hébergé sur le VPS (hors Toutou Gourmet). Instance = nom du site (deploy/sites/sites.conf).
+# Port et variables : /srv/sites/%i/shared/.env (PORT=31xx obligatoire).
+[Unit]
+Description=Site %i (Next.js)
+After=network.target
+
+[Service]
+Type=simple
+User=sites
+Group=sites
+WorkingDirectory=/srv/sites/%i/current
+EnvironmentFile=/srv/sites/%i/shared/.env
+Environment=NODE_ENV=production
+Environment=NEXT_TELEMETRY_DISABLED=1
+Environment=NODE_OPTIONS=--max-old-space-size=384
+ExecStart=/usr/bin/node node_modules/next/dist/bin/next start -H 127.0.0.1 -p ${PORT}
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/srv/sites/%i/current/.next
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK
+CapabilityBoundingSet=
+UMask=0027
+
+[Install]
+WantedBy=multi-user.target

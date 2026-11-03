@@ -1,0 +1,9 @@
+[Unit]
+Description=Mise à jour du site %i depuis GitHub
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=administrator
+ExecStart=/home/administrator/Toutou/deploy/sites/deploy-site.sh %i
+Nice=10

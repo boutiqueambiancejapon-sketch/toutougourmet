@@ -1,0 +1,11 @@
+# Toutes les heures (minute décalée par site via RandomizedDelaySec) : publie ce qui a été poussé sur GitHub (articles du CMS).
+[Unit]
+Description=Mise à jour horaire du site %i
+
+[Timer]
+OnCalendar=hourly
+RandomizedDelaySec=20min
+Persistent=true
+
+[Install]
+WantedBy=timers.target
