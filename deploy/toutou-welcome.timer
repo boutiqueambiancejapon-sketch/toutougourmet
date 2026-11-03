@@ -1,0 +1,12 @@
+# Tous les jours à 10 h 17, heure de Paris. Persistent : rattrape un passage manqué si le serveur
+# était éteint (le script n'envoie jamais deux fois la même étape à une adresse).
+[Unit]
+Description=Toutou Gourmet - suite de bienvenue, chaque jour à 10 h 17
+
+[Timer]
+OnCalendar=*-*-* 10:17:00 Europe/Paris
+Persistent=true
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target

@@ -27,6 +27,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
       { href: '/chien/marque/dog-chef', label: 'Dog Chef' },
       { href: '/chien/marque/dogfy-diet', label: 'Dogfy Diet' },
       { href: '/comparateur', label: 'Comparateur' },
+      { href: '/codes-promo', label: 'Codes promo' },
     ],
   },
   {

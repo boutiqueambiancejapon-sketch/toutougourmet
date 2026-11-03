@@ -3,11 +3,13 @@
 import { redirect } from 'next/navigation'
 import { assertDashboardAction as assertDashboard } from '@/lib/dashboard/guard'
 import { nextFirstTuesday, parisDate, sendInstant } from '@/lib/emails/schedule'
+import { unsubscribeUrlFromEnv } from '@/lib/emails/unsubscribe'
 import { weeklyDigestEmail } from '@/lib/emails/weekly'
+import { WELCOME_STEPS, welcomeStepEmail, type WelcomeStep } from '@/lib/emails/welcome-sequence'
 import { suspendCampaign } from '@/lib/server/brevo-newsletter'
 import { getPool } from '@/lib/server/db'
 import { sendTransactionalEmail } from '@/lib/server/mailer'
-import { sendTestEmail, type TestKind } from '@/lib/server/newsletter'
+import { newsletterMailConfigured, sendTestEmail, type TestKind } from '@/lib/server/newsletter'
 import { getWeeklyDigestData, lastWeekStart } from '@/lib/server/weekly-digest-data'
 
 // @cdc e-mails — actions du tableau de bord : test vers NEWSLETTER_TEST_EMAIL, suspension d'une
@@ -48,4 +50,31 @@ export async function sendWeeklyTest(): Promise<void> {
     }
   }
   redirect(`/tableau-de-bord/emails/hebdo?test=${result}`)
+}
+
+/** Test d'une étape de la suite de bienvenue vers NEWSLETTER_TEST_EMAIL (jamais vers la liste). */
+export async function sendWelcomeStepTest(step: WelcomeStep): Promise<void> {
+  await assertDashboard()
+  if (!WELCOME_STEPS.includes(step)) redirect('/tableau-de-bord/emails')
+  const to = process.env.NEWSLETTER_TEST_EMAIL
+  const unsubscribe = to ? unsubscribeUrlFromEnv(to) : null
+  let result = 'config'
+  if (to && unsubscribe && newsletterMailConfigured()) {
+    try {
+      const mail = welcomeStepEmail(step, unsubscribe, new Date())
+      await sendTransactionalEmail({
+        to,
+        subject: `[Test] ${mail.subject}`,
+        html: mail.html,
+        text: mail.text,
+        headers: { 'List-Unsubscribe': `<${unsubscribe}>` },
+        tags: ['lettre-test'],
+      })
+      result = 'ok'
+    } catch (err) {
+      console.error('[bienvenue] test non envoyé', err instanceof Error ? err.message : err)
+      result = 'error'
+    }
+  }
+  redirect(`/tableau-de-bord/emails/suite/${step}?test=${result}`)
 }

@@ -4,6 +4,8 @@ import { brandDescriptions, brandFaqs, brandRecipes, brandVerdicts, fullReviews,
 import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
 import { FaqItem, FaqList } from '@/components/article/Faq'
 import { frTypo } from '@/lib/utils'
+import { getPromoPage, promoPath } from '@/data/promo-codes'
+import { shortDiscount, isOfferSlug } from '@/data/partner-discounts'
 import { BrandHero, BrandIdentity } from './BrandHero'
 import { BrandPresentation, BrandProsCons, BrandRecipes } from './BrandDetails'
 import { BrandVerdict } from './BrandVerdict'
@@ -18,7 +20,10 @@ const SITE = 'https://www.toutou-gourmet.com'
 export function BrandPage({ brand }: { brand: Brand }) {
   const faqs = brandFaqs[brand.slug] ?? []
   const verdict = brandVerdicts[brand.slug] ?? brand.tagline
+  // Page « code promo » du partenaire, en tête : c'est le lien le plus cherché (« code promo X »).
+  const promo = isOfferSlug(brand.slug) && getPromoPage(brand.slug) ? [{ href: promoPath(brand.slug), label: `Code promo ${brand.name} : ${shortDiscount(brand.slug)}, mode d'emploi` }] : []
   const links = [
+    ...promo,
     ...(fullReviews[brand.slug] ? [fullReviews[brand.slug]] : []),
     ...(relatedComparatifs[brand.slug] ?? []).map((c) => ({ href: `/chien/marque/${c.slug}`, label: c.label })),
     { href: '/comparateur', label: 'Comparer les 6 marques' },

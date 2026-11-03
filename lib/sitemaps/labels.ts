@@ -28,6 +28,12 @@ const STATIC_LABELS: Record<string, string> = {
   '/blog': 'Tous les articles',
   '/chien/marque': 'Les marques',
   '/chien/marque/comparatif': 'Comparatif des marques',
+  '/codes-promo': 'Codes promo pour chien',
+  '/codes-promo/dog-chef': 'Code promo Dog Chef',
+  '/codes-promo/dogfy-diet': 'Code promo Dogfy Diet',
+  '/codes-promo/elmut': 'Code promo Elmut',
+  '/codes-promo/franklin': 'Code promo Franklin Pet Food',
+  '/codes-promo/ultra-premium-direct': 'Code promo Ultra Premium Direct',
 }
 
 /** Libellé lisible d'une adresse du sitemap ; à défaut, le dernier segment de l'adresse. */

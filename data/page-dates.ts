@@ -26,6 +26,12 @@ export const PAGE_DATES: Record<string, string> = {
   '/auteurs/mathias-c': '2026-11-02',
   '/plan-du-site': '2026-11-02',
   '/chien/marque/comparatif': '2026-11-02',
+  '/codes-promo': '2026-11-03',
+  '/codes-promo/dog-chef': '2026-11-03',
+  '/codes-promo/dogfy-diet': '2026-11-03',
+  '/codes-promo/elmut': '2026-11-03',
+  '/codes-promo/franklin': '2026-11-03',
+  '/codes-promo/ultra-premium-direct': '2026-11-03',
 }
 
 /** Fiches marque et duels automatiques /chien/marque/* (données de data/brands.ts). */

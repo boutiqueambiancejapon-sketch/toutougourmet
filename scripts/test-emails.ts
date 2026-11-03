@@ -7,6 +7,9 @@ import { isFirstTuesday, nextFirstTuesday, sendInstant } from '../lib/emails/sch
 import { buildUnsubscribeUrl, unsubscribeToken, verifyUnsubscribeToken } from '../lib/emails/unsubscribe'
 import { WELCOME_SUBJECT, welcomeEmail } from '../lib/emails/welcome'
 import { getBrandBySlug } from '../data/brands'
+import { CONFIRMED_DISCOUNTS } from '../data/partner-discounts'
+import { WELCOME_STEPS, offerSlugFor, welcomeStepEmail, type WelcomeStep } from '../lib/emails/welcome-sequence'
+import { afterStart, daysSince, dueStep, emailHash, sequenceStart } from '../lib/server/welcome-sequence'
 
 let passed = 0
 function test(name: string, fn: () => void) {
@@ -111,6 +114,51 @@ test("choix des guides : 30 derniers jours, pas d'article futur", () => {
   assert.ok(t(featured) <= date.getTime())
   assert.ok(guides.every((g) => t(g) <= date.getTime()))
   assert.ok(guides.every((g) => t(g) <= t(featured)))
+})
+
+test('suite de bienvenue : étape due, délai de grâce, jamais de retour en arrière', () => {
+  const none = new Set<WelcomeStep>()
+  assert.equal(dueStep(0, none), null)
+  assert.equal(dueStep(1, none), null)
+  assert.equal(dueStep(2, none), 'j2')
+  assert.equal(dueStep(5, none), 'j5')
+  assert.equal(dueStep(4, new Set<WelcomeStep>(['j2'])), null)
+  assert.equal(dueStep(5, new Set<WelcomeStep>(['j2'])), 'j5')
+  assert.equal(dueStep(10, new Set<WelcomeStep>(['j2', 'j5'])), 'j10')
+  assert.equal(dueStep(13, none), 'j10')
+  assert.equal(dueStep(14, none), null)
+  assert.equal(dueStep(6, new Set<WelcomeStep>(['j5'])), null)
+  assert.equal(dueStep(10, new Set<WelcomeStep>(['j10'])), null)
+})
+
+test('suite de bienvenue : jours civils à Paris, date de départ, empreinte', () => {
+  assert.equal(daysSince('2026-11-01T23:30:00Z', '2026-11-03'), 1) // 00 h 30 le 2 à Paris
+  assert.equal(daysSince('2026-11-01T10:00:00Z', '2026-11-03'), 2)
+  assert.ok(afterStart('2026-11-10T08:00:00Z', '2026-11-10'))
+  assert.ok(!afterStart('2026-11-09T22:00:00Z', '2026-11-11'))
+  assert.equal(sequenceStart(''), null)
+  assert.equal(sequenceStart(undefined), null)
+  assert.equal(sequenceStart('10/11/2026'), null)
+  assert.equal(sequenceStart('2026-11-10'), '2026-11-10')
+  assert.equal(emailHash(' Marie@Example.com ', SECRET), emailHash('marie@example.com', SECRET))
+  assert.ok(!emailHash('marie@example.com', SECRET).includes('marie'))
+})
+
+test('suite de bienvenue : désinscription, remise exacte à J5, pas de « undefined »', () => {
+  const unsub = buildUnsubscribeUrl('marie@example.com', SECRET)
+  const date = new Date('2026-11-20T12:00:00Z')
+  for (const step of WELCOME_STEPS) {
+    const mail = welcomeStepEmail(step, unsub, date)
+    assert.ok(mail.html.includes('Se désinscrire'), step)
+    assert.ok(mail.text.includes(unsub), step)
+    assert.ok(!/undefined|null/.test(mail.html + mail.text), step)
+  }
+  const slug = offerSlugFor(date)
+  const j5 = welcomeStepEmail('j5', unsub, date)
+  const discount = CONFIRMED_DISCOUNTS[slug] ?? ''
+  assert.ok(discount && j5.text.includes(discount))
+  assert.ok(j5.html.includes('rel="sponsored nofollow"'))
+  assert.ok(j5.text.includes(`/codes-promo/${slug}`))
 })
 
 console.log(`${passed} tests passés`)
