@@ -10,6 +10,7 @@ import { SizeTable, SizeRow } from '@/components/article/SizeTable'
 import { WhatToDo, Step } from '@/components/article/WhatToDo'
 import { PoisonCenters } from '@/components/article/PoisonCenters'
 import { BrandCTA } from '@/components/marques/BrandCTA'
+import { BreedBrandCompare, BrandGroup, BrandRow } from '@/components/race/BreedBrandCompare'
 import { ArticleSignupInvite } from '@/components/cro/ArticleSignupInvite'
 import { Heading2 } from './Heading2'
 import { MdxLink } from './MdxLink'
@@ -25,6 +26,7 @@ export const articleMdxComponents = {
   WhatToDo, Step,
   PoisonCenters,
   BrandCTA,
+  BreedBrandCompare, BrandGroup, BrandRow,
   BodyImage,
   ArticleSignupInvite,
   h2: Heading2,
