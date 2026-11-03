@@ -59,7 +59,7 @@ function FeaturedCard({ article }: { article: Article }) {
       </div>
       <div className="p-7 flex flex-col gap-3.5 flex-1">
         <h3
-          className="m-0 text-2xl md:text-3xl font-black text-[var(--text-primary)] leading-tight group-hover:text-[var(--accent-1)] transition-colors"
+          className="m-0 text-2xl md:text-3xl font-black text-[var(--text-primary)] leading-tight group-hover:text-orange-ink transition-colors"
           style={{ fontFamily: "'Fraunces', serif", letterSpacing: '-0.02em' }}
         >
           {frontmatter.title}
@@ -98,7 +98,7 @@ function SmallCard({ article }: { article: Article }) {
           {frontmatter.category}
         </span>
         <h3
-          className="m-0 font-black text-[var(--text-primary)] leading-tight text-base line-clamp-2 group-hover:text-[var(--accent-1)] transition-colors"
+          className="m-0 font-black text-[var(--text-primary)] leading-tight text-base line-clamp-2 group-hover:text-orange-ink transition-colors"
           style={{ fontFamily: "'Fraunces', serif", letterSpacing: '-0.01em' }}
         >
           {frontmatter.title}
@@ -123,7 +123,7 @@ export function ArticlesGrid() {
       <div className="max-w-[1280px] mx-auto">
         <div className="flex items-end justify-between mb-12 gap-6 flex-wrap">
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-[var(--accent-blue)] mb-2.5">
+            <p className="text-xs font-bold uppercase tracking-widest text-blue-ink mb-2.5">
               Le blog
             </p>
             <h2 className="section-title m-0">
@@ -132,7 +132,7 @@ export function ArticlesGrid() {
           </div>
           <Link
             href="/blog"
-            className="text-sm font-bold text-[var(--accent-blue)] whitespace-nowrap hover:underline"
+            className="text-sm font-bold text-blue-ink whitespace-nowrap hover:underline"
           >
             Tous les articles →
           </Link>

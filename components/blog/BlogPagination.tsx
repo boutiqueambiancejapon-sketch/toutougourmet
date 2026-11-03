@@ -66,7 +66,7 @@ export function BlogPagination({ page, totalPages, onChange }: BlogPaginationPro
         onClick={() => onChange(Math.max(1, page - 1))}
         disabled={prevDisabled}
         aria-label="Page précédente"
-        className="w-10 h-10 rounded-[var(--radius-md)] text-sm font-semibold border border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--accent-1)] hover:text-[var(--accent-1)] disabled:opacity-30 disabled:cursor-not-allowed inline-flex items-center justify-center"
+        className="w-10 h-10 rounded-[var(--radius-md)] text-sm font-semibold border border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--accent-1)] hover:text-orange-ink disabled:opacity-30 disabled:cursor-not-allowed inline-flex items-center justify-center"
       >
         ←
       </button>
@@ -94,7 +94,7 @@ export function BlogPagination({ page, totalPages, onChange }: BlogPaginationPro
         onClick={() => onChange(Math.min(totalPages, page + 1))}
         disabled={nextDisabled}
         aria-label="Page suivante"
-        className="w-10 h-10 rounded-[var(--radius-md)] text-sm font-semibold border border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--accent-1)] hover:text-[var(--accent-1)] disabled:opacity-30 disabled:cursor-not-allowed inline-flex items-center justify-center"
+        className="w-10 h-10 rounded-[var(--radius-md)] text-sm font-semibold border border-[var(--border)] text-[var(--text-secondary)] hover:border-[var(--accent-1)] hover:text-orange-ink disabled:opacity-30 disabled:cursor-not-allowed inline-flex items-center justify-center"
       >
         →
       </button>

@@ -60,7 +60,7 @@ export function BlogPostCard({ article }: BlogPostCardProps) {
       {/* Body */}
       <div className="relative px-5 py-4 flex flex-col gap-2.5 flex-1">
         <h3
-          className="m-0 font-black text-[var(--text-primary)] leading-tight text-lg line-clamp-3 group-hover:text-[var(--accent-1)] transition-colors"
+          className="m-0 font-black text-[var(--text-primary)] leading-tight text-lg line-clamp-3 group-hover:text-orange-ink transition-colors"
           style={{ fontFamily: "'Fraunces', serif", letterSpacing: '-0.01em' }}
         >
           {frontmatter.title}

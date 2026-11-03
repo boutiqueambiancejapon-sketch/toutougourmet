@@ -58,7 +58,7 @@ export default function AProposPage() {
                 ['Note globale', "Synthèse pondérée des 5 critères précédents."],
               ].map(([title, desc]) => (
                 <li key={title} className="flex gap-3">
-                  <span className="text-[var(--accent-1)] mt-1 shrink-0">▸</span>
+                  <span className="text-orange-ink mt-1 shrink-0">▸</span>
                   <div>
                     <span className="font-semibold text-[var(--text-primary)]">{title} : </span>
                     <span className="text-[var(--text-secondary)] text-sm">{desc}</span>
@@ -79,29 +79,29 @@ export default function AProposPage() {
             </p>
             <ul className="space-y-2 text-[var(--text-secondary)] text-sm mb-4">
               <li className="flex items-start gap-2">
-                <span className="text-[var(--accent-1)] mt-1 shrink-0">✓</span>
+                <span className="text-orange-ink mt-1 shrink-0">✓</span>
                 Quand tu cliques sur un de nos liens affiliés et que tu passes commande, on perçoit
                 une commission de la marque.
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-[var(--accent-1)] mt-1 shrink-0">✓</span>
+                <span className="text-orange-ink mt-1 shrink-0">✓</span>
                 Cette commission ne change rien au prix que tu paies. Souvent, tu bénéficies même
                 d&apos;une réduction exclusive via nos liens.
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-[var(--accent-1)] mt-1 shrink-0">✓</span>
+                <span className="text-orange-ink mt-1 shrink-0">✓</span>
                 Nos avis et notes sont établis indépendamment de toute relation commerciale. On ne
                 sélectionne pas une marque parce qu&apos;elle nous paye plus.
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-[var(--accent-1)] mt-1 shrink-0">✓</span>
+                <span className="text-orange-ink mt-1 shrink-0">✓</span>
                 Tous les liens affiliés sont clairement identifiés sur le site (mention "Lien affilié"
                 et attribut <code>rel="sponsored"</code> dans le code HTML).
               </li>
             </ul>
             <p className="text-sm text-[var(--text-muted)]">
               Si tu as des questions sur notre modèle économique,{' '}
-              <Link href="/contact" className="text-[var(--accent-1)] underline">
+              <Link href="/contact" className="text-orange-ink underline">
                 contacte-nous
               </Link>
               .

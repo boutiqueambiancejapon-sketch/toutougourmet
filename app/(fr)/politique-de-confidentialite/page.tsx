@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   robots: { index: false },
 }
 
-const linkClass = 'text-[var(--accent-1)] underline'
+const linkClass = 'text-orange-ink underline'
 
 function Section({ title, id, children }: { title: string; id?: string; children: ReactNode }) {
   return (

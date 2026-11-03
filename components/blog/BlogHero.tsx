@@ -37,7 +37,7 @@ export function BlogHero({ articleCount }: BlogHeroProps) {
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-blue)]" />
           <span
-            className="text-xs font-bold uppercase tracking-widest text-[var(--accent-blue)]"
+            className="text-xs font-bold uppercase tracking-widest text-blue-ink"
             style={{ fontFamily: "'JetBrains Mono', monospace" }}
           >
             Le blog · {articleCount} articles

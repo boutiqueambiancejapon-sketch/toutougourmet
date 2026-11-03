@@ -8,7 +8,7 @@ interface BadgeProps {
 
 const variantStyles = {
   default: 'bg-[var(--bg-surface-2)] text-[var(--text-secondary)] border border-[var(--border)]',
-  promo: 'bg-[var(--accent-1)] text-white',
+  promo: 'bg-[var(--accent-1)] text-ink',
   new: 'bg-[var(--accent-2)] text-[var(--text-primary)]',
   vet: 'bg-[var(--accent-3)] text-white',
   cat: 'bg-[var(--accent-4)] text-[var(--text-primary)]',

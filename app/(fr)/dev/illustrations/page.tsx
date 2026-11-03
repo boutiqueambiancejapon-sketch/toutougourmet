@@ -75,7 +75,7 @@ export default function IllustrationsDevPage() {
   return (
     <main className="mx-auto max-w-[1280px] px-6 md:px-10 py-12">
       <header className="mb-10 pb-6 border-b border-[var(--border)]">
-        <p className="text-xs uppercase tracking-widest font-bold text-[var(--accent-1)] mb-2">
+        <p className="text-xs uppercase tracking-widest font-bold text-orange-ink mb-2">
           Dev · non indexé
         </p>
         <h1 className="mb-3">Illustrations — revue visuelle</h1>

@@ -52,7 +52,7 @@ export function BlogSections() {
         {/* En-tête bloc */}
         <div className="flex items-end justify-between mb-12 gap-6 flex-wrap">
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-[var(--accent-blue)] mb-2.5">
+            <p className="text-xs font-bold uppercase tracking-widest text-blue-ink mb-2.5">
               Le blog
             </p>
             <h2 className="section-title m-0">
@@ -63,7 +63,7 @@ export function BlogSections() {
           </div>
           <Link
             href="/blog"
-            className="text-sm font-bold text-[var(--accent-blue)] hover:underline whitespace-nowrap"
+            className="text-sm font-bold text-blue-ink hover:underline whitespace-nowrap"
           >
             Tous les {all.length} articles →
           </Link>
@@ -88,7 +88,7 @@ export function BlogSections() {
                 </h3>
                 <Link
                   href={`/blog?cat=${encodeURIComponent(section.label)}`}
-                  className="text-sm font-bold text-[var(--accent-blue)] hover:underline whitespace-nowrap"
+                  className="text-sm font-bold text-blue-ink hover:underline whitespace-nowrap"
                 >
                   Voir tout →
                 </Link>

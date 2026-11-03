@@ -112,7 +112,7 @@ export function QuizWrapper() {
             id="quiz-poids"
             label="Son poids"
             hint="en kg"
-            placeholder="12"
+            placeholder="ex. 12"
             min={0.5}
             max={100}
             value={typeof value === 'string' ? value : ''}

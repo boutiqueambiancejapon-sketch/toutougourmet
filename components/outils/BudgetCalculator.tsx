@@ -68,7 +68,7 @@ export function BudgetCalculator({ dog }: { dog?: AccountDog | null }) {
       <ToolCard label="Estimer le budget" onSubmit={onSubmit}>
         <div className="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] items-end gap-3">
           <Segmented name="animal" legend="Animal" options={ANIMALS} value={animal} onChange={change(setAnimal)} />
-          <NumberField id={weightId} label="Poids (kg)" value={weight} onChange={change(setWeight)} placeholder="12" min={0.5} max={100} />
+          <NumberField id={weightId} label="Poids (kg)" value={weight} onChange={change(setWeight)} placeholder="ex. 12" min={0.5} max={100} />
         </div>
         <Segmented name="age" legend="Âge" options={AGES} value={age} onChange={change(setAge)} />
         <Segmented name="activite" legend="Activité" options={ACTIVITIES} value={activity} onChange={change(setActivity)} />

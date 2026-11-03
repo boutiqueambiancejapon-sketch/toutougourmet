@@ -74,7 +74,7 @@ export function AllergyField({ id, value, onChange, error, name, label = 'Allerg
           placeholder={full ? `${ALLERGIES_MAX} au plus` : 'ex. bœuf'}
           aria-describedby={`${id}-hint`}
           aria-invalid={error ? true : undefined}
-          className="h-12 w-full min-w-0 flex-1 rounded-control border-2 border-ink bg-paper px-4 text-base text-ink outline-none placeholder:text-ink-2 focus-visible:ring-4 focus-visible:ring-amber disabled:opacity-60 aria-[invalid=true]:border-orange-ink"
+          className="h-12 w-full min-w-0 flex-1 rounded-control border-2 border-ink bg-paper px-4 text-base text-ink outline-none placeholder:text-ink-3 focus-visible:ring-4 focus-visible:ring-amber disabled:opacity-60 aria-[invalid=true]:border-orange-ink"
         />
         <button
           type="button"

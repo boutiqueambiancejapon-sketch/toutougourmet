@@ -113,7 +113,7 @@ export function RationCalculator({ prefill = {}, source = 'lien' }: { prefill?: 
       >
         <div className="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] items-end gap-3">
           <Segmented name="animal" legend="Animal" options={ANIMALS} value={form.animal} onChange={(v) => set('animal', v)} />
-          <NumberField id={weightId} label="Poids (kg)" value={form.weightKg} onChange={(v) => set('weightKg', v)} placeholder="12" min={0.5} max={100} />
+          <NumberField id={weightId} label="Poids (kg)" value={form.weightKg} onChange={(v) => set('weightKg', v)} placeholder="ex. 12" min={0.5} max={100} />
         </div>
         <Segmented name="age" legend="Âge" hint="avant 1 an, après 7 ans" options={ages} value={form.ageGroup} onChange={(v) => set('ageGroup', v)} />
         <Segmented name="activite" legend="Activité" options={ACTIVITIES} value={form.activityLevel} onChange={(v) => set('activityLevel', v)} />

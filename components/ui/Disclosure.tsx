@@ -14,7 +14,7 @@ export function Disclosure({ type = 'short' }: DisclosureProps) {
           affiliés : si tu passes commande via ces liens, on perçoit une commission de la part de la
           marque, sans aucun surcoût pour toi. Ça nous aide à financer le site et à continuer à faire
           des comparatifs honnêtes.{' '}
-          <Link href="/a-propos#affiliation" className="text-[var(--accent-1)] underline">
+          <Link href="/a-propos#affiliation" className="text-orange-ink underline">
             En savoir plus sur notre modèle
           </Link>
           .
@@ -27,7 +27,7 @@ export function Disclosure({ type = 'short' }: DisclosureProps) {
     <p className="caption text-center text-[var(--text-muted)] text-xs">
       🔗 Lien affilié — on perçoit une commission si tu commandes, sans impact sur le prix que tu
       paies.{' '}
-      <Link href="/a-propos#affiliation" className="underline hover:text-[var(--accent-1)]">
+      <Link href="/a-propos#affiliation" className="underline hover:text-orange-ink">
         En savoir plus
       </Link>
     </p>

@@ -45,7 +45,7 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
             {frontmatter.category}
           </span>
           <h2
-            className="font-bold text-[var(--text-primary)] group-hover:text-[var(--accent-1)] leading-snug text-sm line-clamp-2 transition-colors m-0"
+            className="font-bold text-[var(--text-primary)] group-hover:text-orange-ink leading-snug text-sm line-clamp-2 transition-colors m-0"
             style={{ fontFamily: "'Fraunces', serif" }}
           >
             {frontmatter.title}
@@ -96,7 +96,7 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
       {/* Body */}
       <div className="relative px-5 py-4 flex flex-col gap-2.5 flex-1">
         <h2
-          className="m-0 font-black text-[var(--text-primary)] leading-tight text-lg line-clamp-3 group-hover:text-[var(--accent-1)] transition-colors"
+          className="m-0 font-black text-[var(--text-primary)] leading-tight text-lg line-clamp-3 group-hover:text-orange-ink transition-colors"
           style={{ fontFamily: "'Fraunces', serif", letterSpacing: '-0.01em' }}
         >
           {frontmatter.title}

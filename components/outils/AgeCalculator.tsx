@@ -83,7 +83,7 @@ export function AgeCalculator({ dog }: { dog?: AccountDog | null }) {
     <div className="flex flex-col gap-4">
       <ToolCard label="Convertir son âge" onSubmit={onSubmit}>
         <div className="grid grid-cols-2 gap-3">
-          <NumberField id={yearsId} label="Années" value={years} onChange={reset(setYears)} placeholder="3" min={0} max={25} step={1} />
+          <NumberField id={yearsId} label="Années" value={years} onChange={reset(setYears)} placeholder="ex. 3" min={0} max={25} step={1} />
           <div className="flex min-w-0 flex-col gap-1.5">
             <label htmlFor={monthsId} className="text-sm font-semibold text-ink">Et des mois</label>
             <select

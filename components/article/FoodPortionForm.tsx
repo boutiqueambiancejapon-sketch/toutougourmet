@@ -69,7 +69,7 @@ function FoodPortionFields({ ofFood, kcal100, moderation, bands, initialWeight =
             min={1}
             max={90}
             step={0.1}
-            placeholder="12"
+            placeholder="ex. 12"
             value={weight}
             onChange={(e) => onWeight(e.target.value)}
             className="min-h-11 rounded-control border border-line bg-paper px-3 text-base font-normal text-ink"
