@@ -8,7 +8,7 @@ module.exports = {
   // opengraph-image : images de partage, pas des pages
   // /compte : espace personnel (noindex)
   // /croquettes/* : fiches du scanner, listées par leur propre sitemap (relues seulement)
-  exclude: ['/api/*', '/tableau-de-bord', '/tableau-de-bord/*', '/compte', '/compte/*', '/croquettes', '/croquettes/*', '/blog/*', '/icon.svg', '/mentions-legales', '/politique-de-confidentialite', '/marques/*', '/comparatifs/*', '/contact', '/fiche-aliments-dangereux', '/dev/*', '/newsletter/*', '/en', '/en/*', '*/opengraph-image*', '/marques'],
+  exclude: ['/api/*', '/tableau-de-bord', '/tableau-de-bord/*', '/compte', '/compte/*', '/croquettes', '/croquettes/*', '/blog/*', '/icon.svg', '/mentions-legales', '/politique-de-confidentialite', '/marques/*', '/comparatifs/*', '/contact', '/fiche-aliments-dangereux', '/guide-alimentation/livre', '/dev/*', '/newsletter/*', '/en', '/en/*', '*/opengraph-image*', '/marques'],
   additionalPaths: async (config) => [
     { loc: '/', priority: 1.0, changefreq: 'daily' },
     { loc: '/quiz', priority: 0.9, changefreq: 'monthly' },
