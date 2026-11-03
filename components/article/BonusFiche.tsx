@@ -4,6 +4,7 @@ import { useId, useState } from 'react'
 import Link from 'next/link'
 import { track } from '@/lib/analytics'
 import { IconAlert } from '@/components/icons'
+import { DISPOSABLE_MESSAGE, isDisposableRejection } from '@/lib/subscribe-client'
 
 // @cdc 04-pages — bonus lié au contenu (audit design-cro §3 « Article ») : la fiche des aliments
 // dangereux contre l'e-mail. Seul formulaire e-mail de l'article (remplace NewsletterBlock).
@@ -20,7 +21,7 @@ interface BonusFicheProps {
 export function BonusFiche({ slug, dangerCount, moderationCount }: BonusFicheProps) {
   const id = useId()
   const [email, setEmail] = useState('')
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error' | 'disposable'>('idle')
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -31,6 +32,7 @@ export function BonusFiche({ slug, dangerCount, moderationCount }: BonusFichePro
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, _subject: 'Bonus fiche aliments dangereux', source: slug }),
       })
+      if (await isDisposableRejection(res)) return setStatus('disposable')
       if (!res.ok) throw new Error(String(res.status))
       setStatus('success')
       track('Newsletter Signup', { place: 'bonus-fiche', article: slug })
@@ -89,6 +91,11 @@ export function BonusFiche({ slug, dangerCount, moderationCount }: BonusFichePro
         </form>
       )}
 
+      {status === 'disposable' ? (
+        <p role="alert" className="m-0 text-sm text-rose-ink">
+          {DISPOSABLE_MESSAGE}
+        </p>
+      ) : null}
       {status === 'error' ? (
         <p role="alert" className="m-0 text-sm text-ink">
           L&apos;inscription n&apos;est pas passée, réessaie plus tard. La fiche reste accessible : {ficheLink}

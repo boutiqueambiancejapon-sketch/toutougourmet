@@ -8,6 +8,7 @@ interface AuthError {
 
 export function authErrorMessage(error: AuthError | null | undefined): string {
   if (!error) return ''
+  if (error.code === 'SIGNUP_DAILY_LIMIT') return "Trop de comptes créés aujourd'hui depuis cette connexion. Réessaie demain."
   if (error.status === 429) return 'Trop de tentatives. Attends une minute avant de réessayer.'
   switch (error.code) {
     case 'INVALID_EMAIL_OR_PASSWORD':
@@ -23,6 +24,8 @@ export function authErrorMessage(error: AuthError | null | undefined): string {
       return 'Le mot de passe doit faire au plus 128 caractères.'
     case 'INVALID_EMAIL':
       return "Cette adresse e-mail n'est pas valide."
+    case 'DISPOSABLE_EMAIL':
+      return 'Les adresses e-mail temporaires ne sont pas acceptées. Utilise ton adresse habituelle.'
     case 'INVALID_TOKEN':
       return "Ce lien n'est plus valable. Demande un nouveau lien."
     default:

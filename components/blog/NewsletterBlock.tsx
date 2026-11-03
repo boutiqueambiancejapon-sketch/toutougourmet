@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { track } from '@/lib/analytics'
+import { DISPOSABLE_MESSAGE, isDisposableRejection } from '@/lib/subscribe-client'
 
 interface NewsletterBlockProps {
   title?: string
@@ -13,7 +14,7 @@ export function NewsletterBlock({
   description = 'Les nouveaux guides, de temps en temps, et les offres des marques partenaires quand elles valent le coup.',
 }: NewsletterBlockProps) {
   const [email, setEmail] = useState('')
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error' | 'disposable'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
   async function handleSubmit(e: React.FormEvent) {
@@ -29,6 +30,7 @@ export function NewsletterBlock({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, _subject: 'Nouvelle inscription newsletter' }),
       })
+      if (await isDisposableRejection(res)) return setStatus('disposable')
       setStatus(res.ok ? 'success' : 'error')
       if (res.ok) track('Newsletter Signup', { place: title })
     } catch {
@@ -73,6 +75,11 @@ export function NewsletterBlock({
         </form>
       )}
       {errorMsg && <p className="m-0 text-sm text-rose-ink">{errorMsg}</p>}
+      {status === 'disposable' ? (
+        <p role="alert" className="m-0 text-sm text-rose-ink">
+          {DISPOSABLE_MESSAGE}
+        </p>
+      ) : null}
       {status === 'error' && <p className="m-0 text-sm text-rose-ink">L&apos;inscription n&apos;est pas passée, réessaie dans un instant.</p>}
       <p className="m-0 text-xs text-ink-2">
         Un lien en bas de chaque e-mail pour te désinscrire.

@@ -116,6 +116,7 @@ export type ScannerErrorCode =
   | 'unauthorized'
   | 'rate_limited'
   | 'quota_reached'
+  | 'daily_cap'
   | 'bad_request'
   | 'too_large'
   | 'bad_type'

@@ -66,6 +66,7 @@ export const ERROR_MESSAGES: Record<ScannerErrorCode, string> = {
   unauthorized: 'Connecte-toi pour lancer une analyse.',
   rate_limited: 'Trop d\'analyses d\'affilée. Attends une minute avant de recommencer.',
   quota_reached: 'Tu as utilisé toutes tes analyses du mois. Le compteur repart à zéro le 1er du mois prochain.',
+  daily_cap: 'Le scanner a atteint sa limite d\'analyses pour aujourd\'hui. Réessaie demain : ton quota n\'est pas touché.',
   bad_request: 'Envoie une photo de la composition et une des constituants analytiques.',
   too_large: 'Une photo dépasse 8 Mo. Reprends-la ou envoie une version plus légère.',
   bad_type: 'Format non reconnu. Envoie une photo en JPEG, PNG, WebP ou HEIC.',

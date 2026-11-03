@@ -5,6 +5,7 @@ import { overLimit } from '@/lib/server/rate-window'
 import { findByEan, recordScan, releaseQuota, reserveQuota, saveAnalysis, usedThisMonth } from '@/lib/server/scanner'
 import { MAX_IMAGE_BYTES, MAX_IMAGES, RATE_LIMITS } from '@/lib/scanner/config'
 import { scanLimitFor } from '@/lib/server/membership'
+import { releaseDailyCall, reserveDailyCall } from '@/lib/server/scanner-daily'
 import { extractLabel } from '@/lib/scanner/extract'
 import { prepareImage } from '@/lib/scanner/images'
 import { ERROR_MESSAGES, INCOMPLETE_MESSAGE, QUOTA_FREE_MESSAGE, toScanAnalysis, type ScanQuota, type ScanResponse } from '@/lib/scanner/result'
@@ -28,6 +29,7 @@ const STATUS: Record<ScannerErrorCode, number> = {
   unauthorized: 401,
   rate_limited: 429,
   quota_reached: 429,
+  daily_cap: 429,
   bad_request: 400,
   too_large: 413,
   bad_type: 415,
@@ -98,12 +100,16 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const paid = consumeScanSession(sessionToken, user.id)
     if (!paid && !(await reserveQuota(user.id, (await scanLimitFor(user.id)).limit))) return fail('quota_reached', await quota(user.id))
     const refund = () => (paid ? Promise.resolve() : releaseQuota(user.id))
+    if (!(await reserveDailyCall())) {
+      await refund()
+      return fail('daily_cap', await quota(user.id))
+    }
 
     let result
     try {
       result = await extractLabel(images)
     } catch (err) {
-      await refund()
+      await Promise.all([refund(), releaseDailyCall()])
       throw err
     }
     const outcome = classifyExtraction(result.label)

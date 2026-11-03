@@ -12,7 +12,8 @@
 // Variables : NTFY_SERVER, NTFY_TOPIC (secret), ALERTS_STATE_FILE, DATABASE_URL ; pour les essais :
 // ALERTS_LOCAL_URL, ALERTS_PUBLIC_URL, ALERTS_RETRY_MS, SEO_LOGS_DIR, DASHBOARD_BACKUP_DIR.
 
-import { checkBackup, checkHost, checkNight, checkSites, checkUnits, type Incident } from '../lib/server/alerts/checks'
+import { checkBackup,
+  checkScannerDaily, checkHost, checkNight, checkSites, checkUnits, type Incident } from '../lib/server/alerts/checks'
 import { composeMessage, DASHBOARD_URL, diffIncidents, printMessage, readState, sendNtfy, writeState } from '../lib/server/alerts/notify'
 import { getPool } from '../lib/server/db'
 
@@ -54,16 +55,17 @@ async function main(): Promise<void> {
   if (Number.isNaN(now.getTime())) throw new Error(`--now invalide : ${nowArg}`)
 
   const state = readState(stateFile)
-  const [sites, units, night, host, backup, reports] = await Promise.all([
+  const [sites, units, night, host, backup, scanner, reports] = await Promise.all([
     checkSites(),
     checkUnits(),
     checkNight(now),
     checkHost(),
     checkBackup(now),
+    checkScannerDaily(),
     newReports(state.reportsSince),
   ])
   const reportCount = 'count' in reports ? reports.count : 0
-  const current = [...sites, ...units, ...night, ...host, ...backup, ...('count' in reports ? [] : [reports])]
+  const current = [...sites, ...units, ...night, ...host, ...backup, ...scanner, ...('count' in reports ? [] : [reports])]
   const diff = diffIncidents(state, current)
   const msg = composeMessage(diff, reportCount)
 

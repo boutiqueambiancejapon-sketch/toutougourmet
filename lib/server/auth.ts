@@ -2,11 +2,13 @@ import { cache } from 'react'
 import { headers } from 'next/headers'
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
-import { createAuthMiddleware } from 'better-auth/api'
+import { APIError, createAuthMiddleware } from 'better-auth/api'
 import { nextCookies } from 'better-auth/next-js'
 import * as schema from '@/db/schema'
 import { SESSION_HINT_COOKIE } from '@/lib/account-hint'
+import { isDisposableEmail } from './disposable-email'
 import { getDb, type Db } from './drizzle'
+import { clientIp, overLimit } from './rate-window'
 import { accountDeletedEmail, resetPasswordEmail, verificationEmail } from './auth-emails'
 import { sendTransactionalEmail } from './mailer'
 
@@ -16,6 +18,11 @@ import { sendTransactionalEmail } from './mailer'
 // de Better Auth, resserrés sur les routes sensibles. Sans DATABASE_URL, getAuth() renvoie null.
 
 const BASE_URL = process.env.BETTER_AUTH_URL || 'http://localhost:3000'
+
+// @cdc sécurité — au plus 5 comptes par jour depuis une même adresse (compteur en mémoire, adresse
+// jamais écrite), en plus de la limite par minute de Better Auth.
+const SIGNUPS_PER_DAY = [{ windowMs: 24 * 60 * 60 * 1000, max: 5 }] as const
+
 
 function send(mail: Parameters<typeof sendTransactionalEmail>[0]): void {
   // Pas d'attente : le temps de réponse ne doit pas révéler si l'adresse existe.
@@ -79,6 +86,16 @@ function createAuth(db: Db) {
     },
     advanced: { useSecureCookies: secure, cookiePrefix: 'tg' },
     hooks: {
+      before: createAuthMiddleware(async (ctx) => {
+        if (ctx.path !== '/sign-up/email') return
+        const email: unknown = (ctx.body as { email?: unknown } | undefined)?.email
+        if (typeof email === 'string' && isDisposableEmail(email)) {
+          throw new APIError('BAD_REQUEST', { code: 'DISPOSABLE_EMAIL', message: 'Disposable email addresses are not accepted' })
+        }
+        if (overLimit(`signup-day:${clientIp(ctx.headers ?? new Headers())}`, SIGNUPS_PER_DAY)) {
+          throw new APIError('TOO_MANY_REQUESTS', { code: 'SIGNUP_DAILY_LIMIT', message: 'Too many accounts created today' })
+        }
+      }),
       // Témoin lisible par le navigateur (sans valeur secrète) : l'en-tête et /outils/ration savent
       // qu'il y a un compte sans appeler le serveur, donc les pages publiques restent statiques.
       after: createAuthMiddleware(async (ctx) => {

@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { useId, useState, useSyncExternalStore } from 'react'
 import { hasSessionHint } from '@/lib/account-hint'
 import { track } from '@/lib/analytics'
+import { DISPOSABLE_MESSAGE, isDisposableRejection } from '@/lib/subscribe-client'
 
 // @cdc 04-pages — « Garder ce résultat » sous chaque outil (audit design-cro §3 Outils) :
 // e-mail seul, même route que BonusFiche (/api/contact → Brevo).
@@ -25,7 +26,7 @@ interface KeepResultProps {
 export function KeepResult({ tool, summary, invite }: KeepResultProps) {
   const id = useId()
   const [email, setEmail] = useState('')
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error' | 'disposable'>('idle')
   const pathname = usePathname()
   const signedIn = useSyncExternalStore(noop, hasSessionHint, () => false)
 
@@ -38,6 +39,7 @@ export function KeepResult({ tool, summary, invite }: KeepResultProps) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, _subject: `Résultat ${tool} : ${summary}`, source: tool }),
       })
+      if (await isDisposableRejection(res)) return setStatus('disposable')
       if (!res.ok) throw new Error(String(res.status))
       setStatus('success')
       track('Newsletter Signup', { place: `tool-${tool}` })
@@ -84,6 +86,11 @@ export function KeepResult({ tool, summary, invite }: KeepResultProps) {
           </button>
         </form>
       )}
+      {status === 'disposable' ? (
+        <p role="alert" className="m-0 text-sm text-rose-ink">
+          {DISPOSABLE_MESSAGE}
+        </p>
+      ) : null}
       {status === 'error' ? (
         <p role="alert" className="m-0 text-sm text-ink">
           L&apos;envoi n&apos;est pas passé. Ton résultat reste affiché au-dessus : réessaie dans un moment.
