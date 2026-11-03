@@ -12,7 +12,7 @@ export function FicheCriteria({ details }: { details: ScoreResult }) {
   return (
     <section className="flex flex-col gap-2 print:break-inside-avoid-page">
       <h2 className="m-0 font-display text-xl font-black text-ink print:text-[16px]">Le détail des critères</h2>
-      <ul role="list" className="m-0 grid list-none gap-x-6 gap-y-3 p-0 sm:grid-cols-2 print:grid-cols-2 print:gap-y-2">
+      <ul role="list" className="m-0 grid list-none gap-x-6 gap-y-3 p-0 sm:grid-cols-2 print:grid-cols-2 print:gap-y-1.5">
         {details.criteria.map((c) => {
           const ratio = c.points === null ? 0 : c.points / c.max
           return (

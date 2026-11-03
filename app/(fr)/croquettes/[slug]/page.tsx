@@ -2,6 +2,7 @@
 // que la rédaction ne l'a pas relue (reviewed = false) : une lecture IA brute n'est pas indexée.
 // JSON-LD Product + Review seulement si relue. Sous 55/100 : marques partenaires en remplacement.
 // Image de partage : /croquettes/[slug]/og.png (Open Graph) et story.png (bouton « Partager »).
+// « Télécharger le PDF » : /croquettes/[slug]/fiche.pdf, une page A4.
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -104,9 +105,9 @@ export default async function CroquettePage({ params }: Params) {
       <FicheNutrition label={a.label} />
 
       <FicheVerdict brand={a.brand} details={a.details}>
-        <div className="flex flex-col gap-2 sm:flex-row">
-          <ShareButton slug={a.slug} name={name} score={a.score} />
-          <DownloadLink slug={a.slug} />
+        <div className="flex gap-2 sm:max-w-md">
+          <DownloadLink slug={a.slug} className="flex-1" />
+          <ShareButton slug={a.slug} name={name} score={a.score} className="flex-1" />
         </div>
       </FicheVerdict>
 

@@ -1,4 +1,4 @@
-import type { Band, Criterion, CriterionId, ScoreResult } from './score'
+import { BAND_LABELS, type Band, type Criterion, type CriterionId, type ScoreResult } from './score'
 
 // @cdc lot 6 — deux points forts et deux points faibles tirés des critères de la note, en
 // libellés courts (fiche de partage 1080×1920, aperçu de la fiche). Fonction pure.
@@ -57,4 +57,17 @@ export function highlights(d: ScoreResult, count = 2): { strengths: string[]; we
     .slice(0, count)
     .map((c) => WEAK[c.id](c, d))
   return { strengths, weaknesses }
+}
+
+const lowerList = (items: string[]) => items.map((s) => s.charAt(0).toLowerCase() + s.slice(1)).join(', ')
+
+/** Verdict en une phrase : tranche de la note, puis points forts et faibles (fiche web et PDF). */
+export function verdictText(d: ScoreResult): string {
+  const { strengths, weaknesses } = highlights(d)
+  const parts: string[] = []
+  if (d.score !== null && d.band) parts.push(`${d.score}/100 : ${BAND_LABELS[d.band].toLowerCase()} pour un chien adulte.`)
+  else if (d.notice) parts.push(d.notice)
+  if (strengths.length) parts.push(`Points forts : ${lowerList(strengths)}.`)
+  if (weaknesses.length) parts.push(`Points faibles : ${lowerList(weaknesses)}.`)
+  return parts.join(' ')
 }
