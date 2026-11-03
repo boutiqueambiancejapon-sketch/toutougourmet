@@ -21,7 +21,14 @@ export function SiteHeader() {
               match={item.match}
               className="rounded-control px-3.5 py-2.5 text-[15px] font-semibold text-ink no-underline hover:bg-cream-2 aria-[current=page]:bg-amber"
             >
-              {item.label}
+              {item.icon ? (
+                <span className="inline-flex items-center gap-1.5">
+                  <item.icon className="size-[18px]" />
+                  {item.label}
+                </span>
+              ) : (
+                item.label
+              )}
             </NavLink>
           ))}
         </nav>

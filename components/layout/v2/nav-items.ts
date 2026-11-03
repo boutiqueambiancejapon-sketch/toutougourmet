@@ -1,11 +1,11 @@
 // @cdc 04-pages — navigation V2 façon prototype (docs/v2/prototype).
-// Scanner, Connexion et « Mon chien » arrivent avec les lots 4 et 6 : en attendant,
-// le bouton central mène au test et les onglets pointent vers les pages existantes.
+// Le scanner, fonction phare, est le bouton central de la barre d'onglets et le premier lien
+// de l'en-tête ordinateur (demande du propriétaire, 2026-11-03). Le test reste dans l'en-tête et /outils.
 
 import type { ComponentType } from 'react'
-import { IconBook, IconBowl, IconDog, IconHome, IconTarget, type IconProps } from '@/components/icons'
+import { IconBook, IconBowl, IconDog, IconHome, IconScan, type IconProps } from '@/components/icons'
 
-export type NavMatch = 'home' | 'guides' | 'races' | 'tools' | 'brands' | 'quiz'
+export type NavMatch = 'home' | 'guides' | 'races' | 'tools' | 'brands' | 'quiz' | 'scanner'
 
 export interface NavItem {
   href: string
@@ -16,6 +16,7 @@ export interface NavItem {
 
 /** En-tête ordinateur. */
 export const DESKTOP_NAV: NavItem[] = [
+  { href: '/scanner', label: 'Scanner', match: 'scanner', icon: IconScan },
   { href: '/chien', label: 'Guides', match: 'guides' },
   { href: '/chien/race', label: 'Races', match: 'races' },
   { href: '/outils', label: 'Outils', match: 'tools' },
@@ -26,7 +27,7 @@ export const DESKTOP_NAV: NavItem[] = [
 export const TAB_NAV: NavItem[] = [
   { href: '/', label: 'Accueil', match: 'home', icon: IconHome },
   { href: '/chien', label: 'Guides', match: 'guides', icon: IconBook },
-  { href: '/quiz', label: 'Le test', match: 'quiz', icon: IconTarget },
+  { href: '/scanner', label: 'Scanner', match: 'scanner', icon: IconScan },
   { href: '/outils', label: 'Outils', match: 'tools', icon: IconBowl },
   { href: '/chien/race', label: 'Races', match: 'races', icon: IconDog },
 ]
@@ -39,5 +40,6 @@ export function matchSection(pathname: string): NavMatch | null {
   if (pathname.startsWith('/chien') || pathname.startsWith('/blog')) return 'guides'
   if (pathname.startsWith('/outils')) return 'tools'
   if (pathname.startsWith('/quiz')) return 'quiz'
+  if (pathname.startsWith('/scanner') || pathname.startsWith('/croquettes')) return 'scanner'
   return null
 }
