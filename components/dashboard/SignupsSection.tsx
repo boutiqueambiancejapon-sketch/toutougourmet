@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import type { Period } from '@/lib/dashboard/period'
 import type { SignupFunnelRow, SignupsData } from '@/lib/server/dashboard-signups'
 import { signupPlaceLabel } from '@/lib/signup-places'
@@ -35,13 +36,14 @@ function Funnel({ row }: { row: SignupFunnelRow }) {
   )
 }
 
-export function SignupsSection({ data, period }: { data: SignupsData; period: Period }) {
+/** children : panneaux des inscriptions à la lettre et au guide, rangés sous les comptes. */
+export function SignupsSection({ data, period, children }: { data: SignupsData; period: Period; children?: ReactNode }) {
   const { current, previous } = data.total
   const delta = deltaText(current, previous, period)
   const max = Math.max(1, ...data.byPlace.map((r) => r.created))
   return (
     <>
-      <SectionTitle id="inscriptions" title="Inscriptions" intro={`Comptes créés sur ${period.long}, selon l’invitation d’où vient chaque visiteur.`} />
+      <SectionTitle id="inscriptions" title="Inscriptions" intro={`Sur ${period.long} : comptes créés selon l’invitation d’où vient chaque visiteur, puis inscriptions à la lettre et au guide.`} />
       <section aria-label="Inscriptions par emplacement" className="mt-4 rounded-card border border-line bg-paper p-4 md:p-5">
         <p className="m-0 flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <span className="font-display text-4xl font-black tabular-nums text-ink">{nf.format(current)}</span>
@@ -72,6 +74,7 @@ export function SignupsSection({ data, period }: { data: SignupsData; period: Pe
           e-mail (compté le jour de la confirmation).
         </p>
       </section>
+      {children ? <div className="mt-3 grid gap-3 md:grid-cols-2">{children}</div> : null}
     </>
   )
 }

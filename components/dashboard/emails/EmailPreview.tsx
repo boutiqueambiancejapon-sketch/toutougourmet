@@ -52,8 +52,8 @@ export function EmailPreview(props: EmailPreviewProps) {
   return (
     <main className="mx-auto flex w-full max-w-page flex-col gap-2 px-4 pb-16 md:px-8">
       <p className="pt-6 text-sm">
-        <Link href="/tableau-de-bord#emails" className="text-ink-2 underline underline-offset-2">
-          Retour au tableau de bord
+        <Link href="/tableau-de-bord/emails" className="text-ink-2 underline underline-offset-2">
+          Retour aux e-mails
         </Link>
       </p>
       <h1 className="font-display text-3xl font-black text-ink">{title}</h1>

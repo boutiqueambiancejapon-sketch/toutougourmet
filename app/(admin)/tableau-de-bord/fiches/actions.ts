@@ -24,21 +24,21 @@ function revalidatePublic(slug: string, brand: string | null): void {
 export async function saveFiche(id: string, form: FormData): Promise<void> {
   await assertDashboard()
   const row = await getAnalysis(id)
-  if (!row) redirect('/tableau-de-bord#fiches')
+  if (!row) redirect('/tableau-de-bord/contenu#fiches')
   const intent = String(form.get('intent') ?? 'save')
   const reviewed = intent === 'validate' ? true : intent === 'unpublish' ? false : undefined
   const updated = await updateAnalysis(id, labelFromForm(row.extracted, form), reviewed)
   revalidatePublic(row.slug, row.brand)
   if (updated && updated.brand !== row.brand) revalidatePublic(updated.slug, updated.brand)
   revalidatePath(`/tableau-de-bord/fiches/${id}`)
-  if (intent === 'validate') redirect('/tableau-de-bord#fiches')
+  if (intent === 'validate') redirect('/tableau-de-bord/contenu#fiches')
 }
 
 export async function removeFiche(id: string): Promise<void> {
   await assertDashboard()
   const removed = await deleteAnalysis(id)
   if (removed) revalidatePublic(removed.slug, removed.brand)
-  redirect('/tableau-de-bord#fiches')
+  redirect('/tableau-de-bord/contenu#fiches')
 }
 
 export async function handleReport(analysisId: string, reportId: string): Promise<void> {

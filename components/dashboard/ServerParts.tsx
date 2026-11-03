@@ -84,3 +84,19 @@ export function TaskList({ tasks, now }: { tasks: TaskStatus[]; now: number }) {
     </ul>
   )
 }
+
+/** Alertes du serveur en tête d'onglet : la même règle que la ligne d'état de l'accueil. */
+export function ServerAlerts({ alerts }: { alerts: string[] }) {
+  if (alerts.length === 0) {
+    return <p className="m-0 mt-4 rounded-box bg-green-bg px-3 py-2.5 text-sm font-semibold text-green-ink">Rien à signaler sur le serveur.</p>
+  }
+  return (
+    <ul role="alert" className="m-0 mt-4 flex list-none flex-col gap-2 p-0">
+      {alerts.map((a) => (
+        <li key={a} className="rounded-box bg-rose-bg px-3 py-2.5 text-sm font-semibold text-rose-ink">
+          {a}
+        </li>
+      ))}
+    </ul>
+  )
+}

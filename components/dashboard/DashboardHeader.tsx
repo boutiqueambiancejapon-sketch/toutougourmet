@@ -1,65 +1,57 @@
 import Link from 'next/link'
-import { PERIODS, type Period, type PeriodKey } from '@/lib/dashboard/period'
+import { PERIODS, type PeriodKey } from '@/lib/dashboard/period'
+import { TABS, tabHref, type TabSlug } from '@/lib/dashboard/tabs'
 
-// @cdc tableau de bord — en-tête collant : sélecteur de période (?periode=) et accès aux sections.
+// @cdc tableau de bord — en-tête collant : sélecteur de période (?periode=, gardé d'un onglet à
+// l'autre) et barre d'onglets, défilante sur mobile. Chaque lien tient sur une ligne.
 
-const SECTIONS = [
-  { id: 'direct', label: 'En direct' },
-  { id: 'chiffres', label: 'Chiffres' },
-  { id: 'partenaires', label: 'Partenaires' },
-  { id: 'lecteurs', label: 'Lecteurs' },
-  { id: 'inscriptions', label: 'Inscriptions' },
-  { id: 'conversions', label: 'Conversions' },
-  { id: 'pays', label: 'Pays' },
-  { id: 'ia', label: 'IA' },
-  { id: 'messages', label: 'Messages' },
-  { id: 'fiches', label: 'Fiches' },
-  { id: 'nuit', label: 'Tâche de nuit' },
-  { id: 'serveur', label: 'Serveur' },
-]
+interface HeaderProps {
+  period: PeriodKey
+  current: TabSlug
+}
 
-export function DashboardHeader({ period }: { period: Period }) {
+const pill = 'inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-pill font-semibold'
+
+export function DashboardHeader({ period, current }: HeaderProps) {
   return (
     <header className="sticky top-0 z-10 border-b border-line bg-cream/95 backdrop-blur">
-      <div className="mx-auto flex w-full max-w-page flex-col gap-2 px-4 py-3 md:flex-row md:items-center md:px-8">
-        <div className="flex items-center justify-between gap-3">
-          <p className="font-display text-lg font-black text-ink">
+      <div className="mx-auto w-full max-w-page px-4 md:px-8">
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 pt-3 pb-2">
+          <Link href={tabHref('', period)} className="whitespace-nowrap font-display text-lg font-black text-ink no-underline">
             Toutou <span className="text-orange-ink">Gourmet</span>
-          </p>
-          <nav aria-label="Période" className="flex rounded-pill border border-line bg-paper p-0.5 md:hidden">
-            <PeriodLinks current={period.key} />
+          </Link>
+          <nav aria-label="Période" className="flex shrink-0 gap-0.5 rounded-pill bg-cream-2 p-0.5">
+            {(Object.keys(PERIODS) as PeriodKey[]).map((key) => (
+              <Link
+                key={key}
+                href={tabHref(current, key)}
+                aria-current={key === period ? 'true' : undefined}
+                className={`${pill} min-w-11 px-2.5 text-sm ${key === period ? 'bg-ink text-cream' : 'text-ink-2 hover:text-ink'}`}
+              >
+                {PERIODS[key].label}
+              </Link>
+            ))}
           </nav>
         </div>
-        <nav aria-label="Sections" className="-mx-4 overflow-x-auto px-4 md:mx-0 md:ml-6 md:px-0">
-          <ul className="flex gap-1 text-sm">
-            {SECTIONS.map((s) => (
-              <li key={s.id}>
-                <a href={`#${s.id}`} className="inline-flex min-h-9 items-center whitespace-nowrap rounded-pill px-3 font-semibold text-ink-2 hover:bg-cream-2 hover:text-ink">
-                  {s.label}
-                </a>
-              </li>
-            ))}
+        <nav aria-label="Onglets du tableau de bord" className="-mx-4 overflow-x-auto px-4 pb-3 md:mx-0 md:px-0">
+          <ul className="m-0 flex list-none gap-1.5 p-0 text-sm">
+            {TABS.map((t) => {
+              const on = t.slug === current
+              return (
+                <li key={t.slug} className="shrink-0">
+                  <Link
+                    href={tabHref(t.slug, period)}
+                    aria-current={on ? 'page' : undefined}
+                    className={`${pill} border-2 px-3.5 no-underline ${on ? 'border-ink bg-ink text-cream' : 'border-line text-ink hover:border-line-2'}`}
+                  >
+                    {t.label}
+                  </Link>
+                </li>
+              )
+            })}
           </ul>
-        </nav>
-        <nav aria-label="Période" className="ml-auto hidden rounded-pill border border-line bg-paper p-0.5 md:flex">
-          <PeriodLinks current={period.key} />
         </nav>
       </div>
     </header>
   )
-}
-
-function PeriodLinks({ current }: { current: PeriodKey }) {
-  return (Object.keys(PERIODS) as PeriodKey[]).map((key) => (
-    <Link
-      key={key}
-      href={`?periode=${key}`}
-      aria-current={key === current ? 'page' : undefined}
-      className={`inline-flex min-h-9 min-w-12 items-center justify-center rounded-pill px-3 text-sm font-semibold ${
-        key === current ? 'bg-ink text-cream' : 'text-ink-2 hover:text-ink'
-      }`}
-    >
-      {PERIODS[key].label}
-    </Link>
-  ))
 }

@@ -28,7 +28,7 @@ export default async function FicheReviewPage({ params }: { params: Promise<{ id
   return (
     <main className="mx-auto flex w-full max-w-page flex-col gap-2 px-4 pb-16 md:px-8">
       <p className="pt-6 text-sm">
-        <Link href="/tableau-de-bord#fiches" className="text-ink-2 underline underline-offset-2">
+        <Link href="/tableau-de-bord/contenu#fiches" className="text-ink-2 underline underline-offset-2">
           Retour aux fiches à relire
         </Link>
       </p>
