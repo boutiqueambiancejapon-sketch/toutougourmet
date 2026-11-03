@@ -135,7 +135,7 @@ Objectif : `dashboard.toutou-gourmet.com`, nos chiffres à nous (actions des vis
 - [ ] Photos (lot 5) : album croissance, photos de garde. Pas commencé (« plus tard » selon le propriétaire).
 - [ ] Assistant IA (lot 6) et relance des lectures douteuses du scanner sur un modèle plus fort. Pas commencé.
 - [ ] Paiement Premium (lot 7) : en attente, pas de Stripe pour l'instant (Premium gratuit).
-- [ ] Anglais (lot 8) : en attente (« pas d'anglais pour le moment »).
+- [ ] International (lot 8) : reporté, priorité à la France (décision du propriétaire, 2026-11-03). Pistes notées : langues en sous-dossiers + hreflang, offres partenaires par pays de livraison, Amazon Partenaires et animaleries en ligne pour les pays sans partenaire.
 - [ ] Bascule, fin (lot 9) : fusionner `v2` dans la branche de prod GitHub (385 commits d'écart au 2026-11-03), repasser `DEPLOY_BRANCH`, fermer le projet Vercel (domaines à retirer par le propriétaire), racine `toutou-gourmet.com` vers le VPS.
 
 ## Fiche de garde (2026-11-03, `feat/fiche-garde`)
