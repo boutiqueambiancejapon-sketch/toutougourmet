@@ -127,7 +127,7 @@ Objectif : `dashboard.toutou-gourmet.com`, nos chiffres à nous (actions des vis
 ## Reste à faire (point du 2026-11-03)
 
 - [x] Mettre en ligne `release/scanner-garde` (friandises, copie Open Pet Food Facts, fiche de garde, SEO scanner) : 3 tables à créer par le propriétaire (journal du 2026-11-03).
-- [ ] « Il a mangé quoi ? » (lot 2) : outil niveau de risque + renvoi article et centres antipoison. Pas commencé.
+- [ ] « Il a mangé quoi ? » (lot 2) : EN PAUSE (décision du propriétaire, 2026-11-03). Emplacements proposés : haut de /chien/urgences, page /outils/il-a-mange-quoi, liens rapides.
 - [ ] Miniatures de partage par type de page (lot 1) : article, race, outil existent ; catégorie et accueil à vérifier.
 - [ ] Maillage par entités automatique (lot 1) : articles liés en place ; encarts outils ajoutés la nuit ; liens aliment ↔ race ↔ santé à automatiser.
 - [ ] Doublon de catégories `alimentation` / `alimentation-quotidienne` : décision du propriétaire (redirections 301).
