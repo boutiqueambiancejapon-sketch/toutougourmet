@@ -2,7 +2,7 @@ import type { ServerHealth } from '@/lib/server/dashboard-health'
 import { LIMITS } from '@/lib/server/dashboard-health'
 import { BACKUP_MAX_AGE_HOURS } from '@/lib/server/dashboard-backup'
 import { Panel, SectionTitle } from './Panel'
-import { Meter, NA, TaskList, when } from './ServerParts'
+import { Meter, NA, ServerAlerts, TaskList, when } from './ServerParts'
 
 // @cdc tableau de bord — section « Serveur » : machine, tâches planifiées, sauvegarde.
 // Rendu serveur, lu à l'ouverture de la page. Aucun chemin ni variable d'environnement affiché.
@@ -37,7 +37,8 @@ export function ServerSection({ health }: { health: ServerHealth }) {
 
   return (
     <>
-      <SectionTitle id="serveur" title="Serveur" intro="Lu à l’ouverture de la page. Rechargez pour mettre à jour." />
+      <ServerAlerts alerts={health.alertItems.filter((a) => a.tab === 'serveur').map((a) => a.text)} />
+      <SectionTitle id="machine" title="La machine" intro="Lu à l’ouverture de la page. Rechargez pour mettre à jour." />
       <dl className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <Meter
           label="Processeur (15 min)"

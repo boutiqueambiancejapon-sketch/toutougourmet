@@ -15,13 +15,6 @@ export interface Kpi {
   previous: number
 }
 
-export interface Kpis {
-  pageViews: Kpi
-  affiliateClicks: Kpi
-  signups: Kpi
-  toolResults: Kpi
-}
-
 export interface BucketRow {
   bucket: string
   training: number
@@ -29,18 +22,31 @@ export interface BucketRow {
   user: number
 }
 
-export interface SummaryData {
-  kpis: Kpis
+/** Onglet Conversions : clics partenaires et inscriptions à la lettre, au détail. */
+export interface PartnerData {
   clicksByBrand: Row[]
   clicksByPlace: Row[]
   clicksByPage: Row[]
   signupsByPlace: Row[]
   /** Guide PDF : inscriptions et téléchargements (bouton du site) sur la période */
   guide: Row[]
+}
+
+/** Onglet Visiteurs : pages lues, provenances et usage des outils. */
+export interface AudienceData {
+  pageViews: Kpi
+  topPages: Row[]
+  referrers: Row[]
+  toolResults: Kpi
   tools: Row[]
   foodSearches: Row[]
   foodMisses: Row[]
 }
+
+export const EMPTY_PARTNERS: PartnerData = { clicksByBrand: [], clicksByPlace: [], clicksByPage: [], signupsByPlace: [], guide: [] }
+
+const ZERO: Kpi = { current: 0, previous: 0 }
+export const EMPTY_AUDIENCE: AudienceData = { pageViews: ZERO, topPages: [], referrers: [], toolResults: ZERO, tools: [], foodSearches: [], foodMisses: [] }
 
 export interface AiData {
   byOperator: Row[]
@@ -118,44 +124,54 @@ function guideRows(pool: Pool, interval: string): Promise<Row[]> {
   )
 }
 
-export async function getSummary(pool: Pool, period: Period): Promise<SummaryData> {
+export async function getPartners(pool: Pool, period: Period): Promise<PartnerData> {
   const i = period.interval
-  const [pageViews, affiliateClicks, signups, toolResults, clicksByBrand, clicksByPlace, clicksByPage, signupsByPlace, guide, tools, foodSearches, foodMisses] =
-    await Promise.all([
-      // Pages vues confirmées par le navigateur (événement Pageview) : les journaux du serveur
-      // comptent aussi les préchargements et les robots déguisés en navigateurs.
-      eventKpi(pool, i, 'Pageview'),
-      eventKpi(pool, i, 'Affiliate Click'),
-      // Une inscription au guide inscrit aussi à la lettre : elle compte ici.
-      kpi(pool, `SELECT ${KPI_COLUMNS} FROM analytics.events WHERE name = ANY($2) AND ts >= now() - 2 * $1::interval`, [i, SIGNUP_EVENTS]),
-      eventKpi(pool, i, 'Tool Result'),
-      eventsBy(pool, i, 'Affiliate Click', 'brand'),
-      eventsBy(pool, i, 'Affiliate Click', 'place'),
-      eventsBy(pool, i, 'Affiliate Click', null),
-      signupsBySource(pool, i),
-      guideRows(pool, i),
-      eventsBy(pool, i, 'Tool Result', 'tool'),
-      eventsBy(pool, i, 'Food Search', 'query'),
-      rows(
-        pool,
-        `SELECT props->>'query' AS label, count(*)::int AS value FROM analytics.events
-         WHERE name = 'Food Search' AND ts >= now() - $1::interval
-           AND props->>'found' = 'false' AND coalesce(props->>'query', '') <> ''
-         GROUP BY 1 ORDER BY 2 DESC, 1 LIMIT $2`,
-        [i, LIMIT],
-      ),
-    ])
-  return {
-    kpis: { pageViews, affiliateClicks, signups, toolResults },
-    clicksByBrand,
-    clicksByPlace,
-    clicksByPage,
-    signupsByPlace,
-    guide,
-    tools,
-    foodSearches,
-    foodMisses,
-  }
+  const [clicksByBrand, clicksByPlace, clicksByPage, signupsByPlace, guide] = await Promise.all([
+    eventsBy(pool, i, 'Affiliate Click', 'brand'),
+    eventsBy(pool, i, 'Affiliate Click', 'place'),
+    eventsBy(pool, i, 'Affiliate Click', null),
+    signupsBySource(pool, i),
+    guideRows(pool, i),
+  ])
+  return { clicksByBrand, clicksByPlace, clicksByPage, signupsByPlace, guide }
+}
+
+// Identifiants (chien, fiche) remplacés par « [id] » : aucun chemin ne renvoie à un compte.
+const MASKED_PAGE = `regexp_replace(page, '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}', '[id]', 'gi')`
+
+export async function getAudience(pool: Pool, period: Period): Promise<AudienceData> {
+  const i = period.interval
+  const [pageViews, topPages, referrers, toolResults, tools, foodSearches, foodMisses] = await Promise.all([
+    // Pages vues confirmées par le navigateur (événement Pageview) : les journaux du serveur
+    // comptent aussi les préchargements et les robots déguisés en navigateurs.
+    eventKpi(pool, i, 'Pageview'),
+    rows(
+      pool,
+      `SELECT ${MASKED_PAGE} AS label, count(*)::int AS value FROM analytics.events
+       WHERE name = 'Pageview' AND ts >= now() - $1::interval GROUP BY 1 ORDER BY 2 DESC, 1 LIMIT $2`,
+      [i, LIMIT],
+    ),
+    rows(
+      pool,
+      `SELECT coalesce(ref_host, 'Accès direct ou inconnu') AS label, count(*)::int AS value FROM analytics.events
+       WHERE name = 'Pageview' AND ts >= now() - $1::interval
+         AND (ref_host IS NULL OR ref_host NOT LIKE '%toutou-gourmet.com')
+       GROUP BY 1 ORDER BY 2 DESC, 1 LIMIT $2`,
+      [i, LIMIT],
+    ),
+    eventKpi(pool, i, 'Tool Result'),
+    eventsBy(pool, i, 'Tool Result', 'tool'),
+    eventsBy(pool, i, 'Food Search', 'query'),
+    rows(
+      pool,
+      `SELECT props->>'query' AS label, count(*)::int AS value FROM analytics.events
+       WHERE name = 'Food Search' AND ts >= now() - $1::interval
+         AND props->>'found' = 'false' AND coalesce(props->>'query', '') <> ''
+       GROUP BY 1 ORDER BY 2 DESC, 1 LIMIT $2`,
+      [i, LIMIT],
+    ),
+  ])
+  return { pageViews, topPages, referrers, toolResults, tools, foodSearches, foodMisses }
 }
 
 export async function getAi(pool: Pool, period: Period): Promise<AiData> {
