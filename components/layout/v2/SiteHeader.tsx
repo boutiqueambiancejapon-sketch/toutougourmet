@@ -37,7 +37,8 @@ export function SiteHeader() {
           href="/quiz"
           className="hidden min-h-11 shrink-0 items-center whitespace-nowrap rounded-control bg-orange px-4 text-[15px] font-semibold text-ink no-underline md:inline-flex"
         >
-          Faire le test de mon chien
+          <span className="hidden 2xl:inline">Faire le test de mon chien</span>
+          <span className="2xl:hidden">Le test</span>
         </Link>
         <Link
           href="/chien/marque"
