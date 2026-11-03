@@ -159,3 +159,9 @@ Mise à jour approuvée par le propriétaire pour fermer les avis de sécurité 
 - Composition importée : le bloc « Additifs » et les constituants analytiques sont coupés de la liste d'ingrédients avant le découpage (`splitAdditivesBlock`, `lib/scanner/ingredient-text.ts`), même collés au dernier ingrédient ; vitamines et oligo-éléments listés à l'américaine passent aussi dans les additifs.
 - Relecture des fiches importées : « Valider » = relue (indexable comme aujourd'hui), « Écarter » = nouvelle colonne `food_analysis.discarded` (migration `0006_scanner_discard`, à appliquer en production avant le déploiement) : fiche gardée pour le scanner, jamais publiée, hors « Fiches à relire », et le ré-import la met à jour sans effacer le drapeau. Une validation ultérieure l'efface. Colonne plutôt que `details` : `details` est réécrit à chaque recalcul du barème et à chaque ré-import.
 
+## 2026-11-03 — Fiche de garde (branche `feat/fiche-garde`)
+
+- Le gardien n'a pas de compte et rien n'est stocké sur lui. Le lien privé (jeton de 144 bits) expire le lendemain du retour (minuit, heure de Paris) ; supprimer la fiche le coupe aussitôt.
+- La page du gardien vit dans son propre groupe de routes (`app/(garde)`) : sans GA ni `/api/e`, `referrer: no-referrer`, pour que le jeton de l'adresse ne parte ni dans la mesure ni dans un Referer.
+- Sans compte, la saisie reste dans le navigateur (localStorage) jusqu'à la confirmation de l'inscription. Si le lien de confirmation est ouvert dans un autre navigateur, la saisie est perdue : le visiteur repart du profil de son chien.
+- Le profil chien n'a ni croquettes ni allergies : la première fiche les apprend, les suivantes les reprennent (`lib/garde/prefill.ts`).

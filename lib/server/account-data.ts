@@ -1,9 +1,10 @@
 import { asc, eq, inArray } from 'drizzle-orm'
-import { dog, foodAnalysis, membership, scanHistory, scanReport, session, user, weightLog } from '@/db/schema'
+import { dog, foodAnalysis, membership, scanHistory, scanReport, session, sitterSheet, user, weightLog } from '@/db/schema'
+import type { SheetData } from '@/lib/garde/sheet'
 import { getDb } from './drizzle'
 
 // @cdc lot 4 — RGPD : export des données d'un compte (portabilité) et garde-fou de la suppression.
-// Inclut l'historique du scanner (scan_history, scan_report) et la formule (membership). L'export ne contient jamais le mot de passe haché (app.account) ni les jetons de session.
+// Inclut l'historique du scanner (scan_history, scan_report), la formule (membership) et les fiches de garde (sitter_sheet). L'export ne contient jamais le mot de passe haché (app.account) ni les jetons de session.
 
 export interface AccountExport {
   format: 'toutou-gourmet-compte'
@@ -29,6 +30,8 @@ export interface AccountExport {
   scanReports: { date: string; productSlug: string; message: string }[]
   /** Formule du compte (Premium gratuit pendant le lancement) ; null : jamais activée */
   membership: { plan: string; source: string; activatedAt: string | null; createdAt: string } | null
+  /** Fiches de garde : contenu, dates et lien privé (le jeton fait partie des données du compte) */
+  sitterSheets: { dogId: string; startsOn: string; endsOn: string; createdAt: string; expiresAt: string; link: string; content: SheetData }[]
 }
 
 export async function exportAccountData(userId: string): Promise<AccountExport | null> {
@@ -67,6 +70,7 @@ export async function exportAccountData(userId: string): Promise<AccountExport |
     .where(eq(scanReport.userId, userId))
     .orderBy(asc(scanReport.createdAt))
   const [plan] = await db.select().from(membership).where(eq(membership.userId, userId)).limit(1)
+  const sheets = await db.select().from(sitterSheet).where(eq(sitterSheet.userId, userId)).orderBy(asc(sitterSheet.createdAt))
   return {
     format: 'toutou-gourmet-compte',
     version: 1,
@@ -102,6 +106,15 @@ export async function exportAccountData(userId: string): Promise<AccountExport |
     membership: plan
       ? { plan: plan.plan, source: plan.source, activatedAt: plan.activatedAt?.toISOString() ?? null, createdAt: plan.createdAt.toISOString() }
       : null,
+    sitterSheets: sheets.map((s) => ({
+      dogId: s.dogId,
+      startsOn: s.startsOn,
+      endsOn: s.endsOn,
+      createdAt: s.createdAt.toISOString(),
+      expiresAt: s.expiresAt.toISOString(),
+      link: `https://www.toutou-gourmet.com/garde/${s.token}`,
+      content: s.data,
+    })),
   }
 }
 

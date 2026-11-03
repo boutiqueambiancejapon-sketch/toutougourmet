@@ -20,7 +20,7 @@ export function Segmented<T extends string>({ name, legend, hint, options, value
       </legend>
       <div className="flex gap-1 rounded-control bg-cream-2 p-1">
         {options.map(([val, label]) => (
-          <label key={val} className="relative flex min-h-11 flex-1 cursor-pointer">
+          <label key={val} className="relative flex min-h-11 min-w-0 flex-1 cursor-pointer">
             <input
               type="radio"
               name={name}
@@ -29,7 +29,7 @@ export function Segmented<T extends string>({ name, legend, hint, options, value
               onChange={() => onChange(val)}
               className="peer absolute inset-0 m-0 cursor-pointer opacity-0"
             />
-            <span className="flex w-full items-center justify-center rounded-tile px-1 text-center text-sm leading-tight text-ink-2 peer-checked:bg-paper peer-checked:font-semibold peer-checked:text-ink peer-checked:shadow-sm peer-focus-visible:ring-2 peer-focus-visible:ring-ink">
+            <span className="flex w-full min-w-0 items-center justify-center rounded-tile px-1 text-center [overflow-wrap:anywhere] text-sm leading-tight text-ink-2 peer-checked:bg-paper peer-checked:font-semibold peer-checked:text-ink peer-checked:shadow-sm peer-focus-visible:ring-2 peer-focus-visible:ring-ink">
               {label}
             </span>
           </label>

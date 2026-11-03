@@ -10,7 +10,7 @@ interface TextFieldProps {
   id: string
   name: string
   label: string
-  type?: 'text' | 'email' | 'password' | 'date' | 'number'
+  type?: 'text' | 'email' | 'password' | 'date' | 'number' | 'tel' | 'time'
   autoComplete?: string
   defaultValue?: string
   value?: string
@@ -18,7 +18,8 @@ interface TextFieldProps {
   required?: boolean
   error?: string
   hint?: string
-  inputMode?: 'decimal' | 'numeric' | 'email' | 'text'
+  inputMode?: 'decimal' | 'numeric' | 'email' | 'text' | 'tel'
+  placeholder?: string
   min?: string
   max?: string
   step?: string

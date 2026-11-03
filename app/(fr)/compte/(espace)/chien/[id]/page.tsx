@@ -59,6 +59,9 @@ export default async function DogPage({
             Calculer sa ration
           </Link>
         ) : null}
+        <Link href={`/compte/chien/${dog.id}/garde`} className={btnOutline}>
+          Fiche de garde
+        </Link>
         <Link href={`/compte/chien/${dog.id}/modifier`} className={btnOutline}>
           Modifier le profil
         </Link>

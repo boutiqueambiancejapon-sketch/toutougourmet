@@ -18,10 +18,13 @@ interface TopicInput {
 
 const WEIGHT = /surpoids|obes|maigrir|minceur|light|kilos|grossi/
 const KIBBLE = /croquette|marque|avis|comparatif|etiquette|composition|additif|glucide|cereale/
+/** Articles qui portent déjà leur encart de fin vers un outil à compte (fiche de garde). */
+const OWN_END_CTA = /^faire-garder-son-chien/
 
 export function articleSignupTopic({ slug, categorySlug, verdict, hasBreed }: TopicInput): ArticleSignupTopic | null {
   if (categorySlug === 'urgences' || verdict === 'danger' || hasBreed) return null
   if (articleEndCta({ slug, categorySlug, verdict }) !== null) return null
+  if (OWN_END_CTA.test(slug)) return null
   if (WEIGHT.test(slug)) return 'kilos'
   if (categorySlug === 'avis-marques' || KIBBLE.test(slug)) return 'croquettes'
   if (categorySlug === 'sante') return 'poids'

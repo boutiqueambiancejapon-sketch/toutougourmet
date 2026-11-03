@@ -10,6 +10,7 @@ export const SIGNUP_PLACES = {
   'tool-bilan': 'Après le bilan',
   'tool-age': 'Après l’âge',
   'tool-scanner': 'Scanner',
+  'fiche-garde': 'Fiche de garde',
   'article-poids': 'Fin d’article (poids)',
   'article-croquettes': 'Fin d’article (croquettes)',
   'article-aliments': 'Fin d’article (aliments)',

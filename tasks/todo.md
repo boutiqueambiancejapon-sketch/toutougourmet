@@ -121,3 +121,11 @@ Objectif : `dashboard.toutou-gourmet.com`, nos chiffres à nous (actions des vis
 - [ ] Mode « serveur source » : Claude Code + `claude remote-control` en service sur le VPS, dépôt de travail avec droit d'écriture sur GitHub, adresse de préversion (étapes : `PROGRESS.md`, passation)
 - [ ] Tâche des 2 articles par jour déplacée sur le serveur, puis tâche planifiée cloud désactivée le même jour
 - [ ] Bascule DNS
+
+## Fiche de garde (2026-11-03, `feat/fiche-garde`)
+
+- [x] Page outil `/outils/fiche-de-garde`, formulaire sans compte, modèle vierge A4
+- [x] Espace compte : fiches par chien, table `app.sitter_sheet`, export RGPD
+- [x] Page du gardien `/garde/[jeton]` + PDF A4
+- [x] Article `faire-garder-son-chien-vacances-alimentation`
+- [ ] Fusion dans `v2`, migration en production (numéro à harmoniser avec `0005_opff_import`)
