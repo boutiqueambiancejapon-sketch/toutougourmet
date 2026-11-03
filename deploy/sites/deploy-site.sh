@@ -34,5 +34,5 @@ set -a; [[ -f "$ROOT/shared/.env" ]] && . "$ROOT/shared/.env"; set +a
 chgrp -R sites "$DEST/.next" && chmod -R g+w "$DEST/.next"
 ln -sfn "$DEST" "$ROOT/current.new" && mv -T "$ROOT/current.new" "$ROOT/current"
 sudo systemctl restart "site@$NAME"
-ls -1dt "$ROOT"/releases/* | tail -n +3 | xargs -r rm -rf
+ls -1dt "$ROOT"/releases/* | tail -n +3 | xargs -r sudo rm -rf  # cache écrit par l utilisateur sites
 echo "✓ $NAME en ligne : $SHA (port $PORT)"

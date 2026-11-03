@@ -29,7 +29,7 @@ RestrictSUIDSGID=true
 LockPersonality=true
 RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK
 CapabilityBoundingSet=
-UMask=0027
+UMask=0007
 
 [Install]
 WantedBy=multi-user.target
