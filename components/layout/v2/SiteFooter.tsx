@@ -17,6 +17,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
   {
     title: 'Marques',
     links: [
+      { href: '/chien/marque', label: 'Toutes les marques' },
       { href: '/chien/marque/franklin', label: 'Franklin' },
       { href: '/chien/marque/elmut', label: 'Elmut' },
       { href: '/chien/marque/ultra-premium-direct', label: 'Ultra Premium Direct' },
