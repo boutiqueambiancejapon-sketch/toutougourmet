@@ -14,6 +14,7 @@ import { ScanRows } from '@/components/compte/ScanHistoryList'
 import { TrackOnce } from '@/components/compte/TrackOnce'
 import { getSessionUser } from '@/lib/server/auth'
 import { latestWeights, listDogs } from '@/lib/server/dogs'
+import { getFoodLinks } from '@/lib/server/food-suggest'
 import { getMembership, premiumMissing } from '@/lib/server/membership'
 import { listUserScans, usedThisMonth } from '@/lib/server/scanner'
 import { monthlyScanLimit } from '@/lib/scanner/config'
@@ -35,7 +36,7 @@ export default async function AccountHomePage({ searchParams }: { searchParams: 
     listUserScans(user.id, 3),
   ])
   const premium = membership?.plan === 'premium'
-  const latest = await latestWeights(dogs.map((d) => d.id))
+  const [latest, foodLinks] = await Promise.all([latestWeights(dogs.map((d) => d.id)), getFoodLinks(dogs.map((d) => d.foodSlug))])
   const lastWeigh = [...latest.values()].sort((a, b) => b.date.localeCompare(a.date))[0]
   const lastDog = lastWeigh ? dogs.find((d) => d.id === lastWeigh.dogId) : undefined
   return (
@@ -62,7 +63,7 @@ export default async function AccountHomePage({ searchParams }: { searchParams: 
         <ul role="list" className="m-0 grid list-none grid-cols-1 gap-3 p-0 lg:grid-cols-2">
           {dogs.map((d) => (
             <li key={d.id} className="m-0">
-              <DogSummaryCard dog={d} last={latest.get(d.id)} />
+              <DogSummaryCard dog={d} last={latest.get(d.id)} foodLink={d.foodSlug ? foodLinks.get(d.foodSlug) : null} />
             </li>
           ))}
           <li className="m-0">

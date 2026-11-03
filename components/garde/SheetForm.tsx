@@ -19,6 +19,8 @@ interface SheetFormProps {
   /** Bandeau au-dessus des champs (ex. « Déjà rempli depuis son profil ») */
   banner?: ReactNode
   submitLabel: ReactNode
+  /** Juste avant le bouton, selon la saisie en cours (ex. « Garder dans le profil ») */
+  beforeSubmit?: (draft: SheetDraft) => ReactNode
   /** Sous le bouton (ex. explication du compte demandé) */
   footer?: ReactNode
   onSubmit: (data: SheetData, draft: SheetDraft) => Promise<SheetErrors | void>
@@ -28,7 +30,7 @@ interface SheetFormProps {
   onChange?: (draft: SheetDraft) => void
 }
 
-export function SheetForm({ initial, today, banner, submitLabel, footer, onSubmit, onFirstChange, onChange }: SheetFormProps) {
+export function SheetForm({ initial, today, banner, submitLabel, beforeSubmit, footer, onSubmit, onFirstChange, onChange }: SheetFormProps) {
   const id = useId()
   const [v, setV] = useState(initial)
   const [err, setErr] = useState<SheetErrors>({})
@@ -74,6 +76,7 @@ export function SheetForm({ initial, today, banner, submitLabel, footer, onSubmi
       {count > 0 ? (
         <FormNotice tone="error">{err.form ?? (count === 1 ? 'Un champ est à corriger plus haut.' : `${count} champs sont à corriger plus haut.`)}</FormNotice>
       ) : null}
+      {beforeSubmit?.(v)}
       <button
         type="submit"
         disabled={pending}

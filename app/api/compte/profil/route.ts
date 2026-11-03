@@ -7,7 +7,8 @@ import { getSessionUser } from '@/lib/server/auth'
 import { listDogs } from '@/lib/server/dogs'
 
 // @cdc premium — profil du premier chien du compte, pour pré-remplir les outils (ration, poids,
-// âge, budget) et le calculateur des articles « peut-il manger ». Appelé par le navigateur
+// âge, budget) et le calculateur des articles « peut-il manger ». `allergies` : prénom et allergies
+// des chiens qui en ont, pour l'alerte du scanner et des fiches /croquettes. Appelé par le navigateur
 // seulement si le témoin tg_compte est présent : les pages publiques restent statiques.
 
 export const dynamic = 'force-dynamic'
@@ -17,8 +18,10 @@ const headers = { 'Cache-Control': 'private, no-store' }
 export async function GET(): Promise<NextResponse> {
   const user = await getSessionUser()
   if (!user) return NextResponse.json({ dog: null } satisfies AccountProfile, { status: 401, headers })
-  const [first] = await listDogs(user.id)
+  const dogs = await listDogs(user.id)
+  const [first] = dogs
   if (!first) return NextResponse.json({ dog: null } satisfies AccountProfile, { headers })
+  const allergies = dogs.filter((d) => d.allergies.length > 0).map((d) => ({ name: d.name, allergies: d.allergies }))
   const breed = first.breedSlug ? getBreedBySlug(first.breedSlug) : undefined
   const body: AccountProfile = {
     dog: {
@@ -35,6 +38,7 @@ export async function GET(): Promise<NextResponse> {
       breedMidKg: breed ? breedMidWeight(breed) : null,
       breedName: breed?.name ?? null,
     },
+    allergies,
   }
   return NextResponse.json(body, { headers })
 }

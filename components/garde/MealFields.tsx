@@ -62,7 +62,7 @@ export function MealFields({ id, v, set, err }: PartProps) {
           />
         ))}
       </TwoCols>
-      <TextField id={`${id}-food`} name="food" label="Ses croquettes (marque, recette)" value={v.food} onChange={(x) => set('food', x)} maxLength={120} placeholder="ex. Franklin adulte poulet" error={err.food} />
+      <TextField id={`${id}-food`} name="food" label="Ses croquettes (marque, recette)" value={v.food} onChange={(x) => set('food', x)} maxLength={160} placeholder="ex. Franklin adulte poulet" error={err.food} />
     </Fieldset>
   )
 }

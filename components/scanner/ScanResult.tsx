@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { ResultOrigin, ScanAnalysis, ScanQuota } from '@/lib/scanner/result'
 import { analyseLabel } from '@/lib/scanner/analyse'
+import { AllergyAlert } from './AllergyAlert'
 import { LabelData } from './LabelData'
 import { ReportError } from './ReportError'
 import { ScoreDetail } from './ScoreDetail'
@@ -55,6 +56,7 @@ export function ScanResult({ analysis, origin, quota, signedIn, onRestart }: Sca
       {changed ? (
         <p role="status" className="m-0 text-sm text-ink-2">{`Note recalculée avec ta correction (lecture d'origine : ${analysis.details.score ?? 'pas de note'}).`}</p>
       ) : null}
+      <AllergyAlert ingredients={corrected.ingredients.map((i) => i.nom)} />
       {doubtful ? verify : null}
       <ScoreDetail details={details} />
       {doubtful ? null : verify}

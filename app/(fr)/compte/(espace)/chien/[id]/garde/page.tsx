@@ -8,7 +8,7 @@ import { SheetList } from '@/components/garde/SheetList'
 import { draftForDog } from '@/lib/garde/prefill'
 import { getSessionUser } from '@/lib/server/auth'
 import { todayIso } from '@/lib/server/dog-form'
-import { getDog } from '@/lib/server/dogs'
+import { dogExtrasReady, getDog } from '@/lib/server/dogs'
 import { listSheets } from '@/lib/server/sitter-sheets'
 
 export const metadata: Metadata = { title: 'Fiche de garde' }
@@ -26,9 +26,13 @@ export default async function DogSitterPage({
   if (!user) redirect(`/compte/connexion?retour=/compte/chien/${encodeURIComponent(id)}/garde`)
   const dog = await getDog(user.id, id)
   if (!dog) notFound()
-  const [sheets, query] = await Promise.all([listSheets(user.id, dog.id), searchParams])
+  const [sheets, query, extras] = await Promise.all([listSheets(user.id, dog.id), searchParams, dogExtrasReady()])
   const last = sheets[0] ?? null
-  const prefilled = last ? 'poids, ration, croquettes, allergies, numéros' : 'poids, âge, activité, donc sa ration'
+  const fromProfile = [dog.food ? 'croquettes' : null, dog.allergies.length > 0 ? 'allergies' : null].filter(Boolean).join(', ')
+  const prefilled = last
+    ? 'poids, ration, croquettes, allergies, numéros'
+    : `poids, âge, activité, donc sa ration${fromProfile ? `, ${fromProfile}` : ''}`
+  const gaps = { food: extras && !dog.food, allergies: extras && dog.allergies.length === 0 }
 
   return (
     <>
@@ -45,7 +49,7 @@ export default async function DogSitterPage({
         <h2 id="nouvelle-titre" className="m-0 font-display text-xl font-black leading-tight text-ink">
           Nouvelle fiche
         </h2>
-        <AccountSheetForm dogId={dog.id} initial={draftForDog(dog, last)} today={todayIso()} prefilled={prefilled} />
+        <AccountSheetForm dogId={dog.id} dogName={dog.name} initial={draftForDog(dog, last)} today={todayIso()} prefilled={prefilled} gaps={gaps} />
       </section>
     </>
   )

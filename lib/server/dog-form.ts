@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { ACTIVITY_VALUES } from '@/db/schema'
+import { ALLERGIES_MAX, ALLERGY_LENGTH, uniqueAllergies } from '@/lib/dog-allergies'
 import { birthDateFromAge, isKnownBreed } from '@/lib/dog-profile'
 import type { DogInput } from './dogs'
 
@@ -28,7 +29,14 @@ const dogSchema = z.object({
   weightKg: z.number().min(0.5, 'Poids entre 0,5 et 120 kg.').max(120, 'Poids entre 0,5 et 120 kg.').optional(),
   activity: z.enum(ACTIVITY_VALUES),
   sterilized: z.enum(['oui', 'non']),
+  food: z.string().trim().max(160, '160 caractères au plus.'),
+  foodSlug: z.string(),
+  allergies: z
+    .array(z.string().max(ALLERGY_LENGTH, `${ALLERGY_LENGTH} caractères au plus par allergie.`))
+    .max(ALLERGIES_MAX, `${ALLERGIES_MAX} allergies au plus.`),
 })
+
+const SLUG = /^[a-z0-9-]{1,100}$/
 
 export function parseDogForm(form: FormData): { ok: true; data: DogInput } | { ok: false; errors: FieldErrors } {
   const parsed = dogSchema.safeParse({
@@ -40,6 +48,9 @@ export function parseDogForm(form: FormData): { ok: true; data: DogInput } | { o
     weightKg: decimal(form.get('weightKg')),
     activity: String(form.get('activity') ?? 'normal'),
     sterilized: form.get('sterilized') === 'oui' ? 'oui' : 'non',
+    food: String(form.get('food') ?? ''),
+    foodSlug: String(form.get('foodSlug') ?? ''),
+    allergies: uniqueAllergies(form.getAll('allergies').map((x) => String(x))),
   })
   if (!parsed.success) {
     const errors: FieldErrors = {}
@@ -66,6 +77,10 @@ export function parseDogForm(form: FormData): { ok: true; data: DogInput } | { o
       weightKg: d.weightKg ?? null,
       activity: d.activity,
       sterilized: d.sterilized === 'oui',
+      food: d.food || null,
+      // Fiche liée seulement si le texte vient d'une suggestion ; l'action vérifie qu'elle existe.
+      foodSlug: d.food && SLUG.test(d.foodSlug) ? d.foodSlug : null,
+      allergies: d.allergies,
     },
   }
 }

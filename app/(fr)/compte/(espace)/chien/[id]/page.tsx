@@ -5,6 +5,7 @@ import { PageHeading } from '@/components/compte/espace/PageHeading'
 import { Panel } from '@/components/compte/espace/Panel'
 import { btnOutline, btnPrimary } from '@/components/compte/espace/ui'
 import { dogFacts } from '@/components/compte/DogCard'
+import { DogDiet } from '@/components/compte/DogDiet'
 import { FormNotice } from '@/components/compte/fields'
 import { WeightAlert, WeightAlertTeaser } from '@/components/compte/WeightAlert'
 import { WeightChart } from '@/components/compte/WeightChart'
@@ -17,7 +18,8 @@ import { planOf } from '@/lib/server/membership'
 import { weightTrend } from '@/lib/weight-trend'
 import { getSessionUser } from '@/lib/server/auth'
 import { todayIso } from '@/lib/server/dog-form'
-import { getDog, listWeights } from '@/lib/server/dogs'
+import { dogExtrasReady, getDog, listWeights } from '@/lib/server/dogs'
+import { getFoodLink } from '@/lib/server/food-suggest'
 import { addWeightAction } from '@/app/(fr)/compte/actions'
 
 export const metadata: Metadata = { title: 'Profil du chien' }
@@ -34,7 +36,13 @@ export default async function DogPage({
   if (!user) redirect(`/compte/connexion?retour=/compte/chien/${encodeURIComponent(id)}`)
   const dog = await getDog(user.id, id)
   if (!dog) notFound()
-  const [weights, query, plan] = await Promise.all([listWeights(dog.id), searchParams, planOf(user.id)])
+  const [weights, query, plan, extras, foodLink] = await Promise.all([
+    listWeights(dog.id),
+    searchParams,
+    planOf(user.id),
+    dogExtrasReady(),
+    getFoodLink(dog.foodSlug),
+  ])
   // listWeights : plus récente en premier ; la courbe et l'alerte lisent dans l'ordre des dates.
   const points = [...weights].reverse().map((w) => ({ date: w.date, weightKg: w.weightKg }))
   const trend = plan === 'premium' ? weightTrend(points) : null
@@ -68,6 +76,11 @@ export default async function DogPage({
       </div>
       {query.pesee ? <FormNotice tone="info">Pesée enregistrée.</FormNotice> : null}
       {trend ? <WeightAlert dog={dog} trend={trend} /> : null}
+      {extras ? (
+        <Panel id="repas" title="Ce qu'il mange">
+          <DogDiet dog={dog} link={foodLink} />
+        </Panel>
+      ) : null}
       <Panel id="courbe" title="Sa courbe de poids">
         {points.length > 0 ? (
           <WeightChart name={dog.name} points={points} ideal={ideal} />

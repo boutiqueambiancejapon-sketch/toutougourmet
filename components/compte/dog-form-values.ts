@@ -17,6 +17,9 @@ export const EMPTY_DOG: DogFormValues = {
   weightKg: '',
   activity: 'normal',
   sterilized: 'non',
+  food: '',
+  foodSlug: '',
+  allergies: [],
 }
 
 export function dogToFormValues(d: Dog): DogFormValues {
@@ -30,5 +33,8 @@ export function dogToFormValues(d: Dog): DogFormValues {
     weightKg: d.weightKg ? String(d.weightKg) : '',
     activity: d.activity,
     sterilized: d.sterilized ? 'oui' : 'non',
+    food: d.food ?? '',
+    foodSlug: d.foodSlug ?? '',
+    allergies: d.allergies,
   }
 }

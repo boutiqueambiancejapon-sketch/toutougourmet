@@ -10,14 +10,15 @@ import { clearSessionHint, hasSessionHint } from '@/lib/account-hint'
 
 export type AccountDog = NonNullable<AccountProfile['dog']>
 
-let pending: Promise<AccountDog | null> | null = null
+let pending: Promise<AccountProfile | null> | null = null
 
-function loadProfile(): Promise<AccountDog | null> {
+/** Réponse de /api/compte/profil, une requête par page (null : pas de compte ou erreur). */
+export function loadProfile(): Promise<AccountProfile | null> {
   pending ??= fetch('/api/compte/profil', { cache: 'no-store' })
     .then(async (res) => {
       if (res.status === 401) clearSessionHint()
       if (!res.ok) return null
-      return ((await res.json()) as AccountProfile).dog
+      return (await res.json()) as AccountProfile
     })
     .catch(() => null)
     .finally(() => {
@@ -32,8 +33,8 @@ export function useAccountPrefill(enabled = true): AccountDog | null {
   useEffect(() => {
     if (!enabled || !hasSessionHint()) return
     let alive = true
-    void loadProfile().then((d) => {
-      if (alive) setDog(d)
+    void loadProfile().then((p) => {
+      if (alive) setDog(p?.dog ?? null)
     })
     return () => {
       alive = false

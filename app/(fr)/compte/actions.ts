@@ -8,6 +8,7 @@ import { deleteAttemptsExceeded } from '@/lib/server/account-data'
 import { getAuth, getSessionUser } from '@/lib/server/auth'
 import { parseDogForm, parseWeightForm, todayIso, type FieldErrors } from '@/lib/server/dog-form'
 import { addWeight, createDog, deleteDog, updateDog } from '@/lib/server/dogs'
+import { getFoodLink } from '@/lib/server/food-suggest'
 import { activatePremium } from '@/lib/server/membership'
 
 // @cdc lot 4 — actions serveur des pages /compte. La session est relue à chaque appel ;
@@ -16,6 +17,13 @@ import { activatePremium } from '@/lib/server/membership'
 export interface FormState {
   errors?: FieldErrors
   message?: string
+}
+
+/** Fiche choisie dans les suggestions : gardée seulement si elle existe encore. */
+async function withVerifiedFood<T extends { foodSlug?: string | null }>(data: T): Promise<T> {
+  if (!data.foodSlug) return data
+  const link = await getFoodLink(data.foodSlug)
+  return { ...data, foodSlug: link ? link.slug : null }
 }
 
 async function requireUser() {
@@ -28,7 +36,7 @@ export async function createDogAction(_prev: FormState, form: FormData): Promise
   const user = await requireUser()
   const parsed = parseDogForm(form)
   if (!parsed.ok) return { errors: parsed.errors }
-  const id = await createDog(user.id, parsed.data, todayIso())
+  const id = await createDog(user.id, await withVerifiedFood(parsed.data), todayIso())
   redirect(`/compte/chien/${id}`)
 }
 
@@ -36,7 +44,7 @@ export async function updateDogAction(dogId: string, _prev: FormState, form: For
   const user = await requireUser()
   const parsed = parseDogForm(form)
   if (!parsed.ok) return { errors: parsed.errors }
-  const ok = await updateDog(user.id, dogId, parsed.data)
+  const ok = await updateDog(user.id, dogId, await withVerifiedFood(parsed.data))
   if (!ok) return { message: "Ce chien n'existe pas ou n'est pas rattaché à ton compte." }
   redirect(`/compte/chien/${dogId}`)
 }

@@ -7,6 +7,7 @@ import { btnPrimary } from '@/components/compte/espace/ui'
 import { IconPlus } from '@/components/icons'
 import { getSessionUser } from '@/lib/server/auth'
 import { latestWeights, listDogs } from '@/lib/server/dogs'
+import { getFoodLinks } from '@/lib/server/food-suggest'
 
 export const metadata: Metadata = { title: 'Mes chiens' }
 
@@ -14,7 +15,7 @@ export default async function DogsPage() {
   const user = await getSessionUser()
   if (!user) redirect('/compte/connexion?retour=/compte/chiens')
   const dogs = await listDogs(user.id)
-  const latest = await latestWeights(dogs.map((d) => d.id))
+  const [latest, foodLinks] = await Promise.all([latestWeights(dogs.map((d) => d.id)), getFoodLinks(dogs.map((d) => d.foodSlug))])
   return (
     <>
       <PageHeading
@@ -32,7 +33,7 @@ export default async function DogsPage() {
       <ul role="list" className="m-0 grid list-none grid-cols-1 gap-3 p-0 lg:grid-cols-2">
         {dogs.map((d) => (
           <li key={d.id} className="m-0">
-            <DogSummaryCard dog={d} last={latest.get(d.id)} heading="h2" />
+            <DogSummaryCard dog={d} last={latest.get(d.id)} foodLink={d.foodSlug ? foodLinks.get(d.foodSlug) : null} heading="h2" />
           </li>
         ))}
         {dogs.length === 0 ? (

@@ -30,6 +30,8 @@ export interface AccountProfile {
         breedName: string | null
       })
     | null
+  /** Chiens du compte qui ont des allergies notées (prénom et allergies seulement) : alerte du scanner */
+  allergies?: { name: string; allergies: string[] }[]
 }
 
 const AGES: readonly AgeGroup[] = ['chiot', 'adulte', 'senior']
