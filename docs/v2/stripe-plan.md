@@ -54,3 +54,10 @@ Premium devient un abonnement payant : **un produit « Toutou Gourmet Premium »
 4. Stripe Tax configuré et vérifié par un calcul test.
 5. CGV et pages légales.
 6. Passage en live : clé restreinte live, webhook live, prix live, checklist « Go live » de Stripe.
+
+## Droits de la clé limitée (noms de l'écran Stripe, vérifiés le 2026-11-03)
+
+Core : Charges and Refunds (Lecture), Customers (Écriture), Events (Lecture), Payment Disputes (Lecture), Payment Intents (Lecture), Products (Écriture). Billing : Customer Portal (Écriture), Invoices (Lecture), Prices (Écriture), Subscriptions (Écriture). Checkout Sessions (Écriture). Radar : Reviews (Lecture). Tax : Tax Calculations, Transactions (Écriture) ; Tax Settings, Registrations (Lecture). Webhook Endpoints, Event Destinations (Écriture). Tout le reste : Aucune.
+
+Rangement sur le serveur (Termius, la clé ne s'affiche pas) :
+`read -rsp "Clé Stripe : " K && echo && umask 077 && printf 'STRIPE_SECRET_KEY=%s\n' "$K" > ~/.config/toutou/stripe.env && unset K && echo OK`

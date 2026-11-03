@@ -145,3 +145,4 @@ Objectif : `dashboard.toutou-gourmet.com`, nos chiffres à nous (actions des vis
 - [x] Page du gardien `/garde/[jeton]` + PDF A4
 - [x] Article `faire-garder-son-chien-vacances-alimentation`
 - [ ] Fusion dans `v2`, migration en production (numéro à harmoniser avec `0005_opff_import`)
+- [ ] Stripe (Premium payant) : code en préparation sur `feat/stripe-premium` (sans clé). Reporté par le propriétaire le 2026-11-03 : la clé limitée n'a pas pu être rangée. À reprendre : clé limitée (droits listés dans `docs/v2/stripe-plan.md`), puis `scripts/stripe-setup.ts`, webhook, essai à 0,50 €/jour.
