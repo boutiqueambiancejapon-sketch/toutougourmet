@@ -2,7 +2,7 @@
 
 ## Tranchées
 
-- [x] Framework : Next.js 16.1.6 — jamais downgrader · mise à jour via PR dédiée uniquement
+- [x] Framework : Next.js 16.4.4 (depuis le 2026-11-02, avant 16.1.6) — jamais downgrader · mise à jour via PR dédiée uniquement
 - [x] React : 19.2.3
 - [x] Langage : TypeScript strict — jamais de `any`
 - [x] Déploiement : Vercel · région auto · GitHub Actions CI (à configurer)
@@ -122,3 +122,6 @@ Bienvenue automatique (`WELCOME_EMAIL_ENABLED`) et lettre mensuelle (`toutou-new
 
 ## 2026-11-02 — Audit de sécurité (branche `sec/audit`)
 Rapport : `docs/v2/securite-2026-11.md`. Décisions : aucune IP en base, ni pour les sessions (`ip_address` vidée) ni pour les compteurs de Better Auth (stockage `memory` au lieu de `database` ; remise à zéro à chaque redémarrage, acceptable pour des fenêtres de 1 à 5 min). Le tableau de bord revérifie l'authentification dans chaque page, route et action (Next 16.1.6 a des contournements connus du proxy). Optimiseur d'images en WebP seul. Next et sharp restent à monter dans une branche dédiée.
+
+## 2026-11-02 — Next.js 16.4.4 et sharp 0.35.5 (branche `chore/next-16.4`)
+Mise à jour approuvée par le propriétaire pour fermer les avis de sécurité restants de l'audit : 5 avis critiques sur `next` 16.1.6 (exécution de code via l'optimiseur d'images SVG/AVIF et `use cache`, contournements du proxy) et l'avis élevé sur `sharp` 0.34.5. `next`, `eslint-config-next` et `@next/mdx` passent en 16.4.4 (on reste en 16.x), `sharp` en 0.35.5 en dépendance directe ; Next 16.4.4 déclare lui-même `sharp ^0.35.5`, aucun `overrides` n'est nécessaire. L'`overrides` de `postcss` est gardé (Next 16.4.4 fige encore `postcss` 8.5.23). Seul changement de code : `experimental.turbopackUseSystemTlsCerts` retiré de `next.config.ts` (option supprimée en 16.2, elle ne servait qu'à next/font/google et les polices sont locales). L'optimiseur reste en WebP seul. Les vérifications d'authentification dans chaque page du tableau de bord restent en place, même si le proxy est corrigé.
