@@ -9,6 +9,8 @@ import { DashboardHeader } from './DashboardHeader'
 interface ShellProps {
   period: PeriodKey
   current: TabSlug
+  /** Titre de la page quand ce n'est pas le nom de l'onglet (sous-page). */
+  title?: string
   /** Sous le titre : la question de l'onglet par défaut. */
   intro?: string
   /** Base injoignable ou lecture en échec : dit en clair, la page reste debout. */
@@ -16,14 +18,14 @@ interface ShellProps {
   children: ReactNode
 }
 
-export function DashboardShell({ period, current, intro, notice, children }: ShellProps) {
+export function DashboardShell({ period, current, title, intro, notice, children }: ShellProps) {
   const tab = tabOf(current)
   return (
     <>
       <DashboardHeader period={period} current={current} />
       <main className="mx-auto w-full max-w-page px-4 pb-16 md:px-8">
         <div className="pt-5">
-          <h1 className="page-title m-0 text-ink">{current ? tab.label : 'Tableau de bord'}</h1>
+          <h1 className="page-title m-0 text-ink">{title ?? (current ? tab.label : 'Tableau de bord')}</h1>
           <p className="m-0 mt-1 max-w-prose text-sm text-ink-2">{intro ?? tab.question}</p>
         </div>
         {notice ? (
