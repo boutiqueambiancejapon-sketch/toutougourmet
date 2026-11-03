@@ -146,7 +146,7 @@ Arrêt : `sudo systemctl disable --now toutou-opff-import.timer`. Les données r
 
 ## Lettre et e-mails de la newsletter
 
-Code : `lib/emails/` (gabarits, fonctions pures), `lib/server/newsletter.ts` et `lib/server/brevo-newsletter.ts` (appels Brevo), aperçus dans le tableau de bord (`/tableau-de-bord/emails/bienvenue` et `/tableau-de-bord/emails/lettre`). Tests des gabarits : `npx tsx scripts/test-emails.ts`.
+Code : `lib/emails/` (gabarits, fonctions pures), `lib/server/newsletter.ts` et `lib/server/brevo-newsletter.ts` (appels Brevo), aperçus dans le tableau de bord (`/tableau-de-bord/emails/bienvenue`, `/tableau-de-bord/emails/suite/j2`… et `/tableau-de-bord/emails/lettre`). Tests des gabarits : `npx tsx scripts/test-emails.ts`.
 
 Variables à ajouter dans `/srv/toutou/shared/.env` :
 
@@ -190,6 +190,53 @@ journalctl -u toutou-newsletter -n 50 --no-pager    # ce qu'il a fait
 ```
 
 Arrêt : `sudo systemctl disable --now toutou-newsletter.timer`.
+
+### Suite de bienvenue (préparée, non activée)
+
+Trois e-mails après celui du jour 0 : J2 « Calcule la ration de ton chien », J5 l'offre partenaire du mois (même carte et même rotation que la lettre mensuelle, remise de `data/partner-discounts.ts`, lien vers `/codes-promo/{marque}`), J10 le scanner. Gabarits : `lib/emails/welcome-sequence.ts` ; logique : `lib/server/welcome-sequence.ts` ; aperçus et tests : `/tableau-de-bord/emails/suite/j2`, `/j5`, `/j10`.
+
+`scripts/welcome-sequence.ts` tourne chaque jour à 10 h 17 (heure de Paris). Il lit les contacts de la liste `BREVO_LIST_ID` et leur date de création dans Brevo (jour d'inscription, à Paris), puis envoie à chacun l'étape due :
+
+- seulement aux contacts inscrits le jour `WELCOME_SEQUENCE_START` ou après (les abonnés plus anciens ne reçoivent rien, une réinscription garde la date du premier contact) ;
+- une fois par étape et par adresse : trace dans `analytics.welcome_sends` (empreinte HMAC de l'adresse avec `NEWSLETTER_SECRET`, jamais l'adresse), posée avant l'envoi, retirée si Brevo refuse ;
+- une étape manquée peut partir jusqu'à 3 jours en retard ; jamais une étape plus ancienne qu'une étape déjà envoyée ; un seul e-mail par contact et par jour ;
+- au plus 300 envois par jour ; contacts en liste noire Brevo ignorés ; journal sans adresse (repère `#empreinte`).
+
+Pas de double envoi avec le jour 0 : l'inscription par le guide reçoit l'e-mail du guide **à la place** de la bienvenue (`app/api/contact/route.ts` s'arrête après le guide), la suite commence au jour 2 et ses traces sont à part (`welcome_sends`, pas `guide_sends` ni `WELCOME_SENT`). Un lecteur qui se désinscrit sort de la liste 5 : le script ne le voit plus.
+
+Avant d'installer : appliquer la table (idempotent) :
+
+```bash
+sudo -u postgres psql -d toutou -f db/analytics.sql
+```
+
+Variables à poser dans `/srv/toutou/shared/.env` (le propriétaire, le jour où il active) :
+
+| Variable | Valeur |
+| --- | --- |
+| `WELCOME_EMAIL_ENABLED` | `1` : active la bienvenue du jour 0 (déjà en place) et la suite. Sans elle, le script ne fait rien. |
+| `WELCOME_SEQUENCE_START` | date de départ `AAAA-MM-JJ`, en pratique le jour de l'activation (ex. `2026-11-10`). Vide ou absente : rien n'est envoyé. |
+| `NEWSLETTER_SECRET`, `BREVO_API_KEY`, `BREVO_LIST_ID`, `BREVO_SENDER_EMAIL` | déjà présentes. |
+
+Essai sans rien envoyer ni écrire (plan par étape, aperçus HTML dans `/tmp/welcome-j2.html`, etc.) :
+
+```bash
+cd /srv/toutou/current
+sudo -u toutou bash -c 'set -a; . /srv/toutou/shared/.env; set +a; WELCOME_SEQUENCE_START=2026-11-01 node_modules/.bin/tsx scripts/welcome-sequence.ts --dry'
+# contacts fictifs au lieu de la liste Brevo : ajouter BREVO_DRY_RUN=1 ; simuler un autre jour : --today=2026-11-20
+```
+
+Installation :
+
+```bash
+sudo cp deploy/toutou-welcome.service deploy/toutou-welcome.timer /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now toutou-welcome.timer
+systemctl list-timers toutou-welcome.timer        # prochain passage
+journalctl -u toutou-welcome -n 50 --no-pager     # ce qu'il a fait
+```
+
+Arrêt : `sudo systemctl disable --now toutou-welcome.timer` (ou retirer `WELCOME_SEQUENCE_START`).
 
 ## Le guide de la gamelle (PDF offert contre l'inscription)
 

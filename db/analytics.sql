@@ -127,3 +127,16 @@ CREATE TABLE IF NOT EXISTS analytics.guide_sends (
 );
 ALTER TABLE analytics.guide_sends OWNER TO toutou;
 GRANT SELECT, INSERT, DELETE ON analytics.guide_sends TO administrator;
+
+-- Suite de bienvenue (J2, J5, J10) : une ligne par étape partie et par adresse
+-- (scripts/welcome-sequence.ts). Empreinte HMAC-SHA256 de l'adresse en minuscules, même calcul que
+-- guide_sends, jamais l'adresse elle-même. Posée avant l'envoi, retirée si l'envoi échoue.
+CREATE TABLE IF NOT EXISTS analytics.welcome_sends (
+  email_hash text NOT NULL,
+  step       text NOT NULL CHECK (step IN ('j2', 'j5', 'j10')),
+  sent_at    timestamptz NOT NULL DEFAULT now(),
+  PRIMARY KEY (email_hash, step)
+);
+CREATE INDEX IF NOT EXISTS welcome_sends_sent_at_idx ON analytics.welcome_sends (sent_at);
+ALTER TABLE analytics.welcome_sends OWNER TO toutou;
+GRANT SELECT, INSERT, DELETE ON analytics.welcome_sends TO administrator;

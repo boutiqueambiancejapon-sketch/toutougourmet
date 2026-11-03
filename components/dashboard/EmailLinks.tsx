@@ -4,6 +4,9 @@ import Link from 'next/link'
 
 const LINKS = [
   { href: '/tableau-de-bord/emails/bienvenue', title: 'E-mail de bienvenue', note: 'Envoyé une fois après chaque inscription à la lettre.' },
+  { href: '/tableau-de-bord/emails/suite/j2', title: 'Suite de bienvenue, jour 2', note: 'La ration. Préparée, envoyée seulement si WELCOME_SEQUENCE_START est posé.' },
+  { href: '/tableau-de-bord/emails/suite/j5', title: 'Suite de bienvenue, jour 5', note: 'L’offre partenaire du mois, même carte que la lettre.' },
+  { href: '/tableau-de-bord/emails/suite/j10', title: 'Suite de bienvenue, jour 10', note: 'Le scanner : croquettes, pâtées, friandises.' },
   { href: '/tableau-de-bord/emails/lettre', title: 'Lettre mensuelle', note: 'Prochaine lettre, envois programmés et annulation.' },
   { href: '/tableau-de-bord/emails/hebdo', title: 'Résumé hebdomadaire', note: 'Chiffres de la semaine, envoyés au propriétaire chaque lundi à 8 h 40.' },
 ] as const

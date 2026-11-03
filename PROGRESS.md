@@ -84,6 +84,8 @@
 - **V2 · pages outils** (2026-11-02, branche de travail issue de `v2`, à relire avant fusion) : `/outils` et les 6 outils sur le gabarit `components/outils/ToolPage.tsx` ; « Garder ce résultat » (e-mail → `/api/contact`, `track('Newsletter Signup', { place: 'tool-<nom>' })`), suite logique, au plus un lien partenaire ; `computeRation` commun à `/outils/ration` et au mini-outil d'accueil. Reste : quiz non refait ; tant que Brevo n'est pas branché, l'e-mail du résultat arrive chez le propriétaire (Formspree) et rien n'est envoyé automatiquement au visiteur.
 - **Redesign V2 — Batch 1 / 7** (2026-04-24) : cadrage images & prompt système Gemini. Livrables : `docs/prompts/gemini-image-system.md` (prompt système unique, palette figée, 6 éléments décoratifs signatures, règles de déclinaison par type de slot) + `data/images-manifest.ts` (25 slots typés TypeScript strict : 1 hero home LCP, 4 cartes marques, 6 cartes races, 8 covers catégorie article, 5 articles pilotes, 1 OG social). Style cible : "photo réaliste + illustration peinte par-dessus" (Oatly/Liquid Death). Aucune image imitant les packshots des 4 marques partenaires (Franklin/Elmut/Petty Well/Dog Chef) pour éviter tout risque légal. Prochaine étape : batch 2 — script `scripts/generate-images.ts` + 9 images pilotes test via Gemini 2.5 Flash Image.
 
+- [ ] **Codes promo et suite de bienvenue (2026-11-03, branche `feat/promo-welcome`, non fusionnée)** : hub `/codes-promo` et 5 pages partenaires ; e-mails J2/J5/J10 préparés (`scripts/welcome-sequence.ts`, `deploy/toutou-welcome.*` non installés, activation : `deploy/README.md`, « Suite de bienvenue »).
+
 ## Bloqué
 
 - DM_Sans 3 weights → DÉCISION À VALIDER (supprimer weight 500 ou 600 ?)
