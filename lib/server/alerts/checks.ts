@@ -4,6 +4,7 @@ import { BACKUP_MAX_AGE_HOURS, getBackupStatus } from '../dashboard-backup'
 import { getHostStats } from '../dashboard-host'
 import { addDays, parisDate } from '@/lib/emails/schedule'
 import { NIGHT_LABELS, nightOk, readNightRun } from '../night-logs'
+import { dailyCalls, SCANNER_DAILY_CAP } from '../scanner-daily'
 
 // @cdc alertes — contrôles lancés toutes les 10 minutes par scripts/alerts.ts. Chaque contrôle
 // rend des incidents : une clé stable (une alerte par clé tant qu'elle dure), une ligne courte
@@ -110,4 +111,21 @@ export async function checkBackup(now: Date): Promise<Incident[]> {
     return [{ key: 'backup', urgent: false, line: `Dernière sauvegarde de la base vieille de ${Math.floor(b.ageHours)} heures.`, resolved }]
   }
   return []
+}
+
+/** Scanner : 80 % du plafond de lectures du jour atteint (robots ou succès soudain). */
+export async function checkScannerDaily(): Promise<Incident[]> {
+  const calls = await dailyCalls().catch(() => null)
+  if (calls === null || calls < SCANNER_DAILY_CAP * 0.8) return []
+  const full = calls >= SCANNER_DAILY_CAP
+  return [
+    {
+      key: 'scanner-daily',
+      urgent: false,
+      line: full
+        ? `Scanner : plafond du jour atteint (${calls} lectures sur ${SCANNER_DAILY_CAP}), les analyses photo sont suspendues jusqu'à minuit.`
+        : `Scanner : ${calls} lectures aujourd'hui sur ${SCANNER_DAILY_CAP} autorisées.`,
+      resolved: 'Scanner : compteur du jour remis à zéro.',
+    },
+  ]
 }

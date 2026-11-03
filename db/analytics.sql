@@ -87,3 +87,12 @@ ALTER TABLE analytics.events ADD COLUMN IF NOT EXISTS country char(2);
 ALTER TABLE analytics.hits ADD COLUMN IF NOT EXISTS country char(2);
 CREATE INDEX IF NOT EXISTS events_country_ts_idx ON analytics.events (country, ts) WHERE country IS NOT NULL;
 CREATE INDEX IF NOT EXISTS hits_country_ts_idx ON analytics.hits (country, ts) WHERE country IS NOT NULL;
+
+-- Plafond global des lectures d'étiquette par jour (appels payants au fournisseur d'OCR) : borne
+-- la facture même si des robots créent des comptes. Une ligne par jour (heure de Paris).
+CREATE TABLE IF NOT EXISTS analytics.scanner_daily (
+  day   date PRIMARY KEY,
+  calls integer NOT NULL DEFAULT 0
+);
+ALTER TABLE analytics.scanner_daily OWNER TO toutou;
+GRANT SELECT, INSERT, UPDATE ON analytics.scanner_daily TO administrator;
