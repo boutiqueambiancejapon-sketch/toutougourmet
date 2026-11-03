@@ -40,7 +40,7 @@ export const brandFaqs: Record<string, BrandFaq[]> = {
     { q: 'Dog Chef convient-il aux chiots et aux seniors ?', a: "Oui. Pour un chiot, Dog Chef adapte le rapport calcium et phosphore à la race et au poids adulte estimé, et propose le Puppy Booster. Pour un senior, le menu Poisson et le Senior Booster (glucosamine et curcuma) visent les chiens de plus de 7 ou 8 ans à la mobilité réduite." },
     { q: 'Combien de temps se conservent les repas Dog Chef ?', a: "Fermés : 7 jours au réfrigérateur et 4 mois au congélateur. Ouverts : 24 heures. La box d'essai couvre deux semaines, de quoi faire la transition." },
     { q: 'La livraison Dog Chef est-elle gratuite ?', a: "Oui, en France métropolitaine, comprise dans le prix de l'abonnement. Les repas arrivent en camionnette réfrigérée, en boudins portionnés." },
-    { q: 'Quel est le code promo Dog Chef ?', a: "Le code WZU7090 donne -30 % sur la box d'essai, avec la livraison gratuite et sans engagement. Notre lien partenaire l'applique automatiquement ; tu peux aussi le saisir sur le site Dog Chef." },
+    { q: 'Quel est le code promo Dog Chef ?', a: "Le code WZU7090 donne −30 % sur la box d'essai, avec la livraison gratuite et sans engagement. Notre lien partenaire l'applique automatiquement ; tu peux aussi le saisir sur le site Dog Chef." },
     { q: 'Où sont fabriqués les repas Dog Chef ?', a: "Dans l'atelier de Dog Chef à Huldenberg, en Belgique, où travaillent plus de 100 personnes. La marque a été fondée en 2017 et livre depuis ce site la France, la Belgique et le Luxembourg." },
     { q: 'Dog Chef propose-t-il des repas pour chat ?', a: "Non, Dog Chef ne fait que des repas pour chien. Pour un chat, Elmut propose une gamme de repas frais." },
     { q: 'Quels sont les avis négatifs sur Dog Chef ?', a: "Le prix revient le plus souvent : 45 à 165 € par mois selon le gabarit, bien plus que des croquettes classiques. L'inscription demande un profil détaillé (race, poids, activité, santé) avant la première commande. Et il n'existe aucune formule pour chat." },
@@ -50,7 +50,7 @@ export const brandFaqs: Record<string, BrandFaq[]> = {
     { q: "Comment fonctionne l'abonnement Dogfy Diet ?", a: "Les repas arrivent en sachets prédosés, au rythme choisi à l'inscription. L'abonnement est sans engagement et comprend un suivi nutritionnel gratuit. Une partie des avis Trustpilot signale des prélèvements mal compris et une résiliation compliquée : note la date du prochain envoi et la marche à suivre pour arrêter avant de valider." },
     { q: 'Que contient le menu bœuf Dogfy Diet ?', a: "65 % de bœuf et 22 % de carotte. L'analyse indique 13 % de protéines, 9 % de matières grasses et 71 % d'humidité, soit environ 45 % de protéines et 31 % de matières grasses une fois l'eau retirée." },
     { q: 'Dogfy Diet convient-il à un chien en surpoids ?', a: "Le menu bœuf est riche en graisses (environ 31 % sur matière sèche). Il reste possible pour un chien en surpoids si tu réduis la portion et pèses le chien toutes les deux semaines, idéalement avec l'avis du vétérinaire. Le suivi nutritionnel gratuit sert à ajuster la quantité." },
-    { q: "Quelle est l'offre de bienvenue Dogfy Diet ?", a: "Une box d'essai de 14 jours à -50 %, livraison offerte. Vérifie ensuite le prix de l'abonnement au tarif normal avant le deuxième envoi." },
+    { q: "Quelle est l'offre de bienvenue Dogfy Diet ?", a: "Une box d'essai de 14 jours à −50 %, livraison offerte. Vérifie ensuite le prix de l'abonnement au tarif normal avant le deuxième envoi." },
     { q: 'Que disent les avis clients sur Dogfy Diet ?', a: "La marque obtient 4,4/5 sur 12 566 avis Trustpilot. Les critiques portent surtout sur les prélèvements, la résiliation et quelques sachets livrés abîmés." },
   ],
   fidelis: [
@@ -112,7 +112,7 @@ export const brandDescriptions: Record<string, string[]> = {
   'dogfy-diet': [
     "Dogfy Diet livre des repas frais pour chien, cuits sous vide à température douce puis conditionnés en sachets prédosés. Chaque sachet correspond à une portion calculée pour le chien inscrit, sans balance à sortir. La marque dit suivre les recommandations nutritionnelles de la FEDIAF.",
     "Le menu bœuf contient 65 % de bœuf et 22 % de carotte. Son analyse affiche 13 % de protéines, 9 % de matières grasses et 71 % d'humidité, soit environ 45 % de protéines et 31 % de matières grasses une fois l'eau retirée. Pour un chien en surpoids, la portion se dose avec soin et se vérifie à la pesée.",
-    "La formule fonctionne en abonnement sans engagement, avec un suivi nutritionnel gratuit. L'offre de bienvenue donne une box d'essai de 14 jours à -50 %, livraison offerte.",
+    "La formule fonctionne en abonnement sans engagement, avec un suivi nutritionnel gratuit. L'offre de bienvenue donne une box d'essai de 14 jours à −50 %, livraison offerte.",
     "Sur Trustpilot, Dogfy Diet obtient 4,4/5 sur 12 566 avis. Les reproches portent sur les prélèvements de l'abonnement, que certains clients n'avaient pas compris, sur une résiliation jugée difficile et sur quelques sachets arrivés abîmés. Lis les conditions de l'abonnement avant de valider la box d'essai.",
   ],
   fidelis: [
@@ -123,10 +123,10 @@ export const brandDescriptions: Record<string, string[]> = {
 }
 
 export const brandVerdicts: Record<string, string> = {
-  franklin: "Franklin est le choix le plus simple pour un chien allergique ou sensible : une seule viande par recette, jusqu'à 70 % de viande et une composition courte. La fabrication se fait en République tchèque et les livraisons connaissent des ratés selon les avis. La première commande en abonnement est à -30 %.",
-  elmut: "Elmut convient si tu veux passer au repas frais avec une ration calculée pour ton chien, y compris senior ou en surpoids. Il faut de la place au frigo et un budget plus élevé que pour des croquettes. La première commande est à -40 % par notre lien.",
+  franklin: "Franklin est le choix le plus simple pour un chien allergique ou sensible : une seule viande par recette, jusqu'à 70 % de viande et une composition courte. La fabrication se fait en République tchèque et les livraisons connaissent des ratés selon les avis. L'abonnement est à −30 %.",
+  elmut: "Elmut convient si tu veux passer au repas frais avec une ration calculée pour ton chien, y compris senior ou en surpoids. Il faut de la place au frigo et un budget plus élevé que pour des croquettes. La première commande est à −40 % par notre lien.",
   'ultra-premium-direct': "Ultra Premium Direct vise le chien adulte sans souci particulier et le budget serré : 3 à 5 € le kilo en vente directe. Les recettes standard contiennent du maïs et moins de viande que Franklin ; pour un chien sensible, la gamme Sans Céréales coûte environ 1 € de plus au kilo.",
-  'dog-chef': "Dog Chef convient à un chien dont les besoins changent : chiot en croissance, chien en surpoids, senior. Les portions sont recalculées quand le poids évolue et les Boosters ciblent un besoin précis. Le prix est élevé ; la box d'essai à -30 %, livraison comprise et sans engagement, sert à tester l'appétence avant l'abonnement.",
+  'dog-chef': "Dog Chef convient à un chien dont les besoins changent : chiot en croissance, chien en surpoids, senior. Les portions sont recalculées quand le poids évolue et les Boosters ciblent un besoin précis. Le prix est élevé ; la box d'essai à −30 %, livraison comprise et sans engagement, sert à tester l'appétence avant l'abonnement.",
   'dogfy-diet': "Dogfy Diet convient si tu veux passer au repas frais sans peser les portions : les sachets arrivent prédosés et le suivi nutritionnel est gratuit. Les critiques sur l'abonnement reviennent assez pour lire les conditions avant de commander. Pour un chien en surpoids, le menu bœuf se dose avec soin.",
   fidelis: "Fidelis a deux atouts rares : des bocaux qui se gardent au placard avant ouverture, et des viandes peu courantes comme le cheval ou la chèvre. Les menus étaient tous en rupture de stock au 1er novembre 2026 et peu d'avis clients sont vérifiables. On ne la recommande pas tant que le stock n'est pas revenu.",
 }

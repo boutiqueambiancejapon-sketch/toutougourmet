@@ -1,21 +1,14 @@
 import { getBrandBySlug } from '@/data/brands'
 import type { ActivityLevel } from '@/lib/calculators'
+import { CONFIRMED_DISCOUNTS, type OfferSlug } from '@/data/partner-discounts'
 
 // @cdc premium — offres partenaires du compte, choisies selon le profil du chien. Fonction pure
 // (testée par scripts/test-account-offers.ts). Remises : uniquement celles confirmées par le
 // propriétaire (DECISIONS.md, 2026-11-02). Raisons : reprises des fiches de data/brands.ts, aucun
 // fait ajouté. Fidelis (rupture) et Petty Well (plus partenaire) ne sont jamais proposés.
 
-export type OfferSlug = 'dog-chef' | 'dogfy-diet' | 'elmut' | 'franklin' | 'ultra-premium-direct'
-
-/** Remises confirmées le 2026-11-02. null : pas de remise affichée. */
-export const CONFIRMED_DISCOUNTS: Record<OfferSlug, string | null> = {
-  'dog-chef': "−30 % sur la box d'essai, livraison gratuite",
-  'dogfy-diet': "−50 % sur la box d'essai de 14 jours",
-  elmut: '−40 % sur la première commande',
-  franklin: '−30 % en abonnement',
-  'ultra-premium-direct': '−20 % sur la première commande en abonnement',
-}
+// Remises : une seule table, data/partner-discounts.ts (aussi lue par data/brands.ts).
+export { CONFIRMED_DISCOUNTS, type OfferSlug }
 
 export interface AccountOffer {
   slug: OfferSlug

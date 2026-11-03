@@ -1,4 +1,5 @@
 import { IconChevron } from '@/components/icons'
+import { CONFIRMED_DISCOUNTS } from '@/data/partner-discounts'
 
 // @cdc affiliation — liens partenaires autorisés sous les outils (un au plus par résultat,
 // et seulement quand le résultat le justifie). Les clics sont mesurés par
@@ -7,7 +8,7 @@ import { IconChevron } from '@/components/icons'
 export interface Partner {
   brand: string
   href: string
-  /** Offre en cours, telle que donnée par la marque */
+  /** Offre en cours : data/partner-discounts.ts (seule source) */
   offer: string
   /** Pourquoi ce lien, à partir du résultat */
   why: string
@@ -15,11 +16,11 @@ export interface Partner {
 }
 
 export const PARTNERS = {
-  dogChef: { brand: 'Dog Chef', href: 'https://www.dogchef.com/fr/code/WZU7090', offer: "−30 % sur la box d'essai, livraison gratuite, sans engagement" },
-  dogfy: { brand: 'Dogfy Diet', href: 'https://tidd.ly/4jT3Tqg', offer: "−50 % sur la box d'essai de 14 jours" },
-  elmut: { brand: 'Elmut', href: 'https://c3po.link/QWMW4k6mbU', offer: '−40 % sur la 1re commande' },
-  franklin: { brand: 'Franklin', href: 'https://c3po.link/Q3xbJhfapn', offer: '−30 % sur la 1re commande en abonnement' },
-  upd: { brand: 'Ultra Premium Direct', href: 'https://c3po.link/QqJYNnzYD8', offer: '' },
+  dogChef: { brand: 'Dog Chef', href: 'https://www.dogchef.com/fr/code/WZU7090', offer: CONFIRMED_DISCOUNTS['dog-chef'] ?? '' },
+  dogfy: { brand: 'Dogfy Diet', href: 'https://tidd.ly/4jT3Tqg', offer: CONFIRMED_DISCOUNTS['dogfy-diet'] ?? '' },
+  elmut: { brand: 'Elmut', href: 'https://c3po.link/QWMW4k6mbU', offer: CONFIRMED_DISCOUNTS.elmut ?? '' },
+  franklin: { brand: 'Franklin', href: 'https://c3po.link/Q3xbJhfapn', offer: CONFIRMED_DISCOUNTS.franklin ?? '' },
+  upd: { brand: 'Ultra Premium Direct', href: 'https://c3po.link/QqJYNnzYD8', offer: CONFIRMED_DISCOUNTS['ultra-premium-direct'] ?? '' },
 } as const
 
 export function PartnerLink({ partner, tool }: { partner: Partner; tool: string }) {

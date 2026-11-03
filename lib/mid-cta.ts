@@ -1,4 +1,5 @@
 import { pageTypeOf } from '@/lib/page-type'
+import { CONFIRMED_DISCOUNTS, shortDiscount } from '@/data/partner-discounts'
 
 // @cdc affiliation — encart du milieu d'article (« façon 10min ») : quelle offre servir, selon la
 // carte des conversions (docs/v2/cro-carte.md, validée le 2026-11-03) : un seul encart au milieu
@@ -19,13 +20,13 @@ export interface MidCtaConfig {
 
 const DOG_CHEF: MidCtaConfig = {
   id: 'dog-chef',
-  eyebrow: 'Nouveau chez Dog Chef ? −30 % avec notre lien',
+  eyebrow: `Nouveau chez Dog Chef ? ${CONFIRMED_DISCOUNTS['dog-chef']}`,
   title: 'Un menu calculé pour ton chien, livré frais',
   body: "Tu renseignes son poids, son âge, sa race et son activité. Dog Chef calcule la portion du jour et cuisine les repas à basse température. La box d'essai te montre en deux semaines s'il les aime.",
   checks: ['Portions calculées sur son profil', "Livraison gratuite sur la box d'essai", 'Sans engagement, pause quand tu veux'],
-  button: { label: 'Composer son menu, −30 %', href: 'https://www.dogchef.com/fr/code/WZU7090' },
-  badge: { big: '−30 %', small: 'box d’essai' },
-  secondary: { label: 'Pas sûr de sa ration ? Calcule-la en 30 secondes', href: '/outils/ration' },
+  button: { label: `Composer son menu, ${shortDiscount('dog-chef').replace(' ', '\u00a0')}`, href: 'https://www.dogchef.com/fr/code/WZU7090' },
+  badge: { big: shortDiscount('dog-chef'), small: 'box d’essai' },
+  secondary: { label: 'Pas sûr de sa ration ? Calcule-la avec notre outil', href: '/outils/ration' },
 }
 
 const POIDS: MidCtaConfig = {
