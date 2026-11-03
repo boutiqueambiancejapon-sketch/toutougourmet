@@ -1,17 +1,11 @@
-// @cdc affiliation — fallback sticky CTA quand l'article n'a pas d'affiliateA en frontmatter
-// Routing intent-based : la catégorie + le slug décident quel CTA est servi.
-//
-// Logique actuelle (phase quick-win, single CTA partout sauf VS frontmatter) :
-//   - Urgences & Intoxications        → Bien Nourri (soft, non-commercial)
-//   - Santé                            → Bien Nourri
-//   - Slugs "chien-peut-manger-*"      → Bien Nourri (intent éducation/safety)
-//   - Slugs "chien-mange-*"            → Bien Nourri (intent safety/santé)
-//   - Default (Alimentation hors slugs ci-dessus, Race, Comportement, Avis & Comparatif) → Dog Chef enrichi
-//
-// On teste d'abord le copy enrichi Dog Chef seul pour mesurer le lift.
-// L'A/B test Dog Chef vs double Dog Chef+Elmut viendra dans une 2e phase.
+// @cdc affiliation — bandeau collant (StickyBar) des articles : où il a le droit de paraître
+// (stickyAllowed, en bas de ce fichier, carte des conversions du 2026-11-03), puis quelle offre
+// servir quand l'article n'a pas d'affiliateA en frontmatter (getStickyCtaForArticle).
+// Hors des pages de choix d'achat, le bandeau ne paraît plus : les branches Bien Nourri
+// ci-dessous ne servent plus que de repli.
 
 import type { StickyCtaConfig } from '@/components/blog/StickyCta'
+import { pageTypeOf } from '@/lib/page-type'
 
 export type { StickyCtaConfig }
 
@@ -157,4 +151,31 @@ export function getStickyCtaForArticle(category: string, slug: string): StickyCt
 
   // Tout le reste → Dog Chef enrichi (phase quick-win single CTA)
   return { kind: 'single', config: DOG_CHEF_CTA }
+}
+
+// ────────────────────────────────────────────────────────────
+// Où le bandeau a le droit d'apparaître (carte des conversions, 2026-11-03)
+// ────────────────────────────────────────────────────────────
+
+interface StickyAllowedInput {
+  categorySlug: string
+  slug: string
+  /** Contenu MDX brut : une carte offre (<BrandCTA>) ou un comparatif race y est-il déjà ? */
+  rawContent: string
+  /** L'encart du milieu pousse déjà une marque partenaire (lien externe) */
+  midIsPartner: boolean
+}
+
+const OFFER_IN_ARTICLE = /<(BrandCTA|BreedBrandCompare)\b/
+
+/**
+ * @cdc cro-carte — règle la plus sobre : le bandeau noir collé en bas ne sert qu'aux pages de choix
+ * d'achat (nutrition, croquettes, marques, avis), objectif « clic partenaire » de la carte, et
+ * seulement quand aucune offre n'est déjà sur la page (carte BrandCTA, comparatif race, encart du
+ * milieu partenaire) : jamais deux fois la même demande. Jamais sur les urgences, les aliments,
+ * la santé, les races (le comparatif le remplace), les recettes ni les autres articles.
+ */
+export function stickyAllowed({ categorySlug, slug, rawContent, midIsPartner }: StickyAllowedInput): boolean {
+  if (pageTypeOf(`/chien/${categorySlug}/${slug}`) !== 'nutrition-marques') return false
+  return !midIsPartner && !OFFER_IN_ARTICLE.test(rawContent)
 }

@@ -3,15 +3,21 @@
 // clic sur un lien partenaire est bien enregistré même si la page change aussitôt.
 
 import type { AnalyticsEvent } from './analytics-events'
+import { pageTypeOf } from './page-type'
 
 export type { AnalyticsEvent }
 
 type Props = Record<string, string | number | boolean>
 
+// @cdc mesure — chaque action (hors page vue, dont le type se déduit du chemin) porte le type de
+// page de la carte des conversions (lib/page-type.ts) : clic partenaire, invitation compte vue ou
+// cliquée, inscription, résultat d'outil, téléchargement… Un `pageType` passé à la main l'emporte.
 export function track(event: AnalyticsEvent, props: Props = {}): void {
   if (typeof window === 'undefined') return
   try {
-    const payload = JSON.stringify({ n: event, p: window.location.pathname, r: document.referrer, props })
+    const path = window.location.pathname
+    const withType = event === 'Pageview' ? props : { pageType: pageTypeOf(path), ...props }
+    const payload = JSON.stringify({ n: event, p: path, r: document.referrer, props: withType })
     const blob = new Blob([payload], { type: 'application/json' })
     if (!navigator.sendBeacon?.('/api/e', blob)) {
       void fetch('/api/e', { method: 'POST', body: payload, keepalive: true, cache: 'no-store' })

@@ -12,7 +12,7 @@ import {
 import { formatDate } from '@/lib/utils'
 import { StickyCta } from '@/components/blog/StickyCta'
 import { StickyCtaDouble } from '@/components/blog/StickyCtaDouble'
-import { getStickyCtaForArticle } from '@/lib/sticky-cta-config'
+import { getStickyCtaForArticle, stickyAllowed } from '@/lib/sticky-cta-config'
 import { ArticleLayout } from '@/components/blog/ArticleLayout'
 import { getArticleSlot } from '@/components/blog/blog-categories'
 import { getSlotPath, resolveSlot } from '@/data/image-utils'
@@ -134,6 +134,9 @@ export default async function ArticlePage({ params }: Props) {
     ? getStickyCtaForArticle(frontmatter.category, slug)
     : null
 
+  // @cdc cro-carte — même règle que /chien/[category]/[slug] (ici sans encart du milieu).
+  const showSticky = stickyAllowed({ categorySlug: frontmatter.categorySlug ?? '', slug, rawContent, midIsPartner: false })
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
@@ -168,7 +171,7 @@ export default async function ArticlePage({ params }: Props) {
         />
       </ArticleLayout>
 
-      {explicitDouble ? (
+      {!showSticky ? null : explicitDouble ? (
         <StickyCtaDouble
           eyebrow="Comparer les deux"
           brandA={{ label: `Acheter ${frontmatter.affiliateA!.name}`, href: frontmatter.affiliateA!.url }}

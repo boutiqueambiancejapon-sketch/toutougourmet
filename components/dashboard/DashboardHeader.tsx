@@ -9,6 +9,7 @@ const SECTIONS = [
   { id: 'partenaires', label: 'Partenaires' },
   { id: 'lecteurs', label: 'Lecteurs' },
   { id: 'inscriptions', label: 'Inscriptions' },
+  { id: 'conversions', label: 'Conversions' },
   { id: 'pays', label: 'Pays' },
   { id: 'ia', label: 'IA' },
   { id: 'messages', label: 'Messages' },
