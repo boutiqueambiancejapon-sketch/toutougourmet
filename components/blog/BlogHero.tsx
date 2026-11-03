@@ -23,7 +23,7 @@ export function BlogHero({ articleCount }: BlogHeroProps) {
           aria-label="Fil d'Ariane"
           className="flex flex-wrap items-center gap-1.5 text-sm text-[var(--text-muted)] mb-5"
         >
-          <Link href="/" className="hover:text-[var(--text-primary)]">
+          <Link href="/" className="inline-flex min-h-11 items-center hover:text-[var(--text-primary)]">
             Accueil
           </Link>
           <span aria-hidden="true" className="opacity-50">

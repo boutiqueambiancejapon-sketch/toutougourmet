@@ -28,7 +28,7 @@ export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
           <span key={i} className="flex items-center gap-1.5">
             {i > 0 && <span aria-hidden>›</span>}
             {item.href && i < items.length - 1 ? (
-              <Link href={item.href} className="hover:text-orange-ink transition-colors">
+              <Link href={item.href} className="inline-flex min-h-11 items-center hover:text-orange-ink transition-colors">
                 {item.label}
               </Link>
             ) : (

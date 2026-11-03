@@ -49,9 +49,9 @@ export default function AutheurMathiasPage() {
 
           {/* Breadcrumb */}
           <nav className="text-sm text-[var(--text-muted)] mb-8" aria-label="Fil d'Ariane">
-            <Link href="/" className="hover:underline">Accueil</Link>
+            <Link href="/" className="inline-flex min-h-11 items-center hover:underline">Accueil</Link>
             <span className="mx-2" aria-hidden="true">›</span>
-            <Link href="/blog" className="hover:underline">Blog</Link>
+            <Link href="/blog" className="inline-flex min-h-11 items-center hover:underline">Blog</Link>
             <span className="mx-2" aria-hidden="true">›</span>
             <span>{author.name}</span>
           </nav>

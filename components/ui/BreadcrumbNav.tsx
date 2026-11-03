@@ -23,12 +23,12 @@ export function BreadcrumbNav({ items }: { items: BreadcrumbItem[] }) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <nav aria-label="Fil d'Ariane" className="v2 text-sm text-ink-2">
-        <ol role="list" className="m-0 flex list-none flex-wrap items-center gap-1.5 p-0">
+        <ol role="list" className="m-0 flex list-none flex-wrap items-center gap-x-1.5 p-0">
           {items.map((item, i) => (
             <li key={`${item.label}-${i}`} className="inline-flex items-center gap-1.5">
               {i > 0 ? <span aria-hidden="true" className="opacity-50">›</span> : null}
               {item.href ? (
-                <Link href={item.href} className="text-ink-2 no-underline hover:text-ink">{item.label}</Link>
+                <Link href={item.href} className="inline-flex min-h-11 items-center text-ink-2 no-underline hover:text-ink">{item.label}</Link>
               ) : (
                 <span aria-current="page" className="text-ink">{item.label}</span>
               )}

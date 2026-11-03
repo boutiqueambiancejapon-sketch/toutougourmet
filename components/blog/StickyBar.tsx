@@ -6,7 +6,9 @@ import { IconClose } from '@/components/icons'
 // @cdc 04-pages — coque commune des bandeaux collants d'affiliation (StickyCta, StickyCtaDouble,
 // bandeau Dog Chef de lib/sticky-cta-config) : une seule ligne compacte sur mobile, au-dessus de la barre d'onglets,
 // affichée après 35 % de la page lue (audit design 2026-11-02, page article).
-// pb-8 sur mobile : le bandeau passe au-dessus du bouton central de la barre d'onglets.
+// Mobile : tant que le bandeau est affiché, il prend la place de la barre d'onglets (masquée par
+// html[data-sticky] dans globals.css) au lieu de s'y ajouter (audit 2026-11-03, E11 : 225 px
+// d'écran pris en permanence).
 
 const SHOW_AT = 0.35
 
@@ -70,9 +72,17 @@ export function StickyBar({ children }: { children: ReactNode }) {
   const [dismissed, setDismissed] = useState(false)
   // `visible` n'est vrai que dans le navigateur, après défilement : lire le stockage ici ne crée
   // aucun écart avec le rendu serveur.
-  if (!visible || dismissed || midInView || closedRecently()) return null
+  const shown = visible && !dismissed && !midInView && !closedRecently()
+  useEffect(() => {
+    if (!shown) return
+    document.documentElement.dataset.sticky = '1'
+    return () => {
+      delete document.documentElement.dataset.sticky
+    }
+  }, [shown])
+  if (!shown) return null
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-[calc(var(--tabbar-h)+env(safe-area-inset-bottom))] z-30 px-2 pb-8 md:bottom-0 md:px-4 md:pb-4">
+    <div className="pointer-events-none fixed inset-x-0 bottom-0 z-30 px-2 pb-[calc(8px+env(safe-area-inset-bottom))] md:px-4 md:pb-4">
       <div className="v2 pointer-events-auto mx-auto flex max-w-[720px] items-center gap-2 rounded-box bg-ink py-1.5 pr-1 pl-3 text-cream md:gap-4 md:py-3 md:pr-2 md:pl-4">
         {children}
         <button

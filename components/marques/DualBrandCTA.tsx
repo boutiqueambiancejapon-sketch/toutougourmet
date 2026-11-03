@@ -17,7 +17,7 @@ export function DualBrandCTA({ brandA, brandB, place }: { brandA: Brand; brandB:
                 href={b.affiliateUrl}
                 target="_blank"
                 rel="sponsored noopener"
-                className="self-start font-semibold text-orange-ink underline underline-offset-4 hover:text-ink"
+                className="inline-flex min-h-11 max-w-full items-center self-start font-semibold text-orange-ink underline underline-offset-4 hover:text-ink"
               >
                 Voir l&apos;offre {b.name}&nbsp;→
               </a>

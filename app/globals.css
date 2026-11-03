@@ -213,6 +213,8 @@
 html { scroll-behavior: smooth; }
 /* Exemple d'un champ : plus clair que la saisie pour ne pas faire croire le champ rempli (audit 2026-11-03, E9). */
 ::placeholder { color: var(--ink-3); opacity: 1; }
+/* Bandeau partenaire collant affiché (components/blog/StickyBar.tsx) : il remplace la barre d'onglets. */
+html[data-sticky] [data-tabbar] { display: none; }
 
 body {
   background-color: var(--bg-primary);

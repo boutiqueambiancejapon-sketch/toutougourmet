@@ -38,7 +38,7 @@ export function BodyImage({
           alt={alt}
           width={width}
           height={height}
-          sizes="(max-width: 768px) 100vw, 800px"
+          sizes="(max-width: 800px) calc(100vw - 2rem), 760px"
           className="w-full h-auto"
           priority={priority}
           loading={priority ? 'eager' : 'lazy'}
