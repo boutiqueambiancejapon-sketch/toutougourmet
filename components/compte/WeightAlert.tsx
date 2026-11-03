@@ -35,7 +35,7 @@ export function WeightAlert({ dog, trend }: { dog: Dog; trend: WeightTrend }) {
       <p className="m-0 text-[15px] leading-relaxed text-ink-2">
         {facts} Pour revenir à {formatKg(target)}, sa ration tombe à environ <strong className="font-semibold text-ink">{ration.gKibble} g de croquettes par jour</strong> (à 360 kcal pour 100 g), friandises comprises.
       </p>
-      <Link href={href} className="inline-flex min-h-11 items-center justify-center self-start rounded-control bg-ink px-4 text-[15px] font-semibold text-cream no-underline">
+      <Link href={href} className="inline-flex min-h-11 w-full items-center justify-center whitespace-nowrap rounded-control bg-ink px-4 text-[15px] font-semibold text-cream no-underline sm:w-auto sm:self-start">
         Recalculer sa ration
       </Link>
       <OfferCard offer={weightGainOffer()} cta="account-weight-offer" />

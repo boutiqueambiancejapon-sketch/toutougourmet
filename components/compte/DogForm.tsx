@@ -1,5 +1,6 @@
 'use client'
 
+import type { ReactNode } from 'react'
 import { useActionState, useId, useState } from 'react'
 import type { ActivityLevel } from '@/lib/calculators'
 import type { FormState } from '@/app/(fr)/compte/actions'
@@ -24,7 +25,7 @@ interface DogFormProps {
   action: (prev: FormState, form: FormData) => Promise<FormState>
   initial: DogFormValues
   breeds: { slug: string; name: string }[]
-  submitLabel: string
+  submitLabel: ReactNode
   today: string
 }
 

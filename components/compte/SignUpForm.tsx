@@ -59,7 +59,10 @@ export function SignUpForm({ returnTo }: { returnTo: string }) {
         maxLength={128}
         hint="8 caractères au moins."
       />
-      <SubmitButton pending={pending}>Créer mon compte</SubmitButton>
+      <SubmitButton pending={pending}>
+        <span className="xs:hidden">Créer mon compte</span>
+        <span className="hidden xs:inline">Créer mon compte gratuit</span>
+      </SubmitButton>
       <p className="m-0 text-sm text-ink-2">
         Déjà un compte ?{' '}
         <Link href={`/compte/connexion?retour=${encodeURIComponent(returnTo)}`} className="font-semibold text-orange-ink underline underline-offset-2">

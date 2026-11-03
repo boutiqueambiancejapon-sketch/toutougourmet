@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { AccountCard, AccountPage, safeReturnPath } from '@/components/compte/AccountPage'
+import { SignUpBenefits, signUpTitle } from '@/components/compte/SignUpBenefits'
 import { SignUpForm } from '@/components/compte/SignUpForm'
 import { getSessionUser } from '@/lib/server/auth'
 
@@ -10,15 +11,12 @@ export default async function SignUpPage({ searchParams }: { searchParams: Promi
   const returnTo = safeReturnPath((await searchParams).retour)
   if (await getSessionUser()) redirect(returnTo)
   return (
-    <AccountPage
-      title="Créer ton compte"
-      lead={<p>Enregistre le profil de ton chien une fois : poids, âge, activité. Les outils se remplissent tout seuls et tu suis ses pesées.</p>}
-    >
+    <AccountPage title={signUpTitle(returnTo)} lead={<p>Trois champs, puis un lien de confirmation par e-mail.</p>} aside={<SignUpBenefits />}>
       <AccountCard label="Inscription">
         <SignUpForm returnTo={returnTo} />
       </AccountCard>
       <p className="m-0 text-sm leading-relaxed text-ink-2">
-        Gratuit. Ton e-mail sert à te connecter et à retrouver ton mot de passe, on ne le transmet à personne.
+        Ton e-mail sert à te connecter et à retrouver ton mot de passe. On ne le transmet à personne.
       </p>
     </AccountPage>
   )
