@@ -7,7 +7,7 @@ export function FooterGuide() {
     <aside
       aria-labelledby="footer-guide"
       data-cta="guide-footer"
-      className="mb-10 flex items-center gap-4 rounded-card border border-cream/15 bg-cream/5 p-4 md:gap-6 md:p-6"
+      className="flex items-center gap-4 rounded-card border border-cream/15 bg-cream/5 p-4 md:gap-6 md:p-6"
     >
       <Image
         src="/guides/apercu-couverture.webp"
