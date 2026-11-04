@@ -36,6 +36,8 @@ export const foodAnalysis = app.table(
     source: text('source').$type<AnalysisSource>().notNull().default('photo'),
     /** Image du produit fournie par le fichier Maxi Zoo (Awin), null sinon */
     imageUrl: text('image_url'),
+    /** Lien affilié Awin vers la page exacte du produit chez Maxi Zoo, null sinon */
+    buyUrl: text('buy_url'),
     scanCount: integer('scan_count').notNull().default(1),
     /** Relue par la rédaction : seule une fiche relue est indexée et listée dans le sitemap */
     reviewed: boolean('reviewed').notNull().default(false),

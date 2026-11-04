@@ -1,0 +1,1 @@
+ALTER TABLE "app"."food_analysis" ADD COLUMN "buy_url" text;

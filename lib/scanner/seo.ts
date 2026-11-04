@@ -76,6 +76,13 @@ export interface Alternative {
   reason: string
 }
 
+/** Choix du propriétaire : Dog Chef et Franklin d'abord (DECISIONS.md), les autres ensuite. */
+const FIRST_PARTNERS = ['dog-chef', 'franklin']
+const partnerRank = (slug: string): number => {
+  const i = FIRST_PARTNERS.indexOf(slug)
+  return i < 0 ? FIRST_PARTNERS.length : i
+}
+
 /** Une ou deux marques partenaires qui vendent des croquettes, hors marque de la fiche et hors rupture. */
 export function alternativesFor(brand: string | null, score: number | null, kind: ProductKind = 'complete'): Alternative[] {
   // Pas de marque partenaire de friandises : rien à proposer à la place d'une friandise
@@ -83,7 +90,7 @@ export function alternativesFor(brand: string | null, score: number | null, kind
   const own = partnerBrand(brand)?.slug
   return brands
     .filter((b) => b.slug !== own && !b.stockNote && b.animal.includes('chien') && b.type.includes('croquettes'))
-    .sort((a, b) => b.scores.qualiteIngredients - a.scores.qualiteIngredients)
+    .sort((a, b) => partnerRank(a.slug) - partnerRank(b.slug) || b.scores.qualiteIngredients - a.scores.qualiteIngredients)
     .slice(0, 2)
     .map((b) => ({ brand: b, reason: `${b.facts.strength}. Pour qui : ${b.facts.bestFor.charAt(0).toLowerCase()}${b.facts.bestFor.slice(1)}.` }))
 }
@@ -119,3 +126,6 @@ export function parsePage(value: string | string[] | undefined): number {
   const n = Number(Array.isArray(value) ? value[0] : value)
   return Number.isInteger(n) && n >= 1 && n <= 1000 ? n : 1
 }
+
+/** Un produit proposé à la place d'un autre doit l'être pour sa note : 70 au moins, et 15 points de mieux. */
+export const betterEnough = (candidate: number, current: number): boolean => candidate >= 70 && candidate - current >= 15

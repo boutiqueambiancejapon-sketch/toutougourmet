@@ -92,6 +92,13 @@
       "when": 1793831735387,
       "tag": "0012_maxizoo_source_image",
       "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1793833342689,
+      "tag": "0013_maxizoo_buy_url",
+      "breakpoints": true
     }
   ]
 }

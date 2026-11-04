@@ -28,10 +28,11 @@ import { ProductPhoto } from '@/components/scanner/ProductPhoto'
 import { KindTag } from '@/components/scanner/treat/KindTag'
 import { TreatAlerts } from '@/components/scanner/treat/TreatAlerts'
 import { TreatHomemade } from '@/components/scanner/treat/TreatHomemade'
-import { foodNoun, NOUNS } from '@/lib/scanner/food-noun'
+import { CATEGORY_PHRASE, foodNoun, NOUNS } from '@/lib/scanner/food-noun'
 import { kindOf } from '@/lib/scanner/score'
 import { toScanAnalysis } from '@/lib/scanner/result'
-import { alternativesFor, brandSlug, ficheTitle } from '@/lib/scanner/seo'
+import { ALTERNATIVE_BELOW, alternativesFor, brandSlug, ficheTitle } from '@/lib/scanner/seo'
+import { betterAtMaxiZoo } from '@/lib/server/scanner-catalog'
 import { getBySlug } from '@/lib/server/scanner'
 import { reviewedItemsSafe } from '@/lib/server/scanner-catalog'
 import { getDb } from '@/lib/server/drizzle'
@@ -82,6 +83,7 @@ export default async function CroquettePage({ params }: Params) {
   const treat = kindOf(a.details) === 'treat'
   const noun = foodNoun(a.label, a.details)
   const words = NOUNS[noun]
+  const better = a.score !== null && a.score < ALTERNATIVE_BELOW ? await betterAtMaxiZoo(noun, a.brand, a.score) : null
   const name = [a.brand, a.product].filter(Boolean).join(' ') || 'Produit sans nom lisible'
   const h1 = a.product ? `${a.product}${a.brand ? ` (${a.brand})` : ''} : notre analyse` : `${a.brand ?? words.unnamed} : notre analyse`
   const date = row.createdAt.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' })
@@ -137,8 +139,8 @@ export default async function CroquettePage({ params }: Params) {
         </div>
       </FicheVerdict>
 
-      <FicheBuy link={buyLink(a)} />
-      <FicheAlternatives alternatives={alternativesFor(a.brand, a.score, kindOf(a.details))} />
+      <FicheBuy link={buyLink({ ...a, buyUrl: row.buyUrl })} />
+      <FicheAlternatives better={better} category={CATEGORY_PHRASE[noun]} alternatives={alternativesFor(a.brand, a.score, kindOf(a.details))} />
       {treat ? <TreatHomemade score={a.score} /> : null}
 
       <p className="m-0 text-[15px] leading-relaxed text-ink-2">

@@ -264,3 +264,7 @@ Le même jour, plafond retiré en version 1.6 : seule 1 fiche sur 101 déclare c
 ## 2026-11-04 : Fiches Maxi Zoo publiées sans relecture
 
 Choix du propriétaire, qui ne relira pas. Lecture sans IA de pages structurées, code-barres du fichier Awin, mention de la source sur chaque fiche. Une page sans chiffres clés, sans composition, sans note ou mêlant plusieurs recettes est écartée. Ces fiches entrent dans les classements sans contrôle IA, pour ne pas multiplier les appels payants.
+
+## 2026-11-04 : Sous 55, proposer mieux au lieu de vendre le produit
+
+Décision du propriétaire : aucun lien d'achat sur le produit mal noté, Dog Chef et Franklin proposés à la place, plus le mieux noté de la même catégorie chez Maxi Zoo (70 au moins et 15 points de mieux). Dog Chef et Franklin n'ont pas de note dans le scanner : la fiche le dit.
