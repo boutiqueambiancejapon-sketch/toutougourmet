@@ -20,6 +20,17 @@ Demande du propriétaire (2026-11-03). Marque partenaire : Franklin Pet Food (li
 - [ ] Combien de friandises par jour pour un chien : la règle des 10 % des calories
 - [ ] Os, poissons et sticks au collagène à mâcher : sans danger pour le chien ?
 
+## Pépites Search Console (`ration`, sauf indication)
+
+Validé par le propriétaire (2026-11-04), d'après l'export Search Console. Ces requêtes ont déjà des impressions, sans article dédié. Vérifier le doublon comme pour les autres sujets.
+
+- [ ] Le chien peut-il manger du paprika ?
+- [ ] Le chien peut-il manger des merguez ?
+- [ ] Le chien peut-il manger du skyr ?
+- [ ] Le chien peut-il manger de la choucroute ?
+- [ ] Mon chien ne mange plus et reste couché : que faire ? (`bien-nourri`)
+- [ ] Ultra Premium Direct ou Franklin Pet Food : lequel choisir ? (`quiz`)
+
 ## Fiche de garde (`fiche-de-garde`) et voyage
 
 - [ ] Partir en vacances avec son chien : la liste de ce qu'il faut emporter (alimentation, eau, papiers)
