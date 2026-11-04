@@ -334,7 +334,7 @@ Tu écris le sujet et le verbe : *« La quantité compte plus que la marque »*,
 - Pas d'allure de publication : ni calculs détaillés, ni tableaux de kcal, ni avalanche de pourcentages ou de mg/kg dans le texte courant.
 - Exception sécurité : toxique, urgence, maladie, médicament. Là, les doses, les symptômes et les numéros restent exacts et le ton reste sérieux.
 - Jamais de référence façon article scientifique dans le texte : pas de « (Noble et al., 2017) », d'auteur, de revue, de DOI ni de PMID. On écrit « une étude britannique » ou « les vétérinaires conseillent », et les références vont seulement dans « Sources » en fin d'article, si besoin. Une affirmation de santé reste vérifiée à une source sérieuse. Plus court, jamais moins vrai.
-- 600 à 1 000 mots en général. FAQ de 4 à 6 questions courtes.
+- 1 000 à 1 200 mots en général. FAQ de 4 à 6 questions courtes.
 - Produit cité : partir de sa page officielle. Pas de conclusion tirée d'une estimation maison.
 
 Ce qui précède prime sur la liste ci-dessous : la précision technique et les références servent aux sections sécurité et à la rubrique « Sources », pas au texte courant.

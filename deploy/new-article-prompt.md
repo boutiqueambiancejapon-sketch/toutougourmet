@@ -8,7 +8,7 @@ Tâche quotidienne : rédiger UN nouvel article pour Toutou Gourmet (www.toutou-
 - Pas d'allure de publication : ni calculs détaillés, ni tableaux de kcal, ni avalanche de pourcentages ou de mg/kg dans le texte courant.
 - Exception sécurité : toxique, urgence, maladie, médicament. Là, les doses, les symptômes et les numéros restent exacts et le ton reste sérieux.
 - Jamais de référence façon article scientifique dans le texte : pas de « (Noble et al., 2017) », d'auteur, de revue, de DOI ni de PMID. On écrit « une étude britannique » ou « les vétérinaires conseillent », et les références vont seulement dans « Sources » en fin d'article, si besoin. Une affirmation de santé reste vérifiée à une source sérieuse. Plus court, jamais moins vrai.
-- 600 à 1 000 mots en général. FAQ de 4 à 6 questions courtes.
+- 1 000 à 1 200 mots en général. FAQ de 4 à 6 questions courtes.
 - Produit cité : partir de sa page officielle. Pas de conclusion tirée d'une estimation maison.
 
 ## Avant d'écrire
@@ -28,7 +28,7 @@ Tâche quotidienne : rédiger UN nouvel article pour Toutou Gourmet (www.toutou-
 - Toute donnée chiffrée vient d'une source vérifiée (étude avec auteur, année, revue, DOI ou PMID, ou base officielle : USDA FoodData Central, ANSES, FEDIAF), listée dans « Sources » en fin d'article et jamais entre parenthèses dans le texte. Sans source, ne pas l'écrire.
 
 ## Rédiger (`content/blog/{slug}.mdx`)
-- 600 à 1 000 mots, tutoiement comme le reste du site, H2 en questions naturelles, réponse directe en tête de chaque section, paragraphes autonomes (entité répétée, chiffre + unité dans la même phrase).
+- 1 000 à 1 200 mots, tutoiement comme le reste du site, H2 en questions naturelles, réponse directe en tête de chaque section, paragraphes autonomes (entité répétée, chiffre + unité dans la même phrase).
 - Section `## TL;DR` en tête (puces), puis les composants V2 quand ils ont du sens : `SizeTable` / `SizeRow` (quantités par gabarit avec races nommées). Dans chaque `SizeRow`, l'attribut `amount` donne les grammes entre parenthèses sous la forme « (20 à 30 g) » ou « (15 g) » : le mini-calculateur de l'article lit ces valeurs, elles doivent être cohérentes avec le texte., `WhatToDo` / `Step` et `PoisonCenters` pour un aliment à risque, `FaqList` / `FaqItem` (6 à 8 questions). Les composants utilisables sont listés dans `components/mdx/article-components.tsx` : n'en utiliser aucun autre.
 - Santé : rappeler que l'article ne remplace pas l'avis d'un vétérinaire, ne jamais poser de diagnostic ; être ferme sur les aliments dangereux.
 - 2 à 4 liens internes vers des articles qui existent (route `/chien/{categorySlug}/{slug}`, vérifier avec ls/grep).
