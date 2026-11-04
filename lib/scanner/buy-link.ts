@@ -3,19 +3,19 @@ import { partnerBrand } from './seo'
 
 // @cdc lot 6 — où acheter le produit d'une fiche notée au moins 55. Marque partenaire : son lien.
 // Marque présente chez Maxi Zoo (vérifié le 2026-11-04) : sa page de marque, lien Awin. Sinon :
-// recherche Amazon. Aucune carte sous 55, ni pour un aliment thérapeutique, qui se choisit avec le vétérinaire.
+// accueil Maxi Zoo, sans laisser croire que le produit y est vendu. Les recherches Amazon, par nom
+// ou par code-barres, ne trouvaient pas le produit (test du propriétaire, 2026-11-04). Aucune carte sous 55, ni pour un aliment thérapeutique, qui se choisit avec le vétérinaire.
 
 export const BUY_MIN_SCORE = 55
 
 const UPD_URL = 'https://www.ultrapremiumdirect.com/?utm_source=affilae&utm_medium=banniere_affiliation&utm_campaign=Toutou%20Gourmet&ae=1346'
-const AMAZON_TAG = 'ambiancejap0a-21'
 const MAXI_ZOO_BRANDS = ['royal canin', 'edgard cooper', 'edgard & cooper', 'pedigree', 'carnilove', 'vitakraft', 'eukanuba']
 
 export interface BuyLink {
   store: string
   href: string
-  /** Mention exigée par le programme Partenaires d'Amazon. */
-  amazon: boolean
+  /** Vrai si le produit lui-même est proposé par ce marchand, faux pour un renvoi vers son accueil. */
+  exact: boolean
 }
 
 const maxiZooUrl = (brand: string) =>
