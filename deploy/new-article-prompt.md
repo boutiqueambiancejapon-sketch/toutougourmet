@@ -1,10 +1,14 @@
 Tâche quotidienne : rédiger UN nouvel article pour Toutou Gourmet (www.toutou-gourmet.com), site français sur l'alimentation et la santé du chien. Tu tournes sur le serveur de Toutou, dans une copie de travail de la branche `v2` (la V2 du site). Le site en ligne n'est pas modifié avant la bascule : tu ne touches JAMAIS à la branche de production.
 
-## Ton de l'article (demande du propriétaire, 2026-11-04)
-- On écrit pour un maître de chien qui lit sur son téléphone, pas pour un vétérinaire. Phrases simples, conseils qu'on peut suivre tout de suite, 600 à 1 000 mots pour un sujet léger (friandises, cadeaux, habitudes).
-- Pas d'avalanche de chiffres : kcal par friandise, prix au kilo, pourcentages d'ingrédients, tableaux de calculs. Un chiffre seulement s'il change ce que le lecteur va faire. Les doses et chiffres de sécurité (toxiques, urgences) restent précis.
-- Produit cité : lire d'abord la page officielle du produit (composition, conseils d'utilisation, FAQ) et partir de ce qu'elle dit. Jamais de conclusion « à éviter » ou « trop calorique » tirée d'une estimation maison ou d'un poids trouvé chez un tiers. Si la marque ne publie pas une donnée, l'écrire en une phrase.
-- Répondre oui ou non avec un conseil pratique. Pas de ton de reproche ni d'avertissement à chaque paragraphe.
+## Ton de l'article (priorité sur tout le reste)
+**Priorité sur tout le reste (demande du propriétaire, 2026-11-04).** Les gens veulent la réponse vite et passer un bon moment.
+- Réponse dans les 2 premières phrases, en langage courant, puis des conseils qu'on peut suivre tout de suite.
+- Ton vivant : des scènes de la vie avec un chien, un peu d'humour quand le sujet s'y prête. Jamais de blague sur une urgence ou un chien malade.
+- Pas trop chiffré, pas trop scientifique : pas de calculs de kcal, de pourcentages d'ingrédients, de mg/kg, de tableaux de calcul ni de références d'études dans le texte courant. On garde un chiffre seulement s'il change ce que le lecteur va faire.
+- Exception sécurité : toxique, urgence, maladie, médicament. Là, les doses, les symptômes et les numéros restent exacts et le ton reste sérieux.
+- Une affirmation de santé reste vérifiée à une source sérieuse, listée en fin d'article sous « Sources ». Plus court, jamais moins vrai.
+- 600 à 1 000 mots en général. FAQ de 4 à 6 questions courtes.
+- Produit cité : partir de sa page officielle. Pas de conclusion tirée d'une estimation maison.
 
 ## Avant d'écrire
 1. Lire `CLAUDE.md` et `PROGRESS.md`.
@@ -23,7 +27,7 @@ Tâche quotidienne : rédiger UN nouvel article pour Toutou Gourmet (www.toutou-
 - Toute donnée chiffrée vient d'une source vérifiée : auteur, année, revue, DOI/PMID, ou base officielle (USDA FoodData Central, ANSES, FEDIAF). Sans source, ne pas l'écrire.
 
 ## Rédiger (`content/blog/{slug}.mdx`)
-- 900 à 1 600 mots, tutoiement comme le reste du site, H2 en questions naturelles, réponse directe en tête de chaque section, paragraphes autonomes (entité répétée, chiffre + unité dans la même phrase).
+- 600 à 1 000 mots, tutoiement comme le reste du site, H2 en questions naturelles, réponse directe en tête de chaque section, paragraphes autonomes (entité répétée, chiffre + unité dans la même phrase).
 - Section `## TL;DR` en tête (puces), puis les composants V2 quand ils ont du sens : `SizeTable` / `SizeRow` (quantités par gabarit avec races nommées). Dans chaque `SizeRow`, l'attribut `amount` donne les grammes entre parenthèses sous la forme « (20 à 30 g) » ou « (15 g) » : le mini-calculateur de l'article lit ces valeurs, elles doivent être cohérentes avec le texte., `WhatToDo` / `Step` et `PoisonCenters` pour un aliment à risque, `FaqList` / `FaqItem` (6 à 8 questions). Les composants utilisables sont listés dans `components/mdx/article-components.tsx` : n'en utiliser aucun autre.
 - Santé : rappeler que l'article ne remplace pas l'avis d'un vétérinaire, ne jamais poser de diagnostic ; être ferme sur les aliments dangereux.
 - 2 à 4 liens internes vers des articles qui existent (route `/chien/{categorySlug}/{slug}`, vérifier avec ls/grep).

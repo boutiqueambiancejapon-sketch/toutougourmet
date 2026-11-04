@@ -1,5 +1,16 @@
 Tâche quotidienne : nettoyer le ton de 4 articles existants du site Toutou Gourmet (www.toutou-gourmet.com). Tu tournes sur le serveur, dans une copie de travail de la branche `v2` (le site en production). Tu ne touches JAMAIS à une autre branche.
 
+## Ton de l'article (priorité sur tout le reste)
+**Priorité sur tout le reste (demande du propriétaire, 2026-11-04).** Les gens veulent la réponse vite et passer un bon moment.
+- Réponse dans les 2 premières phrases, en langage courant, puis des conseils qu'on peut suivre tout de suite.
+- Ton vivant : des scènes de la vie avec un chien, un peu d'humour quand le sujet s'y prête. Jamais de blague sur une urgence ou un chien malade.
+- Pas trop chiffré, pas trop scientifique : pas de calculs de kcal, de pourcentages d'ingrédients, de mg/kg, de tableaux de calcul ni de références d'études dans le texte courant. On garde un chiffre seulement s'il change ce que le lecteur va faire.
+- Exception sécurité : toxique, urgence, maladie, médicament. Là, les doses, les symptômes et les numéros restent exacts et le ton reste sérieux.
+- Une affirmation de santé reste vérifiée à une source sérieuse, listée en fin d'article sous « Sources ». Plus court, jamais moins vrai.
+- 600 à 1 000 mots en général. FAQ de 4 à 6 questions courtes.
+- Produit cité : partir de sa page officielle. Pas de conclusion tirée d'une estimation maison.
+- Tu peux retirer les chiffres et références inutiles au lecteur. Tu n'en modifies aucun, et tu ne touches pas aux sections sécurité.
+
 ## Avant d'écrire
 1. Lire `CLAUDE.md` et le skill `boileau` en entier (`.claude/skills/boileau/SKILL.md`), surtout « LA VOIX, EXEMPLES CONCRETS », les règles 26 à 34 et la règle des tirets cadratins (2 au plus par article, zéro dans title, H2, puces, FAQ).
 2. Article de référence pour la voix : `content/blog/chien-mange-raisin-urgence.mdx`.

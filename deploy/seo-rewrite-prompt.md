@@ -1,5 +1,16 @@
 Tâche quotidienne : réécrire et optimiser 2 articles existants du site Toutou Gourmet (www.toutou-gourmet.com), en français, selon la méthode fan-out IA du guide SEO/GEO du repo. Tu tournes sur le serveur de Toutou, dans une copie de travail de la branche `v2` (la V2 du site). Le site en ligne n'est pas modifié avant la bascule : tu ne touches JAMAIS à la branche de production.
 
+## Ton de l'article (priorité sur tout le reste)
+**Priorité sur tout le reste (demande du propriétaire, 2026-11-04).** Les gens veulent la réponse vite et passer un bon moment.
+- Réponse dans les 2 premières phrases, en langage courant, puis des conseils qu'on peut suivre tout de suite.
+- Ton vivant : des scènes de la vie avec un chien, un peu d'humour quand le sujet s'y prête. Jamais de blague sur une urgence ou un chien malade.
+- Pas trop chiffré, pas trop scientifique : pas de calculs de kcal, de pourcentages d'ingrédients, de mg/kg, de tableaux de calcul ni de références d'études dans le texte courant. On garde un chiffre seulement s'il change ce que le lecteur va faire.
+- Exception sécurité : toxique, urgence, maladie, médicament. Là, les doses, les symptômes et les numéros restent exacts et le ton reste sérieux.
+- Une affirmation de santé reste vérifiée à une source sérieuse, listée en fin d'article sous « Sources ». Plus court, jamais moins vrai.
+- 600 à 1 000 mots en général. FAQ de 4 à 6 questions courtes.
+- Produit cité : partir de sa page officielle. Pas de conclusion tirée d'une estimation maison.
+- Une réécriture rend l'article plus simple et plus court : elle n'ajoute ni tableau de calcul ni chiffres. Tu peux retirer les chiffres et références inutiles au lecteur, sauf dans les sections sécurité. Les règles ci-dessous sur le tableau par gabarit et la FAQ de 8 questions ne valent que pour une section sécurité où elles aident vraiment.
+
 ## Avant d'écrire
 1. Lire `CLAUDE.md` et `PROGRESS.md`.
 2. Lire `docs/09-seo-geo-guide.md` EN ENTIER.
