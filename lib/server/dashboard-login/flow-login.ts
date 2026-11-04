@@ -5,9 +5,9 @@ import { alertFactorChange, alertIfFailureSeries, alertNewDevice } from './alert
 import { attemptSucceeded, beginAttempt } from './attempts'
 import { consumeBackupCode, hasFactor, knownDevice, rememberDevice } from './factors'
 import { BLOCKED, NEUTRAL, NO_SESSION, ok, text, type FlowContext, type FlowResult } from './flow-types'
-import { countFactorFailure, createSession, deleteSession, elevateSession, saveChallenge, takeChallenge } from './sessions'
+import { countFactorFailure, createSession, deleteSession, elevateSession, saveChallenge, saveDirectChallenge, takeChallenge, takeDirectChallenge } from './sessions'
 import { verifyTotp } from './totp'
-import { authenticationOptions, checkAuthentication } from './webauthn'
+import { authenticationOptions, challengeOf, checkAuthentication, directAuthenticationOptions } from './webauthn'
 
 // @cdc tableau de bord — mot de passe, puis second facteur. Un mot de passe juste n'ouvre jamais le
 // tableau de bord : il crée une session d'attente qui ne donne accès qu'à l'écran suivant.
@@ -77,3 +77,29 @@ export const passkeyVerifyStep = (ctx: FlowContext): Promise<FlowResult> =>
     if (!challenge || typeof response !== 'object' || response === null) return false
     return checkAuthentication(response as AuthenticationResponseJSON, challenge)
   })
+
+// @cdc tableau de bord — connexion directe par Face ID : la clé vaut deux preuves, l'appareil et le
+// visage (vérification de l'utilisateur exigée). Le code de secours et le TOTP, eux, restent derrière le mot de passe.
+export async function directOptionsStep(): Promise<FlowResult> {
+  const options = await directAuthenticationOptions()
+  await saveDirectChallenge(options.challenge)
+  return ok({ options })
+}
+
+export async function directVerifyStep(ctx: FlowContext): Promise<FlowResult> {
+  const attempt = await beginAttempt('passkey', ctx.who, await knownDevice(ctx.deviceToken))
+  if (!attempt) return BLOCKED()
+  const response = ctx.input.response
+  const parsed = typeof response === 'object' && response !== null && 'response' in response ? (response as AuthenticationResponseJSON) : null
+  const challenge = parsed ? challengeOf(parsed) : null
+  if (!parsed || !challenge || !(await takeDirectChallenge(challenge)) || !(await checkAuthentication(parsed, challenge))) {
+    await alertIfFailureSeries()
+    return NEUTRAL()
+  }
+  await attemptSucceeded(attempt)
+  const now = new Date()
+  const token = await createSession('full', ctx.who.label, now, now)
+  const freshDevice = await rememberDevice(ctx.deviceToken, ctx.who.label)
+  if (freshDevice) alertNewDevice(ctx.who.label)
+  return { ...ok({ next: stageHref('full', ctx.input.next) }), setSession: token, ...(freshDevice ? { setDevice: freshDevice } : {}) }
+}

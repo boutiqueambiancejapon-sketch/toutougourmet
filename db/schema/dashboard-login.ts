@@ -83,3 +83,9 @@ export const dashboardLoginEvent = app.table(
   },
   (t) => [index('dashboard_login_event_at_idx').on(t.at), index('dashboard_login_event_ip_idx').on(t.ipHash, t.at)],
 )
+
+/** Défis de la connexion directe par Face ID : aucune session n'existe encore, un défi ne sert qu'une fois. */
+export const dashboardChallenge = app.table('dashboard_challenge', {
+  challenge: text('challenge').primaryKey(),
+  createdAt: at('created_at').notNull().defaultNow(),
+})

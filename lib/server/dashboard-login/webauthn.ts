@@ -62,6 +62,22 @@ export async function authenticationOptions() {
   })
 }
 
+/** Connexion directe : aucune clé citée, un visiteur n'apprend rien. L'iPhone propose la sienne. */
+export function directAuthenticationOptions() {
+  return generateAuthenticationOptions({ rpID: relyingParty().rpID, userVerification: 'required', allowCredentials: [] })
+}
+
+/** Défi annoncé par le navigateur, à confronter à ceux que le serveur a émis. Illisible : null. */
+export function challengeOf(response: AuthenticationResponseJSON): string | null {
+  try {
+    const data: unknown = JSON.parse(Buffer.from(response.response.clientDataJSON, 'base64url').toString('utf8'))
+    const value = typeof data === 'object' && data !== null && 'challenge' in data ? data.challenge : null
+    return typeof value === 'string' && value.length <= 128 ? value : null
+  } catch {
+    return null
+  }
+}
+
 export async function checkAuthentication(response: AuthenticationResponseJSON, challenge: string): Promise<boolean> {
   const { rpID, origin } = relyingParty()
   const stored = (await listPasskeys()).find((p) => p.credentialId === response.id)

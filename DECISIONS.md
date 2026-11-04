@@ -250,3 +250,7 @@ Une session regroupe les actions d'une même empreinte du jour, sans pause de pl
 - RP ID figé dans le code. `DASHBOARD_WEBAUTHN_RP_ID` n'accepte que `localhost`, pour les essais : une clé créée pour `localhost` ne sert à rien depuis Internet.
 - Migration numérotée `0010`. La PR #88 porte une `0009_stripe_premium`, déjà prise par `0009_food_check` sur `v2`. Celle qui fusionne en second doit régénérer sa migration : `drizzle-kit migrate` n'applique que les migrations plus récentes que la dernière passée.
 
+
+## 2026-11-04 : Connexion directe par Face ID
+
+Décision du propriétaire : Face ID sans mot de passe sur son iPhone. Une clé d'accès avec vérification de l'utilisateur vaut deux preuves (l'appareil, le visage ou le code de l'iPhone) et résiste au hameçonnage. Le mot de passe reste en secours, toujours suivi d'un second facteur ; le TOTP et les codes de secours ne s'utilisent jamais sans lui. Les défis vivent dans `app.dashboard_challenge`, à usage unique, 5 minutes, 200 au plus : aucune session n'existe encore à ce stade, et une session d'attente aurait ouvert le code de secours sans mot de passe. Conséquence : qui connaît le code de l'iPhone, ou un autre appareil du même trousseau iCloud, peut ouvrir le tableau de bord.
