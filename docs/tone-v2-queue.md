@@ -25,11 +25,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `nourriture-spitz-nain`
 - [x] `meilleures-patees-chien`
 - [x] `chien-mange-couche-normal`
-- [ ] `chien-mange-pistaches`
-- [ ] `graine-de-lin-chien-bienfaits-dosage`
-- [ ] `chien-peut-manger-abricots`
-- [ ] `conserver-patee-chien-apres-ouverture`
-- [ ] `chien-barbecue-securite-aliments-eviter`
+- [x] `chien-mange-pistaches`
+- [x] `graine-de-lin-chien-bienfaits-dosage`
+- [x] `chien-peut-manger-abricots`
+- [x] `conserver-patee-chien-apres-ouverture`
+- [x] `chien-barbecue-securite-aliments-eviter`
 - [ ] `croquettes-chien-hypothyroidie`
 - [ ] `quelle-quantite-patee-chien-par-jour`
 - [ ] `chien-peut-manger-pates`
