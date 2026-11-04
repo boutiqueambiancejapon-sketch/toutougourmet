@@ -20,11 +20,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `chien-peut-manger-miel`
 - [x] `halloween-chien-bonbons-citrouille-dangers`
 - [x] `chien-mange-noix-cajou`
-- [ ] `avis-croquettes-orlando-lidl`
-- [ ] `chien-peut-manger-melon`
-- [ ] `nourriture-spitz-nain`
-- [ ] `meilleures-patees-chien`
-- [ ] `chien-mange-couche-normal`
+- [x] `avis-croquettes-orlando-lidl`
+- [x] `chien-peut-manger-melon`
+- [x] `nourriture-spitz-nain`
+- [x] `meilleures-patees-chien`
+- [x] `chien-mange-couche-normal`
 - [ ] `chien-mange-pistaches`
 - [ ] `graine-de-lin-chien-bienfaits-dosage`
 - [ ] `chien-peut-manger-abricots`
