@@ -6,6 +6,7 @@ import { periodQuery, type PeriodKey } from './period'
 export const TABS = [
   { slug: '', label: 'Accueil', question: 'Tout va bien, ça progresse, et qu’est-ce qui attend ?' },
   { slug: 'trafic', label: 'Trafic', question: 'Qui vient sur le site, d’où, et que font-ils ?' },
+  { slug: 'crm', label: 'CRM', question: 'Qui sont mes contacts, et où en est chacun ?' },
   { slug: 'conversions', label: 'Conversions', question: 'Quelles pages rapportent des e-mails, des comptes et des clics ?' },
   { slug: 'robots', label: 'Robots IA', question: 'Quels robots d’IA lisent le site, et quelles pages ?' },
   { slug: 'contenu', label: 'Contenu', question: 'La tâche de nuit a-t-elle tourné, et qu’est-ce qui attend une relecture ?' },

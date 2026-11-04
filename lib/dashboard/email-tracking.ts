@@ -23,7 +23,9 @@ export interface TrackingRow {
   source: string | null
   listedAt: Date | null
   listStatus: 'actif' | 'desinscrit' | null
-  account: { createdAt: Date; verified: boolean; dogs: number } | null
+  account: { id?: string; createdAt: Date; verified: boolean; dogs: number; dogNames?: string[] } | null
+  /** Étapes de la suite et des rappels déjà parties (welcome_sends) */
+  sentSteps: string[]
   /** Adresse de test ou du propriétaire, connue par l'environnement */
   internal: boolean
   optedOut: boolean
@@ -39,6 +41,8 @@ export interface KnownSubscriber {
 }
 
 export interface KnownAccount {
+  id?: string
+  dogNames?: string[]
   email: string
   createdAt: Date
   verified: boolean
@@ -78,7 +82,7 @@ const lastActivity = (r: TrackingRow): number =>
 export function buildTrackingRows(input: TrackingInput): TrackingRow[] {
   const rows = new Map<string, TrackingRow>()
   const rowFor = (hash: string, email: string | null): TrackingRow => {
-    const row = rows.get(hash) ?? { hash, email, source: null, listedAt: null, listStatus: null, account: null, internal: false, optedOut: input.optOuts.has(hash), sends: [] }
+    const row = rows.get(hash) ?? { hash, email, source: null, listedAt: null, listStatus: null, account: null, sentSteps: [], internal: false, optedOut: input.optOuts.has(hash), sends: [] }
     rows.set(hash, row)
     return row
   }
@@ -90,7 +94,7 @@ export function buildTrackingRows(input: TrackingInput): TrackingRow[] {
     row.listedAt = s.createdAt ? new Date(s.createdAt) : null
     row.listStatus = s.status
   }
-  for (const a of input.accounts) rowFor(input.hash(a.email), norm(a.email)).account = { createdAt: a.createdAt, verified: a.verified, dogs: a.dogs }
+  for (const a of input.accounts) rowFor(input.hash(a.email), norm(a.email)).account = { id: a.id, createdAt: a.createdAt, verified: a.verified, dogs: a.dogs, dogNames: a.dogNames }
   for (const email of input.internal) rowFor(input.hash(email), norm(email)).internal = true
 
   const logged = new Set<string>()
@@ -104,6 +108,7 @@ export function buildTrackingRows(input: TrackingInput): TrackingRow[] {
     rowFor(line.email_hash, null).sends.push({ label: EMAIL_KIND_LABEL[kind], subject: null, state: 'sent', at: line.sent_at })
   }
   for (const g of input.guideSends) legacy(g, 'guide')
+  for (const w of input.welcomeSends) rows.get(w.email_hash)?.sentSteps.push(w.step)
   for (const w of input.welcomeSends) legacy(w, (w.step.startsWith('j') ? `suite-${w.step}` : w.step) as EmailKind)
   for (const s of input.subscribers) {
     const hash = input.hash(s.email)

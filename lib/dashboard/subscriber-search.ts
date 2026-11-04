@@ -1,12 +1,14 @@
 import { cookies } from 'next/headers'
 
-// @cdc tableau de bord — page des inscrits. La recherche par adresse ne passe jamais dans l'URL :
+// @cdc tableau de bord — contacts du CRM. La recherche par adresse ne passe jamais dans l'URL :
 // Caddy journalise l'URL complète de chaque requête. Le formulaire l'envoie en POST (action
 // serveur), elle vit dans un cookie httpOnly limité à la page (Caddy masque les cookies dans ses
 // journaux), 15 minutes au plus.
 
 export const SEARCH_COOKIE = 'tdb_recherche'
-export const SEARCH_PATH = '/tableau-de-bord/conversions/inscrits'
+/** Adresse de l'export CSV, déjà connue du proxy. */
+export const EXPORT_PATH = '/tableau-de-bord/conversions/inscrits/export'
+export const CONTACTS_PATH = '/tableau-de-bord/crm/contacts'
 export const SEARCH_MAX = 120
 export const SEARCH_MAX_AGE = 15 * 60
 
@@ -35,12 +37,4 @@ export const encodeSearch = (query: string): string => Buffer.from(query, 'utf8'
 export async function readSearch(): Promise<string> {
   const raw = (await cookies()).get(SEARCH_COOKIE)?.value
   return raw ? cleanQuery(Buffer.from(raw, 'base64url').toString('utf8')) : ''
-}
-
-export function listHref(list: ListKind, page = 1): string {
-  const params = new URLSearchParams()
-  if (list !== 'lettre') params.set('liste', list)
-  if (page > 1) params.set('page', String(page))
-  const qs = params.toString()
-  return qs ? `${SEARCH_PATH}?${qs}` : SEARCH_PATH
 }

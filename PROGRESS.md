@@ -152,3 +152,9 @@ L'onglet Visiteurs devient Trafic, un petit GA4 maison : vue d'ensemble, en dire
 Calculs sans base dans `lib/dashboard/traffic.ts`, contrôlés par `npx tsx scripts/test-traffic.ts`. Lectures dans `lib/server/dashboard-traffic.ts`. Aucune donnée nouvelle n'est collectée.
 
 Restent : espace CRM, reprise des tableaux, connexion sécurisée (branche `feat/dashboard-login`).
+
+## 2026-11-04 : Tableau de bord, onglet CRM
+
+Nouvel onglet CRM (`/tableau-de-bord/crm`) : où en sont les contacts, puis liste unique lettre et comptes, avec filtres, recherche et prochain e-mail prévu. Fiche à l'adresse de l'empreinte, jamais de l'e-mail. L'ancienne page des inscrits redirige ; son export CSV reste au même endroit. Calculs dans `lib/dashboard/crm.ts`, `nextStepFor` dans `lib/server/welcome-sequence.ts`, contrôlés par `npx tsx scripts/test-crm.ts`.
+
+Écart avec la maquette : « Désinscrits » est un total, Brevo ne donnant pas la date de désinscription.
