@@ -5,11 +5,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : pa
 - [x] `chien-mange-cafe-urgence`
 - [x] `chien-mange-noix-macadamia-urgence`
 - [x] `chien-mange-poireau-urgence`
-- [ ] `chien-mange-chocolat-urgence`
-- [ ] `chien-peut-manger-noisettes`
-- [ ] `chien-mange-raisin-urgence`
-- [ ] `chien-mange-os-poulet-urgence`
-- [ ] `chien-mange-os-cuit-urgence`
+- [x] `chien-mange-chocolat-urgence`
+- [x] `chien-peut-manger-noisettes`
+- [x] `chien-mange-raisin-urgence`
+- [x] `chien-mange-os-poulet-urgence`
+- [x] `chien-mange-os-cuit-urgence`
 - [ ] `chien-peut-manger-banane`
 - [ ] `repas-frais-vs-croquettes-chien`
 - [ ] `chien-mange-xylitol-urgence`
