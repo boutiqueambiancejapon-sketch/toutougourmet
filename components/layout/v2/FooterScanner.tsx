@@ -1,8 +1,15 @@
+'use client'
+
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { IconScan } from '@/components/icons'
 
-// @cdc cro-carte — le scanner, fonction phare du site, mis en avant en tête du pied de page.
+// @cdc cro-carte — le scanner, fonction phare du site, mis en avant en tête du pied de page. Absent
+// de /scanner, qui a déjà le bouton, et des pages de consultation, qui n'ont pas de bouton de scan.
+const HIDDEN_ON = /^\/scanner(\/(croquette|friandise))?\/?$/
+
 export function FooterScanner() {
+  if (HIDDEN_ON.test(usePathname())) return null
   return (
     <aside
       aria-labelledby="footer-scanner"

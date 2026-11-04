@@ -5,12 +5,11 @@ import { PREMIUM_LABEL } from '@/lib/scanner/fixtures'
 // (app/(fr)/scanner/exemple-story.png) depuis une étiquette inventée, marque fictive.
 // @cdc perf — affichée en 224 px (w-56) : next/image sert une version réduite en AVIF/WebP au lieu du PNG 1080×1920.
 
-export function ExampleFiche() {
+export const EXAMPLE_TITLE = 'À quoi ressemble l\u2019analyse d\u2019une croquette\u00a0?'
+
+/** Sans titre : /scanner le met dans le pli qui l'entoure. */
+export function ExampleFicheBody() {
   return (
-    <section aria-labelledby="exemple" className="flex flex-col gap-4">
-      <h2 id="exemple" className="m-0 font-display text-2xl font-black text-ink">
-        À quoi ressemble l&apos;analyse d&apos;une croquette&nbsp;?
-      </h2>
       <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
         <Image
           src="/scanner/exemple-story.png"
@@ -30,6 +29,16 @@ export function ExampleFiche() {
           </p>
         </div>
       </div>
+  )
+}
+
+export function ExampleFiche() {
+  return (
+    <section aria-labelledby="exemple" className="flex flex-col gap-4">
+      <h2 id="exemple" className="m-0 font-display text-2xl font-black text-ink">
+        {EXAMPLE_TITLE}
+      </h2>
+      <ExampleFicheBody />
     </section>
   )
 }

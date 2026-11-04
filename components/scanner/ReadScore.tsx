@@ -13,10 +13,7 @@ const LEVELS: { band: Band; range: string; text: string }[] = [
 
 export function ReadScore() {
   return (
-    <section aria-labelledby="lire-note" className="flex flex-col gap-4">
-      <h2 id="lire-note" className="m-0 font-display text-2xl font-black text-ink">
-        Quelle est une bonne note pour des croquettes&nbsp;?
-      </h2>
+    <div className="flex flex-col gap-4">
       <p className="m-0 text-[15px] leading-relaxed text-ink-2">
         Une note de 75 ou plus signale une très bonne composition, 55 à 74 une composition correcte. Chaque tranche, avec le
         profil d&apos;étiquette qu&apos;on y trouve le plus souvent :
@@ -37,6 +34,6 @@ export function ReadScore() {
         besoins propres, à voir avec ton vétérinaire. Une friandise a les mêmes tranches de couleur, calculées avec son propre
         barème.
       </p>
-    </section>
+    </div>
   )
 }

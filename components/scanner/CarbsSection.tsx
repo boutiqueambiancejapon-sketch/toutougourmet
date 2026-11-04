@@ -6,10 +6,7 @@ import { CarbsCalculator } from './CarbsCalculator'
 
 export function CarbsSection() {
   return (
-    <section aria-labelledby="glucides" className="flex flex-col gap-4">
-      <h2 id="glucides" className="m-0 font-display text-2xl font-black text-ink">
-        Comment calculer le taux de glucides des croquettes&nbsp;?
-      </h2>
+    <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-3 text-base leading-relaxed text-ink-2 [&_p]:m-0">
         <p>
           Les glucides ne figurent pas sur l&apos;étiquette : le règlement (CE) n° 767/2009 ne les rend pas obligatoires. On les
@@ -25,6 +22,6 @@ export function CarbsSection() {
         </p>
       </div>
       <CarbsCalculator />
-    </section>
+    </div>
   )
 }

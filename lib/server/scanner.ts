@@ -1,4 +1,4 @@
-import { and, desc, eq, inArray, sql } from 'drizzle-orm'
+import { and, desc, eq, sql } from 'drizzle-orm'
 import { foodAnalysis, scanHistory, scanReport, scanUsage, type FoodAnalysis } from '@/db/schema'
 import type { AnalysisSource } from '@/db/schema/scanner'
 import { analyseLabel, scoreVersionFor } from '@/lib/scanner/analyse'
@@ -8,7 +8,7 @@ import type { ExtractedLabel } from '@/lib/scanner/types'
 import { getDb } from './drizzle'
 
 // @cdc lot 6 — accès base du scanner : cache par EAN, quota mensuel, historique par compte,
-// derniers scans publics (jamais d'information sur le compte), signalements d'erreur.
+// signalements d'erreur.
 
 function db() {
   const d = getDb()
@@ -137,49 +137,6 @@ export async function listUserScans(userId: string, limit = 50): Promise<ScanSum
     .where(eq(scanHistory.userId, userId))
     .orderBy(desc(scanHistory.createdAt))
     .limit(limit)
-}
-
-/** Derniers produits analysés, un par produit, sans rien sur les comptes. Vide sous le seuil. */
-/**
- * Derniers produits scannés sur le site, comptes et visiteurs sans compte confondus (journal
- * analytics.scanner_events depuis le 2026-11-04, historique des comptes avant). Rien sur la personne.
- * Sans le journal, la liste repose sur l'historique seul.
- */
-export async function recentScans(limit: number, minDistinct: number): Promise<ScanSummary[]> {
-  const d = getDb()
-  if (!d) return []
-  const history = await d
-    .select({ id: scanHistory.foodAnalysisId, at: sql<Date>`max(${scanHistory.createdAt})` })
-    .from(scanHistory)
-    .groupBy(scanHistory.foodAnalysisId)
-    .orderBy(sql`max(${scanHistory.createdAt}) DESC`)
-    .limit(limit * 3)
-  const events = await d
-    .execute<{ id: string; at: Date }>(
-      sql`SELECT food_analysis_id AS id, max(created_at) AS at FROM analytics.scanner_events
-           WHERE result = 'found' AND food_analysis_id IS NOT NULL GROUP BY 1 ORDER BY 2 DESC LIMIT ${limit * 3}`,
-    )
-    .then((r) => r.rows)
-    .catch((err: unknown) => {
-      console.error('[scanner] journal des scans illisible', err && typeof err === 'object' && 'code' in err ? String(err.code) : 'inconnu')
-      return [] as { id: string; at: Date }[]
-    })
-  const latest = new Map<string, Date>()
-  for (const r of [...history, ...events]) {
-    const at = new Date(r.at)
-    const known = latest.get(r.id)
-    if (!known || at > known) latest.set(r.id, at)
-  }
-  if (latest.size === 0) return []
-  const rows = await d
-    .select({ id: foodAnalysis.id, slug: foodAnalysis.slug, brand: foodAnalysis.brand, product: foodAnalysis.product, score: foodAnalysis.score, kind: sql<string>`${foodAnalysis.details}->>'kind'` })
-    .from(foodAnalysis)
-    .where(and(inArray(foodAnalysis.id, [...latest.keys()]), eq(foodAnalysis.discarded, false)))
-  if (rows.length < minDistinct) return []
-  return rows
-    .map(({ id, ...r }) => ({ ...r, at: latest.get(id) as Date, kind: r.kind === 'treat' ? ('treat' as const) : ('complete' as const) }))
-    .sort((a, b) => b.at.getTime() - a.at.getTime())
-    .slice(0, limit)
 }
 
 export async function addReport(userId: string, analysisId: string, message: string): Promise<boolean> {

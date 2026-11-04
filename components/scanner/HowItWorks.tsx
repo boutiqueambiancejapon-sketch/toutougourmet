@@ -1,6 +1,6 @@
 import { BarcodeArt, IngredientsArt, ScoreArt } from './illustrations'
 
-// @cdc lot 6 — « Comment ça marche » sur /scanner : trois étapes illustrées, rendu serveur.
+// @cdc lot 6 — « Comment ça marche » sur /scanner : trois étapes illustrées, rendu serveur (titre porté par le pli).
 
 const STEPS = [
   {
@@ -22,10 +22,12 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section aria-labelledby="comment" className="flex flex-col gap-4">
-      <h2 id="comment" className="m-0 font-display text-2xl font-black text-ink">
-        Comment analyser les croquettes, la pâtée ou les friandises de ton chien&nbsp;?
-      </h2>
+    <div className="flex flex-col gap-4">
+      <p>
+        Le scanner analyse la composition des croquettes, pâtées et friandises pour chien et lui donne une note sur 100. Scanne le
+        code-barres du paquet : si le produit est déjà connu, la note s&apos;affiche aussitôt, sans compte. Sinon, deux photos de
+        l&apos;étiquette suffisent (une seule pour une friandise) avec un compte gratuit, et notre barème publié fait le calcul.
+      </p>
       <ol role="list" className="m-0 grid list-none gap-4 p-0 sm:grid-cols-3">
         {STEPS.map((s, i) => (
           <li key={s.title} className="flex gap-4 rounded-card border border-line bg-paper p-4 sm:flex-col">
@@ -37,6 +39,6 @@ export function HowItWorks() {
           </li>
         ))}
       </ol>
-    </section>
+    </div>
   )
 }

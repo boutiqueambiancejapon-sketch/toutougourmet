@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { RANKING_MIN_REVIEWED } from '@/lib/scanner/seo'
 import { reviewedItemsSafe } from '@/lib/server/scanner-catalog'
+import { MethodDetails } from './MethodDetails'
 import { RankingList } from './RankingList'
 
 // @cdc lot 6 — « Quelles croquettes pour chien sont les mieux notées ? » sur /scanner : les 5
@@ -15,10 +16,7 @@ export async function TopRated() {
   if (items.length < MIN_SHOWN) return null
   const treats = (await reviewedItemsSafe('treat')).length
   return (
-    <section aria-labelledby="meilleures-notes" className="flex flex-col gap-3">
-      <h2 id="meilleures-notes" className="m-0 font-display text-2xl font-black text-ink">
-        Quelles croquettes pour chien sont les mieux notées&nbsp;?
-      </h2>
+    <MethodDetails id="meilleures-notes" title={'Quelles croquettes pour chien sont les mieux notées\u00a0?'}>
       <p className="m-0 text-base leading-relaxed text-ink-2">
         {`Les ${Math.min(SHOWN, items.length)} meilleures notes parmi les ${items.length} croquettes et pâtées qui ont une fiche publiée, calculées avec le même barème.`}
       </p>
@@ -40,6 +38,6 @@ export async function TopRated() {
           .
         </p>
       ) : null}
-    </section>
+    </MethodDetails>
   )
 }

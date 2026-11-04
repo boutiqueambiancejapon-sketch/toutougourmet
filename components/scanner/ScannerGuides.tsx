@@ -20,10 +20,7 @@ const GUIDES: { href: string; label: string; text: string }[] = [
 export async function ScannerGuides() {
   const treatsListed = (await reviewedItemsSafe('treat')).length >= RANKING_MIN_REVIEWED
   return (
-    <section aria-labelledby="patee-friandise" className="flex flex-col gap-4">
-      <h2 id="patee-friandise" className="m-0 font-display text-2xl font-black text-ink">
-        Comment juger la composition d&apos;une pâtée ou d&apos;une friandise&nbsp;?
-      </h2>
+    <div className="flex flex-col gap-4">
       <p className="m-0 text-base leading-relaxed text-ink-2">
         Une pâtée se juge comme une croquette, une fois l&apos;eau retirée. Avec 78 % d&apos;humidité, 8 % de protéines sur la boîte
         font environ 36 % sur matière sèche. Le scanner fait ce calcul pour comparer une pâtée et une croquette sur la même base.
@@ -51,6 +48,6 @@ export async function ScannerGuides() {
           </li>
         ))}
       </ul>
-    </section>
+    </div>
   )
 }

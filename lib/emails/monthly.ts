@@ -118,7 +118,7 @@ function topFoodBlocks(food: TopFood): EmailBlock[] {
   return [
     divider(),
     label('La meilleure note du mois au scanner'),
-    paragraph(`${name} obtient ${food.score}/100 parmi les paquets scannés ce mois-ci et relus par la rédaction.`),
+    paragraph(`${name} obtient ${food.score}/100 parmi les fiches relues par la rédaction ce mois-ci.`),
     button('Voir sa fiche', siteUrl(`/croquettes/${food.slug}`)),
   ]
 }

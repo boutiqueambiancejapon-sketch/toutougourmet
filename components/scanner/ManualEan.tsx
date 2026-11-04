@@ -8,6 +8,30 @@ import { decodeFile, normalizeCode } from '@/lib/scanner/barcode-client'
 
 export type CodeVia = 'camera' | 'manual' | 'photo'
 
+/** Secours sous la caméra et sous la saisie à la main : photos de l'étiquette ou retour. */
+export function ScanFallbackLinks({ onCancel, onNoBarcode }: { onCancel: () => void; onNoBarcode: () => void }) {
+  return (
+    <div className="flex flex-col gap-2 border-t border-line pt-3 sm:flex-row sm:justify-between">
+      <button type="button" onClick={onNoBarcode} className="min-h-11 text-left text-[15px] font-semibold text-ink underline underline-offset-2">
+        Pas de code-barres : analyser par photos
+      </button>
+      <button type="button" onClick={onCancel} className="min-h-11 text-left text-[15px] text-ink-2 underline underline-offset-2">
+        Annuler
+      </button>
+    </div>
+  )
+}
+
+/** Saisie ouverte depuis le premier écran, sans passer par la caméra. */
+export function ManualStep({ onCode, onCancel, onNoBarcode }: { onCode: (ean: string, via: CodeVia) => void; onCancel: () => void; onNoBarcode: () => void }) {
+  return (
+    <section aria-label="Saisir le code-barres" className="flex flex-col gap-4 rounded-card border border-line bg-paper p-4 sm:p-6">
+      <ManualEan onCode={onCode} />
+      <ScanFallbackLinks onCancel={onCancel} onNoBarcode={onNoBarcode} />
+    </section>
+  )
+}
+
 export function ManualEan({ onCode }: { onCode: (ean: string, via: CodeVia) => void }) {
   const id = useId()
   const [value, setValue] = useState('')

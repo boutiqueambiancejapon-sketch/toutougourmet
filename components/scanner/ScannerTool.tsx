@@ -1,17 +1,17 @@
 'use client'
 
-import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
+import { useEffect, useState, useSyncExternalStore } from 'react'
 import dynamic from 'next/dynamic'
 import { hasSessionHint } from '@/lib/account-hint'
 import { ToolSignupCard } from '@/components/cro/ToolSignupCard'
 import { track } from '@/lib/analytics'
 import type { Prefill, ResultOrigin, ScanAnalysis, ScanQuota, ScanResponse } from '@/lib/scanner/result'
 import { AccountGate, PREFILL_KEY } from './AccountGate'
-import type { CodeVia } from './ManualEan'
+import { ManualStep, type CodeVia } from './ManualEan'
 import { PhotoSteps } from './PhotoSteps'
 import { ScanProblem } from './ScanProblem'
 import { ScanResult } from './ScanResult'
-import { ScanStart, START_EVENT } from './ScanStart'
+import { ScanStart } from './ScanStart'
 
 // @cdc lot 6 — parcours du scanner sur /scanner : code-barres d'abord (caméra, chiffres ou photo),
 // résultat immédiat s'il est en cache ou sur Open Pet Food Facts (sans compte, non décompté),
@@ -26,6 +26,7 @@ const BarcodeScanner = dynamic(() => import('./BarcodeScanner').then((m) => m.Ba
 type Step =
   | { name: 'idle' }
   | { name: 'camera' }
+  | { name: 'manual' }
   | { name: 'looking'; ean: string }
   | { name: 'photos'; prefill: Prefill; notice?: { code: 'not_found' | 'cat_food'; message: string } }
   | { name: 'result'; analysis: ScanAnalysis; origin: ResultOrigin }
@@ -37,7 +38,6 @@ export function ScannerTool({ monthlyLimit }: { monthlyLimit: number }) {
   const signedIn = useSyncExternalStore(noop, hasSessionHint, () => false)
   const [step, setStep] = useState<Step>({ name: 'idle' })
   const [quota, setQuota] = useState<ScanQuota | null>(null)
-  const top = useRef<HTMLDivElement>(null)
 
   // Retour de connexion (?photos=1) : reprendre les photos avec le code-barres gardé.
   useEffect(() => {
@@ -50,15 +50,6 @@ export function ScannerTool({ monthlyLimit }: { monthlyLimit: number }) {
     // Après l'hydratation (la page servie est la même pour tous) : prochain tour de boucle.
     const t = setTimeout(() => setStep({ name: 'photos', prefill }), 0)
     return () => clearTimeout(t)
-  }, [])
-
-  useEffect(() => {
-    const start = () => {
-      setStep({ name: 'camera' })
-      top.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-    window.addEventListener(START_EVENT, start)
-    return () => window.removeEventListener(START_EVENT, start)
   }, [])
 
   useEffect(() => {
@@ -89,8 +80,9 @@ export function ScannerTool({ monthlyLimit }: { monthlyLimit: number }) {
 
   const restart = () => setStep({ name: 'camera' })
   return (
-    <div ref={top} id="scan" className="flex scroll-mt-24 flex-col gap-4">
-      {step.name === 'idle' ? <ScanStart monthlyLimit={monthlyLimit} onStart={() => setStep({ name: 'camera' })} /> : null}
+    <div id="scan" className="flex scroll-mt-24 flex-col gap-4">
+      {step.name === 'idle' ? <ScanStart monthlyLimit={monthlyLimit} onStart={() => setStep({ name: 'camera' })} onManual={() => setStep({ name: 'manual' })} /> : null}
+      {step.name === 'manual' ? <ManualStep onCode={lookup} onCancel={() => setStep({ name: 'idle' })} onNoBarcode={() => setStep({ name: 'photos', prefill: EMPTY })} /> : null}
       {step.name === 'camera' ? (
         <BarcodeScanner onCode={lookup} onCancel={() => setStep({ name: 'idle' })} onNoBarcode={() => setStep({ name: 'photos', prefill: EMPTY })} />
       ) : null}

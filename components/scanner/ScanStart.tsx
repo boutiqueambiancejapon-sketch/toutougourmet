@@ -1,9 +1,7 @@
 'use client'
 
-// @cdc lot 6 — bouton principal du scanner et sa réassurance. Le bouton répété en bas de page
-// (ScanAgainButton) remonte au parcours et ouvre la caméra par un événement de fenêtre.
-
-export const START_EVENT = 'tg-scan-start'
+// @cdc lot 6 — bouton principal du scanner, sa réassurance et la saisie à la main. Seul bouton de
+// scan du site : les pages de consultation n'ont qu'un lien vers /scanner.
 
 function BarcodeIcon() {
   return (
@@ -13,28 +11,21 @@ function BarcodeIcon() {
   )
 }
 
-const big =
-  'inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-control bg-orange px-6 text-lg font-bold text-ink shadow-[5px_5px_0_var(--ink)] transition-transform active:translate-x-[3px] active:translate-y-[3px] active:shadow-[2px_2px_0_var(--ink)] sm:w-auto'
-
-export function ScanStart({ monthlyLimit, onStart }: { monthlyLimit: number; onStart: () => void }) {
+export function ScanStart({ monthlyLimit, onStart, onManual }: { monthlyLimit: number; onStart: () => void; onManual: () => void }) {
   return (
-    <div className="flex flex-col gap-3">
-      <button type="button" onClick={onStart} className={big}>
+    <div className="flex flex-col gap-3 rounded-card bg-ink p-4 text-cream sm:p-5">
+      <button
+        type="button"
+        onClick={onStart}
+        className="inline-flex min-h-14 w-full items-center justify-center gap-3 whitespace-nowrap rounded-control bg-orange px-5 text-lg font-bold text-ink shadow-[0_3px_0_var(--orange-ink)] transition-transform active:translate-y-[3px] active:shadow-none"
+      >
         <BarcodeIcon />
-        Scanner le code-barres
+        Scanner un paquet
       </button>
-      <p className="m-0 text-sm leading-relaxed text-ink-2">
-        {`Sans compte si le produit est déjà connu. Pour un produit inconnu, l'analyse par photo demande un compte gratuit (${monthlyLimit} par mois). Ta photo n'est jamais enregistrée.`}
-      </p>
+      <p className="m-0 text-sm leading-relaxed text-cream/90">{`Code-barres sans compte. Photo de l'étiquette avec un compte gratuit, ${monthlyLimit} par mois.`}</p>
+      <button type="button" onClick={onManual} className="min-h-11 text-sm font-semibold text-cream underline underline-offset-2">
+        Saisir le code-barres à la main
+      </button>
     </div>
-  )
-}
-
-export function ScanAgainButton() {
-  return (
-    <button type="button" onClick={() => window.dispatchEvent(new Event(START_EVENT))} className={big}>
-      <BarcodeIcon />
-      Scanner le sac
-    </button>
   )
 }

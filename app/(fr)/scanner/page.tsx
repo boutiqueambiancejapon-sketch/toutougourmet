@@ -1,7 +1,7 @@
-// @cdc lot 6 — page publique du scanner, orientée action : rendu serveur indexable, revalidée
-// toutes les 60 s pour « Derniers scans » et « Meilleures notes ». Le parcours (code-barres,
-// photos) et le calculateur de glucides sont des composants clients ; tout le texte (étapes,
-// méthodes repliées des deux barèmes, repères de composition, FAQ) est dans le HTML servi.
+// @cdc lot 6 — page publique du scanner, la seule avec le bouton de scan et la seule indexée.
+// En haut : H1, phrase courte, parcours (composant client), deux cartes vers les listes, trois
+// dernières fiches. Tout le texte (étapes, barèmes, repères, FAQ) reste dans le HTML servi, plié
+// sous <details>. Revalidée toutes les 60 s pour les dernières fiches et les meilleures notes.
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
@@ -9,12 +9,12 @@ import { FaqItem, FaqList } from '@/components/article/Faq'
 import { OtherTools } from '@/components/outils/OtherTools'
 import { CarbsSection } from '@/components/scanner/CarbsSection'
 import { CompositionGuide } from '@/components/scanner/CompositionGuide'
-import { ExampleFiche } from '@/components/scanner/ExampleFiche'
+import { EXAMPLE_TITLE, ExampleFicheBody } from '@/components/scanner/ExampleFiche'
 import { HowItWorks } from '@/components/scanner/HowItWorks'
+import { BrowseCards } from '@/components/scanner/lists/BrowseCards'
+import { LatestFiches } from '@/components/scanner/lists/LatestFiches'
 import { MethodDetails } from '@/components/scanner/MethodDetails'
 import { ReadScore } from '@/components/scanner/ReadScore'
-import { RecentScans } from '@/components/scanner/RecentScans'
-import { ScanAgainButton } from '@/components/scanner/ScanStart'
 import { ScannerJsonLd } from '@/components/scanner/ScannerJsonLd'
 import { ScannerGuides } from '@/components/scanner/ScannerGuides'
 import { ScannerMethod } from '@/components/scanner/ScannerMethod'
@@ -50,41 +50,50 @@ export default function ScannerPage() {
   return (
     <>
       <ScannerJsonLd faq={faq} description={DESCRIPTION} />
-      <div className="v2 mx-auto flex max-w-prose flex-col gap-12 px-4 pt-4 pb-16 md:px-8 md:pt-8">
+      <div className="v2 mx-auto flex max-w-prose flex-col gap-10 px-4 pt-4 pb-16 md:px-8 md:pt-8">
         <div className="flex flex-col gap-5">
           <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Outils', href: '/outils' }, { label: 'Scanner de croquettes' }]} />
           <header className="flex flex-col gap-2">
-            <h1 className="m-0 font-display text-[clamp(2rem,5vw,2.75rem)] font-black leading-[1.05] tracking-tight text-ink">
+            <h1 className="m-0 font-display text-[clamp(1.75rem,5vw,2.75rem)] font-black leading-[1.05] tracking-tight text-ink">
               Scanner de croquettes, pâtées et friandises pour chien : note sur 100
             </h1>
             <p className="m-0 text-base leading-relaxed text-ink-2 md:text-lg">
-              Le scanner analyse la composition des croquettes, pâtées et friandises pour chien et lui donne une note sur 100.
-              Scanne le code-barres du paquet : si le produit est déjà connu, la note s&apos;affiche aussitôt, sans compte. Sinon,
-              deux photos de l&apos;étiquette suffisent (une seule pour une friandise) avec un compte gratuit, et notre barème publié
-              fait le calcul.
+              Scanne le paquet de ton chien : tu obtiens une note sur 100, et ce qu&apos;elle veut dire.
             </p>
           </header>
           <ScannerTool monthlyLimit={FREE_MONTHLY_SCANS} />
-          <RecentScans />
+          <BrowseCards />
+          <LatestFiches />
         </div>
 
-        <HowItWorks />
-        <ExampleFiche />
-        <ReadScore />
-
         <div className="flex flex-col gap-3">
+          <p className="m-0 text-[15px] leading-relaxed text-ink-2">1. Tu scannes. 2. On lit la composition. 3. Tu as la note et ce qu&apos;elle veut dire.</p>
+          <MethodDetails id="comment" title={'Comment analyser les croquettes, la pâtée ou les friandises de ton chien ?'}>
+            <HowItWorks />
+          </MethodDetails>
+          <MethodDetails id="exemple" title={EXAMPLE_TITLE}>
+            <ExampleFicheBody />
+          </MethodDetails>
+          <MethodDetails id="lire-note" title={'Quelle est une bonne note pour des croquettes ?'}>
+            <ReadScore />
+          </MethodDetails>
           <MethodDetails title="Comment est calculée la note des croquettes et pâtées ?">
             <ScannerMethod />
           </MethodDetails>
           <MethodDetails id="methode-friandises" title="Comment est calculée la note des friandises ?">
             <TreatMethod />
           </MethodDetails>
+          <MethodDetails id="glucides" title={'Comment calculer le taux de glucides des croquettes ?'}>
+            <CarbsSection />
+          </MethodDetails>
+          <MethodDetails id="bonne-composition" title={'Qu’est-ce qu’une bonne composition de croquettes pour chien ?'}>
+            <CompositionGuide />
+          </MethodDetails>
+          <MethodDetails id="patee-friandise" title={'Comment juger la composition d’une pâtée ou d’une friandise ?'}>
+            <ScannerGuides />
+          </MethodDetails>
+          <TopRated />
         </div>
-
-        <CarbsSection />
-        <CompositionGuide />
-        <ScannerGuides />
-        <TopRated />
 
         <section aria-labelledby="faq" className="flex flex-col">
           <h2 id="faq" className="m-0 font-display text-2xl font-black text-ink">
@@ -98,7 +107,7 @@ export default function ScannerPage() {
             ))}
           </FaqList>
           <p className="m-0 text-sm leading-relaxed text-ink-2">
-            {'Yuka ne note pas les aliments pour animaux\u00a0: '}
+            {'Yuka ne note pas les aliments pour animaux : '}
             <Link href="/scanner/alternative-yuka-animaux" className="font-semibold text-orange-ink underline underline-offset-2">
               notre scanner comparé à Yuka pour les croquettes
             </Link>
@@ -109,14 +118,6 @@ export default function ScannerPage() {
             .
           </p>
         </section>
-
-        <aside aria-label="Scanner un sac" className="relative mr-2 flex flex-col gap-4 rounded-card bg-ink p-6 text-cream shadow-[8px_8px_0_var(--orange)] md:p-8">
-          <p className="m-0 font-display text-[clamp(1.5rem,3.4vw,2rem)] font-black leading-tight">Le sac est à portée de main ?</p>
-          <p className="m-0 text-base leading-relaxed text-cream/90">Sac de croquettes ou paquet de friandises : le code-barres suffit pour les produits déjà connus, sans compte.</p>
-          <div>
-            <ScanAgainButton />
-          </div>
-        </aside>
 
         <OtherTools current="scanner" />
       </div>

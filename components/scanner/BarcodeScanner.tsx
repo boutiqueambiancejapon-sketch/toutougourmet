@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { decodeSource, getDetector } from '@/lib/scanner/barcode-client'
-import { ManualEan, type CodeVia } from './ManualEan'
+import { ManualEan, ScanFallbackLinks, type CodeVia } from './ManualEan'
 
 // @cdc lot 6 — lecture du code-barres à la caméra (iPhone Safari et Android). Le flux vidéo reste
 // dans le navigateur : aucune image n'est envoyée ni gardée. Caméra refusée, absente ou
@@ -86,14 +86,7 @@ export function BarcodeScanner({ onCode, onCancel, onNoBarcode }: BarcodeScanner
         </p>
       )}
       <ManualEan onCode={onCode} />
-      <div className="flex flex-col gap-2 border-t border-line pt-3 sm:flex-row sm:justify-between">
-        <button type="button" onClick={onNoBarcode} className="min-h-11 text-left text-[15px] font-semibold text-ink underline underline-offset-2">
-          Pas de code-barres : analyser par photos
-        </button>
-        <button type="button" onClick={onCancel} className="min-h-11 text-left text-[15px] text-ink-2 underline underline-offset-2">
-          Annuler
-        </button>
-      </div>
+      <ScanFallbackLinks onCancel={onCancel} onNoBarcode={onNoBarcode} />
     </section>
   )
 }
