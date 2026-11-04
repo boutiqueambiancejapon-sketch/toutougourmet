@@ -25,11 +25,7 @@ const websiteJsonLd = {
   name: 'Toutou Gourmet',
   url: SITE_URL,
   description: "Guide de l'alimentation du chien en France : ration, aliments, races et marques comparées",
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: `${SITE_URL}/recherche?q={search_term_string}`,
-    'query-input': 'required name=search_term_string',
-  },
+  // Pas de SearchAction : /recherche n'existe pas et la recherche de /chien ne lit aucun paramètre d'URL.
 }
 
 export function SiteDocument({ locale, header, footer, children }: SiteDocumentProps) {
