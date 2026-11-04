@@ -119,11 +119,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `os-poulet-chien-danger`
 - [x] `chien-peut-manger-lentilles`
 - [x] `nourriture-labrador-retriever`
-- [ ] `choisir-taille-croquettes-chien`
-- [ ] `quelle-quantite-donner-manger-chien-selon-poids`
-- [ ] `avis-fidelis-menus-frais-chien-bocaux`
-- [ ] `chien-peut-manger-foie`
-- [ ] `recette-biscuits-sardine-chien`
+- [x] `choisir-taille-croquettes-chien`
+- [x] `quelle-quantite-donner-manger-chien-selon-poids`
+- [x] `avis-fidelis-menus-frais-chien-bocaux`
+- [x] `chien-peut-manger-foie`
+- [x] `recette-biscuits-sardine-chien`
 - [ ] `vinaigre-de-cidre-chien-bienfaits-precautions`
 - [ ] `chien-peut-manger-myrtilles`
 - [ ] `chien-boit-beaucoup-eau-causes`
