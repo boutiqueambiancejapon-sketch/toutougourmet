@@ -10,6 +10,7 @@ import { PARTNERS, type Partner } from './partners'
 import { rationHref } from './ration-params'
 import { ToolResult } from './ToolResult'
 import type { AccountDog } from './useAccountPrefill'
+import { useResultReveal } from '@/lib/use-result-reveal'
 
 // @cdc outils — budget mensuel par marque pour la ration calculée (computeRation). Un seul lien
 // partenaire : la marque la moins chère pour ce profil ; les autres renvoient à leur fiche.
@@ -40,6 +41,7 @@ export function BudgetCalculator({ dog }: { dog?: AccountDog | null }) {
   const [activity, setActivity] = useState<ActivityLevel>(p?.activityLevel ?? 'normal')
   const [sterilized, setSterilized] = useState<'oui' | 'non'>(p?.sterilized ? 'oui' : 'non')
   const [rows, setRows] = useState<Row[] | null>(null)
+  const [resultRef, reveal] = useResultReveal()
 
   const change = <T,>(setter: (v: T) => void) => (v: T) => { setter(v); setRows(null) }
   const kg = parseFloat(weight.replace(',', '.'))
@@ -53,6 +55,7 @@ export function BudgetCalculator({ dog }: { dog?: AccountDog | null }) {
       .sort((a, b) => a.monthly - b.monthly)
     setRows(res)
     track('Tool Result', { tool: 'budget' })
+    reveal()
   }
 
   const best = rows?.[0]
@@ -69,7 +72,7 @@ export function BudgetCalculator({ dog }: { dog?: AccountDog | null }) {
         <Segmented name="sterilise" legend="Stérilisé" options={STERILIZED} value={sterilized} onChange={change(setSterilized)} />
         <SubmitButton>Comparer les budgets</SubmitButton>
       </ToolCard>
-      <div aria-live="polite">
+      <div ref={resultRef} aria-live="polite">
         {rows && best ? (
           <ToolResult
             tool="budget"

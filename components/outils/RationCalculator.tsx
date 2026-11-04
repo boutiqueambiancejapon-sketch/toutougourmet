@@ -10,6 +10,7 @@ import { CheckField, NumberField, SubmitButton, ToolCard } from './fields'
 import { RationResult } from './RationResult'
 import { FOOD_OPTIONS, parseRationParams, type RationFood, type RationPrefill } from './ration-params'
 import { useAccountPrefill } from './useAccountPrefill'
+import { useResultReveal } from '@/lib/use-result-reveal'
 
 // @cdc outils — calculateur complet de /outils/ration. Même fonction que le mini-outil de
 // l'accueil (computeRation, lib/calculators.ts) : mêmes réglages, même résultat.
@@ -95,6 +96,7 @@ export function RationCalculator({
   // Poids reçu (URL ou profil du compte) : le résultat s'affiche tout de suite.
   const [result, setResult] = useState<RationValues | null>(() => (prefill.weightKg ? compute(initial) : null))
   const fromUrl = Boolean(prefill.weightKg)
+  const [resultRef, reveal] = useResultReveal()
 
   useEffect(() => {
     if (fromUrl) track('Tool Result', { tool: 'ration', source })
@@ -116,6 +118,7 @@ export function RationCalculator({
           if (!values) return
           setResult(values)
           track('Tool Result', { tool: 'ration' })
+          reveal()
         }}
       >
         <NumberField id={weightId} label="Poids (kg)" value={form.weightKg} onChange={(v) => set('weightKg', v)} placeholder="ex. 12" min={0.5} max={100} />
@@ -128,7 +131,7 @@ export function RationCalculator({
         </CheckField>
         <SubmitButton>Calculer sa ration</SubmitButton>
       </ToolCard>
-      <div aria-live="polite">
+      <div ref={resultRef} aria-live="polite">
         {result ? (
           <RationResult
             result={result}

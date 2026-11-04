@@ -55,7 +55,6 @@ export function RationResult({ result, form, dogName }: { result: RationValues; 
       steps={steps(form)}
       partner={partner(grams, form, dogName)}
       dogName={dogName}
-      emailInput={{ tool: 'ration', weightKg: form.weightKg, ageGroup: form.ageGroup, activityLevel: form.activityLevel, sterilized: form.sterilized, highEnergy: form.highEnergy, food: form.food }}
     >
       <BigResult value={`${grams} g`} unit={what}>
         <p>

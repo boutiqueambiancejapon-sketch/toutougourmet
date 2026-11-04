@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react'
 import { track } from '@/lib/analytics'
 import { BILAN_QUESTIONS, computeBilan, getVerdict, recommend, type BilanAnswers } from '@/data/bien-nourri'
 import { BienNourriResult } from './BienNourriResult'
+import { titleTypo } from '@/lib/title-typo'
+import { useResultReveal } from '@/lib/use-result-reveal'
 
 // @cdc outils — bilan « bien nourri » en 6 questions (data/bien-nourri.ts). Une question à la
 // fois ; les choix uniques passent à la suivante tout seuls.
@@ -14,6 +16,7 @@ export function BienNourriEvaluator() {
   const [stepIndex, setStepIndex] = useState(0)
   const [answers, setAnswers] = useState<BilanAnswers>({})
   const [done, setDone] = useState(false)
+  const [resultRef, reveal] = useResultReveal()
 
   // « Tool Result » (tool = bien-nourri) alimente le compteur public du sticky CTA
   // (/api/bien-nourri-count) et le tableau de bord. Une fois par bilan.
@@ -36,7 +39,10 @@ export function BienNourriEvaluator() {
 
   function next() {
     if (stepIndex < total - 1) setStepIndex(stepIndex + 1)
-    else setDone(true)
+    else {
+      setDone(true)
+      reveal()
+    }
   }
 
   function select(value: string) {
@@ -56,7 +62,7 @@ export function BienNourriEvaluator() {
 
   if (done) {
     return (
-      <div aria-live="polite">
+      <div ref={resultRef} aria-live="polite">
         <BienNourriResult
           answers={answers}
           onRestart={() => {
@@ -80,7 +86,7 @@ export function BienNourriEvaluator() {
         </div>
       </div>
       <div className="flex flex-col gap-1">
-        <h2 className="m-0 font-display text-xl font-black leading-snug text-ink md:text-2xl">{step.prompt}</h2>
+        <h2 className="m-0 font-display text-xl font-black leading-snug text-ink md:text-2xl">{titleTypo(step.prompt)}</h2>
         {step.helpText ? <p className="m-0 text-sm leading-relaxed text-ink-2">{step.helpText}</p> : null}
       </div>
       <ul role="list" className="m-0 flex list-none flex-col gap-2 p-0">

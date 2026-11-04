@@ -8,11 +8,13 @@ import { BigResult, NumberField, SubmitButton, ToolCard } from './fields'
 import type { NextStep } from './NextSteps'
 import { ToolResult } from './ToolResult'
 import type { AccountDog } from './useAccountPrefill'
+import { useResultReveal } from '@/lib/use-result-reveal'
 
 // @cdc outils — âge humain selon le gabarit (tableau AVMA, lib/calculators.ts). Pas de lien
 // partenaire : l'âge seul ne justifie aucune marque.
 
-const SIZES = [['petit', 'Petit'], ['moyen', 'Moyen'], ['grand', 'Grand'], ['tres-grand', 'Très grand']] as const
+// « Géant » : « Très grand » passait sur deux lignes dans son segment (la phrase dessous donne le poids).
+const SIZES = [['petit', 'Petit'], ['moyen', 'Moyen'], ['grand', 'Grand'], ['tres-grand', 'Géant']] as const
 const SIZE_HINT: Record<SizeCategory, string> = {
   petit: 'moins de 10 kg : Yorkshire, Chihuahua, Carlin',
   moyen: '10 à 25 kg : Beagle, Cocker, Bulldog',
@@ -59,7 +61,8 @@ export function AgeCalculator({ dog }: { dog?: AccountDog | null }) {
   const [years, setYears] = useState(known !== null ? String(Math.floor(known / 12)) : '')
   const [months, setMonths] = useState(known !== null ? String(known % 12) : '0')
   const [size, setSize] = useState<SizeCategory>(dog?.weightKg ? sizeOf(dog.weightKg) : 'moyen')
-  const [result, setResult] = useState<{ age: DogAgeResult; label: string; years: number; months: number; size: SizeCategory } | null>(null)
+  const [result, setResult] = useState<{ age: DogAgeResult; label: string } | null>(null)
+  const [resultRef, reveal] = useResultReveal()
 
   function reset<T>(setter: (v: T) => void) {
     return (v: T) => {
@@ -74,8 +77,9 @@ export function AgeCalculator({ dog }: { dog?: AccountDog | null }) {
     const m = parseInt(months, 10) || 0
     if (!Number.isFinite(y) || y < 0 || y > 25 || y + m === 0) return
     const label = m > 0 ? `${y} an${y > 1 ? 's' : ''} et ${m} mois` : `${y} an${y > 1 ? 's' : ''}`
-    setResult({ age: calculateDogHumanAge(y + m / 12, size), label, years: y, months: m, size })
+    setResult({ age: calculateDogHumanAge(y + m / 12, size), label })
     track('Tool Result', { tool: 'age' })
+    reveal()
   }
 
   const age = result?.age
@@ -102,11 +106,9 @@ export function AgeCalculator({ dog }: { dog?: AccountDog | null }) {
         <p className="-mt-2 m-0 text-sm text-ink-2">{SIZE_HINT[size]}</p>
         <SubmitButton>Convertir son âge</SubmitButton>
       </ToolCard>
-      <div aria-live="polite">
+      <div ref={resultRef} aria-live="polite">
         {result && age ? (
-          <ToolResult tool="age" summary={`${result.label}, gabarit ${size} : ${age.humanAge} ans humains (${age.lifeStage})`} steps={nextSteps(age.stagePill, size)}
-            emailInput={{ tool: 'age', years: result.years, months: result.months, size: result.size }}
-          >
+          <ToolResult tool="age" summary={`${result.label}, gabarit ${size} : ${age.humanAge} ans humains (${age.lifeStage})`} steps={nextSteps(age.stagePill, size)}>
             <BigResult value={`${age.humanAge} ans`} unit="en âge humain">
               <p>
                 <strong className="font-semibold text-ink">{age.lifeStage}.</strong> {age.context}

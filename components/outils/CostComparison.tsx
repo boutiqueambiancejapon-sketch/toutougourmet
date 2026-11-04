@@ -6,6 +6,7 @@ import { buildCostComparisons, calculateDailyCalories, type ActivityLevel, type 
 import { Segmented } from '@/components/tools/Segmented'
 import { BigResult, NumberField, SubmitButton, ToolCard } from './fields'
 import { ToolResult } from './ToolResult'
+import { useResultReveal } from '@/lib/use-result-reveal'
 
 // @cdc outils — coût annuel de quatre façons de nourrir, pour la même ration (computeRation).
 // Pas de lien partenaire : le résultat compare des types d'aliment, pas des marques.
@@ -19,6 +20,7 @@ export function CostComparisonTool() {
   const [age, setAge] = useState<AgeGroup>('adulte')
   const [activity, setActivity] = useState<ActivityLevel>('normal')
   const [rows, setRows] = useState<CostComparison[] | null>(null)
+  const [resultRef, reveal] = useResultReveal()
 
   const change = <T,>(setter: (v: T) => void) => (v: T) => { setter(v); setRows(null) }
 
@@ -29,6 +31,7 @@ export function CostComparisonTool() {
     const kcal = calculateDailyCalories({ animal: 'chien', weightKg: kg, ageGroup: age, activityLevel: activity, sterilized: false })
     setRows(buildCostComparisons(kcal))
     track('Tool Result', { tool: 'cout' })
+    reveal()
   }
 
   const sorted = rows ? [...rows].sort((a, b) => a.annualBudget - b.annualBudget) : []
@@ -42,7 +45,7 @@ export function CostComparisonTool() {
         <Segmented name="activite" legend="Activité" options={ACTIVITIES} value={activity} onChange={change(setActivity)} />
         <SubmitButton>Comparer sur un an</SubmitButton>
       </ToolCard>
-      <div aria-live="polite">
+      <div ref={resultRef} aria-live="polite">
         {rows && low && high ? (
           <ToolResult
             tool="cout"

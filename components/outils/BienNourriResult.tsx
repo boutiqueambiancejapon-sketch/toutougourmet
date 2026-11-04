@@ -32,7 +32,7 @@ export function BienNourriResult({ answers, onRestart }: { answers: BilanAnswers
 
   return (
     <div className="flex flex-col gap-4">
-      <ToolResult tool="bien-nourri" summary={`${scores.normalized}/100, ${verdict.label}`} steps={steps(answers, internal)} partner={partner} emailInput={{ tool: 'bilan', answers }}>
+      <ToolResult tool="bien-nourri" summary={`${scores.normalized}/100, ${verdict.label}`} steps={steps(answers, internal)} partner={partner}>
         <BigResult value={`${scores.normalized}/100`} unit={verdict.label}>
           <p>{verdict.summary}</p>
         </BigResult>

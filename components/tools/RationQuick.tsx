@@ -7,6 +7,7 @@ import { computeRation, BARF_KCAL_100G, FRESH_KCAL_100G, KIBBLE_KCAL_100G, type 
 import { IconChevron } from '@/components/icons'
 import { Segmented } from './Segmented'
 import { FOOD_OPTIONS, gramsFor, rationHref, type RationFood } from '@/components/outils/ration-params'
+import { useResultReveal } from '@/lib/use-result-reveal'
 
 // @cdc 04-pages — calculateur de ration compact du hero (audit design-CRO, §3 Accueil).
 // Même fonction que l'outil complet /outils/ration (computeRation, lib/calculators.ts) : mêmes
@@ -33,6 +34,7 @@ export function RationQuick({ headingId }: { headingId: string }) {
   const [sterilized, setSterilized] = useState<YesNo>('non')
   const [food, setFood] = useState<Food>('croquettes')
   const [shown, setShown] = useState(false)
+  const [resultRef, reveal] = useResultReveal()
 
   const kg = parseFloat(weight.replace(',', '.'))
   const valid = Number.isFinite(kg) && kg >= 0.5 && kg <= 100
@@ -51,6 +53,7 @@ export function RationQuick({ headingId }: { headingId: string }) {
         if (!valid) return
         setShown(true)
         track('Tool Result', { tool: 'ration-accueil' })
+        reveal()
       }}
     >
       <h2 id={headingId} className="m-0 font-display text-[1.6rem] font-black leading-tight text-ink">
@@ -81,9 +84,9 @@ export function RationQuick({ headingId }: { headingId: string }) {
       <button type="submit" className="min-h-12 rounded-control bg-ink px-5 text-base font-semibold text-cream hover:underline">
         Calculer sa ration
       </button>
-      <div aria-live="polite">
+      <div ref={resultRef} aria-live="polite">
         {shown && valid ? (
-          <div className="flex flex-col gap-3 border-t border-line pt-4">
+          <div data-tool-result tabIndex={-1} className="flex scroll-mt-20 flex-col gap-3 border-t border-line pt-4">
             <p className="m-0 flex flex-wrap items-baseline gap-x-2 text-ink">
               <span className="font-display text-4xl font-black">{grams} g</span>
               <span className="text-base">{FOOD_TEXT[food].what}</span>

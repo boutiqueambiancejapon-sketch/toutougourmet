@@ -9,6 +9,7 @@ import { PARTNERS, type Partner } from './partners'
 import { ScoreScale } from './ScoreScale'
 import { ToolResult } from './ToolResult'
 import type { AccountDog } from './useAccountPrefill'
+import { useResultReveal } from '@/lib/use-result-reveal'
 
 // @cdc outils — poids actuel comparé au poids de forme. Lien partenaire seulement pour un chien
 // en surpoids (Dog Chef dose les repas selon le poids visé).
@@ -37,16 +38,18 @@ export function BodyScoreEvaluator({ dog }: { dog?: AccountDog | null }) {
   const idealId = useId()
   const [current, setCurrent] = useState(dog?.weightKg ? String(dog.weightKg) : '')
   const [ideal, setIdeal] = useState(dog?.breedMidKg ? String(dog.breedMidKg) : '')
-  const [result, setResult] = useState<{ score: BodyScoreResult; idealKg: number; currentKg: number } | null>(null)
+  const [result, setResult] = useState<{ score: BodyScoreResult; idealKg: number } | null>(null)
   const sizes = DOG_SIZES
+  const [resultRef, reveal] = useResultReveal()
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault()
     const c = parseFloat(current.replace(',', '.'))
     const i = parseFloat(ideal.replace(',', '.'))
     if (!(c > 0) || !(i > 0)) return
-    setResult({ score: evaluateBodyScore(c, i), idealKg: i, currentKg: c })
+    setResult({ score: evaluateBodyScore(c, i), idealKg: i })
     track('Tool Result', { tool: 'etat-corporel' })
+    reveal()
   }
 
   const r = result?.score
@@ -76,14 +79,13 @@ export function BodyScoreEvaluator({ dog }: { dog?: AccountDog | null }) {
         </fieldset>
         <SubmitButton>Évaluer son poids</SubmitButton>
       </ToolCard>
-      <div aria-live="polite">
+      <div ref={resultRef} aria-live="polite">
         {result && r ? (
           <ToolResult
             tool="etat-corporel"
             summary={`${r.label} (${gap} par rapport à ${result.idealKg} kg)`}
             steps={nextSteps(r.score, result.idealKg)}
             partner={partner(r.score)}
-            emailInput={{ tool: 'poids', currentKg: result.currentKg, idealKg: result.idealKg }}
           >
             <BigResultScore label={r.label} gap={gap} advice={r.advice} score={r.score} />
           </ToolResult>

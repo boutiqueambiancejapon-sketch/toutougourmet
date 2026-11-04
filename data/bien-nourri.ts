@@ -227,15 +227,16 @@ export interface RecommendationOutput {
 export function recommend(scores: BilanScores): RecommendationOutput {
   const { tags, normalized } = scores
 
-  // 1. Signes de peau ou problèmes digestifs : Elmut (repas frais cuits à basse température)
+  // 1. Signes de peau ou problèmes digestifs : repas frais cuits à basse température. Dog Chef avant
+  // Elmut, décision du propriétaire du 2026-11-04.
   if (tags.has('signes-sante') || tags.has('digestif')) {
     return {
-      primary: 'elmut',
+      primary: 'dogchef',
       rationale:
-        "Tu as coché des signes de peau ou de digestion. Elmut cuisine en France des repas frais à basse température, sans conservateurs : une piste à essayer après avoir écarté une cause médicale avec ton vétérinaire.",
-      url: 'https://c3po.link/QWMW4k6mbU',
-      offer: CONFIRMED_DISCOUNTS.elmut ?? undefined,
-      buttonLabel: 'Essayer Elmut',
+        "Tu as coché des signes de peau ou de digestion. Dog Chef cuisine à basse température des repas frais dosés pour son profil : une piste à essayer après avoir écarté une cause médicale avec ton vétérinaire.",
+      url: 'https://www.dogchef.com/fr/code/WZU7090',
+      offer: CONFIRMED_DISCOUNTS['dog-chef'] ?? undefined,
+      buttonLabel: 'Essayer Dog Chef',
     }
   }
 

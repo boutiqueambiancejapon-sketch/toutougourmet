@@ -4,6 +4,7 @@ import { useId, useState } from 'react'
 import { track } from '@/lib/analytics'
 import { ASSUMED_DRY_MOISTURE, carbsCriterion, dryMatterBasis } from '@/lib/scanner/score'
 import { BigResult, NumberField, SubmitButton, ToolCard } from '@/components/outils/fields'
+import { useResultReveal } from '@/lib/use-result-reveal'
 
 // @cdc lot 6 — calculateur de glucides de /scanner, sans compte : même calcul que la note
 // (dryMatterBasis et carbsCriterion de lib/scanner/score.ts), mêmes hypothèses (humidité 10 %).
@@ -37,6 +38,7 @@ export function CarbsCalculator() {
   const [values, setValues] = useState<Record<Key, string>>({ proteines: '', matieresGrasses: '', cendres: '', cellulose: '', humidite: '' })
   const [result, setResult] = useState<Result | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [resultRef, reveal] = useResultReveal()
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -53,6 +55,7 @@ export function CarbsCalculator() {
     setError(null)
     setResult({ asFed: basis.carbsAsFed, dm: basis.carbsDm, points: c.points, reading: c.explanation, assumed: basis.assumedMoisture })
     track('Tool Result', { tool: 'glucides' })
+    reveal()
   }
 
   return (
@@ -80,10 +83,10 @@ export function CarbsCalculator() {
         </div>
         <SubmitButton>Calculer les glucides</SubmitButton>
       </ToolCard>
-      <div aria-live="polite">
+      <div ref={resultRef} aria-live="polite">
         {error ? <p className="m-0 rounded-box bg-amber-bg p-3 text-[15px] text-amber-ink">{error}</p> : null}
         {result ? (
-          <div className="flex flex-col gap-3 rounded-card border-2 border-ink bg-paper p-4 sm:p-6">
+          <div data-tool-result tabIndex={-1} className="flex scroll-mt-20 flex-col gap-3 rounded-card border-2 border-ink bg-paper p-4 sm:p-6">
             <BigResult value={fmt(result.dm)} unit="% de glucides sur matière sèche">
               <p>{`Soit ${fmt(result.asFed)} % sur le produit tel quel. Dans la note sur 100 : ${result.points} points sur 15.`}</p>
               <p>{result.reading}</p>
