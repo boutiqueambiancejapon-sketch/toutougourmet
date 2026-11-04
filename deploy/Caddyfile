@@ -23,8 +23,8 @@ www.toutou-gourmet.com {
 	}
 }
 
-# Tableau de bord privé : la page /tableau-de-bord du site, protégée par DASHBOARD_USER /
-# DASHBOARD_PASSWORD (authentification faite par l'application, pas par Caddy).
+# Tableau de bord privé : la page /tableau-de-bord du site, protégée par l'application, pas par
+# Caddy (connexion avec second facteur, ou Basic avant la bascule : deploy/README.md).
 dashboard.toutou-gourmet.com {
 	encode zstd gzip
 	log {

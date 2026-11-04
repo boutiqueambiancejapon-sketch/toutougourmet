@@ -44,7 +44,7 @@ async function trackingCsv(): Promise<string | null> {
 }
 
 export async function GET(request: NextRequest) {
-  if (!(await dashboardAllowed())) return new NextResponse(null, { status: 404, headers: NO_STORE })
+  if (!(await dashboardAllowed())) return new NextResponse(null, { status: 401, headers: NO_STORE })
   const list = parseList(request.nextUrl.searchParams.get('liste') ?? undefined)
   const csv = list === 'comptes' ? await accountsCsv() : list === 'envois' ? await trackingCsv() : await letterCsv()
   if (csv === null) {

@@ -300,6 +300,65 @@ Tests sans toucher à la vraie liste : `BREVO_DRY_RUN=1` (inscription journalis�
 
 Mesure : événements `Guide Signup` (propriété `place` : `page-guide`, `article-aliment`, `article-recette`, `fiche-frigo`) et `Guide Download` (bouton « Télécharger le PDF » du site ; le lien de l'e-mail n'est pas compté). Tableau de bord, section Lecteurs : « Inscriptions newsletter par source » (lignes `guide · …`) et « Le guide de la gamelle ».
 
+## Connexion au tableau de bord (clé d'accès ou code, à la place de Basic)
+
+Code : `proxy.ts`, `lib/dashboard/guard.ts`, `lib/dashboard/login/`, `lib/server/dashboard-login/`. Migration `db/migrations/0010_dashboard_login.sql` (6 tables `app.dashboard_*`, sans lien avec les comptes visiteurs).
+
+Tant que les tables manquent, ou que `DASHBOARD_LOGIN_ENABLED=1` ou `DASHBOARD_AUTH_SECRET` (32 caractères au moins) manque, l'authentification Basic reste active, comme avant. Le code peut donc être déployé sans rien changer.
+
+| Variable | Rôle |
+|---|---|
+| `DASHBOARD_USER`, `DASHBOARD_PASSWORD` | Déjà en place, toujours utilisés. Les changer ferme toutes les sessions, garde les clés et les codes. |
+| `DASHBOARD_AUTH_SECRET` | Chiffre le secret TOTP, sert de clé aux empreintes (codes de secours, adresses IP, appareils). Le changer rend TOTP et codes de secours inutilisables : passer alors par le secours ci-dessous. |
+| `DASHBOARD_LOGIN_ENABLED` | `1` active la nouvelle connexion. |
+| `NTFY_TOPIC` | Déjà en place : alertes sur nouvel appareil, série d'échecs, facteur ajouté ou retiré, code de secours utilisé. |
+
+### Bascule, dans cet ordre
+
+```bash
+# 1. Branche fusionnée dans v2 et déployée. Basic reste actif, rien ne change pour l'instant.
+# 2. Tables (sauvegarde de la base comprise) :
+sudo /usr/local/sbin/toutou-migrate
+# 3. Variables, sans afficher le secret :
+printf 'DASHBOARD_AUTH_SECRET=%s\nDASHBOARD_LOGIN_ENABLED=1\n' "$(openssl rand -hex 32)" | sudo tee -a /srv/toutou/shared/.env > /dev/null
+# 4. Relance (coupure de quelques secondes) :
+sudo systemctl restart toutou-web
+```
+
+5. Sur l'iPhone, ouvrir `https://dashboard.toutou-gourmet.com/tableau-de-bord` : identifiant et mot de passe, « Créer une clé Face ID », noter les 10 codes de secours hors de l'iPhone.
+6. Écran Sécurité : ajouter aussi l'application de codes (« Ajouter au trousseau »). Elle sert si Face ID ne répond plus.
+
+Retour à Basic, sans déploiement :
+
+```bash
+sudo sed -i '/^DASHBOARD_LOGIN_ENABLED=/d' /srv/toutou/shared/.env && sudo systemctl restart toutou-web
+```
+
+### Secours : plus de Face ID, plus de codes, ou blocage
+
+À faire en SSH (Termius). Aucune adresse web, aucune variable publique n'y mène.
+
+```bash
+# Réinitialise le second facteur : clés, application, codes de secours, sessions, échecs récents.
+# La prochaine connexion par mot de passe ouvre l'enrôlement, et rien d'autre.
+sudo -u toutou node --env-file=/srv/toutou/shared/.env /srv/toutou/current/scripts/dashboard-2fa-reset.mjs --confirmer
+
+# Efface seulement les échecs récents (« Trop d'essais »), sans toucher au reste.
+sudo -u toutou node --env-file=/srv/toutou/shared/.env /srv/toutou/current/scripts/dashboard-2fa-reset.mjs --debloquer
+```
+
+Une alerte ntfy part après `--confirmer`. Si elle arrive sans que tu aies lancé la commande, quelqu'un est sur le serveur.
+
+Mot de passe oublié : il est dans `DASHBOARD_PASSWORD`, sur le serveur. Le remplacer, puis `sudo systemctl restart toutou-web`.
+
+### Limites en place
+
+5 échecs par adresse en 15 minutes, 30 échecs de mot de passe et 10 échecs de second facteur pour tout le monde en 15 minutes, 5 échecs de second facteur par session. Un appareil déjà connu échappe aux limites globales, pas à celle par adresse. Compteurs en base : un redémarrage ne les efface pas. Journal gardé 90 jours (`app.dashboard_login_event`), sans adresse IP en clair.
+
+Session : 12 heures au plus, fermée après 2 heures sans activité. La vue « En direct » qui se rafraîchit ne compte pas comme une activité.
+
+Essais : `npx tsx scripts/test-dashboard-login.ts` (avec `TEST_DATABASE_URL` sur une base jetable pour les parcours), `scripts/e2e-dashboard-login.mjs` (serveur local, authentificateur virtuel).
+
 ## Alertes et résumé hebdomadaire (préparés, non installés)
 
 Deux minuteries, sous l'utilisateur `toutou`, depuis `/srv/toutou/current` :
