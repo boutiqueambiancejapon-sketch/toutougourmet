@@ -411,6 +411,9 @@ if (failed) {
 test('étiquettes étrangères : mêmes règles qu\'en français', () => {
   assert.equal(animalKind('carne di agnello'), 'nommee')
   assert.equal(animalKind('Rindfleisch'), 'nommee')
+  assert.equal(animalKind('getrocknetes Lachsprotein'), 'nommee')
+  assert.equal(animalKind('getrocknetes Geflügelprotein'), 'non-nommee')
+  assert.equal(isByProduct("sous-produits d'origine végétale"), false)
   assert.equal(animalKind('carne'), 'non-nommee')
   assert.equal(hasGlycerin('glicerolo'), true)
   assert.equal(unnamedPreservative('CONSERVANTI'), true)

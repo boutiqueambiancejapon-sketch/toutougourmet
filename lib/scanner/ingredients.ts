@@ -12,7 +12,7 @@ const FOREIGN_TERMS: Record<string, string> = {
   pollo: 'poulet', huhn: 'poulet', hahnchen: 'poulet', huhner: 'poulet', huhnerfleisch: 'poulet', hahnchenfleisch: 'poulet', kip: 'poulet', kippenvlees: 'poulet',
   tacchino: 'dinde', pavo: 'dinde', pute: 'dinde', truthahn: 'dinde', putenfleisch: 'dinde', kalkoen: 'dinde',
   anatra: 'canard', pato: 'canard', ente: 'canard', entenfleisch: 'canard', eend: 'canard',
-  manzo: 'boeuf', bovino: 'boeuf', ternera: 'boeuf', vacuno: 'boeuf', rind: 'boeuf', rindfleisch: 'boeuf', rund: 'boeuf', rundvlees: 'boeuf',
+  manzo: 'boeuf', bovino: 'boeuf', ternera: 'boeuf', vacuno: 'boeuf', rind: 'boeuf', schweine: 'porc', puten: 'dinde', enten: 'canard', forellen: 'truite', rindfleisch: 'boeuf', rund: 'boeuf', rundvlees: 'boeuf',
   maiale: 'porc', suino: 'porc', cerdo: 'porc', schwein: 'porc', schweinefleisch: 'porc', varken: 'porc', varkensvlees: 'porc', pork: 'porc',
   vitello: 'veau', veal: 'veau', kalb: 'veau', coniglio: 'lapin', conejo: 'lapin', kaninchen: 'lapin', konijn: 'lapin', rabbit: 'lapin',
   cavallo: 'cheval', caballo: 'cheval', pferd: 'cheval', paard: 'cheval', horse: 'cheval', cervo: 'cerf', ciervo: 'cerf', hirsch: 'cerf', hert: 'cerf', venison: 'cerf',
@@ -41,6 +41,8 @@ export function normalize(s: string): string {
     .replace(/[’']/g, ' ')
     .replace(/\s+/g, ' ')
     .trim()
+    // Mots composés allemands : « Geflügelprotein », « Lachsmehl », « Rinderfett ».
+    .replace(/\b(gefluegel|geflugel|lachs|forellen|thunfisch|fisch|rinder?|lamm|huhner|hahnchen|schweine?|puten|enten)(?=[a-z]{3,})/g, (w) => `${w === 'rinder' ? 'rind' : w} `)
     .replace(/[a-z]+/g, (w) => (Object.hasOwn(FOREIGN_TERMS, w) ? FOREIGN_TERMS[w] : w))
 }
 
@@ -145,7 +147,8 @@ export function unnamedAntioxidants(texts: string[]): boolean {
 
 export const isByProduct = (name: string) => {
   const n = animalText(name)
-  return BY_PRODUCTS.test(n) && !NAMED_ANIMAL.test(n)
+  // « sous-produits d'origine végétale » n'est pas une origine animale non nommée.
+  return BY_PRODUCTS.test(n) && !NAMED_ANIMAL.test(n) && !/vegetale?s?([^a-z]|$)/.test(mainName(name))
 }
 export const isCereal = (name: string) => CEREALS.test(normalize(name)) && animalKind(name) === null
 export const hasSugar = (name: string) => SUGARS.test(normalize(name))

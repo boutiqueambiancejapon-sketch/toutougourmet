@@ -162,3 +162,7 @@ Friandises qui perdent le 100 : « Peau de bœuf » (Carrefour), masques de bœu
 ## Version 1.3, friandises 1.2 (2026-11-04)
 
 Les étiquettes en italien, espagnol, allemand, néerlandais ou anglais sont lues avec les mêmes règles : `normalize` traduit les termes courants (`lib/scanner/ingredients.ts`). Le texte de l'étiquette reste affiché tel quel. Repéré sur le premier scan réel, dont la note passe de 78 à 85.
+
+## Version 1.4, friandises 1.3 (2026-11-04)
+
+Mots composés allemands lus (« Geflügelprotein », « Lachsprotein »). « Sous-produits d'origine végétale » n'est plus compté comme une origine animale non nommée. La lecture de la photo ne prend plus une part de protéines pour une part d'ingrédients.

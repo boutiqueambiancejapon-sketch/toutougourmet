@@ -76,7 +76,7 @@ export const LABEL_JSON_SCHEMA: JsonSchema = {
       },
       required: ['kcalKg', 'kcal100g', 'kcalPiece', 'poidsPieceG'],
     },
-    partAnimaleDeclaree: nullableNumber('Part totale d\'ingrédients d\'origine animale annoncée sur l\'emballage (ex. « 70 % de viande »), sinon null'),
+    partAnimaleDeclaree: nullableNumber('Part totale d\'ingrédients d\'origine animale annoncée sur l\'emballage (ex. « 70 % de viande »), sinon null. Pas une part des protéines : « 82 % de protéines animales » donne null'),
     confiance: {
       type: 'object',
       description: 'Confiance de lecture par champ : absent si le champ n\'apparaît pas sur les images',
