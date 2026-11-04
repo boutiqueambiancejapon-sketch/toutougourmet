@@ -37,9 +37,10 @@ Principe : l'IA recopie l'étiquette (`ExtractedLabel`), elle ne note pas. La no
 
 ≥ 75 : très bonne composition (vert) · 55-74 : correcte (bleu) · 35-54 : moyenne (ambre) · < 35 : faible (rose).
 
-## Version 1.5 (2026-11-04)
+## Version 1.6 (2026-11-04)
 
-- Plafond : un aliment complet qui ne déclare pas à la fois calcium et phosphore ne dépasse pas 89 (`CAP_WITHOUT_MINERALS`). Le critère absent reste non évalué ; l'hypothèse s'affiche avec la note. Le barème friandise ne change pas.
+- Calcium et phosphore absents : 0 sur 5 au lieu d'être ignorés. Ils ne sont jamais cités parmi les points faibles : c'est un manque d'information, pas un défaut de la recette. Remplace le plafond à 89 de la version 1.5, qui frappait 100 fiches sur 101 et créait des ex æquo.
+- Note partielle : affichée quand un critère n'a pas pu être évalué (`isPartial`), le plus souvent les glucides faute de cendres ou de fibres. Le barème friandise ne change pas.
 - Comparaison : les classements séparent croquettes, pâtées et type inconnu (`?categorie=`). La fiche dit « 89/100, parmi les pâtées ».
 - Après ce changement : `tsx scripts/rescore-fiches.ts --appliquer` recalcule les notes enregistrées, car les listes lisent la note stockée.
 

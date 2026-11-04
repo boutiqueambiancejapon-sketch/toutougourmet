@@ -15,7 +15,7 @@ const CRITERIA: [string, number, string][] = [
   ['Sucres ajoutés', 5, '0 si un sucre, un sirop ou du caramel est listé'],
   ['Conservateurs controversés', 5, '0 si BHA, BHT ou éthoxyquine apparaît, 3 si des antioxygènes sont cités sans leur nom'],
   ['Colorants', 5, '0 si un colorant est listé'],
-  ['Rapport calcium / phosphore', 5, 'compté seulement s\'il est écrit : 5 entre 1 et 2 pour 1. Sans les deux valeurs, la note ne dépasse pas 89'],
+  ['Rapport calcium / phosphore', 5, '5 entre 1 et 2 pour 1, 0 hors de cette fourchette ou si les deux valeurs ne sont pas écrites'],
 ]
 
 export function ScannerMethod() {

@@ -74,7 +74,7 @@ export function highlights(d: ScoreResult, count = 2): { strengths: string[]; we
   const weaknesses = [
     ...alerts,
     ...evaluated
-      .filter((c) => ratio(c) < 0.5)
+      .filter((c) => ratio(c) < 0.5 && !c.undeclared)
       .sort((a, b) => b.max - (b.points ?? 0) - (a.max - (a.points ?? 0)))
       .map((c) => WEAK[c.id](c, d)),
   ].slice(0, count)

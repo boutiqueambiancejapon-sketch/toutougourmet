@@ -1,4 +1,4 @@
-import { BAND_LABELS, type ScoreResult } from '@/lib/scanner/score'
+import { BAND_LABELS, type ScoreResult, isPartial } from '@/lib/scanner/score'
 import { ScoreBadge } from './ScoreBadge'
 import { KindTag } from './treat/KindTag'
 import { TreatAlerts } from './treat/TreatAlerts'
@@ -26,7 +26,7 @@ export function ScoreDetail({ details, headingLevel = 'h3', alerts = true }: Sco
           <p className="m-0 font-display text-2xl font-black leading-tight text-ink">
             {score === null ? 'Pas de note' : `${score}/100`}
           </p>
-          <p className="m-0 text-[15px] text-ink-2">{band ? BAND_LABELS[band] : details.notice}</p>
+          <p className="m-0 text-[15px] text-ink-2">{band ? `${BAND_LABELS[band]}${isPartial(details) ? ', note partielle' : ''}` : details.notice}</p>
           <KindTag details={details} />
         </div>
       </div>
