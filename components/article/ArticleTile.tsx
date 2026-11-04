@@ -4,6 +4,7 @@ import { getArticleSlot } from '@/components/blog/blog-categories'
 import { getCategoryPill, type OgTone } from '@/lib/og/tokens'
 import { estimateReadTime, type Article } from '@/lib/mdx'
 import { CategoryIcon, VerdictIcon, type VerdictKind } from '@/components/icons'
+import { titleTypo } from '@/lib/title-typo'
 
 // @cdc 04-pages — carte d'article V2 : fond pastel de la rubrique, titre, puis une ligne
 // rubrique · verdict · temps de lecture sous le titre (pas de pastille au-dessus).
@@ -45,7 +46,7 @@ export function ArticleTile({ article, featured = false }: { article: Article; f
       </span>
       <span className="flex grow flex-col gap-2.5 px-1 pb-1">
         <span className={`font-display font-black leading-tight group-hover:underline ${featured ? 'text-[clamp(1.5rem,2.6vw,2rem)]' : 'text-lg'}`}>
-          {fm.title}
+          {titleTypo(fm.title)}
         </span>
         {featured ? <span className="text-ink-2">{fm.description}</span> : null}
         <span className="mt-auto flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-medium text-ink-2">

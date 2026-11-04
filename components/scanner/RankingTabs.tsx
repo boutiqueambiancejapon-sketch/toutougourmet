@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import type { ProductKind } from '@/lib/scanner/score'
+import { titleTypo } from '@/lib/title-typo'
 
 // @cdc lot 6 — onglets du classement /croquettes : aliments complets (croquettes, pâtées) et
 // friandises (/croquettes/friandises). Deux barèmes différents : leurs notes ne se mélangent
@@ -36,7 +37,7 @@ export function RankingMethod({ treat }: { treat: boolean }) {
   return (
     <section aria-labelledby="methode-classement" className="flex flex-col gap-2">
       <h2 id="methode-classement" className="m-0 font-display text-2xl font-black text-ink">
-        {treat ? 'Comment les friandises sont-elles notées ?' : 'Comment les croquettes sont-elles notées ?'}
+        {titleTypo(treat ? 'Comment les friandises sont-elles notées ?' : 'Comment les croquettes sont-elles notées ?')}
       </h2>
       <p className="m-0 text-[15px] leading-relaxed text-ink-2">
         {`L'étiquette vient d'une photo lue par une IA ou de la base ouverte Open Pet Food Facts, puis le barème calcule la note sur ${treat ? '8 critères propres aux friandises' : '11 critères'}. Le même barème s'applique à toutes les marques, partenaires compris, et aucune marque ne paie pour sa place. Il est détaillé, sources comprises, dans la `}

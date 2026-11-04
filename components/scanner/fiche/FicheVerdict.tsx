@@ -3,6 +3,7 @@ import { verdictText } from '@/lib/scanner/highlights'
 import type { NounWords } from '@/lib/scanner/food-noun'
 import { kindOf, type ScoreResult } from '@/lib/scanner/score'
 import { ScoreDetail } from '../ScoreDetail'
+import { titleTypo } from '@/lib/title-typo'
 
 // @cdc lot 6 — fiche /croquettes/[slug] : « Les croquettes {Marque} sont-elles bonnes pour ton
 // chien ? » (pâtée, aliment de type inconnu ou friandise : lib/scanner/food-noun.ts). Verdict en
@@ -14,7 +15,7 @@ export function FicheVerdict({ brand, details, words, children }: { brand: strin
   return (
     <section aria-labelledby="verdict" className="flex flex-col gap-3">
       <h2 id="verdict" className="m-0 font-display text-2xl font-black text-ink">
-        {words.question(brand)}
+        {titleTypo(words.question(brand))}
       </h2>
       <p className="m-0 text-base leading-relaxed text-ink-2">{verdictText(details)}</p>
       <ScoreDetail details={details} alerts={!treat} />

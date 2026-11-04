@@ -5,6 +5,7 @@ import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
 import { FaqItem, FaqList } from '@/components/article/Faq'
 import { frTypo } from '@/lib/utils'
 import { PromoOffer } from './PromoOffer'
+import { titleTypo } from '@/lib/title-typo'
 
 // @cdc affiliation — page « code promo » d'un partenaire (/codes-promo/[slug]) : réponse directe,
 // offre et bouton partenaire, mode d'emploi, conditions tirées de nos données, pour quel chien,
@@ -37,7 +38,7 @@ export function PromoPageView({ page, brand }: { page: PromoPage; brand: Brand }
             ]}
           />
           <header className="flex max-w-prose flex-col gap-3">
-            <h1 className="m-0 font-display text-[clamp(1.9rem,3.6vw,2.6rem)] font-black leading-[1.08] tracking-tight text-ink">{frTypo(page.h1)}</h1>
+            <h1 className="m-0 font-display text-[clamp(1.9rem,3.6vw,2.6rem)] font-black leading-[1.08] tracking-tight text-ink">{titleTypo(page.h1)}</h1>
             <p className="m-0 text-lg leading-relaxed text-ink-2">{frTypo(page.intro)}</p>
             <p className="m-0 text-sm text-ink-2">
               Offre vérifiée le <time dateTime={PROMO_VERIFIED_AT}>{formatFrDate(PROMO_VERIFIED_AT)}</time>.
@@ -47,7 +48,7 @@ export function PromoPageView({ page, brand }: { page: PromoPage; brand: Brand }
         </div>
 
         <section aria-labelledby="mode-emploi" className="flex max-w-prose flex-col gap-3">
-          <h2 id="mode-emploi" className={H2}>{frTypo(howTitle)}</h2>
+          <h2 id="mode-emploi" className={H2}>{titleTypo(howTitle)}</h2>
           <ol className="m-0 list-decimal space-y-2 pl-6 leading-relaxed text-ink">
             {page.steps.map((s) => (
               <li key={s}>{frTypo(s)}</li>
@@ -56,7 +57,7 @@ export function PromoPageView({ page, brand }: { page: PromoPage; brand: Brand }
         </section>
 
         <section aria-labelledby="conditions" className="flex max-w-prose flex-col gap-3">
-          <h2 id="conditions" className={H2}>{frTypo(`Quelles sont les conditions de l'offre ${brand.name} ?`)}</h2>
+          <h2 id="conditions" className={H2}>{titleTypo(`Quelles sont les conditions de l'offre ${brand.name} ?`)}</h2>
           <ul className="m-0 list-disc space-y-2 pl-6 leading-relaxed text-ink">
             {page.conditions.map((c) => (
               <li key={c}>{frTypo(c)}</li>
@@ -65,7 +66,7 @@ export function PromoPageView({ page, brand }: { page: PromoPage; brand: Brand }
         </section>
 
         <section aria-labelledby="pour-quel-chien" className="flex max-w-prose flex-col gap-3">
-          <h2 id="pour-quel-chien" className={H2}>{frTypo(`${brand.name} est-il fait pour ton chien ?`)}</h2>
+          <h2 id="pour-quel-chien" className={H2}>{titleTypo(`${brand.name} est-il fait pour ton chien ?`)}</h2>
           <p className="m-0 leading-relaxed text-ink">{frTypo(page.fit)}</p>
           <ul role="list" className="m-0 flex list-none flex-col gap-2 p-0">
             {page.links.map((l) => (
@@ -77,7 +78,7 @@ export function PromoPageView({ page, brand }: { page: PromoPage; brand: Brand }
         </section>
 
         <section aria-labelledby="faq" className="flex max-w-prose flex-col gap-2">
-          <h2 id="faq" className={H2}>{frTypo(`Questions fréquentes sur le code promo ${brand.name}`)}</h2>
+          <h2 id="faq" className={H2}>{titleTypo(`Questions fréquentes sur le code promo ${brand.name}`)}</h2>
           <FaqList>
             {faqs.map((f) => (
               <FaqItem key={f.q} question={frTypo(f.q)}>

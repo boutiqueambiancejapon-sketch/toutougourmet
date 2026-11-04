@@ -24,7 +24,7 @@ export function FicheNutrition({ label }: { label: ExtractedLabel }) {
   return (
     <section aria-labelledby="proteines-glucides" className="flex flex-col gap-3">
       <h2 id="proteines-glucides" className="m-0 font-display text-2xl font-black text-ink">
-        Combien de protéines et de glucides ?
+        Combien de protéines et de glucides&nbsp;?
       </h2>
       <p className="m-0 text-base leading-relaxed text-ink-2">{lead}</p>
       <table className="w-full border-collapse text-[15px]">

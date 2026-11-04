@@ -18,6 +18,7 @@ import { GuideTop } from '@/components/guide/GuideTop'
 import { SitterSheetCta } from '@/components/garde/SitterSheetCta'
 import { Heading2 } from './Heading2'
 import { MdxLink } from './MdxLink'
+import { titleTypo } from '@/lib/title-typo'
 
 // Composants utilisables dans les articles MDX (content/blog), pour /chien/[category]/[slug]
 // et /blog/[slug]. Un composant absent de cette liste fait échouer la compilation de l'article.
@@ -38,6 +39,7 @@ export const articleMdxComponents = {
   SitterSheetCta,
   ArticleFormula,
   h2: Heading2,
+  h3: ({ children, ...props }: ComponentProps<'h3'>) => <h3 {...props}>{titleTypo(children)}</h3>,
   a: MdxLink,
   // Tableau Markdown : défilement horizontal sur mobile, signalé par une ligne (audit 2026-11-03, E33).
   table: (props: ComponentProps<'table'>) => (

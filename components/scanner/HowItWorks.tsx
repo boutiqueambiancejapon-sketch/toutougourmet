@@ -24,7 +24,7 @@ export function HowItWorks() {
   return (
     <section aria-labelledby="comment" className="flex flex-col gap-4">
       <h2 id="comment" className="m-0 font-display text-2xl font-black text-ink">
-        Comment analyser les croquettes, la pâtée ou les friandises de ton chien ?
+        Comment analyser les croquettes, la pâtée ou les friandises de ton chien&nbsp;?
       </h2>
       <ol role="list" className="m-0 grid list-none gap-4 p-0 sm:grid-cols-3">
         {STEPS.map((s, i) => (

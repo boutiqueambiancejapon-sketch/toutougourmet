@@ -51,7 +51,7 @@ export default function RaceHubPage() {
       <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Guides', href: '/chien' }, { label: 'Alimentation par race' }]} />
       <div className="flex max-w-prose flex-col gap-3">
         <h1 className="m-0 font-display text-[clamp(1.9rem,3.6vw,2.6rem)] font-black leading-[1.08] tracking-tight text-ink">
-          Quelle nourriture selon la race de ton chien ?
+          Quelle nourriture selon la race de ton chien&nbsp;?
         </h1>
         <p className="m-0 leading-relaxed text-ink-2">
           {breeds.length} races, avec pour chacune son poids adulte, ses prédispositions et les aliments à surveiller.

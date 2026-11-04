@@ -17,7 +17,7 @@ export function RankingBrands({ brands }: { brands: BrandGroup[] }) {
   return (
     <section aria-labelledby="marques" className="flex flex-col gap-3">
       <h2 id="marques" className={H2}>
-        Quelle note pour chaque marque de croquettes ?
+        Quelle note pour chaque marque de croquettes&nbsp;?
       </h2>
       <ul role="list" className="m-0 flex list-none flex-wrap gap-2 p-0">
         {listed.map((b) => (
@@ -71,7 +71,7 @@ export function TreatQuantity() {
   return (
     <section aria-labelledby="combien" className="flex flex-col gap-2">
       <h2 id="combien" className={H2}>
-        Combien de friandises donner à son chien par jour ?
+        Combien de friandises donner à son chien par jour&nbsp;?
       </h2>
       <p className={P}>
         Les friandises ne doivent pas dépasser 10 % de l&apos;apport calorique quotidien du chien (FEDIAF). Quand l&apos;étiquette

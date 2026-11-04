@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Article } from '@/lib/mdx'
 import { formatDate, estimateReadTime } from '@/lib/utils'
 import { getCategoryVisual } from './blog-categories'
+import { titleTypo } from '@/lib/title-typo'
 
 interface BlogPostCardProps {
   article: Article
@@ -49,7 +50,7 @@ export function BlogPostCard({ article }: BlogPostCardProps) {
           className="m-0 font-black text-[var(--text-primary)] leading-tight text-lg line-clamp-3 group-hover:text-orange-ink transition-colors"
           style={{ fontFamily: "'Fraunces', serif", letterSpacing: '-0.01em' }}
         >
-          {frontmatter.title}
+          {titleTypo(frontmatter.title)}
         </h3>
         <p className="text-sm text-[var(--text-secondary)] leading-relaxed line-clamp-2 m-0">
           {frontmatter.description}

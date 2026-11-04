@@ -12,6 +12,7 @@ import { RubricRows } from '@/components/pillar/RubricRows'
 import { GuideList } from '@/components/pillar/GuideList'
 import { FoodSearch } from '@/components/tools/FoodSearch'
 import type { FoodVerdict } from '@/lib/food-verdicts'
+import { titleTypo } from '@/lib/title-typo'
 
 // @cdc 04-pages — page pilier V2 d'une rubrique : en-tête, recherche d'aliment + verdicts
 // (rubriques aliments), article à la une, 3 cartes récentes, puis liste dense « question →
@@ -102,7 +103,7 @@ export default async function CategoryPage({ params }: Props) {
         <section aria-labelledby="verdicts" className="flex flex-col gap-4">
           <div className="flex max-w-[560px] flex-col gap-2">
             <h2 id="verdicts" className="m-0 font-display text-2xl font-black text-ink">
-              {category === 'urgences' ? "Qu'a-t-il avalé\u00a0?" : 'Mon chien peut-il manger…\u00a0?'}
+              {titleTypo(category === 'urgences' ? "Qu'a-t-il avalé\u00a0?" : 'Mon chien peut-il manger…\u00a0?')}
             </h2>
             <p className="m-0 text-base text-ink-2">{`${foods.length} aliments classés dans cette rubrique, chacun avec son guide.`}</p>
             <FoodSearch foods={foods.map(({ label, href, verdict }) => ({ label, href, verdict }))} placeholder={searchPlaceholder(foods)} />

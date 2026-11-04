@@ -17,7 +17,7 @@ export async function TopRated() {
   return (
     <section aria-labelledby="meilleures-notes" className="flex flex-col gap-3">
       <h2 id="meilleures-notes" className="m-0 font-display text-2xl font-black text-ink">
-        Quelles croquettes pour chien sont les mieux notées ?
+        Quelles croquettes pour chien sont les mieux notées&nbsp;?
       </h2>
       <p className="m-0 text-base leading-relaxed text-ink-2">
         {`Les ${Math.min(SHOWN, items.length)} meilleures notes parmi les ${items.length} croquettes et pâtées qui ont une fiche publiée, calculées avec le même barème.`}

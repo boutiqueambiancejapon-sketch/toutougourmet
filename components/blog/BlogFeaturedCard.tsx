@@ -3,6 +3,7 @@ import type { Article } from '@/lib/mdx'
 import { formatDate, estimateReadTime } from '@/lib/utils'
 import { Illustration } from '@/components/ui/Illustration'
 import { getCategoryVisual } from './blog-categories'
+import { titleTypo } from '@/lib/title-typo'
 
 interface BlogFeaturedCardProps {
   article: Article
@@ -45,7 +46,7 @@ export function BlogFeaturedCard({ article }: BlogFeaturedCardProps) {
             lineHeight: 1.1,
           }}
         >
-          {frontmatter.title}
+          {titleTypo(frontmatter.title)}
         </h2>
         <p className="text-base md:text-lg text-[var(--text-secondary)] leading-relaxed m-0">
           {frontmatter.description}

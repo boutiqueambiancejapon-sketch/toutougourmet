@@ -15,7 +15,7 @@ export function CompositionGuide() {
   return (
     <section aria-labelledby="bonne-composition" className="flex flex-col gap-4">
       <h2 id="bonne-composition" className="m-0 font-display text-2xl font-black text-ink">
-        Qu&apos;est-ce qu&apos;une bonne composition de croquettes pour chien ?
+        Qu&apos;est-ce qu&apos;une bonne composition de croquettes pour chien&nbsp;?
       </h2>
       <p className="m-0 text-base leading-relaxed text-ink-2">
         Une bonne croquette pour chien adulte annonce une viande ou un poisson d&apos;espèce nommée en tête de liste, plus de 30 %

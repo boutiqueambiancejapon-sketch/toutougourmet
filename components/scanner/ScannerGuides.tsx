@@ -22,7 +22,7 @@ export async function ScannerGuides() {
   return (
     <section aria-labelledby="patee-friandise" className="flex flex-col gap-4">
       <h2 id="patee-friandise" className="m-0 font-display text-2xl font-black text-ink">
-        Comment juger la composition d&apos;une pâtée ou d&apos;une friandise ?
+        Comment juger la composition d&apos;une pâtée ou d&apos;une friandise&nbsp;?
       </h2>
       <p className="m-0 text-base leading-relaxed text-ink-2">
         Une pâtée se juge comme une croquette, une fois l&apos;eau retirée. Avec 78 % d&apos;humidité, 8 % de protéines sur la boîte

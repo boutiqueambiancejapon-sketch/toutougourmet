@@ -33,6 +33,7 @@ import { getBySlug } from '@/lib/server/scanner'
 import { reviewedItemsSafe } from '@/lib/server/scanner-catalog'
 import { getDb } from '@/lib/server/drizzle'
 import { isPublished } from '@/lib/server/scanner-published'
+import { titleTypo } from '@/lib/title-typo'
 
 export const revalidate = 300
 
@@ -93,7 +94,7 @@ export default async function CroquettePage({ params }: Params) {
       <div className="flex flex-col gap-4">
         <BreadcrumbNav items={crumbs} />
         <header className="flex flex-col gap-3">
-          <h1 className="m-0 font-display text-[clamp(1.75rem,4.2vw,2.5rem)] font-black leading-[1.08] tracking-tight text-ink">{h1}</h1>
+          <h1 className="m-0 font-display text-[clamp(1.75rem,4.2vw,2.5rem)] font-black leading-[1.08] tracking-tight text-ink">{titleTypo(h1)}</h1>
           <div className="flex flex-wrap items-center gap-3">
             <ScoreBadge score={a.score} />
             <KindTag details={a.details} />

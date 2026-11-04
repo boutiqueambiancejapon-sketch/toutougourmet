@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { titleTypo } from '@/lib/title-typo'
 
 // @cdc seo-geo §4 — FAQ en accordéon natif (<details>), sans JavaScript, rendue côté serveur.
 // La question est un <h3> ; lib/mdx.ts › extractFaqs reprend le même texte dans le
@@ -12,7 +13,7 @@ export function FaqItem({ question, children }: { question: string; children: Re
   return (
     <details className="group rounded-box border border-line bg-paper">
       <summary className="flex min-h-14 cursor-pointer list-none items-center gap-3 px-4 py-3 [&::-webkit-details-marker]:hidden">
-        <h3 className="m-0 grow text-base font-semibold leading-snug text-ink">{question}</h3>
+        <h3 className="m-0 grow text-base font-semibold leading-snug text-ink">{titleTypo(question)}</h3>
         <span aria-hidden="true" className="shrink-0 text-xl leading-none text-ink-2 group-open:hidden">
           +
         </span>

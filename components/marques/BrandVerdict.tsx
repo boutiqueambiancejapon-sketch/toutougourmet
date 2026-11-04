@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { brandOfferLabel, type Brand } from '@/data/brands'
 import { AffiliateNote } from './AffiliateNote'
+import { titleTypo } from '@/lib/title-typo'
 
 // @cdc affiliation — CTA principal d'une fiche marque (un seul par page) : bloc orange plein, verdict
 // en clair, un bouton. Marque en rupture : pas de bouton, un lien discret et des alternatives.
@@ -15,7 +16,7 @@ export function BrandVerdict({ brand, verdict }: { brand: Brand; verdict: string
       className={`v2 rounded-card p-6 md:p-10 ${out ? 'border border-line bg-cream-2' : 'bg-orange shadow-[8px_8px_0_var(--ink)]'}`}
     >
       <h2 id="verdict" className="m-0 font-display text-[clamp(1.5rem,3vw,2rem)] font-black leading-tight text-ink">
-        Faut-il essayer {brand.name}&nbsp;?
+        {titleTypo(`Faut-il essayer ${brand.name} ?`)}
       </h2>
       <p className="m-0 mt-4 max-w-[65ch] text-base leading-relaxed text-ink md:text-lg">{verdict}</p>
       <p className="m-0 mt-5 font-semibold text-ink">{brandOfferLabel(brand)}</p>

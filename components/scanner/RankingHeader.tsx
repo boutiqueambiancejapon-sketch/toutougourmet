@@ -1,6 +1,7 @@
 import type { ProductKind } from '@/lib/scanner/score'
 import { opffIndexPolicy } from '@/lib/server/scanner-published'
 import { frenchDate, isoDay, publishedRule, RANKING_COPY } from './ranking-copy'
+import { titleTypo } from '@/lib/title-typo'
 
 // @cdc lot 6 — en-tête des classements : H1, introduction factuelle (nombre de fiches publiées,
 // méthode, règle de publication) et date de mise à jour calculée sur la fiche la plus récente.
@@ -20,7 +21,7 @@ export function RankingHeader({ kind, count, enough, updated }: { kind: ProductK
     : `Le classement des ${copy.noun} pour chien se remplit au fil des fiches publiées.`
   return (
     <header className="flex flex-col gap-3">
-      <h1 className="m-0 font-display text-[clamp(2rem,5vw,2.75rem)] font-black leading-[1.05] tracking-tight text-ink">{copy.h1}</h1>
+      <h1 className="m-0 font-display text-[clamp(2rem,5vw,2.75rem)] font-black leading-[1.05] tracking-tight text-ink">{titleTypo(copy.h1)}</h1>
       <p className="m-0 text-base leading-relaxed text-ink-2 md:text-lg">{`${lead} ${METHOD[kind]}`}</p>
       <p className="m-0 text-[15px] leading-relaxed text-ink-2">
         {`${publishedRule(opffIndexPolicy())} Un produit absent n'a pas encore de fiche, ce qui ne dit rien de sa note.`}

@@ -13,6 +13,7 @@ import { frenchDate, isoDay, latestDate } from '@/components/scanner/ranking-cop
 import { BAND_LABELS, bandFor } from '@/lib/scanner/score'
 import { BRAND_MIN_REVIEWED, partnerBrand } from '@/lib/scanner/seo'
 import { groupByBrand, reviewedItemsSafe } from '@/lib/server/scanner-catalog'
+import { titleTypo } from '@/lib/title-typo'
 
 export const revalidate = 300
 
@@ -85,7 +86,7 @@ export default async function BrandRankingPage({ params }: Params) {
         <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Classement des croquettes', href: '/croquettes' }, { label: group.name }]} />
         <header className="flex flex-col gap-3">
           <h1 className="m-0 font-display text-[clamp(2rem,5vw,2.75rem)] font-black leading-[1.05] tracking-tight text-ink">
-            {`Croquettes ${group.name} : avis et note de composition`}
+            {titleTypo(`Croquettes ${group.name} : avis et note de composition`)}
           </h1>
           <div className="flex items-center gap-4">
             <ScoreBadge score={group.average} size="lg" />
@@ -102,7 +103,7 @@ export default async function BrandRankingPage({ params }: Params) {
 
       <section aria-labelledby="recettes" className="flex flex-col gap-3">
         <h2 id="recettes" className="m-0 font-display text-2xl font-black text-ink">
-          {`Quelles croquettes ${group.name} ont la meilleure note ?`}
+          {titleTypo(`Quelles croquettes ${group.name} ont la meilleure note ?`)}
         </h2>
         <RankingList items={group.items} showBrand={false} />
       </section>

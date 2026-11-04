@@ -17,7 +17,7 @@ export function FoodPortionCalc({ food, kcal100, moderation, bands }: FoodPortio
   return (
     <section aria-labelledby="combien" className="v2 my-7 flex flex-col gap-3 rounded-card border border-line bg-paper p-5">
       <h2 id="combien" className="m-0 scroll-mt-24 font-display text-xl font-black leading-tight text-ink">
-        Combien {ofFood} pour ton chien ?
+        Combien {ofFood} pour ton chien&nbsp;?
       </h2>
       <p className="m-0 text-[15px] leading-relaxed text-ink-2">
         {bands.length > 0

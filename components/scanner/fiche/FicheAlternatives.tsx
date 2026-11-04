@@ -9,7 +9,7 @@ export function FicheAlternatives({ alternatives }: { alternatives: Alternative[
   return (
     <section aria-labelledby="remplacer" className="flex flex-col gap-3">
       <h2 id="remplacer" className="m-0 font-display text-2xl font-black text-ink">
-        Par quoi les remplacer ?
+        Par quoi les remplacer&nbsp;?
       </h2>
       <p className="m-0 text-base leading-relaxed text-ink-2">
         {`Sous 55/100, la composition cumule plusieurs défauts. ${alternatives.length > 1 ? 'Deux marques testées par la rédaction, qui vendent' : 'Une marque testée par la rédaction, qui vend'} des croquettes :`}

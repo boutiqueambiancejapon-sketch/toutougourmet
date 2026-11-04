@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { formatDate, estimateReadTime } from '@/lib/utils'
 import type { Article } from '@/lib/mdx'
 import { getCategoryVisual } from './blog-categories'
+import { titleTypo } from '@/lib/title-typo'
 
 interface ArticleCardProps {
   article: Article
@@ -48,7 +49,7 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
             className="font-bold text-[var(--text-primary)] group-hover:text-orange-ink leading-snug text-sm line-clamp-2 transition-colors m-0"
             style={{ fontFamily: "'Fraunces', serif" }}
           >
-            {frontmatter.title}
+            {titleTypo(frontmatter.title)}
           </h2>
           <p className="text-xs text-[var(--text-muted)] m-0">
             {formatDate(frontmatter.date)} · {readTime} min
@@ -85,7 +86,7 @@ export function ArticleCard({ article, variant = 'vertical' }: ArticleCardProps)
           className="m-0 font-black text-[var(--text-primary)] leading-tight text-lg line-clamp-3 group-hover:text-orange-ink transition-colors"
           style={{ fontFamily: "'Fraunces', serif", letterSpacing: '-0.01em' }}
         >
-          {frontmatter.title}
+          {titleTypo(frontmatter.title)}
         </h2>
         <p className="text-sm text-[var(--text-secondary)] leading-relaxed line-clamp-2 m-0">
           {frontmatter.description}

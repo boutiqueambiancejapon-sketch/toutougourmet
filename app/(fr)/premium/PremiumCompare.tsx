@@ -41,7 +41,7 @@ export function PremiumCompare() {
   return (
     <section aria-labelledby="comparer" className="flex flex-col gap-4">
       <h2 id="comparer" className="m-0 font-display text-2xl font-black text-ink md:text-3xl">
-        Quelle différence entre les formules ?
+        Quelle différence entre les formules&nbsp;?
       </h2>
       <div className="overflow-hidden rounded-card border border-line bg-paper">
         <table className="w-full table-fixed border-collapse text-left">

@@ -4,6 +4,7 @@ import { IconAlert, IconChevron, IconSearch, type IconProps } from '@/components
 import { FoodSearch } from '@/components/tools/FoodSearch'
 import type { FoodVerdict } from '@/lib/food-verdicts'
 import { bookSummary } from '@/lib/guide/book'
+import { titleTypo } from '@/lib/title-typo'
 
 // @cdc 04-pages — première section après le hero : recherche « peut-il manger » sur les aliments
 // classés, puis deux entrées secondaires en lignes. Pas d'aplat orange ici : l'action principale
@@ -19,7 +20,7 @@ export function StartTiles({ foods }: { foods: FoodVerdict[] }) {
     <section aria-labelledby="peut-manger" className="v2 grid grid-cols-1 gap-8 md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] md:gap-12">
       <div className="flex flex-col gap-3">
         <h2 id="peut-manger" className="m-0 font-display text-2xl font-black text-ink">
-          Mon chien peut-il manger… ?
+          {titleTypo('Mon chien peut-il manger…\u00a0?')}
         </h2>
         <p className="m-0 text-base text-ink-2">{`Tape l’aliment qu’il vient de chiper. ${bookSummary().foodCount} aliments ont déjà leur verdict.`}</p>
         <FoodSearch foods={entries} />

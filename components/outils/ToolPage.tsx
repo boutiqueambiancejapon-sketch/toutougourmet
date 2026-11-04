@@ -3,6 +3,7 @@ import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
 import { FaqItem, FaqList } from '@/components/article/Faq'
 import { OtherTools } from './OtherTools'
 import type { ToolSlug } from './tool-list'
+import { titleTypo } from '@/lib/title-typo'
 
 // @cdc 5.0 — gabarit V2 des pages outils (audit design-cro §3 Outils), rendu serveur :
 // fil d'Ariane, H1 et chapô courts, l'outil tout de suite (visible sans défiler sur mobile),
@@ -70,7 +71,7 @@ export function ToolPage({ slug, path, crumb, title, lead, children, methodTitle
           <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Outils', href: '/outils' }, { label: crumb }]} />
           <header className="flex flex-col gap-2">
             <h1 className="m-0 font-display text-[clamp(1.75rem,4.2vw,2.5rem)] font-black leading-[1.08] tracking-tight text-ink">
-              {title}
+              {titleTypo(title)}
             </h1>
             <div className="m-0 text-base leading-relaxed text-ink-2 md:text-lg [&_p]:m-0">{lead}</div>
           </header>
@@ -81,7 +82,7 @@ export function ToolPage({ slug, path, crumb, title, lead, children, methodTitle
 
         <section aria-labelledby="methode" className="flex flex-col gap-3">
           <h2 id="methode" className="m-0 font-display text-2xl font-black text-ink">
-            {methodTitle}
+            {titleTypo(methodTitle)}
           </h2>
           <div className="flex flex-col gap-3 text-base leading-relaxed text-ink-2 [&_a]:text-orange-ink [&_a]:underline [&_a]:underline-offset-2 [&_p]:m-0 [&_strong]:font-semibold [&_strong]:text-ink">
             {method}
@@ -92,7 +93,7 @@ export function ToolPage({ slug, path, crumb, title, lead, children, methodTitle
 
         <section aria-labelledby="faq" className="flex flex-col">
           <h2 id="faq" className="m-0 font-display text-2xl font-black text-ink">
-            {faqTitle}
+            {titleTypo(faqTitle)}
           </h2>
           <FaqList>
             {faq.map((item) => (

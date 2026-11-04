@@ -7,6 +7,7 @@ import { computeScores, getSortedBrands, hasClearWinner, type QuizAnswers } from
 import { NumberField } from '@/components/outils/fields'
 import { QuizStep } from './QuizStep'
 import { QuizResult } from './QuizResult'
+import { titleTypo } from '@/lib/title-typo'
 
 // @cdc outils — test « Quelle marque pour ton chien ? » (audit design-cro §3 Outils) : une
 // question à la fois, bouton « Continuer » (pas de passage automatique, qui gênerait la
@@ -101,7 +102,7 @@ export function QuizWrapper() {
       </div>
       <div className="flex flex-col gap-1">
         <h2 ref={heading} tabIndex={-1} className="m-0 font-display text-xl font-black leading-snug text-ink outline-none md:text-2xl">
-          {step.question}
+          {titleTypo(step.question)}
         </h2>
         {step.help ? <p className="m-0 text-sm leading-relaxed text-ink-2">{step.help}</p> : null}
       </div>

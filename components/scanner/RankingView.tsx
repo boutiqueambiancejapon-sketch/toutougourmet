@@ -11,6 +11,7 @@ import { RankingJsonLd } from './RankingJsonLd'
 import { RankingList } from './RankingList'
 import { RankingMethod, RankingTabs } from './RankingTabs'
 import { latestDate, RANKING_COPY } from './ranking-copy'
+import { titleTypo } from '@/lib/title-typo'
 
 // @cdc lot 6 — corps commun des deux classements (/croquettes et /croquettes/friandises) :
 // seulement les fiches publiées du type demandé, triées par note. Filtres marque et tranche de
@@ -48,7 +49,7 @@ export async function RankingView({ kind, sp }: { kind: ProductKind; sp: Ranking
       {!enough ? (
         <section aria-labelledby="bientot" className="flex flex-col gap-3 rounded-card border-2 border-ink bg-paper p-5">
           <h2 id="bientot" className="m-0 font-display text-xl font-black text-ink">
-            Pourquoi le classement est-il encore court ?
+            {titleTypo('Pourquoi le classement est-il encore court ?')}
           </h2>
           <p className="m-0 text-[15px] leading-relaxed text-ink-2">
             {`${all.length === 0 ? "Aucune fiche n'est" : `${all.length} fiche${all.length > 1 ? 's sont' : ' est'}`} publiée${all.length > 1 ? 's' : ''} pour l'instant. Une lecture automatique d'étiquette peut contenir une erreur : on ne classe un produit qu'une fois sa fiche publiée, et le classement s'ouvre à partir de ${RANKING_MIN_REVIEWED} fiches.`}
@@ -64,7 +65,7 @@ export async function RankingView({ kind, sp }: { kind: ProductKind; sp: Ranking
       {all.length > 0 ? (
         <section aria-labelledby="classement" className="flex flex-col gap-4">
           <h2 id="classement" className="m-0 font-display text-2xl font-black text-ink">
-            {copy.listTitle}
+            {titleTypo(copy.listTitle)}
           </h2>
           <RankingFilters brands={brands.map((b) => ({ slug: b.slug, name: b.name }))} brand={brand} band={band} base={copy.path} />
           {list.length > 0 ? <RankingList items={shown} start={offset + 1} /> : <p className="m-0 text-[15px] text-ink-2">Aucune fiche publiée ne correspond à ces filtres.</p>}
