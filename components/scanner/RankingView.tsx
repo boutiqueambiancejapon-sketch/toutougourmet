@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
+import { categoryQuery, COMPLETE_CATEGORIES, parseCategory } from '@/lib/scanner/food-noun'
 import type { ProductKind } from '@/lib/scanner/score'
 import { inBand, parseBand, parsePage, RANKING_MIN_REVIEWED, RANKING_PAGE_SIZE } from '@/lib/scanner/seo'
 import { groupByBrand, reviewedItemsSafe } from '@/lib/server/scanner-catalog'
@@ -17,7 +18,7 @@ import { titleTypo } from '@/lib/title-typo'
 // seulement les fiches publiées du type demandé, triées par note. Filtres marque et tranche de
 // note en paramètres d'URL, rendus côté serveur. ItemList JSON-LD = la page de liste affichée.
 
-export type RankingSearchParams = { marque?: string | string[]; note?: string | string[]; page?: string | string[] }
+export type RankingSearchParams = { marque?: string | string[]; note?: string | string[]; page?: string | string[]; categorie?: string | string[] }
 
 export const firstParam = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v) ?? ''
 
@@ -27,10 +28,12 @@ export async function RankingView({ kind, sp }: { kind: ProductKind; sp: Ranking
   const every = await reviewedItemsSafe()
   const all = every.filter((it) => it.kind === kind)
   const counts: Record<ProductKind, number> = { complete: every.filter((it) => it.kind === 'complete').length, treat: every.filter((it) => it.kind === 'treat').length }
+  const category = treat ? null : parseCategory(sp.categorie)
+  const inCategory = category ? all.filter((it) => it.noun === category) : all
   const brands = groupByBrand(all)
   const brand = firstParam(sp.marque)
   const band = parseBand(sp.note)
-  const list = all.filter((it) => (brand === '' || it.brandSlug === brand) && inBand(it.score, band))
+  const list = inCategory.filter((it) => (brand === '' || it.brandSlug === brand) && inBand(it.score, band))
   const pages = Math.max(1, Math.ceil(list.length / RANKING_PAGE_SIZE))
   const page = Math.min(parsePage(sp.page), pages)
   const offset = (page - 1) * RANKING_PAGE_SIZE
@@ -67,9 +70,25 @@ export async function RankingView({ kind, sp }: { kind: ProductKind; sp: Ranking
           <h2 id="classement" className="m-0 font-display text-2xl font-black text-ink">
             {titleTypo(copy.listTitle)}
           </h2>
-          <RankingFilters brands={brands.map((b) => ({ slug: b.slug, name: b.name }))} brand={brand} band={band} base={copy.path} />
+          {category ? (
+            <nav aria-label="Catégorie" className="-mx-4 overflow-x-auto px-4 md:mx-0 md:px-0">
+              <ul className="m-0 flex list-none gap-1.5 p-0 text-sm">
+                {COMPLETE_CATEGORIES.filter((c) => c.noun !== 'aliment' || all.some((it) => it.noun === 'aliment')).map((c) => {
+                  const query = categoryQuery(c.noun)
+                  return (
+                    <li key={c.noun} className="shrink-0">
+                      <Link href={query ? `${copy.path}?${query}` : copy.path} aria-current={c.noun === category ? 'true' : undefined} className={`inline-flex min-h-11 items-center whitespace-nowrap rounded-pill border-2 px-3 font-semibold no-underline ${c.noun === category ? 'border-ink bg-ink text-cream' : 'border-line bg-paper text-ink'}`}>
+                        {c.label}
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
+            </nav>
+          ) : null}
+          <RankingFilters brands={brands.map((b) => ({ slug: b.slug, name: b.name }))} brand={brand} band={band} base={copy.path} category={category && category !== 'croquettes' ? category : ''} />
           {list.length > 0 ? <RankingList items={shown} start={offset + 1} /> : <p className="m-0 text-[15px] text-ink-2">Aucune fiche publiée ne correspond à ces filtres.</p>}
-          <Pagination page={page} pages={pages} params={{ marque: brand, note: band ?? '' }} base={copy.path} />
+          <Pagination page={page} pages={pages} params={{ marque: brand, note: band ?? '', categorie: category && category !== 'croquettes' ? category : '' }} base={copy.path} />
         </section>
       ) : null}
 

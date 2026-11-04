@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { verdictText } from '@/lib/scanner/highlights'
-import type { NounWords } from '@/lib/scanner/food-noun'
+import { CATEGORY_PHRASE, type FoodNoun, type NounWords } from '@/lib/scanner/food-noun'
 import { kindOf, type ScoreResult } from '@/lib/scanner/score'
 import { ScoreDetail } from '../ScoreDetail'
 import { titleTypo } from '@/lib/title-typo'
@@ -10,7 +10,14 @@ import { titleTypo } from '@/lib/title-typo'
 // une phrase (tranche, points forts et faibles), puis le détail de la note. Les alertes d'une
 // friandise sont déjà en tête de fiche : pas de doublon ici.
 
-export function FicheVerdict({ brand, details, words, children }: { brand: string | null; details: ScoreResult; words: NounWords; children?: ReactNode }) {
+const COMPARE: Record<FoodNoun, string> = {
+  croquettes: 'Compare-la à d’autres croquettes : l’eau d’une pâtée change le calcul.',
+  patee: 'Compare-la à d’autres pâtées : l’eau de la recette change le calcul face à des croquettes.',
+  friandise: 'Les friandises ont leur propre barème : cette note ne se compare pas à celle d’un repas.',
+  aliment: '',
+}
+
+export function FicheVerdict({ brand, details, words, noun, children }: { brand: string | null; details: ScoreResult; words: NounWords; noun: FoodNoun; children?: ReactNode }) {
   const treat = kindOf(details) === 'treat'
   return (
     <section aria-labelledby="verdict" className="flex flex-col gap-3">
@@ -18,6 +25,11 @@ export function FicheVerdict({ brand, details, words, children }: { brand: strin
         {titleTypo(words.question(brand))}
       </h2>
       <p className="m-0 text-base leading-relaxed text-ink-2">{verdictText(details)}</p>
+      {details.score !== null && CATEGORY_PHRASE[noun] ? (
+        <p className="m-0 text-[15px] leading-relaxed text-ink">
+          <strong>{`${details.score}/100, ${CATEGORY_PHRASE[noun]}.`}</strong> {COMPARE[noun]}
+        </p>
+      ) : null}
       <ScoreDetail details={details} alerts={!treat} />
       {children}
       <p className="m-0 text-[15px] leading-relaxed text-ink-2">

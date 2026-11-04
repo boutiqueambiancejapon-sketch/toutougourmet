@@ -27,6 +27,25 @@ function test(name: string, fn: () => void) {
 }
 const pts = (r: ReturnType<typeof scoreLabel>, id: string) => r.criteria.find((c) => c.id === id)?.points
 
+test('plafond à 89 sans calcium et phosphore déclarés tous les deux', () => {
+  const noCalcium = { ...PREMIUM_LABEL, constituants: { ...PREMIUM_LABEL.constituants, calcium: null, phosphore: null } }
+  const uncapped = scoreLabel({ ...noCalcium, constituants: { ...noCalcium.constituants, calcium: 1.2, phosphore: 0.9 } })
+  const capped = scoreLabel({
+    ...noCalcium,
+    typeAliment: 'humide',
+    constituants: { ...noCalcium.constituants, proteines: 12, matieresGrasses: 6, cendres: 2, cellulose: 0.5, humidite: 78 },
+    ingredients: [{ nom: 'Saumon', pourcentage: 60 }, { nom: 'Poulet', pourcentage: 30 }],
+  })
+  assert.equal(capped.score, 89)
+  assert.match(capped.assumptions.join(' '), /plafonnée à 89/)
+  assert.equal(capped.band, 'tres-bon', 'la mention reste')
+  assert.ok(uncapped.score !== null, 'une étiquette complète garde sa note')
+  const complete = scoreLabel({ ...noCalcium, typeAliment: 'humide', constituants: { ...noCalcium.constituants, proteines: 12, matieresGrasses: 6, cendres: 2, cellulose: 0.5, humidite: 78, calcium: 0.3, phosphore: 0.2 }, ingredients: [{ nom: 'Saumon', pourcentage: 60 }, { nom: 'Poulet', pourcentage: 30 }] })
+  assert.ok(complete.score !== null && complete.score > 89, `étiquette complète : ${complete.score}`)
+  const half = scoreLabel({ ...noCalcium, typeAliment: 'humide', constituants: { ...noCalcium.constituants, proteines: 12, matieresGrasses: 6, cendres: 2, cellulose: 0.5, humidite: 78, calcium: 0.3 }, ingredients: [{ nom: 'Saumon', pourcentage: 60 }, { nom: 'Poulet', pourcentage: 30 }] })
+  assert.equal(half.score, 89, 'une seule valeur ne suffit pas')
+})
+
 test('croquette premium riche en viande : très bonne note', () => {
   const r = scoreLabel(PREMIUM_LABEL)
   assert.equal(r.version, SCORE_VERSION)

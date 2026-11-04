@@ -12,13 +12,13 @@ const SHOWN = 5
 const MIN_SHOWN = 3
 
 export async function TopRated() {
-  const items = await reviewedItemsSafe('complete')
+  const items = (await reviewedItemsSafe('complete')).filter((it) => it.noun === 'croquettes')
   if (items.length < MIN_SHOWN) return null
   const treats = (await reviewedItemsSafe('treat')).length
   return (
     <MethodDetails id="meilleures-notes" title={'Quelles croquettes pour chien sont les mieux notées\u00a0?'}>
       <p className="m-0 text-base leading-relaxed text-ink-2">
-        {`Les ${Math.min(SHOWN, items.length)} meilleures notes parmi les ${items.length} croquettes et pâtées qui ont une fiche publiée, calculées avec le même barème.`}
+        {`Les ${Math.min(SHOWN, items.length)} meilleures notes parmi les ${items.length} croquettes qui ont une fiche publiée, calculées avec le même barème.`}
       </p>
       <RankingList items={items.slice(0, SHOWN)} />
       {items.length >= RANKING_MIN_REVIEWED ? (

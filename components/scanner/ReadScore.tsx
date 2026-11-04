@@ -32,7 +32,7 @@ export function ReadScore() {
       <p className="m-0 text-[15px] leading-relaxed text-ink-2">
         La note juge la composition écrite sur le sac, pas l&apos;adaptation à ton chien : un chiot, un chien âgé ou malade a des
         besoins propres, à voir avec ton vétérinaire. Une friandise a les mêmes tranches de couleur, calculées avec son propre
-        barème.
+        barème. Une note se compare dans sa catégorie : l&apos;eau d&apos;une pâtée change le calcul face à des croquettes.
       </p>
     </div>
   )

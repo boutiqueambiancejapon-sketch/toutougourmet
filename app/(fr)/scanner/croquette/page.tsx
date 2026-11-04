@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   robots: LIST_ROBOTS,
 }
 
-export default async function CroquetteListPage({ searchParams }: { searchParams: Promise<{ vue?: string | string[] }> }) {
-  const { vue } = await searchParams
-  return <CategoryView category={CATEGORY} vueParam={vue} />
+export default async function CroquetteListPage({ searchParams }: { searchParams: Promise<{ vue?: string | string[]; categorie?: string | string[] }> }) {
+  const { vue, categorie } = await searchParams
+  return <CategoryView category={CATEGORY} vueParam={vue} categoryParam={categorie} />
 }

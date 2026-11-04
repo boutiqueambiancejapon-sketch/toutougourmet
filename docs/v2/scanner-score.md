@@ -37,6 +37,12 @@ Principe : l'IA recopie l'étiquette (`ExtractedLabel`), elle ne note pas. La no
 
 ≥ 75 : très bonne composition (vert) · 55-74 : correcte (bleu) · 35-54 : moyenne (ambre) · < 35 : faible (rose).
 
+## Version 1.5 (2026-11-04)
+
+- Plafond : un aliment complet qui ne déclare pas à la fois calcium et phosphore ne dépasse pas 89 (`CAP_WITHOUT_MINERALS`). Le critère absent reste non évalué ; l'hypothèse s'affiche avec la note. Le barème friandise ne change pas.
+- Comparaison : les classements séparent croquettes, pâtées et type inconnu (`?categorie=`). La fiche dit « 89/100, parmi les pâtées ».
+- Après ce changement : `tsx scripts/rescore-fiches.ts --appliquer` recalcule les notes enregistrées, car les listes lisent la note stockée.
+
 ## Limites connues (à traiter dans une version suivante)
 
 - Seuils de l'adulte : un aliment « croissance » ou « senior » est noté avec les mêmes repères (FEDIAF croissance : 25 g de protéines/100 g MS avant 14 semaines, 20 g après).

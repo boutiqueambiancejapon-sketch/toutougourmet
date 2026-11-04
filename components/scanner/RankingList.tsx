@@ -1,10 +1,11 @@
 import Link from 'next/link'
+import { CATEGORY_PHRASE } from '@/lib/scanner/food-noun'
 import type { ReviewedItem } from '@/lib/server/scanner-catalog'
 import { ScoreBadge } from './ScoreBadge'
 
 // @cdc lot 6 — liste de fiches relues (classement, page marque, meilleures notes de /scanner).
 
-export function RankingList({ items, start = 1, showBrand = true }: { items: ReviewedItem[]; start?: number; showBrand?: boolean }) {
+export function RankingList({ items, start = 1, showBrand = true, showCategory = false }: { items: ReviewedItem[]; start?: number; showBrand?: boolean; showCategory?: boolean }) {
   return (
     <ol role="list" className="m-0 flex list-none flex-col divide-y divide-line border-y border-line p-0">
       {items.map((it, i) => (
@@ -15,6 +16,7 @@ export function RankingList({ items, start = 1, showBrand = true }: { items: Rev
             <span className="flex min-w-0 grow flex-col">
               <span className="truncate font-semibold group-hover:underline">{showBrand ? (it.brand ?? 'Marque inconnue') : (it.product ?? 'Produit sans nom')}</span>
               {showBrand ? <span className="truncate text-[15px] text-ink-2">{it.product ?? 'Produit sans nom'}</span> : null}
+              {showCategory && CATEGORY_PHRASE[it.noun] ? <span className="text-xs text-ink-2">{`${it.score}/100 ${CATEGORY_PHRASE[it.noun]}`}</span> : null}
             </span>
           </Link>
         </li>
