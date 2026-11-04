@@ -6,7 +6,7 @@ Tâche quotidienne : rédiger UN nouvel article pour Toutou Gourmet (www.toutou-
 - Ton vivant : des scènes de la vie avec un chien, un peu d'humour quand le sujet s'y prête. Jamais de blague sur une urgence ou un chien malade.
 - Pas trop chiffré, pas trop scientifique : pas de calculs de kcal, de pourcentages d'ingrédients, de mg/kg, de tableaux de calcul ni de références d'études dans le texte courant. On garde un chiffre seulement s'il change ce que le lecteur va faire.
 - Exception sécurité : toxique, urgence, maladie, médicament. Là, les doses, les symptômes et les numéros restent exacts et le ton reste sérieux.
-- Une affirmation de santé reste vérifiée à une source sérieuse, listée en fin d'article sous « Sources ». Plus court, jamais moins vrai.
+- Jamais de référence façon article scientifique dans le texte : pas de « (Noble et al., 2017) », d'auteur, de revue, de DOI ni de PMID. On écrit « une étude britannique » ou « les vétérinaires conseillent », et les références vont seulement dans « Sources » en fin d'article, si besoin. Une affirmation de santé reste vérifiée à une source sérieuse. Plus court, jamais moins vrai.
 - 600 à 1 000 mots en général. FAQ de 4 à 6 questions courtes.
 - Produit cité : partir de sa page officielle. Pas de conclusion tirée d'une estimation maison.
 
@@ -24,7 +24,7 @@ Tâche quotidienne : rédiger UN nouvel article pour Toutou Gourmet (www.toutou-
 
 ## Recherche
 - Lire 3 à 5 pages qui rankent sur la requête (WebFetch) : sous-questions traitées, manques, mises en garde vétérinaires.
-- Toute donnée chiffrée vient d'une source vérifiée : auteur, année, revue, DOI/PMID, ou base officielle (USDA FoodData Central, ANSES, FEDIAF). Sans source, ne pas l'écrire.
+- Toute donnée chiffrée vient d'une source vérifiée (étude avec auteur, année, revue, DOI ou PMID, ou base officielle : USDA FoodData Central, ANSES, FEDIAF), listée dans « Sources » en fin d'article et jamais entre parenthèses dans le texte. Sans source, ne pas l'écrire.
 
 ## Rédiger (`content/blog/{slug}.mdx`)
 - 600 à 1 000 mots, tutoiement comme le reste du site, H2 en questions naturelles, réponse directe en tête de chaque section, paragraphes autonomes (entité répétée, chiffre + unité dans la même phrase).

@@ -11,7 +11,7 @@
 - Ton vivant : des scènes de la vie avec un chien, un peu d'humour quand le sujet s'y prête. Jamais de blague sur une urgence ou un chien malade.
 - Pas trop chiffré, pas trop scientifique : pas de calculs de kcal, de pourcentages d'ingrédients, de mg/kg, de tableaux de calcul ni de références d'études dans le texte courant. On garde un chiffre seulement s'il change ce que le lecteur va faire.
 - Exception sécurité : toxique, urgence, maladie, médicament. Là, les doses, les symptômes et les numéros restent exacts et le ton reste sérieux.
-- Une affirmation de santé reste vérifiée à une source sérieuse, listée en fin d'article sous « Sources ». Plus court, jamais moins vrai.
+- Jamais de référence façon article scientifique dans le texte : pas de « (Noble et al., 2017) », d'auteur, de revue, de DOI ni de PMID. On écrit « une étude britannique » ou « les vétérinaires conseillent », et les références vont seulement dans « Sources » en fin d'article, si besoin. Une affirmation de santé reste vérifiée à une source sérieuse. Plus court, jamais moins vrai.
 - 600 à 1 000 mots en général. FAQ de 4 à 6 questions courtes.
 - Produit cité : partir de sa page officielle. Pas de conclusion tirée d'une estimation maison.
 
@@ -249,7 +249,7 @@ Avant d'écrire, on liste les sous-questions de chaque dimension. Une dimension 
 | L'aliment | Quelle partie (peau, noyau, pépins, feuilles), cru ou cuit, frais, sec, en conserve, produits dérivés (jus, compote, gâteau) | Tableau partie par partie ou forme par forme |
 | La quantité | Combien par gabarit, à quelle fréquence, dose toxique en mg/kg | Tableau en grammes par tranche de poids, avec des races citées |
 | La situation | Il en a mangé par accident, il en a mangé beaucoup, il vomit après, combien de temps avant les symptômes | Section « Que faire si… » avec des étapes et les numéros des centres antipoison |
-| Le pourquoi | Quelle molécule, quel mécanisme, quelle étude | Nom de la molécule, dose, étude citée (auteur, année, revue, DOI) |
+| Le pourquoi | Quelle molécule, quel mécanisme, quelle étude | Nom de la molécule, dose, étude décrite simplement, référence complète dans « Sources » en fin d'article |
 | Les alternatives | Que donner à la place, quelle friandise équivalente | Liste courte avec liens internes vers les pages concernées |
 
 #### Le tableau par gabarit avec des races nommées

@@ -6,10 +6,10 @@ Tâche quotidienne : réécrire et optimiser 2 articles existants du site Toutou
 - Ton vivant : des scènes de la vie avec un chien, un peu d'humour quand le sujet s'y prête. Jamais de blague sur une urgence ou un chien malade.
 - Pas trop chiffré, pas trop scientifique : pas de calculs de kcal, de pourcentages d'ingrédients, de mg/kg, de tableaux de calcul ni de références d'études dans le texte courant. On garde un chiffre seulement s'il change ce que le lecteur va faire.
 - Exception sécurité : toxique, urgence, maladie, médicament. Là, les doses, les symptômes et les numéros restent exacts et le ton reste sérieux.
-- Une affirmation de santé reste vérifiée à une source sérieuse, listée en fin d'article sous « Sources ». Plus court, jamais moins vrai.
+- Jamais de référence façon article scientifique dans le texte : pas de « (Noble et al., 2017) », d'auteur, de revue, de DOI ni de PMID. On écrit « une étude britannique » ou « les vétérinaires conseillent », et les références vont seulement dans « Sources » en fin d'article, si besoin. Une affirmation de santé reste vérifiée à une source sérieuse. Plus court, jamais moins vrai.
 - 600 à 1 000 mots en général. FAQ de 4 à 6 questions courtes.
 - Produit cité : partir de sa page officielle. Pas de conclusion tirée d'une estimation maison.
-- Une réécriture rend l'article plus simple et plus court : elle n'ajoute ni tableau de calcul ni chiffres. Tu peux retirer les chiffres et références inutiles au lecteur, sauf dans les sections sécurité. Les règles ci-dessous sur le tableau par gabarit et la FAQ de 8 questions ne valent que pour une section sécurité où elles aident vraiment.
+- Une réécriture rend l'article plus simple et plus court : elle n'ajoute ni tableau de calcul ni chiffres. Déplace les références scientifiques du texte, comme « (Auteur et al., 2019) », vers « Sources » en fin d'article, sections sécurité comprises. Tu peux retirer les chiffres inutiles au lecteur, sauf dans les sections sécurité. Les règles ci-dessous sur le tableau par gabarit et la FAQ de 8 questions ne valent que pour une section sécurité où elles aident vraiment.
 
 ## Avant d'écrire
 1. Lire `CLAUDE.md` et `PROGRESS.md`.
