@@ -105,11 +105,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `nourriture-staffordshire-bull-terrier`
 - [x] `tapis-de-lechage-chien-guide-utilisation`
 - [x] `croquettes-chien-demangeaisons`
-- [ ] `recette-patee-maison-dinde-chien`
-- [ ] `nourriture-american-staffordshire-terrier`
-- [ ] `croquettes-chien-cancer`
-- [ ] `chien-peut-manger-betterave`
-- [ ] `recette-friandises-saumon-patate-douce-chien`
+- [x] `recette-patee-maison-dinde-chien`
+- [x] `nourriture-american-staffordshire-terrier`
+- [x] `croquettes-chien-cancer`
+- [x] `chien-peut-manger-betterave`
+- [x] `recette-friandises-saumon-patate-douce-chien`
 - [ ] `croquettes-chien-calculs-urinaires`
 - [ ] `donner-comprime-chien-refuse-medicament`
 - [ ] `collagene-chien-bienfaits-dosage`
