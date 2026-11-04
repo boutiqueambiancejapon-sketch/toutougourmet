@@ -75,7 +75,7 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `meilleures-croquettes-petit-chien`
 - [x] `chien-mange-glands-chene-urgence`
 - [x] `chataignes-marrons-inde-chien-difference-danger`
-- [~] `curcuma-chien-bienfaits-dosage` · doses contradictoires impossibles à trancher sans changer un nombre : 15-20 mg/kg/jour contre environ 100 mg/kg/jour dans le tableau ; pâte dorée dite 2× plus concentrée que la poudre alors qu'elle est diluée ; aucune source sérieuse trouvée
+- [ ] `curcuma-chien-bienfaits-dosage`
 - [x] `voyager-voiture-chien-alimentation-mal-transports`
 - [x] `croquettes-chien-insuffisance-renale`
 - [x] `croquettes-chien-sterilise`
