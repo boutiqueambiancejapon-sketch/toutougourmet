@@ -12,6 +12,8 @@ SupplementaryGroups=systemd-journal
 WorkingDirectory=/home/administrator/toutou-preview/current
 Environment=INGEST_HOSTS=www.toutou-gourmet.com,toutou-gourmet.com,dashboard.toutou-gourmet.com
 Environment=DATABASE_URL=postgresql:///toutou?host=/var/run/postgresql
+# Facultatif, même valeur que dans le .env du site : adresses ou plages à ne pas compter.
+# Environment=ANALYTICS_IGNORED_IPS=203.0.113.7,2001:db8:1::/48
 ExecStart=/usr/bin/node scripts/ingest-caddy-logs.mjs
 NoNewPrivileges=true
 ProtectSystem=strict

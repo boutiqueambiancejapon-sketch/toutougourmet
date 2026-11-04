@@ -50,7 +50,8 @@ export const BOT_RULES = [
   ['Screaming Frog', 'Screaming Frog', 'Screaming Frog', 'seo'],
 ].map(([needle, bot, operator, kind]) => ({ needle: needle.toLowerCase(), bot, operator, kind }))
 
-const GENERIC_BOT = /bot|crawl|spider|slurp|headless|python|curl|wget|go-http|httpclient|scrapy|java\/|okhttp|axios|node-fetch|uptime|monitor/i
+// « toutou- » : surveillance du site (toutou-alerts), comptée comme une visite humaine jusqu'au 2026-11-04.
+const GENERIC_BOT = /toutou-|bot|crawl|spider|slurp|headless|python|curl|wget|go-http|httpclient|scrapy|java\/|okhttp|axios|node-fetch|uptime|monitor/i
 
 export function classifyUa(ua) {
   const low = (ua || '').toLowerCase()

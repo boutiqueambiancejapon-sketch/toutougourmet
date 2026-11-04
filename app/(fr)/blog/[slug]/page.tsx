@@ -13,6 +13,7 @@ import { formatDate } from '@/lib/utils'
 import { StickyCta } from '@/components/blog/StickyCta'
 import { StickyCtaDouble } from '@/components/blog/StickyCtaDouble'
 import { getStickyCtaForArticle, stickyAllowed } from '@/lib/sticky-cta-config'
+import { remarkFormula } from '@/lib/remark-formula'
 import { ArticleLayout } from '@/components/blog/ArticleLayout'
 import { getArticleSlot } from '@/components/blog/blog-categories'
 import { getSlotPath, resolveSlot } from '@/data/image-utils'
@@ -164,7 +165,7 @@ export default async function ArticlePage({ params }: Props) {
           components={articleMdxComponents}
           options={{
             mdxOptions: {
-              remarkPlugins: [remarkGfm, ...signupPlugins, ...guidePlugins],
+              remarkPlugins: [remarkGfm, remarkFormula, ...signupPlugins, ...guidePlugins],
               rehypePlugins: [
                 [rehypeAutolinkTerms, { terms: AUTOLINK_DICTIONARY, maxTotal: 3 }],
               ],

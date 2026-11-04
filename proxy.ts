@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { dashboardCredentials, isAuthorized } from '@/lib/dashboard/auth'
 import { clientIp, isLimited, overLimit } from '@/lib/server/rate-window'
+import { markIgnoredVisitor, OWNER_COOKIE, ownerCookieNeedsRenewal, ownerCookieOptions, ownerCookieValue } from '@/lib/server/analytics-ignore'
 
 // @cdc tableau de bord — proxy Next 16 (ex-middleware). Il ne concerne que /tableau-de-bord et
 // la page du gardien /garde/[jeton] (voir config.matcher) : le reste du site ne passe jamais par ici.
@@ -23,6 +24,18 @@ function sitterProxy(request: NextRequest): NextResponse {
   return response
 }
 
+// @cdc mesure — identifié au tableau de bord : le propriétaire ne compte plus dans les statistiques
+// (cookie signé + empreinte de son adresse, lib/server/analytics-ignore.ts). La mesure ne retarde
+// ni ne casse jamais le tableau de bord.
+function rememberOwner(request: NextRequest, response: NextResponse): void {
+  void markIgnoredVisitor(clientIp(request.headers))
+  if (!ownerCookieNeedsRenewal(request.cookies.get(OWNER_COOKIE)?.value)) return
+  const value = ownerCookieValue()
+  if (!value) return
+  const secure = request.headers.get('x-forwarded-proto') === 'https'
+  response.cookies.set(OWNER_COOKIE, value, ownerCookieOptions(request.headers.get('host'), secure))
+}
+
 export async function proxy(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/garde/')) return sitterProxy(request)
   const expected = dashboardCredentials()
@@ -37,6 +50,7 @@ export async function proxy(request: NextRequest) {
     const response = NextResponse.next()
     response.headers.set('X-Robots-Tag', 'noindex, nofollow')
     response.headers.set('Cache-Control', 'private, no-store')
+    rememberOwner(request, response)
     return response
   }
 

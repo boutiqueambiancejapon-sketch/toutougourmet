@@ -197,3 +197,10 @@ Décision du propriétaire : les lecteurs veulent la réponse vite et se diverti
 - Pas de suite le premier mardi du mois, jour de la lettre : plafond d'un e-mail par jour.
 
 Précision du propriétaire (2026-11-04) sur le ton des articles : informatif, intéressant, légèrement scientifique et divertissant, sans allure d'étude scientifique. Les références vont en fin d'article. Lot de nuit : 10 articles par nuit pour déplacer les références (`deploy/citations-prompt.md`), à retirer de `deploy/seo-rewrite.sh` quand il n'en reste plus.
+
+## 2026-11-04 — Exclusion du propriétaire et barre collante d'une marque (branche `feat/stats-sticky-formules`)
+- Exclusion par cookie signé et empreinte d'adresse plutôt qu'une liste d'IP : l'iPhone du propriétaire change d'adresse. Caddy masque les cookies dans ses journaux, l'ingestion ne peut lire que l'empreinte, que `/api/e` met à jour dès qu'il voit le cookie.
+- Empreinte SHA-256 salée ligne par ligne, sel en base : aucune nouvelle variable pour le service d'ingestion. Elle ne protège pas d'une lecture de la base par force brute sur une IPv4, mais la table ne contient que les adresses du propriétaire, 12 h.
+- Effet connu : une IPv4 partagée (4G, Wi-Fi d'hôtel) masque aussi les autres visiteurs de cette adresse pendant 12 h au plus. Le cookie reste réservé au propriétaire : la politique de confidentialité ne change pas pour les visiteurs.
+- La barre d'une marque lève, à la demande du propriétaire, l'interdit « races » et « offre déjà sur la page » de la carte des conversions : elle s'efface dès que le bloc d'offre arrive, jamais deux demandes à l'écran. Urgences, aliments, santé et maladies restent exclus.
+- Fiche race : la barre suit toujours la marque `pick`, même en rupture (décision du propriétaire, audit annulé) ; la ligne dit alors la rupture. Duels à deux marques nommées : pas de marque principale, barre à deux boutons inchangée.

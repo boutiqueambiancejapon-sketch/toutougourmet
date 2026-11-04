@@ -8,6 +8,7 @@ import { articleMdxComponents } from '@/components/mdx/article-components'
 import { Heading2 } from '@/components/mdx/Heading2'
 import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
 import { formatDate } from '@/lib/utils'
+import { remarkFormula } from '@/lib/remark-formula'
 import { DualBrandCTA } from './DualBrandCTA'
 import { StickyComparatifCTA } from './StickyComparatifCTA'
 
@@ -43,7 +44,7 @@ export function ComparatifEditorial({ comparatif, brandA, brandB }: Props) {
           </header>
           {brandA && brandB ? <DualBrandCTA brandA={brandA} brandB={brandB} place="duel-haut" /> : null}
           <div className="mdx-content">
-            <MDXRemote source={content} components={components} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
+            <MDXRemote source={content} components={components} options={{ mdxOptions: { remarkPlugins: [remarkGfm, remarkFormula] } }} />
           </div>
           <nav aria-label="Pour aller plus loin" className="flex flex-wrap gap-x-6 gap-y-2 border-t border-line pt-6">
             <Link href="/chien/marque" className="font-semibold text-orange-ink underline underline-offset-4">Choisir selon le profil de ton chien</Link>

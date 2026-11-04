@@ -32,6 +32,41 @@ export function useScrolledPast(threshold = SHOW_AT): boolean {
   return past
 }
 
+const OFFER_SHOW_AT_VIEWPORT = 0.5
+
+/**
+ * @cdc cro-carte — barre d'une marque (StickyOffer) : vraie après une demi-hauteur d'écran défilée,
+ * tant que le bloc d'offre `stopAt` est entièrement sous l'écran. Elle s'efface dès que son premier
+ * pixel entre à l'écran, reste effacée à sa hauteur et plus bas, et revient si le lecteur remonte
+ * au-dessus. Calculé à chaque défilement : un saut par le sommaire et le chargement tardif des
+ * images sont pris en compte, ce qu'un IntersectionObserver raterait.
+ */
+function useBeforeOffer(stopAt: string | undefined): boolean {
+  const [before, setBefore] = useState(false)
+  useEffect(() => {
+    if (!stopAt) return
+    let frame = 0
+    const update = () => {
+      frame = 0
+      const offer = document.querySelector(stopAt)
+      const offerBelow = !offer || offer.getBoundingClientRect().top >= window.innerHeight
+      setBefore(offerBelow && window.scrollY >= window.innerHeight * OFFER_SHOW_AT_VIEWPORT)
+    }
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+    schedule()
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule, { passive: true })
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+    }
+  }, [stopAt])
+  return before
+}
+
 /** Vrai tant que l'encart du milieu d'article est à l'écran : une seule offre visible à la fois. */
 function useMidCtaInView(): boolean {
   const [inView, setInView] = useState(false)
@@ -72,8 +107,10 @@ function onPopupChange(cb: () => void): () => void {
   return () => window.removeEventListener(POPUP_EVENT, cb)
 }
 
-export function StickyBar({ children }: { children: ReactNode }) {
-  const visible = useScrolledPast()
+export function StickyBar({ children, stopAt }: { children: ReactNode; stopAt?: string }) {
+  const scrolledPast = useScrolledPast()
+  const beforeOffer = useBeforeOffer(stopAt)
+  const visible = stopAt ? beforeOffer : scrolledPast
   // Panneau du guide ouvert (components/guide/GuidePopup.tsx) : le bandeau s'efface le temps qu'il est là.
   const popupOpen = useSyncExternalStore(onPopupChange, isPopupOpen, () => false)
   const midInView = useMidCtaInView()
