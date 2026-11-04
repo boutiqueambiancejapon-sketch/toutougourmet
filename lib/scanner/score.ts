@@ -6,7 +6,7 @@ import type { ExtractedLabel } from './types'
 // source sont décrits dans docs/v2/scanner-score.md : toute modification du barème change
 // SCORE_VERSION (les analyses en cache sont alors recalculées à la lecture).
 
-export const SCORE_VERSION = '1.6'
+export const SCORE_VERSION = '1.7'
 
 /** Humidité retenue pour des croquettes qui ne la déclarent pas (règlement UE 767/2009 : mention obligatoire au-delà de 14 %). */
 export const ASSUMED_DRY_MOISTURE = 10
@@ -210,10 +210,10 @@ export function scoreLabel(label: ExtractedLabel): ScoreResult {
 
   scoreIngredients(label, add, missing)
 
-  // Calcium / phosphore : une étiquette qui ne les donne pas perd ces points, sans que ce soit un
+  // Calcium / phosphore : une fiche qui ne les a pas perd ces points, sans que ce soit un
   // défaut de la recette (`undeclared` : jamais cité parmi les points faibles).
   if (a.calcium === null || a.phosphore === null || a.phosphore <= 0) {
-    criteria.push({ id: 'calcium-phosphore', label: 'Rapport calcium / phosphore', max: 5, points: 0, undeclared: true, explanation: 'Calcium et phosphore ne sont pas indiqués tous les deux : impossible de vérifier leur équilibre, donc 0 point.' })
+    criteria.push({ id: 'calcium-phosphore', label: 'Rapport calcium / phosphore', max: 5, points: 0, undeclared: true, explanation: 'Calcium et phosphore ne figurent pas tous les deux sur cette fiche, même si la marque peut les publier ailleurs : impossible de vérifier leur équilibre, donc 0 point.' })
   } else if (a.calcium !== null && a.phosphore !== null && a.phosphore > 0) {
     const ratio = round1(a.calcium / a.phosphore)
     const ok = ratio >= 1 && ratio <= 2
