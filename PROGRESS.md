@@ -158,3 +158,7 @@ Restent : espace CRM, reprise des tableaux, connexion sécurisée (branche `feat
 Nouvel onglet CRM (`/tableau-de-bord/crm`) : où en sont les contacts, puis liste unique lettre et comptes, avec filtres, recherche et prochain e-mail prévu. Fiche à l'adresse de l'empreinte, jamais de l'e-mail. L'ancienne page des inscrits redirige ; son export CSV reste au même endroit. Calculs dans `lib/dashboard/crm.ts`, `nextStepFor` dans `lib/server/welcome-sequence.ts`, contrôlés par `npx tsx scripts/test-crm.ts`.
 
 Écart avec la maquette : « Désinscrits » est un total, Brevo ne donnant pas la date de désinscription.
+
+## 2026-11-04 : Connexion du tableau de bord en service
+
+Bascule faite (`DASHBOARD_LOGIN_ENABLED=1`), clé Face ID créée et utilisée sur le vrai iPhone. Connexion directe par Face ID ajoutée, migration `0011_dashboard_challenge`. Correction des champs : correction automatique coupée, espace finale ignorée, bouton pour afficher le mot de passe. `CRM_HIDDEN_EMAILS` retire des adresses du CRM. Restent à reprendre : tableaux Conversions, Robots IA, Contenu et Serveur.

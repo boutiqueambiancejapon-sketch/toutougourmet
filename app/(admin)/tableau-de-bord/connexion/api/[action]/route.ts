@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { requestFromSameHost } from '@/lib/dashboard/auth'
 import { ABSOLUTE_MS, DEVICE_COOKIE, DEVICE_COOKIE_DAYS, deviceLabel, SESSION_COOKIE } from '@/lib/dashboard/login/policy'
 import { deletePasskey, deleteTotp, enrollPasskeyOptions, enrollPasskeyVerify, enrollTotpConfirm, enrollTotpStart, regenerateCodes } from '@/lib/server/dashboard-login/flow-factors'
-import { backupStep, passkeyOptionsStep, passkeyVerifyStep, passwordStep, totpStep } from '@/lib/server/dashboard-login/flow-login'
+import { backupStep, directOptionsStep, directVerifyStep, passkeyOptionsStep, passkeyVerifyStep, passwordStep, totpStep } from '@/lib/server/dashboard-login/flow-login'
 import { closeSession, logout, logoutEverywhere } from '@/lib/server/dashboard-login/flow-sessions'
 import type { FlowContext, FlowResult } from '@/lib/server/dashboard-login/flow-types'
 import { dashboardAuthMode } from '@/lib/server/dashboard-login/mode'
@@ -24,6 +24,8 @@ const ACTIONS: Record<string, (ctx: FlowContext) => Promise<FlowResult>> = {
   'mot-de-passe': passwordStep,
   code: totpStep,
   secours: backupStep,
+  'cle-directe-options': directOptionsStep,
+  'cle-directe': directVerifyStep,
   'cle-options': passkeyOptionsStep,
   'cle-verifier': passkeyVerifyStep,
   'enrol-cle-options': enrollPasskeyOptions,

@@ -138,6 +138,7 @@ await check('écran de connexion, erreur neutre', async () => {
   await page.goto(`${BASE}/tableau-de-bord/emails`)
   await page.waitForURL('**/tableau-de-bord/connexion?suivant=*')
   await shot(page, '01-connexion')
+  assert.equal(await page.getByRole('button', { name: 'Se connecter avec Face ID' }).count(), 0, 'pas de bouton sans clé enregistrée')
   await signIn(page, 'mauvais')
   await page.getByText('Connexion impossible').waitFor()
   await shot(page, '02-erreur')
@@ -201,6 +202,30 @@ await check('connexion : mot de passe seul insuffisant, puis Face ID virtuel', a
   assert.notEqual(full, pending, 'cookie renouvelé au second facteur')
   for (const path of ['/tableau-de-bord/direct', '/tableau-de-bord/conversions/inscrits/export']) assert.notEqual((await raw(path, `__Host-tg_dashboard=${full}`)).status, 401, path)
   await logout(page)
+})
+
+await check('Face ID direct : pas de mot de passe, session complète, défi à usage unique', async () => {
+  await clearFailures()
+  await page.goto(`${BASE}/tableau-de-bord/connexion`)
+  let sent = null
+  page.on('request', (r) => {
+    if (r.url().endsWith('/connexion/api/cle-directe')) sent = r.postData()
+  })
+  await page.getByRole('button', { name: 'Se connecter avec Face ID' }).click()
+  await page.waitForURL(/\/tableau-de-bord(\?|$)/)
+  await page.getByRole('heading', { level: 1, name: 'Tableau de bord' }).waitFor()
+  const row = (await db.query(`SELECT factor_at FROM app.dashboard_session WHERE stage = 'full' ORDER BY created_at DESC LIMIT 1`)).rows[0]
+  assert.ok(row?.factor_at, 'second facteur noté')
+  await logout(page)
+  const headers = { origin: BASE, 'content-type': 'application/json' }
+  const post = (action, data) => context.request.post(`${BASE}/tableau-de-bord/connexion/api/${action}`, { headers, data })
+  assert.ok(sent, 'réponse de la clé vue')
+  assert.equal((await post('cle-directe', JSON.parse(sent))).status(), 401, 'même réponse rejouée : refus')
+  assert.equal((await post('cle-directe', { response: { response: { clientDataJSON: 'e30' } } })).status(), 401, 'réponse forgée : refus')
+  await clearFailures()
+  assert.equal((await post('secours', { code: codes[1] })).status(), 401, 'code de secours sans mot de passe : refus')
+  assert.equal((await post('code', { code: '000000' })).status(), 401, 'code à 6 chiffres sans mot de passe : refus')
+  await clearFailures()
 })
 
 await check('clé indisponible sur cet appareil : repli sur le code', async () => {

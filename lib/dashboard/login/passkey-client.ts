@@ -29,7 +29,7 @@ async function prepare(action: string): Promise<Prepared> {
  * take() rend ce qui est prêt. Une annulation ne consomme pas le défi : il resservira tel quel.
  * refresh() en demande un autre après une réponse du serveur, qui, elle, l'a consommé.
  */
-export function usePreparedPasskey(action: 'cle-options' | 'enrol-cle-options', enabled = true) {
+export function usePreparedPasskey(action: 'cle-directe-options' | 'cle-options' | 'enrol-cle-options', enabled = true) {
   const ready = useRef<Promise<Prepared> | null>(null)
   useEffect(() => {
     if (enabled && !ready.current) ready.current = prepare(action)
@@ -57,11 +57,11 @@ export async function addPasskey(ready: Prepared): Promise<LoginReply | null> {
   }
 }
 
-export async function signInWithPasskey(ready: Prepared, next: string): Promise<LoginReply | null> {
+export async function signInWithPasskey(ready: Prepared, next: string, verify: 'cle-directe' | 'cle-verifier' = 'cle-verifier'): Promise<LoginReply | null> {
   if (!ready.reply.ok || !ready.browser) return ready.reply
   try {
     const response = await ready.browser.startAuthentication({ optionsJSON: ready.reply.options as PublicKeyCredentialRequestOptionsJSON })
-    return await callLogin('cle-verifier', { response, next })
+    return await callLogin(verify, { response, next })
   } catch {
     return null
   }

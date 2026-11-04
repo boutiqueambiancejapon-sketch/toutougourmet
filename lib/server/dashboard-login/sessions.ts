@@ -38,14 +38,15 @@ export async function readSession(token: string | undefined, touch = false, now 
   return session
 }
 
-export async function createSession(stage: SessionStage, label: string, now = new Date()): Promise<string> {
+/** factorAt : second facteur déjà passé, pour une session ouverte directement par une clé. */
+export async function createSession(stage: SessionStage, label: string, now = new Date(), factorAt: Date | null = null): Promise<string> {
   const fp = passwordFingerprint()
   if (!fp) throw new Error('Identifiants absents')
   const token = newToken()
   await requirePool().query(
-    `INSERT INTO app.dashboard_session (token_hash, stage, password_fp, created_at, last_seen_at, expires_at, device_label)
-     VALUES ($1, $2, $3, $4, $4, $5, $6)`,
-    [tokenHash(token), stage, fp, now, new Date(now.getTime() + stageLifetimeMs(stage)), label],
+    `INSERT INTO app.dashboard_session (token_hash, stage, password_fp, created_at, last_seen_at, expires_at, device_label, factor_at)
+     VALUES ($1, $2, $3, $4, $4, $5, $6, $7)`,
+    [tokenHash(token), stage, fp, now, new Date(now.getTime() + stageLifetimeMs(stage)), label, factorAt],
   )
   await requirePool().query(`DELETE FROM app.dashboard_session WHERE expires_at < $1`, [now])
   return token
@@ -90,4 +91,23 @@ export async function takeChallenge(id: string, now = new Date()): Promise<strin
   const { challenge, challengeAt } = rows[0] ?? {}
   if (!challenge || !challengeAt || now.getTime() - challengeAt.getTime() > CHALLENGE_MS) return null
   return challenge
+}
+
+const MAX_DIRECT_CHALLENGES = 200
+
+/** Défi d'une connexion directe. Une rafale chasse les plus anciens : elle ne remplit jamais la table. */
+export async function saveDirectChallenge(challenge: string): Promise<void> {
+  const pool = requirePool()
+  await pool.query('INSERT INTO app.dashboard_challenge (challenge) VALUES ($1)', [challenge])
+  await pool.query(
+    `DELETE FROM app.dashboard_challenge WHERE created_at < now() - make_interval(secs => $1)
+       OR challenge NOT IN (SELECT challenge FROM app.dashboard_challenge ORDER BY created_at DESC LIMIT $2)`,
+    [CHALLENGE_MS / 1000, MAX_DIRECT_CHALLENGES],
+  )
+}
+
+/** Efface le défi d'un seul geste : vrai s'il existait, depuis moins de 5 minutes. */
+export async function takeDirectChallenge(challenge: string): Promise<boolean> {
+  const { rowCount } = await requirePool().query('DELETE FROM app.dashboard_challenge WHERE challenge = $1 AND created_at >= now() - make_interval(secs => $2)', [challenge, CHALLENGE_MS / 1000])
+  return rowCount === 1
 }
