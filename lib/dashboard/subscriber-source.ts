@@ -18,7 +18,7 @@ const LABELS: Record<string, string> = {
 }
 
 export function subscriberSourceLabel(source: string | null | undefined): string {
-  const raw = (source ?? '').trim()
+  const raw = (source ?? '').trim().replace(/^outil-/, '')
   if (!raw) return 'Non renseignée'
   if (Object.hasOwn(LABELS, raw)) return LABELS[raw]
   if (raw.startsWith('Résultat ')) return 'Résultat d’outil'

@@ -34,7 +34,7 @@ export function ContactToolbar({ filter, query, search, clear }: { filter: Conta
           autoComplete="off"
           autoCapitalize="none"
           spellCheck={false}
-          placeholder="Adresse ou nom du chien"
+          placeholder="Adresse ou chien"
           className="min-h-11 min-w-0 flex-1 rounded-pill border border-line-2 bg-paper px-4 text-base text-ink"
         />
         <button type="submit" className={`${btn} bg-ink text-cream`}>

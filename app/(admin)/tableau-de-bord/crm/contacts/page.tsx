@@ -38,7 +38,7 @@ export default async function ContactsPage(props: Props) {
       <CrmNav period={period.key} current="/contacts" />
       <ContactToolbar filter={filter} query={query} search={searchContacts} clear={clearContactSearch} />
       <p className="m-0 mt-3 text-xs text-ink-2">
-        {hits.length} {hits.length > 1 ? 'contacts' : 'contact'} sur {all.length}. Les adresses de test et la tienne sont retirées.
+        {hits.length} {hits.length > 1 ? 'contacts' : 'contact'} sur {all.length}. Seules les adresses de test déclarées sur le serveur sont retirées.
       </p>
       <section aria-label="Contacts" className="mt-2 rounded-card border border-line bg-paper px-4 py-1 md:px-5">
         <ContactList items={items} query={query} />
