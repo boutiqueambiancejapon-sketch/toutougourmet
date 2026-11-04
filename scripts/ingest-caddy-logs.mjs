@@ -12,6 +12,7 @@ import readline from 'node:readline'
 import pg from 'pg'
 import { aiReferrer, classifyUa, deviceOf } from './lib/bots.mjs'
 import { countryOf } from './lib/geo.mjs'
+import { buildStaticList, findFingerprint, isStaticIgnored, visitorKey } from './lib/analytics-ignore.mjs'
 
 const DRY = process.argv.includes('--dry')
 // Adresses gardées (ex. « www.toutou-gourmet.com,toutou-gourmet.com ») ; vide = toutes.
@@ -22,6 +23,33 @@ const RETENTION_DAYS = 180
 const STATIC = /^\/(_next\/|images\/|fonts\/|favicon|icons?\/|apple-touch|manifest|robots\.txt$|sitemap)|\.(js|css|map|png|jpe?g|webp|avif|gif|svg|ico|woff2?|txt|xml|json)$/i
 
 const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL || 'postgresql:///toutou?host=/var/run/postgresql', max: 2 })
+
+// @cdc mesure — visites à ne pas compter (scripts/lib/analytics-ignore.mjs). Le serveur et
+// ANALYTICS_IGNORED_IPS : toutes les requêtes, robots compris. Le propriétaire, par empreinte :
+// ses pages vues humaines. Les 20 dernières secondes du journal attendent le passage suivant : le
+// site a ainsi le temps de recevoir l'événement de la page et de poser l'empreinte d'une nouvelle adresse.
+const STATIC_IGNORED = buildStaticList()
+const SETTLE_DELAY = '-20s'
+let ownerRows = []
+const ownerSeen = new Map()
+
+function isOwnerIp(ip) {
+  const key = visitorKey(ip)
+  if (!key) return false
+  if (!ownerSeen.has(key)) ownerSeen.set(key, findFingerprint(ownerRows, ip) !== null)
+  return ownerSeen.get(key)
+}
+
+/** Table absente (SQL pas encore posé) : on ingère comme avant, seule la liste fixe s'applique. */
+async function loadOwnerRows() {
+  try {
+    if (!DRY) await pool.query('DELETE FROM analytics.ignored_ips WHERE expires_at <= now()')
+    const { rows } = await pool.query('SELECT salt, hash FROM analytics.ignored_ips WHERE expires_at > now()')
+    ownerRows = rows
+  } catch (err) {
+    console.error('[ingest] empreintes illisibles :', err.message)
+  }
+}
 
 function header(h, name) {
   const v = h?.[name] ?? h?.[name.toLowerCase()]
@@ -38,6 +66,8 @@ function toHit(entry) {
   const req = entry.request
   if (!req || !String(entry.logger || '').startsWith('http.log.access')) return null
   if (HOSTS.length && !HOSTS.includes(String(req.host || '').toLowerCase().split(':')[0])) return null
+  const clientIp = req.client_ip || req.remote_ip || null
+  if (isStaticIgnored(clientIp, STATIC_IGNORED)) return null
   const uri = req.uri || '/'
   const path = uri.split('?')[0].slice(0, 300)
   const ua = header(req.headers, 'User-Agent') || ''
@@ -49,8 +79,8 @@ function toHit(entry) {
     /prefetch/i.test(header(req.headers, 'Sec-Purpose') || header(req.headers, 'Purpose') || '') || /[?&]_rsc=/.test(uri)
   if (kind === 'human' && prefetch) return null
   if (String(req.host || '').startsWith('dashboard.')) return null
+  if (kind === 'human' && isOwnerIp(clientIp)) return null
   const refHost = hostOf(header(req.headers, 'Referer'))
-  const clientIp = req.client_ip || req.remote_ip || null
   return {
     ts: new Date(entry.ts * 1000).toISOString(),
     host: (req.host || '').slice(0, 100),
@@ -101,7 +131,8 @@ async function flush(rows, cursor) {
 async function main() {
   const { rows } = await pool.query('SELECT cursor FROM analytics.ingest_state WHERE source = $1', [SOURCE])
   const cursor = rows[0]?.cursor
-  const args = ['-u', 'caddy', '-o', 'json', '--no-pager', ...(cursor ? ['--after-cursor', cursor] : ['--since', '-7d'])]
+  await loadOwnerRows()
+  const args = ['-u', 'caddy', '-o', 'json', '--no-pager', '--until', SETTLE_DELAY, ...(cursor ? ['--after-cursor', cursor] : ['--since', '-7d'])]
   const jc = spawn('journalctl', args, { stdio: ['ignore', 'pipe', 'inherit'] })
   const rl = readline.createInterface({ input: jc.stdout })
 

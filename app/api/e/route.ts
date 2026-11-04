@@ -3,9 +3,10 @@ import { getPool } from '@/lib/server/db'
 import { BOT_UA, deviceOf, isAnalyticsEvent } from '@/lib/analytics-events'
 import { countryOf } from '@/lib/server/geo'
 import { clientIp } from '@/lib/server/rate-window'
+import { isIgnoredVisitor, OWNER_COOKIE } from '@/lib/server/analytics-ignore'
 
 // @cdc mesure — reçoit les actions des visiteurs (clic partenaire, outil, inscription, recherche)
-// et les range dans analytics.events. Aucun cookie, aucune IP stockée : seul le pays déduit
+// et les range dans analytics.events. Aucun cookie posé, aucune IP stockée : seul le pays déduit
 // de l'adresse (base locale, lib/server/geo.ts) est écrit. Répond toujours 204 :
 // la mesure ne doit jamais casser la page. Sans base (Vercel), ne fait rien.
 
@@ -68,6 +69,8 @@ export async function POST(req: NextRequest) {
 
   const ip = clientIp(req.headers)
   if (rateLimited(ip)) return done()
+  // @cdc mesure — propriétaire (cookie signé, empreinte de son adresse) et serveur : rien n'est écrit.
+  if (await isIgnoredVisitor(ip, req.cookies.get(OWNER_COOKIE)?.value)) return done()
 
   const text = await req.text()
   if (text.length > MAX_BODY) return done()

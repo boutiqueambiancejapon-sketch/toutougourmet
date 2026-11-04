@@ -176,3 +176,15 @@ CREATE TABLE IF NOT EXISTS analytics.email_optouts (
 );
 ALTER TABLE analytics.email_optouts OWNER TO toutou;
 GRANT SELECT, INSERT, DELETE ON analytics.email_optouts TO administrator;
+
+-- Visites à ne pas compter (lib/server/analytics-ignore.ts, scripts/ingest-caddy-logs.mjs) : adresses
+-- du moment du propriétaire, posées quand il s'identifie au tableau de bord ou que son cookie est vu
+-- sur le site. Empreinte SHA-256 salée ligne par ligne, jamais l'adresse (IPv6 : le /64). Valable
+-- 12 h, prolongée s'il reste actif ; les lignes expirées sont retirées par l'ingestion.
+CREATE TABLE IF NOT EXISTS analytics.ignored_ips (
+  hash       text PRIMARY KEY,
+  salt       text NOT NULL,
+  expires_at timestamptz NOT NULL
+);
+ALTER TABLE analytics.ignored_ips OWNER TO toutou;
+GRANT SELECT, INSERT, UPDATE, DELETE ON analytics.ignored_ips TO administrator;
