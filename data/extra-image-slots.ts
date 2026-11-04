@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-calendrier-avent-chien',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, attentive beagle sitting beside a large handmade wooden advent box with small open square compartments, a few of them showing small brown dog treats, a pine sprig on the side. The compartments carry no numbers and no writing. The dog is not eating.',
+    composition:
+      'Full frame, subject edge to edge, dog and box filling the whole width, no empty band, no outline drawn around the dog or the food, at most 6 to 8 small confetti, no text, no numbers, no humans.',
+    decorations: ['confetti', 'sparkle'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-04 pour l'article calendrier-avent-chien.",
+  },
+  {
     id: 'art-zinc-chien-carence-besoins-sources',
     group: 'articles',
     ratio: '3:2',
