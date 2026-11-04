@@ -15,6 +15,7 @@ export const SIGNUP_PLACES = {
   'article-croquettes': 'Fin d’article (croquettes)',
   'article-aliments': 'Fin d’article (aliments)',
   'tool-email': 'E-mail de résultat d’outil',
+  'email-j4': 'E-mail de bienvenue, jour 4',
 } as const
 
 export type SignupPlace = keyof typeof SIGNUP_PLACES

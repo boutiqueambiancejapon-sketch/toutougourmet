@@ -5,7 +5,7 @@
 // Usage : DATABASE_URL='postgresql:///toutou?host=/var/run/postgresql' node scripts/purge-unverified.mjs [--dry] [--days=30]
 
 import pg from 'pg'
-import { purgeUnverifiedUsers, UNVERIFIED_RETENTION_DAYS } from './lib/purge-unverified.mjs'
+import { EMAIL_LOG_RETENTION_MONTHS, purgeEmailHistory, purgeUnverifiedUsers, UNVERIFIED_RETENTION_DAYS } from './lib/purge-unverified.mjs'
 
 const url = process.env.DATABASE_URL
 if (!url) {
@@ -22,6 +22,8 @@ try {
   const result = await purgeUnverifiedUsers(pool, { days, dry })
   const verb = dry ? 'à supprimer' : 'supprimés'
   console.log(`[purge] ${verb} : ${result.users} compte(s) non confirmé(s) depuis plus de ${days} jours, ${result.verifications} jeton(s) et ${result.sessions} session(s) expirés`)
+  const history = await purgeEmailHistory(pool, { dry })
+  console.log(`[purge] ${verb} : ${history} ligne(s) d'historique d'envois de plus de ${EMAIL_LOG_RETENTION_MONTHS} mois`)
 } catch (err) {
   console.error('[purge] échec', err instanceof Error ? err.message : err)
   process.exitCode = 1

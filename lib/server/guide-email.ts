@@ -1,8 +1,8 @@
-import { createHmac } from 'node:crypto'
 import { guideEmail } from '@/lib/emails/guide'
 import { unsubscribeUrlFromEnv } from '@/lib/emails/unsubscribe'
 import { bookSummary } from '@/lib/guide/book'
 import { getPool } from './db'
+import { emailHash, emailHashSecret } from './email-hash'
 import { sendTransactionalEmail } from './mailer'
 import { overLimit } from './rate-window'
 
@@ -24,11 +24,6 @@ const SITE_WIDE = [
 const sentInMemory = new Set<string>()
 const inFlight = new Set<string>()
 
-function emailKey(email: string): string {
-  const secret = process.env.NEWSLETTER_SECRET || process.env.BETTER_AUTH_SECRET || 'toutou-guide'
-  return createHmac('sha256', secret).update(email).digest('hex')
-}
-
 /** Réserve l'envoi pour cette adresse. false : déjà envoyé. */
 async function claim(key: string): Promise<boolean> {
   const pool = getPool()
@@ -49,7 +44,7 @@ async function release(key: string): Promise<void> {
 
 export async function sendGuideOnce(rawEmail: string, ip: string): Promise<GuideMailResult> {
   const email = rawEmail.trim().toLowerCase()
-  const key = emailKey(email)
+  const key = emailHash(email, emailHashSecret())
   if (inFlight.has(key)) return 'already'
   if (overLimit(`guide-mail:${ip}`, PER_IP) || overLimit('guide-mail:site', SITE_WIDE)) {
     console.warn('[guide] e-mail non envoyé : limite de débit atteinte')
@@ -67,6 +62,7 @@ export async function sendGuideOnce(rawEmail: string, ip: string): Promise<Guide
       to: email,
       ...mail,
       headers: unsubscribeUrl ? { 'List-Unsubscribe': `<${unsubscribeUrl}>` } : undefined,
+      kind: 'guide',
       tags: ['guide'],
     })
     return 'sent'

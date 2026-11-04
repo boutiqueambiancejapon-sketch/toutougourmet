@@ -37,7 +37,7 @@ export async function sendWelcomeOnce(rawEmail: string): Promise<WelcomeResult> 
     if (sent !== false) return sent === true ? 'already' : 'error'
     await markWelcomeSent(email)
     const mail = welcomeEmail(unsubscribe)
-    await sendTransactionalEmail({ to: email, ...mail, headers: listUnsubscribeHeaders(unsubscribe), tags: ['lettre-bienvenue'] })
+    await sendTransactionalEmail({ to: email, ...mail, headers: listUnsubscribeHeaders(unsubscribe), kind: 'bienvenue', tags: ['lettre-bienvenue'] })
     return 'sent'
   } catch (err) {
     console.error('[newsletter] bienvenue non envoyée', err instanceof Error ? err.message : err)
@@ -84,6 +84,7 @@ export async function sendTestEmail(kind: TestKind, date: Date): Promise<'ok' | 
       html: mail.html,
       text: mail.text,
       headers: listUnsubscribeHeaders(unsubscribe),
+      kind: 'test',
       tags: ['lettre-test'],
     })
     return 'ok'

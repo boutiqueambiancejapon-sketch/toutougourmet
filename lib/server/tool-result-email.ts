@@ -40,6 +40,7 @@ export async function sendToolResultEmail(email: string, result: ToolResultText)
     to: email,
     ...mail,
     headers: unsubscribeUrl ? { 'List-Unsubscribe': `<${unsubscribeUrl}>` } : undefined,
+    kind: 'outil',
     tags: ['outil'],
   })
 }

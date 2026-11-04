@@ -193,14 +193,23 @@ Arrêt : `sudo systemctl disable --now toutou-newsletter.timer`.
 
 ### Suite de bienvenue (préparée, non activée)
 
-Trois e-mails après celui du jour 0 : J2 « Calcule la ration de ton chien », J5 l'offre partenaire du mois (même carte et même rotation que la lettre mensuelle, remise de `data/partner-discounts.ts`, lien vers `/codes-promo/{marque}`), J10 le scanner. Gabarits : `lib/emails/welcome-sequence.ts` ; logique : `lib/server/welcome-sequence.ts` ; aperçus et tests : `/tableau-de-bord/emails/suite/j2`, `/j5`, `/j10`.
+Trois e-mails après celui du jour 0 : J2 « Calcule la ration de ton chien », J7 l'offre partenaire du mois (code interne `j5`, gardé pour les lignes déjà écrites, les liens et les étiquettes ; même carte et même rotation que la lettre mensuelle, remise de `data/partner-discounts.ts`, lien vers `/codes-promo/{marque}`), J10 le scanner. Gabarits : `lib/emails/welcome-sequence.ts` ; logique : `lib/server/welcome-sequence.ts` ; aperçus et tests : `/tableau-de-bord/emails/suite/j2`, `/j5`, `/j10`.
+
+**Rappels de compte (désactivés, textes à valider)** : `compte-j4` (inscrit sans compte, sauté s'il en a un), `chien-j1` et `chien-j4` (compte confirmé sans chien, sautés dès qu'un chien est ajouté, puis plus rien). Gabarits : `lib/emails/account-reminders.ts` ; aperçus : `/tableau-de-bord/emails/relances/compte-j4`, `/chien-j1`, `/chien-j4`. Rien ne part sans `ACCOUNT_REMINDERS_ENABLED=1`, en plus des deux variables ci-dessous ; la mention de `/compte/inscription` change alors toute seule.
+
+Un compte confirmé ne reçoit pas J2, J7 ni J10 : l'inscription au compte n'a pas de case pour la lettre, il ne reçoit que les rappels de son compte. Un compte dont l'adresse n'est pas confirmée ne reçoit aucun rappel : il ne peut pas se connecter (`requireEmailVerification`).
 
 `scripts/welcome-sequence.ts` tourne chaque jour à 10 h 17 (heure de Paris). Il lit les contacts de la liste `BREVO_LIST_ID` et leur date de création dans Brevo (jour d'inscription, à Paris), puis envoie à chacun l'étape due :
 
 - seulement aux contacts inscrits le jour `WELCOME_SEQUENCE_START` ou après (les abonnés plus anciens ne reçoivent rien, une réinscription garde la date du premier contact) ;
 - une fois par étape et par adresse : trace dans `analytics.welcome_sends` (empreinte HMAC de l'adresse avec `NEWSLETTER_SECRET`, jamais l'adresse), posée avant l'envoi, retirée si Brevo refuse ;
-- une étape manquée peut partir jusqu'à 3 jours en retard ; jamais une étape plus ancienne qu'une étape déjà envoyée ; un seul e-mail par contact et par jour ;
+- une étape manquée peut partir jusqu'à 3 jours en retard ; jamais une étape plus ancienne qu'une étape déjà envoyée ; un seul e-mail par adresse et par jour, y compris après un guide, une bienvenue ou un résultat d'outil déjà partis ce jour-là (reporté au lendemain) ; rien le premier mardi du mois, jour de la lettre (la suite reprend le lendemain). Un J0 demandé après 10 h 17 peut encore tomber le même jour qu'une étape : il répond à une demande, il n'est pas retenu ;
+- adresse désinscrite exclue : liste Brevo (liste noire ou `listUnsubscribed`), `analytics.email_optouts` (notre lien, y compris pour un compte hors liste), et lecture du contact Brevo juste avant chaque rappel `chien-*` ;
 - au plus 300 envois par jour ; contacts en liste noire Brevo ignorés ; journal sans adresse (repère `#empreinte`).
+
+### Journal des envois
+
+Chaque e-mail individuel passant par `lib/server/mailer.ts` (guide, bienvenue, suite, rappels, résultat d'outil, compte, tests, résumé hebdomadaire) écrit une ligne dans `analytics.email_log` : empreinte HMAC, type, sujet, état (`sent`, `failed`, `simulated` avec `MAIL_LOG_ONLY`), date. L'écriture part en arrière-plan : table absente ou base lente ne bloquent aucun envoi, l'erreur va au journal avec son code seul. Vue : Conversions, « Voir les adresses inscrites », onglet Envois (recherche et export CSV). La lettre mensuelle part en campagne Brevo : pas de ligne par adresse. Conservation : `toutou-purge` retire `email_log`, `guide_sends` et `welcome_sends` après 24 mois ; `email_optouts` reste.
 
 Pas de double envoi avec le jour 0 : l'inscription par le guide reçoit l'e-mail du guide **à la place** de la bienvenue (`app/api/contact/route.ts` s'arrête après le guide), la suite commence au jour 2 et ses traces sont à part (`welcome_sends`, pas `guide_sends` ni `WELCOME_SENT`). Un lecteur qui se désinscrit sort de la liste 5 : le script ne le voit plus.
 

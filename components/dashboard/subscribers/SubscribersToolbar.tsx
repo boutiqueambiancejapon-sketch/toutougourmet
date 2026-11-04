@@ -17,6 +17,7 @@ interface ToolbarProps {
 const LISTS: { kind: ListKind; label: string }[] = [
   { kind: 'lettre', label: 'Lettre' },
   { kind: 'comptes', label: 'Comptes' },
+  { kind: 'envois', label: 'Envois' },
 ]
 
 const btn = 'inline-flex min-h-11 shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-pill px-3 text-sm font-semibold'
@@ -31,7 +32,7 @@ export function SubscribersToolbar({ list, query, search, clear }: ToolbarProps)
               key={l.kind}
               href={listHref(l.kind)}
               aria-current={l.kind === list ? 'page' : undefined}
-              className={`${btn} min-w-24 no-underline ${l.kind === list ? 'bg-ink text-cream' : 'text-ink-2 hover:text-ink'}`}
+              className={`${btn} min-w-20 no-underline ${l.kind === list ? 'bg-ink text-cream' : 'text-ink-2 hover:text-ink'}`}
             >
               {l.label}
             </Link>

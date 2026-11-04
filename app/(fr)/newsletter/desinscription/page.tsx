@@ -44,7 +44,7 @@ export default async function UnsubscribePage({ searchParams }: PageProps) {
       )}
       {valid && state === 'fait' && (
         <p role="status" className="rounded-box border border-line bg-green-bg px-4 py-3 text-green-ink">
-          C&apos;est fait : {email} ne recevra plus la lettre de Toutou Gourmet.
+          C&apos;est fait : {email} ne recevra plus la lettre ni les rappels de Toutou Gourmet.
         </p>
       )}
       {valid && state === 'erreur' && (
@@ -54,7 +54,10 @@ export default async function UnsubscribePage({ searchParams }: PageProps) {
       )}
       {valid && state !== 'fait' && (
         <form action={unsubscribe} className="flex flex-col items-start gap-4">
-          <p className="text-ink-2">L&apos;adresse {email} ne recevra plus la lettre mensuelle ni les offres partenaires.</p>
+          <p className="text-ink-2">
+            L&apos;adresse {email} ne recevra plus la lettre mensuelle, les offres partenaires ni les rappels. Si tu as un compte, les e-mails de
+            connexion et de mot de passe continuent.
+          </p>
           <input type="hidden" name="e" value={email} />
           <input type="hidden" name="t" value={token} />
           <button type="submit" className="min-h-12 rounded-control bg-orange px-5 font-semibold text-ink hover:underline">

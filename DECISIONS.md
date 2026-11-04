@@ -187,3 +187,11 @@ Mise à jour approuvée par le propriétaire pour fermer les avis de sécurité 
 
 ## 2026-11-04 : articles Toutou plus courts, plus vivants, moins chiffrés
 Décision du propriétaire : les lecteurs veulent la réponse vite et se divertir. Priorité au langage courant et aux conseils pratiques (règle en tête de `docs/09-seo-geo-guide.md`, du skill boileau et des consignes de nuit). Exception : sécurité, urgence et maladie restent exactes et sérieuses. Effet à surveiller : moins de chiffres peut réduire les reprises par les moteurs d'IA, à regarder dans Search Console.
+## 2026-11-04 — Suivi des e-mails et calendrier (branche `feat/email-tracking`)
+- `analytics.email_log` garde empreinte HMAC, type, sujet, état et date de chaque e-mail individuel, jamais l'adresse. Résolution à l'affichage en calculant le HMAC des adresses connues. Écriture en arrière-plan depuis `lib/server/mailer.ts`, pour qu'elle ne retarde aucun envoi. Conservation 24 mois (`toutou-purge`, avec `guide_sends` et `welcome_sends`).
+- La lettre mensuelle part en campagne Brevo : pas de ligne par adresse, la vue le dit.
+- L'offre passe de J5 à J7 en gardant le code `j5` : les lignes écrites restent valables, sans réécriture ni double envoi.
+- Trois rappels (`compte-j4`, `chien-j1`, `chien-j4`) coupés par défaut, `ACCOUNT_REMINDERS_ENABLED=1` après validation des textes par le propriétaire.
+- L'inscription au compte n'a aucune case pour la lettre : un compte confirmé ne reçoit que les rappels de son compte, même s'il figure aussi sur la liste. Il garde la lettre mensuelle tant qu'il reste sur la liste Brevo.
+- `analytics.email_optouts` note chaque clic sur « Se désinscrire » : un compte hors liste Brevo n'y serait sinon pas exclu. Empreinte gardée sans limite de durée. Une réinscription par formulaire rend la lettre, pas la suite ni les rappels.
+- Pas de suite le premier mardi du mois, jour de la lettre : plafond d'un e-mail par jour.

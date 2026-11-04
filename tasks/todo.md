@@ -169,7 +169,7 @@ Rapport hors dépôt : `~/audits/audit-partenaires-2026-11-04.md`.
 
 ## Suivi des e-mails et nouvelles relances (2026-11-04)
 
-- [ ] Journal des envois et vue « qui reçoit quoi et quand » dans le tableau de bord
-- [ ] Calendrier sans compte : J0, J2 ration, J4 compte, J7 offre, J10 scanner
-- [ ] Compte sans chien : J1 et J4, arrêt dès qu'un chien est ajouté
+- [x] Journal des envois et vue « qui reçoit quoi et quand » dans le tableau de bord (branche `feat/email-tracking`)
+- [x] Calendrier sans compte : J0, J2 ration, J4 compte, J7 offre, J10 scanner
+- [x] Compte sans chien : J1 et J4, arrêt dès qu'un chien est ajouté
 - [ ] Textes et aperçus montrés au propriétaire avant tout envoi des nouveaux e-mails

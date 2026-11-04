@@ -4,26 +4,30 @@ import { getPromoPage, promoPath } from '@/data/promo-codes'
 import { FREE_MONTHLY_SCANS } from '@/lib/scanner/config'
 import { button, divider, heading, label, linkItem, paragraph, renderEmail, siteUrl, smallPrint, type RenderedEmail } from './layout'
 import { offerForMonth } from './monthly'
+import { accountRemindersEnabled } from './account-reminders'
 import { offerCard } from './offer-card'
 
 // @cdc e-mails — suite de bienvenue, après l'e-mail du jour 0 (bienvenue ou guide) : J2 la
-// ration, J5 l'offre partenaire du moment (même carte que la lettre, remise de
-// data/partner-discounts.ts), J10 le scanner. Envoyée par scripts/welcome-sequence.ts, une fois
-// par étape et par adresse. Même ton que lib/emails/welcome.ts (tutoiement, phrases courtes).
+// ration, J7 l'offre partenaire du moment (code interne j5 : les lignes déjà écrites en base et
+// les liens gardent ce nom ; même carte que la lettre, remise de data/partner-discounts.ts), J10
+// le scanner. Envoyée par scripts/welcome-sequence.ts, une fois par étape et par adresse. Même ton
+// que lib/emails/welcome.ts (tutoiement, phrases courtes). Rappels de compte : account-reminders.ts.
 
 export const WELCOME_STEPS = ['j2', 'j5', 'j10'] as const
 export type WelcomeStep = (typeof WELCOME_STEPS)[number]
 
 /** Jour d'envoi de chaque étape, compté depuis l'inscription (jour 0). */
-export const STEP_DAY: Record<WelcomeStep, number> = { j2: 2, j5: 5, j10: 10 }
+export const STEP_DAY: Record<WelcomeStep, number> = { j2: 2, j5: 7, j10: 10 }
 
 export const STEP_LABEL: Record<WelcomeStep, string> = {
   j2: 'Jour 2 : la ration',
-  j5: "Jour 5 : l'offre du moment",
+  j5: "Jour 7 : l'offre du moment",
   j10: 'Jour 10 : le scanner',
 }
 
-const REASON = "Tu reçois cet e-mail parce que tu t'es inscrit à la lettre de Toutou Gourmet (3 e-mails de bienvenue, puis un par mois)."
+/** Pied des e-mails : avec le rappel J4 activé, la suite compte 4 e-mails pour un inscrit sans compte. */
+const reason = (): string =>
+  `Tu reçois cet e-mail parce que tu t'es inscrit à la lettre de Toutou Gourmet (${accountRemindersEnabled() ? "les e-mails de bienvenue, sur dix jours" : '3 e-mails de bienvenue'}, puis un par mois).`
 
 export function rationEmail(unsubscribeUrl: string): RenderedEmail {
   return renderEmail({
@@ -41,11 +45,11 @@ export function rationEmail(unsubscribeUrl: string): RenderedEmail {
       paragraph("L'équipe Toutou Gourmet"),
     ],
     unsubscribeUrl,
-    reason: REASON,
+    reason: reason(),
   })
 }
 
-/** Offre de l'étape J5 : celle du mois suivant, pour ne pas répéter la lettre mensuelle. */
+/** Offre de l'étape J7 (code j5) : celle du mois suivant, pour ne pas répéter la lettre mensuelle. */
 export function offerSlugFor(date: Date): OfferSlug {
   return offerForMonth(new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, 1)))
 }
@@ -70,7 +74,7 @@ export function offerEmail(unsubscribeUrl: string, date: Date): RenderedEmail {
       paragraph("L'équipe Toutou Gourmet"),
     ],
     unsubscribeUrl,
-    reason: REASON,
+    reason: reason(),
   })
 }
 
@@ -92,7 +96,7 @@ export function scannerEmail(unsubscribeUrl: string): RenderedEmail {
       paragraph("L'équipe Toutou Gourmet"),
     ],
     unsubscribeUrl,
-    reason: REASON,
+    reason: reason(),
   })
 }
 

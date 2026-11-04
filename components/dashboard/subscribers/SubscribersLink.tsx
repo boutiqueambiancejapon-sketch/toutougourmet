@@ -13,7 +13,7 @@ export function SubscribersLink() {
       <IconMail className="size-5 text-orange-ink" />
       <span className="min-w-0 flex-1">
         <span className="block font-semibold">Voir les adresses inscrites</span>
-        <span className="block text-xs text-ink-2">Lettre (Brevo) et comptes du site, avec recherche et export CSV</span>
+        <span className="block text-xs text-ink-2">Lettre (Brevo), comptes du site et e-mails reçus par chacun, avec recherche et export CSV</span>
       </span>
       <IconChevron className="size-4 text-ink-2" />
     </Link>

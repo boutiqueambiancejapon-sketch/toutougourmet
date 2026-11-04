@@ -2,6 +2,7 @@
 
 import { redirect } from 'next/navigation'
 import { assertDashboardAction as assertDashboard } from '@/lib/dashboard/guard'
+import { REMINDER_STEPS, reminderEmail, type ReminderStep } from '@/lib/emails/account-reminders'
 import { nextFirstTuesday, parisDate, sendInstant } from '@/lib/emails/schedule'
 import { unsubscribeUrlFromEnv } from '@/lib/emails/unsubscribe'
 import { weeklyDigestEmail } from '@/lib/emails/weekly'
@@ -42,7 +43,7 @@ export async function sendWeeklyTest(): Promise<void> {
   if (pool && to && process.env.BREVO_API_KEY && process.env.BREVO_SENDER_EMAIL) {
     try {
       const mail = weeklyDigestEmail(await getWeeklyDigestData(pool, lastWeekStart(new Date())))
-      await sendTransactionalEmail({ to, subject: `[Test] ${mail.subject}`, html: mail.html, text: mail.text, tags: ['interne'] })
+      await sendTransactionalEmail({ to, subject: `[Test] ${mail.subject}`, html: mail.html, text: mail.text, kind: 'test', tags: ['interne'] })
       result = 'ok'
     } catch (err) {
       console.error('[hebdo] test non envoyé', err instanceof Error ? err.message : err)
@@ -68,6 +69,7 @@ export async function sendWelcomeStepTest(step: WelcomeStep): Promise<void> {
         html: mail.html,
         text: mail.text,
         headers: { 'List-Unsubscribe': `<${unsubscribe}>` },
+        kind: 'test',
         tags: ['lettre-test'],
       })
       result = 'ok'
@@ -77,4 +79,32 @@ export async function sendWelcomeStepTest(step: WelcomeStep): Promise<void> {
     }
   }
   redirect(`/tableau-de-bord/emails/suite/${step}?test=${result}`)
+}
+
+/** Test d'un rappel de compte vers NEWSLETTER_TEST_EMAIL, possible même rappels désactivés. */
+export async function sendReminderTest(step: ReminderStep): Promise<void> {
+  await assertDashboard()
+  if (!REMINDER_STEPS.includes(step)) redirect('/tableau-de-bord/emails')
+  const to = process.env.NEWSLETTER_TEST_EMAIL
+  const unsubscribe = to ? unsubscribeUrlFromEnv(to) : null
+  let result = 'config'
+  if (to && unsubscribe && newsletterMailConfigured()) {
+    try {
+      const mail = reminderEmail(step, unsubscribe)
+      await sendTransactionalEmail({
+        to,
+        subject: `[Test] ${mail.subject}`,
+        html: mail.html,
+        text: mail.text,
+        headers: { 'List-Unsubscribe': `<${unsubscribe}>` },
+        kind: 'test',
+        tags: ['lettre-test'],
+      })
+      result = 'ok'
+    } catch (err) {
+      console.error('[rappels] test non envoyé', err instanceof Error ? err.message : err)
+      result = 'error'
+    }
+  }
+  redirect(`/tableau-de-bord/emails/relances/${step}?test=${result}`)
 }

@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import { AccountCard, AccountPage, safeReturnPath } from '@/components/compte/AccountPage'
 import { SignUpBenefits, signUpTitle } from '@/components/compte/SignUpBenefits'
 import { SignUpForm } from '@/components/compte/SignUpForm'
+import { accountRemindersEnabled } from '@/lib/emails/account-reminders'
 import { getSessionUser } from '@/lib/server/auth'
 
 export const metadata: Metadata = {
@@ -19,7 +20,9 @@ export default async function SignUpPage({ searchParams }: { searchParams: Promi
         <SignUpForm returnTo={returnTo} />
       </AccountCard>
       <p className="m-0 text-sm leading-relaxed text-ink-2">
-        Ton e-mail sert à te connecter et à retrouver ton mot de passe. On ne le transmet à personne.
+        {accountRemindersEnabled()
+          ? 'Ton e-mail sert à te connecter, à retrouver ton mot de passe et à deux rappels au plus si ton compte reste sans chien. On ne le transmet à personne.'
+          : 'Ton e-mail sert à te connecter et à retrouver ton mot de passe. On ne le transmet à personne.'}
       </p>
     </AccountPage>
   )

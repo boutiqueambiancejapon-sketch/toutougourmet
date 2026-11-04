@@ -1,12 +1,13 @@
-# Suite de bienvenue (scripts/welcome-sequence.ts) : J2 la ration, J5 l'offre du moment, J10 le
-# scanner, une fois par étape et par adresse (analytics.welcome_sends), aux contacts de la liste
-# Brevo inscrits depuis WELCOME_SEQUENCE_START. Rien ne part sans WELCOME_EMAIL_ENABLED=1 et
+# Suite de bienvenue (scripts/welcome-sequence.ts) : J2 la ration, J7 l'offre du moment (code j5),
+# J10 le scanner, une fois par étape et par adresse (analytics.welcome_sends), aux contacts de la
+# liste Brevo inscrits depuis WELCOME_SEQUENCE_START, plus les 3 rappels de compte si
+# ACCOUNT_REMINDERS_ENABLED=1. Rien ne part sans WELCOME_EMAIL_ENABLED=1 et
 # WELCOME_SEQUENCE_START. Au plus 300 envois par jour.
 # NON INSTALLÉ : voir deploy/README.md, section « Suite de bienvenue ».
 # Tant que le site tourne depuis la préversion : adapter User= et WorkingDirectory= comme dans
 # toutou-ingest.service.
 [Unit]
-Description=Toutou Gourmet - suite de bienvenue (J2, J5, J10)
+Description=Toutou Gourmet - suite de bienvenue (J2, J7, J10) et rappels de compte
 After=network-online.target postgresql.service
 Wants=network-online.target
 

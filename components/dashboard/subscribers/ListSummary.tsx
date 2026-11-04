@@ -6,8 +6,8 @@ interface SummaryProps {
   total: number
   matched: number
   query: string
-  /** « inscrit » ou « compte » : mis au pluriel selon le nombre. */
-  noun: 'inscrit' | 'compte'
+  /** Mis au pluriel selon le nombre. */
+  noun: 'inscrit' | 'compte' | 'adresse'
   source: string
 }
 

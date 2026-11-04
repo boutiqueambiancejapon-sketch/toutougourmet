@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS analytics.guide_sends (
 ALTER TABLE analytics.guide_sends OWNER TO toutou;
 GRANT SELECT, INSERT, DELETE ON analytics.guide_sends TO administrator;
 
--- Suite de bienvenue (J2, J5, J10) : une ligne par étape partie et par adresse
+-- Suite de bienvenue (J2, J7 sous le code j5, J10, rappels plus bas) : une ligne par étape partie et par adresse
 -- (scripts/welcome-sequence.ts). Empreinte HMAC-SHA256 de l'adresse en minuscules, même calcul que
 -- guide_sends, jamais l'adresse elle-même. Posée avant l'envoi, retirée si l'envoi échoue.
 CREATE TABLE IF NOT EXISTS analytics.welcome_sends (
@@ -140,3 +140,39 @@ CREATE TABLE IF NOT EXISTS analytics.welcome_sends (
 CREATE INDEX IF NOT EXISTS welcome_sends_sent_at_idx ON analytics.welcome_sends (sent_at);
 ALTER TABLE analytics.welcome_sends OWNER TO toutou;
 GRANT SELECT, INSERT, DELETE ON analytics.welcome_sends TO administrator;
+
+-- Nouvelles étapes de la suite : compte-j4 (créer un compte), chien-j1 et chien-j4 (ajouter son
+-- chien). Le code j5 reste celui de l'offre, partie au jour 7 depuis le 2026-11 : aucune ligne à
+-- réécrire, une adresse qui a déjà reçu j5 ne le reçoit pas une seconde fois.
+ALTER TABLE analytics.welcome_sends DROP CONSTRAINT IF EXISTS welcome_sends_step_check;
+ALTER TABLE analytics.welcome_sends ADD CONSTRAINT welcome_sends_step_check
+  CHECK (step IN ('j2', 'j5', 'j10', 'compte-j4', 'chien-j1', 'chien-j4'));
+
+-- Journal des e-mails individuels (lib/server/email-log.ts) : qui a reçu quoi et quand, vu dans le
+-- tableau de bord (Conversions, Adresses inscrites, Envois). Empreinte HMAC-SHA256 de l'adresse en
+-- minuscules, même calcul que guide_sends, jamais l'adresse : une fois le contact supprimé, plus
+-- rien dans la base ne relie ces lignes à une adresse en clair. Purge après 24 mois (toutou-purge).
+-- state : sent | failed | simulated (MAIL_LOG_ONLY, rien n'est parti).
+CREATE TABLE IF NOT EXISTS analytics.email_log (
+  id         bigserial PRIMARY KEY,
+  email_hash text NOT NULL,
+  kind       text NOT NULL,
+  subject    text NOT NULL,
+  state      text NOT NULL CHECK (state IN ('sent', 'failed', 'simulated')),
+  sent_at    timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS email_log_hash_sent_at_idx ON analytics.email_log (email_hash, sent_at DESC);
+CREATE INDEX IF NOT EXISTS email_log_sent_at_idx ON analytics.email_log (sent_at);
+ALTER TABLE analytics.email_log OWNER TO toutou;
+GRANT SELECT, INSERT, DELETE ON analytics.email_log TO administrator;
+GRANT USAGE ON SEQUENCE analytics.email_log_id_seq TO administrator;
+
+-- Désinscriptions faites par notre lien (lib/server/email-optouts.ts) : une adresse présente ici
+-- ne reçoit plus ni la suite ni les rappels de compte, même sans figurer dans la liste Brevo.
+-- Empreinte seulement, gardée sans limite de durée : elle prouve l'opposition et la fait respecter.
+CREATE TABLE IF NOT EXISTS analytics.email_optouts (
+  email_hash text PRIMARY KEY,
+  created_at timestamptz NOT NULL DEFAULT now()
+);
+ALTER TABLE analytics.email_optouts OWNER TO toutou;
+GRANT SELECT, INSERT, DELETE ON analytics.email_optouts TO administrator;
