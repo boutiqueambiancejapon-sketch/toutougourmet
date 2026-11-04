@@ -254,3 +254,7 @@ Une session regroupe les actions d'une même empreinte du jour, sans pause de pl
 ## 2026-11-04 : Connexion directe par Face ID
 
 Décision du propriétaire : Face ID sans mot de passe sur son iPhone. Une clé d'accès avec vérification de l'utilisateur vaut deux preuves (l'appareil, le visage ou le code de l'iPhone) et résiste au hameçonnage. Le mot de passe reste en secours, toujours suivi d'un second facteur ; le TOTP et les codes de secours ne s'utilisent jamais sans lui. Les défis vivent dans `app.dashboard_challenge`, à usage unique, 5 minutes, 200 au plus : aucune session n'existe encore à ce stade, et une session d'attente aurait ouvert le code de secours sans mot de passe. Conséquence : qui connaît le code de l'iPhone, ou un autre appareil du même trousseau iCloud, peut ouvrir le tableau de bord.
+
+## 2026-11-04 : Plafond de note et comparaison par catégorie
+
+Décision du propriétaire : 90 ou plus est réservé aux étiquettes qui déclarent calcium et phosphore, et une note se compare dans sa catégorie. Les 23 pâtées notées 90 ou plus n'indiquaient ni l'un ni l'autre, et la médiane des pâtées (96) dépassait de loin celle des croquettes (61).

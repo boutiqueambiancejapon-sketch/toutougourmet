@@ -6,12 +6,14 @@ import type { ExtractedLabel } from './types'
 // source sont décrits dans docs/v2/scanner-score.md : toute modification du barème change
 // SCORE_VERSION (les analyses en cache sont alors recalculées à la lecture).
 
-export const SCORE_VERSION = '1.4'
+export const SCORE_VERSION = '1.5'
 
 /** Humidité retenue pour des croquettes qui ne la déclarent pas (règlement UE 767/2009 : mention obligatoire au-delà de 14 %). */
 export const ASSUMED_DRY_MOISTURE = 10
 /** En dessous de ce total de points évaluables, pas de note : trop d'informations manquent. */
 export const MIN_EVALUATED_POINTS = 60
+/** Note maximale d'un aliment complet qui ne déclare pas à la fois calcium et phosphore. */
+export const CAP_WITHOUT_MINERALS = 89
 
 export type CriterionId =
   | 'proteines'
@@ -222,6 +224,10 @@ export function scoreLabel(label: ExtractedLabel): ScoreResult {
   else {
     const max = evaluated.reduce((s, c) => s + c.max, 0)
     score = Math.round((evaluated.reduce((s, c) => s + (c.points ?? 0), 0) / max) * 100)
+    if (score > CAP_WITHOUT_MINERALS && (a.calcium === null || a.phosphore === null)) {
+      score = CAP_WITHOUT_MINERALS
+      assumptions.push(`Calcium et phosphore ne sont pas déclarés tous les deux : la note est plafonnée à ${CAP_WITHOUT_MINERALS}. Au-delà, l'étiquette doit être complète.`)
+    }
   }
   return {
     version: SCORE_VERSION,

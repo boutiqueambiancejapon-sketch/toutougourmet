@@ -95,9 +95,10 @@ function pick(pool: ListFiche[], direction: 1 | -1): ListFiche[] {
   return capPerBrand(ordered).slice(0, RANKING_SIZE).sort(byScore)
 }
 
-const rankingPool = (items: ListFiche[], kind: ProductKind) => items.filter((f) => f.kind === kind && isValidated(f) && f.complete && f.score !== null)
+const rankingPool = (items: ListFiche[], kind: ProductKind, noun?: FoodNoun) => items.filter((f) => f.kind === kind && (!noun || f.noun === noun) && isValidated(f) && f.complete && f.score !== null)
 
-export const topFiches = (items: ListFiche[], kind: ProductKind): ListFiche[] => pick(rankingPool(items, kind), -1)
+/** noun : catégorie du classement. Une pâtée et des croquettes ne se comparent pas : l'eau change le calcul. */
+export const topFiches = (items: ListFiche[], kind: ProductKind, noun?: FoodNoun): ListFiche[] => pick(rankingPool(items, kind, noun), -1)
 
 /**
  * Aliment thérapeutique ou prescrit : sa composition répond à une maladie (peu de protéines pour le
@@ -107,9 +108,9 @@ export const topFiches = (items: ListFiche[], kind: ProductKind): ListFiche[] =>
 const THERAPEUTIC = /\b(hepatic|renal|urinary|gastro|hypoallergenic|anallergenic|satiety|veterinar\w*|prescription|derma\w*|cardiac|diabetic|metabolic|[a-z]\/d)\b/i
 export const isTherapeutic = (f: Pick<ListFiche, 'brand' | 'product'>): boolean => THERAPEUTIC.test(`${f.brand ?? ''} ${f.product ?? ''}`)
 
-export const lowFiches = (items: ListFiche[], kind: ProductKind): ListFiche[] =>
+export const lowFiches = (items: ListFiche[], kind: ProductKind, noun?: FoodNoun): ListFiche[] =>
   pick(
-    rankingPool(items, kind).filter((f) => (f.score ?? 100) < LOW_SCORE_BELOW && !isTherapeutic(f)),
+    rankingPool(items, kind, noun).filter((f) => (f.score ?? 100) < LOW_SCORE_BELOW && !isTherapeutic(f)),
     1,
   )
 

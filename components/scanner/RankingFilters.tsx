@@ -7,9 +7,10 @@ import { BAND_FILTERS } from '@/lib/scanner/seo'
 
 const select = 'min-h-12 w-full rounded-control border-2 border-ink bg-paper px-3 text-base text-ink outline-none focus-visible:ring-4 focus-visible:ring-amber'
 
-export function RankingFilters({ brands, brand, band, base }: { brands: { slug: string; name: string }[]; brand: string; band: Band | null; base: string }) {
+export function RankingFilters({ brands, brand, band, base, category = '' }: { brands: { slug: string; name: string }[]; brand: string; band: Band | null; base: string; category?: string }) {
   return (
     <form method="get" action={base} aria-label="Filtrer le classement" className="grid grid-cols-2 items-end gap-3 sm:grid-cols-[1fr_1fr_auto]">
+      {category ? <input type="hidden" name="categorie" value={category} /> : null}
       <label className="flex min-w-0 flex-col gap-1.5 text-sm font-semibold text-ink">
         Marque
         <select name="marque" defaultValue={brand} className={select}>

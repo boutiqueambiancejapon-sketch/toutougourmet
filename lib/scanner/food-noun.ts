@@ -89,3 +89,22 @@ export const NOUNS: Record<FoodNoun, NounWords> = {
 
 /** Mots d'une fiche enregistrée (étiquette lue et note). */
 export const nounWords = (label: NounLabel, details?: Pick<ScoreResult, 'kind'>): NounWords => NOUNS[foodNoun(label, details)]
+
+/** Catégorie d'une note : deux notes ne se comparent que dans la même. Type inconnu : null. */
+export const CATEGORY_PHRASE: Record<FoodNoun, string | null> = { croquettes: 'parmi les croquettes', patee: 'parmi les pâtées', friandise: 'parmi les friandises', aliment: null }
+
+export const COMPLETE_CATEGORIES = [
+  { noun: 'croquettes', label: 'Croquettes' },
+  { noun: 'patee', label: 'Pâtées' },
+  { noun: 'aliment', label: 'Type inconnu' },
+] as const
+
+export type CompleteCategory = (typeof COMPLETE_CATEGORIES)[number]['noun']
+
+export function parseCategory(value: string | string[] | undefined): CompleteCategory {
+  const raw = Array.isArray(value) ? value[0] : value
+  return COMPLETE_CATEGORIES.find((c) => c.noun === raw)?.noun ?? 'croquettes'
+}
+
+/** ?categorie= d'une liste : rien pour les croquettes, la catégorie par défaut. */
+export const categoryQuery = (category: CompleteCategory): string => (category === 'croquettes' ? '' : `categorie=${category}`)

@@ -1,6 +1,7 @@
 import { cache } from 'react'
 import { and, desc, isNotNull, sql } from 'drizzle-orm'
 import { foodAnalysis } from '@/db/schema'
+import { foodNoun, type FoodNoun } from '@/lib/scanner/food-noun'
 import type { ProductKind } from '@/lib/scanner/score'
 import { brandSlug } from '@/lib/scanner/seo'
 import { getDb } from './drizzle'
@@ -19,6 +20,7 @@ export interface ReviewedItem {
   product: string | null
   score: number
   kind: ProductKind
+  noun: FoodNoun
   updatedAt: Date
 }
 
@@ -33,11 +35,13 @@ export const reviewedItems = cache(async (): Promise<ReviewedItem[]> => {
       score: foodAnalysis.score,
       kind: sql<string | null>`${foodAnalysis.details}->>'kind'`,
       updatedAt: foodAnalysis.updatedAt,
+      extracted: foodAnalysis.extracted,
+      details: foodAnalysis.details,
     })
     .from(foodAnalysis)
     .where(and(publishedWhere(), isNotNull(foodAnalysis.score)))
     .orderBy(desc(foodAnalysis.score), foodAnalysis.brand, foodAnalysis.product)
-  return rows.map((r) => ({ ...r, score: r.score ?? 0, kind: r.kind === 'treat' ? 'treat' : 'complete', brandSlug: brandSlug(r.brand) }))
+  return rows.map(({ extracted, details, ...r }) => ({ ...r, score: r.score ?? 0, kind: r.kind === 'treat' ? 'treat' : 'complete', noun: foodNoun(extracted, details), brandSlug: brandSlug(r.brand) }))
 })
 
 /** Même liste, sans jamais faire échouer la page qui l'affiche. `kind` : aliments complets ou friandises seulement. */

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
+import { categoryQuery, COMPLETE_CATEGORIES, parseCategory, type CompleteCategory } from '@/lib/scanner/food-noun'
 import { FICHE_VUES, LATEST_SHOWN, latestPool, listStats, lowFiches, parseVue, topFiches, type FicheVue } from '@/lib/scanner/fiche-lists'
 import type { ProductKind } from '@/lib/scanner/score'
 import { listFiches } from '@/lib/server/scanner-lists'
@@ -27,13 +28,33 @@ const EMPTY: Record<FicheVue, string> = {
   moins: 'Aucune fiche contrôlée sous 55 pour le moment.',
 }
 
-function Tabs({ path, current }: { path: string; current: FicheVue }) {
+function CategoryTabs({ path, current, vue }: { path: string; current: CompleteCategory; vue: FicheVue }) {
+  const vueQuery = FICHE_VUES.find((t) => t.vue === vue)?.query.replace('?', '') ?? ''
+  return (
+    <nav aria-label="Catégorie" className="-mx-4 overflow-x-auto px-4 md:mx-0 md:px-0">
+      <ul className="m-0 flex list-none gap-1.5 p-0 text-sm">
+        {COMPLETE_CATEGORIES.map((c) => {
+          const query = [categoryQuery(c.noun), vueQuery].filter(Boolean).join('&')
+          return (
+            <li key={c.noun} className="shrink-0">
+              <Link href={query ? `${path}?${query}` : path} aria-current={c.noun === current ? 'true' : undefined} className={`inline-flex min-h-11 items-center whitespace-nowrap rounded-pill border-2 px-3 font-semibold no-underline ${c.noun === current ? 'border-ink bg-ink text-cream' : 'border-line bg-paper text-ink'}`}>
+                {c.label}
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
+    </nav>
+  )
+}
+
+function Tabs({ path, current, category }: { path: string; current: FicheVue; category: string }) {
   return (
     <nav aria-label="Listes de fiches" className="grid grid-cols-[auto_auto_auto] gap-0.5 rounded-control bg-cream-2 p-1">
       {FICHE_VUES.map((t) => (
         <Link
           key={t.vue}
-          href={`${path}${t.query}`}
+          href={[category, t.query.replace('?', '')].filter(Boolean).length ? `${path}?${[category, t.query.replace('?', '')].filter(Boolean).join('&')}` : path}
           aria-current={t.vue === current ? 'page' : undefined}
           className={`flex min-h-11 items-center justify-center whitespace-nowrap rounded-box px-1.5 text-[13px] font-semibold no-underline sm:text-sm ${t.vue === current ? 'bg-paper text-ink' : 'text-ink-2'}`}
         >
@@ -59,20 +80,29 @@ function Stats({ count, average }: { count: number; average: number | null }) {
   )
 }
 
-export async function CategoryView({ category, vueParam }: { category: Category; vueParam: string | string[] | undefined }) {
+interface CategoryViewProps {
+  category: Category
+  vueParam: string | string[] | undefined
+  categoryParam?: string | string[]
+}
+
+export async function CategoryView({ category, vueParam, categoryParam }: CategoryViewProps) {
   const vue = parseVue(vueParam)
   const all = await listFiches()
-  const pool = latestPool(all, category.kind)
+  const complete = category.kind === 'complete'
+  const noun = complete ? parseCategory(categoryParam) : undefined
+  const pool = latestPool(all, category.kind).filter((f) => !noun || f.noun === noun)
   const stats = listStats(pool)
-  const items = vue === 'top' ? topFiches(all, category.kind) : vue === 'moins' ? lowFiches(all, category.kind) : pool.slice(0, LATEST_SHOWN)
+  const items = noun === 'aliment' && vue !== 'dernieres' ? [] : vue === 'top' ? topFiches(all, category.kind, noun) : vue === 'moins' ? lowFiches(all, category.kind, noun) : pool.slice(0, LATEST_SHOWN)
   return (
     <div className="v2 mx-auto flex max-w-prose flex-col gap-4 px-4 pt-4 pb-16 md:px-8 md:pt-8">
       <BreadcrumbNav items={[{ label: 'Scanner', href: '/scanner' }, { label: category.title }]} />
       <h1 className="m-0 font-display text-[clamp(1.75rem,5vw,2.5rem)] font-black leading-[1.05] tracking-tight text-ink">{category.title}</h1>
       {vue === 'dernieres' && stats.count > 0 ? <Stats count={stats.count} average={stats.average} /> : null}
-      <Tabs path={category.path} current={vue} />
+      {noun ? <CategoryTabs path={category.path} current={noun} vue={vue} /> : null}
+      <Tabs path={category.path} current={vue} category={noun ? categoryQuery(noun) : ''} />
       {items.length > 0 ? <FicheRows items={items} ranked={vue !== 'dernieres'} /> : <p className="m-0 rounded-box bg-cream-2 p-4 text-[15px] leading-relaxed text-ink-2">{EMPTY[vue]}</p>}
-      <p className="m-0 text-sm leading-relaxed text-ink-2">{NOTES[vue]}</p>
+      <p className="m-0 text-sm leading-relaxed text-ink-2">{noun === 'aliment' ? 'Le type de ces produits n’a pas été reconnu : ils ne sont pas classés, faute de savoir à quoi les comparer. ' : ''}{NOTES[vue]}</p>
       <p className="m-0 flex flex-wrap gap-x-4 text-sm">
         <Link href={category.method} className="inline-flex min-h-11 items-center text-ink-2 underline underline-offset-2">
           Comment la note est calculée

@@ -166,3 +166,7 @@ Bascule faite (`DASHBOARD_LOGIN_ENABLED=1`), clé Face ID créée et utilisée s
 ## 2026-11-04 : Tableaux Conversions, Robots IA, Contenu et Serveur
 
 Robots IA : filtres par robot et type de visite dans l'URL, part des types de visite, visites par heure, mini-courbe et détail par opérateur, couverture par rubrique, vraies erreurs (`lib/dashboard/robots.ts`, `lib/server/dashboard-robots.ts`). Conversions : lignes lisibles à la place du tableau, titres, emplacements vides repliés. Contenu : « À traiter », avancée de la réécriture, résumé des nuits sans IA. Serveur : 12 tâches suivies, problèmes en tête. Calculs : `npx tsx scripts/test-dashboard-tables.ts`. Le choix de période disparaît de Contenu et Serveur.
+
+## 2026-11-04 : Scanner, barème 1.5
+
+Note plafonnée à 89 sans calcium et phosphore déclarés. Classements séparés par catégorie (croquettes, pâtées, type inconnu, `?categorie=`), et la fiche dit « 89/100, parmi les pâtées ». Après déploiement : `tsx scripts/rescore-fiches.ts --appliquer`. Restent proposés, non décidés : fusion des doublons, barème 2.

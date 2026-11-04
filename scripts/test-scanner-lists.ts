@@ -87,6 +87,12 @@ test('3 fiches par marque au plus, variantes du nom de marque comprises', () => 
   assert.deepEqual(slugs(top), ['a', 'b', 'c', 'e'])
 })
 
+test('classement par catégorie : pâtées et croquettes ne se mélangent pas', () => {
+  const items = [fiche('c', { noun: 'croquettes', score: 80 }), fiche('p', { noun: 'patee', score: 89 }), fiche('i', { noun: 'aliment', score: 95 })]
+  assert.deepEqual(slugs(topFiches(items, 'complete', 'patee')), ['p'])
+  assert.deepEqual(slugs(topFiches(items, 'complete', 'croquettes')), ['c'])
+})
+
 test('top 10 au plus, trié par note, moins bien notées croissantes et sous 55', () => {
   const many = Array.from({ length: 14 }, (_, i) => fiche(`m${i}`, { score: 30 + i * 5 }))
   const top = topFiches(many, 'complete')

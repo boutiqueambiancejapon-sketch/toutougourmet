@@ -105,7 +105,7 @@ export default async function BrandRankingPage({ params }: Params) {
         <h2 id="recettes" className="m-0 font-display text-2xl font-black text-ink">
           {titleTypo(`Quelles croquettes ${group.name} ont la meilleure note ?`)}
         </h2>
-        <RankingList items={group.items} showBrand={false} />
+        <RankingList showCategory items={group.items} showBrand={false} />
       </section>
 
       {partner ? (

@@ -1,5 +1,6 @@
 'use client'
 
+import { CATEGORY_PHRASE, foodNoun } from '@/lib/scanner/food-noun'
 import Link from 'next/link'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { ResultOrigin, ScanAnalysis, ScanQuota } from '@/lib/scanner/result'
@@ -58,6 +59,9 @@ export function ScanResult({ analysis, origin, quota, signedIn, onRestart }: Sca
       ) : null}
       <AllergyAlert ingredients={corrected.ingredients.map((i) => i.nom)} />
       {doubtful ? verify : null}
+      {details.score !== null && CATEGORY_PHRASE[foodNoun(corrected, details)] ? (
+        <p className="m-0 text-sm font-semibold text-ink">{`${details.score}/100, ${CATEGORY_PHRASE[foodNoun(corrected, details)]}. Une note se compare dans sa catégorie.`}</p>
+      ) : null}
       <ScoreDetail details={details} />
       {doubtful ? null : verify}
       <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">

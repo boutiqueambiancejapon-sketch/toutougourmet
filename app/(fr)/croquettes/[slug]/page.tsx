@@ -79,7 +79,8 @@ export default async function CroquettePage({ params }: Params) {
   if (!row) notFound()
   const a = toScanAnalysis(row)
   const treat = kindOf(a.details) === 'treat'
-  const words = NOUNS[foodNoun(a.label, a.details)]
+  const noun = foodNoun(a.label, a.details)
+  const words = NOUNS[noun]
   const name = [a.brand, a.product].filter(Boolean).join(' ') || 'Produit sans nom lisible'
   const h1 = a.product ? `${a.product}${a.brand ? ` (${a.brand})` : ''} : notre analyse` : `${a.brand ?? words.unnamed} : notre analyse`
   const date = row.createdAt.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' })
@@ -127,7 +128,7 @@ export default async function CroquettePage({ params }: Params) {
 
       {treat ? null : <FicheNutrition label={a.label} />}
 
-      <FicheVerdict brand={a.brand} details={a.details} words={words}>
+      <FicheVerdict brand={a.brand} details={a.details} words={words} noun={noun}>
         <div className="flex gap-2 sm:max-w-md">
           <DownloadLink slug={a.slug} className="flex-1" />
           <ShareButton slug={a.slug} name={name} score={a.score} className="flex-1" />

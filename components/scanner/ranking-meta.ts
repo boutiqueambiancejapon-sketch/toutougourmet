@@ -6,14 +6,14 @@ import { RANKING_COPY, SITE_URL } from './ranking-copy'
 import { firstParam, type RankingSearchParams } from './RankingView'
 
 // @cdc 06-seo — métadonnées des classements. Indexable à partir de RANKING_MIN_REVIEWED fiches
-// publiées du type. Pages filtrées (marque, note) : noindex, canonique vers le classement complet.
+// publiées du type. Pages filtrées (marque, note, catégorie) : noindex, canonique vers le classement complet.
 // Pages 2 et suivantes sans filtre : canonique sur elles-mêmes, title numéroté.
 
 export async function rankingMetadata(kind: ProductKind, sp: RankingSearchParams): Promise<Metadata> {
   const copy = RANKING_COPY[kind]
   const items = await reviewedItemsSafe(kind)
   const page = parsePage(sp.page)
-  const filtered = firstParam(sp.marque) !== '' || parseBand(sp.note) !== null
+  const filtered = firstParam(sp.marque) !== '' || parseBand(sp.note) !== null || firstParam(sp.categorie) !== ''
   const indexable = items.length >= RANKING_MIN_REVIEWED && !filtered
   const base = `${SITE_URL}${copy.path}`
   const canonical = page > 1 && !filtered ? `${base}?page=${page}` : base
