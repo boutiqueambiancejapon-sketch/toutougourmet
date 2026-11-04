@@ -1,5 +1,4 @@
 import type { Period } from '@/lib/dashboard/period'
-import { getAllArticles } from '@/lib/mdx'
 import { getRecentMessages, type StoredMessage } from './contact'
 import { EMPTY_CONVERSIONS, getConversions, type ConversionsData } from './dashboard-conversions'
 import { EMPTY_GEO, getGeo, type GeoData } from './dashboard-geo'
@@ -53,21 +52,9 @@ export async function loadConversionsTab(period: Period): Promise<Loaded<Convers
 
 const EMPTY_AI: AiData = { byOperator: [], byKind: [], timeline: [], topPages: [], aiReadPaths: [], referrals: [], landingPages: [], errors: [] }
 
-export interface RobotsData {
-  ai: AiData
-  unread: { path: string; title: string }[]
-  articleCount: number
-}
-
-export async function loadRobots(period: Period): Promise<Loaded<RobotsData>> {
-  const articles = getAllArticles()
-    .filter((a) => a.frontmatter.categorySlug)
-    .map((a) => ({ path: `/chien/${a.frontmatter.categorySlug}/${a.slug}`, title: a.frontmatter.title }))
+export async function loadRobots(period: Period): Promise<Loaded<{ ai: AiData }>> {
   const ai = await safeRead('robots IA', EMPTY_AI, (pool) => getAi(pool, period))
-  const read = new Set(ai.value.aiReadPaths.map((p) => p.replace(/\/$/, '')))
-  // Sans lecture de la base, on ignore quels articles ont été lus : liste vide plutôt que fausse.
-  const unread = ai.ok ? articles.filter((a) => !read.has(a.path)) : []
-  return { data: { ai: ai.value, unread, articleCount: articles.length }, ok: ai.ok }
+  return { data: { ai: ai.value }, ok: ai.ok }
 }
 
 export interface ContentData {

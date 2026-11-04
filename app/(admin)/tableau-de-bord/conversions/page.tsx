@@ -1,5 +1,7 @@
 import { openTab, READ_FAILED, type TabPageProps } from '@/lib/dashboard/tab-page'
 import { loadConversionsTab } from '@/lib/server/dashboard-tabs'
+import { insightOf } from '@/lib/dashboard/insight'
+import { pageTitles } from '@/lib/server/dashboard-traffic'
 import { DashboardShell } from '@/components/dashboard/DashboardShell'
 import { ConversionsSection } from '@/components/dashboard/ConversionsSection'
 import { EmailSignupPanels, PartnersSection } from '@/components/dashboard/PartnersSection'
@@ -17,8 +19,8 @@ export default async function ConversionsTab(props: TabPageProps) {
   return (
     <DashboardShell period={period.key} current="conversions" notice={ok ? null : READ_FAILED}>
       <SubscribersLink />
-      <ConversionsSection data={data.conversions} period={period} />
-      <PartnersSection data={data.partners} />
+      <ConversionsSection data={data.conversions} period={period} insight={insightOf(data.conversions.rows)} />
+      <PartnersSection data={data.partners} titles={pageTitles()} />
       <SignupsSection data={data.signups} period={period}>
         <EmailSignupPanels data={data.partners} />
       </SignupsSection>

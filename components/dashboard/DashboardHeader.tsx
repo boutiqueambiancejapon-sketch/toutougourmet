@@ -11,13 +11,15 @@ interface HeaderProps {
   current: TabSlug
   /** Sous-page de l'onglet : changer de période y reste (« /acquisition »). */
   sub?: string
+  /** Onglet sans chiffre de période : pas de sélecteur. */
+  noPeriod?: boolean
   securityLink?: boolean
   onSecurity?: boolean
 }
 
 const pill = 'inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-pill font-semibold'
 
-export function DashboardHeader({ period, current, sub = '', securityLink = false, onSecurity = false }: HeaderProps) {
+export function DashboardHeader({ period, current, sub = '', noPeriod = false, securityLink = false, onSecurity = false }: HeaderProps) {
   return (
     <header className="sticky top-0 z-10 border-b border-line bg-cream/95 backdrop-blur">
       <div className="mx-auto w-full max-w-page px-4 md:px-8">
@@ -25,7 +27,7 @@ export function DashboardHeader({ period, current, sub = '', securityLink = fals
           <Link href={tabHref('', period)} className="whitespace-nowrap font-display text-lg font-black text-ink no-underline">
             Toutou <span className="text-orange-ink">Gourmet</span>
           </Link>
-          <nav aria-label="Période" className="flex shrink-0 gap-0.5 rounded-pill bg-cream-2 p-0.5">
+          {noPeriod ? null : <nav aria-label="Période" className="flex shrink-0 gap-0.5 rounded-pill bg-cream-2 p-0.5">
             {(Object.keys(PERIODS) as PeriodKey[]).map((key) => (
               <Link
                 key={key}
@@ -36,7 +38,7 @@ export function DashboardHeader({ period, current, sub = '', securityLink = fals
                 {PERIODS[key].label}
               </Link>
             ))}
-          </nav>
+          </nav>}
         </div>
         <nav aria-label="Onglets du tableau de bord" className="-mx-4 overflow-x-auto px-4 pb-3 md:mx-0 md:px-0">
           <ul className="m-0 flex list-none gap-1.5 p-0 text-sm">

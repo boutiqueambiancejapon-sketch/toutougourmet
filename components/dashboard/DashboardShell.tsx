@@ -12,6 +12,7 @@ interface ShellProps {
   current: TabSlug
   /** Sous-page de l'onglet, gardée quand on change de période. */
   sub?: string
+  noPeriod?: boolean
   /** Titre de la page quand ce n'est pas le nom de l'onglet (sous-page). */
   title?: string
   /** Sous le titre : la question de l'onglet par défaut. */
@@ -23,12 +24,12 @@ interface ShellProps {
   children: ReactNode
 }
 
-export async function DashboardShell({ period, current, sub, title, intro, notice, security = false, children }: ShellProps) {
+export async function DashboardShell({ period, current, sub, noPeriod, title, intro, notice, security = false, children }: ShellProps) {
   const tab = tabOf(current)
   const hasLogin = (await dashboardAuthMode()) === 'login'
   return (
     <>
-      <DashboardHeader period={period} current={current} sub={sub} securityLink={hasLogin} onSecurity={security} />
+      <DashboardHeader period={period} current={current} sub={sub} noPeriod={noPeriod} securityLink={hasLogin} onSecurity={security} />
       <main className="mx-auto w-full max-w-page px-4 pb-16 md:px-8">
         <div className="pt-5">
           <h1 className="page-title m-0 text-ink">{title ?? (current ? tab.label : 'Tableau de bord')}</h1>

@@ -39,40 +39,40 @@ export function ServerSection({ health }: { health: ServerHealth }) {
     <>
       <ServerAlerts alerts={health.alertItems.filter((a) => a.tab === 'serveur').map((a) => a.text)} />
       <SectionTitle id="machine" title="La machine" intro="Lu à l’ouverture de la page. Rechargez pour mettre à jour." />
-      <dl className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <dl className="m-0 mt-4 grid grid-cols-2 gap-2.5 lg:grid-cols-4">
         <Meter
-          label="Processeur (15 min)"
+          label="Processeur"
           ratio={load}
           value={load === null ? NA : pf.format(load)}
-          detail={host.load ? `Charge ${host.load.map((n) => df.format(n)).join(' · ')} sur ${host.cores} cœurs (1, 5, 15 min)` : NA}
+          detail={host.load ? `Sur 15 min, ${host.cores} cœurs (${df.format(host.load[2])})` : NA}
           alert={load !== null && load > LIMITS.loadPerCore}
         />
         <Meter
           label="Mémoire utilisée"
           ratio={mem}
           value={mem === null ? NA : pf.format(mem)}
-          detail={host.memory ? `${bytes(host.memory.total - host.memory.used)} disponibles sur ${bytes(host.memory.total)}` : NA}
+          detail={host.memory ? `${bytes(host.memory.total - host.memory.used)} libres` : NA}
           alert={mem !== null && 1 - mem < LIMITS.memoryFree}
         />
         <Meter
           label="Disque utilisé"
           ratio={disk}
           value={disk === null ? NA : pf.format(disk)}
-          detail={host.disk ? `${bytes(host.disk.total - host.disk.used)} libres sur ${bytes(host.disk.total)}` : NA}
+          detail={host.disk ? `${bytes(host.disk.total - host.disk.used)} libres` : NA}
           alert={disk !== null && 1 - disk < LIMITS.diskFree}
         />
-        <div className="rounded-card border border-line bg-paper p-4">
-          <dt className="text-sm font-semibold text-ink-2">Allumé depuis</dt>
-          <dd className="mt-1 font-display text-3xl font-black tabular-nums text-ink">
+        <div className="rounded-box border border-line bg-paper px-3 py-2.5">
+          <dt className="text-sm leading-snug text-ink-2">Allumé depuis</dt>
+          <dd className="m-0 font-display text-2xl font-black tabular-nums text-ink">
             {host.uptimeSeconds === null ? '—' : duration(host.uptimeSeconds)}
           </dd>
-          <dd className="mt-2 text-xs text-ink-2">
-            {host.uptimeSeconds === null ? NA : `Démarré ${when(new Date(now - host.uptimeSeconds * 1000).toISOString(), now)}`}
+          <dd className="m-0 mt-1 text-xs text-ink-2">
+            {host.uptimeSeconds === null ? NA : 'Depuis le dernier démarrage'}
           </dd>
         </div>
       </dl>
       <div className="mt-4 grid gap-4 md:grid-cols-2">
-        <Panel title="Tâches planifiées" hint="État du dernier passage, heure de Paris.">
+        <Panel title="Toutes les tâches" hint="Celles qui posent problème passent en tête.">
           <TaskList tasks={tasks} now={now} />
         </Panel>
         <Panel title="Sauvegarde de la base" hint={`Une copie par nuit, alerte au-delà de ${BACKUP_MAX_AGE_HOURS} heures.`}>
@@ -86,7 +86,7 @@ export function ServerSection({ health }: { health: ServerHealth }) {
             <dd className="tabular-nums text-ink">{backup.size === null ? NA : bytes(backup.size)}</dd>
             <dt className="text-ink-2">Copie hors du serveur</dt>
             <dd className={backup.offsite ? 'text-ink' : 'font-semibold text-amber-ink'}>
-              {backup.offsite ? 'configurée' : 'non configurée'}
+              {backup.offsite ? 'configurée' : 'aucune : une panne de la machine emporterait aussi les copies'}
             </dd>
           </dl>
         </Panel>

@@ -41,6 +41,8 @@ export function SignupsSection({ data, period, children }: { data: SignupsData; 
   const { current, previous } = data.total
   const delta = deltaText(current, previous, period)
   const max = Math.max(1, ...data.byPlace.map((r) => r.created))
+  const withResult = data.byPlace.filter((r) => r.created > 0)
+  const withoutResult = data.byPlace.filter((r) => r.created === 0)
   return (
     <>
       <SectionTitle id="inscriptions" title="Inscriptions" intro={`Sur ${period.long} : comptes créés selon l’invitation d’où vient chaque visiteur, puis inscriptions à la lettre et au guide.`} />
@@ -49,13 +51,13 @@ export function SignupsSection({ data, period, children }: { data: SignupsData; 
           <span className="font-display text-4xl font-black tabular-nums text-ink">{nf.format(current)}</span>
           <span className={`text-sm font-semibold ${delta.up ? 'text-green-ink' : 'text-ink-2'}`}>{delta.text}</span>
         </p>
-        {data.byPlace.length === 0 ? (
+        {withResult.length === 0 ? (
           <div className="mt-4">
-            <Empty>Aucune invitation vue ni aucun compte créé sur la période.</Empty>
+            <Empty>Aucun compte créé sur la période.</Empty>
           </div>
         ) : (
           <ol className="m-0 mt-4 flex list-none flex-col gap-3 p-0">
-            {data.byPlace.map((row) => (
+            {withResult.map((row) => (
               <li key={row.place} className="border-b border-line pb-3 last:border-b-0 last:pb-0">
                 <div className="flex items-baseline justify-between gap-3 text-sm">
                   <span className="min-w-0 text-ink">{signupPlaceLabel(row.place)}</span>
@@ -69,6 +71,19 @@ export function SignupsSection({ data, period, children }: { data: SignupsData; 
             ))}
           </ol>
         )}
+        {withoutResult.length > 0 ? (
+          <details className="mt-3 text-sm">
+            <summary className="cursor-pointer text-ink-2">Voir les {withoutResult.length} emplacements sans compte créé</summary>
+            <ul className="m-0 mt-2 flex list-none flex-col gap-2 p-0">
+              {withoutResult.map((row) => (
+                <li key={row.place}>
+                  <span className="text-ink">{signupPlaceLabel(row.place)}</span>
+                  <Funnel row={row} />
+                </li>
+              ))}
+            </ul>
+          </details>
+        ) : null}
         <p className="m-0 mt-4 text-xs text-ink-2">
           Pour chaque emplacement : combien de personnes ont vu l’invitation, cliqué, créé leur compte, puis confirmé leur
           e-mail (compté le jour de la confirmation).

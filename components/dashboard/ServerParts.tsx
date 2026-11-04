@@ -37,13 +37,13 @@ interface MeterProps {
 export function Meter({ label, ratio, value, detail, alert }: MeterProps) {
   const width = ratio === null ? 0 : Math.min(Math.max(ratio, 0.02), 1) * 100
   return (
-    <div className="rounded-card border border-line bg-paper p-4" title={`${label} : ${value}, ${detail}`}>
-      <dt className="text-sm font-semibold text-ink-2">{label}</dt>
-      <dd className="mt-1 font-display text-3xl font-black tabular-nums text-ink">{ratio === null ? '—' : value}</dd>
-      <dd className="mt-2 h-2 rounded-pill bg-cream-2" aria-hidden="true">
+    <div className="rounded-box border border-line bg-paper px-3 py-2.5" title={`${label} : ${value}, ${detail}`}>
+      <dt className="text-sm leading-snug text-ink-2">{label}</dt>
+      <dd className="m-0 font-display text-2xl font-black tabular-nums text-ink">{ratio === null ? '—' : value}</dd>
+      <dd className="m-0 mt-1 h-2 rounded-pill bg-cream-2" aria-hidden="true">
         {ratio !== null && <div className={`h-2 rounded-pill ${alert ? 'bg-rose-ink' : 'bg-orange'}`} style={{ width: `${width}%` }} />}
       </dd>
-      <dd className="mt-2 text-xs text-ink-2">
+      <dd className="m-0 mt-1 text-xs text-ink-2">
         {ratio === null ? NA : detail}
         {alert && <strong className="ml-1 font-semibold text-rose-ink">· au-dessus du seuil</strong>}
       </dd>
@@ -59,25 +59,29 @@ const STATE: Record<TaskState, { label: string; className: string }> = {
   unknown: { label: 'État non disponible', className: 'bg-cream-2 text-ink-2' },
 }
 
+const shortWhen = (iso: string | null, now: number): string => {
+  if (!iso) return NA
+  const full = when(iso, now)
+  return /\(([^)]+)\)/.exec(full)?.[1] ?? full
+}
+
+const FIRST: TaskState[] = ['failed', 'stopped', 'unknown']
+
 export function TaskList({ tasks, now }: { tasks: TaskStatus[]; now: number }) {
+  const sorted = [...tasks].sort((a, b) => Number(FIRST.includes(b.state)) - Number(FIRST.includes(a.state)))
   return (
-    <ul className="flex flex-col divide-y divide-line">
-      {tasks.map((t) => {
+    <ul className="m-0 flex list-none flex-col divide-y divide-line p-0">
+      {sorted.map((t) => {
         const s = STATE[t.state]
         return (
-          <li key={t.unit} className="py-3 first:pt-0 last:pb-0">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <p className="font-semibold text-ink">
-                {t.label} <span className="text-sm font-normal text-ink-2">· {t.rhythm}</span>
-              </p>
-              <span className={`rounded-pill px-3 py-1 text-xs font-semibold ${s.className}`}>{s.label}</span>
+          <li key={t.unit} className="py-2.5 first:pt-0 last:pb-0" title={`Dernier passage : ${when(t.last, now)}`}>
+            <div className="flex items-start justify-between gap-2">
+              <p className="m-0 min-w-0 text-sm font-semibold text-ink">{t.label}</p>
+              <span className={`shrink-0 whitespace-nowrap rounded-pill px-2 py-0.5 text-xs font-semibold ${s.className}`}>{s.label}</span>
             </div>
-            <dl className="mt-1 grid grid-cols-[auto_1fr] gap-x-2 text-xs text-ink-2">
-              <dt>Dernier passage</dt>
-              <dd className="tabular-nums">{when(t.last, now)}</dd>
-              <dt>Prochain passage</dt>
-              <dd className="tabular-nums">{t.next ? when(t.next, now) : (t.nextHint ?? NA)}</dd>
-            </dl>
+            <p className="m-0 text-xs text-ink-2">
+              {t.rhythm} · dernier {shortWhen(t.last, now)} · prochain {t.next ? shortWhen(t.next, now) : (t.nextHint ?? NA)}
+            </p>
           </li>
         )
       })}

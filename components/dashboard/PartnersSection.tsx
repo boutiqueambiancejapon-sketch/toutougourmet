@@ -9,7 +9,7 @@ import { Panel, SectionTitle } from './Panel'
 
 const named = (rows: Row[], label: (raw: string) => string): Row[] => rows.map((r) => ({ ...r, label: label(r.label) }))
 
-export function PartnersSection({ data }: { data: PartnerData }) {
+export function PartnersSection({ data, titles }: { data: PartnerData; titles: Map<string, string> }) {
   return (
     <>
       <SectionTitle id="partenaires" title="Clics partenaires" intro="Chaque clic sur un lien de marque, compté au départ vers le site partenaire." />
@@ -21,7 +21,7 @@ export function PartnersSection({ data }: { data: PartnerData }) {
           <BarList rows={named(data.clicksByPlace, clickPlaceLabel)} empty="Aucun emplacement à classer pour l’instant." />
         </Panel>
         <Panel title="Pages qui envoient le plus de clics" wide>
-          <BarList rows={data.clicksByPage} empty="Aucune page n’a encore envoyé de clic." />
+          <BarList rows={named(data.clicksByPage, (page) => titles.get(page.replace(/\/$/, '')) ?? page)} empty="Aucune page n’a encore envoyé de clic." />
         </Panel>
       </div>
     </>
