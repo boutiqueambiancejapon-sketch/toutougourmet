@@ -173,7 +173,7 @@ test('où acheter : partenaire, Maxi Zoo, Amazon, jamais sous 55 ni pour un alim
   assert.ok(buyLink({ brand: 'Pedigree', product: 'Rodeo', score: 60 })?.href.includes('awinaffid=1112904'))
   const amazon = buyLink({ brand: 'Josera', product: 'SensiAdult', score: 56 })
   assert.equal(amazon?.store, 'Amazon')
-  assert.ok(amazon?.href.includes('tag=toutougourmet-21') && amazon.amazon)
+  assert.ok(amazon?.href.includes('tag=ambiancejap0a-21') && amazon.amazon)
   assert.equal(buyLink({ brand: 'Pedigree', product: 'Rodeo', score: 41 }), null)
   assert.equal(buyLink({ brand: 'Royal Canin', product: 'Hepatic HF 16', score: 70 }), null)
   assert.equal(buyLink({ brand: null, product: 'X', score: 80 }), null)

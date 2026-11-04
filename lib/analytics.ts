@@ -36,7 +36,7 @@ export function affiliateBrand(href: string): string | null {
     [/c3po\.link\/QqJYNnzYD8|ultrapremiumdirect\.com\/.*ae=1346/, 'Ultra Premium Direct'],
     [/tidd\.ly\/(4jT3Tqg|42O6yHG)/, 'Dogfy Diet'],
     [/tidd\.ly\/(48rl0Z3|43sUPyF)/, 'Fidelis'],
-    [/(amzn\.to|amazon\.fr\/.*tag=toutougourmet)/, 'Amazon'],
+    [/(amzn\.to|amazon\.fr\/.*tag=(toutougourmet|ambiancejap0a))/, 'Amazon'],
     // Les autres liens tidd.ly sont des fiches Maxi Zoo (Royal Canin, Eukanuba…)
     [/tidd\.ly\/|awin1\.com\/cread\.php\?awinmid=68698/, 'Maxi Zoo'],
     [/c3po\.link\//, 'Autre (c3po)'],
