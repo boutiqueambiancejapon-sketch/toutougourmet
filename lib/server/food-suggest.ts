@@ -19,7 +19,7 @@ const haystack = sql`translate(lower(coalesce(${foodAnalysis.brand}, '') || ' ' 
 const visible = (treats: boolean) =>
   and(
     not(foodAnalysis.discarded),
-    or(publishedWhere(), eq(foodAnalysis.source, 'openpetfoodfacts')),
+    or(publishedWhere(), eq(foodAnalysis.source, 'openpetfoodfacts'), eq(foodAnalysis.source, 'maxizoo')),
     treats ? undefined : sql`coalesce(${foodAnalysis.details}->>'kind', '') <> 'treat'`,
   )
 

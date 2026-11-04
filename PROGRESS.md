@@ -174,3 +174,7 @@ Note plafonnée à 89 sans calcium et phosphore déclarés. Classements séparé
 ## 2026-11-04 : Scanner, recherche par nom
 
 `/scanner` propose de chercher un produit par son nom sous le bouton de scan (`components/scanner/ProductSearch.tsx`, `GET /api/scanner/recherche`, base seule, sans IA). Rien trouvé : photo de l'étiquette. Correction de la lecture des pourcentages prête sur `fix/scanner-percentages`, non publiée : effet montré au propriétaire d'abord. Tâche de nuit de recherche des compositions : idée validée sur le principe, essai sur 50 produits à chiffrer, conditions Awin à vérifier.
+
+## 2026-11-04 : Base de fiches depuis Maxi Zoo
+
+Décision du propriétaire : publication directe, sans relecture, après accord d'Awin qu'il a reçu et que nous n'avons pas lu. Import nuit par nuit depuis les pages produit (`scripts/import-maxizoo.ts`), 200 par nuit. Une fiche relue ou venue d'une photo n'est jamais touchée, une fiche Open Pet Food Facts est remplacée. Fiches Maxi Zoo comptées comme validées, hors contrôle IA payant, toujours hors Google. Dog Chef et Franklin n'ont aucune fiche : à demander aux marques.

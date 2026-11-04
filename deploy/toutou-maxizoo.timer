@@ -1,0 +1,9 @@
+[Unit]
+Description=Toutou Gourmet - fiches Maxi Zoo, chaque nuit
+
+[Timer]
+OnCalendar=*-*-* 02:13:00 Europe/Paris
+Persistent=false
+
+[Install]
+WantedBy=timers.target

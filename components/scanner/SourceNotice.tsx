@@ -16,11 +16,23 @@ const OPEN_DATA = {
 
 /** Mention ODbL d'une fiche issue d'une base ouverte, null pour une lecture de photos. */
 export function openDataCredit(source: AnalysisSource): string | null {
+  if (source === 'maxizoo') return 'Données : fiche produit Maxi Zoo'
   return source === 'photo' ? null : OPEN_DATA[source].credit
 }
 
 export function SourceNotice({ source, reviewed = false }: { source: AnalysisSource; reviewed?: boolean }) {
   if (source === 'photo') return <AiNotice reviewed={reviewed} />
+  if (source === 'maxizoo') {
+    return (
+      <p className="m-0 rounded-box border border-line bg-paper p-3 text-sm leading-relaxed text-ink-2">
+        <strong className="font-semibold text-ink">Données : fiche produit Maxi Zoo.</strong> Composition et constituants viennent de la page du produit chez ce revendeur, une recette peut changer : compare avec ton paquet. La note est calculée par{' '}
+        <Link href="/scanner#methode" className="font-semibold text-orange-ink underline underline-offset-2">
+          notre barème publié
+        </Link>
+        .
+      </p>
+    )
+  }
   const base = OPEN_DATA[source]
   return (
     <p className="m-0 rounded-box border border-line bg-paper p-3 text-sm leading-relaxed text-ink-2">

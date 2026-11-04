@@ -19,7 +19,7 @@ export interface ScanAnalysis {
 }
 
 /** D'où vient le résultat affiché : cache (déjà analysé), Open Pet Food Facts (copie locale ou API), Open Food Facts ou photos lues par l'IA. */
-export type ResultOrigin = 'cache' | 'openpetfoodfacts' | 'openfoodfacts' | 'photo'
+export type ResultOrigin = 'cache' | 'openpetfoodfacts' | 'openfoodfacts' | 'maxizoo' | 'photo'
 
 /** Parties de l'étiquette demandées en photo. */
 export type PhotoPart = 'ingredients' | 'analyse' | 'face'

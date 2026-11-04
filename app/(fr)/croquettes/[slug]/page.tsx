@@ -102,7 +102,7 @@ export default async function CroquettePage({ params }: Params) {
             <ScoreBadge score={a.score} />
             <KindTag details={a.details} />
             <p className="m-0 text-base text-ink-2">
-              {`${row.reviewed ? 'Fiche relue' : a.source === 'openpetfoodfacts' ? 'Données Open Pet Food Facts' : a.source === 'openfoodfacts' ? 'Données Open Food Facts' : 'Analyse automatique'} du `}
+              {`${row.reviewed ? 'Fiche relue' : a.source === 'openpetfoodfacts' ? 'Données Open Pet Food Facts' : a.source === 'openfoodfacts' ? 'Données Open Food Facts' : a.source === 'maxizoo' ? 'Données Maxi Zoo' : 'Analyse automatique'} du `}
               <time dateTime={row.createdAt.toISOString()}>{date}</time>
               {a.ean ? ` · code-barres ${a.ean}` : ''}
             </p>

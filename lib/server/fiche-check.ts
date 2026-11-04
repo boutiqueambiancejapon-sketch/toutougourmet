@@ -11,7 +11,8 @@ import type { Db } from './drizzle'
 const HASH = sql<string>`md5(${foodAnalysis.extracted}::text)`
 
 export function ficheCheckStore(db: Db, { recheckDoubt = false }: { recheckDoubt?: boolean } = {}): FicheCheckStore {
-  const where = sql`NOT ${foodAnalysis.reviewed} AND NOT ${foodAnalysis.discarded}
+  // Fiches Maxi Zoo : recopiées sans IA d'une page structurée, pas de contrôle payant.
+  const where = sql`NOT ${foodAnalysis.reviewed} AND NOT ${foodAnalysis.discarded} AND ${foodAnalysis.source} <> 'maxizoo'
     AND (${foodCheck.foodAnalysisId} IS NULL OR ${foodCheck.contentHash} <> ${HASH}${recheckDoubt ? sql` OR ${foodCheck.status} = 'doubt'` : sql``})`
   const onCheck = eq(foodCheck.foodAnalysisId, foodAnalysis.id)
   return {

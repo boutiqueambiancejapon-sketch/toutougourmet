@@ -15,6 +15,7 @@ export const TASKS = [
   { unit: 'site-articles', label: 'Articles des autres sites', rhythm: 'chaque nuit' },
   { unit: 'site-covers', label: 'Images des autres sites', rhythm: 'chaque nuit' },
   { unit: 'toutou-welcome', label: 'E-mails de Milo', rhythm: 'chaque matin' },
+  { unit: 'toutou-maxizoo', label: 'Fiches Maxi Zoo', rhythm: 'chaque nuit' },
   { unit: 'toutou-alerts', label: 'Alertes', rhythm: 'régulièrement', nextHint: 'après le passage précédent' },
   { unit: 'toutou-weekly', label: 'Résumé hebdomadaire', rhythm: 'chaque semaine' },
   { unit: 'toutou-opff-import', label: 'Import Open Pet Food Facts', rhythm: 'chaque semaine' },

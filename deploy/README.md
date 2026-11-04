@@ -413,3 +413,7 @@ journalctl -u toutou-alerts -n 50 --no-pager      # ce qu'a vu le dernier passag
 Les deux services tournent durcis (`NoNewPrivileges`, `ProtectSystem=strict`, `ProtectHome`, `PrivateTmp`) ; seul `/srv/toutou/shared` est accessible en écriture, pour le fichier d'état. Tant que le site tourne depuis la préversion, adapter `User=` et `WorkingDirectory=` comme dans `toutou-ingest.service`.
 
 Arrêt : `sudo systemctl disable --now toutou-alerts.timer toutou-weekly.timer`.
+
+## Fiches Maxi Zoo
+
+`toutou-maxizoo.timer` lit 200 pages produit par nuit, sans IA (`scripts/import-maxizoo.ts`). Le fichier Awin reste hors du dépôt : `/srv/toutou/shared/maxizoo-feed.csv.gz`, à remplacer pour le mettre à jour. Le suivi est dans `/srv/toutou/shared/maxizoo-state.json`. Installer : copier les deux unités dans `/etc/systemd/system`, `daemon-reload`, puis `enable --now toutou-maxizoo.timer`. Essai sans écriture : `tsx scripts/import-maxizoo.ts --limite=20 --essai`.

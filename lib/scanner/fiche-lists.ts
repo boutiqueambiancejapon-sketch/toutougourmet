@@ -40,6 +40,8 @@ export interface ListFiche {
   kind: ProductKind
   noun: FoodNoun
   reviewed: boolean
+  /** Recopiée de la page produit Maxi Zoo : pas de contrôle IA */
+  fromMaxiZoo?: boolean
   discarded: boolean
   scanCount: number
   createdAt: Date
@@ -57,7 +59,7 @@ export const isFicheComplete = (label: ExtractedLabel, score: number | null): bo
 
 /** Une fiche relue garde la main sur le contrôle IA : la décision humaine passe avant. */
 export const isPublicFiche = (f: ListFiche): boolean => !f.discarded && (f.reviewed || f.check !== 'rejected')
-export const isValidated = (f: ListFiche): boolean => isPublicFiche(f) && (f.reviewed || f.check === 'ok')
+export const isValidated = (f: ListFiche): boolean => isPublicFiche(f) && (f.reviewed || f.fromMaxiZoo === true || f.check === 'ok')
 export const isRealScan = (f: ListFiche): boolean => f.lastScanAt !== null || f.scanCount > 0
 
 const latestAt = (f: ListFiche): number => Math.max(f.lastScanAt?.getTime() ?? 0, f.createdAt.getTime())

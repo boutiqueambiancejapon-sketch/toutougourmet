@@ -37,6 +37,7 @@ export const listFiches = cache(async (): Promise<ListFiche[]> => {
           extracted: foodAnalysis.extracted,
           details: foodAnalysis.details,
           reviewed: foodAnalysis.reviewed,
+          source: foodAnalysis.source,
           discarded: foodAnalysis.discarded,
           scanCount: foodAnalysis.scanCount,
           createdAt: foodAnalysis.createdAt,
@@ -47,13 +48,14 @@ export const listFiches = cache(async (): Promise<ListFiche[]> => {
         .from(foodAnalysis)
         .leftJoin(foodCheck, eq(foodCheck.foodAnalysisId, foodAnalysis.id))
         .leftJoin(opffProduct, eq(opffProduct.ean, foodAnalysis.ean))
-        .where(sql`NOT ${foodAnalysis.discarded} AND (${foodAnalysis.reviewed} OR ${foodAnalysis.scanCount} > 0 OR ${currentCheckStatus} = 'ok')`),
+        .where(sql`NOT ${foodAnalysis.discarded} AND (${foodAnalysis.reviewed} OR ${foodAnalysis.scanCount} > 0 OR ${currentCheckStatus} = 'ok' OR ${foodAnalysis.source} = 'maxizoo')`),
       readJournal(d),
     ])
-    return rows.map(({ id, extracted, details, lastHistory, ...r }) => {
+    return rows.map(({ id, extracted, details, lastHistory, source, ...r }) => {
       const scans = [journal.get(id), lastHistory ? new Date(lastHistory) : null].filter((v): v is Date => !!v)
       return {
         ...r,
+        fromMaxiZoo: source === 'maxizoo',
         kind: details.kind === 'treat' ? 'treat' : 'complete',
         noun: foodNoun(extracted, details),
         lastScanAt: scans.length ? new Date(Math.max(...scans.map((v) => v.getTime()))) : null,
