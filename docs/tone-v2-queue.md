@@ -60,11 +60,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `avis-dogfy-diet-repas-frais-chien`
 - [x] `dog-chef-vs-just-russel`
 - [x] `croquettes-chien-epilepsie`
-- [ ] `dog-chef-vs-japhy`
-- [ ] `topping-croquettes-chien-enrichir-gamelle-guide`
-- [ ] `avis-dog-chef-croquettes-canard-frais`
-- [ ] `chien-peut-manger-framboises`
-- [ ] `chien-mange-crapaud-urgence`
+- [x] `dog-chef-vs-japhy`
+- [x] `topping-croquettes-chien-enrichir-gamelle-guide`
+- [x] `avis-dog-chef-croquettes-canard-frais`
+- [x] `chien-peut-manger-framboises`
+- [x] `chien-mange-crapaud-urgence`
 - [ ] `aliments-fermentes-chien-bienfaits-dosage`
 - [ ] `nourriture-whippet`
 - [ ] `eukanuba-vs-royal-canin`
