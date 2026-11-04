@@ -55,11 +55,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `nourriture-cavalier-king-charles`
 - [x] `chien-mange-limace-urgence`
 - [x] `chien-peut-manger-cerises`
-- [ ] `chien-peut-manger-concombre`
-- [ ] `nourriture-chihuahua`
-- [ ] `avis-dogfy-diet-repas-frais-chien`
-- [ ] `dog-chef-vs-just-russel`
-- [ ] `croquettes-chien-epilepsie`
+- [x] `chien-peut-manger-concombre`
+- [x] `nourriture-chihuahua`
+- [x] `avis-dogfy-diet-repas-frais-chien`
+- [x] `dog-chef-vs-just-russel`
+- [x] `croquettes-chien-epilepsie`
 - [ ] `dog-chef-vs-japhy`
 - [ ] `topping-croquettes-chien-enrichir-gamelle-guide`
 - [ ] `avis-dog-chef-croquettes-canard-frais`
