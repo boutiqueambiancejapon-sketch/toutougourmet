@@ -1,5 +1,11 @@
 Tâche quotidienne : rédiger UN nouvel article pour Toutou Gourmet (www.toutou-gourmet.com), site français sur l'alimentation et la santé du chien. Tu tournes sur le serveur de Toutou, dans une copie de travail de la branche `v2` (la V2 du site). Le site en ligne n'est pas modifié avant la bascule : tu ne touches JAMAIS à la branche de production.
 
+## Ton de l'article (demande du propriétaire, 2026-11-04)
+- On écrit pour un maître de chien qui lit sur son téléphone, pas pour un vétérinaire. Phrases simples, conseils qu'on peut suivre tout de suite, 600 à 1 000 mots pour un sujet léger (friandises, cadeaux, habitudes).
+- Pas d'avalanche de chiffres : kcal par friandise, prix au kilo, pourcentages d'ingrédients, tableaux de calculs. Un chiffre seulement s'il change ce que le lecteur va faire. Les doses et chiffres de sécurité (toxiques, urgences) restent précis.
+- Produit cité : lire d'abord la page officielle du produit (composition, conseils d'utilisation, FAQ) et partir de ce qu'elle dit. Jamais de conclusion « à éviter » ou « trop calorique » tirée d'une estimation maison ou d'un poids trouvé chez un tiers. Si la marque ne publie pas une donnée, l'écrire en une phrase.
+- Répondre oui ou non avec un conseil pratique. Pas de ton de reproche ni d'avertissement à chaque paragraphe.
+
 ## Avant d'écrire
 1. Lire `CLAUDE.md` et `PROGRESS.md`.
 2. Lire `docs/09-seo-geo-guide.md` EN ENTIER (structure, fan-out §2.7, règle race × question §6.4).

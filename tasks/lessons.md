@@ -15,3 +15,7 @@ Règle : `npm run build > log 2>&1 || { tail log; exit 1; }` avant tout commit, 
 - Le propriétaire (chien de 17 kg au BARF, 250 g par jour) a lu 661 g de « repas frais » : l'outil ne connaissait que le frais cuit livré (133 kcal/100 g, beaucoup d'eau).
 - Règle : chaque type d'aliment a sa densité sourcée (croquettes 360, frais cuit 133, BARF cru 200). Un nouveau type d'aliment = une option et une densité, jamais un réemploi d'une autre.
 - Contrôle : comparer le résultat au repère courant du type (BARF : 2 à 3 % du poids) avant de mettre en ligne.
+
+## 2026-11-04 — Articles trop chiffrés et produit non vérifié
+- Le propriétaire a trouvé l'article du calendrier de l'Avent ennuyeux : des calculs que personne ne lit, et une conclusion « pas une case entière sous 15 kg » tirée d'une estimation (poids trouvé chez un tiers × kcal d'une seule recette), contre la fiche Franklin qui dit « une case par jour ».
+- Règle : partir de la page officielle du produit, écrire pour un maître de chien, un chiffre seulement s'il change la décision. Règle ajoutée à `deploy/new-article-prompt.md`.
