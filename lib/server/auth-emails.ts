@@ -36,6 +36,7 @@ export function verificationEmail(to: string, name: string, url: string): Transa
   return {
     to,
     subject: 'Confirme ton adresse e-mail',
+    kind: 'confirmation',
     text: plain(lines, url, footer),
     html: layout(lines, { label: 'Confirmer mon adresse', url }, footer),
   }
@@ -48,6 +49,7 @@ export function resetPasswordEmail(to: string, name: string, url: string): Trans
   return {
     to,
     subject: 'Nouveau mot de passe',
+    kind: 'mot-de-passe',
     text: plain(lines, url, footer),
     html: layout(lines, { label: 'Choisir un mot de passe', url }, footer),
   }
@@ -63,6 +65,7 @@ export function accountDeletedEmail(to: string, name: string): TransactionalEmai
   return {
     to,
     subject: 'Ton compte est supprimé',
+    kind: 'suppression',
     text: plain(lines, null, footer),
     html: layout(lines, null, footer),
   }

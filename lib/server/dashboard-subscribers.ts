@@ -18,6 +18,8 @@ export interface Subscriber {
   createdAt: string
   source: string | null
   status: SubscriberStatus
+  /** Attribut Brevo WELCOME_SENT : la bienvenue est partie, sans date connue */
+  welcomeSent: boolean
 }
 
 export type SubscribersResult =
@@ -42,6 +44,7 @@ function toSubscriber(c: BrevoContact, list: number): Subscriber {
     createdAt: c.createdAt ?? '',
     source: typeof source === 'string' ? source : null,
     status: unsubscribed ? 'desinscrit' : 'actif',
+    welcomeSent: c.attributes?.WELCOME_SENT === true,
   }
 }
 

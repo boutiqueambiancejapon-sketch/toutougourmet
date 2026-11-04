@@ -93,6 +93,11 @@ export default function PolitiqueConfidentialitePage() {
               contenu du message pour l&apos;envoyer. Ces emails ne contiennent aucune publicité.
             </p>
             <p className="mb-2">
+              Si ton compte confirmé ne contient pas encore de chien, nous pouvons t&apos;envoyer deux rappels
+              au plus pour t&apos;inviter à ajouter son profil. Ils s&apos;arrêtent dès que tu l&apos;ajoutes, et le lien
+              de désinscription présent dans chacun les coupe.
+            </p>
+            <p className="mb-2">
               Scanner d&apos;étiquette : les photos que tu envoies sont traitées en mémoire puis oubliées, jamais
               enregistrées sur notre serveur. Pour lire l&apos;étiquette, elles sont transmises à l&apos;API Gemini
               de Google (Google Ireland Limited). Nous gardons le texte lu sur l&apos;étiquette et la note, qui forment
@@ -123,6 +128,23 @@ export default function PolitiqueConfidentialitePage() {
               Seul le responsable du site voit les adresses inscrites à la lettre et celles des comptes, dans
               un espace privé protégé par mot de passe. Il s&apos;en sert pour gérer la lettre et les comptes
               (répondre à une demande, retirer une adresse), et pour rien d&apos;autre.
+            </p>
+          </Section>
+
+          <Section title="Suivi des emails envoyés">
+            <p className="mb-2">
+              Pour savoir quel email t&apos;a été envoyé et quand, nous gardons pour chacun son type, son objet,
+              sa date et s&apos;il est parti ou non. Nous ne relevons ni les ouvertures ni les clics dans ce journal.
+              Il ne contient pas ton adresse, seulement une empreinte calculée à partir d&apos;elle avec une clé
+              secrète : nous ne pouvons relier une ligne à une adresse que si nous connaissons encore cette
+              adresse, par la liste de la lettre ou par un compte. Seul le responsable du site consulte ce suivi,
+              dans le même espace privé.
+            </p>
+            <p>
+              Ces lignes sont effacées après 24 mois. Si tu supprimes ton compte ou si tu quittes la lettre,
+              elles restent jusqu&apos;à cette échéance sous forme d&apos;empreinte, sans ton adresse. Quand tu te
+              désinscris, nous gardons aussi l&apos;empreinte de ton adresse, sans limite de durée, pour ne plus
+              t&apos;écrire. Ce suivi repose sur notre intérêt légitime à prouver et à contrôler nos envois.
             </p>
           </Section>
 

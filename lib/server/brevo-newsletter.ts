@@ -69,6 +69,8 @@ export async function markWelcomeSent(email: string): Promise<void> {
 
 /** Retire l'adresse de la liste de la lettre. Une adresse déjà absente compte comme un succès. */
 export async function removeFromList(email: string): Promise<void> {
+  // Comme subscribe() : à blanc, Brevo n'est pas appelé (tests, préversion).
+  if (process.env.BREVO_DRY_RUN === '1') return
   const id = listId()
   if (!id) throw new Error('brevo-not-configured')
   const res = await brevo(`/contacts/lists/${id}/contacts/remove`, { method: 'POST', body: { emails: [email] } })

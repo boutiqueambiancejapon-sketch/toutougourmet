@@ -11,6 +11,7 @@
 import { writeFileSync } from 'node:fs'
 import { weeklyDigestEmail } from '../lib/emails/weekly'
 import { getPool } from '../lib/server/db'
+import { flushEmailLog } from '../lib/server/email-log'
 import { sendTransactionalEmail } from '../lib/server/mailer'
 import { getWeeklyDigestData, lastWeekStart } from '../lib/server/weekly-digest-data'
 
@@ -34,7 +35,8 @@ async function main(): Promise<void> {
   }
   const to = process.env.OWNER_EMAIL
   if (!to) throw new Error('OWNER_EMAIL absent')
-  await sendTransactionalEmail({ to, subject: mail.subject, html: mail.html, text: mail.text, tags: ['interne'] })
+  await sendTransactionalEmail({ to, subject: mail.subject, html: mail.html, text: mail.text, kind: 'interne', tags: ['interne'] })
+  await flushEmailLog()
   console.log('[hebdo] résumé envoyé à OWNER_EMAIL.')
 }
 

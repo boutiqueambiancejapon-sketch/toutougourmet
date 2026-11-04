@@ -1,4 +1,5 @@
-# Supprime les comptes jamais confirmés (plus de 30 jours), les jetons et sessions expirés.
+# Supprime les comptes jamais confirmés (plus de 30 jours), les jetons et sessions expirés,
+# l'historique des envois d'e-mails de plus de 24 mois.
 [Unit]
 Description=Toutou Gourmet - purge des comptes non confirmés
 After=postgresql.service

@@ -4,6 +4,38 @@
 
 export const UNVERIFIED_RETENTION_DAYS = 30
 
+// @cdc e-mails — RGPD, durée de conservation : historique des envois gardé 24 mois (politique de
+// confidentialité). guide_sends et welcome_sends suivent : après 24 mois, plus rien à dédoublonner.
+// email_optouts n'est jamais purgée : elle fait respecter l'opposition.
+export const EMAIL_LOG_RETENTION_MONTHS = 24
+
+const EMAIL_HISTORY_TABLES = ['email_log', 'guide_sends', 'welcome_sends']
+
+/**
+ * Une table absente compte pour zéro : la purge des comptes doit passer même si db/analytics.sql
+ * n'a pas encore été appliqué.
+ * @param {import('pg').Pool | import('pg').Client} db
+ * @param {{ months?: number, dry?: boolean }} [options]
+ * @returns {Promise<number>} lignes supprimées (ou à supprimer avec dry)
+ */
+export async function purgeEmailHistory(db, { months = EMAIL_LOG_RETENTION_MONTHS, dry = false } = {}) {
+  if (!Number.isInteger(months) || months < 1) throw new Error(`durée invalide : ${months}`)
+  let total = 0
+  for (const table of EMAIL_HISTORY_TABLES) {
+    const { rows } = await db.query('SELECT to_regclass($1) IS NOT NULL AS ok', [`analytics.${table}`])
+    if (!rows[0].ok) continue
+    const where = 'sent_at < now() - make_interval(months => $1::int)'
+    if (dry) {
+      const res = await db.query(`SELECT count(*)::int AS n FROM analytics.${table} WHERE ${where}`, [months])
+      total += res.rows[0].n
+    } else {
+      const res = await db.query(`DELETE FROM analytics.${table} WHERE ${where}`, [months])
+      total += res.rowCount ?? 0
+    }
+  }
+  return total
+}
+
 /**
  * @param {import('pg').Pool | import('pg').Client} db
  * @param {{ days?: number, dry?: boolean }} [options]

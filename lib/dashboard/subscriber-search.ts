@@ -10,10 +10,11 @@ export const SEARCH_PATH = '/tableau-de-bord/conversions/inscrits'
 export const SEARCH_MAX = 120
 export const SEARCH_MAX_AGE = 15 * 60
 
-export type ListKind = 'lettre' | 'comptes'
+export type ListKind = 'lettre' | 'comptes' | 'envois'
 
 export function parseList(value: string | string[] | undefined): ListKind {
-  return (Array.isArray(value) ? value[0] : value) === 'comptes' ? 'comptes' : 'lettre'
+  const list = Array.isArray(value) ? value[0] : value
+  return list === 'comptes' || list === 'envois' ? list : 'lettre'
 }
 
 export function parsePage(value: string | string[] | undefined): number {
@@ -31,7 +32,7 @@ export async function readSearch(): Promise<string> {
 
 export function listHref(list: ListKind, page = 1): string {
   const params = new URLSearchParams()
-  if (list === 'comptes') params.set('liste', 'comptes')
+  if (list !== 'lettre') params.set('liste', list)
   if (page > 1) params.set('page', String(page))
   const qs = params.toString()
   return qs ? `${SEARCH_PATH}?${qs}` : SEARCH_PATH

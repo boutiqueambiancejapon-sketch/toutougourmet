@@ -5,7 +5,9 @@ import { parseList } from '@/lib/dashboard/subscriber-search'
 import { subscriberSourceLabel } from '@/lib/dashboard/subscriber-source'
 import { signupPlaceLabel } from '@/lib/signup-places'
 import { allAccounts } from '@/lib/server/dashboard-accounts'
+import { allEmailTracking } from '@/lib/server/dashboard-email-tracking'
 import { allSubscribers } from '@/lib/server/dashboard-subscribers'
+import { trackingCsvRows, TRACKING_CSV_HEADER } from '@/lib/dashboard/email-tracking'
 
 // @cdc tableau de bord — export CSV d'une liste entière (?liste=lettre|comptes). Identifiants
 // revérifiés ici (le proxy peut sauter, voir guard.ts), réponse jamais mise en cache.
@@ -36,10 +38,15 @@ async function accountsCsv(): Promise<string | null> {
   return toCsv(['email', 'creation', 'adresse_confirmee', 'emplacement', 'premium', 'chiens'], rows)
 }
 
+async function trackingCsv(): Promise<string | null> {
+  const res = await allEmailTracking()
+  return res.ok ? toCsv(TRACKING_CSV_HEADER, trackingCsvRows(res.rows)) : null
+}
+
 export async function GET(request: NextRequest) {
   if (!(await dashboardAllowed())) return new NextResponse(null, { status: 404, headers: NO_STORE })
   const list = parseList(request.nextUrl.searchParams.get('liste') ?? undefined)
-  const csv = list === 'comptes' ? await accountsCsv() : await letterCsv()
+  const csv = list === 'comptes' ? await accountsCsv() : list === 'envois' ? await trackingCsv() : await letterCsv()
   if (csv === null) {
     return new NextResponse('Lecture impossible pour le moment, réessaie dans une minute.', {
       status: 503,
@@ -50,7 +57,7 @@ export async function GET(request: NextRequest) {
     headers: {
       ...NO_STORE,
       'Content-Type': 'text/csv; charset=utf-8',
-      'Content-Disposition': `attachment; filename="${csvFileName(list === 'comptes' ? 'comptes' : 'lettre')}"`,
+      'Content-Disposition': `attachment; filename="${csvFileName(list)}"`,
     },
   })
 }
