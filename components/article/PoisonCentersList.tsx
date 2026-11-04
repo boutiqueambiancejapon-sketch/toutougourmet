@@ -17,7 +17,7 @@ export function PoisonCentersList({ callLabel }: { callLabel: string }) {
             type="button"
             aria-pressed={c.code === current.code}
             onClick={() => choose(c.code)}
-            className="min-h-10 flex-1 rounded-control px-2 text-sm font-semibold text-ink-2 aria-pressed:bg-ink aria-pressed:text-cream"
+            className="min-h-11 flex-1 rounded-control px-2 text-sm font-semibold text-ink-2 aria-pressed:bg-ink aria-pressed:text-cream"
           >
             {c.label}
           </button>

@@ -18,7 +18,8 @@ import { getMidCta } from '@/lib/mid-cta'
 import { remarkMidCta } from '@/lib/remark-mid-cta'
 import { remarkFormula } from '@/lib/remark-formula'
 import { MidArticleCta } from '@/components/article/MidArticleCta'
-import { ArticleLayout } from '@/components/blog/ArticleLayout'
+import { ArticleLayout, ArticleTldr } from '@/components/blog/ArticleLayout'
+import { isUrgentPage, remarkUrgentFirst } from '@/lib/remark-urgent-first'
 import { getCategoryBySlug } from '@/data/categories'
 import { getArticleSlot } from '@/components/blog/blog-categories'
 import { getSlotPath, resolveSlot } from '@/data/image-utils'
@@ -215,9 +216,13 @@ export default async function ArticleCategoryPage({ params }: Props) {
     mainBrand: frontmatter.affiliateA?.name ?? frontmatter.review?.brand,
     twoBrands: Boolean(frontmatter.affiliateB),
   })
-  const mdxComponents = midCta
-    ? { ...articleMdxComponents, MidCta: () => <MidArticleCta cta={midCta} /> }
-    : articleMdxComponents
+  // @cdc cro-carte — urgence : les gestes d'abord, puis « L'essentiel » ; rien à vendre, même si le MDX pose une offre.
+  const urgent = isUrgentPage({ slug, categorySlug: category, verdict: frontmatter.verdict })
+  const mdxComponents = {
+    ...articleMdxComponents,
+    ...(midCta ? { MidCta: () => <MidArticleCta cta={midCta} /> } : {}),
+    ...(urgent ? { UrgentTldr: () => <ArticleTldr items={tldrItems} />, BrandCTA: () => null, BreedBrandCompare: () => null } : {}),
+  }
 
   return (
     <>
@@ -250,7 +255,7 @@ export default async function ArticleCategoryPage({ params }: Props) {
           components={mdxComponents}
           options={{
             mdxOptions: {
-              remarkPlugins: [remarkGfm, remarkFormula, ...(midCta ? [remarkMidCta] : []), ...signupPlugins, ...guidePlugins],
+              remarkPlugins: [remarkGfm, remarkFormula, ...(midCta ? [remarkMidCta] : []), ...signupPlugins, ...guidePlugins, ...(urgent ? [remarkUrgentFirst] : [])],
               rehypePlugins: [
                 [rehypeAutolinkTerms, { terms: AUTOLINK_DICTIONARY, maxTotal: 3 }],
               ],

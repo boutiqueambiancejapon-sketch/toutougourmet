@@ -8,7 +8,8 @@ export interface BreadcrumbItem {
 
 const SITE_URL = 'https://www.toutou-gourmet.com'
 
-export function BreadcrumbNav({ items }: { items: BreadcrumbItem[] }) {
+/** `compact` : sans le dernier élément sur mobile (le H1 le répète juste dessous), JSON-LD inchangé. */
+export function BreadcrumbNav({ items, compact = false }: { items: BreadcrumbItem[]; compact?: boolean }) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -25,7 +26,7 @@ export function BreadcrumbNav({ items }: { items: BreadcrumbItem[] }) {
       <nav aria-label="Fil d'Ariane" className="v2 text-sm text-ink-2">
         <ol role="list" className="m-0 flex list-none flex-wrap items-center gap-x-1.5 p-0">
           {items.map((item, i) => (
-            <li key={`${item.label}-${i}`} className="inline-flex items-center gap-1.5">
+            <li key={`${item.label}-${i}`} className={`items-center gap-1.5 ${compact && i === items.length - 1 ? 'hidden md:inline-flex' : 'inline-flex'}`}>
               {i > 0 ? <span aria-hidden="true" className="opacity-50">›</span> : null}
               {item.href ? (
                 <Link href={item.href} className="inline-flex min-h-11 items-center text-ink-2 no-underline hover:text-ink">{item.label}</Link>

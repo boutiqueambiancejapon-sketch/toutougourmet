@@ -3,6 +3,7 @@ import { Illustration } from '@/components/ui/Illustration'
 import { getCategoryPill } from '@/lib/og/tokens'
 import { CategoryIcon } from '@/components/icons'
 import { BreadcrumbNav, type BreadcrumbItem } from '@/components/ui/BreadcrumbNav'
+import { titleTypo } from '@/lib/title-typo'
 
 // @cdc 04-pages — en-tête d'article V2 (prototype) : fil d'Ariane, H1, chapô,
 // ligne rubrique · auteur · date de mise à jour en <time>, cover à droite.
@@ -26,47 +27,61 @@ interface ArticleHeaderProps {
   extra?: React.ReactNode
   /** Bloc affiché juste sous le chapô (verdict des articles « peut-il manger ») */
   lead?: React.ReactNode
+  /** Urgence, aliment « danger » : pas d'image, verdict juste sous le chapô et juste avant les gestes ;
+      la ligne auteur et date passe en bas d'article (ArticleLayout), le bouton d'appel reste au premier écran. */
+  urgent?: boolean
+}
+
+type ArticleMetaProps = Pick<ArticleHeaderProps, 'categorySlug' | 'author' | 'updatedIso' | 'updatedDisplay' | 'readTime'>
+
+export function ArticleMeta({ categorySlug, author, updatedIso, updatedDisplay, readTime }: ArticleMetaProps) {
+  const pill = getCategoryPill(categorySlug)
+  return (
+    <p className="m-0 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-ink-2">
+      <Link href={`/chien/${categorySlug}`} className="inline-flex items-center gap-1.5 text-ink-2 no-underline hover:text-ink">
+        <CategoryIcon slug={categorySlug} className="size-[18px]" />
+        {pill.label}
+      </Link>
+      <span aria-hidden="true">·</span>
+      <Link href={author.url} prefetch={false} className="font-semibold text-ink no-underline hover:text-orange-ink">{author.name}</Link>
+      <span aria-hidden="true">·</span>
+      <span>
+        Mis à jour le <time dateTime={updatedIso}>{updatedDisplay}</time>
+      </span>
+      <span aria-hidden="true">·</span>
+      <span>{readTime} min de lecture</span>
+    </p>
+  )
 }
 
 export function ArticleHeader(props: ArticleHeaderProps) {
-  const { breadcrumb, categorySlug, coverSlot, title, description, author, updatedIso, updatedDisplay, readTime, extra, lead } = props
-  const pill = getCategoryPill(categorySlug)
+  const { breadcrumb, coverSlot, title, description, extra, lead, urgent = false } = props
   return (
-    <header className="v2 mx-auto flex max-w-page flex-col gap-6 px-4 pt-6 md:px-8 md:pt-10">
-      <BreadcrumbNav items={breadcrumb} />
-      <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-12">
-        <div className="flex min-w-0 flex-col gap-4">
+    <header className={`v2 mx-auto flex max-w-page flex-col px-4 md:px-8 md:pt-10 ${urgent ? 'gap-2 pt-2' : 'gap-6 pt-6'}`}>
+      <BreadcrumbNav items={breadcrumb} compact={urgent} />
+      <div className={`grid grid-cols-1 items-center gap-6 ${urgent ? 'max-w-[760px]' : 'lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-12'}`}>
+        <div className={`flex min-w-0 flex-col ${urgent ? 'gap-3' : 'gap-4'}`}>
           <h1 className="m-0 font-display text-[clamp(1.9rem,3.6vw,2.6rem)] font-black leading-[1.08] tracking-tight text-ink [text-wrap:balance]">
-            {title}
+            {titleTypo(title)}
           </h1>
           <p className="m-0 text-base leading-relaxed text-ink-2 md:text-lg">{description}</p>
-          {lead}
-          <p className="m-0 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-ink-2">
-            <Link href={`/chien/${categorySlug}`} className="inline-flex items-center gap-1.5 text-ink-2 no-underline hover:text-ink">
-              <CategoryIcon slug={categorySlug} className="size-[18px]" />
-              {pill.label}
-            </Link>
-            <span aria-hidden="true">·</span>
-            <Link href={author.url} prefetch={false} className="font-semibold text-ink no-underline hover:text-orange-ink">{author.name}</Link>
-            <span aria-hidden="true">·</span>
-            <span>
-              Mis à jour le <time dateTime={updatedIso}>{updatedDisplay}</time>
-            </span>
-            <span aria-hidden="true">·</span>
-            <span>{readTime} min de lecture</span>
-          </p>
+          {urgent ? null : lead}
+          {urgent ? null : <ArticleMeta {...props} />}
+          {urgent ? lead : null}
           {extra}
         </div>
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-hero">
-          <Illustration
-            slot={coverSlot}
-            alt={`Illustration : ${title}`}
-            fill
-            priority
-            sizes="(max-width: 1024px) 100vw, 520px"
-            className="!rounded-none"
-          />
-        </div>
+        {urgent ? null : (
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-hero">
+            <Illustration
+              slot={coverSlot}
+              alt={`Illustration : ${title}`}
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 520px"
+              className="!rounded-none"
+            />
+          </div>
+        )}
       </div>
     </header>
   )

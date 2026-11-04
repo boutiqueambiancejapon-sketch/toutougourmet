@@ -1,5 +1,4 @@
 import { VerdictIcon, type VerdictKind } from '@/components/icons'
-import { POISON_CENTERS } from '@/data/poison-centers'
 import { VerdictPoisonLine } from './VerdictPoisonLine'
 
 // @cdc 04-pages — verdict en tête d'article (audit design-cro §3 « Article ») : la réponse
@@ -12,9 +11,8 @@ const TONE: Record<VerdictKind, { word: string; bg: string }> = {
   danger: { word: 'DANGER', bg: 'bg-rose-bg' },
 }
 
-export function VerdictHero({ verdict, note }: { verdict: VerdictKind; note?: string }) {
+export function VerdictHero({ verdict, note, call = verdict === 'danger' }: { verdict: VerdictKind; note?: string; call?: boolean }) {
   const tone = TONE[verdict]
-  const center = verdict === 'danger' ? POISON_CENTERS.fr[0] : undefined
   return (
     <section aria-label="Verdict" className={`v2 flex flex-col gap-3 rounded-card p-4 md:p-5 ${tone.bg}`}>
       <div className="flex items-center gap-4">
@@ -27,7 +25,7 @@ export function VerdictHero({ verdict, note }: { verdict: VerdictKind; note?: st
           {note ? <span className="mt-1.5 text-base leading-snug text-ink">{note}</span> : null}
         </p>
       </div>
-      {center ? <VerdictPoisonLine /> : null}
+      {call ? <VerdictPoisonLine /> : null}
     </section>
   )
 }
