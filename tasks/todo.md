@@ -155,7 +155,9 @@ Objectif : `dashboard.toutou-gourmet.com`, nos chiffres à nous (actions des vis
 - [x] Couper chaque tâche cloud après son premier article réussi
 - [x] Installer la minuterie (0 h 37) avant de couper la dernière tâche
 
-## Réputation et partenaires (audit du 2026-11-04, validé par le propriétaire)
+## Réputation et partenaires (audit du 2026-11-04, ANNULÉ par le propriétaire le jour même)
+
+Corrections non appliquées : ne pas les lancer sans nouvelle demande.
 
 Rapport hors dépôt : `~/audits/audit-partenaires-2026-11-04.md`.
 
