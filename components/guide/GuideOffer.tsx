@@ -7,10 +7,10 @@ import type { BookSummary } from '@/lib/guide/book'
 import { GuideForm } from './GuideForm'
 import { GuideReady } from './GuideReady'
 
-// @cdc guide — encart « Recevoir le guide gratuit » : seul appel à l'action de fin d'article sur
-// les aliments autorisés ou à limiter et sur les recettes (remplace la fiche bonus et l'encart
-// compte, voir lib/article-cro.ts), et en bas de /fiche-aliments-dangereux. Après inscription :
-// « Ton guide est prêt » et le lien direct vers le PDF.
+// @cdc guide — encart « Recevoir le guide gratuit » : bas de l'accueil et de /fiche-aliments-dangereux.
+// Dans les articles, le guide n'apparaît plus qu'en haut (GuideTop, audit mobile 2026-11-04). Après
+// inscription : « Ton guide est prêt » et le lien direct vers le PDF. `data-guide-on-page` retire le
+// bloc du pied de page (globals.css).
 
 interface GuideOfferProps {
   place: GuidePlace
@@ -27,6 +27,7 @@ export function GuideOffer({ place, summary, slug, className = 'mt-10' }: GuideO
     <section
       aria-labelledby={`${id}-t`}
       data-cta={`guide-${place}`}
+      data-guide-on-page
       className={`v2 flex flex-col gap-4 rounded-card border-2 border-ink bg-paper p-4 shadow-[5px_5px_0_var(--orange)] sm:p-6 print:hidden ${className}`}
     >
       {signup.status === 'success' ? (

@@ -6,7 +6,7 @@ import { GUIDE_PAGE_PATH } from '@/lib/guide/config'
 
 export function GuideFicheLink() {
   return (
-    <p className="v2 mt-10 border-t border-line pt-4 text-[15px] text-ink-2 print:hidden">
+    <p data-guide-on-page className="v2 mt-10 border-t border-line pt-4 text-[15px] text-ink-2 print:hidden">
       <Link href={GUIDE_PAGE_PATH} className="font-semibold text-ink underline underline-offset-2">
         Fiche frigo à imprimer
       </Link>{' '}

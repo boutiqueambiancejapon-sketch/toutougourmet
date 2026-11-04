@@ -21,10 +21,10 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
     title: 'Marques',
     links: [
       { href: '/chien/marque', label: 'Toutes les marques' },
+      { href: '/chien/marque/dog-chef', label: 'Dog Chef' },
       { href: '/chien/marque/franklin', label: 'Franklin' },
       { href: '/chien/marque/elmut', label: 'Elmut' },
       { href: '/chien/marque/ultra-premium-direct', label: 'Ultra Premium Direct' },
-      { href: '/chien/marque/dog-chef', label: 'Dog Chef' },
       { href: '/chien/marque/dogfy-diet', label: 'Dogfy Diet' },
       { href: '/comparateur', label: 'Comparateur' },
       { href: '/codes-promo', label: 'Codes promo' },
@@ -57,7 +57,7 @@ export function SiteFooter() {
   return (
     <footer className="v2 mt-16 bg-ink text-cream">
       <div className="mx-auto max-w-page px-4 py-12 md:px-8">
-        <div className="mb-10 grid gap-4 lg:grid-cols-[1.2fr_1fr]">
+        <div data-footer-offers className="mb-10 grid gap-4 lg:grid-cols-[1.2fr_1fr]">
           <FooterScanner />
           <FooterGuide />
         </div>

@@ -5,9 +5,9 @@ import { extractSizeBands, type SizeBand } from '@/lib/size-bands'
 // @cdc 04-pages — règles d'affichage des blocs de conversion d'article (audit design-cro §3).
 
 /**
- * Appel à l'action de fin d'article (carte des conversions, docs/v2/cro-carte.md) : un seul par
- * article.
- * - Aliment autorisé ou à limiter, recette : le guide PDF (l'encart compte est retiré, voir
+ * Appel à l'action principal de l'article (carte des conversions, docs/v2/cro-carte.md) : un seul.
+ * - Aliment autorisé ou à limiter, recette : le guide PDF, en haut de l'article (lib/remark-guide-top.ts),
+ *   plus rien à la fin depuis l'audit mobile du 2026-11-04 (l'encart compte est retiré aussi, voir
  *   lib/article-signup.ts).
  * - Urgence ou aliment « danger » : rien à vendre ; un lien discret vers la fiche frigo du guide,
  *   tout en bas, après la FAQ.

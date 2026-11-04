@@ -46,6 +46,7 @@ Conversions mesurées sur la même période : 1 compte, 1 clic partenaire, 1 qui
 Règles :
 - **Un seul encart de fin d'article** et **un seul encart au milieu au plus**, jamais deux fois la même demande.
 - **Rien à vendre sur les urgences** ni sur un aliment « danger » avant que les gestes et les numéros soient lus.
+- Le guide n'apparaît qu'une fois sur une page (audit mobile du 2026-11-04) : en haut des articles aliments et recettes, en bas de l'accueil, sans répétition en fin d'article ni dans le pied de page. Le panneau du guide reste à part.
 - Le bouton « Créer un compte » de l'en-tête reste partout (sauf dans l'espace compte).
 - La lettre seule disparaît : on demande l'e-mail contre le guide, qui inscrit à la lettre.
 

@@ -41,7 +41,7 @@
   --r-pill: 999px; /* chips, pastilles */
 
   --w-page:  1160px; /* largeur max des pages */
-  --tabbar-h: 72px;  /* barre d'onglets mobile V2 (hors zone de sécurité iPhone) */
+  --tabbar-h: 76px;  /* barre d'onglets mobile V2, mesurée (hors zone de sécurité iPhone) */
   --w-prose: 760px;  /* largeur max des pages de texte */
 
   --display: var(--font-fraunces), Georgia, 'Times New Roman', serif;
@@ -213,8 +213,13 @@
 html { scroll-behavior: smooth; }
 /* Exemple d'un champ : plus clair que la saisie pour ne pas faire croire le champ rempli (audit 2026-11-03, E9). */
 ::placeholder { color: var(--ink-3); opacity: 1; }
-/* Bandeau partenaire collant affiché (components/blog/StickyBar.tsx) : il remplace la barre d'onglets. */
-html[data-sticky] [data-tabbar] { display: none; }
+/* Bandeau partenaire collant (components/blog/StickyBar.tsx) ou panneau du guide (GuidePopup) affiché :
+   il prend la place de la barre d'onglets, jusqu'à sa fermeture. */
+html[data-sticky] [data-tabbar],
+html[data-popup] [data-tabbar] { display: none; }
+/* Une page qui porte déjà sa demande du guide ne la répète pas dans le pied de page (audit mobile 2026-11-04). */
+body:has(main [data-guide-on-page]) [data-cta="guide-footer"] { display: none; }
+body:has(main [data-guide-on-page]) [data-footer-offers] { grid-template-columns: minmax(0, 1fr); }
 
 body {
   background-color: var(--bg-primary);

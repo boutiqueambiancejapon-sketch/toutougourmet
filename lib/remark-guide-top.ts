@@ -3,7 +3,7 @@ import { articleEndCta } from './article-cro'
 
 // @cdc guide — version courte du guide en haut des articles aliments (autorisé ou à limiter) et
 // recettes : <GuideTop /> en tête du corps de l'article, juste sous « L'essentiel » (rendu par
-// ArticleLayout). L'encart de fin reste. Urgences et aliments « danger » : rien (même règle que
+// ArticleLayout). C'est la seule demande du guide dans l'article, en dehors du panneau. Urgences et aliments « danger » : rien (même règle que
 // lib/article-cro.ts, rien à demander avant les gestes et les numéros).
 
 type GuideTopKind = 'aliment' | 'recette'

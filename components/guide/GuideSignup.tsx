@@ -10,9 +10,15 @@ import { GuideReady } from './GuideReady'
 
 export function GuideSignup() {
   const signup = useGuideSignup('page-guide')
-  if (signup.status !== 'success') return <GuideForm signup={signup} />
+  if (signup.status !== 'success') {
+    return (
+      <div data-guide-on-page>
+        <GuideForm signup={signup} />
+      </div>
+    )
+  }
   return (
-    <div className="flex flex-col gap-4">
+    <div data-guide-on-page className="flex flex-col gap-4">
       <GuideReady place="page-guide" />
       <div className="flex flex-col gap-1 rounded-card border-2 border-ink bg-paper p-4 shadow-[4px_4px_0_var(--orange)]">
         <p className="m-0 font-display text-lg font-black text-ink">Et maintenant ?</p>

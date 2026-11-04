@@ -13,6 +13,7 @@ export function GuideInline({ line, slug }: { line: string; slug: string }) {
     <aside
       aria-label="Le guide de la gamelle"
       data-cta="guide-inline-guide"
+      data-guide-on-page
       className="v2 not-prose my-6 flex flex-col gap-2.5 rounded-box border-2 border-ink bg-amber-bg p-3.5 sm:p-4 print:hidden"
     >
       {signup.status === 'success' ? (

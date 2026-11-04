@@ -12,8 +12,8 @@ import { GuideDownloadLink } from './GuideReady'
 import { PopupForm } from './PopupForm'
 
 // @cdc guide — panneau du guide (« popup »), règles d'ouverture dans lib/guide/use-guide-popup.ts.
-// Mobile : panneau bas, 40 % de l'écran au plus, au-dessus de la barre d'onglets, page visible et
-// utilisable derrière (dialogue non modal : aria-modal="false", pas de piège du focus). Le focus va
+// Mobile : panneau bas, 40 % de l'écran au plus, à la place de la barre d'onglets tant qu'il est ouvert
+// (html[data-popup], globals.css), page visible et utilisable derrière (dialogue non modal : aria-modal="false", pas de piège du focus). Le focus va
 // sur le titre à l'ouverture et revient où il était à la fermeture ; Échap ferme. Ordinateur :
 // carte en bas à droite. Inscription : flux du guide (/api/contact, source « guide », place « popup »).
 
@@ -56,9 +56,9 @@ export function GuidePopup({ foodCount, recipeCount }: { foodCount: number; reci
       aria-modal="false"
       aria-labelledby={`${id}-t`}
       aria-describedby={`${id}-d`}
-      className="v2 tg-sheet fixed inset-x-0 bottom-[calc(var(--tabbar-h)+env(safe-area-inset-bottom))] z-50 md:inset-x-auto md:right-4 md:bottom-4 md:w-[420px] print:hidden"
+      className="v2 tg-sheet fixed inset-x-0 bottom-0 z-50 md:inset-x-auto md:right-4 md:bottom-4 md:w-[420px] print:hidden"
     >
-      <div className="relative flex max-h-[40dvh] flex-col gap-2.5 overflow-y-auto rounded-t-card border-2 border-b-0 border-ink bg-paper px-4 pt-3.5 pb-3 shadow-[0_-4px_0_var(--orange)] md:max-h-none md:rounded-card md:border-b-2 md:p-5 md:shadow-[5px_5px_0_var(--orange)]">
+      <div className="relative flex max-h-[40dvh] flex-col gap-2.5 overflow-y-auto rounded-t-card border-2 border-b-0 border-ink bg-paper px-4 pt-3.5 pb-[calc(12px+env(safe-area-inset-bottom))] shadow-[0_-4px_0_var(--orange)] md:max-h-none md:rounded-card md:border-b-2 md:p-5 md:shadow-[5px_5px_0_var(--orange)]">
         <button
           type="button"
           onClick={close}
