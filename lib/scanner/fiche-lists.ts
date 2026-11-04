@@ -99,9 +99,17 @@ const rankingPool = (items: ListFiche[], kind: ProductKind) => items.filter((f) 
 
 export const topFiches = (items: ListFiche[], kind: ProductKind): ListFiche[] => pick(rankingPool(items, kind), -1)
 
+/**
+ * Aliment thérapeutique ou prescrit : sa composition répond à une maladie (peu de protéines pour le
+ * foie, par exemple). Le barème d'un aliment courant ne le juge pas, il ne figure donc pas parmi les
+ * moins bien notés.
+ */
+const THERAPEUTIC = /\b(hepatic|renal|urinary|gastro|hypoallergenic|anallergenic|satiety|veterinar\w*|prescription|derma\w*|cardiac|diabetic|metabolic|[a-z]\/d)\b/i
+export const isTherapeutic = (f: Pick<ListFiche, 'brand' | 'product'>): boolean => THERAPEUTIC.test(`${f.brand ?? ''} ${f.product ?? ''}`)
+
 export const lowFiches = (items: ListFiche[], kind: ProductKind): ListFiche[] =>
   pick(
-    rankingPool(items, kind).filter((f) => (f.score ?? 100) < LOW_SCORE_BELOW),
+    rankingPool(items, kind).filter((f) => (f.score ?? 100) < LOW_SCORE_BELOW && !isTherapeutic(f)),
     1,
   )
 

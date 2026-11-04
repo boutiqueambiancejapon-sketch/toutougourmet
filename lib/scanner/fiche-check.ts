@@ -29,7 +29,7 @@ Réponds à chaque question par true ou false :
 - produitPlausible : le champ produit ressemble à un nom de produit.
 - compositionCoherente : les ingrédients forment une vraie liste d'aliment pour animaux, sans texte étranger (conseils, adresse, numéro de lot).
 - constituantsPlausibles : protéines, matières grasses, cendres, cellulose et humidité sont possibles et leur somme ne dépasse pas 100. Des constituants absents ne sont pas un défaut pour une friandise (kind vaut treat).
-- typeCorrect : kind et typeAliment correspondent au produit décrit (friandise, os à mâcher : treat ; croquettes, pâtée : complete).
+- typeCorrect : kind correspond au produit décrit (friandise, os à mâcher : treat ; croquettes, pâtée : complete). typeAliment vaut souvent « autre » ou « inconnu », surtout pour une friandise : ce n'est pas une erreur, ne le signale pas.
 - ingredientsBonneListe : les ingrédients viennent de la liste de composition, pas des additifs ni du tableau des constituants (« protéines 26 % » n'est pas un ingrédient).
 - partAnimaleValide : partAnimaleDeclaree, si elle est renseignée, est bien une part d'ingrédients animaux et non le taux de protéines du tableau des constituants. Null est valide.
 

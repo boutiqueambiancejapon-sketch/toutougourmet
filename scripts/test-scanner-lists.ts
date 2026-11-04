@@ -94,6 +94,7 @@ test('top 10 au plus, trié par note, moins bien notées croissantes et sous 55'
   const low = lowFiches(many, 'complete')
   assert.deepEqual(low.map((f) => f.score), [30, 35, 40, 45, 50])
   assert.equal(lowFiches([fiche('haute', { score: 72 })], 'complete').length, 0)
+  assert.equal(lowFiches([fiche('foie', { score: 30, brand: 'Royal Canin', product: 'Hepatic HF 16' })], 'complete').length, 0)
 })
 
 test('marques vues en France d’abord, sans inventer : pays inconnu après, pas exclu', () => {
