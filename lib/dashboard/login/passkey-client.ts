@@ -12,30 +12,43 @@ const FRESH_MS = 4 * 60_000
 
 interface Prepared {
   reply: LoginReply
-  browser: typeof import('@simplewebauthn/browser')
+  browser: typeof import('@simplewebauthn/browser') | null
   at: number
 }
 
 async function prepare(action: string): Promise<Prepared> {
-  const [reply, browser] = await Promise.all([callLogin(action), import('@simplewebauthn/browser')])
-  return { reply, browser, at: Date.now() }
+  try {
+    const [reply, browser] = await Promise.all([callLogin(action), import('@simplewebauthn/browser')])
+    return { reply, browser, at: Date.now() }
+  } catch {
+    return { reply: { ok: false, error: 'unavailable' }, browser: null, at: Date.now() }
+  }
 }
 
-/** take() rend ce qui est prêt, ou le prépare si ce n'est plus frais, puis relance une préparation. */
-export function usePreparedPasskey(action: 'cle-options' | 'enrol-cle-options', enabled = true): () => Promise<Prepared> {
+/**
+ * take() rend ce qui est prêt. Une annulation ne consomme pas le défi : il resservira tel quel.
+ * refresh() en demande un autre après une réponse du serveur, qui, elle, l'a consommé.
+ */
+export function usePreparedPasskey(action: 'cle-options' | 'enrol-cle-options', enabled = true) {
   const ready = useRef<Promise<Prepared> | null>(null)
   useEffect(() => {
     if (enabled && !ready.current) ready.current = prepare(action)
   }, [action, enabled])
-  return useCallback(async () => {
-    const current = ready.current ? await ready.current : null
-    ready.current = null
-    return current && Date.now() - current.at < FRESH_MS ? current : prepare(action)
+  const refresh = useCallback(() => {
+    ready.current = prepare(action)
   }, [action])
+  const take = useCallback(async (): Promise<Prepared> => {
+    const current = ready.current ? await ready.current : null
+    if (current && Date.now() - current.at < FRESH_MS) return current
+    const fresh = prepare(action)
+    ready.current = fresh
+    return fresh
+  }, [action])
+  return { take, refresh }
 }
 
 export async function addPasskey(ready: Prepared): Promise<LoginReply | null> {
-  if (!ready.reply.ok) return ready.reply
+  if (!ready.reply.ok || !ready.browser) return ready.reply
   try {
     const response = await ready.browser.startRegistration({ optionsJSON: ready.reply.options as PublicKeyCredentialCreationOptionsJSON })
     return await callLogin('enrol-cle-verifier', { response })
@@ -45,7 +58,7 @@ export async function addPasskey(ready: Prepared): Promise<LoginReply | null> {
 }
 
 export async function signInWithPasskey(ready: Prepared, next: string): Promise<LoginReply | null> {
-  if (!ready.reply.ok) return ready.reply
+  if (!ready.reply.ok || !ready.browser) return ready.reply
   try {
     const response = await ready.browser.startAuthentication({ optionsJSON: ready.reply.options as PublicKeyCredentialRequestOptionsJSON })
     return await callLogin('cle-verifier', { response, next })

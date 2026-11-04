@@ -25,12 +25,12 @@ export function FactorChoice({ hasPasskey, hasTotp, next }: FactorChoiceProps) {
   const [mode, setMode] = useState<Mode>(hasPasskey ? 'passkey' : hasTotp ? 'totp' : 'backup')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
-  const takePrepared = usePreparedPasskey('cle-options', hasPasskey)
+  const prepared = usePreparedPasskey('cle-options', hasPasskey)
 
   async function passkey() {
     setBusy(true)
     setError('')
-    const reply = await signInWithPasskey(await takePrepared(), next)
+    const reply = await signInWithPasskey(await prepared.take(), next)
     if (reply?.ok) {
       go(reply)
       return
@@ -39,6 +39,7 @@ export function FactorChoice({ hasPasskey, hasTotp, next }: FactorChoiceProps) {
       window.location.assign(reply.next)
       return
     }
+    if (reply) prepared.refresh()
     setError(reply ? errorText(reply.error) : PASSKEY_CANCELLED)
     setBusy(false)
   }

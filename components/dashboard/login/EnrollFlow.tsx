@@ -15,12 +15,12 @@ export function EnrollFlow() {
   const [done, setDone] = useState<LoginReply | null>(null)
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
-  const takePrepared = usePreparedPasskey('enrol-cle-options')
+  const prepared = usePreparedPasskey('enrol-cle-options')
 
   async function passkey() {
     setBusy(true)
     setError('')
-    const reply = await addPasskey(await takePrepared())
+    const reply = await addPasskey(await prepared.take())
     if (reply?.ok) {
       setDone(reply)
       return
@@ -29,6 +29,7 @@ export function EnrollFlow() {
       window.location.assign('/tableau-de-bord/connexion')
       return
     }
+    if (reply) prepared.refresh()
     setError(reply ? errorText(reply.error) : PASSKEY_CANCELLED)
     setBusy(false)
   }

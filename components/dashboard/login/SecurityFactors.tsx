@@ -24,7 +24,13 @@ export function SecurityFactors({ passkeys, totp, backupCodes }: SecurityFactors
   const [busy, setBusy] = useState(false)
   const [codes, setCodes] = useState<string[] | null>(null)
   const [settingUp, setSettingUp] = useState(false)
-  const takePrepared = usePreparedPasskey('enrol-cle-options')
+  const prepared = usePreparedPasskey('enrol-cle-options')
+
+  async function addKey(): Promise<LoginReply | null> {
+    const reply = await addPasskey(await prepared.take())
+    if (reply && !reply.ok) prepared.refresh()
+    return reply
+  }
 
   function settle(reply: LoginReply | null) {
     if (reply?.codes) {
@@ -64,7 +70,7 @@ export function SecurityFactors({ passkeys, totp, backupCodes }: SecurityFactors
         ))}
         {passkeys.length === 0 ? <li className="text-sm text-ink-2">Aucune clé d’accès.</li> : null}
       </ul>
-      <button type="button" disabled={busy} onClick={() => run(async () => addPasskey(await takePrepared()))} className={`${smallButton} mt-3`}>
+      <button type="button" disabled={busy} onClick={() => run(addKey)} className={`${smallButton} mt-3`}>
         Ajouter une clé
       </button>
 
