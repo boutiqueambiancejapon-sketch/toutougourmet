@@ -47,12 +47,13 @@ write_one() {
   echo "✗ $site : push impossible, commit gardé dans $dir"; return 1
 }
 
-while read -r site repo _port branch; do
+# Lecture sur le descripteur 3 : claude et npm ne doivent pas consommer la liste des sites.
+while read -r site repo _port branch <&3; do
   [[ -z ${site:-} || $site == \#* ]] && continue
   [[ -n $ONLY && $site != "$ONLY" ]] && continue
   echo "=== $(date -Is) $site"
-  write_one "$site" "$repo" "$branch" || FAILED="$FAILED $site"
-done < "$HERE/sites.conf"
+  write_one "$site" "$repo" "$branch" </dev/null || FAILED="$FAILED $site"
+done 3< "$HERE/sites.conf"
 
 if [[ -n $FAILED && -f $HOME/.config/toutou/alerts.env ]]; then
   set -a; . "$HOME/.config/toutou/alerts.env"; set +a
