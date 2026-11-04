@@ -215,3 +215,10 @@ Rapport hors dépôt : `~/audits/audit-partenaires-2026-11-04.md`.
 - [ ] Propriétaire : créer la clé Face ID sur l'iPhone, noter les codes, ajouter le trousseau
 - [ ] Une fois la bascule éprouvée : retirer le code Basic de `proxy.ts` et `guard.ts`
 
+
+## Scanner, pour plus tard (décidé le 2026-11-04, priorité actuelle : précision de la note)
+
+- Formule payante proche de Yuka dans l'esprit : quelques scans gratuits, puis abonnement. Moment de la demande de paiement à décider.
+- Écran de résultat : verdict franc en tête, deux raisons au plus, allergie du chien avant le verdict.
+- Bouton principal « Scanner un autre produit ».
+- Scan raté : proposer tout de suite la photo de l'étiquette.
