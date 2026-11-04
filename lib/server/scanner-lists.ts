@@ -34,6 +34,7 @@ export const listFiches = cache(async (): Promise<ListFiche[]> => {
           brand: foodAnalysis.brand,
           product: foodAnalysis.product,
           score: foodAnalysis.score,
+          imageUrl: foodAnalysis.imageUrl,
           extracted: foodAnalysis.extracted,
           details: foodAnalysis.details,
           reviewed: foodAnalysis.reviewed,

@@ -15,6 +15,7 @@ export interface ScanAnalysis {
   details: ScoreResult
   label: ExtractedLabel
   source: AnalysisSource
+  imageUrl: string | null
   analysedAt: string
 }
 
@@ -54,6 +55,7 @@ export function toScanAnalysis(row: FoodAnalysis): ScanAnalysis {
     details: row.details,
     label: { ...row.extracted, champsDouteux: row.extracted.champsDouteux ?? [] },
     source: row.source,
+    imageUrl: row.imageUrl,
     analysedAt: row.createdAt.toISOString(),
   }
 }

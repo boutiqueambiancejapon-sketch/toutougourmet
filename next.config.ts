@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
   // @cdc sécurité (audit 2026-11) — pas d'en-tête X-Powered-By: Next.js.
   poweredByHeader: false,
   images: {
+    // @cdc scanner — images produit du fichier Maxi Zoo, servies par Awin, seul hôte externe autorisé.
+    remotePatterns: [{ protocol: 'https', hostname: 'images2.productserve.com' }],
     // @cdc sécurité (audit 2026-11) — WebP seul : l'encodage AVIF de l'optimiseur d'images est visé
     // par des failles de Next 16.1.6 (GHSA-2xp9-vwfh-vxw4) et coûte cher en CPU sur le VPS.
     formats: ['image/webp'],

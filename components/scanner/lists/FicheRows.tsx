@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ficheMeta, type ListFiche } from '@/lib/scanner/fiche-lists'
+import { ProductPhoto } from '../ProductPhoto'
 import { ScoreBadge } from '../ScoreBadge'
 
 // @cdc scanner — lignes d'une liste de fiches : note, marque, produit, date honnête et origine de
@@ -14,6 +15,7 @@ export function FicheRows({ items, ranked = false, showNoun = false }: { items: 
         <li key={f.slug}>
           <Link href={`/croquettes/${f.slug}`} className="group flex min-h-16 items-center gap-3 py-3 text-ink no-underline">
             {ranked ? <span className="w-5 shrink-0 text-right font-display font-black text-ink-2">{i + 1}</span> : null}
+            <ProductPhoto src={f.imageUrl} />
             <ScoreBadge score={f.score} />
             <span className="flex min-w-0 grow flex-col">
               <span className="truncate font-semibold group-hover:underline">{f.brand ?? 'Marque illisible'}</span>

@@ -34,6 +34,8 @@ export const foodAnalysis = app.table(
     model: text('model').notNull(),
     /** Provenance des données : photo lue par l'IA, fiche Open Pet Food Facts ou Open Food Facts (licence ODbL) */
     source: text('source').$type<AnalysisSource>().notNull().default('photo'),
+    /** Image du produit fournie par le fichier Maxi Zoo (Awin), null sinon */
+    imageUrl: text('image_url'),
     scanCount: integer('scan_count').notNull().default(1),
     /** Relue par la rédaction : seule une fiche relue est indexée et listée dans le sitemap */
     reviewed: boolean('reviewed').notNull().default(false),
@@ -51,7 +53,7 @@ export const foodAnalysis = app.table(
   (t) => [
     check('food_analysis_score_range', sql`${t.score} IS NULL OR (${t.score} >= 0 AND ${t.score} <= 100)`),
     check('food_analysis_ean_format', sql`${t.ean} IS NULL OR ${t.ean} ~ '^([0-9]{8}|[0-9]{13})$'`),
-    check('food_analysis_source', sql`${t.source} IN ('photo', 'openpetfoodfacts', 'openfoodfacts')`),
+    check('food_analysis_source', sql`${t.source} IN ('photo', 'openpetfoodfacts', 'openfoodfacts', 'maxizoo')`),
   ],
 )
 

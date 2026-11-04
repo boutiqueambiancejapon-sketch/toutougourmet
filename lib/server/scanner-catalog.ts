@@ -19,6 +19,7 @@ export interface ReviewedItem {
   brandSlug: string | null
   product: string | null
   score: number
+  imageUrl: string | null
   kind: ProductKind
   noun: FoodNoun
   updatedAt: Date
@@ -33,6 +34,7 @@ export const reviewedItems = cache(async (): Promise<ReviewedItem[]> => {
       brand: foodAnalysis.brand,
       product: foodAnalysis.product,
       score: foodAnalysis.score,
+      imageUrl: foodAnalysis.imageUrl,
       kind: sql<string | null>`${foodAnalysis.details}->>'kind'`,
       updatedAt: foodAnalysis.updatedAt,
       extracted: foodAnalysis.extracted,

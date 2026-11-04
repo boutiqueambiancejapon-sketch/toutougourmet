@@ -24,6 +24,7 @@ import { buyLink } from '@/lib/scanner/buy-link'
 import { FicheJsonLd } from '@/components/scanner/fiche/FicheJsonLd'
 import { FicheNutrition } from '@/components/scanner/fiche/FicheNutrition'
 import { FicheVerdict } from '@/components/scanner/fiche/FicheVerdict'
+import { ProductPhoto } from '@/components/scanner/ProductPhoto'
 import { KindTag } from '@/components/scanner/treat/KindTag'
 import { TreatAlerts } from '@/components/scanner/treat/TreatAlerts'
 import { TreatHomemade } from '@/components/scanner/treat/TreatHomemade'
@@ -99,6 +100,7 @@ export default async function CroquettePage({ params }: Params) {
         <header className="flex flex-col gap-3">
           <h1 className="m-0 font-display text-[clamp(1.75rem,4.2vw,2.5rem)] font-black leading-[1.08] tracking-tight text-ink">{titleTypo(h1)}</h1>
           <div className="flex flex-wrap items-center gap-3">
+            <ProductPhoto src={row.imageUrl} size="lg" />
             <ScoreBadge score={a.score} />
             <KindTag details={a.details} />
             <p className="m-0 text-base text-ink-2">
