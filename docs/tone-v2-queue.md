@@ -90,11 +90,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `avis-royal-canin`
 - [x] `avis-ultra-premium-direct`
 - [x] `chien-peut-manger-kiwi`
-- [ ] `omega-3-chien-comparatif-sources`
-- [ ] `aliments-toxiques-chien-liste-complete`
-- [ ] `fibres-alimentaires-chien-role-sources-dosage`
-- [ ] `nourriture-berger-blanc-suisse`
-- [ ] `huile-olive-chien-bienfaits-dosage`
+- [x] `omega-3-chien-comparatif-sources`
+- [x] `aliments-toxiques-chien-liste-complete`
+- [x] `fibres-alimentaires-chien-role-sources-dosage`
+- [x] `nourriture-berger-blanc-suisse`
+- [x] `huile-olive-chien-bienfaits-dosage`
 - [ ] `chien-peut-manger-epinards`
 - [ ] `nourriture-cane-corso`
 - [ ] `avis-franklin-light-dinde-patate-douce-epinards`
