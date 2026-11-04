@@ -33,3 +33,7 @@ Règle : `npm run build > log 2>&1 || { tail log; exit 1; }` avant tout commit, 
 - Règle : un composant posé dans un article porte la classe `v2`, sinon ses utilitaires de marge, couleur et retour à la ligne sont ignorés. À l'inverse, un corps MDX enveloppé dans `.v2` perd toute sa mise en forme (comparatifs).
 - Règle : quand l'audit dit qu'un outil « défile bien » après un appui, vérifier au doigt : Playwright fait défiler jusqu'au bouton avant de cliquer, l'outil poids n'avait aucun code de défilement.
 
+
+## 2026-11-04 : Scanner, ne pas empiler les propositions
+
+Le propriétaire veut un scanner rapide et simple. Répondre à la question posée, proposer un seul petit changement, et mesurer son effet sur les vraies fiches avant de le conseiller : le plafond à 89 a ramené toutes les pâtées Atavik à la même note, ce qu'un simple comptage aurait montré. Vérifier aussi qu'une comparaison n'inclut pas des friandises.
