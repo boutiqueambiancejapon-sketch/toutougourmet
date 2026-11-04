@@ -143,3 +143,11 @@ Gabarits `lib/emails/` (bienvenue, lettre mensuelle), bienvenue après inscripti
 
 Rapport : `docs/v2/audit-ux-2026-11-03.md`. Corrigés : remises partenaires depuis `data/partner-discounts.ts` (118 MDX normalisés), boutons d'offre qui passent à la ligne, contrastes AA par les jetons, accueil (bouton du test, guide à la place de la lettre, un seul chiffre d'aliments), une demande par page (quiz, races, avis, outils), site 100 % chien, bandeau collant à la place de la barre d'onglets, cibles de 44 px, fiche de garde (une colonne, résumé d'erreurs), plan du site tiré des sitemaps, textes boileau. Contrôles : `/tmp/audit-fix/` (captures avant/après, `controles.txt`, `debordements.txt`, `liens.txt`).
 Reste : mode de consentement GA (décision du propriétaire), publication des fiches produit (`/croquettes` vide), suffixe « | Toutou Gourmet » des titres, 1 px de pied de page à 320 px + 120 % (sans défilement possible), faits « chiens et chats » des marques dans les comparatifs.
+
+## 2026-11-04 : Tableau de bord, onglet Trafic
+
+L'onglet Visiteurs devient Trafic, un petit GA4 maison : vue d'ensemble, en direct, acquisition, pages et parcours (`/tableau-de-bord/trafic`). L'ancienne adresse redirige. L'accueil garde cinq chiffres : clics, visiteurs, sessions, e-mails, scans. Période 90 jours ajoutée à tous les onglets.
+
+Calculs sans base dans `lib/dashboard/traffic.ts`, contrôlés par `npx tsx scripts/test-traffic.ts`. Lectures dans `lib/server/dashboard-traffic.ts`. Aucune donnée nouvelle n'est collectée.
+
+Restent : espace CRM, reprise des tableaux, connexion sécurisée (branche `feat/dashboard-login`).

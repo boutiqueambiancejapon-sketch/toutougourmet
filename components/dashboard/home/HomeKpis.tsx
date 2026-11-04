@@ -12,9 +12,8 @@ const TREND_CLASS: Record<Trend, string> = { up: 'text-green-ink', down: 'text-r
 
 const SMALL: { key: Exclude<keyof Kpis, 'clicks'>; label: string }[] = [
   { key: 'visitors', label: 'Visiteurs' },
-  { key: 'views', label: 'Pages vues' },
+  { key: 'sessions', label: 'Sessions' },
   { key: 'emails', label: 'Nouveaux e-mails' },
-  { key: 'accounts', label: 'Nouveaux comptes' },
   { key: 'scans', label: 'Scans de croquettes' },
 ]
 

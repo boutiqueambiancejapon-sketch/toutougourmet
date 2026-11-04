@@ -3,19 +3,20 @@ import type { Period } from '@/lib/dashboard/period'
 import type { Pair } from '@/lib/dashboard/compare'
 import { checkNight } from './alerts/checks'
 import { getServerHealth } from './dashboard-health'
+import { getSessionCounts } from './dashboard-traffic'
 import { AWAITING_REVIEW_SQL } from './scanner-published'
 
 // @cdc tableau de bord — données de l'accueil, choisies pour être légères : une requête pour les
-// cinq chiffres (période + période d'avant), une pour l'histogramme des clics, trois comptes
+// chiffres (période + période d'avant), une pour les sessions, une pour l'histogramme des clics, trois comptes
 // pour « À faire », l'état du serveur et de la dernière nuit. Le reste vit dans les onglets.
 
 export interface HomeKpis {
   clicks: Pair
   /** Visiteurs distincts par jour, cumulés : l'empreinte change chaque jour (lib/server/visitor-id.ts). Compté depuis le 2026-11-04. */
   visitors: Pair
-  views: Pair
+  /** Compté depuis le 2026-11-04, comme les visiteurs. */
+  sessions: Pair
   emails: Pair
-  accounts: Pair
   scans: Pair
 }
 
@@ -25,14 +26,12 @@ export interface ClickBucket {
 }
 
 const ZERO: Pair = { current: 0, previous: 0 }
-export const EMPTY_KPIS: HomeKpis = { clicks: ZERO, visitors: ZERO, views: ZERO, emails: ZERO, accounts: ZERO, scans: ZERO }
+export const EMPTY_KPIS: HomeKpis = { clicks: ZERO, visitors: ZERO, sessions: ZERO, emails: ZERO, scans: ZERO }
 
 /** Événement(s) compté(s) par chiffre. Une inscription au guide inscrit aussi à la lettre. */
-const METRICS: Record<Exclude<keyof HomeKpis, 'visitors'>, string[]> = {
+const METRICS: Record<Exclude<keyof HomeKpis, 'visitors' | 'sessions'>, string[]> = {
   clicks: ['Affiliate Click'],
-  views: ['Pageview'],
   emails: ['Newsletter Signup', 'Guide Signup'],
-  accounts: ['Account Created'],
   scans: ['Scan Result'],
 }
 
@@ -48,13 +47,16 @@ export async function getHomeKpis(pool: Pool, period: Period): Promise<HomeKpis>
     .join(',\n')
   const visitorCols = `count(DISTINCT visitor) FILTER (WHERE name = 'Pageview' AND ts >= now() - $1::interval)::int AS "visitors_c",
               count(DISTINCT visitor) FILTER (WHERE name = 'Pageview' AND ts < now() - $1::interval)::int AS "visitors_p"`
-  const res = await pool.query<Record<string, number>>(
-    `SELECT ${cols}, ${visitorCols} FROM analytics.events WHERE name = ANY($2) AND ts >= now() - 2 * $1::interval`,
-    [period.interval, names, ...keys.map((k) => METRICS[k])],
-  )
+  const [res, sessions] = await Promise.all([
+    pool.query<Record<string, number>>(
+      `SELECT ${cols}, ${visitorCols} FROM analytics.events WHERE name = ANY($2) AND ts >= now() - 2 * $1::interval`,
+      [period.interval, [...names, 'Pageview'], ...keys.map((k) => METRICS[k])],
+    ),
+    getSessionCounts(pool, period),
+  ])
   const row = res.rows[0] ?? {}
-  const pair = (k: keyof HomeKpis): Pair => ({ current: row[`${k}_c`] ?? 0, previous: row[`${k}_p`] ?? 0 })
-  return { clicks: pair('clicks'), visitors: pair('visitors'), views: pair('views'), emails: pair('emails'), accounts: pair('accounts'), scans: pair('scans') }
+  const pair = (k: Exclude<keyof HomeKpis, 'sessions'>): Pair => ({ current: row[`${k}_c`] ?? 0, previous: row[`${k}_p`] ?? 0 })
+  return { clicks: pair('clicks'), visitors: pair('visitors'), sessions, emails: pair('emails'), scans: pair('scans') }
 }
 
 /** Clics partenaires par heure (période « Jour ») ou par jour, heure de Paris. Le premier seau,

@@ -137,7 +137,7 @@ export async function getPartners(pool: Pool, period: Period): Promise<PartnerDa
 }
 
 // Identifiants (chien, fiche) remplacés par « [id] » : aucun chemin ne renvoie à un compte.
-const MASKED_PAGE = `regexp_replace(page, '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}', '[id]', 'gi')`
+export const MASKED_PAGE = `regexp_replace(page, '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}', '[id]', 'gi')`
 
 export async function getAudience(pool: Pool, period: Period): Promise<AudienceData> {
   const i = period.interval

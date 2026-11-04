@@ -9,6 +9,8 @@ import { DashboardHeader } from './DashboardHeader'
 interface ShellProps {
   period: PeriodKey
   current: TabSlug
+  /** Sous-page de l'onglet, gardée quand on change de période. */
+  sub?: string
   /** Titre de la page quand ce n'est pas le nom de l'onglet (sous-page). */
   title?: string
   /** Sous le titre : la question de l'onglet par défaut. */
@@ -18,11 +20,11 @@ interface ShellProps {
   children: ReactNode
 }
 
-export function DashboardShell({ period, current, title, intro, notice, children }: ShellProps) {
+export function DashboardShell({ period, current, sub, title, intro, notice, children }: ShellProps) {
   const tab = tabOf(current)
   return (
     <>
-      <DashboardHeader period={period} current={current} />
+      <DashboardHeader period={period} current={current} sub={sub} />
       <main className="mx-auto w-full max-w-page px-4 pb-16 md:px-8">
         <div className="pt-5">
           <h1 className="page-title m-0 text-ink">{title ?? (current ? tab.label : 'Tableau de bord')}</h1>
