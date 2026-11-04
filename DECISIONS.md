@@ -257,4 +257,4 @@ Décision du propriétaire : Face ID sans mot de passe sur son iPhone. Une clé 
 
 ## 2026-11-04 : Plafond de note et comparaison par catégorie
 
-Décision du propriétaire : 90 ou plus est réservé aux étiquettes qui déclarent calcium et phosphore, et une note se compare dans sa catégorie. Les 23 pâtées notées 90 ou plus n'indiquaient ni l'un ni l'autre, et la médiane des pâtées (96) dépassait de loin celle des croquettes (61).
+Décision du propriétaire : 90 ou plus est réservé aux étiquettes qui déclarent calcium et phosphore, et une note se compare dans sa catégorie. Les 23 fiches humides notées 90 ou plus n'indiquaient ni l'un ni l'autre, et leur médiane était de 96. Le chiffre de 61 annoncé alors pour les croquettes mêlait des friandises : c'était une erreur de comptage. Après recalcul, la médiane est de 89 pour les pâtées et de 78,5 pour les croquettes, et aucune fiche complète ne dépasse 89.
