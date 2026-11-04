@@ -13,6 +13,7 @@ import { BrandCTA } from '@/components/marques/BrandCTA'
 import { BreedBrandCompare, BrandGroup, BrandRow } from '@/components/race/BreedBrandCompare'
 import { ArticleSignupInvite } from '@/components/cro/ArticleSignupInvite'
 import { ToolCta } from '@/components/article/ToolCta'
+import { ArticleFormula } from '@/components/article/Formula'
 import { GuideTop } from '@/components/guide/GuideTop'
 import { SitterSheetCta } from '@/components/garde/SitterSheetCta'
 import { Heading2 } from './Heading2'
@@ -35,6 +36,7 @@ export const articleMdxComponents = {
   ToolCta,
   GuideTop,
   SitterSheetCta,
+  ArticleFormula,
   h2: Heading2,
   a: MdxLink,
   // Tableau Markdown : défilement horizontal sur mobile, signalé par une ligne (audit 2026-11-03, E33).

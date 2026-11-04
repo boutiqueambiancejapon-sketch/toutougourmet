@@ -109,10 +109,7 @@ export function ToolPage({ slug, path, crumb, title, lead, children, methodTitle
   )
 }
 
-/** Formule affichée en ligne, en chasse fixe sobre (pas d'encadré). */
-export function Formula({ children }: { children: ReactNode }) {
-  return <p className="m-0 font-mono text-[15px] text-ink">{children}</p>
-}
+export { Formula } from '@/components/article/Formula'
 
 /** Liste des sources nommées en fin de section « Comment on calcule ». */
 export function Sources({ items }: { items: ReactNode[] }) {
