@@ -18,6 +18,9 @@ export interface LiveData {
   now: string
   views5: number
   perMinute: number[]
+  /** Visiteurs distincts des 5 dernières minutes (empreinte du jour, lib/server/visitor-id.ts). */
+  visitors5: number
+  visitorsPerMinute: number[]
   pages: { label: string; value: number }[]
   refs: { label: string; value: number }[]
   /** Pages vues des 5 dernières minutes par pays (code ISO, vide si inconnu). */
@@ -27,13 +30,21 @@ export interface LiveData {
 }
 
 export async function getLive(pool: Pool): Promise<LiveData> {
-  const [views, minutes, pages, refs, countries, feed, bots] = await Promise.all([
+  const [views, visitors5, minutes, visitors, pages, refs, countries, feed, bots] = await Promise.all([
     pool.query<{ n: number }>(
       `SELECT count(*)::int AS n FROM analytics.events WHERE name = 'Pageview' AND ts >= now() - interval '5 minutes'`,
+    ),
+    pool.query<{ n: number }>(
+      `SELECT count(DISTINCT visitor)::int AS n FROM analytics.events
+        WHERE name = 'Pageview' AND visitor IS NOT NULL AND ts >= now() - interval '5 minutes'`,
     ),
     pool.query<{ m: number; n: number }>(
       `SELECT floor(extract(epoch FROM (now() - ts)) / 60)::int AS m, count(*)::int AS n
          FROM analytics.events WHERE name = 'Pageview' AND ts >= now() - interval '30 minutes' GROUP BY 1`,
+    ),
+    pool.query<{ m: number; n: number }>(
+      `SELECT floor(extract(epoch FROM (now() - ts)) / 60)::int AS m, count(DISTINCT visitor)::int AS n
+         FROM analytics.events WHERE name = 'Pageview' AND visitor IS NOT NULL AND ts >= now() - interval '30 minutes' GROUP BY 1`,
     ),
     pool.query<{ label: string; value: number }>(
       `SELECT page AS label, count(*)::int AS value FROM analytics.events
@@ -60,10 +71,14 @@ export async function getLive(pool: Pool): Promise<LiveData> {
   ])
   const perMinute = Array.from({ length: 30 }, () => 0)
   for (const r of minutes.rows) if (r.m >= 0 && r.m < 30) perMinute[29 - r.m] = r.n
+  const visitorsPerMinute = Array.from({ length: 30 }, () => 0)
+  for (const r of visitors.rows) if (r.m >= 0 && r.m < 30) visitorsPerMinute[29 - r.m] = r.n
   return {
     now: new Date().toISOString(),
     views5: views.rows[0]?.n ?? 0,
     perMinute,
+    visitors5: visitors5.rows[0]?.n ?? 0,
+    visitorsPerMinute,
     pages: pages.rows,
     refs: refs.rows,
     countries: countries.rows,

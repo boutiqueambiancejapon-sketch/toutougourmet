@@ -45,7 +45,7 @@ export default function PolitiqueConfidentialitePage() {
               <li>Ton adresse email si tu t&apos;inscris à la newsletter, avec double opt-in obligatoire</li>
               <li>Ton prénom, ton adresse email et ton message si tu nous écris par le formulaire de contact</li>
               <li>Ton prénom, ton adresse email, ton mot de passe haché et les profils de tes chiens si tu ouvres un compte</li>
-              <li>Des statistiques de visite anonymes, mesurées sur nos propres serveurs (sans cookie)</li>
+              <li>Des statistiques de visite anonymes, mesurées sur nos propres serveurs (sans cookie). Pour compter les visiteurs, on calcule une empreinte de ton adresse et de ton navigateur, qui change chaque jour et ne permet pas de te retrouver</li>
             </ul>
           </Section>
 

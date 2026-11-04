@@ -188,3 +188,6 @@ CREATE TABLE IF NOT EXISTS analytics.ignored_ips (
 );
 ALTER TABLE analytics.ignored_ips OWNER TO toutou;
 GRANT SELECT, INSERT, UPDATE, DELETE ON analytics.ignored_ips TO administrator;
+
+-- Visiteur du jour (lib/server/visitor-id.ts) : empreinte à sel quotidien jamais écrit, sans adresse ni cookie.
+ALTER TABLE analytics.events ADD COLUMN IF NOT EXISTS visitor text;

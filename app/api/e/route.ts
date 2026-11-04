@@ -4,6 +4,7 @@ import { BOT_UA, deviceOf, isAnalyticsEvent } from '@/lib/analytics-events'
 import { countryOf } from '@/lib/server/geo'
 import { clientIp } from '@/lib/server/rate-window'
 import { isIgnoredVisitor, OWNER_COOKIE } from '@/lib/server/analytics-ignore'
+import { visitorId } from '@/lib/server/visitor-id'
 
 // @cdc mesure — reçoit les actions des visiteurs (clic partenaire, outil, inscription, recherche)
 // et les range dans analytics.events. Aucun cookie posé, aucune IP stockée : seul le pays déduit
@@ -85,8 +86,8 @@ export async function POST(req: NextRequest) {
   const refHost = hostOf(body.r)
   try {
     await pool.query(
-      'INSERT INTO analytics.events (name, page, props, ref_host, device, country) VALUES ($1, $2, $3, $4, $5, $6)',
-      [body.n, body.p.slice(0, 300), JSON.stringify(cleanProps(body.props)), refHost, deviceOf(ua), countryOf(ip)],
+      'INSERT INTO analytics.events (name, page, props, ref_host, device, country, visitor) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+      [body.n, body.p.slice(0, 300), JSON.stringify(cleanProps(body.props)), refHost, deviceOf(ua), countryOf(ip), visitorId(ip, ua)],
     )
   } catch (err) {
     console.error('[api/e] insert failed', err instanceof Error ? err.message : err)

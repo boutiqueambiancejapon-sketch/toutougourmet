@@ -52,6 +52,16 @@ export function LiveSection() {
       <SectionTitle id="direct" title="En direct" intro="Rafraîchi toutes les 10 secondes. Pages vues envoyées par le site, robots lus dans les journaux du serveur chaque minute." />
       {failed && <p role="status" className="mt-3 text-sm text-rose-ink">Connexion perdue, nouvel essai dans 10 secondes.</p>}
       <div className="mt-4 grid gap-4 md:grid-cols-2">
+        <Panel title="Visiteurs ces 5 dernières minutes" hint="Une personne qui ouvre 5 pages compte pour 1">
+          <p className="flex items-center gap-3">
+            <span aria-hidden="true" className="relative flex size-3">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-green-strong opacity-60 motion-reduce:animate-none" />
+              <span className="relative inline-flex size-3 rounded-full bg-green-strong" />
+            </span>
+            <span className="font-display text-5xl font-black tabular-nums text-ink">{data ? data.visitors5 : '…'}</span>
+          </p>
+          <div className="mt-4">{data ? <MinuteBars values={data.visitorsPerMinute} /> : null}</div>
+        </Panel>
         <Panel title="Pages vues ces 5 dernières minutes">
           <p className="flex items-center gap-3">
             <span aria-hidden="true" className="relative flex size-3">
