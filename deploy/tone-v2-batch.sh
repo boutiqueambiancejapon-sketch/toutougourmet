@@ -29,6 +29,8 @@ git config user.name "$(git -C "$HOME/Toutou" config user.name)"; git config use
 
 while (( DONE < MAX && $(date +%s) - START < MINUTES * 60 )); do
   (( $(TZ=Europe/Paris date +%H%M | sed 's/^0*//;s/^$/0/') >= 2330 )) && { echo "23 h 30 : arrêt."; break; }
+  # Un seul gros travail à la fois : le serveur a gelé le 2026-11-04 avec plusieurs constructions en parallèle.
+  while (( $(awk '/MemAvailable/ {print int($2/1048576)}' /proc/meminfo) < 4 )) || pgrep -f "next build" >/dev/null; do sleep 120; done
   git fetch -q origin v2 && git checkout -q -B tone-v2 origin/v2 && git clean -fdq -e node_modules || { FAILS=$((FAILS+1)); sleep 60; continue; }
   SLUGS=$(grep -m "$SIZE" '^- \[ \] `' docs/tone-v2-queue.md | sed 's/.*`\(.*\)`.*/\1/')
   [[ -z $SLUGS ]] && { echo "File terminée."; alert "Tous les articles de la file sont réécrits."; break; }

@@ -19,3 +19,7 @@ Règle : `npm run build > log 2>&1 || { tail log; exit 1; }` avant tout commit, 
 ## 2026-11-04 — Articles trop chiffrés et produit non vérifié
 - Le propriétaire a trouvé l'article du calendrier de l'Avent ennuyeux : des calculs que personne ne lit, et une conclusion « pas une case entière sous 15 kg » tirée d'une estimation (poids trouvé chez un tiers × kcal d'une seule recette), contre la fiche Franklin qui dit « une case par jour ».
 - Règle : partir de la page officielle du produit, écrire pour un maître de chien, un chiffre seulement s'il change la décision. Règle ajoutée à `deploy/new-article-prompt.md`.
+
+## 2026-11-04 — Le serveur a gelé puis redémarré
+- Vers 10 h 45 à Paris, plus aucun journal jusqu'au redémarrage de 10 h 51. Aucune trace de manque de mémoire ni d'arrêt propre : cause non prouvée. À ce moment tournaient la réécriture par lots, un chantier en parallèle et leurs constructions du site, en plus de 7 serveurs Next.
+- Règle : une seule construction à la fois sur ce serveur. `tone-v2-batch.sh` attend qu'aucune autre ne tourne et qu'il reste 4 Go libres.
