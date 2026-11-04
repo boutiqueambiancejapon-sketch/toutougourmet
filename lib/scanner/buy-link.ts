@@ -19,7 +19,7 @@ export interface BuyLink {
 }
 
 const maxiZooUrl = (brand: string) =>
-  `https://www.awin1.com/cread.php?awinmid=68698&awinaffid=1112904&ued=${encodeURIComponent(`https://www.maxizoo.fr/search/?text=${encodeURIComponent(brand)}`)}`
+  `https://www.awin1.com/cread.php?awinmid=68698&awinaffid=1112904&ued=${encodeURIComponent(`https://www.maxizoo.fr/search/?text=${encodeURIComponent(brand.replace(/\s*&\s*/g, " "))}`)}`
 
 export function buyLink(f: { brand: string | null; product: string | null; score: number | null }): BuyLink | null {
   if (f.score === null || f.score < BUY_MIN_SCORE || !f.brand || isTherapeutic(f)) return null
