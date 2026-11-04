@@ -2,6 +2,8 @@
 // campagnes mensuelles (création, test, suspension). Clé BREVO_API_KEY dans l'environnement.
 // Utilisé par le site (route, actions du tableau de bord) et par scripts/newsletter-monthly.ts.
 
+import { MILO_SENDER } from '@/lib/emails/email-kinds'
+
 const API = 'https://api.brevo.com/v3'
 
 export const WELCOME_ATTRIBUTE = 'WELCOME_SENT'
@@ -101,7 +103,7 @@ export async function createCampaign(d: CampaignDraft): Promise<number> {
       name: d.name,
       subject: d.subject,
       previewText: d.previewText,
-      sender: { name: process.env.BREVO_SENDER_NAME || 'Toutou Gourmet', email: senderEmail },
+      sender: { name: MILO_SENDER, email: senderEmail },
       htmlContent: d.htmlContent,
       recipients: { listIds: [id] },
       scheduledAt: d.scheduledAt,
