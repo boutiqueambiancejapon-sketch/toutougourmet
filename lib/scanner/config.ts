@@ -23,7 +23,7 @@ export const RATE_LIMITS = [
 ] as const
 
 /** Le bloc « Derniers scans » de /scanner n'apparaît qu'à partir de ce nombre d'analyses distinctes. */
-export const RECENT_SCANS_MIN_DISTINCT = Number(process.env.SCANNER_RECENT_MIN) || 5
+export const RECENT_SCANS_MIN_DISTINCT = Number(process.env.SCANNER_RECENT_MIN) || 1
 export const RECENT_SCANS_SHOWN = 8
 
 export const ACCEPTED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif'] as const

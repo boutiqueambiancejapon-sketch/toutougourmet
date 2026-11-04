@@ -4,9 +4,8 @@ import { timeAgo } from '@/lib/scanner/time'
 import { recentScans } from '@/lib/server/scanner'
 import { ScoreBadge } from './ScoreBadge'
 
-// @cdc lot 6 — « Derniers scans » sur /scanner : un produit par ligne (scans répétés regroupés),
-// jamais rien sur la personne qui a scanné. Masqué tant qu'il y a moins de
-// RECENT_SCANS_MIN_DISTINCT produits analysés (pas de liste maigre au démarrage).
+// @cdc lot 6 — « Derniers scans » sur /scanner, visible par tous : un produit par ligne (scans
+// répétés regroupés), jamais rien sur la personne qui a scanné. Masqué seulement s'il n'y a aucun scan.
 
 export async function RecentScans() {
   const scans = await recentScans(RECENT_SCANS_SHOWN, RECENT_SCANS_MIN_DISTINCT).catch((err: unknown) => {
