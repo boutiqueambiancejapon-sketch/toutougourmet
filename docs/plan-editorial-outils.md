@@ -12,7 +12,7 @@ Règles :
 
 Demande du propriétaire (2026-11-03). Marque partenaire : Franklin Pet Food (lien de `data/brands.ts`). Prix et compositions relevés sur franklinpetfood.com le jour de la rédaction, jamais de mémoire. Encart vers le scanner (les friandises y sont notées) et lien vers `/croquettes/friandises`. Sujet « calendrier de l'Avent » à publier avant le 1er décembre.
 
-- [ ] Calendrier de l'Avent pour chien : que contient-il et est-ce raisonnable (Franklin, 24 surprises)
+- [x] Calendrier de l'Avent pour chien : que contient-il et est-ce raisonnable (Franklin, 24 surprises) → calendrier-avent-chien
 - [ ] Friandises Franklin : avis et composition (sticks, viande séchée, snacks, dressage)
 - [ ] Sticks dentaires pour chien : servent-ils vraiment (sticks menthe et sauge, fromage, beurre de cacahuète)
 - [ ] Friandises de dressage pour chien : lesquelles choisir et combien par séance
