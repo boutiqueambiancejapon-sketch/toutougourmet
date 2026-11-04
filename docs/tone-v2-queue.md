@@ -75,7 +75,7 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `meilleures-croquettes-petit-chien`
 - [x] `chien-mange-glands-chene-urgence`
 - [x] `chataignes-marrons-inde-chien-difference-danger`
-- [ ] `curcuma-chien-bienfaits-dosage`
+- [x] `curcuma-chien-bienfaits-dosage`
 - [x] `voyager-voiture-chien-alimentation-mal-transports`
 - [x] `croquettes-chien-insuffisance-renale`
 - [x] `croquettes-chien-sterilise`
@@ -110,10 +110,10 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `croquettes-chien-cancer`
 - [x] `chien-peut-manger-betterave`
 - [x] `recette-friandises-saumon-patate-douce-chien`
-- [ ] `croquettes-chien-calculs-urinaires`
-- [ ] `donner-comprime-chien-refuse-medicament`
-- [ ] `collagene-chien-bienfaits-dosage`
-- [ ] `nourriture-coton-de-tulear`
+- [x] `croquettes-chien-calculs-urinaires`
+- [x] `donner-comprime-chien-refuse-medicament`
+- [x] `collagene-chien-bienfaits-dosage`
+- [x] `nourriture-coton-de-tulear`
 - [ ] `chien-peut-manger-navet`
 - [ ] `nourriture-berger-australien`
 - [ ] `os-poulet-chien-danger`
