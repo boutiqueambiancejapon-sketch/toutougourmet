@@ -70,11 +70,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `eukanuba-vs-royal-canin`
 - [x] `chien-peut-manger-prunes`
 - [x] `pancreatite-chien-alimentation-guide`
-- [ ] `chien-peut-manger-riz`
-- [ ] `recette-bouillon-os-maison-chien`
-- [ ] `meilleures-croquettes-petit-chien`
-- [ ] `chien-mange-glands-chene-urgence`
-- [ ] `chataignes-marrons-inde-chien-difference-danger`
+- [x] `chien-peut-manger-riz`
+- [x] `recette-bouillon-os-maison-chien`
+- [x] `meilleures-croquettes-petit-chien`
+- [x] `chien-mange-glands-chene-urgence`
+- [x] `chataignes-marrons-inde-chien-difference-danger`
 - [ ] `curcuma-chien-bienfaits-dosage`
 - [ ] `voyager-voiture-chien-alimentation-mal-transports`
 - [ ] `croquettes-chien-insuffisance-renale`
