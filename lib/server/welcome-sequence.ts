@@ -79,10 +79,9 @@ const SUITE_WITH_INVITE = ['j2', 'compte-j4', 'j5', 'j10'] as const
 
 /**
  * Étape à envoyer à une adresse aujourd'hui, ou null. Désinscrite : rien. Compte sans adresse
- * confirmée : pas de rappel chien (il ne peut pas se connecter, requireEmailVerification). Détenteur
- * d'un compte confirmé : pas de suite, l'inscription n'a aucune case pour la lettre, il ne reçoit
- * que les rappels de son compte. Compte en attente de confirmation : suite maintenue, sans
- * l'invitation à créer un compte.
+ * confirmée : pas de rappel chien (il ne peut pas se connecter, requireEmailVerification). Compte
+ * hors liste : seulement les rappels de son compte, l'inscription n'a aucune case pour la lettre.
+ * Inscrit à la liste qui ouvre un compte : suite maintenue, sans l'invitation à créer un compte.
  */
 export function stepForAddress(facts: AddressFacts, { today, start, reminders }: PlanOptions): SequenceStep | null {
   const { contact, account, sent } = facts
@@ -91,7 +90,7 @@ export function stepForAddress(facts: AddressFacts, { today, start, reminders }:
     const step = dueStep(daysSince(account.createdAt, today), sent, DOG_STEPS)
     if (step) return step
   }
-  if (!contact || account?.verified || !afterStart(contact.createdAt, start)) return null
+  if (!contact || !afterStart(contact.createdAt, start)) return null
   const steps: readonly SequenceStep[] = reminders && !account ? SUITE_WITH_INVITE : WELCOME_STEPS
   return dueStep(daysSince(contact.createdAt, today), sent, steps)
 }

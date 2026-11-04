@@ -203,13 +203,19 @@ test('rappels coupés sans la variable : J4 absent, le J7 part quand même', () 
   assert.equal(on(4, facts({ account }), false), null)
 })
 
-test('relance sautée : J4 si compte, suite si compte confirmé, chien dès qu\'il est ajouté', () => {
+test('relance sautée : J4 si compte, chien dès qu\'il est ajouté, suite gardée pour un inscrit à la liste', () => {
   const j2 = new Set<SequenceStep>(['j2'])
   const pending = { createdAt: SIGNUP, verified: false, hasDog: false }
   assert.equal(on(4, facts({ contact, sent: j2, account: pending })), null)
   assert.equal(on(7, facts({ contact, sent: j2, account: pending })), 'j5')
   const withDog = { createdAt: SIGNUP, verified: true, hasDog: true }
-  for (const day of [1, 2, 4, 7, 10]) assert.equal(on(day, facts({ contact, account: withDog })), null, `jour ${day}`)
+  // Inscrit à la liste puis compte ouvert : il garde la suite, sans l'invitation à créer un compte.
+  assert.equal(on(2, facts({ contact, account: withDog })), 'j2')
+  assert.equal(on(4, facts({ contact, sent: j2, account: withDog })), null)
+  assert.equal(on(7, facts({ contact, sent: j2, account: withDog })), 'j5')
+  assert.equal(on(10, facts({ contact, sent: new Set<SequenceStep>(['j2', 'j5']), account: withDog })), 'j10')
+  // Compte sans inscription à la liste : aucune étape de la suite.
+  for (const day of [2, 7, 10]) assert.equal(on(day, facts({ account: withDog })), null, `jour ${day}`)
 })
 
 test('compte sans chien : J1 et J4, adresse confirmée, puis plus rien', () => {
