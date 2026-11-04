@@ -1,0 +1,16 @@
+Objectif : rédiger UN (1) article de blog en FRANÇAIS, orienté guide d'achat ou comparatif de robots tondeuses, pour le site « quel robot tondeuse » : conseil d'achat, comparatifs, tests, guides par surface de jardin, par budget, par marque, installation, entretien. Le lecteur veut acheter et être aidé dans son choix. Le site vit de liens affiliés Amazon, d'où l'importance des ASIN justes.
+
+**Images dans le corps** : les 2 images génériques déjà présentes, `/images/robot-tondeuse-generique-1.jpeg` et `/images/robot-tondeuse-generique-2.jpeg`, sont intégrées à TOUS les articles (ne pas en générer d'autres) : la première après la section « Critères pour bien choisir », la seconde vers le milieu ou avant « Notre recommandation », avec la syntaxe d'image des articles existants et un texte alternatif adapté au contexte.
+
+1. Format et sujet : top ou classement, comparatif X vs Y, guide d'achat segmenté (surface, sans câble), guide par fonctionnalité, tutoriel, FAQ ou dossier. Lis les 5 à 7 derniers articles pour ne pas dupliquer un sujet ni répéter le format de la veille.
+2. Analyse : WebSearch sur la requête visée, lis 3 à 5 articles bien classés (Les Numériques, 01net, Que Choisir, Frandroid, Darty, Boulanger, guides spécialisés). Note critères, modèles, prix, surfaces, points forts et faibles. Trouve un angle : tableau plus clair, recommandations tranchées par profil (petit budget, grand jardin, pente, multi-zones), honnêteté sur les défauts.
+3. Base produits et ASIN (étape critique) : repère le fichier qui stocke les produits et leurs ASIN. Pour chaque produit cité :
+   - présent dans la base : réutilise tel quel son ASIN, son slug et son lien ;
+   - absent : cherche l'ASIN (`site:amazon.fr <marque> <modèle exact>`, page produit Amazon.fr) et vérifie que la page correspond au bon modèle (titre, marque, caractéristiques), puis ajoute-le à la base avec le même schéma.
+   - **Jamais d'ASIN inventé.** En cas de doute, cite le produit sans lien affilié. Le tag d'affiliation est géré par le code du site à partir de l'ASIN.
+4. Rédaction : français, ton de conseil honnête, orienté décision, 1 200 à 2 000 mots. Calibre le schéma (frontmatter, dossier, slug, syntaxe d'image) sur 1 ou 2 articles existants. Structure à adapter : titre avec un critère de recherche (année, surface, budget, marque), chapô, « Critères pour bien choisir » (surface, pente, autonomie, navigation, connectivité, bruit, sécurité, budget), tableau comparatif si top ou comparatif, un H2 par modèle (présentation, points forts, points faibles, à qui ça s'adresse, fourchette de prix, lien affilié), « Notre recommandation », FAQ de 3 à 5 questions. Sources citées en lien. Frontmatter : date du jour, description de 150 à 160 caractères, catégorie (guide-achat, comparatif, test, tuto, faq), tags.
+5. Contraintes : prix et caractéristiques vérifiés sur au moins 2 sources, jamais de chiffre ni de test inventé ; prix fluctuant = fourchette et « prix indicatif à la date de publication ». Défauts mentionnés, neutralité entre marques.
+6. Vérification : `npm run build` doit passer, les 2 images génériques sont dans le corps.
+7. Commit : `content(blog): add <slug>` (ajoute « and N products » si la base a changé).
+
+Compte rendu : format, titre, slug, requête visée, produits cités avec ASIN (en signalant les ajouts), état du build.

@@ -146,3 +146,11 @@ Objectif : `dashboard.toutou-gourmet.com`, nos chiffres à nous (actions des vis
 - [x] Article `faire-garder-son-chien-vacances-alimentation`
 - [ ] Fusion dans `v2`, migration en production (numéro à harmoniser avec `0005_opff_import`)
 - [ ] Stripe (Premium payant) : code en préparation sur `feat/stripe-premium` (sans clé). Reporté par le propriétaire le 2026-11-03 : la clé limitée n'a pas pu être rangée. À reprendre : clé limitée (droits listés dans `docs/v2/stripe-plan.md`), puis `scripts/stripe-setup.ts`, webhook, essai à 0,50 €/jour.
+
+## Rédaction des 5 sites sur le VPS (2026-11-04)
+
+- [x] Consignes reprises des tâches cloud dans `deploy/sites/article-prompts/`
+- [x] `write-articles.sh` + `site-articles.{service,timer}` : 1 article par site à la suite, alerte en cas d'échec
+- [ ] Essai réel de chaque site depuis le serveur, un à la fois
+- [ ] Couper chaque tâche cloud après son premier article réussi
+- [ ] Installer la minuterie (0 h 37) avant de couper la dernière tâche

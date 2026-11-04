@@ -1,0 +1,14 @@
+# Rédaction de nuit des sites hébergés (hors Toutou Gourmet) : voir write-articles.sh.
+[Unit]
+Description=Rédaction de nuit des sites hébergés (1 article par site)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=administrator
+Environment=HOME=/home/administrator
+Environment=LANG=C.UTF-8
+ExecStart=/home/administrator/Toutou/deploy/sites/write-articles.sh
+Nice=10
+TimeoutStartSec=6h

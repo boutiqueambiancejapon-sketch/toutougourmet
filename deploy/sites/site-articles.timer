@@ -1,0 +1,10 @@
+# Chaque nuit à 0 h 37 (heure de Bruxelles) : 5 sites à la suite, avant Toutou (3 h 47) et les images (5 h 33).
+[Unit]
+Description=Rédaction de nuit des sites hébergés
+
+[Timer]
+OnCalendar=*-*-* 00:37:00 Europe/Brussels
+Persistent=true
+
+[Install]
+WantedBy=timers.target
