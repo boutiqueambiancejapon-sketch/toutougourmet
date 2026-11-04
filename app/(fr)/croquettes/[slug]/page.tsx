@@ -19,6 +19,8 @@ import { SourceNotice } from '@/components/scanner/SourceNotice'
 import { LabelData } from '@/components/scanner/LabelData'
 import { ScoreBadge } from '@/components/scanner/ScoreBadge'
 import { FicheAlternatives } from '@/components/scanner/fiche/FicheAlternatives'
+import { FicheBuy } from '@/components/scanner/fiche/FicheBuy'
+import { buyLink } from '@/lib/scanner/buy-link'
 import { FicheJsonLd } from '@/components/scanner/fiche/FicheJsonLd'
 import { FicheNutrition } from '@/components/scanner/fiche/FicheNutrition'
 import { FicheVerdict } from '@/components/scanner/fiche/FicheVerdict'
@@ -132,6 +134,7 @@ export default async function CroquettePage({ params }: Params) {
         </div>
       </FicheVerdict>
 
+      <FicheBuy link={buyLink(a)} />
       <FicheAlternatives alternatives={alternativesFor(a.brand, a.score, kindOf(a.details))} />
       {treat ? <TreatHomemade score={a.score} /> : null}
 

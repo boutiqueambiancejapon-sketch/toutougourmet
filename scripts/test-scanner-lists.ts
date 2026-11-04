@@ -1,5 +1,6 @@
 // Tests des listes publiques du scanner (fonctions pures, sans base).
 // Lancer : npx tsx scripts/test-scanner-lists.ts
+import { buyLink } from '../lib/scanner/buy-link'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { capPerBrand, ficheDateLabel, ficheMeta, isValidated, latestPool, LIST_ROBOTS, listStats, lowFiches, parseVue, seenInFrance, topFiches, type ListFiche } from '../lib/scanner/fiche-lists'
@@ -163,6 +164,19 @@ test('la publication ne dépend pas du contrôle IA', () => {
   const published = readFileSync('lib/server/scanner-published.ts', 'utf8')
   assert.doesNotMatch(published, /foodCheck|food_check/)
   assert.doesNotMatch(readFileSync('lib/server/scanner-catalog.ts', 'utf8'), /foodCheck|food_check/)
+})
+
+test('où acheter : partenaire, Maxi Zoo, Amazon, jamais sous 55 ni pour un aliment thérapeutique', () => {
+  assert.equal(buyLink({ brand: 'Ultra premium direct', product: 'Pâtée agneau', score: 96 })?.store, 'Ultra Premium Direct')
+  assert.ok(buyLink({ brand: 'Ultra premium direct', product: 'Pâtée agneau', score: 96 })?.href.includes('ae=1346'))
+  assert.equal(buyLink({ brand: 'Pedigree', product: 'Rodeo', score: 60 })?.store, 'Maxi Zoo')
+  assert.ok(buyLink({ brand: 'Pedigree', product: 'Rodeo', score: 60 })?.href.includes('awinaffid=1112904'))
+  const amazon = buyLink({ brand: 'Josera', product: 'SensiAdult', score: 56 })
+  assert.equal(amazon?.store, 'Amazon')
+  assert.ok(amazon?.href.includes('tag=toutougourmet-21') && amazon.amazon)
+  assert.equal(buyLink({ brand: 'Pedigree', product: 'Rodeo', score: 41 }), null)
+  assert.equal(buyLink({ brand: 'Royal Canin', product: 'Hepatic HF 16', score: 70 }), null)
+  assert.equal(buyLink({ brand: null, product: 'X', score: 80 }), null)
 })
 
 console.log(`${passed} tests réussis`)

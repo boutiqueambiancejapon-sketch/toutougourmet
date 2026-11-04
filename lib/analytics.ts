@@ -33,12 +33,12 @@ export function affiliateBrand(href: string): string | null {
     [/dogchef\.com\/fr\/code/, 'Dog Chef'],
     [/c3po\.link\/QWMW4k6mbU/, 'Elmut'],
     [/c3po\.link\/(Q3xbJhfapn|QdMASYq2T2)/, 'Franklin'],
-    [/c3po\.link\/QqJYNnzYD8/, 'Ultra Premium Direct'],
+    [/c3po\.link\/QqJYNnzYD8|ultrapremiumdirect\.com\/.*ae=1346/, 'Ultra Premium Direct'],
     [/tidd\.ly\/(4jT3Tqg|42O6yHG)/, 'Dogfy Diet'],
     [/tidd\.ly\/(48rl0Z3|43sUPyF)/, 'Fidelis'],
     [/(amzn\.to|amazon\.fr\/.*tag=toutougourmet)/, 'Amazon'],
     // Les autres liens tidd.ly sont des fiches Maxi Zoo (Royal Canin, Eukanuba…)
-    [/tidd\.ly\//, 'Maxi Zoo'],
+    [/tidd\.ly\/|awin1\.com\/cread\.php\?awinmid=68698/, 'Maxi Zoo'],
     [/c3po\.link\//, 'Autre (c3po)'],
   ]
   return rules.find(([re]) => re.test(href))?.[1] ?? null
