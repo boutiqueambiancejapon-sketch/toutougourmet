@@ -58,11 +58,11 @@ export function AuthorBox({ author }: AuthorBoxProps) {
           ))}
         </div>
 
-        <div className="flex items-center gap-4 mt-1">
+        <div className="flex flex-wrap items-center gap-x-4">
           <Link
             href={author.url}
             prefetch={false}
-            className="text-xs font-semibold text-orange-ink hover:underline"
+            className="inline-flex min-h-11 items-center text-xs font-semibold text-orange-ink hover:underline"
           >
             Tous ses articles →
           </Link>
@@ -71,7 +71,7 @@ export function AuthorBox({ author }: AuthorBoxProps) {
               href={author.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs text-[var(--text-muted)] hover:text-orange-ink transition-colors"
+              className="inline-flex min-h-11 items-center text-xs text-[var(--text-muted)] hover:text-orange-ink transition-colors"
               aria-label={`Profil LinkedIn de ${author.name}`}
             >
               LinkedIn →

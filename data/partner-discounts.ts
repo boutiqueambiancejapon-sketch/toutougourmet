@@ -19,6 +19,18 @@ export function shortDiscount(slug: OfferSlug): string {
   return CONFIRMED_DISCOUNTS[slug]?.match(/^−\d+ %/)?.[0] ?? ''
 }
 
+/** Remise pour une ligne étroite (barre collante) : « −30 % box d'essai », tirée de la remise confirmée. */
+export function compactDiscount(slug: OfferSlug): string | null {
+  const full = CONFIRMED_DISCOUNTS[slug]
+  if (!full) return null
+  return full
+    .split(',')[0]
+    .replace(/ sur la première commande en abonnement$/, ' en abonnement')
+    .replace(/ sur la première commande$/, ' 1re commande')
+    .replace(/ sur la /, ' ')
+    .replace(/ de \d+ jours$/, '')
+}
+
 export function isOfferSlug(value: string): value is OfferSlug {
   return Object.hasOwn(CONFIRMED_DISCOUNTS, value)
 }

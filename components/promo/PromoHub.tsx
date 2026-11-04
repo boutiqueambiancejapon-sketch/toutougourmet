@@ -6,6 +6,7 @@ import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
 import { FaqItem, FaqList } from '@/components/article/Faq'
 import { AffiliateNote } from '@/components/marques/AffiliateNote'
 import { frTypo } from '@/lib/utils'
+import { CopyCode } from './CopyCode'
 import { PromoOffer } from './PromoOffer'
 
 // @cdc affiliation — hub /codes-promo : une carte par partenaire (remise confirmée, code ou lien,
@@ -51,20 +52,18 @@ export function PromoHub() {
               <li key={page.slug} className="flex flex-col gap-3 rounded-card border border-line bg-paper p-5">
                 <h3 className="m-0 font-display text-xl font-black text-ink">{brand.name}</h3>
                 <p className="m-0 text-lg font-bold text-ink">{frTypo(CONFIRMED_DISCOUNTS[page.slug] ?? '')}</p>
+                {page.code ? (
+                  <p className="m-0 flex flex-wrap items-center gap-2 text-ink-2">
+                    Code&nbsp;: <CopyCode code={page.code} />
+                  </p>
+                ) : null}
                 <p className="m-0 text-ink-2">
-                  {page.code ? (
-                    <>
-                      Code&nbsp;: <span className="select-all font-mono font-bold text-ink">{page.code}</span>
-                    </>
-                  ) : (
-                    'Sans code, par notre lien'
-                  )}
-                  {' · '}
+                  {page.code ? null : 'Sans code, par notre lien · '}
                   {frTypo(brand.facts.format)}
                 </p>
                 <p className="m-0 text-sm text-ink-2">{frTypo(`Pour : ${brand.facts.bestFor.toLowerCase()}.`)}</p>
                 <PromoOffer brand={brand} slug={page.slug} code={page.code} variant="compact" />
-                <Link href={promoPath(page.slug)} className="font-semibold text-orange-ink underline underline-offset-4 hover:text-ink">
+                <Link href={promoPath(page.slug)} className="inline-flex min-h-11 items-center font-semibold text-orange-ink underline underline-offset-4 hover:text-ink">
                   {frTypo(`Mode d'emploi et conditions ${brand.name}`)}
                 </Link>
               </li>

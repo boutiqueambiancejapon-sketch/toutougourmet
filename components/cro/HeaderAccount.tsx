@@ -7,8 +7,8 @@ import { useAccountPrefill } from '@/components/outils/useAccountPrefill'
 import { signupHref } from '@/lib/signup-places'
 import { useInviteTracking, useSignedIn } from './useSignupInvite'
 
-// @cdc CRO compte (maquette 1A) — compte de l'en-tête. Visiteur : bouton « Créer un compte »
-// (« S'inscrire » sous 360 px, jamais sur deux lignes). Compte connecté (témoin tg_compte) :
+// @cdc CRO compte (maquette 1A) — compte de l'en-tête. Visiteur : bouton « Créer un compte », plus
+// petit sous 375 px pour garder la marge du bord (« S'inscrire » sous 360 px, jamais sur deux lignes). Compte connecté (témoin tg_compte) :
 // pastille à l'initiale du chien + « Mon chien ». Rendu serveur et hydratation : version
 // visiteur, la page reste statique. Le prénom du chien vient de /api/compte/profil, déjà appelé
 // par les outils (une requête par page, seulement avec le témoin).
@@ -44,7 +44,7 @@ function Visitor() {
         href={signupHref('header', '/compte')}
         onClick={onClick}
         data-cta="signup-header"
-        className={`${BUTTON} ml-auto bg-orange shadow-[0_3px_0_var(--orange-ink)] hover:brightness-105 md:border-2 md:border-ink md:bg-paper md:shadow-none xl:ml-0`}
+        className={`${BUTTON} ml-auto bg-orange shadow-[0_3px_0_var(--orange-ink)] hover:brightness-105 max-[374px]:px-2.5 max-[374px]:text-sm md:border-2 md:border-ink md:bg-paper md:shadow-none xl:ml-0`}
       >
         <span className="min-[360px]:hidden">S&apos;inscrire</span>
         <span className="hidden min-[360px]:inline">Créer un compte</span>

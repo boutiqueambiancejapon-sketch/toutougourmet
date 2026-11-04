@@ -16,14 +16,13 @@ export function RaceHealth({ breed }: { breed: Breed }) {
         Points de vigilance pour le {breed.name}
       </h2>
       {breed.health.map((h) => (
-        <details key={h.title} className="group rounded-box border border-line bg-paper px-4 py-3">
-          <summary className="cursor-pointer list-none font-semibold text-ink marker:hidden">
-            <span className="flex items-center justify-between gap-3">
-              {h.title}
-              <span aria-hidden="true" className="text-ink-2 transition-transform group-open:rotate-45">+</span>
-            </span>
+        <details key={h.title} className="group rounded-box border border-line bg-paper">
+          {/* Toute la carte est cliquable : la zone tactile fait 48 px au moins, marges comprises. */}
+          <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 py-2.5 font-semibold text-ink marker:hidden [&::-webkit-details-marker]:hidden">
+            {h.title}
+            <span aria-hidden="true" className="text-ink-2 transition-transform group-open:rotate-45">+</span>
           </summary>
-          <p className="m-0 mt-2 leading-relaxed text-ink-2">{h.text}</p>
+          <p className="m-0 px-4 pb-3 leading-relaxed text-ink-2">{h.text}</p>
         </details>
       ))}
     </section>

@@ -34,7 +34,7 @@ export function ScanAgainButton() {
   return (
     <button type="button" onClick={() => window.dispatchEvent(new Event(START_EVENT))} className={big}>
       <BarcodeIcon />
-      Scanner le code-barres
+      Scanner le sac
     </button>
   )
 }

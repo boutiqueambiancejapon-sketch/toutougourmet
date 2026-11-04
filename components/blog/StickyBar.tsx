@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useSyncExternalStore, type ReactNode } from 'react'
 import { IconClose } from '@/components/icons'
-import { isPopupOpen, POPUP_EVENT } from '@/lib/guide/popup-state'
+import { CONSENT_BANNER_EVENT, isConsentBannerOpen, isPopupOpen, POPUP_EVENT } from '@/lib/guide/popup-state'
 
 // @cdc 04-pages — coque commune des bandeaux collants d'affiliation (StickyCta, StickyCtaDouble,
 // bandeau Dog Chef de lib/sticky-cta-config) : une seule ligne compacte sur mobile, au-dessus de la barre d'onglets,
@@ -107,17 +107,24 @@ function onPopupChange(cb: () => void): () => void {
   return () => window.removeEventListener(POPUP_EVENT, cb)
 }
 
+function onConsentBannerChange(cb: () => void): () => void {
+  window.addEventListener(CONSENT_BANNER_EVENT, cb)
+  return () => window.removeEventListener(CONSENT_BANNER_EVENT, cb)
+}
+
 export function StickyBar({ children, stopAt }: { children: ReactNode; stopAt?: string }) {
   const scrolledPast = useScrolledPast()
   const beforeOffer = useBeforeOffer(stopAt)
   const visible = stopAt ? beforeOffer : scrolledPast
   // Panneau du guide ouvert (components/guide/GuidePopup.tsx) : le bandeau s'efface le temps qu'il est là.
   const popupOpen = useSyncExternalStore(onPopupChange, isPopupOpen, () => false)
+  // Bandeau cookies affiché : il reste seul en bas (360 x 640 : 325 px de lecture avec les deux).
+  const consentOpen = useSyncExternalStore(onConsentBannerChange, isConsentBannerOpen, () => false)
   const midInView = useMidCtaInView()
   const [dismissed, setDismissed] = useState(false)
   // `visible` n'est vrai que dans le navigateur, après défilement : lire le stockage ici ne crée
   // aucun écart avec le rendu serveur.
-  const shown = visible && !dismissed && !midInView && !popupOpen && !closedRecently()
+  const shown = visible && !dismissed && !midInView && !popupOpen && !consentOpen && !closedRecently()
   useEffect(() => {
     if (!shown) return
     document.documentElement.dataset.sticky = '1'

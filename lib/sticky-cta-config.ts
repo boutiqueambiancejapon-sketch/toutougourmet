@@ -8,7 +8,7 @@ import type { StickyCtaConfig } from '@/components/blog/StickyCta'
 import type { StickyOfferProps } from '@/components/blog/StickyOffer'
 import { pageTypeOf } from '@/lib/page-type'
 import { brandOfferLabel, getBrandBySlug, type Brand } from '@/data/brands'
-import { CONFIRMED_DISCOUNTS, isOfferSlug, partnerSlugFromName, shortDiscount, type OfferSlug } from '@/data/partner-discounts'
+import { compactDiscount, isOfferSlug, partnerSlugFromName, shortDiscount, type OfferSlug } from '@/data/partner-discounts'
 
 export type { StickyCtaConfig }
 
@@ -36,8 +36,8 @@ export const DOG_CHEF_CTA: StickyCtaConfig = {
 }
 
 /**
- * Conservé pour usage interne (recommandation Bien Nourri quand le profil
- * révèle des signes santé/digestif). Voir data/bien-nourri.ts → recommend().
+ * Conservé pour usage interne. Le bilan Bien Nourri recommande Dog Chef depuis le 2026-11-04
+ * (data/bien-nourri.ts → recommend()).
  */
 export const ELMUT_CTA: StickyCtaConfig = {
   brandName: 'Elmut',
@@ -245,13 +245,13 @@ export function getStickyOffer({ categorySlug, slug, rawContent, verdict, mainBr
     const pick = racePick(rawContent)
     if (!pick) return null
     // La marque suit toujours le `pick`, même en rupture : la ligne dit alors la rupture (brandOfferLabel).
-    const offer = (isOfferSlug(pick.slug) ? CONFIRMED_DISCOUNTS[pick.slug] : null) ?? brandOfferLabel(pick)
+    const offer = (isOfferSlug(pick.slug) ? compactDiscount(pick.slug) : null) ?? brandOfferLabel(pick)
     return { brandName: pick.name, href: pick.affiliateUrl, offer, pick: true, stopAt: STOP_RACE_COMPARE }
   }
   if (categorySlug !== 'avis-marques') return null
   const partner = reviewedPartner(rawContent, mainBrand, twoBrands)
   const brand = partner ? getBrandBySlug(partner) : undefined
-  const offer = partner ? CONFIRMED_DISCOUNTS[partner] : null
+  const offer = partner ? compactDiscount(partner) : null
   if (!brand || !offer || brand.stockNote) return null
   return {
     brandName: brand.name,

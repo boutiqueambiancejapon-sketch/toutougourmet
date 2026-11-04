@@ -54,6 +54,19 @@ export function msOnSite(now = Date.now()): number {
   return 0
 }
 
+/** Bandeau cookies ouvert (components/consent/ConsentBanner.tsx) : la barre partenaire attend qu'il soit fermé. */
+export const CONSENT_BANNER_EVENT = 'tg-consent-banner'
+
+export function isConsentBannerOpen(): boolean {
+  return typeof document !== 'undefined' && document.documentElement.dataset.consentBanner === '1'
+}
+
+export function setConsentBannerOpen(open: boolean): void {
+  if (open) document.documentElement.dataset.consentBanner = '1'
+  else delete document.documentElement.dataset.consentBanner
+  window.dispatchEvent(new Event(CONSENT_BANNER_EVENT))
+}
+
 export function isPopupOpen(): boolean {
   return typeof document !== 'undefined' && document.documentElement.dataset.popup === '1'
 }

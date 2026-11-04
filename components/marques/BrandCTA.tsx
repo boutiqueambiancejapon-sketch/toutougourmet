@@ -60,7 +60,7 @@ export function BrandCTA({
         className={
           primary
             ? 'inline-flex min-h-12 max-w-full items-center rounded-control bg-orange px-5 py-3 font-bold text-ink no-underline shadow-[4px_4px_0_var(--ink)] transition-transform hover:-translate-y-0.5'
-            : 'font-semibold text-orange-ink underline underline-offset-4'
+            : 'inline-flex min-h-11 items-center font-semibold text-orange-ink underline underline-offset-4'
         }
       />
       {hideDisclosure ? null : <AffiliateNote />}

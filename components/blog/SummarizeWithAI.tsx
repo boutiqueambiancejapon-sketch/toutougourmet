@@ -19,7 +19,7 @@ export function SummarizeWithAI({ title, url }: SummarizeWithAIProps) {
             href={buildAIUrl(provider, title, url)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center rounded-pill border border-line bg-cream px-3.5 py-2 text-sm font-semibold text-ink no-underline hover:border-ink"
+            className="inline-flex min-h-11 items-center rounded-pill border border-line bg-cream px-3.5 py-2 text-sm font-semibold text-ink no-underline hover:border-ink"
             aria-label={`Résumer avec ${provider.name}`}
           >
             {provider.name}

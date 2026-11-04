@@ -5,7 +5,7 @@ import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
 import { FaqItem, FaqList } from '@/components/article/Faq'
 import { frTypo } from '@/lib/utils'
 import { getPromoPage, promoPath } from '@/data/promo-codes'
-import { shortDiscount, isOfferSlug } from '@/data/partner-discounts'
+import { compactDiscount, shortDiscount, isOfferSlug } from '@/data/partner-discounts'
 import { BrandHero, BrandIdentity } from './BrandHero'
 import { BrandPresentation, BrandProsCons, BrandRecipes } from './BrandDetails'
 import { BrandVerdict } from './BrandVerdict'
@@ -86,7 +86,7 @@ export function BrandPage({ brand }: { brand: Brand }) {
         </nav>
       </div>
 
-      {brand.stockNote ? null : <StickyOffer brandName={brand.name} href={brand.affiliateUrl} offer={brandOfferLabel(brand)} stopAt={STOP_BRAND_PAGE} />}
+      {brand.stockNote ? null : <StickyOffer brandName={brand.name} href={brand.affiliateUrl} offer={(isOfferSlug(brand.slug) ? compactDiscount(brand.slug) : null) ?? brandOfferLabel(brand)} stopAt={STOP_BRAND_PAGE} />}
     </>
   )
 }

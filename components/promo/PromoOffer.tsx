@@ -1,6 +1,7 @@
 import type { Brand } from '@/data/brands'
 import { CONFIRMED_DISCOUNTS, shortDiscount, type OfferSlug } from '@/data/partner-discounts'
 import { AffiliateNote } from '@/components/marques/AffiliateNote'
+import { CopyCode } from './CopyCode'
 
 // @cdc affiliation — bloc offre des pages « code promo » : remise confirmée, code s'il existe,
 // bouton vers le lien partenaire. Rendu serveur. Le clic est mesuré par
@@ -25,7 +26,9 @@ export function PromoButton({ brand, slug }: { brand: Brand; slug: OfferSlug }) 
       rel="sponsored noopener"
       className="inline-flex min-h-12 items-center rounded-control bg-orange px-5 py-3 font-bold text-ink no-underline shadow-[4px_4px_0_var(--ink)] transition-transform hover:-translate-y-0.5"
     >
-      {short ? `Profiter de ${short} chez ${brand.name}` : `Voir l'offre ${brand.name}`}&nbsp;→
+      {short ? `Profiter de ${short.replace(' ', '\u00a0')}` : "Voir l'offre"}
+      <span className="sr-only"> chez {brand.name}</span>
+      &nbsp;→
     </a>
   )
 }
@@ -47,9 +50,9 @@ export function PromoOffer({ brand, slug, code, variant = 'full' }: Props) {
     >
       <p className="m-0 font-display text-2xl font-black leading-tight text-cream">{discount}</p>
       {code ? (
-        <p className="m-0 text-cream">
-          Code à taper&nbsp;:{' '}
-          <span className="select-all rounded-box bg-cream px-2 py-1 font-mono text-lg font-bold tracking-wider text-ink">{code}</span>
+        <p className="m-0 flex flex-wrap items-center gap-2 text-cream">
+          Code à taper&nbsp;:
+          <CopyCode code={code} onDark />
         </p>
       ) : (
         <p className="m-0 text-cream">Pas de code à taper&nbsp;: la remise passe par notre lien.</p>

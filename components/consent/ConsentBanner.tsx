@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { setConsentBannerOpen } from '@/lib/guide/popup-state'
 import { CONSENT_OPEN_EVENT, applyConsent, readConsent, saveConsent, type ConsentChoice } from '@/lib/consent'
 
 // @cdc legal — bannière de consentement (CNIL) : deux boutons de même poids, aucun cookie
@@ -24,6 +25,12 @@ export function ConsentBanner() {
       window.removeEventListener(CONSENT_OPEN_EVENT, reopen)
     }
   }, [])
+
+  useEffect(() => {
+    if (!open) return
+    setConsentBannerOpen(true)
+    return () => setConsentBannerOpen(false)
+  }, [open])
 
   if (!open) return null
 
