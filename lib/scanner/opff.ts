@@ -1,4 +1,5 @@
 import { parseIngredientText } from './ingredient-text'
+import { animalKind } from './ingredients'
 import { analyseLabel } from './analyse'
 import { WET_MOISTURE } from './food-noun'
 import { CONFIDENCE_FIELDS, type AnalyticalKey, type ExtractedLabel, type ImageType } from './types'
@@ -115,6 +116,12 @@ export type OpffVerdict =
 export type OpffUnusableReason = 'pas-aliment-chien' | 'composition' | 'constituants' | 'valeurs-implausibles' | 'note-impossible'
 
 /** Conversion seule, sans juger si la fiche est exploitable. */
+/** Part animale connue quand seuls des composants sont chiffrés (« Viandes (dont bœuf 4 %) ») : un minimum. */
+export function partialAnimalShare(partiels: { nom: string; pourcentage: number }[]): number | null {
+  const sum = partiels.filter((p) => animalKind(p.nom) !== null).reduce((total, p) => total + p.pourcentage, 0)
+  return sum > 0 && sum <= 100 ? sum : null
+}
+
 export function opffLabel(p: OpffProduct, ean: string): ExtractedLabel {
   const type = opffImageType(p.categories_tags, opffName(p))
   const brand = brandCase(clean(firstBrand(p.brands) ?? undefined))
@@ -140,7 +147,7 @@ export function opffLabel(p: OpffProduct, ean: string): ExtractedLabel {
     ingredients: parsed.ingredients,
     constituants,
     additifs: additifs.slice(0, 60),
-    partAnimaleDeclaree: null,
+    partAnimaleDeclaree: partialAnimalShare(parsed.partiels),
     energie: { kcalKg: null, kcal100g: energyKcal100g(p.nutriments), kcalPiece: null, poidsPieceG: null },
     confiance: Object.fromEntries(
       CONFIDENCE_FIELDS.map((k) => [k, has(k === 'marque' ? brand : k === 'produit' ? product : k === 'ean' ? ean : k === 'ingredients' ? parsed.ingredients : k === 'additifs' ? additifs : constituants.proteines)]),

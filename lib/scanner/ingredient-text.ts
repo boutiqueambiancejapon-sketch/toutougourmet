@@ -38,13 +38,66 @@ export function splitTopLevel(text: string): string[] {
 const NUMBER = String.raw`(?<![\d.,])\d+(?:[.,]\d+)?`
 const PERCENT = new RegExp(String.raw`(${NUMBER})\s?%`)
 
-/** Pourcentage écrit pour l'ingrédient (le premier, ex. « Poulet (26 % dont poulet frais 14 %) » : 26). */
+const PERCENT_ALL = new RegExp(PERCENT.source, 'g')
+const number = (raw: string): number | null => {
+  const n = Number(raw.replace(',', '.'))
+  return Number.isFinite(n) && n > 0 && n <= 100 ? n : null
+}
+const firstPercent = (text: string): number | null => {
+  const m = text.match(PERCENT)
+  return m ? number(m[1]) : null
+}
+/** Catégorie légale de l'UE : un chiffre entre ses parenthèses ne vaut que pour une partie de la catégorie. */
+const CATEGORY = /viandes?|meat|sous-produits|by-?products|c[ée]r[ée]ales?|cereals?|poissons?|fish|l[ée]gumes?|vegetables?|min[ée]raux|minerals?|kj[øo]tt|fleisch|carnes?|derivat|biprodukter/i
+/** « dont », « of which » : ce qui suit n'est qu'une partie de l'ingrédient. */
+const PART_OF = /^\s*(dont|including|incl\.?|of which|davon|di cui|de los cuales|hvorav|varav|heraf|som)\b/i
+const WHOLE_AFTER = /^\s*(?:[,;]\s*)?(?:dont|comprend|including|of which|davon|di cui|$)|^\s*[,;]/i
+
+/** Sépare « Viandes (dinde 45 %, sanglier 20 %) 65 % » : avant, dans et après la première parenthèse. */
+function splitParens(item: string): { head: string; inner: string; tail: string } | null {
+  const start = item.indexOf('(')
+  if (start < 0) return null
+  let depth = 0
+  for (let i = start; i < item.length; i++) {
+    if (item[i] === '(') depth++
+    if (item[i] === ')' && --depth === 0) return { head: item.slice(0, start), inner: item.slice(start + 1, i), tail: item.slice(i + 1) }
+  }
+  return { head: item.slice(0, start), inner: item.slice(start + 1), tail: '' }
+}
+
+/** Le chiffre vaut-il pour une partie seulement (« (4 % bœuf) », « (dont poulet 4 %) ») ? */
+function partOnly({ head, inner }: { head: string; inner: string }): boolean {
+  if (PART_OF.test(inner)) return true
+  const lead = new RegExp(String.raw`^\s*${NUMBER}\s?%`).exec(inner)
+  if (lead) return !WHOLE_AFTER.test(inner.slice(lead[0].length))
+  return CATEGORY.test(head) && (inner.match(PERCENT_ALL) ?? []).length === 1
+}
+
+/**
+ * Pourcentage de l'ingrédient entier, jamais celui d'un seul de ses composants. Dans l'ordre : chiffre
+ * écrit avant ou après les parenthèses, chiffre qui les ouvre (« Poulet (26 % dont poulet frais 14 %) » : 26),
+ * somme de composants cités côte à côte (« Viandes (dinde 45 %, sanglier 20 %) » : 65). « Viandes
+ * (dont bœuf 4 %) » : null, seul le bœuf est chiffré (voir partialPercentOf).
+ */
 export function percentOf(item: string): number | null {
   if (/mg\s*\/\s*kg|ui\b|u\.i\./i.test(item)) return null
-  const m = item.match(PERCENT)
-  if (!m) return null
-  const n = Number(m[1].replace(',', '.'))
-  return Number.isFinite(n) && n > 0 && n <= 100 ? n : null
+  const parts = splitParens(item)
+  if (!parts) return firstPercent(item)
+  const outer = firstPercent(parts.head) ?? firstPercent(parts.tail)
+  if (outer !== null) return outer
+  if (partOnly(parts)) return null
+  const inner = [...parts.inner.matchAll(PERCENT_ALL)].map((m) => number(m[1]))
+  if (inner.length === 0 || inner.some((n) => n === null)) return null
+  const lead = new RegExp(String.raw`^\s*${NUMBER}\s?%`).test(parts.inner)
+  if (lead || inner.length === 1) return inner[0]
+  const sum = Math.round((inner as number[]).reduce((a, b) => a + b, 0) * 100) / 100
+  return sum <= 100 ? sum : null
+}
+
+/** Chiffre d'un composant quand l'ingrédient entier n'en a pas : un minimum, pas un total. */
+export function partialPercentOf(item: string): number | null {
+  if (percentOf(item) !== null || /mg\s*\/\s*kg|ui\b|u\.i\./i.test(item)) return null
+  return firstPercent(item)
 }
 
 /** Nom propre : sans astérisque ni pourcentage isolé, parenthèses vides retirées. */
@@ -116,6 +169,8 @@ const isAdditivePiece = (a: string) => a.length > 1 && !/^[\d\s.,]+(u\.?i\.?|mg|
 export interface ParsedIngredients {
   ingredients: Ingredient[]
   additifs: string[]
+  /** Chiffre d'un seul composant, par nom d'ingrédient : le minimum connu pour la part animale */
+  partiels: { nom: string; pourcentage: number }[]
 }
 
 // Mot qui ouvre le bloc des additifs, collé à l'ingrédient précédent faute de virgule
@@ -135,6 +190,7 @@ export function splitGluedAdditives(item: string): [string, string] | null {
 export function parseIngredientText(text: string): ParsedIngredients {
   const ingredients: Ingredient[] = []
   const additifs: string[] = []
+  const partiels: ParsedIngredients['partiels'] = []
   let inAdditives = false
   const nfc = text.normalize('NFC')
   const label = COMPOSITION_LABEL.exec(nfc)
@@ -165,10 +221,12 @@ export function parseIngredientText(text: string): ParsedIngredients {
     const nom = cleanName(raw)
     if (nom.length < 2) continue
     ingredients.push({ nom, pourcentage: percentOf(raw) })
+    const partial = partialPercentOf(raw)
+    if (partial !== null) partiels.push({ nom, pourcentage: partial })
   }
   for (const raw of splitTopLevel(additives)) {
     const a = raw.replace(/\s+/g, ' ').trim().slice(0, 160)
     if (isAdditivePiece(a)) additifs.push(a)
   }
-  return { ingredients: ingredients.slice(0, 80), additifs: additifs.slice(0, 60) }
+  return { ingredients: ingredients.slice(0, 80), additifs: additifs.slice(0, 60), partiels }
 }
