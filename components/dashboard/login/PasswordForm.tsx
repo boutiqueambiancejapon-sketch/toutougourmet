@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useState, type FormEvent } from 'react'
 import { API_PATH, ROOT, stageHref, VERIFY_PATH, type SessionStage } from '@/lib/dashboard/login/policy'
-import { buttonPrimary, callLogin, errorText, fieldClass } from '@/lib/dashboard/login/client'
+import { buttonPrimary, callLogin, errorText, fieldClass, linkButton } from '@/lib/dashboard/login/client'
 import { LoginError } from './LoginFrame'
 
 // @cdc tableau de bord — première étape. Le mot de passe seul n'ouvre rien : la réponse indique
@@ -16,6 +16,7 @@ export function PasswordForm({ next }: { next: string }) {
   const id = useId()
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
+  const [shown, setShown] = useState(false)
 
   // SameSite=Strict : un lien venu de ntfy ou d'un e-mail arrive ici sans le cookie, même connecté.
   // La sonde, partie de cette page, le porte et rattrape ce cas.
@@ -51,11 +52,14 @@ export function PasswordForm({ next }: { next: string }) {
       <label htmlFor={`${id}-user`} className="block text-sm font-semibold text-ink">
         Identifiant
       </label>
-      <input id={`${id}-user`} name="username" autoComplete="username" autoCapitalize="none" spellCheck={false} required className={fieldClass} />
+      <input id={`${id}-user`} name="username" autoComplete="username" autoCapitalize="none" autoCorrect="off" spellCheck={false} required className={fieldClass} />
       <label htmlFor={`${id}-pass`} className="mt-3 block text-sm font-semibold text-ink">
         Mot de passe
       </label>
-      <input id={`${id}-pass`} name="password" type="password" autoComplete="current-password" required className={fieldClass} />
+      <input id={`${id}-pass`} name="password" type={shown ? 'text' : 'password'} autoComplete="current-password" autoCapitalize="none" autoCorrect="off" spellCheck={false} required className={fieldClass} />
+      <button type="button" onClick={() => setShown((v) => !v)} aria-pressed={shown} className={linkButton}>
+        {shown ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}
+      </button>
       <LoginError>{error}</LoginError>
       <button type="submit" disabled={busy} className={`${buttonPrimary} mt-4`}>
         Continuer

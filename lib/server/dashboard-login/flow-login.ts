@@ -17,8 +17,9 @@ export async function passwordStep(ctx: FlowContext): Promise<FlowResult> {
   if (!attempt) return BLOCKED()
   const expected = dashboardCredentials()
   const [okUser, okPassword] = await Promise.all([
-    safeEqual(text(ctx.input, 'username'), expected?.user ?? ''),
-    safeEqual(text(ctx.input, 'password'), expected?.password ?? ''),
+    // Le clavier d'un téléphone ajoute parfois une espace à la fin : elle ne compte pas.
+    safeEqual(text(ctx.input, 'username').trim(), expected?.user ?? ''),
+    safeEqual(text(ctx.input, 'password').trim(), expected?.password ?? ''),
   ])
   if (!expected || !okUser || !okPassword) {
     await alertIfFailureSeries()

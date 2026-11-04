@@ -57,7 +57,7 @@ async function load(withNames = false): Promise<{ ok: true; rows: TrackingRow[];
     const rows = buildTrackingRows({
       subscribers: dry ? DRY_SUBSCRIBERS : subscribers?.ok ? subscribers.rows : [],
       accounts: accounts.ok ? accounts.rows : [],
-      internal: [process.env.NEWSLETTER_TEST_EMAIL, process.env.OWNER_EMAIL].filter((v): v is string => Boolean(v)),
+      internal: [process.env.NEWSLETTER_TEST_EMAIL, process.env.OWNER_EMAIL, ...(process.env.CRM_HIDDEN_EMAILS ?? '').split(',')].filter((v): v is string => Boolean(v?.trim())),
       logs: logs ?? [],
       guideSends: guideSends ?? [],
       welcomeSends: welcomeSends ?? [],
