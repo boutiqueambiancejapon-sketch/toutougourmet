@@ -85,11 +85,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `comprendre-etiquette-patee-chien`
 - [x] `chien-toujours-faim-causes-solutions`
 - [x] `gamelle-surelevee-chien`
-- [ ] `recette-patee-maison-poulet-chien`
-- [ ] `avis-butternut-box`
-- [ ] `avis-royal-canin`
-- [ ] `avis-ultra-premium-direct`
-- [ ] `chien-peut-manger-kiwi`
+- [x] `recette-patee-maison-poulet-chien`
+- [x] `avis-butternut-box`
+- [x] `avis-royal-canin`
+- [x] `avis-ultra-premium-direct`
+- [x] `chien-peut-manger-kiwi`
 - [ ] `omega-3-chien-comparatif-sources`
 - [ ] `aliments-toxiques-chien-liste-complete`
 - [ ] `fibres-alimentaires-chien-role-sources-dosage`
