@@ -45,11 +45,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `psyllium-chien-bienfaits-dosage`
 - [x] `chien-peut-manger-figue`
 - [x] `chien-peut-manger-sardines`
-- [ ] `meilleures-croquettes-chien-de-chasse`
-- [ ] `recette-glace-maison-chien-ete`
-- [ ] `chien-peut-manger-poires`
-- [ ] `meilleures-croquettes-chien-senior`
-- [ ] `croquettes-chien-reflux-gastrique`
+- [x] `meilleures-croquettes-chien-de-chasse`
+- [x] `recette-glace-maison-chien-ete`
+- [x] `chien-peut-manger-poires`
+- [x] `meilleures-croquettes-chien-senior`
+- [x] `croquettes-chien-reflux-gastrique`
 - [ ] `chien-peut-manger-crevettes`
 - [ ] `faut-il-rehydrater-croquettes-chien`
 - [ ] `nourriture-cavalier-king-charles`
