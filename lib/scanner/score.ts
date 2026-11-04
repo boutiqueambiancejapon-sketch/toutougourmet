@@ -34,6 +34,7 @@ export type CriterionId =
   | 'friandise-liste'
   | 'friandise-glycerine'
   | 'friandise-cereales'
+  | 'friandise-transparence'
 
 /** complete : aliment complet (croquettes, pâtée) · treat : friandise, snack, aliment complémentaire */
 export type ProductKind = 'complete' | 'treat'

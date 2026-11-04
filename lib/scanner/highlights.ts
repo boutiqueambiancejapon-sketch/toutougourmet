@@ -34,6 +34,7 @@ const STRONG: Record<CriterionId, Phrase> = {
   'friandise-liste': () => 'Recette courte',
   'friandise-glycerine': () => 'Sans glycérine',
   'friandise-cereales': () => 'Pas de farine en tête',
+  'friandise-transparence': () => 'Étiquette complète',
 }
 
 const WEAK: Record<CriterionId, Phrase> = {
@@ -56,6 +57,7 @@ const WEAK: Record<CriterionId, Phrase> = {
   'friandise-liste': () => 'Liste d\'ingrédients longue',
   'friandise-glycerine': () => 'Glycérine ou animal non nommé',
   'friandise-cereales': () => 'Farine ou céréale en tête',
+  'friandise-transparence': () => 'Étiquette incomplète',
 }
 
 const ratio = (c: Criterion) => (c.points ?? 0) / c.max

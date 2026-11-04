@@ -173,3 +173,6 @@ Le barème ne change pas : le contrôle ne touche ni la note, ni l'étiquette lu
 
 Listes de `/scanner/croquette` et `/scanner/friandise` (`lib/scanner/fiche-lists.ts`) : Top 10 et Moins bien notées prennent les fiches relues ou `ok`, non écartées, complètes (`meetsIndexRule`), 3 par marque. Moins bien notées s'arrête à 55. Dernières fiches ajoute tout vrai scan non écarté. `rejected` sort la fiche de toutes ces listes, sauf si elle est relue.
 
+## Friandises 1.4 (2026-11-04)
+
+Le barème ne comptait que les défauts : une friandise à un seul ingrédient séché atteignait 100, quelle que soit sa nature et même sans analyse. Sucres 12, additifs 13, sel 8, glycérine 8, céréale 4, et nouveau critère « Étiquette complète » sur 10. Trachée, herbière, cou, queue, pied, patte et panse : morceau d'animal nommé, 12 sur 20 au premier ingrédient et 8 sur 15 en part animale, au lieu de 20 et 15. Décision du propriétaire, qui remplace celle du 2026-11-03 sur ces morceaux.

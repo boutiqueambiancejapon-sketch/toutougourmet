@@ -8,14 +8,15 @@ import { TREAT_SHARE } from '@/lib/scanner/treat-allowance'
 
 const NB = ' '
 const CRITERIA: [string, number, string][] = [
-  ['Premier ingrédient', 20, `20 pour une viande ou un poisson d'espèce nommée, 9 si l'espèce n'est pas précisée, 4 pour des sous-produits ou une partie à mâcher (peau, cuir, corne, sabot, oreille, tendon, nerf, os), 0 sinon`],
+  ['Premier ingrédient', 20, `20 pour une viande ou un poisson d'espèce nommée, 12 pour un morceau nommé comme une trachée, un cou ou une queue, 9 si l'espèce n'est pas précisée, 4 pour des sous-produits ou une partie à mâcher (peau, cuir, corne, sabot, oreille, tendon, nerf, os), 0 sinon`],
   ['Part de viande ou de poisson déclarée', 15, `0 si rien n'est écrit, 1 sous 4${NB}%, 3 de 4 à 14${NB}%, 6 de 14 à 30${NB}%, 9 de 30 à 50${NB}%, 12 de 50 à 70${NB}%, 15 à partir de 70${NB}% ou quand la recette n'est faite que de viande ou de poisson. Les parties à mâcher ne comptent pas comme viande`],
-  ['Sucres ajoutés', 15, '0 si un sucre, du miel, de la mélasse, un sirop, du dextrose ou du caramel est listé'],
-  ['Colorants, conservateurs et arômes', 15, '15 sans défaut, 7 avec un défaut, 0 avec deux ou plus. Défauts : un colorant, un conservateur ou antioxygène cité sans nom (ou BHA, BHT, éthoxyquine), un arôme artificiel'],
-  ['Sel ajouté', 10, '0 si du sel ou du chlorure de sodium est listé (les « sels minéraux » ne comptent pas)'],
+  ['Sucres ajoutés', 12, '0 si un sucre, du miel, de la mélasse, un sirop, du dextrose ou du caramel est listé'],
+  ['Colorants, conservateurs et arômes', 13, '13 sans défaut, 6 avec un défaut, 0 avec deux ou plus. Défauts : un colorant, un conservateur ou antioxygène cité sans nom (ou BHA, BHT, éthoxyquine), un arôme artificiel'],
+  ['Sel ajouté', 8, '0 si du sel ou du chlorure de sodium est listé (les « sels minéraux » ne comptent pas)'],
   ['Longueur de la liste', 10, '10 jusqu\'à 5 ingrédients, puis 2 de moins par ingrédient en plus : 0 à partir de 10 (additifs non comptés)'],
-  ['Glycérine et origine animale non nommée', 10, '10 sans défaut, 5 avec un, 0 avec deux ou plus. Défauts : de la glycérine (E422), des sous-produits, un ingrédient animal sans espèce'],
-  ['Céréale ou farine en tête', 5, '0 si le premier ingrédient est une céréale, une farine, un amidon ou une fécule végétale'],
+  ['Glycérine et origine animale non nommée', 8, '8 sans défaut, 4 avec un, 0 avec deux ou plus. Défauts : de la glycérine (E422), des sous-produits, un ingrédient animal sans espèce'],
+  ['Céréale ou farine en tête', 4, '0 si le premier ingrédient est une céréale, une farine, un amidon ou une fécule végétale'],
+  ['Étiquette complète', 10, '6 pour les 5 constituants affichés, 4 pour 4, 2 pour 3, plus 4 si les calories sont affichées'],
 ]
 
 const kg = (s: keyof typeof dogSizeRanges) => `${dogSizeRanges[s].midKg}${NB}kg`

@@ -73,11 +73,13 @@ test('aiguillage : friandise → barème friandise, croquette → barème princi
   assert.equal(scoreVersionFor({ typeImage: 'aliment-chien' }), SCORE_VERSION)
 })
 
-test('bonne friandise (poulet seul) : 100/100, 8 critères, total 100 points', () => {
+test('bonne friandise (poulet seul) : 94 sans analyse affichée, 100 avec, 9 critères, total 100 points', () => {
   const r = scoreTreat(GOOD)
-  assert.equal(r.criteria.length, 8)
+  assert.equal(r.criteria.length, 9)
   assert.equal(r.criteria.reduce((s, c) => s + c.max, 0), 100)
-  assert.equal(r.score, 100)
+  assert.equal(r.score, 94)
+  const full = scoreTreat({ ...GOOD, constituants: { ...GOOD.constituants, proteines: 60, matieresGrasses: 8, cendres: 6, cellulose: 1, humidite: 15 } })
+  assert.equal(full.score, 100)
   assert.equal(r.band, 'tres-bon')
   assert.equal(r.dryMatter, null)
   assert.deepEqual(r.treat?.alerts, [])
@@ -97,15 +99,15 @@ test('mauvaise friandise (sucre, colorant, glycérine, sel, céréale en tête) 
   assert.equal(r.band, 'faible')
 })
 
-test('critère additifs : 15 sans défaut, 7 avec un, 0 avec deux ou plus', () => {
+test('critère additifs : 13 sans défaut, 6 avec un, 0 avec deux ou plus', () => {
   const one = scoreTreat(treat({ ingredients: [{ nom: 'Canard', pourcentage: null }], additifs: ['Colorants'] }))
-  assert.equal(pts(one, 'friandise-additifs'), 7)
+  assert.equal(pts(one, 'friandise-additifs'), 6)
   const two = scoreTreat(treat({ ingredients: [{ nom: 'Canard', pourcentage: null }], additifs: ['Colorants', 'Arômes artificiels'] }))
   assert.equal(pts(two, 'friandise-additifs'), 0)
   const bha = scoreTreat(treat({ ingredients: [{ nom: 'Canard', pourcentage: null }], additifs: ['BHA'] }))
-  assert.equal(pts(bha, 'friandise-additifs'), 7, 'BHA compte comme un défaut de conservateur')
+  assert.equal(pts(bha, 'friandise-additifs'), 6, 'BHA compte comme un défaut de conservateur')
   const named = scoreTreat(treat({ ingredients: [{ nom: 'Canard', pourcentage: null }], additifs: ['Conservateur : sorbate de potassium'] }))
-  assert.equal(pts(named, 'friandise-additifs'), 15, 'conservateur nommé : pas de défaut')
+  assert.equal(pts(named, 'friandise-additifs'), 13, 'conservateur nommé : pas de défaut')
 })
 
 test('part animale progressive et liste courte', () => {
@@ -120,11 +122,11 @@ test('part animale progressive et liste courte', () => {
 test('premier ingrédient, glycérine et farine', () => {
   const unnamed = scoreTreat(treat({ ingredients: [{ nom: 'Viande déshydratée', pourcentage: 40 }, { nom: 'Farine de blé', pourcentage: null }] }))
   assert.equal(pts(unnamed, 'friandise-premier-ingredient'), 9)
-  assert.equal(pts(unnamed, 'friandise-glycerine'), 5, 'un ingrédient animal sans espèce')
+  assert.equal(pts(unnamed, 'friandise-glycerine'), 4, 'un ingrédient animal sans espèce')
   const flour = scoreTreat(treat({ ingredients: [{ nom: 'Farine de riz', pourcentage: null }, { nom: 'Saumon', pourcentage: 20 }] }))
   assert.equal(pts(flour, 'friandise-cereales'), 0)
   const fishMeal = scoreTreat(treat({ ingredients: [{ nom: 'Farine de poisson', pourcentage: null }] }))
-  assert.equal(pts(fishMeal, 'friandise-cereales'), 5, 'farine de poisson : animale, pas une céréale')
+  assert.equal(pts(fishMeal, 'friandise-cereales'), 4, 'farine de poisson : animale, pas une céréale')
   const glyc = scoreTreat(treat({ ingredients: [{ nom: 'Poulet', pourcentage: 60 }, { nom: 'Glycérine', pourcentage: null }, { nom: 'Sous-produits animaux', pourcentage: null }] }))
   assert.equal(pts(glyc, 'friandise-glycerine'), 0, 'glycérine + sous-produits : deux défauts')
 })
@@ -246,8 +248,11 @@ test('parties à mâcher : ni viande nommée au premier ingrédient, ni part de 
   for (const nom of ['Oreilles de porc séchées', 'Sabots de veau séchés', 'Cornes de buffle', 'Tendons de bœuf', 'Nerfs de bœuf', 'Bull pizzle', 'Os à moelle de bœuf', 'Morceaux de peau de tête de bœuf séchés', 'Bois de cerf', 'Beef hide'])
     assert.equal(pts(scoreTreat(treat({ ingredients: [{ nom, pourcentage: null }] })), 'friandise-premier-ingredient'), 4, nom)
   // Vraie viande seule : très bien notée ; « poulet (avec os) » reste de la viande
-  assert.equal(scoreTreat(treat({ ingredients: [{ nom: '100 % poulet séché', pourcentage: 100 }] })).score, 100)
-  assert.equal(pts(scoreTreat(treat({ ingredients: [{ nom: 'Cous de poulet (avec os)', pourcentage: null }] })), 'friandise-premier-ingredient'), 20)
+  assert.equal(scoreTreat(treat({ ingredients: [{ nom: '100 % poulet séché', pourcentage: 100 }] })).score, 90)
+  assert.equal(pts(scoreTreat(treat({ ingredients: [{ nom: 'Trachée de bœuf séchée', pourcentage: null }] })), 'friandise-premier-ingredient'), 12)
+  assert.equal(pts(scoreTreat(treat({ ingredients: [{ nom: 'Trachée de bœuf séchée', pourcentage: null }] })), 'friandise-part-animale'), 8)
+  assert.equal(pts(scoreTreat(treat({ ingredients: [{ nom: '100% getrocknete Rinderhaut', pourcentage: 100 }] })), 'friandise-premier-ingredient'), 4, 'peau de bœuf en allemand')
+  assert.equal(pts(scoreTreat(treat({ ingredients: [{ nom: 'Cous de poulet (avec os)', pourcentage: null }] })), 'friandise-premier-ingredient'), 12)
   // Mélange : seule la viande compte dans la part
   const mix = scoreTreat(treat({ ingredients: [{ nom: 'Poulet', pourcentage: 60 }, { nom: 'Peau de bœuf', pourcentage: 40 }] }))
   assert.equal(pts(mix, 'friandise-part-animale'), meatSharePoints(60))

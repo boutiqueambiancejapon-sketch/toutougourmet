@@ -30,8 +30,19 @@ export const hasArtificialFlavor = (name: string) => ARTIFICIAL_FLAVOR.test(norm
 const CHEW_PART = words([
   'peaux?', 'cuirs?', 'cornes?', 'sabots?', 'oreilles?', 'tendons?', 'nerfs?', 'pizzles?', 'os', 'bois de (cerf|renne|daim|chevreuil)',
   'rawhide', 'skins?', 'hides?', 'horns?', 'hoof', 'hooves', 'ears?', 'bones?', 'antlers?', 'bully sticks?',
+  'haut', 'ohren?', 'knochen', 'hufe?', 'sehnen?', 'pelle', 'orecchie', 'ossa', 'piel', 'huid',
 ])
 export const isChewPart = (name: string) => CHEW_PART.test(mainName(name))
+
+/**
+ * Morceau d'animal nommé mais qui n'est pas du muscle : trachée, herbière, cou, queue, pied, panse.
+ * Il vaut mieux qu'un sous-produit anonyme et moins qu'une viande, décision du propriétaire du 2026-11-04.
+ */
+const ANIMAL_PART = words([
+  'trachees?', 'herbieres?', 'oesophages?', 'cous?', 'queues?', 'pieds?', 'pattes?', 'panses?', 'tripes?',
+  'trachea', 'tracheas', 'necks?', 'tails?', 'feet', 'foot', 'paws?', 'tripe', 'gullets?',
+])
+export const isAnimalPart = (name: string) => ANIMAL_PART.test(mainName(name))
 
 /** Céréale, farine, amidon ou fécule d'origine végétale (« farine de poisson » est animale). */
 const FLOUR = words(['farines?', 'flour', 'amidons?', 'fecules?', 'starch'])
