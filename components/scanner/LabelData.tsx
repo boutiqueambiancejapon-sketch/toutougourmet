@@ -34,6 +34,7 @@ const ORIGIN: Record<AnalysisSource, string> = {
   photo: "de l'étiquette lue",
   openpetfoodfacts: 'de la fiche Open Pet Food Facts',
   openfoodfacts: 'de la fiche Open Food Facts',
+  maxizoo: 'de la fiche produit Maxi Zoo',
 }
 
 const pct = (n: number) => `${n.toLocaleString('fr-FR', { maximumFractionDigits: 2 })} %`

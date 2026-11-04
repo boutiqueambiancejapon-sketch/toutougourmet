@@ -14,7 +14,7 @@ import { user } from './auth'
  * photo : étiquette lue par l'IA · openpetfoodfacts : données de la base ouverte, sans IA ·
  * openfoodfacts : produit pour animaux rangé dans Open Food Facts (dernier recours du code-barres)
  */
-export type AnalysisSource = 'photo' | 'openpetfoodfacts' | 'openfoodfacts'
+export type AnalysisSource = 'photo' | 'openpetfoodfacts' | 'openfoodfacts' | 'maxizoo'
 
 const ts = (name: string) => timestamp(name, { withTimezone: true })
 

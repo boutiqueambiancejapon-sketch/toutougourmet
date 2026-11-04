@@ -45,7 +45,7 @@ export async function isPublished(row: FoodAnalysis): Promise<boolean> {
  * (ses signalements restent affichés). Version SQL brut pour les requêtes pg directes.
  */
 export function awaitingReviewWhere(): SQL {
-  return sql`NOT ${foodAnalysis.reviewed} AND NOT ${foodAnalysis.discarded} AND NOT (${foodAnalysis.source} = 'openpetfoodfacts' AND ${foodAnalysis.scanCount} = 0)`
+  return sql`NOT ${foodAnalysis.reviewed} AND NOT ${foodAnalysis.discarded} AND NOT (${foodAnalysis.source} IN ('openpetfoodfacts', 'maxizoo') AND ${foodAnalysis.scanCount} = 0)`
 }
 
-export const AWAITING_REVIEW_SQL = "NOT reviewed AND NOT discarded AND NOT (source = 'openpetfoodfacts' AND scan_count = 0)"
+export const AWAITING_REVIEW_SQL = "NOT reviewed AND NOT discarded AND NOT (source IN ('openpetfoodfacts', 'maxizoo') AND scan_count = 0)"

@@ -1,0 +1,14 @@
+# Fiches à partir des pages produit Maxi Zoo (scripts/import-maxizoo.ts) : sans IA, 200 pages par
+# nuit, une toutes les 4 s. Fichier Awin hors du dépôt : /srv/toutou/shared/maxizoo-feed.csv.gz.
+[Unit]
+Description=Toutou Gourmet - fiches Maxi Zoo
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=toutou
+WorkingDirectory=/srv/toutou/current
+EnvironmentFile=/srv/toutou/shared/.env
+Nice=15
+ExecStart=/srv/toutou/current/node_modules/.bin/tsx scripts/import-maxizoo.ts --limite=200
