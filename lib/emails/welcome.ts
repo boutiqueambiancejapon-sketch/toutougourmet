@@ -3,7 +3,7 @@ import { button, linkItem, paragraph, renderEmail, siteUrl, type RenderedEmail }
 // @cdc e-mails — e-mail de bienvenue après une inscription à la lettre (voix de Milo, validée par le
 // propriétaire le 2026-11-04, plus le lien vers tous les outils). Envoyé une fois par adresse.
 
-export const WELCOME_SUBJECT = 'Salut, moi c\'est Milo'
+export const WELCOME_SUBJECT = 'Bienvenue sur Toutou Gourmet : 3 outils pour ton chien'
 
 /** Les trois outils les plus utilisés (repris aussi par la dernière page du guide PDF). */
 export const WELCOME_TOOLS = [

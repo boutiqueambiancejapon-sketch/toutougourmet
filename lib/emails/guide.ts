@@ -4,7 +4,7 @@ import { button, paragraph, renderEmail, siteUrl, type RenderedEmail } from './l
 // @cdc e-mails — e-mail du guide, envoyé juste après l'inscription au guide (texte de la maquette
 // validée). Lien direct vers le PDF. Une fois par adresse : lib/server/guide-email.ts.
 
-export const GUIDE_SUBJECT = 'Ton guide de la gamelle est arrivé'
+export const guideSubject = (foodCount: number) => `Ton guide est là : ${foodCount} aliments classés (PDF)`
 
 export interface GuideEmailInput {
   foodCount: number
@@ -15,7 +15,7 @@ export interface GuideEmailInput {
 
 export function guideEmail({ foodCount, recipeCount, unsubscribeUrl }: GuideEmailInput): RenderedEmail {
   return renderEmail({
-    subject: GUIDE_SUBJECT,
+    subject: guideSubject(foodCount),
     preheader: `${GUIDE_TITLE} : ${foodCount} aliments classés, les numéros antipoison et ${recipeCount} recettes.`,
     blocks: [
       paragraph('Salut,'),

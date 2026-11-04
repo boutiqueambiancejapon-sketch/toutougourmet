@@ -31,7 +31,7 @@ const reason = (): string =>
 
 export function rationEmail(unsubscribeUrl: string): RenderedEmail {
   return renderEmail({
-    subject: 'Le paquet ne connaît pas ton chien',
+    subject: 'Combien de grammes par jour pour ton chien ?',
     preheader: 'Son poids, son âge, son activité : le calculateur donne les grammes par jour.',
     blocks: [
       paragraph('Salut,'),
@@ -61,7 +61,7 @@ export function offerEmail(unsubscribeUrl: string, date: Date): RenderedEmail {
   const card = offerCard(slug, 'bienvenue-j5')
   const code = getPromoPage(slug)?.code
   return renderEmail({
-    subject: discount ? `${name} : ${discount}` : `L'offre partenaire du moment : ${name}`,
+    subject: discount ? `${discount.split(',')[0]} chez ${name} pour ton chien` : `L'offre partenaire du moment : ${name}`,
     preheader: code ? `Avec le code ${code}. Mode d'emploi et conditions sur notre page.` : "Par notre lien, sans code à taper. Mode d'emploi et conditions sur notre page.",
     blocks: [
       paragraph('Salut,'),

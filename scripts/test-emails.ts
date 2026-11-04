@@ -47,7 +47,7 @@ test('bienvenue : objet, liens des outils, désinscription, contact, version tex
   const unsub = buildUnsubscribeUrl('lecteur@example.com', SECRET)
   const mail = welcomeEmail(unsub)
   assert.equal(mail.subject, WELCOME_SUBJECT)
-  assert.equal(mail.subject, "Salut, moi c'est Milo")
+  assert.equal(mail.subject, 'Bienvenue sur Toutou Gourmet : 3 outils pour ton chien')
   for (const path of ['/outils/ration', '/fiche-aliments-dangereux', '/scanner', '/outils', '/contact']) {
     assert.ok(mail.html.includes(`href="${SITE}${path}"`), `lien ${path} (html)`)
     assert.ok(mail.text.includes(`${SITE}${path}`), `lien ${path} (texte)`)

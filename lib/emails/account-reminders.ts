@@ -29,7 +29,7 @@ const ACCOUNT_REASON = 'Tu reçois cet e-mail parce que tu as ouvert un compte s
 
 export function accountInviteEmail(unsubscribeUrl: string): RenderedEmail {
   return renderEmail({
-    subject: 'Arrête de lui redemander son poids',
+    subject: 'Sa ration et son poids enregistrés, gratuitement',
     preheader: 'Tu remplis son profil une fois, les outils le reprennent.',
     blocks: [
       paragraph('Salut,'),
@@ -48,7 +48,7 @@ export function accountInviteEmail(unsubscribeUrl: string): RenderedEmail {
 
 export function addDogEmail(unsubscribeUrl: string): RenderedEmail {
   return renderEmail({
-    subject: 'Il manque quelqu\'un dans ton compte',
+    subject: 'Ajoute ton chien : sa ration se calcule toute seule',
     preheader: 'Sa ration, sa fiche de garde et une alerte sur ses allergies partent de son profil.',
     blocks: [
       paragraph('Salut,'),
@@ -65,7 +65,7 @@ export function addDogEmail(unsubscribeUrl: string): RenderedEmail {
 
 export function lastDogReminderEmail(unsubscribeUrl: string): RenderedEmail {
   return renderEmail({
-    subject: 'Dernier rappel, ma fierté a des limites',
+    subject: 'Dernier rappel : le profil de ton chien',
     preheader: 'Note une allergie au poulet, le scanner te signale les paquets qui en contiennent.',
     blocks: [
       paragraph('Salut,'),
