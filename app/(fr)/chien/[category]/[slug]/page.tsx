@@ -12,9 +12,11 @@ import {
 import { formatDate } from '@/lib/utils'
 import { StickyCta } from '@/components/blog/StickyCta'
 import { StickyCtaDouble } from '@/components/blog/StickyCtaDouble'
-import { getStickyCtaForArticle, stickyAllowed } from '@/lib/sticky-cta-config'
+import { StickyOffer } from '@/components/blog/StickyOffer'
+import { getStickyCtaForArticle, getStickyOffer, stickyAllowed } from '@/lib/sticky-cta-config'
 import { getMidCta } from '@/lib/mid-cta'
 import { remarkMidCta } from '@/lib/remark-mid-cta'
+import { remarkFormula } from '@/lib/remark-formula'
 import { MidArticleCta } from '@/components/article/MidArticleCta'
 import { ArticleLayout } from '@/components/blog/ArticleLayout'
 import { getCategoryBySlug } from '@/data/categories'
@@ -204,6 +206,15 @@ export default async function ArticleCategoryPage({ params }: Props) {
     rawContent,
     midIsPartner: Boolean(midCta?.button.href.startsWith('http')),
   })
+  // @cdc cro-carte — fiche race ou avis qui met une marque en avant : sa barre passe avant les autres.
+  const stickyOffer = getStickyOffer({
+    categorySlug: category,
+    slug,
+    rawContent,
+    verdict: frontmatter.verdict,
+    mainBrand: frontmatter.affiliateA?.name ?? frontmatter.review?.brand,
+    twoBrands: Boolean(frontmatter.affiliateB),
+  })
   const mdxComponents = midCta
     ? { ...articleMdxComponents, MidCta: () => <MidArticleCta cta={midCta} /> }
     : articleMdxComponents
@@ -239,7 +250,7 @@ export default async function ArticleCategoryPage({ params }: Props) {
           components={mdxComponents}
           options={{
             mdxOptions: {
-              remarkPlugins: [remarkGfm, ...(midCta ? [remarkMidCta] : []), ...signupPlugins, ...guidePlugins],
+              remarkPlugins: [remarkGfm, remarkFormula, ...(midCta ? [remarkMidCta] : []), ...signupPlugins, ...guidePlugins],
               rehypePlugins: [
                 [rehypeAutolinkTerms, { terms: AUTOLINK_DICTIONARY, maxTotal: 3 }],
               ],
@@ -248,7 +259,9 @@ export default async function ArticleCategoryPage({ params }: Props) {
         />
       </ArticleLayout>
 
-      {!showSticky ? null : explicitDouble ? (
+      {stickyOffer ? (
+        <StickyOffer {...stickyOffer} />
+      ) : !showSticky ? null : explicitDouble ? (
         <StickyCtaDouble
           eyebrow="Comparer les deux"
           brandA={{ label: `Acheter ${frontmatter.affiliateA!.name}`, href: frontmatter.affiliateA!.url }}

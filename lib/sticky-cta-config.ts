@@ -5,10 +5,17 @@
 // ci-dessous ne servent plus que de repli.
 
 import type { StickyCtaConfig } from '@/components/blog/StickyCta'
+import type { StickyOfferProps } from '@/components/blog/StickyOffer'
 import { pageTypeOf } from '@/lib/page-type'
-import { shortDiscount } from '@/data/partner-discounts'
+import { brandOfferLabel, getBrandBySlug, type Brand } from '@/data/brands'
+import { CONFIRMED_DISCOUNTS, isOfferSlug, partnerSlugFromName, shortDiscount, type OfferSlug } from '@/data/partner-discounts'
 
 export type { StickyCtaConfig }
+
+/** Blocs d'offre où s'efface la barre d'une marque (StickyOffer). */
+const STOP_RACE_COMPARE = '[data-cta="race-compare"]'
+const STOP_ARTICLE_OFFER = '.mdx-content [data-cta^="brand-"]'
+export const STOP_BRAND_PAGE = '[data-cta="brand-fiche"]'
 
 // ────────────────────────────────────────────────────────────
 // Configs individuels
@@ -174,9 +181,82 @@ const OFFER_IN_ARTICLE = /<(BrandCTA|BreedBrandCompare)\b/
  * d'achat (nutrition, croquettes, marques, avis), objectif « clic partenaire » de la carte, et
  * seulement quand aucune offre n'est déjà sur la page (carte BrandCTA, comparatif race, encart du
  * milieu partenaire) : jamais deux fois la même demande. Jamais sur les urgences, les aliments,
- * la santé, les races (le comparatif le remplace), les recettes ni les autres articles.
+ * la santé, les races (barre StickyOffer à la place, voir getStickyOffer), les recettes ni les autres articles.
  */
 export function stickyAllowed({ categorySlug, slug, rawContent, midIsPartner }: StickyAllowedInput): boolean {
   if (pageTypeOf(`/chien/${categorySlug}/${slug}`) !== 'nutrition-marques') return false
+  if (SENSITIVE_SLUG.test(slug)) return false
   return !midIsPartner && !OFFER_IN_ARTICLE.test(rawContent)
+}
+
+// ────────────────────────────────────────────────────────────
+// Barre d'une seule marque (StickyOffer), demande du propriétaire du 2026-11-04
+// ────────────────────────────────────────────────────────────
+
+/** Maladie rangée hors de la rubrique santé : aucune barre, quelle qu'elle soit. */
+const SENSITIVE_SLUG = /diarrhee|vomi|pancreatite|diabet|renale?|cancer|epilepsie|cardiaque|foie|hepat|maladie/
+
+const BRAND_ROW = /<BrandRow\b((?:"[^"]*"|'[^']*'|[^'">])*)>/g
+const BRAND_CTA_NAME = /<BrandCTA\b[^>]*?\bbrandName=["']([^"']+)/g
+
+/** Marque `pick` du comparatif d'une fiche race, quelle qu'elle soit (décision du propriétaire) : une seule, sinon rien. */
+function racePick(rawContent: string): Brand | null {
+  const picks = [...rawContent.matchAll(BRAND_ROW)]
+    .map((m) => m[1])
+    .filter((attrs) => /\bpick\b/.test(attrs.replace(/"[^"]*"|'[^']*'/g, '')))
+  if (picks.length !== 1) return null
+  return getBrandBySlug(/\bbrand=["']([^"']+)/.exec(picks[0])?.[1] ?? '') ?? null
+}
+
+/** Sujet d'un avis ou d'un comparatif s'il est partenaire et seul partenaire proposé sur la page. */
+function reviewedPartner(rawContent: string, mainBrand: string | undefined, twoBrands: boolean): OfferSlug | null {
+  if (twoBrands || !mainBrand) return null
+  const slug = partnerSlugFromName(mainBrand)
+  if (!slug) return null
+  for (const [, name] of rawContent.matchAll(BRAND_CTA_NAME)) {
+    const other = partnerSlugFromName(name)
+    if (other && other !== slug) return null
+  }
+  return slug
+}
+
+interface StickyOfferInput {
+  categorySlug: string
+  slug: string
+  rawContent: string
+  verdict?: string
+  /** Marque de l'article selon son frontmatter (affiliateA, sinon review.brand) */
+  mainBrand?: string
+  /** Le frontmatter nomme deux marques (affiliateB) : pas de marque principale */
+  twoBrands: boolean
+}
+
+/**
+ * @cdc cro-carte — seules les fiches races à comparatif et les avis ou comparatifs de la rubrique
+ * avis-marques passent ici : urgences, aliments, santé et maladies en sont exclus. Race : la marque
+ * `pick`. Avis : le sujet s'il est le seul partenaire de la page, avec une remise dans
+ * CONFIRMED_DISCOUNTS. Sinon null et la page garde sa règle (stickyAllowed). Elle remplace l'interdit « races » de stickyAllowed : la barre s'efface
+ * dès que l'offre de la page arrive, donc jamais deux fois la même demande à l'écran.
+ */
+export function getStickyOffer({ categorySlug, slug, rawContent, verdict, mainBrand, twoBrands }: StickyOfferInput): StickyOfferProps | null {
+  if (verdict === 'danger' || SENSITIVE_SLUG.test(slug)) return null
+  const isRace = pageTypeOf(`/chien/${categorySlug}/${slug}`) === 'races'
+  if (isRace) {
+    const pick = racePick(rawContent)
+    if (!pick) return null
+    // La marque suit toujours le `pick`, même en rupture : la ligne dit alors la rupture (brandOfferLabel).
+    const offer = (isOfferSlug(pick.slug) ? CONFIRMED_DISCOUNTS[pick.slug] : null) ?? brandOfferLabel(pick)
+    return { brandName: pick.name, href: pick.affiliateUrl, offer, pick: true, stopAt: STOP_RACE_COMPARE }
+  }
+  if (categorySlug !== 'avis-marques') return null
+  const partner = reviewedPartner(rawContent, mainBrand, twoBrands)
+  const brand = partner ? getBrandBySlug(partner) : undefined
+  const offer = partner ? CONFIRMED_DISCOUNTS[partner] : null
+  if (!brand || !offer || brand.stockNote) return null
+  return {
+    brandName: brand.name,
+    href: brand.affiliateUrl,
+    offer,
+    stopAt: STOP_ARTICLE_OFFER,
+  }
 }

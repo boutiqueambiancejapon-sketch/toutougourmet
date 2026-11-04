@@ -9,7 +9,8 @@ import { shortDiscount, isOfferSlug } from '@/data/partner-discounts'
 import { BrandHero, BrandIdentity } from './BrandHero'
 import { BrandPresentation, BrandProsCons, BrandRecipes } from './BrandDetails'
 import { BrandVerdict } from './BrandVerdict'
-import { StickyBrandCTA } from './StickyBrandCTA'
+import { StickyOffer } from '@/components/blog/StickyOffer'
+import { STOP_BRAND_PAGE } from '@/lib/sticky-cta-config'
 
 // @cdc 04-pages — fiche marque V2 (/chien/marque/[slug]) : en-tête, bande encre d'identité,
 // présentation, points forts et limites, recettes, un seul CTA principal, FAQ, liens utiles.
@@ -84,7 +85,7 @@ export function BrandPage({ brand }: { brand: Brand }) {
         </nav>
       </div>
 
-      {brand.stockNote ? null : <StickyBrandCTA brandName={brand.name} affiliateUrl={brand.affiliateUrl} offer={brandOfferLabel(brand)} />}
+      {brand.stockNote ? null : <StickyOffer brandName={brand.name} href={brand.affiliateUrl} offer={brandOfferLabel(brand)} stopAt={STOP_BRAND_PAGE} />}
     </>
   )
 }
