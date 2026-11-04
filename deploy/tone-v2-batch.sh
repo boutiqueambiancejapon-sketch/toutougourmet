@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# Réécriture du ton V2 par lots (docs/tone-v2-queue.md), dans sa propre copie, jamais dans ~/Toutou.
+# Usage : tone-v2-batch.sh [taille du lot] [nombre max de lots] [minutes max]. S'arrête à 23 h 30 à
+# Paris pour laisser la place aux tâches de nuit, et après 2 échecs de suite (alerte ntfy).
+# Journal : ~/toutou-seo-logs/tone-v2-AAAA-MM-JJ.log
+set -uo pipefail
+export PATH=/home/administrator/.local/bin:/usr/local/bin:/usr/bin:/bin
+SIZE=${1:-5}; MAX=${2:-1000}; MINUTES=${3:-110}
+REPO=https://github.com/boutiqueambiancejapon-sketch/toutougourmet
+WORK=$HOME/toutou-tone
+LOGS=$HOME/toutou-seo-logs
+mkdir -p "$LOGS"
+LOG=$LOGS/tone-v2-$(TZ=Europe/Paris date +%F).log
+exec 9>"$HOME/.toutou-tone.lock"
+flock -n 9 || { echo "Une réécriture est déjà en cours."; exit 0; }
+exec >>"$LOG" 2>&1
+START=$(date +%s); FAILS=0; DONE=0
+
+alert() {
+  [[ -f $HOME/.config/toutou/alerts.env ]] || return 0
+  set -a; . "$HOME/.config/toutou/alerts.env"; set +a
+  [[ -n "${NTFY_SERVER:-}" && -n "${NTFY_TOPIC:-}" ]] || return 0
+  curl -s -o /dev/null --max-time 15 -H "Title: Réécriture du ton" -d "$1" "$NTFY_SERVER/$NTFY_TOPIC" || true
+}
+
+[[ -d $WORK/.git ]] || git clone -q "$REPO" "$WORK"
+cd "$WORK" || exit 1
+git config user.name "$(git -C "$HOME/Toutou" config user.name)"; git config user.email "$(git -C "$HOME/Toutou" config user.email)"
+
+while (( DONE < MAX && $(date +%s) - START < MINUTES * 60 )); do
+  (( $(TZ=Europe/Paris date +%H%M | sed 's/^0*//;s/^$/0/') >= 2330 )) && { echo "23 h 30 : arrêt."; break; }
+  git fetch -q origin v2 && git checkout -q -B tone-v2 origin/v2 && git clean -fdq -e node_modules || { FAILS=$((FAILS+1)); sleep 60; continue; }
+  SLUGS=$(grep -m "$SIZE" '^- \[ \] `' docs/tone-v2-queue.md | sed 's/.*`\(.*\)`.*/\1/')
+  [[ -z $SLUGS ]] && { echo "File terminée."; alert "Tous les articles de la file sont réécrits."; break; }
+  [[ -d node_modules ]] && [[ node_modules/.package-lock.json -nt package-lock.json ]] || npm ci --no-audit --no-fund --silent
+  echo "=== $(date -Is) lot : $(echo "$SLUGS" | tr '\n' ' ')"
+  BEFORE=$(git rev-parse HEAD)
+  timeout 45m claude -p "$(cat deploy/tone-v2-prompt.md; printf '\n## Articles à traiter\n%s\n' "$SLUGS")" --permission-mode auto --output-format text </dev/null || echo "claude a terminé avec une erreur"
+  if [[ $(git rev-parse HEAD) == "$BEFORE" ]]; then
+    FAILS=$((FAILS+1)); echo "✗ aucun commit ($FAILS)"
+    (( FAILS >= 2 )) && { alert "La réécriture du ton s'est arrêtée après 2 échecs. Voir le journal $(basename "$LOG")."; break; }
+    continue
+  fi
+  git checkout -q -- . ; git clean -fdq -e node_modules
+  PUSHED=0
+  for i in 1 2 3; do
+    git fetch -q origin v2
+    if git rebase -q origin/v2 && git push -q origin HEAD:v2; then PUSHED=1; break; fi
+    git rebase --abort 2>/dev/null || true
+    sleep $((i * 15))
+  done
+  if (( PUSHED )); then FAILS=0; DONE=$((DONE+1)); echo "✓ $(git log -1 --format='%h %s' | cut -c1-120)"
+  else FAILS=$((FAILS+1)); echo "✗ push impossible ($FAILS)"; (( FAILS >= 2 )) && { alert "La réécriture du ton n'arrive plus à pousser. Voir le journal $(basename "$LOG")."; break; }; fi
+done
+echo "=== $(date -Is) fin : $DONE lot(s)"

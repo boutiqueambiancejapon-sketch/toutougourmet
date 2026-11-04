@@ -173,3 +173,9 @@ Rapport hors dépôt : `~/audits/audit-partenaires-2026-11-04.md`.
 - [x] Calendrier sans compte : J0, J2 ration, J4 compte, J7 offre, J10 scanner
 - [x] Compte sans chien : J1 et J4, arrêt dès qu'un chien est ajouté
 - [ ] Textes et aperçus montrés au propriétaire avant tout envoi des nouveaux e-mails
+
+## Ton V2 sur tout le site (2026-11-04)
+
+- [x] File par pages les plus vues (`docs/tone-v2-queue.md`), consigne et script de lots (`deploy/tone-v2-batch.sh`)
+- [ ] Premier lot relu avant de lancer la suite
+- [ ] Toute la file traitée, puis retirer `deploy/citations-prompt.md` de la nuit
