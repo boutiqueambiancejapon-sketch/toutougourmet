@@ -1,0 +1,9 @@
+# Chaque nuit à 1 h, heure de Paris. À retirer quand docs/tone-v2-queue.md est terminée.
+[Unit]
+Description=Toutou Gourmet : réécriture du ton V2, chaque nuit
+
+[Timer]
+OnCalendar=*-*-* 01:00:00 Europe/Paris
+
+[Install]
+WantedBy=timers.target

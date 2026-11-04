@@ -217,3 +217,5 @@ Décision du propriétaire : Dog Chef paie plus vite. Repas frais, Dog Chef d'ab
 - [ ] À trancher par le propriétaire : `signup_sources` est vidée à la confirmation. Afficher la source d'un compte confirmé, comme sur la maquette, demande de garder cette ligne et de le dire dans la politique de confidentialité.
 
 2026-11-04, suite : rotation des offres (lettre et J7) limitée à Dog Chef et Franklin, Elmut seulement là où il est vraiment la solution. Page À propos, audit, site de Charlotte Devaux et exports Search Console et Bing : le propriétaire ne donne pas suite pour l'instant. App de contrôle du serveur : reportée.
+
+2026-11-04 : réécriture du ton seulement de 1 h à 8 h à Paris (`toutou-tone.timer`), lots de 10 articles, décision du propriétaire.

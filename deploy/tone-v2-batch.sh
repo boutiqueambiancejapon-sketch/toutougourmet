@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 # Réécriture du ton V2 par lots (docs/tone-v2-queue.md), dans sa propre copie, jamais dans ~/Toutou.
-# Usage : tone-v2-batch.sh [taille du lot] [nombre max de lots] [minutes max]. S'arrête à 23 h 30 à
-# Paris pour laisser la place aux tâches de nuit, et après 2 échecs de suite (alerte ntfy).
+# Usage : tone-v2-batch.sh [taille du lot] [nombre max de lots] [minutes max]. Lancé par
+# toutou-tone.timer à 1 h. Ne tourne qu'entre 1 h et 8 h à Paris (décision du propriétaire) et
+# s'arrête après 2 échecs de suite (alerte ntfy). Laisse passer les autres tâches de nuit.
 # Journal : ~/toutou-seo-logs/tone-v2-AAAA-MM-JJ.log
 set -uo pipefail
 export PATH=/home/administrator/.local/bin:/usr/local/bin:/usr/bin:/bin
-SIZE=${1:-5}; MAX=${2:-1000}; MINUTES=${3:-110}
+SIZE=${1:-10}; MAX=${2:-1000}; MINUTES=${3:-420}
 REPO=https://github.com/boutiqueambiancejapon-sketch/toutougourmet
 WORK=$HOME/toutou-tone
 LOGS=$HOME/toutou-seo-logs
@@ -28,9 +29,10 @@ cd "$WORK" || exit 1
 git config user.name "$(git -C "$HOME/Toutou" config user.name)"; git config user.email "$(git -C "$HOME/Toutou" config user.email)"
 
 while (( DONE < MAX && $(date +%s) - START < MINUTES * 60 )); do
-  (( $(TZ=Europe/Paris date +%H%M | sed 's/^0*//;s/^$/0/') >= 2330 )) && { echo "23 h 30 : arrêt."; break; }
+  NOW=$(TZ=Europe/Paris date +%H%M | sed 's/^0*//;s/^$/0/')
+  (( NOW < 100 || NOW >= 800 )) && { echo "Hors de la plage 1 h - 8 h : arrêt."; break; }
   # Un seul gros travail à la fois : le serveur a gelé le 2026-11-04 avec plusieurs constructions en parallèle.
-  while (( $(awk '/MemAvailable/ {print int($2/1048576)}' /proc/meminfo) < 4 )) || pgrep -f '/\.bin/nex[t] build' >/dev/null; do sleep 120; done
+  while (( $(awk '/MemAvailable/ {print int($2/1048576)}' /proc/meminfo) < 4 )) || pgrep -f '/\.bin/nex[t] build|write-articles\.s[h]|seo-rewrite\.s[h]' >/dev/null; do sleep 120; done
   # Copie de travail propre à ce script : un lot interrompu (redémarrage du serveur) ne doit pas la bloquer.
   if ! { git rebase --abort 2>/dev/null; git fetch -q origin v2 && git checkout -q -f -B tone-v2 origin/v2 && git clean -fdq -e node_modules; }; then
     FAILS=$((FAILS+1)); echo "✗ mise à jour impossible ($FAILS)"

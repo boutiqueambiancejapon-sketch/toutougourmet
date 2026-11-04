@@ -1,0 +1,13 @@
+# Réécriture du ton V2 par lots, entre 1 h et 8 h : voir deploy/tone-v2-batch.sh.
+[Unit]
+Description=Toutou Gourmet : réécriture du ton V2 (nuit)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=administrator
+Environment=HOME=/home/administrator
+Environment=LANG=C.UTF-8
+ExecStart=/home/administrator/Toutou/deploy/tone-v2-batch.sh
+TimeoutStartSec=7h30min
