@@ -95,11 +95,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `fibres-alimentaires-chien-role-sources-dosage`
 - [x] `nourriture-berger-blanc-suisse`
 - [x] `huile-olive-chien-bienfaits-dosage`
-- [ ] `chien-peut-manger-epinards`
-- [ ] `nourriture-cane-corso`
-- [ ] `avis-franklin-light-dinde-patate-douce-epinards`
-- [ ] `nourriture-golden-retriever`
-- [ ] `chien-a-bu-eau-de-mer-que-faire`
+- [x] `chien-peut-manger-epinards`
+- [x] `nourriture-cane-corso`
+- [x] `avis-franklin-light-dinde-patate-douce-epinards`
+- [x] `nourriture-golden-retriever`
+- [x] `chien-a-bu-eau-de-mer-que-faire`
 - [ ] `chien-peut-manger-porc`
 - [ ] `nourriture-cocker-spaniel`
 - [ ] `nourriture-staffordshire-bull-terrier`
