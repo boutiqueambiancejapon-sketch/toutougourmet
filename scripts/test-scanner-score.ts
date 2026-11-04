@@ -8,7 +8,8 @@ import { animalKind, isByProduct, isCereal, isUnnamedAnimal } from '../lib/scann
 import { carbsCriterion, dryMatterBasis, isPartial, scoreLabel, SCORE_VERSION } from '../lib/scanner/score'
 import { alternativesFor, ficheTitle, partnerBrand, shortProduct } from '../lib/scanner/seo'
 import { parseExtractedLabel } from '../lib/scanner/types'
-import { parseIngredientText, percentOf } from '../lib/scanner/ingredient-text'
+import { parseIngredientText, partialPercentOf, percentOf } from '../lib/scanner/ingredient-text'
+import { partialAnimalShare } from '../lib/scanner/opff'
 import { opffFoodType, opffImageType, opffToLabel } from '../lib/scanner/opff'
 import { foodNoun, NOUNS } from '../lib/scanner/food-noun'
 import { classifyExtraction, nothingRead } from '../lib/scanner/outcome'
@@ -173,6 +174,25 @@ test('pourcentages : virgule décimale, zéros, mention après le chiffre', () =
     { nom: 'sel', pourcentage: 0.0008 },
     { nom: 'foie (séché)', pourcentage: 4 },
   ])
+})
+
+test('pourcentage de l\'ingrédient entier, pas d\'un composant', () => {
+  assert.equal(percentOf('Viandes et sous-produits animaux (4 % bœuf)'), null)
+  assert.equal(percentOf('Viandes et sous-produits animaux (dont poulet 4 %)'), null)
+  assert.equal(percentOf('Carnes y subproductos animales (4% de pollo fresco)'), null)
+  assert.equal(percentOf('céréales (dont blé complet 20%)'), null)
+  assert.equal(percentOf('Kjøtt og animalske biprodukter (43% okse)'), null)
+  assert.equal(percentOf('Viandes et abats crus (dinde 45%, sanglier 20%)'), 65)
+  assert.equal(percentOf('Viandes et abats crus (agneau 56%, jambon italien 10%)'), 66)
+  assert.equal(percentOf('Poulet (26% dont poulet frais 14%)'), 26)
+  assert.equal(percentOf('Saumon (30%, dont saumon frais 26%, saumon déshydraté 4%)'), 30)
+  assert.equal(percentOf('poulet et dinde déshydratés (29% comprend poulet 21%, une source naturelle)'), 29)
+  assert.equal(percentOf('volaille (viande (poulet et dinde 10%), cœurs 20%, gésiers 15%) 60%'), 60)
+  assert.equal(percentOf('agneau (foies 20%, lobes 10%) 30%'), 30)
+  assert.equal(percentOf('Sanglier (85% dont cœur, épaule, viandes)'), 85)
+  assert.equal(partialPercentOf('Viandes et sous-produits animaux (4 % bœuf)'), 4)
+  assert.equal(partialPercentOf('Poulet (26% dont poulet frais 14%)'), null)
+  assert.equal(partialAnimalShare([{ nom: 'Viandes et sous-produits animaux (4 % bœuf)', pourcentage: 4 }, { nom: 'céréales (dont blé 20 %)', pourcentage: 20 }]), 4)
 })
 
 test('additifs collés sans ponctuation, en norvégien ou à l\'américaine', () => {
