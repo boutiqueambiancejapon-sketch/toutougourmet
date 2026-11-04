@@ -27,3 +27,9 @@ Règle : `npm run build > log 2>&1 || { tail log; exit 1; }` avant tout commit, 
 
 ## 2026-11-04 — Note fausse sur une étiquette italienne
 - Les listes du scanner ne lisaient que le français et quelques mots d'anglais. Le premier vrai scan affichait « carne di agnello n'est ni une viande ni un poisson ». Contrôler un scan réel de bout en bout, explications comprises, dès qu'il arrive.
+
+## 2026-11-04 — Les règles `.mdx-content` passent devant Tailwind
+- Les règles de `globals.css` ne sont dans aucune couche : dans un article, elles battent tous les utilitaires. `.mdx-content table` imposait `white-space: nowrap`, d'où des tableaux de 1 637 px, et les couleurs `good`/`bad` de `CompareTd` ne s'affichaient pas.
+- Règle : un composant posé dans un article porte la classe `v2`, sinon ses utilitaires de marge, couleur et retour à la ligne sont ignorés. À l'inverse, un corps MDX enveloppé dans `.v2` perd toute sa mise en forme (comparatifs).
+- Règle : quand l'audit dit qu'un outil « défile bien » après un appui, vérifier au doigt : Playwright fait défiler jusqu'au bouton avant de cliquer, l'outil poids n'avait aucun code de défilement.
+

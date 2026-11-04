@@ -179,3 +179,19 @@ Rapport hors dépôt : `~/audits/audit-partenaires-2026-11-04.md`.
 - [x] File par pages les plus vues (`docs/tone-v2-queue.md`), consigne et script de lots (`deploy/tone-v2-batch.sh`)
 - [ ] Premier lot relu avant de lancer la suite
 - [ ] Toute la file traitée, puis retirer `deploy/citations-prompt.md` de la nuit
+
+## Audit mobile (2026-11-04, branche `fix/audit-mobile`)
+
+- [x] Comparatifs `franklin-vs-elmut`, `elmut-vs-dog-chef` : styles MDX rétablis
+- [x] Résultat des outils sous l'en-tête après le calcul, focus, `prefers-reduced-motion`
+- [x] `CompareTable` en cartes sur mobile, indication de défilement sur le tableau des marques
+- [x] Urgences : gestes et antipoison sous l'encadré, bouton d'appel, ni image, ni résumé IA, ni offre
+- [x] Boutons sur une ligne à 360 et 390 px (`/codes-promo`, `/codes-promo/dog-chef`, `/scanner`, `/outils/age`)
+- [x] Guide une seule fois par page, ligne e-mail retirée des outils, Dog Chef sur le bilan
+- [x] `--tabbar-h` à 76 px, onglets masqués sous le panneau du guide
+- [x] Barre collante vérifiée sur les avis partenaires, lien vers les alternatives ailleurs, carte d'offre sur `/chien/marque`
+- [x] Titres sans ponctuation orpheline, doses en une ligne par poids, cibles tactiles, défauts à 360 px, `SearchAction`, « Copier »
+- [ ] Revoir sur un vrai iPhone : défilement et clavier après le calcul, bouton d'appel, panneau du guide, cartes de tableaux
+- [ ] `viewport-fit=cover` : non posé, marges gauche et droite (paysage, encoche) à traiter d'abord
+- [ ] Décider du sort de `/api/outils/email` et de `lib/tool-email.ts`, sans appelant depuis l'audit
+

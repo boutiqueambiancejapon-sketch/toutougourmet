@@ -219,3 +219,6 @@ Décision du propriétaire : Dog Chef paie plus vite. Repas frais, Dog Chef d'ab
 2026-11-04, suite : rotation des offres (lettre et J7) limitée à Dog Chef et Franklin, Elmut seulement là où il est vraiment la solution. Page À propos, audit, site de Charlotte Devaux et exports Search Console et Bing : le propriétaire ne donne pas suite pour l'instant. App de contrôle du serveur : reportée.
 
 2026-11-04 : réécriture du ton seulement de 1 h à 8 h à Paris (`toutou-tone.timer`), lots de 10 articles, décision du propriétaire.
+
+2026-11-04, audit mobile, validé par le propriétaire : le guide n'est demandé qu'une fois par page, en plus du panneau. La ligne « Reçois ton résultat par e-mail » disparaît des outils, sa route reste. Bilan : Dog Chef à la place d'Elmut pour les signes de peau ou de digestion. Urgences et aliments « danger » : ni image, ni résumé IA, ni offre, la ligne auteur et date passe en bas pour garder le bouton d'appel au premier écran. L'image reste déclarée dans le JSON-LD `Article` de ces pages. Gabarit : « Géant » à la place de « Très grand ». `viewport-fit=cover` non posé : les zones sûres gauche et droite ne sont gérées nulle part.
+
