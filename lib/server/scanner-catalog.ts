@@ -1,7 +1,9 @@
 import { cache } from 'react'
 import { and, desc, isNotNull, sql } from 'drizzle-orm'
 import { foodAnalysis } from '@/db/schema'
+import { isTherapeutic } from '@/lib/scanner/fiche-lists'
 import { foodNoun, type FoodNoun } from '@/lib/scanner/food-noun'
+import { betterEnough } from '@/lib/scanner/seo'
 import type { ProductKind } from '@/lib/scanner/score'
 import { brandSlug } from '@/lib/scanner/seo'
 import { getDb } from './drizzle'
@@ -77,4 +79,34 @@ export function groupByBrand(items: ReviewedItem[]): BrandGroup[] {
       return { slug, name, items: list, average: Math.round(list.reduce((s, it) => s + it.score, 0) / list.length) }
     })
     .sort((a, b) => a.name.localeCompare(b.name, 'fr'))
+}
+
+export interface BetterProduct {
+  slug: string
+  name: string
+  score: number
+  imageUrl: string | null
+  buyUrl: string
+}
+
+/** Sous une note faible : le mieux noté de la même catégorie chez Maxi Zoo, d'une autre marque, avec son lien exact. */
+export async function betterAtMaxiZoo(noun: FoodNoun, brand: string | null, score: number | null): Promise<BetterProduct | null> {
+  const d = getDb()
+  const type = noun === 'croquettes' ? 'sec' : noun === 'patee' ? 'humide' : null
+  if (!d || score === null || !type) return null
+  const rows = await d
+    .select({ slug: foodAnalysis.slug, brand: foodAnalysis.brand, product: foodAnalysis.product, score: foodAnalysis.score, imageUrl: foodAnalysis.imageUrl, buyUrl: foodAnalysis.buyUrl })
+    .from(foodAnalysis)
+    .where(sql`NOT ${foodAnalysis.discarded} AND ${foodAnalysis.buyUrl} IS NOT NULL AND ${foodAnalysis.score} IS NOT NULL
+      AND ${foodAnalysis.extracted}->>'typeAliment' = ${type} AND coalesce(${foodAnalysis.details}->>'kind', 'complete') = 'complete'
+      AND lower(coalesce(${foodAnalysis.brand}, '')) <> lower(${brand ?? ''})`)
+    .orderBy(desc(foodAnalysis.score), foodAnalysis.slug)
+    .limit(10)
+    .catch((err: unknown) => {
+      console.error('[scanner] meilleure alternative', err instanceof Error ? err.message : err)
+      return []
+    })
+  const best = rows.find((r) => r.score !== null && r.buyUrl && betterEnough(r.score, score) && !isTherapeutic(r))
+  if (!best || best.score === null || !best.buyUrl) return null
+  return { slug: best.slug, name: [best.brand, best.product].filter(Boolean).join(', '), score: best.score, imageUrl: best.imageUrl, buyUrl: best.buyUrl }
 }

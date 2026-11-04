@@ -31,9 +31,10 @@ function parseCsv(text: string): string[][] {
   return rows
 }
 
-type Item = MaxiZooItem & { url: string; image: string | null }
+type Item = MaxiZooItem & { url: string; image: string | null; buy: string | null }
 
 const IMAGE_HOST = 'https://images2.productserve.com/'
+const BUY_LINK = /^https:\/\/www\.awin1\.com\/pclick\.php\?p=\d+&a=1112904&m=68698$/
 
 function loadItems(): Item[] {
   const [head, ...rows] = parseCsv(gunzipSync(readFileSync(FEED)).toString('utf8'))
@@ -46,7 +47,8 @@ function loadItems(): Item[] {
     const name = r[at('product_name')] ?? ''
     if (!ean || !MAXI_ZOO_CATEGORIES[category] || !url.startsWith('https://www.maxizoo.fr/p/') || isMixedProduct(name) || seen.has(ean)) continue
     const image = r[at('aw_image_url')] ?? ''
-    seen.set(ean, { ean, url, category, name, brand: r[at('brand_name')] ?? '', image: image.startsWith(IMAGE_HOST) ? image : null })
+    const buy = r[at('aw_deep_link')] ?? ''
+    seen.set(ean, { ean, url, category, name, brand: r[at('brand_name')] ?? '', image: image.startsWith(IMAGE_HOST) ? image : null, buy: BUY_LINK.test(buy) ? buy : null })
   }
   const rank = (i: Item) => {
     const p = PRIORITY.findIndex((b) => i.brand.toLowerCase().includes(b))
@@ -62,13 +64,15 @@ async function main(): Promise<void> {
   const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL })
   const all = loadItems()
   // Image : sans lire aucune page, pour toute fiche dont le code-barres est dans le fichier.
-  const withImage = all.filter((i) => i.image)
+  const withData = all.filter((i) => i.image || i.buy)
   if (!dry) {
     const updated = await pool.query(
-      `UPDATE app.food_analysis f SET image_url = v.image FROM unnest($1::text[], $2::text[]) AS v(ean, image) WHERE f.ean = v.ean AND f.image_url IS DISTINCT FROM v.image`,
-      [withImage.map((i) => i.ean), withImage.map((i) => i.image)],
+      `UPDATE app.food_analysis f SET image_url = coalesce(v.image, f.image_url), buy_url = coalesce(v.buy, f.buy_url)
+         FROM unnest($1::text[], $2::text[], $3::text[]) AS v(ean, image, buy)
+        WHERE f.ean = v.ean AND (f.image_url IS DISTINCT FROM coalesce(v.image, f.image_url) OR f.buy_url IS DISTINCT FROM coalesce(v.buy, f.buy_url))`,
+      [withData.map((i) => i.ean), withData.map((i) => i.image), withData.map((i) => i.buy)],
     )
-    console.log(`${updated.rowCount ?? 0} images ajoutées`)
+    console.log(`${updated.rowCount ?? 0} fiches avec image ou lien mis à jour`)
   }
   const items = all.filter((i) => !state[i.ean]).slice(0, limit)
   const counts: Record<string, number> = {}
@@ -92,14 +96,14 @@ async function main(): Promise<void> {
       if (dry) { note(item.ean, existing ? 'a-mettre-a-jour' : 'a-creer'); continue }
       const version = scoreVersionFor(label)
       if (existing) {
-        await pool.query(`UPDATE app.food_analysis SET extracted = $2, details = $3, score = $4, algorithm_version = $5, model = 'maxizoo', source = 'maxizoo', brand = $6, product = $7, image_url = $8, updated_at = now() WHERE id = $1`, [existing.id, JSON.stringify(label), JSON.stringify(details), details.score, version, label.marque, label.produit, item.image])
+        await pool.query(`UPDATE app.food_analysis SET extracted = $2, details = $3, score = $4, algorithm_version = $5, model = 'maxizoo', source = 'maxizoo', brand = $6, product = $7, image_url = $8, buy_url = $9, updated_at = now() WHERE id = $1`, [existing.id, JSON.stringify(label), JSON.stringify(details), details.score, version, label.marque, label.produit, item.image, item.buy])
         note(item.ean, 'mise-a-jour')
       } else {
         const base = baseSlug(label.marque, label.produit, item.ean)
         await pool.query(
-          `INSERT INTO app.food_analysis (ean, slug, brand, product, extracted, details, score, algorithm_version, model, source, scan_count, image_url)
-           VALUES ($1, CASE WHEN EXISTS (SELECT 1 FROM app.food_analysis WHERE slug = $2) THEN $3 ELSE $2 END, $4, $5, $6, $7, $8, $9, 'maxizoo', 'maxizoo', 0, $10)`,
-          [item.ean, base, `${base.slice(0, 92)}-${item.ean.slice(-6)}`, label.marque, label.produit, JSON.stringify(label), JSON.stringify(details), details.score, version, item.image],
+          `INSERT INTO app.food_analysis (ean, slug, brand, product, extracted, details, score, algorithm_version, model, source, scan_count, image_url, buy_url)
+           VALUES ($1, CASE WHEN EXISTS (SELECT 1 FROM app.food_analysis WHERE slug = $2) THEN $3 ELSE $2 END, $4, $5, $6, $7, $8, $9, 'maxizoo', 'maxizoo', 0, $10, $11)`,
+          [item.ean, base, `${base.slice(0, 92)}-${item.ean.slice(-6)}`, label.marque, label.produit, JSON.stringify(label), JSON.stringify(details), details.score, version, item.image, item.buy],
         )
         note(item.ean, 'creee')
       }

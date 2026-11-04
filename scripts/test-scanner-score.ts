@@ -6,7 +6,7 @@ import assert from 'node:assert/strict'
 import { INCOMPLETE_LABEL, PREMIUM_LABEL, SUPERMARKET_LABEL } from '../lib/scanner/fixtures'
 import { animalKind, isByProduct, isCereal, isUnnamedAnimal } from '../lib/scanner/ingredients'
 import { carbsCriterion, dryMatterBasis, isPartial, scoreLabel, SCORE_VERSION } from '../lib/scanner/score'
-import { alternativesFor, ficheTitle, partnerBrand, shortProduct } from '../lib/scanner/seo'
+import { alternativesFor, betterEnough, ficheTitle, partnerBrand, shortProduct } from '../lib/scanner/seo'
 import { parseExtractedLabel } from '../lib/scanner/types'
 import { parseIngredientText, partialPercentOf, percentOf } from '../lib/scanner/ingredient-text'
 import { partialAnimalShare } from '../lib/scanner/opff'
@@ -431,6 +431,14 @@ test('title de fiche : 60 caractères au plus, nom du produit coupé au mot', ()
   assert.equal(ficheTitle('Lidl', 'Orlando multi-croquettes boeuf', 18), 'Croquettes Lidl Orlando : avis et note 18/100')
   assert.equal(shortProduct('Lidl', 'Lidl Orlando multi-croquettes pour chien'), 'Orlando multi-croquettes')
   assert.ok(ficheTitle('Une marque au nom vraiment très très long', 'Produit', 12).length <= 60)
+})
+
+test('alternatives : Dog Chef et Franklin d\'abord, un produit nettement mieux noté seulement', () => {
+  assert.deepEqual(alternativesFor('Royal Canin', 40).map((a) => a.brand.slug), ['dog-chef', 'franklin'])
+  assert.ok(alternativesFor('Dog Chef', 40).every((a) => a.brand.slug !== 'dog-chef'))
+  assert.equal(betterEnough(70, 54), true)
+  assert.equal(betterEnough(69, 40), false, '70 au moins')
+  assert.equal(betterEnough(75, 65), false, '15 points de mieux')
 })
 
 test('marque partenaire et alternatives sous 55', () => {

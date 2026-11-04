@@ -1,10 +1,12 @@
 import Link from 'next/link'
 import type { Alternative } from '@/lib/scanner/seo'
+import type { BetterProduct } from '@/lib/server/scanner-catalog'
+import { ProductPhoto } from '../ProductPhoto'
 
 // @cdc lot 6 — fiche /croquettes/[slug] sous 55/100 : « Par quoi les remplacer ? ». Une ou deux
 // marques partenaires (data/brands.ts), lien sponsorisé déclaré comme tel.
 
-export function FicheAlternatives({ alternatives }: { alternatives: Alternative[] }) {
+export function FicheAlternatives({ alternatives, better = null, category = null }: { alternatives: Alternative[]; better?: BetterProduct | null; category?: string | null }) {
   if (alternatives.length === 0) return null
   return (
     <section aria-labelledby="remplacer" className="flex flex-col gap-3">
@@ -15,10 +17,27 @@ export function FicheAlternatives({ alternatives }: { alternatives: Alternative[
         {`Sous 55/100, la composition cumule plusieurs défauts. ${alternatives.length > 1 ? 'Deux marques testées par la rédaction, qui vendent' : 'Une marque testée par la rédaction, qui vend'} des croquettes :`}
       </p>
       <ul role="list" className="m-0 flex list-none flex-col gap-3 p-0">
+        {better ? (
+          <li className="flex flex-col gap-2 rounded-card border-2 border-ink bg-paper p-4">
+            <p className="m-0 flex items-center gap-3">
+              <ProductPhoto src={better.imageUrl} />
+              <span className="font-display text-lg font-black leading-snug text-ink [overflow-wrap:anywhere]">{better.name}</span>
+            </p>
+            <p className="m-0 text-[15px] leading-relaxed text-ink-2">{`Mieux noté par notre barème : ${better.score}/100${category ? `, ${category}` : ''}.`}</p>
+            <div className="flex flex-wrap items-center gap-3">
+              <a href={better.buyUrl} rel="sponsored nofollow noopener" target="_blank" data-cta="scan-alternative-maxizoo" className="inline-flex min-h-11 items-center whitespace-nowrap rounded-control bg-ink px-4 font-semibold text-cream no-underline hover:underline">
+                Voir chez Maxi Zoo
+              </a>
+              <Link href={`/croquettes/${better.slug}`} className="text-sm text-ink-2 underline underline-offset-2">
+                Voir sa fiche
+              </Link>
+            </div>
+          </li>
+        ) : null}
         {alternatives.map(({ brand, reason }) => (
           <li key={brand.slug} className="flex flex-col gap-2 rounded-card border border-line bg-paper p-4">
             <p className="m-0 font-display text-lg font-black text-ink">{brand.name}</p>
-            <p className="m-0 text-[15px] leading-relaxed text-ink-2">{reason}</p>
+            <p className="m-0 text-[15px] leading-relaxed text-ink-2">{`${reason} Pas encore noté par notre scanner.`}</p>
             {brand.discountOffer ? <p className="m-0 text-sm font-semibold text-ink">{brand.discountOffer}</p> : null}
             <div className="flex flex-wrap items-center gap-3">
               <a

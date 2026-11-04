@@ -22,8 +22,9 @@ export interface BuyLink {
 const awin = (url: string) => `https://www.awin1.com/cread.php?awinmid=68698&awinaffid=1112904&ued=${encodeURIComponent(url)}`
 const maxiZooUrl = (brand: string) => awin(`https://www.maxizoo.fr/search/?text=${encodeURIComponent(brand.replace(/\s*&\s*/g, ' '))}`)
 
-export function buyLink(f: { brand: string | null; product: string | null; score: number | null }): BuyLink | null {
+export function buyLink(f: { brand: string | null; product: string | null; score: number | null; buyUrl?: string | null }): BuyLink | null {
   if (f.score === null || f.score < BUY_MIN_SCORE || !f.brand || isTherapeutic(f)) return null
+  if (f.buyUrl) return { store: 'Maxi Zoo', href: f.buyUrl, amazon: false }
   const partner = partnerBrand(f.brand)
   if (partner?.slug === 'ultra-premium-direct') return { store: partner.name, href: UPD_URL, amazon: false }
   if (partner && !partner.stockNote) return { store: partner.name, href: partner.affiliateUrl, amazon: false }
