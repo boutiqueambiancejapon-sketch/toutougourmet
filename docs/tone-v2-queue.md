@@ -15,11 +15,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : pa
 - [x] `chien-mange-xylitol-urgence`
 - [x] `nourriture-berger-belge-malinois`
 - [x] `chien-peut-manger-butternut-potiron`
-- [ ] `chien-peut-manger-piment`
-- [ ] `chien-mange-ail-oignon-urgence`
-- [ ] `chien-peut-manger-miel`
-- [ ] `halloween-chien-bonbons-citrouille-dangers`
-- [ ] `chien-mange-noix-cajou`
+- [x] `chien-peut-manger-piment`
+- [x] `chien-mange-ail-oignon-urgence`
+- [x] `chien-peut-manger-miel`
+- [x] `halloween-chien-bonbons-citrouille-dangers`
+- [x] `chien-mange-noix-cajou`
 - [ ] `chien-peut-manger-avoine`
 - [ ] `chien-peut-manger-clementine-orange`
 - [ ] `chien-peut-manger-fromage`
