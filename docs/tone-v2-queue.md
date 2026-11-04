@@ -80,11 +80,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `croquettes-chien-insuffisance-renale`
 - [x] `croquettes-chien-sterilise`
 - [x] `chien-peut-manger-courgette`
-- [ ] `chien-peut-manger-yaourt`
-- [ ] `chien-peut-manger-oeufs`
-- [ ] `comprendre-etiquette-patee-chien`
-- [ ] `chien-toujours-faim-causes-solutions`
-- [ ] `gamelle-surelevee-chien`
+- [x] `chien-peut-manger-yaourt`
+- [x] `chien-peut-manger-oeufs`
+- [x] `comprendre-etiquette-patee-chien`
+- [x] `chien-toujours-faim-causes-solutions`
+- [x] `gamelle-surelevee-chien`
 - [ ] `recette-patee-maison-poulet-chien`
 - [ ] `avis-butternut-box`
 - [ ] `avis-royal-canin`
