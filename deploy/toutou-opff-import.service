@@ -1,6 +1,6 @@
 # Copie hebdomadaire d'Open Pet Food Facts (scripts/opff-import.ts) : export JSONL officiel lu en
 # flux, aliments pour chien gardés dans app.opff_product, fiches notables pré-notées.
-# NON INSTALLÉ : voir deploy/README.md, section « Copie Open Pet Food Facts ».
+# Voir deploy/README.md, sections « Copie Open Pet Food Facts » et « Contrôle IA des fiches du scanner ».
 # Tant que le site tourne depuis la préversion : adapter User= et WorkingDirectory= comme dans
 # toutou-ingest.service.
 [Unit]
@@ -14,8 +14,11 @@ User=toutou
 WorkingDirectory=/srv/toutou/current
 EnvironmentFile=/srv/toutou/shared/.env
 ExecStart=/srv/toutou/current/node_modules/.bin/tsx scripts/opff-import.ts
-# Mesuré en dev le 2026-11-03 : 16 s, 250 Mo au plus pour 15 700 lignes
-TimeoutStartSec=30min
+# Contrôle IA des nouvelles fiches, 300 appels au plus. Le « - » : un échec ne marque pas l'import en
+# échec, les fiches restent à contrôler et le passage suivant les reprend.
+ExecStartPost=-/srv/toutou/current/node_modules/.bin/tsx scripts/check-fiches-ai.ts
+# Import mesuré en dev le 2026-11-03 : 16 s, 250 Mo au plus pour 15 700 lignes. Contrôle : 300 appels en série.
+TimeoutStartSec=60min
 Nice=10
 IOSchedulingClass=idle
 MemoryMax=700M

@@ -4,9 +4,11 @@ import { notFound } from 'next/navigation'
 import { dashboardAllowed } from '@/lib/dashboard/guard'
 import { parsePeriod } from '@/lib/dashboard/period'
 import { READ_FAILED } from '@/lib/dashboard/tab-page'
+import { getFicheChecks } from '@/lib/server/dashboard-fiche-checks'
 import { getScannerHealth } from '@/lib/server/dashboard-scanner'
 import { DashboardShell } from '@/components/dashboard/DashboardShell'
 import { Empty } from '@/components/dashboard/Panel'
+import { FicheCheckCard } from '@/components/dashboard/scanner/FicheCheckCard'
 import { RecentFailures, RecentScans } from '@/components/dashboard/scanner/ScannerLists'
 import { DailyCap, ScannerTiles } from '@/components/dashboard/scanner/ScannerNumbers'
 
@@ -24,7 +26,7 @@ const NOT_YET = 'Le journal du scanner n’existe pas encore sur ce serveur (db/
 
 export default async function ScannerHealthPage() {
   if (!(await dashboardAllowed())) notFound()
-  const health = await getScannerHealth()
+  const [health, checks] = await Promise.all([getScannerHealth(), getFicheChecks()])
   const { today, week } = health.counts
   const nothingYet = health.journal && week.code + week.photo + today.code + today.photo === 0
   return (
@@ -51,7 +53,10 @@ export default async function ScannerHealthPage() {
           <DailyCap calls={health.calls} cap={health.cap} />
           <RecentFailures rows={health.failures} journal={health.journal} />
         </div>
-        <RecentScans rows={health.scans} />
+        <div className="flex min-w-0 flex-col gap-4">
+          <FicheCheckCard checks={checks} />
+          <RecentScans rows={health.scans} checks={checks.byFood} />
+        </div>
       </div>
     </DashboardShell>
   )

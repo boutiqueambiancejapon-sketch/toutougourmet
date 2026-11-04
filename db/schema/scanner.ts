@@ -55,6 +55,32 @@ export const foodAnalysis = app.table(
   ],
 )
 
+export type FicheCheckStatus = 'ok' | 'doubt' | 'rejected'
+
+/**
+ * Contrôle IA d'une fiche (scripts/check-fiches-ai.ts) : le modèle juge, il ne corrige rien. Table à
+ * part : écrire ici ne touche ni food_analysis.updated_at (lastmod du sitemap) ni reviewed (indexation
+ * et schéma d'avis). content_hash vaut md5(extracted::text) au moment du contrôle : une fiche modifiée
+ * depuis redevient « à contrôler ». rejected retire la fiche des listes publiques, sans la supprimer.
+ */
+export const foodCheck = app.table(
+  'food_check',
+  {
+    foodAnalysisId: uuid('food_analysis_id')
+      .primaryKey()
+      .references(() => foodAnalysis.id, { onDelete: 'cascade' }),
+    status: text('status').$type<FicheCheckStatus>().notNull(),
+    /** Raison courte, pour le tableau de bord seulement */
+    reason: text('reason').notNull(),
+    model: text('model').notNull(),
+    contentHash: text('content_hash').notNull(),
+    inputTokens: integer('input_tokens').notNull().default(0),
+    outputTokens: integer('output_tokens').notNull().default(0),
+    checkedAt: ts('checked_at').notNull().defaultNow(),
+  },
+  (t) => [check('food_check_status', sql`${t.status} IN ('ok', 'doubt', 'rejected')`), index('food_check_status_idx').on(t.status)],
+)
+
 export const scanHistory = app.table(
   'scan_history',
   {
@@ -105,3 +131,4 @@ export const scanReport = app.table(
 )
 
 export type FoodAnalysis = typeof foodAnalysis.$inferSelect
+export type FoodCheck = typeof foodCheck.$inferSelect
