@@ -50,11 +50,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `chien-peut-manger-poires`
 - [x] `meilleures-croquettes-chien-senior`
 - [x] `croquettes-chien-reflux-gastrique`
-- [ ] `chien-peut-manger-crevettes`
-- [ ] `faut-il-rehydrater-croquettes-chien`
-- [ ] `nourriture-cavalier-king-charles`
-- [ ] `chien-mange-limace-urgence`
-- [ ] `chien-peut-manger-cerises`
+- [x] `chien-peut-manger-crevettes`
+- [x] `faut-il-rehydrater-croquettes-chien`
+- [x] `nourriture-cavalier-king-charles`
+- [x] `chien-mange-limace-urgence`
+- [x] `chien-peut-manger-cerises`
 - [ ] `chien-peut-manger-concombre`
 - [ ] `nourriture-chihuahua`
 - [ ] `avis-dogfy-diet-repas-frais-chien`
