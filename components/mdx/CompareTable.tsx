@@ -34,25 +34,31 @@ function maxColumns(node: ReactNode): number {
   }, 0)
 }
 
-/** Ajoute intitulés et rôles ARIA aux éléments du tableau. */
+/**
+ * Pose intitulés et rôles ARIA. Les balises écrites à la main dans le MDX (<thead>, <tr>, <th>, <td>)
+ * passent par les mêmes composants : une balise HTML recevrait ces props comme de faux attributs.
+ */
 function stackTree(node: ReactNode, labels: string[]): ReactNode {
   return Children.map(node, (child) => {
     if (!isParent(child)) return child
+    const { children } = child.props
     if (isRow(child)) {
+      const inHead = Children.toArray(children).filter(isParent).some(isHeadCell)
+      if (inHead) return <tr role="row">{stackTree(children, labels)}</tr>
+      const highlight = child.type === CompareTr && (child.props as CompareTrProps).highlight
       let col = -1
-      const cells = Children.map(child.props.children, (cell) => {
-        if (!isParent(cell)) return cell
+      const cells = Children.map(children, (cell) => {
+        if (!isParent(cell) || !isBodyCell(cell)) return cell
         col += 1
-        if (isBodyCell(cell)) return cloneElement(cell as ReactElement<CompareTdProps>, { stackLabel: labels[col] ?? '', stackFirst: col === 0 })
-        return cell
+        const { good, bad } = cell.type === CompareTd ? (cell.props as CompareTdProps) : { good: false, bad: false }
+        return <CompareTd good={good} bad={bad} stackLabel={labels[col] ?? ''} stackFirst={col === 0}>{cell.props.children}</CompareTd>
       })
-      if (child.type === CompareTr) return cloneElement(child as ReactElement<CompareTrProps>, { role: 'row', stacked: true }, cells)
-      // <tr> écrit à la main : en-tête (rôle seul) ou ligne de données (mêmes classes que CompareTr).
-      const inHead = Children.toArray(child.props.children).filter(isParent).some(isHeadCell)
-      return cloneElement(child as ReactElement<{ role?: string; className?: string }>, { role: 'row', className: inHead ? undefined : `border-line ${STACKED_ROW} bg-paper md:bg-transparent` }, cells)
+      return <CompareTr role="row" stacked highlight={highlight}>{cells}</CompareTr>
     }
-    const role = child.type === 'tbody' || child.type === CompareThead ? 'rowgroup' : undefined
-    return cloneElement(child as Parent, role ? { role } : undefined, stackTree(child.props.children, labels))
+    if (isHeadCell(child)) return <CompareTh>{children}</CompareTh>
+    if (child.type === 'thead' || child.type === CompareThead) return <CompareThead role="rowgroup">{stackTree(children, labels)}</CompareThead>
+    if (child.type === 'tbody') return <tbody role="rowgroup">{stackTree(children, labels)}</tbody>
+    return cloneElement(child, undefined, stackTree(children, labels))
   })
 }
 

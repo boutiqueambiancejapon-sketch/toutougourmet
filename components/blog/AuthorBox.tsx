@@ -33,7 +33,7 @@ export function AuthorBox({ author }: AuthorBoxProps) {
           <Link
             href={author.url}
             prefetch={false}
-            className="font-bold text-[var(--text-primary)] hover:text-orange-ink transition-colors"
+            className="inline-flex min-h-11 items-center font-bold text-[var(--text-primary)] hover:text-orange-ink transition-colors"
             style={{ fontFamily: "'Fraunces', serif" }}
           >
             {author.name}

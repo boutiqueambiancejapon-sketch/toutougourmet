@@ -211,6 +211,9 @@
 }
 
 html { scroll-behavior: smooth; }
+/* L'entrée en tampon de la pastille d'offre dépassait de 16 px : sur mobile, la page restait élargie (audit mobile 2026-11-04).
+   clip et non hidden : pas de conteneur de défilement, les éléments collants restent collants. */
+main { overflow-x: clip; }
 /* Exemple d'un champ : plus clair que la saisie pour ne pas faire croire le champ rempli (audit 2026-11-03, E9). */
 ::placeholder { color: var(--ink-3); opacity: 1; }
 /* Bandeau partenaire collant (components/blog/StickyBar.tsx) ou panneau du guide (GuidePopup) affiché :

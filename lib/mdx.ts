@@ -5,6 +5,17 @@ import matter from 'gray-matter'
 
 const contentDir = path.join(process.cwd(), 'content')
 
+// @cdc seo-geo — next-mdx-remote retire les expressions JavaScript : {"< 5 kg"} ou {'Autorisés'} dans un
+// article donnaient une cellule vide (30 articles, vu à l'audit mobile du 2026-11-04). Le texte est
+// remis tel quel, chevrons échappés. Les attributs (nom={'…'}) ne sont pas touchés.
+const TEXT_EXPRESSION = /(?<![=\w])\{\s*(?:'([^'\n{}]*)'|"([^"\n{}]*)"|`([^`\n{}]*)`)\s*\}/g
+
+function restoreTextExpressions(mdx: string): string {
+  return mdx.replace(TEXT_EXPRESSION, (_, single?: string, double?: string, tick?: string) =>
+    (single ?? double ?? tick ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'),
+  )
+}
+
 // Remplace l'année de rédaction dans les titres/descriptions par l'année courante
 // Ex: "Avis Royal Canin : notre test complet 2026" → "…2027" en 2027
 function injectCurrentYear(frontmatter: ArticleFrontmatter): ArticleFrontmatter {
@@ -121,7 +132,7 @@ export function getAllArticles(): Article[] {
       const slug = file.replace(/\.mdx$/, '')
       const raw = fs.readFileSync(path.join(blogDir, file), 'utf-8')
       const { data, content } = matter(raw)
-      return { slug, frontmatter: injectCurrentYear(data as ArticleFrontmatter), content, rawContent: content }
+      return { slug, frontmatter: injectCurrentYear(data as ArticleFrontmatter), content: restoreTextExpressions(content), rawContent: content }
     })
     .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
 }
@@ -131,7 +142,7 @@ export function getArticleBySlug(slug: string): Article | null {
   if (!fs.existsSync(filePath)) return null
   const raw = fs.readFileSync(filePath, 'utf-8')
   const { data, content } = matter(raw)
-  return { slug, frontmatter: injectCurrentYear(data as ArticleFrontmatter), content, rawContent: content }
+  return { slug, frontmatter: injectCurrentYear(data as ArticleFrontmatter), content: restoreTextExpressions(content), rawContent: content }
 }
 
 export function getArticlesByCategory(categorySlug: string): Article[] {
@@ -203,5 +214,5 @@ export function getComparatif(slug: string): Comparatif | null {
   if (!fs.existsSync(filePath)) return null
   const raw = fs.readFileSync(filePath, 'utf-8')
   const { data, content } = matter(raw)
-  return { slug, frontmatter: data as ComparatifFrontmatter, content, rawContent: content }
+  return { slug, frontmatter: data as ComparatifFrontmatter, content: restoreTextExpressions(content), rawContent: content }
 }
