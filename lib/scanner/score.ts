@@ -6,14 +6,12 @@ import type { ExtractedLabel } from './types'
 // source sont décrits dans docs/v2/scanner-score.md : toute modification du barème change
 // SCORE_VERSION (les analyses en cache sont alors recalculées à la lecture).
 
-export const SCORE_VERSION = '1.5'
+export const SCORE_VERSION = '1.6'
 
 /** Humidité retenue pour des croquettes qui ne la déclarent pas (règlement UE 767/2009 : mention obligatoire au-delà de 14 %). */
 export const ASSUMED_DRY_MOISTURE = 10
 /** En dessous de ce total de points évaluables, pas de note : trop d'informations manquent. */
 export const MIN_EVALUATED_POINTS = 60
-/** Note maximale d'un aliment complet qui ne déclare pas à la fois calcium et phosphore. */
-export const CAP_WITHOUT_MINERALS = 89
 
 export type CriterionId =
   | 'proteines'
@@ -78,6 +76,8 @@ export interface Criterion {
   /** null : critère non évalué, faute d'information sur l'étiquette */
   points: number | null
   explanation: string
+  /** Information absente de l'étiquette, pas un défaut de la recette */
+  undeclared?: boolean
 }
 
 export type Band = 'tres-bon' | 'correct' | 'moyen' | 'faible'
@@ -99,6 +99,9 @@ export interface ScoreResult {
   /** Friandise : nombre par jour selon le gabarit et alertes de sécurité */
   treat?: TreatInfo
 }
+
+/** Note calculée sans tous les critères : un chiffre manque sur l'étiquette. */
+export const isPartial = (d: Pick<ScoreResult, 'score' | 'criteria'>): boolean => d.score !== null && d.criteria.some((c) => c.points === null)
 
 export const kindOf = (d: Pick<ScoreResult, 'kind'>): ProductKind => d.kind ?? 'complete'
 
@@ -207,8 +210,11 @@ export function scoreLabel(label: ExtractedLabel): ScoreResult {
 
   scoreIngredients(label, add, missing)
 
-  // Calcium / phosphore : évalué seulement s'il est donné
-  if (a.calcium !== null && a.phosphore !== null && a.phosphore > 0) {
+  // Calcium / phosphore : une étiquette qui ne les donne pas perd ces points, sans que ce soit un
+  // défaut de la recette (`undeclared` : jamais cité parmi les points faibles).
+  if (a.calcium === null || a.phosphore === null || a.phosphore <= 0) {
+    criteria.push({ id: 'calcium-phosphore', label: 'Rapport calcium / phosphore', max: 5, points: 0, undeclared: true, explanation: 'Calcium et phosphore ne sont pas indiqués tous les deux : impossible de vérifier leur équilibre, donc 0 point.' })
+  } else if (a.calcium !== null && a.phosphore !== null && a.phosphore > 0) {
     const ratio = round1(a.calcium / a.phosphore)
     const ok = ratio >= 1 && ratio <= 2
     add('calcium-phosphore', 'Rapport calcium / phosphore', 5, ok ? 5 : 0,
@@ -224,10 +230,6 @@ export function scoreLabel(label: ExtractedLabel): ScoreResult {
   else {
     const max = evaluated.reduce((s, c) => s + c.max, 0)
     score = Math.round((evaluated.reduce((s, c) => s + (c.points ?? 0), 0) / max) * 100)
-    if (score > CAP_WITHOUT_MINERALS && (a.calcium === null || a.phosphore === null)) {
-      score = CAP_WITHOUT_MINERALS
-      assumptions.push(`Calcium et phosphore ne sont pas déclarés tous les deux : la note est plafonnée à ${CAP_WITHOUT_MINERALS}. Au-delà, l'étiquette doit être complète.`)
-    }
   }
   return {
     version: SCORE_VERSION,

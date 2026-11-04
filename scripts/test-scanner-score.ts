@@ -5,7 +5,7 @@ import { hasGlycerin, hasSalt, treatAlerts, unnamedPreservative } from '../lib/s
 import assert from 'node:assert/strict'
 import { INCOMPLETE_LABEL, PREMIUM_LABEL, SUPERMARKET_LABEL } from '../lib/scanner/fixtures'
 import { animalKind, isByProduct, isCereal, isUnnamedAnimal } from '../lib/scanner/ingredients'
-import { carbsCriterion, dryMatterBasis, scoreLabel, SCORE_VERSION } from '../lib/scanner/score'
+import { carbsCriterion, dryMatterBasis, isPartial, scoreLabel, SCORE_VERSION } from '../lib/scanner/score'
 import { alternativesFor, ficheTitle, partnerBrand, shortProduct } from '../lib/scanner/seo'
 import { parseExtractedLabel } from '../lib/scanner/types'
 import { parseIngredientText, percentOf } from '../lib/scanner/ingredient-text'
@@ -27,23 +27,25 @@ function test(name: string, fn: () => void) {
 }
 const pts = (r: ReturnType<typeof scoreLabel>, id: string) => r.criteria.find((c) => c.id === id)?.points
 
-test('plafond à 89 sans calcium et phosphore déclarés tous les deux', () => {
-  const noCalcium = { ...PREMIUM_LABEL, constituants: { ...PREMIUM_LABEL.constituants, calcium: null, phosphore: null } }
-  const uncapped = scoreLabel({ ...noCalcium, constituants: { ...noCalcium.constituants, calcium: 1.2, phosphore: 0.9 } })
-  const capped = scoreLabel({
-    ...noCalcium,
-    typeAliment: 'humide',
-    constituants: { ...noCalcium.constituants, proteines: 12, matieresGrasses: 6, cendres: 2, cellulose: 0.5, humidite: 78 },
-    ingredients: [{ nom: 'Saumon', pourcentage: 60 }, { nom: 'Poulet', pourcentage: 30 }],
-  })
-  assert.equal(capped.score, 89)
-  assert.match(capped.assumptions.join(' '), /plafonnée à 89/)
-  assert.equal(capped.band, 'tres-bon', 'la mention reste')
-  assert.ok(uncapped.score !== null, 'une étiquette complète garde sa note')
-  const complete = scoreLabel({ ...noCalcium, typeAliment: 'humide', constituants: { ...noCalcium.constituants, proteines: 12, matieresGrasses: 6, cendres: 2, cellulose: 0.5, humidite: 78, calcium: 0.3, phosphore: 0.2 }, ingredients: [{ nom: 'Saumon', pourcentage: 60 }, { nom: 'Poulet', pourcentage: 30 }] })
-  assert.ok(complete.score !== null && complete.score > 89, `étiquette complète : ${complete.score}`)
-  const half = scoreLabel({ ...noCalcium, typeAliment: 'humide', constituants: { ...noCalcium.constituants, proteines: 12, matieresGrasses: 6, cendres: 2, cellulose: 0.5, humidite: 78, calcium: 0.3 }, ingredients: [{ nom: 'Saumon', pourcentage: 60 }, { nom: 'Poulet', pourcentage: 30 }] })
-  assert.equal(half.score, 89, 'une seule valeur ne suffit pas')
+test('calcium et phosphore absents : 0 sur 5, sans être cités comme défaut', () => {
+  const wet = { ...PREMIUM_LABEL, typeAliment: 'humide' as const, ingredients: [{ nom: 'Saumon', pourcentage: 60 }, { nom: 'Poulet', pourcentage: 30 }] }
+  const values = { proteines: 12, matieresGrasses: 6, cendres: 2, cellulose: 0.5, humidite: 78 }
+  const absent = scoreLabel({ ...wet, constituants: { ...PREMIUM_LABEL.constituants, ...values, calcium: null, phosphore: null } })
+  const half = scoreLabel({ ...wet, constituants: { ...PREMIUM_LABEL.constituants, ...values, calcium: 0.3, phosphore: null } })
+  const full = scoreLabel({ ...wet, constituants: { ...PREMIUM_LABEL.constituants, ...values, calcium: 0.3, phosphore: 0.2 } })
+  assert.equal(pts(absent, 'calcium-phosphore'), 0)
+  assert.equal(pts(half, 'calcium-phosphore'), 0, 'une seule valeur ne suffit pas')
+  assert.equal(pts(full, 'calcium-phosphore'), 5)
+  assert.equal((full.score ?? 0) - (absent.score ?? 0), 5, 'écart de 5 points')
+  assert.equal(isPartial(absent), false, 'une valeur absente de calcium ne rend pas la note partielle')
+  assert.ok(!highlights(absent, 10).weaknesses.some((w) => /Ca\/P/.test(w)), 'jamais un point faible')
+})
+
+test('note partielle quand les glucides ne peuvent pas être estimés', () => {
+  const r = scoreLabel({ ...PREMIUM_LABEL, constituants: { ...PREMIUM_LABEL.constituants, cendres: null } })
+  assert.equal(pts(r, 'glucides'), null)
+  assert.equal(isPartial(r), true)
+  assert.equal(isPartial(scoreLabel(PREMIUM_LABEL)), false)
 })
 
 test('croquette premium riche en viande : très bonne note', () => {
@@ -71,7 +73,7 @@ test('croquette de supermarché, céréales en tête : note faible', () => {
   assert.equal(pts(r, 'conservateurs'), 0)
   assert.equal(pts(r, 'colorants'), 0)
   assert.equal(r.assumptions.length, 1, 'humidité supposée à 10 %')
-  assert.equal(r.criteria.find((c) => c.id === 'calcium-phosphore'), undefined)
+  assert.equal(r.criteria.find((c) => c.id === 'calcium-phosphore')?.points, 0)
 })
 
 test('espèces non nommées, céréales fractionnées, antioxygènes sans nom (cas réel du 2026-11-02)', () => {
