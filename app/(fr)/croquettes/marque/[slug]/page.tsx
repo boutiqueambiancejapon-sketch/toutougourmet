@@ -69,6 +69,17 @@ export default async function BrandRankingPage({ params }: Params) {
   const updated = latestDate(group.items.map((it) => it.updatedAt))
   return (
     <div className="v2 mx-auto flex max-w-prose flex-col gap-8 px-4 pt-4 pb-16 md:px-8 md:pt-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Brand',
+            name: group.name,
+            url: `https://www.toutou-gourmet.com/croquettes/marque/${group.slug}`,
+          }),
+        }}
+      />
       <RankingJsonLd name={`Croquettes ${group.name} classées par note`} path={`/croquettes/marque/${group.slug}`} items={group.items} total={n} />
       <div className="flex flex-col gap-4">
         <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Classement des croquettes', href: '/croquettes' }, { label: group.name }]} />

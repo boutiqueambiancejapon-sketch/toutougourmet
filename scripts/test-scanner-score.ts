@@ -1,5 +1,6 @@
 // Tests de la note du scanner (lib/scanner/score.ts), sans framework : npx tsx scripts/test-scanner-score.ts
 import { hasSugar } from '../lib/scanner/ingredients'
+import { gtinProperty } from '../lib/scanner/gtin'
 import { hasGlycerin, hasSalt, treatAlerts, unnamedPreservative } from '../lib/scanner/treat-ingredients'
 import assert from 'node:assert/strict'
 import { INCOMPLETE_LABEL, PREMIUM_LABEL, SUPERMARKET_LABEL } from '../lib/scanner/fixtures'
@@ -417,6 +418,13 @@ test('étiquettes étrangères : mêmes règles qu\'en français', () => {
   assert.equal(hasSalt('sale'), true)
   assert.ok(treatAlerts(['aglio']).length > 0)
   assert.equal(treatAlerts(['vitamine A 1000 UI']).length, 0)
+})
+
+test('code-barres en donnée structurée : propriété selon la longueur, clé de contrôle exigée', () => {
+  assert.deepEqual(gtinProperty('8056746576448'), { gtin13: '8056746576448' })
+  assert.deepEqual(gtinProperty('8056746576449'), {})
+  assert.deepEqual(gtinProperty(null), {})
+  assert.deepEqual(gtinProperty('abc'), {})
 })
 
 console.log('Tous les tests passent.')

@@ -14,7 +14,7 @@ import { STOP_BRAND_PAGE } from '@/lib/sticky-cta-config'
 
 // @cdc 04-pages — fiche marque V2 (/chien/marque/[slug]) : en-tête, bande encre d'identité,
 // présentation, points forts et limites, recettes, un seul CTA principal, FAQ, liens utiles.
-// JSON-LD : FAQPage + Product sans aggregateRating (aucune note client vérifiable).
+// JSON-LD : FAQPage + Brand. Une marque n'est pas un produit : le Product reste aux fiches du scanner.
 
 const SITE = 'https://www.toutou-gourmet.com'
 
@@ -35,19 +35,20 @@ export function BrandPage({ brand }: { brand: Brand }) {
     '@type': 'FAQPage',
     mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
   }
-  const productSchema = {
+  const brandSchema = {
     '@context': 'https://schema.org',
-    '@type': 'Product',
+    '@type': 'Brand',
+    '@id': `${SITE}/chien/marque/${brand.slug}#marque`,
     name: brand.name,
-    brand: { '@type': 'Brand', name: brand.name },
     description: brand.tagline,
     url: `${SITE}/chien/marque/${brand.slug}`,
+    ...(brand.logo ? { logo: `${SITE}${brand.logo}` } : {}),
   }
 
   return (
     <>
       {faqs.length > 0 ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} /> : null}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(brandSchema) }} />
 
       <div className="v2 mx-auto flex max-w-page flex-col gap-12 px-4 pt-6 pb-24 md:px-8 md:pt-10">
         <div className="flex flex-col gap-6">
