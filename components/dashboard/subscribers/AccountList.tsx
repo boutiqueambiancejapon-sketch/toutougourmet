@@ -1,11 +1,32 @@
-import type { AccountsResult } from '@/lib/server/dashboard-accounts'
-import { signupPlaceLabel } from '@/lib/signup-places'
+import Link from 'next/link'
+import { accountHref, accountStatus, dogNamesLine } from '@/lib/dashboard/account-status'
+import type { AccountRow, AccountsResult } from '@/lib/server/dashboard-accounts'
 import { Empty } from '../Panel'
-import { Badge, shortDate, SubscriberItem } from './RowParts'
+import { Badge } from './RowParts'
 
-// @cdc tableau de bord — comptes créés (base du site), plus récents d'abord.
+// @cdc tableau de bord — comptes créés (base du site), plus récents d'abord. Une ligne : adresse,
+// chiens, date de création, pastille. Toute la ligne ouvre la fiche du compte.
 
-const nf = new Intl.NumberFormat('fr-FR')
+const dayFmt = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'long', timeZone: 'Europe/Paris' })
+
+function Row({ account }: { account: AccountRow }) {
+  const status = accountStatus(account)
+  return (
+    <li className="border-b border-line last:border-b-0">
+      <Link href={accountHref(account.id)} className="flex min-h-11 items-center justify-between gap-3 py-3 text-ink no-underline hover:text-orange-ink">
+        <span className="min-w-0">
+          <span className="block truncate font-semibold">{account.email}</span>
+          <span className="block text-xs text-ink-2">
+            {dogNamesLine(account.dogNames)} · créé le {dayFmt.format(account.createdAt)}
+          </span>
+        </span>
+        <span className="shrink-0">
+          <Badge tone={status.tone}>{status.label}</Badge>
+        </span>
+      </Link>
+    </li>
+  )
+}
 
 export function AccountList({ result, query }: { result: AccountsResult; query: string }) {
   if (!result.ok) {
@@ -16,22 +37,12 @@ export function AccountList({ result, query }: { result: AccountsResult; query: 
     )
   }
   if (result.rows.length === 0) {
-    return <Empty>{query ? 'Aucun compte ne porte une adresse qui contient cette recherche.' : 'Aucun compte créé pour le moment.'}</Empty>
+    return <Empty>{query ? 'Aucun compte ne correspond à cette adresse ni à ce nom de chien.' : 'Aucun compte créé pour le moment.'}</Empty>
   }
   return (
     <ol className="m-0 list-none p-0">
       {result.rows.map((a) => (
-        <SubscriberItem key={`${a.email}-${a.createdAt.toISOString()}`} email={a.email}>
-          <span>{shortDate(a.createdAt)}</span>
-          <span aria-hidden="true">·</span>
-          <span>{a.place ? signupPlaceLabel(a.place) : 'Non attribué'}</span>
-          <span aria-hidden="true">·</span>
-          <span>
-            {nf.format(a.dogs)} {a.dogs > 1 ? 'chiens' : 'chien'}
-          </span>
-          <Badge tone={a.verified ? 'green' : 'neutral'}>{a.verified ? 'Confirmée' : 'Non confirmée'}</Badge>
-          {a.premium ? <Badge tone="amber">Premium</Badge> : null}
-        </SubscriberItem>
+        <Row key={a.id} account={a} />
       ))}
     </ol>
   )

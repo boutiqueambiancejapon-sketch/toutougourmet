@@ -2,8 +2,9 @@ import Link from 'next/link'
 import { IconClose, IconDownload, IconSearch } from '@/components/icons'
 import { listHref, SEARCH_MAX, SEARCH_PATH, type ListKind } from '@/lib/dashboard/subscriber-search'
 
-// @cdc tableau de bord — en tête des inscrits : choix de la liste, recherche par adresse (POST,
-// jamais dans l'URL) et export CSV. Chaque bouton tient sur une ligne à 320 px.
+// @cdc tableau de bord — en tête des inscrits : choix de la liste, recherche par adresse, ou par
+// chien dans la liste des comptes (POST, jamais dans l'URL) et export CSV. Chaque bouton tient sur
+// une ligne à 320 px.
 
 type FormAction = (form: FormData) => Promise<void>
 
@@ -23,6 +24,7 @@ const LISTS: { kind: ListKind; label: string }[] = [
 const btn = 'inline-flex min-h-11 shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-pill px-3 text-sm font-semibold'
 
 export function SubscribersToolbar({ list, query, search, clear }: ToolbarProps) {
+  const prompt = list === 'comptes' ? 'Chercher une adresse ou un chien' : 'Chercher une adresse'
   return (
     <div className="mt-4 flex flex-col gap-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -46,7 +48,7 @@ export function SubscribersToolbar({ list, query, search, clear }: ToolbarProps)
       <form key={query} action={search} role="search" className="flex gap-2">
         <input type="hidden" name="liste" value={list} />
         <label htmlFor="recherche-adresse" className="sr-only">
-          Chercher une adresse
+          {prompt}
         </label>
         <input
           id="recherche-adresse"
@@ -57,7 +59,7 @@ export function SubscribersToolbar({ list, query, search, clear }: ToolbarProps)
           autoComplete="off"
           autoCapitalize="none"
           spellCheck={false}
-          placeholder="Chercher une adresse"
+          placeholder={list === 'comptes' ? 'Adresse ou nom du chien' : prompt}
           className="min-h-11 min-w-0 flex-1 rounded-pill border border-line-2 bg-paper px-4 text-base text-ink"
         />
         <button type="submit" className={`${btn} bg-ink text-cream`}>

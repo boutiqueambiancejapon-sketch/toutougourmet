@@ -74,7 +74,7 @@ export default function PolitiqueConfidentialitePage() {
             <ul className="list-disc pl-5 space-y-1 text-sm mb-2">
               <li>ton adresse email et ton prénom ;</li>
               <li>ton mot de passe, haché : nous ne le connaissons pas et ne pouvons pas le lire ;</li>
-              <li>les profils de tes chiens (nom, race, date de naissance, poids, activité, stérilisation) et leurs pesées ;</li>
+              <li>les profils de tes chiens (nom, race, date de naissance, poids, activité, stérilisation, ce qu&apos;ils mangent, allergies) et leurs pesées ;</li>
               <li>les fiches de garde que tu crées (repas, friandises, allergies, médicaments, habitudes, ton téléphone, celui de ton vétérinaire, dates d&apos;absence). Elles sont lisibles par toute personne à qui tu envoies leur lien privé, jusqu&apos;au lendemain de ton retour. Rien n&apos;est gardé sur la personne qui garde ton chien ;</li>
               <li>pour chaque connexion, sa date, ton adresse IP et le nom de ton navigateur, qui servent à protéger le compte.</li>
             </ul>
@@ -105,6 +105,12 @@ export default function PolitiqueConfidentialitePage() {
               analyses, leur nombre ce mois-ci et tes signalements d&apos;erreur. Cet historique part avec ton compte.
             </p>
             <p className="mb-2">
+              Chaque scan, réussi ou non, laisse aussi une ligne dans un journal : date, code-barres ou photo, résultat
+              et, si tu es connecté, ton compte et la fiche du produit. Ce journal ne contient ni adresse IP, ni photo.
+              Il sert à repérer les pannes du scanner. Ses lignes sont effacées après 90 jours ; si tu supprimes ton
+              compte, elles perdent tout lien avec toi.
+            </p>
+            <p className="mb-2">
               La lecture du code-barres à la caméra se fait dans ton navigateur : aucune image du flux de la caméra
               n&apos;est envoyée ni gardée, seuls les chiffres lus nous parviennent. Pour un produit que notre base ne
               connaît pas encore, notre serveur interroge Open Pet Food Facts (association Open Food Facts, France) en
@@ -118,6 +124,17 @@ export default function PolitiqueConfidentialitePage() {
             </p>
           </Section>
 
+          <Section title="Consultation par le responsable du site">
+            <p>
+              Le responsable du site peut consulter les comptes, les profils de chiens et les scans, dans un
+              espace privé protégé par mot de passe. Il s&apos;en sert pour répondre à une demande d&apos;aide et
+              vérifier que le site fonctionne. Il ne les transmet à personne. Les téléphones, le vétérinaire, les
+              médicaments et les notes des fiches de garde ne s&apos;affichent pas dans cet espace, pas plus que
+              leur lien privé. Cette consultation repose sur notre intérêt légitime à assurer le support et le bon
+              fonctionnement du site.
+            </p>
+          </Section>
+
           <Section title="Newsletter">
             <p className="mb-2">
               Si tu t&apos;inscris à notre newsletter, ton email est uniquement utilisé pour t&apos;envoyer nos
@@ -127,7 +144,7 @@ export default function PolitiqueConfidentialitePage() {
             <p>
               Seul le responsable du site voit les adresses inscrites à la lettre et celles des comptes, dans
               un espace privé protégé par mot de passe. Il s&apos;en sert pour gérer la lettre et les comptes
-              (répondre à une demande, retirer une adresse), et pour rien d&apos;autre.
+              (répondre à une demande, retirer une adresse, vérifier que le site fonctionne), et pour rien d&apos;autre.
             </p>
           </Section>
 

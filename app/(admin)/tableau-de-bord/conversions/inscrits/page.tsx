@@ -79,7 +79,7 @@ export default async function SubscribersPage({ searchParams }: PageProps) {
       period={parsePeriod(undefined).key}
       current="conversions"
       title="Adresses inscrites"
-      intro="Inscrits à la lettre, comptes créés et e-mails reçus par chaque adresse, les plus récents d’abord. Touche une adresse pour la lire en entier."
+      intro="Inscrits à la lettre, comptes créés et e-mails reçus par chaque adresse, les plus récents d’abord. Dans la liste des comptes, touche une ligne pour ouvrir sa fiche."
     >
       <SubscribersToolbar list={list} query={query} search={searchSubscribers} clear={clearSearch} />
       {list === 'comptes' ? <AccountsBlock page={page} query={query} /> : list === 'envois' ? <TrackingBlock page={page} query={query} /> : <LetterBlock page={page} query={query} />}

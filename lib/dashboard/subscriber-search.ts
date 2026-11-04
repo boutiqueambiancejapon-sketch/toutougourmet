@@ -26,8 +26,15 @@ export function cleanQuery(value: unknown): string {
   return typeof value === 'string' ? value.trim().slice(0, SEARCH_MAX) : ''
 }
 
+/**
+ * Valeur du cookie en base64url : un « % » tapé dans la recherche faisait échouer le décodage de
+ * Next pendant la redirection de l'action serveur (URIError, réponse 500).
+ */
+export const encodeSearch = (query: string): string => Buffer.from(query, 'utf8').toString('base64url')
+
 export async function readSearch(): Promise<string> {
-  return cleanQuery((await cookies()).get(SEARCH_COOKIE)?.value)
+  const raw = (await cookies()).get(SEARCH_COOKIE)?.value
+  return raw ? cleanQuery(Buffer.from(raw, 'base64url').toString('utf8')) : ''
 }
 
 export function listHref(list: ListKind, page = 1): string {
