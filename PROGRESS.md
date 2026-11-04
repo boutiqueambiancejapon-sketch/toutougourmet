@@ -170,3 +170,7 @@ Robots IA : filtres par robot et type de visite dans l'URL, part des types de vi
 ## 2026-11-04 : Scanner, barème 1.5
 
 Note plafonnée à 89 sans calcium et phosphore déclarés. Classements séparés par catégorie (croquettes, pâtées, type inconnu, `?categorie=`), et la fiche dit « 89/100, parmi les pâtées ». Après déploiement : `tsx scripts/rescore-fiches.ts --appliquer`. Restent proposés, non décidés : fusion des doublons, barème 2.
+
+## 2026-11-04 : Scanner, recherche par nom
+
+`/scanner` propose de chercher un produit par son nom sous le bouton de scan (`components/scanner/ProductSearch.tsx`, `GET /api/scanner/recherche`, base seule, sans IA). Rien trouvé : photo de l'étiquette. Correction de la lecture des pourcentages prête sur `fix/scanner-percentages`, non publiée : effet montré au propriétaire d'abord. Tâche de nuit de recherche des compositions : idée validée sur le principe, essai sur 50 produits à chiffrer, conditions Awin à vérifier.

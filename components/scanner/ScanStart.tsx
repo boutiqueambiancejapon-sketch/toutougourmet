@@ -1,5 +1,7 @@
 'use client'
 
+import { ProductSearch } from './ProductSearch'
+
 // @cdc lot 6 — bouton principal du scanner, sa réassurance et la saisie à la main. Seul bouton de
 // scan du site : les pages de consultation n'ont qu'un lien vers /scanner.
 
@@ -11,7 +13,7 @@ function BarcodeIcon() {
   )
 }
 
-export function ScanStart({ monthlyLimit, onStart, onManual }: { monthlyLimit: number; onStart: () => void; onManual: () => void }) {
+export function ScanStart({ monthlyLimit, onStart, onManual, onPhoto }: { monthlyLimit: number; onStart: () => void; onManual: () => void; onPhoto: () => void }) {
   return (
     <div className="flex flex-col gap-3 rounded-card bg-ink p-4 text-cream sm:p-5">
       <button
@@ -26,6 +28,7 @@ export function ScanStart({ monthlyLimit, onStart, onManual }: { monthlyLimit: n
       <button type="button" onClick={onManual} className="min-h-11 text-sm font-semibold text-cream underline underline-offset-2">
         Saisir le code-barres à la main
       </button>
+      <ProductSearch onPhoto={onPhoto} />
     </div>
   )
 }

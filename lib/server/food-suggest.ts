@@ -16,8 +16,12 @@ export interface FoodSuggestion {
 const FROM = 'àáâäãåéèêëíìîïóòôöõúùûüçñÿ'
 const TO = 'aaaaaaeeeeiiiiooooouuuucny'
 const haystack = sql`translate(lower(coalesce(${foodAnalysis.brand}, '') || ' ' || coalesce(${foodAnalysis.product}, '')), ${FROM}, ${TO})`
-const visible = () =>
-  and(not(foodAnalysis.discarded), or(publishedWhere(), eq(foodAnalysis.source, 'openpetfoodfacts')), sql`coalesce(${foodAnalysis.details}->>'kind', '') <> 'treat'`)
+const visible = (treats: boolean) =>
+  and(
+    not(foodAnalysis.discarded),
+    or(publishedWhere(), eq(foodAnalysis.source, 'openpetfoodfacts')),
+    treats ? undefined : sql`coalesce(${foodAnalysis.details}->>'kind', '') <> 'treat'`,
+  )
 
 const SLUG = /^[a-z0-9-]{1,100}$/
 
@@ -36,14 +40,14 @@ export function searchTerms(q: string): string[] {
 }
 
 /** 8 fiches au plus dont la marque et le nom contiennent tous les mots tapés (doublons de nom fusionnés). */
-export async function searchFoods(q: string): Promise<FoodSuggestion[]> {
+export async function searchFoods(q: string, { treats = false }: { treats?: boolean } = {}): Promise<FoodSuggestion[]> {
   const d = getDb()
   const terms = searchTerms(q)
   if (!d || terms.length === 0) return []
   const rows = await d
     .select({ slug: foodAnalysis.slug, brand: foodAnalysis.brand, product: foodAnalysis.product, score: foodAnalysis.score })
     .from(foodAnalysis)
-    .where(and(visible(), ...terms.map((t) => sql`${haystack} LIKE ${`%${t}%`}`)))
+    .where(and(visible(treats), ...terms.map((t) => sql`${haystack} LIKE ${`%${t}%`}`)))
     .orderBy(sql`${foodAnalysis.score} DESC NULLS LAST`, sql`${foodAnalysis.scanCount} DESC`)
     .limit(40)
   const seen = new Set<string>()
