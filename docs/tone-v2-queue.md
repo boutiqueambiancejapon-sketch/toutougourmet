@@ -40,11 +40,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `chien-peut-manger-pain`
 - [x] `meilleure-nourriture-bichon-maltais`
 - [x] `nourriture-yorkshire-terrier`
-- [ ] `nourriture-westie`
-- [ ] `nourriture-patou-montagne-pyrenees`
-- [ ] `psyllium-chien-bienfaits-dosage`
-- [ ] `chien-peut-manger-figue`
-- [ ] `chien-peut-manger-sardines`
+- [x] `nourriture-westie`
+- [x] `nourriture-patou-montagne-pyrenees`
+- [x] `psyllium-chien-bienfaits-dosage`
+- [x] `chien-peut-manger-figue`
+- [x] `chien-peut-manger-sardines`
 - [ ] `meilleures-croquettes-chien-de-chasse`
 - [ ] `recette-glace-maison-chien-ete`
 - [ ] `chien-peut-manger-poires`
