@@ -11,6 +11,8 @@ import { AWAITING_REVIEW_SQL } from './scanner-published'
 
 export interface HomeKpis {
   clicks: Pair
+  /** Visiteurs distincts par jour, cumulés : l'empreinte change chaque jour (lib/server/visitor-id.ts). Compté depuis le 2026-11-04. */
+  visitors: Pair
   views: Pair
   emails: Pair
   accounts: Pair
@@ -23,10 +25,10 @@ export interface ClickBucket {
 }
 
 const ZERO: Pair = { current: 0, previous: 0 }
-export const EMPTY_KPIS: HomeKpis = { clicks: ZERO, views: ZERO, emails: ZERO, accounts: ZERO, scans: ZERO }
+export const EMPTY_KPIS: HomeKpis = { clicks: ZERO, visitors: ZERO, views: ZERO, emails: ZERO, accounts: ZERO, scans: ZERO }
 
 /** Événement(s) compté(s) par chiffre. Une inscription au guide inscrit aussi à la lettre. */
-const METRICS: Record<keyof HomeKpis, string[]> = {
+const METRICS: Record<Exclude<keyof HomeKpis, 'visitors'>, string[]> = {
   clicks: ['Affiliate Click'],
   views: ['Pageview'],
   emails: ['Newsletter Signup', 'Guide Signup'],
@@ -35,7 +37,7 @@ const METRICS: Record<keyof HomeKpis, string[]> = {
 }
 
 export async function getHomeKpis(pool: Pool, period: Period): Promise<HomeKpis> {
-  const keys = Object.keys(METRICS) as (keyof HomeKpis)[]
+  const keys = Object.keys(METRICS) as (keyof typeof METRICS)[]
   const names = keys.flatMap((k) => METRICS[k])
   const cols = keys
     .map((k, i) => {
@@ -44,13 +46,15 @@ export async function getHomeKpis(pool: Pool, period: Period): Promise<HomeKpis>
               count(*) FILTER (WHERE name = ANY(${p}) AND ts < now() - $1::interval)::int AS "${k}_p"`
     })
     .join(',\n')
+  const visitorCols = `count(DISTINCT visitor) FILTER (WHERE name = 'Pageview' AND ts >= now() - $1::interval)::int AS "visitors_c",
+              count(DISTINCT visitor) FILTER (WHERE name = 'Pageview' AND ts < now() - $1::interval)::int AS "visitors_p"`
   const res = await pool.query<Record<string, number>>(
-    `SELECT ${cols} FROM analytics.events WHERE name = ANY($2) AND ts >= now() - 2 * $1::interval`,
+    `SELECT ${cols}, ${visitorCols} FROM analytics.events WHERE name = ANY($2) AND ts >= now() - 2 * $1::interval`,
     [period.interval, names, ...keys.map((k) => METRICS[k])],
   )
   const row = res.rows[0] ?? {}
   const pair = (k: keyof HomeKpis): Pair => ({ current: row[`${k}_c`] ?? 0, previous: row[`${k}_p`] ?? 0 })
-  return { clicks: pair('clicks'), views: pair('views'), emails: pair('emails'), accounts: pair('accounts'), scans: pair('scans') }
+  return { clicks: pair('clicks'), visitors: pair('visitors'), views: pair('views'), emails: pair('emails'), accounts: pair('accounts'), scans: pair('scans') }
 }
 
 /** Clics partenaires par heure (période « Jour ») ou par jour, heure de Paris. Le premier seau,

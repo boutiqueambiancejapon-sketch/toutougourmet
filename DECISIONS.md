@@ -215,3 +215,5 @@ Décision du propriétaire : Dog Chef paie plus vite. Repas frais, Dog Chef d'ab
 - [x] `analytics.scanner_events` : 90 jours. Suppression d'un compte ou d'une fiche : `ON DELETE SET NULL`, la ligne reste comme simple compteur, sans lien vers la personne.
 - [x] Route ouverte `/api/scanner/code` : rien n'est écrit avant le contrôle de débit, ni pour un dépassement. Les dépassements sur cette route ne sont donc pas comptés.
 - [ ] À trancher par le propriétaire : `signup_sources` est vidée à la confirmation. Afficher la source d'un compte confirmé, comme sur la maquette, demande de garder cette ligne et de le dire dans la politique de confidentialité.
+
+2026-11-04, suite : rotation des offres (lettre et J7) limitée à Dog Chef et Franklin, Elmut seulement là où il est vraiment la solution. Page À propos, audit, site de Charlotte Devaux et exports Search Console et Bing : le propriétaire ne donne pas suite pour l'instant. App de contrôle du serveur : reportée.

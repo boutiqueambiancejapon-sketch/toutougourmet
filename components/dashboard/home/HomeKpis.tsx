@@ -11,7 +11,8 @@ const nf = new Intl.NumberFormat('fr-FR')
 const TREND_CLASS: Record<Trend, string> = { up: 'text-green-ink', down: 'text-rose-ink', flat: 'text-ink-2' }
 
 const SMALL: { key: Exclude<keyof Kpis, 'clicks'>; label: string }[] = [
-  { key: 'views', label: 'Visiteurs : pages vues' },
+  { key: 'visitors', label: 'Visiteurs' },
+  { key: 'views', label: 'Pages vues' },
   { key: 'emails', label: 'Nouveaux e-mails' },
   { key: 'accounts', label: 'Nouveaux comptes' },
   { key: 'scans', label: 'Scans de croquettes' },

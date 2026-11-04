@@ -13,8 +13,8 @@ import { SEASONAL_TIPS } from './seasonal'
 /** Balise de désinscription des campagnes Brevo, remplacée par Brevo pour chaque destinataire. */
 export const BREVO_UNSUBSCRIBE_TAG = '{{ unsubscribe }}'
 
-/** Offres confirmées (DECISIONS.md, 2026-11-02), dans l'ordre de rotation. Fidelis exclu. */
-export const OFFER_ROTATION: readonly OfferSlug[] = ['dog-chef', 'elmut', 'dogfy-diet', 'franklin', 'ultra-premium-direct']
+/** Rotation limitée à Dog Chef et Franklin (décision du propriétaire, 2026-11-04). Elmut seulement là où il est vraiment la solution. */
+export const OFFER_ROTATION: readonly OfferSlug[] = ['dog-chef', 'franklin']
 
 const DAY = 86_400_000
 const WINDOW_DAYS = 30

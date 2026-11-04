@@ -72,8 +72,8 @@ test("calendrier : premier mardi et 18 h à Paris (heure d'hiver et d'été)", (
 
 test('rotation des offres : 5 offres confirmées sur 5 mois, jamais Fidelis', () => {
   const seen = new Set<string>()
-  for (let m = 0; m < 5; m++) seen.add(offerForMonth(new Date(Date.UTC(2027, m, 5))))
-  assert.equal(seen.size, 5)
+  for (let m = 0; m < OFFER_ROTATION.length; m++) seen.add(offerForMonth(new Date(Date.UTC(2027, m, 5))))
+  assert.equal(seen.size, OFFER_ROTATION.length)
   assert.ok(!OFFER_ROTATION.includes('fidelis' as never))
   for (const slug of OFFER_ROTATION) assert.ok(getBrandBySlug(slug), slug)
 })
