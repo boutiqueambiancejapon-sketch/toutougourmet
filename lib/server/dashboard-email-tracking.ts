@@ -1,5 +1,5 @@
 import type { Pool } from 'pg'
-import { buildTrackingRows, filterTracking, type KnownSubscriber, type LegacyLine, type LogLine, type TrackingRow } from '@/lib/dashboard/email-tracking'
+import { buildTrackingRows, filterTracking, type KnownSubscriber, type LegacyLine, type LogLine, type TrackingRow, type TrackingSend } from '@/lib/dashboard/email-tracking'
 import { allAccounts } from './dashboard-accounts'
 import { allSubscribers } from './dashboard-subscribers'
 import { getPool } from './db'
@@ -91,4 +91,39 @@ export async function listEmailTracking(page: number, query: string): Promise<Tr
 export async function allEmailTracking(): Promise<TrackingResult> {
   const res = await load()
   return res.ok ? { ok: true, total: res.rows.length, matched: res.rows.length, rows: res.rows, notices: res.notices } : res
+}
+
+export type AddressEmails = { ok: true; sends: TrackingSend[]; logMissing: boolean } | { ok: false }
+
+/**
+ * E-mails reçus par une seule adresse, pour la fiche d'un compte : mêmes tables et même calcul que
+ * la vue Envois, lus par empreinte (sans parcourir la liste Brevo ni tout le journal).
+ */
+export async function emailsForAddress(email: string, welcomeSent: boolean): Promise<AddressEmails> {
+  const pool = getPool()
+  if (!pool) return { ok: false }
+  const secret = emailHashSecret()
+  const hash = emailHash(email, secret)
+  try {
+    const [logs, guideSends, welcomeSends] = await Promise.all([
+      readTable<LogLine>(pool, 'email_log', 'SELECT email_hash, kind, subject, state, sent_at FROM analytics.email_log WHERE email_hash = $1 ORDER BY sent_at DESC LIMIT 200', [hash]),
+      readTable<LegacyLine>(pool, 'guide_sends', 'SELECT email_hash, sent_at FROM analytics.guide_sends WHERE email_hash = $1', [hash]),
+      readTable<LegacyLine & { step: string }>(pool, 'welcome_sends', 'SELECT email_hash, step, sent_at FROM analytics.welcome_sends WHERE email_hash = $1', [hash]),
+    ])
+    const rows = buildTrackingRows({
+      subscribers: welcomeSent ? [{ email, createdAt: '', source: null, status: 'actif', welcomeSent: true }] : [],
+      accounts: [],
+      internal: [],
+      logs: logs ?? [],
+      guideSends: guideSends ?? [],
+      welcomeSends: welcomeSends ?? [],
+      optOuts: new Set(),
+      hash: (address) => emailHash(address, secret),
+      listComplete: true,
+    })
+    return { ok: true, sends: rows.find((r) => r.hash === hash)?.sends ?? [], logMissing: logs === null }
+  } catch (err) {
+    logCode(err)
+    return { ok: false }
+  }
 }

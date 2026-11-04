@@ -36,6 +36,28 @@ export async function purgeEmailHistory(db, { months = EMAIL_LOG_RETENTION_MONTH
   return total
 }
 
+// @cdc scanner — RGPD, durée de conservation : journal des scans gardé 90 jours (politique de confidentialité).
+export const SCANNER_EVENTS_RETENTION_DAYS = 90
+
+/**
+ * Table absente : zéro, comme purgeEmailHistory.
+ * @param {import('pg').Pool | import('pg').Client} db
+ * @param {{ days?: number, dry?: boolean }} [options]
+ * @returns {Promise<number>} lignes supprimées (ou à supprimer avec dry)
+ */
+export async function purgeScannerEvents(db, { days = SCANNER_EVENTS_RETENTION_DAYS, dry = false } = {}) {
+  if (!Number.isInteger(days) || days < 1) throw new Error(`durée invalide : ${days}`)
+  const { rows } = await db.query("SELECT to_regclass('analytics.scanner_events') IS NOT NULL AS ok")
+  if (!rows[0].ok) return 0
+  const where = 'created_at < now() - make_interval(days => $1::int)'
+  if (dry) {
+    const res = await db.query(`SELECT count(*)::int AS n FROM analytics.scanner_events WHERE ${where}`, [days])
+    return res.rows[0].n
+  }
+  const res = await db.query(`DELETE FROM analytics.scanner_events WHERE ${where}`, [days])
+  return res.rowCount ?? 0
+}
+
 /**
  * @param {import('pg').Pool | import('pg').Client} db
  * @param {{ days?: number, dry?: boolean }} [options]

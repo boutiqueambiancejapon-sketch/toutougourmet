@@ -115,3 +115,27 @@ export async function allSubscribers(): Promise<SubscribersResult> {
     return failed(err)
   }
 }
+
+export type LetterStatus = { state: 'subscribed' | 'unsubscribed' | 'absent'; welcomeSent: boolean } | { state: 'unknown' }
+
+/** Une adresse dans la liste de la lettre, pour la fiche d'un compte. Brevo en panne ou absent : « unknown », sans lever d'erreur. */
+export async function letterStatusOf(email: string): Promise<LetterStatus> {
+  const c = config()
+  if (!c || process.env.BREVO_DRY_RUN === '1') return { state: 'unknown' }
+  try {
+    const res = await fetch(`${API}/contacts/${encodeURIComponent(email)}`, {
+      headers: { 'api-key': c.key, accept: 'application/json' },
+      cache: 'no-store',
+      signal: AbortSignal.timeout(TIMEOUT_MS),
+    })
+    if (res.status === 404) return { state: 'absent', welcomeSent: false }
+    if (!res.ok) throw new BrevoReadError(`status=${res.status}`)
+    const contact = (await res.json()) as BrevoContact & { listIds?: number[] }
+    const welcomeSent = contact.attributes?.WELCOME_SENT === true
+    if (contact.emailBlacklisted === true || (contact.listUnsubscribed ?? []).includes(c.list)) return { state: 'unsubscribed', welcomeSent }
+    return { state: (contact.listIds ?? []).includes(c.list) ? 'subscribed' : 'absent', welcomeSent }
+  } catch (err) {
+    console.error('[inscrits] lecture d’un contact Brevo', err instanceof BrevoReadError ? err.message : err instanceof Error ? err.name : 'erreur')
+    return { state: 'unknown' }
+  }
+}

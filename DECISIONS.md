@@ -207,3 +207,11 @@ Précision du propriétaire (2026-11-04) sur le ton des articles : informatif, i
 
 ## 2026-11-04 : Dog Chef devant Elmut
 Décision du propriétaire : Dog Chef paie plus vite. Repas frais, Dog Chef d'abord, Elmut ensuite ; croquettes, Franklin d'abord. Appliqué au `pick` des fiches races (17 pages), au test, aux offres du compte, à l'ordre des marques et aux consignes de nuit. La rotation des offres reste. Point signalé : la page À propos affirme que les avis ne dépendent d'aucune relation commerciale.
+
+## Fiche d'un compte et journal du scanner (2026-11-04)
+
+- [x] L'URL de la fiche porte l'identifiant du compte, jamais l'e-mail (Caddy journalise les URL).
+- [x] Fiches de garde dans le tableau de bord : chien, dates, lien actif ou non. `data` et `token` ne sont pas lus par la requête SQL. Le masquage ne se joue donc pas à l'affichage.
+- [x] `analytics.scanner_events` : 90 jours. Suppression d'un compte ou d'une fiche : `ON DELETE SET NULL`, la ligne reste comme simple compteur, sans lien vers la personne.
+- [x] Route ouverte `/api/scanner/code` : rien n'est écrit avant le contrôle de débit, ni pour un dépassement. Les dépassements sur cette route ne sont donc pas comptés.
+- [ ] À trancher par le propriétaire : `signup_sources` est vidée à la confirmation. Afficher la source d'un compte confirmé, comme sur la maquette, demande de garder cette ligne et de le dire dans la politique de confidentialité.

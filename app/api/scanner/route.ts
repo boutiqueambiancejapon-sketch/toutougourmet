@@ -11,6 +11,8 @@ import { prepareImage } from '@/lib/scanner/images'
 import { ERROR_MESSAGES, INCOMPLETE_MESSAGE, QUOTA_FREE_MESSAGE, toScanAnalysis, type ScanQuota, type ScanResponse } from '@/lib/scanner/result'
 import { classifyExtraction, nothingRead } from '@/lib/scanner/outcome'
 import { createScanSession, consumeScanSession } from '@/lib/server/scan-session'
+import { recordScannerEvent } from '@/lib/server/scanner-events'
+import type { ScannerResult } from '@/lib/scanner/scanner-events'
 import { cleanEan } from '@/lib/scanner/slug'
 import { ScannerError, type ScannerErrorCode } from '@/lib/scanner/types'
 
@@ -19,6 +21,8 @@ import { ScannerError, type ScannerErrorCode } from '@/lib/scanner/types'
 // envoi suivant d'une session de scan déjà décomptée), lecture par l'IA, tri de la lecture
 // (pas une étiquette, floue, chat : rendu ; partie manquante : on la demande), note par le
 // barème de l'aliment complet ou celui des friandises (lib/scanner/analyse.ts), enregistrement. Les photos restent en mémoire le temps de la requête.
+// Chaque issue d'un envoi connecté laisse une ligne dans analytics.scanner_events, sans jamais
+// retarder la réponse (lib/server/scanner-events.ts). Un envoi sans compte n'en laisse aucune.
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -71,18 +75,23 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   if (!getDb()) return fail('unavailable')
   const user = await getSessionUser()
   if (!user) return fail('unauthorized')
-  if (overLimit(`scan:${user.id}`, RATE_LIMITS)) return fail('rate_limited')
+  const log = (result: ScannerResult, foodAnalysisId: string | null = null) => recordScannerEvent({ type: 'photo', result, userId: user.id, foodAnalysisId })
+  const failed = (error: Exclude<ScannerErrorCode, 'unauthorized'>, q?: ScanQuota) => {
+    log(error)
+    return fail(error, q)
+  }
+  if (overLimit(`scan:${user.id}`, RATE_LIMITS)) return failed('rate_limited')
   const length = Number(request.headers.get('content-length') ?? 0)
-  if (length > MAX_IMAGES * MAX_IMAGE_BYTES + 512 * 1024) return fail('too_large')
+  if (length > MAX_IMAGES * MAX_IMAGE_BYTES + 512 * 1024) return failed('too_large')
 
   let form: FormData
   try {
     form = await request.formData()
   } catch {
-    return fail('bad_request')
+    return failed('bad_request')
   }
   const files = form.getAll('photo').filter((f): f is File => f instanceof File)
-  if (files.length === 0 || files.length > MAX_IMAGES) return fail('bad_request')
+  if (files.length === 0 || files.length > MAX_IMAGES) return failed('bad_request')
   const typedEan = cleanEan(form.get('ean'))
   const sessionToken = form.get('session')
 
@@ -91,17 +100,19 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       const cached = await findByEan(typedEan)
       if (cached) {
         await recordScan(user.id, cached.id, true)
-        return ok({ ok: true, analysis: toScanAnalysis(cached), fromCache: true, origin: 'cache', quota: await quota(user.id) })
+        const body: ScanResponse = { ok: true, analysis: toScanAnalysis(cached), fromCache: true, origin: 'cache', quota: await quota(user.id) }
+        log('found', cached.id)
+        return ok(body)
       }
     }
     const images = await Promise.all(files.map(prepareImage))
     // Envoi suivant d'une session déjà décomptée (photo manquante ajoutée) : gratuit.
     const paid = consumeScanSession(sessionToken, user.id)
-    if (!paid && !(await reserveQuota(user.id, (await scanLimitFor(user.id)).limit))) return fail('quota_reached', await quota(user.id))
+    if (!paid && !(await reserveQuota(user.id, (await scanLimitFor(user.id)).limit))) return failed('quota_reached', await quota(user.id))
     const refund = () => (paid ? Promise.resolve() : releaseQuota(user.id))
     if (!(await reserveDailyCall())) {
       await refund()
-      return fail('daily_cap', await quota(user.id))
+      return failed('daily_cap', await quota(user.id))
     }
 
     let result
@@ -118,13 +129,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     )
     if (outcome.kind === 'reject') {
       await refund()
-      return fail(outcome.code, await quota(user.id))
+      return failed(outcome.code, await quota(user.id))
     }
     if (outcome.kind === 'incomplete') {
       const free = nothingRead(outcome) && !paid
       if (free) await releaseQuota(user.id)
       const session = paid && typeof sessionToken === 'string' ? sessionToken : free ? '' : createScanSession(user.id)
-      return ok({ ok: false, error: 'incomplete', message: INCOMPLETE_MESSAGE, missing: outcome.missing, read: outcome.read, session, quota: await quota(user.id) })
+      const body: ScanResponse = { ok: false, error: 'incomplete', message: INCOMPLETE_MESSAGE, missing: outcome.missing, read: outcome.read, session, quota: await quota(user.id) }
+      log('incomplete')
+      return ok(body)
     }
     const label = { ...result.label, marque: result.label.marque ?? hint(form.get('brand')), produit: result.label.produit ?? hint(form.get('product')) }
     const ean = cleanEan(label.ean) ?? typedEan
@@ -132,13 +145,16 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     if (existing) await refund() // déjà en cache : l'analyse ne compte pas
     const row = existing ?? (await saveAnalysis(label, ean, result.model, 'photo'))
     await recordScan(user.id, row.id, Boolean(existing))
-    return ok({ ok: true, analysis: toScanAnalysis(row), fromCache: Boolean(existing), origin: existing ? 'cache' : 'photo', quota: await quota(user.id) })
+    const body: ScanResponse = { ok: true, analysis: toScanAnalysis(row), fromCache: Boolean(existing), origin: existing ? 'cache' : 'photo', quota: await quota(user.id) }
+    log('found', row.id)
+    return ok(body)
   } catch (err) {
     if (err instanceof ScannerError) {
       if (!['too_large', 'bad_type', 'bad_request'].includes(err.code)) console.error(`[scanner] ${err.code} ${err.message}`)
+      log(err.code === 'unauthorized' ? 'provider_error' : err.code)
       return fail(err.code)
     }
     console.error('[scanner] erreur', err instanceof Error ? err.message : err)
-    return fail('provider_error')
+    return failed('provider_error')
   }
 }

@@ -14,3 +14,15 @@ export async function safeRead<T>(label: string, fallback: T, read: (pool: Pool)
     return { value: fallback, ok: false }
   }
 }
+
+/** Comme safeRead, pour une lecture liée à un compte : le journal ne garde que le code PostgreSQL. */
+export async function quietRead<T>(label: string, fallback: T, read: (pool: Pool) => Promise<T>): Promise<{ value: T; ok: boolean }> {
+  const pool = getPool()
+  if (!pool) return { value: fallback, ok: false }
+  try {
+    return { value: await read(pool), ok: true }
+  } catch (err) {
+    console.error(`[tableau-de-bord] ${label}, code`, err && typeof err === 'object' && 'code' in err ? String(err.code) : 'inconnu')
+    return { value: fallback, ok: false }
+  }
+}

@@ -22,12 +22,13 @@ export function EmailCell({ email }: { email: string }) {
   )
 }
 
-type Tone = 'green' | 'rose' | 'amber' | 'neutral'
+type Tone = 'green' | 'rose' | 'amber' | 'blue' | 'neutral'
 
 const TONES: Record<Tone, string> = {
   green: 'bg-green-bg text-green-ink',
   rose: 'bg-rose-bg text-rose-ink',
   amber: 'bg-amber-bg text-amber-ink',
+  blue: 'bg-blue-bg text-blue-ink',
   neutral: 'bg-cream-2 text-ink-2',
 }
 

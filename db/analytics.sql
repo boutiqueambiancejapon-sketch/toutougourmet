@@ -191,3 +191,42 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON analytics.ignored_ips TO administrator;
 
 -- Visiteur du jour (lib/server/visitor-id.ts) : empreinte à sel quotidien jamais écrit, sans adresse ni cookie.
 ALTER TABLE analytics.events ADD COLUMN IF NOT EXISTS visitor text;
+-- Journal du scanner (lib/server/scanner-events.ts) : une ligne par scan, réussi ou non, vue dans le
+-- tableau de bord (Contenu, Santé du scanner). Date, type, résultat, compte et fiche quand il y en a.
+-- Ni IP, ni texte d'erreur, ni photo : result vient d'une liste fermée (lib/scanner/scanner-events.ts).
+-- Une suppression de compte ou de fiche efface le lien, la ligne reste comme simple compteur.
+-- Purge après 90 jours (toutou-purge).
+CREATE TABLE IF NOT EXISTS analytics.scanner_events (
+  id               bigserial PRIMARY KEY,
+  created_at       timestamptz NOT NULL DEFAULT now(),
+  scan_type        text NOT NULL CHECK (scan_type IN ('code', 'photo')),
+  result           text NOT NULL,
+  user_id          text,
+  food_analysis_id uuid
+);
+ALTER TABLE analytics.scanner_events DROP CONSTRAINT IF EXISTS scanner_events_result_check;
+ALTER TABLE analytics.scanner_events ADD CONSTRAINT scanner_events_result_check CHECK (result IN (
+  'found', 'incomplete', 'not_found', 'not_scorable', 'not_a_label', 'blurry', 'cat_food', 'timeout',
+  'provider_error', 'unavailable', 'lookup_error', 'quota_reached', 'daily_cap', 'rate_limited',
+  'bad_request', 'too_large', 'bad_type'
+));
+DO $$
+BEGIN
+  IF to_regclass('app."user"') IS NOT NULL AND NOT EXISTS (
+    SELECT 1 FROM pg_constraint WHERE conname = 'scanner_events_user_fk'
+  ) THEN
+    ALTER TABLE analytics.scanner_events
+      ADD CONSTRAINT scanner_events_user_fk FOREIGN KEY (user_id) REFERENCES app."user"(id) ON DELETE SET NULL;
+  END IF;
+  IF to_regclass('app.food_analysis') IS NOT NULL AND NOT EXISTS (
+    SELECT 1 FROM pg_constraint WHERE conname = 'scanner_events_food_fk'
+  ) THEN
+    ALTER TABLE analytics.scanner_events
+      ADD CONSTRAINT scanner_events_food_fk FOREIGN KEY (food_analysis_id) REFERENCES app.food_analysis(id) ON DELETE SET NULL;
+  END IF;
+END $$;
+CREATE INDEX IF NOT EXISTS scanner_events_created_at_idx ON analytics.scanner_events (created_at);
+CREATE INDEX IF NOT EXISTS scanner_events_user_created_idx ON analytics.scanner_events (user_id, created_at) WHERE user_id IS NOT NULL;
+ALTER TABLE analytics.scanner_events OWNER TO toutou;
+GRANT SELECT, INSERT, DELETE ON analytics.scanner_events TO administrator;
+GRANT USAGE ON SEQUENCE analytics.scanner_events_id_seq TO administrator;
