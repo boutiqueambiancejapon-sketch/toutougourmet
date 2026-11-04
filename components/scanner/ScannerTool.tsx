@@ -81,7 +81,7 @@ export function ScannerTool({ monthlyLimit }: { monthlyLimit: number }) {
   const restart = () => setStep({ name: 'camera' })
   return (
     <div id="scan" className="flex scroll-mt-24 flex-col gap-4">
-      {step.name === 'idle' ? <ScanStart monthlyLimit={monthlyLimit} onStart={() => setStep({ name: 'camera' })} onManual={() => setStep({ name: 'manual' })} /> : null}
+      {step.name === 'idle' ? <ScanStart monthlyLimit={monthlyLimit} onPhoto={() => setStep({ name: 'photos', prefill: EMPTY })} onStart={() => setStep({ name: 'camera' })} onManual={() => setStep({ name: 'manual' })} /> : null}
       {step.name === 'manual' ? <ManualStep onCode={lookup} onCancel={() => setStep({ name: 'idle' })} onNoBarcode={() => setStep({ name: 'photos', prefill: EMPTY })} /> : null}
       {step.name === 'camera' ? (
         <BarcodeScanner onCode={lookup} onCancel={() => setStep({ name: 'idle' })} onNoBarcode={() => setStep({ name: 'photos', prefill: EMPTY })} />
