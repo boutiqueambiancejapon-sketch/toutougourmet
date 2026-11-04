@@ -24,3 +24,6 @@ Règle : `npm run build > log 2>&1 || { tail log; exit 1; }` avant tout commit, 
 - Vers 10 h 45 à Paris, plus aucun journal jusqu'au redémarrage de 10 h 51. Aucune trace de manque de mémoire ni d'arrêt propre : cause non prouvée. À ce moment tournaient la réécriture par lots, un chantier en parallèle et leurs constructions du site, en plus de 7 serveurs Next.
 - Règle : une seule construction à la fois sur ce serveur. `tone-v2-batch.sh` attend qu'aucune autre ne tourne et qu'il reste 4 Go libres.
 - `pgrep -f "next build"` se trouve lui-même dans la commande qui le lance : écrire `pgrep -f '/\.bin/nex[t] build'`.
+
+## 2026-11-04 — Note fausse sur une étiquette italienne
+- Les listes du scanner ne lisaient que le français et quelques mots d'anglais. Le premier vrai scan affichait « carne di agnello n'est ni une viande ni un poisson ». Contrôler un scan réel de bout en bout, explications comprises, dès qu'il arrive.

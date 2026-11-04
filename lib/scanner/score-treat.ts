@@ -10,7 +10,7 @@ import type { ExtractedLabel } from './types'
 // Fonction pure, testée par scripts/test-scanner-treat.ts. Règles et sources :
 // docs/v2/scanner-score.md, « Barème friandise ». Toute modification change TREAT_SCORE_VERSION.
 
-export const TREAT_SCORE_VERSION = 'friandise-1.1'
+export const TREAT_SCORE_VERSION = 'friandise-1.2'
 
 const P = ' %'
 const fmt = (n: number) => n.toLocaleString('fr-FR', { maximumFractionDigits: 1 })

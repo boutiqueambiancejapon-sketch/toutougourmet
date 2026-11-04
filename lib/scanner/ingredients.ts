@@ -1,6 +1,37 @@
 // @cdc lot 6 — reconnaissance des ingrédients pour la note (lib/scanner/score.ts). Listes
 // en français normalisé (minuscules, sans accents). Justifications : docs/v2/scanner-score.md.
 
+// @cdc lot 6 — étiquettes étrangères : l'ingrédient reste affiché tel quel, mais la note le lit en
+// français. Sans cette table, « carne di agnello » n'était pas une viande et « conservanti » n'était
+// pas un conservateur (premier scan réel, 2026-11-04). Italien, espagnol, allemand, néerlandais, anglais.
+const FOREIGN_TERMS: Record<string, string> = {
+  carne: 'viande', fleisch: 'viande', vlees: 'viande', pollame: 'volaille', aves: 'volaille', ave: 'volaille',
+  gefluegel: 'volaille', geflugel: 'volaille', gevogelte: 'volaille', pesce: 'poisson', pescado: 'poisson', fisch: 'poisson', vis: 'poisson',
+  sottoprodotti: 'sous-produits', subproductos: 'sous-produits', nebenerzeugnisse: 'sous-produits', bijproducten: 'sous-produits',
+  agnello: 'agneau', cordero: 'agneau', lamm: 'agneau', lam: 'agneau', lammfleisch: 'agneau', lamsvlees: 'agneau',
+  pollo: 'poulet', huhn: 'poulet', hahnchen: 'poulet', huhner: 'poulet', huhnerfleisch: 'poulet', hahnchenfleisch: 'poulet', kip: 'poulet', kippenvlees: 'poulet',
+  tacchino: 'dinde', pavo: 'dinde', pute: 'dinde', truthahn: 'dinde', putenfleisch: 'dinde', kalkoen: 'dinde',
+  anatra: 'canard', pato: 'canard', ente: 'canard', entenfleisch: 'canard', eend: 'canard',
+  manzo: 'boeuf', bovino: 'boeuf', ternera: 'boeuf', vacuno: 'boeuf', rind: 'boeuf', rindfleisch: 'boeuf', rund: 'boeuf', rundvlees: 'boeuf',
+  maiale: 'porc', suino: 'porc', cerdo: 'porc', schwein: 'porc', schweinefleisch: 'porc', varken: 'porc', varkensvlees: 'porc', pork: 'porc',
+  vitello: 'veau', veal: 'veau', kalb: 'veau', coniglio: 'lapin', conejo: 'lapin', kaninchen: 'lapin', konijn: 'lapin', rabbit: 'lapin',
+  cavallo: 'cheval', caballo: 'cheval', pferd: 'cheval', paard: 'cheval', horse: 'cheval', cervo: 'cerf', ciervo: 'cerf', hirsch: 'cerf', hert: 'cerf', venison: 'cerf',
+  cinghiale: 'sanglier', jabali: 'sanglier', wildschwein: 'sanglier',
+  salmone: 'saumon', lachs: 'saumon', zalm: 'saumon', trota: 'truite', trucha: 'truite', forelle: 'truite', forel: 'truite', trout: 'truite',
+  tonno: 'thon', atun: 'thon', thunfisch: 'thon', tonijn: 'thon', tuna: 'thon', merluzzo: 'cabillaud', bacalao: 'cabillaud', kabeljauw: 'cabillaud', cod: 'cabillaud',
+  aringa: 'hareng', arenque: 'hareng', hering: 'hareng', haring: 'hareng', uovo: 'oeuf', uova: 'oeufs', huevo: 'oeuf', huevos: 'oeufs', eier: 'oeufs',
+  glicerolo: 'glycerine', glicerina: 'glycerine', glicerol: 'glycerine', glyzerin: 'glycerine', glycerin: 'glycerine', glycerol: 'glycerine',
+  conservanti: 'conservateurs', conservante: 'conservateurs', conservantes: 'conservateurs', konservierungsstoffe: 'conservateurs', conserveermiddelen: 'conservateurs', preservatives: 'conservateurs',
+  antiossidanti: 'antioxygenes', antioxidantes: 'antioxygenes', antioxidantien: 'antioxygenes', antioxidanten: 'antioxygenes', antioxidants: 'antioxygenes',
+  coloranti: 'colorants', colorantes: 'colorants', farbstoffe: 'colorants', kleurstoffen: 'colorants', aromi: 'aromes', aromas: 'aromes', aromastoffe: 'aromes',
+  zucchero: 'sucre', zuccheri: 'sucres', azucar: 'sucre', azucares: 'sucres', zucker: 'sucre', suiker: 'sucre', melassa: 'melasse', melaza: 'melasse', melasse: 'melasse', miele: 'miel', honig: 'miel', honing: 'miel',
+  sale: 'sel', sal: 'sel', salz: 'sel', zout: 'sel',
+  farina: 'farine', harina: 'farine', mehl: 'farine', meel: 'farine', frumento: 'ble', grano: 'ble', trigo: 'ble', weizen: 'ble', tarwe: 'ble',
+  riso: 'riz', arroz: 'riz', reis: 'riz', rijst: 'riz', orzo: 'orge', cebada: 'orge', gerste: 'orge', gerst: 'orge', avena: 'avoine', hafer: 'avoine', haver: 'avoine', granoturco: 'mais', maiz: 'mais', cereali: 'cereales',
+  cioccolato: 'chocolat', schokolade: 'chocolat', chocolate: 'chocolat', cipolla: 'oignon', cipolle: 'oignons', cebolla: 'oignon', zwiebel: 'oignon', onion: 'oignon',
+  aglio: 'ail', ajo: 'ail', knoblauch: 'ail', knoflook: 'ail', garlic: 'ail', uva: 'raisin', uvas: 'raisin', trauben: 'raisin', druiven: 'raisin', grapes: 'raisin',
+}
+
 export function normalize(s: string): string {
   return s
     .toLowerCase()
@@ -10,6 +41,7 @@ export function normalize(s: string): string {
     .replace(/[’']/g, ' ')
     .replace(/\s+/g, ' ')
     .trim()
+    .replace(/[a-z]+/g, (w) => (Object.hasOwn(FOREIGN_TERMS, w) ? FOREIGN_TERMS[w] : w))
 }
 
 const words = (list: string[]) => new RegExp(`(^|[^a-z])(${list.join('|')})([^a-z]|$)`)

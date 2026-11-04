@@ -1,4 +1,6 @@
 // Tests de la note du scanner (lib/scanner/score.ts), sans framework : npx tsx scripts/test-scanner-score.ts
+import { hasSugar } from '../lib/scanner/ingredients'
+import { hasGlycerin, hasSalt, treatAlerts, unnamedPreservative } from '../lib/scanner/treat-ingredients'
 import assert from 'node:assert/strict'
 import { INCOMPLETE_LABEL, PREMIUM_LABEL, SUPERMARKET_LABEL } from '../lib/scanner/fixtures'
 import { animalKind, isByProduct, isCereal, isUnnamedAnimal } from '../lib/scanner/ingredients'
@@ -405,4 +407,16 @@ if (failed) {
   console.error(`${failed} test(s) en échec`)
   process.exit(1)
 }
+test('étiquettes étrangères : mêmes règles qu\'en français', () => {
+  assert.equal(animalKind('carne di agnello'), 'nommee')
+  assert.equal(animalKind('Rindfleisch'), 'nommee')
+  assert.equal(animalKind('carne'), 'non-nommee')
+  assert.equal(hasGlycerin('glicerolo'), true)
+  assert.equal(unnamedPreservative('CONSERVANTI'), true)
+  assert.equal(hasSugar('zucchero'), true)
+  assert.equal(hasSalt('sale'), true)
+  assert.ok(treatAlerts(['aglio']).length > 0)
+  assert.equal(treatAlerts(['vitamine A 1000 UI']).length, 0)
+})
+
 console.log('Tous les tests passent.')

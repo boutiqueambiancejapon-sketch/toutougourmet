@@ -6,7 +6,7 @@ import type { ExtractedLabel } from './types'
 // source sont décrits dans docs/v2/scanner-score.md : toute modification du barème change
 // SCORE_VERSION (les analyses en cache sont alors recalculées à la lecture).
 
-export const SCORE_VERSION = '1.2'
+export const SCORE_VERSION = '1.3'
 
 /** Humidité retenue pour des croquettes qui ne la déclarent pas (règlement UE 767/2009 : mention obligatoire au-delà de 14 %). */
 export const ASSUMED_DRY_MOISTURE = 10

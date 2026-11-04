@@ -158,3 +158,7 @@ Corrections relevées à l'import complet en dev (2 351 produits chien, 244 not�
 | Notes modifiées | 4 | 26 |
 
 Friandises qui perdent le 100 : « Peau de bœuf » (Carrefour), masques de bœuf (peau de tête, 2 fiches), oreilles de porc, conduits d'oreilles de porc et sabots de veau Atavik passent à 69 ; « 72 % de viande et sous-produits animaux (dont de poulet) » (Vitakraft) passe à 79. Fiches indexables selon la règle proposée : 203 (69 aliments complets, 134 friandises).
+
+## Version 1.3, friandises 1.2 (2026-11-04)
+
+Les étiquettes en italien, espagnol, allemand, néerlandais ou anglais sont lues avec les mêmes règles : `normalize` traduit les termes courants (`lib/scanner/ingredients.ts`). Le texte de l'étiquette reste affiché tel quel. Repéré sur le premier scan réel, dont la note passe de 78 à 85.
