@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useId, useState } from 'react'
+import { ProductPhoto } from './ProductPhoto'
 import { ScoreBadge } from './ScoreBadge'
 
 // @cdc scanner — chercher un produit par son nom quand le paquet n'est pas sous la main. Après
@@ -11,6 +12,7 @@ interface Found {
   slug: string
   name: string
   score: number | null
+  imageUrl?: string | null
 }
 
 export function ProductSearch({ onPhoto }: { onPhoto: () => void }) {
@@ -55,6 +57,7 @@ export function ProductSearch({ onPhoto }: { onPhoto: () => void }) {
           {items.map((f) => (
             <li key={f.slug}>
               <Link href={`/croquettes/${f.slug}`} className="flex min-h-14 items-center gap-3 py-2 text-ink no-underline">
+                <ProductPhoto src={f.imageUrl} />
                 <ScoreBadge score={f.score} />
                 <span className="min-w-0 text-[15px] leading-snug [overflow-wrap:anywhere]">{f.name}</span>
               </Link>

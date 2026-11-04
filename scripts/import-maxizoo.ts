@@ -31,7 +31,9 @@ function parseCsv(text: string): string[][] {
   return rows
 }
 
-type Item = MaxiZooItem & { url: string }
+type Item = MaxiZooItem & { url: string; image: string | null }
+
+const IMAGE_HOST = 'https://images2.productserve.com/'
 
 function loadItems(): Item[] {
   const [head, ...rows] = parseCsv(gunzipSync(readFileSync(FEED)).toString('utf8'))
@@ -43,7 +45,8 @@ function loadItems(): Item[] {
     const category = r[at('merchant_category')] ?? ''
     const name = r[at('product_name')] ?? ''
     if (!ean || !MAXI_ZOO_CATEGORIES[category] || !url.startsWith('https://www.maxizoo.fr/p/') || isMixedProduct(name) || seen.has(ean)) continue
-    seen.set(ean, { ean, url, category, name, brand: r[at('brand_name')] ?? '' })
+    const image = r[at('aw_image_url')] ?? ''
+    seen.set(ean, { ean, url, category, name, brand: r[at('brand_name')] ?? '', image: image.startsWith(IMAGE_HOST) ? image : null })
   }
   const rank = (i: Item) => {
     const p = PRIORITY.findIndex((b) => i.brand.toLowerCase().includes(b))
@@ -57,7 +60,17 @@ async function main(): Promise<void> {
   const dry = process.argv.includes('--essai')
   const state: Record<string, string> = existsSync(STATE) ? (JSON.parse(readFileSync(STATE, 'utf8')) as Record<string, string>) : {}
   const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL })
-  const items = loadItems().filter((i) => !state[i.ean]).slice(0, limit)
+  const all = loadItems()
+  // Image : sans lire aucune page, pour toute fiche dont le code-barres est dans le fichier.
+  const withImage = all.filter((i) => i.image)
+  if (!dry) {
+    const updated = await pool.query(
+      `UPDATE app.food_analysis f SET image_url = v.image FROM unnest($1::text[], $2::text[]) AS v(ean, image) WHERE f.ean = v.ean AND f.image_url IS DISTINCT FROM v.image`,
+      [withImage.map((i) => i.ean), withImage.map((i) => i.image)],
+    )
+    console.log(`${updated.rowCount ?? 0} images ajoutées`)
+  }
+  const items = all.filter((i) => !state[i.ean]).slice(0, limit)
   const counts: Record<string, number> = {}
   const note = (ean: string, result: string) => {
     counts[result] = (counts[result] ?? 0) + 1
@@ -79,19 +92,24 @@ async function main(): Promise<void> {
       if (dry) { note(item.ean, existing ? 'a-mettre-a-jour' : 'a-creer'); continue }
       const version = scoreVersionFor(label)
       if (existing) {
-        await pool.query(`UPDATE app.food_analysis SET extracted = $2, details = $3, score = $4, algorithm_version = $5, model = 'maxizoo', source = 'maxizoo', brand = $6, product = $7, updated_at = now() WHERE id = $1`, [existing.id, JSON.stringify(label), JSON.stringify(details), details.score, version, label.marque, label.produit])
+        await pool.query(`UPDATE app.food_analysis SET extracted = $2, details = $3, score = $4, algorithm_version = $5, model = 'maxizoo', source = 'maxizoo', brand = $6, product = $7, image_url = $8, updated_at = now() WHERE id = $1`, [existing.id, JSON.stringify(label), JSON.stringify(details), details.score, version, label.marque, label.produit, item.image])
         note(item.ean, 'mise-a-jour')
       } else {
         const base = baseSlug(label.marque, label.produit, item.ean)
         await pool.query(
-          `INSERT INTO app.food_analysis (ean, slug, brand, product, extracted, details, score, algorithm_version, model, source, scan_count)
-           VALUES ($1, CASE WHEN EXISTS (SELECT 1 FROM app.food_analysis WHERE slug = $2) THEN $3 ELSE $2 END, $4, $5, $6, $7, $8, $9, 'maxizoo', 'maxizoo', 0)`,
-          [item.ean, base, `${base.slice(0, 92)}-${item.ean.slice(-6)}`, label.marque, label.produit, JSON.stringify(label), JSON.stringify(details), details.score, version],
+          `INSERT INTO app.food_analysis (ean, slug, brand, product, extracted, details, score, algorithm_version, model, source, scan_count, image_url)
+           VALUES ($1, CASE WHEN EXISTS (SELECT 1 FROM app.food_analysis WHERE slug = $2) THEN $3 ELSE $2 END, $4, $5, $6, $7, $8, $9, 'maxizoo', 'maxizoo', 0, $10)`,
+          [item.ean, base, `${base.slice(0, 92)}-${item.ean.slice(-6)}`, label.marque, label.produit, JSON.stringify(label), JSON.stringify(details), details.score, version, item.image],
         )
         note(item.ean, 'creee')
       }
     } catch (err) {
       console.error(`[maxizoo] ${item.ean}`, err instanceof Error ? err.message : err)
+      // Une erreur de la base ne vient pas de la page : inutile d'en lire d'autres.
+      if (err instanceof pg.DatabaseError) {
+        process.exitCode = 1
+        break
+      }
       note(item.ean, 'erreur-reseau')
     }
     await new Promise((r) => setTimeout(r, 4000))

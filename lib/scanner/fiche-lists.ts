@@ -37,6 +37,7 @@ export interface ListFiche {
   brand: string | null
   product: string | null
   score: number | null
+  imageUrl?: string | null
   kind: ProductKind
   noun: FoodNoun
   reviewed: boolean

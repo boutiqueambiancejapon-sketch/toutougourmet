@@ -11,6 +11,7 @@ export interface FoodSuggestion {
   slug: string
   name: string
   score: number | null
+  imageUrl?: string | null
 }
 
 const FROM = 'àáâäãåéèêëíìîïóòôöõúùûüçñÿ'
@@ -45,7 +46,7 @@ export async function searchFoods(q: string, { treats = false }: { treats?: bool
   const terms = searchTerms(q)
   if (!d || terms.length === 0) return []
   const rows = await d
-    .select({ slug: foodAnalysis.slug, brand: foodAnalysis.brand, product: foodAnalysis.product, score: foodAnalysis.score })
+    .select({ slug: foodAnalysis.slug, brand: foodAnalysis.brand, product: foodAnalysis.product, score: foodAnalysis.score, imageUrl: foodAnalysis.imageUrl })
     .from(foodAnalysis)
     .where(and(visible(treats), ...terms.map((t) => sql`${haystack} LIKE ${`%${t}%`}`)))
     .orderBy(sql`${foodAnalysis.score} DESC NULLS LAST`, sql`${foodAnalysis.scanCount} DESC`)
@@ -57,7 +58,7 @@ export async function searchFoods(q: string, { treats = false }: { treats?: bool
     const key = name.toLowerCase()
     if (!name || seen.has(key)) continue
     seen.add(key)
-    out.push({ slug: r.slug, name, score: r.score })
+    out.push({ slug: r.slug, name, score: r.score, imageUrl: r.imageUrl })
     if (out.length === 8) break
   }
   return out

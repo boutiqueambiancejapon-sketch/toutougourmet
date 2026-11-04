@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { CATEGORY_PHRASE } from '@/lib/scanner/food-noun'
 import type { ReviewedItem } from '@/lib/server/scanner-catalog'
+import { ProductPhoto } from './ProductPhoto'
 import { ScoreBadge } from './ScoreBadge'
 
 // @cdc lot 6 — liste de fiches relues (classement, page marque, meilleures notes de /scanner).
@@ -12,6 +13,7 @@ export function RankingList({ items, start = 1, showBrand = true, showCategory =
         <li key={it.slug}>
           <Link href={`/croquettes/${it.slug}`} className="group flex min-h-16 items-center gap-3 py-3 text-ink no-underline">
             <span className="w-7 shrink-0 text-right text-sm font-semibold text-ink-2">{start + i}</span>
+            <ProductPhoto src={it.imageUrl} />
             <ScoreBadge score={it.score} />
             <span className="flex min-w-0 grow flex-col">
               <span className="truncate font-semibold group-hover:underline">{showBrand ? (it.brand ?? 'Marque inconnue') : (it.product ?? 'Produit sans nom')}</span>
