@@ -232,3 +232,16 @@ Décision du propriétaire : Dog Chef paie plus vite. Repas frais, Dog Chef d'ab
 - Plafond de 300 appels par passage, en dur. Le plafond quotidien du scanner (`SCANNER_DAILY_CAP`) n'est pas partagé : un passage ne doit pas bloquer les scans des visiteurs.
 - Vrai scan : contrôle au passage suivant, pas à la création. La fiche apparaît tout de suite dans « Dernières fiches » avec « analyse automatique » ; la route par code-barres est ouverte sans compte, un appel payant y serait à la portée d'un robot (un EAN nouveau, un appel).
 
+## 2026-11-04 — Connexion du tableau de bord (branche `feat/dashboard-login`)
+- Better Auth écarté pour l'administrateur : ses extensions `twoFactor` et `passkey` s'accrochent à `app.user`, donc aux comptes visiteurs, et l'identifiant du propriétaire vit dans le `.env`. Une seconde instance demanderait des tables `user`, `account` et `session` en double pour une seule personne.
+- Bibliothèques ajoutées, versions figées : `@simplewebauthn/server` et `@simplewebauthn/browser` (vérification WebAuthn, CBOR et COSE à ne pas écrire soi-même), `otpauth` (RFC 6238). Le reste vient de `node:crypto` : HMAC, HKDF, AES-256-GCM. `qrcode-generator` était déjà là.
+- Nouvelle variable `DASHBOARD_AUTH_SECRET`, plutôt que dériver de `DASHBOARD_PASSWORD` (changer le mot de passe perdrait le TOTP) ou de `BETTER_AUTH_SECRET` (changer celui des visiteurs perdrait l'accès du propriétaire).
+- Limites et journal en base, pas en mémoire : Next peut charger le proxy et les routes dans des modules séparés, et un redémarrage ne doit pas remettre un attaquant à zéro. Chaque essai s'écrit d'abord comme un échec, sous `pg_advisory_xact_lock`.
+- Un appareil déjà connu (cookie aléatoire haché en base) échappe aux limites globales : sinon, une attaque répartie fermerait la porte au propriétaire. Ce cookie n'ouvre rien : il ne dispense ni du mot de passe, ni du second facteur, ni de la limite par adresse.
+- `SameSite=Strict` exigé, ce qui retire le cookie sur un lien venu de ntfy ou d'un e-mail. La page de connexion interroge `/connexion/api/etat` depuis le navigateur et renvoie vers la page voulue si la session existe.
+- Base en panne une fois la connexion active : 503, jamais de retour à Basic, qui sauterait le second facteur. Le retour à Basic demande de retirer la variable sur le serveur.
+- Ajouter ou retirer un facteur demande un second facteur passé il y a moins de 15 minutes. Le dernier facteur ne se retire pas : le mot de passe seul rouvrirait l'enrôlement.
+- WebAuthn : défi et bibliothèque préparés à l'affichage de l'écran, pour que le toucher appelle Face ID sans attendre un `fetch` (Safari exige un geste récent). Vérification de l'utilisateur obligatoire.
+- RP ID figé dans le code. `DASHBOARD_WEBAUTHN_RP_ID` n'accepte que `localhost`, pour les essais : une clé créée pour `localhost` ne sert à rien depuis Internet.
+- Migration numérotée `0010`. La PR #88 porte une `0009_stripe_premium`, déjà prise par `0009_food_check` sur `v2`. Celle qui fusionne en second doit régénérer sa migration : `drizzle-kit migrate` n'applique que les migrations plus récentes que la dernière passée.
+

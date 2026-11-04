@@ -205,3 +205,13 @@ Rapport hors dépôt : `~/audits/audit-partenaires-2026-11-04.md`.
 - [ ] Premier passage réel par le propriétaire (`--limit=5`, puis complet) : mesurer les jetons réels
 - [ ] Recopier `deploy/toutou-opff-import.service` dans `/etc/systemd/system/`
 
+## Connexion du tableau de bord (branche `feat/dashboard-login`, 2026-11-04)
+
+- [x] Migration `0010_dashboard_login`, sessions, limites, journal, alertes (base jetable)
+- [x] Page de connexion, second facteur, enrôlement, écran Sécurité, garde et proxy
+- [x] Commande de secours `scripts/dashboard-2fa-reset.mjs`
+- [ ] Fusionner dans `v2` (vérifier le numéro de migration si la PR #88 passe avant), déployer
+- [ ] `sudo /usr/local/sbin/toutou-migrate`, poser les deux variables, relancer `toutou-web`
+- [ ] Propriétaire : créer la clé Face ID sur l'iPhone, noter les codes, ajouter le trousseau
+- [ ] Une fois la bascule éprouvée : retirer le code Basic de `proxy.ts` et `guard.ts`
+
