@@ -11,6 +11,13 @@ export const TASKS = [
   { unit: 'toutou-ingest', label: 'Lecture des journaux', rhythm: 'chaque minute', nextHint: '1 min après la fin du passage précédent' },
   { unit: 'toutou-deploy', label: 'Mise en ligne', rhythm: 'toutes les heures' },
   { unit: 'toutou-seo-rewrite', label: 'Tâche de nuit', rhythm: 'chaque nuit' },
+  { unit: 'toutou-tone', label: 'Réécriture des articles', rhythm: 'la nuit, de 1 h à 8 h' },
+  { unit: 'site-articles', label: 'Articles des autres sites', rhythm: 'chaque nuit' },
+  { unit: 'site-covers', label: 'Images des autres sites', rhythm: 'chaque nuit' },
+  { unit: 'toutou-welcome', label: 'E-mails de Milo', rhythm: 'chaque matin' },
+  { unit: 'toutou-alerts', label: 'Alertes', rhythm: 'régulièrement', nextHint: 'après le passage précédent' },
+  { unit: 'toutou-weekly', label: 'Résumé hebdomadaire', rhythm: 'chaque semaine' },
+  { unit: 'toutou-opff-import', label: 'Import Open Pet Food Facts', rhythm: 'chaque semaine' },
   { unit: 'toutou-purge', label: 'Purge des données', rhythm: 'chaque semaine' },
   { unit: 'toutou-geoip', label: 'Base des pays', rhythm: 'chaque mois' },
 ] as const

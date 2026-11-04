@@ -3,14 +3,14 @@ import { PAGE_TYPE_LABELS, type PageType } from '@/lib/page-type'
 import { GOALS, MAIN_GOAL, type ConversionRow, type ConversionsData, type Goal } from '@/lib/server/dashboard-conversions'
 import { Empty, SectionTitle } from './Panel'
 
-// @cdc tableau de bord — « Conversions par type de page » (docs/v2/cro-carte.md, maquette du
-// 2026-11-03) : un tableau compact, une ligne par type de page, pages vues puis chaque objectif
-// en part des pages vues (nombre en dessous). L'objectif principal de la carte est surligné.
+// @cdc tableau de bord — « Conversions par type de page » (docs/v2/cro-carte.md) : une ligne par
+// type de page, lisible sur iPhone, résultat principal à droite et détail dessous.
 
 const nf = new Intl.NumberFormat('fr-FR')
 const pct = new Intl.NumberFormat('fr-FR', { style: 'percent', maximumFractionDigits: 1 })
 
-const GOAL_LABELS: Record<Goal, string> = { email: 'E-mail', compte: 'Compte', clic: 'Partenaire' }
+const GOAL_LABELS: Record<Goal, string> = { email: 'e-mail', compte: 'compte', clic: 'clic' }
+const GOAL_PLURAL: Record<Goal, string> = { email: 'e-mails', compte: 'comptes', clic: 'clics' }
 const GOAL_LONG: Record<Goal, string> = { email: 'e-mail ou guide', compte: 'compte', clic: 'clic partenaire' }
 
 /** Libellés courts pour tenir sur iPhone ; le libellé complet reste au survol. */
@@ -35,71 +35,53 @@ const OTHER_MAIN: Partial<Record<PageType, string>> = {
   accueil: 'le quiz',
 }
 
-const cell = 'px-2 py-2 text-right align-top tabular-nums'
-
-function GoalCell({ goal, row }: { goal: Goal; row: ConversionRow }) {
-  const main = MAIN_GOAL[row.type] === goal
-  const n = row.goals[goal]
-  const rate = n > 0 && row.views > 0 ? pct.format(n / row.views) : n > 0 ? nf.format(n) : '–'
-  return (
-    <td className={cell}>
-      <span className={main ? 'rounded-tile bg-amber px-1 font-semibold text-ink' : 'text-ink'}>{rate}</span>
-      {main ? <span className="sr-only"> (objectif principal)</span> : null}
-      {n > 0 ? <span className="block text-xs text-ink-2">{nf.format(n)}</span> : null}
-    </td>
-  )
-}
-
 function mainGoalText(type: PageType): string {
   const goal = MAIN_GOAL[type]
   return goal ? GOAL_LONG[goal] : (OTHER_MAIN[type] ?? 'aucun fixé')
 }
 
-export function ConversionsSection({ data, period }: { data: ConversionsData; period: Period }) {
+function headline(row: ConversionRow): string {
+  const main = MAIN_GOAL[row.type]
+  const n = main ? row.goals[main] : 0
+  if (main && n > 0) return `${nf.format(n)} ${n > 1 ? GOAL_PLURAL[main] : GOAL_LABELS[main]}`
+  const best = GOALS.find((g) => row.goals[g] > 0)
+  return best ? `${nf.format(row.goals[best])} ${row.goals[best] > 1 ? GOAL_PLURAL[best] : GOAL_LABELS[best]}` : 'Rien'
+}
+
+function detail(row: ConversionRow): string {
+  const main = MAIN_GOAL[row.type]
+  const others = GOALS.filter((g) => row.goals[g] > 0).map((g) => `${nf.format(row.goals[g])} ${row.goals[g] > 1 ? GOAL_PLURAL[g] : GOAL_LABELS[g]}`)
+  const rate = main && row.goals[main] > 0 && row.views > 0 ? `taux ${pct.format(row.goals[main] / row.views)}` : null
+  return [`${nf.format(row.views)} vues`, ...others, rate, `objectif : ${mainGoalText(row.type)}`].filter(Boolean).join(' · ')
+}
+
+export function ConversionsSection({ data, period, insight }: { data: ConversionsData; period: Period; insight: string }) {
   return (
     <>
-      <SectionTitle
-        id="conversions"
-        title="Par type de page"
-        intro={`Sur ${period.long} : pages vues, puis chaque objectif en part des pages vues, avec le nombre en dessous.`}
-      />
+      <p className="m-0 mt-4 rounded-box bg-amber-bg px-3 py-2.5 text-sm text-ink">
+        <span className="font-semibold">À retenir sur {period.long} : </span>
+        {insight}
+      </p>
+      <SectionTitle id="conversions" title="Par type de page" intro={`Sur ${period.long}, classé par pages vues. Le chiffre à droite est le résultat principal de chaque type.`} />
       {data.rows.length === 0 ? (
         <div className="mt-4">
           <Empty>Aucune page vue ni aucune conversion sur la période.</Empty>
         </div>
       ) : (
-        <div className="relative mt-4 overflow-x-auto rounded-card border border-line bg-paper">
-          <table className="w-full border-collapse text-sm">
-            <thead className="bg-cream-2 text-xs text-ink-2">
-              <tr>
-                <th scope="col" className="px-2 py-2 text-left font-semibold">Page</th>
-                <th scope="col" className="px-2 py-2 text-right font-semibold">Vues</th>
-                {GOALS.map((g) => (
-                  <th key={g} scope="col" className="px-2 py-2 text-right font-semibold">{GOAL_LABELS[g]}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {data.rows.map((row) => (
-                <tr key={row.type} className="border-t border-line">
-                  <th scope="row" className="px-2 py-2 text-left align-top font-normal text-ink" title={`${PAGE_TYPE_LABELS[row.type]} · objectif principal : ${mainGoalText(row.type)}`}>
-                    {SHORT[row.type]}
-                  </th>
-                  <td className={`${cell} text-ink`}>{nf.format(row.views)}</td>
-                  {GOALS.map((g) => (
-                    <GoalCell key={g} goal={g} row={row} />
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <ol className="m-0 mt-4 flex list-none flex-col divide-y divide-line rounded-card border border-line bg-paper px-4 py-1 text-sm">
+          {data.rows.map((row) => (
+            <li key={row.type} className="py-2.5" title={PAGE_TYPE_LABELS[row.type]}>
+              <span className="flex items-baseline justify-between gap-3">
+                <span className="min-w-0 text-ink">{SHORT[row.type]}</span>
+                <span className="shrink-0 font-semibold tabular-nums text-ink">{headline(row)}</span>
+              </span>
+              <span className="block text-xs text-ink-2">{detail(row)}</span>
+            </li>
+          ))}
+        </ol>
       )}
       <p className="m-0 mt-3 max-w-prose text-xs text-ink-2">
-        <span className="rounded-tile bg-amber px-1 font-semibold text-ink">Surligné</span> : l’objectif principal de ce type de page.
-        Urgences et accueil n’en ont pas parmi ces trois colonnes (numéros et gestes d’abord, puis le quiz). Un compte est
-        rattaché au type de page de l’invitation d’où vient le visiteur. Comptes sans type connu (bouton du haut, lien
-        direct)&nbsp;: <span className="font-semibold tabular-nums text-ink">{nf.format(data.unattributedAccounts)}</span>.
+        Un compte est rattaché au type de page de l’invitation d’où vient le visiteur. Comptes sans type connu (bouton du haut, lien direct)&nbsp;: <span className="font-semibold tabular-nums text-ink">{nf.format(data.unattributedAccounts)}</span>.
       </p>
     </>
   )

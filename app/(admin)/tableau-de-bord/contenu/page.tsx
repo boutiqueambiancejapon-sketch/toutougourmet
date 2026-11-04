@@ -1,6 +1,7 @@
 import { openTab, READ_FAILED, type TabPageProps } from '@/lib/dashboard/tab-page'
-import { getNightLogs, nightLogDir } from '@/lib/server/dashboard-logs'
+import { getNightLogs, getToneProgress, nightLogDir } from '@/lib/server/dashboard-logs'
 import { loadContent } from '@/lib/server/dashboard-tabs'
+import { ContentTodo, ToneCard } from '@/components/dashboard/ContentTodo'
 import { DashboardShell } from '@/components/dashboard/DashboardShell'
 import { MessagesSection } from '@/components/dashboard/MessagesSection'
 import { NightSection } from '@/components/dashboard/NightSection'
@@ -17,15 +18,23 @@ export const dynamic = 'force-dynamic'
 
 export default async function ContentTab(props: TabPageProps) {
   const period = await openTab(props)
-  const [{ data, ok }, logs] = await Promise.all([loadContent(), getNightLogs(7)])
+  const [{ data, ok }, logs, tone] = await Promise.all([loadContent(), getNightLogs(7), getToneProgress()])
+  const unread = data.messages.filter((m) => !m.handled).length
   return (
-    <DashboardShell period={period.key} current="contenu" notice={ok ? null : READ_FAILED}>
+    <DashboardShell period={period.key} current="contenu" noPeriod notice={ok ? null : READ_FAILED}>
+      <ContentTodo messages={unread} review={data.review.length} imported={data.imported?.total ?? null} checks={logs[0]?.checks.length ?? 0} />
+      <ToneCard progress={tone} />
+      {unread > 0 ? <MessagesSection messages={data.messages} /> : null}
       <NightSection logs={logs} configured={nightLogDir() !== null} />
-      <ReviewSection rows={data.review} error={data.reviewError} />
+      <div id="relecture" className="scroll-mt-20">
+        <ReviewSection rows={data.review} error={data.reviewError} />
+      </div>
       <ScannerHealthLink />
-      <ImportedReview data={data.imported} />
+      <div id="importees" className="scroll-mt-20">
+        <ImportedReview data={data.imported} />
+      </div>
       <OpffImportSection status={data.opff} policy={data.opffPolicy} />
-      <MessagesSection messages={data.messages} />
+      {unread > 0 ? null : <MessagesSection messages={data.messages} />}
     </DashboardShell>
   )
 }

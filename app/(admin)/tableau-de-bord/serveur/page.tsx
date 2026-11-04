@@ -12,7 +12,7 @@ export default async function ServerTab(props: TabPageProps) {
   const period = await openTab(props)
   const health = await getServerHealth()
   return (
-    <DashboardShell period={period.key} current="serveur">
+    <DashboardShell period={period.key} current="serveur" noPeriod>
       <ServerSection health={health} />
     </DashboardShell>
   )

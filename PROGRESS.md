@@ -161,4 +161,8 @@ Nouvel onglet CRM (`/tableau-de-bord/crm`) : où en sont les contacts, puis list
 
 ## 2026-11-04 : Connexion du tableau de bord en service
 
-Bascule faite (`DASHBOARD_LOGIN_ENABLED=1`), clé Face ID créée et utilisée sur le vrai iPhone. Connexion directe par Face ID ajoutée, migration `0011_dashboard_challenge`. Correction des champs : correction automatique coupée, espace finale ignorée, bouton pour afficher le mot de passe. `CRM_HIDDEN_EMAILS` retire des adresses du CRM. Restent à reprendre : tableaux Conversions, Robots IA, Contenu et Serveur.
+Bascule faite (`DASHBOARD_LOGIN_ENABLED=1`), clé Face ID créée et utilisée sur le vrai iPhone. Connexion directe par Face ID ajoutée, migration `0011_dashboard_challenge`. Correction des champs : correction automatique coupée, espace finale ignorée, bouton pour afficher le mot de passe. `CRM_HIDDEN_EMAILS` retire des adresses du CRM. 
+
+## 2026-11-04 : Tableaux Conversions, Robots IA, Contenu et Serveur
+
+Robots IA : filtres par robot et type de visite dans l'URL, part des types de visite, visites par heure, mini-courbe et détail par opérateur, couverture par rubrique, vraies erreurs (`lib/dashboard/robots.ts`, `lib/server/dashboard-robots.ts`). Conversions : lignes lisibles à la place du tableau, titres, emplacements vides repliés. Contenu : « À traiter », avancée de la réécriture, résumé des nuits sans IA. Serveur : 12 tâches suivies, problèmes en tête. Calculs : `npx tsx scripts/test-dashboard-tables.ts`. Le choix de période disparaît de Contenu et Serveur.
