@@ -35,11 +35,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `chien-peut-manger-pates`
 - [x] `croquettes-chien-otites`
 - [x] `chien-peut-manger-jambon`
-- [ ] `chien-peut-manger-avoine`
-- [ ] `butternut-box-vs-dog-chef`
-- [ ] `chien-peut-manger-pain`
-- [ ] `meilleure-nourriture-bichon-maltais`
-- [ ] `nourriture-yorkshire-terrier`
+- [x] `chien-peut-manger-avoine`
+- [x] `butternut-box-vs-dog-chef`
+- [x] `chien-peut-manger-pain`
+- [x] `meilleure-nourriture-bichon-maltais`
+- [x] `nourriture-yorkshire-terrier`
 - [ ] `nourriture-westie`
 - [ ] `nourriture-patou-montagne-pyrenees`
 - [ ] `psyllium-chien-bienfaits-dosage`
