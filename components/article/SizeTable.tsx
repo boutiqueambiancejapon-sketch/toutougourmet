@@ -5,8 +5,10 @@ import { getDictionary } from '@/lib/i18n/dictionaries'
 // @cdc seo-geo §2.7 — tableau par gabarit avec des races nommées.
 // Vrai <table> rendu côté serveur : chaque ligne porte la race ET la quantité, pour
 // qu'une IA qui cherche « [aliment] chihuahua » trouve un passage complet.
-// Mobile : chaque ligne devient une carte. Les rôles ARIA gardent la sémantique de
-// tableau quand l'affichage change (Safari la perd sinon).
+// Mobile : une ligne par poids, le poids à gauche et la dose à droite, races, fréquence et précision
+// à la suite en petit dessous (audit mobile 2026-11-04 : 7 cartes prenaient deux écrans). Une fréquence commune à
+// toutes les lignes passe en note au-dessus. Les rôles ARIA gardent la sémantique de tableau quand
+// l'affichage change (Safari la perd sinon).
 
 export interface SizeRowProps {
   /** Tranche de poids, ex. « Moins de 5 kg ». */
@@ -45,8 +47,8 @@ function rowsFrom(children: ReactNode): SizeRowProps[] {
   )
 }
 
-const cell = 'block md:table-cell md:border-b md:border-line md:px-4 md:py-3 md:align-top'
-const mobileLabel = 'block text-[13px] font-semibold text-ink-2 md:hidden'
+const cell = 'md:table-cell md:border-b md:border-line md:px-4 md:py-3 md:align-top'
+const small = 'text-[13px] leading-snug text-ink-2 md:text-base md:leading-normal'
 
 export function SizeTable({
   caption,
@@ -61,6 +63,7 @@ export function SizeTable({
   const rows = rowsFrom(children)
   const showFrequency = rows.some((r) => r.frequency)
   const showDetail = rows.some((r) => r.detail)
+  const sameFrequency = showFrequency && rows.every((r) => r.frequency === rows[0].frequency) ? rows[0].frequency : undefined
   const labels = {
     amount: amountLabel ?? t.amount,
     frequency: frequencyLabel ?? t.frequency,
@@ -80,6 +83,9 @@ export function SizeTable({
         <table role="table" className="block w-full border-separate border-spacing-0 text-left md:table">
           <caption className="block pb-3 text-left font-display text-lg font-bold leading-snug text-balance text-ink md:table-caption md:px-5 md:pt-4">
             {caption}
+            {sameFrequency ? (
+              <span className="mt-1 block font-body text-sm font-normal text-ink-2 md:hidden">{`${labels.frequency} : ${sameFrequency}`}</span>
+            ) : null}
           </caption>
           <thead role="rowgroup" className="sr-only md:not-sr-only md:table-header-group">
             <tr role="row">
@@ -95,48 +101,35 @@ export function SizeTable({
               ))}
             </tr>
           </thead>
-          <tbody
-            role="rowgroup"
-            className="flex flex-col gap-3 md:table-row-group md:[&>tr:last-child>*]:border-b-0"
-          >
+          <tbody role="rowgroup" className="block rounded-card border border-line bg-paper px-3.5 md:table-row-group md:rounded-none md:border-0 md:bg-transparent md:px-0 md:[&>tr:last-child>*]:border-b-0">
+            <tr aria-hidden="true" className="flex items-baseline justify-between gap-3 border-b border-line py-2 text-xs font-semibold text-ink-2 md:hidden">
+              <td>{t.weight}</td>
+              <td className="text-right">{labels.amount}</td>
+            </tr>
             {rows.map((r) => (
               <tr
                 key={r.weight}
                 role="row"
-                className="grid grid-cols-2 gap-x-3 gap-y-2 rounded-card border border-line bg-paper p-4 md:table-row md:rounded-none md:border-0 md:bg-transparent md:p-0"
+                className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5 border-b border-line py-2.5 before:order-2 before:h-0 before:basis-full last:border-b-0 md:table-row md:before:hidden"
               >
-                <th
-                  role="rowheader"
-                  scope="row"
-                  className={`${cell} col-span-2 font-display text-lg font-bold text-ink md:whitespace-nowrap md:text-base`}
-                >
+                <th role="rowheader" scope="row" className={`${cell} text-left font-semibold text-ink md:whitespace-nowrap md:font-display md:font-bold`}>
                   {r.weight}
                 </th>
-                <td role="cell" className={`${cell} col-span-2 text-ink-2`}>
+                <td role="cell" className={`${cell} ${small} order-3`}>
                   {r.breeds}
                 </td>
-                <td
-                  role="cell"
-                  className={`${cell} ${showFrequency ? '' : 'col-span-2'} rounded-box bg-amber-bg p-3 md:rounded-none md:bg-transparent`}
-                >
-                  <span aria-hidden="true" className={mobileLabel}>
-                    {labels.amount}
-                  </span>
-                  <span className="font-semibold text-ink">{r.amount}</span>
+                <td role="cell" className={`${cell} order-1 ml-auto max-w-[72%] text-right font-semibold text-ink md:ml-0 md:max-w-none md:text-left`}>
+                  {r.amount}
                 </td>
                 {showFrequency && (
-                  <td role="cell" className={`${cell} rounded-box bg-cream-2 p-3 text-ink md:rounded-none md:bg-transparent`}>
-                    <span aria-hidden="true" className={mobileLabel}>
-                      {labels.frequency}
-                    </span>
+                  <td role="cell" className={`${cell} ${small} order-4 ${sameFrequency ? 'hidden' : ''} md:text-ink`}>
+                    <span aria-hidden="true" className="md:hidden">·&nbsp;</span>
                     {r.frequency ?? '—'}
                   </td>
                 )}
                 {showDetail && (
-                  <td role="cell" className={`${cell} col-span-2 text-sm text-ink-2`}>
-                    <span aria-hidden="true" className={mobileLabel}>
-                      {labels.detail}
-                    </span>
+                  <td role="cell" className={`${cell} ${small} order-5 md:text-sm`}>
+                    <span aria-hidden="true" className="md:hidden">·&nbsp;</span>
                     {r.detail ?? '—'}
                   </td>
                 )}

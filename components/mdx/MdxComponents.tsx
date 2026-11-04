@@ -179,61 +179,8 @@ export function Stat({
   )
 }
 
-// ─── CompareTable ─────────────────────────────────────────────────────────────
-// Tableau comparatif stylisé (comme Klaro)
-
-export function CompareTable({ children }: { children: ReactNode }) {
-  return (
-    <div className="my-6 overflow-x-auto rounded-box bg-paper">
-      <table className="w-full text-sm">
-        {children}
-      </table>
-    </div>
-  )
-}
-
-export function CompareThead({ children }: { children: ReactNode }) {
-  return (
-    <thead className="bg-ink text-cream">
-      {children}
-    </thead>
-  )
-}
-
-export function CompareTh({ children }: { children: ReactNode }) {
-  return (
-    <th className="px-4 py-3 text-left text-sm font-bold">
-      {children}
-    </th>
-  )
-}
-
-export function CompareTr({ children, highlight }: { children: ReactNode; highlight?: boolean }) {
-  return (
-    <tr className={`border-b border-line ${highlight ? 'bg-rose-bg' : ''}`}>
-      {children}
-    </tr>
-  )
-}
-
-export function CompareTd({
-  children,
-  good,
-  bad,
-}: {
-  children: ReactNode
-  good?: boolean
-  bad?: boolean
-}) {
-  const color = good ? 'text-green-ink' : bad ? 'text-rose-ink' : 'text-ink-2'
-  return (
-    <td className={`px-4 py-3 ${color}`}>
-      {good && <span className="mr-1 font-bold">✓</span>}
-      {bad && <span className="mr-1 font-bold">✗</span>}
-      {children}
-    </td>
-  )
-}
+// ─── CompareTable : components/mdx/CompareTable.tsx
+export { CompareTable, CompareThead, CompareTh, CompareTr, CompareTd } from './CompareTable'
 
 // ─── Verdict ──────────────────────────────────────────────────────────────────
 // Bloc verdict final de l'article

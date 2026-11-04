@@ -23,7 +23,9 @@ const FULL: Column[] = ['price', 'format', 'strength', 'bestFor', 'madeIn', 'del
 export function BrandTable({ detailed = false, caption }: { detailed?: boolean; caption: string }) {
   const columns = detailed ? FULL : SHORT
   return (
-    <div className="v2 overflow-x-auto rounded-box border border-line bg-paper">
+    <div className="v2 flex flex-col gap-1.5">
+      <p aria-hidden="true" className="m-0 text-xs text-ink-2 md:hidden">Fais glisser le tableau sur le côté pour tout voir&nbsp;→</p>
+      <div className="overflow-x-auto rounded-box border border-line bg-paper">
       <table className={`w-full border-collapse text-left text-sm ${detailed ? "min-w-[1080px]" : "min-w-[780px]"}`}>
         <caption className="sr-only">{caption}</caption>
         <thead>
@@ -58,6 +60,7 @@ export function BrandTable({ detailed = false, caption }: { detailed?: boolean; 
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   )
 }
