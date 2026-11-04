@@ -8,11 +8,13 @@ import { TABS, tabHref, type TabSlug } from '@/lib/dashboard/tabs'
 interface HeaderProps {
   period: PeriodKey
   current: TabSlug
+  /** Sous-page de l'onglet : changer de période y reste (« /acquisition »). */
+  sub?: string
 }
 
 const pill = 'inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-pill font-semibold'
 
-export function DashboardHeader({ period, current }: HeaderProps) {
+export function DashboardHeader({ period, current, sub = '' }: HeaderProps) {
   return (
     <header className="sticky top-0 z-10 border-b border-line bg-cream/95 backdrop-blur">
       <div className="mx-auto w-full max-w-page px-4 md:px-8">
@@ -24,9 +26,9 @@ export function DashboardHeader({ period, current }: HeaderProps) {
             {(Object.keys(PERIODS) as PeriodKey[]).map((key) => (
               <Link
                 key={key}
-                href={tabHref(current, key)}
+                href={tabHref(current, key, '', sub)}
                 aria-current={key === period ? 'true' : undefined}
-                className={`${pill} min-w-11 px-2.5 text-sm ${key === period ? 'bg-ink text-cream' : 'text-ink-2 hover:text-ink'}`}
+                className={`${pill} min-w-10 px-2 text-sm ${key === period ? 'bg-ink text-cream' : 'text-ink-2 hover:text-ink'}`}
               >
                 {PERIODS[key].label}
               </Link>

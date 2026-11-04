@@ -3,7 +3,7 @@ import { countryName } from '@/lib/dashboard/country'
 import { BarList } from './BarList'
 import { Panel } from './Panel'
 
-// @cdc tableau de bord — panneaux « Pays » (onglet Visiteurs) : pays déduit de l'adresse IP au moment
+// @cdc tableau de bord — panneaux « Pays » (onglet Trafic, Acquisition) : pays déduit de l'adresse IP au moment
 // de la visite (base locale DB-IP), l'adresse n'est pas gardée. Une seule série par liste, une seule teinte.
 
 export function GeoPanels({ data }: { data: GeoData }) {

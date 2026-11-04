@@ -5,7 +5,7 @@ import { periodQuery, type PeriodKey } from './period'
 
 export const TABS = [
   { slug: '', label: 'Accueil', question: 'Tout va bien, ça progresse, et qu’est-ce qui attend ?' },
-  { slug: 'visiteurs', label: 'Visiteurs', question: 'Qui vient sur le site, d’où, et pour lire quoi ?' },
+  { slug: 'trafic', label: 'Trafic', question: 'Qui vient sur le site, d’où, et que font-ils ?' },
   { slug: 'conversions', label: 'Conversions', question: 'Quelles pages rapportent des e-mails, des comptes et des clics ?' },
   { slug: 'robots', label: 'Robots IA', question: 'Quels robots d’IA lisent le site, et quelles pages ?' },
   { slug: 'contenu', label: 'Contenu', question: 'La tâche de nuit a-t-elle tourné, et qu’est-ce qui attend une relecture ?' },
@@ -17,8 +17,8 @@ export type TabSlug = (typeof TABS)[number]['slug']
 
 export const DASHBOARD_ROOT = '/tableau-de-bord'
 
-export function tabHref(slug: TabSlug, period: PeriodKey, hash = ''): string {
-  const path = slug ? `${DASHBOARD_ROOT}/${slug}` : DASHBOARD_ROOT
+export function tabHref(slug: TabSlug, period: PeriodKey, hash = '', sub = ''): string {
+  const path = slug ? `${DASHBOARD_ROOT}/${slug}${sub}` : DASHBOARD_ROOT
   return `${path}${periodQuery(period)}${hash}`
 }
 

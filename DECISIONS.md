@@ -232,3 +232,7 @@ Décision du propriétaire : Dog Chef paie plus vite. Repas frais, Dog Chef d'ab
 - Plafond de 300 appels par passage, en dur. Le plafond quotidien du scanner (`SCANNER_DAILY_CAP`) n'est pas partagé : un passage ne doit pas bloquer les scans des visiteurs.
 - Vrai scan : contrôle au passage suivant, pas à la création. La fiche apparaît tout de suite dans « Dernières fiches » avec « analyse automatique » ; la route par code-barres est ouverte sans compte, un appel payant y serait à la portée d'un robot (un EAN nouveau, un appel).
 
+
+## 2026-11-04 : Sessions du tableau de bord sans suivi supplémentaire
+
+Une session regroupe les actions d'une même empreinte du jour, sans pause de plus de 30 minutes. Le calcul se fait à la lecture, sans cookie ni nouvelle collecte : un visiteur qui revient un autre jour compte de nouveau, un redémarrage du site peut le compter deux fois, et la durée s'arrête à la dernière action, donc elle est sous-estimée. Le rebond ignore les fenêtres affichées sans geste du visiteur (`Guide Popup View`, `Account Invite View`).
