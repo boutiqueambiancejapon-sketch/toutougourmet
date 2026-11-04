@@ -100,11 +100,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `avis-franklin-light-dinde-patate-douce-epinards`
 - [x] `nourriture-golden-retriever`
 - [x] `chien-a-bu-eau-de-mer-que-faire`
-- [ ] `chien-peut-manger-porc`
-- [ ] `nourriture-cocker-spaniel`
-- [ ] `nourriture-staffordshire-bull-terrier`
-- [ ] `tapis-de-lechage-chien-guide-utilisation`
-- [ ] `croquettes-chien-demangeaisons`
+- [x] `chien-peut-manger-porc`
+- [x] `nourriture-cocker-spaniel`
+- [x] `nourriture-staffordshire-bull-terrier`
+- [x] `tapis-de-lechage-chien-guide-utilisation`
+- [x] `croquettes-chien-demangeaisons`
 - [ ] `recette-patee-maison-dinde-chien`
 - [ ] `nourriture-american-staffordshire-terrier`
 - [ ] `croquettes-chien-cancer`
