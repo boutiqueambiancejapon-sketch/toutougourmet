@@ -114,11 +114,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `donner-comprime-chien-refuse-medicament`
 - [x] `collagene-chien-bienfaits-dosage`
 - [x] `nourriture-coton-de-tulear`
-- [ ] `chien-peut-manger-navet`
-- [ ] `nourriture-berger-australien`
-- [ ] `os-poulet-chien-danger`
-- [ ] `chien-peut-manger-lentilles`
-- [ ] `nourriture-labrador-retriever`
+- [x] `chien-peut-manger-navet`
+- [x] `nourriture-berger-australien`
+- [x] `os-poulet-chien-danger`
+- [x] `chien-peut-manger-lentilles`
+- [x] `nourriture-labrador-retriever`
 - [ ] `choisir-taille-croquettes-chien`
 - [ ] `quelle-quantite-donner-manger-chien-selon-poids`
 - [ ] `avis-fidelis-menus-frais-chien-bocaux`
