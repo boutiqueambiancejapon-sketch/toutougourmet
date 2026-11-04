@@ -20,9 +20,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `chien-peut-manger-miel`
 - [x] `halloween-chien-bonbons-citrouille-dangers`
 - [x] `chien-mange-noix-cajou`
+- [ ] `avis-croquettes-orlando-lidl`
 - [ ] `chien-peut-manger-melon`
 - [ ] `nourriture-spitz-nain`
 - [ ] `meilleures-patees-chien`
+- [ ] `chien-mange-couche-normal`
 - [ ] `chien-mange-pistaches`
 - [ ] `graine-de-lin-chien-bienfaits-dosage`
 - [ ] `chien-peut-manger-abricots`
@@ -32,12 +34,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [ ] `quelle-quantite-patee-chien-par-jour`
 - [ ] `chien-peut-manger-pates`
 - [ ] `croquettes-chien-otites`
+- [ ] `chien-peut-manger-jambon`
 - [ ] `chien-peut-manger-avoine`
 - [ ] `butternut-box-vs-dog-chef`
 - [ ] `chien-peut-manger-pain`
 - [ ] `meilleure-nourriture-bichon-maltais`
+- [ ] `nourriture-yorkshire-terrier`
 - [ ] `nourriture-westie`
+- [ ] `nourriture-patou-montagne-pyrenees`
 - [ ] `psyllium-chien-bienfaits-dosage`
+- [ ] `chien-peut-manger-figue`
 - [ ] `chien-peut-manger-sardines`
 - [ ] `meilleures-croquettes-chien-de-chasse`
 - [ ] `recette-glace-maison-chien-ete`
@@ -63,6 +69,7 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [ ] `nourriture-whippet`
 - [ ] `eukanuba-vs-royal-canin`
 - [ ] `chien-peut-manger-prunes`
+- [ ] `pancreatite-chien-alimentation-guide`
 - [ ] `chien-peut-manger-riz`
 - [ ] `recette-bouillon-os-maison-chien`
 - [ ] `meilleures-croquettes-petit-chien`
@@ -72,6 +79,7 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [ ] `voyager-voiture-chien-alimentation-mal-transports`
 - [ ] `croquettes-chien-insuffisance-renale`
 - [ ] `croquettes-chien-sterilise`
+- [ ] `chien-peut-manger-courgette`
 - [ ] `chien-peut-manger-yaourt`
 - [ ] `chien-peut-manger-oeufs`
 - [ ] `comprendre-etiquette-patee-chien`
@@ -130,6 +138,7 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [ ] `selles-chien-aspect-couleur-consistance`
 - [ ] `chien-peut-manger-chou-fleur`
 - [ ] `chien-peut-manger-noix-de-coco`
+- [ ] `chien-peut-manger-lapin`
 - [ ] `nourriture-terre-neuve`
 - [ ] `chardon-marie-chien-bienfaits-dosage`
 - [ ] `nourriture-dogue-allemand`
@@ -145,8 +154,8 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [ ] `nourriture-malamute-alaska`
 - [ ] `glucosamine-chondroitine-chien-articulations`
 - [ ] `chien-peut-boire-lait`
-- [ ] `chien-mange-couche-normal`
 - [ ] `recette-riz-poulet-chien-diete-legere`
+- [ ] `croquettes-chien-diabetique`
 - [ ] `chien-peut-manger-noix`
 - [ ] `recette-biscuits-pomme-cannelle-chien`
 - [ ] `spiruline-chien-bienfaits-dosage`
@@ -158,6 +167,7 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [ ] `recette-patate-douce-sechee-chien`
 - [ ] `croquettes-chien-apres-operation`
 - [ ] `recette-poulet-seche-chien`
+- [ ] `croquettes-sans-cereales-chien`
 - [ ] `alimentation-chien-senior-guide`
 - [ ] `chien-peut-manger-pomme`
 - [ ] `chien-peut-manger-cannelle`
@@ -191,7 +201,6 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [ ] `conserver-croquettes-chien-guide-oxydation`
 - [ ] `comment-faire-maigrir-son-chien`
 - [ ] `nourriture-rottweiler`
-- [ ] `pancreatite-chien-alimentation-guide`
 - [ ] `avis-japhy`
 - [ ] `chute-poils-chien-causes-alimentation`
 - [ ] `nourriture-caniche`
@@ -202,7 +211,6 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [ ] `croquettes-chien-mauvaise-haleine`
 - [ ] `nourriture-setter-irlandais`
 - [ ] `glucides-croquettes-chien`
-- [ ] `croquettes-chien-diabetique`
 - [ ] `chien-mange-trop-vite-solutions`
 - [ ] `nourriture-shar-pei`
 - [ ] `nourriture-teckel`
@@ -214,6 +222,7 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [ ] `croquettes-chien-diarrhee-chronique`
 - [ ] `recette-muffins-sales-poulet-courgette-chien`
 - [ ] `chien-peut-manger-oignons`
+- [ ] `flatulences-chien-causes-solutions-alimentation`
 - [ ] `nourriture-dachshund`
 - [ ] `nourriture-shih-tzu`
 - [ ] `chien-peut-manger-pop-corn`
@@ -249,7 +258,6 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [ ] `microbiote-intestinal-chien-alimentation`
 - [ ] `croquettes-chien-allergique`
 - [ ] `diarrhee-chien-que-faire-alimentation`
-- [ ] `avis-croquettes-orlando-lidl`
 - [ ] `choisir-alimentation-chat-guide`
 - [ ] `recette-patee-maison-poisson-chien`
 - [ ] `chien-peut-manger-viande-crue-barf`
@@ -279,28 +287,20 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [ ] `comment-preparer-repas-chien-soi-meme`
 - [ ] `nourriture-braque-hongrois`
 - [ ] `alimentation-chiot-0-2-mois`
-- [ ] `croquettes-sans-cereales-chien`
 - [ ] `meilleure-gamelle-anti-glouton-chien`
 - [ ] `avis-belcando`
 - [ ] `allergie-alimentaire-chien-symptomes-diagnostic`
 - [ ] `repas-noel-chien-aliments-autorises-dangereux`
 - [ ] `comprendre-etiquette-croquettes-chien`
 - [ ] `recette-friandises-maison-occuper-chien-rentree`
-- [ ] `chien-peut-manger-figue`
 - [ ] `chien-peut-manger-pissenlits`
 - [ ] `alimentation-chien-grande-race-adulte-guide`
 - [ ] `chien-peut-manger-agneau`
 - [ ] `chien-mange-mort-aux-rats-urgence`
-- [ ] `chien-peut-manger-courgette`
-- [ ] `chien-peut-manger-jambon`
-- [ ] `nourriture-yorkshire-terrier`
 - [ ] `friandises-naturelles-chien-guide`
 - [ ] `avis-farmina-nd`
-- [ ] `nourriture-patou-montagne-pyrenees`
 - [ ] `chien-peut-manger-fenouil`
-- [ ] `flatulences-chien-causes-solutions-alimentation`
 - [ ] `chien-mange-herbe-pourquoi`
-- [ ] `chien-peut-manger-lapin`
 - [ ] `chien-peut-manger-poivron`
 - [ ] `chien-peut-manger-clementine-orange`
 - [ ] `nourriture-border-collie`
