@@ -166,14 +166,15 @@ test('la publication ne dépend pas du contrôle IA', () => {
   assert.doesNotMatch(readFileSync('lib/server/scanner-catalog.ts', 'utf8'), /foodCheck|food_check/)
 })
 
-test('où acheter : partenaire, Maxi Zoo, Amazon, jamais sous 55 ni pour un aliment thérapeutique', () => {
+test('où acheter : partenaire, Maxi Zoo, accueil sinon, jamais sous 55 ni pour un aliment thérapeutique', () => {
   assert.equal(buyLink({ brand: 'Ultra premium direct', product: 'Pâtée agneau', score: 96 })?.store, 'Ultra Premium Direct')
   assert.ok(buyLink({ brand: 'Ultra premium direct', product: 'Pâtée agneau', score: 96 })?.href.includes('ae=1346'))
   assert.equal(buyLink({ brand: 'Pedigree', product: 'Rodeo', score: 60 })?.store, 'Maxi Zoo')
   assert.ok(buyLink({ brand: 'Pedigree', product: 'Rodeo', score: 60 })?.href.includes('awinaffid=1112904'))
-  const amazon = buyLink({ brand: 'Josera', product: 'SensiAdult', score: 56 })
-  assert.equal(amazon?.store, 'Amazon')
-  assert.ok(amazon?.href.includes('tag=ambiancejap0a-21') && amazon.amazon)
+  const other = buyLink({ brand: 'Josera', product: 'SensiAdult', score: 56 })
+  assert.equal(other?.store, 'Maxi Zoo')
+  assert.equal(other?.exact, false)
+  assert.ok(other?.href.includes('ued=https%3A%2F%2Fwww.maxizoo.fr%2F'))
   assert.equal(buyLink({ brand: 'Pedigree', product: 'Rodeo', score: 41 }), null)
   assert.equal(buyLink({ brand: 'Royal Canin', product: 'Hepatic HF 16', score: 70 }), null)
   assert.equal(buyLink({ brand: null, product: 'X', score: 80 }), null)

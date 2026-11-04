@@ -18,16 +18,15 @@ export interface BuyLink {
   exact: boolean
 }
 
-const maxiZooUrl = (brand: string) =>
-  `https://www.awin1.com/cread.php?awinmid=68698&awinaffid=1112904&ued=${encodeURIComponent(`https://www.maxizoo.fr/search/?text=${encodeURIComponent(brand.replace(/\s*&\s*/g, " "))}`)}`
+const awin = (url: string) => `https://www.awin1.com/cread.php?awinmid=68698&awinaffid=1112904&ued=${encodeURIComponent(url)}`
+const maxiZooUrl = (brand: string) => awin(`https://www.maxizoo.fr/search/?text=${encodeURIComponent(brand.replace(/\s*&\s*/g, ' '))}`)
 
 export function buyLink(f: { brand: string | null; product: string | null; score: number | null }): BuyLink | null {
   if (f.score === null || f.score < BUY_MIN_SCORE || !f.brand || isTherapeutic(f)) return null
   const partner = partnerBrand(f.brand)
-  if (partner?.slug === 'ultra-premium-direct') return { store: partner.name, href: UPD_URL, amazon: false }
-  if (partner && !partner.stockNote) return { store: partner.name, href: partner.affiliateUrl, amazon: false }
+  if (partner?.slug === 'ultra-premium-direct') return { store: partner.name, href: UPD_URL, exact: true }
+  if (partner && !partner.stockNote) return { store: partner.name, href: partner.affiliateUrl, exact: true }
   if (partner) return null
-  if (MAXI_ZOO_BRANDS.includes(f.brand.trim().toLowerCase())) return { store: 'Maxi Zoo', href: maxiZooUrl(f.brand.trim()), amazon: false }
-  const query = `${f.brand} ${f.product ?? ''} chien`.replace(/\s+/g, ' ').trim()
-  return { store: 'Amazon', href: `https://www.amazon.fr/s?k=${encodeURIComponent(query)}&tag=${AMAZON_TAG}`, amazon: true }
+  if (MAXI_ZOO_BRANDS.includes(f.brand.trim().toLowerCase())) return { store: 'Maxi Zoo', href: maxiZooUrl(f.brand.trim()), exact: true }
+  return { store: 'Maxi Zoo', href: awin('https://www.maxizoo.fr/'), exact: false }
 }
