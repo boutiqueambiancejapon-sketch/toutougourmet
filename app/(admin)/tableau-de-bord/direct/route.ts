@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
 export async function GET() {
-  if (!(await dashboardAllowed())) return new NextResponse(null, { status: 404 })
+  if (!(await dashboardAllowed())) return new NextResponse(null, { status: 401, headers: { 'Cache-Control': 'no-store' } })
   const pool = getPool()
   if (!pool) return NextResponse.json({ error: 'no-db' }, { status: 503 })
   try {

@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import type { PeriodKey } from '@/lib/dashboard/period'
 import { tabOf, type TabSlug } from '@/lib/dashboard/tabs'
+import { dashboardAuthMode } from '@/lib/server/dashboard-login/mode'
 import { DashboardHeader } from './DashboardHeader'
 
 // @cdc tableau de bord — cadre commun à l'accueil et aux onglets : en-tête, titre (le nom de
@@ -15,14 +16,17 @@ interface ShellProps {
   intro?: string
   /** Base injoignable ou lecture en échec : dit en clair, la page reste debout. */
   notice?: string | null
+  /** Vrai sur l'écran Sécurité : aucun onglet allumé. */
+  security?: boolean
   children: ReactNode
 }
 
-export function DashboardShell({ period, current, title, intro, notice, children }: ShellProps) {
+export async function DashboardShell({ period, current, title, intro, notice, security = false, children }: ShellProps) {
   const tab = tabOf(current)
+  const hasLogin = (await dashboardAuthMode()) === 'login'
   return (
     <>
-      <DashboardHeader period={period} current={current} />
+      <DashboardHeader period={period} current={current} securityLink={hasLogin} onSecurity={security} />
       <main className="mx-auto w-full max-w-page px-4 pb-16 md:px-8">
         <div className="pt-5">
           <h1 className="page-title m-0 text-ink">{title ?? (current ? tab.label : 'Tableau de bord')}</h1>

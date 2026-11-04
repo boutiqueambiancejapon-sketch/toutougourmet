@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { SECURITY_PATH } from '@/lib/dashboard/login/policy'
 import { PERIODS, type PeriodKey } from '@/lib/dashboard/period'
 import { TABS, tabHref, type TabSlug } from '@/lib/dashboard/tabs'
 
@@ -8,11 +9,13 @@ import { TABS, tabHref, type TabSlug } from '@/lib/dashboard/tabs'
 interface HeaderProps {
   period: PeriodKey
   current: TabSlug
+  securityLink?: boolean
+  onSecurity?: boolean
 }
 
 const pill = 'inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded-pill font-semibold'
 
-export function DashboardHeader({ period, current }: HeaderProps) {
+export function DashboardHeader({ period, current, securityLink = false, onSecurity = false }: HeaderProps) {
   return (
     <header className="sticky top-0 z-10 border-b border-line bg-cream/95 backdrop-blur">
       <div className="mx-auto w-full max-w-page px-4 md:px-8">
@@ -36,7 +39,7 @@ export function DashboardHeader({ period, current }: HeaderProps) {
         <nav aria-label="Onglets du tableau de bord" className="-mx-4 overflow-x-auto px-4 pb-3 md:mx-0 md:px-0">
           <ul className="m-0 flex list-none gap-1.5 p-0 text-sm">
             {TABS.map((t) => {
-              const on = t.slug === current
+              const on = !onSecurity && t.slug === current
               return (
                 <li key={t.slug} className="shrink-0">
                   <Link
@@ -49,6 +52,17 @@ export function DashboardHeader({ period, current }: HeaderProps) {
                 </li>
               )
             })}
+            {securityLink ? (
+              <li className="shrink-0">
+                <Link
+                  href={SECURITY_PATH}
+                  aria-current={onSecurity ? 'page' : undefined}
+                  className={`${pill} border-2 px-3.5 no-underline ${onSecurity ? 'border-ink bg-ink text-cream' : 'border-line text-ink hover:border-line-2'}`}
+                >
+                  Sécurité
+                </Link>
+              </li>
+            ) : null}
           </ul>
         </nav>
       </div>

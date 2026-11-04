@@ -2,6 +2,9 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { dashboardCredentials, isAuthorized } from '@/lib/dashboard/auth'
 import { clientIp, isLimited, overLimit } from '@/lib/server/rate-window'
 import { markIgnoredVisitor, OWNER_COOKIE, ownerCookieNeedsRenewal, ownerCookieOptions, ownerCookieValue } from '@/lib/server/analytics-ignore'
+import { LOGIN_PATH, ROOT, routeCountsAsActivity, routeKind, SESSION_COOKIE, stageHref } from '@/lib/dashboard/login/policy'
+import { dashboardAuthMode } from '@/lib/server/dashboard-login/mode'
+import { readSession } from '@/lib/server/dashboard-login/sessions'
 
 // @cdc tableau de bord — proxy Next 16 (ex-middleware). Il ne concerne que /tableau-de-bord et
 // la page du gardien /garde/[jeton] (voir config.matcher) : le reste du site ne passe jamais par ici.
@@ -36,10 +39,54 @@ function rememberOwner(request: NextRequest, response: NextResponse): void {
   response.cookies.set(OWNER_COOKIE, value, ownerCookieOptions(request.headers.get('host'), secure))
 }
 
+const PRIVATE_HEADERS = { 'X-Robots-Tag': 'noindex, nofollow', 'Cache-Control': 'private, no-store' }
+
+function passThrough(): NextResponse {
+  const response = NextResponse.next()
+  for (const [key, value] of Object.entries(PRIVATE_HEADERS)) response.headers.set(key, value)
+  return response
+}
+
+/** Adresse absolue exigée par Next. Derrière Caddy, request.url ne porte pas forcément le nom public. */
+function redirectTo(request: NextRequest, location: string): NextResponse {
+  const host = request.headers.get('x-forwarded-host') ?? request.headers.get('host') ?? request.nextUrl.host
+  const proto = request.headers.get('x-forwarded-proto') ?? request.nextUrl.protocol.replace(':', '')
+  return new NextResponse(null, { status: 307, headers: { ...PRIVATE_HEADERS, Location: new URL(location, `${proto}://${host}`).toString() } })
+}
+
+const unavailable = () => new NextResponse('Service indisponible', { status: 503, headers: { ...PRIVATE_HEADERS, 'Retry-After': '60' } })
+
+// @cdc tableau de bord — connexion par session (lib/server/dashboard-login). Pages : renvoi vers
+// la connexion. Données, export et actions : 401. Base en panne : 503, sans repli sur Basic.
+async function sessionProxy(request: NextRequest): Promise<NextResponse> {
+  const { pathname, search } = request.nextUrl
+  const kind = routeKind(pathname, request.method)
+  if (kind === 'public') return passThrough()
+  try {
+    const session = await readSession(request.cookies.get(SESSION_COOKIE)?.value, routeCountsAsActivity(pathname))
+    if (session?.stage === 'full') {
+      const response = passThrough()
+      rememberOwner(request, response)
+      return response
+    }
+    if (kind === 'data') return new NextResponse(null, { status: 401, headers: PRIVATE_HEADERS })
+    if (session) return redirectTo(request, stageHref(session.stage))
+    const back = pathname + search
+    return redirectTo(request, back === ROOT ? LOGIN_PATH : `${LOGIN_PATH}?suivant=${encodeURIComponent(back)}`)
+  } catch (err) {
+    console.error('[dashboard-login] session illisible', err instanceof Error ? err.message : err)
+    return unavailable()
+  }
+}
+
 export async function proxy(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith('/garde/')) return sitterProxy(request)
   const expected = dashboardCredentials()
   if (!expected) return new NextResponse('Not Found', { status: 404 })
+
+  const mode = await dashboardAuthMode()
+  if (mode === 'login') return sessionProxy(request)
+  if (mode === 'unavailable') return unavailable()
 
   const failKey = `dashboard-fail:${clientIp(request.headers)}`
   if (isLimited(failKey, FAIL_LIMITS)) {
@@ -47,9 +94,7 @@ export async function proxy(request: NextRequest) {
   }
 
   if (await isAuthorized(request.headers.get('authorization'), expected)) {
-    const response = NextResponse.next()
-    response.headers.set('X-Robots-Tag', 'noindex, nofollow')
-    response.headers.set('Cache-Control', 'private, no-store')
+    const response = passThrough()
     rememberOwner(request, response)
     return response
   }

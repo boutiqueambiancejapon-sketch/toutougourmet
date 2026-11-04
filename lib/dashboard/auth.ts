@@ -1,4 +1,5 @@
-// @cdc tableau de bord — accès réservé au propriétaire (authentification HTTP Basic).
+// @cdc tableau de bord — accès réservé au propriétaire. Identifiants communs à l'authentification
+// HTTP Basic (avant la bascule) et à la page de connexion (lib/server/dashboard-login/mode.ts).
 // Identifiants dans DASHBOARD_USER / DASHBOARD_PASSWORD (/srv/toutou/shared/.env), jamais dans le code.
 // Sans ces deux variables, la route n'existe pas (404).
 
@@ -18,11 +19,22 @@ async function digest(value: string): Promise<Uint8Array> {
 }
 
 /** Comparaison en temps constant : on compare les empreintes SHA-256, de longueur fixe, octet par octet. */
-async function safeEqual(a: string, b: string): Promise<boolean> {
+export async function safeEqual(a: string, b: string): Promise<boolean> {
   const [ha, hb] = await Promise.all([digest(a), digest(b)])
   let diff = 0
   for (let i = 0; i < ha.length; i++) diff |= ha[i] ^ hb[i]
   return diff === 0
+}
+
+/** Vrai si l'en-tête Origin désigne l'hôte de la requête. Une requête sans Origin est refusée. */
+export function requestFromSameHost(h: Headers): boolean {
+  const origin = h.get('origin')
+  const host = h.get('x-forwarded-host') ?? h.get('host')
+  try {
+    return Boolean(origin && host && new URL(origin).host === host)
+  } catch {
+    return false
+  }
 }
 
 /** Vérifie l'en-tête Authorization: Basic … contre les identifiants attendus. */

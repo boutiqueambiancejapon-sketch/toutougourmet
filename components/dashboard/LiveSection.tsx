@@ -21,6 +21,8 @@ export function LiveSection() {
       if (document.visibilityState === 'visible') {
         try {
           const res = await fetch('/tableau-de-bord/direct', { cache: 'no-store' })
+          // Session expirée pendant que l'onglet restait ouvert : retour à la connexion.
+          if (res.status === 401) window.location.assign('/tableau-de-bord/connexion')
           if (!res.ok) throw new Error(String(res.status))
           if (!stopped) {
             setData((await res.json()) as LiveData)
