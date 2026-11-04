@@ -195,3 +195,5 @@ Décision du propriétaire : les lecteurs veulent la réponse vite et se diverti
 - L'inscription au compte n'a aucune case pour la lettre : un compte confirmé ne reçoit que les rappels de son compte, même s'il figure aussi sur la liste. Il garde la lettre mensuelle tant qu'il reste sur la liste Brevo.
 - `analytics.email_optouts` note chaque clic sur « Se désinscrire » : un compte hors liste Brevo n'y serait sinon pas exclu. Empreinte gardée sans limite de durée. Une réinscription par formulaire rend la lettre, pas la suite ni les rappels.
 - Pas de suite le premier mardi du mois, jour de la lettre : plafond d'un e-mail par jour.
+
+Précision du propriétaire (2026-11-04) sur le ton des articles : informatif, intéressant, légèrement scientifique et divertissant, sans allure d'étude scientifique. Les références vont en fin d'article. Lot de nuit : 10 articles par nuit pour déplacer les références (`deploy/citations-prompt.md`), à retirer de `deploy/seo-rewrite.sh` quand il n'en reste plus.

@@ -1,10 +1,11 @@
 Tâche quotidienne : réécrire et optimiser 2 articles existants du site Toutou Gourmet (www.toutou-gourmet.com), en français, selon la méthode fan-out IA du guide SEO/GEO du repo. Tu tournes sur le serveur de Toutou, dans une copie de travail de la branche `v2` (la V2 du site). Le site en ligne n'est pas modifié avant la bascule : tu ne touches JAMAIS à la branche de production.
 
 ## Ton de l'article (priorité sur tout le reste)
-**Priorité sur tout le reste (demande du propriétaire, 2026-11-04).** Les gens veulent la réponse vite et passer un bon moment.
+**Priorité sur tout le reste (demande du propriétaire, 2026-11-04).** Le ton : informatif, intéressant, légèrement scientifique et divertissant. Un article de vulgarisation qu'on a plaisir à lire, pas une étude scientifique.
 - Réponse dans les 2 premières phrases, en langage courant, puis des conseils qu'on peut suivre tout de suite.
 - Ton vivant : des scènes de la vie avec un chien, un peu d'humour quand le sujet s'y prête. Jamais de blague sur une urgence ou un chien malade.
-- Pas trop chiffré, pas trop scientifique : pas de calculs de kcal, de pourcentages d'ingrédients, de mg/kg, de tableaux de calcul ni de références d'études dans le texte courant. On garde un chiffre seulement s'il change ce que le lecteur va faire.
+- La science sert à raconter le pourquoi, avec des mots simples : on peut nommer une molécule et expliquer ce qu'elle fait, citer un fait étonnant ou un chiffre parlant (« le chien digère mal le chocolat : la théobromine reste bien plus longtemps dans son sang que dans le nôtre »). Le lecteur doit apprendre quelque chose à chaque section.
+- Pas d'allure de publication : ni calculs détaillés, ni tableaux de kcal, ni avalanche de pourcentages ou de mg/kg dans le texte courant.
 - Exception sécurité : toxique, urgence, maladie, médicament. Là, les doses, les symptômes et les numéros restent exacts et le ton reste sérieux.
 - Jamais de référence façon article scientifique dans le texte : pas de « (Noble et al., 2017) », d'auteur, de revue, de DOI ni de PMID. On écrit « une étude britannique » ou « les vétérinaires conseillent », et les références vont seulement dans « Sources » en fin d'article, si besoin. Une affirmation de santé reste vérifiée à une source sérieuse. Plus court, jamais moins vrai.
 - 600 à 1 000 mots en général. FAQ de 4 à 6 questions courtes.
