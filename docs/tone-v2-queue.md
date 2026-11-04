@@ -65,11 +65,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `avis-dog-chef-croquettes-canard-frais`
 - [x] `chien-peut-manger-framboises`
 - [x] `chien-mange-crapaud-urgence`
-- [ ] `aliments-fermentes-chien-bienfaits-dosage`
-- [ ] `nourriture-whippet`
-- [ ] `eukanuba-vs-royal-canin`
-- [ ] `chien-peut-manger-prunes`
-- [ ] `pancreatite-chien-alimentation-guide`
+- [x] `aliments-fermentes-chien-bienfaits-dosage`
+- [x] `nourriture-whippet`
+- [x] `eukanuba-vs-royal-canin`
+- [x] `chien-peut-manger-prunes`
+- [x] `pancreatite-chien-alimentation-guide`
 - [ ] `chien-peut-manger-riz`
 - [ ] `recette-bouillon-os-maison-chien`
 - [ ] `meilleures-croquettes-petit-chien`
