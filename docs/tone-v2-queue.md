@@ -30,11 +30,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `chien-peut-manger-abricots`
 - [x] `conserver-patee-chien-apres-ouverture`
 - [x] `chien-barbecue-securite-aliments-eviter`
-- [ ] `croquettes-chien-hypothyroidie`
-- [ ] `quelle-quantite-patee-chien-par-jour`
-- [ ] `chien-peut-manger-pates`
-- [ ] `croquettes-chien-otites`
-- [ ] `chien-peut-manger-jambon`
+- [x] `croquettes-chien-hypothyroidie`
+- [x] `quelle-quantite-patee-chien-par-jour`
+- [x] `chien-peut-manger-pates`
+- [x] `croquettes-chien-otites`
+- [x] `chien-peut-manger-jambon`
 - [ ] `chien-peut-manger-avoine`
 - [ ] `butternut-box-vs-dog-chef`
 - [ ] `chien-peut-manger-pain`
