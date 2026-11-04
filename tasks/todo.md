@@ -195,3 +195,13 @@ Rapport hors dépôt : `~/audits/audit-partenaires-2026-11-04.md`.
 - [ ] `viewport-fit=cover` : non posé, marges gauche et droite (paysage, encoche) à traiter d'abord
 - [ ] Décider du sort de `/api/outils/email` et de `lib/tool-email.ts`, sans appelant depuis l'audit
 
+## Scanner en une page et contrôle IA (branche `feat/scanner-ux`, 2026-11-04)
+
+- [x] `/scanner` : bouton de scan, 2 cartes, 3 dernières fiches, contenu SEO et FAQ pliés
+- [x] `/scanner/croquette`, `/scanner/friandise` : `noindex, follow`, trois onglets par adresse
+- [x] Dates honnêtes, vrais comptes, mentions
+- [x] `scripts/check-fiches-ai.ts`, `app.food_check`, carte du tableau de bord (modèle simulé seulement)
+- [ ] Fusionner dans `v2`, `sudo /usr/local/sbin/toutou-migrate`, déployer
+- [ ] Premier passage réel par le propriétaire (`--limit=5`, puis complet) : mesurer les jetons réels
+- [ ] Recopier `deploy/toutou-opff-import.service` dans `/etc/systemd/system/`
+

@@ -15,7 +15,7 @@ Internet ── 80/443 ──► Caddy (service système, HTTPS automatique)
                                                         └─ PostgreSQL local, base « toutou »
 cron (utilisateur toutou) ──► backup-db.sh chaque nuit à 3 h 15
 toutou-alerts.timer ──► alertes ntfy toutes les 10 min · toutou-weekly.timer ──► résumé du lundi (non installés)
-toutou-opff-import.timer ──► copie Open Pet Food Facts, dimanche 1 h 10 (non installé)
+toutou-opff-import.timer ──► copie Open Pet Food Facts puis contrôle IA des fiches, dimanche 1 h 10
 ```
 
 ## Dossiers
@@ -88,7 +88,7 @@ Tables `app.food_analysis`, `app.scan_history`, `app.scan_usage`, `app.scan_repo
 | `SCANNER_PROVIDER` | facultatif, défaut `gemini` (seul fournisseur branché). |
 | `SCANNER_FREE_MONTHLY` | facultatif, analyses par mois et par compte, défaut 5. |
 | `SCANNER_TIMEOUT_MS` | facultatif, délai d'attente de la lecture, défaut 30000. |
-| `SCANNER_RECENT_MIN` | facultatif, produits distincts avant d'afficher « Derniers scans », défaut 5. |
+| `GEMINI_CHECK_MODEL` | facultatif, modèle du contrôle IA des fiches, défaut `gemini-3.1-flash-lite`. |
 
 Scanner v2 (code-barres, Open Pet Food Facts, fiches de partage) : migration `db/migrations/0002_scanner_source.sql` (colonne `food_analysis.source`), même commande `npx drizzle-kit migrate`. Le serveur doit pouvoir joindre `world.openpetfoodfacts.org` en HTTPS (sortie). Le décodeur de code-barres `public/vendor/zxing/zxing_reader-3.1.6.wasm` est servi par le site : si `barcode-detector` change de version dans `package.json`, recopier le fichier depuis `node_modules/zxing-wasm/dist/reader/` et mettre à jour `ZXING_WASM_URL` (`lib/scanner/barcode-client.ts`). `/scanner` autorise la caméra (`Permissions-Policy: camera=(self)`, `next.config.ts`) : ne pas réécrire cet en-tête dans Caddy. Le jeton de session de scan est signé avec `BETTER_AUTH_SECRET`.
 
@@ -112,7 +112,7 @@ sudo -u toutou env DATABASE_URL='postgresql:///toutou?host=/var/run/postgresql' 
 
 Base de développement : `toutou_accounts_dev` (rôle `administrator`), jamais `toutou`.
 
-## Copie Open Pet Food Facts (préparée, non installée)
+## Copie Open Pet Food Facts
 
 Chaque dimanche à 1 h 10 (heure de Paris, hors de la plage 02:30-05:00 de la tâche de nuit, de la sauvegarde et de la purge), `scripts/opff-import.ts` télécharge l'export officiel `https://static.openpetfoodfacts.org/data/openpetfoodfacts-products.jsonl.gz` (19 Mo compressé, 165 Mo décompressé, mis à jour chaque nuit par Open Pet Food Facts), le lit ligne à ligne, garde les aliments pour chien dans `app.opff_product` et pré-note avec le barème les fiches complètes (`food_analysis`, `source = 'openpetfoodfacts'`, `scan_count = 0`). Seules les fiches dont le contenu a changé sont retraitées ; si l'export n'a pas changé depuis le dernier import réussi (`Last-Modified`), rien n'est relu. Le fichier téléchargé est supprimé à la fin. Mesuré en dev le 2026-11-03 : 16 s, 250 Mo de mémoire au plus.
 
@@ -143,6 +143,27 @@ journalctl -u toutou-opff-import -n 60 --no-pager    # compteurs du dernier pass
 Autres options : `--file=/chemin.jsonl.gz` (export déjà téléchargé, gardé), `--all` (retraite aussi les fiches inchangées), `--force` (relit un export inchangé). Suivi : tableau de bord, onglet Contenu, « Copie Open Pet Food Facts » ; alerte ntfy si le dernier passage a échoué, est bloqué depuis 2 heures, ou si aucun passage n'a réussi depuis 8 jours. Le service tourne durci comme les alertes, avec `Nice=10`, entrées-sorties en priorité basse et `MemoryMax=700M`.
 
 Arrêt : `sudo systemctl disable --now toutou-opff-import.timer`. Les données restent en base ; `TRUNCATE app.opff_product` vide la copie (les fiches déjà créées restent).
+
+## Contrôle IA des fiches du scanner
+
+`scripts/check-fiches-ai.ts` envoie à Gemini le JSON de chaque fiche à contrôler, sans photo, et écrit le jugement (`ok`, `doubt`, `rejected`, raison, modèle, jetons, date) dans `app.food_check`. Rien d'autre n'est écrit : `reviewed`, `discarded` et `updated_at` ne bougent pas, donc ni l'indexation, ni le sitemap, ni le classement `/croquettes`. Les listes de `/scanner/croquette` et `/scanner/friandise` lisent ce statut.
+
+Migration `db/migrations/0009_food_check.sql`, à passer avant de servir ce code. Sans elle les listes publiques restent vides, sans erreur, et le tableau de bord le signale. `toutou-migrate` lit `origin/v2` : la branche doit être fusionnée avant.
+
+```bash
+sudo /usr/local/sbin/toutou-migrate
+cd /srv/toutou/current
+# Nombre de fiches et coût estimé, aucun appel
+sudo -u toutou bash -c 'set -a; . /srv/toutou/shared/.env; set +a; nice -n 15 node_modules/.bin/tsx scripts/check-fiches-ai.ts --dry'
+# Premier essai réel : 5 appels, regarder les jetons et les raisons dans le tableau de bord
+sudo -u toutou bash -c 'set -a; . /srv/toutou/shared/.env; set +a; nice -n 15 node_modules/.bin/tsx scripts/check-fiches-ai.ts --limit=5'
+# Passage complet, à relancer tant qu'il reste des fiches (300 appels par passage au plus)
+sudo -u toutou bash -c 'set -a; . /srv/toutou/shared/.env; set +a; nice -n 15 node_modules/.bin/tsx scripts/check-fiches-ai.ts'
+# Prise en compte par le dimanche : le service de l'import appelle le contrôle après l'import
+sudo cp deploy/toutou-opff-import.service /etc/systemd/system/ && sudo systemctl daemon-reload
+```
+
+Idempotent : une fiche contrôlée et inchangée n'est pas renvoyée (`md5(extracted::text)`), un arrêt se reprend au lancement suivant. Une fiche relue ou écartée n'est jamais envoyée. Arrêt après 5 échecs d'appel à la suite. Journal : `journalctl -u toutou-opff-import`, ligne `[check] appels=… jetons… coût=…`. Options : `--dry`, `--limit=N`, `--recheck-doubt`. Une fiche issue d'un vrai scan apparaît dans « Dernières fiches » sans attendre, contrôlée au passage suivant : pas d'appel payant dans la réponse d'une route ouverte sans compte.
 
 ## Lettre et e-mails de la newsletter
 

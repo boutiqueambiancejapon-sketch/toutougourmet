@@ -166,3 +166,10 @@ Les étiquettes en italien, espagnol, allemand, néerlandais ou anglais sont lue
 ## Version 1.4, friandises 1.3 (2026-11-04)
 
 Mots composés allemands lus (« Geflügelprotein », « Lachsprotein »). « Sous-produits d'origine végétale » n'est plus compté comme une origine animale non nommée. La lecture de la photo ne prend plus une part de protéines pour une part d'ingrédients.
+
+## Contrôle IA des fiches et listes publiques (2026-11-04)
+
+Le barème ne change pas : le contrôle ne touche ni la note, ni l'étiquette lue, ni `reviewed`. `scripts/check-fiches-ai.ts` envoie le JSON de la fiche à Gemini et range le jugement (`ok`, `doubt`, `rejected`, raison) dans `app.food_check`. Consigne et validation : `lib/scanner/fiche-check.ts`. Questions posées : pour chien, marque et produit plausibles, composition cohérente, constituants plausibles, type correct, ingrédients de la bonne liste, part animale qui n'est pas un taux de protéines.
+
+Listes de `/scanner/croquette` et `/scanner/friandise` (`lib/scanner/fiche-lists.ts`) : Top 10 et Moins bien notées prennent les fiches relues ou `ok`, non écartées, complètes (`meetsIndexRule`), 3 par marque. Moins bien notées s'arrête à 55. Dernières fiches ajoute tout vrai scan non écarté. `rejected` sort la fiche de toutes ces listes, sauf si elle est relue.
+
