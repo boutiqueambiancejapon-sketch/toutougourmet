@@ -2,9 +2,9 @@
 
 Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : pages les plus vues d'abord. `[x]` fait, `[~]` sauté avec la raison. Lancé par `deploy/tone-v2-batch.sh`.
 
-- [ ] `chien-mange-cafe-urgence`
-- [ ] `chien-mange-noix-macadamia-urgence`
-- [ ] `chien-mange-poireau-urgence`
+- [x] `chien-mange-cafe-urgence`
+- [x] `chien-mange-noix-macadamia-urgence`
+- [x] `chien-mange-poireau-urgence`
 - [ ] `chien-mange-chocolat-urgence`
 - [ ] `chien-peut-manger-noisettes`
 - [ ] `chien-mange-raisin-urgence`
