@@ -2,7 +2,7 @@ import { getBrandBySlug } from '@/data/brands'
 import { CONFIRMED_DISCOUNTS, type OfferSlug } from '@/data/partner-discounts'
 import { getPromoPage, promoPath } from '@/data/promo-codes'
 import { FREE_MONTHLY_SCANS } from '@/lib/scanner/config'
-import { button, divider, heading, label, linkItem, paragraph, renderEmail, siteUrl, smallPrint, type RenderedEmail } from './layout'
+import { button, divider, linkItem, paragraph, renderEmail, siteUrl, smallPrint, type RenderedEmail } from './layout'
 import { offerForMonth } from './monthly'
 import { accountRemindersEnabled } from './account-reminders'
 import { offerCard } from './offer-card'
@@ -10,8 +10,8 @@ import { offerCard } from './offer-card'
 // @cdc e-mails — suite de bienvenue, après l'e-mail du jour 0 (bienvenue ou guide) : J2 la
 // ration, J7 l'offre partenaire du moment (code interne j5 : les lignes déjà écrites en base et
 // les liens gardent ce nom ; même carte que la lettre, remise de data/partner-discounts.ts), J10
-// le scanner. Envoyée par scripts/welcome-sequence.ts, une fois par étape et par adresse. Même ton
-// que lib/emails/welcome.ts (tutoiement, phrases courtes). Rappels de compte : account-reminders.ts.
+// le scanner. Envoyée par scripts/welcome-sequence.ts, une fois par étape et par adresse. Voix de
+// Milo, le Shiba Inu mascotte (validée le 2026-11-04) : familier, un peu d'humour, faits exacts. Rappels de compte : account-reminders.ts.
 
 export const WELCOME_STEPS = ['j2', 'j5', 'j10'] as const
 export type WelcomeStep = (typeof WELCOME_STEPS)[number]
@@ -31,18 +31,17 @@ const reason = (): string =>
 
 export function rationEmail(unsubscribeUrl: string): RenderedEmail {
   return renderEmail({
-    subject: 'Calcule la ration de ton chien, au gramme près',
-    preheader: 'Son poids, son âge, son activité : le calculateur donne les grammes par jour.',
+    subject: 'Le paquet ne connaît pas ton chien',
+    preheader: 'Son poids, son âge, son activité : le calculateur donne les grammes par jour.',
     blocks: [
-      heading('Combien de grammes par jour pour ton chien ?', 1),
-      paragraph("La quantité imprimée sur le paquet vaut pour un chien moyen. Un chien stérilisé, âgé ou peu actif a besoin de moins, un chien sportif de plus."),
-      paragraph("Notre calculateur part de son poids, de son âge et de son activité, applique la formule NRC des besoins énergétiques et convertit le résultat en grammes de croquettes."),
+      paragraph('Salut,'),
+      paragraph("La dose imprimée sur le paquet vaut pour un chien moyen. Un chien stérilisé, âgé ou peu actif a besoin de moins, un sportif de plus. Moi, on a essayé de me mesurer ma ration, j'ai regardé ailleurs. Ton chien sera sûrement plus coopératif."),
+      paragraph('Notre calculateur part de son poids, de son âge et de son activité, et te donne les grammes par jour.'),
       button('Calculer sa ration', siteUrl('/outils/ration')),
-      paragraph('Deux outils vont avec :'),
-      linkItem('Son poids de forme', siteUrl('/outils/poids'), "Pour savoir s'il doit perdre ou prendre quelques kilos avant de fixer la ration."),
+      paragraph('Deux outils vont avec :'),
+      linkItem('Son poids de forme', siteUrl('/outils/poids'), "Pour savoir s'il doit perdre ou prendre quelques kilos."),
       linkItem('Le budget de sa gamelle', siteUrl('/outils/budget'), 'Le coût par mois selon la marque et son poids.'),
-      smallPrint('Avec un compte gratuit, la ration et le poids de ton chien restent enregistrés, et les outils se remplissent tout seuls.'),
-      paragraph("L'équipe Toutou Gourmet"),
+      paragraph('Milo'),
     ],
     unsubscribeUrl,
     reason: reason(),
@@ -65,13 +64,14 @@ export function offerEmail(unsubscribeUrl: string, date: Date): RenderedEmail {
     subject: discount ? `${name} : ${discount}` : `L'offre partenaire du moment : ${name}`,
     preheader: code ? `Avec le code ${code}. Mode d'emploi et conditions sur notre page.` : "Par notre lien, sans code à taper. Mode d'emploi et conditions sur notre page.",
     blocks: [
-      heading("L'offre partenaire du moment", 1),
-      paragraph("Une fois par mois, on choisit une offre parmi nos marques partenaires. On ne publie que des remises vérifiées : pas de code récupéré sur un site de bons plans."),
+      paragraph('Salut,'),
+      paragraph("Une fois par mois, je choisis une offre parmi nos marques partenaires. Je suis difficile, et pas seulement à table : on publie uniquement des remises vérifiées, jamais un code ramassé sur un site de bons plans."),
       ...(card ? [card] : []),
-      paragraph(code ? `Le code ${code} est déjà rattaché au lien. Le mode d'emploi pas à pas et les conditions sont sur notre page :` : "La remise passe par le lien, sans code à taper. Le mode d'emploi pas à pas et les conditions sont sur notre page :"),
-      linkItem(`Code promo ${name} : mode d'emploi`, siteUrl(promoPath(slug))),
+      paragraph(code ? `Le code ${code} est déjà rattaché au lien. Le mode d'emploi et les conditions sont sur notre page :` : "La remise passe par le lien, sans code à taper. Le mode d'emploi et les conditions sont sur notre page :"),
+      linkItem(`Code promo ${name} : mode d'emploi`, siteUrl(promoPath(slug))),
       linkItem('Toutes les offres de nos partenaires', siteUrl('/codes-promo')),
-      paragraph("L'équipe Toutou Gourmet"),
+      smallPrint("Lien partenaire : on touche une commission si tu commandes, ça ne change rien à ton prix."),
+      paragraph('Milo'),
     ],
     unsubscribeUrl,
     reason: reason(),
@@ -80,20 +80,18 @@ export function offerEmail(unsubscribeUrl: string, date: Date): RenderedEmail {
 
 export function scannerEmail(unsubscribeUrl: string): RenderedEmail {
   return renderEmail({
-    subject: 'Que valent les croquettes de ton chien ? Note sur 100',
-    preheader: "Croquettes, pâtées, friandises : scanne le code-barres, la note sur 100 s'affiche.",
+    subject: 'Que valent ses croquettes ? Note sur 100',
+    preheader: "Croquettes, pâtées, friandises : scanne le code-barres, la note sur 100 s'affiche.",
     blocks: [
-      heading('Que valent ses croquettes ?', 1),
-      paragraph("Le scanner lit la composition des croquettes, des pâtées et des friandises pour chien et leur donne une note sur 100, selon un barème publié."),
-      label('Comment ça marche'),
-      paragraph("Scanne le code-barres du paquet. Si le produit est déjà connu, la note s'affiche aussitôt, sans compte."),
-      paragraph(`Sinon, photographie l'étiquette : deux photos pour des croquettes ou une pâtée, une seule pour une friandise. Il faut un compte gratuit, ${FREE_MONTHLY_SCANS} analyses par photo par mois.`),
+      paragraph('Salut,'),
+      paragraph("Le scanner lit la composition des croquettes, des pâtées et des friandises, et leur donne une note sur 100, selon un barème publié. Je ne l'utilise pas : je refuse d'abord, je me renseigne après."),
+      paragraph(`Scanne le code-barres du paquet. Si le produit est déjà connu, la note s'affiche aussitôt, sans compte. Sinon, photographie l'étiquette, avec un compte gratuit (${FREE_MONTHLY_SCANS} analyses par photo par mois).`),
       button('Scanner un paquet', siteUrl('/scanner')),
       divider(),
       linkItem('Le classement des croquettes', siteUrl('/croquettes'), 'Les paquets déjà notés, du meilleur au moins bon.'),
       linkItem('Le classement des friandises', siteUrl('/croquettes/friandises'), 'Les friandises notées avec leur propre barème.'),
-      paragraph("C'est le dernier e-mail de bienvenue. Ensuite, un e-mail par mois, pas plus."),
-      paragraph("L'équipe Toutou Gourmet"),
+      paragraph("C'est mon dernier e-mail de bienvenue. Ensuite, c'est une lettre par mois, pas plus. Je ne suis pas du genre à insister, demande à ma gamelle."),
+      paragraph('Milo'),
     ],
     unsubscribeUrl,
     reason: reason(),

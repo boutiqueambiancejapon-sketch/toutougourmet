@@ -26,3 +26,11 @@ export type EmailLogState = 'sent' | 'failed' | 'simulated'
  * compte, les tests et le résumé envoyé au propriétaire.
  */
 export const CAPPED_KINDS: readonly EmailKind[] = ['guide', 'bienvenue', 'suite-j2', 'suite-j5', 'suite-j10', 'compte-j4', 'chien-j1', 'chien-j4', 'outil']
+
+/** Nom d'expéditeur de Milo, la mascotte. Les e-mails de sécurité du compte restent au nom du site. */
+export const MILO_SENDER = 'Milo, de Toutou Gourmet'
+const MILO_KINDS: readonly EmailKind[] = ['guide', 'bienvenue', 'suite-j2', 'suite-j5', 'suite-j10', 'compte-j4', 'chien-j1', 'chien-j4', 'outil', 'test']
+
+export function senderNameFor(kind: EmailKind, fallback: string): string {
+  return MILO_KINDS.includes(kind) ? MILO_SENDER : fallback
+}

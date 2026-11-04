@@ -1,9 +1,9 @@
-import { button, heading, linkItem, paragraph, renderEmail, siteUrl, type RenderedEmail } from './layout'
+import { button, linkItem, paragraph, renderEmail, siteUrl, type RenderedEmail } from './layout'
 
-// @cdc e-mails — e-mail de bienvenue après une inscription à la lettre (texte validé par le
-// propriétaire, repris tel quel, plus le lien vers tous les outils). Envoyé une fois par adresse.
+// @cdc e-mails — e-mail de bienvenue après une inscription à la lettre (voix de Milo, validée par le
+// propriétaire le 2026-11-04, plus le lien vers tous les outils). Envoyé une fois par adresse.
 
-export const WELCOME_SUBJECT = 'Bienvenue chez Toutou Gourmet : 3 choses à garder sous la main'
+export const WELCOME_SUBJECT = 'Salut, moi c\'est Milo'
 
 /** Les trois outils les plus utilisés (repris aussi par la dernière page du guide PDF). */
 export const WELCOME_TOOLS = [
@@ -15,15 +15,14 @@ export const WELCOME_TOOLS = [
 export function welcomeEmail(unsubscribeUrl: string): RenderedEmail {
   return renderEmail({
     subject: WELCOME_SUBJECT,
-    preheader: 'Un e-mail par mois, pas plus. En attendant, trois outils à garder sous la main.',
+    preheader: 'Je renifle tout, je refuse la moitié, et j\'ai un avis sur la gamelle de ton chien.',
     blocks: [
-      heading('Bienvenue chez Toutou Gourmet', 1),
-      paragraph("Merci de t'être inscrit. Tu recevras un e-mail par mois, pas plus : les nouveaux guides et les offres des marques partenaires quand elles valent le coup."),
-      paragraph('En attendant, trois outils que les maîtres utilisent le plus :'),
+      paragraph("Salut, moi c'est Milo, Shiba Inu et mascotte de Toutou Gourmet. Je renifle tout, je refuse la moitié de ce qu'on me sert, et j'ai donc un avis sur la gamelle de ton chien."),
+      paragraph("Merci de t'être inscrit. Je t'envoie quelques conseils les premiers jours, puis une lettre par mois avec les nouveaux guides et les offres qui valent le coup."),
+      paragraph('En attendant, trois outils à garder sous la patte :'),
       ...WELCOME_TOOLS.map((t) => linkItem(t.title, siteUrl(t.path), t.note)),
-      paragraph('Les autres outils calculent son âge en années humaines, son poids idéal et le budget de sa gamelle, font le bilan « bien nourri » et proposent un quiz.'),
-      button('Tous nos outils', siteUrl('/outils')),
-      paragraph("L'équipe Toutou Gourmet"),
+      button('Voir tous les outils', siteUrl('/outils')),
+      paragraph('Milo'),
     ],
     unsubscribeUrl,
     reason: "Tu reçois cet e-mail parce que tu t'es inscrit à la lettre de Toutou Gourmet.",

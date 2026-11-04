@@ -5,7 +5,7 @@
 // Chaque e-mail laisse une ligne dans analytics.email_log (empreinte, type, sujet, état), écrite en
 // arrière-plan : le journal ne bloque ni ne retarde jamais l'envoi (lib/server/email-log.ts).
 
-import type { EmailKind, EmailLogState } from '@/lib/emails/email-kinds'
+import { senderNameFor, type EmailKind, type EmailLogState } from '@/lib/emails/email-kinds'
 import { recordEmailSend } from './email-log'
 
 const API = 'https://api.brevo.com/v3/smtp/email'
@@ -42,7 +42,7 @@ async function deliver(mail: TransactionalEmail): Promise<EmailLogState> {
     method: 'POST',
     headers: { 'api-key': key, 'content-type': 'application/json', accept: 'application/json' },
     body: JSON.stringify({
-      sender: { email: senderEmail, name: process.env.BREVO_SENDER_NAME || 'Toutou Gourmet' },
+      sender: { email: senderEmail, name: senderNameFor(mail.kind, process.env.BREVO_SENDER_NAME || 'Toutou Gourmet') },
       to: [{ email: mail.to }],
       subject: mail.subject,
       textContent: mail.text,

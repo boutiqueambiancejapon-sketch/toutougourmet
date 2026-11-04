@@ -47,7 +47,7 @@ test('bienvenue : objet, liens des outils, désinscription, contact, version tex
   const unsub = buildUnsubscribeUrl('lecteur@example.com', SECRET)
   const mail = welcomeEmail(unsub)
   assert.equal(mail.subject, WELCOME_SUBJECT)
-  assert.equal(mail.subject, 'Bienvenue chez Toutou Gourmet : 3 choses à garder sous la main')
+  assert.equal(mail.subject, "Salut, moi c'est Milo")
   for (const path of ['/outils/ration', '/fiche-aliments-dangereux', '/scanner', '/outils', '/contact']) {
     assert.ok(mail.html.includes(`href="${SITE}${path}"`), `lien ${path} (html)`)
     assert.ok(mail.text.includes(`${SITE}${path}`), `lien ${path} (texte)`)
@@ -56,7 +56,7 @@ test('bienvenue : objet, liens des outils, désinscription, contact, version tex
   assert.ok(mail.text.includes(unsub), 'désinscription signée (texte)')
   assert.ok(mail.html.includes("Merci de t&#39;être inscrit") || mail.html.includes("Merci de t'être inscrit"))
   assert.ok(mail.html.includes('Pour nous écrire, passe par le formulaire de contact du site'))
-  assert.ok(mail.text.includes("L'équipe Toutou Gourmet"))
+  assert.ok(mail.text.includes('Milo'))
   assert.ok(!/<img/i.test(mail.html) || /src="https:\/\//.test(mail.html), 'images en URL absolues')
   assert.ok(mail.html.includes('max-width:600px'))
 })
