@@ -10,11 +10,11 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : pa
 - [x] `chien-mange-raisin-urgence`
 - [x] `chien-mange-os-poulet-urgence`
 - [x] `chien-mange-os-cuit-urgence`
-- [ ] `chien-peut-manger-banane`
-- [ ] `repas-frais-vs-croquettes-chien`
-- [ ] `chien-mange-xylitol-urgence`
-- [ ] `nourriture-berger-belge-malinois`
-- [ ] `chien-peut-manger-butternut-potiron`
+- [x] `chien-peut-manger-banane`
+- [x] `repas-frais-vs-croquettes-chien`
+- [x] `chien-mange-xylitol-urgence`
+- [x] `nourriture-berger-belge-malinois`
+- [x] `chien-peut-manger-butternut-potiron`
 - [ ] `chien-peut-manger-piment`
 - [ ] `chien-mange-ail-oignon-urgence`
 - [ ] `chien-peut-manger-miel`
