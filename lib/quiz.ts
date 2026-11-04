@@ -54,6 +54,9 @@ export function computeScores(answers: QuizAnswers): BrandScores {
   if (answers.age === 'adulte') { scores.dogChef += 1 }
   if (answers.age === 'chiot') { scores.franklin += 1 }
 
+  // @cdc partenaires — décision du propriétaire (2026-11-04) : à égalité, Dog Chef passe devant Elmut.
+  if (scores.dogChef > 0 && scores.dogChef === scores.elmut) scores.dogChef += 1
+
   return scores
 }
 

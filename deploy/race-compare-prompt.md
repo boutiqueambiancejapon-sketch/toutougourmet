@@ -1,4 +1,5 @@
 Tâche quotidienne : convertir 2 fiches races du site Toutou Gourmet (www.toutou-gourmet.com) au comparatif de marques `<BreedBrandCompare>`. Tu tournes sur le serveur, dans une copie de travail de la branche `v2` (le site en production). Tu ne touches JAMAIS à une autre branche.
+- Marques (décision du propriétaire, 2026-11-04) : repas frais, Dog Chef d'abord, Elmut ensuite ; croquettes, Franklin d'abord. Dès qu'un `pick` ou une marque en tête se justifie, c'est Dog Chef, sinon Franklin. Si la fiche dit que Dog Chef ne convient pas à ce chien, on ne le met pas en tête.
 
 ## Avant d'écrire
 1. Lire `CLAUDE.md`, le skill `boileau` (`.claude/skills/boileau/SKILL.md`) et l'entrée du 2026-11-03 de `DECISIONS.md` sur le comparatif des fiches races (règle des pastilles).
@@ -10,7 +11,7 @@ Les fichiers `content/blog/*.mdx` avec `categorySlug: "race"` qui ne contiennent
 
 ## Pour chaque fiche
 - Repère la section qui recommande des marques (souvent « Nos recommandations de marques pour … » ou un tableau de marques). Remplace-la par un H2 question naturelle (« Quelles marques pour un {race} ? ») suivi de `<BreedBrandCompare breed="…" weight="…">` avec un ou deux `<BrandGroup>` par profil et un `<BrandRow>` par marque citée.
-- Tout le contenu du comparatif vient de la fiche elle-même : raison (une phrase courte), mise en garde éventuelle, prix par jour seulement s'il est écrit dans la fiche, poids de référence de la fiche. Rien d'inventé. Pastilles selon la règle de DECISIONS.md : « tres-adapte » sans réserve, « adapte » avec une condition ou une mise en garde, « correct » quand la fiche dit « correct » ou « à vérifier ». `pick` sur la première marque recommandée par la fiche.
+- Tout le contenu du comparatif vient de la fiche elle-même : raison (une phrase courte), mise en garde éventuelle, prix par jour seulement s'il est écrit dans la fiche, poids de référence de la fiche. Rien d'inventé. Pastilles selon la règle de DECISIONS.md : « tres-adapte » sans réserve, « adapte » avec une condition ou une mise en garde, « correct » quand la fiche dit « correct » ou « à vérifier ». `pick` sur Dog Chef s'il figure dans la fiche, sinon sur la première marque recommandée.
 - Supprime les paragraphes, listes et tableaux qui faisaient doublon avec le comparatif, et tout lien partenaire en dehors du comparatif. Garde le reste de l'article intact (conseils, FAQ, sources), sans réécrire le ton.
 - NE PAS toucher : slug, `categorySlug`, `category`, `date`, doses, chiffres sourcés. `updatedAt` = date du jour.
 

@@ -54,12 +54,13 @@ interface Rule {
 }
 
 // Chaque raison renvoie à une ligne de data/brands.ts (pros, facts) : la citer, pas l'enrichir.
+// @cdc partenaires — décision du propriétaire (2026-11-04) : Dog Chef devant Elmut en repas frais, Franklin en croquettes.
 const RULES: Rule[] = [
   // Chiot : boosters Puppy de Dog Chef (pros), sachets prédosés de Dogfy (facts.strength)
   { slug: 'dog-chef', points: 5, when: (_, s) => s === 'chiot', reason: "Un booster Puppy s'ajoute aux repas des chiots, et la ration est recalculée quand son poids change." },
   { slug: 'dogfy-diet', points: 3, when: (_, s, z) => s === 'chiot' && z !== 'geant', reason: 'Sachets prédosés prêts à servir, avec un suivi nutritionnel gratuit.' },
   // Senior : Elmut et Dog Chef conseillés pour le chien senior (facts.bestFor)
-  { slug: 'elmut', points: 5, when: (_, s) => s === 'senior', reason: 'Conseillé dans notre fiche pour le chien senior : repas frais cuits sous vide à 90 °C, sans conservateur.' },
+  { slug: 'elmut', points: 3, when: (_, s) => s === 'senior', reason: 'Conseillé dans notre fiche pour le chien senior : repas frais cuits sous vide à 90 °C, sans conservateur.' },
   { slug: 'dog-chef', points: 4, when: (_, s) => s === 'senior', reason: "Un booster Senior s'ajoute à ses repas, et la ration suit son poids." },
   // Surpoids, stérilisé ou chien calme : ration calculée et recalculée (Dog Chef, Elmut)
   { slug: 'dog-chef', points: 6, when: (p) => Boolean(p.gainingWeight), reason: 'Portions recalculées quand son poids change : utile pour un chien qui prend du poids.' },
@@ -75,7 +76,7 @@ const RULES: Rule[] = [
   { slug: 'ultra-premium-direct', points: 2, when: (p, s) => s === 'adulte' && !p.gainingWeight && !p.sterilized, reason: 'Croquettes vendues en direct, environ 3 à 5 € le kg, pour un chien adulte sans souci particulier.' },
   // Repères par défaut : une seule source de viande (Franklin), repas frais dosés (Dog Chef)
   { slug: 'franklin', points: 1, when: (_, s) => s !== 'senior', reason: 'Une seule source de viande par recette, pratique si son ventre est sensible.' },
-  { slug: 'dog-chef', points: 1, when: () => true, reason: 'Repas frais livrés gratuitement, ration calculée sur son profil.' },
+  { slug: 'dog-chef', points: 3, when: () => true, reason: 'Repas frais livrés gratuitement, ration calculée sur son profil.' },
   { slug: 'dogfy-diet', points: 1, when: (p, _, z) => !p.gainingWeight && z !== 'geant', reason: 'Sachets prédosés prêts à servir, avec un suivi nutritionnel gratuit.' },
 ]
 

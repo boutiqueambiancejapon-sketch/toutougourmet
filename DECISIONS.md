@@ -204,3 +204,6 @@ Précision du propriétaire (2026-11-04) sur le ton des articles : informatif, i
 - Effet connu : une IPv4 partagée (4G, Wi-Fi d'hôtel) masque aussi les autres visiteurs de cette adresse pendant 12 h au plus. Le cookie reste réservé au propriétaire : la politique de confidentialité ne change pas pour les visiteurs.
 - La barre d'une marque lève, à la demande du propriétaire, l'interdit « races » et « offre déjà sur la page » de la carte des conversions : elle s'efface dès que le bloc d'offre arrive, jamais deux demandes à l'écran. Urgences, aliments, santé et maladies restent exclus.
 - Fiche race : la barre suit toujours la marque `pick`, même en rupture (décision du propriétaire, audit annulé) ; la ligne dit alors la rupture. Duels à deux marques nommées : pas de marque principale, barre à deux boutons inchangée.
+
+## 2026-11-04 : Dog Chef devant Elmut
+Décision du propriétaire : Dog Chef paie plus vite. Repas frais, Dog Chef d'abord, Elmut ensuite ; croquettes, Franklin d'abord. Appliqué au `pick` des fiches races (17 pages), au test, aux offres du compte, à l'ordre des marques et aux consignes de nuit. La rotation des offres reste. Point signalé : la page À propos affirme que les avis ne dépendent d'aucune relation commerciale.

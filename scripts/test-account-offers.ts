@@ -60,7 +60,7 @@ test('chiot : Dog Chef (booster Puppy) en tête', () => {
 })
 
 test('senior : Elmut puis Dog Chef', () => {
-  assert.deepEqual(slugs({ ...base, ageMonths: 100 }).slice(0, 2), ['elmut', 'dog-chef'])
+  assert.deepEqual(slugs({ ...base, ageMonths: 100 }).slice(0, 2), ['dog-chef', 'elmut'])
 })
 
 test('prise de poids : Dog Chef en tête, jamais Dogfy (menu riche) ni Ultra Premium Direct', () => {

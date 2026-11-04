@@ -10,6 +10,7 @@ Tâche quotidienne : rédiger UN nouvel article pour Toutou Gourmet (www.toutou-
 - Jamais de référence façon article scientifique dans le texte : pas de « (Noble et al., 2017) », d'auteur, de revue, de DOI ni de PMID. On écrit « une étude britannique » ou « les vétérinaires conseillent », et les références vont seulement dans « Sources » en fin d'article, si besoin. Une affirmation de santé reste vérifiée à une source sérieuse. Plus court, jamais moins vrai.
 - 1 000 à 1 200 mots en général. FAQ de 4 à 6 questions courtes.
 - Produit cité : partir de sa page officielle. Pas de conclusion tirée d'une estimation maison.
+- Marques (décision du propriétaire, 2026-11-04) : repas frais, Dog Chef d'abord, Elmut ensuite ; croquettes, Franklin d'abord. Dès qu'un `pick` ou une marque en tête se justifie, c'est Dog Chef, sinon Franklin. Si la fiche dit que Dog Chef ne convient pas à ce chien, on ne le met pas en tête.
 
 ## Avant d'écrire
 1. Lire `CLAUDE.md` et `PROGRESS.md`.

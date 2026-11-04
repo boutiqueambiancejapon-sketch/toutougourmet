@@ -11,6 +11,7 @@ Tâche quotidienne : réécrire et optimiser 2 articles existants du site Toutou
 - 1 000 à 1 200 mots en général. FAQ de 4 à 6 questions courtes.
 - Produit cité : partir de sa page officielle. Pas de conclusion tirée d'une estimation maison.
 - Une réécriture rend l'article plus simple et plus court : elle n'ajoute ni tableau de calcul ni chiffres. Déplace les références scientifiques du texte, comme « (Auteur et al., 2019) », vers « Sources » en fin d'article, sections sécurité comprises. Tu peux retirer les chiffres inutiles au lecteur, sauf dans les sections sécurité. Les règles ci-dessous sur le tableau par gabarit et la FAQ de 8 questions ne valent que pour une section sécurité où elles aident vraiment.
+- Marques (décision du propriétaire, 2026-11-04) : repas frais, Dog Chef d'abord, Elmut ensuite ; croquettes, Franklin d'abord. Dès qu'un `pick` ou une marque en tête se justifie, c'est Dog Chef, sinon Franklin. Si la fiche dit que Dog Chef ne convient pas à ce chien, on ne le met pas en tête.
 
 ## Avant d'écrire
 1. Lire `CLAUDE.md` et `PROGRESS.md`.
