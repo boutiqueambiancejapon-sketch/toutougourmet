@@ -151,6 +151,6 @@ Objectif : `dashboard.toutou-gourmet.com`, nos chiffres à nous (actions des vis
 
 - [x] Consignes reprises des tâches cloud dans `deploy/sites/article-prompts/`
 - [x] `write-articles.sh` + `site-articles.{service,timer}` : 1 article par site à la suite, alerte en cas d'échec
-- [ ] Essai réel de chaque site depuis le serveur, un à la fois
-- [ ] Couper chaque tâche cloud après son premier article réussi
-- [ ] Installer la minuterie (0 h 37) avant de couper la dernière tâche
+- [x] Essai réel de chaque site depuis le serveur, un à la fois
+- [x] Couper chaque tâche cloud après son premier article réussi
+- [x] Installer la minuterie (0 h 37) avant de couper la dernière tâche
