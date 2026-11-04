@@ -6,8 +6,7 @@ import { brevoKey, listId } from './brevo-newsletter'
 
 const API = 'https://api.brevo.com/v3'
 const TIMEOUT_MS = 6_000
-export const PAGE_SIZE = 50
-/** Recherche et export parcourent la liste par blocs de 500, 5 000 contacts au plus. */
+/** Export et CRM parcourent la liste par blocs de 500, 5 000 contacts au plus. */
 const SCAN_BLOCK = 500
 const SCAN_MAX = 5_000
 
@@ -85,25 +84,6 @@ async function scanAll(key: string, list: number): Promise<{ count: number; rows
   return { count: first.count, rows, truncated: first.count > SCAN_MAX }
 }
 
-/** Une page de 50. Avec `query` : filtre insensible à la casse sur l'adresse, côté serveur. */
-export async function listSubscribers(page: number, query: string): Promise<SubscribersResult> {
-  const c = config()
-  if (!c) return { ok: false, reason: 'not-configured' }
-  try {
-    if (!query) {
-      const block = await readBlock(c.key, c.list, (page - 1) * PAGE_SIZE, PAGE_SIZE)
-      return { ok: true, total: block.count, matched: block.count, rows: block.rows, truncated: false }
-    }
-    const all = await scanAll(c.key, c.list)
-    const needle = query.toLowerCase()
-    const hits = all.rows.filter((s) => s.email.toLowerCase().includes(needle))
-    const rows = hits.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
-    return { ok: true, total: all.count, matched: hits.length, rows, truncated: all.truncated }
-  } catch (err) {
-    return failed(err)
-  }
-}
-
 /** Pour l'export CSV : toute la liste. */
 export async function allSubscribers(): Promise<SubscribersResult> {
   const c = config()
@@ -116,7 +96,7 @@ export async function allSubscribers(): Promise<SubscribersResult> {
   }
 }
 
-export type LetterStatus = { state: 'subscribed' | 'unsubscribed' | 'absent'; welcomeSent: boolean } | { state: 'unknown' }
+export type LetterStatus = { state: 'subscribed' | 'unsubscribed' | 'absent'; welcomeSent: boolean; createdAt: string | null } | { state: 'unknown' }
 
 /** Une adresse dans la liste de la lettre, pour la fiche d'un compte. Brevo en panne ou absent : « unknown », sans lever d'erreur. */
 export async function letterStatusOf(email: string): Promise<LetterStatus> {
@@ -128,12 +108,13 @@ export async function letterStatusOf(email: string): Promise<LetterStatus> {
       cache: 'no-store',
       signal: AbortSignal.timeout(TIMEOUT_MS),
     })
-    if (res.status === 404) return { state: 'absent', welcomeSent: false }
+    if (res.status === 404) return { state: 'absent', welcomeSent: false, createdAt: null }
     if (!res.ok) throw new BrevoReadError(`status=${res.status}`)
     const contact = (await res.json()) as BrevoContact & { listIds?: number[] }
     const welcomeSent = contact.attributes?.WELCOME_SENT === true
-    if (contact.emailBlacklisted === true || (contact.listUnsubscribed ?? []).includes(c.list)) return { state: 'unsubscribed', welcomeSent }
-    return { state: (contact.listIds ?? []).includes(c.list) ? 'subscribed' : 'absent', welcomeSent }
+    const createdAt = contact.createdAt ?? null
+    if (contact.emailBlacklisted === true || (contact.listUnsubscribed ?? []).includes(c.list)) return { state: 'unsubscribed', welcomeSent, createdAt }
+    return { state: (contact.listIds ?? []).includes(c.list) ? 'subscribed' : 'absent', welcomeSent, createdAt }
   } catch (err) {
     console.error('[inscrits] lecture d’un contact Brevo', err instanceof BrevoReadError ? err.message : err instanceof Error ? err.name : 'erreur')
     return { state: 'unknown' }

@@ -5,9 +5,8 @@ import { getPool } from './db'
 // d'origine : analytics.signup_sources, vidée à la confirmation de l'adresse (signup-source.ts) et
 // peut-être retirée plus tard ; sans ligne ou sans table, le compte est « non attribué ».
 // Les journaux ne gardent que le code d'erreur PostgreSQL, jamais l'adresse ni le chien cherchés.
-// Noms des chiens : lus pour la liste affichée seulement, jamais pour l'export ni le suivi (allAccounts).
+// Noms des chiens : lus pour la liste affichée seulement, jamais pour l'export ni le suivi (allAccounts sans argument).
 
-export const ACCOUNTS_PAGE_SIZE = 50
 const EXPORT_MAX = 20_000
 
 export interface AccountRow {
@@ -79,10 +78,6 @@ async function read(query: string, limit: number, offset: number, withNames: boo
   }
 }
 
-export function listAccounts(page: number, query: string): Promise<AccountsResult> {
-  return read(query, ACCOUNTS_PAGE_SIZE, (page - 1) * ACCOUNTS_PAGE_SIZE, true)
-}
-
-export function allAccounts(): Promise<AccountsResult> {
-  return read('', EXPORT_MAX, 0, false)
+export function allAccounts(withNames = false): Promise<AccountsResult> {
+  return read('', EXPORT_MAX, 0, withNames)
 }

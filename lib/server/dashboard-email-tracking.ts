@@ -1,5 +1,5 @@
 import type { Pool } from 'pg'
-import { buildTrackingRows, filterTracking, type KnownSubscriber, type LegacyLine, type LogLine, type TrackingRow, type TrackingSend } from '@/lib/dashboard/email-tracking'
+import { buildTrackingRows, type KnownSubscriber, type LegacyLine, type LogLine, type TrackingRow, type TrackingSend } from '@/lib/dashboard/email-tracking'
 import { allAccounts } from './dashboard-accounts'
 import { allSubscribers } from './dashboard-subscribers'
 import { getPool } from './db'
@@ -10,7 +10,6 @@ import { emailHash, emailHashSecret } from './email-hash'
 // ici, côté serveur, en calculant le HMAC des adresses connues ; aucune adresse n'est écrite. La
 // lettre mensuelle part en campagne Brevo : elle n'a pas de ligne par adresse, la vue le dit.
 
-export const TRACKING_PAGE_SIZE = 50
 const LOG_LIMIT = 50_000
 
 type Problem = 'no-database' | 'unreadable'
@@ -37,11 +36,11 @@ const DRY_SUBSCRIBERS: KnownSubscriber[] = [
   { email: 'lettre-essai@example.invalid', createdAt: '2026-11-02T18:05:00+01:00', source: 'Nouvelle inscription newsletter', status: 'actif', welcomeSent: true },
 ]
 
-async function load(): Promise<{ ok: true; rows: TrackingRow[]; notices: TrackingNotice[] } | { ok: false; reason: Problem }> {
+async function load(withNames = false): Promise<{ ok: true; rows: TrackingRow[]; notices: TrackingNotice[] } | { ok: false; reason: Problem }> {
   const pool = getPool()
   if (!pool) return { ok: false, reason: 'no-database' }
   const dry = process.env.BREVO_DRY_RUN === '1'
-  const [subscribers, accounts] = await Promise.all([dry ? null : allSubscribers(), allAccounts()])
+  const [subscribers, accounts] = await Promise.all([dry ? null : allSubscribers(), allAccounts(withNames)])
   const listOk = dry || subscribers?.ok === true
   const listComplete = dry || (subscribers?.ok === true && !subscribers.truncated)
   try {
@@ -74,18 +73,8 @@ async function load(): Promise<{ ok: true; rows: TrackingRow[]; notices: Trackin
   }
 }
 
-export async function listEmailTracking(page: number, query: string): Promise<TrackingResult> {
-  const res = await load()
-  if (!res.ok) return res
-  const hits = filterTracking(res.rows, query)
-  return {
-    ok: true,
-    total: res.rows.length,
-    matched: hits.length,
-    rows: hits.slice((page - 1) * TRACKING_PAGE_SIZE, page * TRACKING_PAGE_SIZE),
-    notices: res.notices,
-  }
-}
+/** Pour le CRM : toutes les adresses, avec le nom des chiens et l'identifiant des comptes. */
+export const loadContactRows = () => load(true)
 
 /** Pour l'export CSV : toutes les lignes. */
 export async function allEmailTracking(): Promise<TrackingResult> {

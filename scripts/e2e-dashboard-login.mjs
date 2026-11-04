@@ -35,7 +35,7 @@ const check = async (name, fn) => {
   console.log(`ok - ${name}`)
 }
 
-const PAGES = ['', '/trafic', '/trafic/direct', '/trafic/acquisition', '/trafic/pages', '/visiteurs', '/conversions', '/robots', '/contenu', '/emails', '/serveur', '/scanner', '/securite', '/emails/lettre', '/emails/hebdo', '/emails/bienvenue', '/emails/suite/j2', '/emails/relances/compte-j4', '/conversions/inscrits', '/conversions/comptes/inconnu', '/fiches/1'].map((p) => `/tableau-de-bord${p}`)
+const PAGES = ['', '/trafic', '/trafic/direct', '/trafic/acquisition', '/trafic/pages', '/crm', '/crm/contacts', '/crm/contacts/0123456789abcdef', '/visiteurs', '/conversions', '/robots', '/contenu', '/emails', '/serveur', '/scanner', '/securite', '/emails/lettre', '/emails/hebdo', '/emails/bienvenue', '/emails/suite/j2', '/emails/relances/compte-j4', '/conversions/inscrits', '/conversions/comptes/inconnu', '/fiches/1'].map((p) => `/tableau-de-bord${p}`)
 const DATA = ['/tableau-de-bord/direct', '/tableau-de-bord/conversions/inscrits/export', '/tableau-de-bord/conversions/inscrits/export?liste=comptes', '/tableau-de-bord/conversions/inscrits/export?liste=envois']
 
 const raw = (path, cookie, init = {}) => fetch(BASE + path, { redirect: 'manual', ...init, headers: { ...(cookie ? { cookie } : {}), ...init.headers } })

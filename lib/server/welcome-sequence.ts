@@ -95,6 +95,26 @@ export function stepForAddress(facts: AddressFacts, { today, start, reminders }:
   return dueStep(daysSince(contact.createdAt, today), sent, steps)
 }
 
+/** Première étape d'un parcours encore à venir : jamais avant la dernière partie, jamais au-delà du délai de grâce. */
+function upcoming(steps: readonly SequenceStep[], base: string, sent: ReadonlySet<SequenceStep>, today: string): { step: SequenceStep; inDays: number } | null {
+  const days = daysSince(base, today)
+  const after = steps.findLastIndex((s) => sent.has(s)) + 1
+  for (const step of steps.slice(after)) {
+    if (days <= SEQUENCE_DAY[step] + GRACE_DAYS) return { step, inDays: Math.max(0, SEQUENCE_DAY[step] - days) }
+  }
+  return null
+}
+
+/** Prochain e-mail prévu pour une adresse, avec le nombre de jours d'attente. Mêmes parcours que stepForAddress. */
+export function nextStepFor(facts: AddressFacts, { today, start, reminders }: PlanOptions): { step: SequenceStep; inDays: number } | null {
+  const { contact, account, sent } = facts
+  if (facts.optedOut || contact?.blacklisted) return null
+  const dog = reminders && account?.verified && !account.hasDog && afterStart(account.createdAt, start) ? upcoming(DOG_STEPS, account.createdAt, sent, today) : null
+  const suite = contact && afterStart(contact.createdAt, start) ? upcoming(reminders && !account ? SUITE_WITH_INVITE : WELCOME_STEPS, contact.createdAt, sent, today) : null
+  if (dog && suite) return dog.inDays <= suite.inDays ? dog : suite
+  return dog ?? suite
+}
+
 /** Vrai si le contact s'est inscrit le jour de départ ou après (`start` : AAAA-MM-JJ, Paris). */
 export function afterStart(createdAt: string, start: string): boolean {
   return parisDate(new Date(createdAt)) >= start
