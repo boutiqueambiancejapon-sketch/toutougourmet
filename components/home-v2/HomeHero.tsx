@@ -28,7 +28,7 @@ export function HomeHero() {
         <RationQuick headingId="ration-accueil" />
       </div>
       <div className="tg-wiggle relative aspect-[3/2] w-full overflow-hidden rounded-hero [grid-area:photo] lg:aspect-[4/3] lg:self-end">
-        <Illustration slot="home-hero" alt="Trois chiens assis côte à côte, illustrations dessinées" fill priority sizes="(max-width: 1024px) 100vw, 560px" className="!rounded-none" />
+        <Illustration slot="home-hero" alt="Deux Cavaliers King Charles et un Shiba assis côte à côte" fill priority imageClassName="object-right" sizes="(max-width: 1024px) 100vw, 560px" className="!rounded-none" />
       </div>
     </section>
   )

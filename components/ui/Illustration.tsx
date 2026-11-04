@@ -26,6 +26,8 @@ interface IllustrationProps {
   /** Custom `sizes` attribute for next/image; falls back to a sensible default. */
   sizes?: string
   className?: string
+  /** Cadrage de l'image en mode fill (« object-right » : sujet à droite du fichier). */
+  imageClassName?: string
   /** Override overlay intensity when placing over busy hero photos */
   overlayIntensity?: 'soft' | 'normal'
 }
@@ -47,6 +49,7 @@ export function Illustration({
   fill = false,
   sizes = DEFAULT_SIZES,
   className,
+  imageClassName,
 }: IllustrationProps) {
   // Résolution : manifest principal, puis registre additionnel
   // (data/extra-image-slots.ts) pour les slots featured déclarés hors du gros
@@ -89,7 +92,7 @@ export function Illustration({
     >
       {hasRealImage ? (
         fill ? (
-          <Image src={src} alt={alt} fill priority={priority} fetchPriority={fetchPriority} sizes={sizes} className="object-cover" />
+          <Image src={src} alt={alt} fill priority={priority} fetchPriority={fetchPriority} sizes={sizes} className={cn('object-cover', imageClassName)} />
         ) : (
           <Image
             src={src}
