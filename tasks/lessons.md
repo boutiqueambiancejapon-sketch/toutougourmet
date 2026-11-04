@@ -23,3 +23,4 @@ Règle : `npm run build > log 2>&1 || { tail log; exit 1; }` avant tout commit, 
 ## 2026-11-04 — Le serveur a gelé puis redémarré
 - Vers 10 h 45 à Paris, plus aucun journal jusqu'au redémarrage de 10 h 51. Aucune trace de manque de mémoire ni d'arrêt propre : cause non prouvée. À ce moment tournaient la réécriture par lots, un chantier en parallèle et leurs constructions du site, en plus de 7 serveurs Next.
 - Règle : une seule construction à la fois sur ce serveur. `tone-v2-batch.sh` attend qu'aucune autre ne tourne et qu'il reste 4 Go libres.
+- `pgrep -f "next build"` se trouve lui-même dans la commande qui le lance : écrire `pgrep -f '/\.bin/nex[t] build'`.
