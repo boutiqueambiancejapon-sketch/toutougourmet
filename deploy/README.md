@@ -207,6 +207,14 @@ Un compte hors liste ne reçoit pas J2, J7 ni J10 : l'inscription au compte n'a 
 - adresse désinscrite exclue : liste Brevo (liste noire ou `listUnsubscribed`), `analytics.email_optouts` (notre lien, y compris pour un compte hors liste), et lecture du contact Brevo juste avant chaque rappel `chien-*` ;
 - au plus 300 envois par jour ; contacts en liste noire Brevo ignorés ; journal sans adresse (repère `#empreinte`).
 
+### Journal du scanner
+
+`app/api/scanner/route.ts` et `app/api/scanner/code/route.ts` écrivent une ligne par scan dans `analytics.scanner_events` (date, type, résultat en liste fermée, compte et fiche quand il y en a), en arrière-plan : table absente ou base lente, la réponse ne change pas et le journal du service garde seulement `[scanner-events] écriture impossible, code …`. Écran : `/tableau-de-bord/scanner`. Purge à 90 jours par `toutou-purge`. Rien n'est écrit pour une photo envoyée sans compte, ni pour un code invalide ou un dépassement de débit sur la route ouverte `code` : un robot ne peut pas remplir la table.
+
+```bash
+sudo -u postgres psql -d toutou -f db/analytics.sql
+```
+
 ### Journal des envois
 
 Chaque e-mail individuel passant par `lib/server/mailer.ts` (guide, bienvenue, suite, rappels, résultat d'outil, compte, tests, résumé hebdomadaire) écrit une ligne dans `analytics.email_log` : empreinte HMAC, type, sujet, état (`sent`, `failed`, `simulated` avec `MAIL_LOG_ONLY`), date. L'écriture part en arrière-plan : table absente ou base lente ne bloquent aucun envoi, l'erreur va au journal avec son code seul. Vue : Conversions, « Voir les adresses inscrites », onglet Envois (recherche et export CSV). La lettre mensuelle part en campagne Brevo : pas de ligne par adresse. Conservation : `toutou-purge` retire `email_log`, `guide_sends` et `welcome_sends` après 24 mois ; `email_optouts` reste.
