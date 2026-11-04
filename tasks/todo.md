@@ -154,3 +154,20 @@ Objectif : `dashboard.toutou-gourmet.com`, nos chiffres à nous (actions des vis
 - [x] Essai réel de chaque site depuis le serveur, un à la fois
 - [x] Couper chaque tâche cloud après son premier article réussi
 - [x] Installer la minuterie (0 h 37) avant de couper la dernière tâche
+
+## Réputation et partenaires (audit du 2026-11-04, validé par le propriétaire)
+
+Rapport hors dépôt : `~/audits/audit-partenaires-2026-11-04.md`.
+
+- [ ] Retirer les fausses étoiles et les bandeaux sans fondement
+- [ ] Sortir Franklin et Dog Chef des recommandations sur les 4 pages maladie
+- [ ] Retirer Fidelis des boutons tant que la rupture dure
+- [ ] Sortir Dogfy des mises en avant et de la rotation des offres
+- [ ] Corriger les chiffres, ajouter les rappels aux fiches, méthode de notation publiée
+
+## Suivi des e-mails et nouvelles relances (2026-11-04)
+
+- [ ] Journal des envois et vue « qui reçoit quoi et quand » dans le tableau de bord
+- [ ] Calendrier sans compte : J0, J2 ration, J4 compte, J7 offre, J10 scanner
+- [ ] Compte sans chien : J1 et J4, arrêt dès qu'un chien est ajouté
+- [ ] Textes et aperçus montrés au propriétaire avant tout envoi des nouveaux e-mails
