@@ -158,6 +158,17 @@ export function extractTldr(rawContent: string): string[] {
 }
 
 // Supprime la section TL;DR du contenu MDX pour éviter le doublon
+/**
+ * Classement d'un article : placé avant le `## TL;DR`, il s'affiche avant le résumé ; juste après, après lui.
+ * Il est sorti du MDX, car le résumé est rendu à part et stripTldr effacerait ce qui suit le TL;DR.
+ */
+export function extractClassement(content: string): { segment: string | null; beforeTldr: boolean; content: string } {
+  const tag = /^<Classement segment="([^"]+)" \/>\s*$/m.exec(content)
+  if (!tag) return { segment: null, beforeTldr: false, content }
+  const tldr = content.search(/^##?\s*TL;DR/im)
+  return { segment: tag[1], beforeTldr: tldr >= 0 && tag.index < tldr, content: content.replace(tag[0], '') }
+}
+
 export function stripTldr(content: string): string {
   return content.replace(/##?\s*TL;DR[^\n]*\n([\s\S]*?)(?=\n##)/i, '')
 }

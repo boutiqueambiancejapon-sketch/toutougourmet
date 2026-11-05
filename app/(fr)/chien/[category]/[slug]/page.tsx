@@ -6,6 +6,7 @@ import {
   getArticleBySlug,
   extractTldr,
   stripTldr,
+  extractClassement,
   estimateReadTime,
   extractFaqs,
 } from '@/lib/mdx'
@@ -25,6 +26,8 @@ import { getArticleSlot } from '@/components/blog/blog-categories'
 import { getSlotPath, resolveSlot } from '@/data/image-utils'
 import { DEFAULT_AUTHOR } from '@/data/authors'
 import { articleMdxComponents } from '@/components/mdx/article-components'
+import { Classement } from '@/components/article/Classement'
+import type { SegmentSlug } from '@/lib/scanner/rankings'
 import rehypeAutolinkTerms from '@/lib/rehype-autolink-terms'
 import { AUTOLINK_DICTIONARY } from '@/lib/autolink-dictionary'
 import remarkGfm from 'remark-gfm'
@@ -224,6 +227,8 @@ export default async function ArticleCategoryPage({ params }: Props) {
     ...(urgent ? { UrgentTldr: () => <ArticleTldr items={tldrItems} />, BrandCTA: () => null, BreedBrandCompare: () => null } : {}),
   }
 
+  const classement = extractClassement(content)
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
@@ -249,9 +254,11 @@ export default async function ArticleCategoryPage({ params }: Props) {
         allArticles={allArticles}
         currentSlug={slug}
         categorySlug={category}
+        classementBefore={classement.segment && classement.beforeTldr ? <Classement segment={classement.segment as SegmentSlug} /> : undefined}
+        classementAfter={classement.segment && !classement.beforeTldr ? <Classement segment={classement.segment as SegmentSlug} /> : undefined}
       >
         <MDXRemote
-          source={stripTldr(content)}
+          source={stripTldr(classement.content)}
           components={mdxComponents}
           options={{
             mdxOptions: {
