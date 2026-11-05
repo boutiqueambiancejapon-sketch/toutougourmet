@@ -15,6 +15,7 @@ import { ArticleSignupInvite } from '@/components/cro/ArticleSignupInvite'
 import { ToolCta } from '@/components/article/ToolCta'
 import { HealthPicks } from '@/components/article/HealthPicks'
 import { ProductPicks, ProductPick } from '@/components/article/ProductPicks'
+import { Classement } from '@/components/article/Classement'
 import { ArticleFormula } from '@/components/article/Formula'
 import { GuideTop } from '@/components/guide/GuideTop'
 import { SitterSheetCta } from '@/components/garde/SitterSheetCta'
@@ -35,6 +36,7 @@ export const articleMdxComponents = {
   BrandCTA,
   HealthPicks,
   ProductPicks, ProductPick,
+  Classement,
   BreedBrandCompare, BrandGroup, BrandRow,
   BodyImage,
   ArticleSignupInvite,
