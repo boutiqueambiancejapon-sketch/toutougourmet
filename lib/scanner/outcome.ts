@@ -22,10 +22,12 @@ export function classifyExtraction(label: ExtractedLabel, baremes: boolean = BAR
   const doubts = label.champsDouteux ?? []
   const unreliable = doubts.includes('ingredients') || doubts.filter((d) => d !== 'ingredients').length >= 3
   if (label.lisibilite === 'floue' && ((ingredients === 0 && !hasAnalysis) || unreliable)) return { kind: 'reject', code: 'blurry' }
-  if (!label.estUneEtiquette || label.typeImage === 'autre') return { kind: 'reject', code: 'not_a_label' }
+  // Nouveaux barèmes : typeProduit décide. Test réel du 2026-11-05 : Gemini répond typeImage « autre » pour les huiles.
+  const type = baremes ? label.typeProduit ?? null : null
+  const known = type !== null && type !== 'autre' && type !== 'indetermine'
+  if (!label.estUneEtiquette || (label.typeImage === 'autre' && !known)) return { kind: 'reject', code: 'not_a_label' }
   if (label.typeImage === 'aliment-chat' || (label.espece === 'chat' && label.typeImage !== 'aliment-chien')) return { kind: 'reject', code: 'cat_food' }
   // Nouveaux barèmes : seul un aliment à noter a besoin de l'analyse.
-  const type = baremes ? label.typeProduit ?? null : null
   if (type === 'autre') return { kind: 'reject', code: 'not_a_label' }
   const needsAnalysis = type ? type === 'aliment' && !label.alimentVeterinaire : label.typeImage !== 'friandise'
   const missing: PhotoPart[] = []
