@@ -14,7 +14,7 @@ export function BrandGlossary() {
           <div key={lettre} className="flex flex-col gap-1">
             <p className="m-0 font-display text-lg font-black text-ink">{lettre}</p>
             {marques.map((m) => (
-              <Link key={m.href} href={m.href} className="py-1 text-[15px] font-semibold text-orange-ink underline underline-offset-2">{`Avis ${m.nom}`}</Link>
+              <Link key={m.href} href={m.href} className="py-1 text-[15px] font-semibold text-orange-ink underline underline-offset-2">{m.nom}</Link>
             ))}
           </div>
         ))}
