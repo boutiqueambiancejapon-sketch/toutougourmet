@@ -1,6 +1,7 @@
 import { cache } from 'react'
 import { and, eq, isNotNull, or, sql } from 'drizzle-orm'
 import { foodAnalysis } from '@/db/schema'
+import { horsListes, NOM_CLASSEMENT, noteCourante } from '@/lib/scanner/baremes/fiche'
 import { buyLink, type BuyLink } from '@/lib/scanner/buy-link'
 import { isTherapeutic } from '@/lib/scanner/fiche-lists'
 import { foodNoun } from '@/lib/scanner/food-noun'
@@ -32,21 +33,23 @@ export const rankedRecipes = cache(async (): Promise<RankedRecipe[]> => {
     .where(and(isNotNull(foodAnalysis.score), sql`NOT ${foodAnalysis.discarded}`, or(eq(foodAnalysis.source, 'maxizoo'), eq(foodAnalysis.reviewed, true))))
   const best = new Map<string, RankedRecipe>()
   for (const r of rows) {
-    if (!r.brand || !r.product || r.score === null || isTherapeutic(r) || isSupplementName(r.product)) continue
     const label = r.extracted as ExtractedLabel
+    // Interrupteur éteint : la note et le détail en base. Allumé : compléments, huiles, vétérinaire et fiches sans note fiable sortent.
+    const { score, details } = noteCourante({ score: r.score, details: r.details as ScoreResult, extracted: label })
+    if (!r.brand || !r.product || score === null || isTherapeutic(r) || isSupplementName(r.product) || horsListes(details)) continue
     const key = recipeKey(r.brand, r.product)
     const seen = best.get(key)
-    if (seen && seen.score <= r.score) continue
+    if (seen && seen.score <= score) continue
     best.set(key, {
       key,
       slug: r.slug,
       brand: r.brand,
       name: recipeName(r.product),
-      noun: foodNoun(label, r.details as ScoreResult),
+      noun: details.bareme?.classement ? NOM_CLASSEMENT[details.bareme.classement] : foodNoun(label, details),
       ingredients: label.ingredients.map((i) => i.nom),
       fat: label.constituants.matieresGrasses,
       protein: label.constituants.proteines,
-      score: r.score,
+      score,
       image: r.image,
       buy: buyLink(r),
       updatedAt: r.updatedAt,

@@ -1,6 +1,7 @@
 import { cache } from 'react'
 import { eq, sql } from 'drizzle-orm'
 import { foodAnalysis, foodCheck, opffProduct, type FicheCheckStatus } from '@/db/schema'
+import { horsListes, NOM_CLASSEMENT, noteCourante } from '@/lib/scanner/baremes/fiche'
 import { foodNoun } from '@/lib/scanner/food-noun'
 import { isFicheComplete, type ListFiche } from '@/lib/scanner/fiche-lists'
 import { getDb, type Db } from './drizzle'
@@ -52,16 +53,19 @@ export const listFiches = cache(async (): Promise<ListFiche[]> => {
         .where(sql`NOT ${foodAnalysis.discarded} AND (${foodAnalysis.reviewed} OR ${foodAnalysis.scanCount} > 0 OR ${currentCheckStatus} = 'ok' OR ${foodAnalysis.source} = 'maxizoo')`),
       readJournal(d),
     ])
-    return rows.map(({ id, extracted, details, lastHistory, source, ...r }) => {
+    return rows.flatMap(({ id, extracted, details: enBase, lastHistory, source, ...base }) => {
+      const { score, details } = noteCourante({ score: base.score, details: enBase, extracted })
+      if (horsListes(details)) return []
+      const r = { ...base, score }
       const scans = [journal.get(id), lastHistory ? new Date(lastHistory) : null].filter((v): v is Date => !!v)
-      return {
+      return [{
         ...r,
         fromMaxiZoo: source === 'maxizoo',
         kind: details.kind === 'treat' ? 'treat' : 'complete',
-        noun: foodNoun(extracted, details),
+        noun: details.bareme?.classement ? NOM_CLASSEMENT[details.bareme.classement] : foodNoun(extracted, details),
         lastScanAt: scans.length ? new Date(Math.max(...scans.map((v) => v.getTime()))) : null,
         complete: isFicheComplete(extracted, r.score),
-      } satisfies ListFiche
+      } satisfies ListFiche]
     })
   } catch (err) {
     console.error('[scanner] listes de fiches indisponibles', err instanceof Error ? err.message : err)

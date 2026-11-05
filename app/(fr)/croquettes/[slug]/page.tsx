@@ -21,6 +21,9 @@ import { FicheBuy } from '@/components/scanner/fiche/FicheBuy'
 import { buyLink } from '@/lib/scanner/buy-link'
 import { FicheJsonLd } from '@/components/scanner/fiche/FicheJsonLd'
 import { FicheNutrition } from '@/components/scanner/fiche/FicheNutrition'
+import { FicheSimple } from '@/components/scanner/fiche/FicheSimple'
+import { SafetyAlerts } from '@/components/scanner/SafetyAlerts'
+import { sansDetail } from '@/lib/scanner/baremes/fiche'
 import { FicheVerdict } from '@/components/scanner/fiche/FicheVerdict'
 import { ProductPhoto } from '@/components/scanner/ProductPhoto'
 import { KindTag } from '@/components/scanner/treat/KindTag'
@@ -58,6 +61,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const noun = foodNoun(row.extracted, row.details)
   const name = [row.brand, row.product].filter(Boolean).join(' ') || NOUNS[noun].these
   const url = `${SITE}/croquettes/${row.slug}`
+  if (sansDetail(row.details)) return { title: { absolute: `${name}${row.score !== null ? ` : note ${row.score}/100` : ''}` }, description: row.details.notice ?? undefined, alternates: { canonical: url }, robots: { index: false, follow: true } }
   const what = treat ? 'premier ingrédient, part de viande, sucre, sel et additifs' : 'protéines et glucides sur matière sèche, premier ingrédient, additifs'
   return {
     title: { absolute: ficheTitle(row.brand, row.product, row.score, noun) },
@@ -77,6 +81,7 @@ export default async function CroquettePage({ params }: Params) {
   const row = await load((await params).slug)
   if (!row) notFound()
   const a = toScanAnalysis(row)
+  if (sansDetail(a.details)) return <FicheSimple a={a} name={[a.brand, a.product].filter(Boolean).join(' ') || 'Produit sans nom lisible'} />
   const treat = kindOf(a.details) === 'treat'
   const noun = foodNoun(a.label, a.details)
   const words = NOUNS[noun]
@@ -110,7 +115,7 @@ export default async function CroquettePage({ params }: Params) {
           </div>
         </header>
         <SourceNotice source={a.source} reviewed={row.reviewed} />
-        {a.details.treat ? <TreatAlerts alerts={a.details.treat.alerts} /> : null}
+        {a.details.alertes ? <SafetyAlerts alerts={a.details.alertes} /> : a.details.treat ? <TreatAlerts alerts={a.details.treat.alerts} /> : null}
         <AllergyAlert ingredients={a.label.ingredients.map((i) => i.nom)} />
       </div>
 

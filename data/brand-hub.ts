@@ -10,7 +10,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Elmut : notre avis en bref',
         paragraphs: [
           "Elmut est une bonne marque de repas frais d'après sa composition, avec une liste d'ingrédients très courte. Ses 5 recettes pour chien obtiennent de 90 à 93 sur 100 au barème du scanner : poulet, bœuf et dinde à 93, porc à 91, poisson à 90, avec une viande nommée en tête de liste.",
-          "Ces notes viennent des pages produit d'Elmut, lues le 5 novembre 2026. Sa fiche donne le rapport calcium/phosphore, de 1,1 à 1,4 selon la recette, et ne chiffre que le calcium et le phosphore ajoutés, sans leur teneur totale. La marque perd donc les 5 points de ce critère. Elmut est un partenaire, et le barème reste celui des autres marques.",
+          "Ces notes viennent des pages produit d'Elmut, lues le 5 novembre 2026. Sa fiche donne le rapport calcium/phosphore, de 1,1 à 1,4 selon la recette, et ne chiffre que le calcium et le phosphore ajoutés, sans leur teneur totale. Notre note ne peut donc pas vérifier ces deux teneurs elles-mêmes. Elmut est un partenaire, et le barème reste celui des autres marques.",
         ],
       },
       {

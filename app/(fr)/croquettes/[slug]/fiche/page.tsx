@@ -9,7 +9,9 @@ import { FicheCriteria } from '@/components/scanner/fiche/FicheCriteria'
 import { FicheIngredients } from '@/components/scanner/fiche/FicheIngredients'
 import { FicheStamp } from '@/components/scanner/fiche/FicheStamp'
 import { FichePrintBottom } from '@/components/scanner/fiche/FichePrintBottom'
+import { SafetyAlerts } from '@/components/scanner/SafetyAlerts'
 import { openDataCredit } from '@/components/scanner/SourceNotice'
+import { sansDetail } from '@/lib/scanner/baremes/fiche'
 import { TreatAlerts } from '@/components/scanner/treat/TreatAlerts'
 import { nounWords } from '@/lib/scanner/food-noun'
 import { getDb } from '@/lib/server/drizzle'
@@ -64,11 +66,16 @@ export default async function FichePage({ params }: Params) {
           <p className="m-0 rounded-box bg-amber-bg p-3 text-sm text-amber-ink print:p-2 print:text-[10px]">{`Absent de l'étiquette : ${row.details.missing.join(', ')}. La note porte sur les critères évalués.`}</p>
         ) : null}
 
-        {row.details.treat ? <TreatAlerts alerts={row.details.treat.alerts} /> : null}
-        <FicheCriteria details={row.details} />
-        <FicheIngredients label={row.extracted} />
-
-        <FichePrintBottom details={row.details} these={words.these} />
+        {row.details.alertes ? <SafetyAlerts alerts={row.details.alertes} /> : row.details.treat ? <TreatAlerts alerts={row.details.treat.alerts} /> : null}
+        {sansDetail(row.details) ? (
+          <p className="m-0 text-base font-semibold text-ink">{row.details.notice}</p>
+        ) : (
+          <>
+            <FicheCriteria details={row.details} />
+            <FicheIngredients label={row.extracted} />
+            <FichePrintBottom details={row.details} these={words.these} />
+          </>
+        )}
 
         <footer className="flex flex-col gap-1 border-t border-line pt-3 text-xs text-ink-2 print:pt-2 print:text-[9px]">
           <p className="m-0 font-semibold text-ink">

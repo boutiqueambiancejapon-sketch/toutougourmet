@@ -30,7 +30,7 @@ export function FicheVerdict({ brand, details, words, noun, children }: { brand:
           <strong>{`${details.score}/100, ${CATEGORY_PHRASE[noun]}.`}</strong> {COMPARE[noun]}
         </p>
       ) : null}
-      <ScoreDetail details={details} alerts={!treat} />
+      <ScoreDetail details={details} alerts={!treat && !details.alertes} />
       {children}
       <p className="m-0 text-[15px] leading-relaxed text-ink-2">
         {treat

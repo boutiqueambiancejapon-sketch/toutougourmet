@@ -59,7 +59,8 @@ export function noteAliment(e: Entree): Resultat {
     alertes.push(`Chiot : calcium à ${fmt(ms.ca)} % sur sec, au-dessus du maximum FEDIAF de ${caMax} % pour ce profil.`)
   }
   if (croissance && grand && ms.ca === null) alertes.push('Chiot de grande race : calcium non lu, à vérifier sur l\'emballage.')
-  // Décision du propriétaire : sans les deux valeurs, on se fie au rapport déclaré par la marque. Il reste hors des alertes chiot.
+  // Décision du propriétaire : sans les deux valeurs, le rapport déclaré par la marque rapporte ses points,
+  // mais le plafond de 90 reste, pour toutes les marques. Il reste hors des alertes chiot.
   const declare = ms.ca === null || ms.p === null ? e.rapportCaP : null
   if (declare) {
     const dedans = declare.min >= 1 && declare.max <= rMax
@@ -122,7 +123,7 @@ export function noteAliment(e: Entree): Resultat {
   // Composition sans analyse : la composition seule ne dit rien de la nutrition. 70 reste sous la tranche « très bonne » (75).
   if (ms.prot === null || ms.mg === null) pl.baisser(70, 'Composition sans analyse : la nutrition n\'est pas vérifiée, note plafonnée à 70.')
   else if (non.includes('glucides')) pl.baisser(85, 'Glucides impossibles à estimer : note plafonnée à 85.')
-  else if (non.includes('calcium-phosphore')) pl.baisser(90, 'Calcium et phosphore absents : note plafonnée à 90.')
+  else if (non.includes('calcium-phosphore') || declare) pl.baisser(90, 'Calcium et phosphore absents : note plafonnée à 90.')
   const fiabilite: Fiabilite = non.includes('glucides') || ing.length === 0 ? 'faible' : caP && pct ? 'haute' : 'moyenne'
   return total('aliment', c, { fiabilite, alertes, plafond: pl.v, horsClassement: fiabilite === 'faible' })
 }

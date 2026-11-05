@@ -15,6 +15,9 @@ import { noteHuile } from '../lib/scanner/baremes/huile'
 import { MSG_DOS } from '../lib/scanner/baremes/types'
 import { labelPrompt, LABEL_INSTRUCTIONS_V2, LABEL_JSON_SCHEMA_V2 } from '../lib/scanner/baremes/lecture-ia'
 import { analyseBaremes, entreeDepuisLabel, typeDepuisLabel } from '../lib/scanner/baremes/vers-score'
+import { horsListes, NOM_CLASSEMENT, noteCourante, sansDetail } from '../lib/scanner/baremes/fiche'
+import { ficheA4Data } from '../lib/og/fiche/data'
+import type { FoodAnalysis } from '../db/schema'
 import { analyseLabel, scoreVersionFor } from '../lib/scanner/analyse'
 import { PREMIUM_LABEL, SUPERMARKET_LABEL } from '../lib/scanner/fixtures'
 import { LABEL_INSTRUCTIONS, LABEL_JSON_SCHEMA } from '../lib/scanner/label-schema'
@@ -284,7 +287,11 @@ assert.equal(extraireEpaDha(entreeDepuisLabel(L({ teneurs: ['EPA 12 %', 'DHA 8 %
 const CPAT = (p: Partial<Entree>) => noteAliment(E({ ingredients: I('poulet'), constituants: C(28), ...p }))
 const crit = (r: ReturnType<typeof noteAliment>) => r.criteres.find((x) => x.id === 'calcium-phosphore')
 assert.equal(crit(CPAT({ rapportCaP: { min: 1.1, max: 1.4 } }))?.points, 6)
-assert.notEqual(CPAT({ rapportCaP: { min: 1.1, max: 1.4 } }).plafond?.valeur, 90)
+// Le plafond de 90 reste tant que les deux valeurs manquent, pour toutes les marques
+assert.equal(CPAT({ rapportCaP: { min: 1.1, max: 1.4 } }).plafond?.valeur, 90)
+assert.equal(CPAT({ marque: 'Elmut', rapportCaP: { min: 1.1, max: 1.4 } }).plafond?.valeur, 90)
+assert.equal(CPAT({ constituants: { ...C(28), calcium: 1 }, rapportCaP: { min: 1.1, max: 1.4 } }).plafond?.valeur, 90)
+assert.notEqual(CPAT({ constituants: { ...C(28), calcium: 1, phosphore: 0.8 }, rapportCaP: { min: 1.1, max: 1.4 } }).plafond?.valeur, 90)
 assert.equal(crit(CPAT({ rapportCaP: { min: 0.7, max: 0.9 } }))?.points, 0)
 assert.equal(crit(CPAT({}))?.points, null)
 assert.equal(CPAT({}).plafond?.valeur, 90)
@@ -333,4 +340,47 @@ for (const t of ['aliment', 'friandise', 'complement', 'huile'] as const) {
   assert.equal(r.notice, MSG_DOS, t)
 }
 assert.equal(classifyExtraction(L({ ingredients: [], constituants: SANS, typeProduit: 'aliment', alimentVeterinaire: true }), true).kind, 'complete')
+// ─── Raccord derrière l'interrupteur ─────────────────────
+const fiche = (l: ExtractedLabel, enBase = scoreLabel(l)) => ({ score: enBase.score, details: enBase, extracted: l })
+// Éteint : la note et le détail en base, tels quels, même objet ; aucun champ nouveau ; aucune fiche ne sort des listes
+const rowEteint = fiche(PREMIUM_LABEL)
+assert.equal(noteCourante(rowEteint).details, rowEteint.details)
+assert.equal(noteCourante(rowEteint).score, rowEteint.score)
+assert.equal(noteCourante({ ...rowEteint, score: 12 }).score, 12)
+assert.ok(!('bareme' in rowEteint.details))
+assert.ok(!('alertes' in rowEteint.details))
+assert.equal(horsListes(rowEteint.details), false)
+assert.equal(sansDetail(rowEteint.details), false)
+assert.equal(sansDetail({ ...rowEteint.details, criteria: [] }), false)
+const row = (l: ExtractedLabel) => ({ id: 'x', slug: 'x', brand: 'Marque', product: 'Produit', ean: null, score: analyseBaremes(l).score, details: analyseBaremes(l), extracted: l, source: 'photo', createdAt: new Date('2026-11-05'), updatedAt: new Date('2026-11-05'), reviewed: false, discarded: false, imageUrl: null, buyUrl: null, scanCount: 0, model: 'x', algorithmVersion: 'x' }) as unknown as FoodAnalysis
+const eteintA4 = ficheA4Data({ ...row(PREMIUM_LABEL), score: rowEteint.score, details: rowEteint.details })
+assert.equal(eteintA4.simple, false)
+assert.deepEqual(eteintA4.safety, [])
+assert.ok(eteintA4.criteria.length > 0)
+// Allumé : classement séparé, compléments et huiles hors des listes
+const allume = (l: ExtractedLabel) => noteCourante(fiche(l), true).details
+const lueAliment = L({ typeProduit: 'aliment', typeAliment: 'sec', constituants: { proteines: 28, matieresGrasses: 15, cendres: 7, cellulose: 3, humidite: 10, calcium: 1.2, phosphore: 0.9 } })
+assert.equal(allume(lueAliment).bareme?.classement, 'sec')
+assert.equal(NOM_CLASSEMENT.sec, 'croquettes')
+assert.equal(NOM_CLASSEMENT.humide, 'patee')
+assert.equal(allume(L({ typeProduit: 'aliment', typeAliment: 'humide', constituants: { proteines: 10, matieresGrasses: 6, cendres: 2, cellulose: 1, humidite: 78, calcium: 0.3, phosphore: 0.2 } })).bareme?.classement, 'humide')
+const huileLue = L({ typeProduit: 'huile', produit: 'Huile de saumon', ingredients: [{ nom: 'huile de saumon', pourcentage: null }], tableauBrut: 'EPA 12 %, DHA 8 %', constituants: SANS })
+const complementLu = L({ typeProduit: 'complement', produit: 'Comprimés', ingredients: [{ nom: 'glucosamine', pourcentage: null }], constituants: SANS })
+const vetLu = L({ typeProduit: 'aliment', alimentVeterinaire: true })
+for (const l of [huileLue, complementLu, vetLu]) assert.equal(horsListes(allume(l)), true)
+assert.equal(horsListes(allume(lueAliment)), false)
+for (const l of [huileLue, complementLu, vetLu, L({ typeProduit: 'friandise', ingredients: [{ nom: 'poulet', pourcentage: null }, { nom: 'xylitol', pourcentage: null }] })]) assert.equal(sansDetail(allume(l)), true)
+assert.equal(sansDetail(allume(lueAliment)), false)
+// PDF : ni critère, ni composition, ni alternative ; le message et les alertes
+const a4Huile = ficheA4Data(row(huileLue))
+assert.equal(a4Huile.simple, true)
+assert.equal(a4Huile.verdict, MSG_CONSEIL)
+assert.deepEqual(a4Huile.criteria, [])
+assert.deepEqual(a4Huile.alternatives, [])
+const a4Morue = ficheA4Data(row(L({ typeProduit: 'huile', produit: 'Huile de foie de morue', ingredients: [{ nom: 'huile de foie de morue', pourcentage: null }], constituants: SANS })))
+assert.ok(a4Morue.safety.some((x) => ROUGE_MORUE.test(x)))
+const a4Vet = ficheA4Data(row(vetLu))
+assert.equal(a4Vet.score, null)
+assert.match(a4Vet.verdict, /à juger avec ton vétérinaire/)
+assert.deepEqual(a4Vet.alternatives, [])
 console.log('tests : tout passe')
