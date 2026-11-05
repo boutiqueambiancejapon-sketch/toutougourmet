@@ -142,9 +142,9 @@ export const relatedComparatifs: Record<string, { slug: string; label: string }[
 
 /** Test complet publié dans la rubrique Avis, quand il existe. */
 export const fullReviews: Record<string, { href: string; label: string }> = {
-  'ultra-premium-direct': { href: '/chien/avis-marques/avis-ultra-premium-direct', label: 'Notre test complet Ultra Premium Direct' },
-  'dogfy-diet': { href: '/chien/avis-marques/avis-dogfy-diet-repas-frais-chien', label: 'Notre test complet Dogfy Diet' },
-  fidelis: { href: '/chien/avis-marques/avis-fidelis-menus-frais-chien-bocaux', label: 'Notre test complet Fidelis' },
-  'dog-chef': { href: '/chien/avis-marques/avis-dog-chef-croquettes-canard-frais', label: 'Notre test des croquettes Dog Chef au canard' },
-  franklin: { href: '/chien/avis-marques/avis-franklin-light-dinde-patate-douce-epinards', label: 'Notre test de la recette Franklin Light' },
+  'ultra-premium-direct': { href: '/chien/avis-marques/avis-ultra-premium-direct', label: 'Notre avis complet sur Ultra Premium Direct' },
+  'dogfy-diet': { href: '/chien/avis-marques/avis-dogfy-diet-repas-frais-chien', label: 'Notre avis complet sur Dogfy Diet' },
+  fidelis: { href: '/chien/avis-marques/avis-fidelis-menus-frais-chien-bocaux', label: 'Notre avis complet sur Fidelis' },
+  'dog-chef': { href: '/chien/avis-marques/avis-dog-chef-croquettes-canard-frais', label: 'Notre avis sur les croquettes Dog Chef au canard' },
+  franklin: { href: '/chien/avis-marques/avis-franklin-light-dinde-patate-douce-epinards', label: 'Notre avis sur la recette Franklin Light' },
 }

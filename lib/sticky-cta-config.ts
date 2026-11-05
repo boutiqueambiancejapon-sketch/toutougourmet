@@ -45,7 +45,7 @@ export const ELMUT_CTA: StickyCtaConfig = {
   url: 'https://c3po.link/QWMW4k6mbU',
   label: 'repas frais cuisinés en France',
   badge: shortDiscount('elmut'),
-  socialProof: '★★★★★ 4.7/5 selon notre test · cuisson douce',
+  socialProof: 'Repas frais · cuisson douce',
   buttonLabel: 'Essayer →',
   subButton: 'Livraison réfrigérée incluse',
 }
