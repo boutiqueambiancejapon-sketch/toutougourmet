@@ -1,6 +1,7 @@
 # Progression — Toutou Gourmet — màj à chaque fin de session
 
 ## Complété
+- 2026-11-05 · Récits de santé et de qualité retirés des pages partenaires, note Dog Chef alignée sur Trustpilot. Remise Ultra Premium Direct −20 % confirmée par le propriétaire. Maquette des menus : `/maquettes/menus/`.
 - 2026-11-05 · Sources santé : règle des 10 % rendue à la WSAVA (40 articles, 10 fichiers), doses huile de saumon et oméga-3 alignées sur Bauer 2011, SF68 corrigé. Reste : anciennes doses dans une douzaine d'autres pages.
 - 2026-11-05 · Dogfy Diet fusionné dans son avis (redirection), Agen et validation vétérinaire corrigés sur Ultra Premium Direct, rappel retiré. Décisions du propriétaire sur les barèmes dans `DECISIONS.md`.
 - 2026-11-05 · Pages mères Elmut, Ultra Premium Direct et Dogfy Diet (`data/brand-hub.ts`), chiffres corrigés sur sources lues le 5 novembre, lignes de classement reliées aux avis de modèle (`data/model-reviews.ts`).

@@ -31,7 +31,7 @@ export const DOG_CHEF_CTA: StickyCtaConfig = {
   label: 'le menu sur-mesure pour ton chien',
   badge: shortDiscount('dog-chef'),
   code: 'WZU7090',
-  socialProof: '★★★★★ 4.8/5 · 7 800+ avis Trustpilot',
+  socialProof: '★★★★★ 4,7/5 · 5 569 avis Trustpilot',
   buttonLabel: 'Calculer →',
   subButton: 'Livraison incluse · sans engagement',
 }

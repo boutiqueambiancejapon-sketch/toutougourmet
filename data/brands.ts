@@ -106,7 +106,7 @@ export const brands: Brand[] = [
       serviceClient: 4.7,
     },
     pros: [
-      "Élu Produit de l'Année 2026, 4,8/5 sur plus de 7 800 avis",
+      "Élu Produit de l'Année 2026, 4,7/5 sur 5 569 avis Trustpilot au 5 novembre 2026",
       'Ration calculée sur le profil du chien, recalculée quand son poids change',
       'Boosters ciblés : Puppy, Senior, Mobility, Transit',
       'Livraison gratuite incluse',
