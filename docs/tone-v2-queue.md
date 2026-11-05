@@ -214,16 +214,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `chien-mange-trop-vite-solutions`
 - [x] `nourriture-shar-pei`
 - [x] `nourriture-teckel`
-- [ ] `croquettes-chiot-grande-race`
-- [ ] `chien-peut-manger-patate-douce`
-- [ ] `recette-friandises-dentaires-maison-chien`
-- [ ] `chien-peut-manger-peches`
-- [ ] `huile-de-coco-chien-bienfaits-dosage`
-- [ ] `croquettes-chien-diarrhee-chronique`
-- [ ] `recette-muffins-sales-poulet-courgette-chien`
-- [ ] `chien-peut-manger-oignons`
-- [ ] `flatulences-chien-causes-solutions-alimentation`
-- [ ] `nourriture-dachshund`
+- [x] `croquettes-chiot-grande-race`
+- [x] `chien-peut-manger-patate-douce`
+- [x] `recette-friandises-dentaires-maison-chien`
+- [x] `chien-peut-manger-peches`
+- [x] `huile-de-coco-chien-bienfaits-dosage`
+- [x] `croquettes-chien-diarrhee-chronique`
+- [x] `recette-muffins-sales-poulet-courgette-chien`
+- [x] `chien-peut-manger-oignons`
+- [x] `flatulences-chien-causes-solutions-alimentation`
+- [x] `nourriture-dachshund`
 - [ ] `nourriture-shih-tzu`
 - [ ] `chien-peut-manger-pop-corn`
 - [ ] `biotine-chien-bienfaits-dosage`
