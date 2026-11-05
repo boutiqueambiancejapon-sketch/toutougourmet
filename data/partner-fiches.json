@@ -14,7 +14,7 @@
    "calcium": 1.3,
    "phosphore": 1.0
   },
-  "kcal100g": null
+  "kcal100g": 393
  },
  {
   "brand": "Dog Chef",
@@ -31,7 +31,7 @@
    "calcium": 1.2,
    "phosphore": 0.9
   },
-  "kcal100g": null
+  "kcal100g": 388
  },
  {
   "brand": "Dog Chef",
@@ -48,7 +48,7 @@
    "calcium": 1.45,
    "phosphore": 1.0
   },
-  "kcal100g": null
+  "kcal100g": 394
  },
  {
   "brand": "Dog Chef",
@@ -65,7 +65,7 @@
    "calcium": 1.2,
    "phosphore": 0.9
   },
-  "kcal100g": null
+  "kcal100g": 395
  },
  {
   "brand": "Dog Chef",
@@ -86,7 +86,7 @@
  },
  {
   "brand": "Dog Chef",
-  "product": "Repas frais à l'agneau",
+  "product": "Repas frais agneau et dinde",
   "url": "https://www.dogchef.com/fr/recettes-fraiches/recette-agneau-frais",
   "type": "humide",
   "composition": "Agneau 28% (viande, foie), Dinde (gésiers) 27%, Carottes 13%, Sarrasin 7%, Petit pois 6%, Broccoli 5%, Courgette 4,8%, Patate douce 3%, Racine de persil 3%, Pomme 1%, Huiles végétales (tournesol, colza) 0,5%, Huile de poisson 0,4%, Phosphate de calcium 0,2%, Chicorée 0,2%, Sels de potassium d’acides organiques 0,2%, Carbonate de calcium 0,1%, Psyllium 0,1%, Levure (source de Mannan-Oligosaccharides et Bêta-glucanes) 0,1%, Sel 0,1%, Glycinate de Magnésium 0,1%, Sucres fermentés 0,05%, Thym 0,05%",
@@ -99,14 +99,15 @@
    "calcium": 0.33,
    "phosphore": 0.26
   },
-  "kcal100g": null
+  "kcal100g": null,
+  "slug": "dog-chef-repas-frais-a-l-agneau"
  },
  {
   "brand": "Dog Chef",
-  "product": "Repas frais au bœuf",
+  "product": "Repas frais bœuf et poulet",
   "url": "https://www.dogchef.com/fr/recettes-fraiches/boeuf",
   "type": "humide",
-  "composition": "Boeuf 32% (viande, coeur, foie, rognons), Poulet 26% (gésiers), Carotte 8%, Petit pois 7%, Brocoli 5%, Carotte jaune 5%, Sarrasin 5%, Courgette 4%, Racine de persil 3%, Pomme 0,7%, Phosphate de calcium 0,6%, Huiles végétales (tournesol, colza) 0,5%, Huile de poisson 0,5%, Carbonate de calcium 0,4%, Sels de potassium d’acides organiques 0,3%, Chicorée 0,2%, Graines de chia 0,1%, Psyllium 0,1%, Levure (source de Mannan-Oligosaccharides et Bêta-glucanes) 0,1%, Sel 0,09%, Glycinate de Magnésium 0,08%, Sucres fermentés 0,05%, Romarin 0,05% Boeuf La source principale de protéines dans cette recette",
+  "composition": "Boeuf 32% (viande, coeur, foie, rognons), Poulet 26% (gésiers), Carotte 8%, Petit pois 7%, Brocoli 5%, Carotte jaune 5%, Sarrasin 5%, Courgette 4%, Racine de persil 3%, Pomme 0,7%, Phosphate de calcium 0,6%, Huiles végétales (tournesol, colza) 0,5%, Huile de poisson 0,5%, Carbonate de calcium 0,4%, Sels de potassium d’acides organiques 0,3%, Chicorée 0,2%, Graines de chia 0,1%, Psyllium 0,1%, Levure (source de Mannan-Oligosaccharides et Bêta-glucanes) 0,1%, Sel 0,09%, Glycinate de Magnésium 0,08%, Sucres fermentés 0,05%, Romarin 0,05%",
   "constituants": {
    "proteines": 10.69,
    "matieresGrasses": 6.42,
@@ -116,7 +117,8 @@
    "calcium": 0.29,
    "phosphore": 0.24
   },
-  "kcal100g": null
+  "kcal100g": null,
+  "slug": "dog-chef-repas-frais-au-boeuf"
  },
  {
   "brand": "Dog Chef",

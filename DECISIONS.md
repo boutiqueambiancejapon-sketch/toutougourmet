@@ -293,3 +293,6 @@ Classements séparés sec et humide. Fiches partenaires revérifiées et fiches 
 
 ## 2026-11-05 — Dogfy Diet : une seule page
 L'avis `avis-dogfy-diet-repas-frais-chien` avait les positions (5 554 impressions, position 10,4) et la page marque 4 impressions : celle-ci redirige vers l'avis, qui reprend son contenu (`BrandHubBlock`). Rappel de décembre 2024 retiré de la page Ultra Premium Direct, jugé daté par le propriétaire.
+
+## 2026-11-05 — Source des fiches
+Décision du propriétaire : on se base sur ce que dit la marque (site ou fiche technique), avec la date du relevé, pour toutes les marques. Pas de recherche de source tierce. Les promesses s'écrivent « selon la marque ».
