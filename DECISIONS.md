@@ -296,3 +296,6 @@ L'avis `avis-dogfy-diet-repas-frais-chien` avait les positions (5 554 impression
 
 ## 2026-11-05 — Source des fiches
 Décision du propriétaire : on se base sur ce que dit la marque (site ou fiche technique), avec la date du relevé, pour toutes les marques. Pas de recherche de source tierce. Les promesses s'écrivent « selon la marque ».
+
+## 2026-11-05 — Partenaires dans les classements
+Le propriétaire accepte que les partenaires restent nombreux en tête si le résultat tient après l'import des pâtées, barème publié et liens signalés. La formule n'est pas ajustée pour les faire reculer. L'activation attend qu'il voie le classement final.

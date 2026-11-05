@@ -46,7 +46,9 @@ export function loadFeedItems(path: string, opts: { anyCategory?: boolean } = {}
   }
   const rank = (i: FeedItem) => {
     const p = PRIORITY.findIndex((b) => i.brand.toLowerCase().includes(b))
-    return (i.ean.startsWith('205') ? 100 : 0) + (p < 0 ? 50 : p)
+    // Pâtées d'abord : le classement humide manque d'autres marques que les partenaires (décision du 2026-11-05)
+    const wet = MAXI_ZOO_CATEGORIES[i.category]?.typeAliment === 'humide' ? 0 : 200
+    return wet + (i.ean.startsWith('205') ? 100 : 0) + (p < 0 ? 50 : p)
   }
   return [...seen.values()].sort((a, b) => rank(a) - rank(b) || a.ean.localeCompare(b.ean))
 }
