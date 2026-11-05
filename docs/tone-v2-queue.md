@@ -164,16 +164,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `a-quelle-heure-donner-manger-chien`
 - [x] `croquettes-chien-maladie-foie`
 - [x] `chien-peut-manger-fromage`
-- [ ] `recette-patate-douce-sechee-chien`
-- [ ] `croquettes-chien-apres-operation`
-- [ ] `recette-poulet-seche-chien`
-- [ ] `croquettes-sans-cereales-chien`
-- [ ] `alimentation-chien-senior-guide`
-- [ ] `chien-peut-manger-pomme`
-- [ ] `chien-peut-manger-cannelle`
-- [ ] `chien-peut-manger-pasteque`
-- [ ] `nourriture-boxer`
-- [ ] `nourriture-springer-spaniel-anglais`
+- [x] `recette-patate-douce-sechee-chien`
+- [x] `croquettes-chien-apres-operation`
+- [x] `recette-poulet-seche-chien`
+- [x] `croquettes-sans-cereales-chien`
+- [x] `alimentation-chien-senior-guide`
+- [x] `chien-peut-manger-pomme`
+- [x] `chien-peut-manger-cannelle`
+- [x] `chien-peut-manger-pasteque`
+- [x] `nourriture-boxer`
+- [x] `nourriture-springer-spaniel-anglais`
 - [ ] `chien-peut-manger-champignons`
 - [ ] `chien-peut-manger-aubergines`
 - [ ] `croquettes-chien-arthrose`
