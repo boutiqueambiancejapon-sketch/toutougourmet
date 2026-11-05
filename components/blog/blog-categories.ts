@@ -158,6 +158,7 @@ const BREED_SLOT_BY_SLUG: Record<string, string> = {
  * Elle écrase aussi la cover breed historique pour les articles de race.
  */
 const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
+  'chien-peut-manger-paprika': 'art-chien-peut-manger-paprika',
   'friandises-franklin-avis-composition': 'art-friandises-franklin-avis-composition',
   'calendrier-avent-chien': 'art-calendrier-avent-chien',
   'zinc-chien-carence-besoins-sources': 'art-zinc-chien-carence-besoins-sources',

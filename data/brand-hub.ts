@@ -116,7 +116,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
       {
         h2: 'Comment conserver Dogfy Diet et quels sont ses concurrents ?',
         paragraphs: [
-          "Selon la marque, les repas Dogfy Diet se conservent jusqu'à 30 jours au réfrigérateur ou 1 an au congélateur, et une portion congelée passe au réfrigérateur la veille. Un sachet ouvert se finit sous 48 heures, et un sachet arrivé décongelé mais froid sous 15 jours. Les pages officielles qu'on a lues ne nomment pas le lieu de fabrication, donc pose la question à la marque si l'origine compte pour toi.",
+          "Selon la marque, les repas Dogfy Diet se conservent jusqu'à 30 jours au réfrigérateur ou 1 an au congélateur, et une portion congelée passe au réfrigérateur la veille. Un sachet ouvert se finit sous 48 heures, et un sachet arrivé décongelé mais froid sous 15 jours. Dogfy Diet annonce cuisiner ses repas à Parets del Vallès, dans la province de Barcelone. Le menu bœuf annonce 60,5 % de bœuf, dont 48,6 % d'abats et 6,9 % de viande, avec de la rate et du foie pour le reste, selon sa page officielle.",
           "Dog Chef et Elmut sont ses concurrents les plus proches, avec des repas frais notés de 85 à 87 pour le premier et de 90 à 93 pour le second. Leurs pages détaillées : [avis Dog Chef](/chien/marque/dog-chef) et [avis Elmut](/chien/marque/elmut). Pour un chien difficile, la box d'essai reste le moyen le plus simple de vérifier.",
         ],
       },

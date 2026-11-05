@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-chien-peut-manger-paprika',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, attentive beagle sitting on a warm kitchen floor beside a low wooden board holding a small wooden bowl of bright red paprika powder and two dried red peppers. The dog looks at the bowl with curiosity, without eating it. No packaging, no brand, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog and board filling the whole width, no empty band, no outline drawn around the dog or the food, at most 6 to 8 small confetti, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-05 pour l'article chien-peut-manger-paprika.",
+  },
+  {
     id: 'art-friandises-franklin-avis-composition',
     group: 'articles',
     ratio: '3:2',
@@ -23,7 +37,7 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     imageReady: true,
     ext: 'webp',
     subject:
-      'A calm, attentive beagle sitting on a kitchen floor beside a wooden board holding small dog treats: a few strips of dried meat, some chewy green dental sticks and a handful of tiny soft training bites. The dog looks at the treats without eating. No packaging, no brand, no writing.',
+      'A calm, attentive Brittany spaniel sitting on a kitchen floor beside a wooden board holding small dog treats: a few strips of dried meat, some chewy green dental sticks and a handful of tiny soft training bites. The dog looks at the treats without eating. No packaging, no brand, no writing.',
     composition:
       'Full frame, subject edge to edge, dog and board filling the whole width, no empty band, no outline drawn around the dog or the food, at most 6 to 8 small confetti, no text, no numbers, no humans.',
     decorations: ['confetti'],
@@ -37,7 +51,7 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     imageReady: true,
     ext: 'webp',
     subject:
-      'A calm, attentive beagle sitting beside a large handmade wooden advent box with small open square compartments, a few of them showing small brown dog treats, a pine sprig on the side. The compartments carry no numbers and no writing. The dog is not eating.',
+      'A calm, attentive Bernese mountain dog sitting beside a large handmade wooden advent box with small open square compartments, a few of them showing small brown dog treats, a pine sprig on the side. The compartments carry no numbers and no writing. The dog is not eating.',
     composition:
       'Full frame, subject edge to edge, dog and box filling the whole width, no empty band, no outline drawn around the dog or the food, at most 6 to 8 small confetti, no text, no numbers, no humans.',
     decorations: ['confetti', 'sparkle'],
@@ -65,7 +79,7 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
     imageReady: true,
     ext: 'webp',
     subject:
-      'A calm, attentive beagle lying on a warm cream kitchen floor next to a knocked-over small cup of coffee beans and a little heap of used coffee grounds, looking up. The dog is not eating.',
+      'A calm, attentive apricot miniature poodle lying on a warm cream kitchen floor next to a knocked-over small cup of coffee beans and a little heap of used coffee grounds, looking up. The dog is not eating.',
     composition:
       'Full frame, dog on the right half, coffee beans and grounds lower-left foreground, soft cream kitchen background. Only a few scattered confetti pieces (6 to 10 maximum). Do NOT trace any outline or contour line around the dog or the food.',
     decorations: ['confetti', 'sparkle'],
