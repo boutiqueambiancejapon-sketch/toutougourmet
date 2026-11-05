@@ -304,16 +304,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `chien-peut-manger-poivron`
 - [x] `chien-peut-manger-clementine-orange`
 - [x] `nourriture-border-collie`
-- [ ] `chien-peut-manger-celeri`
-- [ ] `chien-peut-manger-canard`
-- [ ] `chien-peut-manger-olives`
-- [ ] `chien-peut-manger-boeuf-cru`
-- [ ] `chien-peut-manger-asperges`
-- [ ] `quantite-eau-chien-par-jour`
-- [ ] `faire-garder-son-chien-vacances-alimentation`
-- [ ] `alimentation-chiot-2-6-mois`
-- [ ] `avis-hills-science-diet`
-- [ ] `croquettes-chien-surpoids`
+- [x] `chien-peut-manger-celeri`
+- [x] `chien-peut-manger-canard`
+- [x] `chien-peut-manger-olives`
+- [x] `chien-peut-manger-boeuf-cru`
+- [x] `chien-peut-manger-asperges`
+- [x] `quantite-eau-chien-par-jour`
+- [x] `faire-garder-son-chien-vacances-alimentation`
+- [~] `alimentation-chiot-2-6-mois` · chiffres contraires à la source, à trancher par le propriétaire : l'article donne pour FEDIAF 1,0 à 4,5 g de calcium/1 000 kcal et un ratio Ca:P de 1:1 à 2:1, le tableau FEDIAF 2024 donne un minimum de 2,0 à 2,5 g, un maximum de 4,0 à 4,5 g et un ratio maximal de 1,6 à 1,8:1 en croissance ; Dobenecker 2006 ne montre aucun effet chez les grands chiens testés (Foxhound croisés), seulement chez le Beagle, sans signe clinique
+- [x] `avis-hills-science-diet`
+- [x] `croquettes-chien-surpoids`
 - [ ] `nourriture-berger-de-beauce`
 - [ ] `nourriture-carlin`
 - [ ] `nourriture-basset-hound`
