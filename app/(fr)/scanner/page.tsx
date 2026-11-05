@@ -21,6 +21,7 @@ import { ScannerMethod } from '@/components/scanner/ScannerMethod'
 import { TreatMethod } from '@/components/scanner/treat/TreatMethod'
 import { ScannerTool } from '@/components/scanner/ScannerTool'
 import { TopRated } from '@/components/scanner/TopRated'
+import { RankingLinks } from '@/components/scanner/rankings/RankingLinks'
 import { scannerFaq } from '@/components/scanner/scanner-faq'
 import { FREE_MONTHLY_SCANS } from '@/lib/scanner/config'
 
@@ -65,6 +66,8 @@ export default function ScannerPage() {
           <BrowseCards />
           <LatestFiches />
         </div>
+
+        <RankingLinks />
 
         <div className="flex flex-col gap-3">
           <p className="m-0 text-[15px] leading-relaxed text-ink-2">1. Tu scannes. 2. On lit la composition. 3. Tu as la note et ce qu&apos;elle veut dire.</p>

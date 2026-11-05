@@ -6,6 +6,7 @@ import { ArticleTile, articleHref } from '@/components/article/ArticleTile'
 import { GuideSearch, type GuideEntry } from '@/components/guides/GuideSearch'
 import { TopQuestions } from '@/components/guides/TopQuestions'
 import { RubricRows } from '@/components/pillar/RubricRows'
+import { RankingLinks } from '@/components/scanner/rankings/RankingLinks'
 
 export const metadata: Metadata = {
   title: 'Guides alimentation et santé du chien',
@@ -66,6 +67,8 @@ export default function ChienPage() {
         <h2 id="rubriques" className="m-0 font-display text-2xl font-black text-ink">Par rubrique</h2>
         <RubricRows rows={rubriques} label="Rubriques" />
       </section>
+
+      <RankingLinks />
 
       <section aria-labelledby="derniers" className="flex flex-col gap-4">
         <h2 id="derniers" className="m-0 font-display text-2xl font-black text-ink">Les derniers guides</h2>

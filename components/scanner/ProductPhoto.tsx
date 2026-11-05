@@ -1,11 +1,23 @@
-import Image from 'next/image'
+'use client'
 
-// @cdc scanner — photo du produit dans un rond, quand le fichier Maxi Zoo en donne une. Décorative :
-// le nom du produit est toujours écrit à côté. Rien si l'image manque.
+import Image from 'next/image'
+import { useState } from 'react'
+import { IconDog } from '@/components/icons'
+
+// @cdc scanner — photo du produit dans un rond. Décorative : le nom du produit est toujours écrit à côté.
+// Pas de photo, ou photo qui ne charge pas : un petit chien (demande du propriétaire, 2026-11-05).
 
 export function ProductPhoto({ src, size = 'sm' }: { src?: string | null; size?: 'sm' | 'lg' }) {
-  if (!src) return null
+  const [broken, setBroken] = useState(false)
   const px = size === 'lg' ? 80 : 44
+  const box = size === 'lg' ? 'size-20' : 'size-11'
+  if (!src || broken) {
+    return (
+      <span aria-hidden="true" className={`inline-flex ${box} shrink-0 items-center justify-center rounded-full border border-line bg-paper text-ink-2`}>
+        <IconDog className={size === 'lg' ? 'size-10' : 'size-6'} />
+      </span>
+    )
+  }
   return (
     <Image
       src={src}
@@ -13,7 +25,8 @@ export function ProductPhoto({ src, size = 'sm' }: { src?: string | null; size?:
       width={px}
       height={px}
       sizes={`${px}px`}
-      className={`shrink-0 rounded-full border border-line bg-paper object-contain p-0.5 ${size === 'lg' ? 'size-20' : 'size-11'}`}
+      onError={() => setBroken(true)}
+      className={`shrink-0 rounded-full border border-line bg-paper object-contain p-0.5 ${box}`}
     />
   )
 }
