@@ -224,16 +224,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `chien-peut-manger-oignons`
 - [x] `flatulences-chien-causes-solutions-alimentation`
 - [x] `nourriture-dachshund`
-- [ ] `nourriture-shih-tzu`
-- [ ] `chien-peut-manger-pop-corn`
-- [ ] `biotine-chien-bienfaits-dosage`
-- [ ] `recette-friandises-foie-seche-chien`
-- [ ] `recette-patee-maison-canard-chien`
-- [ ] `alimentation-anxiete-chien-comportement`
-- [ ] `chien-peut-manger-cornichons`
-- [ ] `gamelle-chien-inox-ceramique-plastique-silicone`
-- [ ] `avis-orijen`
-- [ ] `recette-patee-maison-boeuf-chien`
+- [x] `nourriture-shih-tzu`
+- [x] `chien-peut-manger-pop-corn`
+- [x] `biotine-chien-bienfaits-dosage`
+- [x] `recette-friandises-foie-seche-chien`
+- [x] `recette-patee-maison-canard-chien`
+- [x] `alimentation-anxiete-chien-comportement`
+- [x] `chien-peut-manger-cornichons`
+- [x] `gamelle-chien-inox-ceramique-plastique-silicone`
+- [x] `avis-orijen`
+- [x] `recette-patee-maison-boeuf-chien`
 - [ ] `croquettes-chien-hyperactif`
 - [ ] `nourriture-braque-de-weimar`
 - [ ] `nourriture-bull-terrier`
