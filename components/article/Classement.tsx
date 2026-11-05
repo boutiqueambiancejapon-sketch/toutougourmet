@@ -16,7 +16,7 @@ export async function Classement({ segment: slug }: { segment: SegmentSlug }) {
   const top = shownRecipes(list, SHOWN)
   if (top.length < 3) return null
   return (
-    <div data-cta="classement-article" className="my-6 flex flex-col gap-6">
+    <div data-cta="classement-article" className="v2 my-6 flex flex-col gap-6">
       <RankingJsonLd name={segment.listTitle} path={segment.path} items={top.map((r) => ({ slug: r.slug, brand: displayBrand(r.brand), product: displayName(r.name) }))} start={1} total={top.length} />
       <RankingBody segment={segment} list={list} count={SHOWN} note={NOTE} />
     </div>
