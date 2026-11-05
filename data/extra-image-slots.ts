@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-friandises-franklin-avis-composition',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'blue',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, attentive beagle sitting on a kitchen floor beside a wooden board holding small dog treats: a few strips of dried meat, some chewy green dental sticks and a handful of tiny soft training bites. The dog looks at the treats without eating. No packaging, no brand, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog and board filling the whole width, no empty band, no outline drawn around the dog or the food, at most 6 to 8 small confetti, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-05 pour l'article friandises-franklin-avis-composition.",
+  },
+  {
     id: 'art-calendrier-avent-chien',
     group: 'articles',
     ratio: '3:2',
