@@ -31,11 +31,13 @@ export function entreeDepuisLabel(l: ExtractedLabel): Entree {
     partAnimaleDeclaree: l.partAnimaleDeclaree,
     energie: l.energie,
     mentions: l.mentions,
-    tableauBrut: l.tableauBrut,
+    // Les teneurs lues comptent comme le tableau : l'extracteur lit les deux de la même façon.
+    tableauBrut: [l.tableauBrut, ...(l.teneurs ?? []).slice(0, 30)].filter(Boolean).join(' ; ') || null,
     rationLue: l.rationLue === true,
     ration10kgG: l.ration10kgG,
     emballage: l.emballage,
     alimentVeterinaire: l.alimentVeterinaire === true,
+    rapportCaP: l.rapportCaP,
     stade: l.stade,
     gabarit: l.gabarit,
   }

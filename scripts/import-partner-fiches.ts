@@ -17,6 +17,7 @@ interface PartnerFiche {
   type: keyof typeof CATEGORY
   composition: string
   constituants: Extract<MaxiZooParse, { ok: true }>['constituants']
+  rapportCaP?: { min: number; max: number }
   kcal100g: number | null
 }
 
@@ -28,6 +29,7 @@ async function main(): Promise<void> {
     const label = maxiZooLabel({ brand: f.brand, name: `${f.brand} ${f.product}`, ean: '', category: CATEGORY[f.type] }, { ok: true, constituants: f.constituants, composition: f.composition, kcal100g: f.kcal100g })
     if (!label || !MAXI_ZOO_CATEGORIES[CATEGORY[f.type]]) throw new Error(`fiche illisible : ${f.brand} ${f.product}`)
     label.ean = null
+    if (f.rapportCaP) label.rapportCaP = f.rapportCaP
     const details = analyseLabel(label)
     console.log(`${details.score ?? '?'}  ${f.brand} · ${f.product} (${label.ingredients.length} ingrédients, premier : ${label.ingredients[0]?.nom})`)
     if (!pool || details.score === null) continue

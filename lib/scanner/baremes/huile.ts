@@ -6,8 +6,8 @@ import { fmt, MSG_CONSEIL, pasCompte, Plafond, S, total, vide, type Critere, typ
 // @cdc scanner — barème 4 : huiles, sur 100. Le calcul de ration ne donne jamais de dose à viser.
 // Affichage (décision du 2026-11-05) : la note et MSG_CONSEIL, rien d'autre, aucune promesse de soin.
 
-const POISSON_GRAS = /saumon|sardine|anchois|hareng|maquereau|krill|salmon/
-const MORUE = /foie|morue|cod liver/
+const POISSON_GRAS = /saumon|sardine|anchois|hareng|maquereau|krill|salmon|lachs|herring|hering|anchov|mackerel|makrele/
+const MORUE = /foie|morue|cod liver|lebertran|dorsch/
 /** Valeurs NRC via Bauer 2011 pour un chien de 10 kg. Servent au calcul, pas à conseiller une dose. */
 const NRC_APPORT_10KG = 170
 
@@ -21,11 +21,11 @@ export function noteHuile(e: Entree): Resultat {
   const c: Critere[] = []
   const brut = `${e.produit ?? ''} ${e.ingredients.map((i) => i.nom).join(' ')}`.toLowerCase()
   const morue = MORUE.test(`${compo} ${nomP}`) || /cod liver/.test(brut)
-  const poisson = !morue && (POISSON_GRAS.test(compo) || (POISSON_GRAS.test(nomP) && /poisson|huile/.test(compo)))
-  const generique = !morue && !poisson && /huile de poisson/.test(compo)
+  const poisson = !morue && (POISSON_GRAS.test(compo) || (POISSON_GRAS.test(nomP) && /poisson|huile|fisch|\boil\b|\bol\b/.test(compo)))
+  const generique = !morue && !poisson && /huile de poisson|fisch ?ol|fish oil/.test(compo)
   const algue = /algues?|schizochytrium/.test(`${compo} ${nomP}`)
   // Toute huile sans poisson, krill, algue ni morue est végétale, et le nom du produit compte autant que la composition.
-  const vegetale = !poisson && !morue && !generique && !algue && !/poisson|fish|krill|omega.?3/.test(`${compo} ${nomP} ${brut}`)
+  const vegetale = !poisson && !morue && !generique && !algue && !/poisson|fish|fisch|krill|omega.?3/.test(`${compo} ${nomP} ${brut}`)
   c.push({ id: 'source', libelle: 'Espèce et source', max: 15, points: poisson ? 15 : algue ? 12 : morue ? 10 : generique ? 8 : vegetale ? 4 : 2, explication: poisson ? 'Poisson gras nommé.' : algue ? 'Huile d\'algue : du DHA, sans poisson.' : morue ? 'Foie de morue : riche en vitamines A et D.' : generique ? 'Poisson sans espèce.' : vegetale ? 'Huile végétale : pas d\'EPA ni de DHA, le chien convertit peu l\'ALA.' : 'Source peu claire.', source: `${S.FEDIAF} ; ${S.BAUER} ; points : ${S.EDITO}` })
 
   const alertes: string[] = []

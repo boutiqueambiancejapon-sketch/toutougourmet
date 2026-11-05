@@ -59,7 +59,12 @@ export function noteAliment(e: Entree): Resultat {
     alertes.push(`Chiot : calcium à ${fmt(ms.ca)} % sur sec, au-dessus du maximum FEDIAF de ${caMax} % pour ce profil.`)
   }
   if (croissance && grand && ms.ca === null) alertes.push('Chiot de grande race : calcium non lu, à vérifier sur l\'emballage.')
-  if (ms.ca === null || ms.p === null || ms.p <= 0) c.push(pasCompte('calcium-phosphore', 'Calcium et phosphore', 6, 'Pas tous les deux sur cette fiche : critère sorti du calcul.', S.FEDIAF))
+  // Décision du propriétaire : sans les deux valeurs, on se fie au rapport déclaré par la marque. Il reste hors des alertes chiot.
+  const declare = ms.ca === null || ms.p === null ? e.rapportCaP : null
+  if (declare) {
+    const dedans = declare.min >= 1 && declare.max <= rMax
+    c.push({ id: 'calcium-phosphore', libelle: 'Calcium et phosphore', max: 6, points: dedans ? 6 : 0, explication: `Rapport de ${fmt(declare.min)}${declare.max !== declare.min ? ` à ${fmt(declare.max)}` : ''} déclaré par la marque, sans les valeurs de calcium et de phosphore. Repère : de 1 à ${rMax}.`, source: `${S.FEDIAF} ; rapport déclaré : décision éditoriale` })
+  } else if (ms.ca === null || ms.p === null || ms.p <= 0) c.push(pasCompte('calcium-phosphore', 'Calcium et phosphore', 6, 'Pas tous les deux sur cette fiche : critère sorti du calcul.', S.FEDIAF))
   else {
     const r = ms.ca / ms.p
     c.push({ id: 'calcium-phosphore', libelle: 'Calcium et phosphore', max: 6, points: (ms.ca >= caMin && ms.ca <= caMax ? 2 : 0) + (ms.p >= pMin && ms.p <= 1.6 ? 2 : 0) + (r >= 1 && r <= rMax ? 2 : 0), explication: `Calcium ${fmt(ms.ca)} %, phosphore ${fmt(ms.p)} % sur sec, rapport ${fmt(r)}. Repères : calcium de ${caMin} à ${caMax} %, rapport de 1 à ${rMax}.`, source: S.FEDIAF })

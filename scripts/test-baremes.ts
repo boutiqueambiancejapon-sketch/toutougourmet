@@ -10,7 +10,10 @@ import { extraireEpaDha } from '../lib/scanner/baremes/teneur'
 import { MSG_CONSEIL, type Entree } from '../lib/scanner/baremes/types'
 import { estVeterinaire } from '../lib/scanner/baremes/veterinaire'
 import { BAREMES_ACTIFS } from '../lib/scanner/baremes/config'
-import { labelPrompt, LABEL_JSON_SCHEMA_V2 } from '../lib/scanner/baremes/lecture-ia'
+import { chiffresIncoherents, differeDeLaFiche } from '../lib/scanner/baremes/controle-lecture'
+import { noteHuile } from '../lib/scanner/baremes/huile'
+import { MSG_DOS } from '../lib/scanner/baremes/types'
+import { labelPrompt, LABEL_INSTRUCTIONS_V2, LABEL_JSON_SCHEMA_V2 } from '../lib/scanner/baremes/lecture-ia'
 import { analyseBaremes, entreeDepuisLabel, typeDepuisLabel } from '../lib/scanner/baremes/vers-score'
 import { analyseLabel, scoreVersionFor } from '../lib/scanner/analyse'
 import { PREMIUM_LABEL, SUPERMARKET_LABEL } from '../lib/scanner/fixtures'
@@ -243,4 +246,83 @@ assert.equal(sansAnalyse({ typeProduit: 'huile', typeImage: 'autre' }), 'complet
 assert.equal(sansAnalyse({ typeProduit: 'indetermine', typeImage: 'autre' }), 'reject')
 assert.equal(classifyExtraction(L({ typeImage: 'autre', typeProduit: 'huile' })).kind, 'reject')
 assert.equal(classifyExtraction(L({ constituants: SANS, typeImage: 'aliment-chien', typeProduit: 'huile' })).kind, 'incomplete')
+// ─── Noms étrangers : sécurité ─────────────────────
+for (const n of ['Schokolade', 'Schokoladenüberzug', 'chocolate', 'Kakao', 'Rosinen', 'Trauben', 'Weintrauben', 'raisins', 'grapes', 'Xylit', 'xylitol', 'noix de macadamia', 'Macadamianüsse', 'uvas']) assert.ok(securite({ ingredients: I(n), additifs: [] }).zero, n)
+for (const n of ['Knoblauch', 'Knoblauchpulver', 'Zwiebel', 'Zwiebeln', 'garlic', 'onion', 'cebolla', 'aglio']) assert.ok(securite({ ingredients: I(n, 'poulet'), additifs: [] }).zero, n)
+for (const n of ['Knoblauch', 'Zwiebel', 'garlic', 'onion']) assert.equal(securite({ ingredients: I('a', 'b', 'c', n), additifs: [] }).plafond?.valeur, 45, n)
+for (const n of ['Traubenzucker', 'grape sugar', 'ohne Schokolade', 'ohne Xylit', 'sin xilitol', 'Zwieback', 'Kakadu', 'mayonnaise', 'majoran', 'without garlic', 'Rosmarin', 'Lauchhuhn']) {
+  const s = securite({ ingredients: I(n), additifs: [] })
+  assert.equal(s.zero, null, n)
+  assert.equal(s.plafond, null, n)
+}
+for (const n of ['Traubenkernöl', 'Traubenkernextrakt', 'grape seed oil', 'Schokoladenaroma']) {
+  const s = securite({ ingredients: I(n), additifs: [] })
+  assert.equal(s.zero, null, n)
+  assert.equal(s.plafond?.valeur, 50, n)
+}
+// Noms étrangers : huiles
+for (const n of ['Lachsöl', 'Lachs Öl', 'salmon oil', 'Fischöl', 'fish oil', 'Rotes Lachsöl', 'Dorsch-Lebertranöl', 'Leinöl']) assert.equal(c(n), 'huile', n)
+for (const n of ['Lachs Sticks', 'Fischstäbchen']) assert.notEqual(c(n), 'huile', n)
+const hNom = (produit: string, ingredient: string) => noteHuile(E({ produit, ingredients: I(ingredient) }))
+for (const [p, i] of [['Rotes Lachsöl', '100 % natürliches rotes Lachsöl'], ['Salmon oil', 'salmon oil'], ['Fischöl', 'Fischöl'], ['Fish oil', 'fish oil']]) {
+  const r = hNom(p, i)
+  assert.ok(!/végétale/.test(r.plafond?.raison ?? ''), p)
+  assert.ok((r.criteres.find((x) => x.id === 'source')?.points ?? 0) >= 8, p)
+}
+assert.match(hNom('Hanföl', '100 % naturreines Hanföl').plafond?.raison ?? '', /végétale/)
+assert.match(hNom('Leinöl', 'Leinöl').plafond?.raison ?? '', /végétale/)
+assert.equal(hNom('Dorsch-Lebertranöl', '100 % Lebertranöl').criteres.find((x) => x.id === 'source')?.points, 10)
+// Prompt : champs obligatoires, section française, toxiques dans toutes les langues ; ancien prompt intact
+for (const k of ['tableauBrut', 'mentions', 'teneurs', 'stade', 'gabarit', 'ration10kgG', 'emballage']) assert.ok(LABEL_JSON_SCHEMA_V2.required?.includes(k), k)
+assert.ok(LABEL_INSTRUCTIONS_V2.includes('section française'))
+assert.ok(!LABEL_INSTRUCTIONS_V2.includes('Garde la langue et l\'orthographe'))
+assert.ok(LABEL_INSTRUCTIONS.includes('Garde la langue et l\'orthographe'))
+assert.ok(!(LABEL_JSON_SCHEMA.required ?? []).includes('tableauBrut'))
+assert.match(entreeDepuisLabel(L({ teneurs: ['EPA 12 %', 'DHA 8 %'] })).tableauBrut ?? '', /EPA 12 %.*DHA 8 %/)
+assert.equal(extraireEpaDha(entreeDepuisLabel(L({ teneurs: ['EPA 12 %', 'DHA 8 %'] })).tableauBrut ?? '').epaDhaPct, 20)
+// Rapport calcium/phosphore déclaré sans les deux valeurs (cas Elmut)
+const CPAT = (p: Partial<Entree>) => noteAliment(E({ ingredients: I('poulet'), constituants: C(28), ...p }))
+const crit = (r: ReturnType<typeof noteAliment>) => r.criteres.find((x) => x.id === 'calcium-phosphore')
+assert.equal(crit(CPAT({ rapportCaP: { min: 1.1, max: 1.4 } }))?.points, 6)
+assert.notEqual(CPAT({ rapportCaP: { min: 1.1, max: 1.4 } }).plafond?.valeur, 90)
+assert.equal(crit(CPAT({ rapportCaP: { min: 0.7, max: 0.9 } }))?.points, 0)
+assert.equal(crit(CPAT({}))?.points, null)
+assert.equal(CPAT({}).plafond?.valeur, 90)
+// Les deux valeurs écrites priment sur le rapport déclaré
+assert.equal(crit(CPAT({ constituants: { ...C(28), calcium: 1, phosphore: 0.8 }, rapportCaP: { min: 3, max: 4 } }))?.points, 6)
+// Pas de calcium pour les alertes chiot : l'alerte « non lu » reste, aucun plafond calcium
+const chiotDeclare = CPAT({ produit: 'Chiot grande race', constituants: C(30), rapportCaP: { min: 1.1, max: 1.4 } })
+assert.ok(chiotDeclare.alertes.some((a) => /calcium non lu/.test(a)))
+assert.notEqual(chiotDeclare.plafond?.valeur, 59)
+assert.equal(crit(CPAT({ produit: 'Chiot grande race', constituants: C(30), rapportCaP: { min: 1.5, max: 1.9 } }))?.points, 0)
+assert.equal(entreeDepuisLabel(L({ rapportCaP: { min: 1.1, max: 1.4 } })).rapportCaP?.max, 1.4)
+assert.ok(!Object.keys(parseExtractedLabel({})).includes('rapportCaP'))
+assert.ok(LABEL_JSON_SCHEMA_V2.required?.includes('rapportCaP'))
+// Garde-fou sur le petit texte
+const CH = (p: Partial<ExtractedLabel['constituants']>) => ({ ...SANS, ...p })
+assert.ok(chiffresIncoherents({ typeProduit: 'aliment', typeAliment: 'sec', constituants: CH({ proteines: 60, matieresGrasses: 30, cendres: 8, cellulose: 3, humidite: 10 }) }))
+assert.ok(chiffresIncoherents({ typeProduit: 'complement', typeAliment: 'autre', constituants: CH({ proteines: 90, cendres: 20 }) }))
+assert.ok(chiffresIncoherents({ typeProduit: 'aliment', typeAliment: 'sec', constituants: CH({ cellulose: 30 }) }))
+assert.ok(chiffresIncoherents({ typeProduit: 'aliment', typeAliment: 'humide', constituants: CH({ proteines: 30 }) }))
+assert.ok(chiffresIncoherents({ typeProduit: 'huile', typeAliment: 'autre', constituants: CH({ matieresGrasses: 40 }) }))
+assert.equal(chiffresIncoherents({ typeProduit: 'aliment', typeAliment: 'sec', constituants: CH({ proteines: 27, matieresGrasses: 17, cendres: 7.8, cellulose: 1.8 }) }), null)
+assert.equal(chiffresIncoherents({ typeProduit: 'aliment', typeAliment: 'humide', constituants: CH({ proteines: 9.8, matieresGrasses: 6.9, cendres: 1.7, cellulose: 0.4, humidite: 78 }) }), null)
+assert.equal(chiffresIncoherents({ typeProduit: 'huile', typeAliment: 'autre', constituants: CH({ matieresGrasses: 99.9 }) }), null)
+assert.equal(chiffresIncoherents({ typeProduit: 'complement', typeAliment: 'autre', constituants: CH({ proteines: 55, matieresGrasses: 6 }) }), null)
+assert.ok(differeDeLaFiche(CH({ proteines: 18.5 }), CH({ proteines: 55 })))
+assert.equal(differeDeLaFiche(CH({ cendres: 8.2 }), CH({ cendres: 7.9 })), null)
+assert.equal(differeDeLaFiche(CH({ proteines: 3.7 }), CH({ proteines: 4 })), null)
+assert.equal(differeDeLaFiche(CH({ proteines: 27 }), SANS), null)
+assert.deepEqual(classifyExtraction(L({ typeProduit: 'aliment', typeAliment: 'sec', constituants: CH({ cellulose: 30, proteines: 20 }) }), true), { kind: 'reject', code: 'recheck' })
+assert.equal(classifyExtraction(L({ constituants: CH({ cellulose: 30, proteines: 20 }) })).kind, 'complete')
+// Devant du paquet seul : on demande le dos, pas de note
+const devant = L({ ingredients: [], constituants: SANS, additifs: [], typeProduit: 'friandise', lisibilite: 'floue', produit: 'Snack', champsDouteux: [] })
+assert.deepEqual(classifyExtraction(devant, true).kind, 'incomplete')
+assert.equal(classifyExtraction(devant, false).kind, 'reject')
+for (const t of ['aliment', 'friandise', 'complement', 'huile'] as const) {
+  const r = analyseBaremes(L({ ingredients: [], typeProduit: t, produit: 'Recette' }))
+  assert.equal(r.score, null, t)
+  assert.equal(r.notice, MSG_DOS, t)
+}
+assert.equal(classifyExtraction(L({ ingredients: [], constituants: SANS, typeProduit: 'aliment', alimentVeterinaire: true }), true).kind, 'complete')
 console.log('tests : tout passe')

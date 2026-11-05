@@ -27,6 +27,8 @@ export interface Entree {
   emballage?: 'opaque' | 'transparent' | null
   /** Champ IA : aliment vétérinaire ou présenté pour une maladie */
   alimentVeterinaire?: boolean
+  /** Rapport calcium/phosphore déclaré par la marque, sans les deux valeurs. Jamais utilisé pour les alertes chiot */
+  rapportCaP?: { min: number; max: number } | null
   /** Champ IA : stade annoncé, sinon déduit du nom */
   stade?: Stade | null
   /** Champ IA : gabarit annoncé, sinon déduit du nom */
@@ -59,6 +61,8 @@ export const S = {
 
 /** Décision du propriétaire (2026-11-05) : compléments et huiles, une note et ce message, rien d'autre. */
 export const MSG_CONSEIL = "Attention, ce n'est pas un conseil de vétérinaire"
+/** Devant du paquet seul : pas de note, on demande le dos. */
+export const MSG_DOS = 'Prends une photo du dos du paquet, là où est écrite la composition.'
 export const MSG_VETERINAIRE = 'Aliment vétérinaire ou lié à une maladie : pas de note, à juger avec ton vétérinaire.'
 
 export const round1 = (n: number) => Math.round(n * 10) / 10

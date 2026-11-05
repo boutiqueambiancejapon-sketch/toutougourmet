@@ -6,16 +6,16 @@ import type { Entree } from './types'
 export interface Securite { zero: { raison: string } | null; plafond: { valeur: number; raison: string } | null; alertes: string[] }
 
 const TOXIQUES: { nom: string; re: RegExp; texte: string }[] = [
-  { nom: 'Xylitol', re: /(^|[^a-z0-9])(xylit\w*|xilitol|e[ -]?967|sucre de bouleau|birch sugar)([^a-z0-9]|$)/, texte: 'toxique pour le chien, même en petite quantité.' },
-  { nom: 'Raisin', re: /(^|[^a-z])(raisins?|sultanines?|grapes?)([^a-z]|$)/, texte: 'peut provoquer une insuffisance rénale chez le chien, sans dose sûre connue.' },
-  { nom: 'Chocolat ou cacao', re: /(^|[^a-z])(chocolats?|cacao|cocoa|chocolate|theobromine)([^a-z]|$)/, texte: 'le chien élimine très lentement la théobromine.' },
-  { nom: 'Macadamia', re: /(^|[^a-z])macadamias?([^a-z]|$)/, texte: 'provoque faiblesse, vomissements et fièvre chez le chien.' },
+  { nom: 'Xylitol', re: /(^|[^a-z0-9])(xylit\w*|xilitol|e[ -]?967|sucre de bouleau|birch sugar|birkenzucker)([^a-z0-9]|$)/, texte: 'toxique pour le chien, même en petite quantité.' },
+  { nom: 'Raisin', re: /(^|[^a-z])(raisins?|sultanines?|sultaninen?|grapes?|grapeseed|rosinen?|(?:wein)?trauben?\w*|uvas?|pasas)([^a-z]|$)/, texte: 'peut provoquer une insuffisance rénale chez le chien, sans dose sûre connue.' },
+  { nom: 'Chocolat ou cacao', re: /(^|[^a-z])(chocolats?|cacao|cocoa|chocolate|theobromine|schokolad\w*|kakao\w*|cioccolato)([^a-z]|$)/, texte: 'le chien élimine très lentement la théobromine.' },
+  { nom: 'Macadamia', re: /(^|[^a-z])macadamia\w*([^a-z]|$)/, texte: 'provoque faiblesse, vomissements et fièvre chez le chien.' },
 ]
-const ALLIUM = /(^|[^a-z])(oignons?|ail|aulx|echalotes?|poireaux?|ciboulette|onions?|garlic)([^a-z]|$)/
-const A_RELIRE = /extraits?|extract|seed|aromes?|flavou?r|pepins?|polyphenols?|proanthocyan/
+const ALLIUM = /(^|[^a-z])(oignons?|ail|aulx|echalotes?|poireaux?|ciboulette|onions?|garlic|knoblauch\w*|zwiebel\w*|barlauch\w*|schnittlauch|ajo|cebollas?|aglio|cipolla)([^a-z]|$)/
+const A_RELIRE = /extraits?|extract|extrakt|estratto|seed|kern|aromes?|aromas?|flavou?r|pepins?|polyphenols?|proanthocyan/
 
 /** Retire « sans chocolat », « sans gluten » : la négation porte sur un mot, pas sur le reste de la liste. */
-const sansNegation = (t: string) => t.replace(/\b(sans|without|free from)\s+(?:(?:ajouts?|traces?)\s+d[e ]\s*)?[a-z-]+(?:\s+(?:ni|ou)\s+[a-z-]+)*/g, ' ')
+const sansNegation = (t: string) => t.replace(/\b(sans|without|free from|ohne|sin|senza)\s+(?:(?:ajouts?|traces?)\s+d[e ]\s*)?[a-z-]+(?:\s+(?:ni|ou)\s+[a-z-]+)*/g, ' ')
 /** À relire seulement si chaque citation du toxique partage son segment avec un mot d'extrait ou d'arôme. */
 const formeARelire = (t: string, re: RegExp) => [...t.matchAll(new RegExp(re.source, 'g'))].every((m) => {
   const i = m.index ?? 0
@@ -23,8 +23,8 @@ const formeARelire = (t: string, re: RegExp) => [...t.matchAll(new RegExp(re.sou
   const f = t.slice(i + 1).search(/[,;()[\]]/)
   return A_RELIRE.test(t.slice(deb, f < 0 ? t.length : i + 1 + f))
 })
-/** Le sucre de raisin est du glucose. */
-const nettoyer = (brut: string) => sansNegation(normalize(brut)).replace(/sucres? de raisins?/g, ' ')
+/** Le sucre de raisin est du glucose, dans toutes les langues. */
+const nettoyer = (brut: string) => sansNegation(normalize(brut)).replace(/sucres? de raisins?|traubenzucker|grape sugar|azucar de uva|zucchero d uva/g, ' ')
 
 export function securite(e: Pick<Entree, 'ingredients' | 'additifs'>): Securite {
   const items = [

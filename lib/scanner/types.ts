@@ -108,6 +108,9 @@ export const extractedLabelSchema = z.object({
   gabarit: z.enum(DOG_SIZES).nullable().optional().catch(null),
   alimentVeterinaire: z.boolean().nullable().optional().catch(null),
   tableauBrut: text(1500).optional(),
+  teneurs: z.array(z.string()).optional().catch(undefined),
+  /** Rapport calcium/phosphore annoncé sans les deux valeurs. Une seule valeur : min = max. */
+  rapportCaP: z.object({ min: z.number().positive().max(20), max: z.number().positive().max(20) }).nullable().optional().catch(null),
   rationLue: z.boolean().nullable().optional().catch(null),
   ration10kgG: bounded(2_000).optional(),
   mentions: text(500).optional(),
@@ -162,6 +165,7 @@ export type ScannerErrorCode =
   | 'bad_type'
   | 'not_a_label'
   | 'blurry'
+  | 'recheck'
   | 'cat_food'
   | 'not_found'
   | 'timeout'

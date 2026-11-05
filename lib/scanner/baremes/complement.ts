@@ -11,7 +11,7 @@ export interface Actif { id: string; libelle: string; re: RegExp }
 
 /** Actifs reconnus : sert seulement à vérifier que leur teneur est écrite. */
 export const ACTIFS: Actif[] = [
-  { id: 'epa-dha', libelle: 'EPA et DHA', re: /\b(epa|dha)\b|acide eicosapentaenoique|huile de (poisson|saumon)|schizochytrium|krill/ },
+  { id: 'epa-dha', libelle: 'EPA et DHA', re: /\b(epa|dha)\b|acide eicosapentaenoique|huile de (poisson|saumon)|fisch ?ol|lachs ?ol|fish oil|salmon oil|schizochytrium|krill/ },
   { id: 'moule-verte', libelle: 'Moule aux lèvres vertes', re: /moules? (verte|aux (levres|orles))|levres vertes|orles verts|\bglm\b/ },
   { id: 'sf68', libelle: 'Enterococcus faecium SF68', re: /sf ?68|enterococcus faecium/ },
   { id: 'tryptophane', libelle: 'Tryptophane ou alpha-casozépine', re: /tryptophane|casozepine/ },
@@ -77,7 +77,7 @@ export function noteComplement(e: Entree): Resultat {
   // Foie de morue seulement : « foie » seul désigne souvent un foie de volaille.
   const mgNrc = mgEpaDha10kg(extraireEpaDha(epaDhaTexte), e.ration10kgG)
   const alertes = [
-    ...(/morue|cod liver/.test(`${compo} ${normalize(e.produit ?? '')}`) ? [ALERTE_MORUE] : []),
+    ...(/morue|cod liver|lebertran|dorsch/.test(`${compo} ${normalize(e.produit ?? '')}`) ? [ALERTE_MORUE] : []),
     ...(mgNrc !== null && mgNrc > NRC_LIMITE_10KG ? [ALERTE_LIMITE_NRC] : []),
   ]
   return total('complement', c, {

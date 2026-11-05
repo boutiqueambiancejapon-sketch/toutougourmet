@@ -5,7 +5,7 @@ import { noteFriandise } from './friandise'
 import { noteHuile } from './huile'
 import { estHumide, matiereSeche } from './matiere-seche'
 import { securite } from './securite'
-import { MSG_CONSEIL, MSG_VETERINAIRE, vide, type Entree, type Resultat, type TypeProduit } from './types'
+import { MSG_CONSEIL, MSG_DOS, MSG_VETERINAIRE, vide, type Entree, type Resultat, type TypeProduit } from './types'
 import { estVeterinaire } from './veterinaire'
 
 // @cdc scanner — porte d'entrée des quatre barèmes.
@@ -16,6 +16,7 @@ export function noter(e: Entree, type: TypeProduit = classer(e)): Resultat {
   if (type === 'autre') return vide('autre', 'Ce produit ne se mange pas : pas de note.')
   if (estVeterinaire(e)) return vide(type, MSG_VETERINAIRE, sec.alertes)
   if (type === 'indetermine') return vide('indetermine', 'Type de produit incertain : pas de note.', sec.alertes)
+  if (e.ingredients.length === 0) return vide(type, MSG_DOS, sec.alertes)
   if (sec.zero) return { type, note: 0, fiabilite: 'haute', criteres: [], plafond: { valeur: 0, raison: sec.zero.raison }, alertes: sec.alertes, message: type === 'complement' || type === 'huile' ? `${sec.zero.raison} ${MSG_CONSEIL}` : sec.zero.raison, horsClassement: true }
   const r = type === 'aliment' ? noteAliment(e) : type === 'friandise' ? noteFriandise(e) : type === 'complement' ? noteComplement(e) : noteHuile(e)
   const alertes = [...sec.alertes, ...r.alertes]
