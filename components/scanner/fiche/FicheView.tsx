@@ -22,6 +22,8 @@ import { toScanAnalysis } from '@/lib/scanner/result'
 import { ALTERNATIVE_BELOW, alternativesFor, brandSlug } from '@/lib/scanner/seo'
 import { betterAtMaxiZoo } from '@/lib/server/scanner-catalog'
 import { reviewedItemsSafe } from '@/lib/server/scanner-catalog'
+import { h1Fiche } from '@/lib/scanner/fiche-texte'
+import { currentYear } from '@/lib/title-year'
 import { titleTypo } from '@/lib/title-typo'
 
 import { marquePage } from '@/data/marque-pages'
@@ -48,7 +50,7 @@ export async function FicheView({ row, indexee, path }: { row: FoodAnalysis; ind
   const name = [a.brand, a.product].filter(Boolean).join(' ') || 'Produit sans nom lisible'
   const nom = ficheNom(a.brand, a.product, indexee) ?? name
   const buy = buyLink({ ...a, buyUrl: row.buyUrl })
-  const h1 = indexee ? indexee.nom : a.product ? `${a.product}${a.brand ? ` (${a.brand})` : ''} : notre analyse` : `${a.brand ?? words.unnamed} : notre analyse`
+  const h1 = indexee ? h1Fiche(indexee.nom, currentYear()) : a.product ? `${a.product}${a.brand ? ` (${a.brand})` : ''} : notre analyse` : `${a.brand ?? words.unnamed} : notre analyse`
   const date = row.createdAt.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' })
   const bSlug = brandSlug(a.brand)
   const brandListed = bSlug !== null && (await reviewedItemsSafe('complete')).some((it) => it.brandSlug === bSlug)
