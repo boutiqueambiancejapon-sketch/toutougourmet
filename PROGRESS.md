@@ -1,6 +1,7 @@
 # Progression — Toutou Gourmet — màj à chaque fin de session
 
 ## Complété
+- 2026-11-05 · Barèmes raccordés aux classements, listes, fiche, PDF et images derrière `BAREMES_ACTIFS` (éteint, branche `feat/baremes`). Recalcul à blanc de 634 fiches : `~/audits/baremes-2026-11-05/recalcul/comparatif.md`, page `/maquettes/baremes-comparatif/`.
 - 2026-11-05 · Quatre barèmes portés dans `lib/scanner/baremes/` (branche `feat/baremes`, non fusionnée, interrupteur `BAREMES_ACTIFS` éteint). Tests : `npx tsx scripts/test-baremes.ts`. Mesure sur photos : `~/audits/baremes-2026-11-05/resultats-ia.md`.
 - 2026-11-05 · Dog Chef : recettes renommées Bœuf et poulet, Agneau et dinde, calories des croquettes ajoutées, texte parasite retiré. Bilan des fiches : `~/audits/baremes-2026-11-05/donnees/bilan.md`.
 - 2026-11-05 · Santé : seuil de 40 mg pour 100 kcal retiré faute de source, volumes d'huile remplacés par un renvoi (article saumon ou vétérinaire), phrases SF68 alignées.
