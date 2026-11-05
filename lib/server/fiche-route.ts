@@ -36,6 +36,12 @@ export async function ficheDeLAdresse(type: FicheType, slug: string): Promise<Fi
   return row ? { row, path: `/croquettes/${row.slug}` } : null
 }
 
+/** Le nom exact d'abord : « composition » saute si le titre dépasserait 60 signes. */
+const titreIndexee = (nom: string, note: string | null): string => {
+  const long = `${nom} : composition et note ${note}`
+  return long.length <= 60 ? long : `${nom} : note ${note}`
+}
+
 export function ficheMetadata(f: FicheTrouvee | null): Metadata {
   if (!f) return { title: 'Fiche introuvable', robots: { index: false, follow: false } }
   const { row, indexee, path } = f
@@ -49,7 +55,7 @@ export function ficheMetadata(f: FicheTrouvee | null): Metadata {
   const what = treat ? 'premier ingrédient, part de viande, sucre, sel et additifs' : 'protéines et glucides sur matière sèche, premier ingrédient, additifs'
   const note = row.score !== null ? `${row.score}/100` : null
   return {
-    title: { absolute: indexee ? `${indexee.nom} : composition et note ${note}` : ficheTitle(row.brand, row.product, row.score, noun) },
+    title: { absolute: indexee ? titreIndexee(indexee.nom, note) : ficheTitle(row.brand, row.product, row.score, noun) },
     description: (indexee
       ? `Composition de ${indexee.nom} : premier ingrédient${prot !== null ? `, ${Math.round(prot)} % de protéines une fois l'eau retirée` : ''}, additifs et note de ${note} selon notre barème publié.`
       : `Avis et composition de ${name} : ${what}${note ? `, note de ${note}` : ''} selon notre barème publié.`
