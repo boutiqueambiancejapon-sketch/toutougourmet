@@ -1,4 +1,5 @@
-import { LABEL_INSTRUCTIONS, LABEL_JSON_SCHEMA, type JsonSchema } from '../label-schema'
+import { labelPrompt, type LabelPrompt } from '../baremes/lecture-ia'
+import type { JsonSchema } from '../label-schema'
 import { parseExtractedLabel, ScannerError, type LabelImage, type LabelProvider } from '../types'
 
 // @cdc lot 6 — fournisseur Gemini (API REST generateContent, sans SDK) : sortie JSON imposée par
@@ -102,30 +103,34 @@ export async function geminiJson({ system, message, schema, model, maxOutputToke
   return { text, inputTokens: usage?.promptTokenCount ?? 0, outputTokens: (usage?.candidatesTokenCount ?? 0) + (usage?.thoughtsTokenCount ?? 0), model: `gemini:${used}` }
 }
 
+/** Corps de la requête de lecture d'une étiquette : même format pour l'ancien et le nouveau prompt. */
+export function labelRequestBody(images: LabelImage[], model: string, prompt: LabelPrompt) {
+  return {
+    systemInstruction: { parts: [{ text: prompt.system }] },
+    contents: [
+      {
+        role: 'user',
+        parts: [
+          ...images.map((img) => ({ inlineData: { mimeType: img.mimeType, data: img.data.toString('base64') } })),
+          { text: 'Recopie cette étiquette au format demandé.' },
+        ],
+      },
+    ],
+    generationConfig: {
+      temperature: 0,
+      maxOutputTokens: 4096,
+      responseMimeType: 'application/json',
+      responseSchema: toGeminiSchema(prompt.schema),
+      ...(model.startsWith('gemini-2.5') ? { thinkingConfig: { thinkingBudget: 0 } } : {}),
+    },
+  }
+}
+
 export const geminiProvider: LabelProvider = {
   name: 'gemini',
   async extract(images: LabelImage[], signal: AbortSignal) {
     const model = process.env.GEMINI_SCANNER_MODEL || DEFAULT_GEMINI_MODEL
-    const body = {
-      systemInstruction: { parts: [{ text: LABEL_INSTRUCTIONS }] },
-      contents: [
-        {
-          role: 'user',
-          parts: [
-            ...images.map((img) => ({ inlineData: { mimeType: img.mimeType, data: img.data.toString('base64') } })),
-            { text: 'Recopie cette étiquette au format demandé.' },
-          ],
-        },
-      ],
-      generationConfig: {
-        temperature: 0,
-        maxOutputTokens: 4096,
-        responseMimeType: 'application/json',
-        responseSchema: toGeminiSchema(LABEL_JSON_SCHEMA),
-        ...(model.startsWith('gemini-2.5') ? { thinkingConfig: { thinkingBudget: 0 } } : {}),
-      },
-    }
-    const { text, finishReason } = await postGenerate(model, body, signal)
+    const { text, finishReason } = await postGenerate(model, labelRequestBody(images, model, labelPrompt()), signal)
     let raw: unknown
     try {
       raw = JSON.parse(text)

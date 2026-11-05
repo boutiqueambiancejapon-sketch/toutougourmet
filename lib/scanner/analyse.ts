@@ -1,3 +1,5 @@
+import { BAREMES_ACTIFS, BAREMES_VERSION } from './baremes/config'
+import { analyseBaremes } from './baremes/vers-score'
 import { kindOf, scoreLabel, SCORE_VERSION, type ProductKind, type ScoreResult } from './score'
 import { scoreTreat, TREAT_SCORE_VERSION } from './score-treat'
 import type { ExtractedLabel } from './types'
@@ -9,9 +11,10 @@ import type { ExtractedLabel } from './types'
 export const productKind = (label: Pick<ExtractedLabel, 'typeImage'>): ProductKind => (label.typeImage === 'friandise' ? 'treat' : 'complete')
 
 /** Version du barème qui s'applique à cette étiquette (recalcul en cache si elle a changé). */
-export const scoreVersionFor = (label: Pick<ExtractedLabel, 'typeImage'>) => (productKind(label) === 'treat' ? TREAT_SCORE_VERSION : SCORE_VERSION)
+export const scoreVersionFor = (label: Pick<ExtractedLabel, 'typeImage'>) => (BAREMES_ACTIFS ? BAREMES_VERSION : productKind(label) === 'treat' ? TREAT_SCORE_VERSION : SCORE_VERSION)
 
 export function analyseLabel(label: ExtractedLabel): ScoreResult {
+  if (BAREMES_ACTIFS) return analyseBaremes(label)
   return productKind(label) === 'treat' ? scoreTreat(label) : scoreLabel(label)
 }
 

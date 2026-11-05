@@ -293,3 +293,6 @@ Classements séparés sec et humide. Fiches partenaires revérifiées et fiches 
 
 ## 2026-11-05 — Dogfy Diet : une seule page
 L'avis `avis-dogfy-diet-repas-frais-chien` avait les positions (5 554 impressions, position 10,4) et la page marque 4 impressions : celle-ci redirige vers l'avis, qui reprend son contenu (`BrandHubBlock`). Rappel de décembre 2024 retiré de la page Ultra Premium Direct, jugé daté par le propriétaire.
+
+## 2026-11-05 — Barèmes du scanner : branche `feat/baremes`, interrupteur éteint
+Les quatre barèmes vivent dans `lib/scanner/baremes/`, derrière `BAREMES_ACTIFS = false` (`config.ts`) : ancien barème et ancien prompt tant qu'il reste faux, l'ancien code n'est pas supprimé. Compléments et huiles affichent la note et « Attention, ce n'est pas un conseil de vétérinaire », sans détail, études ni tranche. Le rappel sur le foie de morue et le dépassement NRC sont retirés de l'affichage pour cette raison ; les alertes de sécurité (toxiques, oignon et ail) restent. Avant d'activer : raccorder les classements (sec, humide, friandise, via `details.bareme.classement`), sortir compléments et huiles des listes publiques et des pages `/croquettes`, résultats de `resultats-ia.md` lus par le propriétaire.
