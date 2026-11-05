@@ -1,5 +1,7 @@
 // Tests des classements : une recette par ligne, noms lisibles, segments.
 import assert from 'node:assert/strict'
+import { existsSync } from 'node:fs'
+import { MODEL_REVIEWS, recipeHref } from '../data/model-reviews'
 import { extractClassement } from '../lib/mdx'
 import { isSupplementName, capByBrand, displayBrand, displayName, recipeKey, recipeName, segmentBySlug } from '../lib/scanner/rankings'
 
@@ -32,4 +34,9 @@ assert.ok(!after.content.includes('Classement'))
 assert.equal(extractClassement('## TL;DR\n').segment, null)
 assert.ok(isSupplementName('Compléments Articulations & Vieillissement Friandises'))
 assert.ok(!isSupplementName('Sticks Chien Adulte Poulet'))
+assert.equal(recipeKey('Dog Chef', 'Croquettes au canard frais 2 kg') in MODEL_REVIEWS, true)
+assert.equal(recipeKey('Franklin Pet Food', 'Croquettes Dinde, patate douce, épinards') in MODEL_REVIEWS, true)
+assert.equal(recipeHref('dog chef|croquettes au canard frais', 'x'), '/chien/avis-marques/avis-dog-chef-croquettes-canard-frais')
+assert.equal(recipeHref('inconnu', 'fiche-x'), '/croquettes/fiche-x')
+for (const href of Object.values(MODEL_REVIEWS)) assert.ok(existsSync(`content/blog/${href.split('/').pop()}.mdx`), href)
 console.log('test-rankings : tout passe')

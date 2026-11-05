@@ -1,6 +1,7 @@
 # Progression — Toutou Gourmet — màj à chaque fin de session
 
 ## Complété
+- 2026-11-05 · Pages mères Elmut, Ultra Premium Direct et Dogfy Diet (`data/brand-hub.ts`), chiffres corrigés sur sources lues le 5 novembre, lignes de classement reliées aux avis de modèle (`data/model-reviews.ts`).
 - 2026-11-05 · Page mère Franklin (`data/brand-hub.ts`), « notre test » retiré des titres, descriptions et liens, compléments sortis des classements. Prochain gros chantier : quatre barèmes du scanner (`tasks/todo.md`).
 - 2026-11-05 · Barre collante Maxi Zoo sur 4 articles compléments (`stickyProduct`), à mesurer dans les clics partenaires.
 - 2026-11-05 · Même composant pour les classements des pages et des articles (`RankingBody`). Cluster compléments Maxi Zoo au calendrier (12 sujets, un article transactionnel sur 8).

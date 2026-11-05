@@ -211,8 +211,8 @@ export const PROMO_PAGES: PromoPage[] = [
     ],
     conditions: [
       'La remise porte sur la première commande en abonnement.',
-      "L'abonnement est sans engagement.",
-      'Livraison en 2 à 4 jours ouvrés, gratuite dès 49 €.',
+      "L'abonnement demande d'accepter au moins 2 livraisons, selon la fiche produit lue le 5 novembre 2026.",
+      "Livraison gratuite dès 64 € d'achat au 5 novembre 2026.",
     ],
     fit: "Ultra Premium Direct vend ses croquettes en direct, environ 3 à 5 € le kilo : le prix au kilo le plus bas de notre sélection. Notre fiche le conseille pour un chien adulte sans souci particulier, quand le budget compte. Certaines recettes contiennent des pois et montent à 35 % de glucides sur matière sèche.",
     links: [
@@ -223,11 +223,11 @@ export const PROMO_PAGES: PromoPage[] = [
     faqs: [
       {
         q: 'La remise Ultra Premium Direct marche-t-elle sans abonnement ?',
-        a: "Non. Les 20 % portent sur la première commande en abonnement. L'abonnement est sans engagement.",
+        a: "Non. Les 20 % portent sur la première commande en abonnement. La fiche produit demande d'accepter au moins 2 livraisons.",
       },
       {
         q: 'Où sont fabriquées les croquettes Ultra Premium Direct ?',
-        a: "L'enrobage final est fait à Agen. Les croquettes semi-finies viennent de sous-traitants européens : elles ne sont pas fabriquées à 100 % en France.",
+        a: "La fiche indique « Fabriqué en France », sans nom ni adresse d'usine. Le lieu de cuisson n'est donc pas précisé.",
       },
     ],
   },
