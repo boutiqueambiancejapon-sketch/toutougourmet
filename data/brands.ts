@@ -84,7 +84,7 @@ export const brands: Brand[] = [
       format: 'Croquettes et pâtées',
       madeIn: 'République tchèque (recettes formulées à Paris)',
       delivery: "Colis, gratuit dès 49 € en point relais avec l'abonnement",
-      strength: 'Une seule source de viande par recette',
+      strength: 'Sans céréales, jusqu’à 70 % de viande',
       bestFor: 'Chien allergique ou à la digestion sensible',
     },
   },

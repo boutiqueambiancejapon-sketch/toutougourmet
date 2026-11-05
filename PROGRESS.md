@@ -184,3 +184,7 @@ Décision du propriétaire : publication directe, sans relecture, après accord 
 ## 2026-11-05 : Vérification de 7 points signalés par la réécriture
 
 Hypertension (ACVIM 2018 lu en texte intégral : traitement confirmé, seuils chiffrés de sodium, potassium et oméga-3 sans source retirés, verdict Franklin retiré), Boxer (Franklin retiré : la marque est sans céréales), Belcando, olives, krill (Bauer 2011), Orijen, Dogue allemand (37 à 42 %). Sources : `git log`. Reste : Elmut encore premier choix du Boxer malgré la règle Dog Chef d'abord, à trancher.
+
+## 2026-11-05 : Franklin confronté à ses fiches officielles
+
+3 fiches lues sur franklinpetfood.com (Dinde Saumon Valériane, Dinde Patate douce Épinards, Canard Pomme Carotte) : sans céréales confirmé. Faux et corrigés : glucides 15-22 % (diabète), phosphore et magnésium « naturellement bas » (rein, calculs, infections), « toutes les recettes mono-protéine », insectes et lapin. Liens Franklin retirés de 4 articles médicaux (diabète, rein, calculs, infections). Non vérifié : digestibilité 85-90 %, vétérinaire nutritionniste, les 5 autres recettes (site limité en requêtes).

@@ -161,14 +161,14 @@ export const PROMO_PAGES: PromoPage[] = [
     slug: 'franklin',
     title: 'Code promo Franklin Pet Food : −30 % en abonnement',
     description:
-      "Franklin Pet Food : −30 % en abonnement, par notre lien, sans code à taper. Croquettes mono-protéine. Offre vérifiée le 2 novembre 2026.",
+      "Franklin Pet Food : −30 % en abonnement, par notre lien, sans code à taper. Croquettes sans céréales. Offre vérifiée le 2 novembre 2026.",
     h1: 'Code promo Franklin Pet Food : −30 % en abonnement',
     intro:
       "Franklin Pet Food retire 30 % du prix quand tu commandes en abonnement par notre lien. Il n'y a pas de code à taper : la remise est rattachée au lien.",
     code: null,
     steps: [
       'Ouvre Franklin Pet Food par notre lien : la remise de 30 % y est rattachée.',
-      'Choisis la recette selon la viande que ton chien supporte : une seule source de viande par recette.',
+      'Choisis la recette selon la viande que ton chien supporte, et lis sa composition : certaines associent deux espèces.',
       "Choisis l'abonnement, pas l'achat simple : la remise porte sur l'abonnement.",
       "Vérifie la ligne −30 % dans le récapitulatif avant de payer. Si elle manque, ne valide pas la commande.",
     ],
@@ -177,7 +177,7 @@ export const PROMO_PAGES: PromoPage[] = [
       "L'abonnement est sans engagement.",
       "Livraison gratuite dès 49 € en point relais avec l'abonnement.",
     ],
-    fit: "Franklin fait des croquettes et des pâtées avec une seule source de viande par recette, jusqu'à 70 % de viande. Notre fiche le conseille pour un chien allergique ou à la digestion sensible. Les recettes sont formulées à Paris et fabriquées en République tchèque. Prévois une transition de 10 jours au moins.",
+    fit: "Franklin fait des croquettes et des pâtées sans céréales, jusqu'à 70 % de viande. Notre fiche le conseille pour un chien allergique ou à la digestion sensible. Les recettes sont formulées à Paris et fabriquées en République tchèque. Prévois une transition de 10 jours au moins.",
     links: [
       { href: '/chien/avis-marques/avis-franklin-light-dinde-patate-douce-epinards', label: 'Notre test de la recette Franklin Light' },
       { href: '/chien/marque/franklin', label: 'Avis Franklin Pet Food : prix, recettes, points faibles' },
