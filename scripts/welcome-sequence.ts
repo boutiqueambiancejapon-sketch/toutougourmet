@@ -91,7 +91,7 @@ async function main(): Promise<void> {
       const contact = byEmail.get(email)
       const step = stepForAddress(
         {
-          contact: contact ? { createdAt: contact.createdAt, blacklisted: contact.blacklisted } : null,
+          contact: contact ? { createdAt: contact.createdAt, blacklisted: contact.blacklisted, source: contact.source } : null,
           account: accounts.get(email) ?? null,
           sent: sent.get(hash) ?? new Set(),
           optedOut: optOuts?.has(hash) ?? false,
