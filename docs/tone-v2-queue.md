@@ -334,16 +334,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `recette-croquettes-maison-chien`
 - [x] `croquettes-chien-douleurs-articulaires`
 - [x] `huile-krill-chien-bienfaits-dosage`
-- [ ] `just-russel-vs-japhy`
-- [ ] `nourriture-berger-des-shetland`
-- [ ] `nourriture-dalmatien`
-- [ ] `budget-alimentation-chien-par-mois`
-- [ ] `nourriture-doberman`
-- [ ] `nourriture-saint-bernard`
-- [ ] `quand-promener-chien-apres-manger`
-- [ ] `avis-buddy-pet-foods`
-- [ ] `avis-happy-dog`
-- [ ] `chien-peut-manger-endives`
+- [x] `just-russel-vs-japhy`
+- [x] `nourriture-berger-des-shetland`
+- [x] `nourriture-dalmatien`
+- [x] `budget-alimentation-chien-par-mois`
+- [x] `nourriture-doberman`
+- [x] `nourriture-saint-bernard`
+- [x] `quand-promener-chien-apres-manger`
+- [x] `avis-buddy-pet-foods`
+- [x] `avis-happy-dog`
+- [x] `chien-peut-manger-endives`
 - [ ] `chien-peut-manger-mais`
 - [ ] `congeler-repas-maison-chien-guide`
 - [ ] `croquettes-chien-dysplasie-hanche`
