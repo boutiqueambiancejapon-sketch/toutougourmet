@@ -137,7 +137,7 @@ export function ScanOgCard(d: ScanCardData) {
           <span style={{ fontFamily: 'Fraunces', fontWeight: 900, fontSize: productSize(d.product) * 0.82, lineHeight: 1.02, letterSpacing: -1.5, color: C.ink }}>{clip(d.product, 70)}</span>
           {d.brand ? <span style={{ fontWeight: 700, fontSize: 34, color: C.ink2 }}>{clip(d.brand, 40)}</span> : null}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 10 }}>
-            {(d.notes ? d.notes.slice(0, 2).map((t) => ({ t: clip(t, 70), bg: C.rose, ink: C.roseInk })) : [...d.strengths.map((t) => ({ t, bg: C.green, ink: C.greenInk })), ...d.weaknesses.map((t) => ({ t, bg: C.rose, ink: C.roseInk }))].slice(0, 3)).map((p) => (
+            {(d.notes ? d.notes.slice(0, 2).map((t) => ({ t: clip(t, 110), bg: C.rose, ink: C.roseInk })) : [...d.strengths.map((t) => ({ t, bg: C.green, ink: C.greenInk })), ...d.weaknesses.map((t) => ({ t, bg: C.rose, ink: C.roseInk }))].slice(0, 3)).map((p) => (
               <span key={p.t} style={{ display: 'flex', background: p.bg, color: p.ink, fontWeight: 700, fontSize: 24, padding: '8px 18px', borderRadius: 999 }}>{p.t}</span>
             ))}
           </div>

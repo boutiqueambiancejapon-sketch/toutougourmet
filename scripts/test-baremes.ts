@@ -371,6 +371,8 @@ for (const l of [huileLue, complementLu, vetLu]) assert.equal(horsListes(allume(
 assert.equal(horsListes(allume(lueAliment)), false)
 for (const l of [huileLue, complementLu, vetLu, L({ typeProduit: 'friandise', ingredients: [{ nom: 'poulet', pourcentage: null }, { nom: 'xylitol', pourcentage: null }] })]) assert.equal(sansDetail(allume(l)), true)
 assert.equal(sansDetail(allume(lueAliment)), false)
+// Note de 0 : pas de nombre de friandises par jour
+assert.equal(allume(L({ typeProduit: 'friandise', ingredients: [{ nom: 'poulet', pourcentage: null }, { nom: 'chocolat', pourcentage: null }] })).treat, undefined)
 // PDF : ni critère, ni composition, ni alternative ; le message et les alertes
 const a4Huile = ficheA4Data(row(huileLue))
 assert.equal(a4Huile.simple, true)

@@ -55,8 +55,8 @@ export function noteAliment(e: Entree): Resultat {
   const pMin = croissance ? 0.9 : 0.4
   const rMax = croissance ? (petit ? 1.8 : 1.6) : 2
   if (croissance && ms.ca !== null && ms.ca > caMax) {
-    pl.baisser(59, `Calcium au-dessus de ${caMax} % sur sec pour ce chiot.`)
-    alertes.push(`Chiot : calcium à ${fmt(ms.ca)} % sur sec, au-dessus du maximum FEDIAF de ${caMax} % pour ce profil.`)
+    pl.baisser(59, `Calcium au-dessus de ${fmt(caMax)} % sur sec pour ce chiot.`)
+    alertes.push(`Chiot : calcium à ${ms.ca.toLocaleString('fr-FR', { maximumFractionDigits: 2 })} % sur sec, au-dessus du maximum FEDIAF de ${fmt(caMax)} % pour ce profil.`)
   }
   if (croissance && grand && ms.ca === null) alertes.push('Chiot de grande race : calcium non lu, à vérifier sur l\'emballage.')
   // Décision du propriétaire : sans les deux valeurs, le rapport déclaré par la marque rapporte ses points,

@@ -110,7 +110,7 @@ export function ficheA4Data(row: FoodAnalysis): FicheA4Data {
   const noun = foodNoun(label, d)
   return {
     name: clipWords(row.product ?? row.brand ?? 'Produit sans nom lisible', 90),
-    meta: [noun === 'croquettes' || noun === 'aliment' ? null : NOUNS[noun].title, row.product ? row.brand : null, row.ean ? `code-barres ${row.ean}` : null, `fiche du ${date}`].filter(Boolean).join(' · '),
+    meta: [noun === 'croquettes' || noun === 'aliment' || sansDetail(d) ? null : NOUNS[noun].title, row.product ? row.brand : null, row.ean ? `code-barres ${row.ean}` : null, `fiche du ${date}`].filter(Boolean).join(' · '),
     these: NOUNS[noun].these,
     score: d.score,
     band: d.band ? BAND_SHORT[d.band] : null,

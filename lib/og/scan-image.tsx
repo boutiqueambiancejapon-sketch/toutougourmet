@@ -43,7 +43,7 @@ async function cardData(input: ScanImageInput): Promise<ScanCardData> {
     credit: openDataCredit(input.source) ?? 'Lecture automatique, vérifie sur ton sac',
     dog,
     qr: qrDataUri(SCANNER_URL),
-    tag: simple ? 'Note sur 100' : words.tag,
+    tag: simple ? (input.details.score === null ? 'Scanner' : 'Note sur 100') : words.tag,
     cta: simple ? 'Scanne ton produit' : words.cta,
   }
 }

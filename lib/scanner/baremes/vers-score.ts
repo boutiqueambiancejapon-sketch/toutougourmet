@@ -87,7 +87,8 @@ function versScore(l: ExtractedLabel, e: Entree, r: Resultat): ScoreResult {
     assumptions: simple ? [] : [...(hSupposee ? [`Humidité non indiquée : on retient ${ms?.h} %, valeur courante des croquettes.`] : []), ...(plafonne && r.plafond ? [r.plafond.raison] : [])],
     dryMatter: ms && ms.h !== null ? { proteines: nul1(ms.prot), matieresGrasses: nul1(ms.mg), glucides: nul1(ms.glu) } : null,
     notice: r.message,
-    ...(r.type === 'friandise' ? { treat: { allowance: treatAllowance(l.energie), alerts: treatAlerts(texts) } } : {}),
+    // Note de 0 : pas de nombre de friandises par jour pour un produit à ne pas donner.
+    ...(r.type === 'friandise' && !zero ? { treat: { allowance: treatAllowance(l.energie), alerts: treatAlerts(texts) } } : {}),
     bareme: { type: r.type, simple, classement: classementDe(e, r), horsClassement: r.horsClassement, fiabilite: r.fiabilite },
     alertes: r.alertes,
   }
