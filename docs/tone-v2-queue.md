@@ -264,16 +264,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `alimentation-beau-pelage-chien-guide`
 - [x] `croquettes-chien-sportif`
 - [x] `chien-peut-manger-beurre-de-cacahuete`
-- [ ] `croquettes-chien-constipation`
-- [ ] `torsion-estomac-chien-prevention-alimentation`
-- [ ] `nourriture-samoyed`
-- [ ] `avis-acana`
-- [ ] `recette-patee-maison-agneau-chien`
-- [ ] `nourriture-chow-chow`
-- [ ] `chien-vomit-apres-manger-causes`
-- [ ] `chien-peut-manger-carottes`
-- [ ] `chien-peut-manger-mangue`
-- [ ] `croquettes-chien-intolerant-cereales`
+- [x] `croquettes-chien-constipation`
+- [x] `torsion-estomac-chien-prevention-alimentation`
+- [x] `nourriture-samoyed`
+- [x] `avis-acana`
+- [x] `recette-patee-maison-agneau-chien`
+- [x] `nourriture-chow-chow`
+- [x] `chien-vomit-apres-manger-causes`
+- [x] `chien-peut-manger-carottes`
+- [x] `chien-peut-manger-mangue`
+- [x] `croquettes-chien-intolerant-cereales`
 - [ ] `canneberge-chien-infection-urinaire-efficacite`
 - [ ] `note-etat-corporel-chien-evaluer-maison`
 - [ ] `alimentation-chien-hiver-froid-guide`
