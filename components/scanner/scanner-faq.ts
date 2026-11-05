@@ -26,7 +26,7 @@ export function scannerFaq(monthlyLimit: number): FaqEntry[] {
     {
       question: 'Le scanner note-t-il les friandises pour chien ?',
       answer:
-        "Oui, avec un barème à part sur 100 points, publié dans la méthode : viande ou poisson nommé en premier, part de viande déclarée, ni sucre ni sel ajoutés, pas de colorant, de conservateur sans nom ni d'arôme artificiel, liste courte, ni glycérine ni farine en tête. Si l'étiquette donne les calories, le résultat indique combien en donner par jour selon le gabarit, sans dépasser 10 % de l'apport calorique (FEDIAF). Xylitol, raisin, chocolat, oignon ou ail, peau de buffle et os cuits déclenchent une alerte.",
+        "Oui, avec un barème à part sur 100 points, publié dans la méthode : viande ou poisson nommé en premier, part de viande déclarée, ni sucre ni sel ajoutés, pas de colorant, de conservateur sans nom ni d'arôme artificiel, liste courte, ni glycérine ni farine en tête. Si l'étiquette donne les calories, le résultat indique combien en donner par jour selon le gabarit, sans dépasser 10 % de l'apport calorique (repère courant des vétérinaires). Xylitol, raisin, chocolat, oignon ou ail, peau de buffle et os cuits déclenchent une alerte.",
     },
     {
       question: 'La note convient-elle à un chiot ou à un chien malade ?',

@@ -55,7 +55,7 @@ export interface TreatAllowanceRow {
   label: string
   weightKg: number
   dailyKcal: number
-  /** 10 % du besoin du jour (FEDIAF) */
+  /** 10 % du besoin du jour (repère WSAVA) */
   capKcal: number
   /** Friandises par jour (null si le poids ou l'énergie d'une pièce manque) */
   pieces: number | null

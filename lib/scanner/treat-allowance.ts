@@ -3,12 +3,12 @@ import type { TreatInfo, TreatAllowanceRow } from './score'
 import type { LabelEnergy } from './types'
 
 // @cdc lot 6 — combien de friandises par jour, par gabarit. Plafond : 10 % de l'apport calorique
-// du jour (FEDIAF, Nutritional Guidelines 2021, friandises et aliments complémentaires). Besoin du
+// du jour (repère courant des vétérinaires : WSAVA, Feeding treats to your dog, 2025). Besoin du
 // jour : même formule que le calculateur de ration (lib/calculators.ts, NRC 2006), chien adulte
 // non stérilisé à activité normale, au poids de référence du gabarit (dogSizeRanges.midKg).
 // Fonction pure, testée par scripts/test-scanner-treat.ts.
 
-/** Part maximale de l'apport calorique du jour venant des friandises (FEDIAF). */
+/** Part maximale de l'apport calorique du jour venant des friandises (repère WSAVA). */
 export const TREAT_SHARE = 0.1
 
 const SIZES = ['petit', 'moyen', 'grand'] as const
