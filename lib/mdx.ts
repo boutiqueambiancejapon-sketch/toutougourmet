@@ -1,4 +1,5 @@
 import { estimateReadTime as estimateReadTimeUtil } from '@/lib/utils'
+import { currentYear, refreshYear, titleWithYear } from '@/lib/title-year'
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
@@ -16,15 +17,14 @@ function restoreTextExpressions(mdx: string): string {
   )
 }
 
-// Remplace l'année de rédaction dans les titres/descriptions par l'année courante
-// Ex: "Avis Royal Canin : notre test complet 2026" → "…2027" en 2027
+// Année à jour dans le titre et la description, ajoutée au titre d'un avis, d'un classement ou d'un comparatif.
 function injectCurrentYear(frontmatter: ArticleFrontmatter): ArticleFrontmatter {
-  const year = String(new Date().getFullYear())
-  // Remplace uniquement l'année de rédaction en fin de titre (ex: "… 2026" → "… 2027")
-  // N'affecte pas les années historiques en milieu de phrase ("depuis 2012", "fondée en 1953")
-  const replaceTitle = (s: string) => s?.replace(/\b(20[2-9]\d)\s*$/, year) ?? s
-  const replaceDesc  = (s: string) => s?.replace(/\b(20[2-9]\d)\b(?=\s*[.?]?\s*$)/, year) ?? s
-  return { ...frontmatter, title: replaceTitle(frontmatter.title), description: replaceDesc(frontmatter.description) }
+  const year = currentYear()
+  return {
+    ...frontmatter,
+    title: titleWithYear(frontmatter.title, frontmatter.category, year),
+    description: frontmatter.description ? refreshYear(frontmatter.description, year) : frontmatter.description,
+  }
 }
 
 export interface AffiliateLink {
