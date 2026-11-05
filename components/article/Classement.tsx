@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { RankRow } from '@/components/scanner/rankings/RankRow'
-import { segmentBySlug, type SegmentSlug } from '@/lib/scanner/rankings'
+import { capByBrand, segmentBySlug, type SegmentSlug } from '@/lib/scanner/rankings'
 import { segmentRecipes } from '@/lib/server/rankings'
 import { titleTypo } from '@/lib/title-typo'
 
@@ -10,7 +10,7 @@ import { titleTypo } from '@/lib/title-typo'
 export async function Classement({ segment: slug }: { segment: SegmentSlug }) {
   const segment = segmentBySlug(slug)
   if (!segment) return null
-  const top = (await segmentRecipes(segment)).slice(0, 5)
+  const top = capByBrand(await segmentRecipes(segment), 2).slice(0, 5)
   if (top.length < 3) return null
   return (
     <section data-cta="classement-article" className="not-prose my-8 flex flex-col gap-3">

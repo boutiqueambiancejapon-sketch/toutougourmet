@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { displayBrand, displayName } from '@/lib/scanner/rankings'
 import type { RankedRecipe } from '@/lib/server/rankings'
 import { ProductPhoto } from '../ProductPhoto'
 import { ScoreBadge } from '../ScoreBadge'
@@ -24,7 +25,7 @@ export function RankRow({ recipe, rank }: { recipe: RankedRecipe; rank: number }
         <span className="w-6 shrink-0 text-right font-display text-xl font-black text-ink">{rank}</span>
         <ProductPhoto src={recipe.image} />
         <Link href={`/croquettes/${recipe.slug}`} className="min-w-0 grow font-semibold leading-snug text-ink no-underline hover:underline [overflow-wrap:anywhere]">
-          {`${recipe.brand} ${recipe.name}`}
+          {`${displayBrand(recipe.brand)} ${displayName(recipe.name)}`}
         </Link>
         <ScoreBadge score={recipe.score} />
       </div>

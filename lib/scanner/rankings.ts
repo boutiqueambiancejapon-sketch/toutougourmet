@@ -62,8 +62,8 @@ export const SEGMENTS: RankSegment[] = [
   { slug: 'peau-sensible', label: 'Peau', audience: 'pour peau sensible', path: '/chien/sante/croquettes-chien-dermatite', title: '', h1: '', description: '', listTitle: 'Quelles croquettes pour peau sensible ont la meilleure composition ?', match: named(/\b(skin|dermacomfort)\b/) },
   { slug: 'articulations', label: 'Articulations', audience: 'pour les articulations', path: '/chien/sante/croquettes-chien-arthrose', title: '', h1: '', description: '', listTitle: 'Quelles croquettes pour les articulations ont la meilleure composition ?', match: named(/\b(joint|mobility)\b/) },
   { slug: 'hypoallergeniques', label: 'Allergies', audience: 'hypoallergéniques', path: '/chien/alimentation-quotidienne/croquettes-chien-allergique', title: '', h1: '', description: '', listTitle: 'Quelles croquettes hypoallergéniques ont la meilleure composition ?', match: named(/hypoallerg/) },
-  { slug: 'patees', label: 'Pâtées', audience: 'en pâtée', path: '/chien/alimentation-quotidienne/meilleures-patees-chien', title: '', h1: '', description: '', listTitle: 'Quelles pâtées pour chien ont la meilleure composition ?', match: (r) => r.noun === 'patee' },
-  { slug: 'friandises', label: 'Friandises', audience: 'en friandise', path: '/meilleures-friandises', title: 'Meilleures friandises pour chien : le classement', h1: 'Meilleures friandises pour chien : le classement par composition', description: 'Les friandises pour chien classées par note sur 100, selon leur barème propre, à partir des étiquettes lues chez Maxi Zoo.', listTitle: 'Quelles friandises pour chien ont la meilleure composition ?', match: (r) => r.noun === 'friandise' },
+  { slug: 'patees', label: 'Pâtées', audience: 'de pâtée', path: '/chien/alimentation-quotidienne/meilleures-patees-chien', title: '', h1: '', description: '', listTitle: 'Quelles pâtées pour chien ont la meilleure composition ?', match: (r) => r.noun === 'patee' },
+  { slug: 'friandises', label: 'Friandises', audience: 'de friandises', path: '/meilleures-friandises', title: 'Meilleures friandises pour chien : le classement', h1: 'Meilleures friandises pour chien : le classement par composition', description: 'Les friandises pour chien classées par note sur 100, selon leur barème propre, à partir des étiquettes lues chez Maxi Zoo.', listTitle: 'Quelles friandises pour chien ont la meilleure composition ?', match: (r) => r.noun === 'friandise' },
 ]
 
 export const segmentBySlug = (slug: string): RankSegment | undefined => SEGMENTS.find((s) => s.slug === slug)
@@ -87,3 +87,25 @@ export function recipeName(product: string): string {
 
 export const recipeKey = (brand: string | null, product: string): string =>
   `${fold(brand ?? '')}|${fold(recipeName(product)).replace(/[^a-z0-9]+/g, ' ').trim()}`
+
+/** Nom lisible : sans « croquettes pour chien », la première lettre en capitale. */
+export function displayName(name: string): string {
+  const clean = name.replace(/^(croquettes?|friandises?)(\s+pour)?(\s+chiens?)?[\s,]*/i, '').replace(/\s+pour animaux adultes$/i, '').trim() || name
+  return clean.charAt(0).toUpperCase() + clean.slice(1)
+}
+
+/** « REAL NATURE » devient « Real Nature » ; « Edgard & Cooper » ne change pas. */
+export function displayBrand(brand: string): string {
+  return brand === brand.toUpperCase() ? brand.toLowerCase().replace(/(^|\s)\p{L}/gu, (c) => c.toUpperCase()) : brand
+}
+
+/** Au plus n recettes par marque, dans l'ordre : un classement ne doit pas lister 10 fois la même marque. */
+export function capByBrand<T extends { brand: string }>(list: T[], n: number): T[] {
+  const seen = new Map<string, number>()
+  return list.filter((r) => {
+    const k = fold(r.brand)
+    const count = (seen.get(k) ?? 0) + 1
+    seen.set(k, count)
+    return count <= n
+  })
+}
