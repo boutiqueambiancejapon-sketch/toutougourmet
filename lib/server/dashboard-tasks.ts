@@ -23,6 +23,7 @@ export const TASKS = [
   { unit: 'toutou-opff-import', label: 'Import Open Pet Food Facts', rhythm: 'chaque semaine' },
   { unit: 'toutou-purge', label: 'Purge des données', rhythm: 'chaque semaine' },
   { unit: 'toutou-geoip', label: 'Base des pays', rhythm: 'chaque mois' },
+  { unit: 'toutou-new-year', label: 'Titres à la nouvelle année', rhythm: 'chaque 1er janvier' },
 ] as const
 
 export type TaskState = 'ok' | 'running' | 'failed' | 'stopped' | 'unknown'

@@ -1,0 +1,13 @@
+# Reconstruit le site la nuit du 1er janvier (titres à la nouvelle année).
+[Unit]
+Description=Toutou Gourmet : titres à la nouvelle année
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=administrator
+Environment=HOME=/home/administrator
+Environment=LANG=C.UTF-8
+ExecStart=/home/administrator/Toutou/deploy/new-year.sh
+TimeoutStartSec=2h

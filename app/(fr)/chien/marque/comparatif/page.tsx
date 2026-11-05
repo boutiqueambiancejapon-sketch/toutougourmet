@@ -4,9 +4,10 @@ import { getDuelPairs } from '@/data/brands'
 import { getComparatif } from '@/lib/mdx'
 import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
 import { IconChevron } from '@/components/icons'
+import { currentYear } from '@/lib/title-year'
 
 export const metadata: Metadata = {
-  title: 'Comparatif croquettes pour chien',
+  title: `Comparatif croquettes pour chien ${currentYear()}`,
   description:
     'Dog Chef vs Elmut, Franklin vs Ultra Premium Direct : tous nos comparatifs marque contre marque, avec prix, fabrication et verdict.',
   alternates: { canonical: 'https://www.toutou-gourmet.com/chien/marque/comparatif' },

@@ -5,6 +5,7 @@ import { getComparatif } from '@/lib/mdx'
 import { BrandPage } from '@/components/marques/BrandPage'
 import { BrandDuel } from '@/components/marques/BrandDuel'
 import { ComparatifEditorial } from '@/components/marques/ComparatifEditorial'
+import { currentYear } from '@/lib/title-year'
 
 // @cdc 04-pages — route /chien/marque/[slug] : fiche marque, duel éditorial MDX ou duel automatique.
 
@@ -30,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const b = getBrandBySlug(slugB)
     if (!isDuelBrand(a) || !isDuelBrand(b)) return {}
     return {
-      title: { absolute: `${a.name} vs ${b.name} : comparatif 2026` },
+      title: { absolute: `${a.name} vs ${b.name} : comparatif ${currentYear()}` },
       description: `Comparaison ${a.name} vs ${b.name} : composition, prix, fabrication, livraison et verdict. Quelle marque choisir pour ton chien ?`,
       alternates: { canonical: `https://www.toutou-gourmet.com/chien/marque/${slug}` },
     }
@@ -39,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const brand = getBrandBySlug(slug)
   if (!brand) return {}
   return {
-    title: `${brand.name} : avis, prix, code promo`,
+    title: `${brand.name} : avis ${currentYear()}, prix, code promo`,
     description: `Avis ${brand.name} : composition, prix, avantages et inconvénients. ${brandOfferLabel(brand)}.`,
     alternates: { canonical: `https://www.toutou-gourmet.com/chien/marque/${slug}` },
   }

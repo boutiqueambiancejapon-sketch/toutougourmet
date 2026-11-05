@@ -278,3 +278,6 @@ L'arborescence passe par le maillage (marque, gamme, duel), pas par de nouvelles
 
 ## 2026-11-05 — Cluster scanner : classements dans Google, fiches dehors
 Fiches et pages marque du scanner toujours en noindex. Google reçoit des classements par type de chien, type de produit et maladie, reliés au scanner. Maladies : critère propre à chaque maladie, jamais la note générale, qui favorise les protéines. Partenaires notés avec le même barème.
+
+## 2026-11-05 — Année automatique dans les titres
+Avis, classements et comparatifs portent l'année dans le titre, ajoutée à la construction (`lib/title-year.ts`). `updatedAt` et le corps des articles ne bougent pas au 1er janvier : l'année du titre ne vaut pas mise à jour du contenu.

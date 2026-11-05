@@ -43,3 +43,6 @@ Deux tailles d'une même recette donnaient 67 et 82 : une parenthèse jamais fer
 
 ## 2026-11-05 — Pages modèles
 J'avais réduit les pages de produit à quelques gammes. Le propriétaire veut un avis par modèle pour le maillage : le test des suggestions Google lui donne raison sur 198 modèles sur 373. Tester une intuition de demande avant de la réduire.
+
+## 2026-11-05 — Année dans les titres
+Une page pré-générée ne change pas seule au 1er janvier : toute valeur calculée à la construction a besoin d'une reconstruction datée (`toutou-new-year.timer`).
