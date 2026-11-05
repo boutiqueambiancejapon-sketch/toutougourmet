@@ -244,16 +244,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `proteines-insectes-croquettes-chien`
 - [x] `mycotoxines-croquettes-chien-risques-prevention`
 - [x] `chien-peut-manger-gingembre`
-- [ ] `nourriture-dogue-de-bordeaux`
-- [ ] `chien-peut-manger-avocat`
-- [ ] `chien-vegetarien-vegan-science`
-- [ ] `recette-friandises-banane-avoine-chien`
-- [ ] `ration-menagere-chien-guide-recettes`
-- [ ] `nourriture-welsh-corgi-pembroke`
-- [ ] `nourriture-bouvier-bernois`
-- [ ] `coup-de-chaleur-chien-symptomes-premiers-gestes`
-- [ ] `faut-il-faire-jeuner-son-chien`
-- [ ] `coprophagie-chien-causes-solutions`
+- [x] `nourriture-dogue-de-bordeaux`
+- [x] `chien-peut-manger-avocat`
+- [x] `chien-vegetarien-vegan-science`
+- [x] `recette-friandises-banane-avoine-chien`
+- [x] `ration-menagere-chien-guide-recettes`
+- [x] `nourriture-welsh-corgi-pembroke`
+- [x] `nourriture-bouvier-bernois`
+- [x] `coup-de-chaleur-chien-symptomes-premiers-gestes`
+- [x] `faut-il-faire-jeuner-son-chien`
+- [x] `coprophagie-chien-causes-solutions`
 - [ ] `croquettes-chien-stresse-anxieux`
 - [ ] `microbiote-intestinal-chien-alimentation`
 - [ ] `croquettes-chien-allergique`
