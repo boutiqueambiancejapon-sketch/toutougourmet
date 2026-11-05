@@ -236,3 +236,18 @@ Croquettes et pâtées, friandises, compléments, huiles : chacun son barème. L
 7. Recalcul des fiches, classements mis à jour, méthode publiée pour chaque barème, compléments et huiles dans les classements. Maladies graves : toujours pas de classement par note.
 
 Coût : lectures IA seulement sur le jeu de référence, demander avant de multiplier. D'ici là : compléments et huiles hors classements (`isSupplementName`), mais le scanner leur donne encore une note de friandise ou d'aliment.
+
+## Fiches produit indexables et pages mères (plan du 2026-11-05)
+
+Accord de principe du propriétaire, à confirmer sur maquette le 10 novembre. Rien n'entre dans Google avant son accord.
+
+- [ ] Avant le 10/11, sur `feat/baremes` : protéger les fiches complétées contre les imports, rebrancher les notes partenaires écrites en dur, nettoyer les copies de travail d'agents.
+- [ ] Avant le 10/11 : maquettes de la fiche, de la page mère et du glossaire `/chien/marque` ; recalcul à blanc avec les pâtées importées.
+- [ ] 10/11 : classement final, décision sur les barèmes et les 48 fiches, accord sur les maquettes.
+- [ ] Activer les barèmes : sauvegarde, interrupteur, déploiement, `--appliquer`, vérification.
+- [ ] Adresses par type (`/croquettes`, `/patees`, `/friandises`, `/complements`, `/huiles`) avec redirections, adresses courtes, une page par recette (`recipeKey`). Type incertain : adresse actuelle et noindex.
+- [ ] Modèle de fiche : titre et H1 « Marque + Modèle », phrases calculées, pour quel chien, 3 alternatives, FAQ, liens. Schema Product avec note éditoriale, sans `gtin13` pour les codes 205. Types distincts dans le barème et le texte.
+- [ ] Nettoyer les marques (doublons, fiches sans marque). Glossaire de `/chien/marque` limité aux pages indexables.
+- [ ] Pages mères : compléter les avis existants, créer Real Nature, Atavik, Eukanuba, Carnilove, Pedigree. Une page par marque, classement par type. Règle du calendrier : une seule page par produit.
+- [ ] Test : 30 à 50 fiches croquettes et pâtées, plan du site, mesure 4 à 6 semaines dans la Search Console.
+- [ ] Si le test est bon : passe du lundi (script, IA pour les seuls doutes, 10 fiches par semaine, résumé), puis friandises, puis compléments et huiles au compte-gouttes. Sinon : retour en noindex.

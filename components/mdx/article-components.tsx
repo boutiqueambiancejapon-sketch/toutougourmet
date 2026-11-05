@@ -15,6 +15,7 @@ import { ArticleSignupInvite } from '@/components/cro/ArticleSignupInvite'
 import { ToolCta } from '@/components/article/ToolCta'
 import { HealthPicks } from '@/components/article/HealthPicks'
 import { ProductPicks, ProductPick } from '@/components/article/ProductPicks'
+import { MarqueClassement } from '@/components/article/MarqueClassement'
 import { BrandHubBlock } from '@/components/marques/BrandHubBlock'
 import { ArticleFormula } from '@/components/article/Formula'
 import { GuideTop } from '@/components/guide/GuideTop'
@@ -35,7 +36,7 @@ export const articleMdxComponents = {
   PoisonCenters,
   BrandCTA,
   HealthPicks,
-  ProductPicks, ProductPick, BrandHubBlock,
+  ProductPicks, ProductPick, MarqueClassement, BrandHubBlock,
   BreedBrandCompare, BrandGroup, BrandRow,
   BodyImage,
   ArticleSignupInvite,

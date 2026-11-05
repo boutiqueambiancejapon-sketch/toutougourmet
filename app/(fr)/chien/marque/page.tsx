@@ -5,6 +5,7 @@ import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
 import { BrandTable } from '@/components/marques/BrandTable'
 import { BrandProfiles } from '@/components/marques/BrandProfiles'
 import { BrandTopOffers } from '@/components/marques/BrandTopOffers'
+import { BrandGlossary } from '@/components/marques/BrandGlossary'
 import { IconChevron } from '@/components/icons'
 
 export const metadata: Metadata = {
@@ -64,6 +65,8 @@ export default function MarqueHubPage() {
           ))}
         </ul>
       </section>
+
+      <BrandGlossary />
     </div>
   )
 }

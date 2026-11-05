@@ -3,7 +3,8 @@ import { brands, getDuelPairs } from '@/data/brands'
 import { BRAND_PAGES_DATE, PAGE_DATES } from '@/data/page-dates'
 import { getAllArticles, getComparatif, type Article } from '@/lib/mdx'
 import { SEGMENTS } from '@/lib/scanner/rankings'
-import { segmentIndexable, segmentRecipes } from '@/lib/server/rankings'
+import { rankedRecipes, segmentIndexable, segmentRecipes } from '@/lib/server/rankings'
+import { FICHES_INDEXEES, ficheIndexeePath } from '@/lib/scanner/fiches-indexees'
 import { sitemapTypeOf, type SitemapType } from './types'
 
 // @cdc seo — liste des URL des sitemaps : uniquement des adresses finales en 200 (aucune
@@ -86,12 +87,17 @@ function contentEntries(): SitemapEntry[] {
   ]
 }
 
-/** Classements au-delà du seuil. Fiches et pages marque du scanner : jamais dans le sitemap. */
+/** Classements au-delà du seuil et fiches choisies pour Google. Les autres fiches et les pages marque du scanner : jamais. */
 async function croquettesEntries(): Promise<SitemapEntry[]> {
   const entries: SitemapEntry[] = []
   for (const segment of SEGMENTS.filter((s) => s.path.startsWith('/meilleures-'))) {
     const list = await segmentRecipes(segment)
     if (segmentIndexable(segment, list)) entries.push({ path: segment.path, lastmod: latest(list.map((r) => r.updatedAt)) })
+  }
+  const recettes = await rankedRecipes().catch(() => [])
+  for (const f of FICHES_INDEXEES) {
+    const r = recettes.find((x) => x.key === f.cle)
+    if (r) entries.push({ path: ficheIndexeePath(f), lastmod: r.updatedAt })
   }
   return entries
 }

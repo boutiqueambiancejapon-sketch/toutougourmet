@@ -12,5 +12,7 @@ export function validGtin(code: string): boolean {
 /** { gtin13: '…' } selon la longueur, ou rien si le code n'est pas valide. */
 export function gtinProperty(code: string | null | undefined): Record<string, string> {
   if (!code || !validGtin(code)) return {}
+  // Préfixes GS1 20 à 29 : codes internes d'un magasin (Maxi Zoo : 205…), pas un code-barres officiel.
+  if (code.length === 13 && code.startsWith('2')) return {}
   return { [`gtin${code.length}`]: code }
 }
