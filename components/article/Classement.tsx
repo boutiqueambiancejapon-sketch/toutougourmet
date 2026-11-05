@@ -19,7 +19,7 @@ export async function Classement({ segment: slug }: { segment: SegmentSlug }) {
         {top.map((r, i) => <RankRow key={r.key} recipe={r} rank={i + 1} />)}
       </ol>
       <p className="m-0 text-sm text-ink-2">
-        {'Note de composition sur 100, calculée sur les étiquettes lues. Liens partenaires : on touche une commission si tu commandes, sans surcoût pour toi. '}
+        {`${segment.byFat ? 'Classement du moins gras au plus gras, selon les étiquettes lues : la perte de poids se décide avec ton vétérinaire.' : 'Note de composition sur 100, calculée sur les étiquettes lues.'} Liens partenaires : on touche une commission si tu commandes, sans surcoût pour toi. `}
         <Link href="/scanner" className="font-semibold text-orange-ink underline underline-offset-2">Scanner ton paquet</Link>
       </p>
     </section>

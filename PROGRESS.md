@@ -1,6 +1,7 @@
 # Progression — Toutou Gourmet — màj à chaque fin de session
 
 ## Complété
+- 2026-11-05 · Pages de classement : texte d'environ 800 mots, FAQ et sources (`data/ranking-content.ts`), liens depuis /scanner, /chien, le menu et le pied de page. Surpoids rattaché à l'article existant. Icône de chien sans photo.
 - 2026-11-05 · Année automatique dans les titres (`lib/title-year.ts`), reconstruction du site chaque 1er janvier (`deploy/new-year.sh`, `toutou-new-year.timer`).
 - 2026-11-05 · Classements publiés : `/meilleures-croquettes` (chiot, adulte, chien moyen, grand chien, surpoids), `/meilleures-friandises`, bloc `<Classement>` dans 9 articles, fiches partenaires depuis leurs sites (`data/partner-fiches.json`, `scripts/import-partner-fiches.ts`). Anciennes adresses `/croquettes` et `/croquettes/friandises` redirigées.
 - 2026-11-05 · Avis + Maxi Zoo : marques, modèles et duels au calendrier (232 sujets, `docs/plan-editorial-outils.md`), deux articles par jour : transactionnel à 7 h, informatif à 20 h (`deploy/article.sh`). Fiches et pages marque du scanner en noindex, classements sous 30 fiches aussi, `scripts/maxizoo-lookup.ts`, bloc `ProductPicks`, blocs posés sur 5 avis existants. Fiches : codes à 11 chiffres acceptés (Hill's, Orijen, Acana), parenthèse non fermée et texte de livraison corrigés.

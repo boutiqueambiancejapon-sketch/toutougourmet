@@ -848,5 +848,56 @@
    "phosphore": 1.0
   },
   "kcal100g": 349
+ },
+ {
+  "brand": "Franklin Pet Food",
+  "product": "Croquettes Dinde, truite, patate douce",
+  "url": "https://franklinpetfood.com/products/dinde-truite-patate-douce",
+  "type": "sec",
+  "composition": "Protéine de dinde 25% , patate douce 16% , graisse de volaille 12% , dinde fraîche 10% , protéine de truite 9% , protéine de volaille hydrolysée 7% , citrouille séchée 5% , œufs déshydratés 4% , graines de lin 3% , pulpe de pomme séchée, plasma porcin déshydraté 2% , foie de volaille hydrolysé 2% , huile de saumon 2% , chlorure de sodium 0,4% , mannan-oligosaccharides (prébiotiques) 500 mg/kg , fructo-oligosaccharides (prébiotiques) 500 mg/kg , glucosamine 0,027% , sulfate de chondroïtine 0,019% , Yucca du Mojave 0,01% , bactéries inactivées et leurs composants. Lactobacillus helveticus HA (probiotiques) – 122,2 milliards de cellules/100g .",
+  "constituants": {
+   "proteines": 31.0,
+   "matieresGrasses": 18.0,
+   "cendres": 6.3,
+   "cellulose": 2.0,
+   "humidite": 10.0,
+   "calcium": 1.3,
+   "phosphore": 0.9
+  },
+  "kcal100g": 398
+ },
+ {
+  "brand": "Franklin Pet Food",
+  "product": "Croquettes Dinde, patate douce, épinards",
+  "url": "https://franklinpetfood.com/products/dinde-patate-douce-epinards",
+  "type": "sec",
+  "composition": "Dinde 63% (dont dinde fraîche 34% , protéines de dinde 15% , protéines de dinde hydrolysées 10% , graisse de dinde 2% , foie de dinde hydrolysé 2% ), patate douce 18% , courge séchée 5% , pulpe de pomme séchée 5% , lignocellulose 3% , graines de lin 3% , épinards séchés 1% , huile de saumon 1% , chlorure de potassium 0,4% , mannan-oligosaccharides (prébiotiques) 500 mg/kg , fructo-oligosaccharides (prébiotiques) 500 mg/kg , glucosamine 0,027% ,sulfate de chondroïtine 0,019% , Yucca de Mojave 0,01% , bactéries inactivées et leurs composants (Lactobacillus helevticus HA-122 (probiotiques)) 200 millions de cellules/100g .",
+  "constituants": {
+   "proteines": 30.0,
+   "matieresGrasses": 11.0,
+   "cendres": 6.8,
+   "cellulose": 7.0,
+   "humidite": 10.0,
+   "calcium": 1.3,
+   "phosphore": 0.8
+  },
+  "kcal100g": null
+ },
+ {
+  "brand": "Franklin Pet Food",
+  "product": "Croquettes Digestion sensible",
+  "url": "https://franklinpetfood.com/products/croquettes-chien-adulte-digestion-sensible",
+  "type": "sec",
+  "composition": "Agneau 52% ( 35% d'agneau frais, 14% de protéines d’agneau, 3% de protéines hydrolysées d’agneau), patate douce 27,6% , pois 9% , protéines de pois , graines de lin, pulpe de betterave séchée, algues séchées 0,5% , menthe séchée 0,19% , poudre de chicorée (prébiotiques) 170 mg/kg , mannan-oligosaccharides (prébiotiques) 40 mg/kg .",
+  "constituants": {
+   "proteines": 25.0,
+   "matieresGrasses": 15.0,
+   "cendres": 8.3,
+   "cellulose": 2.4,
+   "humidite": 10.0,
+   "calcium": 1.4,
+   "phosphore": 1.0
+  },
+  "kcal100g": 373
  }
 ]

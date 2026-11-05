@@ -7,6 +7,8 @@ import { addYear, currentYear } from '@/lib/title-year'
 import { titleTypo } from '@/lib/title-typo'
 import { RankingJsonLd } from '../RankingJsonLd'
 import { RankRow } from './RankRow'
+import { RANKING_CONTENT } from '@/data/ranking-content'
+import { RankingArticle, RankingSources } from './RankingArticle'
 import { RankingLead } from './RankingLead'
 
 // @cdc cluster scanner — page de classement : réponse d'abord, 20 recettes, appel au scanner, autres
@@ -17,6 +19,7 @@ const SHOWN = 20
 export async function SegmentPage({ segment }: { segment: RankSegment }) {
   const list = await segmentRecipes(segment)
   const shown = capByBrand(list, 3).slice(0, SHOWN)
+  const content = RANKING_CONTENT[segment.slug]
   return (
     <div className="v2 mx-auto flex max-w-prose flex-col gap-6 px-4 pt-4 pb-16 md:px-8 md:pt-8">
       <RankingJsonLd name={segment.h1} path={segment.path} items={shown.map((r) => ({ slug: r.slug, brand: displayBrand(r.brand), product: displayName(r.name) }))} start={1} total={shown.length} />
@@ -42,6 +45,7 @@ export async function SegmentPage({ segment }: { segment: RankSegment }) {
         <p className="m-0 text-sm text-ink-2">{"Liens partenaires : on touche une commission si tu commandes, sans surcoût pour toi. Le rang ne dépend que de l'étiquette."}</p>
       </section>
       <ToolCta tool="scanner" />
+      {content ? <RankingArticle content={content} /> : null}
       <section aria-labelledby="methode" className="flex flex-col gap-2">
         <h2 id="methode" className="m-0 font-display text-2xl font-black text-ink">{titleTypo('Comment ce classement est-il calculé ?')}</h2>
         <p className="m-0 text-[15px] leading-relaxed text-ink-2">
@@ -49,6 +53,7 @@ export async function SegmentPage({ segment }: { segment: RankSegment }) {
           <Link href="/scanner#methode" className="font-semibold text-orange-ink underline underline-offset-2">Voir le barème</Link>.
         </p>
       </section>
+      {content ? <RankingSources sources={content.sources} /> : null}
     </div>
   )
 }
