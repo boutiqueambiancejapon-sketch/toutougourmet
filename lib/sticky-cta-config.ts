@@ -15,6 +15,7 @@ export type { StickyCtaConfig }
 /** Blocs d'offre où s'efface la barre d'une marque (StickyOffer). */
 const STOP_RACE_COMPARE = '[data-cta="race-compare"]'
 const STOP_ARTICLE_OFFER = '.mdx-content [data-cta^="brand-"]'
+const STOP_PRODUCT_PICKS = '[data-cta="avis-produit"]'
 export const STOP_BRAND_PAGE = '[data-cta="brand-fiche"]'
 
 // ────────────────────────────────────────────────────────────
@@ -229,6 +230,8 @@ interface StickyOfferInput {
   mainBrand?: string
   /** Le frontmatter nomme deux marques (affiliateB) : pas de marque principale */
   twoBrands: boolean
+  /** Complément : le produit Maxi Zoo qui correspond au sujet (frontmatter stickyProduct) */
+  stickyProduct?: { name: string; url: string }
 }
 
 /**
@@ -238,8 +241,9 @@ interface StickyOfferInput {
  * CONFIRMED_DISCOUNTS. Sinon null et la page garde sa règle (stickyAllowed). Elle remplace l'interdit « races » de stickyAllowed : la barre s'efface
  * dès que l'offre de la page arrive, donc jamais deux fois la même demande à l'écran.
  */
-export function getStickyOffer({ categorySlug, slug, rawContent, verdict, mainBrand, twoBrands }: StickyOfferInput): StickyOfferProps | null {
+export function getStickyOffer({ categorySlug, slug, rawContent, verdict, mainBrand, twoBrands, stickyProduct }: StickyOfferInput): StickyOfferProps | null {
   if (verdict === 'danger' || SENSITIVE_SLUG.test(slug)) return null
+  if (stickyProduct) return { brandName: stickyProduct.name, href: stickyProduct.url, offer: 'Chez Maxi Zoo', stopAt: STOP_PRODUCT_PICKS }
   const isRace = pageTypeOf(`/chien/${categorySlug}/${slug}`) === 'races'
   if (isRace) {
     const pick = racePick(rawContent)

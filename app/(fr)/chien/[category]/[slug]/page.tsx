@@ -218,6 +218,7 @@ export default async function ArticleCategoryPage({ params }: Props) {
     verdict: frontmatter.verdict,
     mainBrand: frontmatter.affiliateA?.name ?? frontmatter.review?.brand,
     twoBrands: Boolean(frontmatter.affiliateB),
+    stickyProduct: frontmatter.stickyProduct,
   })
   // @cdc cro-carte — urgence : les gestes d'abord, puis « L'essentiel » ; rien à vendre, même si le MDX pose une offre.
   const urgent = isUrgentPage({ slug, categorySlug: category, verdict: frontmatter.verdict })
