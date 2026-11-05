@@ -1,43 +1,30 @@
 import Link from 'next/link'
-import { RANKING_MIN_REVIEWED } from '@/lib/scanner/seo'
-import { reviewedItemsSafe } from '@/lib/server/scanner-catalog'
+import { capByBrand, segmentBySlug, type RankSegment } from '@/lib/scanner/rankings'
+import { segmentRecipes } from '@/lib/server/rankings'
 import { MethodDetails } from './MethodDetails'
-import { RankingList } from './RankingList'
+import { RankRow } from './rankings/RankRow'
 
-// @cdc lot 6 — « Quelles croquettes pour chien sont les mieux notées ? » sur /scanner : les 5
-// meilleures fiches PUBLIÉES. Masqué sous 3 fiches ; liens vers les classements (croquettes,
-// friandises) seulement quand ils sont indexables.
+// @cdc cluster scanner — « Quelles croquettes pour chien sont les mieux notées ? » sur /scanner : le haut
+// du classement, puis les liens vers les classements croquettes et friandises.
 
 const SHOWN = 5
-const MIN_SHOWN = 3
+const LINK = 'font-semibold text-orange-ink underline underline-offset-2'
 
 export async function TopRated() {
-  const items = (await reviewedItemsSafe('complete')).filter((it) => it.noun === 'croquettes')
-  if (items.length < MIN_SHOWN) return null
-  const treats = (await reviewedItemsSafe('treat')).length
+  const list = await segmentRecipes(segmentBySlug('tous') as RankSegment)
+  const top = capByBrand(list, 2).slice(0, SHOWN)
+  if (top.length < 3) return null
   return (
     <MethodDetails id="meilleures-notes" title={'Quelles croquettes pour chien sont les mieux notées\u00a0?'}>
-      <p className="m-0 text-base leading-relaxed text-ink-2">
-        {`Les ${Math.min(SHOWN, items.length)} meilleures notes parmi les ${items.length} croquettes qui ont une fiche publiée, calculées avec le même barème.`}
+      <ol role="list" className="m-0 flex list-none flex-col gap-3 p-0">
+        {top.map((r, i) => <RankRow key={r.key} recipe={r} rank={i + 1} />)}
+      </ol>
+      <p className="m-0 text-[15px] leading-relaxed text-ink-2">
+        {'La suite est dans le '}
+        <Link href="/meilleures-croquettes" className={LINK}>classement des meilleures croquettes pour chien</Link>
+        {', et les friandises ont le leur : '}
+        <Link href="/meilleures-friandises" className={LINK}>meilleures friandises pour chien</Link>.
       </p>
-      <RankingList items={items.slice(0, SHOWN)} />
-      {items.length >= RANKING_MIN_REVIEWED ? (
-        <p className="m-0 text-[15px] leading-relaxed text-ink-2">
-          {'La suite est dans le '}
-          <Link href="/croquettes" className="font-semibold text-orange-ink underline underline-offset-2">
-            classement des meilleures croquettes pour chien
-          </Link>
-          {treats >= RANKING_MIN_REVIEWED ? (
-            <>
-              {', et les friandises ont le leur : '}
-              <Link href="/croquettes/friandises" className="font-semibold text-orange-ink underline underline-offset-2">
-                meilleures friandises pour chien
-              </Link>
-            </>
-          ) : null}
-          .
-        </p>
-      ) : null}
     </MethodDetails>
   )
 }

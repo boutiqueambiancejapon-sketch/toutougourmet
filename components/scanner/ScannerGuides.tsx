@@ -1,6 +1,4 @@
 import Link from 'next/link'
-import { RANKING_MIN_REVIEWED } from '@/lib/scanner/seo'
-import { reviewedItemsSafe } from '@/lib/server/scanner-catalog'
 
 // @cdc lot 6 — « Comment juger une pâtée ou une friandise ? » sur /scanner : la différence avec
 // une croquette en deux paragraphes, puis les guides nutrition qui détaillent chaque critère
@@ -17,8 +15,7 @@ const GUIDES: { href: string; label: string; text: string }[] = [
   { href: '/chien/alimentation-quotidienne/friandises-naturelles-chien-guide', label: 'Le guide des friandises naturelles pour chien', text: 'liste les bons choix et la part de friandises dans la ration.' },
 ]
 
-export async function ScannerGuides() {
-  const treatsListed = (await reviewedItemsSafe('treat')).length >= RANKING_MIN_REVIEWED
+export function ScannerGuides() {
   return (
     <div className="flex flex-col gap-4">
       <p className="m-0 text-base leading-relaxed text-ink-2">
@@ -28,15 +25,11 @@ export async function ScannerGuides() {
       <p className="m-0 text-base leading-relaxed text-ink-2">
         Une friandise n&apos;a pas à couvrir les besoins du chien. Son barème regarde la viande ou le poisson nommé en premier, le
         sucre, le sel et les additifs ajoutés, et la longueur de la liste.
-        {treatsListed ? (
-          <>
-            {' Les mieux notées sont dans le '}
-            <Link href="/croquettes/friandises" className={LINK}>
-              classement des meilleures friandises pour chien
-            </Link>
-            .
-          </>
-        ) : null}
+        {' Les mieux notées sont dans le '}
+        <Link href="/meilleures-friandises" className={LINK}>
+          classement des meilleures friandises pour chien
+        </Link>
+        .
       </p>
       <ul role="list" className="m-0 flex list-none flex-col gap-2 p-0">
         {GUIDES.map((g) => (

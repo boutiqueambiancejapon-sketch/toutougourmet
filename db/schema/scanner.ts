@@ -14,7 +14,7 @@ import { user } from './auth'
  * photo : étiquette lue par l'IA · openpetfoodfacts : données de la base ouverte, sans IA ·
  * openfoodfacts : produit pour animaux rangé dans Open Food Facts (dernier recours du code-barres)
  */
-export type AnalysisSource = 'photo' | 'openpetfoodfacts' | 'openfoodfacts' | 'maxizoo'
+export type AnalysisSource = 'photo' | 'openpetfoodfacts' | 'openfoodfacts' | 'maxizoo' | 'marque'
 
 const ts = (name: string) => timestamp(name, { withTimezone: true })
 
@@ -55,7 +55,7 @@ export const foodAnalysis = app.table(
   (t) => [
     check('food_analysis_score_range', sql`${t.score} IS NULL OR (${t.score} >= 0 AND ${t.score} <= 100)`),
     check('food_analysis_ean_format', sql`${t.ean} IS NULL OR ${t.ean} ~ '^([0-9]{8}|[0-9]{13})$'`),
-    check('food_analysis_source', sql`${t.source} IN ('photo', 'openpetfoodfacts', 'openfoodfacts', 'maxizoo')`),
+    check('food_analysis_source', sql`${t.source} IN ('photo', 'openpetfoodfacts', 'openfoodfacts', 'maxizoo', 'marque')`),
   ],
 )
 

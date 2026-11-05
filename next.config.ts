@@ -32,6 +32,9 @@ const nextConfig: NextConfig = {
       // Quand on aura généré un vrai favicon.ico aux couleurs DA, on remplacera
       // le binaire et on virera ce redirect.
       { source: '/favicon.ico', destination: '/icon.svg', permanent: true },
+      // Classements : décision du 2026-11-05, les fiches restent sous /croquettes en noindex
+      { source: '/croquettes', destination: '/meilleures-croquettes', permanent: true },
+      { source: '/croquettes/friandises', destination: '/meilleures-friandises', permanent: true },
 
       // ── Partenariat Petty Well → Ultra Premium Direct (mai 2026) ─────────
       // Petty Well a été retiré du comparateur au profit d'Ultra Premium Direct.

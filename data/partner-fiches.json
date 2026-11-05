@@ -1,0 +1,848 @@
+[
+ {
+  "brand": "Dog Chef",
+  "product": "Croquettes au bœuf frais",
+  "url": "https://www.dogchef.com/fr/croquettes/croquette-boeuf",
+  "type": "sec",
+  "composition": "Boeuf frais 50%, boeuf séché 12%, flocons de pomme de terre, avoine, graisse de volaille, protéine végétarienne hydrolysée, carotte séchée 3%, pulpe de betterave séchée, graines de lin 2%, minéraux 1,3%, chicorée séchée, levure, haricots verts séchés 0,7%, huile d’algue (source naturelle d’EPA et de DHA) 0,5%, pomme séchée 0,5%, psyllium, baies d’argousier 0,2%, spiruline 0,2%, herbes (romarin, thym, persil) 0,2%, sulfate de glucosamine, sulfate de chondroïtine",
+  "constituants": {
+   "proteines": 30.0,
+   "matieresGrasses": 18.5,
+   "cendres": 7.0,
+   "cellulose": 3.0,
+   "humidite": null,
+   "calcium": 1.3,
+   "phosphore": 1.0
+  },
+  "kcal100g": null,
+  "logo": "/images/marques/dogchef-logo.webp"
+ },
+ {
+  "brand": "Dog Chef",
+  "product": "Croquettes au canard frais",
+  "url": "https://www.dogchef.com/fr/croquettes/canard-frais",
+  "type": "sec",
+  "composition": "Canard frais désossé 50%, canard séché 13%, sarrasin 8%, patates douces 8%, pois 6%, graisse de poulet 5%, carottes 2%, minéraux, pulpe de betterave 1%, huile d’olive, graines de lin 0,5%, poires 0,5%, farine de caroube 0,5%, huile d’algues (source naturelle d’EPA et de DHA) 0,3%, FOS, extrait de levure (source naturelle de MOS et de bêta-glucanes), canneberges 0,01%, ortie 0,01%, chlorhydrate de glucosamine, sulfate de chondroïtine",
+  "constituants": {
+   "proteines": 30.0,
+   "matieresGrasses": 18.5,
+   "cendres": 7.5,
+   "cellulose": 3.5,
+   "humidite": 9.0,
+   "calcium": 1.2,
+   "phosphore": 0.9
+  },
+  "kcal100g": null,
+  "logo": "/images/marques/dogchef-logo.webp"
+ },
+ {
+  "brand": "Dog Chef",
+  "product": "Croquettes à la dinde fraîche",
+  "url": "https://www.dogchef.com/fr/croquettes/croquette-dinde",
+  "type": "sec",
+  "composition": "Dinde fraîche désossée 50%, dinde séchée 10%, riz 7%, avoine, patate douce 6%, graisse de dinde, protéine de pois, protéine végétarienne hydrolysée, levure de bière, graines de lin 1,5%, minéraux 1,3%, chicorée séchée (source naturelle de FOS et inuline), pommes séchées 0,5%, pulpe de betterave séchée 0,5%, carottes séchées 0,5%, psyllium husk, extrait de levure (source naturelle de MOS et bêta-glucanes), huile d’algue (source naturelle d’EPA et de DHA) 0,5%, potiron, églantier 0,1%, sulfate de glucosamine, sulfate de chondroïtine, pissenlit 0,01%",
+  "constituants": {
+   "proteines": 30.0,
+   "matieresGrasses": 18.5,
+   "cendres": 8.0,
+   "cellulose": 2.5,
+   "humidite": null,
+   "calcium": 1.45,
+   "phosphore": 1.0
+  },
+  "kcal100g": null,
+  "logo": "/images/marques/dogchef-logo.webp"
+ },
+ {
+  "brand": "Dog Chef",
+  "product": "Croquettes au poulet frais",
+  "url": "https://www.dogchef.com/fr/croquettes/poulet-frais",
+  "type": "sec",
+  "composition": "Poulet frais désossé 50%, poulet séché 13%, riz blanc 10%, pois 10%, graisse de poulet 5%, carottes 2%, minéraux, pulpe de betterave 1%, huile d’olive, graines de lin 0,5%, pommes 0,5%, psyllium husk 0,5%, huile d’algues (source naturelle d’EPA et de DHA) 0,3%, FOS, extrait de levure (source naturelle de MOS et de bêta-glucanes), myrtilles 0,01%, curcuma 0,01%, chlorhydrate de glucosamine, sulfate de chondroïtine",
+  "constituants": {
+   "proteines": 30.0,
+   "matieresGrasses": 18.5,
+   "cendres": 8.5,
+   "cellulose": 2.2,
+   "humidite": 9.0,
+   "calcium": 1.2,
+   "phosphore": 0.9
+  },
+  "kcal100g": null,
+  "logo": "/images/marques/dogchef-logo.webp"
+ },
+ {
+  "brand": "Dog Chef",
+  "product": "Repas frais au porc",
+  "url": "https://www.dogchef.com/fr/recettes-fraiches/porc",
+  "type": "humide",
+  "composition": "Porc 52% (viande, cœur), Pommes de terre 12%, Haricots verts 8%, Riz 8%, Carottes 6%, Panais 5%, Céleri-rave 4%, Pommes 1%, Phosphate de calcium 0,6%, Huiles végétales (tournesol, colza) 0,5%, Huile de poisson 0,5%, Carbonate de calcium 0,4%, Sels de potassium d’acides organiques 0,3%, Chicorée 0,2%, Psyllium 0,1%, Levure (source de Mannan-Oligosaccharides et Bêta-glucanes) 0,1%, Glycinate de Magnésium 0,1%, Sel 0,06%, Sucres fermentés 0,05%",
+  "constituants": {
+   "proteines": 10.79,
+   "matieresGrasses": 4.76,
+   "cendres": 2.0,
+   "cellulose": 1.22,
+   "humidite": 71.0,
+   "calcium": 0.32,
+   "phosphore": 0.23
+  },
+  "kcal100g": null,
+  "logo": "/images/marques/dogchef-logo.webp"
+ },
+ {
+  "brand": "Dog Chef",
+  "product": "Repas frais à l'agneau",
+  "url": "https://www.dogchef.com/fr/recettes-fraiches/recette-agneau-frais",
+  "type": "humide",
+  "composition": "Agneau 28% (viande, foie), Dinde (gésiers) 27%, Carottes 13%, Sarrasin 7%, Petit pois 6%, Broccoli 5%, Courgette 4,8%, Patate douce 3%, Racine de persil 3%, Pomme 1%, Huiles végétales (tournesol, colza) 0,5%, Huile de poisson 0,4%, Phosphate de calcium 0,2%, Chicorée 0,2%, Sels de potassium d’acides organiques 0,2%, Carbonate de calcium 0,1%, Psyllium 0,1%, Levure (source de Mannan-Oligosaccharides et Bêta-glucanes) 0,1%, Sel 0,1%, Glycinate de Magnésium 0,1%, Sucres fermentés 0,05%, Thym 0,05%",
+  "constituants": {
+   "proteines": 9.65,
+   "matieresGrasses": 6.5,
+   "cendres": 2.01,
+   "cellulose": 1.92,
+   "humidite": 72.9,
+   "calcium": 0.33,
+   "phosphore": 0.26
+  },
+  "kcal100g": null,
+  "logo": "/images/marques/dogchef-logo.webp"
+ },
+ {
+  "brand": "Dog Chef",
+  "product": "Repas frais au bœuf",
+  "url": "https://www.dogchef.com/fr/recettes-fraiches/boeuf",
+  "type": "humide",
+  "composition": "Boeuf 32% (viande, coeur, foie, rognons), Poulet 26% (gésiers), Carotte 8%, Petit pois 7%, Brocoli 5%, Carotte jaune 5%, Sarrasin 5%, Courgette 4%, Racine de persil 3%, Pomme 0,7%, Phosphate de calcium 0,6%, Huiles végétales (tournesol, colza) 0,5%, Huile de poisson 0,5%, Carbonate de calcium 0,4%, Sels de potassium d’acides organiques 0,3%, Chicorée 0,2%, Graines de chia 0,1%, Psyllium 0,1%, Levure (source de Mannan-Oligosaccharides et Bêta-glucanes) 0,1%, Sel 0,09%, Glycinate de Magnésium 0,08%, Sucres fermentés 0,05%, Romarin 0,05% Boeuf La source principale de protéines dans cette recette",
+  "constituants": {
+   "proteines": 10.69,
+   "matieresGrasses": 6.42,
+   "cendres": 2.06,
+   "cellulose": 1.77,
+   "humidite": 73.6,
+   "calcium": 0.29,
+   "phosphore": 0.24
+  },
+  "kcal100g": null,
+  "logo": "/images/marques/dogchef-logo.webp"
+ },
+ {
+  "brand": "Dog Chef",
+  "product": "Repas frais au poisson",
+  "url": "https://www.dogchef.com/fr/recettes-fraiches/poisson",
+  "type": "humide",
+  "composition": "Poisson 54% (poisson blanc, saumon), Haricots verts 12%, Carottes 8%, Panais 7%, Flocons d’avoine 6%, Céleri-rave 5%, Huile d’olive 3%, Pommes 2%, Huiles végétales (tournesol, colza) 0,5%, Huile de poisson 0,5%, Phosphate de calcium 0,3%, Sels de potassium d’acides organiques 0,3%, Carbonate de calcium 0,2%, Chicorée 0,2%, Psyllium 0,1%, Levure (source de Mannan-Oligosaccharides et Bêta-glucanes) 0,1%, Glycinate de Magnésium 0,1%, Sucres fermentés 0,05%",
+  "constituants": {
+   "proteines": 11.26,
+   "matieresGrasses": 6.19,
+   "cendres": 2.16,
+   "cellulose": 1.85,
+   "humidite": 72.0,
+   "calcium": 0.36,
+   "phosphore": 0.22
+  },
+  "kcal100g": null,
+  "logo": "/images/marques/dogchef-logo.webp"
+ },
+ {
+  "brand": "Dog Chef",
+  "product": "Repas frais au canard",
+  "url": "https://www.dogchef.com/fr/recettes-fraiches/canard",
+  "type": "humide",
+  "composition": "Canard 54% (viande, gésier, coeur), Haricots verts 11%, Carottes 7%, Panais 7%, Patates douces 6%, Céleri-rave 5%, Sarrasin 5%, Pommes 2%, Huiles végétales (tournesol, colza) 0,5%, Huile de poisson 0,5%, Graines de chia 0,5%, Phosphate de calcium 0,5%, Carbonate de calcium 0,3%, Sels de potassium d’acides organiques 0,3%, Chicorée 0,2%, Psyllium 0,1%, Levure (source de Mannan-Oligosaccharides et Bêta-glucanes) 0,1%, Glycinate de Magnésium 0,1%, Sel 0,05%, Sucres fermentés 0,05%",
+  "constituants": {
+   "proteines": 10.23,
+   "matieresGrasses": 6.8,
+   "cendres": 2.02,
+   "cellulose": 1.78,
+   "humidite": 73.0,
+   "calcium": 0.3,
+   "phosphore": 0.24
+  },
+  "kcal100g": null,
+  "logo": "/images/marques/dogchef-logo.webp"
+ },
+ {
+  "brand": "Dog Chef",
+  "product": "Repas frais au poulet",
+  "url": "https://www.dogchef.com/fr/recettes-fraiches/poulet",
+  "type": "humide",
+  "composition": "Poulet 57% (viande, gésier, foie), Haricots verts 12%, Carottes 8%, Panais 7%, Céleri-rave 5%, Riz 5%, Pommes 2%, Huiles végétales (tournesol, colza) 0,5%, Phosphate de calcium 0,5%, Huile de poisson 0,5%, Carbonate de calcium 0,3%, Sels de potassium d’acides organiques 0,3%, Chicorée 0,2%, Psyllium 0,1%, Levure (source de Mannan-Oligosaccharides et Bêta-glucanes) 0,1%, Glycinate de Magnésium 0,1%, Sel 0,06%, Sucres fermentés 0,05%",
+  "constituants": {
+   "proteines": 10.48,
+   "matieresGrasses": 6.88,
+   "cendres": 1.94,
+   "cellulose": 1.22,
+   "humidite": 73.0,
+   "calcium": 0.32,
+   "phosphore": 0.24
+  },
+  "kcal100g": null,
+  "logo": "/images/marques/dogchef-logo.webp"
+ },
+ {
+  "brand": "Dog Chef",
+  "product": "Repas frais à la dinde",
+  "url": "https://www.dogchef.com/fr/recettes-fraiches/dinde",
+  "type": "humide",
+  "composition": "Dinde 58% (viande, gésier, foie), Carotte 7%, Patate douce 6%, Petit pois 6%, Brocoli 4%, Sarrasin 4%, Carotte jaune 4%, Courgette 3%, Racine de persil 3%, Pomme 0,6%, Phosphate de calcium 0,6%, Huiles végétales (tournesol, colza) 0,5%, Huile de poisson 0,5%, Carbonate de calcium 0,4%, Sels de potassium d’acides organiques 0,3%, Chicorée 0,2%, Psyllium 0,1%, Levure (source de Mannan-Oligosaccharides et Bêta-glucanes) 0,1%, Glycinate de Magnésium 0,1%, Sel 0,09%, Sucres fermentés 0,05%, Sauge 0,05%",
+  "constituants": {
+   "proteines": 12.32,
+   "matieresGrasses": 6.58,
+   "cendres": 2.1,
+   "cellulose": 1.68,
+   "humidite": 72.0,
+   "calcium": 0.31,
+   "phosphore": 0.25
+  },
+  "kcal100g": null,
+  "logo": "/images/marques/dogchef-logo.webp"
+ },
+ {
+  "brand": "Elmut",
+  "product": "Repas frais au poulet",
+  "url": "https://elmut.fr/produits-chien/frais/poulet",
+  "type": "humide",
+  "composition": "Poulet (viande, foie, coeur) 62%, courgettes, carottes, quinoa, fécule de pomme de terre, huile de colza, carbonate de calcium, minéraux",
+  "constituants": {
+   "proteines": 13.2,
+   "matieresGrasses": 6.4,
+   "cendres": 1.3,
+   "cellulose": 0.7,
+   "humidite": 75.6,
+   "calcium": null,
+   "phosphore": null
+  },
+  "kcal100g": 122,
+  "logo": "/images/marques/elmut-logo.webp"
+ },
+ {
+  "brand": "Elmut",
+  "product": "Repas frais au bœuf",
+  "url": "https://elmut.fr/produits-chien/frais/boeuf",
+  "type": "humide",
+  "composition": "Boeuf(coeur, poumons, foie) 62%, courgettes, carottes, riz, fécule de pomme de terre, huile de colza, carbonate de calcium, minéraux",
+  "constituants": {
+   "proteines": 13.8,
+   "matieresGrasses": 7.6,
+   "cendres": 1.2,
+   "cellulose": 0.6,
+   "humidite": 71.7,
+   "calcium": null,
+   "phosphore": null
+  },
+  "kcal100g": 144,
+  "logo": "/images/marques/elmut-logo.webp"
+ },
+ {
+  "brand": "Elmut",
+  "product": "Repas frais à la dinde",
+  "url": "https://elmut.fr/produits-chien/frais/dinde",
+  "type": "humide",
+  "composition": "Dinde (viande, foie, coeur) 62%, courgettes, carottes, quinoa, fécule de pomme de terre, huile de colza, carbonate de calcium, minéraux",
+  "constituants": {
+   "proteines": 13.6,
+   "matieresGrasses": 7.1,
+   "cendres": 1.6,
+   "cellulose": 0.8,
+   "humidite": 74.2,
+   "calcium": null,
+   "phosphore": null
+  },
+  "kcal100g": 129,
+  "logo": "/images/marques/elmut-logo.webp"
+ },
+ {
+  "brand": "Elmut",
+  "product": "Repas frais au porc",
+  "url": "https://elmut.fr/produits-chien/frais/porc",
+  "type": "humide",
+  "composition": "Ingrédients : porc (coeur, foie, viande) 62%, courgettes, carottes, riz, fécule de pomme de terre, huile de colza, carbonate de calcium, minéraux",
+  "constituants": {
+   "proteines": 13.1,
+   "matieresGrasses": 7.5,
+   "cendres": 1.3,
+   "cellulose": 0.6,
+   "humidite": 74.1,
+   "calcium": null,
+   "phosphore": null
+  },
+  "kcal100g": 134,
+  "logo": "/images/marques/elmut-logo.webp"
+ },
+ {
+  "brand": "Elmut",
+  "product": "Repas frais au poisson",
+  "url": "https://elmut.fr/produits-chien/frais/poisson",
+  "type": "humide",
+  "composition": "Poisson (saumon, colin) 47%, foie de poulet, courgettes, carottes, quinoa, huile de colza, carbonate de calcium, minéraux",
+  "constituants": {
+   "proteines": 12.0,
+   "matieresGrasses": 7.7,
+   "cendres": 1.7,
+   "cellulose": 0.8,
+   "humidite": 73.7,
+   "calcium": null,
+   "phosphore": null
+  },
+  "kcal100g": 134,
+  "logo": "/images/marques/elmut-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Light Super Premium pour Chien Stérilisé",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-light-super-premium-pour-chien-en-surpoids-sterilise/",
+  "type": "sec",
+  "composition": "protéines d'agneau déshydratées (16%), riz (16%), pois (15,5%), maïs (15%), protéines de porc déshydratées (14%), fibres de fèverole (6,5%), graisse de poulet (5,5%), protéines de porc hydrolysées (3%), pulpe de betterave déshydratée (3%), huile de saumon (1,5%), levure de bière, minéraux, fructo-oligosaccharides (FOS) (0,1%), paroi de levures (source de MOS) (0,1%), algues (dont Ascophyllum nodosum) (0,1%), plantes déshydratées (chicorée, brocoli, canneberge, épinard, myrtille, agrumes, curcuma, clou de girofle, romarin)",
+  "constituants": {
+   "proteines": 28.0,
+   "matieresGrasses": 12.0,
+   "cendres": 7.5,
+   "cellulose": 4.5,
+   "humidite": 8.0,
+   "calcium": 1.5,
+   "phosphore": 1.0
+  },
+  "kcal100g": 354,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Chien Sensible Agneau Sans Céréales",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-sans-cereales-pour-chien-sensible-toutes-tailles/",
+  "type": "sec",
+  "composition": "protéines d’agneau déshydratées (20%), pois (17,5%), protéines de porc déshydratées (14%), manioc (12%), graisse de poulet (10%), fécule de pomme de terre (10%), tapioca (4,5%), protéines de porc hydrolysées (3%), pulpe de betterave déshydratée (3%), huile de saumon (1,5%), fibres de pomme (1%), minéraux, levure de bière, fructo-oligosaccharides (FOS) (0,3%, dont chicorée déshydratée), paroi de levures (source de MOS) (0,3%), plantes déshydratées (chicorée, brocoli, canneberge, épinard, myrtille, agrumes, curcuma, clou de girofle, romarin), algues (dont Ascophyllum nodosum) (0,1%), glucosamine, sulfate de chondroïtine",
+  "constituants": {
+   "proteines": 30.0,
+   "matieresGrasses": 16.0,
+   "cendres": 8.0,
+   "cellulose": 3.0,
+   "humidite": 8.0,
+   "calcium": 1.5,
+   "phosphore": 1.0
+  },
+  "kcal100g": 382,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Super Premium pour Chien Taille Moyenne",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-super-premium-pour-chien-de-taille-moyenne/",
+  "type": "sec",
+  "composition": "protéines de poulet déshydratées (31%), riz (20%), maïs (17%), pois (12%), graisse de poulet (8%), protéines de porc hydrolysées (3%), pulpe de betterave déshydratée (2,5%), huile de saumon (1,5%), fibres végétales (1%), levure de bière, minéraux, paroi de levures (source de MOS), fructo-oligosaccharides (FOS), algues (dont Ascophyllum nodosum) (0,1%), plantes déshydratées (chicorée, brocoli, canneberge, épinard, myrtille, agrumes, curcuma, clou de girofle, romarin)",
+  "constituants": {
+   "proteines": 28.0,
+   "matieresGrasses": 15.0,
+   "cendres": 8.0,
+   "cellulose": 3.0,
+   "humidite": 8.0,
+   "calcium": 1.5,
+   "phosphore": 1.0
+  },
+  "kcal100g": 376,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Super Premium pour Chien Grande Taille",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-super-premium-pour-chien-de-grande-taille/",
+  "type": "sec",
+  "composition": "protéines de poulet déshydratées (35%), riz (20%), maïs (13%), pois (12%), graisse de poulet (9%), protéines de porc hydrolysées (2,5%), pulpe de betterave (2,5%), fibres végétales, huile de saumon (1,5%), levure de bière, minéraux, paroi de levures (source de MOS), fructo-oligosaccharides (FOS), algues (dont Ascophyllum nodosum) (0,1%), plantes déshydratées (chicorée, brocoli, canneberge, épinard, myrtille, agrumes, curcuma, clou de girofle, romarin), glucosamine, sulfate de chondroïtine",
+  "constituants": {
+   "proteines": 30.0,
+   "matieresGrasses": 16.0,
+   "cendres": 8.0,
+   "cellulose": 3.0,
+   "humidite": 8.0,
+   "calcium": 1.4,
+   "phosphore": 0.9
+  },
+  "kcal100g": 382,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes pour Chien Senior +7ans",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-chien-senior-love-care/",
+  "type": "sec",
+  "composition": "protéines de poulet déshydratées (26%), riz (20%), pois (12%), maïs (12%), fibres de pois (6%), graisse de poulet (5,5%), protéines de porc déshydratées (5%), huile de saumon (3,5%), protéines de porc hydrolysées (3%), pulpe de betterave déshydratée (3%), fibres de pomme, levure de bière, minéraux, collagène marin hydrolysé (0,15%), fructo-oligosaccharides (FOS) (0,1%), algues (dont Ascophyllum nodosum) (0,1%), plantes déshydratées (chicorée, brocoli, canneberge, épinard, myrtille, agrumes, curcuma, clou de girofle, romarin), extraits de levure (0,08%), glucosamine (0,05%), sulfate de chondroïtine (0,01%)",
+  "constituants": {
+   "proteines": 28.0,
+   "matieresGrasses": 14.0,
+   "cendres": 7.0,
+   "cellulose": 4.5,
+   "humidite": 8.0,
+   "calcium": 1.1,
+   "phosphore": 0.8
+  },
+  "kcal100g": 354,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Light pour Chien en surpoids",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-chien-surpoids-sterilise-love-care/",
+  "type": "sec",
+  "composition": "protéines de poulet déshydratées (32,5%), riz (25,5%), pois déshydratés (15%), protéines de volaille hydrolysées (5%), fibres végétales (5%), graisse de poulet (4%), cosse de caroube déshydratée, pulpe de betterave déshydratée, tapioca, huile de saumon (1,5%), protéines de porc déshydratées, levure de bière, minéraux, huile de colza, mannan-oligosaccharides (MOS) (0,1%), fructo-oligosaccharides (FOS) (0,1%), spiruline déshydratée, baies de canneberge séchées, épinard séché, brocoli séché, myrtilles séchées, glucosamine (0,01%), sulfate de chondroïtine (0,01%), yucca schidigera déshydraté, ascophyllum nodosum déshydratée (0,01%)",
+  "constituants": {
+   "proteines": 30.0,
+   "matieresGrasses": 12.0,
+   "cendres": 8.0,
+   "cellulose": 6.0,
+   "humidite": 8.0,
+   "calcium": 1.3,
+   "phosphore": 1.0
+  },
+  "kcal100g": 342,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Light Sans Céréales Chien Stérilisé",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-light-sans-cereales-pour-chien-en-surpoids-sterilise/",
+  "type": "sec",
+  "composition": "protéines d'agneau déshydratées (18%), pois (16%), protéines de porc déshydratées (15%), fécule de pomme de terre (14%), manioc (12%), graisse de poulet (7%), fibres de pois, protéines de porc hydrolysées (3%), pulpe de betterave déshydratée (3%), huile de saumon (1,5%), fibres de pomme (1%), minéraux, levure de bière, fructo-oligosaccharides (FOS) (0,2%, dont chicorée déshydratée), paroi de levures (source de MOS) (0,15%), plantes déshydratées (chicorée, brocoli, canneberge, épinard, myrtille, agrumes, curcuma, clou de girofle, romarin), algues (dont Ascophyllum nodosum) (0,1%), glucosamine, sulfate de chondroïtine",
+  "constituants": {
+   "proteines": 30.0,
+   "matieresGrasses": 13.0,
+   "cendres": 8.0,
+   "cellulose": 5.0,
+   "humidite": 8.0,
+   "calcium": 1.5,
+   "phosphore": 1.0
+  },
+  "kcal100g": 354,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Super Premium pour Chien Agneau et Riz",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-super-premium-pour-chien-agneau-et-riz/",
+  "type": "sec",
+  "composition": "protéines d'agneau déshydratées (16%), riz (16%), pois (16%), maïs (15,5%), protéines de porc déshydratées (13,5%), graisse de poulet (8,5%), protéines de porc hydrolysées (3%), pulpe de betterave déshydratée (3%), huile de saumon (1,5%), fibres de pois (1%), levure de bière, minéraux, fructo-oligosaccharides (FOS) (0,2%), paroi de levures (source de MOS) (0,15%), algues (dont Ascophyllum nodosum) (0,1%), plantes déshydratées (chicorée, brocoli, canneberge, épinard, myrtille, agrumes, curcuma, clou de girofle, romarin)",
+  "constituants": {
+   "proteines": 28.0,
+   "matieresGrasses": 15.0,
+   "cendres": 8.0,
+   "cellulose": 3.0,
+   "humidite": 8.0,
+   "calcium": 1.5,
+   "phosphore": 1.0
+  },
+  "kcal100g": 380,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Chien Adulte Poulet Sans Céréales",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-sans-cereales-poulet-frais-chien-adulte-toutes-tailles/",
+  "type": "sec",
+  "composition": "poulet frais* (20%), protéines de poulet déshydratées (17%), tapioca* (9,5%), patate douce déshydratée* (9%), amidon de pomme de terre* (9%), pois déshydratés* (9%), protéines de porc déshydratées (8,5%), graisse de volaille (6%), protéines de poulet hydrolysées (5%), pulpe de betterave déshydratée*, huile de saumon (1,5%), levure de bière déshydratée*, pomme déshydratée* (1%), minéraux, chlorure de sodium, chlorure de potassium, fructo-oligosaccharides (FOS), mannan-oligosaccharides (MOS), brocoli déshydraté* (0,1%), sulfate de chondroïtine, glucosamine, ascophyllum nodosum déshydraté* (0,05%), yucca schidigera déshydraté*, myrtilles déshydratées* (0,01%), canneberge déshydratée* (0,01%), romarin déshydraté* (0,01%), persil déshydraté* (0,01%)",
+  "constituants": {
+   "proteines": 28.0,
+   "matieresGrasses": 15.0,
+   "cendres": 7.0,
+   "cellulose": 3.0,
+   "humidite": 8.0,
+   "calcium": 1.2,
+   "phosphore": 0.8
+  },
+  "kcal100g": 380,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Hypoallergéniques pour Chien",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-hypoallergenique-chien-allergique/",
+  "type": "sec",
+  "composition": "protéines de poisson déshydratées (29%), riz (29%), pois (16,5%), graisse de poulet (7,5%), pulpe de betterave déshydratée (3%), graine de lin (3%), protéines de porc hydrolysées (2,5%), fibres de pois (2%), manioc (2%), huile de saumon (1,5%), levure de bière, fructo-oligosaccharides (FOS) (0,12%), paroi de levures (source de MOS) (0,1%), algues (dont Ascophyllum nodosum) (0,1%), plantes déshydratées (chicorée, brocoli, canneberge, épinard, myrtille, agrumes, curcuma, clou de girofle, romarin)",
+  "constituants": {
+   "proteines": 28.0,
+   "matieresGrasses": 15.0,
+   "cendres": 8.5,
+   "cellulose": 3.0,
+   "humidite": 8.0,
+   "calcium": 1.5,
+   "phosphore": 1.0
+  },
+  "kcal100g": 375,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Super Premium pour Chien Saumon et Riz",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-super-premium-pour-chiens-saumon-et-riz/",
+  "type": "sec",
+  "composition": "protéines de poulet déshydratées (27%), riz (20%), maïs (17%), pois (13%), graisse de poulet (8%), protéines de saumon déshydratées (4%), protéines de porc hydrolysées (3%), pulpe de betterave déshydratée (2%), huile de saumon (1,5%), fibres de pois, levure de bière, minéraux, paroi de levures (source de MOS), fructo-oligosaccharides (FOS), algues (dont Ascophyllum nodosum) (0,1%), plantes déshydratées (chicorée, brocoli, canneberge, épinard, myrtille, agrumes, curcuma, clou de girofle, romarin)",
+  "constituants": {
+   "proteines": 28.0,
+   "matieresGrasses": 15.0,
+   "cendres": 8.0,
+   "cellulose": 3.0,
+   "humidite": 8.0,
+   "calcium": 1.5,
+   "phosphore": 1.0
+  },
+  "kcal100g": 376,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Chien Adulte Saumon Sans Céréales",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-sans-cereales-saumon-frais-chien-adulte-toutes-tailles/",
+  "type": "sec",
+  "composition": "saumon frais* (20%), creton déshydraté (100% porc) (20%), tapioca* (18%), pomme de terre déshydratée* (18%), graisse de volaille (4%), protéines de pomme de terre déshydratées, protéines de porc hydrolysées, pulpe de chicorée déshydratée* (source de FOS) (2,5%), pulpe de betterave déshydratée*, levure de bière déshydratée* (source de MOS) (2,5%), minéraux, huile de saumon (1,5%), pomme déshydratée* (0,5%), psyllium*, ascophyllum nodosum déshydraté* (0,1%), framboises déshydratées* (0,1%), bêta-glucanes, myrtilles déshydratées* (0,05%), glucosamine, sulfate de chondroïtine",
+  "constituants": {
+   "proteines": 28.0,
+   "matieresGrasses": 14.0,
+   "cendres": 8.0,
+   "cellulose": 3.0,
+   "humidite": 8.0,
+   "calcium": 1.1,
+   "phosphore": 0.8
+  },
+  "kcal100g": 372,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Sans Céréales Grand Chien et Géant",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-sans-cereales-original-chien-adulte-grand-et-geant-sup-40-kg/",
+  "type": "sec",
+  "composition": "protéines de volaille déshydratées (29,5%), creton déshydraté (100% porc) (16%), pois déshydraté (14%), graisse de volaille (10%), tapioca (9%), pomme de terre déshydratée (8%), protéines de poulet hydrolysées, protéines de thon déshydratées, huile de saumon (1,5%), levure de bière déshydratée (source de MOS), œuf déshydraté, pulpe de betterave déshydratée, graine de lin, minéraux, plantes déshydratées, pulpe de chicorée déshydratée (source de FOS), mannan-oligosaccharides (MOS), ascophyllum nodosum déshydraté (0,1%), yucca schidigera déshydraté, glucosamine, sulfate de chondroïtine",
+  "constituants": {
+   "proteines": 40.0,
+   "matieresGrasses": 20.0,
+   "cendres": 8.5,
+   "cellulose": 2.5,
+   "humidite": 8.0,
+   "calcium": 1.4,
+   "phosphore": 1.1
+  },
+  "kcal100g": 406,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Light Petit Chien Stérilisé",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-light-super-premium-pour-chien-sterilise-de-petite-taille/",
+  "type": "sec",
+  "composition": "protéines d'agneau déshydratées (16%), riz (16%), pois (15,5%), maïs (15%), protéines de porc déshydratées (14%), fibres de fèverole (6,5%), graisse de poulet (5,5%), protéines de porc hydrolysées (3%), pulpe de betterave déshydratée (3%), huile de saumon (1,5%), levure de bière, minéraux, fructo-oligosaccharides (FOS) (0,1%), paroi de levures (source de MOS) (0,1%), algues (dont Ascophyllum nodosum) (0,1%), plantes déshydratées (chicorée, brocoli, canneberge, épinard, myrtille, agrumes, curcuma, clou de girofle, romarin)",
+  "constituants": {
+   "proteines": 28.0,
+   "matieresGrasses": 12.0,
+   "cendres": 7.5,
+   "cellulose": 4.5,
+   "humidite": 8.0,
+   "calcium": 1.5,
+   "phosphore": 1.0
+  },
+  "kcal100g": 354,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Chien Actif Super Premium",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-super-premium-pour-chien-actif-de-toutes-tailles/",
+  "type": "sec",
+  "composition": "protéines de poulet déshydratées (34%), riz (15%), maïs (14%), pois (12%), graisse de poulet (11,5%), graines de lin (3%), protéines de porc hydrolysées (2,5%), pulpe de betterave déshydratée (2,5%), huile de saumon (1,5%), levure de bière, fibres végétales, minéraux, paroi de levures (source de MOS), fructo-oligosaccharides (FOS), algues (dont Ascophyllum nodosum) (0,1%), plantes déshydratées (chicorée, brocoli, canneberge, épinard, myrtille, agrumes, curcuma, clou de girofle, romarin), glucosamine, sulfate de chondroïtine",
+  "constituants": {
+   "proteines": 30.0,
+   "matieresGrasses": 20.0,
+   "cendres": 8.0,
+   "cellulose": 2.5,
+   "humidite": 8.0,
+   "calcium": 1.4,
+   "phosphore": 0.9
+  },
+  "kcal100g": 404,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Super Premium Chien Sensible",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-super-premium-pour-chien-sensible/",
+  "type": "sec",
+  "composition": "protéines d'agneau déshydratées (16%), riz (16%), pois (16%), maïs (15,5%), protéines de porc déshydratées (13,5%), graisse de poulet (8,5%), protéines de porc hydrolysées (3%), pulpe de betterave déshydratée (3%), huile de saumon (1,5%), fibres de pois (1%), levure de bière, minéraux, fructo-oligosaccharides (FOS) (0,2%), paroi de levures (source de MOS) (0,15%), algues (dont Ascophyllum nodosum) (0,1%), plantes déshydratées (chicorée, brocoli, canneberge, épinard, myrtille, agrumes, curcuma, clou de girofle, romarin)",
+  "constituants": {
+   "proteines": 28.0,
+   "matieresGrasses": 15.0,
+   "cendres": 8.0,
+   "cellulose": 3.0,
+   "humidite": 8.0,
+   "calcium": 1.5,
+   "phosphore": 1.0
+  },
+  "kcal100g": 380,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Pâtée Chien Sans Céréales Poulet Dinde",
+  "url": "https://www.ultrapremiumdirect.com/produits/12-boites-de-patee-pour-chien-sans-cereales-poulet-dinde-carotte-epinard/",
+  "type": "humide",
+  "composition": "volaille 60% (viande 20% (poulet 10% et dinde 10%), cœurs et foies de volaille 20%, gésiers de volaille 15%, peaux de volaille 5%), carotte 5%, épinard 4%, mangue 1%, inuline (prébiotique), huile de lin 0,2%, minéraux",
+  "constituants": {
+   "proteines": 10.0,
+   "matieresGrasses": 7.0,
+   "cendres": 1.5,
+   "cellulose": 0.2,
+   "humidite": 78.0,
+   "calcium": 0.22,
+   "phosphore": 0.18
+  },
+  "kcal100g": 113,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Pâtée Chien Sans Céréales Agneau",
+  "url": "https://www.ultrapremiumdirect.com/produits/12-boites-de-patee-pour-chien-sans-cereales-agneau-courgette-carotte/",
+  "type": "humide",
+  "composition": "agneau 30% (foies 20%, lobes 10%), porc 30% (viandes 20%, rognons 5% et lobes 5%), courgette 6%, carotte 3%, pomme 1%, minéraux, inuline (prébiotique), huile de lin 0,2%",
+  "constituants": {
+   "proteines": 10.0,
+   "matieresGrasses": 6.0,
+   "cendres": 2.0,
+   "cellulose": 0.2,
+   "humidite": 79.0,
+   "calcium": 0.22,
+   "phosphore": 0.18
+  },
+  "kcal100g": 102,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Petit Chien Adulte Saumon",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-saumon-frais-chien-adulte-petite-taille/",
+  "type": "sec",
+  "composition": "saumon frais* (20%), protéines de poulet déshydratées (20%), patate douce déshydratée* (12%), amidon de pomme de terre (12%), pois déshydratés* (12%), graisse de volaille (5%), creton de porc déshydraté (4%), protéines de volaille hydrolysées, pulpe de betterave déshydratée*, graine de lin*, huile de saumon (1,5%), levure de bière déshydratée*, pomme déshydratée* (1%), fibres végétales*, chicorée déshydratée* (source de FOS) (0,8%), minéraux, mannan-oligosaccharides (MOS), ascophyllum nodosum déshydraté* (0,05%), plantes déshydratées (rosmarinus sp., curcuma sp., citrus sp., eugenia sp.), glucosamine, sulfate de chondroïtine, myrtille déshydratée* (0,01%), canneberge déshydratée* (0,01%), brocoli déshydraté* (0,01%), épinard déshydraté*, yucca schidigera déshydraté*",
+  "constituants": {
+   "proteines": 28.0,
+   "matieresGrasses": 17.0,
+   "cendres": 7.0,
+   "cellulose": 3.0,
+   "humidite": 8.0,
+   "calcium": 1.1,
+   "phosphore": 0.8
+  },
+  "kcal100g": 389,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes pour chien digestion au canard",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-pour-chien-digestion-au-canard/",
+  "type": "sec",
+  "composition": "protéines de canard déshydratées (19%), patate douce (18%), tapioca (13%), protéines de porc déshydratées (12%), fécule de pomme de terre (10%), graisse de poulet (7%), fibres de pois (6%), protéines de porc hydrolysées (3%), pulpes de betterave (2,5%), graines de lin (2%), huile de saumon (1,5%), substances minérales, levure de bière (1%), fructo-oligosaccharides (FOS) (0,15%), algues (dont ascophyllum nodosum déshydraté) (0,1%), plantes déshydratées (chicorée, brocoli, canneberge, épinard, myrtille, agrumes, curcuma, clou de girofle, romarin), paroi de levures (source de MOS) (0,08%)",
+  "constituants": {
+   "proteines": 28.0,
+   "matieresGrasses": 15.0,
+   "cendres": 7.5,
+   "cellulose": 4.5,
+   "humidite": 8.0,
+   "calcium": 1.2,
+   "phosphore": 0.85
+  },
+  "kcal100g": 367,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Petit Chien moins de 10kg",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-super-premium-pour-chien-de-petite-taille/",
+  "type": "sec",
+  "composition": "protéines de poulet déshydratées (29,5%), riz (24,5%), pois déshydratés (15%), graisse de poulet (13%), protéines de volaille hydrolysées (6%), protéines de poisson déshydratées, cosse de caroube déshydratée, pulpe de betterave déshydratée, huile de saumon (1,5%), œuf déshydraté, minéraux, fibres végétales, levure de bière déshydratée, mannan-oligosaccharides (MOS), fructo-oligosaccharides (FOS), yucca schidigera déshydraté, spiruline déshydratée, canneberge déshydratée, épinard déshydraté, brocoli déshydraté, myrtilles déshydratées, ascophyllum nodosum déshydraté (0,01%)",
+  "constituants": {
+   "proteines": 30.0,
+   "matieresGrasses": 20.0,
+   "cendres": 7.5,
+   "cellulose": 2.0,
+   "humidite": 8.0,
+   "calcium": 1.4,
+   "phosphore": 0.9
+  },
+  "kcal100g": 410,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Super Premium pour Chien Senior",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-super-premium-pour-chien-senior/",
+  "type": "sec",
+  "composition": "porc et agneau déshydratés (34%), riz (20%), pois (14%), graisse de poulet (10%), maïs (10%), cosse de caroube (3%), tapioca (2%), levure de bière (2%), pulpe de betterave (2%), huile de saumon (1,5%), chlorure de sodium, fructo et manno-oligosaccharides, ascophyllum nodosum, plantes (thym, fleur de camomille, fenouil, échinacée), yucca schidigera",
+  "constituants": {
+   "proteines": 28.0,
+   "matieresGrasses": 15.0,
+   "cendres": 7.0,
+   "cellulose": 2.5,
+   "humidite": 8.0,
+   "calcium": 1.4,
+   "phosphore": 1.0
+  },
+  "kcal100g": null,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes pour chien peau & pelage",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-peau-et-pelage-pour-chien/",
+  "type": "sec",
+  "composition": "protéines de saumon déshydratées (23,5%), patate douce déshydratée (20,5%), amidon de pomme de terre (20,5%), protéines de poisson déshydratées (8%), graisse de volaille (6%), levure de bière déshydratée (4%), protéines de poulet hydrolysées, huile de tournesol (2,5%), pulpe de betterave déshydratée, graine de lin (2%), huile de saumon (1,5%), fibres végétales, minéraux, chicorée déshydratée (source de FOS), mannan-oligosaccharides (MOS), graine de bourrache (0,2%), farine de krill (0,2%), herbes déshydratées (0,1%) (grenade, persil, origan, thym), carotte déshydratée, ascophyllum nodosum déshydraté (0,05%), poudre de curcuma, plantes déshydratées (rosmarinus sp., curcuma sp., citrus sp., eugenia sp.), myrtilles déshydratées, canneberge déshydratée",
+  "constituants": {
+   "proteines": 27.0,
+   "matieresGrasses": 16.0,
+   "cendres": 7.0,
+   "cellulose": 2.0,
+   "humidite": 8.0,
+   "calcium": 1.4,
+   "phosphore": 1.0
+  },
+  "kcal100g": 392,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Sans Céréales pour Chien Moyen et Grand",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-sans-cereales-natural-hunter-chien-adulte-moyen-et-grand-de-25-kg-a-45-kg/",
+  "type": "sec",
+  "composition": "poulet déshydraté (32%), porc déshydraté (17%), pois (13%), graisse de poulet (12%), tapioca (8%), cosse de caroube (4%), fécule de pomme de terre (4%), dinde déshydratée (3%), huile de saumon (1,5%), œuf déshydraté (1%), pulpe de betterave (1%), graine de lin (1%), levure de bière (1%), chlorure de sodium, fructo et manno-oligosaccharides, sulfate de chondroïtine et glucosamine, ascophyllum nodosum, plantes (thym, fleur de camomille, fenouil, échinacée), lécithines",
+  "constituants": {
+   "proteines": 40.0,
+   "matieresGrasses": 20.0,
+   "cendres": 8.5,
+   "cellulose": 2.5,
+   "humidite": 8.0,
+   "calcium": 1.3,
+   "phosphore": 0.9
+  },
+  "kcal100g": null,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes Chien Petit et Moyen Sans Céréales",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-sans-cereales-country-farm-chien-adulte-petit-et-moyen-inf-25kg/",
+  "type": "sec",
+  "composition": "poulet déshydraté (27%), creton (100% porc) (15%), graisse de volaille (10%), pois déshydratés (10%), tapioca (10%), pomme de terre déshydratée (10%), pulpe de betterave (3%), protéines de volailles hydrolysées (2,5%), huile de saumon (1,5%), œuf déshydraté (1,5%), levure de bière (1%), graines de lin (1%), substances minérales, herbes déshydratées (thym, fenouil, camomille), pulpe de chicorée (FOS), manno-oligosaccharides (MOS), ascophyllum nodosum, glucosamine, sulfate de chondroïtine",
+  "constituants": {
+   "proteines": 40.0,
+   "matieresGrasses": 20.0,
+   "cendres": 8.5,
+   "cellulose": 2.5,
+   "humidite": 8.0,
+   "calcium": 1.5,
+   "phosphore": 1.0
+  },
+  "kcal100g": null,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Ultra Premium Direct",
+  "product": "Croquettes sans céréales chien digestion sensible toutes tailles - édition engagée pour la cause animale",
+  "url": "https://www.ultrapremiumdirect.com/produits/croquettes-sans-cereales-pour-chien-sensible-toutes-tailles-edition-simone-jean-marc/",
+  "type": "sec",
+  "composition": "agneau déshydraté (20%), porc déshydraté (20%), pois (17%), tapioca (15%), graisse de poulet (8,5%), fécule de pomme de terre (8,5%), cosse de caroube (6%), pulpe de betterave (2%), huile de saumon (1,5% dont 5% DHA), chlorure de sodium, pomme, fructo et manno-oligosaccharides, sulfate de chondroïtine et glucosamine, lécithines, ascophyllum nodosum, plantes (thym, fenouil, fleur de camomille, échinacée)",
+  "constituants": {
+   "proteines": 30.0,
+   "matieresGrasses": 16.0,
+   "cendres": 8.0,
+   "cellulose": 3.5,
+   "humidite": 8.0,
+   "calcium": 1.4,
+   "phosphore": 1.0
+  },
+  "kcal100g": null,
+  "logo": "/images/marques/ultrapremiumdirect-logo.webp"
+ },
+ {
+  "brand": "Dogfy Diet",
+  "product": "Repas frais au bœuf",
+  "url": "https://dogfydiet.com/fr/nos-recettes/recette-boeuf",
+  "type": "humide",
+  "composition": "Bœuf (60,5%), Carotte fraîche (26%), Pomme de terre fraîche (5,5%), Patate douce fraîche (3,6%), Vitamines et minéraux (1,9%), Huile (saumon, olive, tournesol, colza) (1,6%), Fécule de pomme de terre naturelle (0,9%)",
+  "constituants": {
+   "proteines": 12.01,
+   "matieresGrasses": 10.5,
+   "cellulose": 1.29,
+   "cendres": 1.2,
+   "humidite": 72.0,
+   "calcium": null,
+   "phosphore": null
+  },
+  "kcal100g": null,
+  "logo": "/images/marques/dogfy-diet-logo.webp"
+ },
+ {
+  "brand": "Dogfy Diet",
+  "product": "Repas frais à la dinde",
+  "url": "https://dogfydiet.com/fr/nos-recettes/recette-dinde",
+  "type": "humide",
+  "composition": "Dinde (60,3%), Carotte fraîche (25%), Patate douce fraîche (3,6%), Courgette (3,6%), Navet frais (1,8%), Petits pois (1,8%), Huile (saumon, olive, tournesol, colza) (1,6%), Amidon naturel de pois (0,9%), Pomme déshydratée (0,9%), Vitamines et minéraux (0,4%)",
+  "constituants": {
+   "proteines": 11.51,
+   "matieresGrasses": 9.25,
+   "cellulose": 0.99,
+   "cendres": 3.39,
+   "humidite": 71.0,
+   "calcium": null,
+   "phosphore": null
+  },
+  "kcal100g": null,
+  "logo": "/images/marques/dogfy-diet-logo.webp"
+ },
+ {
+  "brand": "Dogfy Diet",
+  "product": "Repas frais au poulet",
+  "url": "https://dogfydiet.com/fr/nos-recettes/recette-poulet",
+  "type": "humide",
+  "composition": "Poulet (60,7%), Carotte fraîche (24,8%), Pomme de terre fraîche (5,5%), Courge (3,7%), Petits pois (1,8%), Huile (saumon, olive, tournesol, colza) (1,3%), Amidon naturel de pois (0,9%), Pomme déshydratée (0,9%), Vitamines et minéraux (0,4%)",
+  "constituants": {
+   "proteines": 12.0,
+   "matieresGrasses": 12.0,
+   "cellulose": 1.02,
+   "cendres": 2.28,
+   "humidite": 70.0,
+   "calcium": null,
+   "phosphore": null
+  },
+  "kcal100g": null,
+  "logo": "/images/marques/dogfy-diet-logo.webp"
+ },
+ {
+  "brand": "Dogfy Diet",
+  "product": "Repas frais au saumon",
+  "url": "https://dogfydiet.com/fr/nos-recettes/recette-saumon",
+  "type": "humide",
+  "composition": "Saumon (60,3%), Carotte fraîche (26,5%), Pomme de terre fraîche (7,3%), Navet frais (2,7%), Fécule de pomme de terre naturelle (1,8%), Vitamines et minéraux (0,7%), Huile (olive, tournesol, colza) (0,5%)",
+  "constituants": {
+   "proteines": 9.86,
+   "matieresGrasses": 14.96,
+   "cellulose": 1.02,
+   "cendres": 3.06,
+   "humidite": 66.0,
+   "calcium": null,
+   "phosphore": null
+  },
+  "kcal100g": null,
+  "logo": "/images/marques/dogfy-diet-logo.webp"
+ },
+ {
+  "brand": "Franklin Pet Food",
+  "product": "Croquettes Canard, pomme, carotte",
+  "url": "https://franklinpetfood.com/products/canard-pomme-carotte",
+  "type": "sec",
+  "composition": "Canard 70% ( 41% de canard frais, 27,5% de protéines de canard, 1,5% de protéines de canard hydrolysées), patate douce 9,5% , pois chiches 5% , pois , banane plantain séchée 3,5% , luzerne 2,7% , carottes 2,5% , épinards séchés 1% , pommes séchées 1% , mannan-oligosaccharides (prébiotiques) 500 mg/kg , poudre de chicorée (prébiotiques) 500 mg/kg .",
+  "constituants": {
+   "proteines": 34.0,
+   "matieresGrasses": 18.0,
+   "cendres": 8.2,
+   "cellulose": 2.3,
+   "humidite": 10.0,
+   "calcium": 1.2,
+   "phosphore": 0.7
+  },
+  "kcal100g": 391,
+  "logo": "/images/marques/franklin-logo.webp"
+ }
+]
