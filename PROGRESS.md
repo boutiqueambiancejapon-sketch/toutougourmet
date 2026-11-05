@@ -1,6 +1,7 @@
 # Progression — Toutou Gourmet — màj à chaque fin de session
 
 ## Complété
+- 2026-11-05 · Import Maxi Zoo : pâtées en priorité, avant toute activation des barèmes. Barèmes sur `feat/baremes`, interrupteur éteint.
 - 2026-11-05 · Dog Chef : recettes renommées Bœuf et poulet, Agneau et dinde, calories des croquettes ajoutées, texte parasite retiré. Bilan des fiches : `~/audits/baremes-2026-11-05/donnees/bilan.md`.
 - 2026-11-05 · Santé : seuil de 40 mg pour 100 kcal retiré faute de source, volumes d'huile remplacés par un renvoi (article saumon ou vétérinaire), phrases SF68 alignées.
 - 2026-11-05 · Anciennes doses d'oméga-3 alignées sur Bauer 2011 dans 41 fichiers. Restent à trancher : seuil de 40 mg pour 100 kcal, volumes d'huile dans quelques recettes, mentions de SF68.
