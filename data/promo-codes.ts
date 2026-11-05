@@ -61,7 +61,7 @@ export const PROMO_PAGES: PromoPage[] = [
     ],
     fit: "Dog Chef calcule la ration sur le profil du chien et la recalcule quand son poids change. Notre fiche la conseille pour un chiot, un chien en surpoids ou un senior. Les boosters Puppy, Senior, Mobility et Transit s'ajoutent aux repas.",
     links: [
-      { href: '/chien/avis-marques/avis-dog-chef-croquettes-canard-frais', label: 'Notre test des croquettes Dog Chef au canard' },
+      { href: '/chien/avis-marques/avis-dog-chef-croquettes-canard-frais', label: 'Notre avis sur les croquettes Dog Chef au canard' },
       { href: '/chien/marque/dog-chef', label: 'Avis Dog Chef : prix, recettes, points faibles' },
       { href: '/chien/marque/elmut-vs-dog-chef', label: 'Dog Chef ou Elmut, lequel choisir ?' },
     ],
@@ -102,7 +102,7 @@ export const PROMO_PAGES: PromoPage[] = [
     ],
     fit: "Dogfy Diet livre des repas cuits sous vide en sachets prédosés, congelés. Notre fiche le conseille pour un chien difficile à nourrir. Le menu bœuf est riche (environ 31 % de matières grasses sur matière sèche) : à doser avec soin chez un chien en surpoids, et notre sélection l'écarte au-delà de 40 kg.",
     links: [
-      { href: '/chien/avis-marques/avis-dogfy-diet-repas-frais-chien', label: 'Notre test complet Dogfy Diet' },
+      { href: '/chien/avis-marques/avis-dogfy-diet-repas-frais-chien', label: 'Notre avis complet sur Dogfy Diet' },
       { href: '/chien/marque/dogfy-diet', label: 'Avis Dogfy Diet : prix, recettes, points faibles' },
     ],
     faqs: [
@@ -179,7 +179,7 @@ export const PROMO_PAGES: PromoPage[] = [
     ],
     fit: "Franklin fait des croquettes et des pâtées sans céréales, jusqu'à 70 % de viande. Notre fiche le conseille pour un chien allergique ou à la digestion sensible. Les recettes sont formulées à Paris et fabriquées en République tchèque. Prévois une transition de 10 jours au moins.",
     links: [
-      { href: '/chien/avis-marques/avis-franklin-light-dinde-patate-douce-epinards', label: 'Notre test de la recette Franklin Light' },
+      { href: '/chien/avis-marques/avis-franklin-light-dinde-patate-douce-epinards', label: 'Notre avis sur la recette Franklin Light' },
       { href: '/chien/marque/franklin', label: 'Avis Franklin Pet Food : prix, recettes, points faibles' },
       { href: '/chien/marque/franklin-vs-ultra-premium-direct', label: 'Franklin ou Ultra Premium Direct, lequel choisir ?' },
     ],
@@ -216,7 +216,7 @@ export const PROMO_PAGES: PromoPage[] = [
     ],
     fit: "Ultra Premium Direct vend ses croquettes en direct, environ 3 à 5 € le kilo : le prix au kilo le plus bas de notre sélection. Notre fiche le conseille pour un chien adulte sans souci particulier, quand le budget compte. Certaines recettes contiennent des pois et montent à 35 % de glucides sur matière sèche.",
     links: [
-      { href: '/chien/avis-marques/avis-ultra-premium-direct', label: 'Notre test complet Ultra Premium Direct' },
+      { href: '/chien/avis-marques/avis-ultra-premium-direct', label: 'Notre avis complet sur Ultra Premium Direct' },
       { href: '/chien/marque/ultra-premium-direct', label: 'Avis Ultra Premium Direct : prix, recettes, points faibles' },
       { href: '/chien/marque/franklin-vs-ultra-premium-direct', label: 'Franklin ou Ultra Premium Direct, lequel choisir ?' },
     ],
