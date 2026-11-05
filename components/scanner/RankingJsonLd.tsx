@@ -1,6 +1,7 @@
 import type { ReviewedItem } from '@/lib/server/scanner-catalog'
 
-type JsonLdItem = Pick<ReviewedItem, 'slug' | 'brand' | 'product'>
+/** `href` : page indexable du produit (son avis). Sans elle, le nom suffit : une fiche en noindex n'a rien à faire ici. */
+type JsonLdItem = Pick<ReviewedItem, 'brand' | 'product'> & { href?: string }
 import { SITE_URL } from './ranking-copy'
 
 // @cdc 06-seo — ItemList du classement affiché (même ordre, mêmes positions que la liste visible) :
@@ -27,7 +28,7 @@ export function RankingJsonLd({ name, path, items, start = 1, total }: { name: s
     itemListElement: items.map((it, i) => ({
       '@type': 'ListItem',
       position: start + i,
-      url: `${SITE_URL}/croquettes/${it.slug}`,
+      ...(it.href ? { url: `${SITE_URL}${it.href}` } : {}),
       name: itemName(it),
     })),
   }

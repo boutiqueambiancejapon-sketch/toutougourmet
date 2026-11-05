@@ -1,6 +1,7 @@
 import { RankingJsonLd } from '@/components/scanner/RankingJsonLd'
 import { RankingBody, shownRecipes } from '@/components/scanner/rankings/RankingBody'
 import { displayBrand, displayName, segmentBySlug, type SegmentSlug } from '@/lib/scanner/rankings'
+import { MODEL_REVIEWS } from '@/data/model-reviews'
 import { segmentRecipes } from '@/lib/server/rankings'
 
 // @cdc cluster scanner — classement en tête d'article, même rendu que les pages /meilleures-… (RankingBody) :
@@ -17,7 +18,7 @@ export async function Classement({ segment: slug }: { segment: SegmentSlug }) {
   if (top.length < 3) return null
   return (
     <div data-cta="classement-article" className="v2 my-6 flex flex-col gap-6">
-      <RankingJsonLd name={segment.listTitle} path={segment.path} items={top.map((r) => ({ slug: r.slug, brand: displayBrand(r.brand), product: displayName(r.name) }))} start={1} total={top.length} />
+      <RankingJsonLd name={segment.listTitle} path={segment.path} items={top.map((r) => ({ href: MODEL_REVIEWS[r.key], brand: displayBrand(r.brand), product: displayName(r.name) }))} start={1} total={top.length} />
       <RankingBody segment={segment} list={list} count={SHOWN} note={NOTE} />
     </div>
   )
