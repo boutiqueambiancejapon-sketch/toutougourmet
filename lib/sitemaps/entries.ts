@@ -2,8 +2,8 @@ import { categories } from '@/data/categories'
 import { brands, getDuelPairs } from '@/data/brands'
 import { BRAND_PAGES_DATE, PAGE_DATES } from '@/data/page-dates'
 import { getAllArticles, getComparatif, type Article } from '@/lib/mdx'
-import { BRAND_MIN_REVIEWED, RANKING_MIN_REVIEWED } from '@/lib/scanner/seo'
-import { groupByBrand, reviewedItemsSafe } from '@/lib/server/scanner-catalog'
+import { RANKING_MIN_REVIEWED } from '@/lib/scanner/seo'
+import { reviewedItemsSafe } from '@/lib/server/scanner-catalog'
 import { sitemapTypeOf, type SitemapType } from './types'
 
 // @cdc seo — liste des URL des sitemaps : uniquement des adresses finales en 200 (aucune
@@ -86,10 +86,10 @@ function contentEntries(): SitemapEntry[] {
   ]
 }
 
-/** Fiches du scanner publiées, classements /croquettes et /croquettes/friandises, pages marque au-delà des seuils. */
+/** Classements au-delà du seuil. Fiches et pages marque du scanner : jamais dans le sitemap. */
 async function croquettesEntries(): Promise<SitemapEntry[]> {
   const items = await reviewedItemsSafe()
-  // Classement et pages marque : aliments complets seulement (les friandises ont leur barème)
+  // Deux barèmes, deux classements
   const complete = items.filter((i) => i.kind === 'complete')
   const treats = items.filter((i) => i.kind === 'treat')
   const entries: SitemapEntry[] = []
@@ -98,10 +98,6 @@ async function croquettesEntries(): Promise<SitemapEntry[]> {
   // Classement des friandises : même seuil, date de la fiche friandise la plus récente
   if (treats.length >= RANKING_MIN_REVIEWED)
     entries.push({ path: '/croquettes/friandises', lastmod: latest(treats.map((i) => i.updatedAt)) })
-  for (const b of groupByBrand(complete))
-    if (b.items.length >= BRAND_MIN_REVIEWED)
-      entries.push({ path: `/croquettes/marque/${b.slug}`, lastmod: latest(b.items.map((i) => i.updatedAt)) })
-  for (const i of items) entries.push({ path: `/croquettes/${i.slug}`, lastmod: i.updatedAt })
   return entries
 }
 

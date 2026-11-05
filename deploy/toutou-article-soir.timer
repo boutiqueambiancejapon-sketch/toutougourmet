@@ -1,0 +1,9 @@
+[Unit]
+Description=Toutou Gourmet : article informatif à 20:00
+
+[Timer]
+OnCalendar=*-*-* 20:00:00 Europe/Brussels
+Persistent=false
+
+[Install]
+WantedBy=timers.target

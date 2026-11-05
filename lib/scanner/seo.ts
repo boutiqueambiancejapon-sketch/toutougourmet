@@ -8,8 +8,8 @@ import { slugify } from './slug'
 // marque partenaire et alternatives proposées sous une note faible.
 
 export const TITLE_MAX = 60
-/** Fiches relues nécessaires pour indexer le classement /croquettes */
-export const RANKING_MIN_REVIEWED = 5
+/** Fiches publiées nécessaires pour indexer un classement (décision du 2026-11-05 : pas de classement maigre dans Google) */
+export const RANKING_MIN_REVIEWED = 30
 /** Fiches relues nécessaires pour indexer une page marque */
 export const BRAND_MIN_REVIEWED = 2
 /** Sous cette note, la fiche propose des marques partenaires */

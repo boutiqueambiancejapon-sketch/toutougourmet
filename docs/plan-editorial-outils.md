@@ -10,7 +10,7 @@ Règles :
 
 ## Avis + Maxi Zoo (`scanner`)
 
-Demande du propriétaire (2026-11-05). Deux étages à relier : l'avis sur une marque et l'avis sur un modèle précis de cette marque. Requêtes relevées dans les suggestions Google le 2026-11-05 : 198 modèles de croquettes sur 373 y figurent. Ce test dit que Google connaît la requête, pas son volume. Toutes les pages vivent sous `/chien/avis-marques/`.
+Demande du propriétaire (2026-11-05). Deux étages à relier : l'avis sur une marque et l'avis sur un modèle précis de cette marque. Requêtes relevées dans les suggestions Google le 2026-11-05 : 198 modèles de croquettes sur 373 y figurent. Ce test dit que Google connaît la requête, pas son volume. Toutes les pages vivent sous `/chien/avis-marques/`. Article transactionnel de 7 h (`deploy/new-article-prompt.md`).
 
 Maillage, le point fort de ces pages :
 - Une page modèle cite sa page marque dès l'introduction. Elle cite aussi 2 modèles voisins de la marque déjà publiés et, s'il existe, un duel. Si sa page marque n'existe pas, écrire d'abord la page marque.
@@ -295,6 +295,9 @@ Validé par le propriétaire (2026-11-04), d'après l'export Search Console. Ces
 - [ ] Le chien peut-il manger de la choucroute ?
 - [ ] Mon chien ne mange plus et reste couché : que faire ? (`bien-nourri`)
 - [ ] Ultra Premium Direct ou Franklin Pet Food : lequel choisir ? (`quiz`)
+- [ ] Le chien peut-il manger du curry ?
+- [ ] Le chien peut-il manger des châtaignes ?
+- [ ] Le chien peut-il manger du ketchup ?
 
 ## Fiche de garde (`fiche-de-garde`) et voyage
 

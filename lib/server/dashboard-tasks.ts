@@ -10,6 +10,8 @@ export const TASKS = [
   // Minuteur relatif (1 min après la fin du passage précédent) : systemd ne publie pas d'heure fixe.
   { unit: 'toutou-ingest', label: 'Lecture des journaux', rhythm: 'chaque minute', nextHint: '1 min après la fin du passage précédent' },
   { unit: 'toutou-deploy', label: 'Mise en ligne', rhythm: 'toutes les heures' },
+  { unit: 'toutou-article-matin', label: 'Article du matin (avis)', rhythm: 'chaque jour à 7 h' },
+  { unit: 'toutou-article-soir', label: 'Article du soir (informatif)', rhythm: 'chaque jour à 20 h' },
   { unit: 'toutou-seo-rewrite', label: 'Tâche de nuit', rhythm: 'chaque nuit' },
   { unit: 'toutou-tone', label: 'Réécriture des articles', rhythm: 'la nuit, de 1 h à 8 h' },
   { unit: 'site-articles', label: 'Articles des autres sites', rhythm: 'chaque nuit' },

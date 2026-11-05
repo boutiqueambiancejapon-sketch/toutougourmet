@@ -1,5 +1,5 @@
 // @cdc lot 6 — page marque du classement : toutes les fiches PUBLIÉES d'aliments complets d'une
-// marque et leur note moyenne. noindex sous BRAND_MIN_REVIEWED fiches. Lien vers la fiche marque
+// marque et leur note moyenne. Toujours noindex (décision du 2026-11-05). Lien vers la fiche marque
 // du site quand la marque est partenaire (data/brands.ts). Title « Croquettes {marque} : avis et
 // note de composition », raccourci pour les noms longs (≤ 60) ; description bornée à 155.
 import type { Metadata } from 'next'
@@ -11,7 +11,7 @@ import { RankingJsonLd } from '@/components/scanner/RankingJsonLd'
 import { ScoreBadge } from '@/components/scanner/ScoreBadge'
 import { frenchDate, isoDay, latestDate } from '@/components/scanner/ranking-copy'
 import { BAND_LABELS, bandFor } from '@/lib/scanner/score'
-import { BRAND_MIN_REVIEWED, partnerBrand } from '@/lib/scanner/seo'
+import { partnerBrand } from '@/lib/scanner/seo'
 import { groupByBrand, reviewedItemsSafe } from '@/lib/server/scanner-catalog'
 import { titleTypo } from '@/lib/title-typo'
 
@@ -56,7 +56,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     description,
     alternates: { canonical: url },
     openGraph: { title: `Croquettes ${group.name} : ${group.average}/100 en moyenne`, description, url, type: 'website' },
-    robots: n >= BRAND_MIN_REVIEWED ? undefined : { index: false, follow: true },
+    robots: { index: false, follow: true },
   }
 }
 

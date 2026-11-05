@@ -40,7 +40,7 @@ function alertsOf({ host, tasks, backup }: Pick<ServerHealth, 'host' | 'tasks' |
   }
   for (const t of tasks) {
     // La tâche de nuit se lit dans l'onglet Contenu, les autres dans Serveur.
-    const tab = t.unit === 'toutou-seo-rewrite' ? 'contenu' : 'serveur'
+    const tab = t.unit === 'toutou-seo-rewrite' || t.unit.startsWith('toutou-article') ? 'contenu' : 'serveur'
     if (t.state === 'failed') push(`${t.label} : le dernier passage a échoué.`, tab)
     if (t.state === 'stopped') push(`${t.label} : la tâche planifiée est arrêtée.`, tab)
   }

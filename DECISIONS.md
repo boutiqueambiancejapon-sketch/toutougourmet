@@ -274,4 +274,7 @@ Décision du propriétaire : aucun lien d'achat sur le produit mal noté, Dog Ch
 Décision du propriétaire, option A : une adresse dont la source Brevo est l'outil ration saute l'étape J2 et garde la suite. Seule la source d'inscription compte : les calculs ne sont pas reliés à une adresse.
 
 ## 2026-11-05 — Pages Avis + : à plat dans `avis-marques`
-L'arborescence passe par le maillage (marque, gamme, duel), pas par de nouvelles adresses : `/chien/avis-marques/{slug}`. Décision du propriétaire : un article par jour, thème différent chaque jour, avis de marque et avis de modèle reliés entre eux. Une page modèle lit sa recette et dit ce qui la distingue, jamais de page par taille de sac.
+L'arborescence passe par le maillage (marque, gamme, duel), pas par de nouvelles adresses : `/chien/avis-marques/{slug}`. Décision du propriétaire : un article transactionnel à 7 h et un informatif à 20 h, thème différent chaque jour, avis de marque et avis de modèle reliés entre eux. Une page modèle lit sa recette et dit ce qui la distingue, jamais de page par taille de sac.
+
+## 2026-11-05 — Cluster scanner : classements dans Google, fiches dehors
+Fiches et pages marque du scanner toujours en noindex. Google reçoit des classements par type de chien, type de produit et maladie, reliés au scanner. Maladies : critère propre à chaque maladie, jamais la note générale, qui favorise les protéines. Partenaires notés avec le même barème.
