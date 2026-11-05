@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict'
 import { contactLine, contactStatus, contactsOf, filterContacts, stepLabel, summarize } from '../lib/dashboard/crm'
 import type { TrackingRow } from '../lib/dashboard/email-tracking'
-import { nextStepFor, type AddressFacts } from '../lib/server/welcome-sequence'
+import { fromRationTool, nextStepFor, stepForAddress, type AddressFacts } from '../lib/server/welcome-sequence'
 
 const NOW = new Date('2026-11-04T12:00:00Z')
 const r = (over: Partial<TrackingRow>): TrackingRow => ({ hash: 'h', email: 'a@x.fr', source: 'guide', listedAt: new Date('2026-11-01T10:00:00Z'), listStatus: 'actif', account: null, sentSteps: [], internal: false, optedOut: false, sends: [], ...over })
@@ -56,4 +56,17 @@ assert.equal(nextStepFor(f({ contact: { createdAt: '2026-10-20T10:00:00Z', black
 assert.deepEqual(nextStepFor(f({ sent: new Set(['j2']), account: { createdAt: '2026-11-03T10:00:00Z', verified: true, hasDog: false } }), opts), { step: 'chien-j1', inDays: 0 })
 assert.deepEqual(nextStepFor(f({ sent: new Set(['j2']), account: { createdAt: '2026-11-03T10:00:00Z', verified: true, hasDog: true } }), opts), { step: 'j5', inDays: 6 }, 'pas d’invitation avec un compte')
 assert.equal(nextStepFor(f({ contact: null, account: { createdAt: '2026-11-03T10:00:00Z', verified: false, hasDog: false } }), opts), null)
+const ration = { createdAt: '2026-11-03T10:00:00Z', blacklisted: false, source: 'outil-ration' }
+assert.equal(fromRationTool('ration'), true)
+assert.equal(fromRationTool('outil-ration'), true)
+assert.equal(fromRationTool('Résultat ration'), true)
+assert.equal(fromRationTool('guide'), false)
+assert.equal(fromRationTool('moderation'), false)
+assert.equal(fromRationTool(null), false)
+const withAccount = { createdAt: '2026-11-03T10:00:00Z', verified: true, hasDog: true }
+assert.deepEqual(nextStepFor(f({ contact: ration, account: withAccount }), opts), { step: 'j5', inDays: 6 }, 'venu de la ration : pas de J2')
+assert.equal(stepForAddress(f({ contact: ration, account: withAccount }), { ...opts, today: '2026-11-05' }), null, 'le jour du J2, rien ne part')
+assert.equal(stepForAddress(f({ contact: { ...ration, source: 'guide' }, account: withAccount }), { ...opts, today: '2026-11-05' }), 'j2', 'les autres gardent le J2')
+assert.equal(stepForAddress(f({ contact: ration, account: withAccount, sent: new Set() }), { ...opts, today: '2026-11-10' }), 'j5', 'la suite continue')
+assert.deepEqual(nextStepFor(f({ contact: ration }), opts), { step: 'compte-j4', inDays: 3 }, 'sans compte : invitation gardée')
 console.log('test-crm : tout passe')

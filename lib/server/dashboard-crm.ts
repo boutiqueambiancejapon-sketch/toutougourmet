@@ -28,7 +28,7 @@ export function nextForRow(r: TrackingRow, options: PlanOptions | null): { step:
   if (!options) return null
   return nextStepFor(
     {
-      contact: r.listedAt ? { createdAt: r.listedAt.toISOString(), blacklisted: r.listStatus === 'desinscrit' } : null,
+      contact: r.listedAt ? { createdAt: r.listedAt.toISOString(), blacklisted: r.listStatus === 'desinscrit', source: r.source } : null,
       account: r.account ? { createdAt: r.account.createdAt.toISOString(), verified: r.account.verified, hasDog: r.account.dogs > 0 } : null,
       sent: new Set(r.sentSteps as SequenceStep[]),
       optedOut: r.optedOut,
@@ -51,7 +51,7 @@ export async function nextForDetail(detail: AccountDetail): Promise<{ step: stri
     const { letter, core, dogs } = detail
     return nextStepFor(
       {
-        contact: letter.state !== 'absent' && letter.createdAt ? { createdAt: letter.createdAt, blacklisted: letter.state === 'unsubscribed' } : null,
+        contact: letter.state !== 'absent' && letter.createdAt ? { createdAt: letter.createdAt, blacklisted: letter.state === 'unsubscribed', source: letter.source } : null,
         account: { createdAt: core.createdAt.toISOString(), verified: core.verified, hasDog: dogs.length > 0 },
         sent: new Set(steps.rows.map((r) => r.step as SequenceStep)),
         optedOut: (opt.rowCount ?? 0) > 0,

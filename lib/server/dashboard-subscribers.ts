@@ -96,7 +96,7 @@ export async function allSubscribers(): Promise<SubscribersResult> {
   }
 }
 
-export type LetterStatus = { state: 'subscribed' | 'unsubscribed' | 'absent'; welcomeSent: boolean; createdAt: string | null } | { state: 'unknown' }
+export type LetterStatus = { state: 'subscribed' | 'unsubscribed' | 'absent'; welcomeSent: boolean; createdAt: string | null; source: string | null } | { state: 'unknown' }
 
 /** Une adresse dans la liste de la lettre, pour la fiche d'un compte. Brevo en panne ou absent : « unknown », sans lever d'erreur. */
 export async function letterStatusOf(email: string): Promise<LetterStatus> {
@@ -108,13 +108,14 @@ export async function letterStatusOf(email: string): Promise<LetterStatus> {
       cache: 'no-store',
       signal: AbortSignal.timeout(TIMEOUT_MS),
     })
-    if (res.status === 404) return { state: 'absent', welcomeSent: false, createdAt: null }
+    if (res.status === 404) return { state: 'absent', welcomeSent: false, createdAt: null, source: null }
     if (!res.ok) throw new BrevoReadError(`status=${res.status}`)
     const contact = (await res.json()) as BrevoContact & { listIds?: number[] }
     const welcomeSent = contact.attributes?.WELCOME_SENT === true
     const createdAt = contact.createdAt ?? null
-    if (contact.emailBlacklisted === true || (contact.listUnsubscribed ?? []).includes(c.list)) return { state: 'unsubscribed', welcomeSent, createdAt }
-    return { state: (contact.listIds ?? []).includes(c.list) ? 'subscribed' : 'absent', welcomeSent, createdAt }
+    const source = typeof contact.attributes?.SOURCE === 'string' ? contact.attributes.SOURCE : null
+    if (contact.emailBlacklisted === true || (contact.listUnsubscribed ?? []).includes(c.list)) return { state: 'unsubscribed', welcomeSent, createdAt, source }
+    return { state: (contact.listIds ?? []).includes(c.list) ? 'subscribed' : 'absent', welcomeSent, createdAt, source }
   } catch (err) {
     console.error('[inscrits] lecture d’un contact Brevo', err instanceof BrevoReadError ? err.message : err instanceof Error ? err.name : 'erreur')
     return { state: 'unknown' }

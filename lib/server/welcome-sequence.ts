@@ -27,6 +27,8 @@ export interface SequenceContact {
   /** Date de création du contact dans Brevo (ISO 8601) */
   createdAt: string
   blacklisted: boolean
+  /** Attribut Brevo SOURCE : où l'adresse a été laissée */
+  source?: string | null
 }
 
 /** Repère court pour les journaux : jamais l'adresse en clair. */
@@ -59,7 +61,7 @@ export interface AccountFacts {
 
 export interface AddressFacts {
   /** Contact de la liste Brevo de la lettre, null s'il n'y est pas */
-  contact: { createdAt: string; blacklisted: boolean } | null
+  contact: { createdAt: string; blacklisted: boolean; source?: string | null } | null
   /** Compte du site, null s'il n'en a pas */
   account: AccountFacts | null
   sent: ReadonlySet<SequenceStep>
@@ -77,6 +79,14 @@ export interface PlanOptions {
 const DOG_STEPS = ['chien-j1', 'chien-j4'] as const
 const SUITE_WITH_INVITE = ['j2', 'compte-j4', 'j5', 'j10'] as const
 
+/** Adresse laissée sur l'outil ration : la personne a déjà sa ration, l'étape J2 qui l'y invite saute. */
+export const fromRationTool = (source: string | null | undefined): boolean => /(^|[\s-])ration\b/i.test(source ?? '')
+
+function suiteSteps(contact: { source?: string | null }, account: AccountFacts | null, reminders: boolean): readonly SequenceStep[] {
+  const steps: readonly SequenceStep[] = reminders && !account ? SUITE_WITH_INVITE : WELCOME_STEPS
+  return fromRationTool(contact.source) ? steps.filter((step) => step !== 'j2') : steps
+}
+
 /**
  * Étape à envoyer à une adresse aujourd'hui, ou null. Désinscrite : rien. Compte sans adresse
  * confirmée : pas de rappel chien (il ne peut pas se connecter, requireEmailVerification). Compte
@@ -91,8 +101,7 @@ export function stepForAddress(facts: AddressFacts, { today, start, reminders }:
     if (step) return step
   }
   if (!contact || !afterStart(contact.createdAt, start)) return null
-  const steps: readonly SequenceStep[] = reminders && !account ? SUITE_WITH_INVITE : WELCOME_STEPS
-  return dueStep(daysSince(contact.createdAt, today), sent, steps)
+  return dueStep(daysSince(contact.createdAt, today), sent, suiteSteps(contact, account, reminders))
 }
 
 /** Première étape d'un parcours encore à venir : jamais avant la dernière partie, jamais au-delà du délai de grâce. */
@@ -110,7 +119,7 @@ export function nextStepFor(facts: AddressFacts, { today, start, reminders }: Pl
   const { contact, account, sent } = facts
   if (facts.optedOut || contact?.blacklisted) return null
   const dog = reminders && account?.verified && !account.hasDog && afterStart(account.createdAt, start) ? upcoming(DOG_STEPS, account.createdAt, sent, today) : null
-  const suite = contact && afterStart(contact.createdAt, start) ? upcoming(reminders && !account ? SUITE_WITH_INVITE : WELCOME_STEPS, contact.createdAt, sent, today) : null
+  const suite = contact && afterStart(contact.createdAt, start) ? upcoming(suiteSteps(contact, account, reminders), contact.createdAt, sent, today) : null
   if (dog && suite) return dog.inDays <= suite.inDays ? dog : suite
   return dog ?? suite
 }
@@ -136,6 +145,7 @@ interface BrevoListContact {
   createdAt?: string
   emailBlacklisted?: boolean
   listUnsubscribed?: number[]
+  attributes?: Record<string, unknown>
 }
 
 /** Tous les contacts de la liste de la lettre (pages de 500). */
@@ -153,7 +163,7 @@ export async function fetchListContacts(): Promise<SequenceContact[]> {
     const data = (await res.json()) as { contacts?: BrevoListContact[] }
     const page = data.contacts ?? []
     for (const c of page)
-      if (c.email && c.createdAt) out.push({ email: c.email, createdAt: c.createdAt, blacklisted: Boolean(c.emailBlacklisted) || (c.listUnsubscribed ?? []).includes(id) })
+      if (c.email && c.createdAt) out.push({ email: c.email, createdAt: c.createdAt, source: typeof c.attributes?.SOURCE === 'string' ? c.attributes.SOURCE : null, blacklisted: Boolean(c.emailBlacklisted) || (c.listUnsubscribed ?? []).includes(id) })
     if (page.length < 500) break
   }
   return out

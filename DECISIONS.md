@@ -268,3 +268,7 @@ Choix du propriétaire, qui ne relira pas. Lecture sans IA de pages structurées
 ## 2026-11-04 : Sous 55, proposer mieux au lieu de vendre le produit
 
 Décision du propriétaire : aucun lien d'achat sur le produit mal noté, Dog Chef et Franklin proposés à la place, plus le mieux noté de la même catégorie chez Maxi Zoo (70 au moins et 15 points de mieux). Dog Chef et Franklin n'ont pas de note dans le scanner : la fiche le dit.
+
+## 2026-11-05 : Pas d'e-mail « ration » à qui vient de l'outil ration
+
+Décision du propriétaire, option A : une adresse dont la source Brevo est l'outil ration saute l'étape J2 et garde la suite. Seule la source d'inscription compte : les calculs ne sont pas reliés à une adresse.
