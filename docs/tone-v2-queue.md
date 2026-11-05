@@ -134,16 +134,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `nourriture-bouledogue-francais`
 - [x] `chien-peut-manger-mures`
 - [x] `proteines-chien-besoins-qualite`
-- [ ] `chien-peut-manger-thon`
-- [ ] `selles-chien-aspect-couleur-consistance`
-- [ ] `chien-peut-manger-chou-fleur`
-- [ ] `chien-peut-manger-noix-de-coco`
-- [ ] `chien-peut-manger-lapin`
-- [ ] `nourriture-terre-neuve`
-- [ ] `chardon-marie-chien-bienfaits-dosage`
-- [ ] `nourriture-dogue-allemand`
-- [ ] `nourriture-schnauzer-nain`
-- [ ] `recette-friandises-education-chien`
+- [x] `chien-peut-manger-thon`
+- [x] `selles-chien-aspect-couleur-consistance`
+- [x] `chien-peut-manger-chou-fleur`
+- [x] `chien-peut-manger-noix-de-coco`
+- [x] `chien-peut-manger-lapin`
+- [x] `nourriture-terre-neuve`
+- [x] `chardon-marie-chien-bienfaits-dosage`
+- [x] `nourriture-dogue-allemand`
+- [x] `nourriture-schnauzer-nain`
+- [x] `recette-friandises-education-chien`
 - [ ] `chien-peut-manger-petits-pois`
 - [ ] `croquettes-a-volonte-ou-rationnees`
 - [ ] `combien-temps-chien-sans-manger`
