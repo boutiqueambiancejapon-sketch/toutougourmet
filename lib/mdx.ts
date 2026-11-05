@@ -96,6 +96,8 @@ export interface ArticleFrontmatter {
   image: string
   author: string
   affiliateA?: AffiliateLink
+  /** Complément : barre collante vers le produit Maxi Zoo qui correspond au sujet */
+  stickyProduct?: { name: string; url: string }
   affiliateB?: AffiliateLink
   /** Optionnel — active l'injection de Product/Review/AggregateRating JSON-LD */
   review?: ReviewFrontmatter

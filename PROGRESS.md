@@ -1,6 +1,7 @@
 # Progression — Toutou Gourmet — màj à chaque fin de session
 
 ## Complété
+- 2026-11-05 · Barre collante Maxi Zoo sur 4 articles compléments (`stickyProduct`), à mesurer dans les clics partenaires.
 - 2026-11-05 · Même composant pour les classements des pages et des articles (`RankingBody`). Cluster compléments Maxi Zoo au calendrier (12 sujets, un article transactionnel sur 8).
 - 2026-11-05 · Classement en tête de 6 articles « meilleur… », après le TL;DR de 4 articles santé, 10 recettes affichées.
 - 2026-11-05 · Page mère Dog Chef (`data/brand-hub.ts`, `components/marques/BrandHub.tsx`) : recettes notées, prix, avis négatifs, concurrents, vétérinaires ; 5 articles y renvoient. Conservation corrigée à 10 mois selon le site de la marque. Autres partenaires à suivre.
