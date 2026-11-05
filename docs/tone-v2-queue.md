@@ -234,16 +234,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `gamelle-chien-inox-ceramique-plastique-silicone`
 - [x] `avis-orijen`
 - [x] `recette-patee-maison-boeuf-chien`
-- [ ] `croquettes-chien-hyperactif`
-- [ ] `nourriture-braque-de-weimar`
-- [ ] `nourriture-bull-terrier`
-- [ ] `chien-peut-manger-tomate`
-- [ ] `alimentation-chienne-gestante-allaitante`
-- [ ] `croquettes-chien-tartre`
-- [ ] `levure-de-biere-chien-bienfaits-dosage`
-- [ ] `proteines-insectes-croquettes-chien`
-- [ ] `mycotoxines-croquettes-chien-risques-prevention`
-- [ ] `chien-peut-manger-gingembre`
+- [x] `croquettes-chien-hyperactif`
+- [x] `nourriture-braque-de-weimar`
+- [x] `nourriture-bull-terrier`
+- [x] `chien-peut-manger-tomate`
+- [x] `alimentation-chienne-gestante-allaitante`
+- [x] `croquettes-chien-tartre`
+- [x] `levure-de-biere-chien-bienfaits-dosage`
+- [x] `proteines-insectes-croquettes-chien`
+- [x] `mycotoxines-croquettes-chien-risques-prevention`
+- [x] `chien-peut-manger-gingembre`
 - [ ] `nourriture-dogue-de-bordeaux`
 - [ ] `chien-peut-manger-avocat`
 - [ ] `chien-vegetarien-vegan-science`
