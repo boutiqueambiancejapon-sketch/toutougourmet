@@ -9,7 +9,7 @@ import { securite } from '../lib/scanner/baremes/securite'
 import { extraireEpaDha } from '../lib/scanner/baremes/teneur'
 import { MSG_CONSEIL, type Entree } from '../lib/scanner/baremes/types'
 import { estVeterinaire } from '../lib/scanner/baremes/veterinaire'
-import { BAREMES_ACTIFS } from '../lib/scanner/baremes/config'
+import { BAREMES_ACTIFS, BAREMES_VERSION } from '../lib/scanner/baremes/config'
 import { chiffresIncoherents, differeDeLaFiche } from '../lib/scanner/baremes/controle-lecture'
 import { noteHuile } from '../lib/scanner/baremes/huile'
 import { MSG_DOS } from '../lib/scanner/baremes/types'
@@ -28,7 +28,7 @@ import { analyseLabel, scoreVersionFor } from '../lib/scanner/analyse'
 import { PREMIUM_LABEL, SUPERMARKET_LABEL } from '../lib/scanner/fixtures'
 import { LABEL_INSTRUCTIONS, LABEL_JSON_SCHEMA } from '../lib/scanner/label-schema'
 import { classifyExtraction } from '../lib/scanner/outcome'
-import { scoreLabel, SCORE_VERSION } from '../lib/scanner/score'
+import { scoreLabel } from '../lib/scanner/score'
 import { parseExtractedLabel, type ExtractedLabel } from '../lib/scanner/types'
 const vide = { proteines: null, matieresGrasses: null, cendres: null, cellulose: null, humidite: null, calcium: null, phosphore: null }
 const I = (...n: string[]) => n.map((nom) => ({ nom, pourcentage: null as number | null }))
@@ -204,14 +204,14 @@ const humEntree = E({ typeAliment: 'humide', ingredients: I('poulet'), constitua
 assert.equal(classementDe(secEntree, noteAliment(secEntree)), 'sec')
 assert.equal(classementDe(humEntree, noteAliment(humEntree)), 'humide')
 assert.equal(classementDe(E({ ingredients: I('huile de saumon') }), huile), null)
-// ─── Interrupteur : une fusion ne change aucune note en ligne ─────────────────────
-assert.equal(BAREMES_ACTIFS, false)
+// ─── Interrupteur allumé : toute note passe par les quatre barèmes ─────────────────────
+assert.equal(BAREMES_ACTIFS, true)
 for (const l of [PREMIUM_LABEL, SUPERMARKET_LABEL]) {
-  assert.deepEqual(analyseLabel(l), scoreLabel(l))
-  assert.equal(scoreVersionFor(l), SCORE_VERSION)
+  assert.deepEqual(analyseLabel(l), analyseBaremes(l))
+  assert.equal(scoreVersionFor(l), BAREMES_VERSION)
 }
-assert.equal(labelPrompt().system, LABEL_INSTRUCTIONS)
-assert.equal(labelPrompt().schema, LABEL_JSON_SCHEMA)
+assert.notEqual(labelPrompt().system, LABEL_INSTRUCTIONS)
+assert.equal(labelPrompt().schema, LABEL_JSON_SCHEMA_V2)
 assert.ok(!('typeProduit' in (LABEL_JSON_SCHEMA.properties ?? {})))
 assert.ok(!Object.keys(parseExtractedLabel({})).includes('typeProduit'))
 assert.deepEqual(JSON.parse(JSON.stringify(parseExtractedLabel({ ...PREMIUM_LABEL }))), JSON.parse(JSON.stringify(PREMIUM_LABEL)))
@@ -253,8 +253,8 @@ assert.equal(sansAnalyse({ typeProduit: 'aliment', alimentVeterinaire: true }), 
 assert.equal(sansAnalyse({ typeProduit: 'autre' }), 'reject')
 assert.equal(sansAnalyse({ typeProduit: 'huile', typeImage: 'autre' }), 'complete')
 assert.equal(sansAnalyse({ typeProduit: 'indetermine', typeImage: 'autre' }), 'reject')
-assert.equal(classifyExtraction(L({ typeImage: 'autre', typeProduit: 'huile' })).kind, 'reject')
-assert.equal(classifyExtraction(L({ constituants: SANS, typeImage: 'aliment-chien', typeProduit: 'huile' })).kind, 'incomplete')
+assert.equal(classifyExtraction(L({ typeImage: 'autre', typeProduit: 'huile' }), false).kind, 'reject')
+assert.equal(classifyExtraction(L({ constituants: SANS, typeImage: 'aliment-chien', typeProduit: 'huile' }), false).kind, 'incomplete')
 // ─── Noms étrangers : sécurité ─────────────────────
 for (const n of ['Schokolade', 'Schokoladenüberzug', 'chocolate', 'Kakao', 'Rosinen', 'Trauben', 'Weintrauben', 'raisins', 'grapes', 'Xylit', 'xylitol', 'noix de macadamia', 'Macadamianüsse', 'uvas']) assert.ok(securite({ ingredients: I(n), additifs: [] }).zero, n)
 for (const n of ['Knoblauch', 'Knoblauchpulver', 'Zwiebel', 'Zwiebeln', 'garlic', 'onion', 'cebolla', 'aglio']) assert.ok(securite({ ingredients: I(n, 'poulet'), additifs: [] }).zero, n)
@@ -335,7 +335,7 @@ assert.equal(differeDeLaFiche(CH({ cendres: 8.2 }), CH({ cendres: 7.9 })), null)
 assert.equal(differeDeLaFiche(CH({ proteines: 3.7 }), CH({ proteines: 4 })), null)
 assert.equal(differeDeLaFiche(CH({ proteines: 27 }), SANS), null)
 assert.deepEqual(classifyExtraction(L({ typeProduit: 'aliment', typeAliment: 'sec', constituants: CH({ cellulose: 30, proteines: 20 }) }), true), { kind: 'reject', code: 'recheck' })
-assert.equal(classifyExtraction(L({ constituants: CH({ cellulose: 30, proteines: 20 }) })).kind, 'complete')
+assert.equal(classifyExtraction(L({ constituants: CH({ cellulose: 30, proteines: 20 }) }), false).kind, 'complete')
 // Devant du paquet seul : on demande le dos, pas de note
 const devant = L({ ingredients: [], constituants: SANS, additifs: [], typeProduit: 'friandise', lisibilite: 'floue', produit: 'Snack', champsDouteux: [] })
 assert.deepEqual(classifyExtraction(devant, true).kind, 'incomplete')
@@ -350,9 +350,9 @@ assert.equal(classifyExtraction(L({ ingredients: [], constituants: SANS, typePro
 const fiche = (l: ExtractedLabel, enBase = scoreLabel(l)) => ({ score: enBase.score, details: enBase, extracted: l })
 // Éteint : la note et le détail en base, tels quels, même objet ; aucun champ nouveau ; aucune fiche ne sort des listes
 const rowEteint = fiche(PREMIUM_LABEL)
-assert.equal(noteCourante(rowEteint).details, rowEteint.details)
-assert.equal(noteCourante(rowEteint).score, rowEteint.score)
-assert.equal(noteCourante({ ...rowEteint, score: 12 }).score, 12)
+assert.equal(noteCourante(rowEteint, false).details, rowEteint.details)
+assert.equal(noteCourante(rowEteint, false).score, rowEteint.score)
+assert.equal(noteCourante({ ...rowEteint, score: 12 }, false).score, 12)
 assert.ok(!('bareme' in rowEteint.details))
 assert.ok(!('alertes' in rowEteint.details))
 assert.equal(horsListes(rowEteint.details), false)
