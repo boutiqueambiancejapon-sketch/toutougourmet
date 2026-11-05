@@ -4,65 +4,22 @@
 // Suivi : MAXIZOO_STATE (défaut /srv/toutou/shared/maxizoo-state.json), un code-barres n'est lu qu'une fois.
 // Fiche relue à la main ou venue d'une photo : jamais touchée.
 import { existsSync, readFileSync, writeFileSync } from 'node:fs'
-import { gunzipSync } from 'node:zlib'
 import pg from 'pg'
 import { analyseLabel, scoreVersionFor } from '../lib/scanner/analyse'
-import { isMixedProduct, MAXI_ZOO_CATEGORIES, maxiZooLabel, pageText, parseMaxiZooPage, type MaxiZooItem } from '../lib/scanner/maxizoo'
-import { baseSlug, cleanEan } from '../lib/scanner/slug'
+import { maxiZooLabel, pageText, parseMaxiZooPage } from '../lib/scanner/maxizoo'
+import { loadFeedItems } from '../lib/scanner/maxizoo-feed'
+import { baseSlug } from '../lib/scanner/slug'
 
 const FEED = process.env.MAXIZOO_FEED || '/srv/toutou/shared/maxizoo-feed.csv.gz'
 const STATE = process.env.MAXIZOO_STATE || '/srv/toutou/shared/maxizoo-state.json'
-const PRIORITY = ['royal canin', 'pro plan', 'purina', 'hill', 'pedigree', 'edgard', 'eukanuba', 'cesar', 'orijen', 'acana', 'carnilove', 'real nature', 'select gold', 'premiere', 'multifit']
 const USER_AGENT = 'Mozilla/5.0 (compatible; ToutouGourmet/1.0; +https://www.toutou-gourmet.com)'
-
-function parseCsv(text: string): string[][] {
-  const rows: string[][] = []
-  let row: string[] = []
-  let cell = ''
-  let quoted = false
-  for (let i = 0; i < text.length; i++) {
-    const c = text[i]
-    if (quoted) {
-      if (c === '"' && text[i + 1] === '"') { cell += '"'; i++ } else if (c === '"') quoted = false
-      else cell += c
-    } else if (c === '"') quoted = true
-    else if (c === ',') { row.push(cell); cell = '' } else if (c === '\n') { row.push(cell); rows.push(row); row = []; cell = '' } else if (c !== '\r') cell += c
-  }
-  return rows
-}
-
-type Item = MaxiZooItem & { url: string; image: string | null; buy: string | null }
-
-const IMAGE_HOST = 'https://images2.productserve.com/'
-const BUY_LINK = /^https:\/\/www\.awin1\.com\/pclick\.php\?p=\d+&a=1112904&m=68698$/
-
-function loadItems(): Item[] {
-  const [head, ...rows] = parseCsv(gunzipSync(readFileSync(FEED)).toString('utf8'))
-  const at = (name: string) => head.indexOf(name)
-  const seen = new Map<string, Item>()
-  for (const r of rows) {
-    const ean = cleanEan(r[at('ean')])
-    const url = r[at('merchant_deep_link')] ?? ''
-    const category = r[at('merchant_category')] ?? ''
-    const name = r[at('product_name')] ?? ''
-    if (!ean || !MAXI_ZOO_CATEGORIES[category] || !url.startsWith('https://www.maxizoo.fr/p/') || isMixedProduct(name) || seen.has(ean)) continue
-    const image = r[at('aw_image_url')] ?? ''
-    const buy = r[at('aw_deep_link')] ?? ''
-    seen.set(ean, { ean, url, category, name, brand: r[at('brand_name')] ?? '', image: image.startsWith(IMAGE_HOST) ? image : null, buy: BUY_LINK.test(buy) ? buy : null })
-  }
-  const rank = (i: Item) => {
-    const p = PRIORITY.findIndex((b) => i.brand.toLowerCase().includes(b))
-    return (i.ean.startsWith('205') ? 100 : 0) + (p < 0 ? 50 : p)
-  }
-  return [...seen.values()].sort((a, b) => rank(a) - rank(b) || a.ean.localeCompare(b.ean))
-}
 
 async function main(): Promise<void> {
   const limit = Number(/--limite=(\d+)/.exec(process.argv.join(' '))?.[1] ?? 100)
   const dry = process.argv.includes('--essai')
   const state: Record<string, string> = existsSync(STATE) ? (JSON.parse(readFileSync(STATE, 'utf8')) as Record<string, string>) : {}
   const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL })
-  const all = loadItems()
+  const all = loadFeedItems(FEED)
   // Image : sans lire aucune page, pour toute fiche dont le code-barres est dans le fichier.
   const withData = all.filter((i) => i.image || i.buy)
   if (!dry) {

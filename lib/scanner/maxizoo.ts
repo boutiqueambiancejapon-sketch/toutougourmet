@@ -67,7 +67,7 @@ export function parseMaxiZooPage(text: string): MaxiZooParse {
   if (constituants.proteines + constituants.matieresGrasses + (constituants.cendres ?? 0) + (constituants.cellulose ?? 0) > 100) return { ok: false, reason: 'chiffres-manquants' }
   if (compoAt < 0) return { ok: false, reason: 'composition-absente' }
   const after = text.slice(compoAt + 'Composition'.length)
-  const end = after.search(/Peut contenir|Additifs par kg|Additifs nutritionnels|Mode d.emploi|Conseils? d.utilisation/i)
+  const end = after.search(/Peut contenir|Additifs par kg|Additifs nutritionnels|Mode d.emploi|Conseils? d.utilisation|L\.I\.P\.|Teneur en humidit|Informations concernant|Le montant de commande/i)
   const composition = (end > 0 ? after.slice(0, end) : after.slice(0, 1500)).trim().replace(/^[:\s]+/, '').replace(/^.{0,120}?\(\d{5,}\)\s*:?\s*/, '')
   if (composition.length < 15) return { ok: false, reason: 'composition-absente' }
   if (constituants.humidite === null) constituants.humidite = percentAfter(text.slice(compoAt, compoAt + 2500), PATTERNS.humidite)

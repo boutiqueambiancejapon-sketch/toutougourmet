@@ -37,3 +37,6 @@ Règle : `npm run build > log 2>&1 || { tail log; exit 1; }` avant tout commit, 
 ## 2026-11-04 : Scanner, ne pas empiler les propositions
 
 Le propriétaire veut un scanner rapide et simple. Répondre à la question posée, proposer un seul petit changement, et mesurer son effet sur les vraies fiches avant de le conseiller : le plafond à 89 a ramené toutes les pâtées Atavik à la même note, ce qu'un simple comptage aurait montré. Vérifier aussi qu'une comparaison n'inclut pas des friandises.
+
+## 2026-11-05 — Relire les fiches sur de vraies pages
+Deux tailles d'une même recette donnaient 67 et 82 : une parenthèse jamais fermée avalait la liste, et des phrases de livraison passaient pour un ingrédient. Comparer deux pages d'une même recette détecte ce que les tests sur exemples ne voient pas.
