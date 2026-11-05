@@ -222,3 +222,17 @@ Rapport hors dépôt : `~/audits/audit-partenaires-2026-11-04.md`.
 - Écran de résultat : verdict franc en tête, deux raisons au plus, allergie du chien avant le verdict.
 - Bouton principal « Scanner un autre produit ».
 - Scan raté : proposer tout de suite la photo de l'étiquette.
+
+## Prochain gros chantier : quatre barèmes pour le scanner (décision du propriétaire, 2026-11-05)
+
+Croquettes et pâtées, friandises, compléments, huiles : chacun son barème. L'IA et notre analyse reconnaissent le type et lisent tout ce qui compte pour ce type. Le scan reste rapide : le travail se fait dans le barème, pas dans l'écran.
+
+1. Jeu de référence : 40 à 60 vraies étiquettes réparties sur les 4 types, avec la note attendue d'un œil humain, pour mesurer chaque changement.
+2. Reconnaissance du type : `typeImage` et `productKind`, règle sur le nom et la composition en secours. Mesurer les erreurs de type sur le jeu de référence.
+3. Croquettes et pâtées : revoir ce qui fausse aujourd'hui (notes de 100/100, poids des protéines, calcium et phosphore absents, âge et gabarit du produit, fibres).
+4. Friandises : reprendre le barème actuel avec le même jeu.
+5. Compléments : à définir (dose d'actif affichée, preuves par actif, cohérence avec le besoin annoncé, transparence). Aucune promesse de soin.
+6. Huiles : à définir (espèce, taux d'EPA et de DHA, pureté, antioxydants, conservation).
+7. Recalcul des fiches, classements mis à jour, méthode publiée pour chaque barème, compléments et huiles dans les classements. Maladies graves : toujours pas de classement par note.
+
+Coût : lectures IA seulement sur le jeu de référence, demander avant de multiplier. D'ici là : compléments et huiles hors classements (`isSupplementName`), mais le scanner leur donne encore une note de friandise ou d'aliment.

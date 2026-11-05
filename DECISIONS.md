@@ -284,3 +284,6 @@ Avis, classements et comparatifs portent l'année dans le titre, ajoutée à la 
 
 ## 2026-11-05 — Page mère par partenaire
 `/chien/marque/{slug}` porte l'avis sur la marque, les pages d'avis produit, duels et code promo y renvoient. Accord du propriétaire pour commencer par Dog Chef. Chaque partenaire suit le même modèle (`data/brand-hub.ts`), sources datées.
+
+## 2026-11-05 — Quatre barèmes pour le scanner
+Prochain gros chantier du propriétaire : croquettes, friandises, compléments et huiles auront chacun leur barème, l'IA et l'analyse reconnaissant le type. En attendant, compléments et huiles restent hors classements.

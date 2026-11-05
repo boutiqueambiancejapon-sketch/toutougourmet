@@ -75,6 +75,9 @@ export const PAGE_SEGMENTS = SEGMENTS.filter((s) => s.path.startsWith('/meilleur
 export const MIN_RECIPES = { pillar: 30, segment: 8 }
 export const MIN_BRANDS = { pillar: 8, segment: 3 }
 
+/** Compléments et huiles : pas encore de barème propre, donc hors classement (chantier des barèmes, tasks/todo.md). */
+export const isSupplementName = (name: string): boolean => /compl[ée]ments?\b|compl[ée]mentaire|\bhuile\b|probiotique|fortiflora|comprim[ée]s?\b/i.test(name)
+
 /** Nom sans la taille du sac ni le lot : « Mini Adulte 4 kg », « 2x2 kg ». */
 export function recipeName(product: string): string {
   return product
