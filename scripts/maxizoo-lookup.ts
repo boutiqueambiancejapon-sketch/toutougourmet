@@ -1,6 +1,7 @@
 // Pour rédiger un avis : trouve un produit Maxi Zoo et lit sa page, sans rien écrire en base.
 //   tsx scripts/maxizoo-lookup.ts royal canin mini adult   → produits dont le nom contient tous ces mots
 //   tsx scripts/maxizoo-lookup.ts --lire=3182550402217     → composition, analyse, note et lien exact
+// Tous les rayons (compléments compris). Un complément n'a pas de note : le barème vise les aliments.
 // Fichier Awin hors du dépôt : MAXIZOO_FEED, sinon ~/tools/maxizoo-feed.csv.gz.
 import { homedir } from 'node:os'
 import { join } from 'node:path'
@@ -33,7 +34,7 @@ async function read(item: FeedItem): Promise<void> {
 
 async function main(): Promise<void> {
   const args = process.argv.slice(2)
-  const items = loadFeedItems(FEED)
+  const items = loadFeedItems(FEED, { anyCategory: true })
   const ean = args.find((a) => a.startsWith('--lire='))?.slice('--lire='.length)
   if (!ean) return search(items, args)
   const item = items.find((i) => i.ean === ean)

@@ -273,6 +273,30 @@ Titre : « {Modèle} : avis et composition ». Les marques alternent dans la lis
 - [ ] Carnilove ou Wilderness : lequel choisir (carnilove ou wilderness)
 - [ ] Dentastix ou Dentalife : lequel choisir (dentastix ou dentalife)
 
+## Compléments Maxi Zoo (`scanner`)
+
+Demande du propriétaire (2026-11-05). Requêtes relevées dans les suggestions Google le 2026-11-05. Environ 30 compléments pour chien dans le fichier Maxi Zoo (PetBalance, Premiere, Beaphar, Canosept, FortiFlora). Article transactionnel.
+
+Règles de ces pages, en plus de celles de « Avis + Maxi Zoo » :
+- Pas de note ni de classement : le barème du scanner vise les aliments. On présente une sélection, avec ce que contient le produit et à qui il s'adresse.
+- `node_modules/.bin/tsx scripts/maxizoo-lookup.ts petbalance articulations` donne les produits et, avec `--lire=CODE`, le lien exact et l'image. Sur un complément, `--lire` s'arrête souvent après le lien : lire la composition sur la page indiquée par WebFetch, et ne rien affirmer si elle est absente.
+- Un complément ne soigne pas : jamais de promesse de guérison, efficacité dite telle que les études la montrent, dose et contre-indications exactes, avis du vétérinaire pour un chien malade, gestant ou sous traitement. Chiot : jamais de calcium ajouté à un aliment complet sans avis vétérinaire.
+- Maillage : la page centrale liste les pages par besoin et les articles par ingrédient (`huile-saumon-chien-bienfaits-dosage`, `probiotiques-chien-bienfaits-dosage`, `glucosamine-chondroitine-chien-articulations`, `omega-3-chien-comparatif-sources`, `levure-de-biere-chien-bienfaits-dosage`, `spiruline-chien-bienfaits-dosage`, `collagene-chien-bienfaits-dosage`, `curcuma-chien-bienfaits-dosage`, `huile-de-coco-chien-bienfaits-dosage`). Chaque nouvelle page les cite et leur ajoute, si le produit s'y prête, un bloc `<ProductPicks>` et un lien vers la page centrale.
+- Frontmatter : même `category` et `categorySlug` que `huile-saumon-chien-bienfaits-dosage`. Une page par besoin, jamais par taille de flacon.
+
+- [ ] Complément alimentaire pour chien : lesquels servent vraiment (meilleur complement alimentaire chien) : page centrale, à écrire en premier
+- [ ] Complément alimentaire pour les articulations du chien (complement alimentaire articulation chien, maxi zoo)
+- [ ] Complément alimentaire contre les démangeaisons du chien (meilleur complement alimentaire chien demangeaison)
+- [ ] Complément alimentaire pour chien senior (meilleur complement alimentaire chien senior)
+- [ ] Complément alimentaire pour chien arthrosique (complément alimentaire chien arthrose)
+- [ ] FortiFlora pour chien : avis et dosage (probiotique chien fortiflora)
+- [ ] Complément alimentaire pour le pelage du chien (complement alimentaire pelage chien)
+- [ ] Complément pour la digestion du chien (complement alimentaire digestion chien)
+- [ ] Apaisant naturel pour chien : ce qui marche (calmant naturel chien, apaisant naturel chien)
+- [ ] Complément alimentaire pour faire grossir un chien (complément alimentaire chien prise de poids)
+- [ ] Complément alimentaire pour chiot : faut-il en donner (complément alimentaire chiot)
+- [ ] Huile de saumon de Maxi Zoo : laquelle choisir (huile de saumon chien maxi zoo)
+
 ## Friandises Franklin (`scanner`)
 
 Demande du propriétaire (2026-11-03). Marque partenaire : Franklin Pet Food (lien de `data/brands.ts`). Prix et compositions relevés sur franklinpetfood.com le jour de la rédaction, jamais de mémoire. Encart vers le scanner (les friandises y sont notées) et lien vers `/croquettes/friandises`. Sujet « calendrier de l'Avent » à publier avant le 1er décembre.
