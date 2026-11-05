@@ -19,6 +19,21 @@ function Inline({ text }: { text: string }) {
   return <>{out}</>
 }
 
+export function RankingSections({ sections }: { sections: RankingContent['sections'] }) {
+  return (
+    <>
+      {sections.map((s) => (
+        <section key={s.h2} className="flex flex-col gap-3">
+          <h2 className="m-0 font-display text-2xl font-black text-ink">{titleTypo(s.h2)}</h2>
+          {s.paragraphs.map((p) => (
+            <p key={p.slice(0, 40)} className="m-0 text-base leading-relaxed text-ink-2"><Inline text={p} /></p>
+          ))}
+        </section>
+      ))}
+    </>
+  )
+}
+
 export function RankingArticle({ content }: { content: RankingContent }) {
   const schema = {
     '@context': 'https://schema.org',
@@ -28,14 +43,7 @@ export function RankingArticle({ content }: { content: RankingContent }) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }} />
-      {content.sections.map((s) => (
-        <section key={s.h2} className="flex flex-col gap-3">
-          <h2 className="m-0 font-display text-2xl font-black text-ink">{titleTypo(s.h2)}</h2>
-          {s.paragraphs.map((p) => (
-            <p key={p.slice(0, 40)} className="m-0 text-base leading-relaxed text-ink-2"><Inline text={p} /></p>
-          ))}
-        </section>
-      ))}
+      <RankingSections sections={content.sections} />
       <section className="flex flex-col gap-2">
         <h2 className="m-0 font-display text-2xl font-black text-ink">{titleTypo('Questions fréquentes')}</h2>
         <FaqList>

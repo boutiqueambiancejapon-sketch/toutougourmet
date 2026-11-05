@@ -181,7 +181,7 @@ export const RANKING_CONTENT: Partial<Record<SegmentSlug, RankingContent>> = {
       { q: 'Un Beagle a-t-il besoin de croquettes spéciales ?', a: "Pas forcément, mais sa gourmandise impose de surveiller les rations. Une recette modérée en matières grasses et une balance de cuisine font souvent plus qu'une gamme dédiée à la race." },
       { q: 'Puis-je donner des croquettes grande race à un chien moyen ?', a: "Oui si le grain lui convient et que la recette est complète, mais la ration change avec l'énergie affichée. Un chiot moyen reste, lui, sur des croquettes de croissance adaptées à son gabarit." },
       { q: 'Combien de repas par jour pour un chien moyen ?', a: "Deux repas par jour conviennent à la plupart des adultes. Un chien qui mange vite ou un Bouledogue français profite de portions plus petites." },
-      { q: 'Quand passer aux croquettes senior ?', a: "Vers 7 à 8 ans pour un chien moyen, selon sa forme. Un chien en pleine santé qui garde son poids n'a pas à changer dès son anniversaire." },
+      { q: 'Quand passer aux croquettes senior ?', a: "L'âge senior dépend du gabarit : dès 5 ans pour un géant et vers 10 ans pour un petit chien, le chien moyen se situant entre les deux. Un chien en pleine santé qui garde son poids n'a pas à changer dès son anniversaire." },
     ],
     sources: [FEDIAF, 'Fiches nutrition par race de Toutou Gourmet (gabarits et prédispositions)'],
   },
@@ -213,7 +213,7 @@ export const RANKING_CONTENT: Partial<Record<SegmentSlug, RankingContent>> = {
         paragraphs: [
           "La ration d'un grand chien dépend de son poids, de son âge, de son activité et de la recette. Le [calculateur de ration](/outils/ration) donne une quantité en grammes, et notre guide du [chien de grande race adulte](/chien/alimentation-quotidienne/alimentation-chien-grande-race-adulte-guide) explique les besoins caloriques par poids.",
           "Un chiot de grande race suit d'autres règles : calcium modéré et croquettes de croissance jusqu'à 18 mois au moins, et 24 mois pour une race géante. Ce classement mélange plusieurs âges, alors lis bien le nom de la recette, et préfère le [classement chiot](/meilleures-croquettes/chiot) pour un jeune chien.",
-          "Un grand chien vieillit plus tôt qu'un petit, et le passage à une recette senior se pose souvent vers 5 à 7 ans. Notre comparatif des [croquettes pour chien senior](/chien/avis-marques/meilleures-croquettes-chien-senior) présente les chiffres à regarder.",
+          "Un grand chien vieillit plus tôt qu'un petit, et la question d'une recette senior se pose plus tôt, dès 5 ans pour une race géante. Notre comparatif des [croquettes pour chien senior](/chien/avis-marques/meilleures-croquettes-chien-senior) présente les chiffres à regarder.",
         ],
       },
     ],
