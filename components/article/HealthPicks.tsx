@@ -1,4 +1,4 @@
-import { ProductPhoto } from '@/components/scanner/ProductPhoto'
+import { ProductPick } from '@/components/article/ProductPicks'
 import { HEALTH_NEEDS, type HealthNeedKey } from '@/data/health-picks'
 import { titleTypo } from '@/lib/title-typo'
 
@@ -14,17 +14,7 @@ export function HealthPicks({ need }: { need: HealthNeedKey }) {
       <p className="m-0 text-base leading-relaxed text-ink-2">{intro}</p>
       <ul role="list" className="m-0 flex list-none flex-col gap-3 p-0">
         {items.map((item) => (
-          <li key={item.name} className="flex flex-col gap-2 rounded-card border border-line bg-paper p-4">
-            <p className="m-0 flex items-center gap-3">
-              <ProductPhoto src={item.image} />
-              <span className="min-w-0 font-semibold leading-snug text-ink [overflow-wrap:anywhere]">{item.name}</span>
-            </p>
-            <p className="m-0 text-[15px] leading-relaxed text-ink-2">{item.why}</p>
-            {item.vet ? <p className="m-0 text-sm font-semibold text-ink">Sur avis de ton vétérinaire</p> : null}
-            <a href={item.href} rel="sponsored nofollow noopener" target="_blank" className="inline-flex min-h-11 items-center justify-center self-start whitespace-nowrap rounded-control bg-ink px-4 font-semibold !text-cream !no-underline hover:!underline">
-              {`Voir chez ${item.store}`}
-            </a>
-          </li>
+          <ProductPick key={item.name} name={item.name} why={item.why} href={item.href} image={item.image} vet={item.vet} store={item.store} />
         ))}
       </ul>
       <p className="m-0 text-sm text-ink-2">

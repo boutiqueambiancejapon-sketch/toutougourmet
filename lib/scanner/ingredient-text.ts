@@ -187,6 +187,13 @@ export function splitGluedAdditives(item: string): [string, string] | null {
   return [m[1], m[2]]
 }
 
+/** « Poulet (20 % (dont dos), blé » : une parenthèse jamais fermée avalerait toute la liste en un ingrédient. */
+function closeOpenPercent(text: string): string {
+  const open = (text.match(/\(/g) ?? []).length
+  const closed = (text.match(/\)/g) ?? []).length
+  return open > closed ? text.replace(/\((\d+(?:[.,]\d+)?\s*%)\s*\(/g, '($1) (') : text
+}
+
 export function parseIngredientText(text: string): ParsedIngredients {
   const ingredients: Ingredient[] = []
   const additifs: string[] = []
@@ -195,7 +202,7 @@ export function parseIngredientText(text: string): ParsedIngredients {
   const nfc = text.normalize('NFC')
   const label = COMPOSITION_LABEL.exec(nfc)
   const body = label ? nfc.slice(label.index + label[0].length) : nfc.replace(/^\s*(composition|ingr[ée]dients?)\s*:?\s*/i, '')
-  const { composition, additives } = splitAdditivesBlock(body)
+  const { composition, additives } = splitAdditivesBlock(closeOpenPercent(body))
   let gluedBefore = false
   for (const item of splitTopLevel(composition)) {
     // Les additifs collés à l'ingrédient précédent ouvrent le bloc : la suite en fait partie

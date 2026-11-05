@@ -25,6 +25,12 @@ assert.deepEqual(parseMaxiZooPage('Rien ici'), { ok: false, reason: 'section-abs
 assert.deepEqual(parseMaxiZooPage('Composants analytiques Protéines 8 %, matières grasses 4 %. Bœuf : protéines 9 %, matières grasses 5 %. Composition bœuf, eau, carottes et sel.'), { ok: false, reason: 'plusieurs-recettes' })
 assert.deepEqual(parseMaxiZooPage('Composants analytiques cendres 8 %. Composition bœuf, eau, carottes et sel.'), { ok: false, reason: 'chiffres-manquants' })
 assert.deepEqual(parseMaxiZooPage('Composants analytiques Protéines 8 %, matières grasses 4 %.'), { ok: false, reason: 'composition-absente' })
+const tail = parseMaxiZooPage('Composants analytiques Protéines 27 %, matières grasses 16 %. Composition farine de blé, maïs. L.I.P. : Protéines sélectionnées. Teneur en humidité 9,5 % Informations concernant l’expédition La livraison est gratuite.')
+assert.ok(tail.ok && tail.composition === 'farine de blé, maïs.' && tail.constituants.humidite === 9.5)
+const open = parseMaxiZooPage('Composants analytiques Protéines 28 %, matières grasses 17 %. Composition Poulet (20 % (dont dos et filet), blé, mais, riz (7 %), levure.')
+const openLabel = open.ok ? maxiZooLabel({ brand: 'PRO PLAN', name: 'PRO PLAN Small 7 kg', ean: '7613035123458', category: 'Chien > Nourriture pour chien > Croquettes pour chiens' }, open) : null
+assert.equal(openLabel?.ingredients.length, 5)
+assert.equal(openLabel?.ingredients[0].pourcentage, 20)
 assert.equal(isMixedProduct('Pedigree Mix en sauce 12x85 g'), true)
 assert.equal(isMixedProduct('Royal Canin Mini Adult 8 kg'), false)
 assert.equal(productName({ brand: 'Pedigree', name: 'Pedigree Adult bœuf' }), 'Adult bœuf')

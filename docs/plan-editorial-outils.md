@@ -8,6 +8,91 @@ Règles :
 - Un outil absent de `components/outils/tool-list.ts` (ex. fiche de garde tant qu'elle n'est pas en ligne) : sauter ses sujets jusqu'à sa mise en ligne.
 - Liens internes : vers l'outil, vers 2 à 4 articles proches, et depuis 1 à 2 articles existants vers le nouvel article (ajout d'une phrase naturelle).
 
+## Avis + Maxi Zoo (`scanner`)
+
+Demande du propriétaire (2026-11-05). Requêtes relevées dans les suggestions Google le 2026-11-05, produits présents dans le fichier Maxi Zoo. La page de marque est la page mère, les pages de gamme, de race et les duels la citent et elle les cite. Aucun changement d'adresse : toutes vivent sous `/chien/avis-marques/`.
+
+Règles de ces pages, en plus de celles du haut du fichier :
+- Partir des vraies pages produit : `node_modules/.bin/tsx scripts/maxizoo-lookup.ts royal canin mini adulte` donne les codes-barres, puis `--lire=CODE` donne la composition, l'analyse, les calories, la note du scanner, le lien exact et l'image. 15 lectures au plus par article. Page illisible : ne rien affirmer sur ce produit.
+- Lire deux tailles de la même recette quand elles existent. Notes différentes de plus de 5 points : ne pas citer la note, s'en tenir à la composition, et le dire dans le compte rendu.
+- Une page de gamme ou de race doit lire sa recette et dire ce qui la distingue de la page mère. Si rien ne la distingue, coche `[~]` et ajoute plutôt une phrase à la page mère. Une taille de sac n'est jamais un sujet.
+- Le verdict tombe dans le TL;DR, sourcé par la composition : premier ingrédient, part animale si elle est déclarée, protéines, matières grasses, note du scanner. Calcium ou phosphore absents : écrire « non indiqués sur la page Maxi Zoo », jamais « la marque ne les déclare pas ».
+- Bloc produits, un seul, avec 1 à 3 produits : `<ProductPicks title="…"><ProductPick name="…" why="…" href="LIEN" image="IMAGE" /></ProductPicks>`, `LIEN` et `IMAGE` copiés de l'outil, jamais de lien tidd.ly ni de lien inventé. `why` donne un fait lu sur la page. Une formule vétérinaire porte `vet`.
+- Recette notée sous 55 : proposer une recette Maxi Zoo notée au moins 70 et 15 points plus haut, lue avec l'outil, ou un partenaire si le sujet s'y prête.
+- Jamais : faux témoignage, note d'avis clients recopiée sans la page, « notre test » ou « testé » (on lit des étiquettes, on ne nourrit pas de chiens), « recommandé par les vétérinaires » sans source, « scanné » pour un produit qu'aucun lecteur n'a scanné, promesse de soin. Prix seulement avec « relevé le {date} ».
+- Requête « avis vétérinaire » : répondre à ce que disent les sources publiées et renvoyer vers le vétérinaire du chien. Le site n'a pas de vétérinaire relecteur, ne pas le laisser croire.
+- Frontmatter : `category: "Avis & Comparatif"`, `categorySlug: "avis-marques"`. Couverture : un chien et sa gamelle, sans paquet, sans logo, sans nom de marque.
+
+### Vague 1 : les marques nommées et les plus grosses requêtes
+
+- [ ] Edgard & Cooper : avis sur les croquettes et la composition (edgard cooper avis, avis vétérinaire)
+- [ ] Royal Canin ou Pro Plan : lequel choisir pour son chien (royal canin ou proplan chien)
+- [ ] Royal Canin Mini Adulte : avis et composition (royal canin mini adulte avis)
+- [ ] Quelles croquettes choisir chez Maxi Zoo (croquettes maxi zoo chien)
+- [ ] Select Gold : avis sur les croquettes de Maxi Zoo (select gold avis, avis vétérinaire)
+- [ ] Real Nature Wilderness : avis sur les croquettes et la pâtée (real nature wilderness avis)
+- [ ] Orijen ou Acana : quelles différences (orijen ou acana)
+- [ ] Royal Canin Maxi Adulte : avis et composition (royal canin maxi adulte avis)
+- [ ] Eukanuba : avis sur les croquettes (eukanuba avis, avis vétérinaire)
+- [ ] Royal Canin ou Hill's : lequel choisir (royal canin ou hills)
+- [ ] Premiere : avis sur les croquettes et les pâtées Meati (premiere croquette chien avis)
+- [ ] Carnilove : avis sur les croquettes (carnilove avis chien)
+
+### Vague 2 : gammes et âges
+
+- [ ] Royal Canin Medium Adulte : avis et composition (royal canin medium adulte avis)
+- [ ] Royal Canin Mini Puppy : avis pour un chiot de petite taille (royal canin puppy mini avis)
+- [ ] Royal Canin Medium et Maxi Puppy : avis pour un chiot (royal canin puppy maxi avis)
+- [ ] Royal Canin Sterilised : avis pour un chien stérilisé (royal canin medium sterilised avis)
+- [ ] Pro Plan Sensitive Digestion à l'agneau : avis (pro plan sensitive digestion agneau avis)
+- [ ] Pro Plan Puppy : avis pour un chiot (pro plan puppy avis)
+- [ ] Hill's Science Plan chien : quelle recette choisir (hill's science plan chien)
+- [ ] Hill's Science Plan chien stérilisé : avis (hill's science plan chien stérilisé)
+- [ ] Edgard & Cooper chiot : avis et quantités (edgard cooper chiot avis, quantité)
+- [ ] Edgard & Cooper barquettes : avis sur la pâtée (edgard cooper barquette chien)
+- [ ] Orijen Original : avis et composition (orijen original chien)
+- [ ] Eukanuba Puppy : avis pour un chiot (eukanuba puppy avis)
+- [ ] Select Gold Sensitive : pour quel chien (select gold sensitive chien avis)
+- [ ] Wilderness pâtée pour chien : avis (real nature pâtée chien avis)
+- [ ] Premiere Best Meat : avis et composition (premiere best meat adult)
+- [ ] Premiere Meati : avis sur la pâtée (premiere meati chien)
+
+### Vague 3 : duels
+
+- [ ] Pro Plan ou Hill's : lequel choisir (hill's ou proplan)
+- [ ] Eukanuba ou Pro Plan : lequel choisir (eukanuba ou proplan)
+- [ ] Eukanuba ou Hill's : lequel choisir (eukanuba ou hill's)
+- [ ] Edgard & Cooper ou Royal Canin : lequel choisir (edgard cooper vs royal canin)
+- [ ] Select Gold ou Royal Canin : lequel choisir (select gold ou royal canin)
+- [ ] Acana ou Royal Canin : lequel choisir (acana ou royal canin)
+- [ ] Carnilove ou Orijen : lequel choisir (carnilove ou orijen)
+- [ ] Carnilove ou Wilderness : lequel choisir (carnilove ou wilderness)
+- [ ] Select Gold, Real Nature, Premiere : quelles différences entre les marques de Maxi Zoo (croquettes maxi zoo select gold, wilderness)
+
+### Vague 4 : races Royal Canin
+
+Une fiche `nourriture-{race}` existe souvent : y renvoyer, ne pas la répéter. Le sujet est la recette, pas la race.
+
+- [ ] Royal Canin Bouledogue Français : avis et composition (royal canin bouledogue français)
+- [ ] Royal Canin Golden Retriever : avis et composition (royal canin golden retriever adulte)
+- [ ] Royal Canin Berger Allemand : avis et composition (royal canin berger allemand adulte)
+- [ ] Royal Canin Labrador : avis et composition (royal canin labrador sterilised)
+- [ ] Royal Canin Chihuahua : avis et composition (royal canin chihuahua adulte)
+- [ ] Royal Canin Caniche : avis et composition (royal canin caniche adulte)
+
+### Vague 5 : petites marques, friandises dentaires, besoins
+
+- [ ] Nature's Variety : avis sur les croquettes (nature's variety chien avis)
+- [ ] Pedigree : bon ou mauvais, avis sur la composition (pedigree bon ou mauvais)
+- [ ] Ultima chien : avis sur les croquettes (ultima chien avis vétérinaire)
+- [ ] Advance chien : avis sur les croquettes (croquettes advance chien avis)
+- [ ] Pâtée Cesar : avis pour un chien (pâtée cesar chien avis)
+- [ ] Dentastix : avis et composition (dentastix avis, avis vétérinaire)
+- [ ] Dentalife : avis et composition (avis dentalife chien)
+- [ ] Whimzees : avis et composition (whimzees chien avis)
+- [ ] Dentastix ou Dentalife : lequel choisir (dentastix ou dentalife)
+- [ ] Croquettes hypoallergéniques pour chien : avis et lecture de l'étiquette (croquettes hypoallergéniques chien avis)
+
 ## Friandises Franklin (`scanner`)
 
 Demande du propriétaire (2026-11-03). Marque partenaire : Franklin Pet Food (lien de `data/brands.ts`). Prix et compositions relevés sur franklinpetfood.com le jour de la rédaction, jamais de mémoire. Encart vers le scanner (les friandises y sont notées) et lien vers `/croquettes/friandises`. Sujet « calendrier de l'Avent » à publier avant le 1er décembre.

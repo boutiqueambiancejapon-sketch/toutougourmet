@@ -272,3 +272,6 @@ Décision du propriétaire : aucun lien d'achat sur le produit mal noté, Dog Ch
 ## 2026-11-05 : Pas d'e-mail « ration » à qui vient de l'outil ration
 
 Décision du propriétaire, option A : une adresse dont la source Brevo est l'outil ration saute l'étape J2 et garde la suite. Seule la source d'inscription compte : les calculs ne sont pas reliés à une adresse.
+
+## 2026-11-05 — Pages Avis + : à plat dans `avis-marques`
+L'arborescence passe par le maillage (marque, gamme, duel), pas par de nouvelles adresses : `/chien/avis-marques/{slug}`. Une page de gamme doit lire sa recette, sinon elle ne se crée pas : pas de page par taille de sac. Une nuit sur deux pour ne pas retarder les sujets déjà validés.
