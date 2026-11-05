@@ -124,16 +124,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `avis-fidelis-menus-frais-chien-bocaux`
 - [x] `chien-peut-manger-foie`
 - [x] `recette-biscuits-sardine-chien`
-- [ ] `vinaigre-de-cidre-chien-bienfaits-precautions`
-- [ ] `chien-peut-manger-myrtilles`
-- [ ] `chien-boit-beaucoup-eau-causes`
-- [ ] `chien-peut-manger-ananas`
-- [ ] `huile-saumon-chien-bienfaits-dosage`
-- [ ] `chien-peut-manger-haricots-verts`
-- [ ] `megaoesophage-chien-alimentation`
-- [ ] `nourriture-bouledogue-francais`
-- [ ] `chien-peut-manger-mures`
-- [ ] `proteines-chien-besoins-qualite`
+- [x] `vinaigre-de-cidre-chien-bienfaits-precautions`
+- [x] `chien-peut-manger-myrtilles`
+- [x] `chien-boit-beaucoup-eau-causes`
+- [x] `chien-peut-manger-ananas`
+- [x] `huile-saumon-chien-bienfaits-dosage`
+- [x] `chien-peut-manger-haricots-verts`
+- [x] `megaoesophage-chien-alimentation`
+- [x] `nourriture-bouledogue-francais`
+- [x] `chien-peut-manger-mures`
+- [x] `proteines-chien-besoins-qualite`
 - [ ] `chien-peut-manger-thon`
 - [ ] `selles-chien-aspect-couleur-consistance`
 - [ ] `chien-peut-manger-chou-fleur`
