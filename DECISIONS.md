@@ -281,3 +281,6 @@ Fiches et pages marque du scanner toujours en noindex. Google reçoit des classe
 
 ## 2026-11-05 — Année automatique dans les titres
 Avis, classements et comparatifs portent l'année dans le titre, ajoutée à la construction (`lib/title-year.ts`). `updatedAt` et le corps des articles ne bougent pas au 1er janvier : l'année du titre ne vaut pas mise à jour du contenu.
+
+## 2026-11-05 — Page mère par partenaire
+`/chien/marque/{slug}` porte l'avis sur la marque, les pages d'avis produit, duels et code promo y renvoient. Accord du propriétaire pour commencer par Dog Chef. Chaque partenaire suit le même modèle (`data/brand-hub.ts`), sources datées.

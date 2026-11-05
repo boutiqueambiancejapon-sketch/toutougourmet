@@ -8,6 +8,7 @@ import { getPromoPage, promoPath } from '@/data/promo-codes'
 import { compactDiscount, shortDiscount, isOfferSlug } from '@/data/partner-discounts'
 import { BrandHero, BrandIdentity } from './BrandHero'
 import { BrandPresentation, BrandProsCons, BrandRecipes } from './BrandDetails'
+import { BrandHub } from './BrandHub'
 import { BrandVerdict } from './BrandVerdict'
 import { StickyOffer } from '@/components/blog/StickyOffer'
 import { STOP_BRAND_PAGE } from '@/lib/sticky-cta-config'
@@ -59,6 +60,7 @@ export function BrandPage({ brand }: { brand: Brand }) {
         <BrandPresentation brand={brand} paragraphs={brandDescriptions[brand.slug] ?? []} />
         <BrandProsCons brand={brand} />
         <BrandRecipes brand={brand} recipes={brandRecipes[brand.slug] ?? []} />
+        <BrandHub brand={brand} />
         <BrandVerdict brand={brand} verdict={frTypo(verdict)} />
 
         {faqs.length > 0 ? (

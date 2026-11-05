@@ -110,7 +110,7 @@ export const brands: Brand[] = [
       'Ration calculée sur le profil du chien, recalculée quand son poids change',
       'Boosters ciblés : Puppy, Senior, Mobility, Transit',
       'Livraison gratuite incluse',
-      'Se conserve 7 jours au frigo et 4 mois au congélateur',
+      'Se conserve 7 jours au frigo et jusqu\'à 10 mois au congélateur',
     ],
     cons: [
       'Uniquement pour les chiens (pas de chat)',
