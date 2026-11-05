@@ -64,7 +64,6 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         paragraphs: [
           "Oui, et plus que chez ses concurrents directs : Trustpilot affiche 4,0 sur 5 pour 3 983 avis au 5 novembre 2026, dont 9 % à une étoile et 2 % à deux étoiles.",
           "On a lu les 20 avis à une étoile de la première page ce jour-là. La plupart parlent de colis éventrés, de sacs percés et de livraisons ratées ou mal remises, puis d'un service client injoignable et de résiliations difficiles. Quatre clients parlent aussi d'animaux malades, des chats le plus souvent : ces récits restent les leurs, sans lien de cause établi. La fiche produit signale elle-même des délais plus longs qu'à l'habitude. Prévois une marge avant que ton sac soit vide, et vérifie-le à la livraison.",
-          "Le site officiel des rappels a publié le 26 décembre 2024 un rappel des croquettes Protein Boost au poulet, sac de 8 kg, lot 008724, pour des salmonelles détectées sur un lot de matière première. Ce rappel concerne ce seul lot, comme l'indique la [fiche RappelConso](https://rappel.conso.gouv.fr/fiche-rappel/17002/interne).",
         ],
       },
       {
@@ -95,7 +94,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
       {
         h2: 'Combien coûte Dogfy Diet ?',
         paragraphs: [
-          "Dogfy Diet affiche au 5 novembre 2026 des prix de départ par jour de 1,99 € jusqu'à 2 kg, 2,19 € de 3 à 9 kg, 3,18 € de 10 à 25 kg et 4,77 € au-delà. Une autre de ses pages annonce 1,81 €, 1,99 €, 2,89 € et 4,34 € pour les mêmes gabarits, et seul le questionnaire donne ton prix. Les montants plus bas, dès 1,00 €, incluent la réduction de la box d'essai. Au tarif de départ, compte au moins 60 à 66 € par mois pour un chien de 3 à 9 kg. Notre [avis complet sur Dogfy Diet](/chien/avis-marques/avis-dogfy-diet-repas-frais-chien) détaille le budget par gabarit.",
+          "Dogfy Diet affiche au 5 novembre 2026 des prix de départ par jour de 1,99 € jusqu'à 2 kg, 2,19 € de 3 à 9 kg, 3,18 € de 10 à 25 kg et 4,77 € au-delà. Une autre de ses pages annonce 1,81 €, 1,99 €, 2,89 € et 4,34 € pour les mêmes gabarits, et seul le questionnaire donne ton prix. Les montants plus bas, dès 1,00 €, incluent la réduction de la box d'essai. Au tarif de départ, compte au moins 60 à 66 € par mois pour un chien de 3 à 9 kg.",
           "La box d'essai de 14 jours est annoncée à −50 %, avec la livraison gratuite et un abonnement sans engagement. Notre page [code promo Dogfy Diet](/codes-promo/dogfy-diet) explique comment l'obtenir et à quel moment arrêter si les repas ne conviennent pas.",
         ],
       },

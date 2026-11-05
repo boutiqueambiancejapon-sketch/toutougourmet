@@ -41,7 +41,7 @@ function pageDate(path: string): Date {
 }
 
 function brandEntries(): SitemapEntry[] {
-  const brandPages = brands.map((b) => ({ path: `/chien/marque/${b.slug}`, lastmod: day(BRAND_PAGES_DATE) }))
+  const brandPages = brands.filter((b) => b.slug !== 'dogfy-diet').map((b) => ({ path: `/chien/marque/${b.slug}`, lastmod: day(BRAND_PAGES_DATE) }))
   const duels = getDuelPairs().map(([a, b]) => {
     const slug = `${a.slug}-vs-${b.slug}`
     // Duel éditorial (content/comparatifs) : sa date ; duel automatique : date des fiches marque
