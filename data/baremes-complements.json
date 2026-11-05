@@ -1,0 +1,2643 @@
+[
+ {
+  "slug": "royal-canin-sterilised-mini-8-kg",
+  "ean": "3182550807074",
+  "champ": "calcium",
+  "valeur": 0.74,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-canine-care-nutrition-mini-sterilised-8-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-sterilised-mini-8-kg",
+  "ean": "3182550807074",
+  "champ": "phosphore",
+  "valeur": 0.69,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-canine-care-nutrition-mini-sterilised-8-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-sterilised-mini-8-kg",
+  "ean": "3182550807074",
+  "champ": "humidite",
+  "valeur": 9.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-canine-care-nutrition-mini-sterilised-8-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-cavalier-king-charles-chiot-croquettes-chien-1-5-kg",
+  "ean": "3182550813051",
+  "champ": "calcium",
+  "valeur": 1.2,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-cavalier-king-charles-puppy-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-cavalier-king-charles-chiot-croquettes-chien-1-5-kg",
+  "ean": "3182550813051",
+  "champ": "phosphore",
+  "valeur": 0.9,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-cavalier-king-charles-puppy-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-cocker-chiot-croquettes-chien-3-kg",
+  "ean": "3182550813211",
+  "champ": "calcium",
+  "valeur": 1.2,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-cocker-puppy-3-kg.html",
+  "date": "2026-11-05",
+  "note": "cendres de la fiche = cellulose de la page : la fiche a une valeur décalée, à corriger"
+ },
+ {
+  "slug": "royal-canin-cocker-chiot-croquettes-chien-3-kg",
+  "ean": "3182550813211",
+  "champ": "phosphore",
+  "valeur": 0.9,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-cocker-puppy-3-kg.html",
+  "date": "2026-11-05",
+  "note": "cendres de la fiche = cellulose de la page : la fiche a une valeur décalée, à corriger"
+ },
+ {
+  "slug": "royal-canin-cocker-chiot-croquettes-chien-3-kg",
+  "ean": "3182550813211",
+  "champ": "cellulose",
+  "valeur": 1.8,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-cocker-puppy-3-kg.html",
+  "date": "2026-11-05",
+  "note": "cendres de la fiche = cellulose de la page : la fiche a une valeur décalée, à corriger"
+ },
+ {
+  "slug": "royal-canin-beagle-adulte-croquettes-chien-3-kg",
+  "ean": "3182550821766",
+  "champ": "calcium",
+  "valeur": 0.9,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-beagle-adult-12-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-beagle-adulte-croquettes-chien-3-kg",
+  "ean": "3182550821766",
+  "champ": "phosphore",
+  "valeur": 0.7,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-beagle-adult-12-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-beagle-adulte-croquettes-chien-3-kg",
+  "ean": "3182550821766",
+  "champ": "humidite",
+  "valeur": 9.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-beagle-adult-12-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-caniche-adulte-croquettes-chien-3-kg",
+  "ean": "3182550867719",
+  "champ": "calcium",
+  "valeur": 0.8,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-caniche-adult-7-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-caniche-adulte-croquettes-chien-3-kg",
+  "ean": "3182550867719",
+  "champ": "phosphore",
+  "valeur": 0.6,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-caniche-adult-7-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-caniche-adulte-croquettes-chien-3-kg",
+  "ean": "3182550867719",
+  "champ": "humidite",
+  "valeur": 9.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-caniche-adult-7-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-caniche-adulte-croquettes-chien-3-kg",
+  "ean": "3182550867719",
+  "champ": "cendres",
+  "valeur": 5.3,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-caniche-adult-7-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-relax-care-medium-10-kg",
+  "ean": "3182550894319",
+  "champ": "calcium",
+  "valeur": 1.2,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-canine-care-nutrition-medium-relax-care-3-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-relax-care-medium-10-kg",
+  "ean": "3182550894319",
+  "champ": "phosphore",
+  "valeur": 0.79,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-canine-care-nutrition-medium-relax-care-3-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-sterilised-maxi-12-kg",
+  "ean": "3182550928748",
+  "champ": "humidite",
+  "valeur": 9.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-maxi-sterilised-3-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-small-mini-everyday-nutrition-7-kg",
+  "ean": "7613035123458",
+  "champ": "calcium",
+  "valeur": 1.43,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-1-everyday-nutrition-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-small-mini-everyday-nutrition-7-kg",
+  "ean": "7613035123458",
+  "champ": "phosphore",
+  "valeur": 0.98,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-1-everyday-nutrition-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-small-mini-everyday-nutrition-7-kg",
+  "ean": "7613035123458",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-1-everyday-nutrition-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-hypoallergenic-small-dog",
+  "ean": "3182550940214",
+  "champ": "calcium",
+  "valeur": 0.81,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-veterinary-dog-hypoallergenic-small-dog-1-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-hypoallergenic-small-dog",
+  "ean": "3182550940214",
+  "champ": "phosphore",
+  "valeur": 0.61,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-veterinary-dog-hypoallergenic-small-dog-1-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-berger-allemand-chiot-croquettes-chien-3-kg",
+  "ean": "3182550724142",
+  "champ": "calcium",
+  "valeur": 1.1,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-berger-allemand-junior-12-kg.html",
+  "date": "2026-11-05",
+  "note": "cendres de la fiche = cellulose de la page : la fiche a une valeur décalée, à corriger"
+ },
+ {
+  "slug": "royal-canin-berger-allemand-chiot-croquettes-chien-3-kg",
+  "ean": "3182550724142",
+  "champ": "phosphore",
+  "valeur": 0.85,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-berger-allemand-junior-12-kg.html",
+  "date": "2026-11-05",
+  "note": "cendres de la fiche = cellulose de la page : la fiche a une valeur décalée, à corriger"
+ },
+ {
+  "slug": "royal-canin-berger-allemand-chiot-croquettes-chien-3-kg",
+  "ean": "3182550724142",
+  "champ": "cellulose",
+  "valeur": 2.8,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-berger-allemand-junior-12-kg.html",
+  "date": "2026-11-05",
+  "note": "cendres de la fiche = cellulose de la page : la fiche a une valeur décalée, à corriger"
+ },
+ {
+  "slug": "royal-canin-cocker-adulte-croquettes-chien-3-kg",
+  "ean": "3182550743709",
+  "champ": "calcium",
+  "valeur": 0.74,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-cocker-adult-3-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-cocker-adulte-croquettes-chien-3-kg",
+  "ean": "3182550743709",
+  "champ": "phosphore",
+  "valeur": 0.65,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-cocker-adult-3-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-teckel-adulte-croquettes-chien-1-5-kg",
+  "ean": "3182550717335",
+  "champ": "calcium",
+  "valeur": 0.8,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-teckel-adult-7-5-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-canin-teckel-adulte-croquettes-chien-1-5-kg",
+  "ean": "3182550717335",
+  "champ": "phosphore",
+  "valeur": 0.66,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-teckel-adult-7-5-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-canin-teckel-adulte-croquettes-chien-1-5-kg",
+  "ean": "3182550717335",
+  "champ": "cellulose",
+  "valeur": 2.9,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-teckel-adult-7-5-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-canin-boxer-adulte-croquettes-chien-12-kg",
+  "ean": "3182550719766",
+  "champ": "calcium",
+  "valeur": 0.81,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-boxer-adult-12-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-boxer-adulte-croquettes-chien-12-kg",
+  "ean": "3182550719766",
+  "champ": "phosphore",
+  "valeur": 0.55,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-boxer-adult-12-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-boxer-adulte-croquettes-chien-12-kg",
+  "ean": "3182550719766",
+  "champ": "humidite",
+  "valeur": 9.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-boxer-adult-12-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-boxer-adulte-croquettes-chien-12-kg",
+  "ean": "3182550719766",
+  "champ": "cendres",
+  "valeur": 6.3,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-boxer-adult-12-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-chihuahua-puppy-1-5-kg",
+  "ean": "3182550722544",
+  "champ": "calcium",
+  "valeur": 1.15,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-chihuahua-puppy-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-chihuahua-puppy-1-5-kg",
+  "ean": "3182550722544",
+  "champ": "phosphore",
+  "valeur": 0.91,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-chihuahua-puppy-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-chihuahua-puppy-1-5-kg",
+  "ean": "3182550722544",
+  "champ": "cendres",
+  "valeur": 6.6,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-chihuahua-puppy-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-bhn-shih-tzu-puppy-1-5-kg",
+  "ean": "3182550722605",
+  "champ": "calcium",
+  "valeur": 1.2,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-shih-tzu-puppy-1-5-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-canin-bhn-shih-tzu-puppy-1-5-kg",
+  "ean": "3182550722605",
+  "champ": "phosphore",
+  "valeur": 0.87,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-shih-tzu-puppy-1-5-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-canin-chihuahua-adulte-croquettes-chien-1-5-kg",
+  "ean": "3182550728102",
+  "champ": "calcium",
+  "valeur": 0.76,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-chihuahua-adult-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-chihuahua-adulte-croquettes-chien-1-5-kg",
+  "ean": "3182550728102",
+  "champ": "phosphore",
+  "valeur": 0.59,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-chihuahua-adult-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-chihuahua-adulte-croquettes-chien-1-5-kg",
+  "ean": "3182550728102",
+  "champ": "humidite",
+  "valeur": 9.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-chihuahua-adult-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-golden-retriever-adulte-croquettes-chien-12-kg",
+  "ean": "3182550743440",
+  "champ": "calcium",
+  "valeur": 0.85,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-golden-retriever-adult-12-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-golden-retriever-adulte-croquettes-chien-12-kg",
+  "ean": "3182550743440",
+  "champ": "phosphore",
+  "valeur": 0.72,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-golden-retriever-adult-12-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-croquettes-chiot-yorkshire-terrier-1-5-kg",
+  "ean": "3182550743471",
+  "champ": "calcium",
+  "valeur": 1.2,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-yorkshire-terrier-puppy-1-5-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-canin-croquettes-chiot-yorkshire-terrier-1-5-kg",
+  "ean": "3182550743471",
+  "champ": "phosphore",
+  "valeur": 0.9,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-yorkshire-terrier-puppy-1-5-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-canin-bulldog-chiot-croquettes-chien-3-kg",
+  "ean": "3182550743952",
+  "champ": "calcium",
+  "valeur": 1.2,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-bulldog-junior-12-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-bulldog-chiot-croquettes-chien-3-kg",
+  "ean": "3182550743952",
+  "champ": "phosphore",
+  "valeur": 0.95,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-bulldog-junior-12-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-bulldog-chiot-croquettes-chien-12-kg",
+  "ean": "3182550743891",
+  "champ": "calcium",
+  "valeur": 1.2,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-bulldog-junior-12-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-canin-bulldog-chiot-croquettes-chien-12-kg",
+  "ean": "3182550743891",
+  "champ": "phosphore",
+  "valeur": 0.95,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-bulldog-junior-12-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-canin-bulldog-chiot-croquettes-chien-12-kg",
+  "ean": "3182550743891",
+  "champ": "humidite",
+  "valeur": 9.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-bulldog-junior-12-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-canin-chihuahua-adulte-croquettes-chien-3-kg",
+  "ean": "3182550747820",
+  "champ": "calcium",
+  "valeur": 0.76,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-chihuahua-adult-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-chihuahua-adulte-croquettes-chien-3-kg",
+  "ean": "3182550747820",
+  "champ": "phosphore",
+  "valeur": 0.59,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-chihuahua-adult-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-chihuahua-adulte-croquettes-chien-3-kg",
+  "ean": "3182550747820",
+  "champ": "humidite",
+  "valeur": 9.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-chihuahua-adult-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shih-tzu-adulte-croquettes-chien-7-5-kg",
+  "ean": "3182550748032",
+  "champ": "calcium",
+  "valeur": 0.82,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-shih-tzu-adult-7-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shih-tzu-adulte-croquettes-chien-7-5-kg",
+  "ean": "3182550748032",
+  "champ": "phosphore",
+  "valeur": 0.6,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-shih-tzu-adult-7-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-dalmatien-adulte-croquettes-chien-12-kg",
+  "ean": "3182550765183",
+  "champ": "calcium",
+  "valeur": 0.94,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-dalmatien-adult-12-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-dalmatien-adulte-croquettes-chien-12-kg",
+  "ean": "3182550765183",
+  "champ": "phosphore",
+  "valeur": 0.62,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-dalmatien-adult-12-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-dalmatien-adulte-croquettes-chien-12-kg",
+  "ean": "3182550765183",
+  "champ": "humidite",
+  "valeur": 9.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-dalmatien-adult-12-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-mini-adult-8-4-kg",
+  "ean": "3182550831390",
+  "champ": "calcium",
+  "valeur": 0.82,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-mini-adult-8-2-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-mini-adult-8-4-kg",
+  "ean": "3182550831390",
+  "champ": "phosphore",
+  "valeur": 0.61,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-mini-adult-8-2-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-mini-adult-8-4-kg",
+  "ean": "3182550831390",
+  "champ": "humidite",
+  "valeur": 9.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-mini-adult-8-2-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-mini-ageing-12-1-5-kg",
+  "ean": "3182550793575",
+  "champ": "calcium",
+  "valeur": 0.71,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-mini-ageing-12-3-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-mini-ageing-12-1-5-kg",
+  "ean": "3182550793575",
+  "champ": "phosphore",
+  "valeur": 0.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-mini-ageing-12-3-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-mini-ageing-12-3-5-kg",
+  "ean": "3182550793582",
+  "champ": "calcium",
+  "valeur": 0.71,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-mini-ageing-12-3-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-mini-ageing-12-3-5-kg",
+  "ean": "3182550793582",
+  "champ": "phosphore",
+  "valeur": 0.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-mini-ageing-12-3-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-mini-ageing-12-3-5-kg",
+  "ean": "3182550793582",
+  "champ": "humidite",
+  "valeur": 9.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-mini-ageing-12-3-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-adult-x-small-3-kg",
+  "ean": "3182550793735",
+  "champ": "calcium",
+  "valeur": 0.82,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-x-small-adult-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-adult-x-small-3-kg",
+  "ean": "3182550793735",
+  "champ": "phosphore",
+  "valeur": 0.7,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-x-small-adult-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-adult-x-small-3-kg",
+  "ean": "3182550793735",
+  "champ": "humidite",
+  "valeur": 9.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-x-small-adult-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-x-small-ageing-12-1-5-kg",
+  "ean": "3182550793858",
+  "champ": "calcium",
+  "valeur": 0.7,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-x-small-ageing-de-12-ans-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-x-small-ageing-12-1-5-kg",
+  "ean": "3182550793858",
+  "champ": "phosphore",
+  "valeur": 0.55,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-x-small-ageing-de-12-ans-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-x-small-ageing-12-1-5-kg",
+  "ean": "3182550793858",
+  "champ": "humidite",
+  "valeur": 9.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-x-small-ageing-de-12-ans-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-cocker-adulte-croquettes-chien-12-kg",
+  "ean": "3182550811538",
+  "champ": "calcium",
+  "valeur": 0.74,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-cocker-adult-3-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-cocker-adulte-croquettes-chien-12-kg",
+  "ean": "3182550811538",
+  "champ": "phosphore",
+  "valeur": 0.65,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-cocker-adult-3-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-mini-adult-8-8-kg",
+  "ean": "3182550831406",
+  "champ": "calcium",
+  "valeur": 0.82,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-mini-adult-8-2-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-mini-adult-8-8-kg",
+  "ean": "3182550831406",
+  "champ": "phosphore",
+  "valeur": 0.61,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-mini-adult-8-2-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-mini-adult-8-8-kg",
+  "ean": "3182550831406",
+  "champ": "humidite",
+  "valeur": 9.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-mini-adult-8-2-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-west-highland-white-terrier-adulte-croquettes-chien-3-kg",
+  "ean": "3182550811774",
+  "champ": "calcium",
+  "valeur": 0.78,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-west-highland-white-terrier-adult-3-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-west-highland-white-terrier-adulte-croquettes-chien-3-kg",
+  "ean": "3182550811774",
+  "champ": "phosphore",
+  "valeur": 0.65,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-west-highland-white-terrier-adult-3-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-west-highland-white-terrier-adulte-croquettes-chien-3-kg",
+  "ean": "3182550811774",
+  "champ": "cendres",
+  "valeur": 6.0,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-west-highland-white-terrier-adult-3-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-teckel-adulte-croquettes-chien-7-5-kg",
+  "ean": "3182550812016",
+  "champ": "calcium",
+  "valeur": 0.8,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-teckel-adult-7-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-teckel-adulte-croquettes-chien-7-5-kg",
+  "ean": "3182550812016",
+  "champ": "phosphore",
+  "valeur": 0.66,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-teckel-adult-7-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-teckel-adulte-croquettes-chien-7-5-kg",
+  "ean": "3182550812016",
+  "champ": "humidite",
+  "valeur": 9.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-teckel-adult-7-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-bichon-frise-adulte-croquettes-chien-1-5-kg",
+  "ean": "3182550813242",
+  "champ": "calcium",
+  "valeur": 0.7,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-bichon-frise-adult-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-bichon-frise-adulte-croquettes-chien-1-5-kg",
+  "ean": "3182550813242",
+  "champ": "phosphore",
+  "valeur": 0.6,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-bichon-frise-adult-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-bichon-frise-adulte-croquettes-chien-1-5-kg",
+  "ean": "3182550813242",
+  "champ": "cendres",
+  "valeur": 7.4,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-bichon-frise-adult-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-x-small-adult-8-3-kg",
+  "ean": "3182550831352",
+  "champ": "calcium",
+  "valeur": 0.82,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-x-small-adult-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-x-small-adult-8-3-kg",
+  "ean": "3182550831352",
+  "champ": "phosphore",
+  "valeur": 0.7,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-x-small-adult-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-x-small-adult-8-3-kg",
+  "ean": "3182550831352",
+  "champ": "humidite",
+  "valeur": 9.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-x-small-adult-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-mini-adult-8-2-kg",
+  "ean": "3182550831383",
+  "champ": "calcium",
+  "valeur": 0.82,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-mini-adult-8-2-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-mini-adult-8-2-kg",
+  "ean": "3182550831383",
+  "champ": "phosphore",
+  "valeur": 0.61,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-mini-adult-8-2-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-beagle-adulte-croquettes-chien-12-kg",
+  "ean": "3182550821773",
+  "champ": "calcium",
+  "valeur": 0.9,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-beagle-adult-12-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-beagle-adulte-croquettes-chien-12-kg",
+  "ean": "3182550821773",
+  "champ": "phosphore",
+  "valeur": 0.7,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-beagle-adult-12-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-beagle-adulte-croquettes-chien-12-kg",
+  "ean": "3182550821773",
+  "champ": "humidite",
+  "valeur": 9.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-beagle-adult-12-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-exigent-mini-1-kg",
+  "ean": "3182550894029",
+  "champ": "calcium",
+  "valeur": 0.71,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-canine-care-nutrition-mini-exigent-1-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-canin-exigent-mini-1-kg",
+  "ean": "3182550894029",
+  "champ": "phosphore",
+  "valeur": 0.62,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-canine-care-nutrition-mini-exigent-1-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-canin-exigent-mini-1-kg",
+  "ean": "3182550894029",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-canine-care-nutrition-mini-exigent-1-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-canin-exigent-mini-3-kg",
+  "ean": "3182550894050",
+  "champ": "calcium",
+  "valeur": 0.71,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-canine-care-nutrition-mini-exigent-1-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-canin-exigent-mini-3-kg",
+  "ean": "3182550894050",
+  "champ": "phosphore",
+  "valeur": 0.62,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-canine-care-nutrition-mini-exigent-1-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-canin-exigent-mini-3-kg",
+  "ean": "3182550894050",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-canine-care-nutrition-mini-exigent-1-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-canin-sterilised-mini-3-kg",
+  "ean": "3182550894128",
+  "champ": "calcium",
+  "valeur": 0.74,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-canine-care-nutrition-mini-sterilised-8-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-sterilised-mini-3-kg",
+  "ean": "3182550894128",
+  "champ": "phosphore",
+  "valeur": 0.69,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-canine-care-nutrition-mini-sterilised-8-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-sterilised-mini-3-kg",
+  "ean": "3182550894128",
+  "champ": "humidite",
+  "valeur": 9.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-canine-care-nutrition-mini-sterilised-8-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-urinary-care-mini-3-kg",
+  "ean": "3182550895156",
+  "champ": "calcium",
+  "valeur": 0.81,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-canine-care-nutrition-mini-urinary-care-1-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-urinary-care-mini-3-kg",
+  "ean": "3182550895156",
+  "champ": "phosphore",
+  "valeur": 0.81,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-canine-care-nutrition-mini-urinary-care-1-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-dermacomfort-maxi-12-kg",
+  "ean": "3182550928540",
+  "champ": "humidite",
+  "valeur": 9.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-maxi-dermacomfort-3-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-chien-large-robust-puppy-riche-en-poulet-3-kg",
+  "ean": "7613035114647",
+  "champ": "calcium",
+  "valeur": 1.44,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-large-robust-puppy-healthy-start-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-chien-large-robust-puppy-riche-en-poulet-3-kg",
+  "ean": "7613035114647",
+  "champ": "phosphore",
+  "valeur": 1.02,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-large-robust-puppy-healthy-start-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-chien-large-robust-puppy-riche-en-poulet-3-kg",
+  "ean": "7613035114647",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-large-robust-puppy-healthy-start-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adulte-medium-everyday-nutrition-poulet-3-kg",
+  "ean": "7613035114807",
+  "champ": "calcium",
+  "valeur": 1.32,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-everyday-nutrition-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adulte-medium-everyday-nutrition-poulet-3-kg",
+  "ean": "7613035114807",
+  "champ": "phosphore",
+  "valeur": 0.87,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-everyday-nutrition-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adulte-medium-everyday-nutrition-poulet-3-kg",
+  "ean": "7613035114807",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-everyday-nutrition-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-puppy-medium-healthy-start-poulet-3-kg",
+  "ean": "7613035114869",
+  "champ": "calcium",
+  "valeur": 1.5,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-puppy-healthy-start-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-puppy-medium-healthy-start-poulet-3-kg",
+  "ean": "7613035114869",
+  "champ": "phosphore",
+  "valeur": 1.02,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-puppy-healthy-start-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-puppy-medium-healthy-start-poulet-3-kg",
+  "ean": "7613035114869",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-puppy-healthy-start-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-small-mini-sensitive-skin-3-kg",
+  "ean": "7613035114890",
+  "champ": "calcium",
+  "valeur": 0.97,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-1-sensitive-skin-riche-en-saumon",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-small-mini-sensitive-skin-3-kg",
+  "ean": "7613035114890",
+  "champ": "phosphore",
+  "valeur": 0.87,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-1-sensitive-skin-riche-en-saumon",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-small-mini-sensitive-skin-3-kg",
+  "ean": "7613035114890",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-1-sensitive-skin-riche-en-saumon",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adulte-medium-sensitive-skin-14-kg",
+  "ean": "7613035120464",
+  "champ": "calcium",
+  "valeur": 1.05,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-sensitive-skin-riche-en-saumon",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adulte-medium-sensitive-skin-14-kg",
+  "ean": "7613035120464",
+  "champ": "phosphore",
+  "valeur": 0.83,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-sensitive-skin-riche-en-saumon",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adulte-medium-sensitive-skin-14-kg",
+  "ean": "7613035120464",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-sensitive-skin-riche-en-saumon",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adulte-medium-sensitive-skin-14-kg",
+  "ean": "7613035120464",
+  "champ": "cellulose",
+  "valeur": 3.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-sensitive-skin-riche-en-saumon",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-puppy-large-athletic-healthy-start-poulet-12-kg",
+  "ean": "7613035120365",
+  "champ": "calcium",
+  "valeur": 1.5,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-large-athletic-puppy-healthy-start-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-puppy-large-athletic-healthy-start-poulet-12-kg",
+  "ean": "7613035120365",
+  "champ": "phosphore",
+  "valeur": 1.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-large-athletic-puppy-healthy-start-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-puppy-large-athletic-healthy-start-poulet-12-kg",
+  "ean": "7613035120365",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-large-athletic-puppy-healthy-start-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-puppy-medium-sensitive-skin-saumon-12-kg",
+  "ean": "7613035120389",
+  "champ": "calcium",
+  "valeur": 1.27,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-puppy-sensitive-skin-riche-en-saumon",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-puppy-medium-sensitive-skin-saumon-12-kg",
+  "ean": "7613035120389",
+  "champ": "phosphore",
+  "valeur": 0.97,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-puppy-sensitive-skin-riche-en-saumon",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-puppy-medium-sensitive-skin-saumon-12-kg",
+  "ean": "7613035120389",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-puppy-sensitive-skin-riche-en-saumon",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-puppy-medium-healthy-start-poulet-12-kg",
+  "ean": "7613035120402",
+  "champ": "calcium",
+  "valeur": 1.5,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-puppy-healthy-start-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-puppy-medium-healthy-start-poulet-12-kg",
+  "ean": "7613035120402",
+  "champ": "phosphore",
+  "valeur": 1.02,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-puppy-healthy-start-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-puppy-medium-healthy-start-poulet-12-kg",
+  "ean": "7613035120402",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-puppy-healthy-start-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-large-robust-everyday-nutrition-poulet-et-riz-14-kg",
+  "ean": "7613035120426",
+  "champ": "calcium",
+  "valeur": 1.49,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-large-robust-adult-2-everyday-nutrition-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-large-robust-everyday-nutrition-poulet-et-riz-14-kg",
+  "ean": "7613035120426",
+  "champ": "phosphore",
+  "valeur": 0.99,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-large-robust-adult-2-everyday-nutrition-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-large-robust-everyday-nutrition-poulet-et-riz-14-kg",
+  "ean": "7613035120426",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-large-robust-adult-2-everyday-nutrition-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-large-athletic-everyday-nutrition-poulet-14-kg",
+  "ean": "7613035120440",
+  "champ": "calcium",
+  "valeur": 1.55,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-large-athletic-adult-2-everyday-nutrition-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-large-athletic-everyday-nutrition-poulet-14-kg",
+  "ean": "7613035120440",
+  "champ": "phosphore",
+  "valeur": 0.95,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-large-athletic-adult-2-everyday-nutrition-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adulte-medium-everyday-nutrition-poulet-14-kg",
+  "ean": "7613035120488",
+  "champ": "calcium",
+  "valeur": 1.32,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-everyday-nutrition-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adulte-medium-everyday-nutrition-poulet-14-kg",
+  "ean": "7613035120488",
+  "champ": "phosphore",
+  "valeur": 0.87,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-everyday-nutrition-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adulte-medium-everyday-nutrition-poulet-14-kg",
+  "ean": "7613035120488",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-everyday-nutrition-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-small-mini-adult-everyday-nutrition-14-kg",
+  "ean": "7613035122314",
+  "champ": "calcium",
+  "valeur": 1.43,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-1-everyday-nutrition-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-small-mini-adult-everyday-nutrition-14-kg",
+  "ean": "7613035122314",
+  "champ": "phosphore",
+  "valeur": 0.98,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-1-everyday-nutrition-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-7-medium-large-age-defence-poulet-14-kg",
+  "ean": "7613035122796",
+  "champ": "calcium",
+  "valeur": 1.4,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-large-adult-7-age-defence-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-7-medium-large-age-defence-poulet-14-kg",
+  "ean": "7613035122796",
+  "champ": "phosphore",
+  "valeur": 0.93,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-large-adult-7-age-defence-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-all-sizes-adult-light-sterilised-au-poulet-14-kg",
+  "ean": "7613035122819",
+  "champ": "calcium",
+  "valeur": 1.36,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-all-size-adult-1-light-sterilised-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-all-sizes-adult-light-sterilised-au-poulet-14-kg",
+  "ean": "7613035122819",
+  "champ": "phosphore",
+  "valeur": 0.91,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-all-size-adult-1-light-sterilised-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-all-sizes-adult-light-sterilised-au-poulet-14-kg",
+  "ean": "7613035122819",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-all-size-adult-1-light-sterilised-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adulte-medium-sensitive-skin-7-kg",
+  "ean": "7613035123342",
+  "champ": "calcium",
+  "valeur": 1.05,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-sensitive-skin-riche-en-saumon",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adulte-medium-sensitive-skin-7-kg",
+  "ean": "7613035123342",
+  "champ": "phosphore",
+  "valeur": 0.83,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-sensitive-skin-riche-en-saumon",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adulte-medium-sensitive-skin-7-kg",
+  "ean": "7613035123342",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-sensitive-skin-riche-en-saumon",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adulte-medium-everyday-nutrition-poulet-7-kg",
+  "ean": "7613035123359",
+  "champ": "calcium",
+  "valeur": 1.32,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-everyday-nutrition-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adulte-medium-everyday-nutrition-poulet-7-kg",
+  "ean": "7613035123359",
+  "champ": "phosphore",
+  "valeur": 0.87,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-everyday-nutrition-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-all-sizes-adult-light-sterilised-au-poulet-3-kg",
+  "ean": "7613035123779",
+  "champ": "calcium",
+  "valeur": 1.36,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-all-size-adult-1-light-sterilised-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-all-sizes-adult-light-sterilised-au-poulet-3-kg",
+  "ean": "7613035123779",
+  "champ": "phosphore",
+  "valeur": 0.91,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-all-size-adult-1-light-sterilised-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-all-sizes-adult-light-sterilised-au-poulet-3-kg",
+  "ean": "7613035123779",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-all-size-adult-1-light-sterilised-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-small-mini-age-defence-9-poulet-7-kg",
+  "ean": "7613035125544",
+  "champ": "calcium",
+  "valeur": 1.28,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-9-age-defence-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-small-mini-age-defence-9-poulet-7-kg",
+  "ean": "7613035125544",
+  "champ": "phosphore",
+  "valeur": 0.93,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-9-age-defence-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-small-mini-age-defence-9-poulet-7-kg",
+  "ean": "7613035125544",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-9-age-defence-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-puppy-medium-sensitive-digestion-agneau-12-kg",
+  "ean": "7613035214767",
+  "champ": "calcium",
+  "valeur": 1.38,
+  "source": "https://vetcenter.purina.fr/products/pro-plan-medium-puppy-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-puppy-medium-sensitive-digestion-agneau-12-kg",
+  "ean": "7613035214767",
+  "champ": "phosphore",
+  "valeur": 0.96,
+  "source": "https://vetcenter.purina.fr/products/pro-plan-medium-puppy-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-puppy-medium-sensitive-digestion-agneau-12-kg",
+  "ean": "7613035214767",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/pro-plan-medium-puppy-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-medium-sensitive-digestion-agneau-14-kg",
+  "ean": "7613035214774",
+  "champ": "calcium",
+  "valeur": 1.35,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-medium-sensitive-digestion-agneau-14-kg",
+  "ean": "7613035214774",
+  "champ": "phosphore",
+  "valeur": 0.81,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-medium-sensitive-digestion-agneau-14-kg",
+  "ean": "7613035214774",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-medium-sensitive-digestion-agneau-3-kg",
+  "ean": "7613035214798",
+  "champ": "calcium",
+  "valeur": 1.35,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-medium-sensitive-digestion-agneau-3-kg",
+  "ean": "7613035214798",
+  "champ": "phosphore",
+  "valeur": 0.81,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-medium-sensitive-digestion-agneau-3-kg",
+  "ean": "7613035214798",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-medium-adult-1-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-puppy-medium-sensitive-digestion-agneau-3-kg",
+  "ean": "7613035214811",
+  "champ": "calcium",
+  "valeur": 1.38,
+  "source": "https://vetcenter.purina.fr/products/pro-plan-medium-puppy-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-puppy-medium-sensitive-digestion-agneau-3-kg",
+  "ean": "7613035214811",
+  "champ": "phosphore",
+  "valeur": 0.96,
+  "source": "https://vetcenter.purina.fr/products/pro-plan-medium-puppy-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-puppy-medium-sensitive-digestion-agneau-3-kg",
+  "ean": "7613035214811",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/pro-plan-medium-puppy-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adulte-large-athletic-sensitive-digestion-14kg",
+  "ean": "7613035415591",
+  "champ": "calcium",
+  "valeur": 1.31,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-large-athletic-adult-2-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adulte-large-athletic-sensitive-digestion-14kg",
+  "ean": "7613035415591",
+  "champ": "phosphore",
+  "valeur": 0.84,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-large-athletic-adult-2-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adulte-large-athletic-sensitive-digestion-14kg",
+  "ean": "7613035415591",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-large-athletic-adult-2-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-large-athletic-adult-sensitive-skin-14-kg",
+  "ean": "7613035417045",
+  "champ": "calcium",
+  "valeur": 1.05,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-large-athletic-adult-2-sensitive-skin-riche-en-saumon",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-large-athletic-adult-sensitive-skin-14-kg",
+  "ean": "7613035417045",
+  "champ": "phosphore",
+  "valeur": 0.83,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-large-athletic-adult-2-sensitive-skin-riche-en-saumon",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-large-athletic-adult-sensitive-skin-14-kg",
+  "ean": "7613035417045",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-large-athletic-adult-2-sensitive-skin-riche-en-saumon",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-small-mini-adult-light-sterilised-au-poulet-3-kg",
+  "ean": "7613036571708",
+  "champ": "calcium",
+  "valeur": 1.36,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-1-light-sterilised-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-small-mini-adult-light-sterilised-au-poulet-3-kg",
+  "ean": "7613036571708",
+  "champ": "phosphore",
+  "valeur": 0.92,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-1-light-sterilised-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-small-mini-adult-light-sterilised-au-poulet-3-kg",
+  "ean": "7613036571708",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-1-light-sterilised-riche-en-poulet",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-small-mini-sensitive-digestion-3-kg",
+  "ean": "7613036611268",
+  "champ": "calcium",
+  "valeur": 1.28,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-1-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-small-mini-sensitive-digestion-3-kg",
+  "ean": "7613036611268",
+  "champ": "phosphore",
+  "valeur": 0.93,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-1-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-small-mini-sensitive-digestion-3-kg",
+  "ean": "7613036611268",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-1-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-small-mini-sensitive-digestion-7-kg",
+  "ean": "7613036611329",
+  "champ": "calcium",
+  "valeur": 1.28,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-1-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-small-mini-sensitive-digestion-7-kg",
+  "ean": "7613036611329",
+  "champ": "phosphore",
+  "valeur": 0.93,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-1-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-adult-small-mini-sensitive-digestion-7-kg",
+  "ean": "7613036611329",
+  "champ": "humidite",
+  "valeur": 8.0,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-small-mini-adult-1-sensitive-digestion-riche-en-agneau",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-purina-all-sizes-adult-dog-light-sterilised-agneau-3-kg",
+  "ean": "8445290463814",
+  "champ": "calcium",
+  "valeur": 1.38,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-all-size-adult-light-sterilised-riche-en-agneau-de-haute-qualite",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-purina-all-sizes-adult-dog-light-sterilised-agneau-3-kg",
+  "ean": "8445290463814",
+  "champ": "phosphore",
+  "valeur": 0.93,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-all-size-adult-light-sterilised-riche-en-agneau-de-haute-qualite",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-purina-all-sizes-adult-dog-light-sterilised-agneau-14-kg",
+  "ean": "8445290463951",
+  "champ": "calcium",
+  "valeur": 1.38,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-all-size-adult-light-sterilised-riche-en-agneau-de-haute-qualite",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-purina-all-sizes-adult-dog-light-sterilised-agneau-14-kg",
+  "ean": "8445290463951",
+  "champ": "phosphore",
+  "valeur": 0.93,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-all-size-adult-light-sterilised-riche-en-agneau-de-haute-qualite",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-purina-all-sizes-adult-dog-light-sterilised-poisson-blanc-3-kg",
+  "ean": "8445290524607",
+  "champ": "calcium",
+  "valeur": 1.42,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-all-size-adult-light-sterilised-riche-en-poisson-blanc-de-haute-qualite",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "pro-plan-purina-all-sizes-adult-dog-light-sterilised-poisson-blanc-3-kg",
+  "ean": "8445290524607",
+  "champ": "phosphore",
+  "valeur": 0.96,
+  "source": "https://vetcenter.purina.fr/products/purina-pro-plan-all-size-adult-light-sterilised-riche-en-poisson-blanc-de-haute-qualite",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-caniche-adulte-croquettes-chien-7-5-kg",
+  "ean": "3182550716932",
+  "champ": "calcium",
+  "valeur": 0.8,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-caniche-adult-7-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-caniche-adulte-croquettes-chien-7-5-kg",
+  "ean": "3182550716932",
+  "champ": "phosphore",
+  "valeur": 0.6,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-caniche-adult-7-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-caniche-adulte-croquettes-chien-7-5-kg",
+  "ean": "3182550716932",
+  "champ": "cendres",
+  "valeur": 5.3,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-caniche-adult-7-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-teckel-chiot-croquettes-chien-1-5-kg",
+  "ean": "3182550722575",
+  "champ": "calcium",
+  "valeur": 1.2,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-teckel-puppy-1-5-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-canin-teckel-chiot-croquettes-chien-1-5-kg",
+  "ean": "3182550722575",
+  "champ": "phosphore",
+  "valeur": 0.88,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-teckel-puppy-1-5-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-canin-berger-allemand-chiot-croquettes-chien-12-kg",
+  "ean": "3182550724159",
+  "champ": "calcium",
+  "valeur": 1.1,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-berger-allemand-junior-12-kg.html",
+  "date": "2026-11-05",
+  "note": "cendres de la fiche = cellulose de la page : la fiche a une valeur décalée, à corriger"
+ },
+ {
+  "slug": "royal-canin-berger-allemand-chiot-croquettes-chien-12-kg",
+  "ean": "3182550724159",
+  "champ": "phosphore",
+  "valeur": 0.85,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-berger-allemand-junior-12-kg.html",
+  "date": "2026-11-05",
+  "note": "cendres de la fiche = cellulose de la page : la fiche a une valeur décalée, à corriger"
+ },
+ {
+  "slug": "royal-canin-berger-allemand-chiot-croquettes-chien-12-kg",
+  "ean": "3182550724159",
+  "champ": "cellulose",
+  "valeur": 2.8,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-berger-allemand-junior-12-kg.html",
+  "date": "2026-11-05",
+  "note": "cendres de la fiche = cellulose de la page : la fiche a une valeur décalée, à corriger"
+ },
+ {
+  "slug": "royal-canin-caniche-adulte-croquettes-chien-1-5-kg",
+  "ean": "3182550743174",
+  "champ": "calcium",
+  "valeur": 0.8,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-caniche-adult-7-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-caniche-adulte-croquettes-chien-1-5-kg",
+  "ean": "3182550743174",
+  "champ": "phosphore",
+  "valeur": 0.6,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-caniche-adult-7-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-caniche-adulte-croquettes-chien-1-5-kg",
+  "ean": "3182550743174",
+  "champ": "cendres",
+  "valeur": 5.3,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-caniche-adult-7-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-cavalier-king-charles-adulte-croquettes-chien-1-5-kg",
+  "ean": "3182550743501",
+  "champ": "calcium",
+  "valeur": 0.8,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-cavalier-king-charles-adult-3-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-cavalier-king-charles-adulte-croquettes-chien-1-5-kg",
+  "ean": "3182550743501",
+  "champ": "phosphore",
+  "valeur": 0.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-cavalier-king-charles-adult-3-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-boxer-chiot-12-kg",
+  "ean": "3182550743945",
+  "champ": "calcium",
+  "valeur": 1.2,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-boxer-puppy-12-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-boxer-chiot-12-kg",
+  "ean": "3182550743945",
+  "champ": "phosphore",
+  "valeur": 1.0,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-boxer-puppy-12-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-golden-retriever-chiot-croquettes-chien-12-kg",
+  "ean": "3182550751261",
+  "champ": "calcium",
+  "valeur": 0.98,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-golden-retriever-puppy-3-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-canin-golden-retriever-chiot-croquettes-chien-12-kg",
+  "ean": "3182550751261",
+  "champ": "phosphore",
+  "valeur": 0.8,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-golden-retriever-puppy-3-kg.html",
+  "date": "2026-11-05",
+  "note": "protéines et gras identiques, cendres ou cellulose un peu différentes : formule peut-être mise à jour"
+ },
+ {
+  "slug": "royal-royal-canin-croquettes-cavalier-king-charles-pour-chien-adulte-7-5kg",
+  "ean": "3182550755368",
+  "champ": "calcium",
+  "valeur": 0.8,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-cavalier-king-charles-adult-3-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-royal-canin-croquettes-cavalier-king-charles-pour-chien-adulte-7-5kg",
+  "ean": "3182550755368",
+  "champ": "phosphore",
+  "valeur": 0.5,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-cavalier-king-charles-adult-3-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-adult-x-small-1-5-kg",
+  "ean": "3182550793728",
+  "champ": "calcium",
+  "valeur": 0.82,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-x-small-adult-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "royal-canin-shn-adult-x-small-1-5-kg",
+  "ean": "3182550793728",
+  "champ": "phosphore",
+  "valeur": 0.7,
+  "source": "https://www.lacompagniedesanimaux.com/royal-canin-x-small-adult-1-5-kg.html",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "empreintes-croquettes-poulet-cereales-chien-adulte-sterilise-petite-race",
+  "ean": "3616661263660",
+  "champ": "calcium",
+  "valeur": 1.1,
+  "source": "https://world.openpetfoodfacts.org/product/3616661263660",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0143 et 0.007 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "empreintes-croquettes-poulet-cereales-chien-adulte-sterilise-petite-race",
+  "ean": "3616661263660",
+  "champ": "phosphore",
+  "valeur": 0.7,
+  "source": "https://world.openpetfoodfacts.org/product/3616661263660",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0143 et 0.007 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "organicvet-light-geflugel-reis",
+  "ean": "4260385920249",
+  "champ": "calcium",
+  "valeur": 1.1,
+  "source": "https://world.openpetfoodfacts.org/product/4260385920249",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "organicvet-light-geflugel-reis",
+  "ean": "4260385920249",
+  "champ": "phosphore",
+  "valeur": 0.8,
+  "source": "https://world.openpetfoodfacts.org/product/4260385920249",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "atavik-patee-pour-chien-dinde-riche-en-sanglier-avec-potiron-45359",
+  "ean": "3760260845359",
+  "champ": "calcium",
+  "valeur": 0.32,
+  "source": "https://world.openpetfoodfacts.org/product/3760260845359",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00416 et 0.0028 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-dinde-riche-en-sanglier-avec-potiron-45359",
+  "ean": "3760260845359",
+  "champ": "phosphore",
+  "valeur": 0.28,
+  "source": "https://world.openpetfoodfacts.org/product/3760260845359",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00416 et 0.0028 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "yarrah-vega-dog-food",
+  "ean": "8714265975462",
+  "champ": "calcium",
+  "valeur": 1.2,
+  "source": "https://world.openpetfoodfacts.org/product/8714265975462",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "yarrah-vega-dog-food",
+  "ean": "8714265975462",
+  "champ": "phosphore",
+  "valeur": 0.9,
+  "source": "https://world.openpetfoodfacts.org/product/8714265975462",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "carnilove-fresh-carp-trout",
+  "ean": "8595602527557",
+  "champ": "calcium",
+  "valeur": 1.0,
+  "source": "https://world.openpetfoodfacts.org/product/8595602527557",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "carnilove-fresh-carp-trout",
+  "ean": "8595602527557",
+  "champ": "phosphore",
+  "valeur": 0.8,
+  "source": "https://world.openpetfoodfacts.org/product/8595602527557",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "wolf-of-wilderness-wolf-of-wilderness",
+  "ean": "4260358511474",
+  "champ": "calcium",
+  "valeur": 1.2,
+  "source": "https://world.openpetfoodfacts.org/product/4260358511474",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "wolf-of-wilderness-wolf-of-wilderness",
+  "ean": "4260358511474",
+  "champ": "phosphore",
+  "valeur": 0.9,
+  "source": "https://world.openpetfoodfacts.org/product/4260358511474",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "atavik-patee-pour-chien-monoproteine-poulet",
+  "ean": "3760260844802",
+  "champ": "calcium",
+  "valeur": 0.22,
+  "source": "https://world.openpetfoodfacts.org/product/3760260844802",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00286 et 0.0018 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-monoproteine-poulet",
+  "ean": "3760260844802",
+  "champ": "phosphore",
+  "valeur": 0.18,
+  "source": "https://world.openpetfoodfacts.org/product/3760260844802",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00286 et 0.0018 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-a-la-dinde-riche-en-cerf",
+  "ean": "3760260844031",
+  "champ": "calcium",
+  "valeur": 1.4,
+  "source": "https://world.openpetfoodfacts.org/product/3760260844031",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0182 et 0.011 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-a-la-dinde-riche-en-cerf",
+  "ean": "3760260844031",
+  "champ": "phosphore",
+  "valeur": 1.1,
+  "source": "https://world.openpetfoodfacts.org/product/3760260844031",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0182 et 0.011 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-saumon-riche-en-sprat",
+  "ean": "3760260846110",
+  "champ": "calcium",
+  "valeur": 0.36,
+  "source": "https://world.openpetfoodfacts.org/product/3760260846110",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00468 et 0.0023 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-saumon-riche-en-sprat",
+  "ean": "3760260846110",
+  "champ": "phosphore",
+  "valeur": 0.23,
+  "source": "https://world.openpetfoodfacts.org/product/3760260846110",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00468 et 0.0023 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "eukanuba-chiot-petites-races-poulet-frais",
+  "ean": "8710255121215",
+  "champ": "calcium",
+  "valeur": 1.3,
+  "source": "https://world.openpetfoodfacts.org/product/8710255121215",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0169 et 0.011 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "eukanuba-chiot-petites-races-poulet-frais",
+  "ean": "8710255121215",
+  "champ": "phosphore",
+  "valeur": 1.1,
+  "source": "https://world.openpetfoodfacts.org/product/8710255121215",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0169 et 0.011 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-dinde-riche-en-sanglier-avec-potiron",
+  "ean": "3760260844291",
+  "champ": "calcium",
+  "valeur": 0.32,
+  "source": "https://world.openpetfoodfacts.org/product/3760260844291",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00416 et 0.0028 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-dinde-riche-en-sanglier-avec-potiron",
+  "ean": "3760260844291",
+  "champ": "phosphore",
+  "valeur": 0.28,
+  "source": "https://world.openpetfoodfacts.org/product/3760260844291",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00416 et 0.0028 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "empreintes-croquettes-poulet-cereales-chien-adulte-petite-race",
+  "ean": "3616661263646",
+  "champ": "calcium",
+  "valeur": 1.1,
+  "source": "https://world.openpetfoodfacts.org/product/3616661263646",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0143 et 0.007 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "empreintes-croquettes-poulet-cereales-chien-adulte-petite-race",
+  "ean": "3616661263646",
+  "champ": "phosphore",
+  "valeur": 0.7,
+  "source": "https://world.openpetfoodfacts.org/product/3616661263646",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0143 et 0.007 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-poulet-riche-en-chevreuil-avec-carottes",
+  "ean": "3760260844321",
+  "champ": "calcium",
+  "valeur": 0.4,
+  "source": "https://world.openpetfoodfacts.org/product/3760260844321",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0052 et 0.0033 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-poulet-riche-en-chevreuil-avec-carottes",
+  "ean": "3760260844321",
+  "champ": "phosphore",
+  "valeur": 0.33,
+  "source": "https://world.openpetfoodfacts.org/product/3760260844321",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0052 et 0.0033 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-chien-speciale-croissance-saumon-poulet-43911",
+  "ean": "3760260843911",
+  "champ": "calcium",
+  "valeur": 1.2,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843911",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0156 et 0.009 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-chien-speciale-croissance-saumon-poulet-43911",
+  "ean": "3760260843911",
+  "champ": "phosphore",
+  "valeur": 0.9,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843911",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0156 et 0.009 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-chien-speciale-croissance-poisson-riche-en-poulet-43966",
+  "ean": "3760260843966",
+  "champ": "calcium",
+  "valeur": 1.25,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843966",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.01625 et 0.0095 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-chien-speciale-croissance-poisson-riche-en-poulet-43966",
+  "ean": "3760260843966",
+  "champ": "phosphore",
+  "valeur": 0.95,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843966",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.01625 et 0.0095 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-a-l-agneau-43935",
+  "ean": "3760260843935",
+  "champ": "calcium",
+  "valeur": 1.6,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843935",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0208 et 0.01 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-a-l-agneau-43935",
+  "ean": "3760260843935",
+  "champ": "phosphore",
+  "valeur": 1.0,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843935",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0208 et 0.01 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-dinde-riche-en-canard",
+  "ean": "3760260843782",
+  "champ": "calcium",
+  "valeur": 1.4,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843782",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0182 et 0.011 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-dinde-riche-en-canard",
+  "ean": "3760260843782",
+  "champ": "phosphore",
+  "valeur": 1.1,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843782",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0182 et 0.011 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-poulet-riche-en-chevreuil-avec-carottes-45335",
+  "ean": "3760260845335",
+  "champ": "calcium",
+  "valeur": 0.4,
+  "source": "https://world.openpetfoodfacts.org/product/3760260845335",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0052 et 0.0033 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-poulet-riche-en-chevreuil-avec-carottes-45335",
+  "ean": "3760260845335",
+  "champ": "phosphore",
+  "valeur": 0.33,
+  "source": "https://world.openpetfoodfacts.org/product/3760260845335",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0052 et 0.0033 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "empreintes-croquettes-poulet-sans-cereales-chiot-petite-race",
+  "ean": "3616660558026",
+  "champ": "calcium",
+  "valeur": 1.4,
+  "source": "https://world.openpetfoodfacts.org/product/3616660558026",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0182 et 0.01 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "empreintes-croquettes-poulet-sans-cereales-chiot-petite-race",
+  "ean": "3616660558026",
+  "champ": "phosphore",
+  "valeur": 1.0,
+  "source": "https://world.openpetfoodfacts.org/product/3616660558026",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0182 et 0.01 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-agneau-au-jambon-italien-avec-haricots-verts",
+  "ean": "3760260844352",
+  "champ": "calcium",
+  "valeur": 0.32,
+  "source": "https://world.openpetfoodfacts.org/product/3760260844352",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00416 et 0.0028 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-agneau-au-jambon-italien-avec-haricots-verts",
+  "ean": "3760260844352",
+  "champ": "phosphore",
+  "valeur": 0.28,
+  "source": "https://world.openpetfoodfacts.org/product/3760260844352",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00416 et 0.0028 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-agneau-au-jambon-italien-avec-haricots-verts-40798",
+  "ean": "3760260840798",
+  "champ": "calcium",
+  "valeur": 0.32,
+  "source": "https://world.openpetfoodfacts.org/product/3760260840798",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00416 et 0.0028 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-agneau-au-jambon-italien-avec-haricots-verts-40798",
+  "ean": "3760260840798",
+  "champ": "phosphore",
+  "valeur": 0.28,
+  "source": "https://world.openpetfoodfacts.org/product/3760260840798",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00416 et 0.0028 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-agneau-au-jambon-italien-avec-haricots-verts-45342",
+  "ean": "3760260845342",
+  "champ": "calcium",
+  "valeur": 0.32,
+  "source": "https://world.openpetfoodfacts.org/product/3760260845342",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00416 et 0.0028 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-agneau-au-jambon-italien-avec-haricots-verts-45342",
+  "ean": "3760260845342",
+  "champ": "phosphore",
+  "valeur": 0.28,
+  "source": "https://world.openpetfoodfacts.org/product/3760260845342",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00416 et 0.0028 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-ragout-pour-chien-poulet",
+  "ean": "3760260846066",
+  "champ": "calcium",
+  "valeur": 0.32,
+  "source": "https://world.openpetfoodfacts.org/product/3760260846066",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00416 et 0.0022 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-ragout-pour-chien-poulet",
+  "ean": "3760260846066",
+  "champ": "phosphore",
+  "valeur": 0.22,
+  "source": "https://world.openpetfoodfacts.org/product/3760260846066",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00416 et 0.0022 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-effiloches-poulet-au-canard",
+  "ean": "3760260844284",
+  "champ": "calcium",
+  "valeur": 0.24,
+  "source": "https://world.openpetfoodfacts.org/product/3760260844284",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00312 et 0.0017 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-effiloches-poulet-au-canard",
+  "ean": "3760260844284",
+  "champ": "phosphore",
+  "valeur": 0.17,
+  "source": "https://world.openpetfoodfacts.org/product/3760260844284",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00312 et 0.0017 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-monoproteine-sanglier",
+  "ean": "3760260846103",
+  "champ": "calcium",
+  "valeur": 0.38,
+  "source": "https://world.openpetfoodfacts.org/product/3760260846103",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00494 et 0.0022 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-monoproteine-sanglier",
+  "ean": "3760260846103",
+  "champ": "phosphore",
+  "valeur": 0.22,
+  "source": "https://world.openpetfoodfacts.org/product/3760260846103",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00494 et 0.0022 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-made-in-france-poulet-a-la-lotte",
+  "ean": "3760260844222",
+  "champ": "calcium",
+  "valeur": 0.22,
+  "source": "https://world.openpetfoodfacts.org/product/3760260844222",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00286 et 0.0018 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-made-in-france-poulet-a-la-lotte",
+  "ean": "3760260844222",
+  "champ": "phosphore",
+  "valeur": 0.18,
+  "source": "https://world.openpetfoodfacts.org/product/3760260844222",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00286 et 0.0018 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-a-la-truite-riche-en-canard",
+  "ean": "3760260843805",
+  "champ": "calcium",
+  "valeur": 1.25,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843805",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.01625 et 0.0095 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-a-la-truite-riche-en-canard",
+  "ean": "3760260843805",
+  "champ": "phosphore",
+  "valeur": 0.95,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843805",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.01625 et 0.0095 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-canard-poulet",
+  "ean": "3760260846127",
+  "champ": "calcium",
+  "valeur": 0.36,
+  "source": "https://world.openpetfoodfacts.org/product/3760260846127",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00468 et 0.0021 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-canard-poulet",
+  "ean": "3760260846127",
+  "champ": "phosphore",
+  "valeur": 0.21,
+  "source": "https://world.openpetfoodfacts.org/product/3760260846127",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00468 et 0.0021 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-monoproteine-agneau",
+  "ean": "3760260846080",
+  "champ": "calcium",
+  "valeur": 0.32,
+  "source": "https://world.openpetfoodfacts.org/product/3760260846080",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00416 et 0.0022 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-monoproteine-agneau",
+  "ean": "3760260846080",
+  "champ": "phosphore",
+  "valeur": 0.22,
+  "source": "https://world.openpetfoodfacts.org/product/3760260846080",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00416 et 0.0022 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "carnilove-fresh-chicken-rabbit",
+  "ean": "8595602527526",
+  "champ": "calcium",
+  "valeur": 1.4,
+  "source": "https://world.openpetfoodfacts.org/product/8595602527526",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "carnilove-fresh-chicken-rabbit",
+  "ean": "8595602527526",
+  "champ": "phosphore",
+  "valeur": 1.0,
+  "source": "https://world.openpetfoodfacts.org/product/8595602527526",
+  "date": "2026-11-05"
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-maquereau-riche-en-buffle",
+  "ean": "3760260843812",
+  "champ": "calcium",
+  "valeur": 1.55,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843812",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.02015 et 0.0125 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-maquereau-riche-en-buffle",
+  "ean": "3760260843812",
+  "champ": "phosphore",
+  "valeur": 1.25,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843812",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.02015 et 0.0125 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-au-saumon-pour-chien-sans-cereales-43942",
+  "ean": "3760260843942",
+  "champ": "calcium",
+  "valeur": 1.6,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843942",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0208 et 0.01 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-au-saumon-pour-chien-sans-cereales-43942",
+  "ean": "3760260843942",
+  "champ": "phosphore",
+  "valeur": 1.0,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843942",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0208 et 0.01 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-au-poulet-43928",
+  "ean": "3760260843928",
+  "champ": "calcium",
+  "valeur": 1.6,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843928",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0208 et 0.01 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-au-poulet-43928",
+  "ean": "3760260843928",
+  "champ": "phosphore",
+  "valeur": 1.0,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843928",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0208 et 0.01 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-au-poulet",
+  "ean": "3760260843751",
+  "champ": "calcium",
+  "valeur": 1.6,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843751",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0208 et 0.01 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-au-poulet",
+  "ean": "3760260843751",
+  "champ": "phosphore",
+  "valeur": 1.0,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843751",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0208 et 0.01 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "alleva-croquettes-alleva-equilibrium-sensible-agneau-chiot-mini-medium",
+  "ean": "8002754003018",
+  "champ": "calcium",
+  "valeur": 1.4,
+  "source": "https://world.openpetfoodfacts.org/product/8002754003018",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0182 et 0.009 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "alleva-croquettes-alleva-equilibrium-sensible-agneau-chiot-mini-medium",
+  "ean": "8002754003018",
+  "champ": "phosphore",
+  "valeur": 0.9,
+  "source": "https://world.openpetfoodfacts.org/product/8002754003018",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0182 et 0.009 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-poulet-riche-en-chevreuil-avec-carottes-45366",
+  "ean": "3760260845366",
+  "champ": "calcium",
+  "valeur": 0.4,
+  "source": "https://world.openpetfoodfacts.org/product/3760260845366",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0052 et 0.0033 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-poulet-riche-en-chevreuil-avec-carottes-45366",
+  "ean": "3760260845366",
+  "champ": "phosphore",
+  "valeur": 0.33,
+  "source": "https://world.openpetfoodfacts.org/product/3760260845366",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0052 et 0.0033 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "empreintes-croquettes-poulet-cereales-chien-adulte-race-de-grande-taille",
+  "ean": "3616661263714",
+  "champ": "calcium",
+  "valeur": 1.8,
+  "source": "https://world.openpetfoodfacts.org/product/3616661263714",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0234 et 0.011 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "empreintes-croquettes-poulet-cereales-chien-adulte-race-de-grande-taille",
+  "ean": "3616661263714",
+  "champ": "phosphore",
+  "valeur": 1.1,
+  "source": "https://world.openpetfoodfacts.org/product/3616661263714",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0234 et 0.011 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "edgard-cooper-croquettes-a-l-agneau-pour-chien",
+  "ean": "5425039486086",
+  "champ": "calcium",
+  "valeur": 1.0,
+  "source": "https://world.openpetfoodfacts.org/product/5425039486086",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.013 et 0.007 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "edgard-cooper-croquettes-a-l-agneau-pour-chien",
+  "ean": "5425039486086",
+  "champ": "phosphore",
+  "valeur": 0.7,
+  "source": "https://world.openpetfoodfacts.org/product/5425039486086",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.013 et 0.007 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-au-saumon-pour-chien-sans-cereales",
+  "ean": "3760260843775",
+  "champ": "calcium",
+  "valeur": 1.6,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843775",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0208 et 0.01 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-au-saumon-pour-chien-sans-cereales",
+  "ean": "3760260843775",
+  "champ": "phosphore",
+  "valeur": 1.0,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843775",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0208 et 0.01 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-chien-speciale-croissance-poisson-riche-en-poulet",
+  "ean": "3760260843799",
+  "champ": "calcium",
+  "valeur": 1.25,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843799",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.01625 et 0.0095 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-chien-speciale-croissance-poisson-riche-en-poulet",
+  "ean": "3760260843799",
+  "champ": "phosphore",
+  "valeur": 0.95,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843799",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.01625 et 0.0095 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-agneau-au-jambon-italien-avec-haricots-verts-45373",
+  "ean": "3760260845373",
+  "champ": "calcium",
+  "valeur": 0.32,
+  "source": "https://world.openpetfoodfacts.org/product/3760260845373",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00416 et 0.0028 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-agneau-au-jambon-italien-avec-haricots-verts-45373",
+  "ean": "3760260845373",
+  "champ": "phosphore",
+  "valeur": 0.28,
+  "source": "https://world.openpetfoodfacts.org/product/3760260845373",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00416 et 0.0028 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-maquereau-riche-en-buffle-43980",
+  "ean": "3760260843980",
+  "champ": "calcium",
+  "valeur": 1.55,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843980",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.02015 et 0.0125 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-maquereau-riche-en-buffle-43980",
+  "ean": "3760260843980",
+  "champ": "phosphore",
+  "valeur": 1.25,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843980",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.02015 et 0.0125 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-dinde-riche-en-sanglier-avec-potiron-45328",
+  "ean": "3760260845328",
+  "champ": "calcium",
+  "valeur": 0.32,
+  "source": "https://world.openpetfoodfacts.org/product/3760260845328",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00416 et 0.0028 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-dinde-riche-en-sanglier-avec-potiron-45328",
+  "ean": "3760260845328",
+  "champ": "phosphore",
+  "valeur": 0.28,
+  "source": "https://world.openpetfoodfacts.org/product/3760260845328",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00416 et 0.0028 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-dinde-riche-en-canard-43959",
+  "ean": "3760260843959",
+  "champ": "calcium",
+  "valeur": 1.4,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843959",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0182 et 0.011 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-dinde-riche-en-canard-43959",
+  "ean": "3760260843959",
+  "champ": "phosphore",
+  "valeur": 1.1,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843959",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0182 et 0.011 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-ragout-pour-chien-sanglier",
+  "ean": "3760260846073",
+  "champ": "calcium",
+  "valeur": 0.38,
+  "source": "https://world.openpetfoodfacts.org/product/3760260846073",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00494 et 0.0021 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-ragout-pour-chien-sanglier",
+  "ean": "3760260846073",
+  "champ": "phosphore",
+  "valeur": 0.21,
+  "source": "https://world.openpetfoodfacts.org/product/3760260846073",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00494 et 0.0021 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-a-l-agneau",
+  "ean": "3760260843768",
+  "champ": "calcium",
+  "valeur": 1.6,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843768",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0208 et 0.01 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-a-l-agneau",
+  "ean": "3760260843768",
+  "champ": "phosphore",
+  "valeur": 1.0,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843768",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0208 et 0.01 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-chien-speciale-croissance-saumon-poulet",
+  "ean": "3760260843744",
+  "champ": "calcium",
+  "valeur": 1.2,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843744",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0156 et 0.009 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-chien-speciale-croissance-saumon-poulet",
+  "ean": "3760260843744",
+  "champ": "phosphore",
+  "valeur": 0.9,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843744",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0156 et 0.009 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-a-la-dinde-riche-en-cerf-44048",
+  "ean": "3760260844048",
+  "champ": "calcium",
+  "valeur": 1.4,
+  "source": "https://world.openpetfoodfacts.org/product/3760260844048",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0182 et 0.011 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-a-la-dinde-riche-en-cerf-44048",
+  "ean": "3760260844048",
+  "champ": "phosphore",
+  "valeur": 1.1,
+  "source": "https://world.openpetfoodfacts.org/product/3760260844048",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.0182 et 0.011 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-monoproteine-saumon",
+  "ean": "3760260846097",
+  "champ": "calcium",
+  "valeur": 0.36,
+  "source": "https://world.openpetfoodfacts.org/product/3760260846097",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00468 et 0.0023 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-patee-pour-chien-monoproteine-saumon",
+  "ean": "3760260846097",
+  "champ": "phosphore",
+  "valeur": 0.23,
+  "source": "https://world.openpetfoodfacts.org/product/3760260846097",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.00468 et 0.0023 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-a-la-truite-riche-en-canard-43973",
+  "ean": "3760260843973",
+  "champ": "calcium",
+  "valeur": 1.25,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843973",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.01625 et 0.0095 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "atavik-croquettes-chien-sans-cereales-a-la-truite-riche-en-canard-43973",
+  "ean": "3760260843973",
+  "champ": "phosphore",
+  "valeur": 0.95,
+  "source": "https://world.openpetfoodfacts.org/product/3760260843973",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.01625 et 0.0095 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "empreintes-croquettes-poulet-cereales-chien-senior-petite-race",
+  "ean": "3616661263790",
+  "champ": "calcium",
+  "valeur": 1.0,
+  "source": "https://world.openpetfoodfacts.org/product/3616661263790",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.013 et 0.007 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ },
+ {
+  "slug": "empreintes-croquettes-poulet-cereales-chien-senior-petite-race",
+  "ean": "3616661263790",
+  "champ": "phosphore",
+  "valeur": 0.7,
+  "source": "https://world.openpetfoodfacts.org/product/3616661263790",
+  "date": "2026-11-05",
+  "note": "OPFF stocke 0.013 et 0.007 (saisie en % lue comme apport de référence : 1,3 g pour le calcium, 1 g pour le phosphore) ; conversion vérifiée sur les pâtées Ultra Premium Direct, où elle redonne les 0,22 et 0,18 du site. Saisie contributeur, sans photo de tableau."
+ }
+]

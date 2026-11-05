@@ -9,6 +9,7 @@ import { analyseLabel, scoreVersionFor } from '../lib/scanner/analyse'
 import { maxiZooLabel, pageText, parseMaxiZooPage } from '../lib/scanner/maxizoo'
 import { loadFeedItems } from '../lib/scanner/maxizoo-feed'
 import { baseSlug } from '../lib/scanner/slug'
+import { MARQUE_CORRIGEE } from '../lib/scanner/baremes/activation'
 
 const FEED = process.env.MAXIZOO_FEED || '/srv/toutou/shared/maxizoo-feed.csv.gz'
 const STATE = process.env.MAXIZOO_STATE || '/srv/toutou/shared/maxizoo-state.json'
@@ -47,9 +48,9 @@ async function main(): Promise<void> {
       if (!label) { note(item.ean, 'composition-absente'); continue }
       const details = analyseLabel(label)
       if (details.score === null) { note(item.ean, 'pas-de-note'); continue }
-      const { rows } = await pool.query<{ id: string; source: string; reviewed: boolean; score: number | null }>('SELECT id, source, reviewed, score FROM app.food_analysis WHERE ean = $1', [item.ean])
+      const { rows } = await pool.query<{ id: string; source: string; reviewed: boolean; score: number | null; corrigee: boolean }>(`SELECT id, source, reviewed, score, extracted ? '${MARQUE_CORRIGEE}' AS corrigee FROM app.food_analysis WHERE ean = $1`, [item.ean])
       const existing = rows[0]
-      if (existing && (existing.reviewed || existing.source === 'photo')) { note(item.ean, 'fiche-gardee'); continue }
+      if (existing && (existing.reviewed || existing.corrigee || existing.source === 'photo')) { note(item.ean, 'fiche-gardee'); continue }
       if (dry) { note(item.ean, existing ? 'a-mettre-a-jour' : 'a-creer'); continue }
       const version = scoreVersionFor(label)
       if (existing) {

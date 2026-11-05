@@ -39,6 +39,7 @@ import { getDb, type Db } from '../lib/server/drizzle'
 import { USER_AGENT } from '../lib/server/opff'
 import { saveAnalysis } from '../lib/server/scanner'
 import { updateAnalysis } from '../lib/server/scanner-review'
+import { MARQUE_CORRIGEE } from '../lib/scanner/baremes/activation'
 
 const EXPORT_URL = process.env.OPFF_EXPORT_URL || 'https://static.openpetfoodfacts.org/data/openpetfoodfacts-products.jsonl.gz'
 const BATCH = 200
@@ -95,10 +96,10 @@ async function loadExisting(db: Db | null) {
   if (!db) return { hashes, fiches }
   for (const r of await db.select({ ean: opffProduct.ean, hash: opffProduct.contentHash }).from(opffProduct)) hashes.set(r.ean, r.hash)
   const rows = await db
-    .select({ ean: foodAnalysis.ean, id: foodAnalysis.id, source: foodAnalysis.source, reviewed: foodAnalysis.reviewed })
+    .select({ ean: foodAnalysis.ean, id: foodAnalysis.id, source: foodAnalysis.source, reviewed: foodAnalysis.reviewed, corrigee: sql<boolean>`${foodAnalysis.extracted} ? ${MARQUE_CORRIGEE}` })
     .from(foodAnalysis)
     .where(isNotNull(foodAnalysis.ean))
-  for (const r of rows) if (r.ean) fiches.set(r.ean, { id: r.id, source: r.source, reviewed: r.reviewed })
+  for (const r of rows) if (r.ean) fiches.set(r.ean, { id: r.id, source: r.source, reviewed: r.reviewed || r.corrigee })
   return { hashes, fiches }
 }
 

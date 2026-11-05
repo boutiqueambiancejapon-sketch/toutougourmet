@@ -23,6 +23,9 @@ import { ALTERNATIVE_BELOW, alternativesFor, brandSlug } from '@/lib/scanner/seo
 import { betterAtMaxiZoo } from '@/lib/server/scanner-catalog'
 import { reviewedItemsSafe } from '@/lib/server/scanner-catalog'
 import { h1Fiche } from '@/lib/scanner/fiche-texte'
+import { sansDetail } from '@/lib/scanner/baremes/fiche'
+import { SafetyAlerts } from '../SafetyAlerts'
+import { FicheSimple } from './FicheSimple'
 import { currentYear } from '@/lib/title-year'
 import { titleTypo } from '@/lib/title-typo'
 
@@ -43,6 +46,7 @@ export const ficheNom = (brand: string | null, product: string | null, indexee?:
 
 export async function FicheView({ row, indexee, path }: { row: FoodAnalysis; indexee?: FicheIndexee; path: string }) {
   const a = toScanAnalysis(row)
+  if (sansDetail(a.details)) return <FicheSimple a={a} name={[a.brand, a.product].filter(Boolean).join(' ') || 'Produit sans nom lisible'} />
   const treat = kindOf(a.details) === 'treat'
   const noun = foodNoun(a.label, a.details)
   const words = NOUNS[noun]
@@ -79,7 +83,7 @@ export async function FicheView({ row, indexee, path }: { row: FoodAnalysis; ind
           </div>
         </header>
         <SourceNotice source={a.source} reviewed={row.reviewed} />
-        {a.details.treat ? <TreatAlerts alerts={a.details.treat.alerts} /> : null}
+        {a.details.alertes ? <SafetyAlerts alerts={a.details.alertes} /> : a.details.treat ? <TreatAlerts alerts={a.details.treat.alerts} /> : null}
         <AllergyAlert ingredients={a.label.ingredients.map((i) => i.nom)} />
       </div>
 

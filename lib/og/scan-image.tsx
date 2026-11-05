@@ -1,5 +1,6 @@
 import { ImageResponse } from 'next/og'
 import { getSlotPath, resolveSlot } from '@/data/image-utils'
+import { sansDetail } from '@/lib/scanner/baremes/fiche'
 import { BAND_SHORT, highlights } from '@/lib/scanner/highlights'
 import type { AnalysisSource } from '@/db/schema'
 import { openDataCredit } from '@/components/scanner/SourceNotice'
@@ -30,9 +31,11 @@ async function cardData(input: ScanImageInput): Promise<ScanCardData> {
   const dog = slot?.imageReady ? await loadOgPhoto(getSlotPath(slot), 160, 160) : null
   const { strengths, weaknesses } = highlights(input.details)
   const words = NOUNS[input.noun ?? (kindOf(input.details) === 'treat' ? 'friandise' : 'croquettes')]
+  const simple = sansDetail(input.details)
   return {
     score: input.details.score,
-    band: input.details.band ? BAND_SHORT[input.details.band] : 'Pas de note',
+    band: input.details.band ? BAND_SHORT[input.details.band] : input.details.score === null ? 'Pas de note' : '',
+    ...(simple ? { notes: [input.details.notice, ...(input.details.alertes ?? [])].filter((n): n is string => Boolean(n)).slice(0, 3) } : {}),
     product: input.product ?? input.brand ?? words.forDog,
     brand: input.product ? input.brand : null,
     strengths,
@@ -40,8 +43,8 @@ async function cardData(input: ScanImageInput): Promise<ScanCardData> {
     credit: openDataCredit(input.source) ?? 'Lecture automatique, vérifie sur ton sac',
     dog,
     qr: qrDataUri(SCANNER_URL),
-    tag: words.tag,
-    cta: words.cta,
+    tag: simple ? (input.details.score === null ? 'Scanner' : 'Note sur 100') : words.tag,
+    cta: simple ? 'Scanne ton produit' : words.cta,
   }
 }
 

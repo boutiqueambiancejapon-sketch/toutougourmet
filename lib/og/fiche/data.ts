@@ -1,5 +1,6 @@
 import { openDataCredit } from '@/components/scanner/SourceNotice'
 import type { FoodAnalysis } from '@/db/schema'
+import { sansDetail } from '@/lib/scanner/baremes/fiche'
 import { BAND_SHORT, verdictText } from '@/lib/scanner/highlights'
 import { ingredientClass, type IngredientClass } from '@/lib/scanner/ingredient-class'
 import { foodNoun, NOUNS } from '@/lib/scanner/food-noun'
@@ -36,6 +37,10 @@ export interface FicheA4Data {
     perDayNote: string
     homemade: string | null
   } | null
+  /** Note seule : ni critère, ni composition, ni alternative */
+  simple: boolean
+  /** Alertes de sécurité des nouveaux barèmes, tous types */
+  safety: string[]
   url: string
   qr: string
   credit: string
@@ -105,7 +110,7 @@ export function ficheA4Data(row: FoodAnalysis): FicheA4Data {
   const noun = foodNoun(label, d)
   return {
     name: clipWords(row.product ?? row.brand ?? 'Produit sans nom lisible', 90),
-    meta: [noun === 'croquettes' || noun === 'aliment' ? null : NOUNS[noun].title, row.product ? row.brand : null, row.ean ? `code-barres ${row.ean}` : null, `fiche du ${date}`].filter(Boolean).join(' · '),
+    meta: [noun === 'croquettes' || noun === 'aliment' || sansDetail(d) ? null : NOUNS[noun].title, row.product ? row.brand : null, row.ean ? `code-barres ${row.ean}` : null, `fiche du ${date}`].filter(Boolean).join(' · '),
     these: NOUNS[noun].these,
     score: d.score,
     band: d.band ? BAND_SHORT[d.band] : null,
@@ -121,7 +126,9 @@ export function ficheA4Data(row: FoodAnalysis): FicheA4Data {
     ],
     dryMatterNote: clipWords(d.assumptions[0] ?? "Valeurs de l'étiquette, eau retirée.", 110),
     treat: treatData(row),
-    alternatives: alternativesFor(row.brand, d.score, kindOf(d)).map(({ brand, reason }) => ({
+    simple: sansDetail(d),
+    safety: d.alertes ?? [],
+    alternatives: alternativesFor(row.brand, sansDetail(d) ? null : d.score, kindOf(d)).map(({ brand, reason }) => ({
       name: brand.name,
       reason: clipWords(reason, 110),
       url: `toutou-gourmet.com/chien/marque/${brand.slug}`,

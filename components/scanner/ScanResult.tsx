@@ -9,6 +9,7 @@ import { analyseLabel } from '@/lib/scanner/analyse'
 import { AllergyAlert } from './AllergyAlert'
 import { LabelData } from './LabelData'
 import { ReportError } from './ReportError'
+import { ScanResultSimple } from './ScanResultSimple'
 import { ScoreDetail } from './ScoreDetail'
 import { ShareButton } from './ShareButton'
 import { SourceNotice } from './SourceNotice'
@@ -45,6 +46,8 @@ export function ScanResult({ analysis, origin, quota, signedIn, onRestart }: Sca
   const changed = details.score !== analysis.details.score
   // Chiffres douteux : l'encart « à vérifier » passe avant le détail de la note.
   const doubtful = (analysis.label.champsDouteux ?? []).some((f) => f !== 'ingredients')
+  // Compléments et huiles : la note et le message, rien d'autre (décision du 2026-11-05).
+  if (analysis.details.bareme?.simple) return <ScanResultSimple analysis={analysis} name={name} quota={quota} onRestart={onRestart} />
   const verify = <VerifyFields original={analysis.label} analysisId={analysis.id} signedIn={signedIn} onChange={setCorrected} />
   return (
     <section aria-labelledby="scan-resultat" className="flex flex-col gap-5 rounded-card border border-line bg-paper p-4 sm:p-6">

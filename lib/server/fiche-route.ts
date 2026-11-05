@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { permanentRedirect } from 'next/navigation'
 import type { FoodAnalysis } from '@/db/schema'
 import { ficheIndexeePath, parCle, parCourt, parSlug, type FicheIndexee, type FicheType } from '@/lib/scanner/fiches-indexees'
+import { sansDetail } from '@/lib/scanner/baremes/fiche'
+import { ficheGardee } from '@/lib/scanner/baremes/fusions'
 import { titreFiche } from '@/lib/scanner/fiche-texte'
 import { kindOf } from '@/lib/scanner/score'
 import { currentYear } from '@/lib/title-year'
@@ -35,7 +37,11 @@ export async function ficheDeLAdresse(type: FicheType, slug: string): Promise<Fi
   const ancienne = parSlug(slug)
   if (ancienne) permanentRedirect(ficheIndexeePath(ancienne))
   const row = await getBySlug(slug)
-  return row ? { row, path: `/croquettes/${row.slug}` } : null
+  if (row) return { row, path: `/croquettes/${row.slug}` }
+  // Doublon fusionné par l'activation des barèmes : l'ancienne adresse suit la fiche gardée.
+  const garde = ficheGardee(slug)
+  if (garde) permanentRedirect(`/croquettes/${garde}`)
+  return null
 }
 
 export function ficheMetadata(f: FicheTrouvee | null): Metadata {
@@ -47,9 +53,10 @@ export function ficheMetadata(f: FicheTrouvee | null): Metadata {
   const name = indexee?.nom ?? ([row.brand, row.product].filter(Boolean).join(' ') || NOUNS[noun].these)
   const image = `${SITE}/croquettes/${row.slug}/og.png`
   const soeur = !indexee && row.brand && row.product ? parCle(recipeKey(row.brand, row.product)) : undefined
-  const prot = dryMatterBasis(label.constituants, label.typeAliment).protDm
-  const what = treat ? 'premier ingrédient, part de viande, sucre, sel et additifs' : 'protéines et glucides sur matière sèche, premier ingrédient, additifs'
   const note = row.score !== null ? `${row.score}/100` : null
+  const prot = dryMatterBasis(label.constituants, label.typeAliment).protDm
+  if (sansDetail(row.details)) return { title: { absolute: `${name}${note ? ` : note ${note}` : ''}` }, description: row.details.notice ?? undefined, alternates: { canonical: `${SITE}${path}` }, robots: { index: false, follow: true } }
+  const what = treat ? 'premier ingrédient, part de viande, sucre, sel et additifs' : 'protéines et glucides sur matière sèche, premier ingrédient, additifs'
   return {
     title: { absolute: indexee ? titreFiche(indexee.nom, row.score, currentYear()) : ficheTitle(row.brand, row.product, row.score, noun) },
     description: (indexee

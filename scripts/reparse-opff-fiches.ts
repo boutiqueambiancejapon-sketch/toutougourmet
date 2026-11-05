@@ -22,7 +22,7 @@ async function main(): Promise<void> {
   const { rows } = await pool.query<Row>(
     `SELECT f.id, f.extracted, f.score, coalesce(nullif(o.ingredients_text_fr, ''), o.ingredients_text) AS text
        FROM app.food_analysis f JOIN app.opff_product o ON o.ean = f.ean
-      WHERE f.source = 'openpetfoodfacts' AND NOT f.reviewed AND coalesce(nullif(o.ingredients_text_fr, ''), o.ingredients_text) <> ''`,
+      WHERE f.source = 'openpetfoodfacts' AND NOT f.reviewed AND NOT f.extracted ? 'corrigee' AND coalesce(nullif(o.ingredients_text_fr, ''), o.ingredients_text) <> ''`,
   )
   let read = 0
   let scored = 0

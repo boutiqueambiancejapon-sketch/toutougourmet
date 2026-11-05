@@ -13,6 +13,8 @@ export interface ScanCardData {
   brand: string | null
   strengths: string[]
   weaknesses: string[]
+  /** Note seule (compléments, huiles, pas de note) : message et alertes, à la place des points forts et faibles */
+  notes?: string[]
   credit: string
   dog: string | null
   qr: string
@@ -94,10 +96,18 @@ export function ScanStoryCard(d: ScanCardData) {
           {d.brand ? <span style={{ fontWeight: 700, fontSize: 42, color: C.ink2 }}>{clip(d.brand, 40)}</span> : null}
         </div>
       </div>
-      <div style={{ display: 'flex', gap: 30 }}>
-        <Points title="Points forts" items={d.strengths} empty="Aucun point fort net" bg={C.green} ink={C.greenInk} mark="+" />
-        <Points title="Points faibles" items={d.weaknesses} empty="Aucun point faible repéré" bg={C.rose} ink={C.roseInk} mark="–" />
-      </div>
+      {d.notes ? (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+          {d.notes.map((t) => (
+            <span key={t} style={{ display: 'flex', background: C.rose, color: C.roseInk, borderRadius: 24, padding: '20px 26px', fontWeight: 700, fontSize: 36, lineHeight: 1.15 }}>{clip(t, 150)}</span>
+          ))}
+        </div>
+      ) : (
+        <div style={{ display: 'flex', gap: 30 }}>
+          <Points title="Points forts" items={d.strengths} empty="Aucun point fort net" bg={C.green} ink={C.greenInk} mark="+" />
+          <Points title="Points faibles" items={d.weaknesses} empty="Aucun point faible repéré" bg={C.rose} ink={C.roseInk} mark="–" />
+        </div>
+      )}
       <div style={{ display: 'flex', alignItems: 'center', gap: 28, background: C.white, border: `5px solid ${C.ink}`, borderRadius: 36, padding: 30 }}>
         {d.dog ? (
           // eslint-disable-next-line @next/next/no-img-element -- next/og : next/image indisponible
@@ -127,7 +137,7 @@ export function ScanOgCard(d: ScanCardData) {
           <span style={{ fontFamily: 'Fraunces', fontWeight: 900, fontSize: productSize(d.product) * 0.82, lineHeight: 1.02, letterSpacing: -1.5, color: C.ink }}>{clip(d.product, 70)}</span>
           {d.brand ? <span style={{ fontWeight: 700, fontSize: 34, color: C.ink2 }}>{clip(d.brand, 40)}</span> : null}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginTop: 10 }}>
-            {[...d.strengths.map((t) => ({ t, bg: C.green, ink: C.greenInk })), ...d.weaknesses.map((t) => ({ t, bg: C.rose, ink: C.roseInk }))].slice(0, 3).map((p) => (
+            {(d.notes ? d.notes.slice(0, 2).map((t) => ({ t: clip(t, 110), bg: C.rose, ink: C.roseInk })) : [...d.strengths.map((t) => ({ t, bg: C.green, ink: C.greenInk })), ...d.weaknesses.map((t) => ({ t, bg: C.rose, ink: C.roseInk }))].slice(0, 3)).map((p) => (
               <span key={p.t} style={{ display: 'flex', background: p.bg, color: p.ink, fontWeight: 700, fontSize: 24, padding: '8px 18px', borderRadius: 999 }}>{p.t}</span>
             ))}
           </div>
