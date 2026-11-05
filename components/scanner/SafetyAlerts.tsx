@@ -1,6 +1,6 @@
 import { IconAlert } from '@/components/icons'
 
-// @cdc scanner — alertes de sécurité des nouveaux barèmes (toxiques, oignon et ail, chiot), tous types.
+// @cdc scanner — alertes de sécurité des nouveaux barèmes (toxiques, oignon et ail, chiot, foie de morue, limite NRC), tous types.
 
 export function SafetyAlerts({ alerts }: { alerts: string[] }) {
   if (alerts.length === 0) return null

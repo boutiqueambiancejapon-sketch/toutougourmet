@@ -1,4 +1,5 @@
 import { normalize } from '../ingredients'
+import { ALERTE_LIMITE_NRC, ALERTE_MORUE, NRC_LIMITE_10KG } from './alertes'
 import { extraireEpaDha } from './teneur'
 import { fmt, MSG_CONSEIL, pasCompte, Plafond, S, total, vide, type Critere, type Entree, type Resultat } from './types'
 
@@ -9,7 +10,6 @@ const POISSON_GRAS = /saumon|sardine|anchois|hareng|maquereau|krill|salmon/
 const MORUE = /foie|morue|cod liver/
 /** Valeurs NRC via Bauer 2011 pour un chien de 10 kg. Servent au calcul, pas à conseiller une dose. */
 const NRC_APPORT_10KG = 170
-const NRC_LIMITE_10KG = 2080
 
 export function noteHuile(e: Entree): Resultat {
   if (e.ingredients.length === 0) return vide('huile', 'La composition manque : pas de note.')
@@ -28,6 +28,7 @@ export function noteHuile(e: Entree): Resultat {
   const vegetale = !poisson && !morue && !generique && !algue && !/poisson|fish|krill|omega.?3/.test(`${compo} ${nomP} ${brut}`)
   c.push({ id: 'source', libelle: 'Espèce et source', max: 15, points: poisson ? 15 : algue ? 12 : morue ? 10 : generique ? 8 : vegetale ? 4 : 2, explication: poisson ? 'Poisson gras nommé.' : algue ? 'Huile d\'algue : du DHA, sans poisson.' : morue ? 'Foie de morue : riche en vitamines A et D.' : generique ? 'Poisson sans espèce.' : vegetale ? 'Huile végétale : pas d\'EPA ni de DHA, le chien convertit peu l\'ALA.' : 'Source peu claire.', source: `${S.FEDIAF} ; ${S.BAUER} ; points : ${S.EDITO}` })
 
+  const alertes: string[] = []
   const t = extraireEpaDha(`${e.tableauBrut ?? ''} ${e.mentions ?? ''}`)
   const cite = /\b(epa|dha)\b|omega.?3/.test(texte)
   const complet = t.epaDhaPct !== null && !t.partiel
@@ -38,6 +39,7 @@ export function noteHuile(e: Entree): Resultat {
   if (vegetale || !complet || !e.ration10kgG) c.push(pasCompte('ration-nrc', 'Ration comparée à l\'apport NRC', 15, vegetale ? 'Sans objet pour une huile végétale.' : 'EPA + DHA ou ration manquants : critère sorti du calcul.', S.BAUER))
   else {
     const mg = (e.ration10kgG * (t.epaDhaPct ?? 0) * 1000) / 100
+    if (mg > NRC_LIMITE_10KG) alertes.push(ALERTE_LIMITE_NRC)
     const p = mg > NRC_LIMITE_10KG ? 5 : mg >= NRC_APPORT_10KG ? 15 : mg >= NRC_APPORT_10KG / 2 ? 8 : 3
     c.push({ id: 'ration-nrc', libelle: 'Ration comparée à l\'apport NRC', max: 15, points: p, explication: `Pour un chien de 10 kg, la ration écrite apporte environ ${Math.round(mg)} mg d'EPA et DHA par jour, ${mg > NRC_LIMITE_10KG ? 'au-dessus de la limite haute NRC' : mg >= NRC_APPORT_10KG ? 'au moins l\'apport NRC' : 'moins que l\'apport NRC'}. Pas un conseil de dose.`, source: S.BAUER })
   }
@@ -61,6 +63,7 @@ export function noteHuile(e: Entree): Resultat {
   if (morue) {
     const vitChiffrees = /vitamine a\b[^.a-z]{0,8}\d/.test(texte) && /vitamine d3?\b[^.a-z]{0,8}\d/.test(texte)
     if (!vitChiffrees) pl.baisser(60, 'Foie de morue sans vitamines A et D chiffrées : note plafonnée à 60.')
+    alertes.push(ALERTE_MORUE)
   }
-  return total('huile', c, { fiabilite: complet && analyse ? 'haute' : complet || t.omega3Pct !== null ? 'moyenne' : 'faible', plafond: pl.v, message: MSG_CONSEIL }, 50)
+  return total('huile', c, { fiabilite: complet && analyse ? 'haute' : complet || t.omega3Pct !== null ? 'moyenne' : 'faible', plafond: pl.v, alertes, message: MSG_CONSEIL }, 50)
 }

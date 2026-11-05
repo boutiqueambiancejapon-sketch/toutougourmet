@@ -1,5 +1,6 @@
 import { controversialPreservatives, hasColorant, hasSugar, isByProduct, isCereal, normalize } from '../ingredients'
 import { hasGlycerin, unnamedPreservative } from '../treat-ingredients'
+import { ALERTE_LIMITE_NRC, ALERTE_MORUE, mgEpaDha10kg, NRC_LIMITE_10KG } from './alertes'
 import { extraireEpaDha } from './teneur'
 import { MSG_CONSEIL, pasCompte, Plafond, S, total, vide, type Critere, type Entree, type Resultat } from './types'
 
@@ -73,7 +74,14 @@ export function noteComplement(e: Entree): Resultat {
   const pl = new Plafond()
   pl.baisser(90, 'Une étiquette complète ne prouve pas que le produit marche : note plafonnée à 90.')
   if (chiffres.length === 0) pl.baisser(60, 'Aucune teneur d\'actif affichée : note plafonnée à 60.')
+  // Foie de morue seulement : « foie » seul désigne souvent un foie de volaille.
+  const mgNrc = mgEpaDha10kg(extraireEpaDha(epaDhaTexte), e.ration10kgG)
+  const alertes = [
+    ...(/morue|cod liver/.test(`${compo} ${normalize(e.produit ?? '')}`) ? [ALERTE_MORUE] : []),
+    ...(mgNrc !== null && mgNrc > NRC_LIMITE_10KG ? [ALERTE_LIMITE_NRC] : []),
+  ]
   return total('complement', c, {
+    alertes,
     fiabilite: chiffres.length && e.rationLue ? 'haute' : chiffres.length || e.rationLue ? 'moyenne' : 'faible',
     plafond: pl.v,
     message: MSG_CONSEIL,
