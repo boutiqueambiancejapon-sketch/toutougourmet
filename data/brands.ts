@@ -246,7 +246,7 @@ export const brands: Brand[] = [
       price: 'Environ 50 à 200 € par mois, de 5 à 40 kg',
       format: 'Repas frais cuits sous vide',
       madeIn: 'Non communiqué',
-      delivery: 'Sachets prédosés livrés congelés',
+      delivery: 'Sachets prédosés, 30 jours au réfrigérateur ou 1 an au congélateur selon la marque',
       strength: 'Sachets prédosés et suivi nutritionnel gratuit',
       bestFor: 'Chien difficile à nourrir',
     },

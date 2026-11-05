@@ -100,7 +100,7 @@ export const PROMO_PAGES: PromoPage[] = [
       "L'abonnement qui suit est sans engagement.",
       "Dans une partie des avis clients, les prélèvements de l'abonnement sont mal compris et la résiliation jugée difficile : garde la date de fin de l'essai en tête.",
     ],
-    fit: "Dogfy Diet livre des repas cuits sous vide en sachets prédosés, congelés. Notre fiche le conseille pour un chien difficile à nourrir. Le menu bœuf est riche (37,5 % de matières grasses sur matière sèche) : à doser avec soin chez un chien en surpoids, et notre sélection l'écarte au-delà de 40 kg.",
+    fit: "Dogfy Diet livre des repas cuits sous vide en sachets prédosés. Notre fiche le conseille pour un chien difficile à nourrir. Le menu bœuf est riche (37,5 % de matières grasses sur matière sèche) : à doser avec soin chez un chien en surpoids, et notre sélection l'écarte au-delà de 40 kg.",
     links: [
       { href: '/chien/avis-marques/avis-dogfy-diet-repas-frais-chien', label: 'Notre avis complet sur Dogfy Diet' },
       { href: '/chien/marque/dogfy-diet', label: 'Avis Dogfy Diet : prix, recettes, points faibles' },
