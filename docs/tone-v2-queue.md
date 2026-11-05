@@ -204,16 +204,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `avis-japhy`
 - [x] `chute-poils-chien-causes-alimentation`
 - [x] `nourriture-caniche`
-- [ ] `nourriture-beagle`
-- [ ] `pica-chien-causes-solutions`
-- [ ] `taurine-chien-carence-cardiomyopathie-dilatee`
-- [ ] `chien-peut-manger-brocoli`
-- [ ] `croquettes-chien-mauvaise-haleine`
-- [ ] `nourriture-setter-irlandais`
-- [ ] `glucides-croquettes-chien`
-- [ ] `chien-mange-trop-vite-solutions`
-- [ ] `nourriture-shar-pei`
-- [ ] `nourriture-teckel`
+- [x] `nourriture-beagle`
+- [x] `pica-chien-causes-solutions`
+- [x] `taurine-chien-carence-cardiomyopathie-dilatee`
+- [x] `chien-peut-manger-brocoli`
+- [x] `croquettes-chien-mauvaise-haleine`
+- [x] `nourriture-setter-irlandais`
+- [x] `glucides-croquettes-chien`
+- [x] `chien-mange-trop-vite-solutions`
+- [x] `nourriture-shar-pei`
+- [x] `nourriture-teckel`
 - [ ] `croquettes-chiot-grande-race`
 - [ ] `chien-peut-manger-patate-douce`
 - [ ] `recette-friandises-dentaires-maison-chien`
