@@ -314,16 +314,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [~] `alimentation-chiot-2-6-mois` · chiffres contraires à la source, à trancher par le propriétaire : l'article donne pour FEDIAF 1,0 à 4,5 g de calcium/1 000 kcal et un ratio Ca:P de 1:1 à 2:1, le tableau FEDIAF 2024 donne un minimum de 2,0 à 2,5 g, un maximum de 4,0 à 4,5 g et un ratio maximal de 1,6 à 1,8:1 en croissance ; Dobenecker 2006 ne montre aucun effet chez les grands chiens testés (Foxhound croisés), seulement chez le Beagle, sans signe clinique
 - [x] `avis-hills-science-diet`
 - [x] `croquettes-chien-surpoids`
-- [ ] `nourriture-berger-de-beauce`
-- [ ] `nourriture-carlin`
-- [ ] `nourriture-basset-hound`
-- [ ] `nourriture-jack-russell-terrier`
-- [ ] `zinc-chien-carence-besoins-sources`
-- [ ] `recette-biscuits-maison-beurre-cacahuete-chien`
-- [ ] `nourriture-bichon-frise`
-- [ ] `recette-gateau-anniversaire-chien-maison`
-- [ ] `chien-peut-manger-pommes-de-terre`
-- [ ] `croquettes-chien-difficile-nourrir`
+- [x] `nourriture-berger-de-beauce`
+- [x] `nourriture-carlin`
+- [x] `nourriture-basset-hound`
+- [x] `nourriture-jack-russell-terrier`
+- [x] `zinc-chien-carence-besoins-sources`
+- [x] `recette-biscuits-maison-beurre-cacahuete-chien`
+- [x] `nourriture-bichon-frise`
+- [x] `recette-gateau-anniversaire-chien-maison`
+- [x] `chien-peut-manger-pommes-de-terre`
+- [x] `croquettes-chien-difficile-nourrir`
 - [ ] `alimentation-chiot-6-12-mois`
 - [ ] `moule-verte-chien-arthrose-dosage`
 - [ ] `avis-wolfsblut`
