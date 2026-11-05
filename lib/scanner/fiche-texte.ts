@@ -7,6 +7,16 @@ import type { ExtractedLabel } from './types'
 
 const nb = (n: number) => n.toLocaleString('fr-FR', { maximumFractionDigits: 1 })
 
+/** H1 d'une fiche indexée. L'année est calculée à l'affichage : elle passe seule à l'année suivante le 1er janvier. */
+export const h1Fiche = (nom: string, annee: number): string => `Avis ${nom} ${annee}`
+
+/** Le nom exact et l'année d'abord : « composition » saute si le titre dépasserait 60 signes. */
+export function titreFiche(nom: string, note: number | null, annee: number): string {
+  const debut = h1Fiche(nom, annee)
+  const long = `${debut} : composition et note ${note}/100`
+  return long.length <= 60 ? long : `${debut} : note ${note}/100`
+}
+
 export interface Place {
   marque: string
   rang: number

@@ -302,3 +302,5 @@ Le propriétaire accepte que les partenaires restent nombreux en tête si le ré
 
 ## 2026-11-05 — Fiches produit ouvertes à Google
 Le propriétaire revoit sa décision « aucune fiche indexée » : ces pages poussent au clic partenaire et il veut avancer sans attendre. Premier lot de 49 fiches, une par recette, listées dans `data/fiches-indexees.json`, sur des marques qui ont une page mère. Titre et H1 au nom exact du produit, adresse courte par type (`/croquettes/…`, `/patees/…`), texte calculé depuis la composition, Product et Review avec notre note. La page mère vise « avis {marque} ». Les autres fiches restent en noindex. Mise en ligne directe sur sa demande, sans maquette et avant les barèmes : les notes changeront à l'activation. Mesure : positions et clics dans la Search Console, recul éventuel des articles.
+
+Précision du propriétaire le même jour : titre et H1 des fiches indexées portent « Avis » et l'année (« Avis Royal Canin Medium Puppy 2026 »). L'année est calculée à l'affichage et passe seule à 2027. Ces fiches gardent le nom complet du produit : elles ne visent pas « avis {marque} » seul, réservé à la page mère.
