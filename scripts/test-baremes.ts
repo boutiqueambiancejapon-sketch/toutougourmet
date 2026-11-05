@@ -397,6 +397,9 @@ const CO2 = (champ: 'calcium' | 'cendres', valeur: number) => ({ slug: 's', cham
 const r1 = corrigerFiche(brut({ proteines: 20 }), { complements: [CO2('calcium', 1.2)] })
 assert.equal(r1.extracted.constituants.calcium, 1.2)
 assert.deepEqual(r1.ajoutes, ['calcium'])
+// Une fiche corrigée porte la marque qui la protège des imports ; une fiche intacte ne la porte pas
+assert.equal(r1.extracted.corrigee, true)
+assert.equal(corrigerFiche(brut({ proteines: 20 }), {}).extracted.corrigee, undefined)
 // Une valeur déjà remplie n'est jamais écrasée
 const r2 = corrigerFiche(brut({ calcium: 0.9 }), { complements: [CO2('calcium', 1.2)] })
 assert.equal(r2.extracted.constituants.calcium, 0.9)

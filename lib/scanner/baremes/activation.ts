@@ -24,6 +24,9 @@ export const CENDRES_FAUSSES: { slug: string; faux: number; vrai: number; source
 /** Enregistrée comme aliment complet, c'est une friandise. */
 export const TYPE_FAUX = [{ slug: 'flamingo-chicken-fillets-long', typeImage: 'friandise', typeProduit: 'friandise' }] as const
 
+/** Posée sur une fiche corrigée à la main : les imports ne la réécrivent plus, seule la relecture le peut. */
+export const MARQUE_CORRIGEE = 'corrigee'
+
 export type ExtractedBrut = Record<string, unknown> & { constituants: Record<string, number | null> }
 
 export interface Corrections {
@@ -49,7 +52,13 @@ export function corrigerFiche(extracted: ExtractedBrut, c: Corrections): { extra
   const type = Boolean(c.type && extracted.typeProduit !== c.type.typeProduit)
   const rapport = Boolean(c.rapportCaP && !extracted.rapportCaP)
   return {
-    extracted: { ...extracted, constituants, ...(type && c.type ? c.type : {}), ...(rapport ? { rapportCaP: c.rapportCaP } : {}) },
+    extracted: {
+      ...extracted,
+      constituants,
+      ...(type && c.type ? c.type : {}),
+      ...(rapport ? { rapportCaP: c.rapportCaP } : {}),
+      ...(ajoutes.length > 0 || cendres || type || rapport ? { [MARQUE_CORRIGEE]: true } : {}),
+    },
     ajoutes,
     ignores,
     cendres,
