@@ -299,3 +299,5 @@ Les quatre barèmes vivent dans `lib/scanner/baremes/`, derrière `BAREMES_ACTIF
 
 ## 2026-11-05 — Barèmes : rapport calcium/phosphore déclaré et garde-fou de lecture
 On se base sur ce que dit la marque : sans les deux valeurs, le critère du barème aliments suit `rapportCaP` (6 sur 6 dans la plage, 0 hors plage), hors alertes chiot. Chiffres incohérents ou loin de la fiche du même code-barres : « Reprends une photo du tableau », pas de note (`controle-lecture.ts`), journalisé comme `blurry` pour garder la contrainte SQL de `scanner_events`. Composition absente : photo du dos demandée, pas de note. `BAREMES_ACTIFS` reste faux : bloquants dans `~/audits/baremes-2026-11-05/resultats-ia.md`.
+## 2026-11-05 — Source des fiches
+Décision du propriétaire : on se base sur ce que dit la marque (site ou fiche technique), avec la date du relevé, pour toutes les marques. Pas de recherche de source tierce. Les promesses s'écrivent « selon la marque ».

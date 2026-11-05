@@ -13,6 +13,8 @@ const CATEGORY = { sec: 'Chien > Nourriture pour chien > Croquettes pour chiens'
 interface PartnerFiche {
   brand: string
   product: string
+  /** Adresse d'origine, gardée quand le nom change */
+  slug?: string
   url: string
   type: keyof typeof CATEGORY
   composition: string
@@ -36,8 +38,8 @@ async function main(): Promise<void> {
     await pool.query(
       `INSERT INTO app.food_analysis (slug, brand, product, extracted, details, score, algorithm_version, model, source, reviewed, image_url, scan_count)
        VALUES ($1, $2, $3, $4, $5, $6, $7, 'site-marque', 'marque', true, NULL, 0)
-       ON CONFLICT (slug) DO UPDATE SET extracted = $4, details = $5, score = $6, algorithm_version = $7, updated_at = now()`,
-      [baseSlug(f.brand, f.product, null), f.brand, f.product, JSON.stringify(label), JSON.stringify(details), details.score, scoreVersionFor(label)],
+       ON CONFLICT (slug) DO UPDATE SET product = $3, extracted = $4, details = $5, score = $6, algorithm_version = $7, updated_at = now()`,
+      [f.slug ?? baseSlug(f.brand, f.product, null), f.brand, f.product, JSON.stringify(label), JSON.stringify(details), details.score, scoreVersionFor(label)],
     )
   }
   await pool?.end()
