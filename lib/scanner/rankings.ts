@@ -98,7 +98,7 @@ export function displayName(name: string): string {
     .replace(/\s+pour animaux adultes$/i, '')
     .replace(/^[\s,]+|[\s,]+$/g, '')
     .trim() || name
-  return clean.charAt(0).toUpperCase() + clean.slice(1)
+  return /^(au|aux|à la|à l')\b/i.test(clean) ? clean.charAt(0).toLowerCase() + clean.slice(1) : clean.charAt(0).toUpperCase() + clean.slice(1)
 }
 
 /** « REAL NATURE » devient « Real Nature », « Hills » devient « Hill's » ; « Edgard & Cooper » ne change pas. */
