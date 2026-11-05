@@ -184,16 +184,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `nourriture-bichon-havanais`
 - [x] `dog-chef-vs-royal-canin`
 - [x] `nourriture-bouledogue-anglais`
-- [ ] `croquettes-chien-dermatite`
-- [ ] `calcium-phosphore-chien-ratio-besoins`
-- [ ] `croquettes-ou-patee`
-- [ ] `chien-peut-manger-fraises`
-- [ ] `chien-peut-manger-cacahuetes`
-- [ ] `avis-just-russel`
-- [ ] `comment-nourrir-chien-sans-dents`
-- [ ] `croquettes-chien-infections-urinaires`
-- [ ] `alimentation-chien-ete-canicule-guide`
-- [ ] `croquettes-chien-problemes-cardiaques`
+- [x] `croquettes-chien-dermatite`
+- [x] `calcium-phosphore-chien-ratio-besoins`
+- [x] `croquettes-ou-patee`
+- [x] `chien-peut-manger-fraises`
+- [x] `chien-peut-manger-cacahuetes`
+- [x] `avis-just-russel`
+- [x] `comment-nourrir-chien-sans-dents`
+- [x] `croquettes-chien-infections-urinaires`
+- [x] `alimentation-chien-ete-canicule-guide`
+- [x] `croquettes-chien-problemes-cardiaques`
 - [ ] `recette-biscuits-potiron-chien`
 - [ ] `chien-peut-manger-persil`
 - [ ] `probiotiques-chien-bienfaits-dosage`
