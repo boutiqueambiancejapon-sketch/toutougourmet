@@ -194,7 +194,7 @@ export const brands: Brand[] = [
       "« Fabriqué en France » indiqué sur la fiche produit",
     ],
     cons: [
-      "Usine non nommée : le lieu de cuisson des croquettes n'est pas précisé",
+      "La marque dit faire produire ses croquettes par des sous-traitants français, qu'elle ne nomme pas",
       "Présence de protéines végétales (pois) sur certaines recettes",
       "Taux de glucides parfois élevé (jusqu'à 35 % MS sur certaines formules)",
     ],
@@ -204,7 +204,7 @@ export const brands: Brand[] = [
     facts: {
       price: 'Environ 3 à 5 € le kg selon la gamme',
       format: 'Croquettes, pâtées et friandises',
-      madeIn: 'Fabriqué en France selon la marque, usine non nommée',
+      madeIn: 'Sous-traitants français non nommés, selon la marque',
       delivery: 'Gratuite dès 64 € au 5 novembre 2026',
       strength: 'Le prix au kilo le plus bas de la sélection',
       bestFor: 'Chien adulte sans souci particulier, budget serré',

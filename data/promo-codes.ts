@@ -100,7 +100,7 @@ export const PROMO_PAGES: PromoPage[] = [
       "L'abonnement qui suit est sans engagement.",
       "Dans une partie des avis clients, les prélèvements de l'abonnement sont mal compris et la résiliation jugée difficile : garde la date de fin de l'essai en tête.",
     ],
-    fit: "Dogfy Diet livre des repas cuits sous vide en sachets prédosés, congelés. Notre fiche le conseille pour un chien difficile à nourrir. Le menu bœuf est riche (environ 31 % de matières grasses sur matière sèche) : à doser avec soin chez un chien en surpoids, et notre sélection l'écarte au-delà de 40 kg.",
+    fit: "Dogfy Diet livre des repas cuits sous vide en sachets prédosés, congelés. Notre fiche le conseille pour un chien difficile à nourrir. Le menu bœuf est riche (37,5 % de matières grasses sur matière sèche) : à doser avec soin chez un chien en surpoids, et notre sélection l'écarte au-delà de 40 kg.",
     links: [
       { href: '/chien/avis-marques/avis-dogfy-diet-repas-frais-chien', label: 'Notre avis complet sur Dogfy Diet' },
       { href: '/chien/marque/dogfy-diet', label: 'Avis Dogfy Diet : prix, recettes, points faibles' },
@@ -116,7 +116,7 @@ export const PROMO_PAGES: PromoPage[] = [
       },
       {
         q: 'Dogfy Diet convient-il à un chien en surpoids ?',
-        a: "Avec prudence. Le menu bœuf contient environ 31 % de matières grasses sur matière sèche. Pour un chien qui prend du poids, notre sélection propose plutôt Dog Chef ou Elmut, dont la ration suit le poids.",
+        a: "Avec prudence. Le menu bœuf contient 37,5 % de matières grasses sur matière sèche. Pour un chien qui prend du poids, notre sélection propose plutôt Dog Chef ou Elmut, dont la ration suit le poids.",
       },
     ],
   },
@@ -227,7 +227,7 @@ export const PROMO_PAGES: PromoPage[] = [
       },
       {
         q: 'Où sont fabriquées les croquettes Ultra Premium Direct ?',
-        a: "La fiche indique « Fabriqué en France », sans nom ni adresse d'usine. Le lieu de cuisson n'est donc pas précisé.",
+        a: "La marque dit faire produire ses croquettes par des sous-traitants français, qu'elle ne nomme pas. Ses pâtées sont fabriquées en Lot-et-Garonne, en Bretagne et dans le Nord-Pas-de-Calais, selon son site.",
       },
     ],
   },

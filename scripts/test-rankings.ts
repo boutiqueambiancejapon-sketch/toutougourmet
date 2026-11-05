@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict'
 import { existsSync } from 'node:fs'
 import { MODEL_REVIEWS, recipeHref } from '../data/model-reviews'
+import { inlineParts, inlinePlain } from '../lib/inline-links'
 import { extractClassement } from '../lib/mdx'
 import { isSupplementName, capByBrand, displayBrand, displayName, recipeKey, recipeName, segmentBySlug } from '../lib/scanner/rankings'
 
@@ -39,4 +40,8 @@ assert.equal(recipeKey('Franklin Pet Food', 'Croquettes Dinde, patate douce, ép
 assert.equal(recipeHref('dog chef|croquettes au canard frais', 'x'), '/chien/avis-marques/avis-dog-chef-croquettes-canard-frais')
 assert.equal(recipeHref('inconnu', 'fiche-x'), '/croquettes/fiche-x')
 for (const href of Object.values(MODEL_REVIEWS)) assert.ok(existsSync(`content/blog/${href.split('/').pop()}.mdx`), href)
+assert.deepEqual(inlineParts('Voir [la fiche](https://rappel.conso.gouv.fr/x).'), [{ text: 'Voir ' }, { label: 'la fiche', href: 'https://rappel.conso.gouv.fr/x', external: true }, { text: '.' }])
+assert.deepEqual(inlineParts('[scanner](/scanner)'), [{ label: 'scanner', href: '/scanner', external: false }])
+assert.equal(inlinePlain('Voir [la fiche](/x) ici'), 'Voir la fiche ici')
+assert.deepEqual(inlineParts('[x](javascript:alert(1))'), [{ text: '[x](javascript:alert(1))' }])
 console.log('test-rankings : tout passe')

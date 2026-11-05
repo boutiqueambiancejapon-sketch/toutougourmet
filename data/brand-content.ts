@@ -26,12 +26,12 @@ export const brandFaqs: Record<string, BrandFaq[]> = {
     { q: 'Franklin convient-il aux chats ?', a: "Oui. Franklin propose 5 recettes pour chats, dont une recette stérilisé Poulet, Thon & Saumon à 36 % de protéines, une recette senior et une recette chaton à 38 % de protéines avec DHA. Toutes sont sans céréales, avec de la farine de krill pour les oméga-3. Des pâtées pour chat existent aussi." },
   ],
   elmut: [
-    { q: 'Elmut est-il une bonne marque ?', a: "D'après sa composition, oui : ses 5 recettes pour chien obtiennent de 90 à 93 sur 100 au barème du scanner, avec une viande nommée en tête de liste. Trustpilot affiche 4,4 sur 5, et les reproches lus portent surtout sur la livraison et le service client." },
+    { q: 'Elmut est-il une bonne marque ?', a: "D'après sa composition, oui : ses 5 recettes pour chien obtiennent de 90 à 93 sur 100 au barème du scanner, avec une viande nommée en tête de liste. Trustpilot affiche 4,4 sur 5 au 5 novembre 2026, et les avis négatifs lus parlent surtout d'abonnements repris sans rappel, de prélèvements et de livraisons." },
     { q: 'Où sont cuisinés les repas Elmut ?', a: "Le site d'Elmut annonce des repas mijotés en Poitou-Charentes, sans adresse précise sur les pages qu'on a lues le 5 novembre 2026." },
     { q: 'Quel est le prix Elmut selon la taille de mon chien ?', a: "Petit chien de moins de 10 kg : environ 1,80 à 2,50 € par jour, soit 55 à 75 € par mois. Chien moyen de 10 à 25 kg : environ 2,50 à 4 € par jour, soit 75 à 120 € par mois. Grand chien de 25 à 40 kg : environ 4 à 6 € par jour, soit 120 à 180 € par mois. Ces prix valent pour une ration 100 % Elmut. La demi-ration (moitié Elmut, moitié croquettes) divise le budget par deux." },
     { q: 'Comment faire la transition depuis les croquettes ?', a: "Elmut conseille 7 à 10 jours. Jours 1 à 3 : 25 % d'Elmut. Jours 4 à 6 : moitié-moitié. Jours 7 à 9 : 75 %. Jour 10 : 100 %. La flore intestinale a ainsi le temps de s'adapter, ce qui limite diarrhée et ballonnements. Mieux vaut alterner les repas que mélanger les deux aliments dans la même gamelle." },
-    { q: 'Elmut convient-il aux chiots ?', a: "Oui, dès 2 mois. Le questionnaire tient compte de l'âge, de la race et du poids adulte estimé pour calculer la ration de croissance. Pour un chiot de grande race (Berger allemand, Labrador), la vitesse de croissance se surveille de près, et Elmut ajuste les rations." },
-    { q: 'Elmut convient-il aux chiens seniors ou en surpoids ?', a: "Oui. Pour un senior, le menu Saumon & Brocoli apporte des oméga-3, utiles chez un chien arthrosique. Pour un chien en surpoids, le menu Dinde & Courgette est pauvre en lipides. Dans les deux cas, la ration est calculée sur le profil du chien." },
+    { q: 'Elmut convient-il aux chiots ?', a: "À partir de 4 mois selon le site d'Elmut. Le questionnaire tient compte de l'âge, de la race et du poids adulte estimé pour calculer la ration de croissance. Pour un chiot de grande race (Berger allemand, Labrador), la vitesse de croissance se surveille de près, et Elmut ajuste les rations." },
+    { q: 'Elmut convient-il aux chiens seniors ou en surpoids ?', a: "Le site d'Elmut dit suivre les préconisations FEDIAF pour les chiens adultes et seniors, et la ration est calculée sur le profil du chien. Les recettes affichent de 26 à 29 % de matières grasses sur matière sèche : pour un chien en surpoids ou malade, décide avec ton vétérinaire." },
     { q: 'Que faire des repas Elmut pendant les vacances ?', a: "Deux solutions. Tu congèles des repas à l'avance (jusqu'à six mois, selon le site d'Elmut) et tu pars avec une glacière. Ou tu suspends l'abonnement depuis ton espace client avant le départ, sans pénalité ni délai minimum." },
     { q: 'Comment conserver les repas Elmut ?', a: "Au réfrigérateur en permanence, jusqu'à la date indiquée sur l'étiquette, puis 5 jours après ouverture du boudin. Au congélateur : jusqu'à six mois, selon le site d'Elmut. Chaque livraison arrive réfrigérée par Chronofresh. Prévois environ deux étagères de frigo pour une semaine, selon la taille du chien." },
     { q: 'Elmut est-il disponible pour les chats ?', a: "Oui, Elmut propose 3 recettes pour chats (poulet, bœuf, dinde) avec jusqu'à 90 % de viande et moins de 3 % de glucides." },
@@ -53,20 +53,20 @@ export const brandFaqs: Record<string, BrandFaq[]> = {
     { q: 'Que disent les vétérinaires de Dog Chef ?', a: "Dog Chef n'a pas publié d'étude clinique indépendante sur ses recettes. Pour un chien qui a une maladie diagnostiquée, fais valider le plan par ton vétérinaire avant de commencer." },
   ],
   'ultra-premium-direct': [
-    { q: 'Ultra Premium Direct est-il une bonne marque ?', a: "D'après sa composition, cela dépend de la recette : les 26 recettes pour chien qu'on a lues vont de 70 à 98 sur 100 au barème du scanner. Trustpilot affiche 4,0 sur 5, avec des reproches surtout sur la livraison et le service client." },
+    { q: 'Ultra Premium Direct est-il une bonne marque ?', a: "D'après sa composition, cela dépend de la recette : les 26 recettes pour chien qu'on a lues vont de 70 à 98 sur 100 au barème du scanner. Trustpilot affiche 4,0 sur 5 au 5 novembre 2026, avec des reproches surtout sur la livraison et le service client." },
     { q: 'Quel est le prix des croquettes Ultra Premium Direct ?', a: "Le sac de 12 kg pour chien de taille moyenne coûte 46,90 €, soit 3,91 € le kilo au 5 novembre 2026, et 42,21 € en abonnement. Le prix au kilo change selon la gamme." },
     { q: "L'abonnement Ultra Premium Direct est-il sans engagement ?", a: "La fiche produit demande d'accepter au moins 2 livraisons. La fréquence, le produit et la quantité restent modifiables, jusqu'à 3 jours avant l'expédition pour un changement de référence." },
-    { q: 'La livraison Ultra Premium Direct est-elle gratuite ?', a: "Elle devient gratuite dès 64 € d'achat. En dessous, elle part de 3,90 € à domicile et de 2,90 € en point relais, avec des tarifs à part pour les îles et certains codes postaux." },
-    { q: 'Où sont fabriquées les croquettes Ultra Premium Direct ?', a: "La fiche indique « Fabriqué en France », sans nom ni adresse d'usine. Le lieu de cuisson n'est donc pas précisé." },
+    { q: 'La livraison Ultra Premium Direct est-elle gratuite ?', a: "Au 5 novembre 2026, elle devient gratuite dès 64 € d'achat. En dessous, elle part de 3,90 € à domicile et de 2,90 € en point relais, avec des tarifs à part pour les îles et certains codes postaux." },
+    { q: 'Où sont fabriquées les croquettes Ultra Premium Direct ?', a: "La marque dit faire produire ses croquettes par des sous-traitants français, qu'elle ne nomme pas. Ses pâtées sont fabriquées en Lot-et-Garonne, en Bretagne et dans le Nord-Pas-de-Calais, selon son site." },
     { q: 'Où acheter Ultra Premium Direct ?', a: "La marque vend en direct sur son site. Elle ne figure pas dans le catalogue Maxi Zoo qu'on a lu le 5 novembre 2026." },
   ],
   'dogfy-diet': [
-    { q: 'Dogfy Diet est-il une bonne marque ?', a: "D'après sa composition, oui : ses 4 recettes obtiennent de 87 à 91 sur 100 au barème du scanner. Ses pages ne donnent ni calcium ni phosphore, et les reproches lus sur Trustpilot portent surtout sur la livraison." },
+    { q: 'Dogfy Diet est-il une bonne marque ?', a: "D'après sa composition, oui : ses 4 recettes obtiennent de 87 à 91 sur 100 au barème du scanner. Ses pages ne donnent ni calcium ni phosphore, et environ la moitié des avis négatifs lus sur Trustpilot parle de prélèvements, d'abonnement ou de résiliation." },
     { q: "Comment fonctionne l'abonnement Dogfy Diet ?", a: "Les repas arrivent en sachets prédosés, au rythme choisi à l'inscription. L'abonnement est sans engagement et comprend un suivi nutritionnel gratuit. Une partie des avis Trustpilot signale des prélèvements mal compris et une résiliation compliquée : note la date du prochain envoi et la marche à suivre pour arrêter avant de valider." },
     { q: 'Que contient le menu bœuf Dogfy Diet ?', a: "60,5 % de bœuf et 26 % de carotte, selon la page officielle lue le 5 novembre 2026. L'analyse indique 72 % d'humidité, 42,9 % de protéines et 37,5 % de matières grasses une fois l'eau retirée." },
     { q: 'Dogfy Diet convient-il à un chien en surpoids ?', a: "Le menu bœuf est riche en graisses (37,5 % sur matière sèche). Il reste possible pour un chien en surpoids si tu réduis la portion et pèses le chien toutes les deux semaines, idéalement avec l'avis du vétérinaire. Le suivi nutritionnel gratuit sert à ajuster la quantité." },
     { q: "Quelle est l'offre de bienvenue Dogfy Diet ?", a: "Une box d'essai de 14 jours à −50 %, livraison offerte. Vérifie ensuite le prix de l'abonnement au tarif normal avant le deuxième envoi." },
-    { q: 'Que disent les avis clients sur Dogfy Diet ?', a: "La marque obtient 4,4/5 sur 12 609 avis Trustpilot au 5 novembre 2026. Les avis négatifs lus ce jour-là parlent surtout de livraison : retards, colis décongelés ou incomplets." },
+    { q: 'Que disent les avis clients sur Dogfy Diet ?', a: "La marque obtient 4,4/5 sur 12 609 avis Trustpilot au 5 novembre 2026. Sur les 20 avis à une ou deux étoiles lus ce jour-là, environ la moitié parle de prélèvements, d'abonnement ou de résiliation. Viennent ensuite les livraisons, puis des chiens qui refusent les repas ou les digèrent mal, selon leurs maîtres. Note la date du prochain envoi et vérifie le colis." },
   ],
   fidelis: [
     { q: 'Les menus Fidelis sont-ils disponibles ?', a: "Au 1er novembre 2026, tous les menus en bocaux étaient affichés « Sold Out » sur le site. Vérifie le stock avant de prévoir une transition alimentaire." },
@@ -87,11 +87,11 @@ export const brandRecipes: Record<string, BrandRecipe[]> = {
     { name: 'Pâtée Canard & Valériane', description: 'Canard seul, sans céréales. En complément des croquettes.' },
   ],
   elmut: [
-    { name: 'Menu Poulet & Légumes', description: '67 % de viande, 54 % de protéines, sans conservateur.' },
-    { name: 'Menu Bœuf & Carottes', description: '70 % de viande, 58 % de protéines. Pour un chien actif.' },
-    { name: 'Menu Saumon & Brocoli', description: '65 % de poisson, oméga-3 EPA et DHA. Pour un chien senior ou à la peau sensible.' },
-    { name: 'Menu Dinde & Courgette', description: '65 % de viande, pauvre en lipides. Pour un chien en surpoids ou stérilisé.' },
-    { name: 'Menu Porc & Patate douce', description: '66 % de viande. Pour un chien intolérant au poulet.' },
+    { name: 'Menu Poulet', description: '62 % de poulet (viande, foie, cœur), 53,7 % de protéines sur matière sèche.' },
+    { name: 'Menu Bœuf', description: '62 % de bœuf (cœur, poumons, foie), 48,8 % de protéines sur matière sèche.' },
+    { name: 'Menu Dinde', description: '62 % de dinde (viande, foie, cœur), 52,7 % de protéines sur matière sèche.' },
+    { name: 'Menu Porc', description: '62 % de porc (cœur, foie, viande), 50,6 % de protéines sur matière sèche.' },
+    { name: 'Menu Poisson', description: '47 % de poisson (saumon, colin), avec du foie de poulet, 45,6 % de protéines sur matière sèche.' },
   ],
   'dog-chef': [
     { name: 'Menu Poulet', description: 'Viande, gésier et foie. 48 % de protéines sur matière sèche, 15 % de lipides.' },
@@ -115,7 +115,7 @@ export const brandDescriptions: Record<string, string[]> = {
   ],
   elmut: [
     "Elmut a été fondée en 2019 par une équipe française. La marque cuisine ses repas en Poitou-Charentes, selon son site, dans une cuisine agréée qualité humaine, sous vide à 90 °C pendant plus de deux heures, loin des 200 °C de l'extrusion des croquettes.",
-    "Tu remplis le profil de ton chien (race, âge, poids, activité, santé), Elmut calcule la ration et envoie des boudins réfrigérés prêts à servir. Les recettes contiennent 67 % de viande en moyenne, sans conservateur ni colorant artificiel, et la liste d'ingrédients tient en quatre lignes.",
+    "Tu remplis le profil de ton chien (race, âge, poids, activité, santé), Elmut calcule la ration et envoie des boudins réfrigérés prêts à servir. Les recettes contiennent 62 % de viande, ou 47 % de poisson pour la recette au poisson, avec une liste de 8 ingrédients.",
     "Pour passer des croquettes à Elmut, compte 7 à 10 jours de transition progressive. La flore intestinale a ainsi le temps de s'adapter.",
   ],
   'dog-chef': [
@@ -139,7 +139,7 @@ export const brandDescriptions: Record<string, string[]> = {
 
 export const brandVerdicts: Record<string, string> = {
   franklin: "Franklin est le choix le plus simple pour un chien allergique ou sensible : une seule viande par recette, jusqu'à 70 % de viande et une composition courte. La fabrication se fait en République tchèque et les livraisons connaissent des ratés selon les avis. L'abonnement est à −30 %.",
-  elmut: "Elmut convient si tu veux passer au repas frais avec une ration calculée pour ton chien, y compris senior ou en surpoids. Il faut de la place au frigo et un budget plus élevé que pour des croquettes. La première commande est à −40 % par notre lien.",
+  elmut: "Elmut convient si tu veux passer au repas frais avec une ration calculée pour ton chien. Il faut de la place au frigo et un budget plus élevé que pour des croquettes. La première commande est à −40 % par notre lien.",
   'ultra-premium-direct': "Ultra Premium Direct vise le chien adulte sans souci particulier et le budget serré : 3 à 5 € le kilo en vente directe. Les recettes standard contiennent du maïs et moins de viande que Franklin ; pour un chien sensible, la gamme Sans Céréales coûte environ 1 € de plus au kilo.",
   'dog-chef': "Dog Chef convient à un chien dont les besoins changent : chiot en croissance, chien en surpoids, senior. Les portions sont recalculées quand le poids évolue et les Boosters ciblent un besoin précis. Le prix est élevé ; la box d'essai à −30 %, livraison comprise et sans engagement, sert à tester l'appétence avant l'abonnement.",
   'dogfy-diet': "Dogfy Diet convient si tu veux passer au repas frais sans peser les portions : les sachets arrivent prédosés et le suivi nutritionnel est gratuit. Les critiques sur l'abonnement reviennent assez pour lire les conditions avant de commander. Pour un chien en surpoids, le menu bœuf se dose avec soin.",

@@ -10,7 +10,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Elmut : notre avis en bref',
         paragraphs: [
           "Elmut est une bonne marque de repas frais d'après sa composition, avec une liste d'ingrédients très courte. Ses 5 recettes pour chien obtiennent de 90 à 93 sur 100 au barème du scanner : poulet, bœuf et dinde à 93, porc à 91, poisson à 90, avec une viande nommée en tête de liste.",
-          "Ces notes viennent des pages produit d'Elmut, lues le 5 novembre 2026. Sa fiche donne le rapport calcium/phosphore, de 1,1 à 1,4 selon la recette, mais pas les deux valeurs : la marque perd donc les 5 points de ce critère. Elmut est un partenaire, et le barème reste celui des autres marques.",
+          "Ces notes viennent des pages produit d'Elmut, lues le 5 novembre 2026. Sa fiche donne le rapport calcium/phosphore, de 1,1 à 1,4 selon la recette, et ne chiffre que le calcium et le phosphore ajoutés, sans leur teneur totale. La marque perd donc les 5 points de ce critère. Elmut est un partenaire, et le barème reste celui des autres marques.",
         ],
       },
       {
@@ -24,11 +24,11 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Elmut a-t-il des avis négatifs ?',
         paragraphs: [
           "Oui : Trustpilot affiche 4,4 sur 5 pour 2 749 avis au 5 novembre 2026, dont 7 % à une étoile et 2 % à deux étoiles. Cette part d'avis à une étoile dépasse celle de Dog Chef et de Franklin, autour de 3 % à la même date.",
-          "Les 2 avis à une étoile affichés ce jour-là parlent de livraison et de service client : une attente sans nouvelles, un colis arrivé trop tard et un service difficile à joindre. L'un des clients dit aussi que ses chiens ont été malades après le changement d'alimentation. Deux avis ne font pas une statistique, et ce récit reste celui d'un client. Vérifie la température du colis à l'arrivée, et fais la transition sur 7 à 10 jours.",
+          "On a lu les 20 avis à une ou deux étoiles de la première page ce jour-là. Ils parlent surtout d'abonnements repris sans rappel, de prélèvements et de retenues de 20 €, puis de livraisons retardées ou jamais reçues. Deux clients disent aussi que leurs chiens ont été malades. Ces récits restent ceux de clients, et on n'en tire aucun lien de cause. Note la date du prochain envoi, vérifie le colis à l'arrivée et fais la transition sur 7 à 10 jours.",
         ],
       },
       {
-        h2: 'Que disent les vétérinaires d’Elmut ?',
+        h2: "Que disent les vétérinaires d'Elmut ?",
         paragraphs: [
           "Elmut publie le témoignage du Dr David Balouka, vétérinaire, sur sa propre page d'accueil : un avis qui vient de la marque et n'a rien d'une étude indépendante. Les pourcentages affichés sur cette page viennent d'un sondage auprès de clients. Toutou Gourmet n'a pas de vétérinaire relecteur, et on n'a pas trouvé d'étude indépendante portant sur Elmut elle-même.",
           "Un chiot, un chien malade ou un chien sous traitement mérite qu'on montre la recette à son vétérinaire. Notre guide [repas frais ou croquettes](/chien/avis-marques/repas-frais-vs-croquettes-chien) résume ce que l'on sait des deux options.",
@@ -63,21 +63,21 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Ultra Premium Direct a-t-il des avis négatifs ?',
         paragraphs: [
           "Oui, et plus que chez ses concurrents directs : Trustpilot affiche 4,0 sur 5 pour 3 983 avis au 5 novembre 2026, dont 9 % à une étoile et 2 % à deux étoiles.",
-          "Les 5 avis à une étoile affichés ce jour-là parlent surtout de colis perdus ou erronés, de service client injoignable et d'une commande payée puis expédiée très tard. La fiche produit signale elle-même des délais plus longs qu'à l'habitude, dus à des ajustements logistiques. Prévois donc une marge avant que ton sac soit vide.",
-          "Le site officiel des rappels a publié le 26 décembre 2024 un rappel des croquettes Protein Boost au poulet, sac de 8 kg, lot 008724, pour des salmonelles détectées sur un lot de matière première. Ce rappel concerne ce seul lot : la fiche se trouve sur RappelConso, le site de l'État.",
+          "On a lu les 20 avis à une étoile de la première page ce jour-là. La plupart parlent de colis éventrés, de sacs percés et de livraisons ratées ou mal remises, puis d'un service client injoignable et de résiliations difficiles. Quatre clients disent aussi que leurs animaux, des chats le plus souvent, ont été malades : ces récits restent les leurs, sans lien de cause établi. La fiche produit signale elle-même des délais plus longs qu'à l'habitude. Prévois une marge avant que ton sac soit vide, et vérifie-le à la livraison.",
+          "Le site officiel des rappels a publié le 26 décembre 2024 un rappel des croquettes Protein Boost au poulet, sac de 8 kg, lot 008724, pour des salmonelles détectées sur un lot de matière première. Ce rappel concerne ce seul lot, comme l'indique la [fiche RappelConso](https://rappel.conso.gouv.fr/fiche-rappel/17002/interne).",
         ],
       },
       {
-        h2: 'Que disent les vétérinaires d’Ultra Premium Direct ?',
+        h2: "Que disent les vétérinaires d'Ultra Premium Direct ?",
         paragraphs: [
-          "On n'a trouvé aucun avis vétérinaire indépendant sur la marque, et Toutou Gourmet n'a pas de vétérinaire relecteur. Les pages produit qu'on a lues ne nomment aucun vétérinaire.",
+          "La marque dit travailler avec des vétérinaires nutritionnistes, sans les nommer sur les pages qu'on a lues. On n'a trouvé aucun avis vétérinaire indépendant sur elle, et Toutou Gourmet n'a pas de vétérinaire relecteur.",
           "Pour un chien en bonne santé, l'étiquette donne déjà beaucoup d'informations : premier ingrédient, protéines, calcium et phosphore. Notre guide pour [lire une étiquette de croquettes](/chien/alimentation-quotidienne/comprendre-etiquette-croquettes-chien) t'aide à les comparer, et un chien malade passe d'abord par son vétérinaire.",
         ],
       },
       {
         h2: 'Où sont fabriquées les croquettes Ultra Premium Direct et quels sont ses concurrents ?',
         paragraphs: [
-          "La fiche produit indique « Fabriqué en France » et l'adresse de l'entreprise à Bordeaux, sans nom ni adresse d'usine. La marque vend en direct : elle ne figure pas dans le catalogue Maxi Zoo lu le 5 novembre 2026.",
+          "La marque dit faire produire ses croquettes par des sous-traitants français, qu'elle ne nomme pas. Ses pâtées sont fabriquées en Lot-et-Garonne, en Bretagne et dans le Nord-Pas-de-Calais, selon son site. La marque vend en direct, et elle ne figure pas dans le catalogue Maxi Zoo lu le 5 novembre 2026.",
           "Franklin et les croquettes Dog Chef sont ses concurrents les plus proches, notés de 85 à 96 et de 90 à 94 sur 100. Nos duels détaillent le choix : [Franklin ou Ultra Premium Direct](/chien/marque/franklin-vs-ultra-premium-direct), [Dog Chef ou Ultra Premium Direct](/chien/marque/dog-chef-vs-ultra-premium-direct) et [Elmut ou Ultra Premium Direct](/chien/marque/elmut-vs-ultra-premium-direct). Notre [avis complet sur Ultra Premium Direct](/chien/avis-marques/avis-ultra-premium-direct) entre dans le détail de la gamme.",
         ],
       },
@@ -89,13 +89,13 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Dogfy Diet : notre avis en bref',
         paragraphs: [
           "Dogfy Diet est une bonne marque de repas frais d'après sa composition, avec des sachets prédosés faciles à servir. Ses 4 recettes obtiennent de 87 à 91 sur 100 au barème du scanner : bœuf, dinde et poulet à 91, saumon à 87, avec environ 60 % de viande ou de poisson selon les pages officielles.",
-          "Ces notes viennent des fiches de la marque, lues le 5 novembre 2026. Ces pages ne donnent ni calcium ni phosphore : Dogfy Diet perd donc les 5 points de ce critère. Le menu bœuf est riche, avec 37,5 % de matières grasses sur matière sèche : pour un chien en surpoids, la portion se discute. Dogfy Diet est un partenaire, et le barème reste le même que pour les autres marques.",
+          "Ces notes viennent des fiches de la marque, lues le 5 novembre 2026. Ces pages ne donnent ni calcium ni phosphore, et Dogfy Diet perd donc les 5 points de ce critère. Le menu bœuf est riche, avec 37,5 % de matières grasses sur matière sèche, et la portion se discute pour un chien en surpoids. Dogfy Diet est un partenaire, et le barème reste le même que pour les autres marques.",
         ],
       },
       {
         h2: 'Combien coûte Dogfy Diet ?',
         paragraphs: [
-          "Dogfy Diet annonce un départ à 1,00 € par jour au 5 novembre 2026, et le prix réel dépend du chien : le site le calcule à la demande. Notre [avis complet sur Dogfy Diet](/chien/avis-marques/avis-dogfy-diet-repas-frais-chien) donne un ordre de grandeur de 50 € par mois pour un chien de 5 kg à 200 € pour un chien de 40 kg.",
+          "Dogfy Diet affiche au 5 novembre 2026 des prix de départ par jour de 1,99 € jusqu'à 2 kg, 2,19 € de 3 à 9 kg, 3,18 € de 10 à 25 kg et 4,77 € au-delà. Les montants plus bas, dès 1,00 €, incluent la réduction de la box d'essai. Notre [avis complet sur Dogfy Diet](/chien/avis-marques/avis-dogfy-diet-repas-frais-chien) donne un ordre de grandeur de 50 € par mois pour un chien de 5 kg à 200 € pour un chien de 40 kg.",
           "La box d'essai de 14 jours est annoncée à −50 %, avec la livraison gratuite et un abonnement sans engagement. Notre page [code promo Dogfy Diet](/codes-promo/dogfy-diet) explique comment l'obtenir et à quel moment arrêter si les repas ne conviennent pas.",
         ],
       },
@@ -103,21 +103,21 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Dogfy Diet a-t-il des avis négatifs ?',
         paragraphs: [
           "Oui : Trustpilot affiche 4,4 sur 5 pour 12 609 avis au 5 novembre 2026, dont 8 % à une étoile et 2 % à deux étoiles. La note reste bonne, avec une part visible de clients très déçus.",
-          "Les 6 avis à une ou deux étoiles affichés ce jour-là parlent surtout de livraison : retards, colis décongelés ou incomplets. D'autres évoquent un remplacement trop tardif, un service surtout en espagnol et un doute sur la fraîcheur d'un repas. Vérifie le colis dès réception, et garde de la place au congélateur.",
+          "On a lu les 20 avis à une ou deux étoiles de la première page ce jour-là. Environ la moitié parle de prélèvements, d'abonnements réactivés ou de résiliations difficiles. Viennent ensuite les livraisons en retard ou manquées, puis des chiens qui refusent les repas ou les digèrent mal, selon leurs maîtres. Note la date du prochain envoi et vérifie le colis dès réception.",
         ],
       },
       {
         h2: 'Que disent les vétérinaires de Dogfy Diet ?',
         paragraphs: [
           "Dogfy Diet présente ses recettes comme élaborées par des vétérinaires et des nutritionnistes : cette information vient de la marque, sans nom sur les pages qu'on a lues. Toutou Gourmet n'a pas de vétérinaire relecteur, et on n'a pas trouvé d'étude indépendante portant sur Dogfy Diet elle-même.",
-          "Montre la recette à ton vétérinaire si ton chien est malade, en croissance ou s'il doit surveiller son poids. Notre guide [repas frais ou croquettes](/chien/avis-marques/repas-frais-vs-croquettes-chien) résume ce que l'on sait des deux options.",
+          "La marque ne recommande pas ses menus aux chiens qui ont un problème rénal, hépatique, pancréatique ou cardiaque, une hyperlipidémie, une hypertriglycéridémie, un syndrome de Cushing, une MICI (maladie inflammatoire chronique de l'intestin), une constipation ou des calculs urinaires. Montre aussi la recette à ton vétérinaire si ton chien est en croissance ou s'il doit surveiller son poids. Notre guide [repas frais ou croquettes](/chien/avis-marques/repas-frais-vs-croquettes-chien) résume ce que l'on sait des deux options.",
         ],
       },
       {
         h2: 'Comment conserver Dogfy Diet et quels sont ses concurrents ?',
         paragraphs: [
-          "Les sachets Dogfy Diet arrivent congelés et restent au congélateur jusqu'à la veille du repas, puis décongèlent environ 12 heures au réfrigérateur. Les pages officielles qu'on a lues ne nomment pas le lieu de fabrication : pose la question à la marque si l'origine compte pour toi.",
-          "Dog Chef et Elmut sont ses concurrents les plus proches, avec des repas frais notés de 85 à 87 pour le premier et de 90 à 93 pour le second. Leurs pages détaillées : [avis Dog Chef](/chien/marque/dog-chef) et [avis Elmut](/chien/marque/elmut). Pour un chien difficile, la box d'essai reste le test le plus simple.",
+          "Selon la marque, les repas Dogfy Diet se conservent jusqu'à 30 jours au réfrigérateur ou 1 an au congélateur, et une portion congelée passe au réfrigérateur la veille. Les pages officielles qu'on a lues ne nomment pas le lieu de fabrication, donc pose la question à la marque si l'origine compte pour toi.",
+          "Dog Chef et Elmut sont ses concurrents les plus proches, avec des repas frais notés de 85 à 87 pour le premier et de 90 à 93 pour le second. Leurs pages détaillées : [avis Dog Chef](/chien/marque/dog-chef) et [avis Elmut](/chien/marque/elmut). Pour un chien difficile, la box d'essai reste le moyen le plus simple de vérifier.",
         ],
       },
     ],
