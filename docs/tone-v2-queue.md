@@ -174,16 +174,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `chien-peut-manger-pasteque`
 - [x] `nourriture-boxer`
 - [x] `nourriture-springer-spaniel-anglais`
-- [ ] `chien-peut-manger-champignons`
-- [ ] `chien-peut-manger-aubergines`
-- [ ] `croquettes-chien-arthrose`
-- [ ] `recette-patee-maison-lapin-chien`
-- [ ] `combien-fois-par-jour-donner-manger-chien`
-- [ ] `fontaine-eau-chien-comment-choisir`
-- [ ] `nourriture-epagneul-breton`
-- [ ] `nourriture-bichon-havanais`
-- [ ] `dog-chef-vs-royal-canin`
-- [ ] `nourriture-bouledogue-anglais`
+- [x] `chien-peut-manger-champignons`
+- [x] `chien-peut-manger-aubergines`
+- [x] `croquettes-chien-arthrose`
+- [x] `recette-patee-maison-lapin-chien`
+- [x] `combien-fois-par-jour-donner-manger-chien`
+- [x] `fontaine-eau-chien-comment-choisir`
+- [x] `nourriture-epagneul-breton`
+- [x] `nourriture-bichon-havanais`
+- [x] `dog-chef-vs-royal-canin`
+- [x] `nourriture-bouledogue-anglais`
 - [ ] `croquettes-chien-dermatite`
 - [ ] `calcium-phosphore-chien-ratio-besoins`
 - [ ] `croquettes-ou-patee`
