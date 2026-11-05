@@ -284,16 +284,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `transition-alimentaire-chien`
 - [x] `nourriture-berger-allemand`
 - [x] `croquettes-chien-travail`
-- [ ] `comment-preparer-repas-chien-soi-meme`
-- [ ] `nourriture-braque-hongrois`
-- [ ] `alimentation-chiot-0-2-mois`
-- [ ] `meilleure-gamelle-anti-glouton-chien`
-- [ ] `avis-belcando`
-- [ ] `allergie-alimentaire-chien-symptomes-diagnostic`
-- [ ] `repas-noel-chien-aliments-autorises-dangereux`
-- [ ] `comprendre-etiquette-croquettes-chien`
-- [ ] `recette-friandises-maison-occuper-chien-rentree`
-- [ ] `chien-peut-manger-pissenlits`
+- [x] `comment-preparer-repas-chien-soi-meme`
+- [x] `nourriture-braque-hongrois`
+- [x] `alimentation-chiot-0-2-mois`
+- [x] `meilleure-gamelle-anti-glouton-chien`
+- [x] `avis-belcando`
+- [x] `allergie-alimentaire-chien-symptomes-diagnostic`
+- [x] `repas-noel-chien-aliments-autorises-dangereux`
+- [x] `comprendre-etiquette-croquettes-chien`
+- [x] `recette-friandises-maison-occuper-chien-rentree`
+- [x] `chien-peut-manger-pissenlits`
 - [ ] `alimentation-chien-grande-race-adulte-guide`
 - [ ] `chien-peut-manger-agneau`
 - [ ] `chien-mange-mort-aux-rats-urgence`
