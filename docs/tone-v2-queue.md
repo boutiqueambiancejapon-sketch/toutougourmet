@@ -324,16 +324,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `recette-gateau-anniversaire-chien-maison`
 - [x] `chien-peut-manger-pommes-de-terre`
 - [x] `croquettes-chien-difficile-nourrir`
-- [ ] `alimentation-chiot-6-12-mois`
-- [ ] `moule-verte-chien-arthrose-dosage`
-- [ ] `avis-wolfsblut`
-- [ ] `chien-peut-manger-dinde`
-- [ ] `chien-peut-manger-poulet-cru`
-- [ ] `chien-peut-manger-saumon`
-- [ ] `distributeur-croquettes-automatique-chien`
-- [ ] `recette-croquettes-maison-chien`
-- [ ] `croquettes-chien-douleurs-articulaires`
-- [ ] `huile-krill-chien-bienfaits-dosage`
+- [x] `alimentation-chiot-6-12-mois`
+- [x] `moule-verte-chien-arthrose-dosage`
+- [x] `avis-wolfsblut`
+- [x] `chien-peut-manger-dinde`
+- [x] `chien-peut-manger-poulet-cru`
+- [x] `chien-peut-manger-saumon`
+- [x] `distributeur-croquettes-automatique-chien`
+- [x] `recette-croquettes-maison-chien`
+- [x] `croquettes-chien-douleurs-articulaires`
+- [x] `huile-krill-chien-bienfaits-dosage`
 - [ ] `just-russel-vs-japhy`
 - [ ] `nourriture-berger-des-shetland`
 - [ ] `nourriture-dalmatien`
