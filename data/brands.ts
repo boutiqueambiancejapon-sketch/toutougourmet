@@ -68,7 +68,7 @@ export const brands: Brand[] = [
       "Pionniers du mono-protéine en France, pratique pour un chien allergique",
       "Jusqu'à 70 % de viande, cuisson entre 90 et 110 °C",
       "Formulé avec la Dr Charlotte Dirat (vétérinaire nutritionniste)",
-      '4,7/5 sur plus de 4 700 avis Trustpilot, 100 000 clients revendiqués',
+      '4,6/5 sur 12 158 avis Trustpilot au 5 novembre 2026, 100 000 clients revendiqués',
       'Abonnement sans engagement, de 15 à 20 % moins cher',
     ],
     cons: [

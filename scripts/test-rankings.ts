@@ -1,7 +1,7 @@
 // Tests des classements : une recette par ligne, noms lisibles, segments.
 import assert from 'node:assert/strict'
 import { extractClassement } from '../lib/mdx'
-import { capByBrand, displayBrand, displayName, recipeKey, recipeName, segmentBySlug } from '../lib/scanner/rankings'
+import { isSupplementName, capByBrand, displayBrand, displayName, recipeKey, recipeName, segmentBySlug } from '../lib/scanner/rankings'
 
 assert.equal(recipeName('Mini Adulte 4 kg'), 'Mini Adulte')
 assert.equal(recipeName('ACANA Senior 2x11,4 kg'), 'ACANA Senior')
@@ -30,4 +30,6 @@ const after = extractClassement('## TL;DR\n- a\n\n<Classement segment="surpoids"
 assert.deepEqual([after.segment, after.beforeTldr], ['surpoids', false])
 assert.ok(!after.content.includes('Classement'))
 assert.equal(extractClassement('## TL;DR\n').segment, null)
+assert.ok(isSupplementName('Compléments Articulations & Vieillissement Friandises'))
+assert.ok(!isSupplementName('Sticks Chien Adulte Poulet'))
 console.log('test-rankings : tout passe')

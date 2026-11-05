@@ -14,6 +14,8 @@ export interface BrandRecipe {
 
 export const brandFaqs: Record<string, BrandFaq[]> = {
   franklin: [
+    { q: 'Franklin est-il une bonne marque ?', a: "D'après sa composition, oui : les 7 recettes de croquettes pour chien qu'on a lues obtiennent de 85 à 96 sur 100 au barème du scanner. Reste à vérifier que ton chien les digère : la transition se fait sur 10 jours au moins." },
+    { q: 'Où acheter les croquettes Franklin ?', a: "Franklin vend d'abord sur son propre site, à l'unité ou en abonnement. La marque ne figure pas dans le catalogue Maxi Zoo qu'on a lu le 5 novembre 2026." },
     { q: 'Quel est le prix Franklin selon la taille de mon chien ?', a: "Pour un petit chien de moins de 10 kg, compte à partir de 17 € par mois en abonnement. Pour un grand chien de plus de 25 kg, environ 75 à 80 € par mois, soit 2,50 € par jour. Le prix au kilo dépend de la recette et du sac : environ 9 € le kilo pour le Saumon & Truite en 2,5 kg, environ 6,30 € pour l'Agneau en 12 kg et 5,20 € pour le Bœuf en 12 kg. L'abonnement retire 15 à 20 % et la livraison en point relais devient gratuite dès 49 €." },
     { q: 'Où sont fabriquées les croquettes Franklin ?', a: "Les recettes sont formulées à Paris par l'équipe Franklin avec la Dr Charlotte Dirat, vétérinaire. La fabrication a lieu en République tchèque, dans une usine certifiée ISO et HACCP du groupe VAFO, qui produit aussi CARNILOVE et BRIT. La cuisson se fait entre 90 et 110 °C. Franklin ne produit pas en France." },
     { q: 'Quel est le taux de protéines selon la recette ?', a: "Canard, Pomme & Carotte : 34 % de protéines, 18 % de lipides, 391 kcal pour 100 g. Saumon, Truite & Persil : 34 % de protéines, 16,5 % de lipides, 0,5 % d'oméga-3. Poulet, Courge & Myrtille (chien stérilisé) : 34 % de protéines, 16,5 % de lipides. Chiot Poulet, Saumon & Fenouil : 37,5 % de protéines, 18,5 % de lipides. La recette Agneau ne contient que 25 % de protéines, un point à connaître pour un chien très actif." },
@@ -98,7 +100,7 @@ export const brandDescriptions: Record<string, string[]> = {
     "Franklin Pet Food est née en 2018 pour Iphy, la bouledogue française d'Andrea El Hani, allergique au poulet et au bœuf. Eczéma, troubles digestifs : aucune croquette du marché ne lui convenait. Andrea s'associe alors à Bertrand Dupray et lance des croquettes à une seule source de viande, sans céréales.",
     "Les recettes sont formulées à Paris avec la Dr Charlotte Dirat, vétérinaire nutritionniste, et fabriquées en République tchèque dans une usine du groupe VAFO (CARNILOVE, BRIT), certifiée ISO et HACCP. La cuisson se fait entre 90 et 110 °C. Les recettes montent jusqu'à 70 % de viande ou de poisson, avec la patate douce comme principale source d'amidon.",
     "Le groupe VAFO est actionnaire depuis 2023. Franklin revendique plus de 100 000 clients et livre dans 7 pays européens. La gamme couvre le chiot (recette avec DHA), l'adulte, le chien stérilisé, le senior (glucosamine et chondroïtine) et les allergies.",
-    "Sur Trustpilot, Franklin obtient 4,7/5 sur plus de 4 700 avis. Les clients citent le pelage, la digestion et l'appétence. Le reproche qui revient porte sur la livraison : retards, colis bloqués. Les recettes sans poisson ont un rapport oméga-6/oméga-3 élevé, qu'une cuillère d'huile de saumon deux ou trois fois par semaine compense.",
+    "Sur Trustpilot, Franklin obtient 4,6/5 sur 12 158 avis au 5 novembre 2026. Les clients citent le pelage, la digestion et l'appétence. Le reproche qui revient porte sur la livraison : retards, colis bloqués. Les recettes sans poisson ont un rapport oméga-6/oméga-3 élevé, qu'une cuillère d'huile de saumon deux ou trois fois par semaine compense.",
   ],
   elmut: [
     "Elmut a été fondée en 2019 par une équipe française. La marque cuisine ses repas dans une cuisine agréée qualité humaine, sous vide à 90 °C pendant plus de deux heures, loin des 200 °C de l'extrusion des croquettes.",
@@ -136,7 +138,11 @@ export const brandVerdicts: Record<string, string> = {
 export const relatedComparatifs: Record<string, { slug: string; label: string }[]> = {
   'dog-chef': [{ slug: 'elmut-vs-dog-chef', label: 'Dog Chef ou Elmut, lequel choisir ?' }],
   elmut: [{ slug: 'elmut-vs-dog-chef', label: 'Elmut ou Dog Chef, lequel choisir ?' }],
-  franklin: [{ slug: 'franklin-vs-elmut', label: 'Franklin ou Elmut, lequel choisir ?' }],
+  franklin: [
+    { slug: 'franklin-vs-elmut', label: 'Franklin ou Elmut, lequel choisir ?' },
+    { slug: 'franklin-vs-ultra-premium-direct', label: 'Franklin ou Ultra Premium Direct, lequel choisir ?' },
+    { slug: 'dog-chef-vs-franklin', label: 'Dog Chef ou Franklin, lequel choisir ?' },
+  ],
   'ultra-premium-direct': [{ slug: 'franklin-vs-ultra-premium-direct', label: 'Franklin ou Ultra Premium Direct, lequel choisir ?' }],
 }
 

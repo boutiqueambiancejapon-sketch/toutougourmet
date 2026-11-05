@@ -4,13 +4,13 @@ import { foodAnalysis } from '@/db/schema'
 import { buyLink, type BuyLink } from '@/lib/scanner/buy-link'
 import { isTherapeutic } from '@/lib/scanner/fiche-lists'
 import { foodNoun } from '@/lib/scanner/food-noun'
-import { MIN_BRANDS, MIN_RECIPES, recipeKey, recipeName, type RankRecipe, type RankSegment } from '@/lib/scanner/rankings'
+import { isSupplementName, MIN_BRANDS, MIN_RECIPES, recipeKey, recipeName, type RankRecipe, type RankSegment } from '@/lib/scanner/rankings'
 import type { ScoreResult } from '@/lib/scanner/score'
 import type { ExtractedLabel } from '@/lib/scanner/types'
 import { getDb } from './drizzle'
 
 // @cdc cluster scanner — recettes des classements : fiches Maxi Zoo et fiches relues, hors aliments
-// thérapeutiques. Plusieurs tailles d'une recette : une ligne, la note la plus basse, par prudence.
+// thérapeutiques et compléments. Plusieurs tailles d'une recette : une ligne, la note la plus basse, par prudence.
 
 export interface RankedRecipe extends RankRecipe {
   key: string
@@ -32,7 +32,7 @@ export const rankedRecipes = cache(async (): Promise<RankedRecipe[]> => {
     .where(and(isNotNull(foodAnalysis.score), sql`NOT ${foodAnalysis.discarded}`, or(eq(foodAnalysis.source, 'maxizoo'), eq(foodAnalysis.reviewed, true))))
   const best = new Map<string, RankedRecipe>()
   for (const r of rows) {
-    if (!r.brand || !r.product || r.score === null || isTherapeutic(r)) continue
+    if (!r.brand || !r.product || r.score === null || isTherapeutic(r) || isSupplementName(r.product)) continue
     const label = r.extracted as ExtractedLabel
     const key = recipeKey(r.brand, r.product)
     const seen = best.get(key)
