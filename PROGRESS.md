@@ -180,3 +180,7 @@ Note plafonnée à 89 sans calcium et phosphore déclarés. Classements séparé
 ## 2026-11-04 : Base de fiches depuis Maxi Zoo
 
 Décision du propriétaire : publication directe, sans relecture, après accord d'Awin qu'il a reçu et que nous n'avons pas lu. Import nuit par nuit depuis les pages produit (`scripts/import-maxizoo.ts`), 200 par nuit. Une fiche relue ou venue d'une photo n'est jamais touchée, une fiche Open Pet Food Facts est remplacée. Fiches Maxi Zoo comptées comme validées, hors contrôle IA payant, toujours hors Google. Dog Chef et Franklin n'ont aucune fiche : à demander aux marques.
+
+## 2026-11-05 : Vérification de 7 points signalés par la réécriture
+
+Hypertension (ACVIM 2018 lu en texte intégral : traitement confirmé, seuils chiffrés de sodium, potassium et oméga-3 sans source retirés, verdict Franklin retiré), Boxer (Franklin retiré : la marque est sans céréales), Belcando, olives, krill (Bauer 2011), Orijen, Dogue allemand (37 à 42 %). Sources : `git log`. Reste : Elmut encore premier choix du Boxer malgré la règle Dog Chef d'abord, à trancher.
