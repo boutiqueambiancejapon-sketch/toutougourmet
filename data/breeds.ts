@@ -174,7 +174,7 @@ export const BREEDS: Breed[] = [
     watch: 'Prise de poids',
     health: [
       { title: 'Anomalies oculaires (CEA, APR)', text: 'Surtout génétiques. Lutéine, zéaxanthine et vitamines A et E soutiennent la rétine.' },
-      { title: 'Peau et pelage', text: "Pelage double épais et prédispositions dermatologiques : les oméga-3 passent en premier. Sans source d'oméga-3 dans la ration, 0,5 à 1 ml d'huile de saumon par jour pour 8 à 10 kg." },
+      { title: 'Peau et pelage', text: "Pelage double épais et prédispositions dermatologiques : les oméga-3 passent en premier. Sans source d'oméga-3 dans la ration, un complément d'huile de saumon, dosé selon le taux écrit sur le flacon." },
     ],
     foodNote: "Le shetland a un appétit inversement proportionnel à sa taille : la ration se pèse, avec 20 à 30 % de moins s'il est stérilisé ou sédentaire.",
     near: ['border-collie', 'berger-australien', 'welsh-corgi-pembroke'],
