@@ -306,3 +306,7 @@ Décision du propriétaire : on se base sur ce que dit la marque (site ou fiche 
 Classements, listes, fiche, PDF et images de partage suivent `details.bareme` quand `BAREMES_ACTIFS` est vrai : sec et humide séparés, compléments, huiles et aliments vétérinaires hors des listes. Interrupteur faux, rendu comparé à `origin/v2` sur une copie de la base : seule la phrase Elmut change. Avant d'activer : part des partenaires à trancher, méthode de `/scanner` à réécrire, écritures en base à accorder (`~/audits/baremes-2026-11-05/recalcul/comparatif.md`).
 ## 2026-11-05 — Partenaires dans les classements
 Le propriétaire accepte que les partenaires restent nombreux en tête si le résultat tient après l'import des pâtées, barème publié et liens signalés. La formule n'est pas ajustée pour les faire reculer. L'activation attend qu'il voie le classement final.
+
+## 2026-11-05 — Barèmes : script d'activation
+`scripts/activer-baremes.ts` écrit corrections et recalcul en une seule transaction, le jour de l'activation seulement : essai par défaut, refus sans sauvegarde de moins de 36 h, refus d'écrire avec l'interrupteur éteint. Avant de le lancer : protéger les corrections des imports OPFF et Maxi Zoo, qui réécrivent les fiches non relues, et décider du sort des fiches dont le contrôle IA devient caduc.
+

@@ -1,6 +1,7 @@
 # Progression — Toutou Gourmet — màj à chaque fin de session
 
 ## Complété
+- 2026-11-05 · Préparation des barèmes (branche `feat/baremes`, interrupteur éteint) : `scripts/activer-baremes.ts`, testé en essai sur copie locale, méthode publique des 4 barèmes, phrase Dogfy, adresses fusionnées redirigées. Faits Dogfy à publier : `~/audits/baremes-2026-11-05/recalcul/dogfy-a-publier.md`.
 - 2026-11-05 · Barèmes raccordés aux classements, listes, fiche, PDF et images derrière `BAREMES_ACTIFS` (éteint, branche `feat/baremes`). Recalcul à blanc de 634 fiches : `~/audits/baremes-2026-11-05/recalcul/comparatif.md`, page `/maquettes/baremes-comparatif/`.
 - 2026-11-05 · Quatre barèmes portés dans `lib/scanner/baremes/` (branche `feat/baremes`, non fusionnée, interrupteur `BAREMES_ACTIFS` éteint). Tests : `npx tsx scripts/test-baremes.ts`. Mesure sur photos : `~/audits/baremes-2026-11-05/resultats-ia.md`.
 - 2026-11-05 · Import Maxi Zoo : pâtées en priorité, avant toute activation des barèmes. Barèmes sur `feat/baremes`, interrupteur éteint.
