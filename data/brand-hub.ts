@@ -24,7 +24,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Elmut a-t-il des avis négatifs ?',
         paragraphs: [
           "Oui : Trustpilot affiche 4,4 sur 5 pour 2 749 avis au 5 novembre 2026, dont 7 % à une étoile et 2 % à deux étoiles. Cette part d'avis à une étoile dépasse celle de Dog Chef et de Franklin, autour de 3 % à la même date.",
-          "On a lu les 20 avis à une ou deux étoiles de la première page ce jour-là. Ils parlent surtout d'abonnements repris sans rappel, de prélèvements et de retenues de 20 €, puis de livraisons retardées ou jamais reçues. Deux clients racontent que leurs chiens ont été malades après la recette au poisson, et deux autres parlent de nourriture périmée et de morceaux de plastique. Ces récits restent ceux de clients, et on n'en tire aucun lien de cause. Note la date du prochain envoi et vérifie le colis à l'arrivée.",
+          "On a lu les 20 avis à une ou deux étoiles de la première page ce jour-là. Ils parlent surtout d'abonnements repris sans rappel, de prélèvements et de retenues de 20 €, puis de livraisons retardées ou jamais reçues. Note la date du prochain envoi et vérifie le colis à l'arrivée.",
         ],
       },
       {
@@ -63,7 +63,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Ultra Premium Direct a-t-il des avis négatifs ?',
         paragraphs: [
           "Oui, et plus que chez ses concurrents directs : Trustpilot affiche 4,0 sur 5 pour 3 983 avis au 5 novembre 2026, dont 9 % à une étoile et 2 % à deux étoiles.",
-          "On a lu les 20 avis à une étoile de la première page ce jour-là. La plupart parlent de colis éventrés, de sacs percés et de livraisons ratées ou mal remises, puis d'un service client injoignable et de résiliations difficiles. Quatre clients parlent aussi d'animaux malades, des chats le plus souvent : ces récits restent les leurs, sans lien de cause établi. La fiche produit signale elle-même des délais plus longs qu'à l'habitude. Prévois une marge avant que ton sac soit vide, et vérifie-le à la livraison.",
+          "On a lu les 20 avis à une étoile de la première page ce jour-là. La plupart parlent de colis éventrés, de sacs percés et de livraisons ratées ou mal remises, puis d'un service client injoignable et de résiliations difficiles. La fiche produit signale elle-même des délais plus longs qu'à l'habitude. Prévois une marge avant que ton sac soit vide, et vérifie-le à la livraison.",
         ],
       },
       {
@@ -102,7 +102,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Dogfy Diet a-t-il des avis négatifs ?',
         paragraphs: [
           "Oui : Trustpilot affiche 4,4 sur 5 pour 12 609 avis au 5 novembre 2026, dont 8 % à une étoile et 2 % à deux étoiles. La note reste bonne, avec une part visible de clients très déçus.",
-          "On a lu les 20 avis à une ou deux étoiles de la première page ce jour-là. Environ la moitié parle de prélèvements, d'abonnements réactivés ou de résiliations difficiles. Viennent ensuite les livraisons en retard ou manquées, puis des chiens qui refusent les repas. Trois maîtres décrivent des vomissements, une diarrhée ou une constipation, sans lien de cause établi, et un client dit avoir jeté des sachets gonflés ou ouverts. Note la date du prochain envoi et vérifie le colis dès réception.",
+          "On a lu les 20 avis à une ou deux étoiles de la première page ce jour-là. Environ la moitié parle de prélèvements, d'abonnements réactivés ou de résiliations difficiles. Viennent ensuite les livraisons en retard ou manquées. Note la date du prochain envoi et vérifie le colis dès réception.",
         ],
       },
       {
@@ -141,7 +141,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Franklin Pet Food a-t-il des avis négatifs ?',
         paragraphs: [
           "Oui, et ils restent minoritaires : Trustpilot affiche 4,6 sur 5 pour 12 158 avis au 5 novembre 2026, dont environ 3 % à une étoile et 2 % à deux étoiles. Trustpilot mêle clients invités par la marque et clients spontanés, donc la note seule ne suffit pas.",
-          "Les 2 avis à une étoile affichés ce jour-là parlent de la gestion de l'abonnement, du service client et d'un chien qui a mal digéré malgré une transition de 10 jours. Deux avis ne font pas une statistique. Des selles molles au changement restent le reproche à anticiper : notre guide de la [transition alimentaire](/chien/alimentation-quotidienne/transition-alimentaire-chien) aide à ralentir le rythme.",
+          "Les 2 avis à une étoile affichés ce jour-là parlent de la gestion de l'abonnement et du service client. Deux avis ne font pas une statistique. Des selles molles au changement restent le reproche à anticiper : notre guide de la [transition alimentaire](/chien/alimentation-quotidienne/transition-alimentaire-chien) aide à ralentir le rythme.",
         ],
       },
       {
@@ -180,7 +180,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Dog Chef a-t-il des avis négatifs ?',
         paragraphs: [
           "Oui, comme toute marque, mais ils restent rares : Trustpilot affiche 4,7 sur 5 pour 5 569 avis au 5 novembre 2026, dont environ 3 % à une étoile. Trustpilot mêle clients invités par la marque et clients spontanés, donc une note ne suffit pas.",
-          "Les avis à une étoile qu'on a lus parlent surtout du service client et de la livraison : créneaux, transporteur, réponses jugées lentes. Quelques-uns évoquent des colis mal dosés et deux signalent un problème de qualité. Notre lecture porte sur les 7 avis affichés ce jour-là, à prendre comme une tendance et pas comme une statistique.",
+          "Les avis à une étoile qu'on a lus parlent surtout du service client et de la livraison : créneaux, transporteur, réponses jugées lentes. Quelques-uns évoquent des colis mal dosés. Notre lecture porte sur les 7 avis affichés ce jour-là, à prendre comme une tendance et pas comme une statistique.",
           "Un chien qui refuse ses repas reste le risque le plus simple à tester. La transition se fait sur 7 jours, et notre guide de la [transition alimentaire](/chien/alimentation-quotidienne/transition-alimentaire-chien) aide si son ventre proteste.",
         ],
       },
