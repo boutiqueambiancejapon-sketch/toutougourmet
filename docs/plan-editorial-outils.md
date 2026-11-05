@@ -34,7 +34,8 @@ Pages mères déjà en ligne, à doter de la section des modèles au premier mod
 
 - [ ] Edgard & Cooper : avis sur les croquettes et la composition (edgard cooper avis, avis vétérinaire)
 - [ ] Select Gold : avis sur les croquettes de Maxi Zoo (select gold avis, avis vétérinaire)
-- [ ] Real Nature Wilderness : avis sur les croquettes et la pâtée (real nature wilderness avis)
+- [ ] Real Nature : avis sur la marque, les croquettes et la pâtée (real nature avis, real nature wilderness avis)
+- [ ] Atavik : avis sur la marque (atavik avis)
 - [ ] Eukanuba : avis sur les croquettes (eukanuba avis, avis vétérinaire)
 - [ ] Premiere : avis sur les croquettes et les pâtées Meati (premiere croquette chien avis)
 - [ ] Carnilove : avis sur les croquettes (carnilove avis chien)

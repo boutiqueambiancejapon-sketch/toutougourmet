@@ -3,13 +3,13 @@ import { nounWords } from '@/lib/scanner/food-noun'
 import { gtinProperty } from '@/lib/scanner/gtin'
 
 // @cdc 06-seo — JSON-LD Product de chaque fiche : le code-barres et la marque disent à Google que
-// chaque page parle d'un produit distinct. Le Review vient seulement si la fiche est relue (une
-// lecture automatique n'est pas une critique publiée). Avis de la rédaction : pas d'aggregateRating.
+// chaque page parle d'un produit distinct. Le Review vient si la fiche est relue ou choisie pour Google
+// (data/fiches-indexees.json). Avis de la rédaction : pas d'aggregateRating.
 
-export function FicheJsonLd({ row, name, url }: { row: FoodAnalysis; name: string; url: string }) {
+export function FicheJsonLd({ row, name, url, indexee = false }: { row: FoodAnalysis; name: string; url: string; indexee?: boolean }) {
   if (row.discarded) return null
   const review =
-    row.reviewed && row.score !== null
+    (row.reviewed || indexee) && row.score !== null
       ? {
           review: {
             '@type': 'Review',
@@ -27,7 +27,7 @@ export function FicheJsonLd({ row, name, url }: { row: FoodAnalysis; name: strin
     name,
     url,
     category: nounWords(row.extracted, row.details).forDog,
-    image: `${url}/og.png`,
+    image: row.imageUrl ?? `https://www.toutou-gourmet.com/croquettes/${row.slug}/og.png`,
     ...(row.brand ? { brand: { '@type': 'Brand', name: row.brand } } : {}),
     ...gtinProperty(row.ean),
     ...review,

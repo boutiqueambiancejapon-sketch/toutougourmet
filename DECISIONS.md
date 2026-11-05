@@ -299,3 +299,6 @@ Décision du propriétaire : on se base sur ce que dit la marque (site ou fiche 
 
 ## 2026-11-05 — Partenaires dans les classements
 Le propriétaire accepte que les partenaires restent nombreux en tête si le résultat tient après l'import des pâtées, barème publié et liens signalés. La formule n'est pas ajustée pour les faire reculer. L'activation attend qu'il voie le classement final.
+
+## 2026-11-05 — Fiches produit ouvertes à Google
+Le propriétaire revoit sa décision « aucune fiche indexée » : ces pages poussent au clic partenaire et il veut avancer sans attendre. Premier lot de 49 fiches, une par recette, listées dans `data/fiches-indexees.json`, sur des marques qui ont une page mère. Titre et H1 au nom exact du produit, adresse courte par type (`/croquettes/…`, `/patees/…`), texte calculé depuis la composition, Product et Review avec notre note. La page mère vise « avis {marque} ». Les autres fiches restent en noindex. Mise en ligne directe sur sa demande, sans maquette et avant les barèmes : les notes changeront à l'activation. Mesure : positions et clics dans la Search Console, recul éventuel des articles.

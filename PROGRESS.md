@@ -212,3 +212,7 @@ Hypertension (ACVIM 2018 lu en texte intégral : traitement confirmé, seuils ch
 ## 2026-11-05 : Produits dans les articles de maladie
 
 Demande du propriétaire : chaque article de maladie propose des croquettes ou pâtées. Bloc `<HealthPicks need="…" />`, données dans `data/health-picks.ts` (Maxi Zoo via Awin, recherche Amazon pour rein, cœur, épilepsie et pancréatite faute de formule chez Maxi Zoo). 36 articles. Les formules vétérinaires l'indiquent. Les clics sur les liens exacts Awin (`pclick`) sont maintenant comptés comme Maxi Zoo.
+
+## 2026-11-05 : Fiches produit indexées
+
+49 fiches en index (`data/fiches-indexees.json`), texte calculé (`lib/scanner/fiche-texte.ts`, `components/scanner/fiche/FicheRepere.tsx`), route `/patees/[slug]`, classement sur les pages mères (`MarqueClassement`), glossaire de `/chien/marque` (`data/marque-pages.ts`). Les codes GS1 commençant par 2 ne sont plus déclarés en GTIN. Nouvelle marque : page mère d'abord, en tête du calendrier de 7 h. Étape suivante : mesurer dans la Search Console, puis élargir.
