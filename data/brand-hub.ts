@@ -10,7 +10,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
       {
         h2: 'Elmut : notre avis en bref',
         paragraphs: [
-          "Elmut est une bonne marque de repas frais d'après sa composition, avec une liste d'ingrédients très courte. Ses 5 recettes pour chien obtiennent de 90 à 93 sur 100 au barème du scanner : poulet, bœuf et dinde à 93, porc à 91, poisson à 90, avec une viande nommée en tête de liste.",
+          "Elmut est une bonne marque de repas frais d'après sa composition, avec une liste d'ingrédients très courte. Ses 5 recettes pour chien obtiennent toutes 90 sur 100 au barème du scanner, avec une viande nommée en tête de liste.",
           "Ces notes viennent des pages produit d'Elmut, lues le 5 novembre 2026. Sa fiche donne le rapport calcium/phosphore, de 1,1 à 1,4 selon la recette, et ne chiffre que le calcium et le phosphore ajoutés, sans leur teneur totale. Notre note ne peut donc pas vérifier ces deux teneurs elles-mêmes. Elmut est un partenaire, et le barème reste celui des autres marques.",
         ],
       },
@@ -39,7 +39,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Où est cuisiné Elmut et quels sont ses concurrents ?',
         paragraphs: [
           "Elmut annonce des repas mijotés en Poitou-Charentes sur son site, sans adresse précise sur les pages qu'on a lues. Les boudins se gardent au réfrigérateur jusqu'à la date indiquée sur l'étiquette, se consomment dans les 5 jours après ouverture et se congèlent jusqu'à six mois.",
-          "Dog Chef et Dogfy Diet sont ses concurrents les plus proches en repas frais livrés, notés de 85 à 87 pour les repas de la première et de 87 à 91 pour la seconde. Nos duels détaillent le choix : [Elmut ou Dog Chef](/chien/marque/elmut-vs-dog-chef), [Franklin ou Elmut](/chien/marque/franklin-vs-elmut) et [Elmut ou Ultra Premium Direct](/chien/marque/elmut-vs-ultra-premium-direct) pour comparer avec les croquettes.",
+          "Dog Chef et Dogfy Diet sont ses concurrents les plus proches en repas frais livrés, notés de 88 à 91 pour les repas de la première et de 85 à 89 pour la seconde. Nos duels détaillent le choix : [Elmut ou Dog Chef](/chien/marque/elmut-vs-dog-chef), [Franklin ou Elmut](/chien/marque/franklin-vs-elmut) et [Elmut ou Ultra Premium Direct](/chien/marque/elmut-vs-ultra-premium-direct) pour comparer avec les croquettes.",
         ],
       },
     ],
@@ -49,7 +49,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
       {
         h2: 'Ultra Premium Direct : notre avis en bref',
         paragraphs: [
-          "Ultra Premium Direct est une marque correcte à bonne d'après sa composition, avec un écart net d'une recette à l'autre. Ses 26 recettes pour chien vont de 70 à 98 sur 100 au barème du scanner : les gammes sans céréales et les pâtées occupent le haut de la liste, et la recette hypoallergénique ferme la marche à 70.",
+          "Ultra Premium Direct est une marque correcte à bonne d'après sa composition, avec un écart net d'une recette à l'autre. Ses 26 recettes pour chien vont de 75 à 97 sur 100 au barème du scanner : les pâtées occupent le haut de la liste, à 96 et 97, et la recette hypoallergénique ferme la marche à 75.",
           "Ces notes viennent des fiches produit de la marque, lues le 5 novembre 2026. Une note de composition ne dit rien de la digestion de ton chien. Ultra Premium Direct est un partenaire, et le barème reste celui des autres marques des [classements](/meilleures-croquettes).",
         ],
       },
@@ -78,7 +78,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Où sont fabriquées les croquettes Ultra Premium Direct et quels sont ses concurrents ?',
         paragraphs: [
           "La marque dit faire produire ses croquettes par des sous-traitants français, qu'elle ne nomme pas. Ses pâtées sont fabriquées en Lot-et-Garonne, en Bretagne et dans le Nord-Pas-de-Calais, selon son site. La marque vend en direct, et elle ne figure pas dans le catalogue Maxi Zoo lu le 5 novembre 2026.",
-          "Franklin et les croquettes Dog Chef sont ses concurrents les plus proches, notés de 85 à 96 et de 90 à 94 sur 100. Nos duels détaillent le choix : [Franklin ou Ultra Premium Direct](/chien/marque/franklin-vs-ultra-premium-direct), [Dog Chef ou Ultra Premium Direct](/chien/marque/dog-chef-vs-ultra-premium-direct) et [Elmut ou Ultra Premium Direct](/chien/marque/elmut-vs-ultra-premium-direct). Notre [avis complet sur Ultra Premium Direct](/chien/avis-marques/avis-ultra-premium-direct) entre dans le détail de la gamme.",
+          "Franklin et les croquettes Dog Chef sont ses concurrents les plus proches, notés de 83 à 92 et de 85 à 95 sur 100. Nos duels détaillent le choix : [Franklin ou Ultra Premium Direct](/chien/marque/franklin-vs-ultra-premium-direct), [Dog Chef ou Ultra Premium Direct](/chien/marque/dog-chef-vs-ultra-premium-direct) et [Elmut ou Ultra Premium Direct](/chien/marque/elmut-vs-ultra-premium-direct). Notre [avis complet sur Ultra Premium Direct](/chien/avis-marques/avis-ultra-premium-direct) entre dans le détail de la gamme.",
         ],
       },
     ],
@@ -88,7 +88,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
       {
         h2: 'Dogfy Diet : notre avis en bref',
         paragraphs: [
-          "Dogfy Diet est une bonne marque de repas frais d'après sa composition, avec des sachets prédosés faciles à servir. Ses 4 recettes obtiennent de 87 à 91 sur 100 au barème du scanner : bœuf, dinde et poulet à 91, saumon à 87, avec environ 60 % de viande ou de poisson selon les pages officielles.",
+          "Dogfy Diet est une bonne marque de repas frais d'après sa composition, avec des sachets prédosés faciles à servir. Ses 4 recettes obtiennent de 85 à 89 sur 100 au barème du scanner : poulet à 89, dinde à 87, bœuf à 86, saumon à 85, avec environ 60 % de viande ou de poisson selon les pages officielles.",
           `Ces notes viennent des fiches de la marque, lues le 5 novembre 2026. Ces pages ne donnent ni calcium ni phosphore, ${BAREMES_ACTIFS ? 'et notre note, qui ne peut pas les vérifier, s\'arrête donc à 90' : 'et Dogfy Diet perd donc les 5 points de ce critère'}. Le menu bœuf est riche, avec 37,5 % de matières grasses sur matière sèche, et la portion se discute pour un chien en surpoids. Dogfy Diet est un partenaire, et le barème reste le même que pour les autres marques.`,
         ],
       },
@@ -117,7 +117,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Comment conserver Dogfy Diet et quels sont ses concurrents ?',
         paragraphs: [
           "Selon la marque, les repas Dogfy Diet se conservent jusqu'à 30 jours au réfrigérateur ou 1 an au congélateur, et une portion congelée passe au réfrigérateur la veille. Un sachet ouvert se finit sous 48 heures, et un sachet arrivé décongelé mais froid sous 15 jours. Dogfy Diet annonce cuisiner ses repas à Parets del Vallès, dans la province de Barcelone. Le menu bœuf annonce 60,5 % de bœuf, dont 48,6 % d'abats et 6,9 % de viande, avec de la rate et du foie pour le reste, selon sa page officielle.",
-          "Dog Chef et Elmut sont ses concurrents les plus proches, avec des repas frais notés de 85 à 87 pour le premier et de 90 à 93 pour le second. Leurs pages détaillées : [avis Dog Chef](/chien/marque/dog-chef) et [avis Elmut](/chien/marque/elmut). Pour un chien difficile, la box d'essai reste le moyen le plus simple de vérifier.",
+          "Dog Chef et Elmut sont ses concurrents les plus proches, avec des repas frais notés de 88 à 91 pour le premier et 90 pour le second. Leurs pages détaillées : [avis Dog Chef](/chien/marque/dog-chef) et [avis Elmut](/chien/marque/elmut). Pour un chien difficile, la box d'essai reste le moyen le plus simple de vérifier.",
         ],
       },
     ],
@@ -127,7 +127,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
       {
         h2: 'Franklin Pet Food : notre avis en bref',
         paragraphs: [
-          "Franklin Pet Food est une bonne marque d'après sa composition, surtout pour un chien qui supporte mal certaines viandes. Les 7 recettes de sa collection de croquettes pour chien qu'on a lues obtiennent de 85 à 96 sur 100 au barème du scanner : Canard et Saumon à 96, trois recettes à la dinde à 94 et deux recettes plus basses, à 85 et 86.",
+          "Franklin Pet Food est une bonne marque d'après sa composition, surtout pour un chien qui supporte mal certaines viandes. Les 7 recettes de sa collection de croquettes pour chien qu'on a lues obtiennent de 83 à 92 sur 100 au barème du scanner : Dinde, saumon, valériane en tête à 92, et la recette Digestion sensible en dernier à 83.",
           "Ces notes viennent des compositions et analyses publiées sur le site de Franklin, lues le 5 novembre 2026. Franklin est un partenaire, et le barème reste celui des autres marques des [classements](/meilleures-croquettes). Une bonne note ne dit rien de la digestion de ton chien : seule la transition répond à cette question.",
         ],
       },
@@ -156,7 +156,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Où sont fabriquées les croquettes Franklin et quels sont ses concurrents ?',
         paragraphs: [
           "Les croquettes Franklin sont formulées à Paris et fabriquées en République tchèque, et la marque vend d'abord sur son propre site. Elle ne figure pas dans le catalogue Maxi Zoo lu le 5 novembre 2026.",
-          "Ultra Premium Direct et Dog Chef sont ses concurrents les plus proches en croquettes : leurs recettes notent de 70 à 98 sur 100 pour la première et de 90 à 94 pour les croquettes de la seconde. Nos duels détaillent le choix : [Franklin ou Ultra Premium Direct](/chien/marque/franklin-vs-ultra-premium-direct), [Dog Chef ou Franklin](/chien/marque/dog-chef-vs-franklin) et [Franklin ou Elmut](/chien/marque/franklin-vs-elmut) pour comparer avec le repas frais.",
+          "Ultra Premium Direct et Dog Chef sont ses concurrents les plus proches en croquettes : leurs recettes notent de 75 à 95 sur 100 pour les croquettes de la première et de 85 à 95 pour celles de la seconde. Nos duels détaillent le choix : [Franklin ou Ultra Premium Direct](/chien/marque/franklin-vs-ultra-premium-direct), [Dog Chef ou Franklin](/chien/marque/dog-chef-vs-franklin) et [Franklin ou Elmut](/chien/marque/franklin-vs-elmut) pour comparer avec le repas frais.",
         ],
       },
     ],
@@ -166,7 +166,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
       {
         h2: 'Dog Chef : notre avis en bref',
         paragraphs: [
-          "Dog Chef est une bonne marque d'après sa composition, avec un prix qui reste élevé pour un grand chien nourri en 100 % frais. Ses 11 recettes obtiennent de 85 à 94 sur 100 au barème du scanner, avec une viande nommée en tête de chaque liste. Les croquettes notent de 90 à 94, les repas frais de 85 à 87.",
+          "Dog Chef est une bonne marque d'après sa composition, avec un prix qui reste élevé pour un grand chien nourri en 100 % frais. Ses 11 recettes obtiennent de 85 à 95 sur 100 au barème du scanner, avec une viande nommée en tête de chaque liste. Les croquettes notent de 85 à 95, les repas frais de 88 à 91.",
           "Ces notes viennent des compositions et analyses publiées sur le site de Dog Chef, lues le 5 novembre 2026. Elles ne disent rien de l'appétit de ton chien ni de sa digestion : la box d'essai répond à cette question. Dog Chef est un partenaire, et le barème reste le même que pour les autres marques des [classements](/meilleures-croquettes).",
         ],
       },
@@ -188,7 +188,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
       {
         h2: 'Quels sont les concurrents de Dog Chef ?',
         paragraphs: [
-          "Elmut, Butternut Box et Dogfy Diet sont les concurrents les plus proches en repas frais livrés. Elmut note de 90 à 93 sur 100 au scanner et Dogfy Diet de 87 à 91, sur leurs pages officielles. Nos duels détaillent le choix : [Dog Chef ou Elmut](/chien/marque/elmut-vs-dog-chef) et [Butternut Box ou Dog Chef](/chien/avis-marques/butternut-box-vs-dog-chef).",
+          "Elmut, Butternut Box et Dogfy Diet sont les concurrents les plus proches en repas frais livrés. Elmut note 90 sur 100 au scanner et Dogfy Diet de 85 à 89, sur leurs pages officielles. Nos duels détaillent le choix : [Dog Chef ou Elmut](/chien/marque/elmut-vs-dog-chef) et [Butternut Box ou Dog Chef](/chien/avis-marques/butternut-box-vs-dog-chef).",
           "Pour un budget plus serré, les croquettes restent moins chères au quotidien. Nos comparatifs [Dog Chef ou Just Russel](/chien/avis-marques/dog-chef-vs-just-russel), [Dog Chef ou Japhy](/chien/avis-marques/dog-chef-vs-japhy) et [Dog Chef ou Royal Canin](/chien/avis-marques/dog-chef-vs-royal-canin) comparent ces deux logiques, et notre avis sur les [croquettes Dog Chef au canard](/chien/avis-marques/avis-dog-chef-croquettes-canard-frais) entre dans le détail d'une recette.",
         ],
       },

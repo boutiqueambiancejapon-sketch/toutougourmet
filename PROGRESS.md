@@ -219,3 +219,7 @@ Demande du propriétaire : chaque article de maladie propose des croquettes ou p
 ## 2026-11-05 : Fiches produit indexées
 
 49 fiches en index (`data/fiches-indexees.json`), texte calculé (`lib/scanner/fiche-texte.ts`, `components/scanner/fiche/FicheRepere.tsx`), route `/patees/[slug]`, classement sur les pages mères (`MarqueClassement`), glossaire de `/chien/marque` (`data/marque-pages.ts`). Les codes GS1 commençant par 2 ne sont plus déclarés en GTIN. Nouvelle marque : page mère d'abord, en tête du calendrier de 7 h. Étape suivante : mesurer dans la Search Console, puis élargir.
+
+## 2026-11-05 : Barèmes activés
+
+Interrupteur allumé et notes écrites à 23:35 UTC (1 145 fiches, 1 068 notes changées, 18 sans note). Sauvegarde : `/srv/toutou/backups/toutou-avant-baremes-2026-11-05.dump`. Textes corrigés avec `scripts/notes-citees.ts`, à relancer après tout recalcul. Note retirée pour 3 produits sans fiche : Acana Senior, Acana Light & Fit, Orijen Six Fish.
