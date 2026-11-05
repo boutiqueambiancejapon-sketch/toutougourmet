@@ -354,10 +354,10 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `chien-peut-manger-salade`
 - [x] `chien-sort-croquettes-bol`
 - [x] `croquettes-chien-convalescence`
-- [ ] `croquettes-chien-hypertension`
-- [ ] `croquettes-chien-perte-appetit`
-- [ ] `croquettes-pressees-froid-vs-extrudees`
-- [ ] `elmut-vs-edgard-cooper`
-- [ ] `just-russel-vs-elmut`
-- [ ] `just-russel-vs-royal-canin`
-- [ ] `meilleurs-legumes-chien`
+- [x] `croquettes-chien-hypertension`
+- [x] `croquettes-chien-perte-appetit`
+- [x] `croquettes-pressees-froid-vs-extrudees`
+- [x] `elmut-vs-edgard-cooper`
+- [x] `just-russel-vs-elmut`
+- [x] `just-russel-vs-royal-canin`
+- [x] `meilleurs-legumes-chien`
