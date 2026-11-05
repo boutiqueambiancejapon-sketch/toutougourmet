@@ -1,22 +1,25 @@
 import Link from 'next/link'
 import { FaqItem, FaqList } from '@/components/article/Faq'
 import type { RankingContent } from '@/data/ranking-content'
+import { inlineParts, inlinePlain } from '@/lib/inline-links'
 import { titleTypo } from '@/lib/title-typo'
 import { frTypo } from '@/lib/utils'
 
 // @cdc cluster scanner — le texte d'une page de classement et sa FAQ, en rendu serveur. JSON-LD FAQPage sans les liens.
 
-const LINK = /\[([^\]]+)\]\((\/[^)]*)\)/g
-const plain = (s: string) => frTypo(s.replace(LINK, '$1'))
+const plain = (s: string) => frTypo(inlinePlain(s))
+const LINK_CLASS = 'font-semibold text-orange-ink underline underline-offset-2'
 
 function Inline({ text }: { text: string }) {
-  const parts = text.split(LINK)
-  const out = []
-  for (let i = 0; i < parts.length; i += 3) {
-    if (parts[i]) out.push(frTypo(parts[i]))
-    if (parts[i + 1]) out.push(<Link key={i} href={parts[i + 2]} className="font-semibold text-orange-ink underline underline-offset-2">{frTypo(parts[i + 1])}</Link>)
-  }
-  return <>{out}</>
+  return (
+    <>
+      {inlineParts(text).map((part, i) => {
+        if ('text' in part) return frTypo(part.text)
+        if (part.external) return <a key={i} href={part.href} target="_blank" rel="noopener" className={LINK_CLASS}>{frTypo(part.label)}</a>
+        return <Link key={i} href={part.href} className={LINK_CLASS}>{frTypo(part.label)}</Link>
+      })}
+    </>
+  )
 }
 
 export function RankingSections({ sections }: { sections: RankingContent['sections'] }) {

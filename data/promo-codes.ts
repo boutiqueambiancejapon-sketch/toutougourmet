@@ -100,7 +100,7 @@ export const PROMO_PAGES: PromoPage[] = [
       "L'abonnement qui suit est sans engagement.",
       "Dans une partie des avis clients, les prélèvements de l'abonnement sont mal compris et la résiliation jugée difficile : garde la date de fin de l'essai en tête.",
     ],
-    fit: "Dogfy Diet livre des repas cuits sous vide en sachets prédosés, congelés. Notre fiche le conseille pour un chien difficile à nourrir. Le menu bœuf est riche (environ 31 % de matières grasses sur matière sèche) : à doser avec soin chez un chien en surpoids, et notre sélection l'écarte au-delà de 40 kg.",
+    fit: "Dogfy Diet livre des repas cuits sous vide en sachets prédosés. Notre fiche le conseille pour un chien difficile à nourrir. Le menu bœuf est riche (37,5 % de matières grasses sur matière sèche) : à doser avec soin chez un chien en surpoids, et notre sélection l'écarte au-delà de 40 kg.",
     links: [
       { href: '/chien/avis-marques/avis-dogfy-diet-repas-frais-chien', label: 'Notre avis complet sur Dogfy Diet' },
       { href: '/chien/marque/dogfy-diet', label: 'Avis Dogfy Diet : prix, recettes, points faibles' },
@@ -116,7 +116,7 @@ export const PROMO_PAGES: PromoPage[] = [
       },
       {
         q: 'Dogfy Diet convient-il à un chien en surpoids ?',
-        a: "Avec prudence. Le menu bœuf contient environ 31 % de matières grasses sur matière sèche. Pour un chien qui prend du poids, notre sélection propose plutôt Dog Chef ou Elmut, dont la ration suit le poids.",
+        a: "Avec prudence. Le menu bœuf contient 37,5 % de matières grasses sur matière sèche. Pour un chien qui prend du poids, notre sélection propose plutôt Dog Chef ou Elmut, dont la ration suit le poids.",
       },
     ],
   },
@@ -211,8 +211,8 @@ export const PROMO_PAGES: PromoPage[] = [
     ],
     conditions: [
       'La remise porte sur la première commande en abonnement.',
-      "L'abonnement est sans engagement.",
-      'Livraison en 2 à 4 jours ouvrés, gratuite dès 49 €.',
+      "L'abonnement demande d'accepter au moins 2 livraisons, selon la fiche produit lue le 5 novembre 2026.",
+      "Livraison gratuite dès 64 € d'achat au 5 novembre 2026.",
     ],
     fit: "Ultra Premium Direct vend ses croquettes en direct, environ 3 à 5 € le kilo : le prix au kilo le plus bas de notre sélection. Notre fiche le conseille pour un chien adulte sans souci particulier, quand le budget compte. Certaines recettes contiennent des pois et montent à 35 % de glucides sur matière sèche.",
     links: [
@@ -223,11 +223,11 @@ export const PROMO_PAGES: PromoPage[] = [
     faqs: [
       {
         q: 'La remise Ultra Premium Direct marche-t-elle sans abonnement ?',
-        a: "Non. Les 20 % portent sur la première commande en abonnement. L'abonnement est sans engagement.",
+        a: "Non. Les 20 % portent sur la première commande en abonnement. La fiche produit demande d'accepter au moins 2 livraisons.",
       },
       {
         q: 'Où sont fabriquées les croquettes Ultra Premium Direct ?',
-        a: "L'enrobage final est fait à Agen. Les croquettes semi-finies viennent de sous-traitants européens : elles ne sont pas fabriquées à 100 % en France.",
+        a: "La marque dit faire produire ses croquettes par des sous-traitants français, qu'elle ne nomme pas. Ses pâtées sont fabriquées en Lot-et-Garonne, en Bretagne et dans le Nord-Pas-de-Calais, selon son site.",
       },
     ],
   },
