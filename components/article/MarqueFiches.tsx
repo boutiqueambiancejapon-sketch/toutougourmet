@@ -1,0 +1,24 @@
+import Link from 'next/link'
+import { marquePage } from '@/data/marque-pages'
+import { FICHES_INDEXEES, ficheIndexeePath } from '@/lib/scanner/fiches-indexees'
+import { titleTypo } from '@/lib/title-typo'
+
+// @cdc seo — liens de la page mère vers chaque fiche ouverte à Google : aucune fiche indexée ne reste orpheline.
+
+export function MarqueFiches({ marque }: { marque: string }) {
+  const page = marquePage(marque)
+  const fiches = page ? FICHES_INDEXEES.filter((f) => marquePage(f.cle.split('|')[0])?.nom === page.nom) : []
+  if (fiches.length === 0) return null
+  return (
+    <section className="v2 not-prose my-8 flex flex-col gap-3">
+      <h2 className="m-0 font-display text-2xl font-black text-ink">{titleTypo(`Quelles fiches lire chez ${page?.nom} ?`)}</h2>
+      <ul role="list" className="m-0 flex list-none flex-col gap-1 p-0">
+        {fiches.map((f) => (
+          <li key={f.court}>
+            <Link href={ficheIndexeePath(f)} className="inline-block py-1 text-[15px] font-semibold text-orange-ink underline underline-offset-2">{f.nom}</Link>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}

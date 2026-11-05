@@ -1,3 +1,4 @@
+import { MarqueFiches } from '@/components/article/MarqueFiches'
 import { RankRow } from '@/components/scanner/rankings/RankRow'
 import { RankingSections } from '@/components/scanner/rankings/RankingArticle'
 import { BRAND_HUB } from '@/data/brand-hub'
@@ -30,6 +31,7 @@ export async function BrandHub({ brand }: { brand: Brand }) {
           <p className="m-0 text-sm text-ink-2">{`Sur ${recipes.length} recettes lues sur le site de la marque. Lien partenaire : on touche une commission si tu commandes, sans surcoût pour toi.`}</p>
         </section>
       ) : null}
+      <MarqueFiches marque={brand.name} />
       <RankingSections sections={rest} />
     </div>
   )
