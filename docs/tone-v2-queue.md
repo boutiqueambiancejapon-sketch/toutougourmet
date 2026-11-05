@@ -294,16 +294,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `comprendre-etiquette-croquettes-chien`
 - [x] `recette-friandises-maison-occuper-chien-rentree`
 - [x] `chien-peut-manger-pissenlits`
-- [ ] `alimentation-chien-grande-race-adulte-guide`
-- [ ] `chien-peut-manger-agneau`
-- [ ] `chien-mange-mort-aux-rats-urgence`
-- [ ] `friandises-naturelles-chien-guide`
-- [ ] `avis-farmina-nd`
-- [ ] `chien-peut-manger-fenouil`
-- [ ] `chien-mange-herbe-pourquoi`
-- [ ] `chien-peut-manger-poivron`
-- [ ] `chien-peut-manger-clementine-orange`
-- [ ] `nourriture-border-collie`
+- [x] `alimentation-chien-grande-race-adulte-guide`
+- [x] `chien-peut-manger-agneau`
+- [x] `chien-mange-mort-aux-rats-urgence`
+- [x] `friandises-naturelles-chien-guide`
+- [x] `avis-farmina-nd`
+- [x] `chien-peut-manger-fenouil`
+- [x] `chien-mange-herbe-pourquoi`
+- [x] `chien-peut-manger-poivron`
+- [x] `chien-peut-manger-clementine-orange`
+- [x] `nourriture-border-collie`
 - [ ] `chien-peut-manger-celeri`
 - [ ] `chien-peut-manger-canard`
 - [ ] `chien-peut-manger-olives`
