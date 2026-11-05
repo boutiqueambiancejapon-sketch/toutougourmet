@@ -24,7 +24,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Elmut a-t-il des avis négatifs ?',
         paragraphs: [
           "Oui : Trustpilot affiche 4,4 sur 5 pour 2 749 avis au 5 novembre 2026, dont 7 % à une étoile et 2 % à deux étoiles. Cette part d'avis à une étoile dépasse celle de Dog Chef et de Franklin, autour de 3 % à la même date.",
-          "On a lu les 20 avis à une ou deux étoiles de la première page ce jour-là. Ils parlent surtout d'abonnements repris sans rappel, de prélèvements et de retenues de 20 €, puis de livraisons retardées ou jamais reçues. Deux clients disent aussi que leurs chiens ont été malades. Ces récits restent ceux de clients, et on n'en tire aucun lien de cause. Note la date du prochain envoi, vérifie le colis à l'arrivée et fais la transition sur 7 à 10 jours.",
+          "On a lu les 20 avis à une ou deux étoiles de la première page ce jour-là. Ils parlent surtout d'abonnements repris sans rappel, de prélèvements et de retenues de 20 €, puis de livraisons retardées ou jamais reçues. Deux clients racontent que leurs chiens ont été malades après la recette au poisson, et deux autres parlent de nourriture périmée et de morceaux de plastique. Ces récits restent ceux de clients, et on n'en tire aucun lien de cause. Note la date du prochain envoi et vérifie le colis à l'arrivée.",
         ],
       },
       {
@@ -63,7 +63,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Ultra Premium Direct a-t-il des avis négatifs ?',
         paragraphs: [
           "Oui, et plus que chez ses concurrents directs : Trustpilot affiche 4,0 sur 5 pour 3 983 avis au 5 novembre 2026, dont 9 % à une étoile et 2 % à deux étoiles.",
-          "On a lu les 20 avis à une étoile de la première page ce jour-là. La plupart parlent de colis éventrés, de sacs percés et de livraisons ratées ou mal remises, puis d'un service client injoignable et de résiliations difficiles. Quatre clients disent aussi que leurs animaux, des chats le plus souvent, ont été malades : ces récits restent les leurs, sans lien de cause établi. La fiche produit signale elle-même des délais plus longs qu'à l'habitude. Prévois une marge avant que ton sac soit vide, et vérifie-le à la livraison.",
+          "On a lu les 20 avis à une étoile de la première page ce jour-là. La plupart parlent de colis éventrés, de sacs percés et de livraisons ratées ou mal remises, puis d'un service client injoignable et de résiliations difficiles. Quatre clients parlent aussi d'animaux malades, des chats le plus souvent : ces récits restent les leurs, sans lien de cause établi. La fiche produit signale elle-même des délais plus longs qu'à l'habitude. Prévois une marge avant que ton sac soit vide, et vérifie-le à la livraison.",
           "Le site officiel des rappels a publié le 26 décembre 2024 un rappel des croquettes Protein Boost au poulet, sac de 8 kg, lot 008724, pour des salmonelles détectées sur un lot de matière première. Ce rappel concerne ce seul lot, comme l'indique la [fiche RappelConso](https://rappel.conso.gouv.fr/fiche-rappel/17002/interne).",
         ],
       },
@@ -95,7 +95,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
       {
         h2: 'Combien coûte Dogfy Diet ?',
         paragraphs: [
-          "Dogfy Diet affiche au 5 novembre 2026 des prix de départ par jour de 1,99 € jusqu'à 2 kg, 2,19 € de 3 à 9 kg, 3,18 € de 10 à 25 kg et 4,77 € au-delà. Les montants plus bas, dès 1,00 €, incluent la réduction de la box d'essai. Notre [avis complet sur Dogfy Diet](/chien/avis-marques/avis-dogfy-diet-repas-frais-chien) donne un ordre de grandeur de 50 € par mois pour un chien de 5 kg à 200 € pour un chien de 40 kg.",
+          "Dogfy Diet affiche au 5 novembre 2026 des prix de départ par jour de 1,99 € jusqu'à 2 kg, 2,19 € de 3 à 9 kg, 3,18 € de 10 à 25 kg et 4,77 € au-delà. Une autre de ses pages annonce 1,81 €, 1,99 €, 2,89 € et 4,34 € pour les mêmes gabarits, et seul le questionnaire donne ton prix. Les montants plus bas, dès 1,00 €, incluent la réduction de la box d'essai. Au tarif de départ, compte au moins 60 à 66 € par mois pour un chien de 3 à 9 kg. Notre [avis complet sur Dogfy Diet](/chien/avis-marques/avis-dogfy-diet-repas-frais-chien) détaille le budget par gabarit.",
           "La box d'essai de 14 jours est annoncée à −50 %, avec la livraison gratuite et un abonnement sans engagement. Notre page [code promo Dogfy Diet](/codes-promo/dogfy-diet) explique comment l'obtenir et à quel moment arrêter si les repas ne conviennent pas.",
         ],
       },
@@ -103,20 +103,20 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Dogfy Diet a-t-il des avis négatifs ?',
         paragraphs: [
           "Oui : Trustpilot affiche 4,4 sur 5 pour 12 609 avis au 5 novembre 2026, dont 8 % à une étoile et 2 % à deux étoiles. La note reste bonne, avec une part visible de clients très déçus.",
-          "On a lu les 20 avis à une ou deux étoiles de la première page ce jour-là. Environ la moitié parle de prélèvements, d'abonnements réactivés ou de résiliations difficiles. Viennent ensuite les livraisons en retard ou manquées, puis des chiens qui refusent les repas ou les digèrent mal, selon leurs maîtres. Note la date du prochain envoi et vérifie le colis dès réception.",
+          "On a lu les 20 avis à une ou deux étoiles de la première page ce jour-là. Environ la moitié parle de prélèvements, d'abonnements réactivés ou de résiliations difficiles. Viennent ensuite les livraisons en retard ou manquées, puis des chiens qui refusent les repas. Trois maîtres décrivent des vomissements, une diarrhée ou une constipation, sans lien de cause établi, et un client dit avoir jeté des sachets gonflés ou ouverts. Note la date du prochain envoi et vérifie le colis dès réception.",
         ],
       },
       {
         h2: 'Que disent les vétérinaires de Dogfy Diet ?',
         paragraphs: [
           "Dogfy Diet présente ses recettes comme élaborées par des vétérinaires et des nutritionnistes : cette information vient de la marque, sans nom sur les pages qu'on a lues. Toutou Gourmet n'a pas de vétérinaire relecteur, et on n'a pas trouvé d'étude indépendante portant sur Dogfy Diet elle-même.",
-          "La marque ne recommande pas ses menus aux chiens qui ont un problème rénal, hépatique, pancréatique ou cardiaque, une hyperlipidémie, une hypertriglycéridémie, un syndrome de Cushing, une MICI (maladie inflammatoire chronique de l'intestin), une constipation ou des calculs urinaires. Montre aussi la recette à ton vétérinaire si ton chien est en croissance ou s'il doit surveiller son poids. Notre guide [repas frais ou croquettes](/chien/avis-marques/repas-frais-vs-croquettes-chien) résume ce que l'on sait des deux options.",
+          "Dogfy Diet formule ses recettes pour des chiens en bonne santé, sans besoin nutritionnel spécifique, et ne les recommande pas en cas de problème de foie. Sa page d'aide sur le syndrome de Cushing les dit adaptées et renvoie au vétérinaire. Si ton chien a une maladie rénale, pancréatique ou cardiaque, une MICI (maladie inflammatoire chronique de l'intestin), une constipation, des calculs urinaires, un excès de graisses dans le sang ou un régime prescrit, demande l'avis de ton vétérinaire avant de commander. Fais de même s'il est en croissance ou doit surveiller son poids. Notre guide [repas frais ou croquettes](/chien/avis-marques/repas-frais-vs-croquettes-chien) résume ce que l'on sait des deux options.",
         ],
       },
       {
         h2: 'Comment conserver Dogfy Diet et quels sont ses concurrents ?',
         paragraphs: [
-          "Selon la marque, les repas Dogfy Diet se conservent jusqu'à 30 jours au réfrigérateur ou 1 an au congélateur, et une portion congelée passe au réfrigérateur la veille. Les pages officielles qu'on a lues ne nomment pas le lieu de fabrication, donc pose la question à la marque si l'origine compte pour toi.",
+          "Selon la marque, les repas Dogfy Diet se conservent jusqu'à 30 jours au réfrigérateur ou 1 an au congélateur, et une portion congelée passe au réfrigérateur la veille. Un sachet ouvert se finit sous 48 heures, et un sachet arrivé décongelé mais froid sous 15 jours. Les pages officielles qu'on a lues ne nomment pas le lieu de fabrication, donc pose la question à la marque si l'origine compte pour toi.",
           "Dog Chef et Elmut sont ses concurrents les plus proches, avec des repas frais notés de 85 à 87 pour le premier et de 90 à 93 pour le second. Leurs pages détaillées : [avis Dog Chef](/chien/marque/dog-chef) et [avis Elmut](/chien/marque/elmut). Pour un chien difficile, la box d'essai reste le moyen le plus simple de vérifier.",
         ],
       },
