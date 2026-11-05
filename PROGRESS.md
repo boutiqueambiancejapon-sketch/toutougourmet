@@ -1,6 +1,7 @@
 # Progression — Toutou Gourmet — màj à chaque fin de session
 
 ## Complété
+- 2026-11-05 · Classement en tête de 6 articles « meilleur… », après le TL;DR de 4 articles santé, 10 recettes affichées.
 - 2026-11-05 · Page mère Dog Chef (`data/brand-hub.ts`, `components/marques/BrandHub.tsx`) : recettes notées, prix, avis négatifs, concurrents, vétérinaires ; 5 articles y renvoient. Conservation corrigée à 10 mois selon le site de la marque. Autres partenaires à suivre.
 - 2026-11-05 · Pages de classement : texte d'environ 800 mots, FAQ et sources (`data/ranking-content.ts`), liens depuis /scanner, /chien, le menu et le pied de page. Surpoids rattaché à l'article existant. Icône de chien sans photo.
 - 2026-11-05 · Année automatique dans les titres (`lib/title-year.ts`), reconstruction du site chaque 1er janvier (`deploy/new-year.sh`, `toutou-new-year.timer`).

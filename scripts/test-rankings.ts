@@ -8,6 +8,7 @@ assert.equal(recipeKey('Royal Canin', 'Mini Adulte 2 kg'), recipeKey('ROYAL CANI
 assert.notEqual(recipeKey('Royal Canin', 'Mini Adulte'), recipeKey('Royal Canin', 'Mini Chiot'))
 assert.equal(displayName("Hill's Croquettes sèches pour chiot de grande race"), 'Chiot de grande race')
 assert.equal(displayName('WILDERNESS croquettes chien, adulte, True Country'), 'Wilderness adulte, True Country')
+assert.equal(displayName('Croquettes au canard frais'), 'au canard frais')
 assert.equal(displayBrand('REAL NATURE'), 'Real Nature')
 assert.equal(displayBrand('Hills'), "Hill's")
 assert.equal(displayBrand('Edgard & Cooper'), 'Edgard & Cooper')

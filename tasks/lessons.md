@@ -46,3 +46,6 @@ J'avais réduit les pages de produit à quelques gammes. Le propriétaire veut u
 
 ## 2026-11-05 — Année dans les titres
 Une page pré-générée ne change pas seule au 1er janvier : toute valeur calculée à la construction a besoin d'une reconstruction datée (`toutou-new-year.timer`).
+
+## 2026-11-05 — Classement avant le texte
+Sur une page « meilleur… », le lecteur cherche la liste : le classement passe en tête, le texte après. Si le texte conseille une autre marque, le dire sous la liste plutôt que laisser une contradiction.
