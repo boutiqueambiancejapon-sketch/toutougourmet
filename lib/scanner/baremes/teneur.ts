@@ -46,9 +46,9 @@ export function extraireEpaDha(texte: string): TeneurEpaDha {
   if (somme) {
     res.epaDhaPct = valide(enPct(nombre(somme[1]), somme[2]))
   } else {
-    const seul = (mot: string) => new RegExp(`\\b(?:${mot})\\b${GAP}${NB} ?${U}`).exec(t) ?? new RegExp(`${NB} ?${U}${AVANT}(?:${mot})\\b`).exec(t)
-    const e = seul('epa|acide eicosapentaenoique')
-    const d = seul('dha|acide docosahexaenoique')
+    const seul = (mot: string) => new RegExp(`\\b(?:${mot})\\b\\)?${GAP}${NB} ?${U}`).exec(t) ?? new RegExp(`${NB} ?${U}${AVANT}(?:${mot})\\b`).exec(t)
+    const e = seul('epa|acide eicosapentaenoique|eicosapentaenoic acid')
+    const d = seul('dha|acide docosahexaenoique|docosahexaenoic acid')
     if (e && d) {
       res.epaDhaPct = valide(enPct(nombre(e[1]), e[2]) + enPct(nombre(d[1]), d[2]))
       res.separe = res.epaDhaPct !== null
