@@ -49,3 +49,6 @@ Une page pré-générée ne change pas seule au 1er janvier : toute valeur calcu
 
 ## 2026-11-05 — Classement avant le texte
 Sur une page « meilleur… », le lecteur cherche la liste : le classement passe en tête, le texte après. Si le texte conseille une autre marque, le dire sous la liste plutôt que laisser une contradiction.
+
+## 2026-11-05 — Un seul rendu pour un même bloc
+Le classement en article avait dévié de la page de classement. Un même contenu passe par un seul composant (`RankingBody`), sinon les styles divergent.

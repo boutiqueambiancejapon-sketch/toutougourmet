@@ -20,7 +20,7 @@ Tâche biquotidienne : rédiger UN nouvel article pour Toutou Gourmet (www.touto
 
 ## Choisir le sujet
 - **Deux articles par jour, et le thème change chaque jour.** La première ligne de ce message donne le type. `J=$(( 10#$(date +%j) ))`. Les sujets viennent de `docs/plan-editorial-outils.md` :
-  - **Transactionnel (7 h)** : `J` impair, premier sujet non coché de « Avis modèles » ; `J % 4 = 2`, premier de « Avis marques » ; `J % 4 = 0`, premier de « Duels et besoins ». Applique les règles de la section « Avis + Maxi Zoo », maillage compris.
+  - **Transactionnel (7 h)** : `J` impair, premier sujet non coché de « Avis modèles » ; `J % 4 = 2`, premier de « Avis marques » ; `J % 8 = 0`, premier de « Duels et besoins » ; `J % 8 = 4`, premier de la section « Compléments Maxi Zoo », avec ses règles. Applique les règles de la section « Avis + Maxi Zoo », maillage compris.
   - **Informatif (20 h)** : `J % 3` vaut 0 ou 1, un « peut-il manger » ou une urgence : premier sujet non coché de « Pépites Search Console », puis une requête réelle non couverte trouvée par WebSearch (autocomplétion « mon chien peut-il manger », « Autres questions posées »). `J % 3 = 2`, le thème qui a servi il y a le plus longtemps (`git log`) parmi « Friandises Franklin » et les sections d'outils (ration, poids, bilan, scanner, âge, budget, test, fiche de garde).
   Liste vide : prends le thème suivant du même type.
 - **Classement d'abord :** un article « meilleur… » ou « quelles croquettes pour… » dont le besoin a un classement dans `lib/scanner/rankings.ts` commence par `<Classement segment="…" />` juste avant le `## TL;DR`, puis le texte. Sujet de santé : juste après le TL;DR. Maladie grave (reins, diabète, foie, cœur) : pas de classement.

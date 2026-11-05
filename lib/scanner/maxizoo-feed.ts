@@ -28,7 +28,7 @@ function parseCsv(text: string): string[][] {
 }
 
 /** Produits du fichier Awin, marques connues d'abord, sans doublon de code-barres. */
-export function loadFeedItems(path: string): FeedItem[] {
+export function loadFeedItems(path: string, opts: { anyCategory?: boolean } = {}): FeedItem[] {
   const [head, ...rows] = parseCsv(gunzipSync(readFileSync(path)).toString('utf8'))
   const at = (name: string) => head.indexOf(name)
   const seen = new Map<string, FeedItem>()
@@ -39,7 +39,7 @@ export function loadFeedItems(path: string): FeedItem[] {
     const url = r[at('merchant_deep_link')] ?? ''
     const category = r[at('merchant_category')] ?? ''
     const name = r[at('product_name')] ?? ''
-    if (!ean || !MAXI_ZOO_CATEGORIES[category] || !url.startsWith('https://www.maxizoo.fr/p/') || isMixedProduct(name) || seen.has(ean)) continue
+    if (!ean || !(opts.anyCategory || MAXI_ZOO_CATEGORIES[category]) || !url.startsWith('https://www.maxizoo.fr/p/') || isMixedProduct(name) || seen.has(ean)) continue
     const image = r[at('aw_image_url')] ?? ''
     const buy = r[at('aw_deep_link')] ?? ''
     seen.set(ean, { ean, url, category, name, brand: r[at('brand_name')] ?? '', image: image.startsWith(IMAGE_HOST) ? image : null, buy: BUY_LINK.test(buy) ? buy : null })
