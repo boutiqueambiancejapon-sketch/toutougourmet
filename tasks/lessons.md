@@ -55,3 +55,6 @@ Le classement en article avait dévié de la page de classement. Un même conten
 
 ## 2026-11-05 — Une chaîne de commandes s'arrête à la première erreur
 Un script de correction a échoué, et la même commande a quand même fusionné et mis en ligne : des contre-indications Dogfy non corrigées ont été publiques quelques minutes. `set -e` ne suffit pas dans cet environnement (les commandes y sont évaluées dans une chaîne, il a été ignoré le jour même) : une mise en ligne passe par un script lancé avec `bash -euo pipefail fichier.sh`, build réussi avant la fusion.
+
+## 2026-11-05 — Récits d'avis clients
+Les résumés automatiques de Trustpilot ne suffisent pas pour publier des récits de santé ou de qualité sur une marque : décision du propriétaire, on s'en tient à l'abonnement, la livraison et le service client.
