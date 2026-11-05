@@ -41,7 +41,7 @@ export const BREEDS: Breed[] = [
     activity: 'Modérée',
     watch: "Torsion d'estomac",
     health: [
-      { title: 'Thyroïdite auto-immune', text: "Les oméga-3 EPA/DHA modulent l'inflammation auto-immune. Pour un akita de 35 kg, viser 1 500 à 2 000 mg d'EPA+DHA par jour." },
+      { title: 'Thyroïdite auto-immune', text: "Les oméga-3 EPA/DHA modulent l'inflammation auto-immune. La dose se décide avec le vétérinaire." },
       { title: 'Sébadénite sébacée', text: 'Comme pour la thyroïdite, une alimentation anti-inflammatoire riche en oméga-3 passe en premier.' },
       { title: 'Dilatation-torsion gastrique', text: "Son gabarit et sa poitrine profonde l'exposent à la torsion : deux repas par jour, et pas d'exercice dans l'heure qui suit." },
     ],
@@ -56,7 +56,7 @@ export const BREEDS: Breed[] = [
     activity: 'Modérée',
     watch: 'Peau',
     health: [
-      { title: 'Dermatite', text: 'Poil ras, dermatite fréquente, démangeaisons chroniques. Les oméga-3 marins (EPA + DHA, 50 à 75 mg/kg de poids vif par jour) sont le premier levier alimentaire.' },
+      { title: 'Dermatite', text: 'Poil ras, dermatite fréquente, démangeaisons chroniques. Les oméga-3 marins (EPA + DHA) sont le premier levier alimentaire.' },
       { title: 'Surpoids', text: 'Un Amstaff sédentaire nourri avec une croquette sportive à 20 % de matières grasses prend 2 à 3 kg en une saison.' },
     ],
     foodNote: 'Sa musculature trompe : un Amstaff de canapé grossit vite. Les lipides restent entre 14 et 18 % et la ration se pèse.',
@@ -345,7 +345,7 @@ export const BREEDS: Breed[] = [
     activity: 'Modérée',
     watch: "Torsion d'estomac",
     health: [
-      { title: 'Dysplasie de la hanche', text: "Jusqu'à 58 % des sujets selon le club de race américain. EPA et DHA à 50-75 mg/kg/jour, glucosamine, chondroïtine et poids strict (BCS 4-5/9)." },
+      { title: 'Dysplasie de la hanche', text: "Jusqu'à 58 % des sujets selon le club de race américain. EPA et DHA à doser avec le vétérinaire, glucosamine, chondroïtine et poids strict (BCS 4-5/9)." },
       { title: "Dilatation-torsion de l'estomac", text: 'Mortelle dans 15 à 40 % des cas. Deux à trois repas par jour, gamelle posée au sol.' },
       { title: 'Croissance du chiot', text: 'Croissance lente, calcium entre 0,9 et 1,4 % de la matière sèche, sans jamais ajouter de calcium.' },
     ],
@@ -420,7 +420,7 @@ export const BREEDS: Breed[] = [
     watch: 'Hypothyroïdie',
     health: [
       { title: 'Hypothyroïdie', text: 'Parmi les taux les plus élevés de toutes les races. Un chow hypothyroïdien peut demander 15 à 25 % de calories en moins que les tables génériques.' },
-      { title: 'Dysplasie de la hanche et du coude', text: "Oméga-3 (1 000 à 1 500 mg d'EPA+DHA par jour pour 25 kg) et glucosamine dès l'âge adulte." },
+      { title: 'Dysplasie de la hanche et du coude', text: "Oméga-3 (dose à voir avec le vétérinaire) et glucosamine dès l'âge adulte." },
       { title: 'Dilatation-torsion gastrique', text: "Poitrine profonde : deux repas minimum, gamelle au sol, pas d'exercice intense une heure avant et deux heures après." },
     ],
     near: ['akita-inu', 'shar-pei', 'shiba-inu'],
@@ -699,7 +699,7 @@ export const BREEDS: Breed[] = [
     activity: 'Faible',
     watch: 'Peau et plis',
     health: [
-      { title: 'Irritations des plis', text: 'Une protéine animale unique et des oméga-3 EPA/DHA (50 à 75 mg/kg/jour) limitent les irritations et soutiennent la peau.' },
+      { title: 'Irritations des plis', text: 'Une protéine animale unique et des oméga-3 EPA/DHA limitent les irritations et soutiennent la peau.' },
       { title: 'Dysplasie de la hanche', text: 'Le surpoids, fréquent chez cette race sédentaire, aggraverait une éventuelle dysplasie.' },
     ],
     foodNote: "La ration se pèse à la balance plutôt qu'au gobelet, et le poids se contrôle tous les deux à trois mois.",
@@ -713,7 +713,7 @@ export const BREEDS: Breed[] = [
     activity: 'Modérée',
     watch: 'Allergies cutanées',
     health: [
-      { title: 'Dermatite atopique', text: "Les oméga-3 EPA/DHA réduisent l'inflammation de la peau : 50 à 75 mg/kg/jour, soit 500 à 750 mg pour 10 kg." },
+      { title: 'Dermatite atopique', text: "Les oméga-3 EPA/DHA réduisent l'inflammation de la peau. La dose se décide avec le vétérinaire." },
     ],
     foodNote: 'Varier souvent les aliments aggrave les allergies : une alimentation stable, avec une seule source de protéine.',
     near: ['akita-inu', 'spitz-nain', 'husky-siberien'],
@@ -769,7 +769,7 @@ export const BREEDS: Breed[] = [
     activity: 'Élevée',
     watch: 'Allergies cutanées',
     health: [
-      { title: 'Allergies cutanées et alimentaires', text: "15 à 20 % de dermatite atopique, environ 10 % d'allergie alimentaire. Source de protéine unique et oméga-3 (700 à 1 050 mg d'EPA+DHA par jour pour 14 kg)." },
+      { title: 'Allergies cutanées et alimentaires', text: "15 à 20 % de dermatite atopique, environ 10 % d'allergie alimentaire. Source de protéine unique et oméga-3, dose à voir avec le vétérinaire." },
       { title: 'Articulations', text: 'Contrôle pondéral strict (BCS 4-5/9) pour les préserver.' },
     ],
     foodNote: 'Le gobelet doseur surestime souvent les portions de 20 à 30 %, de quoi faire prendre 1 à 2 kg en quelques mois à un chien sédentaire.',
@@ -839,7 +839,7 @@ export const BREEDS: Breed[] = [
     activity: 'Élevée',
     watch: 'Maladie valvulaire mitrale',
     health: [
-      { title: 'Maladie valvulaire mitrale', text: "Présente à l'échographie chez 38 % des whippets d'une étude. Oméga-3 EPA/DHA (40 à 70 mg/kg/jour) et sodium maîtrisé." },
+      { title: 'Maladie valvulaire mitrale', text: "Présente à l'échographie chez 38 % des whippets d'une étude. Oméga-3 EPA/DHA, à doser avec le vétérinaire, et sodium maîtrisé." },
       { title: 'Surpoids', text: '1 kg en trop représente 8 % de son poids : cœur, dos et articulations en pâtissent.' },
       { title: "Dilatation-torsion de l'estomac", text: 'Poitrine profonde et étroite : 2 à 3 repas par jour, pas de gamelle surélevée.' },
     ],
