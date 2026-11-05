@@ -8,7 +8,8 @@
 // Allergies des chiens du compte : encadré rendu dans le navigateur (components/scanner/AllergyAlert).
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
+import { ficheGardee } from '@/lib/scanner/baremes/fusions'
 import { BreadcrumbNav, type BreadcrumbItem } from '@/components/ui/BreadcrumbNav'
 import { AllergyAlert } from '@/components/scanner/AllergyAlert'
 import { DownloadLink } from '@/components/scanner/DownloadLink'
@@ -78,8 +79,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 }
 
 export default async function CroquettePage({ params }: Params) {
-  const row = await load((await params).slug)
-  if (!row) notFound()
+  const { slug } = await params
+  const row = await load(slug)
+  if (!row) {
+    const garde = ficheGardee(slug)
+    if (garde) permanentRedirect(`/croquettes/${garde}`)
+    notFound()
+  }
   const a = toScanAnalysis(row)
   if (sansDetail(a.details)) return <FicheSimple a={a} name={[a.brand, a.product].filter(Boolean).join(' ') || 'Produit sans nom lisible'} />
   const treat = kindOf(a.details) === 'treat'

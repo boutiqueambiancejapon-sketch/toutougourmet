@@ -16,6 +16,12 @@ import { MSG_DOS } from '../lib/scanner/baremes/types'
 import { labelPrompt, LABEL_INSTRUCTIONS_V2, LABEL_JSON_SCHEMA_V2 } from '../lib/scanner/baremes/lecture-ia'
 import { analyseBaremes, entreeDepuisLabel, typeDepuisLabel } from '../lib/scanner/baremes/vers-score'
 import { horsListes, NOM_CLASSEMENT, noteCourante, sansDetail } from '../lib/scanner/baremes/fiche'
+import { corrigerFiche, refusSauvegarde } from '../lib/scanner/baremes/activation'
+import { ficheGardee, redirectionFusion } from '../lib/scanner/baremes/fusions'
+import { BAREMES_PUBLICS } from '../lib/scanner/baremes/methode'
+import { mkdtempSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 import { ficheA4Data } from '../lib/og/fiche/data'
 import type { FoodAnalysis } from '../db/schema'
 import { analyseLabel, scoreVersionFor } from '../lib/scanner/analyse'
@@ -385,4 +391,51 @@ const a4Vet = ficheA4Data(row(vetLu))
 assert.equal(a4Vet.score, null)
 assert.match(a4Vet.verdict, /à juger avec ton vétérinaire/)
 assert.deepEqual(a4Vet.alternatives, [])
+// ─── Préparation de l'activation ─────────────────────
+const brut = (c: Partial<ExtractedLabel['constituants']>) => ({ typeImage: 'aliment-chien', constituants: { ...SANS, ...c } })
+const CO2 = (champ: 'calcium' | 'cendres', valeur: number) => ({ slug: 's', champ, valeur, source: 'x', date: 'd' })
+const r1 = corrigerFiche(brut({ proteines: 20 }), { complements: [CO2('calcium', 1.2)] })
+assert.equal(r1.extracted.constituants.calcium, 1.2)
+assert.deepEqual(r1.ajoutes, ['calcium'])
+// Une valeur déjà remplie n'est jamais écrasée
+const r2 = corrigerFiche(brut({ calcium: 0.9 }), { complements: [CO2('calcium', 1.2)] })
+assert.equal(r2.extracted.constituants.calcium, 0.9)
+assert.deepEqual(r2.ignores, ['calcium'])
+// Cendres : seulement si la valeur fausse est encore là
+assert.equal(corrigerFiche(brut({ cendres: 1.8 }), { cendres: { faux: 1.8, vrai: 7.2 } }).extracted.constituants.cendres, 7.2)
+assert.equal(corrigerFiche(brut({ cendres: 6 }), { cendres: { faux: 1.8, vrai: 7.2 } }).extracted.constituants.cendres, 6)
+assert.equal(corrigerFiche(brut({ cendres: 6 }), { cendres: { faux: 1.8, vrai: 7.2 } }).cendres, false)
+// Type et rapport ; une seconde passe ne change plus rien
+const r3 = corrigerFiche(brut({}), { type: { typeImage: 'friandise', typeProduit: 'friandise' }, rapportCaP: { min: 1.1, max: 1.4 } })
+assert.equal(r3.extracted.typeProduit, 'friandise')
+assert.deepEqual(r3.extracted.rapportCaP, { min: 1.1, max: 1.4 })
+const r4 = corrigerFiche(r3.extracted, { type: { typeImage: 'friandise', typeProduit: 'friandise' }, rapportCaP: { min: 1.1, max: 1.4 } })
+assert.deepEqual([r4.type, r4.rapport], [false, false])
+// Sauvegarde : refus sans dossier, sans fichier, avec un vieux fichier ou un fichier vide
+const dossier = mkdtempSync(join(tmpdir(), 'sauvegardes-'))
+assert.ok(refusSauvegarde(join(dossier, 'absent')))
+assert.ok(refusSauvegarde(dossier))
+writeFileSync(join(dossier, 'vide.dump'), '')
+assert.ok(refusSauvegarde(dossier))
+writeFileSync(join(dossier, 'toutou.dump'), 'x')
+assert.equal(refusSauvegarde(dossier), null)
+assert.ok(refusSauvegarde(dossier, Date.now() + 37 * 3_600_000))
+// Redirections : l'ancienne adresse seulement
+assert.equal(ficheGardee('ultra-premium-direct-patee-pour-chien-agneau'), 'ultra-premium-direct-patee-chien-sans-cereales-agneau')
+assert.equal(ficheGardee('ultra-premium-direct-patee-chien-sans-cereales-agneau'), null)
+assert.equal(redirectionFusion('autre', 'og.png'), null)
+assert.equal(redirectionFusion('ultra-premium-direct-patee-pour-chien-poulet-dinde', 'og.png')?.headers.get('Location'), '/croquettes/ultra-premium-direct-patee-chien-sans-cereales-poulet-dinde/og.png')
+// Méthode publiée : chaque barème fait 100, comme le code, sans promesse de soin
+const SOMME = Object.fromEntries(BAREMES_PUBLICS.map((b) => [b.id, b.lignes.reduce((s2, l) => s2 + l[1], 0)]))
+assert.deepEqual(SOMME, { aliment: 100, friandise: 100, complement: 100, huile: 100 })
+const ptsCode = (r: { criteres: { id: string; max: number }[] }) => r.criteres.map((x) => x.max).sort((a, b) => b - a)
+const ptsPub = (id: string) => (BAREMES_PUBLICS.find((b) => b.id === id)?.lignes ?? []).map((l) => l[1]).sort((a, b) => b - a)
+const entreeRiche = E({ produit: 'Huile de saumon', ingredients: I('huile de saumon', 'poulet'), constituants: C(28) })
+assert.deepEqual(ptsCode(noter(entreeRiche, 'aliment')), ptsPub('aliment'))
+assert.deepEqual(ptsCode(noter(entreeRiche, 'friandise')), ptsPub('friandise'))
+assert.deepEqual(ptsCode(noter(entreeRiche, 'complement')), ptsPub('complement'))
+assert.deepEqual(ptsCode(noter(entreeRiche, 'huile')), ptsPub('huile'))
+const texteMethode = JSON.stringify(BAREMES_PUBLICS)
+assert.ok(!/soign|guéri|traite\b|soulage|renforce/i.test(texteMethode))
+assert.match(texteMethode, /90 au plus, même quand la marque déclare leur rapport/)
 console.log('tests : tout passe')

@@ -1,4 +1,6 @@
 import { Formula, Sources } from '@/components/outils/ToolPage'
+import { BAREMES_ACTIFS } from '@/lib/scanner/baremes/config'
+import { ScannerMethodBaremes } from './ScannerMethodBaremes'
 import { SCORE_VERSION } from '@/lib/scanner/score'
 
 // @cdc lot 6 — « Comment la note est-elle calculée ? » sur /scanner : barème en clair et sources.
@@ -19,6 +21,7 @@ const CRITERIA: [string, number, string][] = [
 ]
 
 export function ScannerMethod() {
+  if (BAREMES_ACTIFS) return <ScannerMethodBaremes />
   return (
     <>
       <p>

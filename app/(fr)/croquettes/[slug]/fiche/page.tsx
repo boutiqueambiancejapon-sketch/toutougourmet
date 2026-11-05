@@ -3,7 +3,8 @@
 // A4 (tailles print: réduites). noindex, hors sitemap. Friandise : alertes sous l'en-tête.
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
+import { ficheGardee } from '@/lib/scanner/baremes/fusions'
 import { DownloadLink, PrintFicheButton } from '@/components/scanner/DownloadLink'
 import { FicheCriteria } from '@/components/scanner/fiche/FicheCriteria'
 import { FicheIngredients } from '@/components/scanner/fiche/FicheIngredients'
@@ -32,8 +33,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 }
 
 export default async function FichePage({ params }: Params) {
-  const row = await load((await params).slug)
-  if (!row) notFound()
+  const { slug } = await params
+  const row = await load(slug)
+  if (!row) {
+    const garde = ficheGardee(slug)
+    if (garde) permanentRedirect(`/croquettes/${garde}/fiche`)
+    notFound()
+  }
   const name = row.product ?? row.brand ?? 'Produit sans nom lisible'
   const words = nounWords(row.extracted, row.details)
   const date = row.createdAt.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' })

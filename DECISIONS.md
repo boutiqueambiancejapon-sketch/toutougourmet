@@ -304,3 +304,5 @@ Décision du propriétaire : on se base sur ce que dit la marque (site ou fiche 
 
 ## 2026-11-05 — Barèmes : raccord derrière l'interrupteur
 Classements, listes, fiche, PDF et images de partage suivent `details.bareme` quand `BAREMES_ACTIFS` est vrai : sec et humide séparés, compléments, huiles et aliments vétérinaires hors des listes. Interrupteur faux, rendu comparé à `origin/v2` sur une copie de la base : seule la phrase Elmut change. Avant d'activer : part des partenaires à trancher, méthode de `/scanner` à réécrire, écritures en base à accorder (`~/audits/baremes-2026-11-05/recalcul/comparatif.md`).
+## 2026-11-05 — Partenaires dans les classements
+Le propriétaire accepte que les partenaires restent nombreux en tête si le résultat tient après l'import des pâtées, barème publié et liens signalés. La formule n'est pas ajustée pour les faire reculer. L'activation attend qu'il voie le classement final.
