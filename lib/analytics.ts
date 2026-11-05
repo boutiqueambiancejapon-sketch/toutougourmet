@@ -38,7 +38,7 @@ export function affiliateBrand(href: string): string | null {
     [/tidd\.ly\/(48rl0Z3|43sUPyF)/, 'Fidelis'],
     [/(amzn\.to|amazon\.fr\/.*tag=(toutougourmet|ambiancejap0a))/, 'Amazon'],
     // Les autres liens tidd.ly sont des fiches Maxi Zoo (Royal Canin, Eukanuba…)
-    [/tidd\.ly\/|awin1\.com\/cread\.php\?awinmid=68698/, 'Maxi Zoo'],
+    [/tidd\.ly\/|awin1\.com\/(cread\.php\?awinmid=68698|pclick\.php\?[^#]*m=68698)/, 'Maxi Zoo'],
     [/c3po\.link\//, 'Autre (c3po)'],
   ]
   return rules.find(([re]) => re.test(href))?.[1] ?? null

@@ -188,3 +188,7 @@ Hypertension (ACVIM 2018 lu en texte intégral : traitement confirmé, seuils ch
 ## 2026-11-05 : Franklin confronté à ses fiches officielles
 
 3 fiches lues sur franklinpetfood.com (Dinde Saumon Valériane, Dinde Patate douce Épinards, Canard Pomme Carotte) : sans céréales confirmé. Faux et corrigés : glucides 15-22 % (diabète), phosphore et magnésium « naturellement bas » (rein, calculs, infections), « toutes les recettes mono-protéine », insectes et lapin. Liens Franklin retirés de 4 articles médicaux (diabète, rein, calculs, infections). Non vérifié : digestibilité 85-90 %, vétérinaire nutritionniste, les 5 autres recettes (site limité en requêtes).
+
+## 2026-11-05 : Produits dans les articles de maladie
+
+Demande du propriétaire : chaque article de maladie propose des croquettes ou pâtées. Bloc `<HealthPicks need="…" />`, données dans `data/health-picks.ts` (Maxi Zoo via Awin, recherche Amazon pour rein, cœur, épilepsie et pancréatite faute de formule chez Maxi Zoo). 36 articles. Les formules vétérinaires l'indiquent. Les clics sur les liens exacts Awin (`pclick`) sont maintenant comptés comme Maxi Zoo.

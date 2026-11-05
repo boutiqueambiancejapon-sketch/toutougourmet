@@ -13,6 +13,7 @@ import { BrandCTA } from '@/components/marques/BrandCTA'
 import { BreedBrandCompare, BrandGroup, BrandRow } from '@/components/race/BreedBrandCompare'
 import { ArticleSignupInvite } from '@/components/cro/ArticleSignupInvite'
 import { ToolCta } from '@/components/article/ToolCta'
+import { HealthPicks } from '@/components/article/HealthPicks'
 import { ArticleFormula } from '@/components/article/Formula'
 import { GuideTop } from '@/components/guide/GuideTop'
 import { SitterSheetCta } from '@/components/garde/SitterSheetCta'
@@ -31,6 +32,7 @@ export const articleMdxComponents = {
   WhatToDo, Step,
   PoisonCenters,
   BrandCTA,
+  HealthPicks,
   BreedBrandCompare, BrandGroup, BrandRow,
   BodyImage,
   ArticleSignupInvite,
