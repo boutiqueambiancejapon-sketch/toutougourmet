@@ -344,16 +344,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `avis-buddy-pet-foods`
 - [x] `avis-happy-dog`
 - [x] `chien-peut-manger-endives`
-- [ ] `chien-peut-manger-mais`
-- [ ] `congeler-repas-maison-chien-guide`
-- [ ] `croquettes-chien-dysplasie-hanche`
-- [ ] `croquettes-chien-trop-maigre`
-- [ ] `avis-purina-pro-plan`
-- [ ] `avis-taste-of-the-wild`
-- [ ] `chien-peut-manger-radis`
-- [ ] `chien-peut-manger-salade`
-- [ ] `chien-sort-croquettes-bol`
-- [ ] `croquettes-chien-convalescence`
+- [x] `chien-peut-manger-mais`
+- [x] `congeler-repas-maison-chien-guide`
+- [x] `croquettes-chien-dysplasie-hanche`
+- [x] `croquettes-chien-trop-maigre`
+- [x] `avis-purina-pro-plan`
+- [x] `avis-taste-of-the-wild`
+- [x] `chien-peut-manger-radis`
+- [x] `chien-peut-manger-salade`
+- [x] `chien-sort-croquettes-bol`
+- [x] `croquettes-chien-convalescence`
 - [ ] `croquettes-chien-hypertension`
 - [ ] `croquettes-chien-perte-appetit`
 - [ ] `croquettes-pressees-froid-vs-extrudees`
