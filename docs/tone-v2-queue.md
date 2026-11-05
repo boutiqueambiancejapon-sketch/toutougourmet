@@ -154,16 +154,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `nourriture-malamute-alaska`
 - [x] `glucosamine-chondroitine-chien-articulations`
 - [x] `chien-peut-boire-lait`
-- [ ] `recette-riz-poulet-chien-diete-legere`
-- [ ] `croquettes-chien-diabetique`
-- [ ] `chien-peut-manger-noix`
-- [ ] `recette-biscuits-pomme-cannelle-chien`
-- [ ] `spiruline-chien-bienfaits-dosage`
-- [ ] `chien-peut-manger-amandes`
-- [ ] `nourriture-husky-siberien`
-- [ ] `a-quelle-heure-donner-manger-chien`
-- [ ] `croquettes-chien-maladie-foie`
-- [ ] `chien-peut-manger-fromage`
+- [x] `recette-riz-poulet-chien-diete-legere`
+- [x] `croquettes-chien-diabetique`
+- [x] `chien-peut-manger-noix`
+- [x] `recette-biscuits-pomme-cannelle-chien`
+- [x] `spiruline-chien-bienfaits-dosage`
+- [x] `chien-peut-manger-amandes`
+- [x] `nourriture-husky-siberien`
+- [x] `a-quelle-heure-donner-manger-chien`
+- [x] `croquettes-chien-maladie-foie`
+- [x] `chien-peut-manger-fromage`
 - [ ] `recette-patate-douce-sechee-chien`
 - [ ] `croquettes-chien-apres-operation`
 - [ ] `recette-poulet-seche-chien`
