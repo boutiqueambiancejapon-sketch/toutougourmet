@@ -22,7 +22,7 @@ export function BrandVerdict({ brand, verdict }: { brand: Brand; verdict: string
       <p className="m-0 mt-5 font-semibold text-ink">{brandOfferLabel(brand)}</p>
       {out ? (
         <p className="m-0 mt-4 flex flex-wrap gap-x-6 gap-y-2">
-          <Link href="/chien/marque/dogfy-diet" className="font-semibold text-ink underline underline-offset-4">Voir Dogfy Diet</Link>
+          <Link href="/chien/avis-marques/avis-dogfy-diet-repas-frais-chien" className="font-semibold text-ink underline underline-offset-4">Voir Dogfy Diet</Link>
           <Link href="/chien/marque/dog-chef" className="font-semibold text-ink underline underline-offset-4">Voir Dog Chef</Link>
           <a href={brand.affiliateUrl} target="_blank" rel="sponsored noopener" className="text-ink-2 underline underline-offset-4">
             Vérifier le stock chez {brand.name}

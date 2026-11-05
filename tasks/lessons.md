@@ -54,4 +54,4 @@ Sur une page « meilleur… », le lecteur cherche la liste : le classement pass
 Le classement en article avait dévié de la page de classement. Un même contenu passe par un seul composant (`RankingBody`), sinon les styles divergent.
 
 ## 2026-11-05 — Une chaîne de commandes s'arrête à la première erreur
-Un script de correction a échoué, et la même commande a quand même fusionné et mis en ligne : des contre-indications Dogfy non corrigées ont été publiques quelques minutes. Toute chaîne qui finit par une mise en ligne commence par `set -euo pipefail`, et le build doit réussir avant la fusion.
+Un script de correction a échoué, et la même commande a quand même fusionné et mis en ligne : des contre-indications Dogfy non corrigées ont été publiques quelques minutes. `set -e` ne suffit pas dans cet environnement (les commandes y sont évaluées dans une chaîne, il a été ignoré le jour même) : une mise en ligne passe par un script lancé avec `bash -euo pipefail fichier.sh`, build réussi avant la fusion.

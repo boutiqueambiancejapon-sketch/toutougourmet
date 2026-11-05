@@ -25,7 +25,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
       { href: '/chien/marque/franklin', label: 'Franklin' },
       { href: '/chien/marque/elmut', label: 'Elmut' },
       { href: '/chien/marque/ultra-premium-direct', label: 'Ultra Premium Direct' },
-      { href: '/chien/marque/dogfy-diet', label: 'Dogfy Diet' },
+      { href: '/chien/avis-marques/avis-dogfy-diet-repas-frais-chien', label: 'Dogfy Diet' },
       { href: '/comparateur', label: 'Comparateur' },
       { href: '/codes-promo', label: 'Codes promo' },
     ],

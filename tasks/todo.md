@@ -231,7 +231,7 @@ Croquettes et pâtées, friandises, compléments, huiles : chacun son barème. L
 2. Reconnaissance du type : `typeImage` et `productKind`, règle sur le nom et la composition en secours. Mesurer les erreurs de type sur le jeu de référence.
 3. Croquettes et pâtées : revoir ce qui fausse aujourd'hui (notes de 100/100, poids des protéines, calcium et phosphore absents, âge et gabarit du produit, fibres).
 4. Friandises : reprendre le barème actuel avec le même jeu.
-5. Compléments : à définir (dose d'actif affichée, preuves par actif, cohérence avec le besoin annoncé, transparence). Aucune promesse de soin.
+5. Compléments : formule proposée dans `~/audits/baremes-2026-11-05/`. Décision du 2026-11-05 : une note et « attention, ce n'est pas un conseil de vétérinaire », sans affichage à part. Aucune promesse de soin.
 6. Huiles : à définir (espèce, taux d'EPA et de DHA, pureté, antioxydants, conservation).
 7. Recalcul des fiches, classements mis à jour, méthode publiée pour chaque barème, compléments et huiles dans les classements. Maladies graves : toujours pas de classement par note.
 

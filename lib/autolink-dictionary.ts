@@ -17,7 +17,7 @@ export const AUTOLINK_DICTIONARY: Record<string, string> = {
   'Elmut':                '/chien/marque/elmut',
   'Franklin Pet Food':    '/chien/marque/franklin',
   'Ultra Premium Direct': '/chien/marque/ultra-premium-direct',
-  'Dogfy Diet':           '/chien/marque/dogfy-diet',
+  'Dogfy Diet':           '/chien/avis-marques/avis-dogfy-diet-repas-frais-chien',
 
   // — Pages outils —
   'comparateur':        '/comparateur',
