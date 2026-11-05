@@ -24,6 +24,7 @@ const ORIGIN_TEXT: Record<ResultOrigin, string> = {
   openpetfoodfacts: 'Calculé à partir des données d\'Open Pet Food Facts, sans photo : non décompté.',
   openfoodfacts: 'Calculé à partir des données d\'Open Food Facts, sans photo : non décompté.',
   maxizoo: 'Calculé à partir de la fiche Maxi Zoo, sans photo : non décompté.',
+  marque: 'Calculé à partir du site officiel de la marque, sans photo : non décompté.',
   photo: 'Analyse de tes photos terminée.',
 }
 

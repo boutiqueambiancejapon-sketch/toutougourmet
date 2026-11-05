@@ -86,7 +86,7 @@ export default async function CroquettePage({ params }: Params) {
   const date = row.createdAt.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' })
   const bSlug = brandSlug(a.brand)
   const brandListed = bSlug !== null && (await reviewedItemsSafe('complete')).some((it) => it.brandSlug === bSlug)
-  const crumbs: BreadcrumbItem[] = [{ label: 'Accueil', href: '/' }, treat ? { label: 'Classement des friandises', href: '/croquettes/friandises' } : { label: 'Classement des croquettes', href: '/croquettes' }]
+  const crumbs: BreadcrumbItem[] = [{ label: 'Accueil', href: '/' }, treat ? { label: 'Classement des friandises', href: '/meilleures-friandises' } : { label: 'Classement des croquettes', href: '/meilleures-croquettes' }]
   if (a.brand) crumbs.push(brandListed ? { label: a.brand, href: `/croquettes/marque/${bSlug}` } : { label: a.brand })
   crumbs.push({ label: a.product ?? name })
   const first = a.label.ingredients[0]
@@ -146,7 +146,7 @@ export default async function CroquettePage({ params }: Params) {
           Scanne son étiquette
         </Link>{' '}
         pour vérifier la lecture, ou compare avec les{' '}
-        <Link href={treat ? '/croquettes/friandises' : '/croquettes'} className="font-semibold text-orange-ink underline underline-offset-2">
+        <Link href={treat ? '/meilleures-friandises' : '/meilleures-croquettes'} className="font-semibold text-orange-ink underline underline-offset-2">
           {treat ? 'meilleures friandises pour chien' : 'meilleures croquettes pour chien'}
         </Link>
         .

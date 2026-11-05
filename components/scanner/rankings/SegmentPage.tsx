@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
 import { ToolCta } from '@/components/article/ToolCta'
-import { capByBrand, SEGMENTS, type RankSegment } from '@/lib/scanner/rankings'
+import { capByBrand, displayBrand, displayName, SEGMENTS, type RankSegment } from '@/lib/scanner/rankings'
 import { segmentRecipes } from '@/lib/server/rankings'
 import { titleTypo } from '@/lib/title-typo'
+import { RankingJsonLd } from '../RankingJsonLd'
 import { RankRow } from './RankRow'
 import { RankingLead } from './RankingLead'
 
@@ -17,6 +18,7 @@ export async function SegmentPage({ segment }: { segment: RankSegment }) {
   const shown = capByBrand(list, 3).slice(0, SHOWN)
   return (
     <div className="v2 mx-auto flex max-w-prose flex-col gap-6 px-4 pt-4 pb-16 md:px-8 md:pt-8">
+      <RankingJsonLd name={segment.h1} path={segment.path} items={shown.map((r) => ({ slug: r.slug, brand: displayBrand(r.brand), product: displayName(r.name) }))} start={1} total={shown.length} />
       <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Scanner', href: '/scanner' }, { label: segment.label === 'Toutes' ? 'Classement des croquettes' : segment.label }]} />
       <h1 className="m-0 font-display text-[clamp(2rem,5vw,2.75rem)] font-black leading-[1.05] tracking-tight text-ink">{titleTypo(segment.h1)}</h1>
       <RankingLead segment={segment} list={list} />

@@ -40,6 +40,6 @@ export function matchSection(pathname: string): NavMatch | null {
   if (pathname.startsWith('/chien') || pathname.startsWith('/blog')) return 'guides'
   if (pathname.startsWith('/outils')) return 'tools'
   if (pathname.startsWith('/quiz')) return 'quiz'
-  if (pathname.startsWith('/scanner') || pathname.startsWith('/croquettes')) return 'scanner'
+  if (pathname.startsWith('/scanner') || pathname.startsWith('/croquettes') || pathname.startsWith('/meilleures-')) return 'scanner'
   return null
 }

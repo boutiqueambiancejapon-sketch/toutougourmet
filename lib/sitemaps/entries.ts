@@ -2,8 +2,8 @@ import { categories } from '@/data/categories'
 import { brands, getDuelPairs } from '@/data/brands'
 import { BRAND_PAGES_DATE, PAGE_DATES } from '@/data/page-dates'
 import { getAllArticles, getComparatif, type Article } from '@/lib/mdx'
-import { RANKING_MIN_REVIEWED } from '@/lib/scanner/seo'
-import { reviewedItemsSafe } from '@/lib/server/scanner-catalog'
+import { SEGMENTS } from '@/lib/scanner/rankings'
+import { segmentIndexable, segmentRecipes } from '@/lib/server/rankings'
 import { sitemapTypeOf, type SitemapType } from './types'
 
 // @cdc seo — liste des URL des sitemaps : uniquement des adresses finales en 200 (aucune
@@ -88,16 +88,11 @@ function contentEntries(): SitemapEntry[] {
 
 /** Classements au-delà du seuil. Fiches et pages marque du scanner : jamais dans le sitemap. */
 async function croquettesEntries(): Promise<SitemapEntry[]> {
-  const items = await reviewedItemsSafe()
-  // Deux barèmes, deux classements
-  const complete = items.filter((i) => i.kind === 'complete')
-  const treats = items.filter((i) => i.kind === 'treat')
   const entries: SitemapEntry[] = []
-  if (complete.length >= RANKING_MIN_REVIEWED)
-    entries.push({ path: '/croquettes', lastmod: latest(complete.map((i) => i.updatedAt)) })
-  // Classement des friandises : même seuil, date de la fiche friandise la plus récente
-  if (treats.length >= RANKING_MIN_REVIEWED)
-    entries.push({ path: '/croquettes/friandises', lastmod: latest(treats.map((i) => i.updatedAt)) })
+  for (const segment of SEGMENTS.filter((s) => s.path.startsWith('/meilleures-'))) {
+    const list = await segmentRecipes(segment)
+    if (segmentIndexable(segment, list)) entries.push({ path: segment.path, lastmod: latest(list.map((r) => r.updatedAt)) })
+  }
   return entries
 }
 

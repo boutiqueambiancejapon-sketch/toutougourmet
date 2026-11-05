@@ -17,11 +17,23 @@ const OPEN_DATA = {
 /** Mention ODbL d'une fiche issue d'une base ouverte, null pour une lecture de photos. */
 export function openDataCredit(source: AnalysisSource): string | null {
   if (source === 'maxizoo') return 'Données : fiche produit Maxi Zoo'
+  if (source === 'marque') return 'Données : site officiel de la marque'
   return source === 'photo' ? null : OPEN_DATA[source].credit
 }
 
 export function SourceNotice({ source, reviewed = false }: { source: AnalysisSource; reviewed?: boolean }) {
   if (source === 'photo') return <AiNotice reviewed={reviewed} />
+  if (source === 'marque') {
+    return (
+      <p className="m-0 rounded-box border border-line bg-paper p-3 text-sm leading-relaxed text-ink-2">
+        <strong className="font-semibold text-ink">Données : site officiel de la marque.</strong> Composition et constituants viennent de sa page produit, la note de{' '}
+        <Link href="/scanner#methode" className="font-semibold text-orange-ink underline underline-offset-2">
+          notre barème publié
+        </Link>
+        . Marque partenaire : on touche une commission si tu commandes, la note n&apos;en dépend pas.
+      </p>
+    )
+  }
   if (source === 'maxizoo') {
     return (
       <p className="m-0 rounded-box border border-line bg-paper p-3 text-sm leading-relaxed text-ink-2">

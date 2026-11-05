@@ -83,7 +83,7 @@ export default async function BrandRankingPage({ params }: Params) {
       />
       <RankingJsonLd name={`Croquettes ${group.name} classées par note`} path={`/croquettes/marque/${group.slug}`} items={group.items} total={n} />
       <div className="flex flex-col gap-4">
-        <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Classement des croquettes', href: '/croquettes' }, { label: group.name }]} />
+        <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Classement des croquettes', href: '/meilleures-croquettes' }, { label: group.name }]} />
         <header className="flex flex-col gap-3">
           <h1 className="m-0 font-display text-[clamp(2rem,5vw,2.75rem)] font-black leading-[1.05] tracking-tight text-ink">
             {titleTypo(`Croquettes ${group.name} : avis et note de composition`)}
@@ -124,7 +124,7 @@ export default async function BrandRankingPage({ params }: Params) {
           page du scanner de croquettes
         </Link>
         , identique pour toutes les marques. Pour comparer avec les autres marques, voir le{' '}
-        <Link href="/croquettes" className="font-semibold text-orange-ink underline underline-offset-2">
+        <Link href="/meilleures-croquettes" className="font-semibold text-orange-ink underline underline-offset-2">
           classement des meilleures croquettes pour chien
         </Link>
         . Une autre recette de la marque sous la main ?{' '}
