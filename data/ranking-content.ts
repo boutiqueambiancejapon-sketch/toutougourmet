@@ -11,6 +11,7 @@ export interface RankingContent {
 }
 
 const FEDIAF = 'FEDIAF, Nutritional Guidelines (besoins en protéines, matières grasses, calcium et phosphore)'
+const WSAVA_TREATS = 'WSAVA, Feeding treats to your dog, 2025 (repère de 10 % pour les friandises)'
 const REG = "Règlement CE 767/2009 sur l'étiquetage des aliments pour animaux"
 
 export const RANKING_CONTENT: Partial<Record<SegmentSlug, RankingContent>> = {
@@ -239,7 +240,7 @@ export const RANKING_CONTENT: Partial<Record<SegmentSlug, RankingContent>> = {
       {
         h2: 'Combien de friandises donner à un chien par jour ?',
         paragraphs: [
-          "Les friandises ne doivent pas dépasser 10 % de l'apport calorique du jour, selon les repères de la FEDIAF. Un chien de 15 kg qui a besoin de 800 kcal par jour peut donc recevoir 80 kcal de friandises au maximum, et sa ration se réduit d'autant s'il en reçoit souvent.",
+          "Les friandises ne doivent pas dépasser 10 % de l'apport calorique du jour, un repère courant des vétérinaires. Un chien de 15 kg qui a besoin de 800 kcal par jour peut donc recevoir 80 kcal de friandises au maximum, et sa ration se réduit d'autant s'il en reçoit souvent.",
           "Ce plafond passe vite pour un petit chien. Un Yorkshire de 3 kg brûle très peu, et quelques biscuits peuvent peser lourd dans sa journée. Coupe les friandises en petits morceaux : le chien retient le geste bien plus que la taille de la récompense.",
           "Notre [guide des friandises naturelles](/chien/alimentation-quotidienne/friandises-naturelles-chien-guide) donne des équivalents concrets, comme des sprats séchés ou un bâton de carotte, et notre outil de [ration](/outils/ration) aide à garder l'équilibre.",
         ],
@@ -267,6 +268,6 @@ export const RANKING_CONTENT: Partial<Record<SegmentSlug, RankingContent>> = {
       { q: 'Comment noter une friandise qui n’est pas dans la liste ?', a: "Le [scanner](/scanner) lit le code-barres ou une photo de l'étiquette et applique le barème des friandises. Le résultat indique aussi une quantité par jour quand les données le permettent." },
       { q: 'Faut-il préférer les friandises maison ?', a: "Une friandise maison te laisse choisir chaque ingrédient, et plusieurs de nos recettes tiennent en quelques minutes. Elle se conserve moins longtemps : garde-la au frais et compte ses calories comme les autres." },
     ],
-    sources: [FEDIAF],
+    sources: [WSAVA_TREATS],
   },
 }

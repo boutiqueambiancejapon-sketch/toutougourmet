@@ -61,8 +61,8 @@ export function TreatMethod() {
       </p>
       <p>
         <strong>Combien par jour ?</strong> Si l&apos;étiquette donne l&apos;énergie (en kcal par kilo, pour 100{NB}g ou par
-        pièce), le résultat calcule combien de friandises tiennent dans {share} de l&apos;apport calorique du jour, repère de la
-        FEDIAF. Le besoin du jour vient de la formule du calculateur de ration (NRC 2006) pour un chien adulte d&apos;activité
+        pièce), le résultat calcule combien de friandises tiennent dans {share} de l&apos;apport calorique du jour, repère courant
+        des vétérinaires. Le besoin du jour vient de la formule du calculateur de ration (NRC 2006) pour un chien adulte d&apos;activité
         normale de {kg('petit')}, {kg('moyen')} ou {kg('grand')}. Sans énergie écrite, le résultat le dit et ne donne pas de
         chiffre.
       </p>
@@ -72,7 +72,7 @@ export function TreatMethod() {
       </p>
       <Sources
         items={[
-          'FEDIAF, Nutritional Guidelines for Complete and Complementary Pet Food for Cats and Dogs, 2021 (friandises et aliments complémentaires).',
+          'WSAVA, Feeding treats to your dog, 2025 (repère de 10 % de l\'apport calorique).',
           'FEDIAF, Code of Good Labelling Practice for Pet Food, 2019 (« au poulet » : 4 % au moins, « riche en poulet » : 14 % au moins).',
           'National Research Council, Nutrient Requirements of Dogs and Cats, National Academies Press, 2006 (besoin énergétique).',
           'Règlement (CE) n° 767/2009 (ordre des ingrédients par poids décroissant) et directive 82/475/CEE (catégories d\'ingrédients).',

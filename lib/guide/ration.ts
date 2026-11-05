@@ -38,6 +38,6 @@ export const RATION_TIPS: { title: string; text: string }[] = [
   },
   {
     title: 'Les friandises',
-    text: 'Toutes friandises réunies restent sous 10 % de l’apport calorique quotidien (FEDIAF 2023).',
+    text: 'Toutes friandises réunies restent sous 10 % de l’apport calorique quotidien (repère courant des vétérinaires).',
   },
 ]

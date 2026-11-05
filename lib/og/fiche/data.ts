@@ -83,8 +83,8 @@ function treatData(row: FoodAnalysis): FicheA4Data['treat'] {
     alerts: t.alerts.map((x) => ({ label: `${x.label} (« ${clipWords(x.found, 40)} »)`, text: clipWords(x.text, 150) })),
     perDay: a ? a.rows.map((r) => ({ label: `${r.label} (${r.weightKg} kg)`, value: allowanceText(r) })) : [],
     perDayNote: a
-      ? `Au plus ${share} de l'apport calorique du jour (FEDIAF), chien adulte d'activité normale.`
-      : `Calories non indiquées sur l'étiquette. Repère FEDIAF : friandises sous ${share} de l'apport calorique du jour.`,
+      ? `Au plus ${share} de l'apport calorique du jour (repère vétérinaire), chien adulte d'activité normale.`
+      : `Calories non indiquées sur l'étiquette. Repère vétérinaire : friandises sous ${share} de l'apport calorique du jour.`,
     homemade:
       row.score !== null && row.score < ALTERNATIVE_BELOW
         ? `Recettes maison sans sucre ni sel : ${HOMEMADE_TREATS.map((h) => h.label).join(', ')}, sur toutou-gourmet.com.`

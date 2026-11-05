@@ -115,7 +115,7 @@ Alternative partenaire sous 55/100 : jamais pour une friandise (pas de partenair
 - Énergie lue sur l'étiquette (`ExtractedLabel.energie`, champ facultatif ajouté le 2026-11-03) : `kcalKg`, `kcal100g`, `kcalPiece`, `poidsPieceG`, recopiés dans l'unité écrite, sans conversion par l'IA (kJ seuls : rien). Open Pet Food Facts : `energy-kcal_100g` si entre 20 et 900.
 - kcal pour 100 g = `kcal100g`, sinon `kcalKg ÷ 10`. kcal par pièce = `kcalPiece`, sinon kcal pour 100 g × poids de la pièce ÷ 100.
 - Besoin du jour : formule du calculateur de ration (`calculateDailyCalories`, lib/calculators.ts : 70 × poids^0,75 × 1,5, NRC 2006), chien adulte non stérilisé, activité normale, au poids de référence du gabarit (`dogSizeRanges.midKg`) : petit 5 kg, moyen 15 kg, grand 32 kg.
-- Plafond : 10 % de ce besoin (FEDIAF), arrondi à la kcal. Friandises par jour = plafond ÷ kcal par pièce, arrondi à l'entier inférieur (0 : « moins d'une friandise »). Sans kcal par pièce mais avec kcal au poids : grammes par jour.
+- Plafond : 10 % de ce besoin (repère WSAVA, Feeding treats to your dog, 2025), arrondi à la kcal. Friandises par jour = plafond ÷ kcal par pièce, arrondi à l'entier inférieur (0 : « moins d'une friandise »). Sans kcal par pièce mais avec kcal au poids : grammes par jour.
 - Aucune énergie écrite : « Calories non indiquées sur l'étiquette », sans chiffre.
 
 ### Alertes de sécurité (hors note)

@@ -5,7 +5,7 @@ import { Panel, small } from "./FicheA4Panel";
 import { u } from "./scale";
 
 // @cdc lot 6 — fiche A4 (PDF) d'une friandise : alertes de sécurité sous le verdict, et en bas
-// de page le nombre de friandises par jour (10 % de l'apport calorique, FEDIAF) et, sous 55/100,
+// de page le nombre de friandises par jour (10 % de l'apport calorique, repère WSAVA) et, sous 55/100,
 // nos recettes maison (pas de marque partenaire de friandises).
 
 type Treat = NonNullable<FicheA4Data["treat"]>;
