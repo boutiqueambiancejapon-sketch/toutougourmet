@@ -6,9 +6,11 @@ import { findByEan, recordScan, releaseQuota, reserveQuota, saveAnalysis, usedTh
 import { MAX_IMAGE_BYTES, MAX_IMAGES, RATE_LIMITS } from '@/lib/scanner/config'
 import { scanLimitFor } from '@/lib/server/membership'
 import { releaseDailyCall, reserveDailyCall } from '@/lib/server/scanner-daily'
+import { BAREMES_ACTIFS } from '@/lib/scanner/baremes/config'
+import { differeDeLaFiche } from '@/lib/scanner/baremes/controle-lecture'
 import { extractLabel } from '@/lib/scanner/extract'
 import { prepareImage } from '@/lib/scanner/images'
-import { ERROR_MESSAGES, INCOMPLETE_MESSAGE, QUOTA_FREE_MESSAGE, toScanAnalysis, type ScanQuota, type ScanResponse } from '@/lib/scanner/result'
+import { ERROR_MESSAGES, BACK_PHOTO_MESSAGE, INCOMPLETE_MESSAGE, QUOTA_FREE_MESSAGE, toScanAnalysis, type ScanQuota, type ScanResponse } from '@/lib/scanner/result'
 import { classifyExtraction, nothingRead } from '@/lib/scanner/outcome'
 import { createScanSession, consumeScanSession } from '@/lib/server/scan-session'
 import { recordScannerEvent } from '@/lib/server/scanner-events'
@@ -39,6 +41,7 @@ const STATUS: Record<ScannerErrorCode, number> = {
   bad_type: 415,
   not_a_label: 422,
   blurry: 422,
+  recheck: 422,
   cat_food: 422,
   not_found: 404,
   timeout: 504,
@@ -77,7 +80,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   if (!user) return fail('unauthorized')
   const log = (result: ScannerResult, foodAnalysisId: string | null = null) => recordScannerEvent({ type: 'photo', result, userId: user.id, foodAnalysisId })
   const failed = (error: Exclude<ScannerErrorCode, 'unauthorized'>, q?: ScanQuota) => {
-    log(error)
+    log(error === 'recheck' ? 'blurry' : error)
     return fail(error, q)
   }
   if (overLimit(`scan:${user.id}`, RATE_LIMITS)) return failed('rate_limited')
@@ -135,13 +138,18 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       const free = nothingRead(outcome) && !paid
       if (free) await releaseQuota(user.id)
       const session = paid && typeof sessionToken === 'string' ? sessionToken : free ? '' : createScanSession(user.id)
-      const body: ScanResponse = { ok: false, error: 'incomplete', message: INCOMPLETE_MESSAGE, missing: outcome.missing, read: outcome.read, session, quota: await quota(user.id) }
+      const body: ScanResponse = { ok: false, error: 'incomplete', message: BAREMES_ACTIFS && outcome.missing.includes('ingredients') ? BACK_PHOTO_MESSAGE : INCOMPLETE_MESSAGE, missing: outcome.missing, read: outcome.read, session, quota: await quota(user.id) }
       log('incomplete')
       return ok(body)
     }
     const label = { ...result.label, marque: result.label.marque ?? hint(form.get('brand')), produit: result.label.produit ?? hint(form.get('product')) }
     const ean = cleanEan(label.ean) ?? typedEan
     const existing = ean ? await findByEan(ean) : null
+    // Nouveaux barèmes : un chiffre lu loin de la fiche du même code-barres, on redemande la photo.
+    if (BAREMES_ACTIFS && existing && differeDeLaFiche(label.constituants, existing.extracted.constituants)) {
+      await refund()
+      return failed('recheck', await quota(user.id))
+    }
     if (existing) await refund() // déjà en cache : l'analyse ne compte pas
     const row = existing ?? (await saveAnalysis(label, ean, result.model, 'photo'))
     await recordScan(user.id, row.id, Boolean(existing))
@@ -151,7 +159,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   } catch (err) {
     if (err instanceof ScannerError) {
       if (!['too_large', 'bad_type', 'bad_request'].includes(err.code)) console.error(`[scanner] ${err.code} ${err.message}`)
-      log(err.code === 'unauthorized' ? 'provider_error' : err.code)
+      log(err.code === 'unauthorized' ? 'provider_error' : err.code === 'recheck' ? 'blurry' : err.code)
       return fail(err.code)
     }
     console.error('[scanner] erreur', err instanceof Error ? err.message : err)

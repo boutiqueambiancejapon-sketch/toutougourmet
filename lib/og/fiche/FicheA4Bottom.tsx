@@ -84,7 +84,7 @@ export function FicheA4Bottom({ d }: { d: FicheA4Data }) {
       }}
     >
       <div style={{ display: "flex", gap: u(10), height: u(ROW_H) }}>
-        {d.treat ? treatPanels(d.treat) : completePanels(d)}
+        {d.simple ? null : d.treat ? treatPanels(d.treat) : completePanels(d)}
         <Panel width={QR_W}>
           <div
             style={{

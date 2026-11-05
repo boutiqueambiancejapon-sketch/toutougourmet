@@ -7,7 +7,8 @@ import type { ScannerErrorCode } from './types'
 export type ScanType = 'code' | 'photo'
 
 /** Une tentative sans compte sur la route photo n'est pas un scan : elle n'est pas enregistrée. */
-export type ScannerResult = Exclude<ScannerErrorCode, 'unauthorized'> | 'found' | 'incomplete' | 'not_scorable' | 'lookup_error'
+// « recheck » est journalisé comme « blurry » : la contrainte SQL de scanner_events reste inchangée.
+export type ScannerResult = Exclude<ScannerErrorCode, 'unauthorized' | 'recheck'> | 'found' | 'incomplete' | 'not_scorable' | 'lookup_error'
 
 /** success : note affichée · partial : photo manquante demandée · missing : produit inconnu · failure : tout le reste */
 export type ResultFamily = 'success' | 'partial' | 'missing' | 'failure'

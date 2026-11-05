@@ -3,7 +3,7 @@
 // critères en barres, composition en pastilles colorées. Tout tient sur une page.
 import { Stamp } from '../ScanCard'
 import { OG_COLORS as C } from '../tokens'
-import type { FicheA4Data } from './data'
+import { clipWords, type FicheA4Data } from './data'
 import { FicheA4Bottom } from './FicheA4Bottom'
 import { FicheA4Composition } from './FicheA4Composition'
 import { FicheA4Criteria } from './FicheA4Criteria'
@@ -23,7 +23,7 @@ function Header({ d }: { d: FicheA4Data }) {
         <span style={{ fontFamily: 'Fraunces', fontWeight: 900, fontSize: u(nameSize(d.name)), lineHeight: 1.08, color: C.cream }}>{d.name}</span>
         <span style={{ fontWeight: 500, fontSize: u(11.5), color: C.cream2 }}>{d.meta}</span>
       </div>
-      <Stamp score={d.score} band={d.band ?? 'Pas de note'} size={u(112)} />
+      <Stamp score={d.score} band={d.band ?? (d.score === null ? 'Pas de note' : '')} size={u(112)} />
     </div>
   )
 }
@@ -40,9 +40,9 @@ export function FicheA4({ d }: { d: FicheA4Data }) {
       {d.missing ? (
         <div style={{ display: 'flex', background: C.amberBg, borderRadius: u(10), padding: `${u(7)}px ${u(12)}px`, fontWeight: 500, fontSize: u(10.5), lineHeight: 1.35, color: C.amberInk }}>{d.missing}</div>
       ) : null}
-      {d.treat ? <TreatAlertsA4 alerts={d.treat.alerts} /> : null}
-      <FicheA4Criteria criteria={d.criteria} />
-      <FicheA4Composition items={d.ingredients} hidden={d.hidden} />
+      {d.safety.length ? <TreatAlertsA4 alerts={d.safety.map((text) => ({ label: 'Attention', text: clipWords(text, 170) }))} /> : d.treat ? <TreatAlertsA4 alerts={d.treat.alerts} /> : null}
+      {d.simple ? null : <FicheA4Criteria criteria={d.criteria} />}
+      {d.simple ? null : <FicheA4Composition items={d.ingredients} hidden={d.hidden} />}
       <FicheA4Bottom d={d} />
     </div>
   )

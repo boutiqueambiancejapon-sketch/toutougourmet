@@ -1,3 +1,4 @@
+import { BAREMES_ACTIFS } from '@/lib/scanner/baremes/config'
 import type { RankingContent } from './ranking-content'
 
 // @cdc seo — texte des pages mères des partenaires, à partir des requêtes de la Search Console (export du
@@ -10,7 +11,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Elmut : notre avis en bref',
         paragraphs: [
           "Elmut est une bonne marque de repas frais d'après sa composition, avec une liste d'ingrédients très courte. Ses 5 recettes pour chien obtiennent de 90 à 93 sur 100 au barème du scanner : poulet, bœuf et dinde à 93, porc à 91, poisson à 90, avec une viande nommée en tête de liste.",
-          "Ces notes viennent des pages produit d'Elmut, lues le 5 novembre 2026. Sa fiche donne le rapport calcium/phosphore, de 1,1 à 1,4 selon la recette, et ne chiffre que le calcium et le phosphore ajoutés, sans leur teneur totale. La marque perd donc les 5 points de ce critère. Elmut est un partenaire, et le barème reste celui des autres marques.",
+          "Ces notes viennent des pages produit d'Elmut, lues le 5 novembre 2026. Sa fiche donne le rapport calcium/phosphore, de 1,1 à 1,4 selon la recette, et ne chiffre que le calcium et le phosphore ajoutés, sans leur teneur totale. Notre note ne peut donc pas vérifier ces deux teneurs elles-mêmes. Elmut est un partenaire, et le barème reste celui des autres marques.",
         ],
       },
       {
@@ -88,7 +89,7 @@ export const BRAND_HUB: Record<string, Pick<RankingContent, 'sections'>> = {
         h2: 'Dogfy Diet : notre avis en bref',
         paragraphs: [
           "Dogfy Diet est une bonne marque de repas frais d'après sa composition, avec des sachets prédosés faciles à servir. Ses 4 recettes obtiennent de 87 à 91 sur 100 au barème du scanner : bœuf, dinde et poulet à 91, saumon à 87, avec environ 60 % de viande ou de poisson selon les pages officielles.",
-          "Ces notes viennent des fiches de la marque, lues le 5 novembre 2026. Ces pages ne donnent ni calcium ni phosphore, et Dogfy Diet perd donc les 5 points de ce critère. Le menu bœuf est riche, avec 37,5 % de matières grasses sur matière sèche, et la portion se discute pour un chien en surpoids. Dogfy Diet est un partenaire, et le barème reste le même que pour les autres marques.",
+          `Ces notes viennent des fiches de la marque, lues le 5 novembre 2026. Ces pages ne donnent ni calcium ni phosphore, ${BAREMES_ACTIFS ? 'et notre note, qui ne peut pas les vérifier, s\'arrête donc à 90' : 'et Dogfy Diet perd donc les 5 points de ce critère'}. Le menu bœuf est riche, avec 37,5 % de matières grasses sur matière sèche, et la portion se discute pour un chien en surpoids. Dogfy Diet est un partenaire, et le barème reste le même que pour les autres marques.`,
         ],
       },
       {

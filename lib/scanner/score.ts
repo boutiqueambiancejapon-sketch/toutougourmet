@@ -1,3 +1,4 @@
+import type { BaremeInfo } from './baremes/vers-score'
 import { animalKind, controversialPreservatives, hasColorant, hasSugar, isByProduct, isCereal, isUnnamedAnimal, speciesInDetailOnly, unnamedAntioxidants } from './ingredients'
 import type { ExtractedLabel } from './types'
 
@@ -35,6 +36,10 @@ export type CriterionId =
   | 'friandise-glycerine'
   | 'friandise-cereales'
   | 'friandise-transparence'
+  // Nouveaux barèmes (lib/scanner/baremes)
+  | 'cendres'
+  | 'transparence'
+  | 'friandise-ration'
 
 /** complete : aliment complet (croquettes, pâtée) · treat : friandise, snack, aliment complémentaire */
 export type ProductKind = 'complete' | 'treat'
@@ -98,6 +103,10 @@ export interface ScoreResult {
   notice: string | null
   /** Friandise : nombre par jour selon le gabarit et alertes de sécurité */
   treat?: TreatInfo
+  /** Nouveaux barèmes : type, classement, note seule pour compléments et huiles */
+  bareme?: BaremeInfo
+  /** Nouveaux barèmes : alertes de sécurité, tous types */
+  alertes?: string[]
 }
 
 /** Note calculée sans tous les critères : un chiffre manque sur l'étiquette. */

@@ -18,6 +18,11 @@ export const IMAGE_TYPES = ['aliment-chien', 'aliment-chat', 'friandise', 'autre
 export type ImageType = (typeof IMAGE_TYPES)[number]
 export const LEGIBILITY = ['nette', 'floue'] as const
 export const FOOD_TYPES = ['sec', 'humide', 'autre', 'inconnu'] as const
+/** Champs lus seulement avec les nouveaux barèmes (lib/scanner/baremes/config.ts). */
+export const PRODUCT_TYPES = ['aliment', 'friandise', 'complement', 'huile', 'autre', 'indetermine'] as const
+export const LIFE_STAGES = ['chiot', 'adulte', 'senior', 'tous'] as const
+export const DOG_SIZES = ['petit', 'moyen', 'grand'] as const
+export const PACKAGINGS = ['opaque', 'transparent'] as const
 
 /** Constituants analytiques en % du produit tel quel (comme sur l'étiquette). */
 export const ANALYTICAL_KEYS = ['proteines', 'matieresGrasses', 'cellulose', 'cendres', 'humidite', 'calcium', 'phosphore'] as const
@@ -97,6 +102,19 @@ export const extractedLabelSchema = z.object({
   partAnimaleDeclaree: pct,
   /** Absent des analyses enregistrées avant le barème friandise (2026-11-03) */
   energie: energySchema,
+  // Absents tant que les nouveaux barèmes sont désactivés : ni le prompt ni les fiches ne les ont.
+  typeProduit: z.enum(PRODUCT_TYPES).nullable().optional().catch(null),
+  stade: z.enum(LIFE_STAGES).nullable().optional().catch(null),
+  gabarit: z.enum(DOG_SIZES).nullable().optional().catch(null),
+  alimentVeterinaire: z.boolean().nullable().optional().catch(null),
+  tableauBrut: text(1500).optional(),
+  teneurs: z.array(z.string()).optional().catch(undefined),
+  /** Rapport calcium/phosphore annoncé sans les deux valeurs. Une seule valeur : min = max. */
+  rapportCaP: z.object({ min: z.number().positive().max(20), max: z.number().positive().max(20) }).nullable().optional().catch(null),
+  rationLue: z.boolean().nullable().optional().catch(null),
+  ration10kgG: bounded(2_000).optional(),
+  mentions: text(500).optional(),
+  emballage: z.enum(PACKAGINGS).nullable().optional().catch(null),
   confiance: z.object(Object.fromEntries(CONFIDENCE_FIELDS.map((k) => [k, confidence])) as Record<ConfidenceField, typeof confidence>).catch(
     Object.fromEntries(CONFIDENCE_FIELDS.map((k) => [k, 'absent'])) as Record<ConfidenceField, 'absent'>,
   ),
@@ -147,6 +165,7 @@ export type ScannerErrorCode =
   | 'bad_type'
   | 'not_a_label'
   | 'blurry'
+  | 'recheck'
   | 'cat_food'
   | 'not_found'
   | 'timeout'

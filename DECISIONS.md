@@ -294,9 +294,16 @@ Classements séparés sec et humide. Fiches partenaires revérifiées et fiches 
 ## 2026-11-05 — Dogfy Diet : une seule page
 L'avis `avis-dogfy-diet-repas-frais-chien` avait les positions (5 554 impressions, position 10,4) et la page marque 4 impressions : celle-ci redirige vers l'avis, qui reprend son contenu (`BrandHubBlock`). Rappel de décembre 2024 retiré de la page Ultra Premium Direct, jugé daté par le propriétaire.
 
+## 2026-11-05 — Barèmes du scanner : branche `feat/baremes`, interrupteur éteint
+Les quatre barèmes vivent dans `lib/scanner/baremes/`, derrière `BAREMES_ACTIFS = false` (`config.ts`) : ancien barème et ancien prompt tant qu'il reste faux, l'ancien code n'est pas supprimé. Compléments et huiles affichent la note et « Attention, ce n'est pas un conseil de vétérinaire », sans détail, études ni tranche. Décision du propriétaire : les alertes de sécurité restent affichées (toxiques, oignon et ail, rappel sur le foie de morue, dépassement de la limite haute NRC d'EPA + DHA), sur les huiles comme sur les compléments. Avant d'activer : raccorder les classements (sec, humide, friandise, via `details.bareme.classement`), sortir compléments et huiles des listes publiques et des pages `/croquettes`, résultats de `resultats-ia.md` lus par le propriétaire.
+
+## 2026-11-05 — Barèmes : rapport calcium/phosphore déclaré et garde-fou de lecture
+On se base sur ce que dit la marque : sans les deux valeurs, le critère du barème aliments suit `rapportCaP` (6 sur 6 dans la plage, 0 hors plage), hors alertes chiot, et le plafond de 90 reste tant que les deux valeurs manquent, pour toutes les marques. Chiffres incohérents ou loin de la fiche du même code-barres : « Reprends une photo du tableau », pas de note (`controle-lecture.ts`), journalisé comme `blurry` pour garder la contrainte SQL de `scanner_events`. Composition absente : photo du dos demandée, pas de note. `BAREMES_ACTIFS` reste faux : bloquants dans `~/audits/baremes-2026-11-05/resultats-ia.md`.
 ## 2026-11-05 — Source des fiches
 Décision du propriétaire : on se base sur ce que dit la marque (site ou fiche technique), avec la date du relevé, pour toutes les marques. Pas de recherche de source tierce. Les promesses s'écrivent « selon la marque ».
 
+## 2026-11-05 — Barèmes : raccord derrière l'interrupteur
+Classements, listes, fiche, PDF et images de partage suivent `details.bareme` quand `BAREMES_ACTIFS` est vrai : sec et humide séparés, compléments, huiles et aliments vétérinaires hors des listes. Interrupteur faux, rendu comparé à `origin/v2` sur une copie de la base : seule la phrase Elmut change. Avant d'activer : part des partenaires à trancher, méthode de `/scanner` à réécrire, écritures en base à accorder (`~/audits/baremes-2026-11-05/recalcul/comparatif.md`).
 ## 2026-11-05 — Partenaires dans les classements
 Le propriétaire accepte que les partenaires restent nombreux en tête si le résultat tient après l'import des pâtées, barème publié et liens signalés. La formule n'est pas ajustée pour les faire reculer. L'activation attend qu'il voie le classement final.
 
@@ -304,3 +311,8 @@ Le propriétaire accepte que les partenaires restent nombreux en tête si le ré
 Le propriétaire revoit sa décision « aucune fiche indexée » : ces pages poussent au clic partenaire et il veut avancer sans attendre. Premier lot de 49 fiches, une par recette, listées dans `data/fiches-indexees.json`, sur des marques qui ont une page mère. Titre et H1 au nom exact du produit, adresse courte par type (`/croquettes/…`, `/patees/…`), texte calculé depuis la composition, Product et Review avec notre note. La page mère vise « avis {marque} ». Les autres fiches restent en noindex. Mise en ligne directe sur sa demande, sans maquette et avant les barèmes : les notes changeront à l'activation. Mesure : positions et clics dans la Search Console, recul éventuel des articles.
 
 Précision du propriétaire le même jour : titre et H1 des fiches indexées portent « Avis » et l'année (« Avis Royal Canin Medium Puppy 2026 »). L'année est calculée à l'affichage et passe seule à 2027. Ces fiches gardent le nom complet du produit : elles ne visent pas « avis {marque} » seul, réservé à la page mère.
+## 2026-11-05 — Barèmes : script d'activation
+`scripts/activer-baremes.ts` écrit corrections et recalcul en une seule transaction, le jour de l'activation seulement : essai par défaut, refus sans sauvegarde de moins de 36 h, refus d'écrire avec l'interrupteur éteint. Avant de le lancer : protéger les corrections des imports OPFF et Maxi Zoo, qui réécrivent les fiches non relues, et décider du sort des fiches dont le contrôle IA devient caduc.
+
+## 2026-11-05 — Barèmes activés
+Le propriétaire demande l'activation sans voir d'abord le classement final, après avertissement sur le nombre de notes qui changent. Les fiches complétées perdent leur statut de contrôle IA jusqu'au prochain contrôle, comme recommandé. Sauvegarde prise juste avant.

@@ -1,6 +1,8 @@
 import { cache } from 'react'
 import { and, desc, isNotNull, sql } from 'drizzle-orm'
 import { foodAnalysis } from '@/db/schema'
+import { BAREMES_ACTIFS } from '@/lib/scanner/baremes/config'
+import { horsListes, NOM_CLASSEMENT, noteCourante } from '@/lib/scanner/baremes/fiche'
 import { isTherapeutic } from '@/lib/scanner/fiche-lists'
 import { foodNoun, type FoodNoun } from '@/lib/scanner/food-noun'
 import { betterEnough } from '@/lib/scanner/seo'
@@ -45,7 +47,14 @@ export const reviewedItems = cache(async (): Promise<ReviewedItem[]> => {
     .from(foodAnalysis)
     .where(and(publishedWhere(), isNotNull(foodAnalysis.score)))
     .orderBy(desc(foodAnalysis.score), foodAnalysis.brand, foodAnalysis.product)
-  return rows.map(({ extracted, details, ...r }) => ({ ...r, score: r.score ?? 0, kind: r.kind === 'treat' ? 'treat' : 'complete', noun: foodNoun(extracted, details), brandSlug: brandSlug(r.brand) }))
+  const items = rows.flatMap(({ extracted, details, ...r }) => {
+    const note = noteCourante({ score: r.score, details, extracted })
+    if (horsListes(note.details) || (note.details.bareme && note.score === null)) return []
+    const noun = note.details.bareme?.classement ? NOM_CLASSEMENT[note.details.bareme.classement] : foodNoun(extracted, note.details)
+    return [{ ...r, score: note.score ?? 0, kind: (note.details.bareme ? note.details.kind === 'treat' : r.kind === 'treat') ? ('treat' as const) : ('complete' as const), noun, brandSlug: brandSlug(r.brand) }]
+  })
+  // Sans recalcul en base, l'ordre de la requête ne suit pas la nouvelle note.
+  return BAREMES_ACTIFS ? items.sort((a, b) => b.score - a.score) : items
 })
 
 /** Même liste, sans jamais faire échouer la page qui l'affiche. `kind` : aliments complets ou friandises seulement. */
