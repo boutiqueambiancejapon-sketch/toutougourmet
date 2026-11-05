@@ -254,16 +254,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `coup-de-chaleur-chien-symptomes-premiers-gestes`
 - [x] `faut-il-faire-jeuner-son-chien`
 - [x] `coprophagie-chien-causes-solutions`
-- [ ] `croquettes-chien-stresse-anxieux`
-- [ ] `microbiote-intestinal-chien-alimentation`
-- [ ] `croquettes-chien-allergique`
-- [ ] `diarrhee-chien-que-faire-alimentation`
-- [ ] `choisir-alimentation-chat-guide`
-- [ ] `recette-patee-maison-poisson-chien`
-- [ ] `chien-peut-manger-viande-crue-barf`
-- [ ] `alimentation-beau-pelage-chien-guide`
-- [ ] `croquettes-chien-sportif`
-- [ ] `chien-peut-manger-beurre-de-cacahuete`
+- [x] `croquettes-chien-stresse-anxieux`
+- [x] `microbiote-intestinal-chien-alimentation`
+- [x] `croquettes-chien-allergique`
+- [x] `diarrhee-chien-que-faire-alimentation`
+- [x] `choisir-alimentation-chat-guide`
+- [x] `recette-patee-maison-poisson-chien`
+- [x] `chien-peut-manger-viande-crue-barf`
+- [x] `alimentation-beau-pelage-chien-guide`
+- [x] `croquettes-chien-sportif`
+- [x] `chien-peut-manger-beurre-de-cacahuete`
 - [ ] `croquettes-chien-constipation`
 - [ ] `torsion-estomac-chien-prevention-alimentation`
 - [ ] `nourriture-samoyed`
