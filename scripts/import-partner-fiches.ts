@@ -18,7 +18,6 @@ interface PartnerFiche {
   composition: string
   constituants: Extract<MaxiZooParse, { ok: true }>['constituants']
   kcal100g: number | null
-  logo: string
 }
 
 async function main(): Promise<void> {
@@ -34,9 +33,9 @@ async function main(): Promise<void> {
     if (!pool || details.score === null) continue
     await pool.query(
       `INSERT INTO app.food_analysis (slug, brand, product, extracted, details, score, algorithm_version, model, source, reviewed, image_url, scan_count)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, 'site-marque', 'marque', true, $8, 0)
-       ON CONFLICT (slug) DO UPDATE SET extracted = $4, details = $5, score = $6, algorithm_version = $7, image_url = $8, updated_at = now()`,
-      [baseSlug(f.brand, f.product, null), f.brand, f.product, JSON.stringify(label), JSON.stringify(details), details.score, scoreVersionFor(label), f.logo],
+       VALUES ($1, $2, $3, $4, $5, $6, $7, 'site-marque', 'marque', true, NULL, 0)
+       ON CONFLICT (slug) DO UPDATE SET extracted = $4, details = $5, score = $6, algorithm_version = $7, updated_at = now()`,
+      [baseSlug(f.brand, f.product, null), f.brand, f.product, JSON.stringify(label), JSON.stringify(details), details.score, scoreVersionFor(label)],
     )
   }
   await pool?.end()

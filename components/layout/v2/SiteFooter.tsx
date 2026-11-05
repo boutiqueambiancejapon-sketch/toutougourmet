@@ -34,6 +34,8 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
     title: 'Outils',
     links: [
       { href: '/scanner', label: 'Scanner de croquettes' },
+      { href: '/meilleures-croquettes', label: 'Classement des croquettes' },
+      { href: '/meilleures-friandises', label: 'Classement des friandises' },
       { href: '/quiz', label: 'Le test de mon chien' },
       { href: '/outils/ration', label: 'Calcul de la ration' },
       { href: '/outils/age', label: 'Âge humain du chien' },

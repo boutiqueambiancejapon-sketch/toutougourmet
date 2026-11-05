@@ -5,7 +5,7 @@
 import type { ComponentType } from 'react'
 import { IconBook, IconBowl, IconDog, IconHome, IconScan, type IconProps } from '@/components/icons'
 
-export type NavMatch = 'home' | 'guides' | 'races' | 'tools' | 'brands' | 'quiz' | 'scanner'
+export type NavMatch = 'home' | 'guides' | 'races' | 'tools' | 'brands' | 'quiz' | 'scanner' | 'rankings'
 
 export interface NavItem {
   href: string
@@ -17,6 +17,7 @@ export interface NavItem {
 /** En-tête ordinateur. */
 export const DESKTOP_NAV: NavItem[] = [
   { href: '/scanner', label: 'Scanner', match: 'scanner', icon: IconScan },
+  { href: '/meilleures-croquettes', label: 'Classements', match: 'rankings' },
   { href: '/chien', label: 'Guides', match: 'guides' },
   { href: '/chien/race', label: 'Races', match: 'races' },
   { href: '/outils', label: 'Outils', match: 'tools' },
@@ -35,11 +36,12 @@ export const TAB_NAV: NavItem[] = [
 /** Rubrique active d'une adresse (une seule à la fois). */
 export function matchSection(pathname: string): NavMatch | null {
   if (pathname === '/') return 'home'
+  if (pathname.startsWith('/meilleures-')) return 'rankings'
   if (pathname.startsWith('/chien/race')) return 'races'
   if (pathname.startsWith('/chien/marque') || pathname.startsWith('/comparateur') || pathname.startsWith('/comparatifs')) return 'brands'
   if (pathname.startsWith('/chien') || pathname.startsWith('/blog')) return 'guides'
   if (pathname.startsWith('/outils')) return 'tools'
   if (pathname.startsWith('/quiz')) return 'quiz'
-  if (pathname.startsWith('/scanner') || pathname.startsWith('/croquettes') || pathname.startsWith('/meilleures-')) return 'scanner'
+  if (pathname.startsWith('/scanner') || pathname.startsWith('/croquettes')) return 'scanner'
   return null
 }
