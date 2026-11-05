@@ -1,6 +1,7 @@
 # Progression — Toutou Gourmet — màj à chaque fin de session
 
 ## Complété
+- 2026-11-05 · `chien-peut-manger-paprika`, format « peut-il manger », requête « chien peut-il manger du paprika » (pépite Search Console). À vérifier : `chien-peut-manger-piment` annonce 100 à 500 SHU pour le paprika doux sans source trouvée.
 - 2026-11-05 · Dogfy : lieu de cuisine et détail du menu bœuf ajoutés. Barèmes prêts sur `feat/baremes` (`scripts/activer-baremes.ts`), non activés. Avant activation : protéger les fiches complétées des imports, décider pour 48 fiches du contrôle IA, recalculer les notes écrites en dur.
 - 2026-11-05 · Import Maxi Zoo : pâtées en priorité, avant toute activation des barèmes. Barèmes sur `feat/baremes`, interrupteur éteint.
 - 2026-11-05 · Dog Chef : recettes renommées Bœuf et poulet, Agneau et dinde, calories des croquettes ajoutées, texte parasite retiré. Bilan des fiches : `~/audits/baremes-2026-11-05/donnees/bilan.md`.

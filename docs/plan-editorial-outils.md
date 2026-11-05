@@ -314,7 +314,7 @@ Demande du propriétaire (2026-11-03). Marque partenaire : Franklin Pet Food (li
 
 Validé par le propriétaire (2026-11-04), d'après l'export Search Console. Ces requêtes ont déjà des impressions, sans article dédié. Vérifier le doublon comme pour les autres sujets.
 
-- [ ] Le chien peut-il manger du paprika ?
+- [x] Le chien peut-il manger du paprika ? → chien-peut-manger-paprika
 - [ ] Le chien peut-il manger des merguez ?
 - [ ] Le chien peut-il manger du skyr ?
 - [ ] Le chien peut-il manger de la choucroute ?
