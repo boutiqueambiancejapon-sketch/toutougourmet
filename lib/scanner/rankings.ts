@@ -88,14 +88,22 @@ export function recipeName(product: string): string {
 export const recipeKey = (brand: string | null, product: string): string =>
   `${fold(brand ?? '')}|${fold(recipeName(product)).replace(/[^a-z0-9]+/g, ' ').trim()}`
 
-/** Nom lisible : sans « croquettes pour chien », la première lettre en capitale. */
+/** Nom lisible : sans la marque répétée ni « croquettes pour chien », la première lettre en capitale. */
 export function displayName(name: string): string {
-  const clean = name.replace(/^(croquettes?|friandises?)(\s+pour)?(\s+chiens?)?[\s,]*/i, '').replace(/\s+pour animaux adultes$/i, '').trim() || name
+  const clean = name
+    .replace(/^(hill'?s|purina)\s+/i, '')
+    .replace(/\b(croquettes?|nourriture)(\s+s[èe]ches?)?(\s+pour)?(\s+chiens?)?[\s,]*/gi, '')
+    .replace(/^friandises?\s+/i, '')
+    .replace(/\bWILDERNESS\b/, 'Wilderness')
+    .replace(/\s+pour animaux adultes$/i, '')
+    .replace(/^[\s,]+|[\s,]+$/g, '')
+    .trim() || name
   return clean.charAt(0).toUpperCase() + clean.slice(1)
 }
 
-/** « REAL NATURE » devient « Real Nature » ; « Edgard & Cooper » ne change pas. */
+/** « REAL NATURE » devient « Real Nature », « Hills » devient « Hill's » ; « Edgard & Cooper » ne change pas. */
 export function displayBrand(brand: string): string {
+  if (/^hill'?s$/i.test(brand)) return "Hill's"
   return brand === brand.toUpperCase() ? brand.toLowerCase().replace(/(^|\s)\p{L}/gu, (c) => c.toUpperCase()) : brand
 }
 
