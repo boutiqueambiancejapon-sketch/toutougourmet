@@ -40,3 +40,6 @@ Le propriétaire veut un scanner rapide et simple. Répondre à la question pos�
 
 ## 2026-11-05 — Relire les fiches sur de vraies pages
 Deux tailles d'une même recette donnaient 67 et 82 : une parenthèse jamais fermée avalait la liste, et des phrases de livraison passaient pour un ingrédient. Comparer deux pages d'une même recette détecte ce que les tests sur exemples ne voient pas.
+
+## 2026-11-05 — Pages modèles
+J'avais réduit les pages de produit à quelques gammes. Le propriétaire veut un avis par modèle pour le maillage : le test des suggestions Google lui donne raison sur 198 modèles sur 373. Tester une intuition de demande avant de la réduire.
