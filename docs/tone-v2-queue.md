@@ -194,16 +194,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `croquettes-chien-infections-urinaires`
 - [x] `alimentation-chien-ete-canicule-guide`
 - [x] `croquettes-chien-problemes-cardiaques`
-- [ ] `recette-biscuits-potiron-chien`
-- [ ] `chien-peut-manger-persil`
-- [ ] `probiotiques-chien-bienfaits-dosage`
-- [ ] `croquettes-chien-digestion-sensible`
-- [ ] `conserver-croquettes-chien-guide-oxydation`
-- [ ] `comment-faire-maigrir-son-chien`
-- [ ] `nourriture-rottweiler`
-- [ ] `avis-japhy`
-- [ ] `chute-poils-chien-causes-alimentation`
-- [ ] `nourriture-caniche`
+- [x] `recette-biscuits-potiron-chien`
+- [x] `chien-peut-manger-persil`
+- [x] `probiotiques-chien-bienfaits-dosage`
+- [x] `croquettes-chien-digestion-sensible`
+- [x] `conserver-croquettes-chien-guide-oxydation`
+- [x] `comment-faire-maigrir-son-chien`
+- [x] `nourriture-rottweiler`
+- [x] `avis-japhy`
+- [x] `chute-poils-chien-causes-alimentation`
+- [x] `nourriture-caniche`
 - [ ] `nourriture-beagle`
 - [ ] `pica-chien-causes-solutions`
 - [ ] `taurine-chien-carence-cardiomyopathie-dilatee`
