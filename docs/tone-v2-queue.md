@@ -274,16 +274,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `chien-peut-manger-carottes`
 - [x] `chien-peut-manger-mangue`
 - [x] `croquettes-chien-intolerant-cereales`
-- [ ] `canneberge-chien-infection-urinaire-efficacite`
-- [ ] `note-etat-corporel-chien-evaluer-maison`
-- [ ] `alimentation-chien-hiver-froid-guide`
-- [ ] `nourriture-akita-inu`
-- [ ] `alimentation-barf-chien-guide-complet`
-- [ ] `croquettes-bio-chien-label-guide-achat`
-- [ ] `nourriture-shiba-inu`
-- [ ] `transition-alimentaire-chien`
-- [ ] `nourriture-berger-allemand`
-- [ ] `croquettes-chien-travail`
+- [x] `canneberge-chien-infection-urinaire-efficacite`
+- [x] `note-etat-corporel-chien-evaluer-maison`
+- [x] `alimentation-chien-hiver-froid-guide`
+- [x] `nourriture-akita-inu`
+- [x] `alimentation-barf-chien-guide-complet`
+- [x] `croquettes-bio-chien-label-guide-achat`
+- [x] `nourriture-shiba-inu`
+- [x] `transition-alimentaire-chien`
+- [x] `nourriture-berger-allemand`
+- [x] `croquettes-chien-travail`
 - [ ] `comment-preparer-repas-chien-soi-meme`
 - [ ] `nourriture-braque-hongrois`
 - [ ] `alimentation-chiot-0-2-mois`
