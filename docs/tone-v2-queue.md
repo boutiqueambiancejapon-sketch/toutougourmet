@@ -144,16 +144,16 @@ Demande du propriétaire : tout le site agréable à lire pour la V2. Ordre : Se
 - [x] `nourriture-dogue-allemand`
 - [x] `nourriture-schnauzer-nain`
 - [x] `recette-friandises-education-chien`
-- [ ] `chien-peut-manger-petits-pois`
-- [ ] `croquettes-a-volonte-ou-rationnees`
-- [ ] `combien-temps-chien-sans-manger`
-- [ ] `alimentation-chien-sportif-avant-apres-effort`
-- [ ] `nourriture-braque-allemand`
-- [ ] `additifs-croquettes-chien-conservateurs-colorants`
-- [ ] `alimentation-poisson-chien-guide`
-- [ ] `nourriture-malamute-alaska`
-- [ ] `glucosamine-chondroitine-chien-articulations`
-- [ ] `chien-peut-boire-lait`
+- [x] `chien-peut-manger-petits-pois`
+- [x] `croquettes-a-volonte-ou-rationnees`
+- [x] `combien-temps-chien-sans-manger`
+- [x] `alimentation-chien-sportif-avant-apres-effort`
+- [x] `nourriture-braque-allemand`
+- [x] `additifs-croquettes-chien-conservateurs-colorants`
+- [x] `alimentation-poisson-chien-guide`
+- [x] `nourriture-malamute-alaska`
+- [x] `glucosamine-chondroitine-chien-articulations`
+- [x] `chien-peut-boire-lait`
 - [ ] `recette-riz-poulet-chien-diete-legere`
 - [ ] `croquettes-chien-diabetique`
 - [ ] `chien-peut-manger-noix`
