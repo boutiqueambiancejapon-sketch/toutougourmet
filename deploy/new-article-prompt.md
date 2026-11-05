@@ -1,4 +1,4 @@
-Tâche quotidienne : rédiger UN nouvel article pour Toutou Gourmet (www.toutou-gourmet.com), site français sur l'alimentation et la santé du chien. Tu tournes sur le serveur de Toutou, dans une copie de travail de la branche `v2` (la V2 du site). Le site en ligne n'est pas modifié avant la bascule : tu ne touches JAMAIS à la branche de production.
+Tâche biquotidienne : rédiger UN nouvel article pour Toutou Gourmet (www.toutou-gourmet.com), site français sur l'alimentation et la santé du chien. Tu tournes sur le serveur de Toutou, dans une copie de travail de la branche `v2` (la V2 du site). Le site en ligne n'est pas modifié avant la bascule : tu ne touches JAMAIS à la branche de production.
 
 ## Ton de l'article (priorité sur tout le reste)
 **Priorité sur tout le reste (demande du propriétaire, 2026-11-04).** Le ton : informatif, intéressant, légèrement scientifique et divertissant. Un article de vulgarisation qu'on a plaisir à lire, pas une étude scientifique.
@@ -19,13 +19,12 @@ Tâche quotidienne : rédiger UN nouvel article pour Toutou Gourmet (www.toutou-
 4. Lire 2 articles récents de `content/blog/` du même format que celui que tu vas écrire, dont l'article pilote V2 `chien-peut-manger-poires.mdx`, pour reproduire exactement le frontmatter et les composants.
 
 ## Choisir le sujet
-- **Un article par jour, et le thème change chaque jour.** Calcule `$(( 10#$(date +%j) % 4 ))` et prends dans `docs/plan-editorial-outils.md` :
-  - 1 ou 3 : premier sujet non coché de « Avis modèles » (section « Avis + Maxi Zoo »). Applique les règles de la section, maillage compris.
-  - 2 : calcule `$(( 10#$(date +%j) / 4 % 2 ))` : 1, premier sujet non coché de « Avis marques » ; 0, premier sujet non coché de « Duels et besoins » (même section, mêmes règles).
-  - 0 : hors section « Avis + Maxi Zoo », le thème qui a servi il y a le plus longtemps (`git log`) parmi « Pépites Search Console », « Friandises Franklin » et les sections d'outils (ration, poids, bilan, scanner, âge, budget, test, fiche de garde).
-  Liste vide : prends le thème suivant de cette liste.
+- **Deux articles par jour, et le thème change chaque jour.** La première ligne de ce message donne le type. `J=$(( 10#$(date +%j) ))`. Les sujets viennent de `docs/plan-editorial-outils.md` :
+  - **Transactionnel (7 h)** : `J` impair, premier sujet non coché de « Avis modèles » ; `J % 4 = 2`, premier de « Avis marques » ; `J % 4 = 0`, premier de « Duels et besoins ». Applique les règles de la section « Avis + Maxi Zoo », maillage compris.
+  - **Informatif (20 h)** : `J % 3` vaut 0 ou 1, un « peut-il manger » ou une urgence : premier sujet non coché de « Pépites Search Console », puis une requête réelle non couverte trouvée par WebSearch (autocomplétion « mon chien peut-il manger », « Autres questions posées »). `J % 3 = 2`, le thème qui a servi il y a le plus longtemps (`git log`) parmi « Friandises Franklin » et les sections d'outils (ration, poids, bilan, scanner, âge, budget, test, fiche de garde).
+  Liste vide : prends le thème suivant du même type.
 - **Pour tous les thèmes, le sujet doit rester publiable.** Parmi les sections d'outils, prends le premier sujet non coché dont l'outil existe dans `components/outils/tool-list.ts`, en suivant les règles en tête du fichier (requête réelle vérifiée, pas de doublon ; sinon coche `[~]` avec le slug existant et passe au suivant). L'article pose **un seul** encart `<ToolCta tool="{slug de l'outil}" />` juste après la section qui pose la question à laquelle l'outil répond. À la fin, coche le sujet (`- [x] … → slug`) dans le même commit. Les règles ci-dessous s'appliquent aussi. Quand tout le plan est coché, reviens au choix libre ci-dessous.
-- Varier le format d'un jour à l'autre (regarder les `date` des 7 derniers articles) : guide pratique, « peut-il manger » (aliment), urgence (« mon chien a mangé… »), recette maison, dossier santé/nutrition, guide d'achat.
+- Article informatif hors plan : varier le format d'un jour à l'autre (regarder les `date` des 7 derniers articles) : guide pratique, « peut-il manger » (aliment), urgence (« mon chien a mangé… »), recette maison, dossier santé/nutrition, guide d'achat.
 - Utiliser WebSearch pour trouver une requête réelle avec de la demande (autocomplétion, « Autres questions posées », forums) qui n'est PAS déjà couverte : vérifier avec `ls content/blog` et `grep -ril` sur le sujet. Pas de doublon, pas de cannibalisation d'une page existante.
 - Ne créer AUCUNE page « [race] peut-il manger [X] ». Une nouvelle fiche race (`nourriture-{race}`) seulement si la race n'a pas encore d'article ; dans ce cas, ajouter aussi sa fiche dans `data/breeds.ts` (mêmes règles que les autres fiches : rien qui ne soit écrit et sourcé dans l'article).
 

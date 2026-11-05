@@ -1,6 +1,6 @@
-# Contenu quotidien sur la branche v2 : 1 nouvel article + 2 réécritures (deploy/seo-rewrite.sh).
+# Contenu de nuit sur la branche v2 : réécritures (deploy/seo-rewrite.sh). Les nouveaux articles : toutou-article-*.
 [Unit]
-Description=Toutou Gourmet : 1 nouvel article + 2 réécritures SEO (v2)
+Description=Toutou Gourmet : réécritures SEO (v2)
 After=network-online.target
 Wants=network-online.target
 

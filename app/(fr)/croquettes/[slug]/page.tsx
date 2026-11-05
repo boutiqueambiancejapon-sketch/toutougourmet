@@ -1,7 +1,5 @@
-// @cdc lot 6 — fiche produit générée depuis le cache du scanner. noindex et hors sitemap tant
-// que la rédaction ne l'a pas relue (reviewed = false) : une lecture IA brute n'est pas indexée.
-// Exception réglable : fiche Open Pet Food Facts complète si OPFF_INDEX_POLICY=complete
-// (lib/server/scanner-published.ts), désactivée par défaut.
+// @cdc lot 6 — fiche produit générée depuis le cache du scanner. Toujours noindex et hors sitemap
+// (décision du 2026-11-05) : Google reçoit les classements et les avis, la fiche sert le scanner et le compte.
 // JSON-LD Product + Review seulement si relue. Sous 55/100 : marques partenaires en remplacement.
 // Friandise (barème à part) : pastille « Friandise », alertes de sécurité en tête, nombre par
 // jour à la place de la matière sèche, recettes maison sous 55/100 (pas de partenaire friandise).
@@ -36,7 +34,6 @@ import { betterAtMaxiZoo } from '@/lib/server/scanner-catalog'
 import { getBySlug } from '@/lib/server/scanner'
 import { reviewedItemsSafe } from '@/lib/server/scanner-catalog'
 import { getDb } from '@/lib/server/drizzle'
-import { isPublished } from '@/lib/server/scanner-published'
 import { titleTypo } from '@/lib/title-typo'
 
 export const revalidate = 300
@@ -72,7 +69,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       type: 'website',
       images: [{ url: `${url}/og.png`, width: 1200, height: 630, alt: `Note de ${name}` }],
     },
-    robots: (await isPublished(row)) ? undefined : { index: false, follow: true },
+    robots: { index: false, follow: true },
   }
 }
 

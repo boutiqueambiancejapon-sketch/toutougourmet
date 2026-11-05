@@ -1,0 +1,13 @@
+# Un article informatif par jour (deploy/article.sh).
+[Unit]
+Description=Toutou Gourmet : article informatif
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=administrator
+Environment=HOME=/home/administrator
+Environment=LANG=C.UTF-8
+ExecStart=/home/administrator/Toutou/deploy/article.sh informatif
+TimeoutStartSec=2h
