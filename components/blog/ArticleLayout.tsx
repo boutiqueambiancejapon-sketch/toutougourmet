@@ -39,6 +39,9 @@ export interface ArticleLayoutProps {
   categorySlug?: string
   /** MDX rendered content goes here */
   children: React.ReactNode
+  /** Classement placé avant ou après le résumé (lib/mdx.ts › extractClassement) */
+  classementBefore?: React.ReactNode
+  classementAfter?: React.ReactNode
 }
 
 const TLDR_ID = 'l-essentiel'
@@ -64,6 +67,8 @@ export function ArticleLayout({
   currentSlug,
   categorySlug,
   children,
+  classementBefore,
+  classementAfter,
 }: ArticleLayoutProps) {
   const { frontmatter, slug } = article
   const catSlug = categorySlug ?? frontmatter.categorySlug
@@ -108,7 +113,9 @@ export function ArticleLayout({
       <div className={`mx-auto max-w-page px-4 md:px-8 ${urgent ? 'pt-2' : 'pt-8'}`}>
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,1fr)_320px]">
           <div className="min-w-0">
+            {classementBefore}
             {urgent ? null : <ArticleTldr items={tldrItems} />}
+            {classementAfter}
             {portion && !urgent ? <FoodPortionCalc {...portion} /> : null}
             {breed ? (
               <>
