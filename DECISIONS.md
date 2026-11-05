@@ -287,3 +287,9 @@ Avis, classements et comparatifs portent l'année dans le titre, ajoutée à la 
 
 ## 2026-11-05 — Quatre barèmes pour le scanner
 Prochain gros chantier du propriétaire : croquettes, friandises, compléments et huiles auront chacun leur barème, l'IA et l'analyse reconnaissant le type. En attendant, compléments et huiles restent hors classements.
+
+## 2026-11-05 — Décisions du propriétaire sur les barèmes
+Classements séparés sec et humide. Fiches partenaires revérifiées et fiches des autres marques complétées avant tout classement fondé sur les nouveaux barèmes. Compléments et huiles : on scanne, l'IA analyse, une note et un message « attention, ce n'est pas un conseil de vétérinaire », rien de plus : ni affichage « Étiquette », ni études à part. Seuils oignon et ail et notes de référence : le propriétaire fait confiance, sans relecture ligne à ligne.
+
+## 2026-11-05 — Dogfy Diet : une seule page
+L'avis `avis-dogfy-diet-repas-frais-chien` avait les positions (5 554 impressions, position 10,4) et la page marque 4 impressions : celle-ci redirige vers l'avis, qui reprend son contenu (`BrandHubBlock`). Rappel de décembre 2024 retiré de la page Ultra Premium Direct, jugé daté par le propriétaire.
