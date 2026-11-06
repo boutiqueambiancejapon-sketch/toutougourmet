@@ -3,11 +3,12 @@
 import { eq } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { marquePage } from '@/data/marque-pages'
 import { MODEL_REVIEWS } from '@/data/model-reviews'
 import { ficheIndex } from '@/db/schema'
 import { assertDashboardAction as assertDashboard } from '@/lib/dashboard/guard'
 import { horsListes } from '@/lib/scanner/baremes/fiche'
-import { nomRecette } from '@/lib/scanner/fiches-indexees'
+import { ficheIndexeePath, nomRecette } from '@/lib/scanner/fiches-indexees'
 import { recipeKey, recipeName } from '@/lib/scanner/rankings'
 import type { ScoreResult } from '@/lib/scanner/score'
 import { baseSlug } from '@/lib/scanner/slug'
@@ -90,6 +91,11 @@ export async function basculerIndex(id: string, ouvrir: boolean): Promise<void> 
     }
   }
   revalidatePublic(row.slug, row.brand)
+  // L'adresse courte, le plan du site et la page mère changent tout de suite, sans attendre leur prochaine mise à jour.
+  const [fiche] = await d.select({ type: ficheIndex.type, court: ficheIndex.court }).from(ficheIndex).where(eq(ficheIndex.cle, cle)).limit(1)
+  if (fiche) revalidatePath(ficheIndexeePath(fiche))
+  const mere = marquePage(row.brand)
+  if (mere) revalidatePath(mere.href)
   revalidatePath('/sitemaps/croquettes.xml')
   revalidatePath('/tableau-de-bord/fiches')
 }

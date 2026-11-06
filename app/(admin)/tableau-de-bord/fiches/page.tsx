@@ -28,7 +28,7 @@ export default async function FichesPage({ searchParams }: Props) {
       <p className="m-0 pt-6 text-sm"><Link href="/tableau-de-bord/contenu" className="text-ink-2 underline underline-offset-2">Retour au contenu</Link></p>
       <header className="flex flex-col gap-1">
         <h1 className="m-0 font-display text-3xl font-black text-ink">Fiches produit et Google</h1>
-        <p className="m-0 text-sm text-ink-2">{`${toutes.filter((l) => l.indexee).length} indexées sur ${toutes.length} recettes. Une recette regroupe tous ses formats. Le changement arrive sur le site en 5 minutes au plus, puis Google met quelques jours.`}</p>
+        <p className="m-0 text-sm text-ink-2">{`${toutes.filter((l) => l.indexee).length} indexées sur ${toutes.length} recettes. Une recette regroupe tous ses formats. Le changement arrive tout de suite sur le site, puis Google met quelques jours.`}</p>
       </header>
       <form method="get" className="grid gap-2 sm:grid-cols-5">
         <select name="marque" defaultValue={f.marque ?? ''} aria-label="Marque" className={CHAMP}>
