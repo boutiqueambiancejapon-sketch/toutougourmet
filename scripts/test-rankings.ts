@@ -1,3 +1,4 @@
+import { marqueCanonique } from '../lib/scanner/marque'
 // Tests des classements : une recette par ligne, noms lisibles, segments.
 import assert from 'node:assert/strict'
 import { existsSync } from 'node:fs'
@@ -44,4 +45,9 @@ assert.deepEqual(inlineParts('Voir [la fiche](https://rappel.conso.gouv.fr/x).')
 assert.deepEqual(inlineParts('[scanner](/scanner)'), [{ label: 'scanner', href: '/scanner', external: false }])
 assert.equal(inlinePlain('Voir [la fiche](/x) ici'), 'Voir la fiche ici')
 assert.deepEqual(inlineParts('[x](javascript:alert(1))'), [{ text: '[x](javascript:alert(1))' }])
+assert.equal(marqueCanonique('Edgard cooper'), 'Edgard & Cooper')
+assert.equal(marqueCanonique('EUKANUBA'), 'Eukanuba')
+assert.equal(marqueCanonique("Hill's"), 'Hills')
+assert.equal(marqueCanonique('Purina One'), 'Purina One')
+assert.equal(marqueCanonique(null), null)
 console.log('test-rankings : tout passe')
