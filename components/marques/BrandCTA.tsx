@@ -23,7 +23,7 @@ interface BrandCTAProps {
   affiliateUrl: string
   offer?: string
   code?: string | null
-  /** primary : encadré sombre avec bouton ; secondary : lien souligné discret */
+  /** primary : encadré sombre avec bouton ; secondary : bandeau compact sur une ligne */
   variant?: 'primary' | 'secondary'
   /** Verbe du bouton : « Essayer » par défaut */
   cta?: string
@@ -69,17 +69,24 @@ export function BrandCTA({
       </aside>
     )
   }
+  const remise = slug ? shortDiscount(slug) : ''
   return (
-    <div data-cta={`brand-${place}`} className="v2 not-prose my-6 flex flex-col items-start gap-2">
-      {line ? <p className="m-0 text-sm font-semibold text-ink">{slug ? `${brandName}\u00a0: ${line}` : line}</p> : null}
-      <PartnerButton
-        href={affiliateUrl}
-        fallback={label}
-        srLabel={`(${brandName}, nouvel onglet)`}
-        after={<span aria-hidden="true">&nbsp;→</span>}
-        className="inline-flex min-h-11 items-center font-semibold text-orange-ink underline underline-offset-4"
-      />
-      {hideDisclosure ? null : <AffiliateNote />}
+    <div data-cta={`brand-${place}`} className="v2 not-prose my-5 flex flex-col gap-1.5">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2 rounded-box border border-line bg-paper px-3 py-2.5">
+        {remise ? <span className="shrink-0 whitespace-nowrap rounded-pill bg-amber px-2.5 py-1 text-sm font-bold text-ink">{remise}</span> : null}
+        <p className="m-0 min-w-[12rem] flex-1 text-sm leading-snug text-ink-2">
+          <strong className="font-semibold text-ink">{brandName}</strong>
+          {line ? ` · ${remise ? line.replace(remise, '').replace(/^\s*/, '') : line}` : ''}
+        </p>
+        <PartnerButton
+          href={affiliateUrl}
+          fallback={slug ? label : cta}
+          srLabel={`(${brandName}, nouvel onglet)`}
+          after={<span aria-hidden="true">&nbsp;→</span>}
+          className="inline-flex min-h-10 shrink-0 items-center whitespace-nowrap rounded-control bg-ink px-3.5 text-sm font-semibold text-cream no-underline hover:underline"
+        />
+      </div>
+      {hideDisclosure ? null : <AffiliateNote court />}
     </div>
   )
 }
