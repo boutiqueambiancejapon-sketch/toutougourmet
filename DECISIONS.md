@@ -328,3 +328,5 @@ Demande du propriétaire. Toutes les heures, `scripts/indexnow.mjs` compare le p
 
 ## 2026-11-06 — aocr.org
 Le propriétaire demande de bloquer ce référent s'il abuse. Seuil : 100 pages vues par heure (3 à 8 aujourd'hui). `deploy/referer-guard.sh` contrôle toutes les 15 minutes, bloque par Caddy et prévient par ntfy. Blocage levé en vidant `/etc/caddy/blocages.caddy`.
+
+Précision du 2026-11-06 : aocr.org est un faux référent. Il sort des statistiques (`app/api/e`), et le seuil de blocage compte désormais les requêtes dans les journaux de Caddy : 4 000 par heure, soit environ 100 visites.
