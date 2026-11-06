@@ -26,7 +26,7 @@ const ROWS: Row[] = [
   {
     label: 'Calcul de la note',
     yuka: 'Sur 100 pour un aliment : qualité nutritionnelle 60 %, additifs 30 %, bio 10 %',
-    toutou: 'Sur 100. Croquettes et pâtées : 11 critères (protéines, graisses et glucides sur matière sèche, ingrédients, additifs, rapport calcium-phosphore). Friandises : 8 critères sur la recette (viande, sucres et sel ajoutés, additifs)',
+    toutou: 'Sur 100. Croquettes et pâtées : 13 critères (protéines, graisses et glucides sur matière sèche, ingrédients, additifs, calcium et phosphore). Friandises : 10 critères sur la recette (viande, sucres et sel ajoutés, additifs)',
   },
   {
     label: 'Repères nutritionnels',
