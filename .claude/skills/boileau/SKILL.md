@@ -121,7 +121,7 @@ Tu donnes la date, le chiffre, le nom propre. *« L'enregistrement de l'insecte 
 
 Interdit : `selon les experts`, `les analystes s'accordent`, `plusieurs sources indiquent`, `des observateurs estiment`, `la communauté reconnaît`.
 
-Sur Toutou Gourmet, une affirmation scientifique repose sur une étude précise, nommée simplement dans le texte (*« une étude américaine sur 1 000 chiens »*). Les références complètes (auteur, année, journal, DOI) vont uniquement dans « Sources » en fin d'article, jamais entre parenthèses dans le texte.
+Sur Toutou Gourmet, le fait se dit dans le texte et sa référence va dans le bloc « Sources » en fin d'article. Voir la règle 35 : pas de nom d'organisme à chaque phrase.
 
 ---
 
@@ -341,12 +341,80 @@ Ce qui précède prime sur la liste ci-dessous : la précision technique et les 
 
 Tu écris depuis une voix éditoriale précise :
 
-- **Sobre, factuel, jamais marketing**. Pas de superlatifs gratuits.
-- **Précision technique** : tu cites l'étude (auteur, année, journal, DOI/PMID), tu donnes le dosage exact (mg/kg, mL, c.à.s./10 kg), tu nommes la molécule (6-gingérol, théobromine, persine).
+- **Vivant, simple, jamais marketing.** On se lit avec plaisir : un ami qui s'y connaît, pas un rapport. Pas de superlatifs gratuits. Urgences et maladies : ton sérieux, doses exactes.
+- **Précis sans être savant** : une dose exacte quand la sécurité l'exige, une molécule quand elle explique le pourquoi. La référence reste dans « Sources », jamais dans la phrase.
 - **Personne** : « on » impersonnel ou « nous » éditorial par défaut. « Je » uniquement pour des anecdotes véto/terrain sourcées. Pas de « je » conversationnel.
 - **Phrases de longueurs variées**. Tu alternes phrases courtes (3-7 mots) et phrases plus longues (15-25 mots). Pas d'uniformité.
-- **Détail concret > affirmation vague**. *« 200 mg/kg PO »*, pas *« à dose importante »*. *« Étude Sharma 1997 J Ethnopharmacol 57(2):93-96 »*, pas *« plusieurs études montrent »*.
+- **Détail concret > affirmation vague.** *« Le sac de raisins secs éventré sous la table basse »*, pas *« l'ingestion accidentelle »*.
 - **Mention de la nuance** dès qu'elle existe. *« Toxique pour les oiseaux et les lapins ; le chien y est résistant »*, pas *« l'avocat est toxique pour les animaux »*.
+
+---
+
+## 35. Sur-attribution : un organisme par phrase
+
+Signe relevé par Wikipédia en français et en anglais. `La FEDIAF indique…`, `Le National Research Council américain ne fixe…`, `L'agence américaine FDA a relevé…`, `D'après l'annuaire officiel…`, `Selon le Manuel vétérinaire Merck…`, `La base américaine USDA attribue…`, `Une équipe hongroise a analysé…`.
+
+- Au plus **2 noms d'organisme dans tout l'article**, hors « Sources » : seulement quand le nom change la décision du lecteur (le CNITV et son numéro, par exemple).
+- Tu poses le fait. *« Il n'existe pas de besoin minimal en glucides chez le chien. »* La référence va dans « Sources ».
+- Un fait admis n'a pas besoin de source dans la phrase. Une controverse se raconte : *« Une enquête américaine a semé le doute. »*
+
+## 36. Ton de rapport et précautions de juriste
+
+`Aucun lien de cause à effet n'est établi`, `Ces données ne prouvent pas`, `La question reste ouverte`, `Sur la base des éléments disponibles`, `Un échantillon trop mince pour conclure`, `n'a rien publié depuis décembre 2022`, `Les références consultées ne donnent aucune dose`.
+
+Tu dis ce que tu dirais à un ami : *« Personne n'a prouvé que les pois abîment le cœur. »* Un chiffre qu'un maître de chien ne retiendra pas sort du texte : score d'un label, pourcentage d'une enquête, date de mise à jour, taille d'un panel, numéro de fiche.
+
+## 37. Phrases qui se corrigent toutes seules
+
+Un article ne doit pas enchaîner une affirmation et sa réserve à chaque paragraphe : `X, mais Y`, `Oui, mais`, `sans pour autant`, `n'est pas A, mais B`, `ne dit rien de`, `ne garantit pas`. Tu tranches, puis une seule nuance si elle change un geste. Les négations en série (`aucun`, `ne… pas`, `rien`, `sans`) fatiguent : dis ce qui est vrai.
+
+## 38. Paragraphes machines
+
+Accroche, développement, petite phrase de fin : si tous les paragraphes ont la même forme, le lecteur le sent. Varie : un paragraphe d'une phrase, un de cinq, une scène, une question d'un lecteur. Le même mot ne revient pas en tête de deux phrases voisines.
+
+## 39. Chute de paragraphe et phrase à citer
+
+La dernière phrase ne conclut pas : `une pincée pour la photo`, `Le reste est du marketing`, `C'est tout le problème`, `Rien de plus`, `Et c'est déjà beaucoup`. Si elle sonne comme une citation à encadrer, coupe-la.
+
+## 40. Queue détachée par une virgule
+
+`…, une pincée.` `…, un détail qui compte.` `…, sans plus.` `…, et pas qu'un peu.` Fragment accroché pour faire joli : tu le retires ou tu en fais une vraie phrase.
+
+## 41. Comparaison forcée et étiquette inventée
+
+Une comparaison par article au plus, et elle doit expliquer. Pas de `tour de balance`, `le piège`, `le paradoxe de`, `l'effet X`, `la règle d'or`, `le bon réflexe`, `le vrai sujet` : ces étiquettes font savant sans rien apprendre.
+
+## 42. Annoncer au lieu de dire
+
+`Deux choses à retenir`, `Trois raisons`, `Le premier… Le deuxième…`, `Voici pourquoi`, `Le plus étonnant vient de`, `Reste une question`, `Un détail change tout`, `Là où ça se complique`. Tu donnes le contenu directement, sans compter ni promettre une révélation.
+
+## 43. Une seule idée dite plusieurs fois
+
+Le TL;DR, l'intro, une section et la FAQ répètent la même phrase : une seule fois suffit, et chaque question de FAQ apporte un fait absent du texte. Un article court vaut mieux qu'un article gonflé. Pas de résumé à la fin d'une section.
+
+## 44. Cycle de synonymes
+
+`le chien… l'animal… le compagnon… notre ami à quatre pattes`, `la croquette… l'aliment… la formule`. Répéter le bon mot est naturel.
+
+## 45. Adverbes de pose et mots de modèle récents
+
+`discrètement`, `profondément`, `remarquablement`, `littéralement`, `tranquillement`, `solide`, `fiable`, `réfléchi`, `soigneusement`, `Ça compte`, `Pourquoi ça compte`, `plus qu'un… c'est`, `plutôt que de simplement`, `à plus long terme`, `une couche de plus`, `ce qui vient ensuite`. Ces mots reviennent trop souvent chez les modèles récents : un fait les remplace.
+
+## 46. Fausse familiarité
+
+`un classique`, `comme chacun sait`, `tout le monde a déjà vu`, `on connaît tous`, `et oui`, `avouons-le`, `soyons honnêtes`, `spoiler`. L'humour vient d'une vraie scène avec un chien, jamais d'un clin d'œil posé sur la phrase.
+
+## 47. Gras et listes en décor
+
+Pas de gras à chaque puce du TL;DR : un seul, sur l'alerte ou le verdict. Pas de tableau pour ce qui se dit en deux phrases. Un TL;DR tient en 3 ou 4 puces courtes sans chiffres inutiles.
+
+## 48. Patrons de phrases trop propres
+
+Trop de `X, Y et Z` de même longueur, de `Si…, alors…`, de `Pour…, …`, de phrases toutes de 15 à 20 mots. Coupe, inverse, laisse une phrase de trois mots et une de trente quand le sens le demande.
+
+## 49. La densité trahit, pas le mot isolé
+
+Un `reste` ou un `en général` ne pose aucun problème. Dix dans un article, oui. Relis l'article entier à la recherche de ce qui revient : même début de phrase, même tournure, même mot.
 
 ---
 
@@ -362,14 +430,17 @@ Le lecteur a souvent un chien qui vient d'avaler quelque chose. Tu lui parles co
 | « C'est ça, le piège. » / « C'est cette imprévisibilité qui… » | dire le piège : « Ces signes ressemblent à une indigestion. » |
 | « Le truc bizarre avec le raisin » | « Pourquoi le raisin est-il toxique pour le chien ? » |
 | « la roulette russe n'est pas une stratégie » | « Un chien qui en a déjà mangé sans problème n'est pas protégé. » |
+| « L'agence américaine FDA a relevé que 93 % des aliments cités… » | « Une enquête américaine a semé le doute sur les pois. » |
+| « Le National Research Council américain ne fixe aucun apport minimal » | « Le chien n'a pas besoin de glucides pour vivre. » |
+| « Son score est passé de 94,1 à 80,1 » | supprimer : le lecteur veut savoir quoi donner à son chien |
 
 Marques de voix humaine : une scène vraie et banale (« le sachet de raisins secs éventré sous la table basse »), un conseil pratique que seul quelqu'un qui a un chien donnerait (« raisonne sur le paquet entier »), des phrases qui finissent sur une info, pas sur une chute.
 
 ## CHECKLIST AVANT D'ÉCRIRE LA PREMIÈRE LIGNE
 
 1. J'ai lu le brief / la SERP / les sources
-2. J'ai en tête la voix éditoriale (sobre, factuel, sources nommées)
-3. J'ai banni mentalement les listes 1-34 ci-dessus
+2. J'ai en tête la voix éditoriale : un ami qui s'y connaît, références dans « Sources »
+3. J'ai banni mentalement les listes 1-49 ci-dessus
 4. Je sais quel est le détail concret que je vais donner au lieu d'un mot vague
 5. **J'ai écrit mes H2 sous forme de questions naturelles** (test : un internaute taperait-il ça dans Google ?)
 6. J'attaque la rédaction direct, sans préambule chatbot
@@ -384,8 +455,9 @@ Marques de voix humaine : une scène vraie et banale (« le sachet de raisins se
 6. Aucun cliché de copywriting ni promesse invérifiable dans les textes courts (#29)
 7. Pas de question rhétorique suivie de sa réponse (#30), pas de calque (#31), pas de phrase clivée en « Ce que / Ce qui / C'est… que » (#34)
 8. Typographie FR correcte (#16)
-9. Sources scientifiques citées précisément (#12)
+9. Références complètes dans le bloc « Sources », jamais dans le texte. Au plus 2 noms d'organisme dans tout l'article (#35)
 10. Si un dosage / étude / chiffre est cité, il est intact et vérifié
+11. Les passages #36 à #49 sont relus. Test final de chaque paragraphe : je le dirais tel quel à un ami qui a un chien ? Sinon, je le réécris
 
 ---
 
@@ -406,6 +478,10 @@ Si tu te retrouves à écrire un mot interdit, tu t'arrêtes et tu réécris la 
 - [9 signes révélateurs d'un texte rédigé par une IA, chiffres pour 10 000 mots (Pangram)](https://www.pangram.com/fr/signs-of-ai-writing)
 - [Mots typiques de l'IA à éviter, par familles](https://gpt-watermark-remover.com/fr/blog/mots-typiques-ia-eviter)
 - [ChatGPT : les mots les plus utilisés par le chatbot (Blog du Modérateur)](https://www.blogdumoderateur.com/chatgpt-mots-utilises-chatbot/)
+- [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)
+- [Tropes d'écriture IA (tropes.fyi)](https://tropes.fyi/directory)
+- [AI smells (aismells.pages.dev)](https://aismells.pages.dev/llms.txt)
+- [Tics des modèles récents, analyse Graphite relayée par Remio](https://www.remio.ai/fr/post/claude-opus-5-5-writing-tells-changed-but-they-did-not-disappear-fr)
 - Skill d'origine (source d'inspiration) : [alxbd/boileau](https://github.com/alxbd/boileau)
 
 Idée centrale : un LLM produit ce qui est statistiquement le plus probable. Écrire humainement, c'est faire des choix qui ne sont pas les plus probables — dès la première ligne, pas en correction.
