@@ -30,11 +30,11 @@
 - [x] `chien-peut-manger-prunes` · fruit · màj 2026-07-05 · réécrit 2026-11-04
 - [x] `chien-peut-manger-noix-de-coco` · fruit · màj 2026-07-16 · réécrit 2026-11-05
 - [x] `chien-peut-manger-figue` · fruit · màj 2026-08-31 · réécrit 2026-11-05
-- [ ] `chien-peut-manger-clementine-orange` · fruit · màj 2026-09-25
+- [x] `chien-peut-manger-clementine-orange` · fruit · màj 2026-09-25 · réécrit 2026-11-06
 
 ## 2. « Peut-il manger » : légumes (29)
 
-- [ ] `chien-peut-manger-brocoli` · legumes · màj 2026-03-12
+- [x] `chien-peut-manger-brocoli` · legumes · màj 2026-03-12 · réécrit 2026-11-06
 - [ ] `chien-peut-manger-chou-fleur` · legumes · màj 2026-03-12
 - [ ] `chien-peut-manger-endives` · legumes · màj 2026-03-12
 - [ ] `chien-peut-manger-poivron` · legumes · màj 2026-03-12
