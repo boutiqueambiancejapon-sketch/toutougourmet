@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
-# Bloque un site référent abusif : au-delà du seuil de pages vues par heure, ses visites reçoivent une erreur 403.
+# Bloque un site référent abusif : au-delà du seuil de requêtes par heure, ses visites reçoivent une erreur 403.
 # Le visiteur normal n'est pas touché. Pour lever le blocage : vider /etc/caddy/blocages.caddy puis recharger Caddy.
 # Lancé par toutou-referer-guard.timer, en root, pour écrire dans /etc/caddy et recharger Caddy.
 set -euo pipefail
 
 REFERENT=aocr.org
-SEUIL=100
+SEUIL=4000
 BLOCAGES=/etc/caddy/blocages.caddy
 
 grep -q "$REFERENT" "$BLOCAGES" 2>/dev/null && exit 0
-VUES=$(sudo -u postgres psql -d toutou -Atc "SELECT count(*) FROM analytics.events WHERE name = 'Pageview' AND ref_host = '$REFERENT' AND ts > now() - interval '1 hour'")
-echo "$REFERENT : $VUES pages vues en une heure (seuil $SEUIL)"
+# Les statistiques du site ignorent ce référent : on compte donc dans les journaux du serveur. Une visite pèse environ 40 requêtes.
+VUES=$(journalctl -u caddy --since '1 hour ago' --no-pager -o cat | grep -c "$REFERENT" || true)
+echo "$REFERENT : $VUES requêtes en une heure (seuil $SEUIL)"
 [ "$VUES" -lt "$SEUIL" ] && exit 0
 
 cp "$BLOCAGES" "$BLOCAGES.avant"
@@ -18,7 +19,7 @@ printf '@referent_bloque header_regexp Referer ^https?://([a-z0-9-]+\\.)*%s\nres
 if caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile >/dev/null 2>&1; then
   systemctl reload caddy
   echo "Bloqué : $REFERENT"
-  MESSAGE="$REFERENT bloqué : $VUES pages vues en une heure."
+  MESSAGE="$REFERENT bloqué : $VUES requêtes en une heure."
 else
   mv "$BLOCAGES.avant" "$BLOCAGES"
   echo "Configuration refusée, blocage annulé" >&2

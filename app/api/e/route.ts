@@ -84,6 +84,8 @@ export async function POST(req: NextRequest) {
   if (!isAnalyticsEvent(body.n) || typeof body.p !== 'string' || !body.p.startsWith('/')) return done()
 
   const refHost = hostOf(body.r)
+  // aocr.org est un faux référent posé par un robot, le site lui-même n'y est pour rien : ses visites faussent les chiffres.
+  if (refHost === 'aocr.org') return done()
   try {
     await pool.query(
       'INSERT INTO analytics.events (name, page, props, ref_host, device, country, visitor) VALUES ($1, $2, $3, $4, $5, $6, $7)',
