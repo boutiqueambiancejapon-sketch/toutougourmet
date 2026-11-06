@@ -12,6 +12,7 @@ export const EMAIL_KIND_LABEL = {
   'chien-j4': 'Rappel, jour 4 : ajouter son chien',
   outil: "Résultat d'outil",
   confirmation: "Confirmation d'adresse",
+  'confirmation-rappel': "Rappel de confirmation d'adresse",
   'mot-de-passe': 'Mot de passe oublié',
   suppression: 'Suppression du compte',
   test: 'Test du tableau de bord',

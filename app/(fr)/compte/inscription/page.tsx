@@ -15,7 +15,7 @@ export default async function SignUpPage({ searchParams }: { searchParams: Promi
   const returnTo = safeReturnPath((await searchParams).retour)
   if (await getSessionUser()) redirect(returnTo)
   return (
-    <AccountPage title={signUpTitle(returnTo)} lead={<p>Trois champs, puis un lien de confirmation par e-mail.</p>} aside={<SignUpBenefits />}>
+    <AccountPage title={signUpTitle(returnTo)} lead={<p>Trois champs, et ton compte est ouvert.</p>} aside={<SignUpBenefits />}>
       <AccountCard label="Inscription">
         <SignUpForm returnTo={returnTo} />
       </AccountCard>

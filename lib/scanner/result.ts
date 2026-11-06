@@ -70,6 +70,7 @@ export const QUOTA_FREE_MESSAGE = `Tu as utilisé tes ${FREE_MONTHLY_SCANS} anal
 
 export const ERROR_MESSAGES: Record<ScannerErrorCode, string> = {
   unauthorized: 'Connecte-toi pour lancer une analyse.',
+  email_unverified: 'Confirme ton adresse e-mail pour lancer une analyse par photo : le lien est dans ta boîte mail, ou à renvoyer depuis ton compte.',
   rate_limited: 'Trop d\'analyses d\'affilée. Attends une minute avant de recommencer.',
   quota_reached: 'Tu as utilisé toutes tes analyses du mois. Le compteur repart à zéro le 1er du mois prochain.',
   daily_cap: 'Le scanner a atteint sa limite d\'analyses pour aujourd\'hui. Réessaie demain : ton quota n\'est pas touché.',

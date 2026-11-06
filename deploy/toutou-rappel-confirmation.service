@@ -1,0 +1,13 @@
+# Un rappel unique aux comptes non confirmés, 24 heures après l'inscription.
+[Unit]
+Description=Toutou Gourmet - rappel de confirmation d'adresse
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=toutou
+WorkingDirectory=/srv/toutou/current
+EnvironmentFile=/srv/toutou/shared/.env
+Nice=15
+ExecStart=/srv/toutou/current/node_modules/.bin/tsx scripts/rappel-confirmation.ts

@@ -157,6 +157,7 @@ export interface LabelProvider {
 
 export type ScannerErrorCode =
   | 'unauthorized'
+  | 'email_unverified'
   | 'rate_limited'
   | 'quota_reached'
   | 'daily_cap'

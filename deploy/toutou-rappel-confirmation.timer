@@ -1,0 +1,9 @@
+[Unit]
+Description=Toutou Gourmet - rappel de confirmation, toutes les heures
+
+[Timer]
+OnCalendar=*:23
+Persistent=false
+
+[Install]
+WantedBy=timers.target
