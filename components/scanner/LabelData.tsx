@@ -1,4 +1,5 @@
 import type { ScanAnalysis } from '@/lib/scanner/result'
+import { IngredientList } from './IngredientList'
 import type { AnalyticalKey } from '@/lib/scanner/types'
 import type { AnalysisSource } from '@/db/schema'
 
@@ -47,16 +48,9 @@ export function LabelData({ label, source, headingLevel = 'h3' }: { label: ScanA
   return (
     <div className="flex flex-col gap-6">
       <section className="flex flex-col gap-2">
-        <H className="m-0 font-display text-xl font-black text-ink">Composition lue sur l&apos;étiquette</H>
+        <H className="m-0 font-display text-xl font-black text-ink">Composition</H>
         {label.ingredients.length > 0 ? (
-          <ol className="m-0 flex list-decimal flex-col gap-1 pl-6 text-[15px] leading-relaxed text-ink marker:text-ink-2">
-            {label.ingredients.map((i, n) => (
-              <li key={`${n}-${i.nom}`}>
-                {i.nom}
-                {i.pourcentage !== null ? <span className="text-ink-2">{` (${pct(i.pourcentage)})`}</span> : null}
-              </li>
-            ))}
-          </ol>
+          <IngredientList ingredients={label.ingredients} />
         ) : (
           <p className="m-0 text-[15px] text-ink-2">{`Composition absente ${origin}.`}</p>
         )}
@@ -64,18 +58,14 @@ export function LabelData({ label, source, headingLevel = 'h3' }: { label: ScanA
       <section className="flex flex-col gap-2">
         <H className="m-0 font-display text-xl font-black text-ink">Constituants analytiques</H>
         {rows.length > 0 ? (
-          <table className="w-full border-collapse text-[15px]">
-            <tbody>
-              {rows.map(([k, name]) => (
-                <tr key={k} className="border-b border-line">
-                  <th scope="row" className="py-2 text-left font-normal text-ink-2">
-                    {name}
-                  </th>
-                  <td className="py-2 text-right font-semibold text-ink">{pct(label.constituants[k] as number)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <dl className="m-0 grid grid-cols-2 gap-2 sm:grid-cols-3">
+            {rows.map(([k, name]) => (
+              <div key={k} className="flex flex-col-reverse gap-0.5 rounded-box border border-line bg-paper px-3 py-2.5">
+                <dt className="text-[13px] leading-snug text-ink-2">{name}</dt>
+                <dd className="m-0 font-display text-xl font-black tabular-nums text-ink">{pct(label.constituants[k] as number)}</dd>
+              </div>
+            ))}
+          </dl>
         ) : (
           <p className="m-0 text-[15px] text-ink-2">{`Constituants absents ${origin}.`}</p>
         )}
@@ -84,7 +74,9 @@ export function LabelData({ label, source, headingLevel = 'h3' }: { label: ScanA
       {label.additifs.length > 0 ? (
         <section className="flex flex-col gap-2">
           <H className="m-0 font-display text-xl font-black text-ink">Additifs</H>
-          <p className="m-0 text-[15px] leading-relaxed text-ink">{label.additifs.join(', ')}</p>
+          <ul role="list" className="m-0 flex list-none flex-wrap gap-1.5 p-0">
+            {label.additifs.map((a) => <li key={a} className="rounded-pill border border-line bg-paper px-2.5 py-1 text-sm leading-tight text-ink">{a}</li>)}
+          </ul>
         </section>
       ) : null}
       {label.illisibles.length > 0 ? (
