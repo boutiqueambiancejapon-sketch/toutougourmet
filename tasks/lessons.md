@@ -58,3 +58,6 @@ Un script de correction a échoué, et la même commande a quand même fusionné
 
 ## 2026-11-05 — Récits d'avis clients
 Les résumés automatiques de Trustpilot ne suffisent pas pour publier des récits de santé ou de qualité sur une marque : décision du propriétaire, on s'en tient à l'abonnement, la livraison et le service client.
+
+## 2026-11-06 : ton des avis
+Le propriétaire a trouvé l'avis Edgard & Cooper « ultra scientifique ». Les règles détaillées des avis (composition, sources, réserves) écrasaient la consigne de ton. Une règle de ton doit dire qu'elle passe avant les autres et donner un exemple de phrase. Prévenir avec le test : ce paragraphe, je le dirais à un ami ?
