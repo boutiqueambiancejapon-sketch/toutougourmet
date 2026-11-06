@@ -38,9 +38,9 @@ export default async function FicheReviewPage({ params }: { params: Promise<{ id
           {`${row.discarded ? 'Écartée, jamais indexée' : row.reviewed ? 'Relue, indexable' : 'Non relue, noindex'} · source : ${SOURCE[row.source]} · ${row.model} · créée le ${dateFmt.format(row.createdAt)}`}
           {row.ean ? ` · EAN ${row.ean}` : ''}
           {` · ${row.scanCount} consultation${row.scanCount > 1 ? 's' : ''} · `}
-          <Link href={`/croquettes/${row.slug}`} className="underline underline-offset-2">
+          <a href={`https://www.toutou-gourmet.com/croquettes/${row.slug}`} target="_blank" rel="noopener" className="underline underline-offset-2">
             {`/croquettes/${row.slug}`}
-          </Link>
+          </a>
         </p>
         {l.champsDouteux.length > 0 && (
           <p className="mt-2 rounded-box bg-amber-bg px-3 py-2 text-sm text-amber-ink">{`Lus comme douteux : ${l.champsDouteux.join(', ')}.`}</p>

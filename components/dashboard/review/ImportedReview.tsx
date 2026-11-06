@@ -55,9 +55,9 @@ export function ImportedReview({ data }: { data: { rows: ImportedRow[]; total: n
                   <span className="font-semibold text-ink">{`${r.score ?? '?'}/100`}</span>
                   <span>{NOUNS[r.noun].title}</span>
                   <span>{r.indexable ? 'Règle d\'indexation remplie' : 'Constituants incomplets'}</span>
-                  <Link href={`/croquettes/${r.slug}`} className="underline underline-offset-2">
+                  <a href={`https://www.toutou-gourmet.com/croquettes/${r.slug}`} target="_blank" rel="noopener" className="underline underline-offset-2">
                     Voir la fiche
-                  </Link>
+                  </a>
                 </span>
               </div>
               <Decision row={r} />
