@@ -1,4 +1,4 @@
-import { CONFIRMED_DISCOUNTS, partnerSlugFromName } from '@/data/partner-discounts'
+import { CONFIRMED_DISCOUNTS, partnerSlugFromName, shortDiscount } from '@/data/partner-discounts'
 import { PartnerButton } from '@/components/cro/PartnerButton'
 import { AffiliateNote } from './AffiliateNote'
 
@@ -23,7 +23,7 @@ interface BrandCTAProps {
   affiliateUrl: string
   offer?: string
   code?: string | null
-  /** primary : bouton orange plein ; secondary : lien souligné discret */
+  /** primary : encadré sombre avec bouton ; secondary : lien souligné discret */
   variant?: 'primary' | 'secondary'
   /** Verbe du bouton : « Essayer » par défaut */
   cta?: string
@@ -44,24 +44,40 @@ export function BrandCTA({
 }: BrandCTAProps) {
   const label = `${cta} ${brandName}`
   const line = offerLine(brandName, offer)
-  const primary = variant === 'primary'
+  const slug = partnerSlugFromName(brandName)
+  if (variant === 'primary') {
+    const remise = slug ? shortDiscount(slug) : ''
+    return (
+      <aside data-cta={`brand-${place}`} aria-label={brandName} className="v2 not-prose relative my-8 flex flex-col items-start gap-3 rounded-card bg-ink p-5 shadow-[6px_6px_0_var(--orange)] sm:p-7">
+        {remise ? (
+          <p aria-hidden="true" className="absolute -top-5 right-3 m-0 flex size-20 rotate-6 flex-col items-center justify-center rounded-pill bg-orange text-ink shadow-[3px_3px_0_var(--ink)] sm:right-5 sm:size-24">
+            <span className="whitespace-nowrap font-display text-xl font-black leading-none sm:text-2xl">{remise.replace(' ', '\u00a0')}</span>
+          </p>
+        ) : null}
+        <p className="m-0 text-sm font-semibold text-amber">{slug ? 'Notre partenaire' : 'Où l\'acheter'}</p>
+        <p className={`m-0 font-display text-2xl font-black leading-tight text-paper sm:text-3xl ${remise ? 'pr-20 sm:pr-24' : ''}`}>{brandName}</p>
+        {line ? <p className="m-0 text-base leading-relaxed text-cream">{line}</p> : null}
+        <PartnerButton
+          href={affiliateUrl}
+          fallback={label}
+          srLabel={`(${brandName}, nouvel onglet)`}
+          after={<span aria-hidden="true">&nbsp;→</span>}
+          statusClassName="text-cream"
+          className="mt-1 inline-flex min-h-12 max-w-full items-center whitespace-nowrap rounded-control bg-amber px-5 py-3 font-bold text-ink no-underline shadow-[4px_4px_0_var(--orange)] transition-transform hover:-translate-y-0.5"
+        />
+        {hideDisclosure ? null : <AffiliateNote className="text-cream" />}
+      </aside>
+    )
+  }
   return (
     <div data-cta={`brand-${place}`} className="v2 not-prose my-6 flex flex-col items-start gap-2">
-      {line ? (
-        <p className="m-0 text-sm font-semibold text-ink">
-          {partnerSlugFromName(brandName) ? `${brandName}\u00a0: ${line}` : line}
-        </p>
-      ) : null}
+      {line ? <p className="m-0 text-sm font-semibold text-ink">{slug ? `${brandName}\u00a0: ${line}` : line}</p> : null}
       <PartnerButton
         href={affiliateUrl}
         fallback={label}
         srLabel={`(${brandName}, nouvel onglet)`}
         after={<span aria-hidden="true">&nbsp;→</span>}
-        className={
-          primary
-            ? 'inline-flex min-h-12 max-w-full items-center rounded-control bg-orange px-5 py-3 font-bold text-ink no-underline shadow-[4px_4px_0_var(--ink)] transition-transform hover:-translate-y-0.5'
-            : 'inline-flex min-h-11 items-center font-semibold text-orange-ink underline underline-offset-4'
-        }
+        className="inline-flex min-h-11 items-center font-semibold text-orange-ink underline underline-offset-4"
       />
       {hideDisclosure ? null : <AffiliateNote />}
     </div>
