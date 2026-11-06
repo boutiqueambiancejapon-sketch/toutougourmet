@@ -59,7 +59,7 @@ export function FicheHero({ h1, image, details, categorie, buy, children }: Fich
           {fiabilite ? <span className="rounded-pill border border-line px-3 py-1 text-sm text-ink-2">{FIABILITE_LABEL[fiabilite]}</span> : null}
           <KindTag details={details} />
         </div>
-        {categorie ? <p className="m-0 text-sm text-ink-2">{`Note calculée sur l'étiquette, à comparer ${categorie}.`}</p> : null}
+        {categorie ? <p className="m-0 text-sm text-ink-2">{`Note calculée sur l'étiquette, ${categorie}.`}</p> : null}
         {buy ? (
           <a href={buy.href} rel="sponsored nofollow noopener" target="_blank" data-cta="fiche-achat-haut" className="inline-flex min-h-12 items-center justify-center whitespace-nowrap rounded-control bg-orange px-5 font-semibold text-ink no-underline hover:underline">
             {`Voir chez ${buy.store}`}

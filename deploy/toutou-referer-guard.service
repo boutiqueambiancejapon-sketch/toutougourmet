@@ -1,0 +1,6 @@
+[Unit]
+Description=Toutou Gourmet - blocage d'un site référent abusif
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/toutou-referer-guard

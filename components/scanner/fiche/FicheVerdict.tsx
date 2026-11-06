@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { verdictText } from '@/lib/scanner/highlights'
-import { CATEGORY_PHRASE, type FoodNoun, type NounWords } from '@/lib/scanner/food-noun'
+import type { FoodNoun, NounWords } from '@/lib/scanner/food-noun'
 import { kindOf, type ScoreResult } from '@/lib/scanner/score'
 import { ScoreDetail } from '../ScoreDetail'
 import { titleTypo } from '@/lib/title-typo'
@@ -25,11 +25,7 @@ export function FicheVerdict({ brand, details, words, noun, children }: { brand:
         {titleTypo(words.question(brand))}
       </h2>
       <p className="m-0 text-base leading-relaxed text-ink-2">{verdictText(details)}</p>
-      {details.score !== null && CATEGORY_PHRASE[noun] ? (
-        <p className="m-0 text-[15px] leading-relaxed text-ink">
-          <strong>{`${details.score}/100, ${CATEGORY_PHRASE[noun]}.`}</strong> {COMPARE[noun]}
-        </p>
-      ) : null}
+      {COMPARE[noun] ? <p className="m-0 text-[15px] leading-relaxed text-ink-2">{COMPARE[noun]}</p> : null}
       <ScoreDetail details={details} alerts={!treat && !details.alertes} resume={false} />
       {children}
       <p className="m-0 text-[15px] leading-relaxed text-ink-2">
