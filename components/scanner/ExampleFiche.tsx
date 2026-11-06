@@ -24,7 +24,7 @@ export function ExampleFicheBody() {
             {`Chaque produit scanné a sa fiche. Celle-ci est calculée sur une étiquette inventée (marque fictive ${PREMIUM_LABEL.marque}) : saumon et poulet en tête, ${PREMIUM_LABEL.constituants.proteines} % de protéines sur le paquet.`}
           </p>
           <p className="m-0">
-            Elle se partage en image au format story, ou se télécharge en PDF d&apos;une page A4 avec le détail des 11 critères, la
+            Elle se partage en image au format story, ou se télécharge en PDF d&apos;une page A4 avec le détail de tous les critères, la
             composition colorée ingrédient par ingrédient et les valeurs ramenées sur matière sèche.
           </p>
         </div>

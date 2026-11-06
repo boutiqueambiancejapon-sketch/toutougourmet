@@ -16,7 +16,7 @@ const STEPS = [
   {
     art: <ScoreArt />,
     title: 'La note sur 100',
-    text: 'Notre barème calcule la note sur 11 critères pour un aliment complet, 8 pour une friandise. Il explique chacun et liste ce qui manque sur l\'étiquette.',
+    text: 'Notre barème calcule la note sur 13 critères pour un aliment complet, 10 pour une friandise. Il explique chacun et liste ce qui manque sur l\'étiquette.',
   },
 ]
 
