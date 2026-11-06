@@ -41,7 +41,8 @@ function createAuth(db: Db) {
     database: drizzleAdapter(db, { provider: 'pg', schema }),
     emailAndPassword: {
       enabled: true,
-      requireEmailVerification: true,
+      // Compte ouvert dès l'inscription (décision du 2026-11-06). La confirmation reste exigée pour les e-mails et l'analyse par photo.
+      requireEmailVerification: false,
       minPasswordLength: 8,
       maxPasswordLength: 128,
       resetPasswordTokenExpiresIn: 60 * 60,
@@ -124,7 +125,7 @@ export function getAuth(): Auth | null {
   return globalForAuth.tgAuth
 }
 
-export type SessionUser = { id: string; name: string; email: string }
+export type SessionUser = { id: string; name: string; email: string; emailVerified: boolean }
 
 /** Utilisateur connecté de la requête en cours (une seule lecture par rendu). */
 export const getSessionUser = cache(async (): Promise<SessionUser | null> => {
@@ -135,5 +136,5 @@ export const getSessionUser = cache(async (): Promise<SessionUser | null> => {
   if (!auth) return null
   const session = await auth.api.getSession({ headers: requestHeaders })
   if (!session) return null
-  return { id: session.user.id, name: session.user.name, email: session.user.email }
+  return { id: session.user.id, name: session.user.name, email: session.user.email, emailVerified: session.user.emailVerified }
 })

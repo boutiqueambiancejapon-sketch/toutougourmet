@@ -43,7 +43,7 @@ export function DraftResume({ dogs, newDogGaps }: DraftResumeProps) {
   if (draft === null) {
     return (
       <FormNotice tone="info">
-        Aucune saisie en attente sur cet appareil (lien de confirmation ouvert ailleurs, ou fiche déjà créée). Ouvre la page d&apos;un de{' '}
+        Aucune saisie en attente sur cet appareil (saisie faite ailleurs, ou fiche déjà créée). Ouvre la page d&apos;un de{' '}
         <Link href="/compte/chiens" className={linkInline}>
           tes chiens
         </Link>{' '}

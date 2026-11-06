@@ -7,14 +7,13 @@ import { track } from '@/lib/analytics'
 import { authErrorMessage } from './auth-errors'
 import { FormNotice, SubmitButton, TextField } from './fields'
 
-// @cdc lot 4 — inscription : prénom, e-mail, mot de passe. Le compte s'ouvre après le clic sur
-// le lien reçu par e-mail (Better Auth connecte alors directement et renvoie vers /compte).
+// @cdc lot 4 — inscription : prénom, e-mail, mot de passe. Le compte s'ouvre tout de suite ; le lien
+// reçu par e-mail confirme l'adresse (décision du 2026-11-06).
 
 export function SignUpForm({ returnTo }: { returnTo: string }) {
   const id = useId()
   const [pending, setPending] = useState(false)
   const [error, setError] = useState('')
-  const [sentTo, setSentTo] = useState('')
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -28,19 +27,12 @@ export function SignUpForm({ returnTo }: { returnTo: string }) {
       password: String(data.get('password') ?? ''),
       callbackURL: `${returnTo}${returnTo.includes('?') ? '&' : '?'}bienvenue=1`,
     })
-    setPending(false)
-    if (err) return setError(authErrorMessage(err))
-    setSentTo(email)
+    if (err) {
+      setPending(false)
+      return setError(authErrorMessage(err))
+    }
     track('Account Signup', { step: 'form' })
-  }
-
-  if (sentTo) {
-    return (
-      <FormNotice tone="info">
-        <strong className="font-semibold">Regarde ta boîte mail.</strong> On a envoyé un lien de confirmation à {sentTo}. Clique
-        dessus pour ouvrir ton compte (pense aux indésirables si tu ne le vois pas).
-      </FormNotice>
-    )
+    window.location.assign(returnTo)
   }
 
   return (

@@ -52,7 +52,7 @@ export function PublicSheetForm() {
         signedIn ? null : (
           <p className="m-0 text-sm leading-relaxed text-ink-2">
             Le lien et le PDF demandent un compte gratuit. Ta saisie reste sur cet appareil en attendant : rien ne nous est envoyé avant
-            l&apos;inscription. Ouvre le lien de confirmation sur ce même appareil pour la retrouver.
+            l&apos;inscription, et tu la retrouves ensuite sur ce même appareil.
           </p>
         )
       }

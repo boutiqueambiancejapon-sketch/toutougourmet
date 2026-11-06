@@ -1,4 +1,5 @@
 import { AccountShell } from '@/components/compte/espace/AccountShell'
+import { EmailConfirmBanner } from '@/components/compte/espace/EmailConfirmBanner'
 import { getSessionUser } from '@/lib/server/auth'
 import { getMembership } from '@/lib/server/membership'
 
@@ -11,6 +12,7 @@ export default async function AccountSpaceLayout({ children }: { children: React
   const membership = await getMembership(user.id)
   return (
     <AccountShell name={user.name} email={user.email} premium={membership?.plan === 'premium'}>
+      {user.emailVerified ? null : <EmailConfirmBanner email={user.email} />}
       {children}
     </AccountShell>
   )

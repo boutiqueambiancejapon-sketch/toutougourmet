@@ -32,6 +32,7 @@ export const SCANNER_RESULTS: Record<ScannerResult, ResultInfo> = {
   provider_error: { label: 'Erreur de service', family: 'failure', pill: 'Service' },
   unavailable: { label: 'Service indisponible', family: 'failure', pill: 'Service' },
   lookup_error: { label: 'Open Pet Food Facts injoignable', family: 'failure', pill: 'Service' },
+  email_unverified: { label: 'Adresse non confirmée', family: 'failure', pill: 'Limite' },
   quota_reached: { label: 'Quota du mois atteint', family: 'failure', pill: 'Limite' },
   daily_cap: { label: 'Plafond du jour atteint', family: 'failure', pill: 'Limite' },
   rate_limited: { label: 'Trop d’essais rapprochés', family: 'failure', pill: 'Limite' },

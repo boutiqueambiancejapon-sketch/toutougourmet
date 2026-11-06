@@ -33,6 +33,7 @@ export const maxDuration = 60
 const NO_STORE = { 'Cache-Control': 'private, no-store' }
 const STATUS: Record<ScannerErrorCode, number> = {
   unauthorized: 401,
+  email_unverified: 403,
   rate_limited: 429,
   quota_reached: 429,
   daily_cap: 429,
@@ -83,6 +84,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     log(error === 'recheck' ? 'blurry' : error)
     return fail(error, q)
   }
+  if (!user.emailVerified) return failed('email_unverified')
   if (overLimit(`scan:${user.id}`, RATE_LIMITS)) return failed('rate_limited')
   const length = Number(request.headers.get('content-length') ?? 0)
   if (length > MAX_IMAGES * MAX_IMAGE_BYTES + 512 * 1024) return failed('too_large')

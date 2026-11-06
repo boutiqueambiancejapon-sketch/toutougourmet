@@ -31,12 +31,26 @@ function plain(paragraphs: string[], url: string | null, footer: string): string
 
 export function verificationEmail(to: string, name: string, url: string): TransactionalEmail {
   const hello = name ? `Bonjour ${name},` : 'Bonjour,'
-  const lines = [hello, 'Il reste une étape pour ouvrir ton compte Toutou Gourmet : confirme ton adresse e-mail.']
+  const lines = [hello, 'Ton compte Toutou Gourmet est ouvert. Confirme ton adresse e-mail pour recevoir ses alertes et garder ton compte.']
   const footer = "Le lien est valable 24 heures. Si tu n'as pas créé de compte, ignore cet e-mail."
   return {
     to,
     subject: 'Confirme ton adresse e-mail',
     kind: 'confirmation',
+    text: plain(lines, url, footer),
+    html: layout(lines, { label: 'Confirmer mon adresse', url }, footer),
+  }
+}
+
+/** Rappel unique, 24 heures après l'inscription (scripts/rappel-confirmation.ts). */
+export function verificationReminderEmail(to: string, name: string, url: string): TransactionalEmail {
+  const hello = name ? `Bonjour ${name},` : 'Bonjour,'
+  const lines = [hello, "Ton adresse n'est pas encore confirmée. Un clic suffit pour garder ton compte et recevoir ses alertes. Sans confirmation, il sera supprimé 30 jours après sa création."]
+  const footer = "Le lien est valable 7 jours, et on ne te relancera pas. Si tu n'as pas créé de compte, ignore cet e-mail."
+  return {
+    to,
+    subject: 'Il te reste un clic pour confirmer ton adresse',
+    kind: 'confirmation-rappel',
     text: plain(lines, url, footer),
     html: layout(lines, { label: 'Confirmer mon adresse', url }, footer),
   }
