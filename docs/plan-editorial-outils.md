@@ -18,10 +18,11 @@ Maillage, le point fort de ces pages :
 - Les duels citent les deux pages marques, et ces pages citent le duel.
 
 Règles de ces pages, en plus de celles du haut du fichier :
+- Le ton du haut de `deploy/new-article-prompt.md` passe avant les règles ci-dessous : une page d'avis se lit avec plaisir, ce n'est pas un rapport (rappel du propriétaire, 2026-11-06).
 - Partir des vraies pages produit : `node_modules/.bin/tsx scripts/maxizoo-lookup.ts royal canin mini adulte` donne les codes-barres, puis `--lire=CODE` donne la composition, l'analyse, les calories, la note du scanner, le lien exact et l'image. 15 lectures au plus par article. Page illisible : essayer une autre taille, sinon ne rien affirmer sur ce produit.
 - Lire deux tailles de la même recette quand elles existent. Notes différentes de plus de 5 points : ne pas citer la note, s'en tenir à la composition, et le dire dans le compte rendu.
 - Une page modèle doit dire ce que ce modèle a de propre face à ses voisins : premier ingrédient, protéines, matières grasses, calories, chien visé. Une taille de sac n'est jamais un sujet. Modèle introuvable dans l'outil, ou composition identique à un modèle déjà publié : cocher `[~]` avec la raison et passer au suivant.
-- Le verdict tombe dans le TL;DR, sourcé par la composition : premier ingrédient, part animale si elle est déclarée, protéines, matières grasses, note du scanner. Calcium ou phosphore absents : écrire « non indiqués sur la page Maxi Zoo », jamais « la marque ne les déclare pas ».
+- Le verdict tombe dans le TL;DR en langage courant : la note, ce qui est bien, ce qui coince. Protéines, matières grasses et calcium vont dans le tableau de la page, pas dans la phrase.
 - Bloc produits, un seul, avec 1 à 3 produits : `<ProductPicks title="…"><ProductPick name="…" why="…" href="LIEN" image="IMAGE" /></ProductPicks>`, `LIEN` et `IMAGE` copiés de l'outil, jamais de lien tidd.ly ni de lien inventé. `why` donne un fait lu sur la page. Une formule vétérinaire porte `vet`.
 - Recette notée sous 55 : proposer une recette Maxi Zoo notée au moins 70 et 15 points plus haut, lue avec l'outil, ou un partenaire si le sujet s'y prête.
 - Jamais : faux témoignage, note d'avis clients recopiée sans la page, « notre test » ou « testé » (on lit des étiquettes, on ne nourrit pas de chiens), « recommandé par les vétérinaires » sans source, « scanné » pour un produit qu'aucun lecteur n'a scanné, promesse de soin. Prix seulement avec « relevé le {date} ».
