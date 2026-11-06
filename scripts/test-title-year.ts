@@ -1,6 +1,6 @@
 // Tests de l'année dans les titres, avec un passage au 1er janvier 2027.
 import assert from 'node:assert/strict'
-import { currentYear, refreshYear, titleWithYear } from '../lib/title-year'
+import { addYear, currentYear, refreshYear, titleWithYear } from '../lib/title-year'
 
 const T = (title: string, category?: string, year = 2027) => titleWithYear(title, category, year)
 assert.equal(T('Avis Acana 2026 : composition, prix et alternative'), 'Avis Acana 2027 : composition, prix et alternative')
@@ -19,4 +19,5 @@ assert.equal(T(long, undefined, 2026), long)
 // Minuit à Paris : le 31 décembre à 23 h 30 UTC, c'est déjà 2027 en France.
 assert.equal(currentYear(new Date('2026-12-31T23:30:00Z')), 2027)
 assert.equal(currentYear(new Date('2026-12-31T22:30:00Z')), 2026)
+assert.equal(addYear('Meilleures croquettes pour chien adulte : le classement par composition', 2026, Infinity), 'Meilleures croquettes pour chien adulte 2026 : le classement par composition')
 console.log('test-title-year : tout passe')

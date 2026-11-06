@@ -2,7 +2,7 @@ import { OG_COLORS as C } from '../tokens'
 import type { FicheA4Data } from './data'
 import { u } from './scale'
 
-// @cdc lot 6 — fiche A4 (PDF) : les 11 critères sur deux colonnes, points et barre colorée
+// @cdc lot 6 — fiche A4 (PDF) : les critères sur deux colonnes, points et barre colorée
 // (mêmes seuils que FicheCriteria), explication courte.
 
 function barColor(ratio: number): string {

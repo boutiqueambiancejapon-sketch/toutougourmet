@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 
 const SUMMARY = [
   'Yuka analyse les aliments et cosmétiques pour humains, pas les aliments pour animaux.',
-  'Notre scanner note sur 100 les croquettes et pâtées (11 critères) et les friandises pour chien (8 critères), avec un barème publié.',
+  'Notre scanner note sur 100 les croquettes et pâtées (13 critères) et les friandises pour chien (10 critères), avec un barème publié.',
   'Code-barres sans compte, analyses par photo avec un compte gratuit.',
 ]
 

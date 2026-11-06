@@ -28,7 +28,7 @@ export const RANKING_CONTENT: Partial<Record<SegmentSlug, RankingContent>> = {
       {
         h2: 'Que mesure la note sur 100 de ce classement ?',
         paragraphs: [
-          "La note sur 100 mesure la composition affichée, avec 11 critères : protéines, matières grasses et glucides sur matière sèche, premier ingrédient, part animale déclarée, ingrédients animaux sans espèce, céréales en tête de liste, sucres ajoutés, conservateurs controversés, colorants et rapport calcium/phosphore.",
+          "La note sur 100 mesure la composition affichée, avec 13 critères : protéines, matières grasses, glucides, calcium et phosphore, cendres, premier ingrédient, part animale, espèces nommées, place des végétaux, sucres ajoutés, conservateurs, colorants et étiquette complète.",
           "La matière sèche désigne ce qui reste de l'aliment sans son eau. Ce calcul rend deux recettes comparables, même quand l'une contient 8 % d'humidité et l'autre 12 %. La FEDIAF, la fédération européenne des fabricants, fixe le minimum de protéines à 18 % sur matière sèche pour un chien adulte.",
           "Le barème récompense les recettes riches en viande, et un chien en bonne santé s'en porte bien. Un chien malade peut avoir d'autres besoins : un chien aux reins fragiles a souvent besoin de moins de phosphore et de protéines. Il passe donc par son vétérinaire, et nos [articles santé](/chien/sante) présentent les formules adaptées plutôt qu'un podium.",
         ],

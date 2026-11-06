@@ -15,7 +15,7 @@ const WANTS_YEAR = /^avis\b|:\s*avis\b|\bmeilleur(?:e|s|es)?\b|\bcomparatif\b|\b
 const MAX_LENGTH = 66
 
 /** Ajoute l'année juste avant les deux-points, là où Google l'affiche à coup sûr. */
-export function addYear(title: string, year: number): string {
+export function addYear(title: string, year: number, max = MAX_LENGTH): string {
   const colon = title.search(/\s:/)
   const next =
     colon > 0
@@ -23,7 +23,7 @@ export function addYear(title: string, year: number): string {
       : /^avis\b/i.test(title)
         ? `${title} ${year}`
         : `${title} en ${year}`
-  return next.length <= MAX_LENGTH ? next : title
+  return next.length <= max ? next : title
 }
 
 /** Titre d'un article : l'année à jour s'il en a une, ajoutée si c'est un avis, un classement ou un comparatif. */
