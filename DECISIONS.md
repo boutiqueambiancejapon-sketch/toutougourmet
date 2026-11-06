@@ -322,3 +322,6 @@ Demande du propriétaire : voir toutes les fiches, filtrer par marque, type et �
 
 ## 2026-11-06 — Fiabilité et « Vérifier pour mon chien »
 Le propriétaire valide : la fiabilité de la note s'affiche (données complètes, partielles, limitées) et un bouton sur les fiches compare le produit au profil du chien. La note générale reste publique ; seule la réponse pour le chien demande un compte. Réponse en trois états avec ses raisons, sans note de compatibilité ni diagnostic. Pas de V2 du barème pour l'instant.
+
+## 2026-11-06 — IndexNow
+Demande du propriétaire. Toutes les heures, `scripts/indexnow.mjs` compare le plan du site au dernier envoi et signale les changements à api.indexnow.org. La clé est publique par conception (`public/<clé>.txt`), donc versionnée. Google n'utilise pas IndexNow.
