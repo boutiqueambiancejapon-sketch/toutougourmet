@@ -39,6 +39,7 @@ export async function GET(): Promise<NextResponse> {
       breedName: breed?.name ?? null,
     },
     allergies,
+    chiens: dogs.map((d) => ({ id: d.id, name: d.name, age: ageGroupOf(d.birthDate) ?? null, weightKg: d.weightKg, activity: d.activity, sterilized: d.sterilized, allergies: d.allergies })),
   }
   return NextResponse.json(body, { headers })
 }

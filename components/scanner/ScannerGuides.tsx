@@ -20,7 +20,7 @@ export function ScannerGuides() {
     <div className="flex flex-col gap-4">
       <p className="m-0 text-base leading-relaxed text-ink-2">
         Une pâtée se juge comme une croquette, une fois l&apos;eau retirée. Avec 78 % d&apos;humidité, 8 % de protéines sur la boîte
-        font environ 36 % sur matière sèche. Le scanner fait ce calcul pour comparer une pâtée et une croquette sur la même base.
+        font environ 36 % sur matière sèche. Le scanner fait ce calcul, mais note et classe les pâtées à part : leur eau et leur viande fraîche ne se comparent pas à une croquette.
       </p>
       <p className="m-0 text-base leading-relaxed text-ink-2">
         Une friandise n&apos;a pas à couvrir les besoins du chien. Son barème regarde la viande ou le poisson nommé en premier, le

@@ -37,9 +37,9 @@ export function WhyDogScale() {
         croquette à 8&nbsp;% d&apos;eau.
       </p>
       <p className="m-0">
-        Les autres critères lisent l&apos;étiquette du sac&nbsp;: une espèce animale nommée en premier ingrédient, la part de viande
-        ou de poisson déclarée, les ingrédients animaux sans espèce, les céréales en tête de liste, les sucres ajoutés, les
-        conservateurs BHA, BHT et éthoxyquine, les colorants. Le rapport calcium-phosphore rapporte des points seulement si les deux valeurs figurent sur la fiche et sont équilibrées.
+        Les autres critères lisent l&apos;étiquette du sac&nbsp;: une espèce animale nommée en premier ingrédient, la part animale une fois
+        l&apos;eau retirée, les ingrédients sans espèce, la place des végétaux, les sucres ajoutés, les conservateurs BHA, BHT et éthoxyquine, les colorants,
+        le calcium et le phosphore, et le soin apporté à l&apos;étiquette.
         Le même barème s&apos;applique à chaque produit, et aucune marque ne paie pour sa note.
       </p>
     </Section>

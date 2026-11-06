@@ -17,7 +17,7 @@ export function CarbsSection() {
         <Formula>glucides sur matière sèche = glucides × 100 ÷ (100 − humidité)</Formula>
         <p>
           Exemple : 26 % de protéines, 15 % de matières grasses, 7 % de cendres, 3 % de cellulose et 10 % d&apos;humidité donnent 39 %
-          de glucides sur le sac, soit 43,3 % sur matière sèche. Cette croquette prend 6 points sur 15 au critère des glucides de la
+          de glucides sur le sac, soit 43,3 % sur matière sèche. Cette croquette prend 5 points sur 8 au critère des glucides de la
           note.
         </p>
       </div>

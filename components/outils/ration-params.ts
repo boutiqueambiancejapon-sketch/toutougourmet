@@ -1,3 +1,4 @@
+import type { ChienProfil } from '@/lib/scanner/compatibilite'
 import { BARF_BODY_PCT, type ActivityLevel, type AgeGroup, type RationValues } from '@/lib/calculators'
 
 // Paramètres d'URL de /outils/ration (pré-remplissage depuis l'accueil et les pages race) :
@@ -58,6 +59,8 @@ export interface AccountProfile {
     | null
   /** Chiens du compte qui ont des allergies notées (prénom et allergies seulement) : alerte du scanner */
   allergies?: { name: string; allergies: string[] }[]
+  /** Tous les chiens du compte, pour « Vérifier pour mon chien » sur les fiches. */
+  chiens?: ChienProfil[]
 }
 
 const AGES: readonly AgeGroup[] = ['chiot', 'adulte', 'senior']

@@ -1,4 +1,5 @@
 import { BAND_LABELS, type ScoreResult, isPartial } from '@/lib/scanner/score'
+import { FicheFiabilite } from './fiche/FicheFiabilite'
 import { SafetyAlerts } from './SafetyAlerts'
 import { ScoreBadge } from './ScoreBadge'
 import { KindTag } from './treat/KindTag'
@@ -31,6 +32,7 @@ export function ScoreDetail({ details, headingLevel = 'h3', alerts = true }: Sco
           <KindTag details={details} />
         </div>
       </div>
+      <FicheFiabilite details={details} />
       {alerts && details.alertes ? <SafetyAlerts alerts={details.alertes} /> : null}
       {alerts && details.treat && !details.alertes ? <TreatAlerts alerts={details.treat.alerts} /> : null}
       {details.missing.length > 0 ? (

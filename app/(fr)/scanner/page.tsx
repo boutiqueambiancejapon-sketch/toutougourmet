@@ -18,7 +18,7 @@ import { ReadScore } from '@/components/scanner/ReadScore'
 import { ScannerJsonLd } from '@/components/scanner/ScannerJsonLd'
 import { ScannerGuides } from '@/components/scanner/ScannerGuides'
 import { ScannerMethod } from '@/components/scanner/ScannerMethod'
-import { TreatMethod } from '@/components/scanner/treat/TreatMethod'
+import { BaremeSections } from '@/components/scanner/ScannerMethodBaremes'
 import { ScannerTool } from '@/components/scanner/ScannerTool'
 import { TopRated } from '@/components/scanner/TopRated'
 import { RankingLinks } from '@/components/scanner/rankings/RankingLinks'
@@ -84,7 +84,10 @@ export default function ScannerPage() {
             <ScannerMethod />
           </MethodDetails>
           <MethodDetails id="methode-friandises" title="Comment est calculée la note des friandises ?">
-            <TreatMethod />
+            <BaremeSections ids={['friandise']} />
+          </MethodDetails>
+          <MethodDetails id="methode-complements" title="Comment sont notés les compléments et les huiles ?">
+            <BaremeSections ids={['complement', 'huile']} />
           </MethodDetails>
           <MethodDetails id="glucides" title={'Comment calculer le taux de glucides des croquettes ?'}>
             <CarbsSection />

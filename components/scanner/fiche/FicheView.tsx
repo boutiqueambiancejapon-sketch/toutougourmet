@@ -17,7 +17,9 @@ import { KindTag } from '../treat/KindTag'
 import { TreatAlerts } from '../treat/TreatAlerts'
 import { TreatHomemade } from '../treat/TreatHomemade'
 import { CATEGORY_PHRASE, foodNoun, NOUNS } from '@/lib/scanner/food-noun'
-import { kindOf } from '@/lib/scanner/score'
+import { dryMatterBasis, kindOf } from '@/lib/scanner/score'
+import { isTherapeutic } from '@/lib/scanner/fiche-lists'
+import { FicheMonChien } from './FicheMonChien'
 import { toScanAnalysis } from '@/lib/scanner/result'
 import { ALTERNATIVE_BELOW, alternativesFor, brandSlug } from '@/lib/scanner/seo'
 import { betterAtMaxiZoo } from '@/lib/server/scanner-catalog'
@@ -50,6 +52,7 @@ export async function FicheView({ row, indexee, path }: { row: FoodAnalysis; ind
   const name = [a.brand, a.product].filter(Boolean).join(' ') || 'Produit sans nom lisible'
   const nom = indexee?.nom ?? nomRecette(a.brand, a.product) ?? name
   const buy = buyLink({ ...a, buyUrl: row.buyUrl })
+  const basis = dryMatterBasis(a.label.constituants, a.label.typeAliment)
   const h1 = indexee ? h1Fiche(indexee.nom, currentYear()) : a.product ? `${a.product}${a.brand ? ` (${a.brand})` : ''} : notre analyse` : `${a.brand ?? words.unnamed} : notre analyse`
   const date = row.createdAt.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' })
   const bSlug = brandSlug(a.brand)
@@ -81,6 +84,7 @@ export async function FicheView({ row, indexee, path }: { row: FoodAnalysis; ind
         <SourceNotice source={a.source} reviewed={row.reviewed} />
         {a.details.alertes ? <SafetyAlerts alerts={a.details.alertes} /> : a.details.treat ? <TreatAlerts alerts={a.details.treat.alerts} /> : null}
         <AllergyAlert ingredients={a.label.ingredients.map((i) => i.nom)} />
+        <FicheMonChien produit={{ nom, friandise: treat, ingredients: a.label.ingredients.map((i) => i.nom), protDm: basis.protDm, fatDm: basis.fatDm, alertes: a.details.alertes ?? [], veterinaire: isTherapeutic({ brand: a.brand, product: a.product }) }} />
       </div>
 
       <section aria-labelledby="contenu" className="flex flex-col gap-4">
