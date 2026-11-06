@@ -11,6 +11,8 @@ export const MAXI_ZOO_CATEGORIES: Record<string, Pick<ExtractedLabel, 'typeImage
   'Chien > Nourriture pour chien > Croquettes pour chiens': { typeImage: 'aliment-chien', typeAliment: 'sec' },
   'Chien > Nourriture pour chien > Nourriture humide pour chien': { typeImage: 'aliment-chien', typeAliment: 'humide' },
   'Chien > Nourriture pour chien > Friandises et boissons': { typeImage: 'friandise', typeAliment: 'autre' },
+  // Compléments et huiles : le type vient du nom (baremes/classer), noté sans classement.
+  'Chien > Nourriture pour chien > Compléments alimentaires et élevage': { typeImage: 'aliment-chien', typeAliment: 'autre' },
 }
 
 export interface MaxiZooItem {
@@ -52,7 +54,7 @@ export function pageText(html: string): string {
     .replace(/\s+/g, ' ')
 }
 
-const MIX_NAME = /\b(mix|assortiment|assorti(e|es|s)?|vari[ée]t[ée]s?|multipack|s[ée]lection mixte|lot mixte|coffret|\d+\s*saveurs?)\b/i
+const MIX_NAME = /biberon|\b(mix|assortiment|assorti(e|es|s)?|vari[ée]t[ée]s?|multipack|s[ée]lection mixte|lot mixte|coffret|\d+\s*saveurs?)\b/i
 export const isMixedProduct = (name: string): boolean => MIX_NAME.test(name)
 
 export function parseMaxiZooPage(text: string): MaxiZooParse {
@@ -63,8 +65,10 @@ export function parseMaxiZooPage(text: string): MaxiZooParse {
   // Deux recettes dans la même section : le premier chiffre ne vaudrait que pour l'une d'elles.
   if ((block.match(/prot[ée]ines?/gi) ?? []).length > 1) return { ok: false, reason: 'plusieurs-recettes' }
   const constituants = Object.fromEntries(ANALYTICAL_KEYS.map((k) => [k, percentAfter(block, PATTERNS[k])])) as Record<AnalyticalKey, number | null>
-  if (constituants.proteines === null || constituants.matieresGrasses === null) return { ok: false, reason: 'chiffres-manquants' }
-  if (constituants.proteines + constituants.matieresGrasses + (constituants.cendres ?? 0) + (constituants.cellulose ?? 0) > 100) return { ok: false, reason: 'chiffres-manquants' }
+  // Une huile n'annonce que ses matières grasses, 90 % et plus : pas de protéines à attendre.
+  const huile = (constituants.matieresGrasses ?? 0) >= 90
+  if ((constituants.proteines === null && !huile) || constituants.matieresGrasses === null) return { ok: false, reason: 'chiffres-manquants' }
+  if ((constituants.proteines ?? 0) + constituants.matieresGrasses + (constituants.cendres ?? 0) + (constituants.cellulose ?? 0) > 100) return { ok: false, reason: 'chiffres-manquants' }
   if (compoAt < 0) return { ok: false, reason: 'composition-absente' }
   const after = text.slice(compoAt + 'Composition'.length)
   const end = after.search(/Peut contenir|Additifs par kg|Additifs nutritionnels|Mode d.emploi|Conseils? d.utilisation|L\.I\.P\.|Teneur en humidit|Informations concernant|Le montant de commande/i)

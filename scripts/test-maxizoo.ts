@@ -19,6 +19,9 @@ if (a.ok) {
 }
 const wet = parseMaxiZooPage('Composants analytiques Protéine 8,1 %, matières grasses 4,5 %, cendres brutes 2,4 %, cellulose brute 0,4 %, humidité 79 % Composition 70 % cheval, 25 % bouillon de cheval, 2 % panais.')
 assert.ok(wet.ok && wet.constituants.humidite === 79)
+const huile = parseMaxiZooPage("Composants analytiques Teneur en matières grasses 99,9% Composition 100 % d'huile de poisson (50 % d'huile de foie de morue)")
+assert.ok(huile.ok && huile.constituants.proteines === null && huile.constituants.matieresGrasses === 99.9)
+assert.equal(parseMaxiZooPage('Composants analytiques Teneur en matières grasses 12% Composition poulet, riz et carotte').ok, false)
 const treat = parseMaxiZooPage('Composants analytiques Protéines : 19,6 % - Fibres brutes : 1,4 % - Teneur en matières grasses : 9,2 % - Cendres brutes : 9,9 % - Humidité : 18 % - Valeur énergétique (ME) : 3131 kcal/kg Composition Protéine de volaille séchée, farine de blé, glycérine.')
 assert.ok(treat.ok && treat.constituants.matieresGrasses === 9.2 && treat.constituants.cellulose === 1.4 && treat.kcal100g === 313)
 assert.deepEqual(parseMaxiZooPage('Rien ici'), { ok: false, reason: 'section-absente' })

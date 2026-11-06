@@ -1,3 +1,4 @@
+import { recipeKey } from '@/lib/scanner/rankings'
 import { cache } from 'react'
 import { and, desc, isNotNull, sql } from 'drizzle-orm'
 import { foodAnalysis } from '@/db/schema'
@@ -54,7 +55,13 @@ export const reviewedItems = cache(async (): Promise<ReviewedItem[]> => {
     return [{ ...r, score: note.score ?? 0, kind: (note.details.bareme ? note.details.kind === 'treat' : r.kind === 'treat') ? ('treat' as const) : ('complete' as const), noun, brandSlug: brandSlug(r.brand) }]
   })
   // Sans recalcul en base, l'ordre de la requête ne suit pas la nouvelle note.
-  return BAREMES_ACTIFS ? items.sort((a, b) => b.score - a.score) : items
+  const seen = new Set<string>()
+  return (BAREMES_ACTIFS ? items.sort((a, b) => b.score - a.score) : items).filter((it) => {
+    const cle = it.brand && it.product ? recipeKey(it.brand, it.product) : it.slug
+    if (seen.has(cle)) return false
+    seen.add(cle)
+    return true
+  })
 })
 
 /** Même liste, sans jamais faire échouer la page qui l'affiche. `kind` : aliments complets ou friandises seulement. */
