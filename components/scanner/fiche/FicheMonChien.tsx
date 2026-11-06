@@ -11,7 +11,7 @@ import { signupHref } from '@/lib/signup-places'
 // @cdc profil chien — « Vérifier pour mon chien » sur une fiche. La note générale reste publique ; la réponse pour le chien
 // du lecteur demande un compte, car elle lit son profil. Aucune requête pour un visiteur sans compte.
 
-const CARTE = 'flex flex-col gap-3 rounded-card border-2 border-ink bg-paper p-4'
+const CARTE = 'flex flex-col gap-3 rounded-card bg-amber-bg p-4'
 const BOUTON = 'inline-flex min-h-12 items-center justify-center whitespace-nowrap rounded-control bg-ink px-5 font-semibold text-cream no-underline hover:underline sm:self-start'
 const TITRE = 'm-0 font-display text-xl font-black text-ink'
 const TEXTE = 'm-0 text-[15px] leading-relaxed text-ink-2'

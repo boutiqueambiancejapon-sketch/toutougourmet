@@ -18,8 +18,8 @@ export async function FichePlaceBlock({ row, noun, nom }: { row: FoodAnalysis; n
   const phrases = phrasesPlace({ ...place, marque: displayBrand(row.brand), note: row.score })
   if (phrases.length === 0) return null
   return (
-    <section aria-labelledby="place" className="flex flex-col gap-3">
-      <h2 id="place" className={H2}>{titleTypo(`Comment se place ${nom} ?`)}</h2>
+    <section aria-labelledby="place" className="flex flex-col gap-2 rounded-card bg-cream-2 p-4">
+      <h2 id="place" className="m-0 font-display text-xl font-black text-ink">{titleTypo(`Comment se place ${nom} ?`)}</h2>
       <p className={TEXT}>{phrases.join(' ')}</p>
     </section>
   )

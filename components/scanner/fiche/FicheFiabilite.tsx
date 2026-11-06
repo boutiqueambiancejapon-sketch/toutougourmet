@@ -8,6 +8,8 @@ const TEXTE = {
   faible: ['Données limitées', 'Trop d\'informations manquent : compare cette note avec prudence.'],
 } as const
 
+export const FIABILITE_LABEL = { haute: TEXTE.haute[0], moyenne: TEXTE.moyenne[0], faible: TEXTE.faible[0] }
+
 export function FicheFiabilite({ details }: { details: ScoreResult }) {
   const f = details.bareme?.fiabilite
   if (!f || details.score === null || details.bareme?.simple) return null
