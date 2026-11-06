@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { recipeHref } from '@/data/model-reviews'
 import { displayBrand, displayName } from '@/lib/scanner/rankings'
 import type { RankedRecipe } from '@/lib/server/rankings'
 import { ProductPhoto } from '../ProductPhoto'
@@ -25,7 +24,7 @@ export function RankRow({ recipe, rank }: { recipe: RankedRecipe; rank: number }
       <div className="flex items-center gap-3">
         <span className="w-6 shrink-0 text-right font-display text-xl font-black text-ink">{rank}</span>
         <ProductPhoto src={recipe.image} />
-        <Link href={recipeHref(recipe.key, recipe.slug)} className="min-w-0 grow font-semibold leading-snug !text-ink !no-underline hover:!underline [overflow-wrap:anywhere]">
+        <Link href={recipe.href} className="min-w-0 grow font-semibold leading-snug !text-ink !no-underline hover:!underline [overflow-wrap:anywhere]">
           {`${displayBrand(recipe.brand)} ${displayName(recipe.name)}`}
         </Link>
         <ScoreBadge score={recipe.score} />

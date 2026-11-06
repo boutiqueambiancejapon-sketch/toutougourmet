@@ -4,7 +4,8 @@ import { BRAND_PAGES_DATE, PAGE_DATES } from '@/data/page-dates'
 import { getAllArticles, getComparatif, type Article } from '@/lib/mdx'
 import { SEGMENTS } from '@/lib/scanner/rankings'
 import { rankedRecipes, segmentIndexable, segmentRecipes } from '@/lib/server/rankings'
-import { FICHES_INDEXEES, ficheIndexeePath } from '@/lib/scanner/fiches-indexees'
+import { ficheIndexeePath } from '@/lib/scanner/fiches-indexees'
+import { fichesIndexees } from '@/lib/server/fiches-indexees'
 import { sitemapTypeOf, type SitemapType } from './types'
 
 // @cdc seo — liste des URL des sitemaps : uniquement des adresses finales en 200 (aucune
@@ -95,7 +96,7 @@ async function croquettesEntries(): Promise<SitemapEntry[]> {
     if (segmentIndexable(segment, list)) entries.push({ path: segment.path, lastmod: latest(list.map((r) => r.updatedAt)) })
   }
   const recettes = await rankedRecipes().catch(() => [])
-  for (const f of FICHES_INDEXEES) {
+  for (const f of (await fichesIndexees()).filter((x) => x.actif)) {
     const r = recettes.find((x) => x.key === f.cle)
     if (r) entries.push({ path: ficheIndexeePath(f), lastmod: r.updatedAt })
   }

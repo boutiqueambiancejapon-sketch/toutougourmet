@@ -9,6 +9,8 @@ import { isSupplementName, MIN_BRANDS, MIN_RECIPES, recipeKey, recipeName, type 
 import type { ScoreResult } from '@/lib/scanner/score'
 import type { ExtractedLabel } from '@/lib/scanner/types'
 import { getDb } from './drizzle'
+import { recipeHref } from '@/data/model-reviews'
+import { fichesIndexees } from '@/lib/server/fiches-indexees'
 
 // @cdc cluster scanner — recettes des classements : fiches Maxi Zoo et fiches relues, hors aliments
 // thérapeutiques et compléments. Plusieurs tailles d'une recette : une ligne, la note la plus basse, par prudence.
@@ -16,6 +18,8 @@ import { getDb } from './drizzle'
 export interface RankedRecipe extends RankRecipe {
   key: string
   slug: string
+  /** Adresse de la recette : son avis, sa fiche indexée, sinon sa fiche. */
+  href: string
   brand: string
   score: number
   image: string | null
@@ -31,6 +35,7 @@ export const rankedRecipes = cache(async (): Promise<RankedRecipe[]> => {
     .select({ slug: foodAnalysis.slug, brand: foodAnalysis.brand, product: foodAnalysis.product, score: foodAnalysis.score, image: foodAnalysis.imageUrl, buyUrl: foodAnalysis.buyUrl, extracted: foodAnalysis.extracted, details: foodAnalysis.details, updatedAt: foodAnalysis.updatedAt })
     .from(foodAnalysis)
     .where(and(isNotNull(foodAnalysis.score), sql`NOT ${foodAnalysis.discarded}`, or(eq(foodAnalysis.source, 'maxizoo'), eq(foodAnalysis.reviewed, true))))
+  const fiches = await fichesIndexees()
   const best = new Map<string, RankedRecipe>()
   for (const r of rows) {
     const label = r.extracted as ExtractedLabel
@@ -43,6 +48,7 @@ export const rankedRecipes = cache(async (): Promise<RankedRecipe[]> => {
     best.set(key, {
       key,
       slug: r.slug,
+      href: recipeHref(key, r.slug, fiches),
       brand: r.brand,
       name: recipeName(r.product),
       noun: details.bareme?.classement ? NOM_CLASSEMENT[details.bareme.classement] : foodNoun(label, details),

@@ -1,4 +1,4 @@
-// @cdc seo — Pâtées ouvertes à Google, seulement celles de data/fiches-indexees.json. Le contenu est dans components/scanner/fiche/FicheView.
+// @cdc seo — Pâtées ouvertes à Google, choisies dans le tableau de bord. Le contenu est dans components/scanner/fiche/FicheView.
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { FicheView } from '@/components/scanner/fiche/FicheView'

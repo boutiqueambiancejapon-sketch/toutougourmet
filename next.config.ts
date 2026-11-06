@@ -37,6 +37,7 @@ const nextConfig: NextConfig = {
       { source: '/chien/marque/dogfy-diet', destination: '/chien/avis-marques/avis-dogfy-diet-repas-frais-chien', permanent: true },
       { source: '/croquettes', destination: '/meilleures-croquettes', permanent: true },
       { source: '/croquettes/friandises', destination: '/meilleures-friandises', permanent: true },
+      { source: '/friandises', destination: '/meilleures-friandises', permanent: true },
       { source: '/patees', destination: '/chien/alimentation-quotidienne/meilleures-patees-chien', permanent: true },
       { source: '/meilleures-croquettes/surpoids', destination: '/chien/sante/croquettes-chien-surpoids', permanent: true },
 

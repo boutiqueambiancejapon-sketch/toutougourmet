@@ -316,3 +316,6 @@ Précision du propriétaire le même jour : titre et H1 des fiches indexées por
 
 ## 2026-11-05 — Barèmes activés
 Le propriétaire demande l'activation sans voir d'abord le classement final, après avertissement sur le nombre de notes qui changent. Les fiches complétées perdent leur statut de contrôle IA jusqu'au prochain contrôle, comme recommandé. Sauvegarde prise juste avant.
+
+## 2026-11-06 — Fiches indexées pilotées depuis le tableau de bord
+Demande du propriétaire : voir toutes les fiches, filtrer par marque, type et état, et ouvrir ou retirer une fiche sans mise en ligne. La liste quitte `data/fiches-indexees.json` pour la table `app.fiche_index`. Compléments, huiles, fiches sans note et aliments vétérinaires ne peuvent pas être ouverts depuis cet écran pour l'instant.

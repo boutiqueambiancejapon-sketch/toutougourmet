@@ -31,18 +31,14 @@ import { titleTypo } from '@/lib/title-typo'
 
 import { marquePage } from '@/data/marque-pages'
 import type { FoodAnalysis } from '@/db/schema'
-import { displayBrand, displayName, recipeName } from '@/lib/scanner/rankings'
-import type { FicheIndexee } from '@/lib/scanner/fiches-indexees'
+import { displayBrand } from '@/lib/scanner/rankings'
+import { nomRecette, type FicheIndexee } from '@/lib/scanner/fiches-indexees'
 import { FicheChien, FicheComparer, FichePlaceBlock, FicheQuestions } from './FicheRepere'
 
 // @cdc lot 6 — contenu d'une fiche produit. Friandise : barème à part, nombre par jour à la place de la matière
 // sèche. Sous 55/100 : marques partenaires en remplacement. Le texte calculé vient de FicheRepere.
 
 const SITE = 'https://www.toutou-gourmet.com'
-
-/** Nom court d'un produit : celui de la fiche indexée, sinon la marque et la recette sans le format. */
-export const ficheNom = (brand: string | null, product: string | null, indexee?: FicheIndexee): string | null =>
-  indexee?.nom ?? (brand && product ? `${displayBrand(brand)} ${displayName(recipeName(product))}` : null)
 
 export async function FicheView({ row, indexee, path }: { row: FoodAnalysis; indexee?: FicheIndexee; path: string }) {
   const a = toScanAnalysis(row)
@@ -52,7 +48,7 @@ export async function FicheView({ row, indexee, path }: { row: FoodAnalysis; ind
   const words = NOUNS[noun]
   const better = a.score !== null && a.score < ALTERNATIVE_BELOW ? await betterAtMaxiZoo(noun, a.brand, a.score) : null
   const name = [a.brand, a.product].filter(Boolean).join(' ') || 'Produit sans nom lisible'
-  const nom = ficheNom(a.brand, a.product, indexee) ?? name
+  const nom = indexee?.nom ?? nomRecette(a.brand, a.product) ?? name
   const buy = buyLink({ ...a, buyUrl: row.buyUrl })
   const h1 = indexee ? h1Fiche(indexee.nom, currentYear()) : a.product ? `${a.product}${a.brand ? ` (${a.brand})` : ''} : notre analyse` : `${a.brand ?? words.unnamed} : notre analyse`
   const date = row.createdAt.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' })
