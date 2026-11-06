@@ -32,7 +32,7 @@ Règles de ces pages, en plus de celles du haut du fichier :
 
 Pages mères déjà en ligne, à doter de la section des modèles au premier modèle publié : Royal Canin, Hill's, Pro Plan, Acana, Orijen.
 
-- [ ] Edgard & Cooper : avis sur les croquettes et la composition (edgard cooper avis, avis vétérinaire)
+- [x] Edgard & Cooper : avis sur les croquettes et la composition (edgard cooper avis, avis vétérinaire) → avis-edgard-cooper
 - [ ] Select Gold : avis sur les croquettes de Maxi Zoo (select gold avis, avis vétérinaire)
 - [ ] Real Nature : avis sur la marque, les croquettes et la pâtée (real nature avis, real nature wilderness avis)
 - [ ] Atavik : avis sur la marque (atavik avis)

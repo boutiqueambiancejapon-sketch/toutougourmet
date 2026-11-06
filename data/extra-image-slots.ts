@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-avis-edgard-cooper',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'blue',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, attentive Pembroke Welsh corgi sitting on a warm kitchen floor beside a simple ceramic bowl filled with brown round dog kibble, a few kibbles on the floor. The dog looks at the bowl without eating. No packaging, no bag, no logo, no brand, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog and bowl filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the bowl. Exactly 6 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-06 pour l'article avis-edgard-cooper.",
+  },
+  {
     id: 'art-chien-peut-manger-paprika',
     group: 'articles',
     ratio: '3:2',
