@@ -93,7 +93,7 @@ export async function FicheView({ row, indexee, path }: { row: FoodAnalysis; ind
         </h2>
         <p className="m-0 text-base leading-relaxed text-ink-2">
           {first
-            ? `La composition liste ${n} ingrédient${n > 1 ? 's' : ''}. Le premier, le plus lourd de la recette (règlement CE 767/2009), est « ${first.nom} »${first.pourcentage !== null ? `, à ${first.pourcentage.toLocaleString('fr-FR')} %` : ''}.`
+            ? `La composition liste ${n} ingrédient${n > 1 ? 's' : ''}. Le premier, le plus lourd de la recette, est « ${first.nom} »${first.pourcentage !== null ? `, à ${first.pourcentage.toLocaleString('fr-FR')} %` : ''}.`
             : 'La composition n\'a pas pu être lue sur cette étiquette.'}
           {a.label.additifs.length > 0 ? ` L'étiquette cite ${a.label.additifs.length} additif${a.label.additifs.length > 1 ? 's' : ''}.` : ''}
         </p>
