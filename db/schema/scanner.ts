@@ -62,6 +62,22 @@ export const foodAnalysis = app.table(
 export type FicheCheckStatus = 'ok' | 'doubt' | 'rejected'
 
 /**
+ * Fiches ouvertes à Google, une par recette (cle = recipeKey). `actif` faux : retirée de l'index depuis le tableau
+ * de bord, son adresse courte redirige vers la fiche habituelle en noindex et peut revenir sans changer.
+ */
+export const ficheIndex = app.table('fiche_index', {
+  foodAnalysisId: uuid('food_analysis_id')
+    .primaryKey()
+    .references(() => foodAnalysis.id, { onDelete: 'cascade' }),
+  type: text('type').$type<'croquettes' | 'patees' | 'friandises'>().notNull(),
+  court: text('court').notNull().unique(),
+  cle: text('cle').notNull().unique(),
+  nom: text('nom').notNull(),
+  actif: boolean('actif').notNull().default(true),
+  updatedAt: ts('updated_at').notNull().defaultNow(),
+})
+
+/**
  * Contrôle IA d'une fiche (scripts/check-fiches-ai.ts) : le modèle juge, il ne corrige rien. Table à
  * part : écrire ici ne touche ni food_analysis.updated_at (lastmod du sitemap) ni reviewed (indexation
  * et schéma d'avis). content_hash vaut md5(extracted::text) au moment du contrôle : une fiche modifiée
