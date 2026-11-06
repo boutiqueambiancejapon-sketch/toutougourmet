@@ -34,15 +34,16 @@ Règles de ces pages, en plus de celles du haut du fichier :
 Pages mères déjà en ligne, à doter de la section des modèles au premier modèle publié : Royal Canin, Hill's, Pro Plan, Acana, Orijen.
 
 - [x] Edgard & Cooper : avis sur les croquettes et la composition (edgard cooper avis, avis vétérinaire) → avis-edgard-cooper
-- [ ] Select Gold : avis sur les croquettes de Maxi Zoo (select gold avis, avis vétérinaire)
-- [ ] Real Nature : avis sur la marque, les croquettes et la pâtée (real nature avis, real nature wilderness avis)
-- [ ] Atavik : avis sur la marque (atavik avis)
-- [ ] Eukanuba : avis sur les croquettes (eukanuba avis, avis vétérinaire)
 - [ ] Premiere : avis sur les croquettes et les pâtées Meati (premiere croquette chien avis)
+- [ ] Real Nature : avis sur la marque, les croquettes et la pâtée (real nature avis, real nature wilderness avis)
+- [ ] Select Gold : avis sur les croquettes de Maxi Zoo (select gold avis, avis vétérinaire)
+- [ ] Atavik : avis sur la marque (atavik avis)
+- [ ] MultiFit : avis sur les croquettes et les pâtées (multifit avis)
+- [ ] Eukanuba : avis sur les croquettes (eukanuba avis, avis vétérinaire)
 - [ ] Carnilove : avis sur les croquettes (carnilove avis chien)
 - [ ] Nature's Variety : avis sur les croquettes (nature's variety chien avis)
-- [ ] Ultima chien : avis sur les croquettes (ultima chien avis vétérinaire)
 - [ ] Pedigree : bon ou mauvais, avis sur la composition (pedigree bon ou mauvais)
+- [ ] Ultima chien : avis sur les croquettes (ultima chien avis vétérinaire)
 - [ ] Advance chien : avis sur les croquettes (croquettes advance chien avis)
 - [ ] Pâtée Cesar : avis pour un chien (pâtée cesar chien avis)
 - [ ] Dentastix : avis et composition (dentastix avis, avis vétérinaire)
