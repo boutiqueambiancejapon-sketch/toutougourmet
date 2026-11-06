@@ -172,7 +172,8 @@ export function extractClassement(content: string): { segment: string | null; be
 }
 
 export function stripTldr(content: string): string {
-  return content.replace(/##?\s*TL;DR[^\n]*\n([\s\S]*?)(?=\n##|\n<MarqueClassement)/i, '')
+  // Le titre et ses puces seulement : le paragraphe d'intro, l'avertissement et les composants qui suivent restent.
+  return content.replace(/##?\s*TL;DR[^\n]*\n(?:[ \t]*\n)*(?:[-*]\s+[^\n]*\n)*/i, '')
 }
 
 /**
