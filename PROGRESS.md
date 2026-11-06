@@ -225,3 +225,7 @@ Demande du propriétaire : chaque article de maladie propose des croquettes ou p
 ## 2026-11-05 : Barèmes activés
 
 Interrupteur allumé et notes écrites à 23:35 UTC (1 145 fiches, 1 068 notes changées, 18 sans note). Sauvegarde : `/srv/toutou/backups/toutou-avant-baremes-2026-11-05.dump`. Textes corrigés avec `scripts/notes-citees.ts`, à relancer après tout recalcul. Note retirée pour 3 produits sans fiche : Acana Senior, Acana Light & Fit, Orijen Six Fish.
+
+## 2026-11-06 : Skill boileau et ton des articles
+
+Recherche des marques d'écriture IA, règles 35 à 49 ajoutées à `boileau`, dont le plafond de 2 noms d'organisme par article. Les anciennes consignes qui poussaient à citer auteur, année et revue dans le texte sont retirées. 10 articles récents réécrits. Le nettoyage de nuit applique les mêmes règles aux anciens.
