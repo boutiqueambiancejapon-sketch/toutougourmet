@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ficheMeta, type ListFiche } from '@/lib/scanner/fiche-lists'
+import { recipeName } from '@/lib/scanner/rankings'
 import { ProductPhoto } from '../ProductPhoto'
 import { ScoreBadge } from '../ScoreBadge'
 
@@ -19,7 +20,7 @@ export function FicheRows({ items, ranked = false, showNoun = false }: { items: 
             <ScoreBadge score={f.score} />
             <span className="flex min-w-0 grow flex-col">
               <span className="truncate font-semibold group-hover:underline">{f.brand ?? 'Marque illisible'}</span>
-              <span className="truncate text-[15px] text-ink-2">{f.product ?? 'Produit sans nom lisible'}</span>
+              <span className="truncate text-[15px] text-ink-2">{f.product ? recipeName(f.product) : 'Produit sans nom lisible'}</span>
               <span className="text-xs leading-snug text-ink-2">{ficheMeta(f, { now, showNoun })}</span>
             </span>
           </Link>

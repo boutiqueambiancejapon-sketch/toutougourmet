@@ -3,7 +3,7 @@
 import { buyLink } from '../lib/scanner/buy-link'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { capPerBrand, ficheDateLabel, ficheMeta, isValidated, latestPool, LIST_ROBOTS, listStats, lowFiches, parseVue, seenInFrance, topFiches, type ListFiche } from '../lib/scanner/fiche-lists'
+import { uneParRecette, capPerBrand, ficheDateLabel, ficheMeta, isValidated, latestPool, LIST_ROBOTS, listStats, lowFiches, parseVue, seenInFrance, topFiches, type ListFiche } from '../lib/scanner/fiche-lists'
 
 let passed = 0
 function test(name: string, fn: () => void) {
@@ -183,6 +183,18 @@ test('où acheter : partenaire, Maxi Zoo, Amazon sinon, jamais sous 55 ni pour u
   assert.equal(buyLink({ brand: 'Pedigree', product: 'Rodeo', score: 41 }), null)
   assert.equal(buyLink({ brand: 'Royal Canin', product: 'Hepatic HF 16', score: 70 }), null)
   assert.equal(buyLink({ brand: null, product: 'X', score: 80 }), null)
+})
+
+test('uneParRecette : les formats d\'une recette font une seule ligne, la mieux notée', () => {
+  const liste = uneParRecette([
+    fiche('o2', { brand: 'Orijen', product: 'Original Adult 2 kg', score: 90, scanCount: 1 }),
+    fiche('o11', { brand: 'Orijen', product: 'Original Adult 11,4 kg', score: 97, scanCount: 2 }),
+    fiche('f', { brand: 'Orijen', product: 'Fit & Trim 2 kg', score: 98 }),
+  ])
+  assert.equal(liste.length, 2)
+  const orig = liste.find((f) => f.product?.startsWith('Original'))
+  assert.equal(orig?.slug, 'o11')
+  assert.equal(orig?.scanCount, 3)
 })
 
 console.log(`${passed} tests réussis`)

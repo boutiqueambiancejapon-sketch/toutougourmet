@@ -3,7 +3,7 @@ import { eq, sql } from 'drizzle-orm'
 import { foodAnalysis, foodCheck, opffProduct, type FicheCheckStatus } from '@/db/schema'
 import { horsListes, NOM_CLASSEMENT, noteCourante } from '@/lib/scanner/baremes/fiche'
 import { foodNoun } from '@/lib/scanner/food-noun'
-import { isFicheComplete, type ListFiche } from '@/lib/scanner/fiche-lists'
+import { isFicheComplete, type ListFiche, uneParRecette } from '@/lib/scanner/fiche-lists'
 import { getDb, type Db } from './drizzle'
 
 // @cdc scanner — fiches des listes publiques. Le statut du contrôle IA ne compte que s'il porte sur
@@ -53,7 +53,7 @@ export const listFiches = cache(async (): Promise<ListFiche[]> => {
         .where(sql`NOT ${foodAnalysis.discarded} AND (${foodAnalysis.reviewed} OR ${foodAnalysis.scanCount} > 0 OR ${currentCheckStatus} = 'ok' OR ${foodAnalysis.source} = 'maxizoo')`),
       readJournal(d),
     ])
-    return rows.flatMap(({ id, extracted, details: enBase, lastHistory, source, ...base }) => {
+    return uneParRecette(rows.flatMap(({ id, extracted, details: enBase, lastHistory, source, ...base }) => {
       const { score, details } = noteCourante({ score: base.score, details: enBase, extracted })
       if (horsListes(details)) return []
       const r = { ...base, score }
@@ -66,7 +66,7 @@ export const listFiches = cache(async (): Promise<ListFiche[]> => {
         lastScanAt: scans.length ? new Date(Math.max(...scans.map((v) => v.getTime()))) : null,
         complete: isFicheComplete(extracted, r.score),
       } satisfies ListFiche]
-    })
+    }))
   } catch (err) {
     console.error('[scanner] listes de fiches indisponibles', err instanceof Error ? err.message : err)
     return []

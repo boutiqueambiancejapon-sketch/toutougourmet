@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { CATEGORY_PHRASE } from '@/lib/scanner/food-noun'
+import { recipeName } from '@/lib/scanner/rankings'
 import type { ReviewedItem } from '@/lib/server/scanner-catalog'
 import { ProductPhoto } from './ProductPhoto'
 import { ScoreBadge } from './ScoreBadge'
@@ -17,7 +18,7 @@ export function RankingList({ items, start = 1, showBrand = true, showCategory =
             <ScoreBadge score={it.score} />
             <span className="flex min-w-0 grow flex-col">
               <span className="truncate font-semibold group-hover:underline">{showBrand ? (it.brand ?? 'Marque inconnue') : (it.product ?? 'Produit sans nom')}</span>
-              {showBrand ? <span className="truncate text-[15px] text-ink-2">{it.product ?? 'Produit sans nom'}</span> : null}
+              {showBrand ? <span className="truncate text-[15px] text-ink-2">{it.product ? recipeName(it.product) : 'Produit sans nom'}</span> : null}
               {showCategory && CATEGORY_PHRASE[it.noun] ? <span className="text-xs text-ink-2">{`${it.score}/100 ${CATEGORY_PHRASE[it.noun]}`}</span> : null}
             </span>
           </Link>

@@ -5,9 +5,9 @@ import { titleTypo } from '@/lib/title-typo'
 
 // @cdc seo — liens de la page mère vers chaque fiche ouverte à Google : aucune fiche indexée ne reste orpheline.
 
-export function MarqueFiches({ marque }: { marque: string }) {
+export function MarqueFiches({ marque, dejaListees = [] }: { marque: string; dejaListees?: string[] }) {
   const page = marquePage(marque)
-  const fiches = page ? FICHES_INDEXEES.filter((f) => marquePage(f.cle.split('|')[0])?.nom === page.nom) : []
+  const fiches = page ? FICHES_INDEXEES.filter((f) => marquePage(f.cle.split('|')[0])?.nom === page.nom && !dejaListees.includes(f.cle)) : []
   if (fiches.length === 0) return null
   return (
     <section className="v2 not-prose my-8 flex flex-col gap-3">

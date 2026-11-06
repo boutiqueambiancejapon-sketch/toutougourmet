@@ -31,7 +31,7 @@ export async function BrandHub({ brand }: { brand: Brand }) {
           <p className="m-0 text-sm text-ink-2">{`Sur ${recipes.length} recettes lues sur le site de la marque. Lien partenaire : on touche une commission si tu commandes, sans surcoût pour toi.`}</p>
         </section>
       ) : null}
-      <MarqueFiches marque={brand.name} />
+      <MarqueFiches marque={brand.name} dejaListees={recipes.slice(0, SHOWN).map((r) => r.key)} />
       <RankingSections sections={rest} />
     </div>
   )

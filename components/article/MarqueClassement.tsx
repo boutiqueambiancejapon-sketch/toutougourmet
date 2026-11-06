@@ -24,7 +24,7 @@ export async function MarqueClassement({ marque }: { marque: string }) {
       </ol>
       <p className="m-0 text-sm text-ink-2">{`Sur ${list.length} recettes lues. La note résume l'étiquette : ce n'est ni un test ni un conseil de vétérinaire.`}</p>
     </section>
-    <MarqueFiches marque={marque} />
+    <MarqueFiches marque={marque} dejaListees={list.slice(0, SHOWN).map((r) => r.key)} />
     </>
   )
 }

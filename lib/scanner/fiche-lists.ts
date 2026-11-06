@@ -1,6 +1,7 @@
 import type { FicheCheckStatus } from '@/db/schema/scanner'
 import type { FoodNoun } from './food-noun'
 import { meetsIndexRule } from './opff-import'
+import { recipeKey } from './rankings'
 import type { ProductKind } from './score'
 import { brandSlug } from './seo'
 import { timeAgo } from './time'
@@ -62,6 +63,31 @@ export const isFicheComplete = (label: ExtractedLabel, score: number | null): bo
 export const isPublicFiche = (f: ListFiche): boolean => !f.discarded && (f.reviewed || f.check !== 'rejected')
 export const isValidated = (f: ListFiche): boolean => isPublicFiche(f) && (f.reviewed || f.fromMaxiZoo === true || f.check === 'ok')
 export const isRealScan = (f: ListFiche): boolean => f.lastScanAt !== null || f.scanCount > 0
+
+/**
+ * Une ligne par recette : les formats d'une même recette ne diffèrent que par le poids du paquet. La mieux notée
+ * parmi les fiches publiques la représente, et garde les scans de toutes.
+ */
+export function uneParRecette(items: ListFiche[]): ListFiche[] {
+  const rang = (f: ListFiche): number => (isPublicFiche(f) ? 1000 : 0) + (f.score ?? -1)
+  const groupes = new Map<string, ListFiche>()
+  for (const f of items) {
+    const cle = f.brand && f.product ? recipeKey(f.brand, f.product) : f.slug
+    const vue = groupes.get(cle)
+    if (!vue) {
+      groupes.set(cle, f)
+      continue
+    }
+    const dates = [vue.lastScanAt, f.lastScanAt].filter((d): d is Date => d !== null).map((d) => d.getTime())
+    groupes.set(cle, {
+      ...(rang(f) > rang(vue) ? f : vue),
+      scanCount: vue.scanCount + f.scanCount,
+      lastScanAt: dates.length ? new Date(Math.max(...dates)) : null,
+      createdAt: vue.createdAt > f.createdAt ? vue.createdAt : f.createdAt,
+    })
+  }
+  return [...groupes.values()]
+}
 
 const latestAt = (f: ListFiche): number => Math.max(f.lastScanAt?.getTime() ?? 0, f.createdAt.getTime())
 
