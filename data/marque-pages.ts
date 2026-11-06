@@ -29,6 +29,7 @@ export const MARQUE_PAGES: MarquePage[] = [
   { nom: 'Just Russel', href: avis('avis-just-russel') },
   { nom: 'Orijen', href: avis('avis-orijen') },
   { nom: 'Orlando (Lidl)', href: avis('avis-croquettes-orlando-lidl'), noms: ['Orlando'] },
+  { nom: 'Premiere', href: avis('avis-premiere') },
   { nom: 'Purina Pro Plan', href: avis('avis-purina-pro-plan'), noms: ['Pro Plan', 'Purina'] },
   { nom: 'Royal Canin', href: avis('avis-royal-canin') },
   { nom: 'Taste of the Wild', href: avis('avis-taste-of-the-wild') },

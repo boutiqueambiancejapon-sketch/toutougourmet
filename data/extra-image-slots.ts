@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-avis-premiere',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'blue',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, attentive whippet sitting on a warm kitchen floor beside two simple ceramic bowls, one filled with brown dog kibble, the other with chunks of wet dog food. The dog looks at the bowls without eating. No packaging, no bag, no tin, no logo, no brand, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog and bowls filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the bowls. Exactly 6 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-06 pour l'article avis-premiere.",
+  },
+  {
     id: 'art-avis-edgard-cooper',
     group: 'articles',
     ratio: '3:2',
