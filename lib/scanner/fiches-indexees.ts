@@ -20,5 +20,10 @@ export const parSlug = (liste: FicheIndexee[], slug: string): FicheIndexee | und
 export const parCle = (liste: FicheIndexee[], cle: string): FicheIndexee | undefined => liste.find((f) => f.actif && f.cle === cle)
 
 /** Nom court d'un produit : la marque et la recette, sans le format. */
-export const nomRecette = (brand: string | null, product: string | null): string | null =>
-  brand && product ? `${displayBrand(brand)} ${displayName(recipeName(product))}` : null
+export function nomRecette(brand: string | null, product: string | null): string | null {
+  if (!brand || !product) return null
+  const nom = displayName(recipeName(product))
+  // « Croquettes à la dinde » perd son premier mot : « Dog Chef à la dinde » ne dirait plus ce qu'est le produit.
+  const complet = /^(au|aux|à la|à l')\b/i.test(nom) && /^croquettes?\b/i.test(product) ? `Croquettes ${nom}` : nom
+  return `${displayBrand(brand)} ${complet}`
+}
