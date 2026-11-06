@@ -1,0 +1,12 @@
+# Signale à Bing et aux moteurs IndexNow les pages nouvelles, modifiées ou retirées (scripts/indexnow.mjs).
+[Unit]
+Description=Toutou Gourmet - IndexNow
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=toutou
+WorkingDirectory=/srv/toutou/current
+Nice=15
+ExecStart=/usr/bin/node scripts/indexnow.mjs

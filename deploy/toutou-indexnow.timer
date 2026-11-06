@@ -1,0 +1,9 @@
+[Unit]
+Description=Toutou Gourmet - IndexNow, toutes les heures
+
+[Timer]
+OnCalendar=*:37
+Persistent=false
+
+[Install]
+WantedBy=timers.target
