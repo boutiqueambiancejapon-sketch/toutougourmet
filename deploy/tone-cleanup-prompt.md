@@ -1,4 +1,4 @@
-Tâche quotidienne : nettoyer le ton de 4 articles existants du site Toutou Gourmet (www.toutou-gourmet.com). Tu tournes sur le serveur, dans une copie de travail de la branche `v2` (le site en production). Tu ne touches JAMAIS à une autre branche.
+Tâche quotidienne : nettoyer le ton de 10 articles existants du site Toutou Gourmet (www.toutou-gourmet.com). Tu tournes sur le serveur, dans une copie de travail de la branche `v2` (le site en production). Tu ne touches JAMAIS à une autre branche.
 
 ## Ton de l'article (priorité sur tout le reste)
 **Priorité sur tout le reste (demande du propriétaire, 2026-11-04).** Le ton : informatif, intéressant, légèrement scientifique et divertissant. Un article de vulgarisation qu'on a plaisir à lire, pas une étude scientifique.
@@ -14,12 +14,14 @@ Tâche quotidienne : nettoyer le ton de 4 articles existants du site Toutou Gour
 - Déplace les références scientifiques du texte, comme « (Auteur et al., 2019) », vers « Sources » en fin d'article. Tu peux retirer les chiffres inutiles au lecteur. Tu n'en modifies aucun, et tu ne touches pas aux sections sécurité.
 
 ## Avant d'écrire
-1. Lire `CLAUDE.md` et le skill `boileau` en entier (`.claude/skills/boileau/SKILL.md`), surtout « LA VOIX, EXEMPLES CONCRETS », les règles 26 à 34 et la règle des tirets cadratins (2 au plus par article, zéro dans title, H2, puces, FAQ).
+1. Lire `CLAUDE.md` et le skill `boileau` en entier (`.claude/skills/boileau/SKILL.md`), surtout « LA VOIX, EXEMPLES CONCRETS », les règles 26 à 49 et la règle des tirets cadratins (2 au plus par article, zéro dans title, H2, puces, FAQ).
 2. Article de référence pour la voix : `content/blog/chien-mange-raisin-urgence.mdx`.
 3. `DECISIONS.md` pour les offres partenaires confirmées (Dog Chef −30 % sur la box d'essai, Dogfy Diet −50 % sur la box d'essai, Elmut −40 % sur la première commande, Franklin −30 % en abonnement, Ultra Premium Direct −20 % sur la première commande en abonnement, Maxi Zoo : garder les liens tidd.ly). Petty Well interdit. Aucune autre remise.
 
 ## Choisir les articles
-Compte les tirets cadratins (—) de chaque fichier `content/blog/*.mdx` et prends les 4 qui en ont le plus, en excluant ceux dont `updatedAt` est la date du jour ou la veille (déjà traités par la réécriture SEO de la nuit).
+Lance `node scripts/tone-score.mjs 10` et prends ces 10 articles : ce sont les plus chargés en noms d'organisme, formules de rapport et tirets cadratins. L'outil exclut déjà ceux modifiés ce jour ou la veille.
+
+Pour chaque article, relis tout le texte, y compris le paragraphe qui suit le TL;DR, car il s'affiche désormais. Applique les règles 35 à 49 de `boileau` : au plus 2 noms d'organisme hors « Sources », pas de ton de rapport, un paragraphe qu'on dirait à un ami. Doses, symptômes et numéros d'urgence ne changent pas.
 
 ## Pour chaque article (nettoyage du ton, pas de réécriture SEO)
 - Tirets cadratins ≤ 2 (zéro dans title, H2, puces, FAQ). Zéro emoji. Retirer `emoji=`/`icon=`, les `<StatRow>` faits d'emojis ou de notes x/5 sans méthode, le `<Verdict>` final s'il répète l'article.
@@ -28,13 +30,13 @@ Compte les tirets cadratins (—) de chaque fichier `content/blog/*.mdx` et pren
 - `updatedAt` = date du jour.
 
 ## Vérifications (une seule construction du site, à la fin, pour ménager la mémoire du serveur)
-- Après les 4 articles : `npm run build > /tmp/tone-build.log 2>&1`. S'il échoue à cause d'un article, corrige-le ; si impossible, annule les changements de cet article (`git checkout -- fichier`) et relance une fois.
+- Après les 10 articles : `npm run build > /tmp/tone-build.log 2>&1`. S'il échoue à cause d'un article, corrige-le ; si impossible, annule les changements de cet article (`git checkout -- fichier`) et relance une fois.
 - Pour chaque article : tirets ≤ 2, emojis = 0, aucun nombre modifié (compare avant/après).
 
 ## Commit
-- Un commit Conventional Commits en anglais, ex. `content(tone): clean up 4 articles (slug1, slug2, …)`, terminé par une ligne vide puis :
+- Un commit Conventional Commits en anglais, ex. `content(tone): clean up 10 articles (slug1, slug2, …)`, terminé par une ligne vide puis :
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 - NE PAS pousser : le script qui t'a lancé s'en charge.
 
 ## Compte rendu
-3 lignes maximum : les 4 slugs avec tirets avant → après, chiffres suspects éventuels, état du build.
+3 lignes maximum : les 10 slugs,  chiffres suspects éventuels, état du build.
