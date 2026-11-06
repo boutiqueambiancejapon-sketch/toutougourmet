@@ -1,3 +1,4 @@
+import { marqueCanonique } from '@/lib/scanner/marque'
 import { and, asc, count, desc, eq, isNotNull, isNull, or, sql } from 'drizzle-orm'
 import { foodAnalysis, opffProduct, scanReport, type FoodAnalysis } from '@/db/schema'
 import { analyseLabel, scoreVersionFor } from '@/lib/scanner/analyse'
@@ -88,7 +89,7 @@ export async function updateAnalysis(id: string, label: ExtractedLabel, reviewed
   const [row] = await db()
     .update(foodAnalysis)
     .set({
-      brand: label.marque,
+      brand: marqueCanonique(label.marque) ?? null,
       product: label.produit,
       extracted: label,
       details,

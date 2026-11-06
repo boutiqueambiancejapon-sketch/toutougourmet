@@ -5,6 +5,7 @@ import { foodAnalysis } from '@/db/schema'
 import { horsListes, NOM_CLASSEMENT } from '@/lib/scanner/baremes/fiche'
 import { ficheIndexeePath, parCle, type FicheType } from '@/lib/scanner/fiches-indexees'
 import { foodNoun } from '@/lib/scanner/food-noun'
+import { cleMarque } from '@/lib/scanner/marque'
 import { displayBrand, displayName, fold, recipeKey, recipeName } from '@/lib/scanner/rankings'
 import type { ScoreResult } from '@/lib/scanner/score'
 import type { ExtractedLabel } from '@/lib/scanner/types'
@@ -84,6 +85,13 @@ export async function lignesIndex(): Promise<LigneIndex[]> {
       pageMere: Boolean(marquePage(r.brand)),
     })
   }
+  // Une écriture inconnue d'une marque rejoint la plus fréquente, pour que le filtre n'en montre qu'une.
+  const parCleMarque = new Map<string, Map<string, number>>()
+  for (const l of groupes.values()) {
+    const m = parCleMarque.get(cleMarque(l.marque)) ?? new Map<string, number>()
+    parCleMarque.set(cleMarque(l.marque), m.set(l.marque, (m.get(l.marque) ?? 0) + 1))
+  }
+  for (const l of groupes.values()) l.marque = [...(parCleMarque.get(cleMarque(l.marque)) ?? [])].sort((a, b) => b[1] - a[1])[0][0]
   return [...groupes.values()].sort((a, b) => Number(b.indexee) - Number(a.indexee) || a.marque.localeCompare(b.marque, 'fr') || (b.score ?? -1) - (a.score ?? -1))
 }
 

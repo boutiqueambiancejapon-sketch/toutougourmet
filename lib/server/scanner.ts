@@ -1,3 +1,4 @@
+import { marqueCanonique } from '@/lib/scanner/marque'
 import { and, desc, eq, sql } from 'drizzle-orm'
 import { foodAnalysis, scanHistory, scanReport, scanUsage, type FoodAnalysis } from '@/db/schema'
 import type { AnalysisSource } from '@/db/schema/scanner'
@@ -95,7 +96,7 @@ export async function saveAnalysis(
     try {
       const [row] = await db()
         .insert(foodAnalysis)
-        .values({ ean, slug, brand: label.marque, product: label.produit, extracted: { ...label, ean }, score: details.score, details, algorithmVersion: scoreVersionFor(label), model, source, scanCount })
+        .values({ ean, slug, brand: marqueCanonique(label.marque) ?? null, product: label.produit, extracted: { ...label, ean }, score: details.score, details, algorithmVersion: scoreVersionFor(label), model, source, scanCount })
         .returning()
       return row
     } catch (err) {

@@ -1,3 +1,4 @@
+import { marqueCanonique } from './marque'
 import { foodNoun } from './food-noun'
 import { parseIngredientText } from './ingredient-text'
 import { partialAnimalShare } from './opff'
@@ -96,7 +97,7 @@ export function maxiZooLabel(item: MaxiZooItem, page: Extract<MaxiZooParse, { ok
     estUneEtiquette: true,
     typeImage: type.typeImage,
     lisibilite: 'nette',
-    marque: item.brand.trim() || null,
+    marque: marqueCanonique(item.brand.trim()) || null,
     produit: productName(item),
     ean: item.ean,
     espece: 'chien',
