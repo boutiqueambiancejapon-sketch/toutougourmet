@@ -325,3 +325,6 @@ Le propriétaire valide : la fiabilité de la note s'affiche (données complète
 
 ## 2026-11-06 — IndexNow
 Demande du propriétaire. Toutes les heures, `scripts/indexnow.mjs` compare le plan du site au dernier envoi et signale les changements à api.indexnow.org. La clé est publique par conception (`public/<clé>.txt`), donc versionnée. Google n'utilise pas IndexNow.
+
+## 2026-11-06 — aocr.org
+Le propriétaire demande de bloquer ce référent s'il abuse. Seuil : 100 pages vues par heure (3 à 8 aujourd'hui). `deploy/referer-guard.sh` contrôle toutes les 15 minutes, bloque par Caddy et prévient par ntfy. Blocage levé en vidant `/etc/caddy/blocages.caddy`.

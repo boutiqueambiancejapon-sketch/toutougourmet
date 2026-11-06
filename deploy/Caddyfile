@@ -6,6 +6,7 @@ toutou-gourmet.com {
 }
 
 www.toutou-gourmet.com {
+	import /etc/caddy/blocages.caddy
 	encode zstd gzip
 	log {
 		output stderr
