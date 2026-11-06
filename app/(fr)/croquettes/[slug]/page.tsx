@@ -1,4 +1,4 @@
-// @cdc seo — Fiche produit : ouverte à Google si elle est dans data/fiches-indexees.json, sinon noindex. Le contenu est dans components/scanner/fiche/FicheView.
+// @cdc seo — Fiche produit : ouverte à Google si elle est dans la table fiche_index, sinon noindex. Le contenu est dans components/scanner/fiche/FicheView.
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { FicheView } from '@/components/scanner/fiche/FicheView'

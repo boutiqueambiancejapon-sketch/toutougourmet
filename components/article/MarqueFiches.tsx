@@ -1,13 +1,15 @@
 import Link from 'next/link'
 import { marquePage } from '@/data/marque-pages'
-import { FICHES_INDEXEES, ficheIndexeePath } from '@/lib/scanner/fiches-indexees'
+import { ficheIndexeePath } from '@/lib/scanner/fiches-indexees'
+import { fichesIndexees } from '@/lib/server/fiches-indexees'
 import { titleTypo } from '@/lib/title-typo'
 
 // @cdc seo — liens de la page mère vers chaque fiche ouverte à Google : aucune fiche indexée ne reste orpheline.
 
-export function MarqueFiches({ marque, dejaListees = [] }: { marque: string; dejaListees?: string[] }) {
+export async function MarqueFiches({ marque, dejaListees = [] }: { marque: string; dejaListees?: string[] }) {
   const page = marquePage(marque)
-  const fiches = page ? FICHES_INDEXEES.filter((f) => marquePage(f.cle.split('|')[0])?.nom === page.nom && !dejaListees.includes(f.cle)) : []
+  const toutes = await fichesIndexees()
+  const fiches = page ? toutes.filter((f) => f.actif && marquePage(f.cle.split('|')[0])?.nom === page.nom && !dejaListees.includes(f.cle)) : []
   if (fiches.length === 0) return null
   return (
     <section className="v2 not-prose my-8 flex flex-col gap-3">

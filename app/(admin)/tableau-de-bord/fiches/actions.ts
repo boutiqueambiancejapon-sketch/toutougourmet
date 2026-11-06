@@ -1,8 +1,19 @@
 'use server'
 
+import { eq } from 'drizzle-orm'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { MODEL_REVIEWS } from '@/data/model-reviews'
+import { ficheIndex } from '@/db/schema'
 import { assertDashboardAction as assertDashboard } from '@/lib/dashboard/guard'
+import { horsListes } from '@/lib/scanner/baremes/fiche'
+import { nomRecette } from '@/lib/scanner/fiches-indexees'
+import { recipeKey, recipeName } from '@/lib/scanner/rankings'
+import type { ScoreResult } from '@/lib/scanner/score'
+import { baseSlug } from '@/lib/scanner/slug'
+import type { ExtractedLabel } from '@/lib/scanner/types'
+import { TYPE_ADRESSE, typeDeFiche } from '@/lib/server/dashboard-fiche-index'
+import { getDb } from '@/lib/server/drizzle'
 import { labelFromForm } from '@/lib/scanner/review-form'
 import { brandSlug } from '@/lib/scanner/seo'
 import { decideImported, deleteAnalysis, getAnalysis, markReportHandled, updateAnalysis } from '@/lib/server/scanner-review'
@@ -54,4 +65,31 @@ export async function decideImportedFiche(id: string, decision: 'validate' | 'di
   const row = await decideImported(id, decision)
   if (row) revalidatePublic(row.slug, row.brand)
   revalidatePath('/tableau-de-bord/contenu')
+}
+
+/** Ouvre une recette à Google ou l'en retire. Retirée, elle garde son adresse courte, qui redirige vers sa fiche en noindex. */
+export async function basculerIndex(id: string, ouvrir: boolean): Promise<void> {
+  await assertDashboard()
+  const d = getDb()
+  const row = await getAnalysis(id)
+  if (!d || !row) return
+  const cle = row.brand && row.product ? recipeKey(row.brand, row.product) : row.slug
+  if (!ouvrir) {
+    await d.update(ficheIndex).set({ actif: false, updatedAt: new Date() }).where(eq(ficheIndex.cle, cle))
+  } else {
+    const details = row.details as ScoreResult
+    const type = TYPE_ADRESSE[typeDeFiche(row.extracted as ExtractedLabel, details)]
+    if (!type || row.score === null || MODEL_REVIEWS[cle] || horsListes(details) || !row.brand || !row.product) return
+    const [deja] = await d.select({ cle: ficheIndex.cle }).from(ficheIndex).where(eq(ficheIndex.cle, cle)).limit(1)
+    if (deja) {
+      await d.update(ficheIndex).set({ actif: true, foodAnalysisId: row.id, type, updatedAt: new Date() }).where(eq(ficheIndex.cle, cle))
+    } else {
+      const base = baseSlug(row.brand, recipeName(row.product), null)
+      const [pris] = await d.select({ court: ficheIndex.court }).from(ficheIndex).where(eq(ficheIndex.court, base)).limit(1)
+      await d.insert(ficheIndex).values({ foodAnalysisId: row.id, type, cle, court: pris ? `${base.slice(0, 90)}-${row.id.slice(0, 6)}` : base, nom: nomRecette(row.brand, row.product) ?? row.brand })
+    }
+  }
+  revalidatePublic(row.slug, row.brand)
+  revalidatePath('/sitemaps/croquettes.xml')
+  revalidatePath('/tableau-de-bord/fiches')
 }
