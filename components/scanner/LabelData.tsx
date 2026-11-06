@@ -41,14 +41,14 @@ const ORIGIN: Record<AnalysisSource, string> = {
 
 const pct = (n: number) => `${n.toLocaleString('fr-FR', { maximumFractionDigits: 2 })} %`
 
-export function LabelData({ label, source, headingLevel = 'h3' }: { label: ScanAnalysis['label']; source: AnalysisSource; headingLevel?: 'h2' | 'h3' }) {
+export function LabelData({ label, source, headingLevel = 'h3', sansTitreComposition = false }: { label: ScanAnalysis['label']; source: AnalysisSource; headingLevel?: 'h2' | 'h3'; sansTitreComposition?: boolean }) {
   const H = headingLevel
   const origin = ORIGIN[source]
   const rows = ROWS.filter(([k]) => label.constituants[k] !== null)
   return (
     <div className="flex flex-col gap-6">
       <section className="flex flex-col gap-2">
-        <H className="m-0 font-display text-xl font-black text-ink">Composition</H>
+        {sansTitreComposition ? null : <H className="m-0 font-display text-xl font-black text-ink">Composition</H>}
         {label.ingredients.length > 0 ? (
           <IngredientList ingredients={label.ingredients} />
         ) : (

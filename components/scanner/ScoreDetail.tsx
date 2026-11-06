@@ -15,13 +15,18 @@ interface ScoreDetailProps {
   details: ScoreResult
   headingLevel?: 'h2' | 'h3'
   alerts?: boolean
+  /** Faux : la note est déjà affichée en haut de page. */
+  resume?: boolean
 }
 
-export function ScoreDetail({ details, headingLevel = 'h3', alerts = true }: ScoreDetailProps) {
+const barre = (part: number): string => (part >= 0.75 ? 'bg-green-ink' : part >= 0.4 ? 'bg-amber-ink' : 'bg-rose-ink')
+
+export function ScoreDetail({ details, headingLevel = 'h3', alerts = true, resume = true }: ScoreDetailProps) {
   const H = headingLevel
   const { score, band } = details
   return (
     <div className="flex flex-col gap-4">
+      {resume ? (
       <div className="flex items-center gap-4">
         <ScoreBadge score={score} size="lg" />
         <div className="flex flex-col items-start gap-1">
@@ -32,6 +37,7 @@ export function ScoreDetail({ details, headingLevel = 'h3', alerts = true }: Sco
           <KindTag details={details} />
         </div>
       </div>
+      ) : null}
       <FicheFiabilite details={details} />
       {alerts && details.alertes ? <SafetyAlerts alerts={details.alertes} /> : null}
       {alerts && details.treat && !details.alertes ? <TreatAlerts alerts={details.treat.alerts} /> : null}
@@ -49,16 +55,21 @@ export function ScoreDetail({ details, headingLevel = 'h3', alerts = true }: Sco
       {details.bareme && details.criteria.length === 0 ? null : (
         <section className="flex flex-col gap-2">
           <H className="m-0 font-display text-xl font-black text-ink">Le détail de la note</H>
-          <ul role="list" className="m-0 flex list-none flex-col divide-y divide-line border-y border-line p-0">
+          <ul role="list" className="m-0 flex list-none flex-col gap-2 p-0">
             {details.criteria.map((c) => (
-              <li key={c.id} className="flex flex-col gap-1 py-3">
+              <li key={c.id} className="flex flex-col gap-1.5 rounded-box border border-line bg-paper px-3 py-2.5">
                 <p className="m-0 flex items-baseline justify-between gap-3">
-                  <span className="font-semibold text-ink">{c.label}</span>
-                  <span className={`shrink-0 text-sm font-semibold ${c.points === null ? 'text-ink-2' : 'text-ink'}`}>
+                  <span className="font-semibold leading-snug text-ink">{c.label}</span>
+                  <span className={`shrink-0 whitespace-nowrap text-sm font-semibold tabular-nums ${c.points === null ? 'text-ink-2' : 'text-ink'}`}>
                     {c.points === null ? 'non évalué' : `${c.points} / ${c.max}`}
                   </span>
                 </p>
-                <p className="m-0 text-[15px] leading-relaxed text-ink-2">{c.explanation}</p>
+                {c.points !== null ? (
+                  <span aria-hidden="true" className="block h-1.5 overflow-hidden rounded-pill bg-cream-2">
+                    <span className={`block h-full rounded-pill ${barre(c.points / c.max)}`} style={{ width: `${Math.round((c.points / c.max) * 100)}%` }} />
+                  </span>
+                ) : null}
+                <p className="m-0 text-sm leading-relaxed text-ink-2">{c.explanation}</p>
               </li>
             ))}
           </ul>

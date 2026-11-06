@@ -20,7 +20,7 @@ export function FicheNutrition({ label }: { label: ExtractedLabel }) {
   const lead =
     prot === null
       ? "L'étiquette lue ne permet pas de ramener les protéines sur matière sèche : il manque le taux de protéines ou l'humidité."
-      : `${fmt(prot)} de protéines une fois l'eau retirée, ${prot >= 18 ? 'au-dessus' : 'en dessous'} du minimum de 18 % fixé par la FEDIAF pour un chien adulte${carbs === null ? '.' : `, et environ ${fmt(carbs)} de glucides sur matière sèche.`}`
+      : `${fmt(prot)} de protéines une fois l'eau retirée, ${prot >= 18 ? 'au-dessus' : 'en dessous'} du minimum de 18 % pour un chien adulte${carbs === null ? '.' : `, et environ ${fmt(carbs)} de glucides sur matière sèche.`}`
   return (
     <section aria-labelledby="proteines-glucides" className="flex flex-col gap-3">
       <h2 id="proteines-glucides" className="m-0 font-display text-2xl font-black text-ink">
@@ -31,14 +31,14 @@ export function FicheNutrition({ label }: { label: ExtractedLabel }) {
         <thead>
           <tr className="border-b-2 border-ink text-left">
             <th scope="col" className="py-2 pr-2 font-semibold text-ink">Constituant</th>
-            <th scope="col" className="py-2 pr-2 text-right font-semibold text-ink">Sur l&apos;étiquette</th>
-            <th scope="col" className="py-2 text-right font-semibold text-ink">Sur matière sèche</th>
+            <th scope="col" className="py-2 pr-2 text-right font-semibold text-ink">Étiquette</th>
+            <th scope="col" className="py-2 text-right font-semibold text-ink">Sans l&apos;eau</th>
           </tr>
         </thead>
         <tbody>
           {rows.map(([name, asFed, dm]) => (
             <tr key={name} className="border-b border-line">
-              <th scope="row" className="py-2 pr-2 text-left font-normal text-ink-2">{name}</th>
+              <th scope="row" className="py-2.5 pr-2 text-left font-normal text-ink-2">{name}</th>
               <td className="py-2 pr-2 text-right text-ink">{fmt(asFed)}</td>
               <td className="py-2 text-right font-semibold text-ink">{fmt(dm)}</td>
             </tr>

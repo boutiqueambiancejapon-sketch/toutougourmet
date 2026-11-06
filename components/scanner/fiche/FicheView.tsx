@@ -5,20 +5,18 @@ import { DownloadLink } from '../DownloadLink'
 import { ShareButton } from '../ShareButton'
 import { SourceNotice } from '../SourceNotice'
 import { LabelData } from '../LabelData'
-import { ScoreBadge } from '../ScoreBadge'
 import { FicheAlternatives } from './FicheAlternatives'
 import { FicheBuy } from './FicheBuy'
 import { buyLink } from '@/lib/scanner/buy-link'
 import { FicheJsonLd } from './FicheJsonLd'
 import { FicheNutrition } from './FicheNutrition'
 import { FicheVerdict } from './FicheVerdict'
-import { ProductPhoto } from '../ProductPhoto'
-import { KindTag } from '../treat/KindTag'
 import { TreatAlerts } from '../treat/TreatAlerts'
 import { TreatHomemade } from '../treat/TreatHomemade'
 import { CATEGORY_PHRASE, foodNoun, NOUNS } from '@/lib/scanner/food-noun'
 import { dryMatterBasis, kindOf } from '@/lib/scanner/score'
 import { isTherapeutic } from '@/lib/scanner/fiche-lists'
+import { FicheHero } from './FicheHero'
 import { FicheMonChien } from './FicheMonChien'
 import { toScanAnalysis } from '@/lib/scanner/result'
 import { ALTERNATIVE_BELOW, alternativesFor, brandSlug } from '@/lib/scanner/seo'
@@ -64,24 +62,23 @@ export async function FicheView({ row, indexee, path }: { row: FoodAnalysis; ind
   const first = a.label.ingredients[0]
   const n = a.label.ingredients.length
   return (
-    <div className="v2 mx-auto flex max-w-prose flex-col gap-10 px-4 pt-4 pb-16 md:px-8 md:pt-8">
+    <div className="v2 mx-auto flex max-w-prose flex-col gap-9 px-4 pt-4 pb-16 md:px-8 md:pt-8">
       <FicheJsonLd row={row} name={indexee?.nom ?? name} url={`${SITE}${path}`} indexee={Boolean(indexee)} />
       <div className="flex flex-col gap-4">
         <BreadcrumbNav items={crumbs} />
-        <header className="flex flex-col gap-3">
-          <h1 className="m-0 font-display text-[clamp(1.75rem,4.2vw,2.5rem)] font-black leading-[1.08] tracking-tight text-ink">{titleTypo(h1)}</h1>
-          <div className="flex flex-wrap items-center gap-3">
-            <ProductPhoto src={row.imageUrl} size="lg" />
-            <ScoreBadge score={a.score} />
-            <KindTag details={a.details} />
-            <p className="m-0 text-base text-ink-2">
-              {`${row.reviewed ? 'Fiche relue' : a.source === 'openpetfoodfacts' ? 'Données Open Pet Food Facts' : a.source === 'openfoodfacts' ? 'Données Open Food Facts' : a.source === 'maxizoo' ? 'Données Maxi Zoo' : 'Analyse automatique'} du `}
-              <time dateTime={row.createdAt.toISOString()}>{date}</time>
-              {a.ean ? ` · code-barres ${a.ean}` : ''}
-            </p>
-          </div>
-        </header>
-        <SourceNotice source={a.source} reviewed={row.reviewed} />
+        <FicheHero h1={h1} image={row.imageUrl} details={a.details} categorie={CATEGORY_PHRASE[noun]} buy={buy}>
+          <details className="group text-sm text-ink-2">
+            <summary className="flex min-h-11 cursor-pointer list-none items-center font-semibold text-ink underline underline-offset-2">D&apos;où viennent ces données&nbsp;?</summary>
+            <div className="flex flex-col gap-2 pb-1">
+              <SourceNotice source={a.source} reviewed={row.reviewed} />
+              <p className="m-0">
+                {`${row.reviewed ? 'Fiche relue' : a.source === 'openpetfoodfacts' ? 'Données Open Pet Food Facts' : a.source === 'openfoodfacts' ? 'Données Open Food Facts' : a.source === 'maxizoo' ? 'Données Maxi Zoo' : 'Analyse automatique'} du `}
+                <time dateTime={row.createdAt.toISOString()}>{date}</time>
+                {a.ean ? ` · code-barres ${a.ean}` : ''}
+              </p>
+            </div>
+          </details>
+        </FicheHero>
         {a.details.alertes ? <SafetyAlerts alerts={a.details.alertes} /> : a.details.treat ? <TreatAlerts alerts={a.details.treat.alerts} /> : null}
         <AllergyAlert ingredients={a.label.ingredients.map((i) => i.nom)} />
         <FicheMonChien produit={{ nom, friandise: treat, ingredients: a.label.ingredients.map((i) => i.nom), protDm: basis.protDm, fatDm: basis.fatDm, alertes: a.details.alertes ?? [], veterinaire: isTherapeutic({ brand: a.brand, product: a.product }) }} />
@@ -97,7 +94,7 @@ export async function FicheView({ row, indexee, path }: { row: FoodAnalysis; ind
             : 'La composition n\'a pas pu être lue sur cette étiquette.'}
           {a.label.additifs.length > 0 ? ` L'étiquette cite ${a.label.additifs.length} additif${a.label.additifs.length > 1 ? 's' : ''}.` : ''}
         </p>
-        <LabelData label={a.label} source={a.source} headingLevel="h3" />
+        <LabelData label={a.label} source={a.source} headingLevel="h3" sansTitreComposition />
       </section>
 
       <FichePlaceBlock row={row} noun={noun} nom={nom} />

@@ -7,14 +7,14 @@ import { IconDog } from '@/components/icons'
 // @cdc scanner — photo du produit dans un rond. Décorative : le nom du produit est toujours écrit à côté.
 // Pas de photo, ou photo qui ne charge pas : un petit chien (demande du propriétaire, 2026-11-05).
 
-export function ProductPhoto({ src, size = 'sm' }: { src?: string | null; size?: 'sm' | 'lg' }) {
+export function ProductPhoto({ src, size = 'sm' }: { src?: string | null; size?: 'sm' | 'lg' | 'xl' }) {
   const [broken, setBroken] = useState(false)
-  const px = size === 'lg' ? 80 : 44
-  const box = size === 'lg' ? 'size-20' : 'size-11'
+  const px = size === 'xl' ? 112 : size === 'lg' ? 80 : 44
+  const box = size === 'xl' ? 'size-28' : size === 'lg' ? 'size-20' : 'size-11'
   if (!src || broken) {
     return (
       <span aria-hidden="true" className={`inline-flex ${box} shrink-0 items-center justify-center rounded-full border border-line bg-paper text-ink-2`}>
-        <IconDog className={size === 'lg' ? 'size-10' : 'size-6'} />
+        <IconDog className={size === 'sm' ? 'size-6' : 'size-10'} />
       </span>
     )
   }

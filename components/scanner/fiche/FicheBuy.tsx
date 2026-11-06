@@ -15,7 +15,7 @@ export function FicheBuy({ link }: { link: BuyLink | null }) {
         rel="sponsored nofollow noopener"
         target="_blank"
         data-cta="fiche-achat"
-        className="inline-flex min-h-12 items-center justify-center rounded-control bg-ink px-4 text-center font-semibold text-cream no-underline"
+        className="inline-flex min-h-12 items-center justify-center rounded-control bg-orange px-4 text-center font-semibold text-ink no-underline"
       >
         {`Acheter chez ${link.store}`}
       </a>
