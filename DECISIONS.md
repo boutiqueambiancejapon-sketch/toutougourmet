@@ -319,3 +319,6 @@ Le propriétaire demande l'activation sans voir d'abord le classement final, apr
 
 ## 2026-11-06 — Fiches indexées pilotées depuis le tableau de bord
 Demande du propriétaire : voir toutes les fiches, filtrer par marque, type et état, et ouvrir ou retirer une fiche sans mise en ligne. La liste quitte `data/fiches-indexees.json` pour la table `app.fiche_index`. Compléments, huiles, fiches sans note et aliments vétérinaires ne peuvent pas être ouverts depuis cet écran pour l'instant.
+
+## 2026-11-06 — Fiabilité et « Vérifier pour mon chien »
+Le propriétaire valide : la fiabilité de la note s'affiche (données complètes, partielles, limitées) et un bouton sur les fiches compare le produit au profil du chien. La note générale reste publique ; seule la réponse pour le chien demande un compte. Réponse en trois états avec ses raisons, sans note de compatibilité ni diagnostic. Pas de V2 du barème pour l'instant.

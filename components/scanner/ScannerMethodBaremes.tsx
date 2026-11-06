@@ -1,5 +1,5 @@
 import { Sources } from '@/components/outils/ToolPage'
-import { BAREMES_PUBLICS } from '@/lib/scanner/baremes/methode'
+import { BAREMES_PUBLICS, type BaremePublic } from '@/lib/scanner/baremes/methode'
 
 // @cdc scanner — méthode publiée des 4 barèmes, affichée seulement quand BAREMES_ACTIFS est vrai.
 
@@ -31,7 +31,20 @@ export function ScannerMethodBaremes() {
         <strong>Et un aliment vétérinaire ?</strong> Pas de note. Un aliment présenté pour une maladie est à juger avec ton
         vétérinaire, et il n&apos;existe aucun classement par maladie.
       </p>
-      {BAREMES_PUBLICS.map((b) => (
+      <BaremeSections ids={['aliment']} />
+      <p>
+        <strong>Que veut dire « données complètes », « partielles » ou « limitées » ?</strong> Ce repère, affiché avec la note, dit
+        combien l&apos;étiquette nous a appris. Il ne juge pas le produit : une bonne recette peut avoir une étiquette incomplète.
+      </p>
+      <Fin />
+    </>
+  )
+}
+
+export function BaremeSections({ ids }: { ids: BaremePublic['id'][] }) {
+  return (
+    <>
+      {BAREMES_PUBLICS.filter((b) => ids.includes(b.id)).map((b) => (
         <section key={b.id} className="flex flex-col gap-3">
           <h3 className="m-0 font-display text-xl font-black text-ink">{b.titre}</h3>
           <p className="m-0">{b.intro}</p>
@@ -62,6 +75,13 @@ export function ScannerMethodBaremes() {
           </ul>
         </section>
       ))}
+    </>
+  )
+}
+
+function Fin() {
+  return (
+    <>
       <p>
         Une note de 97 ne dit pas qu&apos;un produit est meilleur pour la santé de ton chien : les critères sont des choix de la
         rédaction, écrits ici pour que tu puisses les discuter. Le barème ne mesure ni la digestibilité, ni l&apos;adaptation à une

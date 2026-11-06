@@ -13,6 +13,9 @@ const FAMILLE: [string, RegExp][] = [
 const familleDe = (n: string) => FAMILLE.find(([, r]) => r.test(normalize(n)))?.[0] ?? null
 const estBaseVegetale = (n: string) => animalKind(n) === null && (familleDe(n) !== null || isCereal(n))
 
+/** Points du critère des glucides, partagés avec le calculateur de /scanner. */
+export const pointsGlucides = (dm: number): number => (dm <= 30 ? 8 : dm <= 40 ? 7 : dm <= 50 ? 5 : 2)
+
 export function noteAliment(e: Entree): Resultat {
   const a = e.constituants
   const ms = matiereSeche(e)
@@ -45,7 +48,7 @@ export function noteAliment(e: Entree): Resultat {
   }
 
   if (ms.glu === null) c.push(pasCompte('glucides', 'Glucides estimés', 8, 'Il faut protéines, matières grasses, cendres, fibres et humidité.', S.NRC))
-  else c.push({ id: 'glucides', libelle: 'Glucides estimés', max: 8, points: ms.glu <= 30 ? 8 : ms.glu <= 40 ? 7 : ms.glu <= 50 ? 5 : 2, explication: `Environ ${fmt(ms.glu)} % sur sec.`, source: `${S.NRC} ; tranches : ${S.EDITO}` })
+  else c.push({ id: 'glucides', libelle: 'Glucides estimés', max: 8, points: pointsGlucides(ms.glu), explication: `Environ ${fmt(ms.glu)} % sur sec.`, source: `${S.NRC} ; tranches : ${S.EDITO}` })
 
   // Calcium et phosphore. Le calcium d'un chiot est testé dès qu'il existe, même sans phosphore.
   const caMin = croissance ? 1 : 0.5

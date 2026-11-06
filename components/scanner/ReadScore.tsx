@@ -5,8 +5,8 @@ import { BAND_CLASSES } from './ScoreBadge'
 // une phrase concrète chacune. Garder les seuils alignés avec bandFor.
 
 const LEVELS: { band: Band; range: string; text: string }[] = [
-  { band: 'tres-bon', range: '75 à 100', text: 'Viande ou poisson d\'espèce nommée en tête, protéines au-dessus de 30 % sur sec, pas de sucre ni de colorant.' },
-  { band: 'correct', range: '55 à 74', text: 'Une base animale correcte avec un ou deux défauts : céréales en deuxième position, part de viande non déclarée.' },
+  { band: 'tres-bon', range: '75 à 100', text: 'Viande ou poisson d\'espèce nommée en tête, bonne part animale, étiquette complète, pas de sucre ni de colorant.' },
+  { band: 'correct', range: '55 à 74', text: 'Une base animale correcte avec un ou deux défauts : végétaux juste derrière, part de viande non déclarée.' },
   { band: 'moyen', range: '35 à 54', text: 'Souvent une céréale ou une catégorie floue (« viandes et sous-produits animaux ») en tête, et beaucoup de glucides.' },
   { band: 'faible', range: '0 à 34', text: 'Peu de protéines animales identifiables, sucres, colorants ou conservateurs controversés dans la liste.' },
 ]

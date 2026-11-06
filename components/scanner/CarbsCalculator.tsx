@@ -2,6 +2,7 @@
 
 import { useId, useState } from 'react'
 import { track } from '@/lib/analytics'
+import { pointsGlucides } from '@/lib/scanner/baremes/aliment'
 import { ASSUMED_DRY_MOISTURE, carbsCriterion, dryMatterBasis } from '@/lib/scanner/score'
 import { BigResult, NumberField, SubmitButton, ToolCard } from '@/components/outils/fields'
 import { useResultReveal } from '@/lib/use-result-reveal'
@@ -51,7 +52,7 @@ export function CarbsCalculator() {
       setError(`Ces quatre valeurs dépassent 80 % à elles seules : on ne peut pas supposer ${ASSUMED_DRY_MOISTURE} % d'humidité. Recopie celle du sac.`)
       return
     }
-    const c = carbsCriterion(basis.carbsDm)
+    const c = { ...carbsCriterion(basis.carbsDm), points: pointsGlucides(basis.carbsDm) }
     setError(null)
     setResult({ asFed: basis.carbsAsFed, dm: basis.carbsDm, points: c.points, reading: c.explanation, assumed: basis.assumedMoisture })
     track('Tool Result', { tool: 'glucides' })
@@ -88,7 +89,7 @@ export function CarbsCalculator() {
         {result ? (
           <div data-tool-result tabIndex={-1} className="flex scroll-mt-20 flex-col gap-3 rounded-card border-2 border-ink bg-paper p-4 sm:p-6">
             <BigResult value={fmt(result.dm)} unit="% de glucides sur matière sèche">
-              <p>{`Soit ${fmt(result.asFed)} % sur le produit tel quel. Dans la note sur 100 : ${result.points} points sur 15.`}</p>
+              <p>{`Soit ${fmt(result.asFed)} % sur le produit tel quel. Dans la note sur 100 : ${result.points} points sur 8.`}</p>
               <p>{result.reading}</p>
               {result.assumed ? <p>{`Humidité non renseignée : on a retenu ${ASSUMED_DRY_MOISTURE} %, valeur courante des croquettes.`}</p> : null}
             </BigResult>
