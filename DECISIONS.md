@@ -336,3 +336,6 @@ Décision du propriétaire : la confirmation d'e-mail ne bloque plus l'accès. A
 
 ## 2026-11-07 — Encadré partenaire, résumé du matin, fiches Premiere et Real Nature
 Un seul encadré sombre par article, les autres liens en bandeau (`unSeulEncadre`, lib/mdx.ts). Résumé envoyé chaque matin par ntfy à 7 h 41, même sans incident. Les 10 meilleures recettes de Premiere et de Real Nature sont ouvertes à Google (`scripts/indexer-meilleures.ts`).
+
+## 2026-11-07 — Assistant IA
+Décision du propriétaire : de vraies réponses, tirées des articles du site quand c'est possible, sinon de l'IA avec la mention en petit italique « Attention, les IA peuvent faire des erreurs ». Les urgences affichent d'abord les centres antipoison. Sans compte, 12 questions par heure et par adresse, 300 appels par jour au total (`ASSISTANT_DAILY_CAP`). Questions gardées 90 jours sans donnée personnelle, pour choisir les articles. Modèle Gemini du scanner.
