@@ -351,3 +351,6 @@ Chiffres du 2 au 7 novembre : ~1 250 pages vues, 17 clics partenaires, bouton d'
 
 Valeur d'un client partenaire (propriétaire, 2026-11-07) : Dog Chef 50 €, Franklin 10 €. À rôle égal, Dog Chef passe devant dans les encadrés et les rotations d'offres ; les notes ne changent pas.
 Mise en œuvre le même jour (accord « Ok ») : Dog Chef garde le grand encadré quand un article a les deux (`unSeulEncadre`), lettre mensuelle Dog Chef deux mois sur trois (décembre et janvier Dog Chef), e-mail J7 de la suite de bienvenue toujours Dog Chef (fin de la règle « ne répète pas la lettre »), section « Repas frais » du plan éditorial traitée à 7 h quand `J % 8 = 6`, revenus estimés dans l'onglet Conversions (`data/partner-values.ts`, taux observés en novembre à recaler).
+
+## 2026-11-07 — Search Console branchée
+Compte de service `toutou-dashboard@toutou-gourmet-514015.iam.gserviceaccount.com` (projet Google Cloud du propriétaire), clé déposée par le propriétaire puis rangée dans `/srv/toutou/shared/gsc-key.json` (toutou, 600), copie effacée. Propriété `sc-domain:toutou-gourmet.com`. Jeton signé par `lib/server/search-console.ts` (portée lecture seule), sans dépendance. Vue `/tableau-de-bord/recherche` : 28 jours, presque en première page (position 8 à 20), bien placées mais peu cliquées, recherches et pages qui amènent des clics.
