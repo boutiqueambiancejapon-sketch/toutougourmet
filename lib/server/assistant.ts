@@ -6,7 +6,7 @@ import { chercherArticles, texteBrut, type ArticleIndexe } from '@/lib/assistant
 import { getAllArticles } from '@/lib/mdx'
 import { getBrandBySlug } from '@/data/brands'
 import { CONFIRMED_DISCOUNTS } from '@/data/partner-discounts'
-import { capByBrand, displayBrand, displayName, fold } from '@/lib/scanner/rankings'
+import { capByBrand, displayBrand, displayName, fold, segmentBySlug, type SegmentSlug } from '@/lib/scanner/rankings'
 import type { FoodNoun } from '@/lib/scanner/food-noun'
 import { geminiJson } from '@/lib/scanner/providers/gemini'
 import type { JsonSchema } from '@/lib/scanner/label-schema'
@@ -56,7 +56,7 @@ Avant de répondre, vérifie que tu as le contexte utile : race ou poids du chie
 Quand tu réponds : la réponse tient dans la première phrase, puis deux à cinq phrases utiles. Pas de jargon, pas de nom d'organisme, pas de titre ni de puce.
 Si des extraits d'articles du site répondent à la question, appuie-toi d'abord sur eux sans les contredire, mets depuisLeSite à vrai et donne dans sources leurs adresses. Sinon, réponds avec tes connaissances et mets depuisLeSite à faux.
 gravite : « aucune » en temps normal ; « veterinaire » quand il faut l'avis de son vétérinaire dans les jours qui viennent ; « urgence » seulement si le chien est en danger maintenant (toxique avalé en quantité dangereuse pour son poids, détresse, convulsions, ventre gonflé, sang). En cas d'urgence, dis d'appeler tout de suite son vétérinaire ou un centre antipoison, sans détour. Ne dramatise pas un cas bénin.
-Tu n'es pas vétérinaire : aucun diagnostic, aucune dose de médicament ou de complément. Ne cite jamais une note, une composition ou un prix absent des données fournies.\nConseil d'achat : recommande seulement des produits de la liste « Produits partenaires » quand elle est fournie, sans citer d'autre marque ni d'autre boutique où acheter ; les liens s'affichent sous ta réponse, ne les écris pas. Les notes viennent de l'étiquette ; Dog Chef et Franklin n'ont pas de note, ne les présente pas comme mieux notés. Sans cette liste, ne recommande aucune marque ni boutique.
+Tu n'es pas vétérinaire : aucun diagnostic, aucune dose de médicament ou de complément. Ne cite jamais une note, une composition ou un prix absent des données fournies.\nConseil d'achat : recommande seulement des produits de la liste « Produits partenaires » quand elle est fournie, sans citer d'autre marque ni d'autre boutique où acheter ; les liens s'affichent sous ta réponse, ne les écris pas. Les notes viennent de l'étiquette ; Dog Chef et Franklin n'ont pas de note, ne les présente pas comme mieux notés. Ne nomme aucun produit ni aucune marque hors de cette liste, même si tu en connais un meilleur. Sans cette liste, ne recommande aucune marque ni boutique.
 Si la question ne porte pas sur un chien, réponds en une phrase que tu ne parles que de chiens et de gamelle.`
 
 const SCHEMA: JsonSchema = {
@@ -93,15 +93,48 @@ function partenaire(slug: 'dog-chef' | 'franklin', quoi: string): Produit[] {
   return b ? [{ nom: `${b.name} (${quoi})`, url: b.affiliateUrl, chez: b.name, score: null, remise: CONFIRMED_DISCOUNTS[slug] }] : []
 }
 
+const AVALE = /\b(a|as|ont) (mange|avale|croque|bu|leche|chipe|vole)\b|\bil a eu\b/
+
+/** Le contexte que Milo doit demander avant de répondre, ou '' s'il l'a déjà (profil, échanges, question). */
+export function contexteManquant(question: string, avant: string, chiens: string): string {
+  const q = fold(question)
+  const tout = fold(`${question} ${avant} ${chiens}`)
+  const poids = /\d+(,\d+)?\s*kg|\b(chiot|shiba|labrador|chihuahua|berger|bouledogue|teckel|golden|yorkshire|caniche|beagle|husky|border|cocker|spitz|jack russell|bichon|carlin|boxer|malinois|staff|setter|epagneul|braque|rottweiler|dogue|terrier)\b/.test(tout)
+  if (AVALE.test(q)) {
+    const quantite = /\d|\b(un|une|deux|trois|quelques|moitie|tablette|carre|grain|morceau|bout|paquet|tout)\b/.test(fold(`${question} ${avant}`).replace(/\b(a|as) (mange|avale) (un|une)\b/, ''))
+    const manque = [poids ? '' : 'son poids ou sa race', quantite ? '' : 'la quantité', /heure|minute|hier|ce matin|ce soir|tout a l'heure|maintenant/.test(tout) ? '' : 'depuis combien de temps', /vomi|va bien|normal|diarrh|tremble|abattu|rien de special|aucun signe|symptome/.test(tout) ? '' : "s'il a des signes"].filter(Boolean)
+    if (manque.length >= 2) return `Contexte manquant : ne réponds pas encore sur le fond, pose tes questions (${manque.join(', ')}) et mets questions à vrai. Exception : si ce qui est décrit est dangereux quelle que soit la quantité ou le poids (raisin, xylitol, raticide, médicament humain), dis d'appeler tout de suite le vétérinaire, gravite urgence.`
+  }
+  if (besoinAchat(question) && !poids && !/\b(\d+ ans|chiot|senior|adulte|vieux|age)\b/.test(tout)) return "Contexte manquant : avant de recommander, demande son âge et son poids (ou sa race), et mets questions à vrai."
+  return ''
+}
+
+/** Classement adapté au chien décrit : âge puis taille, d'après la question, les échanges et le profil. */
+function segmentsDuChien(texte: string): SegmentSlug[] {
+  const t = fold(texte)
+  const ans = Number(t.match(/\b(\d{1,2}) ans\b/)?.[1] ?? NaN)
+  const kg = Number(t.match(/(\d+(?:[.,]\d+)?)\s*kg/)?.[1]?.replace(',', '.') ?? NaN)
+  const age: SegmentSlug = /\bchiot|puppy|\d+ mois\b/.test(t) ? 'chiot' : /senior|vieux|age de|\bage\b/.test(t) || ans >= 8 ? 'senior' : 'adulte'
+  const taille: SegmentSlug | null = /\b(petit|mini)\b/.test(t) || kg < 10 ? 'petit-chien' : /\bgrand\b/.test(t) || kg > 25 ? 'grand-chien' : null
+  return taille ? [age, taille] : [age]
+}
+
 /** Produits proposés : marques citées dans la question, sinon les mieux notés du type demandé, plus les partenaires. */
-async function produitsProposes(question: string): Promise<Produit[]> {
+async function produitsProposes(question: string, contexte: string): Promise<Produit[]> {
   const recettes = await rankedRecipes().catch(() => [])
   const q = ` ${fold(question)} `
   const marques = [...new Set(recettes.map((r) => r.brand))].filter((b) => b.length >= 4 && q.includes(` ${fold(b)}`))
   if (marques.length) return marques.flatMap((m) => recettes.filter((r) => r.brand === m).sort((a, b) => b.score - a.score).flatMap(chezMaxiZoo).slice(0, 3)).slice(0, 6)
   const achat = besoinAchat(question)
   if (!achat) return []
-  const top = (noun: FoodNoun, n: number) => capByBrand(recettes.filter((r) => r.noun === noun).sort((a, b) => b.score - a.score), 1).flatMap(chezMaxiZoo).slice(0, n)
+  const filtres = segmentsDuChien(`${question} ${contexte}`).map((s) => segmentBySlug(s)?.match).filter((m): m is NonNullable<typeof m> => Boolean(m))
+  const top = (noun: FoodNoun, n: number) => {
+    const meilleurs = (l: RankedRecipe[]) => capByBrand(l.sort((a, b) => b.score - a.score), 1).flatMap(chezMaxiZoo).slice(0, n)
+    const type = recettes.filter((r) => r.noun === noun)
+    if (noun !== 'croquettes') return meilleurs(type)
+    const tous = meilleurs(type.filter((r) => filtres.every((f) => f(r))))
+    return tous.length >= n ? tous : meilleurs(type.filter((r) => filtres.slice(0, 1).every((f) => f(r))))
+  }
   if (achat === 'repas') return [...partenaire('dog-chef', 'repas frais livrés'), ...partenaire('franklin', 'croquettes et pâtées mono-protéine'), ...top('croquettes', 2)]
   const extra = achat === 'croquettes' ? [...partenaire('franklin', 'croquettes mono-protéine'), ...partenaire('dog-chef', 'repas frais livrés')] : partenaire('franklin', achat === 'patee' ? 'pâtées mono-protéine' : 'friandises')
   return [...top(NOUN[achat], 3), ...extra]
@@ -135,7 +168,9 @@ export function profilChiens(chiens: Dog[]): string {
 
 export async function repondre(question: string, historique: Echange[], chiens = ''): Promise<Reponse> {
   const trouves = chercherArticles(indexArticles(), question)
-  const produits = await produitsProposes(question)
+  const avant = historique.map((h) => `${h.q} ${h.r}`).join(' ')
+  const manque = contexteManquant(question, avant, chiens)
+  const produits = manque ? [] : await produitsProposes(question, `${historique.map((h) => h.q).join(' ')} ${chiens}`)
   const extraits = trouves.map((t) => `ARTICLE ${t.article.url}\nTitre : ${t.article.titre}\n${texteBrut(t.article.texte)}`).join('\n\n')
   const donnees = produits.map((p) => `- ${p.nom}, chez ${p.chez}${p.score === null ? '' : ` : ${p.score}/100`}${p.remise ? ` (${p.remise})` : ''}`).join('\n')
   const message = [
@@ -143,6 +178,7 @@ export async function repondre(question: string, historique: Echange[], chiens =
     historique.length ? `Échanges précédents :\n${historique.map((h) => `Q : ${h.q}\nR : ${h.r}`).join('\n')}` : '',
     extraits ? `Extraits du site :\n${extraits}` : 'Aucun article du site ne correspond.',
     donnees ? `Produits partenaires (notes du scanner Toutou Gourmet) :\n${donnees}` : '',
+    manque,
     `Question : ${question}`,
   ].filter(Boolean).join('\n\n')
   const { text } = await geminiJson({ system: SYSTEME, message, schema: SCHEMA, maxOutputTokens: 900, signal: AbortSignal.timeout(30_000) })
