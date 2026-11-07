@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getSessionUser } from '@/lib/server/auth'
 import { sujetSensible } from '@/lib/assistant/sensible'
 import { BOT_UA } from '@/lib/analytics-events'
-import { compterQuestion, contexteManquant, demanderContexte, noterQuestion, profilChiens, QUESTIONS_PAR_JOUR, renvoiVeterinaire, repondre, reserverAppel, type Echange, type Reponse } from '@/lib/server/assistant'
+import { CGU_VERSION } from '@/data/conditions'
+import { cguOk, compterQuestion, contexteManquant, demanderContexte, noterQuestion, profilChiens, QUESTIONS_PAR_JOUR, renvoiVeterinaire, repondre, reserverAppel, type Echange, type Reponse } from '@/lib/server/assistant'
 import { listDogs } from '@/lib/server/dogs'
 import { clientIp, overLimit } from '@/lib/server/rate-window'
 
@@ -35,11 +36,12 @@ function robot(req: NextRequest, body: { site?: unknown; t?: unknown } | null): 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   const origin = req.headers.get('origin')
   if (!origin || new URL(origin).host !== req.headers.get('host')) return non(403, 'Requête refusée.')
-  const body = (await req.json().catch(() => null)) as { question?: unknown; historique?: unknown; site?: unknown; t?: unknown; lieu?: unknown } | null
+  const body = (await req.json().catch(() => null)) as { question?: unknown; historique?: unknown; site?: unknown; t?: unknown; lieu?: unknown; cgu?: unknown } | null
   if (robot(req, body)) return non(400, 'Requête refusée.')
   if (overLimit(`assistant-ip:${clientIp(req.headers)}`, PAR_ADRESSE)) return non(429, 'Beaucoup de questions d\'affilée : réessaie dans un moment.')
   const user = await getSessionUser()
   if (!user) return NextResponse.json({ ok: false, compte: true, message: 'Crée ton compte gratuit pour avoir la réponse de Milo.' }, { status: 401, headers })
+  if (!(await cguOk(user.id, body?.cgu === CGU_VERSION).catch(() => false))) return NextResponse.json({ ok: false, cgu: true, message: 'Accepte les conditions d’utilisation pour discuter avec Milo.' }, { status: 409, headers })
   const question = typeof body?.question === 'string' ? body.question.trim() : ''
   if (question.length < 3 || question.length > 500) return non(400, 'Pose ta question en une ou deux phrases.')
   const lieu = body?.lieu === 'fenetre' ? 'fenetre' : 'page'

@@ -250,3 +250,6 @@ CREATE TABLE IF NOT EXISTS analytics.assistant_quota (user_id text NOT NULL, day
 -- kind : site | ia | contexte | sensible | echec
 ALTER TABLE analytics.assistant_questions ADD COLUMN IF NOT EXISTS kind text, ADD COLUMN IF NOT EXISTS gravite text, ADD COLUMN IF NOT EXISTS reponse text, ADD COLUMN IF NOT EXISTS produits integer NOT NULL DEFAULT 0, ADD COLUMN IF NOT EXISTS lieu text;
 CREATE INDEX IF NOT EXISTS assistant_questions_created_idx ON analytics.assistant_questions (created_at);
+
+-- Acceptation des conditions générales avant la première question à Milo (2026-11-07). Effacée avec le compte.
+CREATE TABLE IF NOT EXISTS analytics.assistant_cgu (user_id text PRIMARY KEY REFERENCES app."user"(id) ON DELETE CASCADE, version text NOT NULL, accepted_at timestamptz NOT NULL DEFAULT now());

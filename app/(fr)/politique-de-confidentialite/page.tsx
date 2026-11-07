@@ -130,7 +130,8 @@ export default function PolitiqueConfidentialitePage() {
               sont envoyées à Google (Gemini) pour rédiger la réponse. Certaines conversations (la question et la
               réponse) peuvent être gardées 90 jours, sans ton nom, ton adresse email ni ton adresse IP, pour
               entraîner Milo, améliorer sa précision et choisir nos prochains articles. Le nombre de questions posées
-              par ton compte est compté chaque jour pour la limite quotidienne, puis effacé après 7 jours.
+              par ton compte est compté chaque jour pour la limite quotidienne, puis effacé après 7 jours. La date et la version des conditions d&apos;utilisation que tu as acceptées
+              sont gardées avec ton compte et effacées avec lui.
               N&apos;y écris pas d&apos;information personnelle.
             </p>
           </Section>

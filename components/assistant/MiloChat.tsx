@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { MiloAvatar } from './MiloAvatar'
 import { MiloBulle } from './MiloBulle'
@@ -11,7 +12,7 @@ import { useMilo } from './use-milo'
 const SUGGESTIONS = ['Mon chien a mangé du raisin, je fais quoi ?', 'Combien de croquettes par jour pour mon chien ?', 'Mon chien peut-il manger des noisettes ?', 'Quelles friandises pour un chiot ?']
 
 export function MiloChat({ compact = false }: { compact?: boolean }) {
-  const { messages, occupe, compte, envoyer, effacer } = useMilo(compact ? 'fenetre' : 'page')
+  const { messages, occupe, compte, cgu, accepterCgu, aRemettre, remis, envoyer, effacer } = useMilo(compact ? 'fenetre' : 'page')
   const [texte, setTexte] = useState('')
   const champ = useRef<HTMLTextAreaElement>(null)
   const fin = useRef<HTMLDivElement>(null)
@@ -23,8 +24,13 @@ export function MiloChat({ compact = false }: { compact?: boolean }) {
   }, [messages.length, occupe, compte])
 
   const piege = useRef<HTMLInputElement>(null)
+  useEffect(() => {
+    if (!aRemettre) return
+    const id = window.setTimeout(() => { setTexte(aRemettre); remis() }, 0)
+    return () => window.clearTimeout(id)
+  }, [aRemettre, remis])
   const partir = (q: string) => {
-    if (q.trim().length < 3 || occupe) return
+    if (q.trim().length < 3 || occupe || !cgu) return
     envoyer(q, piege.current?.value ?? '')
     setTexte('')
   }
@@ -62,8 +68,14 @@ export function MiloChat({ compact = false }: { compact?: boolean }) {
           <span className="sr-only">Ta question pour Milo</span>
           <textarea ref={champ} value={texte} onChange={(e) => setTexte(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); partir(texte) } }} rows={compact ? 1 : 2} maxLength={500} placeholder="Écris ta question à Milo" className="w-full resize-none border-0 bg-transparent px-2 py-2 text-base text-ink outline-none" />
         </label>
-        <button type="submit" disabled={occupe || texte.trim().length < 3} className="min-h-11 shrink-0 whitespace-nowrap rounded-control bg-orange px-4 font-semibold text-ink disabled:opacity-50">Envoyer</button>
+        <button type="submit" disabled={occupe || !cgu || texte.trim().length < 3} className="min-h-11 shrink-0 whitespace-nowrap rounded-control bg-orange px-4 font-semibold text-ink disabled:opacity-50">Envoyer</button>
       </form>
+      {cgu ? null : (
+        <label className="flex items-start gap-2 text-sm leading-snug text-ink">
+          <input type="checkbox" checked={cgu} onChange={(e) => accepterCgu(e.target.checked)} className="mt-0.5 size-5 shrink-0 accent-[var(--color-orange)]" />
+          <span>J&apos;accepte les <Link href="/conditions-generales#milo" className="font-semibold underline underline-offset-2">conditions générales d&apos;utilisation</Link> et je sais que Milo, une IA, peut se tromper.</span>
+        </label>
+      )}
       {messages.length ? <button type="button" onClick={effacer} className="self-start text-xs font-semibold text-ink-2 underline underline-offset-2">Nouvelle discussion</button> : null}
     </section>
   )

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Gravite } from '@/lib/assistant/urgence'
+import { CGU_VERSION } from '@/data/conditions'
 import { track } from '@/lib/analytics'
 
 // @cdc assistant — fil de discussion avec Milo, partagé entre la page /assistant et la petite fenêtre des autres
@@ -26,6 +27,7 @@ export interface MiloMessage {
 const FIL = 'milo-fil'
 const EN_ATTENTE = 'milo-question'
 const EVENT = 'milo-fil'
+const CGU = 'milo-cgu'
 
 function lire<T>(store: Storage | undefined, key: string, vide: T): T {
   try {
@@ -50,9 +52,17 @@ export function useMilo(lieu: 'page' | 'fenetre') {
   const [messages, setMessages] = useState<MiloMessage[]>([])
   const [occupe, setOccupe] = useState(false)
   const [compte, setCompte] = useState<string | null>(null)
+  const [cgu, setCgu] = useState(false)
+  const [aRemettre, setARemettre] = useState<string | null>(null)
   const depuis = useRef(0)
   useEffect(() => {
     depuis.current = Date.now()
+    const id = window.setTimeout(() => setCgu(lire<string | null>(local(), CGU, null) === CGU_VERSION), 0)
+    return () => window.clearTimeout(id)
+  }, [])
+  const accepterCgu = useCallback((oui: boolean) => {
+    setCgu(oui)
+    ecrire(local(), CGU, oui ? CGU_VERSION : null)
   }, [])
 
   const garder = useCallback((l: MiloMessage[]) => {
@@ -69,9 +79,15 @@ export function useMilo(lieu: 'page' | 'fenetre') {
     setMessages(enCours)
     setOccupe(true)
     setCompte(null)
-    const res = await fetch('/api/assistant', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: q, historique, site, lieu, t: Date.now() - depuis.current }) }).catch(() => null)
-    const body = (await res?.json().catch(() => null)) as (MiloReponse & { ok: boolean; compte?: boolean; message?: string }) | null
+    const res = await fetch('/api/assistant', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: q, historique, site, lieu, t: Date.now() - depuis.current, cgu: lire<string | null>(local(), CGU, null) }) }).catch(() => null)
+    const body = (await res?.json().catch(() => null)) as (MiloReponse & { ok: boolean; compte?: boolean; cgu?: boolean; message?: string }) | null
     setOccupe(false)
+    if (body?.cgu) {
+      accepterCgu(false)
+      setMessages(avant)
+      setARemettre(q)
+      return
+    }
     if (body?.compte) {
       ecrire(local(), EN_ATTENTE, q)
       setMessages(avant)
@@ -81,7 +97,7 @@ export function useMilo(lieu: 'page' | 'fenetre') {
     }
     track('Assistant Question', { lieu })
     garder([...avant, body?.ok ? { q, r: body } : { q, erreur: body?.message ?? 'Pas de réponse pour l’instant. Réessaie dans un instant.' }])
-  }, [garder, lieu])
+  }, [garder, lieu, accepterCgu])
 
   useEffect(() => {
     const charger = () => setMessages(lire<MiloMessage[]>(session(), FIL, []))
@@ -104,6 +120,10 @@ export function useMilo(lieu: 'page' | 'fenetre') {
     messages,
     occupe,
     compte,
+    cgu,
+    accepterCgu,
+    aRemettre,
+    remis: () => setARemettre(null),
     envoyer: (q: string, site = '') => (occupe ? undefined : void envoyer(q, messages, site)),
     effacer: () => garder([]),
   }
