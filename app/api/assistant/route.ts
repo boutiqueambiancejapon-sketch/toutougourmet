@@ -1,0 +1,39 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { noterQuestion, repondre, reserverAppel, type Echange } from '@/lib/server/assistant'
+import { clientIp, overLimit } from '@/lib/server/rate-window'
+
+// @cdc assistant — POST { question, historique } depuis le site seulement. Limites : par adresse en mémoire, et
+// plafond global d'appels par jour en base. Aucune donnée personnelle gardée.
+
+export const dynamic = 'force-dynamic'
+export const maxDuration = 45
+
+const headers = { 'Cache-Control': 'private, no-store' }
+const LIMITES = [
+  { windowMs: 60 * 60_000, max: 12 },
+  { windowMs: 24 * 60 * 60_000, max: 40 },
+] as const
+
+const non = (status: number, message: string) => NextResponse.json({ ok: false, message }, { status, headers })
+
+export async function POST(req: NextRequest): Promise<NextResponse> {
+  const origin = req.headers.get('origin')
+  if (!origin || new URL(origin).host !== req.headers.get('host')) return non(403, 'Requête refusée.')
+  const body = (await req.json().catch(() => null)) as { question?: unknown; historique?: unknown } | null
+  const question = typeof body?.question === 'string' ? body.question.trim() : ''
+  if (question.length < 3 || question.length > 500) return non(400, 'Pose ta question en une ou deux phrases.')
+  const historique: Echange[] = Array.isArray(body?.historique)
+    ? body.historique.slice(-2).flatMap((h: unknown) => (h && typeof h === 'object' && typeof (h as Echange).q === 'string' && typeof (h as Echange).r === 'string' ? [{ q: (h as Echange).q.slice(0, 500), r: (h as Echange).r.slice(0, 1500) }] : []))
+    : []
+  if (overLimit(`assistant:${clientIp(req.headers)}`, LIMITES)) return non(429, 'Beaucoup de questions d\'affilée : réessaie dans un moment.')
+  if (!(await reserverAppel())) return non(429, 'L\'assistant a beaucoup servi aujourd\'hui. Réessaie demain.')
+  try {
+    const r = await repondre(question, historique)
+    await noterQuestion(question, r)
+    return NextResponse.json({ ok: true, ...r }, { headers })
+  } catch (err) {
+    console.error('[assistant] échec', err instanceof Error ? err.message : err)
+    await noterQuestion(question, null)
+    return non(502, 'La réponse n\'a pas pu être préparée. Réessaie dans un instant.')
+  }
+}

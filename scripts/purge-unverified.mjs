@@ -26,6 +26,9 @@ try {
   console.log(`[purge] ${verb} : ${history} ligne(s) d'historique d'envois de plus de ${EMAIL_LOG_RETENTION_MONTHS} mois`)
   const scans = await purgeScannerEvents(pool, { dry })
   console.log(`[purge] ${verb} : ${scans} ligne(s) du journal du scanner de plus de ${SCANNER_EVENTS_RETENTION_DAYS} jours`)
+  // Questions de l'assistant : gardées 90 jours (page /assistant).
+  const questions = dry ? { rowCount: 0 } : await pool.query("DELETE FROM analytics.assistant_questions WHERE created_at < now() - interval '90 days'")
+  console.log(`[purge] ${verb} : ${questions.rowCount ?? 0} question(s) de l'assistant de plus de 90 jours`)
 } catch (err) {
   console.error('[purge] échec', err instanceof Error ? err.message : err)
   process.exitCode = 1

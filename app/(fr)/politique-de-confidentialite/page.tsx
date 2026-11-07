@@ -124,6 +124,15 @@ export default function PolitiqueConfidentialitePage() {
             </p>
           </Section>
 
+          <Section title="Assistant">
+            <p>
+              Les questions posées à l&apos;<Link href="/assistant" className={linkClass}>assistant</Link> sont
+              envoyées à Google (Gemini) pour rédiger la réponse. On garde le texte de la question 90 jours, sans
+              ton nom, ton adresse email ni ton adresse IP, pour choisir nos prochains articles. N&apos;y écris pas
+              d&apos;information personnelle.
+            </p>
+          </Section>
+
           <Section title="Consultation par le responsable du site">
             <p>
               Le responsable du site peut consulter les comptes, les profils de chiens et les scans, dans un

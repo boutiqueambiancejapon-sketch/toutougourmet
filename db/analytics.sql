@@ -231,3 +231,15 @@ CREATE INDEX IF NOT EXISTS scanner_events_user_created_idx ON analytics.scanner_
 ALTER TABLE analytics.scanner_events OWNER TO toutou;
 GRANT SELECT, INSERT, DELETE ON analytics.scanner_events TO administrator;
 GRANT USAGE ON SEQUENCE analytics.scanner_events_id_seq TO administrator;
+
+-- Assistant : plafond d'appels par jour, et questions gardées 90 jours (sans compte ni adresse) pour choisir les articles.
+CREATE TABLE IF NOT EXISTS analytics.assistant_daily (day date PRIMARY KEY, calls int NOT NULL DEFAULT 0);
+CREATE TABLE IF NOT EXISTS analytics.assistant_questions (
+  id          bigserial PRIMARY KEY,
+  question    text NOT NULL,
+  depuis_site boolean,
+  articles    text[] NOT NULL DEFAULT '{}',
+  created_at  timestamptz NOT NULL DEFAULT now()
+);
+ALTER TABLE analytics.assistant_daily OWNER TO toutou;
+ALTER TABLE analytics.assistant_questions OWNER TO toutou;
