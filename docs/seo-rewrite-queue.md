@@ -35,8 +35,8 @@
 ## 2. « Peut-il manger » : légumes (29)
 
 - [x] `chien-peut-manger-brocoli` · legumes · màj 2026-03-12 · réécrit 2026-11-06
-- [ ] `chien-peut-manger-chou-fleur` · legumes · màj 2026-03-12
-- [ ] `chien-peut-manger-endives` · legumes · màj 2026-03-12
+- [x] `chien-peut-manger-chou-fleur` · legumes · màj 2026-03-12 · réécrit 2026-11-07
+- [x] `chien-peut-manger-endives` · legumes · màj 2026-03-12 · réécrit 2026-11-07
 - [ ] `chien-peut-manger-poivron` · legumes · màj 2026-03-12
 - [ ] `meilleurs-legumes-chien` · legumes · màj 2026-03-12
 - [ ] `chien-peut-manger-asperges` · legumes · màj 2026-03-21
