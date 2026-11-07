@@ -3,7 +3,7 @@
 import { OPFF_FIELDS, opffToLabel, type OpffProduct } from '../lib/scanner/opff'
 import { analyseLabel } from '../lib/scanner/analyse'
 
-const UA = 'ToutouGourmet/1.0 (https://www.toutou-gourmet.com/scanner; contact@toutou-gourmet.com)'
+const UA = 'ToutouGourmet/1.0 (https://www.toutou-gourmet.com/scanner; bonjour@toutou-gourmet.com)'
 
 async function main() {
   const pages = Number(process.argv[2]) || 1

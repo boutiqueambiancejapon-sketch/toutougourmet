@@ -21,9 +21,10 @@ export default function MentionsLegalesPage() {
             <p>Le site toutou-gourmet.com est édité par :</p>
             <p className="mt-2">
               <strong className="text-[var(--text-primary)]">Toutou Gourmet</strong><br />
-              Adresse : France<br />
-              Email : contact@toutou-gourmet.com<br />
-              SIRET : [À compléter]
+              Titulaire et responsable de la publication : Mathias Cetani<br />
+              Siège social : Lindestraat 94, 1785 Merchtem, Belgique<br />
+              Numéro d&apos;entreprise (BCE) et TVA : BE 0683.927.006<br />
+              E-mail : <a href="mailto:bonjour@toutou-gourmet.com" className="underline underline-offset-2">bonjour@toutou-gourmet.com</a>
             </p>
           </section>
 

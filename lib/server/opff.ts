@@ -12,7 +12,7 @@ import { findLocalProduct } from './opff-store'
 
 const API = process.env.OPFF_API_URL || 'https://world.openpetfoodfacts.org/api/v2/product'
 const OFF_API = process.env.OFF_API_URL || 'https://world.openfoodfacts.org/api/v2/product'
-export const USER_AGENT = 'ToutouGourmet/1.0 (https://www.toutou-gourmet.com/scanner; contact@toutou-gourmet.com)'
+export const USER_AGENT = 'ToutouGourmet/1.0 (https://www.toutou-gourmet.com/scanner; bonjour@toutou-gourmet.com)'
 export const OPFF_TIMEOUT_MS = Number(process.env.OPFF_TIMEOUT_MS) || 4000
 
 /** local : notre copie · openpetfoodfacts : API OPFF · openfoodfacts : API Open Food Facts */
