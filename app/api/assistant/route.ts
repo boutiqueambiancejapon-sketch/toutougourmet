@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getSessionUser } from '@/lib/server/auth'
-import { noterQuestion, profilChiens, repondre, reserverAppel, type Echange } from '@/lib/server/assistant'
+import { compterQuestion, contexteManquant, demanderContexte, noterQuestion, profilChiens, QUESTIONS_PAR_JOUR, repondre, reserverAppel, type Echange } from '@/lib/server/assistant'
 import { listDogs } from '@/lib/server/dogs'
 import { overLimit } from '@/lib/server/rate-window'
 
@@ -30,9 +30,12 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     ? body.historique.slice(-4).flatMap((h: unknown) => (h && typeof h === 'object' && typeof (h as Echange).q === 'string' && typeof (h as Echange).r === 'string' ? [{ q: (h as Echange).q.slice(0, 500), r: (h as Echange).r.slice(0, 1500) }] : []))
     : []
   if (overLimit(`assistant:${user.id}`, LIMITES)) return non(429, 'Beaucoup de questions d\'affilée : réessaie dans un moment.')
+  const chiens = await listDogs(user.id).then(profilChiens).catch(() => '')
+  const manque = contexteManquant(question, historique.map((h) => `${h.q} ${h.r}`).join(' '), chiens)
+  if (manque) return NextResponse.json({ ok: true, ...demanderContexte(manque) }, { headers })
+  if (!(await compterQuestion(user.id))) return non(429, `Tu as posé tes ${QUESTIONS_PAR_JOUR} questions du jour. Milo revient demain matin.`)
   if (!(await reserverAppel())) return non(429, 'L\'assistant a beaucoup servi aujourd\'hui. Réessaie demain.')
   try {
-    const chiens = await listDogs(user.id).then(profilChiens).catch(() => '')
     const r = await repondre(question, historique, chiens)
     await noterQuestion(question, r)
     return NextResponse.json({ ok: true, ...r }, { headers })

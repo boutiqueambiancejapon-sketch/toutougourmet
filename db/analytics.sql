@@ -243,3 +243,6 @@ CREATE TABLE IF NOT EXISTS analytics.assistant_questions (
 );
 ALTER TABLE analytics.assistant_daily OWNER TO toutou;
 ALTER TABLE analytics.assistant_questions OWNER TO toutou;
+
+-- Assistant Milo : questions par compte et par jour (limite de 5, décision du 2026-11-07). Purgé après 7 jours.
+CREATE TABLE IF NOT EXISTS analytics.assistant_quota (user_id text NOT NULL, day date NOT NULL, n integer NOT NULL DEFAULT 0, PRIMARY KEY (user_id, day));
