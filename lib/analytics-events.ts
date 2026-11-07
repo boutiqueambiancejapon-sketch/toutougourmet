@@ -13,6 +13,7 @@ export const ANALYTICS_EVENTS = [
   'Food Saved',
   'Assistant Question',
   'Assistant Signup Asked',
+  'Assistant Open',
   'Scan Result',
   'Scan Share',
   'Scan Download',

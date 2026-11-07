@@ -126,10 +126,12 @@ export default function PolitiqueConfidentialitePage() {
 
           <Section title="Assistant">
             <p>
-              Les questions posées à l&apos;<Link href="/assistant" className={linkClass}>assistant</Link> sont
-              envoyées à Google (Gemini) pour rédiger la réponse. On garde le texte de la question 90 jours, sans
-              ton nom, ton adresse email ni ton adresse IP, pour choisir nos prochains articles. N&apos;y écris pas
-              d&apos;information personnelle.
+              Les questions posées à <Link href="/assistant" className={linkClass}>Milo, l&apos;assistant</Link>,
+              sont envoyées à Google (Gemini) pour rédiger la réponse. Certaines conversations (la question et la
+              réponse) peuvent être gardées 90 jours, sans ton nom, ton adresse email ni ton adresse IP, pour
+              entraîner Milo, améliorer sa précision et choisir nos prochains articles. Le nombre de questions posées
+              par ton compte est compté chaque jour pour la limite quotidienne, puis effacé après 7 jours.
+              N&apos;y écris pas d&apos;information personnelle.
             </p>
           </Section>
 

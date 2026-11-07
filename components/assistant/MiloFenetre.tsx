@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
+import { track } from '@/lib/analytics'
 import { MiloAvatar } from './MiloAvatar'
 
 // @cdc assistant — petite fenêtre de Milo sur les pages du site (décision du propriétaire du 2026-11-07). La
@@ -33,7 +34,7 @@ export function MiloFenetre() {
           <div className="min-h-0 grow"><MiloChat compact /></div>
         </div>
       ) : (
-        <button type="button" onClick={() => setOuvert(true)} className="fixed right-3 bottom-[calc(var(--tabbar-h)+env(safe-area-inset-bottom)+12px)] z-40 flex min-h-12 items-center gap-2 rounded-pill border-2 border-ink bg-paper py-1 pr-4 pl-1 font-semibold text-ink shadow-[3px_3px_0_var(--orange)] md:right-5 md:bottom-5">
+        <button type="button" onClick={() => { setOuvert(true); track('Assistant Open', {}) }} className="fixed right-3 bottom-[calc(var(--tabbar-h)+env(safe-area-inset-bottom)+12px)] z-40 flex min-h-12 items-center gap-2 rounded-pill border-2 border-ink bg-paper py-1 pr-4 pl-1 font-semibold text-ink shadow-[3px_3px_0_var(--orange)] md:right-5 md:bottom-5">
           <MiloAvatar size={40} />
           <span className="whitespace-nowrap text-sm">Demande à Milo</span>
         </button>

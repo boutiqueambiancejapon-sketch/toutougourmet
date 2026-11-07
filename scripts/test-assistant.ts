@@ -22,3 +22,9 @@ assert.match(contexteManquant('Quelles sont les meilleures croquettes ?', '', ''
 assert.equal(contexteManquant('Quelles sont les meilleures croquettes ?', '', 'Milo, Shiba Inu, 4 ans, 10 kg'), '')
 assert.equal(contexteManquant('Mon chien peut-il manger des noisettes ?', '', ''), '')
 console.log('contexteManquant : tout passe')
+import { sujetSensible } from '../lib/assistant/sensible'
+assert.equal(sujetSensible('Mon chien a une insuffisance rénale, quelles croquettes ?'), 'veterinaire')
+assert.equal(sujetSensible('Quelle dose de paracétamol pour mon chien ?'), 'veterinaire')
+assert.equal(sujetSensible('Mon chien fait des convulsions'), 'urgence')
+assert.equal(sujetSensible('Combien de croquettes pour un chien de 10 kg ?'), null)
+console.log('sujetSensible : tout passe')

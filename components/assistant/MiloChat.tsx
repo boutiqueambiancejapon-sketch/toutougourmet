@@ -22,9 +22,10 @@ export function MiloChat({ compact = false }: { compact?: boolean }) {
     if (messages.length || compte) fin.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
   }, [messages.length, occupe, compte])
 
+  const piege = useRef<HTMLInputElement>(null)
   const partir = (q: string) => {
     if (q.trim().length < 3 || occupe) return
-    envoyer(q)
+    envoyer(q, piege.current?.value ?? '')
     setTexte('')
   }
 
@@ -55,7 +56,8 @@ export function MiloChat({ compact = false }: { compact?: boolean }) {
         {compte ? <MiloCompte question={compte} place={compact ? 'assistant-fenetre' : 'assistant'} /> : null}
         <div ref={fin} />
       </div>
-      <form onSubmit={(e) => { e.preventDefault(); partir(texte) }} className="flex shrink-0 items-end gap-2 rounded-box border-2 border-ink bg-paper p-1.5 focus-within:shadow-[3px_3px_0_var(--orange)]">
+      <form onSubmit={(e) => { e.preventDefault(); partir(texte) }} className="relative flex shrink-0 items-end gap-2 rounded-box border-2 border-ink bg-paper p-1.5 focus-within:shadow-[3px_3px_0_var(--orange)]">
+        <input ref={piege} name="site" type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px] size-px opacity-0" />
         <label className="flex grow">
           <span className="sr-only">Ta question pour Milo</span>
           <textarea ref={champ} value={texte} onChange={(e) => setTexte(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); partir(texte) } }} rows={compact ? 1 : 2} maxLength={500} placeholder="Écris ta question à Milo" className="w-full resize-none border-0 bg-transparent px-2 py-2 text-base text-ink outline-none" />
