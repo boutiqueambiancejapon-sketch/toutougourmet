@@ -3,6 +3,18 @@
 > Lue et mise à jour par la tâche planifiée « Toutou Gourmet · réécriture 2 articles/jour ».
 > Méthode : `docs/09-seo-geo-guide.md` §2.7 (fan-out), §6.4 (race × question) et §9 (réécriture). Écriture : skill `boileau`.
 
+## Priorité Search Console (propriétaire, 2026-11-07)
+
+Pages que Google montre juste après la première page (28 jours au 5 novembre). Elles passent avant tout le reste de la file. Viser les recherches indiquées : le premier paragraphe répond à la première, un H2 reprend chacune. Ne pas toucher à `title`, `ogTitle` ni `description` : les titres sont revus à part avec le propriétaire.
+
+- [ ] `chien-mange-pistaches` · « pistache chien » (530 affichages, position 8,7, 0 clic), « pistache pour les chiens », « pistache chien toxique » · le lecteur cherche si son chien peut en manger, pas seulement l'urgence : réponse « peut-il manger » en tête, conduite à tenir ensuite
+- [ ] `chataignes-marrons-inde-chien-difference-danger` · « châtaigne cuite pour chien » (217, pos 7,4, 0 clic), « chataigne chien », « chataigne cuite chien » · réponse d'abord sur la châtaigne comestible (cuite, quantité par gabarit), le marron d'Inde ensuite
+- [ ] `chien-mange-os-poulet-urgence` · « os de poulet chien » (401, pos 8,7), « os poulet chien », « mon chien a mangé un os cuit que faire » · même sujet que `os-poulet-chien-danger` : renforcer celle-ci, relier l'autre vers elle
+- [ ] `chien-peut-manger-amandes` · « amande chien » (234, pos 8,8, 0 clic), « chien amande »
+- [ ] `chien-peut-manger-concombre` · « concombre chien » (214, pos 19,3), « les chiens peuvent ils manger du concombre »
+- [ ] `avis-croquettes-orlando-lidl` · « croquette chien lidl » (125, pos 9,7), « croquette chien lidl prix » (80, pos 9,3) · ajouter le prix relevé et la gamme Lidl, sans toucher au bloc `MeilleuresAlternatives`
+- [ ] `chien-peut-manger-cacahuetes` · « cacahuètes chien » (102, pos 5,6, 0 clic)
+
 ## Règles de la file
 
 - On prend les **2 premiers articles non cochés**, de haut en bas.
