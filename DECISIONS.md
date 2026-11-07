@@ -333,3 +333,6 @@ Précision du 2026-11-06 : aocr.org est un faux référent. Il sort des statisti
 
 ## 2026-11-06 — Compte ouvert dès l'inscription
 Décision du propriétaire : la confirmation d'e-mail ne bloque plus l'accès. Avant confirmation, pas d'e-mails de suivi, pas de Premium, pas d'analyse par photo. Un rappel unique part 24 heures après l'inscription (`scripts/rappel-confirmation.ts`), et la suppression à 30 jours reste faite par `scripts/purge-unverified.mjs`.
+
+## 2026-11-07 — Encadré partenaire, résumé du matin, fiches Premiere et Real Nature
+Un seul encadré sombre par article, les autres liens en bandeau (`unSeulEncadre`, lib/mdx.ts). Résumé envoyé chaque matin par ntfy à 7 h 41, même sans incident. Les 10 meilleures recettes de Premiere et de Real Nature sont ouvertes à Google (`scripts/indexer-meilleures.ts`).

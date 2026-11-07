@@ -6,6 +6,7 @@ import {
   getArticleBySlug,
   extractTldr,
   stripTldr,
+  unSeulEncadre,
   extractClassement,
   estimateReadTime,
   extractFaqs,
@@ -259,7 +260,7 @@ export default async function ArticleCategoryPage({ params }: Props) {
         classementAfter={classement.segment && !classement.beforeTldr ? <Classement segment={classement.segment as SegmentSlug} /> : undefined}
       >
         <MDXRemote
-          source={stripTldr(classement.content)}
+          source={unSeulEncadre(stripTldr(classement.content))}
           components={mdxComponents}
           options={{
             mdxOptions: {

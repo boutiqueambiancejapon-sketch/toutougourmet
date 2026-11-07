@@ -1,0 +1,13 @@
+# Résumé du matin envoyé par ntfy (scripts/resume-matin.ts), même quand tout va bien.
+[Unit]
+Description=Toutou Gourmet - résumé du matin
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=toutou
+WorkingDirectory=/srv/toutou/current
+EnvironmentFile=/srv/toutou/shared/.env
+Nice=15
+ExecStart=/srv/toutou/current/node_modules/.bin/tsx scripts/resume-matin.ts
