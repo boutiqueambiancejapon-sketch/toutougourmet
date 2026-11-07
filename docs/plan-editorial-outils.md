@@ -327,6 +327,21 @@ Validé par le propriétaire (2026-11-04), d'après l'export Search Console. Ces
 - [ ] Le chien peut-il manger des châtaignes ?
 - [ ] Le chien peut-il manger du ketchup ?
 
+## Repas frais (`ration`, sauf indication)
+
+Validé par le propriétaire (2026-11-07) : un client Dog Chef rapporte 50 €, Franklin 10 €. Sujets où un repas frais livré répond vraiment à la question. Vérifier la requête (WebSearch) et le doublon (`ls content/blog`, `grep -ril`) : `repas-frais-vs-croquettes-chien`, `ration-menagere-chien-guide-recettes`, `transition-alimentaire-chien`, `alimentation-barf-chien-guide-complet` et les duels `dog-chef-vs-*` existent déjà. Encadré `BrandCTA` Dog Chef là où il répond, Franklin en solution croquettes ; pas de note inventée pour Dog Chef, absent du scanner.
+
+- [ ] Combien coûte un repas frais pour chien par mois ? (`budget`)
+- [ ] Repas frais pour chiot : à partir de quel âge et combien ?
+- [ ] Repas frais pour chien âgé : est-ce mieux que les croquettes ?
+- [ ] Repas frais pour chien stérilisé ou en surpoids : comment doser ?
+- [ ] Mon chien ne finit jamais sa gamelle : faut-il changer d'aliment ? (`bien-nourri`)
+- [ ] Combien de temps se garde un repas frais pour chien au frigo ?
+- [ ] Repas frais livré pour chien : comment ça marche ?
+- [ ] Dog Chef ou Dogfy Diet : lequel choisir ? (`quiz`)
+- [ ] Dog Chef ou Ultra Premium Direct : repas frais ou croquettes premium ? (`quiz`)
+- [ ] Repas frais pour chien allergique : une seule protéine, ça change quoi ?
+
 ## Fiche de garde (`fiche-de-garde`) et voyage
 
 - [ ] Partir en vacances avec son chien : la liste de ce qu'il faut emporter (alimentation, eau, papiers)

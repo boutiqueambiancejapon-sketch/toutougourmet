@@ -57,7 +57,7 @@ const log = (msg: string) => console.log(`[bienvenue] ${msg}`)
 const ALL_STEPS: readonly SequenceStep[] = [...WELCOME_STEPS, ...REMINDER_STEPS]
 const isReminder = (step: SequenceStep): step is ReminderStep => (REMINDER_STEPS as readonly string[]).includes(step)
 const kindOf = (step: SequenceStep): EmailKind => (isReminder(step) ? step : (`suite-${step satisfies WelcomeStep}` as EmailKind))
-const mailFor = (step: SequenceStep, unsubscribe: string) => (isReminder(step) ? reminderEmail(step, unsubscribe) : welcomeStepEmail(step, unsubscribe, new Date(`${today}T12:00:00Z`)))
+const mailFor = (step: SequenceStep, unsubscribe: string) => (isReminder(step) ? reminderEmail(step, unsubscribe) : welcomeStepEmail(step, unsubscribe))
 
 async function main(): Promise<void> {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(today)) throw new Error(`--today invalide : ${today}`)

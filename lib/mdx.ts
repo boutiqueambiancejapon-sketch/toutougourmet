@@ -174,12 +174,16 @@ export function extractClassement(content: string): { segment: string | null; be
 /**
  * Un seul encadré partenaire sombre par article (décision du 2026-11-07) : le premier BrandCTA en format plein reste,
  * les suivants passent en bandeau compact. Sans `variant`, le bouton est en format plein.
+ * Dog Chef présent : c'est lui qui garde le format plein (un client Dog Chef rapporte 50 €, Franklin 10 €, propriétaire
+ * le 2026-11-07), là où l'article le place. Le texte et les notes ne changent pas.
  */
 export function unSeulEncadre(content: string): string {
+  const tags = content.match(/<BrandCTA\b[^>]*?\/>/g) ?? []
+  const plein = tags.find((t) => !/variant="secondary"/.test(t) && /brandName="Dog Chef"/.test(t)) ?? tags.find((t) => !/variant="secondary"/.test(t))
   let vu = false
   return content.replace(/<BrandCTA\b[^>]*?\/>/g, (tag) => {
     if (/variant="secondary"/.test(tag)) return tag
-    if (!vu) {
+    if (!vu && tag === plein) {
       vu = true
       return tag
     }
