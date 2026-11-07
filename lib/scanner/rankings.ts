@@ -16,7 +16,7 @@ export interface RankRecipe {
 export type SegmentSlug =
   | 'tous' | 'chiot' | 'adulte' | 'senior' | 'petit-chien' | 'chien-moyen' | 'grand-chien' | 'sterilise'
   | 'sans-cereales' | 'surpoids' | 'digestion-sensible' | 'peau-sensible' | 'articulations' | 'hypoallergeniques'
-  | 'patees' | 'friandises'
+  | 'patees' | 'friandises' | 'friandises-a-macher' | 'friandises-petit-chien'
 
 export interface RankSegment {
   slug: SegmentSlug
@@ -43,6 +43,9 @@ const SENIOR = /\b(senior|ageing|mature|age defence)\b|\d\+/
 const SMALL = /\b(mini|small|petite? (taille|race)|petit|yorkshire|chihuahua|bichon|maltese|shih tzu|teckel|carlin|caniche)\b/
 const LARGE = /\b(maxi|large|giant|grande? (taille|race)|labrador|golden|berger allemand|boxer|rottweiler)\b/
 const STERILISED = /sterilis|neutered/
+const CHEW = /\b(dent|dental|dentaire|dentastix|oral|hygiene|mastic|a macher|machouiller|os|baton|bully|gosier|oreille|sabot|corne|bois de cerf)/
+const SMALL_TREAT = /\b(mini|small|petits? chiens?|petite (taille|race)|toy|xs)\b/
+const treat = (re: RegExp) => (r: RankRecipe) => r.noun === 'friandise' && re.test(fold(r.name))
 const WEIGHT = /\b(light|weight|fit & trim|satiety)\b/
 
 const page = (slug: string) => `/meilleures-croquettes/${slug}`
@@ -64,12 +67,17 @@ export const SEGMENTS: RankSegment[] = [
   { slug: 'hypoallergeniques', label: 'Allergies', audience: 'hypoallergéniques', path: '/chien/alimentation-quotidienne/croquettes-chien-allergique', title: '', h1: '', description: '', listTitle: 'Quelles croquettes hypoallergéniques ont la meilleure composition ?', match: named(/hypoallerg/) },
   { slug: 'patees', label: 'Pâtées', audience: 'de pâtée', path: '/chien/alimentation-quotidienne/meilleures-patees-chien', title: '', h1: '', description: '', listTitle: 'Quelles pâtées pour chien ont la meilleure composition ?', match: (r) => r.noun === 'patee' },
   { slug: 'friandises', label: 'Friandises', audience: 'de friandises', path: '/meilleures-friandises', title: 'Meilleures friandises pour chien : le classement', h1: 'Meilleures friandises pour chien : le classement par composition', description: 'Les friandises pour chien classées par note sur 100, selon leur barème propre, à partir des étiquettes lues chez Maxi Zoo.', listTitle: 'Quelles friandises pour chien ont la meilleure composition ?', match: (r) => r.noun === 'friandise' },
+  { slug: 'friandises-a-macher', label: 'À mâcher et dentaires', audience: 'de friandises à mâcher', path: '/meilleures-friandises/a-macher', title: 'Meilleures friandises à mâcher et dentaires pour chien', h1: 'Meilleures friandises à mâcher et dentaires pour chien : le classement', description: 'Bâtonnets dentaires, os et friandises à mâcher pour chien classés par note sur 100, à partir des étiquettes lues chez Maxi Zoo.', listTitle: 'Quelles friandises à mâcher ont la meilleure composition ?', match: treat(CHEW) },
+  { slug: 'friandises-petit-chien', label: 'Petit chien', audience: 'de friandises pour petit chien', path: '/meilleures-friandises/petit-chien', title: 'Meilleures friandises pour petit chien : le classement', h1: 'Meilleures friandises pour petit chien : le classement par composition', description: 'Les friandises pour petit chien classées par note sur 100, selon leur barème propre, à partir des étiquettes lues chez Maxi Zoo.', listTitle: 'Quelles friandises pour petit chien ont la meilleure composition ?', match: treat(SMALL_TREAT) },
 ]
 
 export const segmentBySlug = (slug: string): RankSegment | undefined => SEGMENTS.find((s) => s.slug === slug)
 
 /** Pages qui ont leur propre adresse sous /meilleures-croquettes (les autres vivent dans un article). */
 export const PAGE_SEGMENTS = SEGMENTS.filter((s) => s.path.startsWith('/meilleures-croquettes/'))
+
+/** Sous-classements des friandises, sous /meilleures-friandises/… */
+export const TREAT_SEGMENTS = SEGMENTS.filter((s) => s.path.startsWith('/meilleures-friandises/'))
 
 /** Seuil d'ouverture à Google : assez de recettes et de marques pour que le classement veuille dire quelque chose. */
 export const MIN_RECIPES = { pillar: 30, segment: 8 }
