@@ -61,3 +61,4 @@ Les résumés automatiques de Trustpilot ne suffisent pas pour publier des réci
 
 ## 2026-11-06 : ton des avis
 Le propriétaire a trouvé l'avis Edgard & Cooper « ultra scientifique ». Les règles détaillées des avis (composition, sources, réserves) écrasaient la consigne de ton. Une règle de ton doit dire qu'elle passe avant les autres et donner un exemple de phrase. Prévenir avec le test : ce paragraphe, je le dirais à un ami ?
+- 2026-11-07 : une contrainte CHECK de base (analytics.welcome_sends_step_check) a bloqué le rappel de confirmation pendant des heures. Nouvelle valeur d’étape, de type ou de lieu → vérifier les contraintes CHECK de la table (`\d+ table`) et lancer la tâche une fois à la main avant de dire « en place ».
