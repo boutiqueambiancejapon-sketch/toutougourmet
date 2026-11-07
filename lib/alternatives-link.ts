@@ -31,7 +31,7 @@ function partnerSection(rawContent: string): string | null {
 }
 
 export function getAlternativesLink({ slug, frontmatter, rawContent }: Article): AlternativesLinkData | null {
-  if (frontmatter.categorySlug !== 'avis-marques' || !slug.startsWith('avis-')) return null
+  if (!slug.startsWith('avis-')) return null
   const brandName = frontmatter.affiliateA?.name ?? frontmatter.review?.brand
   if (brandName && isOurBrand(brandName)) return null
   return { href: partnerSection(rawContent) ?? HUB, brandName }

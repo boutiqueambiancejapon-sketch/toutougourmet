@@ -4,10 +4,10 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { IconPaw } from '@/components/icons'
 import { useAccountPrefill } from '@/components/outils/useAccountPrefill'
-import { signupHref } from '@/lib/signup-places'
 import { useInviteTracking, useSignedIn } from './useSignupInvite'
 
-// @cdc CRO compte (maquette 1A) — compte de l'en-tête. Visiteur : bouton « Créer un compte », plus
+// @cdc CRO compte (maquette 1A) — compte de l'en-tête. Visiteur : bouton « Mon chien » vers la page qui présente
+// l'espace (test du 2026-11-07, avant : « Créer un compte » vers l'inscription, 2 clics pour 881 vues), plus
 // petit sous 375 px pour garder la marge du bord (« S'inscrire » sous 360 px, jamais sur deux lignes). Compte connecté (témoin tg_compte) :
 // pastille à l'initiale du chien + « Mon chien ». Rendu serveur et hydratation : version
 // visiteur, la page reste statique. Le prénom du chien vient de /api/compte/profil, déjà appelé
@@ -41,13 +41,13 @@ function Visitor() {
       </Link>
       <Link
         ref={ref}
-        href={signupHref('header', '/compte')}
+        href="/mon-chien"
         onClick={onClick}
         data-cta="signup-header"
         className={`${BUTTON} ml-auto bg-orange shadow-[0_3px_0_var(--orange-ink)] hover:brightness-105 max-[374px]:px-2.5 max-[374px]:text-sm md:border-2 md:border-ink md:bg-paper md:shadow-none xl:ml-0`}
       >
-        <span className="min-[360px]:hidden">S&apos;inscrire</span>
-        <span className="hidden min-[360px]:inline">Créer un compte</span>
+        <IconPaw className="mr-1.5 size-5 max-[359px]:hidden" />
+        Mon chien
       </Link>
     </>
   )
