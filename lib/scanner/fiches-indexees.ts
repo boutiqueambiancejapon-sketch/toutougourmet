@@ -22,7 +22,13 @@ export const parCle = (liste: FicheIndexee[], cle: string): FicheIndexee | undef
 /** Nom court d'un produit : la marque et la recette, sans le format. */
 export function nomRecette(brand: string | null, product: string | null): string | null {
   if (!brand || !product) return null
+  // Mots de catalogue sans intérêt dans un titre : « nourriture humide pour chien adulte », tirets, virgules.
   const nom = displayName(recipeName(product))
+    .replace(/\b(nourriture|alimentation) humide( pour)? chiens?( adultes?)?\b,?|\bhumides? chien\b,?|\bpâtée pour chiens?\b|\bpour chiens? adultes?\b/gi, ' ')
+    .replace(/\s+[–-]\s+/g, ' ')
+    .replace(/\s*,\s*/g, ' ')
+    .replace(/\s{2,}/g, ' ')
+    .trim()
   // « Croquettes à la dinde » perd son premier mot : « Dog Chef à la dinde » ne dirait plus ce qu'est le produit.
   const complet = /^(au|aux|à la|à l')\b/i.test(nom) && /^croquettes?\b/i.test(product) ? `Croquettes ${nom}` : nom
   return `${displayBrand(brand)} ${complet}`
