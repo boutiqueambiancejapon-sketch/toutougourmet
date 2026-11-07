@@ -120,6 +120,13 @@
       "when": 1794047062420,
       "tag": "0016_food_favorite",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1794047584345,
+      "tag": "0017_food_history",
+      "breakpoints": true
     }
   ]
 }

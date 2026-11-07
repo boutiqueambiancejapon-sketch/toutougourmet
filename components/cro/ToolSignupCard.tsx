@@ -60,8 +60,8 @@ export function ToolSignupCard({ tool, dogName = null, retour }: { tool: SignupT
       text={copy.text}
       Icon={copy.Icon}
       checks={CHECKS}
-      cta="Créer mon compte gratuit"
-      ctaShort="Créer mon compte"
+      cta="Garder ses résultats"
+      ctaShort="Garder ses résultats"
       retour={retour}
       reassurance
     />

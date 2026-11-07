@@ -14,6 +14,7 @@ export const PAGE_DATES: Record<string, string> = {
   '/scanner/alternative-yuka-animaux': '2026-11-03',
   '/guide-alimentation': '2026-11-03',
   '/premium': '2026-11-03',
+  '/mon-chien': '2026-11-07',
   '/outils': '2026-11-03',
   '/outils/age': '2026-11-02',
   '/outils/bien-nourri': '2026-11-02',
