@@ -147,7 +147,7 @@ GRANT SELECT, INSERT, DELETE ON analytics.welcome_sends TO administrator;
 -- réécrire, une adresse qui a déjà reçu j5 ne le reçoit pas une seconde fois.
 ALTER TABLE analytics.welcome_sends DROP CONSTRAINT IF EXISTS welcome_sends_step_check;
 ALTER TABLE analytics.welcome_sends ADD CONSTRAINT welcome_sends_step_check
-  CHECK (step IN ('j2', 'j5', 'j10', 'compte-j4', 'chien-j1', 'chien-j4'));
+  CHECK (step IN ('j2', 'j5', 'j10', 'compte-j4', 'chien-j1', 'chien-j4', 'confirmation-rappel'));
 
 -- Journal des e-mails individuels (lib/server/email-log.ts) : qui a reçu quoi et quand, vu dans le
 -- tableau de bord (Conversions, Adresses inscrites, Envois). Empreinte HMAC-SHA256 de l'adresse en
