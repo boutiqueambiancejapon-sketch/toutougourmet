@@ -1,4 +1,5 @@
 import { cache } from 'react'
+import { REPONSE_SENSIBLE } from '@/lib/assistant/sensible'
 import type { Gravite } from '@/lib/assistant/urgence'
 import { ACTIVITY_LABELS, breedName, formatAge } from '@/lib/dog-profile'
 import type { Dog } from '@/db/schema'
@@ -31,6 +32,8 @@ export interface Reponse {
   reponse: string
   /** Milo pose des questions au lieu de répondre : il lui manque le contexte. */
   questions: boolean
+  /** Réponse écrite par le serveur (questions de contexte, garde-fou) : pas d'appel à l'IA. */
+  fixe: boolean
   gravite: Gravite
   depuisLeSite: boolean
   articles: { url: string; titre: string }[]
@@ -145,8 +148,17 @@ async function produitsProposes(question: string, contexte: string): Promise<Pro
 
 /** Questions de Milo sans appel à l'IA : il lui manque le contexte. */
 export function demanderContexte(texte: string): Reponse {
-  return { reponse: texte, questions: true, gravite: 'aucune', depuisLeSite: false, articles: [], produits: [] }
+  return { reponse: texte, questions: true, fixe: true, gravite: 'aucune', depuisLeSite: false, articles: [], produits: [] }
 }
+
+/** Garde-fou : renvoi vers le vétérinaire, avec les articles du site sur le sujet pour préparer la question. */
+export function renvoiVeterinaire(question: string, gravite: Exclude<Gravite, 'aucune'>): Reponse {
+  const articles = gravite === 'urgence' ? [] : chercherArticles(indexArticles(), question, 2).map((t) => ({ url: t.article.url, titre: t.article.titre }))
+  return { reponse: REPONSE_SENSIBLE[gravite], questions: false, fixe: true, gravite, depuisLeSite: articles.length > 0, articles, produits: [] }
+}
+
+export type Sorte = 'site' | 'ia' | 'contexte' | 'sensible' | 'echec'
+export const sorteDe = (r: Reponse | null): Sorte => (!r ? 'echec' : r.questions ? 'contexte' : r.fixe ? 'sensible' : r.depuisLeSite ? 'site' : 'ia')
 
 /** Compte une question du jour pour ce compte. Faux : limite atteinte. */
 export async function compterQuestion(userId: string): Promise<boolean> {
@@ -208,14 +220,17 @@ export async function repondre(question: string, historique: Echange[], chiens =
   if (!reponse) throw new Error('réponse vide')
   const gravite: Gravite = brut.gravite === 'urgence' || brut.gravite === 'veterinaire' ? brut.gravite : 'aucune'
   const questions = brut.questions === true
-  return { reponse, questions, gravite, depuisLeSite: !questions && brut.depuisLeSite === true && articles.length > 0, articles: questions ? [] : articles, produits: questions ? [] : produits }
+  return { reponse, questions, fixe: false, gravite, depuisLeSite: !questions && brut.depuisLeSite === true && articles.length > 0, articles: questions ? [] : articles, produits: questions ? [] : produits }
 }
 
-/** Question gardée 90 jours, sans compte ni adresse : elle sert à choisir les prochains articles. */
-export async function noterQuestion(question: string, r: Reponse | null): Promise<void> {
+/** Conversation gardée 90 jours, sans compte ni adresse : suivi dans le tableau de bord et réglage de Milo. */
+export async function noterQuestion(question: string, r: Reponse | null, lieu: string): Promise<void> {
   const pool = getPool()
   if (!pool) return
   await pool
-    .query('INSERT INTO analytics.assistant_questions (question, depuis_site, articles) VALUES ($1, $2, $3)', [question.slice(0, 300), r?.depuisLeSite ?? null, r?.articles.map((a) => a.url) ?? []])
+    .query(
+      'INSERT INTO analytics.assistant_questions (question, depuis_site, articles, kind, gravite, reponse, produits, lieu) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
+      [question.slice(0, 300), r?.depuisLeSite ?? null, r?.articles.map((a) => a.url) ?? [], sorteDe(r), r?.gravite ?? null, r?.reponse.slice(0, 1500) ?? null, r?.produits.length ?? 0, lieu],
+    )
     .catch((err: unknown) => console.error('[assistant] question non notée', err instanceof Error ? err.message : err))
 }

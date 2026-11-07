@@ -50,7 +50,7 @@ function Reponse({ r }: { r: MiloReponse }) {
         <p className="m-0 text-sm text-ink-2">Pour aller plus loin : {r.articles.map((a, i) => <span key={a.url}>{i ? ', ' : ''}<Link href={a.url} className={LIEN}>{a.titre}</Link></span>)}</p>
       ) : null}
       {r.produits.length ? <Produits liste={r.produits} /> : null}
-      {r.depuisLeSite || r.questions ? null : <p className="m-0 text-xs italic text-ink-3">Attention, les IA peuvent faire des erreurs : cette réponse ne s&apos;appuie sur aucun article du site.</p>}
+      {r.depuisLeSite || r.questions || r.fixe ? null : <p className="m-0 text-xs italic text-ink-3">Attention, les IA peuvent faire des erreurs : cette réponse ne s&apos;appuie sur aucun article du site.</p>}
     </div>
   )
 }

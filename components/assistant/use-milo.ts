@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Gravite } from '@/lib/assistant/urgence'
 import { track } from '@/lib/analytics'
 
@@ -11,6 +11,7 @@ import { track } from '@/lib/analytics'
 export interface MiloReponse {
   reponse: string
   questions: boolean
+  fixe: boolean
   gravite: Gravite
   depuisLeSite: boolean
   articles: { url: string; titre: string }[]
@@ -49,6 +50,10 @@ export function useMilo(lieu: 'page' | 'fenetre') {
   const [messages, setMessages] = useState<MiloMessage[]>([])
   const [occupe, setOccupe] = useState(false)
   const [compte, setCompte] = useState<string | null>(null)
+  const depuis = useRef(0)
+  useEffect(() => {
+    depuis.current = Date.now()
+  }, [])
 
   const garder = useCallback((l: MiloMessage[]) => {
     setMessages(l)
@@ -56,7 +61,7 @@ export function useMilo(lieu: 'page' | 'fenetre') {
     window.dispatchEvent(new Event(EVENT))
   }, [])
 
-  const envoyer = useCallback(async (question: string, avant: MiloMessage[]) => {
+  const envoyer = useCallback(async (question: string, avant: MiloMessage[], site = '') => {
     const q = question.trim()
     if (q.length < 3) return
     const historique = avant.filter((m) => m.r).slice(-4).map((m) => ({ q: m.q, r: m.r?.reponse ?? '' }))
@@ -64,7 +69,7 @@ export function useMilo(lieu: 'page' | 'fenetre') {
     setMessages(enCours)
     setOccupe(true)
     setCompte(null)
-    const res = await fetch('/api/assistant', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: q, historique }) }).catch(() => null)
+    const res = await fetch('/api/assistant', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: q, historique, site, lieu, t: Date.now() - depuis.current }) }).catch(() => null)
     const body = (await res?.json().catch(() => null)) as (MiloReponse & { ok: boolean; compte?: boolean; message?: string }) | null
     setOccupe(false)
     if (body?.compte) {
@@ -87,7 +92,7 @@ export function useMilo(lieu: 'page' | 'fenetre') {
         ecrire(local(), EN_ATTENTE, null)
         void envoyer(attente, lire<MiloMessage[]>(session(), FIL, []))
       }
-    }, 0)
+    }, 1600)
     window.addEventListener(EVENT, charger)
     return () => {
       window.clearTimeout(id)
@@ -99,7 +104,7 @@ export function useMilo(lieu: 'page' | 'fenetre') {
     messages,
     occupe,
     compte,
-    envoyer: (q: string) => (occupe ? undefined : void envoyer(q, messages)),
+    envoyer: (q: string, site = '') => (occupe ? undefined : void envoyer(q, messages, site)),
     effacer: () => garder([]),
   }
 }
