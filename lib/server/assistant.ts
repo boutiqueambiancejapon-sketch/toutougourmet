@@ -93,6 +93,15 @@ export function besoinAchat(question: string): Achat | null {
   return 'croquettes'
 }
 
+/** Outils du site joints quand la question y répond (ration, poids idéal). */
+function outilsLies(question: string): { url: string; titre: string }[] {
+  const q = fold(question)
+  const l: { url: string; titre: string }[] = []
+  if (/ration|combien de (croquettes|grammes|patee)|quantite|grammes par jour|par jour/.test(q)) l.push({ url: '/outils/ration', titre: 'Calculer sa ration en grammes' })
+  if (/poids ideal|trop gros|surpoids|maigre|grossi|kilos en trop/.test(q)) l.push({ url: '/outils/poids', titre: 'Vérifier son poids idéal' })
+  return l
+}
+
 const OFFRES: readonly Achat[] = ['croquettes', 'patee', 'friandises', 'repas']
 const TRANSITION = 'transition-alimentaire-chien'
 
@@ -259,7 +268,7 @@ export async function repondre(question: string, historique: Echange[], chiens =
   // Hors urgence et hors avis vétérinaire, Milo propose les produits du type qu'il juge utile (propriétaire, 2026-11-07).
   const offre = OFFRES.find((o) => o === brut.offre) ?? null
   const proposes = produits.length || gravite !== 'aucune' || !offre ? produits : await produitsProposes(question, `${historique.map((h) => h.q).join(' ')} ${chiens}`, offre)
-  return { reponse, questions, fixe: false, gravite, depuisLeSite: !questions && brut.depuisLeSite === true && articles.length > 0, articles: achat ? guides : questions ? [] : articles, produits: gravite === 'aucune' ? proposes : [] }
+  return { reponse, questions, fixe: false, gravite, depuisLeSite: !questions && brut.depuisLeSite === true && articles.length > 0, articles: [...outilsLies(question), ...(achat ? guides : questions ? [] : articles)].slice(0, 3), produits: gravite === 'aucune' ? proposes : [] }
 }
 
 /** Conversation gardée 90 jours, sans compte ni adresse : suivi dans le tableau de bord et réglage de Milo. */
