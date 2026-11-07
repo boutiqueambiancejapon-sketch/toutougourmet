@@ -5,7 +5,7 @@ import type { Gravite } from './urgence'
 
 const fold = (s: string) => s.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase()
 
-const URGENCE = /convuls|ne respire (plus|pas)|respire (mal|difficilement)|etouff|inconscient|s'?est effondre|ne se leve plus|paralys|vomit du sang|sang dans (ses|les) (selles|vomi)|empoisonn|intoxiqu|ventre (gonfle|dur)|torsion|raticide|antigel|coup de chaleur/
+const URGENCE = /convuls|ne respire (plus|pas)|respire (mal|difficilement)|etouff|inconscient|s'?est effondre|ne se leve plus|paralys|vomit du sang|sang dans (ses|les) (selles|vomi)|empoisonn|intoxiqu|ventre (gonfle|dur)|torsion|raticide|antigel|coup de chaleur|(mange|avale|croque).{0,20}(raisins?|xylitol)\b/
 const SENSIBLE = /maladie|malade|insuffisance|diabet|cancer|tumeur|lymphome|chimio|epilep|leishman|cushing|addison|pancreatite|hepat|cirrhose|cardiaque|cardiopathie|calculs? (renaux|urinaires)|cristaux|infection|allergie severe|medicament|antibiotique|anti-?inflammatoire|cortisone|corticoide|posologie|\bdose\b|paracetamol|ibuprofene|aspirine|traitement|ordonnance|operation|chirurgie|sterilisation recente|gestante|enceinte|mise bas|allaite|euthanas|fin de vie|mourir|va mourir/
 
 export function sujetSensible(question: string): Exclude<Gravite, 'aucune'> | null {
