@@ -220,6 +220,8 @@ main { overflow-x: clip; }
    il prend la place de la barre d'onglets, jusqu'à sa fermeture. */
 html[data-sticky] [data-tabbar],
 html[data-popup] [data-tabbar] { display: none; }
+html[data-sticky] [data-milo],
+html[data-popup] [data-milo] { display: none; }
 /* Une page qui porte déjà sa demande du guide ne la répète pas dans le pied de page (audit mobile 2026-11-04). */
 body:has(main [data-guide-on-page]) [data-cta="guide-footer"] { display: none; }
 body:has(main [data-guide-on-page]) [data-footer-offers] { grid-template-columns: minmax(0, 1fr); }

@@ -1,11 +1,9 @@
-// @cdc assistant — question qui ressemble à une urgence : le numéro du centre antipoison s'affiche avant tout,
-// sans compte et sans attendre la réponse de l'IA. Préférer une fausse alerte à une urgence manquée.
-
-const URGENCE = /\b(a mang[ée]|a aval[ée]|a croqu[ée]|a bu|a l[ée]ch[ée]|vomi|vomit|diarrh[ée]e.*sang|sang|convuls|tremble|empoisonn|intoxi|s[’']?[ée]touff|respire mal|ne respire|inconscient|effondr|paralys|gonfl[ée]|ventre dur|urgence)/i
-
-export const estUrgence = (question: string): boolean => URGENCE.test(question)
+// @cdc assistant — centres antipoison vétérinaires, affichés seulement quand Milo juge la situation urgente
+// (décision du propriétaire du 2026-11-07 : d'abord des questions, la recommandation si c'est vraiment grave).
 
 export const CENTRES_ANTIPOISON = [
   { nom: 'CNITV (Lyon)', tel: '04 78 87 10 40' },
   { nom: 'CAPAE-Ouest (Nantes)', tel: '02 40 68 77 40' },
 ]
+
+export type Gravite = 'aucune' | 'veterinaire' | 'urgence'

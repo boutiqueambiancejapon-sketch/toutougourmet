@@ -3,6 +3,7 @@ import { SiteFooter } from '@/components/layout/v2/SiteFooter'
 import { TabBar } from '@/components/layout/v2/TabBar'
 import { SiteDocument } from '@/components/layout/SiteDocument'
 import { GuidePopup } from '@/components/guide/GuidePopup'
+import { MiloFenetre } from '@/components/assistant/MiloFenetre'
 import { bookSummary } from '@/lib/guide/book'
 
 // @cdc i18n — français à la racine : le groupe (fr) n'apparaît pas dans l'URL,
@@ -24,6 +25,7 @@ export default function FrenchLayout({ children }: { children: React.ReactNode }
           <SiteFooter />
           <TabBar />
           <GuidePopup foodCount={foodCount} recipeCount={recipeCount} />
+          <MiloFenetre />
         </div>
       }
     >
