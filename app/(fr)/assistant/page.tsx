@@ -44,7 +44,7 @@ export default function AssistantPage() {
         </ul>
       </section>
       <p className="m-0 text-sm leading-relaxed text-ink-2">
-        Milo n&apos;est pas vétérinaire : il ne pose pas de diagnostic et ne donne pas de dose de médicament. Si ton chien va mal, appelle ton vétérinaire. Tes questions sont gardées 90 jours, sans ton nom ni ton adresse, pour choisir nos prochains articles.{' '}
+        Milo n&apos;est pas vétérinaire : il ne pose pas de diagnostic et ne donne pas de dose de médicament. Si ton chien va mal, appelle ton vétérinaire. Pour l&apos;instant, Milo répond à 5 questions par jour et par compte. Tes questions sont gardées 90 jours, sans ton nom ni ton adresse, pour choisir nos prochains articles.{' '}
         <Link href="/mon-chien" className="font-semibold text-orange-ink underline underline-offset-2">Enregistrer mon chien</Link>
       </p>
     </main>
