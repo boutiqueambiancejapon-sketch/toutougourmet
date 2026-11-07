@@ -62,7 +62,7 @@ export async function sendWelcomeStepTest(step: WelcomeStep): Promise<void> {
   let result = 'config'
   if (to && unsubscribe && newsletterMailConfigured()) {
     try {
-      const mail = welcomeStepEmail(step, unsubscribe, new Date())
+      const mail = welcomeStepEmail(step, unsubscribe)
       await sendTransactionalEmail({
         to,
         subject: `[Test] ${mail.subject}`,

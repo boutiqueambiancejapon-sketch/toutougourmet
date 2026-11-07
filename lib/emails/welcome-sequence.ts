@@ -3,7 +3,6 @@ import { CONFIRMED_DISCOUNTS, type OfferSlug } from '@/data/partner-discounts'
 import { getPromoPage, promoPath } from '@/data/promo-codes'
 import { FREE_MONTHLY_SCANS } from '@/lib/scanner/config'
 import { button, divider, linkItem, paragraph, renderEmail, siteUrl, smallPrint, type RenderedEmail } from './layout'
-import { offerForMonth } from './monthly'
 import { accountRemindersEnabled } from './account-reminders'
 import { offerCard } from './offer-card'
 
@@ -48,13 +47,14 @@ export function rationEmail(unsubscribeUrl: string): RenderedEmail {
   })
 }
 
-/** Offre de l'étape J7 (code j5) : celle du mois suivant, pour ne pas répéter la lettre mensuelle. */
-export function offerSlugFor(date: Date): OfferSlug {
-  return offerForMonth(new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, 1)))
+/** Offre de l'étape J7 (code j5) : Dog Chef (client Dog Chef 50 €, Franklin 10 €, décision du propriétaire du 2026-11-07,
+ * qui remplace « l’offre du mois suivant »). */
+export function offerSlugFor(): OfferSlug {
+  return 'dog-chef'
 }
 
-export function offerEmail(unsubscribeUrl: string, date: Date): RenderedEmail {
-  const slug = offerSlugFor(date)
+export function offerEmail(unsubscribeUrl: string): RenderedEmail {
+  const slug = offerSlugFor()
   const brand = getBrandBySlug(slug)
   const discount = CONFIRMED_DISCOUNTS[slug]
   const name = brand?.name ?? slug
@@ -98,8 +98,8 @@ export function scannerEmail(unsubscribeUrl: string): RenderedEmail {
   })
 }
 
-export function welcomeStepEmail(step: WelcomeStep, unsubscribeUrl: string, date: Date): RenderedEmail {
+export function welcomeStepEmail(step: WelcomeStep, unsubscribeUrl: string): RenderedEmail {
   if (step === 'j2') return rationEmail(unsubscribeUrl)
-  if (step === 'j5') return offerEmail(unsubscribeUrl, date)
+  if (step === 'j5') return offerEmail(unsubscribeUrl)
   return scannerEmail(unsubscribeUrl)
 }

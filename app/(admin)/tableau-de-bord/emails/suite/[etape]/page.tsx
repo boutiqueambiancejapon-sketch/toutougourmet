@@ -22,7 +22,7 @@ export default async function WelcomeStepPreviewPage({ params, searchParams }: P
   const { etape } = await params
   if (!isStep(etape)) notFound()
   const test = (await searchParams).test
-  const mail = welcomeStepEmail(etape, buildUnsubscribeUrl('apercu@example.com', process.env.NEWSLETTER_SECRET || 'apercu'), new Date())
+  const mail = welcomeStepEmail(etape, buildUnsubscribeUrl('apercu@example.com', process.env.NEWSLETTER_SECRET || 'apercu'))
   const started = process.env.WELCOME_SEQUENCE_START
   return (
     <EmailPreview

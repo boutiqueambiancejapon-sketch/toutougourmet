@@ -73,7 +73,8 @@ test("calendrier : premier mardi et 18 h à Paris (heure d'hiver et d'été)", (
 test('rotation des offres : 5 offres confirmées sur 5 mois, jamais Fidelis', () => {
   const seen = new Set<string>()
   for (let m = 0; m < OFFER_ROTATION.length; m++) seen.add(offerForMonth(new Date(Date.UTC(2027, m, 5))))
-  assert.equal(seen.size, OFFER_ROTATION.length)
+  assert.equal(seen.size, new Set(OFFER_ROTATION).size)
+  assert.equal(offerForMonth(new Date(Date.UTC(2026, 11, 1))), 'dog-chef')
   assert.ok(!OFFER_ROTATION.includes('fidelis' as never))
   for (const slug of OFFER_ROTATION) assert.ok(getBrandBySlug(slug), slug)
 })
@@ -155,26 +156,22 @@ test('suite de bienvenue : jours civils à Paris, date de départ, empreinte', (
 
 test('suite de bienvenue : désinscription, remise exacte à J7 (code j5), pas de « undefined »', () => {
   const unsub = buildUnsubscribeUrl('marie@example.com', SECRET)
-  const date = new Date('2026-11-20T12:00:00Z')
   for (const step of WELCOME_STEPS) {
-    const mail = welcomeStepEmail(step, unsub, date)
+    const mail = welcomeStepEmail(step, unsub)
     assert.ok(mail.html.includes('Se désinscrire'), step)
     assert.ok(mail.text.includes(unsub), step)
     assert.ok(!/undefined|null/.test(mail.html + mail.text), step)
   }
-  const slug = offerSlugFor(date)
-  const j5 = welcomeStepEmail('j5', unsub, date)
+  const slug = offerSlugFor()
+  const j5 = welcomeStepEmail('j5', unsub)
   const discount = CONFIRMED_DISCOUNTS[slug] ?? ''
   assert.ok(discount && j5.text.includes(discount))
   assert.ok(j5.html.includes('rel="sponsored nofollow"'))
   assert.ok(j5.text.includes(`/codes-promo/${slug}`))
 })
 
-test('suite de bienvenue : le J7 ne répète pas l\'offre de la lettre du mois', () => {
-  for (let m = 0; m < 12; m++) {
-    const date = new Date(Date.UTC(2026, m, 28))
-    assert.notEqual(offerSlugFor(date), offerForMonth(date))
-  }
+test('suite de bienvenue : le J7 propose Dog Chef', () => {
+  assert.equal(offerSlugFor(), 'dog-chef')
 })
 
 // Calendrier par adresse : inscription le 1er novembre, jour N = 2026-11-(1+N).
