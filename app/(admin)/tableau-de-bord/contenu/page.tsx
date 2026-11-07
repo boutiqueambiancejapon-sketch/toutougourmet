@@ -11,6 +11,7 @@ import { ReviewSection } from '@/components/dashboard/ReviewSection'
 import { ImportedReview } from '@/components/dashboard/review/ImportedReview'
 import { ScannerHealthLink } from '@/components/dashboard/scanner/ScannerHealthLink'
 import { AssistantLink } from '@/components/dashboard/assistant/AssistantLink'
+import { RechercheLink } from '@/components/dashboard/recherche/RechercheLink'
 
 // @cdc tableau de bord — onglet Contenu : comptes rendus de la tâche de nuit, fiches croquettes
 // à relire (avec les signalements) et fiches importées d'Open Pet Food Facts à valider ou écarter,
@@ -35,6 +36,7 @@ export default async function ContentTab(props: TabPageProps) {
         <ReviewSection rows={data.review} error={data.reviewError} />
       </div>
       <ScannerHealthLink />
+      <RechercheLink />
       <AssistantLink />
       <div id="importees" className="scroll-mt-20">
         <ImportedReview data={data.imported} />
