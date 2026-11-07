@@ -7,6 +7,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type { ResultOrigin, ScanAnalysis, ScanQuota } from '@/lib/scanner/result'
 import { analyseLabel } from '@/lib/scanner/analyse'
 import { AllergyAlert } from './AllergyAlert'
+import { FavoriButton } from './fiche/FavoriButton'
 import { LabelData } from './LabelData'
 import { ReportError } from './ReportError'
 import { ScanResultSimple } from './ScanResultSimple'
@@ -76,6 +77,7 @@ export function ScanResult({ analysis, origin, quota, signedIn, onRestart }: Sca
           <DownloadLink slug={analysis.slug} className="flex-1" />
           <ShareButton slug={analysis.slug} name={name} score={analysis.score} className="flex-1" />
         </div>
+        <FavoriButton slug={analysis.slug} />
         <Link href={`/croquettes/${analysis.slug}`} className="inline-flex min-h-12 items-center justify-center rounded-control border-2 border-ink px-5 text-[15px] font-semibold text-ink no-underline">
           Voir la fiche
         </Link>

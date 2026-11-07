@@ -106,6 +106,7 @@ CREATE TABLE IF NOT EXISTS analytics.signup_sources (
   place      text NOT NULL,
   created_at timestamptz NOT NULL DEFAULT now()
 );
+ALTER TABLE analytics.signup_sources ADD COLUMN IF NOT EXISTS last_return date;
 DO $$ BEGIN
   IF to_regclass('app.user') IS NOT NULL AND NOT EXISTS (
     SELECT 1 FROM pg_constraint WHERE conname = 'signup_sources_user_fk'

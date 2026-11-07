@@ -10,6 +10,7 @@ export const ANALYTICS_EVENTS = [
   'Account Signup',
   'Premium Activated',
   'Scan Barcode',
+  'Food Saved',
   'Scan Result',
   'Scan Share',
   'Scan Download',
@@ -29,7 +30,7 @@ export const ANALYTICS_EVENTS = [
  * Écrits par le serveur seulement (lib/server/signup-source.ts), jamais acceptés de /api/e :
  * un visiteur ne peut pas gonfler les comptes créés ou confirmés.
  */
-export const SERVER_EVENTS = ['Account Created', 'Account Verified'] as const
+export const SERVER_EVENTS = ['Account Created', 'Account Verified', 'Dog Added', 'Account Return'] as const
 
 export type ServerEvent = (typeof SERVER_EVENTS)[number]
 

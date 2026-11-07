@@ -118,6 +118,21 @@ export const scanHistory = app.table(
   (t) => [index('scan_history_user_idx').on(t.userId, t.createdAt), index('scan_history_created_idx').on(t.createdAt)],
 )
 
+/** « Mes aliments » : produits gardés par un compte, une ligne par fiche. */
+export const foodFavorite = app.table(
+  'food_favorite',
+  {
+    userId: text('user_id')
+      .notNull()
+      .references(() => user.id, { onDelete: 'cascade' }),
+    foodAnalysisId: uuid('food_analysis_id')
+      .notNull()
+      .references(() => foodAnalysis.id, { onDelete: 'cascade' }),
+    createdAt: ts('created_at').notNull().defaultNow(),
+  },
+  (t) => [primaryKey({ columns: [t.userId, t.foodAnalysisId] })],
+)
+
 export const scanUsage = app.table(
   'scan_usage',
   {
