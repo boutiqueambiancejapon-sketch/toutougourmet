@@ -171,6 +171,22 @@ export function extractClassement(content: string): { segment: string | null; be
   return { segment: tag[1], beforeTldr: tldr >= 0 && tag.index < tldr, content: content.replace(tag[0], '') }
 }
 
+/**
+ * Un seul encadré partenaire sombre par article (décision du 2026-11-07) : le premier BrandCTA en format plein reste,
+ * les suivants passent en bandeau compact. Sans `variant`, le bouton est en format plein.
+ */
+export function unSeulEncadre(content: string): string {
+  let vu = false
+  return content.replace(/<BrandCTA\b[^>]*?\/>/g, (tag) => {
+    if (/variant="secondary"/.test(tag)) return tag
+    if (!vu) {
+      vu = true
+      return tag
+    }
+    return tag.replace(/\s+variant="primary"/, '').replace(/\s*\/>$/, ' variant="secondary" />')
+  })
+}
+
 export function stripTldr(content: string): string {
   // Le titre et ses puces seulement : le paragraphe d'intro, l'avertissement et les composants qui suivent restent.
   return content.replace(/##?\s*TL;DR[^\n]*\n(?:[ \t]*\n)*(?:[-*]\s+[^\n]*\n)*/i, '')

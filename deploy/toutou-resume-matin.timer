@@ -1,0 +1,9 @@
+[Unit]
+Description=Toutou Gourmet - résumé du matin, après l'article de 7 h
+
+[Timer]
+OnCalendar=*-*-* 07:41:00 Europe/Paris
+Persistent=false
+
+[Install]
+WantedBy=timers.target

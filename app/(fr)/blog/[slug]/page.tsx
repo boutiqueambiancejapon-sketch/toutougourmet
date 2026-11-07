@@ -6,6 +6,7 @@ import {
   getArticleBySlug,
   extractTldr,
   stripTldr,
+  unSeulEncadre,
   estimateReadTime,
   extractFaqs,
 } from '@/lib/mdx'
@@ -161,7 +162,7 @@ export default async function ArticlePage({ params }: Props) {
         allArticles={allArticles}
       >
         <MDXRemote
-          source={stripTldr(content)}
+          source={unSeulEncadre(stripTldr(content))}
           components={articleMdxComponents}
           options={{
             mdxOptions: {
