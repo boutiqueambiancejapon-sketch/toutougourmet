@@ -30,13 +30,14 @@ Suivre §9 du guide :
 - FAQ portée à 8 questions si pertinent. 2 à 4 liens internes avec ancres descriptives, vers des slugs qui existent réellement dans `content/blog/` ou `content/comparatifs/` (vérifier avec ls/grep, route `/chien/{categorySlug}/{slug}`).
 - Si l'article n'a pas encore d'encart outil et qu'un outil de `components/outils/tool-list.ts` répond à une question de l'article (ration, poids, bilan, scanner, âge, budget, coût, test, fiche de garde), pose **un seul** `<ToolCta tool="{slug}" />` juste après la section concernée. Jamais sur un article urgences ou un aliment « danger » avant les gestes et les numéros, et pas de deuxième encart si l'article en a déjà un (`<ToolCta`, `<SitterSheetCta`, `<BreedBrandCompare`, `<BrandCTA`).
 - Ne créer AUCUNE nouvelle page race × question.
-- Miniature de partage : renseigner ou vérifier dans le frontmatter `ogTitle` (titre court accrocheur, ≤ 40 caractères si possible, modèle « Poire : ton chien peut en manger ? »), et pour les articles « peut-il manger » et urgences `verdict` (`oui` | `moderation` | `danger`, fidèle au texte) et `verdictNote` (≤ 28 caractères pour oui/danger, ≤ 45 pour moderation, minuscule, sans point final). Espace insécable avant `:` et `?`.
+- **Titres (décision du propriétaire, 2026-11-07) : ne jamais modifier `title`, `ogTitle` ni `description` d'un article existant. Seule exception : un champ vide, à remplir.**
+- Miniature de partage : renseigner dans le frontmatter `ogTitle` s'il manque (titre court accrocheur, ≤ 40 caractères si possible, modèle « Poire : ton chien peut en manger ? »), et pour les articles « peut-il manger » et urgences `verdict` (`oui` | `moderation` | `danger`, fidèle au texte) et `verdictNote` (≤ 28 caractères pour oui/danger, ≤ 45 pour moderation, minuscule, sans point final). Espace insécable avant `:` et `?`.
 - Marques : seules les marques affiliées sont recommandées, avec leurs liens : Dog Chef https://www.dogchef.com/fr/code/WZU7090 (−30 % sur la box d'essai, livraison gratuite), Elmut https://c3po.link/QWMW4k6mbU (−40 % sur la première commande), Franklin Pet Food https://c3po.link/Q3xbJhfapn (−30 % en abonnement), Ultra Premium Direct https://c3po.link/QqJYNnzYD8 (−20 % sur la première commande en abonnement), Dogfy Diet https://tidd.ly/4jT3Tqg (−50 % sur la box d'essai de 14 jours), Fidelis https://tidd.ly/48rl0Z3 (bocaux en rupture au 1er novembre 2026 : ne pas les mettre en avant). Maxi Zoo est partenaire : garder les liens tidd.ly vers ses fiches produits (Royal Canin https://tidd.ly/3PnVz4E, Eukanuba https://tidd.ly/4rPSibE et les autres liens tidd.ly déjà présents), sans les présenter comme une recommandation nutritionnelle. Petty Well n'est plus partenaire : retirer toute mention restante. Aucune autre marque recommandée avec un lien.
 - Mettre `updatedAt` à la date du jour (format YYYY-MM-DD).
 
 ## Vérifications
 - `npm ci` si nécessaire puis `npm run build` : doit passer. Si le build casse à cause d'un article modifié, corriger ; si impossible, annuler les changements de cet article, le marquer `- [~]` avec la raison dans la file et passer au suivant.
-- title ≤ 60 caractères, description ≤ 155 caractères.
+- title ≤ 60 caractères, description ≤ 155 caractères : pour un champ à remplir seulement.
 - Aucune dose ou quantité existante modifiée sans source.
 
 ## Commit
