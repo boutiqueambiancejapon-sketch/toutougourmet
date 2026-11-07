@@ -39,6 +39,13 @@ export default function PolitiqueConfidentialitePage() {
         <p className="text-sm text-[var(--text-muted)] mb-8">Dernière mise à jour : novembre 2026</p>
 
         <div className="flex flex-col gap-8 text-[var(--text-secondary)]">
+          <Section title="Responsable du traitement">
+            <p>
+              Mathias Cetani, Toutou Gourmet, Lindestraat 94, 1785 Merchtem, Belgique (BCE BE 0683.927.006). Pour toute
+              question sur tes données : <a href="mailto:bonjour@toutou-gourmet.com" className={linkClass}>bonjour@toutou-gourmet.com</a>.
+            </p>
+          </Section>
+
           <Section title="Données collectées">
             <p className="mb-2">Toutou Gourmet collecte uniquement :</p>
             <ul className="list-disc pl-5 space-y-1 text-sm">
@@ -181,7 +188,8 @@ export default function PolitiqueConfidentialitePage() {
             <p>
               Conformément au RGPD, tu disposes d&apos;un droit d&apos;accès, de rectification, de suppression
               et de portabilité de tes données. Pour les exercer, écris-nous par le <ContactLink /> du site.
-              Tu peux aussi adresser une réclamation à la CNIL (cnil.fr).
+              Tu peux aussi adresser une réclamation à l&apos;Autorité de protection des données belge
+              (autoriteprotectiondonnees.be) ou, si tu vis en France, à la CNIL (cnil.fr).
             </p>
           </Section>
 

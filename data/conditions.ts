@@ -12,7 +12,7 @@ export interface Article {
 export const CONDITIONS: Article[] = [
   { id: 'objet', titre: 'Objet', paragraphes: [
     'Ces conditions encadrent l’utilisation du site toutou-gourmet.com : articles, outils, scanner, compte et Milo, l’assistant. Utiliser le site vaut acceptation de ces conditions. Pour poser une question à Milo, tu les acceptes en cochant la case prévue avant ton premier message.',
-    'L’éditeur du site est présenté dans les mentions légales.',
+    'Le site est édité par Toutou Gourmet (Mathias Cetani), Lindestraat 94, 1785 Merchtem, Belgique, numéro d’entreprise BE 0683.927.006. Contact : bonjour@toutou-gourmet.com.',
   ] },
   { id: 'informations', titre: 'Des informations, pas un avis vétérinaire', paragraphes: [
     'Les articles, outils, notes et réponses du site donnent des informations générales sur l’alimentation du chien. Ils ne remplacent ni une consultation, ni un diagnostic, ni un traitement prescrit par un vétérinaire.',
@@ -48,6 +48,6 @@ export const CONDITIONS: Article[] = [
   ] },
   { id: 'changements', titre: 'Changements et droit applicable', paragraphes: [
     'Ces conditions peuvent changer. La date de la version en vigueur figure en haut de la page ; avant ta prochaine question à Milo, on te demande d’accepter la nouvelle version.',
-    'Ces conditions relèvent du droit français. En cas de désaccord, écris-nous d’abord par le formulaire de contact : nous cherchons une solution amiable avant toute autre démarche.',
+    'Ces conditions relèvent du droit belge, sans te priver des protections que te donne la loi de ton pays de résidence si tu es consommateur. En cas de désaccord, écris-nous d’abord à bonjour@toutou-gourmet.com : nous cherchons une solution amiable avant toute autre démarche.',
   ] },
 ]
