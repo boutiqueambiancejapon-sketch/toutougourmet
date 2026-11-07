@@ -31,6 +31,7 @@ export const MARQUE_PAGES: MarquePage[] = [
   { nom: 'Orlando (Lidl)', href: avis('avis-croquettes-orlando-lidl'), noms: ['Orlando'] },
   { nom: 'Premiere', href: avis('avis-premiere') },
   { nom: 'Purina Pro Plan', href: avis('avis-purina-pro-plan'), noms: ['Pro Plan', 'Purina'] },
+  { nom: 'Real Nature', href: avis('avis-real-nature') },
   { nom: 'Royal Canin', href: avis('avis-royal-canin') },
   { nom: 'Taste of the Wild', href: avis('avis-taste-of-the-wild') },
   { nom: 'Ultra Premium Direct', href: '/chien/marque/ultra-premium-direct' },
