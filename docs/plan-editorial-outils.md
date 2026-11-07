@@ -318,7 +318,7 @@ Demande du propriétaire (2026-11-03). Marque partenaire : Franklin Pet Food (li
 Validé par le propriétaire (2026-11-04), d'après l'export Search Console. Ces requêtes ont déjà des impressions, sans article dédié. Vérifier le doublon comme pour les autres sujets.
 
 - [x] Le chien peut-il manger du paprika ? → chien-peut-manger-paprika
-- [ ] Le chien peut-il manger de la choucroute ? · « choucroute chien » 288 affichages, « choucroute pour chien » 102, « peut on donner de la choucroute au chien » 57 ; Google montre aujourd'hui `aliments-fermentes-chien-bienfaits-dosage` (position 7,5) : la nouvelle page répond à la choucroute (sel, chou, garniture charcutière), l'article des fermentés la relie
+- [x] Le chien peut-il manger de la choucroute ? → chien-peut-manger-choucroute
 - [ ] Le chien peut-il manger des merguez ?
 - [ ] Le chien peut-il manger du skyr ?
 - [ ] Mon chien ne mange plus et reste couché : que faire ? (`bien-nourri`)
