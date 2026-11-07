@@ -57,7 +57,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   if (sensible) return fixe(renvoiVeterinaire(question, sensible))
   const chiens = await listDogs(user.id).then(profilChiens).catch(() => '')
   const manque = contexteManquant(question, historique.map((h) => `${h.q} ${h.r}`).join(' '), chiens)
-  if (manque) return fixe(demanderContexte(manque))
+  if (manque) return fixe(demanderContexte(manque, question))
   if (!(await compterQuestion(user.id))) return non(429, `Tu as posé tes ${QUESTIONS_PAR_JOUR} questions du jour. Milo revient demain matin.`)
   if (!(await reserverAppel())) return non(429, 'L\'assistant a beaucoup servi aujourd\'hui. Réessaie demain.')
   try {

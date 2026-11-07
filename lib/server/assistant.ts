@@ -62,7 +62,7 @@ Avant de répondre, vérifie que tu as le contexte utile : race ou poids du chie
 Quand tu réponds : la réponse tient dans la première phrase, puis deux à cinq phrases utiles. Pas de jargon, pas de nom d'organisme, pas de titre ni de puce.
 Si des extraits d'articles du site répondent à la question, appuie-toi d'abord sur eux sans les contredire, mets depuisLeSite à vrai et donne dans sources leurs adresses. Sinon, réponds avec tes connaissances et mets depuisLeSite à faux.
 gravite : « aucune » en temps normal ; « veterinaire » quand il faut l'avis de son vétérinaire dans les jours qui viennent ; « urgence » seulement si le chien est en danger maintenant (toxique avalé en quantité dangereuse pour son poids, détresse, convulsions, ventre gonflé, sang). En cas d'urgence, dis d'appeler tout de suite son vétérinaire ou un centre antipoison, sans détour. Ne dramatise pas un cas bénin.
-Tu n'es pas vétérinaire : aucun diagnostic, aucune dose de médicament ou de complément. Ne cite jamais une note, une composition ou un prix absent des données fournies.\nConseil d'achat : recommande seulement des produits de la liste « Produits partenaires » quand elle est fournie, sans citer d'autre marque ni d'autre boutique où acheter ; les liens s'affichent sous ta réponse, ne les écris pas. Les notes viennent de l'étiquette ; Dog Chef et Franklin n'ont pas de note, ne les présente pas comme mieux notés. Cite deux ou trois produits de la liste par leur nom. Ne nomme aucun produit ni aucune marque hors de cette liste, même si tu en connais un meilleur. Sans cette liste, ne recommande aucune marque ni boutique.
+Tu n'es pas vétérinaire : aucun diagnostic, aucune dose de médicament ou de complément. Ne cite jamais une note, une composition ou un prix absent des données fournies.\nConseil d'achat ou envie de changer d'aliment : propose toujours des produits de la liste « Produits partenaires » quand elle est fournie, même si tu poses aussi une question. Une ration maison ou un repas frais pour un chien en bonne santé : présente Dog Chef (repas frais dosés selon le profil du chien, sans calcul à faire) avant de parler du vétérinaire, réservé à un chien malade. Recommande seulement des produits de cette liste, sans citer d'autre marque ni d'autre boutique où acheter ; les liens s'affichent sous ta réponse, ne les écris pas. Les notes viennent de l'étiquette ; Dog Chef et Franklin n'ont pas de note, ne les présente pas comme mieux notés. Cite deux ou trois produits de la liste par leur nom. Ne nomme aucun produit ni aucune marque hors de cette liste, même si tu en connais un meilleur. Sans cette liste, ne recommande aucune marque ni boutique.
 Si la question ne porte pas sur un chien, réponds en une phrase que tu ne parles que de chiens et de gamelle.`
 
 const SCHEMA: JsonSchema = {
@@ -82,10 +82,13 @@ type Achat = 'croquettes' | 'patee' | 'friandises' | 'repas'
 /** Demande de conseil d'achat ? Le type de produit visé, sinon null. */
 export function besoinAchat(question: string): Achat | null {
   const q = fold(question)
-  if (!/\b(meilleure?s?|recommand|conseill|quelle marque|quel(le)?s? (croquettes?|patees?|friandises?|nourriture|repas|marque|aliment)|acheter|choisir|top)\b/.test(q)) return null
+  // Envie de changer d'aliment comprise comme une demande de conseil d'achat (conversation « Rafa », 2026-11-07).
+  const changer = /\b(changer|change|remplacer|passer a|passer aux|essayer|tester|nouvelles? (croquettes?|recettes?|alimentation|nourriture)|autre (marque|recette|croquette|aliment)|que (lui )?donner|quoi (lui )?donner|par quoi)\b/.test(q) && /croquette|recette|alimentation|nourriture|aliment|marque|gamelle|repas|patee|menu|ration/.test(q)
+  const maison = /ration menagere|fait maison|repas maison|cuisiner pour|repas frais|barf/.test(q)
+  if (!changer && !maison && !/\b(meilleure?s?|recommand|conseill|quelle marque|quel(le)?s? (croquettes?|patees?|friandises?|nourriture|repas|marque|aliment)|acheter|choisir|top)\b/.test(q)) return null
   if (/friandise|snack|recompense|os a macher/.test(q)) return 'friandises'
   if (/patee|humide|boite/.test(q)) return 'patee'
-  if (/repas|frais|menager|barf|cuisin/.test(q)) return 'repas'
+  if (maison || /repas|frais|menager|barf|cuisin|recette/.test(q)) return 'repas'
   return 'croquettes'
 }
 
@@ -143,13 +146,16 @@ async function produitsProposes(question: string, contexte: string): Promise<Pro
     return tous.length >= n ? tous : meilleurs(type.filter((r) => filtres.slice(0, 1).every((f) => f(r))))
   }
   if (achat === 'repas') return [...partenaire('dog-chef', 'repas frais livrés'), ...partenaire('franklin', 'croquettes et pâtées mono-protéine'), ...top('croquettes', 2)]
-  const extra = achat === 'croquettes' ? [...partenaire('franklin', 'croquettes mono-protéine'), ...partenaire('dog-chef', 'repas frais livrés')] : partenaire('franklin', achat === 'patee' ? 'pâtées mono-protéine' : 'friandises')
-  return [...top(NOUN[achat], 3), ...extra]
+  // Dog Chef d'abord quand il répond (client Dog Chef 50 €, Franklin 10 €, propriétaire le 2026-11-07) ; notes inchangées.
+  if (achat === 'croquettes') return [...partenaire('dog-chef', 'croquettes ou repas frais dosés pour ton chien'), ...top('croquettes', 3), ...partenaire('franklin', 'croquettes mono-protéine')]
+  return [...top(NOUN[achat], 3), ...partenaire('franklin', achat === 'patee' ? 'pâtées mono-protéine' : 'friandises')]
 }
 
 /** Questions de Milo sans appel à l'IA : il lui manque le contexte. */
-export function demanderContexte(texte: string): Reponse {
-  return { reponse: texte, questions: true, fixe: true, gravite: 'aucune', depuisLeSite: false, articles: [], produits: [] }
+export function demanderContexte(texte: string, question = ''): Reponse {
+  // Envie d'achat sans profil : Dog Chef (son questionnaire fait le reste) et Franklin à côté des questions.
+  const produits = besoinAchat(question) ? [...partenaire('dog-chef', 'repas frais ou croquettes dosés pour ton chien'), ...partenaire('franklin', 'croquettes mono-protéine')] : []
+  return { reponse: texte, questions: true, fixe: true, gravite: 'aucune', depuisLeSite: false, articles: [], produits }
 }
 
 /** Garde-fou : renvoi vers le vétérinaire, avec les articles du site sur le sujet pour préparer la question. */
@@ -235,7 +241,7 @@ export async function repondre(question: string, historique: Echange[], chiens =
   if (!reponse) throw new Error('réponse vide')
   const gravite: Gravite = brut.gravite === 'urgence' || brut.gravite === 'veterinaire' ? brut.gravite : 'aucune'
   const questions = brut.questions === true
-  return { reponse, questions, fixe: false, gravite, depuisLeSite: !questions && brut.depuisLeSite === true && articles.length > 0, articles: questions ? [] : articles, produits: questions ? [] : produits }
+  return { reponse, questions, fixe: false, gravite, depuisLeSite: !questions && brut.depuisLeSite === true && articles.length > 0, articles: questions ? [] : articles, produits }
 }
 
 /** Conversation gardée 90 jours, sans compte ni adresse : suivi dans le tableau de bord et réglage de Milo. */
