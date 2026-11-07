@@ -348,3 +348,5 @@ Conditions générales d'utilisation (même jour, demande du propriétaire) : pa
 
 ## 2026-11-07 — Plan CRO (accord du propriétaire)
 Chiffres du 2 au 7 novembre : ~1 250 pages vues, 17 clics partenaires, bouton d'en-tête 2 clics pour 881 vues, panneau du guide 3,7 %. Revenus de novembre : 1 client Dog Chef + 1 Franklin = 60 €, soit ~30 € par client. Lancés : encadré de fin des pages d'urgence (fiche frigo du guide + Milo, rien à vendre), bouton d'en-tête « Mon chien » vers /mon-chien (à comparer sur deux semaines), lien « Voir les alternatives » sur tous les avis `avis-*` de marques non partenaires et bloc `<MeilleuresAlternatives>` (mieux notées chez Maxi Zoo) sur l'avis Orlando. À suivre : questions de Milo vers les articles, lettre de la semaine, Search Console dans le tableau de bord.
+
+Valeur d'un client partenaire (propriétaire, 2026-11-07) : Dog Chef 50 €, Franklin 10 €. À rôle égal, Dog Chef passe devant dans les encadrés et les rotations d'offres ; les notes ne changent pas.
