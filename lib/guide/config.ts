@@ -26,6 +26,7 @@ export const GUIDE_PLACES = {
   'fiche-frigo': 'Fiche aliments dangereux',
   popup: 'Panneau du guide',
   'inline-guide': 'Haut d’article',
+  'urgence-fin': 'Fin de page d’urgence',
 } as const
 
 export type GuidePlace = keyof typeof GUIDE_PLACES

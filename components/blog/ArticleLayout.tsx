@@ -20,6 +20,7 @@ import { articleEndCta, getPortionCalc } from '@/lib/article-cro'
 import { VerdictHero } from '@/components/article/VerdictHero'
 import { FoodPortionCalc } from '@/components/article/FoodPortionCalc'
 import { GuideFicheLink } from '@/components/guide/GuideFicheLink'
+import { UrgenceSuite } from '@/components/guide/UrgenceSuite'
 import type { Article } from '@/lib/mdx'
 
 // @cdc 04-pages — gabarit d'article V2 (prototype docs/v2/prototype) : en-tête, puis
@@ -128,7 +129,7 @@ export function ArticleLayout({
             <div className="mdx-content mt-6">{children}</div>
             {/* Aliments et recettes : le guide n'apparaît qu'une fois, en haut de l'article (GuideTop) ;
                 urgences et « danger » : un lien discret seulement (lib/article-cro.ts). */}
-            {endCta === 'fiche-link' ? <GuideFicheLink /> : null}
+            {endCta === 'fiche-link' ? (urgent ? <UrgenceSuite slug={slug} /> : <GuideFicheLink />) : null}
             {/* @cdc audit mobile 2026-11-04 — après l'article : avant, il invitait à quitter la page au moment de lire. */}
             {urgent ? null : <SummarizeWithAI title={frontmatter.title} url={canonicalUrl} domain="toutou-gourmet.com" />}
             {urgent ? (
