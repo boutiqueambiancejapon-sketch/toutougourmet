@@ -28,3 +28,6 @@ assert.equal(sujetSensible('Quelle dose de paracétamol pour mon chien ?'), 'vet
 assert.equal(sujetSensible('Mon chien fait des convulsions'), 'urgence')
 assert.equal(sujetSensible('Combien de croquettes pour un chien de 10 kg ?'), null)
 console.log('sujetSensible : tout passe')
+assert.equal(sujetSensible('Mon chien a mangé du raisin, je fais quoi ?'), 'urgence')
+assert.equal(sujetSensible('Mon chien peut-il manger du raisin ?'), null)
+console.log('raisin : tout passe')
