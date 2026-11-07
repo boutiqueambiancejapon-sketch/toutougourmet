@@ -41,6 +41,7 @@ export function SignUpBenefits() {
 
 /** Titre de la page selon d'où vient le visiteur (?retour=). */
 export function signUpTitle(returnTo: string): string {
+  if (returnTo.startsWith('/assistant')) return 'Crée ton compte pour lire la réponse de Milo'
   if (returnTo.startsWith('/scanner')) return "Crée ton compte pour scanner l'étiquette"
   if (returnTo.startsWith('/croquettes')) return 'Crée ton compte pour garder tes analyses'
   if (returnTo.startsWith('/compte/garde')) return 'Crée ton compte pour partager la fiche de garde'

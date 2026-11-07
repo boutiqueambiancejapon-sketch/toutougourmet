@@ -12,6 +12,7 @@ export const ANALYTICS_EVENTS = [
   'Scan Barcode',
   'Food Saved',
   'Assistant Question',
+  'Assistant Signup Asked',
   'Scan Result',
   'Scan Share',
   'Scan Download',
