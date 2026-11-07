@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { CONFIRMED_DISCOUNTS, partnerSlugFromName, shortDiscount } from '@/data/partner-discounts'
 import { PartnerButton } from '@/components/cro/PartnerButton'
 import { AffiliateNote } from './AffiliateNote'
@@ -66,6 +67,7 @@ export function BrandCTA({
           className="mt-1 inline-flex min-h-12 max-w-full items-center whitespace-nowrap rounded-control bg-amber px-5 py-3 font-bold text-ink no-underline shadow-[4px_4px_0_var(--orange)] transition-transform hover:-translate-y-0.5"
         />
         {hideDisclosure ? null : <AffiliateNote className="text-cream" />}
+        {remise && slug ? <Link href={`/codes-promo/${slug}`} className="text-sm text-cream underline underline-offset-2">{`Code promo ${brandName} : les conditions`}</Link> : null}
       </aside>
     )
   }
@@ -86,7 +88,10 @@ export function BrandCTA({
           className="inline-flex min-h-10 shrink-0 items-center whitespace-nowrap rounded-control bg-ink px-3.5 text-sm font-semibold text-cream no-underline hover:underline"
         />
       </div>
-      {hideDisclosure ? null : <AffiliateNote court />}
+      <div className="flex flex-wrap items-baseline gap-x-3">
+        {hideDisclosure ? null : <AffiliateNote court />}
+        {remise && slug ? <Link href={`/codes-promo/${slug}`} className="text-xs text-ink-2 underline underline-offset-2">{`Code promo ${brandName}`}</Link> : null}
+      </div>
     </div>
   )
 }
