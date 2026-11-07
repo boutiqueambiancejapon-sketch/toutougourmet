@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { brandOfferLabel, type Brand } from '@/data/brands'
+import { BRAND_HUB } from '@/data/brand-hub'
+import { sansDoublons } from '@/lib/faq-doublons'
 import { brandDescriptions, brandFaqs, brandRecipes, brandVerdicts, fullReviews, relatedComparatifs } from '@/data/brand-content'
 import { BreadcrumbNav } from '@/components/ui/BreadcrumbNav'
 import { FaqItem, FaqList } from '@/components/article/Faq'
@@ -20,7 +22,8 @@ import { STOP_BRAND_PAGE } from '@/lib/sticky-cta-config'
 const SITE = 'https://www.toutou-gourmet.com'
 
 export function BrandPage({ brand }: { brand: Brand }) {
-  const faqs = brandFaqs[brand.slug] ?? []
+  // Une question déjà traitée par une section de la page (data/brand-hub.ts) ne revient pas dans la FAQ (2026-11-07).
+  const faqs = sansDoublons(brandFaqs[brand.slug] ?? [], (BRAND_HUB[brand.slug]?.sections ?? []).map((x) => x.h2))
   const verdict = brandVerdicts[brand.slug] ?? brand.tagline
   // Page « code promo » du partenaire, en tête : c'est le lien le plus cherché (« code promo X »).
   const promo = isOfferSlug(brand.slug) && getPromoPage(brand.slug) ? [{ href: promoPath(brand.slug), label: `Code promo ${brand.name} : ${shortDiscount(brand.slug)}, mode d'emploi` }] : []
