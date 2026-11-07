@@ -18,7 +18,7 @@ Tâche quotidienne : réécrire et optimiser 2 articles existants du site Toutou
 1. Lire `CLAUDE.md` et `PROGRESS.md`.
 2. Lire `docs/09-seo-geo-guide.md` EN ENTIER.
 3. Charger le skill `boileau` (`.claude/skills/boileau/SKILL.md`) et appliquer ses règles dès le premier jet.
-4. Ouvrir `docs/seo-rewrite-queue.md` et prendre les 2 premiers articles non cochés (`- [ ]`), de haut en bas.
+4. Ouvrir `docs/seo-rewrite-queue.md` et prendre les 2 premiers articles non cochés (`- [ ]`), de haut en bas. Une entrée de la section « Priorité Search Console » donne les recherches à viser et ses consignes : elles passent avant les règles générales, et `title`, `ogTitle` et `description` de ces articles ne changent pas.
 
 ## Pour chaque article (`content/blog/{slug}.mdx`)
 Suivre §9 du guide :
