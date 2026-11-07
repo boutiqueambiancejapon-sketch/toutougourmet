@@ -51,6 +51,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
       { href: '/a-propos', label: 'À propos' },
       { href: '/contact', label: 'Contact' },
       { href: '/mentions-legales', label: 'Mentions légales' },
+      { href: '/conditions-generales', label: 'Conditions d’utilisation' },
       { href: '/politique-de-confidentialite', label: 'Politique de confidentialité' },
       { href: '/plan-du-site', label: 'Plan du site' },
     ],

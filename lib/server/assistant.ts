@@ -6,6 +6,7 @@ import type { Dog } from '@/db/schema'
 import { chercherArticles, texteBrut, type ArticleIndexe } from '@/lib/assistant/recherche'
 import { getAllArticles } from '@/lib/mdx'
 import { getBrandBySlug } from '@/data/brands'
+import { CGU_VERSION } from '@/data/conditions'
 import { CONFIRMED_DISCOUNTS } from '@/data/partner-discounts'
 import { capByBrand, displayBrand, displayName, fold, segmentBySlug, type SegmentSlug } from '@/lib/scanner/rankings'
 import type { FoodNoun } from '@/lib/scanner/food-noun'
@@ -159,6 +160,20 @@ export function renvoiVeterinaire(question: string, gravite: Exclude<Gravite, 'a
 
 export type Sorte = 'site' | 'ia' | 'contexte' | 'sensible' | 'echec'
 export const sorteDe = (r: Reponse | null): Sorte => (!r ? 'echec' : r.questions ? 'contexte' : r.fixe ? 'sensible' : r.depuisLeSite ? 'site' : 'ia')
+
+/** Conditions générales acceptées pour la version en vigueur ? Avec accepte, l'acceptation est enregistrée. */
+export async function cguOk(userId: string, accepte: boolean): Promise<boolean> {
+  const pool = getPool()
+  if (!pool) return false
+  const { rows } = await pool.query<{ version: string }>('SELECT version FROM analytics.assistant_cgu WHERE user_id = $1', [userId])
+  if (rows[0]?.version === CGU_VERSION) return true
+  if (!accepte) return false
+  await pool.query(
+    'INSERT INTO analytics.assistant_cgu (user_id, version) VALUES ($1, $2) ON CONFLICT (user_id) DO UPDATE SET version = EXCLUDED.version, accepted_at = now()',
+    [userId, CGU_VERSION],
+  )
+  return true
+}
 
 /** Compte une question du jour pour ce compte. Faux : limite atteinte. */
 export async function compterQuestion(userId: string): Promise<boolean> {
