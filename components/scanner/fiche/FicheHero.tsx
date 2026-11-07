@@ -5,6 +5,7 @@ import { titleTypo } from '@/lib/title-typo'
 import { ProductPhoto } from '../ProductPhoto'
 import { BAND_CLASSES } from '../ScoreBadge'
 import { KindTag } from '../treat/KindTag'
+import { FavoriButton } from './FavoriButton'
 import { FIABILITE_LABEL } from './FicheFiabilite'
 
 // @cdc scanner — haut de fiche : photo, note en anneau, verdict en un mot et bouton d'achat, visibles sans défiler.
@@ -35,6 +36,7 @@ function NoteAnneau({ score }: { score: number | null }) {
 }
 
 interface FicheHeroProps {
+  slug: string
   h1: string
   image: string | null
   details: ScoreResult
@@ -43,7 +45,7 @@ interface FicheHeroProps {
   children?: ReactNode
 }
 
-export function FicheHero({ h1, image, details, categorie, buy, children }: FicheHeroProps) {
+export function FicheHero({ slug, h1, image, details, categorie, buy, children }: FicheHeroProps) {
   const { score } = details
   const fiabilite = details.bareme?.simple ? undefined : details.bareme?.fiabilite
   return (
@@ -65,6 +67,7 @@ export function FicheHero({ h1, image, details, categorie, buy, children }: Fich
             {`Voir chez ${buy.store}`}
           </a>
         ) : null}
+        <FavoriButton slug={slug} />
         {children}
       </div>
     </header>

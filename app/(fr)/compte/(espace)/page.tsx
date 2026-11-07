@@ -16,6 +16,7 @@ import { getSessionUser } from '@/lib/server/auth'
 import { latestWeights, listDogs } from '@/lib/server/dogs'
 import { getFoodLinks } from '@/lib/server/food-suggest'
 import { getMembership, premiumMissing } from '@/lib/server/membership'
+import { listFavoris } from '@/lib/server/favoris'
 import { listUserScans, usedThisMonth } from '@/lib/server/scanner'
 import { monthlyScanLimit } from '@/lib/scanner/config'
 
@@ -28,12 +29,13 @@ export default async function AccountHomePage({ searchParams }: { searchParams: 
     // Lien de confirmation périmé : Better Auth renvoie ici avec ?error=…
     redirect(params.error ? `/compte/connexion?error=${encodeURIComponent(String(params.error).toUpperCase())}` : '/compte/connexion')
   }
-  const [dogs, membership, missing, used, scans] = await Promise.all([
+  const [dogs, membership, missing, used, scans, favoris] = await Promise.all([
     listDogs(user.id),
     getMembership(user.id),
     premiumMissing(user.id),
     usedThisMonth(user.id),
     listUserScans(user.id, 3),
+    listFavoris(user.id, 10),
   ])
   const premium = membership?.plan === 'premium'
   const [latest, foodLinks] = await Promise.all([latestWeights(dogs.map((d) => d.id)), getFoodLinks(dogs.map((d) => d.foodSlug))])
@@ -70,6 +72,13 @@ export default async function AccountHomePage({ searchParams }: { searchParams: 
             <AddDogCard first={dogs.length === 0} />
           </li>
         </ul>
+      </Panel>
+      <Panel id="mes-aliments" title="Mes aliments">
+        {favoris.length > 0 ? (
+          <ScanRows scans={favoris.map((f) => ({ ...f, at: null }))} />
+        ) : (
+          <p className="m-0 text-base leading-relaxed text-ink-2">Garde ici les croquettes, pâtées et friandises de ton chien : touche « Ajouter à mes aliments » sur une fiche ou après un scan.</p>
+        )}
       </Panel>
       <Panel
         id="derniers-scans"

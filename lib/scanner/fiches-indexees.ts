@@ -24,7 +24,7 @@ export function nomRecette(brand: string | null, product: string | null): string
   if (!brand || !product) return null
   // Mots de catalogue sans intérêt dans un titre : « nourriture humide pour chien adulte », tirets, virgules.
   const nom = displayName(recipeName(product))
-    .replace(/\b(nourriture|alimentation) humide( pour)? chiens?( adultes?)?\b,?|\bhumides? chien\b,?|\bpâtée pour chiens?\b|\bpour chiens? adultes?\b/gi, ' ')
+    .replace(/\b(nourriture|alimentation) humide( pour)? chiens?( adultes?)?\b,?|\bhumides? chien( adultes?)?\b,?|\bpâtée pour chiens?\b|\bpour chiens? adultes?\b/gi, ' ')
     .replace(/\s+[–-]\s+/g, ' ')
     .replace(/\s*,\s*/g, ' ')
     .replace(/\s{2,}/g, ' ')

@@ -6,7 +6,8 @@ import type { Kpi } from './dashboard-queries'
 // @cdc tableau de bord — section « Inscriptions » (CRO compte) : comptes créés sur la période
 // et parcours par emplacement, de l'invitation vue jusqu'à l'e-mail confirmé. Vues et clics
 // viennent du navigateur (/api/e), créations et confirmations du serveur (lib/server/signup-source).
-// Une confirmation est comptée le jour où elle arrive, pas le jour de l'inscription.
+// Une confirmation est comptée le jour où elle arrive, pas le jour de l'inscription. Chien ajouté et retour
+// un autre jour : mêmes emplacements (signup_sources garde l'emplacement de chaque compte).
 
 export interface SignupFunnelRow {
   place: string
@@ -14,6 +15,8 @@ export interface SignupFunnelRow {
   clicks: number
   created: number
   verified: number
+  dogs: number
+  returns: number
 }
 
 export interface SignupsData {
@@ -23,7 +26,7 @@ export interface SignupsData {
 
 export const EMPTY_SIGNUPS: SignupsData = { total: { current: 0, previous: 0 }, byPlace: [] }
 
-const NAMES = ['Account Invite View', 'Account Invite Click', 'Account Created', 'Account Verified']
+const NAMES = ['Account Invite View', 'Account Invite Click', 'Account Created', 'Account Verified', 'Dog Added', 'Account Return']
 
 export async function getSignups(pool: Pool, period: Period): Promise<SignupsData> {
   const [total, byPlace] = await Promise.all([
@@ -38,7 +41,9 @@ export async function getSignups(pool: Pool, period: Period): Promise<SignupsDat
               count(*) FILTER (WHERE name = 'Account Invite View')::int AS views,
               count(*) FILTER (WHERE name = 'Account Invite Click')::int AS clicks,
               count(*) FILTER (WHERE name = 'Account Created')::int AS created,
-              count(*) FILTER (WHERE name = 'Account Verified')::int AS verified
+              count(*) FILTER (WHERE name = 'Account Verified')::int AS verified,
+              count(*) FILTER (WHERE name = 'Dog Added')::int AS dogs,
+              count(*) FILTER (WHERE name = 'Account Return')::int AS returns
        FROM analytics.events
        WHERE name = ANY($2) AND ts >= now() - $1::interval
        GROUP BY 1 ORDER BY created DESC, clicks DESC, views DESC, 1`,

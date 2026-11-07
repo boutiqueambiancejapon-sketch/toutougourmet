@@ -22,6 +22,8 @@ function Funnel({ row }: { row: SignupFunnelRow }) {
     [row.clicks, row.clicks > 1 ? 'clics' : 'clic'],
     [row.created, row.created > 1 ? 'inscrits' : 'inscrit'],
     [row.verified, row.verified > 1 ? 'confirmés' : 'confirmé'],
+    [row.dogs, row.dogs > 1 ? 'avec un chien' : 'avec un chien'],
+    [row.returns, row.returns > 1 ? 'retours' : 'retour'],
   ] as const
   return (
     <p className="m-0 mt-1 text-xs text-ink-2">

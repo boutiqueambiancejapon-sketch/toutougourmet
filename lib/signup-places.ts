@@ -11,6 +11,7 @@ export const SIGNUP_PLACES = {
   'tool-age': 'Après l’âge',
   'tool-scanner': 'Scanner',
   'fiche-chien': 'Fiche : vérifier pour mon chien',
+  'fiche-favori': 'Fiche : enregistrer cet aliment',
   'fiche-garde': 'Fiche de garde',
   'article-poids': 'Fin d’article (poids)',
   'article-croquettes': 'Fin d’article (croquettes)',

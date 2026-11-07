@@ -57,9 +57,46 @@ export async function recordVerified(userId: string, request: Request | undefine
   const pool = getPool()
   if (!pool) return
   try {
-    const res = await pool.query<{ place: string }>('DELETE FROM analytics.signup_sources WHERE user_id = $1 RETURNING place', [userId])
+    const res = await pool.query<{ place: string }>('SELECT place FROM analytics.signup_sources WHERE user_id = $1 ', [userId])
     await insertEvent('Account Verified', res.rows[0]?.place ?? OTHER_PLACE, request?.headers.get('user-agent') ?? null)
   } catch (err) {
     console.error('[signup-source] confirmation', err instanceof Error ? err.message : err)
+  }
+}
+
+async function placeOf(userId: string): Promise<string> {
+  const pool = getPool()
+  if (!pool) return OTHER_PLACE
+  const res = await pool.query<{ place: string }>('SELECT place FROM analytics.signup_sources WHERE user_id = $1', [userId])
+  return res.rows[0]?.place ?? OTHER_PLACE
+}
+
+/** Premier chien ajouté : l'étape qui rend le compte utile. Jamais bloquant. */
+export async function recordDogAdded(userId: string): Promise<void> {
+  const pool = getPool()
+  if (!pool) return
+  try {
+    const n = await pool.query<{ n: number }>('SELECT count(*)::int AS n FROM app.dog WHERE user_id = $1', [userId])
+    if (n.rows[0]?.n === 1) await insertEvent('Dog Added', await placeOf(userId), null)
+  } catch (err) {
+    console.error('[signup-source] chien', err instanceof Error ? err.message : err)
+  }
+}
+
+/** Retour d'un compte un autre jour que celui de sa création, compté une fois par jour. */
+export async function recordReturn(userId: string, ua: string | null): Promise<void> {
+  const pool = getPool()
+  if (!pool) return
+  try {
+    const res = await pool.query(
+      `UPDATE analytics.signup_sources SET last_return = (now() AT TIME ZONE 'Europe/Paris')::date
+        WHERE user_id = $1 AND (created_at AT TIME ZONE 'Europe/Paris')::date < (now() AT TIME ZONE 'Europe/Paris')::date
+          AND last_return IS DISTINCT FROM (now() AT TIME ZONE 'Europe/Paris')::date
+        RETURNING place`,
+      [userId],
+    )
+    if (res.rows[0]) await insertEvent('Account Return', (res.rows[0] as { place: string }).place, ua)
+  } catch (err) {
+    console.error('[signup-source] retour', err instanceof Error ? err.message : err)
   }
 }

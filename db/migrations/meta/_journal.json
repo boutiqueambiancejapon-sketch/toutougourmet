@@ -113,6 +113,13 @@
       "when": 1793954650225,
       "tag": "0015_fiche_index",
       "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1794047062420,
+      "tag": "0016_food_favorite",
+      "breakpoints": true
     }
   ]
 }

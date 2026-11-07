@@ -4,6 +4,7 @@ import { isAPIError } from 'better-auth/api'
 import { cookies, headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 import { SESSION_HINT_COOKIE } from '@/lib/account-hint'
+import { recordDogAdded } from '@/lib/server/signup-source'
 import { deleteAttemptsExceeded } from '@/lib/server/account-data'
 import { getAuth, getSessionUser } from '@/lib/server/auth'
 import { parseDogForm, parseWeightForm, todayIso, type FieldErrors } from '@/lib/server/dog-form'
@@ -37,6 +38,7 @@ export async function createDogAction(_prev: FormState, form: FormData): Promise
   const parsed = parseDogForm(form)
   if (!parsed.ok) return { errors: parsed.errors }
   const id = await createDog(user.id, await withVerifiedFood(parsed.data), todayIso())
+  await recordDogAdded(user.id)
   redirect(`/compte/chien/${id}`)
 }
 

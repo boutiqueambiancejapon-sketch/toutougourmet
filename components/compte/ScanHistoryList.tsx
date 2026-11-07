@@ -13,7 +13,7 @@ export const LOW_SCORE = 55
 
 const dateFr = (d: Date) => d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' })
 
-export function ScanRows({ scans }: { scans: ScanSummary[] }) {
+export function ScanRows({ scans }: { scans: (Omit<ScanSummary, 'at'> & { at: Date | null })[] }) {
   const alt = betterKibbleOffer()
   const hasLow = scans.some((s) => s.score !== null && s.score < LOW_SCORE)
   return (
@@ -25,7 +25,7 @@ export function ScanRows({ scans }: { scans: ScanSummary[] }) {
               <ScoreBadge score={s.score} />
               <span className="flex min-w-0 grow flex-col">
                 <span className="truncate font-semibold group-hover:underline">{[s.brand, s.product].filter(Boolean).join(' · ') || 'Produit sans nom lisible'}</span>
-                <span className="text-sm text-ink-2">{dateFr(s.at)}</span>
+                {s.at ? <span className="text-sm text-ink-2">{dateFr(s.at)}</span> : null}
               </span>
               <IconChevron className="size-4 text-ink-2" />
             </Link>

@@ -5,6 +5,7 @@ import { getBreedBySlug } from '@/data/breeds'
 import { ageGroupOf, ageInMonths } from '@/lib/dog-profile'
 import { getSessionUser } from '@/lib/server/auth'
 import { listDogs } from '@/lib/server/dogs'
+import { recordReturn } from '@/lib/server/signup-source'
 
 // @cdc premium — profil du premier chien du compte, pour pré-remplir les outils (ration, poids,
 // âge, budget) et le calculateur des articles « peut-il manger ». `allergies` : prénom et allergies
@@ -18,7 +19,7 @@ const headers = { 'Cache-Control': 'private, no-store' }
 export async function GET(): Promise<NextResponse> {
   const user = await getSessionUser()
   if (!user) return NextResponse.json({ dog: null } satisfies AccountProfile, { status: 401, headers })
-  const dogs = await listDogs(user.id)
+  const [dogs] = await Promise.all([listDogs(user.id), recordReturn(user.id, null)])
   const [first] = dogs
   if (!first) return NextResponse.json({ dog: null } satisfies AccountProfile, { headers })
   const allergies = dogs.filter((d) => d.allergies.length > 0).map((d) => ({ name: d.name, allergies: d.allergies }))

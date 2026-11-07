@@ -66,7 +66,7 @@ export async function FicheView({ row, indexee, path }: { row: FoodAnalysis; ind
       <FicheJsonLd row={row} name={indexee?.nom ?? name} url={`${SITE}${path}`} indexee={Boolean(indexee)} />
       <div className="flex flex-col gap-4">
         <BreadcrumbNav items={crumbs} />
-        <FicheHero h1={h1} image={row.imageUrl} details={a.details} categorie={CATEGORY_PHRASE[noun]} buy={buy}>
+        <FicheHero slug={row.slug} h1={h1} image={row.imageUrl} details={a.details} categorie={CATEGORY_PHRASE[noun]} buy={buy}>
           <details className="group text-sm text-ink-2">
             <summary className="flex min-h-11 cursor-pointer list-none items-center font-semibold text-ink underline underline-offset-2">D&apos;où viennent ces données&nbsp;?</summary>
             <div className="flex flex-col gap-2 pb-1">
