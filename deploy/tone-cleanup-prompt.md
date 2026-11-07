@@ -25,7 +25,7 @@ Pour chaque article, relis tout le texte, y compris le paragraphe qui suit le TL
 
 ## Pour chaque article (nettoyage du ton, pas de réécriture SEO)
 - Tirets cadratins ≤ 2 (zéro dans title, H2, puces, FAQ). Zéro emoji. Retirer `emoji=`/`icon=`, les `<StatRow>` faits d'emojis ou de notes x/5 sans méthode, le `<Verdict>` final s'il répète l'article.
-- Phrases-chutes et formules creuses supprimées ; tics boileau corrigés ; H2 en questions naturelles (sauf recettes) ; tutoiement ; title ≤ 60 caractères sans tiret cadratin ; description entre 110 et 155.
+- Phrases-chutes et formules creuses supprimées ; tics boileau corrigés ; H2 en questions naturelles (sauf recettes) ; tutoiement. **Titres (décision du propriétaire, 2026-11-07) : ne jamais modifier `title`, `ogTitle` ni `description` d'un article existant. Seule exception : un champ vide, à remplir.**
 - NE PAS toucher : slug, `categorySlug`, `category`, `date`, `verdict`, doses, chiffres sourcés, études, numéros, structure des composants. Aucun chiffre changé sans source vérifiée. Une dose de complément qui paraît élevée : la signaler dans le compte rendu, ne pas l'inventer.
 - `updatedAt` = date du jour.
 
