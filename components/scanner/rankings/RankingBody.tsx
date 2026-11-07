@@ -9,6 +9,14 @@ import { RankRow } from './RankRow'
 // @cdc cluster scanner — le classement lui-même, identique sur une page /meilleures-… et en tête d'article
 // (demande du propriétaire du 2026-11-05) : réponse, boutons des autres classements, liste, appel au scanner.
 
+const TYPES = new Set(['tous', 'patees', 'friandises'])
+
+/** Friandises et pâtées : les filtres chiot, senior, taille… ne visent que les croquettes, on ne montre que les types. */
+function navSegments(segment: RankSegment): { s: RankSegment; label: string }[] {
+  if (segment.slug !== 'patees' && segment.slug !== 'friandises') return SEGMENTS.map((s) => ({ s, label: s.label }))
+  return SEGMENTS.filter((s) => TYPES.has(s.slug)).map((s) => ({ s, label: s.slug === 'tous' ? 'Croquettes' : s.label }))
+}
+
 export const shownRecipes = (list: RankedRecipe[], count: number) => capByBrand(list, 3).slice(0, count)
 
 export function RankingBody({ segment, list, count, note }: { segment: RankSegment; list: RankedRecipe[]; count: number; note?: string }) {
@@ -18,10 +26,10 @@ export function RankingBody({ segment, list, count, note }: { segment: RankSegme
       <RankingLead segment={segment} list={list} />
       <nav aria-label="Autres classements" className="-mx-4 overflow-x-auto px-4 md:mx-0 md:px-0">
         <ul className="m-0 flex list-none gap-1.5 p-0 text-sm">
-          {SEGMENTS.map((s) => (
+          {navSegments(segment).map(({ s, label }) => (
             <li key={s.slug} className="shrink-0">
               <Link href={s.path} aria-current={s.slug === segment.slug ? 'page' : undefined} className="inline-flex min-h-11 items-center whitespace-nowrap rounded-pill border border-line bg-paper px-3 font-semibold text-ink no-underline aria-[current=page]:bg-ink aria-[current=page]:text-cream">
-                {s.label}
+                {label}
               </Link>
             </li>
           ))}
