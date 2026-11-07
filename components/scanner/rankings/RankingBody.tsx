@@ -11,10 +11,12 @@ import { RankRow } from './RankRow'
 
 const TYPES = new Set(['tous', 'patees', 'friandises'])
 
-/** Friandises et pâtées : les filtres chiot, senior, taille… ne visent que les croquettes, on ne montre que les types. */
+/** Croquettes : leurs filtres puis les types. Pâtées : les types. Friandises : les types puis leurs sous-classements. */
 function navSegments(segment: RankSegment): { s: RankSegment; label: string }[] {
-  if (segment.slug !== 'patees' && segment.slug !== 'friandises') return SEGMENTS.map((s) => ({ s, label: s.label }))
-  return SEGMENTS.filter((s) => TYPES.has(s.slug)).map((s) => ({ s, label: s.slug === 'tous' ? 'Croquettes' : s.label }))
+  const types = SEGMENTS.filter((s) => TYPES.has(s.slug)).map((s) => ({ s, label: s.slug === 'tous' ? 'Croquettes' : s.label }))
+  if (segment.slug.startsWith('friandises')) return [...types, ...SEGMENTS.filter((s) => s.slug.startsWith('friandises-')).map((s) => ({ s, label: s.label }))]
+  if (segment.slug === 'patees') return types
+  return SEGMENTS.filter((s) => !s.slug.startsWith('friandises-')).map((s) => ({ s, label: s.label }))
 }
 
 export const shownRecipes = (list: RankedRecipe[], count: number) => capByBrand(list, 3).slice(0, count)
