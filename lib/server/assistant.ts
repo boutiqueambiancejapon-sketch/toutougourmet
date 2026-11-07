@@ -62,7 +62,7 @@ Avant de répondre, vérifie que tu as le contexte utile : race ou poids du chie
 Quand tu réponds : la réponse tient dans la première phrase, puis deux à cinq phrases utiles. Pas de jargon, pas de nom d'organisme, pas de titre ni de puce.
 Si des extraits d'articles du site répondent à la question, appuie-toi d'abord sur eux sans les contredire, mets depuisLeSite à vrai et donne dans sources leurs adresses. Sinon, réponds avec tes connaissances et mets depuisLeSite à faux.
 gravite : « aucune » en temps normal ; « veterinaire » quand il faut l'avis de son vétérinaire dans les jours qui viennent ; « urgence » seulement si le chien est en danger maintenant (toxique avalé en quantité dangereuse pour son poids, détresse, convulsions, ventre gonflé, sang). En cas d'urgence, dis d'appeler tout de suite son vétérinaire ou un centre antipoison, sans détour. Ne dramatise pas un cas bénin.
-Tu n'es pas vétérinaire : aucun diagnostic, aucune dose de médicament ou de complément. Ne cite jamais une note, une composition ou un prix absent des données fournies.\nConseil d'achat ou envie de changer d'aliment : propose toujours des produits de la liste « Produits partenaires » quand elle est fournie, même si tu poses aussi une question. Une ration maison ou un repas frais pour un chien en bonne santé : présente Dog Chef (repas frais dosés selon le profil du chien, sans calcul à faire) avant de parler du vétérinaire, réservé à un chien malade. Recommande seulement des produits de cette liste, sans citer d'autre marque ni d'autre boutique où acheter ; les liens s'affichent sous ta réponse, ne les écris pas. Les notes viennent de l'étiquette ; Dog Chef et Franklin n'ont pas de note, ne les présente pas comme mieux notés. Cite deux ou trois produits de la liste par leur nom. Ne nomme aucun produit ni aucune marque hors de cette liste, même si tu en connais un meilleur. Sans cette liste, ne recommande aucune marque ni boutique.
+Tu n'es pas vétérinaire : aucun diagnostic, aucune dose de médicament ou de complément. Ne cite jamais une note, une composition ou un prix absent des données fournies.\nConseil d'achat ou envie de changer d'aliment : propose toujours des produits de la liste « Produits partenaires » quand elle est fournie, même si tu poses aussi une question. Une ration maison ou un repas frais pour un chien en bonne santé : présente Dog Chef (repas frais dosés selon le profil du chien, sans calcul à faire) avant de parler du vétérinaire, réservé à un chien malade. Recommande seulement des produits de cette liste, sans citer d'autre marque ni d'autre boutique où acheter ; les liens s'affichent sous ta réponse, ne les écris pas. Les notes viennent de l'étiquette ; Dog Chef et Franklin n'ont pas de note, ne les présente pas comme mieux notés. Cite deux ou trois produits de la liste par leur nom. offre : hors urgence et hors maladie, le type de produit qui aiderait vraiment la personne d'après tout le contexte (ration, poids, appétit, chien difficile, éducation, changement d'aliment, chiot qui grandit…) : « repas » pour des repas frais dosés, « croquettes », « patee », « friandises » (éducation, récompense, mastication), sinon « aucune ». Sous ta réponse, nos cartes produits s'afficheront : tu peux finir par une phrase courte qui y renvoie, sans nommer de produit absent de la liste. Ne nomme aucun produit ni aucune marque hors de cette liste, même si tu en connais un meilleur. Sans cette liste, ne recommande aucune marque ni boutique.
 Si la question ne porte pas sur un chien, réponds en une phrase que tu ne parles que de chiens et de gamelle.`
 
 const SCHEMA: JsonSchema = {
@@ -71,10 +71,11 @@ const SCHEMA: JsonSchema = {
     reponse: { type: 'string' },
     questions: { type: 'boolean' },
     gravite: { type: 'string', enum: ['aucune', 'veterinaire', 'urgence'] },
+    offre: { type: 'string', enum: ['aucune', 'croquettes', 'patee', 'friandises', 'repas'] },
     depuisLeSite: { type: 'boolean' },
     sources: { type: 'array', items: { type: 'string' } },
   },
-  required: ['reponse', 'questions', 'gravite', 'depuisLeSite', 'sources'],
+  required: ['reponse', 'questions', 'gravite', 'offre', 'depuisLeSite', 'sources'],
 }
 
 type Achat = 'croquettes' | 'patee' | 'friandises' | 'repas'
@@ -90,6 +91,17 @@ export function besoinAchat(question: string): Achat | null {
   if (/patee|humide|boite/.test(q)) return 'patee'
   if (maison || /repas|frais|menager|barf|cuisin|recette/.test(q)) return 'repas'
   return 'croquettes'
+}
+
+const OFFRES: readonly Achat[] = ['croquettes', 'patee', 'friandises', 'repas']
+const TRANSITION = 'transition-alimentaire-chien'
+
+/** Guides joints à un conseil d'achat : le guide de transition quand on change d'aliment, puis le plus proche. */
+function guidesAchat(index: ArticleIndexe[], question: string): { url: string; titre: string }[] {
+  const q = fold(question)
+  const liste = /chang|remplac|passer a|essayer|tester|nouvelle|autre|transition/.test(q) ? index.filter((a) => a.slug === TRANSITION) : []
+  for (const t of chercherArticles(index, question, 2)) if (!liste.some((a) => a.slug === t.article.slug)) liste.push(t.article)
+  return liste.slice(0, 2).map((a) => ({ url: a.url, titre: a.titre }))
 }
 
 const NOUN: Record<Exclude<Achat, 'repas'>, FoodNoun> = { croquettes: 'croquettes', patee: 'patee', friandises: 'friandise' }
@@ -130,12 +142,12 @@ function segmentsDuChien(texte: string): SegmentSlug[] {
 }
 
 /** Produits proposés : marques citées dans la question, sinon les mieux notés du type demandé, plus les partenaires. */
-async function produitsProposes(question: string, contexte: string): Promise<Produit[]> {
+async function produitsProposes(question: string, contexte: string, impose: Achat | null = null): Promise<Produit[]> {
   const recettes = await rankedRecipes().catch(() => [])
   const q = ` ${fold(question)} `
   const marques = [...new Set(recettes.map((r) => r.brand))].filter((b) => b.length >= 4 && q.includes(` ${fold(b)}`))
-  if (marques.length) return marques.flatMap((m) => recettes.filter((r) => r.brand === m).sort((a, b) => b.score - a.score).flatMap(chezMaxiZoo).slice(0, 3)).slice(0, 6)
-  const achat = besoinAchat(question)
+  if (marques.length && !impose) return marques.flatMap((m) => recettes.filter((r) => r.brand === m).sort((a, b) => b.score - a.score).flatMap(chezMaxiZoo).slice(0, 3)).slice(0, 6)
+  const achat = impose ?? besoinAchat(question)
   if (!achat) return []
   const filtres = segmentsDuChien(`${question} ${contexte}`).map((s) => segmentBySlug(s)?.match).filter((m): m is NonNullable<typeof m> => Boolean(m))
   const top = (noun: FoodNoun, n: number) => {
@@ -221,8 +233,11 @@ export function profilChiens(chiens: Dog[]): string {
 
 export async function repondre(question: string, historique: Echange[], chiens = ''): Promise<Reponse> {
   const achat = besoinAchat(question) !== null
-  // Conseil d'achat : sans extraits d'articles, qui citent d'autres marques que les partenaires.
-  const trouves = achat ? [] : chercherArticles(indexArticles(), question)
+  // Conseil d'achat : Milo ne lit pas les extraits (ils citent d'autres marques que les partenaires), mais les guides
+  // utiles sont joints en lien, et le guide de transition dès qu'on parle de changer d'aliment (2026-11-07).
+  const index = indexArticles()
+  const trouves = achat ? [] : chercherArticles(index, question)
+  const guides = achat ? guidesAchat(index, question) : []
   const produits = await produitsProposes(question, `${historique.map((h) => h.q).join(' ')} ${chiens}`)
   const extraits = trouves.map((t) => `ARTICLE ${t.article.url}\nTitre : ${t.article.titre}\n${texteBrut(t.article.texte)}`).join('\n\n')
   const donnees = produits.map((p) => `- ${p.nom}, chez ${p.chez}${p.score === null ? '' : ` : ${p.score}/100`}${p.remise ? ` (${p.remise})` : ''}`).join('\n')
@@ -234,14 +249,17 @@ export async function repondre(question: string, historique: Echange[], chiens =
     `Question : ${question}`,
   ].filter(Boolean).join('\n\n')
   const { text } = await geminiJson({ system: SYSTEME, message, schema: SCHEMA, maxOutputTokens: 900, signal: AbortSignal.timeout(30_000) })
-  const brut = JSON.parse(text) as { reponse?: unknown; questions?: unknown; gravite?: unknown; depuisLeSite?: unknown; sources?: unknown }
+  const brut = JSON.parse(text) as { reponse?: unknown; questions?: unknown; gravite?: unknown; offre?: unknown; depuisLeSite?: unknown; sources?: unknown }
   const sources = Array.isArray(brut.sources) ? brut.sources.filter((s): s is string => typeof s === 'string') : []
   const articles = trouves.filter((t) => sources.includes(t.article.url)).map((t) => ({ url: t.article.url, titre: t.article.titre }))
   const reponse = typeof brut.reponse === 'string' ? brut.reponse.trim() : ''
   if (!reponse) throw new Error('réponse vide')
   const gravite: Gravite = brut.gravite === 'urgence' || brut.gravite === 'veterinaire' ? brut.gravite : 'aucune'
   const questions = brut.questions === true
-  return { reponse, questions, fixe: false, gravite, depuisLeSite: !questions && brut.depuisLeSite === true && articles.length > 0, articles: questions ? [] : articles, produits }
+  // Hors urgence et hors avis vétérinaire, Milo propose les produits du type qu'il juge utile (propriétaire, 2026-11-07).
+  const offre = OFFRES.find((o) => o === brut.offre) ?? null
+  const proposes = produits.length || gravite !== 'aucune' || !offre ? produits : await produitsProposes(question, `${historique.map((h) => h.q).join(' ')} ${chiens}`, offre)
+  return { reponse, questions, fixe: false, gravite, depuisLeSite: !questions && brut.depuisLeSite === true && articles.length > 0, articles: achat ? guides : questions ? [] : articles, produits: gravite === 'aucune' ? proposes : [] }
 }
 
 /** Conversation gardée 90 jours, sans compte ni adresse : suivi dans le tableau de bord et réglage de Milo. */
