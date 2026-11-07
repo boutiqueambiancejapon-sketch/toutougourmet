@@ -133,6 +133,26 @@ export const foodFavorite = app.table(
   (t) => [primaryKey({ columns: [t.userId, t.foodAnalysisId] })],
 )
 
+/**
+ * Versions passées d'une fiche, écrites par le déclencheur food_analysis_history (migration 0017) dès que sa
+ * composition change, quelle que soit la source. Sert aux futures alertes « la recette a changé ».
+ */
+export const foodAnalysisHistory = app.table(
+  'food_analysis_history',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    foodAnalysisId: uuid('food_analysis_id')
+      .notNull()
+      .references(() => foodAnalysis.id, { onDelete: 'cascade' }),
+    extracted: jsonb('extracted').notNull(),
+    score: smallint('score'),
+    source: text('source').notNull(),
+    validFrom: ts('valid_from').notNull(),
+    recordedAt: ts('recorded_at').notNull().defaultNow(),
+  },
+  (t) => [index('food_analysis_history_fiche_idx').on(t.foodAnalysisId, t.recordedAt)],
+)
+
 export const scanUsage = app.table(
   'scan_usage',
   {

@@ -9,6 +9,7 @@ export function ScanAccountInvite({ retour }: { retour?: string }) {
       title="Garde tes analyses dans ton compte"
       text="Chaque sac scanné reste dans ton historique, à côté du profil et de la courbe de poids de ton chien."
       retour={retour}
+      cta="Garder mes analyses"
     />
   )
 }

@@ -15,6 +15,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
       { href: '/chien/sante', label: 'Santé et alimentation' },
       { href: '/chien/race', label: 'Alimentation par race' },
       { href: '/guide-alimentation', label: 'Le guide gratuit (PDF)' },
+      { href: '/mon-chien', label: 'Mon chien : ton espace gratuit' },
     ],
   },
   {
