@@ -36,7 +36,7 @@ Pages mères déjà en ligne, à doter de la section des modèles au premier mod
 - [x] Edgard & Cooper : avis sur les croquettes et la composition (edgard cooper avis, avis vétérinaire) → avis-edgard-cooper
 - [x] Premiere : avis sur les croquettes et les pâtées Meati (premiere croquette chien avis) → avis-premiere
 - [x] Real Nature : avis sur la marque, les croquettes et la pâtée (real nature avis, real nature wilderness avis) → avis-real-nature
-- [ ] Select Gold : avis sur les croquettes de Maxi Zoo (select gold avis, avis vétérinaire)
+- [x] Select Gold : avis sur les croquettes de Maxi Zoo (select gold avis, avis vétérinaire) → avis-select-gold
 - [ ] Atavik : avis sur la marque (atavik avis)
 - [ ] MultiFit : avis sur les croquettes et les pâtées (multifit avis)
 - [ ] Eukanuba : avis sur les croquettes (eukanuba avis, avis vétérinaire)
@@ -331,7 +331,7 @@ Validé par le propriétaire (2026-11-04), d'après l'export Search Console. Ces
 
 Validé par le propriétaire (2026-11-07) : un client Dog Chef rapporte 50 €, Franklin 10 €. Sujets où un repas frais livré répond vraiment à la question. Vérifier la requête (WebSearch) et le doublon (`ls content/blog`, `grep -ril`) : `repas-frais-vs-croquettes-chien`, `ration-menagere-chien-guide-recettes`, `transition-alimentaire-chien`, `alimentation-barf-chien-guide-complet` et les duels `dog-chef-vs-*` existent déjà. Encadré `BrandCTA` Dog Chef là où il répond, Franklin en solution croquettes ; pas de note inventée pour Dog Chef, absent du scanner.
 
-- [ ] Elmut ou Dog Chef : lequel choisir ? (`quiz`) · « elmut ou dog chef » 141 affichages par mois, position 8,6 sur `/comparateur` ; slug `elmut-vs-dog-chef`, catégorie avis-marques, comparaison factuelle (prix par gabarit tirés de `data/brand-content.ts`, recettes, livraison, engagement), un `BrandCTA` par marque, Dog Chef en encadré principal
+- [~] Elmut ou Dog Chef : lequel choisir ? (`quiz`) → déjà couvert par le duel /chien/marque/elmut-vs-dog-chef (content/comparatifs), à renforcer plutôt que doubler ; · « elmut ou dog chef » 141 affichages par mois, position 8,6 sur `/comparateur` ; slug `elmut-vs-dog-chef`, catégorie avis-marques, comparaison factuelle (prix par gabarit tirés de `data/brand-content.ts`, recettes, livraison, engagement), un `BrandCTA` par marque, Dog Chef en encadré principal
 - [ ] Combien coûte un repas frais pour chien par mois ? (`budget`)
 - [ ] Repas frais pour chiot : à partir de quel âge et combien ?
 - [ ] Repas frais pour chien âgé : est-ce mieux que les croquettes ?

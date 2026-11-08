@@ -160,6 +160,7 @@ const BREED_SLOT_BY_SLUG: Record<string, string> = {
 const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-peut-manger-choucroute': 'art-chien-peut-manger-choucroute',
   'avis-real-nature': 'art-avis-real-nature',
+  'avis-select-gold': 'art-avis-select-gold',
   'avis-premiere': 'art-avis-premiere',
   'avis-edgard-cooper': 'art-avis-edgard-cooper',
   'chien-peut-manger-paprika': 'art-chien-peut-manger-paprika',
