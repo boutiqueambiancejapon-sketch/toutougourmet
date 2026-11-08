@@ -7,8 +7,8 @@
 
 Pages que Google montre juste après la première page (28 jours au 5 novembre). Elles passent avant tout le reste de la file. Viser les recherches indiquées : le premier paragraphe répond à la première, un H2 reprend chacune. Ne pas toucher à `title`, `ogTitle` ni `description` : les titres sont revus à part avec le propriétaire.
 
-- [ ] `chien-mange-pistaches` · « pistache chien » (530 affichages, position 8,7, 0 clic), « pistache pour les chiens », « pistache chien toxique » · le lecteur cherche si son chien peut en manger, pas seulement l'urgence : réponse « peut-il manger » en tête, conduite à tenir ensuite
-- [ ] `chataignes-marrons-inde-chien-difference-danger` · « châtaigne cuite pour chien » (217, pos 7,4, 0 clic), « chataigne chien », « chataigne cuite chien » · réponse d'abord sur la châtaigne comestible (cuite, quantité par gabarit), le marron d'Inde ensuite
+- [x] `chien-mange-pistaches` · « pistache chien » (530 affichages, position 8,7, 0 clic), « pistache pour les chiens », « pistache chien toxique » · le lecteur cherche si son chien peut en manger, pas seulement l'urgence : réponse « peut-il manger » en tête, conduite à tenir ensuite · réécrit 2026-11-08
+- [x] `chataignes-marrons-inde-chien-difference-danger` · « châtaigne cuite pour chien » (217, pos 7,4, 0 clic), « chataigne chien », « chataigne cuite chien » · réponse d'abord sur la châtaigne comestible (cuite, quantité par gabarit), le marron d'Inde ensuite · réécrit 2026-11-08
 - [ ] `chien-mange-os-poulet-urgence` · « os de poulet chien » (401, pos 8,7), « os poulet chien », « mon chien a mangé un os cuit que faire » · même sujet que `os-poulet-chien-danger` : renforcer celle-ci, relier l'autre vers elle
 - [ ] `chien-peut-manger-amandes` · « amande chien » (234, pos 8,8, 0 clic), « chien amande »
 - [ ] `chien-peut-manger-concombre` · « concombre chien » (214, pos 19,3), « les chiens peuvent ils manger du concombre »
@@ -118,7 +118,7 @@ Pages que Google montre juste après la première page (28 jours au 5 novembre).
 
 - [ ] `os-poulet-chien-danger` · urgences · màj 2026-03-09
 - [ ] `chien-mange-noix-cajou` · urgences · màj 2026-03-12
-- [ ] `chien-mange-pistaches` · urgences · màj 2026-03-12
+- [x] `chien-mange-pistaches` · urgences · màj 2026-03-12 · réécrit 2026-11-08
 - [ ] `chien-peut-manger-oignons` · urgences · màj 2026-03-21
 - [ ] `chien-peut-manger-piment` · urgences · màj 2026-03-21
 - [ ] `chien-mange-ail-oignon-urgence` · urgences · màj 2026-03-27
@@ -297,7 +297,7 @@ Pages que Google montre juste après la première page (28 jours au 5 novembre).
 - [ ] `congeler-repas-maison-chien-guide` · alimentation-quotidienne · màj 2026-09-27
 - [ ] `recette-muffins-sales-poulet-courgette-chien` · alimentation-quotidienne · màj 2026-10-11
 - [ ] `gamelle-chien-inox-ceramique-plastique-silicone` · alimentation-quotidienne · màj 2026-10-12
-- [ ] `chataignes-marrons-inde-chien-difference-danger` · alimentation-quotidienne · màj 2026-10-13
+- [x] `chataignes-marrons-inde-chien-difference-danger` · alimentation-quotidienne · màj 2026-10-13 · réécrit 2026-11-08
 - [ ] `recette-patee-maison-canard-chien` · alimentation-quotidienne · màj 2026-10-14
 - [ ] `biotine-chien-bienfaits-dosage` · alimentation-quotidienne · màj 2026-10-16
 - [ ] `recette-riz-poulet-chien-diete-legere` · alimentation-quotidienne · màj 2026-10-18
