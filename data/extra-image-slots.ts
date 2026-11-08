@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-avis-atavik',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'blue',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, attentive Belgian Malinois lying on a warm wooden kitchen floor beside two simple ceramic bowls, one filled with brown dog kibble, the other with chunks of wet dog food. The dog looks at the bowls without eating. No packaging, no bag, no tin, no logo, no brand, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog and bowls filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the bowls. Exactly 7 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-08 pour l'article avis-atavik.",
+  },
+  {
     id: 'art-avis-select-gold',
     group: 'articles',
     ratio: '3:2',

@@ -13,6 +13,7 @@ const avis = (slug: string) => `/chien/avis-marques/${slug}`
 
 export const MARQUE_PAGES: MarquePage[] = [
   { nom: 'Acana', href: avis('avis-acana') },
+  { nom: 'Atavik', href: avis('avis-atavik') },
   { nom: 'Belcando', href: avis('avis-belcando') },
   { nom: 'Buddy Pet Foods', href: avis('avis-buddy-pet-foods') },
   { nom: 'Butternut Box', href: avis('avis-butternut-box') },

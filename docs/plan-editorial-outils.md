@@ -37,7 +37,7 @@ Pages mères déjà en ligne, à doter de la section des modèles au premier mod
 - [x] Premiere : avis sur les croquettes et les pâtées Meati (premiere croquette chien avis) → avis-premiere
 - [x] Real Nature : avis sur la marque, les croquettes et la pâtée (real nature avis, real nature wilderness avis) → avis-real-nature
 - [x] Select Gold : avis sur les croquettes de Maxi Zoo (select gold avis, avis vétérinaire) → avis-select-gold
-- [ ] Atavik : avis sur la marque (atavik avis)
+- [x] Atavik : avis sur la marque (atavik avis) → avis-atavik
 - [ ] MultiFit : avis sur les croquettes et les pâtées (multifit avis)
 - [ ] Eukanuba : avis sur les croquettes (eukanuba avis, avis vétérinaire)
 - [ ] Carnilove : avis sur les croquettes (carnilove avis chien)
