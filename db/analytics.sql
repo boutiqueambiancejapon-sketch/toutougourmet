@@ -253,3 +253,6 @@ CREATE INDEX IF NOT EXISTS assistant_questions_created_idx ON analytics.assistan
 
 -- Acceptation des conditions générales avant la première question à Milo (2026-11-07). Effacée avec le compte.
 CREATE TABLE IF NOT EXISTS analytics.assistant_cgu (user_id text PRIMARY KEY REFERENCES app."user"(id) ON DELETE CASCADE, version text NOT NULL, accepted_at timestamptz NOT NULL DEFAULT now());
+
+-- Code-barres et nom lu pour les scans sans fiche (introuvables), visibles dans « Derniers scans » (2026-11-08).
+ALTER TABLE analytics.scanner_events ADD COLUMN IF NOT EXISTS ean text, ADD COLUMN IF NOT EXISTS nom text;
