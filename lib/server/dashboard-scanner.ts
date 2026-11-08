@@ -19,6 +19,10 @@ export interface FailureRow {
 export interface RecentScanRow {
   key: string
   at: Date
+  /** Résultat du journal (introuvable, échec…) ; null pour l'ancien historique, toujours trouvé. */
+  result: string | null
+  ean: string | null
+  nom: string | null
   eventType: string | null
   fromCache: boolean | null
   foodId: string | null
@@ -73,6 +77,8 @@ async function readFailures(pool: Pool): Promise<FailureRow[]> {
   return rows
 }
 
+const SANS_FICHE = ['not_found', 'not_scorable']
+
 const SCAN_COLUMNS = `f.id AS "foodId", f.brand, f.product, f.score, f.source, u.id AS "userId", u.email`
 
 /**
@@ -81,21 +87,22 @@ const SCAN_COLUMNS = `f.id AS "foodId", f.brand, f.product, f.score, f.source, u
  * de journal, et s'afficherait deux fois.
  */
 async function readScans(pool: Pool, journal: boolean): Promise<RecentScanRow[]> {
-  const history = `SELECT 'h' || h.id::text AS key, h.created_at AS at, NULL::text AS "eventType", h.from_cache AS "fromCache", ${SCAN_COLUMNS}
+  const history = `SELECT 'h' || h.id::text AS key, h.created_at AS at, NULL::text AS result, NULL::text AS ean, NULL::text AS nom, NULL::text AS "eventType", h.from_cache AS "fromCache", ${SCAN_COLUMNS}
      FROM app.scan_history h
      JOIN app.food_analysis f ON f.id = h.food_analysis_id
      JOIN app."user" u ON u.id = h.user_id`
   const sql = journal
-    ? `SELECT 'e' || e.id::text AS key, e.created_at AS at, e.scan_type AS "eventType", NULL::boolean AS "fromCache", ${SCAN_COLUMNS}
+    ? `SELECT 'e' || e.id::text AS key, e.created_at AS at, e.result, e.ean, e.nom, e.scan_type AS "eventType", NULL::boolean AS "fromCache", ${SCAN_COLUMNS}
        FROM analytics.scanner_events e
        LEFT JOIN app.food_analysis f ON f.id = e.food_analysis_id
        LEFT JOIN app."user" u ON u.id = e.user_id
-       WHERE e.result = 'found'
+       WHERE e.result = 'found' OR e.result = ANY($1::text[])
        UNION ALL
        ${history}
        WHERE h.created_at < (SELECT coalesce(min(created_at), 'infinity') FROM analytics.scanner_events) - interval '1 minute'`
     : history
-  const { rows } = await pool.query<RecentScanRow>(`${sql} ORDER BY at DESC LIMIT 15`)
+  // Scans sans fiche (introuvable, trop incomplet) : montrés aussi, avec leur code-barres (2026-11-08).
+  const { rows } = await pool.query<RecentScanRow>(`${sql} ORDER BY at DESC LIMIT 15`, journal ? [SANS_FICHE] : [])
   return rows
 }
 

@@ -45,7 +45,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   if (!ean) return fail('bad_request')
   if (overLimit(`code:${clientIp(request.headers)}`, LIMITS)) return fail('rate_limited')
   const user = await getSessionUser().catch(() => null)
-  const log = (result: ScannerResult, foodAnalysisId: string | null = null) => recordScannerEvent({ type: 'code', result, userId: user?.id ?? null, foodAnalysisId })
+  const log = (result: ScannerResult, foodAnalysisId: string | null = null, nom: string | null = null) => recordScannerEvent({ type: 'code', result, userId: user?.id ?? null, foodAnalysisId, ean, nom })
   const reply = (analysis: Parameters<typeof toScanAnalysis>[0], origin: 'cache' | AnalysisSource) =>
     NextResponse.json({ ok: true, analysis: toScanAnalysis(analysis), fromCache: origin === 'cache', origin } satisfies ScanResponse, { headers: NO_STORE })
 
@@ -65,7 +65,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     }
     const verdict = opffToLabel(lookup.product, ean)
     if (verdict.kind === 'incomplete') {
-      log(verdict.type === 'aliment-chat' ? 'cat_food' : 'not_scorable')
+      log(verdict.type === 'aliment-chat' ? 'cat_food' : 'not_scorable', null, [verdict.brand, verdict.product].filter(Boolean).join(' ') || null)
       if (verdict.type === 'aliment-chat') return fail('cat_food')
       return fail('not_found', { ean, brand: verdict.brand, product: verdict.product })
     }

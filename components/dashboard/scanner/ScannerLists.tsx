@@ -66,6 +66,8 @@ export function RecentScans({ rows, checks }: { rows: RecentScanRow[]; checks: F
           {rows.map((r) => {
             const name = [r.brand, r.product].filter(Boolean).join(', ') || 'Fiche sans nom'
             const check = r.foodId ? checks.get(r.foodId) : undefined
+            const sansFiche = !r.foodId && r.result !== null && r.result !== 'found'
+            const info = r.result && isScannerResult(r.result) ? SCANNER_RESULTS[r.result] : null
             return (
               <ListRow
                 key={r.key}
@@ -74,6 +76,11 @@ export function RecentScans({ rows, checks }: { rows: RecentScanRow[]; checks: F
                     <Link href={`/tableau-de-bord/fiches/${r.foodId}`} className="text-ink underline underline-offset-2">
                       {name}
                     </Link>
+                  ) : sansFiche ? (
+                    <>
+                      {r.nom ?? 'Produit inconnu'}
+                      {r.ean ? <> · code-barres <a href={`https://www.google.com/search?q=${r.ean}`} className="text-ink underline underline-offset-2">{r.ean}</a></> : null}
+                    </>
                   ) : (
                     'Fiche supprimée depuis'
                   )
@@ -84,7 +91,7 @@ export function RecentScans({ rows, checks }: { rows: RecentScanRow[]; checks: F
                     {check ? ` · ${CHECK_BADGES[check.status].label} : ${check.reason}` : ''}
                   </>
                 }
-                aside={r.foodId ? <Score value={r.score} /> : null}
+                aside={r.foodId ? <Score value={r.score} /> : sansFiche ? <Badge tone="amber">{info?.label === 'Produit introuvable' ? 'Introuvable' : 'Incomplet'}</Badge> : null}
               />
             )
           })}

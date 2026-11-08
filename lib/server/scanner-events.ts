@@ -11,6 +11,9 @@ export interface ScannerEvent {
   result: ScannerResult
   userId?: string | null
   foodAnalysisId?: string | null
+  /** Code-barres et nom lu, gardés pour un scan sans fiche (introuvable) : le produit à ajouter. */
+  ean?: string | null
+  nom?: string | null
 }
 
 /** Base bloquée : au-delà, les lignes sont abandonnées plutôt que d'empiler les requêtes en mémoire. */
@@ -29,11 +32,13 @@ export function recordScannerEvent(event: ScannerEvent): void {
     const pool = getPool()
     if (!pool || pending.size >= MAX_PENDING) return
     const write: Promise<void> = pool
-      .query('INSERT INTO analytics.scanner_events (scan_type, result, user_id, food_analysis_id) VALUES ($1, $2, $3, $4)', [
+      .query('INSERT INTO analytics.scanner_events (scan_type, result, user_id, food_analysis_id, ean, nom) VALUES ($1, $2, $3, $4, $5, $6)', [
         event.type,
         event.result,
         event.userId ?? null,
         event.foodAnalysisId ?? null,
+        event.foodAnalysisId ? null : (event.ean ?? null),
+        event.foodAnalysisId ? null : (event.nom?.slice(0, 200) ?? null),
       ])
       .then(() => undefined, logFailure)
       .finally(() => pending.delete(write))
