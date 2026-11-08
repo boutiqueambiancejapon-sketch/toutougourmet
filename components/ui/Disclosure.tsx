@@ -12,8 +12,7 @@ export function Disclosure({ type = 'short' }: DisclosureProps) {
         <p>
           Toutou Gourmet est un site indépendant. Certains liens présents sur ce site sont des liens
           affiliés : si tu passes commande via ces liens, on perçoit une commission de la part de la
-          marque, sans aucun surcoût pour toi. Ça nous aide à financer le site et à continuer à faire
-          des comparatifs honnêtes.{' '}
+          marque, sans aucun surcoût pour toi. Ça nous aide à financer le site et à continuer à comparer les marques.{' '}
           <Link href="/a-propos#affiliation" className="text-orange-ink underline">
             En savoir plus sur notre modèle
           </Link>
