@@ -620,12 +620,38 @@
   - Elmut « ajuste la formulation » → calcule la quantité, 5 recettes fixes
   - FAQ « Franklin et Dog Chef sont d'excellentes alternatives » (contre 31 à 39 % de glucides plus haut) → pistes à discuter, non formulées pour le diabète
   - À vérifier (non changé) : `croquettes-chien-surpoids` « l'obésité est le premier facteur de risque du diabète de type 2 chez le chien » et `comment-faire-maigrir-son-chien` (type 2)
-- [ ] `chien-mange-trop-vite-solutions` · 136 affichages Google (28 j)
-- [ ] `croquettes-chien-dermatite` · 127 affichages Google (28 j)
-- [ ] `fontaine-eau-chien-comment-choisir` · 127 affichages Google (28 j)
-- [ ] `huile-saumon-chien-bienfaits-dosage` · 115 affichages Google (28 j)
-- [ ] `dog-chef-vs-royal-canin` · 109 affichages Google (28 j)
-- [ ] `nourriture-boxer` · 108 affichages Google (28 j)
+- [x] `chien-mange-trop-vite-solutions` · 136 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - « Attendre au moins 1 h après le repas avant tout exercice intense » et « dans les 1 à 3 heures » → 2 à 3 h (comme `torsion-estomac-chien-prevention-alimentation`)
+  - Verdict « tue 15 à 40 % des chiens atteints malgré la chirurgie » → 15 à 33 % (mortalité opérée) ; idem `quand-promener-chien-apres-manger` (« 30 à 40 % même avec une chirurgie rapide » → 15 à 33 %)
+  - POMC, fractionnement en 2 à 3 repas, 15 à 40 % de mortalité globale : cohérents
+  - À vérifier (non changé) : « l'étouffement, risque le plus fréquent en clinique d'urgence » et « dans 9 cas sur 10, c'est une régurgitation », sans source
+- [x] `croquettes-chien-dermatite` · 127 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - TL;DR « 30 % des dermatites chroniques ont une composante alimentaire » → 10 à 20 % (comme le texte et `croquettes-chien-demangeaisons`)
+  - Franklin « mono-protéine non hydrolysée » → recette Canard, Pomme & Carotte avec le canard pour seule viande (la fiche contient 1,5 % de protéines de canard hydrolysées)
+  - Franklin « oméga-3 d'origine marine » (recette Canard sans huile de poisson) → recette Saumon, Truite & Persil sans volaille ni viande rouge
+  - Verdict « notre choix pour l'exclusion stricte » → pour un chien qui n'a jamais mangé de canard, test validé avec le vétérinaire
+  - À vérifier (non changé) : `croquettes-chien-allergique` dit « l'allergie alimentaire touche 10 à 15 % des chiens » (TL;DR et StatRow), alors que la littérature parle de 1 à 2 % des chiens et 9 à 40 % des chiens qui se grattent ; même article : « notre n°1 », Franklin « pionniers du mono-protéine »
+  - À vérifier (non changé) : section Purina/Royal Canin (« protéines hydrolysées de qualité médiocre », « inflammation de bas grade » par les céréales, « aucune des deux marques ne publie »), et « prix supérieur aux gammes vétérinaires »
+- [x] `fontaine-eau-chien-comment-choisir` · 127 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - « L'été, 70-100 ml/kg/jour, comme l'explique notre guide canicule » → par forte chaleur, 80-120 ml/kg/jour (chiffre du guide)
+  - Légende « les deux réclament un nettoyage quotidien » (texte : fontaine une fois par semaine) → la gamelle chaque jour, la fontaine chaque semaine
+  - 50 à 70 ml/kg/jour, capacités par gabarit, filtre toutes les 2 à 4 semaines : cohérents
+- [x] `huile-saumon-chien-bienfaits-dosage` · 115 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : 30 mg/kg^0,75 (100 à 475 mg) et limite 370 mg/kg^0,75 (1 240 à 5 900 mg), volumes à 100 et 200 mg/ml, 125 kcal par cuillère à soupe, 40 kcal par cuillère à café (près de 8 % à 10 kg), cohérent avec `omega-3-chien-comparatif-sources`
+  - À vérifier (non changé) : rapport oméga-6/oméga-3 « 5:1 à 10:1 » attribué aux repères européens (FEDIAF) ; `croquettes-chien-dermatite` dit « inférieur à 5 pour 1 »
+- [x] `dog-chef-vs-royal-canin` · 109 affichages Google (28 j) · relu 2026-11-09 : 8 corrections
+  - Royal Canin Medium Adult « maïs ou riz en premier ingrédient », liste « farine de maïs, volaille, maïs, gluten de maïs » → volaille déshydratée en tête puis blé, farine de maïs, farine de blé, maïs (étiquette scannée le 2026-11-05), 5 endroits ; idem `just-russel-vs-royal-canin` (liste, « devant toute protéine animale », contre)
+  - Dog Chef « très peu de glucides » (frais) et « ~20-25 % » (croquettes) → environ 20 à 35 % et 35 % hors eau (`partner-fiches.json`), 4 endroits
+  - Dog Chef « croquettes sans céréales » (riz, avoine dans 3 recettes sur 4) → croquettes, 2 endroits
+  - Exemple de recette « poulet frais 45 %, patate douce 20 %… » (inventé) → composition officielle du repas au poulet (poulet 57 %…)
+  - Prix 15 kg « 55-90 € » → 60-90 € (`data/brand-content.ts`, 2 à 4 € par jour) ; écart « 25 à 55 € suivant le gabarit » → 25 à 65 €
+  - « Un mois de test » avec la box d'essai → la box couvre deux semaines
+  - Royal Canin 40 à 55 % de glucides (Medium Adult : 48 %) et 25-30 % de protéines : cohérents
+- [x] `nourriture-boxer` · 108 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Repas frais « 500–600 g par jour pour 28–32 kg, 5–8 € » → 1,2 à 1,5 kg (1 600 à 1 900 kcal, repas à 122-144 kcal/100 g), 4 à 6 € par jour (`data/brand-content.ts`)
+  - « Pas d'exercice intense dans l'heure qui suit » → 2 à 3 heures (pilier torsion)
+  - Calories 1 400 à 2 200 kcal par gabarit et Dogfy bœuf 60,5 % : cohérents
+  - À vérifier (non changé) : L-carnitine « 500–2 000 mg/jour » (protocoles publiés pour la cardiomyopathie du Boxer : environ 50 mg/kg trois fois par jour)
 - [ ] `recette-muffins-sales-poulet-courgette-chien` · 108 affichages Google (28 j)
 - [ ] `chien-mange-noix-macadamia-urgence` · 106 affichages Google (28 j)
 - [ ] `chien-peut-manger-noix` · 106 affichages Google (28 j)
