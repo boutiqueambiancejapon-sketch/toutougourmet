@@ -214,12 +214,37 @@
   - À vérifier (non changé) : « les feuilles contiennent beaucoup moins de tanins » (chez le bétail, les jeunes feuilles intoxiquent autant que les glands)
 - [x] `chien-boit-beaucoup-eau-causes` · 659 affichages Google (28 j) · relu 2026-11-09 : 0 correction
   - Rien à corriger : 50-70 ml/kg et seuil de 100 ml/kg alignés avec quantite-eau-chien-par-jour et le guide canicule
-- [ ] `chien-peut-manger-courgette` · 644 affichages Google (28 j)
-- [ ] `croquettes-chien-sterilise` · 643 affichages Google (28 j)
-- [ ] `croquettes-chien-insuffisance-renale` · 642 affichages Google (28 j)
-- [ ] `nourriture-american-staffordshire-terrier` · 635 affichages Google (28 j)
-- [ ] `nourriture-staffordshire-bull-terrier` · 633 affichages Google (28 j)
-- [ ] `croquettes-chien-reflux-gastrique` · 626 affichages Google (28 j)
+- [x] `chien-peut-manger-courgette` · 644 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Repère « 25 à 200 g pour 10 kg » (tableau : 30 à 80 g pour 5-15 kg) → 30 à 80 g pour un chien de 10 kg (TL;DR, texte, FAQ)
+  - « Retire 8 à 10 g de croquettes pour 100 g de courgette » (17 kcal = 5 g de croquettes) → environ 5 g
+  - FAQ Chihuahua 3 kg « 15 à 25 g » → 15 à 30 g (tableau)
+- [x] `croquettes-chien-sterilise` · 643 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Franklin « pas de formule stérilisé dédiée » (recette Poulet, Courge & Myrtille, `brand-content.ts`) → la recette existe, portions à ajuster ; FAQ alignée
+  - Franklin « 32 à 38 % de protéines » → 34 % dans la recette stérilisé ; « sans céréales, pas de pic glycémique » (35,2 % de glucides cités plus haut) → patate douce comme amidon
+  - Franklin « vétérinaire nutritionniste » → vétérinaire ; « notre choix n°1 » → notre premier choix
+  - Dog Chef « 4 recettes (poulet, canard, dinde, bœuf), développées par des vétérinaires, normes FEDIAF et NRC » → croquettes poulet et canard, sans gluten, glucosamine, chondroïtine, huile d'algues (`brand-content.ts`)
+  - À vérifier (non changé) : « 60 % des chiens stérilisés prennent du poids » (pastille, sans source)
+- [x] `croquettes-chien-insuffisance-renale` · 642 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Hill's k/d « 0,19 % de phosphore MS, EPA+DHA 0,4 g pour 100 kcal » → autour de 0,3 % MS (fiches k/d sèches : 0,29 à 0,32 %, environ 0,1 g d'EPA+DHA pour 100 kcal), EPA et DHA à lire sur l'étiquette
+  - « Ces deux marques conviennent à la phase de maintenance » (Franklin à 0,7-0,9 % de phosphore, au-dessus du seuil de 0,6 %) → ne sont pas des aliments rénaux, seulement avec l'accord du vétérinaire
+  - Franklin « vétérinaire nutritionniste » → une vétérinaire
+  - Dog Chef « sans sous-produits » (menus aux abats : cœur, foie, gésier) → viande nommée avec ses abats
+  - À vérifier (non changé) : Hill's et Royal Canin « 70 à 150 € par mois pour 25 kg » (à 16-24 €/kg et environ 300 g par jour, plutôt 145 à 215 €)
+- [x] `nourriture-american-staffordshire-terrier` · 635 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Stérilisation « baisse la dépense de 15 à 20 % » → 20 à 30 % (guide chien stérilisé, article Staffie)
+  - À vérifier (non changé) : le site donne 10-20 %, 15-20 % ou 20-30 % pour la baisse après stérilisation selon les articles
+- [x] `nourriture-staffordshire-bull-terrier` · 633 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Pastille « 900-1500 kcal/jour adulte » (tableau : 185 g à 380 kcal = 700 kcal) → 700-1500
+  - Franklin « EPA et DHA naturels : recette saumon ou agneau » (agneau sans poisson) → recette Saumon, Truite & Persil
+  - Dog Chef « protéine unique » → menus canard ou poisson à une seule viande ; Elmut « mono-protéine » → une seule viande dans 4 menus sur 5
+  - Source « Olivry, Mueller et Prélaud, 2017 » → Mueller, Olivry et Prélaud, 2016 (BMC Vet Res 12:9)
+  - À vérifier (non changé) : chiot 8-14 mois 290-370 g (au-dessus d'un calcul à 2 × besoin de repos) ; L-2-HGA « entre 6 mois et 1 an »
+- [x] `croquettes-chien-reflux-gastrique` · 626 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Franklin « recettes les moins grasses : Canard, Pomme & Carotte ou Poulet, Carotte & Épinards » (canard à 18 % de lipides, la plus grasse ; recette poulet inexistante) → Light Dinde, Patate douce & Épinards (11 %) plutôt que Canard (18 %)
+  - Contre « recettes grasses (saumon, agneau) » → Canard, Pomme & Carotte à 18 %
+  - TL;DR Franklin « faible en graisses saturées » (invérifiable) → recette Light à 11 % de lipides
+  - Elmut « formule à lipides modérés » si reflux (recettes à 26-29 % MS, `brand-content.ts`) → chiffre donné, décision avec le vétérinaire
+  - À vérifier (non changé) : FAQ « grandes races plus prédisposées au reflux » (études contradictoires : plus de reflux sous anesthésie chez les grands chiens à thorax profond, plus chez les races à museau court ailleurs)
 - [ ] `avis-royal-canin` · 625 affichages Google (28 j)
 - [ ] `chien-peut-manger-navet` · 609 affichages Google (28 j)
 - [ ] `chien-peut-manger-abricots` · 605 affichages Google (28 j)
