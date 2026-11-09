@@ -1371,12 +1371,37 @@
   - « vraie solution médicale » (promesse de soin) → un repas humide les y aide, en plus du suivi vétérinaire
   - À corriger dans `data/brand-content.ts` (non changé) : Elmut chat « 3 recettes (poulet, bœuf, dinde) » → 5 recettes avec porc et poisson (elmut.fr, 2026-11-09)
   - À vérifier (non changé) : croquettes seules et « risque rénal », céréales et diabète félin
-- [ ] `congeler-repas-maison-chien-guide` · 0 affichages Google (28 j)
-- [ ] `coprophagie-chien-causes-solutions` · 0 affichages Google (28 j)
-- [ ] `croquettes-chien-allergique` · 0 affichages Google (28 j)
-- [ ] `croquettes-chien-constipation` · 0 affichages Google (28 j)
-- [ ] `croquettes-chien-convalescence` · 0 affichages Google (28 j)
-- [ ] `croquettes-chien-difficile-nourrir` · 0 affichages Google (28 j)
+- [x] `congeler-repas-maison-chien-guide` · 0 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Étude Hellgren 2019 (60 produits, Salmonella 7 %, C. perfringens 30 %, Enterobacteriaceae > 5 000 UFC/g 52 %) vérifiée ; durées et seuils de température alignés sur le reste du site
+- [x] `coprophagie-chien-causes-solutions` · 0 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Encadré « au moins 25 % de protéines animales » (illisible sur l'étiquette, le texte dit protéines brutes) → 25 % de protéines brutes
+  - Chiffres de Hart 2018 (16 %, 23 %, 85 %, 51 % contre 28 %, 0 à 2 %, Shetland 41 %, 0 caniche sur 29, 75 % de plus de 4 ans) vérifiés sur l'étude
+- [x] `croquettes-chien-allergique` · 0 affichages Google (28 j) · relu 2026-11-09 : 9 corrections
+  - « 10 à 15 % des chiens » (TL;DR et chiffre clé) → 1 à 2 % des chiens vus en clinique (`allergie-alimentaire-chien-symptomes-diagnostic`)
+  - Franklin « notre n°1, pionniers du mono-protéine en France » (TL;DR, titre H3) → notre premier choix, née en 2018 pour une bouledogue allergique
+  - « Mono-protéine : une seule viande par recette » (l'article dit plus haut que toutes ne le sont pas) → Canard seul, poisson seul dans Saumon, Truite & Persil
+  - « vétérinaire nutritionniste » et « 4.7/5 sur 4 700+ avis » → vétérinaire, note retirée
+  - FAQ allergie au poulet : canard présenté comme sûr → saumon d'abord, 97 % des chiens à anticorps anti-poulet réagissent au canard (`recette-patee-maison-dinde-chien`)
+  - Délai de l'allergie « minutes à heures » → minutes à jours ; amélioration digestive « 2 à 3 semaines » → 1 à 4 semaines (guide allergie)
+  - Dog Chef canard « mono-protéine » → une seule viande, graisse de poulet 5 % annoncée sans protéine (dogchef.com)
+  - FAQ et verdict « gamme la plus complète, plus grande communauté », « pas de concurrent direct » → retirés
+  - Repas frais « pas de traces croisées de protéines » (invérifiable) → retiré
+- [x] `croquettes-chien-constipation` · 0 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - Franklin « toujours épinards, carottes, courgettes, courge » → patate douce, courge, épinards ou carottes selon la recette, pois chiches (pas de courgette)
+  - Dinde, Courge & Poire « courge fibres solubles, poire sorbitol » (0,5 % chacune) → 5 % de cellulose brute (lignocellulose, luzerne) ; Dinde, Patate douce & Épinards (7 %) ajoutée
+  - « Graines de lin » présentées pour toute la gamme → certaines recettes seulement ; verdict aligné
+  - Citation Dog Chef « jolies crottes » introuvable sur ses pages (titre H3, texte, verdict) → composition officielle : 13 % de légumes et fruits, lin et psyllium
+  - Huile de coco « 1/2 cc pour 10 kg » → par jour au maximum (`huile-de-coco-chien-bienfaits-dosage`)
+  - Aligné ailleurs : `croquettes-chien-diarrhee-chronique` psyllium « 1 à 2 c. à café par repas pour 10-20 kg » → ½ à 1 (`psyllium-chien-bienfaits-dosage`)
+- [x] `croquettes-chien-convalescence` · 0 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Tableau protéines « 25-32 % » (texte et TL;DR : 25-30 %) → 25-30 %
+  - Hill's a/d « 4 600 kcal/kg » comparé aux croquettes telles quelles → environ 1 300 kcal/kg, près de 4 500 sur matière sèche
+  - Dog Chef croquettes « 28 à 32 % de protéines sur MS, digestibilité > 85 % » → 30 % (33 % sur MS), digestibilité absente de la fiche
+  - À vérifier (non changé) : facteur « ×1,3 à 1,5 » attribué à la FEDIAF (les repères FEDIAF visent le chien sain) ; « protéines digestibles à 87 % » pour Hill's a/d
+- [x] `croquettes-chien-difficile-nourrir` · 0 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - « peut attendre moins de 24 heures sans risque » (FAQ : 24 à 48 h) → 24 à 48 heures
+  - Repas frais Dog Chef « 50 % de viande fraîche » (chiffre des croquettes) → 52 à 58 % de viande ou de poisson selon la recette (fiches Dog Chef)
+  - À vérifier (non changé) : « moins de 5 % de causes médicales » sans source
 - [ ] `croquettes-chien-douleurs-articulaires` · 0 affichages Google (28 j)
 - [ ] `croquettes-chien-dysplasie-hanche` · 0 affichages Google (28 j)
 - [ ] `croquettes-chien-hyperactif` · 0 affichages Google (28 j)
