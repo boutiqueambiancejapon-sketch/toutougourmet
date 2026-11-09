@@ -45,7 +45,7 @@ export const BREEDS: Breed[] = [
       { title: 'Sébadénite sébacée', text: 'Comme pour la thyroïdite, une alimentation anti-inflammatoire riche en oméga-3 passe en premier.' },
       { title: 'Dilatation-torsion gastrique', text: "Son gabarit et sa poitrine profonde l'exposent à la torsion : deux repas par jour, et pas d'exercice intense dans les deux heures qui suivent." },
     ],
-    foodNote: "Malgré son tempérament calme, il lui faut 1 600 à 2 500 kcal par jour selon l'activité, en deux repas.",
+    foodNote: "Malgré son tempérament calme, il lui faut 1 100 à 2 200 kcal par jour selon l'activité, en deux repas.",
     near: ['shiba-inu', 'chow-chow', 'malamute-alaska'],
   },
   {
