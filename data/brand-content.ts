@@ -94,7 +94,7 @@ export const brandRecipes: Record<string, BrandRecipe[]> = {
     { name: 'Menu Poisson', description: '47 % de poisson (saumon, colin), avec du foie de poulet, 45,6 % de protéines sur matière sèche.' },
   ],
   'dog-chef': [
-    { name: 'Menu Poulet', description: 'Viande, gésier et foie. 48 % de protéines sur matière sèche, 15 % de lipides.' },
+    { name: 'Menu Poulet', description: 'Viande, gésier et foie. 38,8 % de protéines et 25,5 % de lipides sur matière sèche.' },
     { name: 'Menu Bœuf', description: 'Cœur, tripes et foie de bœuf, pommes de terre, haricots verts, sarrasin.' },
     { name: 'Menu Porc', description: 'Cœur et langue de porc, haricots verts, riz. La recette la moins chère.' },
     { name: 'Menu Canard', description: 'Protéine que la plupart des chiens ne connaissent pas. Pour un chien allergique.' },
