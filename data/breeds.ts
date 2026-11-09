@@ -772,7 +772,7 @@ export const BREEDS: Breed[] = [
       { title: 'Allergies cutanées et alimentaires', text: "15 à 20 % de dermatite atopique, environ 10 % d'allergie alimentaire. Source de protéine unique et oméga-3, dose à voir avec le vétérinaire." },
       { title: 'Articulations', text: 'Contrôle pondéral strict (BCS 4-5/9) pour les préserver.' },
     ],
-    foodNote: 'Le gobelet doseur surestime souvent les portions de 20 à 30 %, de quoi faire prendre 1 à 2 kg en quelques mois à un chien sédentaire.',
+    foodNote: 'Le gobelet doseur peut servir jusqu\'à 80 % de trop, de quoi faire prendre 1 à 2 kg en quelques mois à un chien sédentaire.',
     near: ['american-staffordshire-terrier', 'bull-terrier', 'boxer'],
   },
   {
