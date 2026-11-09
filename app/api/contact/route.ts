@@ -6,6 +6,7 @@ import { sendWelcomeOnce } from '@/lib/server/newsletter'
 import { sendGuideOnce } from '@/lib/server/guide-email'
 import { GUIDE_SOURCE } from '@/lib/guide/config'
 import { contactRateLimited, parseContactMessage, saveContactMessage } from '@/lib/server/contact'
+import { notifyContact } from '@/lib/server/contact-notify'
 import { clientIp, overLimit, retryAfterSeconds } from '@/lib/server/rate-window'
 
 // @cdc contact — deux usages : inscription (e-mail seul, sans champ « message ») envoyée à Brevo,
@@ -79,5 +80,7 @@ export async function POST(req: NextRequest) {
     console.error('[contact] insert failed', err instanceof Error ? err.message : err)
     return unavailable()
   }
+  const message = parsed.value
+  after(() => notifyContact(message))
   return NextResponse.json({ ok: true })
 }

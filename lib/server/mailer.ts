@@ -21,6 +21,8 @@ export interface TransactionalEmail {
   headers?: Record<string, string>
   /** Étiquettes Brevo (par défaut : « compte ») */
   tags?: string[]
+  /** Adresse de réponse (message de contact : répondre directement au visiteur) */
+  replyTo?: string
 }
 
 function logOnly(): boolean {
@@ -49,6 +51,7 @@ async function deliver(mail: TransactionalEmail): Promise<EmailLogState> {
       htmlContent: mail.html,
       tags: mail.tags ?? ['compte'],
       ...(mail.headers ? { headers: mail.headers } : {}),
+      ...(mail.replyTo ? { replyTo: { email: mail.replyTo } } : {}),
     }),
     cache: 'no-store',
   })
