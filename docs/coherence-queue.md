@@ -389,12 +389,34 @@
   - Franklin « 70 % de viande, une seule source de protéine animale » → jusqu'à 70 % de viande ou de poisson, une seule viande par recette
   - Franklin « recettes au saumon ou au maquereau » (aucun maquereau dans la gamme) → recette Saumon, Truite & Persil
   - Régime d'éviction « 8 semaines » (FAQ et reste du site : 8 à 12) → 8 à 12 semaines, deux endroits
-- [ ] `avis-just-russel` · 377 affichages Google (28 j)
-- [ ] `selles-chien-aspect-couleur-consistance` · 375 affichages Google (28 j)
-- [ ] `dog-chef-vs-just-russel` · 373 affichages Google (28 j)
-- [ ] `nourriture-cocker-spaniel` · 352 affichages Google (28 j)
-- [ ] `croquettes-chien-epilepsie` · 345 affichages Google (28 j)
-- [ ] `nourriture-golden-retriever` · 336 affichages Google (28 j)
+- [x] `avis-just-russel` · 377 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Trustpilot « 4,4/5 pour environ 5 500 avis » (site officiel : 4,5, 15 464 avis) → 4,5/5, plus de 15 000 avis (novembre 2026)
+  - Dog Chef croquettes « sans céréales, plus de 30 % de protéines, ~25 % de glucides » (dogchef.com : seule la recette Canard est sans céréales, les autres sans gluten, 63 % de viande, macros non affichées) → titre H3, paragraphe, tableau, avantage et FAQ alignés
+  - À vérifier (non changé) : 7,67 €/kg (justrussel.fr donne 43,28 € pour 9 kg, soit 4,80 €/kg, peut-être en promotion) ; « 93 % des propriétaires » introuvable sur le site ; usine de Gand certifiée IFS non mentionnée par la marque ; Japhy « sans céréales » non vérifié
+  - À aligner plus tard : `just-russel-vs-elmut` dit « livraison payante » et « Just Russel ne nourrit que les chiens » (livraison gratuite et gamme chat sur justrussel.fr) ; `just-russel-vs-japhy` à relire sur la livraison
+- [x] `selles-chien-aspect-couleur-consistance` · 375 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - « Le chien âgé peut développer une IPE, plus fréquente chez le Berger Allemand » (Räihä et Westermarck 1989 : signes avant 4 ans chez 93 % des Bergers Allemands atteints) → le jeune adulte, signes presque toujours avant 4 ans ; source ajoutée
+  - Score fécal, couleurs, durées de surveillance (24 h, 48 h) et fibres : cohérents
+- [x] `dog-chef-vs-just-russel` · 373 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - Just Russel « livraison payante » (tableau, texte prix, FAQ, inconvénient) → gratuite (justrussel.fr : « Livraison toujours gratuite ») ; TL;DR aligné
+  - Just Russel « croquettes uniquement » → croquettes, nourriture humide ou plan mixte (plans affichés sur justrussel.fr)
+  - Dog Chef « sans céréales : oui » et « 100 % croquettes sans céréales » → seule la recette Canard est sans céréales (FAQ alignée)
+  - Budget 10 kg Dog Chef « 40 à 60 € » (`brand-content.ts` : 45 à 60 €) → 45 à 60 € ; écart « 5 à 15 € une fois le port ajouté » → 15 à 20 €
+  - Écart 15 kg « 10 à 30 € de plus » (60-90 € contre 46-54 €) → 10 à 40 €
+- [x] `nourriture-cocker-spaniel` · 352 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Encadré régime d'éviction « 8 semaines » (texte et FAQ : 8 à 12) → 8 à 12 semaines
+  - Elmut mono-protéine « poulet, bœuf ou saumon » (`brand-content.ts` : poulet, bœuf, dinde, porc ; le menu poisson contient du foie de poulet) → poulet, bœuf, dinde ou porc
+  - Ration 13 kg (220-250 g à 360 kcal = 800-900 kcal), Dogfy 4 recettes (vérifié sur dogfydiet.com), Franklin « plus de 90 % de protéines animales » (vérifié) : cohérents
+  - À vérifier (non changé) : dysplasie de la hanche « environ 20 % des Cockers » selon l'OFA ; deux reprises des chiffres OFA (VIN, Ortocanis) donnent 5 à 6,5 %, page OFA illisible
+- [x] `croquettes-chien-epilepsie` · 345 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Essai 2020 (Berk, JVIM) décrit en groupes parallèles → essai croisé en double aveugle, 3 mois MCT puis 3 mois huile d'olive ; 2 chiens sans crise et 3 à moins de 50 % précisés
+  - Essai 2015 (3 + 7 + 5 + 6 = 21 chiens, 71 %), huile de coco (60 % × 75 % = 45 % de C12), risque de pancréatite × 33, dose MCT 13 ml à 30 kg : cohérents
+  - À vérifier (non changé) : prix Neurocare 15 à 20 €/kg
+- [x] `nourriture-golden-retriever` · 336 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Conversion de l'ALA « 5-10 % » (reste du site : moins de 5 %) → moins de 5 %
+  - Prix par jour à 30 kg : Elmut « 3,00-3,60 € » → 4 à 6 €, Dog Chef « 3,20-4,00 € » → 4 à 5,50 €, Franklin « 1,40-1,90 € » → 2,50 € ; repère « ~3,20 € » → 4 à 6 € (`brand-content.ts`)
+  - Franklin « digestibilité 85-90 % » (invérifiable) → annoncée très digeste par la marque
+  - Dog Chef « formules grandes races, résultats visibles sur le pelage et les articulations » (invérifiable) → ration calculée, recette poisson à 1,4 % d'oméga-3
 - [ ] `chien-peut-manger-noix-de-coco` · 331 affichages Google (28 j)
 - [ ] `chien-mange-ail-oignon-urgence` · 321 affichages Google (28 j)
 - [ ] `recette-glace-maison-chien-ete` · 320 affichages Google (28 j)
