@@ -1573,12 +1573,45 @@
   - Repas frais 4 kg « 1,60 € par jour » → 1,50 à 2,50 €
   - FAQ « 220 à 400 kcal, soit 50 à 80 g de croquettes » → 55 à 110 g
   - À vérifier (non changé) : « 35 % ou plus de protéines » alors que Franklin, conseillé, est à 34 %
-- [ ] `nourriture-border-collie` · 0 affichages Google (28 j)
-- [ ] `nourriture-caniche` · 0 affichages Google (28 j)
-- [ ] `nourriture-carlin` · 0 affichages Google (28 j)
-- [ ] `nourriture-dalmatien` · 0 affichages Google (28 j)
-- [ ] `nourriture-jack-russell-terrier` · 0 affichages Google (28 j)
-- [ ] `nourriture-rottweiler` · 0 affichages Google (28 j)
+- [x] `nourriture-border-collie` · 0 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - TL;DR « travail 1 400 à 1 600 kcal » (texte : sport 1 300 à 1 600, travail jusqu'à 2 000) → 1 300 à 1 600, jusqu'à 2 000 au travail
+  - FEDIAF « minimum de 22 % à l'entretien » → 18 % sur matière sèche (21 % peu actif), comme le reste du site
+  - Elmut « avec du DHA » → menu Poisson au saumon ; Franklin « 85 à 90 % digéré » (invérifiable) → 34 % de protéines, Agneau à 25 % (`brand-content.ts`)
+  - Torsion « pas de gros repas dans l'heure avant ou après » → 30 min avant, 2 h après (dossier torsion)
+  - À vérifier (non changé) : digestibilité « 85 à 92 % » des repas frais (texte, FAQ)
+- [x] `nourriture-caniche` · 0 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - TL;DR « 35 % de protéines quelle que soit sa taille » (intro : 28 % pour le grand) → 35 % toy et nain, 28 % moyen et grand
+  - Glucosamine grand caniche « 500 à 1 000 mg » → 300 à 650 mg, le double les 4 à 6 premières semaines (20-30 mg/kg)
+  - Toy 2-3 kg « 90 à 130 g de repas frais » (≈ 120 à 175 kcal, besoin 200 à 280) → 150 à 210 g ; « 1,20 à 1,80 € » → 1,50 à 2,50 €
+  - Franklin « gamme petite race, 85 à 90 % digéré » (invérifiable) → recettes à 34 % de protéines
+  - À vérifier (non changé) : digestibilité « 85–92 % contre 75–80 % pour les croquettes »
+- [x] `nourriture-carlin` · 0 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - « 40 à 45 kcal par kilo » (incompatible avec 240 à 320 kcal pour 6 à 9 kg) → 35 à 40
+  - FAQ croquettes « 370 kcal/100 g, 65 à 85 g » (intro : 360 au plus) → 360 kcal/100 g, 65 à 90 g
+  - Prix 7 kg : Dog Chef 1,40-1,90 € → 1,50-2 € ; Elmut 1,30-1,80 € → 1,80-2,50 € ; Dog Chef « plan minceur progressif » → portion recalculée ; Elmut « recettes peu caloriques » retiré
+  - Franklin « gras modéré » → 16,5 à 18 % de lipides (au-dessus des 10 à 15 % conseillés par l'article)
+  - À vérifier (non changé) : besoins sous la formule du site (7 kg stérilisé sédentaire : 307 kcal ; actif 290-380 contre 400-550 ; chiot 350-420)
+- [x] `nourriture-dalmatien` · 0 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Purines (Kaneko 2014) : foie de bœuf 260-300 → 220 mg ; rognons 200-270 → 175-195 ; sardines 480-600 → 210 (300 séchée) ; blanc de poulet 50-80 → 140 ; saumon 150 « supérieur aux viandes blanches » → 120-130, proche du poulet
+  - Calories 24-28 kg : 1 400-1 600 / 1 600-1 900 / 1 900-2 000 → 1 000-1 200 / 1 200-1 500 / 1 500-2 000 (FEDIAF 95 et 110 kcal/kg^0,75)
+  - Elmut « premier choix, viande maigre sans abats » → menus poulet, dinde et bœuf avec foie et cœur, à faire valider (`brand-content.ts`)
+  - Dog Chef « de quoi choisir une formule sans abats » → menus poulet, bœuf et porc avec abats
+  - À vérifier (non changé) : anchois 400-500, gibier, moules, dinde 60-90 (pas dans Kaneko) ; « 100 % des Dalmatiens » (lignées LUA)
+- [x] `nourriture-jack-russell-terrier` · 0 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - « autant qu'un chien moyennement actif de 12 à 15 kg » (qui mange 600 à 800 kcal) → retiré
+  - 350 à 450 kcal à 380 kcal/100 g « 100 à 145 g » → 90 à 120 g (FAQ : 100 à 120 g)
+  - Glucosamine 6-8 kg « 300 à 600 mg » → 120 à 240 mg, le double les 4 à 6 premières semaines
+  - Moule verte « 10 à 15 mg/kg/jour » → 15 à 50 mg/kg (guide moule verte)
+  - Franklin « formules petite race, glucosamine » → 34 % de protéines, glucosamine dans la recette senior
+  - À vérifier (non changé) : « chaque kilo en trop = 3 ou 4 kg de surcharge » ; test ADN « 80 à 120 € »
+- [x] `nourriture-rottweiler` · 0 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - Torsion « 1 h de repos avant et après » (TL;DR, texte, 2 FAQ) → pas de jeu intense 30 min avant, ni d'effort intense 2 h après (dossier torsion)
+  - Glucosamine « 1 000 à 2 000 mg », chondroïtine « 800 à 1 200 mg » (texte, FAQ) → 700 à 1 800 mg (le double au début) et 500 à 1 200 mg (20-30 et 15-20 mg/kg)
+  - Repas frais 50 kg « 800 à 1 000 g, 8 à 12 € » (≈ 1 200 kcal pour 2 200) → 1,5 à 1,9 kg, plus de 6 €
+  - Elmut « soutien articulaire, 85-92 % digéré » (invérifiable) → 62 % de viande ; Dog Chef « congelées » → réfrigérées
+  - Franklin « 60-70 % de protéines animales » → jusqu'à 70 % de viande, 34 % de protéines (Agneau 25 %)
+  - Dogfy « sachets congelés » → réfrigérateur ou congélateur
+  - À vérifier (non changé) : granulés « 25–30 mm » ; Franklin chien « sans céréales »
 - [ ] `nourriture-saint-bernard` · 0 affichages Google (28 j)
 - [ ] `nourriture-shiba-inu` · 0 affichages Google (28 j)
 - [ ] `nourriture-shih-tzu` · 0 affichages Google (28 j)
