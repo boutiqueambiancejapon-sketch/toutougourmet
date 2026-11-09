@@ -186,12 +186,34 @@
   - Étude 2025 « 12 chiens, douleur réduite, mieux que le groupe sans curcumine » → 6 chiens complémentés contre 6 sans rien, marqueurs en baisse, douleur sans écart significatif (PMC 12115434)
   - Pipérine « ×20 » → chez l'humain (Shoba 1998) : TL;DR, pastille, texte
   - À vérifier (non changé) : « effet anti-inflammatoire léger à 30 mg par chien et par jour » (revue 2023) ; « montaient mieux les escaliers » retiré (absent de l’article source)
-- [ ] `nourriture-patou-montagne-pyrenees` · 743 affichages Google (28 j)
-- [ ] `butternut-box-vs-dog-chef` · 723 affichages Google (28 j)
-- [ ] `nourriture-cane-corso` · 717 affichages Google (28 j)
-- [ ] `pancreatite-chien-alimentation-guide` · 686 affichages Google (28 j)
-- [ ] `chien-mange-glands-chene-urgence` · 683 affichages Google (28 j)
-- [ ] `chien-boit-beaucoup-eau-causes` · 659 affichages Google (28 j)
+- [x] `nourriture-patou-montagne-pyrenees` · 743 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - Croissance « 10-15 kg à 3 mois, plus de 40 kg à 6 mois » (contredit la FAQ : 20-30 kg à 4 mois) → 12-20 kg à 3 mois, 25-35 kg à 6 mois (courbes de race)
+  - Encadré « prise de 50-150 g/jour avant 6 mois » (incompatible avec ces poids et la FAQ à 200 g/jour) → fourchette retirée
+  - Tableau adulte « 550-700 g » → 500-700 g (FAQ et description)
+  - Dog Chef « portions congelées » → boudins portionnés livrés réfrigérés (`brand-content.ts`)
+  - Franklin « croquettes grande race, calcium et phosphore maîtrisés, glucosamine » (aucune recette grande race) → jusqu'à 70 % de viande, glucosamine dans la recette senior ; « Franklin grande race » retiré des croquettes chiot de la FAQ
+  - À vérifier (non changé) : calcium chiot grande race « 0,8 à 1,2 % MS selon FEDIAF et AAFCO » (l'AAFCO fixe un minimum de 1,2 % et un maximum de 1,8 % en croissance grande taille) ; le site varie : 0,8-1,2 (Patou), 0,9-1,4 (Cane Corso), 1,0-1,5 et 1,2-1,8 ailleurs ; seuil « plus de 200 g/jour » sans source
+- [x] `butternut-box-vs-dog-chef` · 723 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - Dog Chef « fondée en 2015 » → 2017 (`brand-content.ts`)
+  - Congélation « 4 mois » (tableau, texte, points forts) → jusqu'à 10 mois (site Dog Chef)
+  - Prix 15 kg « 55-90 € » → 60-90 € (10 à 25 kg : 60 à 120 €, `brand-content.ts`)
+  - Booster Puppy « oméga-3 DHA et EPA » → calcium et phosphore ; Booster Senior « articulations et cerveau », FAQ « soutien cognitif » → glucosamine et curcuma
+  - Croquettes Dog Chef « sans céréales » → sans gluten (`brand-content.ts`, fiches : riz, avoine)
+  - À vérifier (non changé) : Booster Mobility « chondroïtine et glucosamine » (la base dit seulement « cartilages ») ; conservation, pays et frais de port de Butternut Box
+- [x] `nourriture-cane-corso` · 717 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Pastille « 3 repas jusqu'à 6 mois » (tableau : 4 repas de 2 à 4 mois) → 3 à 4 repas
+  - Glucosamine « 500-1500 mg, chondroïtine 400-1200 mg » pour 40-50 kg → 1 600-2 400 mg et 1 200-1 600 mg (40 kg et plus, dossier glucosamine)
+  - Franklin « formule Large Breed, EPA et DHA naturels » (n'existe pas) → Saumon, Truite & Persil pour les oméga-3, glucosamine dans la recette senior
+  - Dog Chef « protéines uniques », Elmut « mono-protéine » (menus bœuf-poulet, agneau-dinde ; poisson Elmut avec foie de poulet) → menus à une seule viande (canard, poisson) ; une seule viande dans 4 menus sur 5
+  - À vérifier (non changé) : calcium chiot 0,9-1,4 % (voir Patou) ; « 50 à 60 % du poids adulte à 6 mois »
+- [x] `pancreatite-chien-alimentation-guide` · 686 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - « Mise à jeun de 24 à 48 heures » (protocole ancien) → réalimentation précoce dans les 24 à 48 heures, long jeûne déconseillé ; pastille et source ajoutées (Purina Institute 2022)
+  - À vérifier (non changé) : prévalence 1,5 %, Schnauzer « risque 3 à 5× », mortalité 27 à 58 %
+- [x] `chien-mange-glands-chene-urgence` · 683 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Étape d'urgence « plus de 5 glands pour moins de 15 kg » (tableau : dès 2-3 glands verts sous 5 kg) → dès 2 ou 3 glands verts sous 5 kg, dès 5 sous 20 kg
+  - À vérifier (non changé) : « les feuilles contiennent beaucoup moins de tanins » (chez le bétail, les jeunes feuilles intoxiquent autant que les glands)
+- [x] `chien-boit-beaucoup-eau-causes` · 659 affichages Google (28 j) · relu 2026-11-09 : 0 correction
+  - Rien à corriger : 50-70 ml/kg et seuil de 100 ml/kg alignés avec quantite-eau-chien-par-jour et le guide canicule
 - [ ] `chien-peut-manger-courgette` · 644 affichages Google (28 j)
 - [ ] `croquettes-chien-sterilise` · 643 affichages Google (28 j)
 - [ ] `croquettes-chien-insuffisance-renale` · 642 affichages Google (28 j)
