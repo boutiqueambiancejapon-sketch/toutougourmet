@@ -260,7 +260,7 @@ export const BREEDS: Breed[] = [
     watch: "Torsion d'estomac",
     health: [
       { title: 'Sarcome histiocytaire', text: 'Plus de 20 % de la race selon les registres. Une alimentation riche en antioxydants et en oméga-3 EPA/DHA est conseillée, sans remplacer le suivi vétérinaire.' },
-      { title: 'Torsion gastrique', text: "Mortalité de 15 à 33 % même en clinique. Deux repas par jour minimum, pas d'exercice intense une heure avant et deux heures après." },
+      { title: 'Torsion gastrique', text: "Mortalité de 15 à 40 % même en clinique. Deux repas par jour minimum, pas d'exercice intense une heure avant et deux heures après." },
       { title: 'Dysplasie', text: 'La croissance est volontairement ralentie pendant 18 à 24 mois, avec calcium et énergie contrôlés.' },
     ],
     foodNote: 'La ration se pèse à la balance, jamais au gobelet : 430 à 540 g de croquettes par jour pour 40 kg.',
