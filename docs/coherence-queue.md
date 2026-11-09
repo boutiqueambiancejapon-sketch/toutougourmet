@@ -66,12 +66,29 @@
   - TL;DR « 26 kcal pour 100 g » pour les deux → 26 pour le potiron, une quarantaine pour le butternut (le texte dit le potiron moins calorique)
   - Eau « 88 à 92 % » → 86 à 92 % (butternut 86 %)
   - Cuillères à soupe ≠ grammes : 3-4 c.à.s. (60-80 g) → 4-5 c.à.s. (60-75 g) ; 5-6 c.à.s. (100-120 g) → 7-8 ; 30-50 g → 30-45 g ; 1 c.à.c. 5-8 g → 5 g
-- [ ] `chien-peut-manger-poires` · 1664 affichages Google (28 j)
-- [ ] `chien-peut-manger-framboises` · 1617 affichages Google (28 j)
-- [ ] `nourriture-yorkshire-terrier` · 1555 affichages Google (28 j)
-- [ ] `chien-peut-manger-riz` · 1521 affichages Google (28 j)
-- [ ] `chien-peut-manger-melon` · 1422 affichages Google (28 j)
-- [ ] `avis-ultra-premium-direct` · 1278 affichages Google (28 j)
+- [x] `chien-peut-manger-poires` · 1664 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Tableau < 5 kg « ½ à 1 tranche (10 à 20 g), 6 à 11 kcal » → 11 à 22 g, 6 à 13 kcal (tranche de 22 g)
+  - Verdict « une à quatre tranches » → ½ à 4 tranches (comme le TL;DR)
+  - Poire séchée « plus de six fois la poire fraîche » (vrai pour le sucre, pas les kcal : 4,6 fois) → six fois plus de sucres
+- [x] `chien-peut-manger-framboises` · 1617 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+- [x] `nourriture-yorkshire-terrier` · 1555 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - FAQ « deux repas à partir de 2,5 kg, trois sous 2 kg » (trou entre 2 et 2,5 kg) → deux repas à partir de 2 kg
+  - À vérifier (non changé, faute de source) : « un chiot de moins de 6 mois demande 30 à 40 % de plus », les repères usuels donnent nettement plus par kilo ; « 1,00 à 1,50 € par jour chez Elmut » invérifiable (site sans prix, `brand-content` dit 1,80 à 2,50 € sous 10 kg)
+- [x] `chien-peut-manger-riz` · 1521 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Tableau calculé sur le besoin au repos, pas d'entretien : 5 kg 15-20 / 40-50 / 100-120 g → 25-30 / 75-85 / 190-215 g ; 10 kg → 40-50 / 125-145 / 320-365 g ; 20 kg → 70-80 / 215-245 / 535-610 g ; 30 kg → 95-110 / 290-330 / 725-830 g (diète bland alignée sur diarrhee-chien-que-faire-alimentation), FAQ 10 kg alignée
+  - Ration ménagère « féculents 30 % de la gamelle » → riz 20 à 25 % de la gamelle, environ 30 % des calories (comme ration-menagere-chien-guide-recettes)
+  - Diète hydrique 12 à 24 h → ajout « 6 h au plus pour un chiot ou un chien de moins de 3 kg » (comme l'article diarrhée)
+- [x] `chien-peut-manger-melon` · 1422 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Tableau < 5 kg « 1 à 2 cubes (30 à 60 g), 20 kcal » dépassait 10 % d'un chien de 2 kg (16 kcal) → 1 cube (30 g), plafond 15 à 30 kcal
+  - « 5 cubes valent 12 ou 13 g de croquettes » → environ 14 g (51 kcal, croquettes à 360 kcal)
+- [x] `avis-ultra-premium-direct` · 1278 affichages Google (28 j) · relu 2026-11-09 : 8 corrections
+  - Recette « N°3 Adulte Poulet et Riz » (absente du site officiel) → recette Super Premium taille moyenne : poulet 31 %, riz 20 %, maïs 17 %, pois 12 %, protéines 28 %, MG 15 % ; catalogue N°1 à N°9 → gammes Super Premium, Sans Céréales, Care (une vingtaine de recettes)
+  - Prix 3-5 €/kg → 3,50 à 6 €/kg (3,91 €/kg le 12 kg standard, 3,52 en abonnement) ; « sac de 3 kg » → sac de 12 kg ; Sans Céréales « 4,50-5 €/kg » → 5,24-5,66 €/kg, « +1 €/kg » → +1,30 à 1,80 € (aussi dans `brand-content.ts`) ; budget Berger allemand 35-50 € → 37-55 €
+  - Sans Céréales « 45-51 % d'ingrédients animaux, 30-35 % de glucides » → environ 57 % et 39 % (fiche poulet frais)
+  - Franklin « fabriqué en France, 5-7 €/kg » → République tchèque, 5,20-9 €/kg (comme `brand-content.ts`)
+  - Maïs allergène « 5 à 10 % des chiens » → environ 4 % des chiens allergiques (comme allergie-alimentaire-chien)
+  - Retiré : « vétérinaires nutritionnistes » (7 mentions), notes 4,7/5 et 4,5/5, « marques les plus citées par les vétérinaires », « meilleur rapport qualité-prix », « compromis le plus solide »
+  - À vérifier (non changé) : le frontmatter garde `aggregateRating` 4,7 sur 47 avis, servi en JSON-LD sans avis affichés sur la page (même cas sur 2 autres avis) : décision du propriétaire
 - [ ] `chien-mange-poireau-urgence` · 1261 affichages Google (28 j)
 - [ ] `recette-bouillon-os-maison-chien` · 1238 affichages Google (28 j)
 - [ ] `chien-barbecue-securite-aliments-eviter` · 1225 affichages Google (28 j)
