@@ -1057,12 +1057,37 @@
   - Stérilisation « métabolisme de base -20 à 30 %, réduis de 15 à 20 % » → besoins -20 à 30 %, réduis de 20 à 25 % (comme croquettes-chien-sterilise)
   - Dog Chef « ration au gramme », Elmut « selon la stérilisation », Dogfy « dosés selon le poids visé », repas frais « ration ajustée au gramme » → portions recalculées, ration sur le profil, sachets prédosés et suivi gratuit (`data/brand-content.ts`)
   - Franklin « oméga-3 EPA et DHA naturels » → recette Saumon, Truite & Persil à 0,5 % d'oméga-3
-- [ ] `avis-premiere` · 6 affichages Google (28 j)
-- [ ] `meilleure-gamelle-anti-glouton-chien` · 6 affichages Google (28 j)
-- [ ] `nourriture-doberman` · 6 affichages Google (28 j)
-- [ ] `faire-garder-son-chien-vacances-alimentation` · 5 affichages Google (28 j)
-- [ ] `nourriture-bull-terrier` · 5 affichages Google (28 j)
-- [ ] `nourriture-dogue-allemand` · 4 affichages Google (28 j)
+- [x] `avis-premiere` · 6 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Franklin « −30 % sur la première commande » → abonnement à −30 % (`data/partner-discounts.ts`)
+  - « La même maison vend Real Nature » (lu après Franklin) → le groupe de Premiere vend aussi Real Nature
+  - Vérifiés : prix au kilo (3,44 et 5,75 €) et coût par jour (145 g et 450 g pour 10 kg) ; glucosamine 0,8 g par sac contre 400-600 mg/j en entretien pour 20 kg (comme glucosamine-chondroitine-chien-articulations) ; notes du tableau, TL;DR et description
+- [x] `meilleure-gamelle-anti-glouton-chien` · 6 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - « jusqu'à 15 à 20 minutes pour une ration qui partait en 30 secondes » (40 fois, le tableau dit 5 à 10) → tapis de fouille 10 à 20 minutes sur une ration, comme chien-mange-trop-vite-solutions
+  - Vérifiés : gamelle surélevée × 2 ; prix 10 à 25 €
+- [x] `nourriture-doberman` · 6 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - Repos « dans l'heure qui suit » (TL;DR) et « 30 à 60 minutes avant et après » (texte, FAQ) → demi-heure avant, 2 à 3 heures après, comme torsion-estomac-chien-prevention-alimentation
+  - « La viande rouge est la source la plus concentrée en taurine » → moules et cœur de bœuf, loin devant le muscle de bœuf (comme taurine-chien-carence-cardiomyopathie-dilatee) ; la viande rouge est riche en L-carnitine
+  - Elmut « formules au bœuf et à l'agneau » (pas d'agneau chez Elmut) → menu Bœuf, avec cœur et foie
+  - Dog Chef « ration calculée au gramme » → portions recalculées selon le profil et le poids
+  - Taurine en complément « 500 à 1 000 mg par jour » → autour de 1 000 mg deux fois par jour au-delà de 25 kg, comme l'article taurine
+  - Vérifiés : 570-630 g pour 2 000-2 200 kcal à 350 kcal/100 g ; Wess 2010 (58 %) ; Dogfy 60,5 % de bœuf
+  - À vérifier (non changé) : digestibilité des repas frais « 85 à 92 % » (reprise dans 5 articles, source non retrouvée)
+- [x] `faire-garder-son-chien-vacances-alimentation` · 5 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - TL;DR « 3,4 kg pour deux semaines » → pour 15 jours d'absence (tableau et FAQ calculés sur 15 jours)
+  - Vérifiés : stocks du tableau (ration × 10 et × 18) ; 57 kcal de friandises pour 12 kg stérilisé ; xylitol 0,1 g/kg ; deux carrés de chocolat noir pour 5 kg ; transition 7 à 10 jours
+- [x] `nourriture-bull-terrier` · 5 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Tableau stérilisé « −15 à −20 % » → besoins −20 à −30 %, ration réduite de 20 à 25 % (comme croquettes-chien-sterilise)
+  - Texte « abaisse la dépense de 15 à 20 % » → besoins de 20 à 30 %, ration −20 à 25 %
+  - alimentation-beau-pelage-chien-guide citait le Bull Terrier parmi les races à dermatose par carence en zinc → retiré (l'acrodermatite létale ne répond pas au zinc, Bauer 2018)
+  - Vérifiés : grammes du tableau à 3 900-4 000 kcal/kg ; 1 100 kcal pour 22 kg et 1 460 kcal pour 32 kg
+- [x] `nourriture-dogue-allemand` · 4 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - Repos « 1 à 2 heures avant et après » (TL;DR, texte) et « deux heures autour » (FAQ) → demi-heure avant, 2 à 3 heures après
+  - Risque sur la vie « 40 % » → 42 %, comme torsion-estomac-chien-prevention-alimentation
+  - FAQ 60 kg « 2 500 à 3 000 kcal, 600 à 750 g » (750 g = 2 700 kcal, et le tableau donne 600-650 g en calme) → 2 200 à 2 500 kcal, 600 à 700 g
+  - FAQ glucosamine « 1 500-2 000 mg », chondroïtine « 1 200-1 500 mg » → 1 200-1 800 et 900-1 200 mg pour 60 kg (comme glucosamine-chondroitine-chien-articulations)
+  - Elmut « Booster Mobility » (c'est un produit Dog Chef) → repas mijotés, ration sur le profil ; Dog Chef « repas au gramme » → portions recalculées, Mobility Booster
+  - Vérifiés : tableaux adulte et chiot croissants ; chocolat 20 mg/kg ; xylitol 0,1 g/kg
+  - À vérifier (non changé) : mortalité SDTE « 15 à 40 % » ; rapport Ca/P chiot « 1,2 à 1,4 »
 - [ ] `chien-mange-chocolat-urgence` · 3 affichages Google (28 j)
 - [ ] `chien-peut-manger-carottes` · 3 affichages Google (28 j)
 - [ ] `avis-buddy-pet-foods` · 2 affichages Google (28 j)
