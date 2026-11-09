@@ -792,12 +792,33 @@
   - Cyanure des pépins : 3,9 mg d'amygdaline/g × 5,9 % = 0,23 mg/g, pas 0,2 → 0,003 à 0,01 mg par pépin, dose létale à 10 kg « au moins 2 200 » → 1 900 (TL;DR, texte, FAQ, verdict), Chihuahua 670 → 580, dose de référence 7 à 22 → 6 à 22 pépins
 - [x] `zinc-chien-carence-besoins-sources` · 65 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
   - Vérifiés : tableau = FEDIAF 1,8 mg/100 kcal à 110 kcal/kg^0,75 (FAQ 20 kg : 19 mg), teneurs USDA, 2 à 3 mg/kg de zinc élément, sulfate 10 mg/kg, toxicité 100 mg/kg (Merck)
-- [ ] `recette-patee-maison-canard-chien` · 64 affichages Google (28 j)
-- [ ] `nourriture-epagneul-breton` · 63 affichages Google (28 j)
-- [ ] `nourriture-terre-neuve` · 63 affichages Google (28 j)
-- [ ] `flatulences-chien-causes-solutions-alimentation` · 62 affichages Google (28 j)
-- [ ] `chien-mange-xylitol-urgence` · 61 affichages Google (28 j)
-- [ ] `nourriture-bouledogue-anglais` · 59 affichages Google (28 j)
+- [x] `recette-patee-maison-canard-chien` · 64 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : canard cuit sans peau 11,2 g de lipides, 23,5 g de protéines, 12 mg de Ca pour 203 mg de P (USDA 172411), recette 300/150/50 g = 60/30/10 % dans la fourchette 20 kg, 95 % des 200 recettes carencées (Stockman 2013), conservation 3 jours comme les autres pâtées maison
+- [x] `nourriture-epagneul-breton` · 63 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - Saison 1 à 2 sorties « 300 à 350 g » (texte) et « 300-330 g » (FAQ) → 280 à 320 g (+15 à 20 % de 240-270 g)
+  - Intro lipides en saison « 15 à 20 % » → 17 à 22 % (comme le tableau et la formule sport)
+  - Dog Chef « poulet, dinde, canard, bœuf » → poulet, bœuf, porc, canard, poisson (menus officiels, `brand-content.ts`)
+  - Franklin « 60-70 % de protéines animales, sans céréales raffinées » → jusqu'à 70 % de viande ou de poisson, sans céréales
+  - Dogfy menu bœuf « environ 45 % de protéines » → 42,9 %
+  - À vérifier (non changé) : « dinde » chez Dog Chef dans d'autres articles (nourriture-cocker-spaniel, nourriture-bull-terrier, croquettes-chien-digestion-sensible…) ; hypersensibilité alimentaire dans 30 à 50 % des otites chroniques
+- [x] `nourriture-terre-neuve` · 63 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Dosage de la taurine : « plus d'un an » (encadré, FAQ taurine) → 6 mois / 6 à 12 mois ou plus (comme le texte et la FAQ sans céréales)
+  - FDA « alerte de 2019, dossier clos en 2023 » → enquête ouverte en 2018, mises à jour arrêtées fin 2022 (texte et Sources, comme les autres articles)
+  - Repas frais « environ 5,50 € par jour pour 55 kg » → plus de 6 € (tarifs publiés jusqu'à 40 kg : 5,50 à 6 €)
+  - Franklin « 70 % de viande » → jusqu'à 70 %
+- [x] `flatulences-chien-causes-solutions-alimentation` · 62 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Kéfir « sans lactose » → pauvre en lactose (comme la FAQ)
+  - À vérifier (non changé) : charbon actif 250 mg pour 10 kg ; « réduire ces gaz de 50 à 70 % » (FAQ Bouledogue) ; SF68 « seule souche avec licence européenne »
+- [x] `chien-mange-xylitol-urgence` · 61 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Tableau, nombre de chewing-gums à 0,2 à 1 g pièce : 10 kg « un à deux » → un à cinq ; 30 kg « trois à dix » → trois à quinze, « un demi-paquet ou plus » → quinze ou plus
+  - Vérifiés : seuils 0,1 et 0,5 g/kg (Dunayer 2006, huit chiens), insuline 2,5 à 7 fois
+- [x] `nourriture-bouledogue-anglais` · 59 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - Besoins « 1 000 à 1 300 kcal » (TL;DR, FAQ Français) → 900 à 1 200 (comme le texte : 900 stérilisé, 1 050 à 1 200 actif)
+  - Exemple 23 kg visé pour 27 kg « 300 kcal de moins » → environ 150 kcal
+  - Dogfy menu bœuf « environ 31 % de gras sur MS » → 37,5 %
+  - Franklin « 1,20 à 1,60 € par jour » → 1,50 à 2,50 € (250 à 330 g à 5,20-9 €/kg) ; glucosamine attribuée à la recette senior
+  - « Elmut et Dog Chef intègrent glucosamine et oméga-3 à leurs formules grandes races » → Mobility Booster et croquettes avec glucosamine de Dog Chef
+  - À vérifier (non changé) : « chaque kilo perdu réduit de 3 à 5 kg la pression sur les articulations »
 - [ ] `nourriture-samoyed` · 59 affichages Google (28 j)
 - [ ] `chien-peut-boire-lait` · 57 affichages Google (28 j)
 - [ ] `recette-friandises-foie-seche-chien` · 53 affichages Google (28 j)
