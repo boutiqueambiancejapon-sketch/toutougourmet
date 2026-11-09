@@ -17,6 +17,7 @@ export const EMAIL_KIND_LABEL = {
   suppression: 'Suppression du compte',
   test: 'Test du tableau de bord',
   interne: 'Résumé hebdomadaire',
+  contact: 'Message de contact (au propriétaire)',
 } as const
 
 export type EmailKind = keyof typeof EMAIL_KIND_LABEL
