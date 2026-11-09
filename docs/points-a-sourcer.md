@@ -6,17 +6,17 @@
 
 ## 1. Stérilisation
 
-- [ ] `croquettes-chien-sterilise` · « 60 % des chiens stérilisés prennent du poids » (pastille, sans source)
-- [ ] `nourriture-american-staffordshire-terrier` · le site donne 10-20 %, 15-20 % ou 20-30 % pour la baisse après stérilisation selon les articles
-- [ ] `nourriture-beagle` · « parmi les trois races les plus à risque d'obésité » ; sédentaire ou stérilisé 600 à 750 kcal (formule du site : 400 à 590 kcal pour 10 kg)
-- [ ] `nourriture-carlin` · besoins sous la formule du site (7 kg stérilisé sédentaire : 307 kcal ; actif 290-380 contre 400-550 ; chiot 350-420)
+- [x] `croquettes-chien-sterilise` · « 60 % des chiens stérilisés prennent du poids » (pastille, sans source) → adouci (aucune source pour 60 %, pastille retirée) · baisse des besoins 19 à 30 % sourcée (Kawauchi 2017, Jeusette 2004) · 1 article
+- [x] `nourriture-american-staffordshire-terrier` · le site donne 10-20 %, 15-20 % ou 20-30 % pour la baisse après stérilisation selon les articles → 20 à 30 % · Kawauchi 2017 (−19,4 %), Jeusette 2004 (−30 %) · 4 articles + 2 fiches race alignés (Jack Russell, Bichon, Westie, `data/breeds.ts`). Reste : `lib/calculators.ts` applique −15 % (STERILIZED_FACTOR 0,85), code non modifié
+- [x] `nourriture-beagle` · « parmi les trois races les plus à risque d'obésité » ; sédentaire ou stérilisé 600 à 750 kcal (formule du site : 400 à 590 kcal pour 10 kg) → « trois races » sourcé (Pegram 2021, VetCompass : Carlin, Beagle, Golden) · kcal alignés sur la formule du site (stérilisé ou sédentaire 400 à 600, régime ≈ 300) · 1 article. Reste : la `description` dit 700 à 900 kcal (actif), non touchée
+- [x] `nourriture-carlin` · besoins sous la formule du site (7 kg stérilisé sédentaire : 307 kcal ; actif 290-380 contre 400-550 ; chiot 350-420) → formule du site : stérilisé peu actif 6-9 kg 270 à 370 kcal, 7 kg ≈ 310 kcal (≈ 85 g), actif 400 à 550, chiot 4-6 kg 530 à 720 · 1 article
 
 ## 2. Sécurité, toxicité et doses
 
-- [ ] `chien-mange-poireau-urgence` · seuil de 3 g/kg (une seule source, Goodflair) plus bas que celui de l'oignon sur le site (5 g/kg), alors que le texte dit le poireau un peu moins concentré
-- [ ] `chien-mange-glands-chene-urgence` · « les feuilles contiennent beaucoup moins de tanins » (chez le bétail, les jeunes feuilles intoxiquent autant que les glands)
-- [ ] `chien-peut-manger-cerises` · `aliments-toxiques-chien-liste-complete` donne « dose toxique d'amygdaline : 1,5 g/kg » (≈ 90 mg/kg de HCN, loin des 2 mg/kg)
-- [ ] `aliments-toxiques-chien-liste-complete` · `chien-mange-chocolat-urgence` dit « deux carrés » pour rendre malade un chien de 5 kg (TL;DR) et « 1 carré » dans le texte
+- [x] `chien-mange-poireau-urgence` · seuil de 3 g/kg (une seule source, Goodflair) plus bas que celui de l'oignon sur le site (5 g/kg), alors que le texte dit le poireau un peu moins concentré → adouci : pas de seuil propre au poireau (Merck), 3 g/kg gardé comme repère de prudence, sous celui de l'oignon (5 g/kg) · 1 article
+- [x] `chien-mange-glands-chene-urgence` · « les feuilles contiennent beaucoup moins de tanins » (chez le bétail, les jeunes feuilles intoxiquent autant que les glands) → corrigé : jeunes feuilles et bourgeons aussi toxiques que les glands verts · Merck, Oak Toxicosis · 1 article
+- [x] `chien-peut-manger-cerises` · `aliments-toxiques-chien-liste-complete` donne « dose toxique d'amygdaline : 1,5 g/kg » (≈ 90 mg/kg de HCN, loin des 2 mg/kg) → HCN ≈ 2 mg/kg · Merck, Cyanide Poisoning (1,5 g/kg déjà retiré de la liste) · 1 article aligné (graine de lin : 0,5-3,5 → 2 mg/kg)
+- [x] `aliments-toxiques-chien-liste-complete` · `chien-mange-chocolat-urgence` dit « deux carrés » pour rendre malade un chien de 5 kg (TL;DR) et « 1 carré » dans le texte → « 1 à 2 carrés (≈ 13 g) » pour 5 kg · Merck (20 mg/kg) + USDA (8 mg/g, plus prudent que Merck) · 2 articles
 - [ ] `eukanuba-vs-royal-canin` · `dog-chef-vs-royal-canin` et `just-russel-vs-royal-canin` donnent Royal Canin à 22-35 €/mois pour 15 kg (≈ 3,3-5 €/kg), sous le prix de `avis-royal-canin` ; non changé car leurs conclusions de prix en dépendent
 - [ ] `eukanuba-vs-royal-canin` · vitamine E 220 contre 200 mg/kg, DentaDefense « −80 % de tartre en 28 jours » (chiffre de la marque)
 - [ ] `avis-just-russel` · 7,67 €/kg (justrussel.fr donne 43,28 € pour 9 kg, soit 4,80 €/kg, peut-être en promotion) ; « 93 % des propriétaires » introuvable sur le site ; usine de Gand certifiée IFS non mentionnée par la marque ; Japhy « sans céréales » non vérifié

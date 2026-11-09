@@ -334,7 +334,7 @@ export const BREEDS: Breed[] = [
       { title: 'Néphrite héréditaire', text: 'Aucun régime ne la prévient chez un chien sain. Après diagnostic, une alimentation rénale (phosphore limité, oméga-3) se discute avec le vétérinaire.' },
       { title: 'Acrodermatite létale', text: 'Le zinc ne la traite pas, contrairement à la dermatose zinc-sensible du husky ou du malamute.' },
     ],
-    foodNote: "Son appétit n'a pas de limite naturelle : la ration se pèse, et baisse de 15 à 20 % après stérilisation.",
+    foodNote: "Son appétit n'a pas de limite naturelle : la ration se pèse, et baisse de 20 à 30 % après stérilisation.",
     near: ['american-staffordshire-terrier', 'staffordshire-bull-terrier', 'boxer'],
   },
   {
@@ -814,7 +814,7 @@ export const BREEDS: Breed[] = [
       { title: 'Dysplasie de la hanche et du coude', text: 'Contrôle du poids, oméga-3 et glucosamine/chondroïtine dès 4-5 ans.' },
       { title: 'Myélopathie dégénérative', text: 'Mêmes axes : poids contrôlé et apport élevé en oméga-3.' },
     ],
-    foodNote: "Les friandises restent sous 10 % de l'apport du jour. Après stérilisation, la ration baisse de 15 à 20 %, sinon il prend 1 à 2 kg dans l'année.",
+    foodNote: "Les friandises restent sous 10 % de l'apport du jour. Après stérilisation, la ration baisse de 20 à 30 %, sinon il prend 1 à 2 kg dans l'année.",
     near: ['dachshund', 'berger-des-shetland', 'beagle'],
   },
   {
