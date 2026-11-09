@@ -285,12 +285,35 @@
   - RPC Virbac « 97 » (TL;DR, Stat, tableau, FAQ) → 92 (34 % / 370 kcal)
   - « un tiers de protéines en plus » → un quart (92 contre 73)
   - UPD Petite Taille (36,90 € les 8 kg, 30/20 %, P 0,9 %, Ca 1,4 %, 410 kcal, ascophyllum 0,01 %) conforme à la page officielle
-- [ ] `croquettes-chien-demangeaisons` · 543 affichages Google (28 j)
-- [ ] `recette-patee-maison-poulet-chien` · 540 affichages Google (28 j)
-- [ ] `huile-olive-chien-bienfaits-dosage` · 531 affichages Google (28 j)
-- [ ] `dog-chef-vs-japhy` · 526 affichages Google (28 j)
-- [ ] `chien-peut-manger-cornichons` · 524 affichages Google (28 j)
-- [ ] `avis-butternut-box` · 507 affichages Google (28 j)
+- [x] `croquettes-chien-demangeaisons` · 543 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Fiche Franklin « mono-protéine stricte : une seule source animale par recette » (texte : pas toutes ; Saumon & Truite) → des recettes à une seule viande, comme Canard, Pomme & Carotte
+  - « 70 % de viande » (Dinde : 65 %, `brand-content.ts`) → 65 à 70 % selon la recette
+  - « Protéines nouvelles disponibles (insectes, canard, lapin) » (aucune recette Franklin insecte ni lapin) → canard ou agneau
+  - À vérifier (non changé) : `score={9}` du Verdict sur une marque partenaire
+- [x] `recette-patee-maison-poulet-chien` · 540 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Tableau ingrédients « poulet cuit 250 g » (encadré : peser cru) → pesé cru puis cuit
+  - Ca/P « 1:15 à 1:20 » (calcul USDA ≈ 1:11, autres fiches maison : 1:12 à 1:15) → 1:12 à 1:15
+  - 40 kg « 800–1100 g » (2-3 % = 800-1200 g) → 800–1200 g, poulet et riz 400–600 g
+  - À vérifier (non changé) : 2-3 % du poids sous-nourrit un petit chien (5 kg : 100-150 g ≈ 140-215 kcal pour 300 kcal de besoin) ; demande une source avant de changer le tableau
+- [x] `huile-olive-chien-bienfaits-dosage` · 531 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - « 884 kcal pour 100 ml » et « 14 mg de vitamine E pour 100 ml » (valeurs USDA pour 100 g ; fiche olives : 100 g) → pour 100 g (Stat ×2, Verdict)
+  - 1 c.à.c. « 44 kcal » (5 ml ≈ 4,5 g ; fiche huile de saumon : 40 kcal) → 40 kcal, tableau 20/40/60/80 kcal, comparatif saumon 45 → 40 kcal
+  - 10 kg « 9 % de sa ration » → 8 %
+  - Surpoids « 5 à 10 % du budget d'un petit chien » (FAQ : presque 20 % à 250 kcal) → 8 à 16 %
+  - FAQ « 10 à 15 g de croquettes, presque 20 % » → 10 à 12 g, 16 %
+  - TL;DR « ½ c.à.c. par jour sous 10 kg » (tableau : 3 à 5 fois/semaine) → fréquence ajoutée
+- [x] `dog-chef-vs-japhy` · 526 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Dog Chef 15 kg « 55 à 90 € » (`brand-content.ts` : 60 € minimum de 10 à 25 kg ; duel Butternut : 60-90 €) → 60 à 90 € (texte, FAQ)
+  - FAQ écart « 5 à 20 € » → 10 à 25 €
+  - Tableau résiliation « ~10 % des avis » (texte : des avis négatifs) → des avis négatifs
+  - Alignés hors file : `avis-japhy` (Dog Chef 15 kg ~50-65 € → ~60-90 €, TL;DR « 10 % des avis » → des avis négatifs) ; `dog-chef-vs-just-russel` (55-90 € → 60-90 €, ×2)
+- [x] `chien-peut-manger-cornichons` · 524 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Oignon « modifications sanguines vers 15 à 30 g/kg » (fiches oignon, barbecue, liste toxiques : 5 g/kg ; Cope 2005 : toxicose dès 0,5 % du poids) → signes dès 5 g/kg en une fois
+  - Aligné hors file : `chien-peut-manger-paprika` (« premiers signes à 15 à 30 g/kg » → 5 g/kg)
+  - Sel 2-3 g/kg et 4 g/kg, cornichon de 10 g (≈ 0,2 g de sel) conformes au Merck et à l'USDA
+- [x] `avis-butternut-box` · 507 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Dog Chef « 7 jours et 4 mois » au congélateur (`brand-content.ts` et duel : 10 mois) → 10 mois
+  - À vérifier (non changé) : Dog Chef « 5 protéines » contre 11 recettes (`brand-content.ts`), d'où « catalogue le plus large » de Butternut ; « suivi nutritionnel en option payante » chez Dog Chef non trouvé
 - [ ] `chien-peut-manger-betterave` · 497 affichages Google (28 j)
 - [ ] `aliments-toxiques-chien-liste-complete` · 478 affichages Google (28 j)
 - [ ] `chien-mange-crapaud-urgence` · 464 affichages Google (28 j)
