@@ -593,12 +593,33 @@
 - [x] `chien-peut-manger-persil` · 167 affichages Google (28 j) · relu 2026-11-09 : 1 correction
   - « Le départ conseillé vaut un quart du plafond » (¼ c. à café contre 1 c. à soupe à 10 kg) → un dixième
   - Plafond 1 c. à soupe pour 9 kg et tableau 5 à 30 kg : cohérents
-- [ ] `chardon-marie-chien-bienfaits-dosage` · 161 affichages Google (28 j)
-- [ ] `chien-peut-manger-fenouil` · 152 affichages Google (28 j)
-- [ ] `gamelle-chien-inox-ceramique-plastique-silicone` · 152 affichages Google (28 j)
-- [ ] `recette-friandises-saumon-patate-douce-chien` · 146 affichages Google (28 j)
-- [ ] `chien-peut-manger-thon` · 142 affichages Google (28 j)
-- [ ] `croquettes-chien-diabetique` · 142 affichages Google (28 j)
+- [x] `chardon-marie-chien-bienfaits-dosage` · 161 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : 20 à 50 mg/kg/jour (Webster et Cooper 2009), ALAT 119 contre 815 UI/L (Skorupski 2011), cohérent avec `croquettes-chien-epilepsie` et `croquettes-chien-maladie-foie`
+  - À vérifier (non changé) : Légalon SIL « 5 mg/kg toutes les 6 heures » (protocole humain : 5 mg/kg puis perfusion continue de 20 mg/kg/jour)
+- [x] `chien-peut-manger-fenouil` · 152 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : 31 kcal, 12 mg de vitamine C, 414 mg de potassium, 49 mg de calcium pour 100 g ; ¼ de bulbe (~60 g, ~19 kcal) sous 10 % à 15 kg
+- [x] `gamelle-chien-inox-ceramique-plastique-silicone` · 152 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : NC State, 417 questionnaires, 68 gamelles, 18 % lavent moins d'une fois tous les trois mois ou jamais
+  - À vérifier (non changé) : l'étude NC State est parue dans *PLOS ONE* en 2022 ; les sources citent l'article GlobalPETS d'avril 2023
+- [x] `recette-friandises-saumon-patate-douce-chien` · 146 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - Biscuit de 10 g « 18 à 22 kcal » → 25 à 35 kcal (pâte ≈ 1 100 kcal pour 30 à 40 biscuits) ; FAQ « environ 20 kcal » → 30
+  - Tableau, TL;DR, FAQ et légende : 1 / 1-2 / 2-4 / 4-5 / 5-6 biscuits (au-dessus de 10 % des kcal) → ½ / 1 / 1-2 (2 au-dessus de 12 kg) / 2-3 / 3-4
+  - « À partir de 4 biscuits, retire 5 à 10 g de croquettes » → un biscuit vaut environ 8 g de croquettes
+  - Index glycémique « autour de 50, contre 85 pour la pomme de terre » → 63 contre 78 (comme `chien-peut-manger-patate-douce`)
+  - TL;DR « 25 minutes au four » → 20 à 25 minutes (comme la préparation)
+- [x] `chien-peut-manger-thon` · 142 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - « Germon (albacore) », « thon blanc albacore » (l'albacore est le thon jaune) → germon (thon blanc), 4 endroits ; 0,35 ppm contre 0,13 pour le listao (FDA) : cohérent
+  - Repère « 100 g par mois et par tranche de 10 kg, en une ou deux fois » contre une fois par semaine dans le tableau → environ 25 g par semaine, en une petite portion
+  - Sel 0,8 à 1 g/100 g contre 40 mg de sodium (×8 à 10) et portions sous 10 % des kcal : cohérents
+  - À vérifier (non changé) : Zafalon 2021 « au-dessus du seuil FDA dans la totalité des échantillons »
+- [x] `croquettes-chien-diabetique` · 142 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - FAQ « le type 2 peut entrer en rémission chez un chien obèse » → rémission rare, surtout chez la chienne non stérilisée (diabète des chaleurs ou de la gestation) stérilisée vite
+  - Franklin « vétérinaire nutritionniste » → vétérinaire (`data/brand-content.ts`)
+  - Dog Chef « sans pic glycémique », « option premium solide », « des vétérinaires garantissent la régularité » → 50 % de canard frais, sans céréales, aucune étude publiée sur le diabète
+  - Repas frais « meilleur contrôle glycémique possible », « ration exactement calculée en glucides » → ration calculée sur le profil du chien
+  - Elmut « ajuste la formulation » → calcule la quantité, 5 recettes fixes
+  - FAQ « Franklin et Dog Chef sont d'excellentes alternatives » (contre 31 à 39 % de glucides plus haut) → pistes à discuter, non formulées pour le diabète
+  - À vérifier (non changé) : `croquettes-chien-surpoids` « l'obésité est le premier facteur de risque du diabète de type 2 chez le chien » et `comment-faire-maigrir-son-chien` (type 2)
 - [ ] `chien-mange-trop-vite-solutions` · 136 affichages Google (28 j)
 - [ ] `croquettes-chien-dermatite` · 127 affichages Google (28 j)
 - [ ] `fontaine-eau-chien-comment-choisir` · 127 affichages Google (28 j)
