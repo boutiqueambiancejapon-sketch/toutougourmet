@@ -1,0 +1,203 @@
+# Points à sourcer (relecture du 2026-11-09)
+
+> 183 chiffres signalés par la relecture de cohérence, sans source sûre. Traités par la tâche `deploy/sources-prompt.md`, de haut en bas.
+> Cocher : `- [x] … → décision (valeur retenue, source, articles alignés)`. Sans source sérieuse : formulation sans chiffre précis, notée « adouci ».
+
+
+## 1. Stérilisation
+
+- [ ] `croquettes-chien-sterilise` · « 60 % des chiens stérilisés prennent du poids » (pastille, sans source)
+- [ ] `nourriture-american-staffordshire-terrier` · le site donne 10-20 %, 15-20 % ou 20-30 % pour la baisse après stérilisation selon les articles
+- [ ] `nourriture-beagle` · « parmi les trois races les plus à risque d'obésité » ; sédentaire ou stérilisé 600 à 750 kcal (formule du site : 400 à 590 kcal pour 10 kg)
+- [ ] `nourriture-carlin` · besoins sous la formule du site (7 kg stérilisé sédentaire : 307 kcal ; actif 290-380 contre 400-550 ; chiot 350-420)
+
+## 2. Sécurité, toxicité et doses
+
+- [ ] `chien-mange-poireau-urgence` · seuil de 3 g/kg (une seule source, Goodflair) plus bas que celui de l'oignon sur le site (5 g/kg), alors que le texte dit le poireau un peu moins concentré
+- [ ] `chien-mange-glands-chene-urgence` · « les feuilles contiennent beaucoup moins de tanins » (chez le bétail, les jeunes feuilles intoxiquent autant que les glands)
+- [ ] `chien-peut-manger-cerises` · `aliments-toxiques-chien-liste-complete` donne « dose toxique d'amygdaline : 1,5 g/kg » (≈ 90 mg/kg de HCN, loin des 2 mg/kg)
+- [ ] `aliments-toxiques-chien-liste-complete` · `chien-mange-chocolat-urgence` dit « deux carrés » pour rendre malade un chien de 5 kg (TL;DR) et « 1 carré » dans le texte
+- [ ] `eukanuba-vs-royal-canin` · `dog-chef-vs-royal-canin` et `just-russel-vs-royal-canin` donnent Royal Canin à 22-35 €/mois pour 15 kg (≈ 3,3-5 €/kg), sous le prix de `avis-royal-canin` ; non changé car leurs conclusions de prix en dépendent
+- [ ] `eukanuba-vs-royal-canin` · vitamine E 220 contre 200 mg/kg, DentaDefense « −80 % de tartre en 28 jours » (chiffre de la marque)
+- [ ] `avis-just-russel` · 7,67 €/kg (justrussel.fr donne 43,28 € pour 9 kg, soit 4,80 €/kg, peut-être en promotion) ; « 93 % des propriétaires » introuvable sur le site ; usine de Gand certifiée IFS non mentionnée par la marque ; Japhy « sans céréales » non vérifié
+- [ ] `chardon-marie-chien-bienfaits-dosage` · Légalon SIL « 5 mg/kg toutes les 6 heures » (protocole humain : 5 mg/kg puis perfusion continue de 20 mg/kg/jour)
+- [ ] `chien-mange-trop-vite-solutions` · « l'étouffement, risque le plus fréquent en clinique d'urgence » et « dans 9 cas sur 10, c'est une régurgitation », sans source
+- [ ] `nourriture-boxer` · L-carnitine « 500–2 000 mg/jour » (protocoles publiés pour la cardiomyopathie du Boxer : environ 50 mg/kg trois fois par jour)
+- [ ] `chien-peut-manger-noix` · noix de Grenoble « à partir de 7 g/kg, vomissements, diarrhée et signes neurologiques » (le 7 g/kg de `aliments-toxiques-chien-liste-complete` concerne les tremblements de la macadamia) ; « le grillage peut concentrer les mycotoxines »
+- [ ] `note-etat-corporel-chien-evaluer-maison` · écart du verre doseur annoncé de 10-20 % ici, 15-20 % ou 20-40 % dans d'autres articles
+- [ ] `additifs-croquettes-chien-conservateurs-colorants` · propylène glycol « dose maximale 3 g/kg d'aliment » chez le chien (aucune limite trouvée, il serait passé en matière première)
+- [ ] `recette-biscuits-pomme-cannelle-chien` · coumarine de la Cassia 1 200 à 6 500 mg/kg ; 127 cas de Vienne (sans symptôme sous 1 g/kg)
+- [ ] `chien-peut-manger-gingembre` · « effet mesurable dès 5 à 10 mg/kg » ; aucune toxicité jusqu'à 2 à 2,5 g/kg
+- [ ] `recette-friandises-foie-seche-chien` · NRC « 333 µg RE par kilo et par jour » et toxicité « 4 000 µg RE/kg/jour » (le besoin semble plutôt de l'ordre de 30 à 50 µg/kg) ; rétinol du foie de porc 5 400 µg (USDA : 6 500)
+- [ ] `chien-peut-manger-tomate` · seuil de 5 mg de tomatine par kilo attribué à des « données toxicologiques vétérinaires françaises », aucune source chien trouvée (DL50 rat 900 mg/kg)
+- [ ] `chien-peut-manger-beurre-de-cacahuete` · « 2 à 4 g de xylitol par cuillère à soupe » ; atteinte du foie 24 à 72 h ici, 12 à 72 h dans chien-peut-manger-pasteque
+- [ ] `mycotoxines-croquettes-chien-risques-prevention` · signes aigus « de 30 minutes à quelques heures » (vrai pour les trémorgènes, l'aflatoxicose met des jours) ; fumonisines FDA « 10 mg/kg » (valeur pour le maïs, pas l'aliment fini)
+- [ ] `comment-preparer-repas-chien-soi-meme` · « 0,5 à 1 g de carbonate de calcium pour 100 g de viande » (seul article à donner une dose)
+- [ ] `chien-vomit-apres-manger-causes` · mortalité du SDTE « 15 à 40 % » (description intouchable) contre « 15 à 33 % » dans quand-promener-chien-apres-manger ; « obstruction complète mortelle en 24 à 48 h »
+- [ ] `chien-peut-manger-brocoli` · seuil AKC « toxique au-delà de 25 % » (déjà signalé dans l'article comme non mesuré)
+- [ ] `croquettes-chien-problemes-cardiaques` · « 150 à 300 mg de sodium pour 100 kcal » dans les croquettes grand public ; dose de taurine « 500 mg à 1 g par jour »
+- [ ] `diarrhee-chien-que-faire-alimentation` · soluté maison « 1 cuillère à café de sel par litre » (recettes humaines : une demi-cuillère)
+- [ ] `just-russel-vs-japhy` · « livraison payante chez Japhy » (seuils contradictoires selon les sites tiers) ; Just Russel 7,67 €/kg
+
+## 3. Repères de nutrition
+
+- [ ] `nourriture-yorkshire-terrier` · « un chiot de moins de 6 mois demande 30 à 40 % de plus », les repères usuels donnent nettement plus par kilo ; « 1,00 à 1,50 € par jour chez Elmut » invérifiable (site sans prix, `brand-content` dit 1,80 à 2,50 € sous 10 kg)
+- [ ] `meilleures-croquettes-chien-de-chasse` · prix Royal Canin ~3-5 €/kg, lipides Dog Chef et Elmut (~12 et ~10 %) sans base indiquée
+- [ ] `nourriture-chihuahua` · repère « 38 à 42 % de protéines animales » pour un Chihuahua
+- [ ] `nourriture-cavalier-king-charles` · `brand-content.ts` donne au Menu Poulet Dog Chef 15 % de lipides sur matière sèche, la fiche importée environ 25 % ; « très adapté » pour deux repas frais au-dessus du repère de gras, choix laissé au propriétaire
+- [ ] `avis-dogfy-diet-repas-frais-chien` · « 30 à 50 % d'AGE en moins avec la vapeur » attribué à van Rooijen 2013 (revue, pas une comparaison vapeur/autoclave) ; prix Dogfy Diet sans source ; part de protéine Butternut et Fidelis
+- [ ] `nourriture-patou-montagne-pyrenees` · calcium chiot grande race « 0,8 à 1,2 % MS selon FEDIAF et AAFCO » (l'AAFCO fixe un minimum de 1,2 % et un maximum de 1,8 % en croissance grande taille) ; le site varie : 0,8-1,2 (Patou), 0,9-1,4 (Cane Corso), 1,0-1,5 et 1,2-1,8 ailleurs ; seuil « plus de 200 g/jour » sans source
+- [ ] `nourriture-cane-corso` · calcium chiot 0,9-1,4 % (voir Patou) ; « 50 à 60 % du poids adulte à 6 mois »
+- [ ] `nourriture-staffordshire-bull-terrier` · chiot 8-14 mois 290-370 g (au-dessus d'un calcul à 2 × besoin de repos) ; L-2-HGA « entre 6 mois et 1 an »
+- [ ] `avis-dog-chef-croquettes-canard-frais` · `aggregateRating` 4,8 sur 32 avis en JSON-LD sans avis affichés (DECISIONS : jamais d'aggregateRating) ; légende « protéine nouvelle dans 70 à 80 % des cas » sans source ; composition Farmina N&D Duck (30-40 % de canard, hareng) et glucosamine d'Acana Singles non trouvées
+- [ ] `recette-patee-maison-poulet-chien` · 2-3 % du poids sous-nourrit un petit chien (5 kg : 100-150 g ≈ 140-215 kcal pour 300 kcal de besoin) ; demande une source avant de changer le tableau
+- [ ] `avis-butternut-box` · Dog Chef « 5 protéines » contre 11 recettes (`brand-content.ts`), d'où « catalogue le plus large » de Butternut ; « suivi nutritionnel en option payante » chez Dog Chef non trouvé
+- [ ] `voyager-voiture-chien-alimentation-mal-transports` · « 1 chien sur 6 », « 3 chiens malades sur 4 sont des chiots », « habitacle à plus de 40 °C en moins de 10 minutes par 25 °C »
+- [ ] `recette-patee-maison-dinde-chien` · même réserve que les autres pâtées, 2-3 % du poids sous-nourrit un petit chien (recette ≈ 1,2 kcal/g : 5 kg reçoit 120 à 185 kcal)
+- [ ] `conserver-croquettes-chien-guide-oxydation` · « 30 à 50 % de vitamine A et 20 à 40 % de vitamine E perdus en 3 mois », sans source précise
+- [ ] `croquettes-chien-dermatite` · `croquettes-chien-allergique` dit « l'allergie alimentaire touche 10 à 15 % des chiens » (TL;DR et StatRow), alors que la littérature parle de 1 à 2 % des chiens et 9 à 40 % des chiens qui se grattent ; même article : « notre n°1 », Franklin « pionniers du mono-protéine »
+- [ ] `croquettes-chien-dermatite` · section Purina/Royal Canin (« protéines hydrolysées de qualité médiocre », « inflammation de bas grade » par les céréales, « aucune des deux marques ne publie »), et « prix supérieur aux gammes vétérinaires »
+- [ ] `huile-saumon-chien-bienfaits-dosage` · rapport oméga-6/oméga-3 « 5:1 à 10:1 » attribué aux repères européens (FEDIAF) ; `croquettes-chien-dermatite` dit « inférieur à 5 pour 1 »
+- [ ] `avis-fidelis-menus-frais-chien-bocaux` · « 8 sources de protéines » (description verrouillée) alors que la boutique liste 11 bocaux (porc, saumon en plus) et des menus surgelés ; la page d'accueil affiche les bocaux en rupture mais products.json les dit disponibles ; conservation « 12 à 24 mois » non trouvée
+- [ ] `nourriture-braque-allemand` · chiot de 6 mois à 22-26 kg (les courbes de croissance trouvées donnent plutôt 18-23 kg pour un mâle, 15-19 kg pour une femelle, sources de faible qualité)
+- [ ] `recette-patee-maison-lapin-chien` · « le calcium en tête » des carences (Stockman cite surtout choline, vitamine D, zinc et vitamine E ; repris dans 3 articles) ; lapin 4 g de lipides contre poulet 10-15 g (cuisse avec peau, comparaison inégale) ; phosphore 277 mg/100 g
+- [ ] `huile-de-coco-chien-bienfaits-dosage` · « 862 kcal pour 100 ml » (USDA : 892 kcal pour 100 g, soit environ 820 pour 100 ml) ; étude canine de 2024 sur la dermatite atopique
+- [ ] `nourriture-setter-irlandais` · « plus de 1 900 chiens » (Glickman 2000, 217(10) porte sur 1 637 chiens ?) ; prévalence 0,8 % ; ration chasse 500-630 g alors que le texte annonce 2 à 3 fois l'entretien
+- [ ] `chien-peut-manger-pasteque` · 39 kcal/100 g (USDA 30, tables françaises 30 à 39 selon la version) ; pépins « 1 à 1,5 cm de long »
+- [ ] `nourriture-husky-siberien` · « 30 à 40 % de calories en moins » sans source (1 000-1 200 kcal pour 20-25 kg est proche de l'entretien courant) ; Hinchcliff 2011, J Exp Biol
+- [ ] `croquettes-chiot-grande-race` · « au-delà de 1,6 g de calcium pour 100 g MS, lésions reproductibles » (c'est le plafond FEDIAF grande race, pas un résultat d'étude ?) ; calcium chiot grande race très variable sur le site : 0,8-1,2 (patou, berger blanc suisse), 0,9-1,4 (cane corso, dogue de Bordeaux), 1-1,5 (dysplasie, setter), 1,2-1,8 (saint-bernard, au-dessus du plafond FEDIAF)
+- [ ] `torsion-estomac-chien-prevention-alimentation` · « jusqu'à 150 fois plus de risque chez les chiens de plus de 40 kg » (TL;DR, source non retrouvée) ; seuil de lipides « 15-18 % MS »
+- [ ] `croquettes-chien-surpoids` · « 30 kg avec 5 kg en trop, comme s'il pesait 50 kg » ; « la nourriture pèse pour 80 % du bilan calorique »
+- [ ] `nourriture-dogue-allemand` · mortalité SDTE « 15 à 40 % » ; rapport Ca/P chiot « 1,2 à 1,4 »
+- [ ] `comprendre-etiquette-croquettes-chien` · ratio oméga-6/oméga-3 « 5:1 à 10:1 » attribué à la FEDIAF
+- [ ] `nourriture-bouvier-bernois` · mortalité de la torsion « 15 à 33 % » ici, « 15 à 40 % » ailleurs ; calcium chiot « 1,2 à 1,8 % » ici, « 1,0 à 1,6 % » sur 3 autres pages ; repos après repas 1 h ou 2 h selon les pages
+- [ ] `alimentation-chiot-2-6-mois` · étude « 5,5 g/1000 kcal » et « étude de 2006 » (Dobenecker) ; Chihuahua 60 % et Dogue 30 % de la croissance à 2 mois ; « réglementée par le Règlement CE 767/2009 » pour l'allégation chiot grande race
+- [ ] `avis-farmina-nd` · « céréales anciennes qui favorisent moins l'inflammation » ; colonnes part de viande et protéines (MS) du tableau
+- [ ] `avis-hills-science-diet` · Prescription Diet « 150-180 € par mois » ; n/d (oncologie) peut-être arrêté ; « une revue vétérinaire (JSAP 2019) : protéines fraîches plus digestes que les farines de maïs » (encart Elmut)
+- [ ] `budget-alimentation-chien-par-mois` · FACCO 97 %, 6,3 milliards, +8 % ; FACCO/Kantar 90 % ; « opérations en janvier et en septembre »
+- [ ] `chien-peut-manger-banane` · FAQ « un chien de 10 kg a besoin d'environ 0,6 g de potassium par jour » (valeur NRC non retrouvée)
+- [ ] `chien-peut-manger-patate-douce` · valeurs « cuite » mélangent cru et four (vitamine C 20 mg = au four, 2,4 mg crue ; 86 kcal = crue)
+- [ ] `chien-peut-manger-pommes-de-terre` · « 20 % de la ration au maximum » (TL;DR et texte) à côté de la règle des 10 % des calories ; solanine « élevée » dans les frites et chips alors que l'épluchage en retire l'essentiel
+- [ ] `croquettes-chien-convalescence` · facteur « ×1,3 à 1,5 » attribué à la FEDIAF (les repères FEDIAF visent le chien sain) ; « protéines digestibles à 87 % » pour Hill's a/d
+- [ ] `croquettes-chien-dysplasie-hanche` · Hill's j/d « 3,5 g d'EPA+DHA pour 1 000 kcal », RC Mobility « 3,6:1 », prix « 14 à 20 €/kg »
+- [ ] `croquettes-chien-hypertension` · Royal Canin Cardiac « 87 mg pour 100 kcal »
+- [ ] `croquettes-chien-sportif` · Franklin « plus d'oméga-3 que les marques sport » → huile de saumon ou poisson dans plusieurs recettes ; densité « à vérifier » → 3 500 à 4 000 kcal/kg (fiches Franklin)
+- [ ] `croquettes-chien-sportif` · « 4 800 kcal/kg » pour Royal Canin Endurance 4800 (une fiche donne 4 367 kcal/kg calculées), aussi dans le bouton Maxi Zoo
+- [ ] `just-russel-vs-elmut` · « 27 % MS » de protéines, probablement sur produit brut
+- [ ] `nourriture-akita-inu` · thyroïdite « plus de 13 % », « parmi les taux les plus hauts » ; huile de coco contre la sébadénite ; 2 000 à 2 200 kcal pour 35 kg modéré (autres fiches race : 1 600 à 2 200)
+- [ ] `nourriture-basset-hound` · « 40 à 60 % de chiens obèses » ; 800 à 1 200 kcal pour 20 à 35 kg
+- [ ] `nourriture-bichon-frise` · « 35 % ou plus de protéines » alors que Franklin, conseillé, est à 34 %
+- [ ] `nourriture-saint-bernard` · calcium chiot « 1,2 à 1,8 % MS », Ca/P 1,2-1,8 (valeurs AAFCO ; ailleurs sur le site 0,8-1,2 ou 0,9-1,4 pour les géants) ; « FEDIAF : croissance limitée à 70 % de la vitesse maximale » (introuvable)
+- [ ] `nourriture-shih-tzu` · « au moins 35 % de protéines » alors que Franklin, conseillé, est à 34 %
+- [ ] `nourriture-teckel` · « obésité × 3 » ; « vétérinaires orthopédistes : 35 à 40 % de protéines » ; digestibilité 82 % / 85-92 %
+- [ ] `ration-menagere-chien-guide-recettes` · étude « 1 726 recettes, 94 %, 52 % » (Dog Aging Project ?) ; recettes senior (≈ 420 kcal pour 550-650) et allergique 10 kg (≈ 300 kcal) sous le besoin sans le dire ; dinde « faible en phosphore »
+- [ ] `recette-biscuits-maison-beurre-cacahuete-chien` · chiot « dès 3 mois » ici, « dès 6 mois » pour le gâteau d'anniversaire
+
+## 4. Santé et chiffres d’études
+
+- [ ] `aliments-fermentes-chien-bienfaits-dosage` · « SF68, seule souche avec licence UE pour le chien » répété sur 4 articles, d'autres souches semblent autorisées
+- [ ] `avis-ultra-premium-direct` · le frontmatter garde `aggregateRating` 4,7 sur 47 avis, servi en JSON-LD sans avis affichés sur la page (même cas sur 2 autres avis) : décision du propriétaire
+- [ ] `chien-peut-manger-porc` · « sans vaccin » pour le chien, une source évoque un vaccin inactivé en autorisation temporaire
+- [ ] `psyllium-chien-bienfaits-dosage` · « 80 % de réponse » de Leib 2000, le résumé dit seulement « la plupart des chiens »
+- [ ] `meilleures-croquettes-chien-senior` · base (brute ou MS) des valeurs Wolfood, Maison Moulin et Virbac, sans fiche dans la base
+- [ ] `chien-peut-manger-oeufs` · avidine « 30 à 40 % d'activité après cuisson » et « 20 % du régime en blanc cru »
+- [ ] `chien-mange-limace-urgence` · symptômes « 2 à 6 semaines » et « des semaines pour atteindre le cœur » face à une période prépatente de 38 à 57 jours ; « prévention à 75 € environ » sans base
+- [ ] `curcuma-chien-bienfaits-dosage` · « effet anti-inflammatoire léger à 30 mg par chien et par jour » (revue 2023) ; « montaient mieux les escaliers » retiré (absent de l’article source)
+- [ ] `pancreatite-chien-alimentation-guide` · prévalence 1,5 %, Schnauzer « risque 3 à 5× », mortalité 27 à 58 %
+- [ ] `croquettes-chien-reflux-gastrique` · FAQ « grandes races plus prédisposées au reflux » (études contradictoires : plus de reflux sous anesthésie chez les grands chiens à thorax profond, plus chez les races à museau court ailleurs)
+- [ ] `croquettes-chien-calculs-urinaires` · pH cible Hill's c/d « 5,9 à 6,1 » contre Stat « 6,2-6,4 » (aucune valeur officielle trouvée) ; « 1 à 3 % des chiens selon la FACCO » (la FACCO ne publie pas ce chiffre) ; récidive « 20-30 % contre 60-80 % » attribuée à Hill's ; Franklin « −30 % » (`partner-discounts.ts`) contre « 15 à 20 % » dans `brand-content.ts`
+- [ ] `nourriture-berger-blanc-suisse` · fréquence de l'allèle MDR1 « ~16 % en Europe » attribuée à Firdová 2016 (étude non ouverte)
+- [ ] `nourriture-shar-pei` · Dogfy menu bœuf « huile de saumon et de lin, 2,9 % d'huiles » (page officielle inaccessible)
+- [ ] `combien-fois-par-jour-donner-manger-chien` · risque « multiplié par 3 » avec un repas unique, attribué à la Morris Animal Foundation (source non retrouvée ; `gamelle-surelevee-chien` ne donne pas de chiffre)
+- [ ] `donner-comprime-chien-refuse-medicament` · « perd un tiers de son efficacité » avec la nourriture (TL;DR) ; le RCP dit seulement que l'absorption baisse
+- [ ] `recette-riz-poulet-chien-diete-legere` · durée « 3 jours au plus » contre « 3 à 5 jours après la résolution, 5 à 7 jours au total » dans `diarrhee-chien-que-faire-alimentation` (aucune source nette ; description de l'article bloquée sur 3 jours) ; basmati « possible » ici, déconseillé dans le guide diarrhée
+- [ ] `nourriture-cocker-spaniel` · dysplasie de la hanche « environ 20 % des Cockers » selon l'OFA ; deux reprises des chiffres OFA (VIN, Ortocanis) donnent 5 à 6,5 %, page OFA illisible
+- [ ] `chien-mange-ail-oignon-urgence` · Chow-Chow dans la liste des races sensibles (trait documenté chez le Shiba, l'Akita et le Jindo)
+- [ ] `a-quelle-heure-donner-manger-chien` · « l'IAABC range la routine alimentaire parmi les cinq piliers du bien-être » (aucun document IAABC trouvé) ; pastille « ±15 min de tolérance » contre FAQ « 30 à 60 min sans conséquence »
+- [ ] `spiruline-chien-bienfaits-dosage` · contre-indication « phénylcétonurie » (maladie humaine, non décrite chez le chien à notre connaissance) ; « fer 6,5 fois mieux absorbé que le sulfate ferreux »
+- [ ] `vinaigre-de-cidre-chien-bienfaits-precautions` · « 12 % d'irritations cutanées » attribué à l'AVMA (TL;DR et Sources), introuvable sur avma.org ni ailleurs ; table : saut de 5 ml (15-30 kg) à 15 ml (30 kg et plus) sans source
+- [ ] `nourriture-labrador-retriever` · « chaque kilo de trop ajoute 3 à 5 kg de pression » sans source précise
+- [ ] `comment-nourrir-chien-sans-dents` · Wallis 2020, 44-100 % sous anesthésie et 80-89 % après 3 ans, texte intégral inaccessible
+- [ ] `combien-temps-chien-sans-manger` · protocole de réalimentation sur 7 jours attribué à l'ASPCA
+- [ ] `comment-faire-maigrir-son-chien` · « 1,8 à 2,5 ans de plus » (Kealy 2002 donne 1,8 an) et « arthrose 1,5 an plus tard » (`nourriture-bouvier-bernois` cite Smith 2006 : 12 ans contre 6 ans)
+- [ ] `croquettes-sans-cereales-chien` · `data/brand-content.ts` dit « l'abonnement retire 15 à 20 % » ; le site Franklin affiche −30 % sur les 3 premières commandes puis −20 % (cohérent avec `partner-discounts.ts`)
+- [ ] `gamelle-chien-inox-ceramique-plastique-silicone` · l'étude NC State est parue dans *PLOS ONE* en 2022 ; les sources citent l'article GlobalPETS d'avril 2023
+- [ ] `chien-peut-manger-thon` · Zafalon 2021 « au-dessus du seuil FDA dans la totalité des échantillons »
+- [ ] `croquettes-chien-diabetique` · `croquettes-chien-surpoids` « l'obésité est le premier facteur de risque du diabète de type 2 chez le chien » et `comment-faire-maigrir-son-chien` (type 2)
+- [ ] `chien-mange-noix-macadamia-urgence` · signes qui disparaissent « en 12 à 48 heures » (texte) contre « 24 à 48 heures » (TL;DR, fin d'article)
+- [ ] `avis-acana` · composition Heritage Free-Run Poultry « poulet frais 26 %, dinde 14 % » (la recette sans céréales APAC affiche 11 % de poulet et 60 % d'ingrédients animaux) ; `data/brand-content.ts` dit « l'abonnement Franklin retire 15 à 20 % » contre −30 % dans `data/partner-discounts.ts`
+- [ ] `nourriture-schnauzer-nain` · « Watson, 2015, consensus ACVIM » (le consensus ACVIM sur la pancréatite date de 2024) ; seuil d'alerte 400 mg/dL et objectif sous 500 mg/dL
+- [ ] `alimentation-chienne-gestante-allaitante` · « service de consultation NutriVet » non identifié
+- [ ] `croquettes-chien-arthrose` · « perte de 6 à 8 % du poids, douleur −25 à 30 % » (la source citée, J Orthop Res 2013, non retrouvée) ; « Hill's j/d light » contient moins de glucosamine ; RC Mobility « maïs, blé, riz » en tête
+- [ ] `glucosamine-chondroitine-chien-articulations` · glucosamine des aliments (trachée 1 400 mg pour 30 g, patte de poulet 400 mg) ; « Saur et al., 2023 » à rapprocher de l'essai de 2023 cité par l'article moule verte
+- [ ] `croquettes-chien-mauvaise-haleine` · 41 % humide contre 22 % sec (étude non nommée) ; VOHC −40 à 60 % de plaque (même chiffre dans l'article tartre)
+- [ ] `nourriture-epagneul-breton` · « dinde » chez Dog Chef dans d'autres articles (nourriture-cocker-spaniel, nourriture-bull-terrier, croquettes-chien-digestion-sensible…) ; hypersensibilité alimentaire dans 30 à 50 % des otites chroniques
+- [ ] `flatulences-chien-causes-solutions-alimentation` · charbon actif 250 mg pour 10 kg ; « réduire ces gaz de 50 à 70 % » (FAQ Bouledogue) ; SF68 « seule souche avec licence européenne »
+- [ ] `nourriture-bouledogue-anglais` · « chaque kilo perdu réduit de 3 à 5 kg la pression sur les articulations »
+- [ ] `nourriture-samoyed` · première description attribuée à Texas A&M (les travaux connus sur le Samoyède viennent de Guelph, Canada) ; insuffisance rénale « entre 3 et 8 ans » chez les femelles
+- [ ] `faut-il-faire-jeuner-son-chien` · FAQ « consulte si le refus dure plus de 24 heures » contre 48 h pour un adulte sain dans combien-temps-chien-sans-manger
+- [ ] `coup-de-chaleur-chien-symptomes-premiers-gestes` · seuil du coup de chaleur 40 °C ici, 40,5 °C dans alimentation-chien-ete-canicule-guide et recette-glace-maison-chien-ete ; le guide canicule dit « 50 % sans prise en charge rapide » alors que les 54 chiens étaient hospitalisés
+- [ ] `croquettes-chien-tartre` · réduction de la plaque « 40 à 60 % » attribuée à une étude de 2020 ; risque « 5 fois plus élevé » chez les petites races
+- [ ] `chien-peut-manger-oignons` · Labrador classé dans 15-30 kg
+- [ ] `croquettes-ou-patee` · « en particulier les mâles » parmi les chiens qui boivent peu
+- [ ] `chien-peut-manger-viande-crue-barf` · salmonelles « dans 20 à 40 % des poulets crus » ; « plus de 50 % des chiens nourris cru » (Veterinary Record 2017) ; Dog Chef « au moins 50 % de viande fraîche » (chiffre des croquettes ?)
+- [ ] `nourriture-braque-de-weimar` · « un seul gros repas par jour augmente le risque » attribué à Glickman 2000 (217:1492 porte sur les facteurs non alimentaires)
+- [ ] `nourriture-dachshund` · « standard de 9 à 15 kg » et « intermédiaire de 7 à 9 kg » (le standard FCI plafonne vers 9 kg) ; « consensus vétérinaire » sur la glucosamine préventive dès 2-3 ans ; « première cause d'euthanasie »
+- [ ] `croquettes-chien-stresse-anxieux` · « 30 à 40 % des chiens montrent des signes d'anxiété » (CNVSPA 2021, source non retrouvée)
+- [ ] `levure-de-biere-chien-bienfaits-dosage` · « 14 g par jour » dans l'étude anti-puces
+- [ ] `nourriture-dogue-de-bordeaux` · « n° 3 OFA » pour la dysplasie de la hanche ; espérance de vie 5 à 8 ans
+- [ ] `microbiote-intestinal-chien-alimentation` · kéfir 1 c. à café pour 5 kg ici et dans aliments-fermentes, mais 1 c. à soupe pour 10 kg dans flatulences et 1 c. à café pour 10 kg dans alimentation-anxiete ; alimentation-barf cite le 80 % sans Joffe 2002 dans ses sources
+- [ ] `nourriture-doberman` · digestibilité des repas frais « 85 à 92 % » (reprise dans 5 articles, source non retrouvée)
+- [ ] `avis-buddy-pet-foods` · fabrication en République tchèque, ISO 9001, séchage à 70 °C, compensation Gold Standard, 50 pays (site officiel muet sur ces points le 2026-11-09) ; « jusqu'à 80 % » plausible (canard : 70 % de canard + foie + graisse)
+- [ ] `comprendre-etiquette-croquettes-chien` · 38 % de glucides « au-dessus du seuil de 30 % recommandé par les vétérinaires nutritionnistes » (sans source, et l'encadré met 25-35 % en « correct ») → zone médiocre des repères (35 à 45 %)
+- [ ] `alimentation-chien-ete-canicule-guide` · brachycéphales « 21,2 % des cas » au Royaume-Uni (étude de 2020 non lue en entier)
+- [ ] `alimentation-chien-grande-race-adulte-guide` · dysplasie 11 % Bergers allemands et 15 % Labradors (SCC 2020)
+- [ ] `chien-mange-herbe-pourquoi` · plantes dans « 2 à 10 % des contenus d'estomac » de loups
+- [ ] `alimentation-chiot-6-12-mois` · croissance « ralentie de plus de 70 % » à 10 mois chez une grande race
+- [ ] `allergie-alimentaire-chien-symptomes-diagnostic` · « avant 12 mois dans 38 % des cas » (texte intégral Olivry 2019 non lisible) ; hydrolysée « 30 à 50 € par mois pour 20 kg », sans doute trop bas
+- [ ] `avis-japhy` · « environ 10 % des avis négatifs parlent de résiliation » ; la description dit « sans céréales » (non touchée)
+- [ ] `avis-taste-of-the-wild` · Sierra Mountain 25 % vient de l'analyse américaine
+- [ ] `chien-mange-mort-aux-rats-urgence` · « 90 % des raticides », coûts, « les graisses accélèrent l'absorption »
+- [ ] `chien-peut-manger-asperges` · « les pointes contiennent un peu plus de nutriments que les tiges »
+- [ ] `chien-peut-manger-avocat` · occlusion « 1 500 à 3 500 € », mortalité « 5 à 15 % » (chirurgie seule 500 à 2 000 € ailleurs sur le site, frais d'imagerie et d'hospitalisation compris ici)
+- [ ] `chien-peut-manger-canard` · « 1 cou de canard entier » pour un chien de 3 kg
+- [ ] `chien-peut-manger-olives` · À aligner (non changé) : fréquence de l'huile d'olive, « quelques fois par semaine » ici contre « quotidien si toléré » dès 10 kg dans `huile-olive-chien-bienfaits-dosage`
+- [ ] `chien-peut-manger-radis` · « les fanes contiennent moins de glucosinolates que le bulbe »
+- [ ] `chien-sort-croquettes-bol` · « avec plusieurs chiens, au moins l'un d'eux le fait presque toujours »
+- [ ] `choisir-alimentation-chat-guide` · croquettes seules et « risque rénal », céréales et diabète félin
+- [ ] `croquettes-chien-difficile-nourrir` · « moins de 5 % de causes médicales » sans source
+- [ ] `croquettes-chien-douleurs-articulaires` · étude krill « Lipids in Health and Disease, 2017 » non retrouvée
+- [ ] `croquettes-chien-hyperactif` · « 5 à 15 % de chiens sensibles aux colorants » et la source « Dell'Omo et Lipp, 1994 » (aucune étude chien retrouvée) ; hyperkinésie « moins de 1 % »
+- [ ] `croquettes-chien-travail` · source « Adam Tomlinson, JAVMA 2019 » (cortisol et effort mental) non retrouvée ; « 20 à 30 % d'énergie en plus » ; déficit en magnésium « souvent » chez le chien stressé
+- [ ] `croquettes-pressees-froid-vs-extrudees` · prix « 7–12 €/kg » et « 2 à 3 fois plus cher » (Markus-Mühle, Platinum semblent plutôt à 5 à 7 €/kg) ; « 95 % des marques » extrudées
+- [ ] `huile-krill-chien-bienfaits-dosage` · krill « la mieux assimilée » et teneur EPA+DHA (15 à 25 % dans `huile-saumon-chien-bienfaits-dosage`, 20 à 30 % dans `omega-3-chien-comparatif-sources`, 15 à 28 % ici)
+- [ ] `just-russel-vs-royal-canin` · Royal Canin 22-35 €/mois pour 15 kg et « 30 à 50 % moins cher » (≈ 5 à 6,50 €/kg, soit plutôt 30 à 40 €/mois)
+- [ ] `moule-verte-chien-arthrose-dosage` · allergie aux fruits de mer « 2-3 % des allergies alimentaires » ; boiterie « dès la 4ᵉ semaine » (Soontornvipart)
+- [ ] `nourriture-berger-allemand` · « deuxième race la plus populaire en France » (SCC 2023)
+- [ ] `nourriture-berger-belge-malinois` · dysplasie « 15 à 20 % des Malinois » (OFA : environ 5 %, données européennes introuvables)
+- [ ] `nourriture-border-collie` · digestibilité « 85 à 92 % » des repas frais (texte, FAQ)
+- [ ] `nourriture-caniche` · digestibilité « 85–92 % contre 75–80 % pour les croquettes »
+- [ ] `nourriture-dalmatien` · anchois 400-500, gibier, moules, dinde 60-90 (pas dans Kaneko) ; « 100 % des Dalmatiens » (lignées LUA)
+- [ ] `probiotiques-chien-bienfaits-dosage` · BARF « bactéries lactiques issues de la viande fermentée » ; kéfir « 40 milliards pour 125 ml »
+- [ ] `quand-promener-chien-apres-manger` · anti-glouton « −60 à 70 % d'air avalé » ; mortalité 15-33 % ici, 15-40 % ailleurs
+- [ ] `quantite-eau-chien-par-jour` · bi-nutrition « recommandée par le SNVEL » ; Labrador de 30 kg dans le texte, 35 kg dans le tableau
+
+## 5. Prix et marques
+
+- [ ] `meilleure-nourriture-bichon-maltais` · Royal Canin Maltese « environ 30 €/kg », aucun prix dans la base
+- [ ] `butternut-box-vs-dog-chef` · Booster Mobility « chondroïtine et glucosamine » (la base dit seulement « cartilages ») ; conservation, pays et frais de port de Butternut Box
+- [ ] `croquettes-chien-insuffisance-renale` · Hill's et Royal Canin « 70 à 150 € par mois pour 25 kg » (à 16-24 €/kg et environ 300 g par jour, plutôt 145 à 215 €)
+- [ ] `croquettes-chien-demangeaisons` · `score={9}` du Verdict sur une marque partenaire
+- [ ] `croquettes-chien-epilepsie` · prix Neurocare 15 à 20 €/kg
+- [ ] `croquettes-chien-cancer` · Hill's n/d « seule formule vétérinaire pour le cancer » et 18 à 25 €/kg, statut de commercialisation non confirmé ; « 1 chien sur 4 (ACS) » sans source précise
+- [ ] `croquettes-a-volonte-ou-rationnees` · notes de silhouette 4,5 contre 6,8 et arthrose « un an et demi plus tard »
+- [ ] `croquettes-chien-diarrhee-chronique` · Dog Chef croquettes « deux sans gluten (dinde, bœuf) » alors que les deux contiennent de l'avoine ; psyllium 1 à 2 c. à c. par repas pour 10-20 kg ; riz blanc « nourrit les mauvaises bactéries »
+- [ ] `friandises-franklin-avis-composition` · prix du 5 novembre (site Franklin en 429 ce soir)
+- [ ] `proteines-insectes-croquettes-chien` · espèces du tableau des marques (Tomojo ne nomme plus l'insecte, FungFeed chat au Tenebrio et non Hermetia), Réglo et Ékinoé non trouvés
+- [ ] `croquettes-chien-digestion-sensible` · Dog Chef croquettes à la dinde (vue chez Zooplus, absente de `data/brand-content.ts`) ; classement de digestibilité poulet/dinde/saumon > bœuf > agneau sans source
+- [ ] `chien-peut-manger-dinde` · À ajouter dans `data/brand-content.ts` (non changé) : les deux nouvelles recettes Dog Chef à la dinde
+- [ ] `choisir-alimentation-chat-guide` · À corriger dans `data/brand-content.ts` (non changé) : Elmut chat « 3 recettes (poulet, bœuf, dinde) » → 5 recettes avec porc et poisson (elmut.fr, 2026-11-09)
+- [ ] `croquettes-chien-intolerant-cereales` · Elmut « sans céréales » dans `croquettes-chien-cancer`, `elmut-vs-edgard-cooper`, `choisir-alimentation-chat-guide`
+- [ ] `nourriture-jack-russell-terrier` · « chaque kilo en trop = 3 ou 4 kg de surcharge » ; test ADN « 80 à 120 € »
+- [ ] `nourriture-rottweiler` · granulés « 25–30 mm » ; Franklin chien « sans céréales »
+- [ ] `nourriture-shiba-inu` · Franklin « sans céréales »
