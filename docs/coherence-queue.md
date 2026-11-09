@@ -1286,12 +1286,25 @@
   - « Dog Chef, recette à l'agneau » (TL;DR, texte, encadré) → pas de recette agneau (zooplus, dogchef.com) ; recette au canard frais
   - « Elmut, agneau compris » → Elmut : poulet, bœuf, dinde, porc, poisson (elmut.fr/produits-chien)
   - À aligner : `chien-peut-manger-lapin` (gammes Dog Chef et Elmut « plutôt l'agneau ») et `nourriture-boxer` (Elmut « bœuf, poulet ou agneau »)
-- [ ] `chien-peut-manger-asperges` · 0 affichages Google (28 j)
-- [ ] `chien-peut-manger-avocat` · 0 affichages Google (28 j)
-- [ ] `chien-peut-manger-banane` · 0 affichages Google (28 j)
-- [ ] `chien-peut-manger-boeuf-cru` · 0 affichages Google (28 j)
-- [ ] `chien-peut-manger-brocoli` · 0 affichages Google (28 j)
-- [ ] `chien-peut-manger-canard` · 0 affichages Google (28 j)
+- [x] `chien-peut-manger-asperges` · 0 affichages Google (28 j) · relu 2026-11-09 : 0 correction
+  - À vérifier (non changé) : « les pointes contiennent un peu plus de nutriments que les tiges »
+- [x] `chien-peut-manger-avocat` · 0 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - « Sans symptôme, il reprend son alimentation après 12 h » (jeûne seulement s'il vomit) → s'il ne vomit plus
+  - Étude farine d'avocat (9 beagles, 18,67 %, butyrate ×1,9) vérifiée sur PMC8835640
+  - À vérifier (non changé) : occlusion « 1 500 à 3 500 € », mortalité « 5 à 15 % » (chirurgie seule 500 à 2 000 € ailleurs sur le site, frais d'imagerie et d'hospitalisation compris ici)
+- [x] `chien-peut-manger-banane` · 0 affichages Google (28 j) · relu 2026-11-09 : 0 correction
+  - À vérifier (non changé) : FAQ « un chien de 10 kg a besoin d'environ 0,6 g de potassium par jour » (valeur NRC non retrouvée)
+- [x] `chien-peut-manger-boeuf-cru` · 0 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Tableau « en complément » 20-40 / 50-80 / 100-150 / 150-250 g par repas (jusqu'à 3 fois les 10 %) → 8-12 / 15-25 / 35-55 / 60-90 g par jour, bœuf maigre cru à 130 kcal/100 g, ration BARF (2 à 3 % du poids) distinguée
+  - « la protéine la plus utilisée en BARF » (description : « l'une des ») → l'une des protéines les plus utilisées
+- [x] `chien-peut-manger-brocoli` · 0 affichages Google (28 j) · relu 2026-11-09 : 0 correction
+  - À vérifier (non changé) : seuil AKC « toxique au-delà de 25 % » (déjà signalé dans l'article comme non mesuré)
+- [x] `chien-peut-manger-canard` · 0 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - TL;DR « Dog Chef et Elmut cuisinent du canard frais » → Elmut n'a pas de recette canard (poulet, bœuf, dinde, porc, poisson, elmut.fr)
+  - « Comme l'agneau et le lapin, le canard reste rare » (plus bas : on le trouve moins souvent que l'agneau) → comme le lapin
+  - Encadré « aucune réaction croisée démontrée poulet-canard » → 97 % des chiens sensibilisés au poulet réagissent au canard in vitro (Olivry 2017, déjà cité par `recette-patee-maison-dinde-chien`), source ajoutée
+  - FAQ « peau chargée en graisses saturées » (graisse de canard surtout mono-insaturée) → très grasse
+  - À vérifier (non changé) : « 1 cou de canard entier » pour un chien de 3 kg
 - [ ] `chien-peut-manger-celeri` · 0 affichages Google (28 j)
 - [ ] `chien-peut-manger-dinde` · 0 affichages Google (28 j)
 - [ ] `chien-peut-manger-endives` · 0 affichages Google (28 j)
