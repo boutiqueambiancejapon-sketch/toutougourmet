@@ -69,7 +69,7 @@ export const brands: Brand[] = [
       "Jusqu'à 70 % de viande, cuisson entre 90 et 110 °C",
       "Formulé avec la Dr Charlotte Dirat (vétérinaire nutritionniste)",
       '4,6/5 sur 12 158 avis Trustpilot au 5 novembre 2026, 100 000 clients revendiqués',
-      'Abonnement sans engagement, de 15 à 20 % moins cher',
+      'Abonnement sans engagement : −30 % sur 3 commandes, puis −20 %',
     ],
     cons: [
       "Fabriqué en Rép. Tchèque (formulé en France, pas made in France)",

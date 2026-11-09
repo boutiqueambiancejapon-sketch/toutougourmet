@@ -148,7 +148,7 @@ export const BREEDS: Breed[] = [
       { title: 'Myélopathie dégénérative', text: 'Atteinte nerveuse liée au gène SOD1. Un poids de forme aide le chien à rester mobile plus longtemps.' },
       { title: 'Sensibilité digestive', text: "Les selles molles reviennent au moindre changement brutal d'aliment." },
     ],
-    foodNote: "L'allèle muté du gène MDR1 touche environ 16 % de la race : aucun anti-diarrhéique humain ni complément sans avis vétérinaire.",
+    foodNote: "L'allèle muté du gène MDR1 représente 14 à 17 % des copies du gène dans la race : aucun anti-diarrhéique humain ni complément sans avis vétérinaire.",
     near: ['berger-allemand', 'berger-de-beauce', 'berger-belge-malinois'],
   },
   {
