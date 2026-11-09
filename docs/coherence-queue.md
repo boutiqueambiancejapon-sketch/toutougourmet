@@ -443,12 +443,32 @@
   - Poulet « 3 à 4 g de lipides, deux à trois fois plus » que la dinde (moins d'1 g) → trois à cinq fois plus (cuit des deux côtés)
   - Verdict « neuf cas sur dix » (texte et FAQ : 97 %, Olivry 2017 vérifié) → presque tous les cas (97 %)
   - À vérifier (non changé) : même réserve que les autres pâtées, 2-3 % du poids sous-nourrit un petit chien (recette ≈ 1,2 kcal/g : 5 kg reçoit 120 à 185 kcal)
-- [ ] `a-quelle-heure-donner-manger-chien` · 294 affichages Google (28 j)
-- [ ] `chien-peut-manger-haricots-verts` · 294 affichages Google (28 j)
-- [ ] `calcium-phosphore-chien-ratio-besoins` · 292 affichages Google (28 j)
-- [ ] `chien-a-bu-eau-de-mer-que-faire` · 287 affichages Google (28 j)
-- [ ] `spiruline-chien-bienfaits-dosage` · 287 affichages Google (28 j)
-- [ ] `chien-peut-manger-lentilles` · 283 affichages Google (28 j)
+- [x] `a-quelle-heure-donner-manger-chien` · 294 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - FAQ réveil matinal « avance le repas du soir… jeûne nocturne de 10 à 12 h maximum » (texte : au-delà de 14 h ; 17 h à 7 h = 14 h) → retarde les deux repas, sans dépasser 14 h de jeûne
+  - FAQ bile « Avance le repas du soir, rapproche-le du coucher » (contradictoire) → retarde-le pour le rapprocher du coucher
+  - Elmut « portions divisibles selon le rythme de vie, horaires déclarés » (elmut.fr : questionnaire race, âge, poids, stérilisation, rien sur les horaires) → ration du jour calculée sur le profil, à partager selon tes horaires (texte et deux avantages)
+  - Elmut « digestibilité élevée » (invérifiable) → 8 ingrédients, 62 % de viande (`brand-content.ts`)
+  - Elmut conservation « 2 à 3 jours après ouverture » → 5 jours (`brand-content.ts`)
+  - Dog Chef « guide de routine alimentaire personnalisé inclus » (introuvable sur dogchef.com) → ration recalculée quand le poids change (texte et avantage)
+  - À vérifier (non changé) : « l'IAABC range la routine alimentaire parmi les cinq piliers du bien-être » (aucun document IAABC trouvé) ; pastille « ±15 min de tolérance » contre FAQ « 30 à 60 min sans conséquence »
+- [x] `chien-peut-manger-haricots-verts` · 294 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - 30 kcal, 90 % d'eau, 3 % de fibres, portions sous 10 % des calories : cohérents
+  - `comment-faire-maigrir-son-chien` : « Crus ou vapeur, 31 kcal » (contredit « jamais crus » ici) → cuits à la vapeur et nature, environ 30 kcal
+- [x] `calcium-phosphore-chien-ratio-besoins` · 292 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Tableau FEDIAF, exemple 900 kcal (1,1 g Ca, 5,6 g max, 0,9 g P), 3 g de coquille à 40 % de calcium : cohérents avec le site
+- [x] `chien-a-bu-eau-de-mer-que-faire` · 287 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - 2 à 3 g/kg de sel pour les premiers signes, 4 g/kg mortel (vérifié sur le Merck Veterinary Manual), volumes à 35 g/L : cohérents
+  - `chien-peut-manger-jambon` : « dose orale toxique autour de 4 g/kg » (pastille et texte) → premiers signes vers 2 à 3 g/kg, dose mortelle vers 4 g/kg
+- [x] `spiruline-chien-bienfaits-dosage` · 287 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Note « 1 c. à café rase ≈ 3 g » (les cuillères du tableau donnent 2 g : 1/8 = 250 mg, 1/2 = 1 g) → environ 2 g
+  - « Étude de 2023 sur 60 chiens, 12 semaines » (introuvable ; étude connue : Satyaraj 2021, 30 chiens, 42 semaines, meilleure réponse au vaccin antirabique et IgA fécales) → étude de 2021 décrite, source ajoutée
+  - FAQ calcium « il en faut 1 200 mg pour 1 kg de ration ménagère » → au moins 1,25 g pour 1 000 kcal (comme `calcium-phosphore-chien-ratio-besoins`)
+  - Levure de bière « 45 % de protéines » → 40 à 52 % (`levure-de-biere-chien-bienfaits-dosage`)
+  - `alimentation-beau-pelage-chien-guide` : spiruline « 0,5-1 g/10 kg/jour » (jusqu'au double de 50 mg/kg) → 0,5 g/10 kg/jour
+  - À vérifier (non changé) : contre-indication « phénylcétonurie » (maladie humaine, non décrite chez le chien à notre connaissance) ; « fer 6,5 fois mieux absorbé que le sulfate ferreux »
+- [x] `chien-peut-manger-lentilles` · 283 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Tableau : cuillères converties à 15, 25, 50, 75 et 100 g → 5, 15, 30, 45 et 60 g (1 c. à café ≈ 5 g, 1 c. à soupe ≈ 15 g) ; reste sous 10 % des calories du jour
+  - 116 kcal, 9 g de protéines, 8 g de fibres, FDA 2018-2022 : cohérents
 - [ ] `quelle-quantite-donner-manger-chien-selon-poids` · 283 affichages Google (28 j)
 - [ ] `vinaigre-de-cidre-chien-bienfaits-precautions` · 276 affichages Google (28 j)
 - [ ] `collagene-chien-bienfaits-dosage` · 273 affichages Google (28 j)
