@@ -688,12 +688,31 @@
 - [x] `croquettes-a-volonte-ou-rationnees` · 101 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
   - Vérifiés : Kealy 2002, 48 Labradors, 25 % de moins, 13 contre 11,2 ans (PMID 11991408) ; POMC un Labrador sur quatre ; 15 kg 640-850 kcal (×1,2 à ×1,6 du besoin au repos) ; 44,5 % et 4,9 millions comme les autres articles
   - À vérifier (non changé) : notes de silhouette 4,5 contre 6,8 et arthrose « un an et demi plus tard »
-- [ ] `chute-poils-chien-causes-alimentation` · 99 affichages Google (28 j)
-- [ ] `recette-biscuits-sardine-chien` · 99 affichages Google (28 j)
-- [ ] `avis-fidelis-menus-frais-chien-bocaux` · 98 affichages Google (28 j)
-- [ ] `calendrier-avent-chien` · 96 affichages Google (28 j)
-- [ ] `chien-peut-manger-champignons` · 96 affichages Google (28 j)
-- [ ] `chien-mange-cafe-urgence` · 91 affichages Google (28 j)
+- [x] `chute-poils-chien-causes-alimentation` · 99 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Zinc FEDIAF « 6 mg par kg de matière sèche » → 72 mg/kg MS (comme l'article sur le beau pelage)
+  - FAQ « régime d'éviction de 8 semaines » → 8 à 12 semaines (comme le texte)
+  - Vérifiés : 66 % bœuf, laitiers, poulet (Mueller 2016) ; 170 mg d'EPA+DHA à 10 kg (30 mg/kg^0,75)
+- [x] `recette-biscuits-sardine-chien` · 99 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Tableau 1 / 2 / 3-4 / 4-6 / 6-8 biscuits (18 kcal, au-dessus de 10 % en bas de chaque gabarit) → ½-1 / 1-2 / 2-3 / 4-5 / 6-7
+  - Vérifiés : EPA+DHA 1,5 à 2 g/100 g (Ciqual, sardine à l'huile d'olive 2,9 g), calcium 300-400 mg, phosphore 400-500 mg
+- [x] `avis-fidelis-menus-frais-chien-bocaux` · 98 affichages Google (28 j) · relu 2026-11-09 : 7 corrections
+  - « Déclarées aliments complets » → la plupart des bocaux sont « complément alimentaire pour chiens » (fiches fidelis.fr, seul le canard est complet) : texte, avantages, inconvénients, FAQ
+  - Dinde « filets, cœur et foie, sans part exacte, huile végétale, vitamines » → 70 % de dinde cuite dont 20 % d'abats, huile de lin, sans vitamines de synthèse
+  - « Bœuf aux framboises et épinards » → bœuf à la patate douce, pomme et brocoli
+  - 25 kg « 130 à 180 € par mois » → 15 kg, 180 € ou plus (400 g à 4,39-4,99 €, 89 à 180 kcal/100 g)
+  - Tableau prix 20 kg 110-150 / 120-160 / 140-180 € → 15 kg : 180 € ou plus / 60-90 € / 60-100 € + port (avis Dog Chef et Butternut du site)
+  - Protéines Dog Chef « poulet, bœuf, canard, dinde, agneau » → poulet, bœuf, porc, canard, poisson (`data/brand-content.ts`)
+  - Sources : date de consultation 9 novembre
+  - À vérifier (non changé) : « 8 sources de protéines » (description verrouillée) alors que la boutique liste 11 bocaux (porc, saumon en plus) et des menus surgelés ; la page d'accueil affiche les bocaux en rupture mais products.json les dit disponibles ; conservation « 12 à 24 mois » non trouvée
+- [x] `calendrier-avent-chien` · 96 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : 29,90 € (1,25 € par jour), pas de kcal publiées par Franklin
+- [x] `chien-peut-manger-champignons` · 96 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Fausse oronge « muscarine, iboténate » → acide iboténique, muscimol
+  - Agaritine « détruite à plus de 80 % par la cuisson » → réduite, environ deux tiers au micro-ondes (Schulzová 2002 : 25 % en général, 35-70 % à la poêle), 2 endroits
+  - FAQ « tous les jours pour un chien moyen ou grand » → grand chien ; un jour sur deux pour un moyen (comme le tableau)
+  - Vérifiés : sélénium 9 µg et potassium 318 mg (USDA), portions sous 10 %
+- [x] `chien-mange-cafe-urgence` · 91 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : tableau 20 mg/kg (marc 4,5 mg/g, soluble 31,4 mg/g, filtre 0,4 mg/mL), espresso 64 mg, 7 g de grains enrobés ≈ 60 mg, seuils 20 / 40-50 / 60 mg/kg comme l'article chocolat
 - [ ] `note-etat-corporel-chien-evaluer-maison` · 90 affichages Google (28 j)
 - [ ] `nourriture-braque-allemand` · 90 affichages Google (28 j)
 - [ ] `halloween-chien-bonbons-citrouille-dangers` · 84 affichages Google (28 j)
