@@ -245,12 +245,23 @@
   - TL;DR Franklin « faible en graisses saturées » (invérifiable) → recette Light à 11 % de lipides
   - Elmut « formule à lipides modérés » si reflux (recettes à 26-29 % MS, `brand-content.ts`) → chiffre donné, décision avec le vétérinaire
   - À vérifier (non changé) : FAQ « grandes races plus prédisposées au reflux » (études contradictoires : plus de reflux sous anesthésie chez les grands chiens à thorax profond, plus chez les races à museau court ailleurs)
-- [ ] `avis-royal-canin` · 625 affichages Google (28 j)
-- [ ] `chien-peut-manger-navet` · 609 affichages Google (28 j)
-- [ ] `chien-peut-manger-abricots` · 605 affichages Google (28 j)
-- [ ] `gamelle-surelevee-chien` · 596 affichages Google (28 j)
-- [ ] `fibres-alimentaires-chien-role-sources-dosage` · 591 affichages Google (28 j)
-- [ ] `avis-dog-chef-croquettes-canard-frais` · 586 affichages Google (28 j)
+- [x] `avis-royal-canin` · 625 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - Medium Adult « farine de maïs déshydratée en premier, protéines animales (26 %) en troisième » (page officielle : volaille en tête) → volaille en tête puis cinq céréales ; Mini Adult : farine de blé en premier ; TL;DR « maïs ou riz en premier » aligné ; noms des céréales sur l'étiquette alignés
+  - FAQ prix « 8 à 14 €/kg » → environ 6,50 €/kg en 15 kg, jusqu'à 14 €/kg en petit sac
+  - Franklin « vétérinaire nutritionniste » → une vétérinaire ; « 70 % de viande » → jusqu'à 70 %
+  - Dog Chef « recette ajustée à la race, l'âge… » → ration calculée par questionnaire (`brand-content.ts`)
+- [x] `chien-peut-manger-navet` · 609 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Tableau 5-15 kg « 3 à 5 dés cuits (30-50 g) » (dés de 1 à 2 cm, 8 g au plus) → 30 à 50 g de dés cuits
+- [x] `chien-peut-manger-abricots` · 605 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - « un seul noyau suffit à provoquer une occlusion » sous 10 kg (plus bas : « peut rester coincé ») → peut provoquer (2 phrases)
+- [x] `gamelle-surelevee-chien` · 596 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - ×2, 20 % et 52 %, seuils de hauteur de 30 cm conformes à l'étude de 2000 et alignés avec le dossier torsion
+- [x] `fibres-alimentaires-chien-role-sources-dosage` · 591 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - « la pulpe de betterave et la pectine produisent beaucoup d'acides gras » (texte et tableau : pulpe modérément fermentescible) → pectine beaucoup, pulpe une quantité moyenne
+- [x] `avis-dog-chef-croquettes-canard-frais` · 586 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Comparatif « Canard strict » pour Acana et Farmina (même tableau : oméga-3 de hareng ou d'huile de poisson) → Canard (+ huile de poisson), Canard (+ hareng)
+  - Composition, analyse et prix (14-18 €/kg) conformes à la page officielle et au site
+  - À vérifier (non changé) : `aggregateRating` 4,8 sur 32 avis en JSON-LD sans avis affichés (DECISIONS : jamais d'aggregateRating) ; légende « protéine nouvelle dans 70 à 80 % des cas » sans source ; composition Farmina N&D Duck (30-40 % de canard, hareng) et glucosamine d'Acana Singles non trouvées
 - [ ] `topping-croquettes-chien-enrichir-gamelle-guide` · 581 affichages Google (28 j)
 - [ ] `chien-mange-couche-normal` · 580 affichages Google (28 j)
 - [ ] `os-poulet-chien-danger` · 580 affichages Google (28 j)
