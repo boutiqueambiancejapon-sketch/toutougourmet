@@ -89,12 +89,29 @@
   - Maïs allergène « 5 à 10 % des chiens » → environ 4 % des chiens allergiques (comme allergie-alimentaire-chien)
   - Retiré : « vétérinaires nutritionnistes » (7 mentions), notes 4,7/5 et 4,5/5, « marques les plus citées par les vétérinaires », « meilleur rapport qualité-prix », « compromis le plus solide »
   - À vérifier (non changé) : le frontmatter garde `aggregateRating` 4,7 sur 47 avis, servi en JSON-LD sans avis affichés sur la page (même cas sur 2 autres avis) : décision du propriétaire
-- [ ] `chien-mange-poireau-urgence` · 1261 affichages Google (28 j)
-- [ ] `recette-bouillon-os-maison-chien` · 1238 affichages Google (28 j)
-- [ ] `chien-barbecue-securite-aliments-eviter` · 1225 affichages Google (28 j)
-- [ ] `meilleures-croquettes-chien-de-chasse` · 1201 affichages Google (28 j)
-- [ ] `faut-il-rehydrater-croquettes-chien` · 1187 affichages Google (28 j)
-- [ ] `chien-peut-manger-yaourt` · 1165 affichages Google (28 j)
+- [x] `chien-mange-poireau-urgence` · 1261 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Délai des signes « 1 à 3 jours » (TL;DR, texte, légende, FAQ, surveillance 3 jours) → 1 à 5 jours, comme les articles ail-oignon et oignons
+  - Tableau 20 kg « 60 g, un petit poireau entier » (un poireau pèse 150 à 300 g) → un tronçon d'une dizaine de centimètres
+  - À vérifier (non changé, faute de source) : seuil de 3 g/kg (une seule source, Goodflair) plus bas que celui de l'oignon sur le site (5 g/kg), alors que le texte dit le poireau un peu moins concentré
+- [x] `recette-bouillon-os-maison-chien` · 1238 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - TL;DR « 1 c. à soupe petit chien, 50-100 ml moyen, 150-200 ml grand » → 1 à 2 c. à soupe, 60 à 120 ml (10-20 kg), 150 à 220 ml au-delà de 35 kg, comme le tableau ; pastille 50-200 ml → 15-220 ml
+  - FAQ « 50 à 100 ml pour 10-20 kg, 150-200 ml dès 30 kg » → 60 à 120 ml, 120 à 180 ml (20-35 kg), 150 à 220 ml au-delà
+- [x] `chien-barbecue-securite-aliments-eviter` · 1225 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Oignon « dès 5 à 10 g/kg », ail « 5 fois plus, 1,25 g/kg » → dès 5 g/kg, ail 3 à 5 fois plus, environ 1 g/kg (comme chien-mange-ail-oignon-urgence)
+  - Tableau saucisses « lipides > 25 % sur matière sèche » → 25 à 35 % de lipides (produit tel quel, comme le texte)
+- [x] `meilleures-croquettes-chien-de-chasse` · 1201 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - TL;DR « pas de repas moins de 2 h avant ou après l'effort » → 2 h avant, ni dans l'heure qui suit (comme le texte et l'encadré)
+  - En-cas « 50-100 kcal la veille au soir » → au moins 2 h avant le départ ; FAQ « 20-25 % de la ration le matin » → en-cas de 50 à 100 kcal
+  - Franklin « 34 à 37,5 % de protéines » → 34 % pour la plupart, 37,5 % pour le chiot ; tableau 34-37,5 % → 25-37,5 %, prix 6-9 € → 5-9 €/kg (`brand-content.ts`)
+  - Dog Chef ~11-14 €/kg → ~14-18 €/kg (comme avis-croquettes-orlando-lidl)
+  - FAQ « saison de 5 mois » (septembre à février dans l'encadré) → 5 à 6 mois
+  - Royal Canin Endurance 4800 à 32 % / 30 % confirmé (page officielle) ; croquettes-chien-sportif disait « 30 % et 20 % sur MS » → 32 % et 30 % (corrigé là-bas)
+  - À vérifier (non changé) : prix Royal Canin ~3-5 €/kg, lipides Dog Chef et Elmut (~12 et ~10 %) sans base indiquée
+- [x] `faut-il-rehydrater-croquettes-chien` · 1187 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Trempage à l'eau tiède « 10 à 15 minutes » → 10 à 20 minutes (TL;DR, pastille, méthode)
+  - FAQ eau froide « 25 à 30 minutes » → 20 à 30 minutes (comme le texte)
+- [x] `chien-peut-manger-yaourt` · 1165 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - FAQ « pot sucré de 150 kcal, 15 à 20 % de la journée d'un petit chien » → près de la moitié de la journée d'un chien de 5 kg (environ 330 kcal)
 - [ ] `chien-peut-manger-kiwi` · 1144 affichages Google (28 j)
 - [ ] `nourriture-chihuahua` · 1112 affichages Google (28 j)
 - [ ] `chien-peut-manger-porc` · 1071 affichages Google (28 j)
