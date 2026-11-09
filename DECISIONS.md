@@ -372,3 +372,5 @@ Mini-calculateur des articles « peut-il manger » (propriétaire, 2026-11-09, p
 Relecture de cohérence (propriétaire, 2026-11-09) : les tâches de nuit existantes ne touchent pas aux chiffres et laissaient passer les incohérences (avoine, amandes, pomme, poire). Nouvelle étape de nuit `deploy/coherence-prompt.md`, 6 articles par nuit, file `docs/coherence-queue.md` triée par affichages Google, corrections notées avant → après.
 
 Relecture du 2026-11-09 : 368 articles relus en une journée, 972 corrections ; 183 points signalés sans correction faute de source (liste dans docs/coherence-queue.md, lignes « À vérifier »). aggregateRating retiré des 3 avis qui en gardaient (règle « jamais d'aggregateRating »). Chocolat : seuils recalculés (5 à 7 carrés pour le cœur à 5 kg, une trentaine pour 60 kg, carré de 5 g).
+
+Points à sourcer (propriétaire, 2026-11-09) : les 183 chiffres « À vérifier » sont triés par importance (stérilisation, sécurité et doses, nutrition, santé, prix et marques) dans docs/points-a-sourcer.md ; traités par lots de 8 (deploy/sources-prompt.md) : source sérieuse, même valeur sur tout le site, sinon formulation adoucie sans chiffre.

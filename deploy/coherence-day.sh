@@ -1,21 +1,25 @@
 #!/usr/bin/env bash
 # Relecture de cohérence en continu sur une journée (demande du propriétaire, 2026-11-09) : lots de 6 articles
 # (deploy/coherence-prompt.md), chaque lot poussé sur v2 et mis en ligne, arrêt à l'heure donnée (Paris).
-#   nohup setsid deploy/coherence-day.sh 19:40 &
+#   nohup setsid deploy/coherence-day.sh '2026-11-10 19:40' [prompt] [file] &
+# Par défaut : deploy/coherence-prompt.md et docs/coherence-queue.md.
 # Sa propre copie (~/toutou-coherence) : ne gêne ni ~/Toutou, ni les articles, ni la tâche de nuit.
 set -uo pipefail
-FIN=${1:-19:40}
+FIN=$(TZ=Europe/Paris date -d "${1:-today 19:40}" +%s)
+PROMPT=${2:-deploy/coherence-prompt.md}
+QUEUE=${3:-docs/coherence-queue.md}
+NOM=$(basename "$PROMPT" -prompt.md)
 REPO_URL=https://github.com/boutiqueambiancejapon-sketch/toutougourmet
 WORK=/home/administrator/toutou-coherence
 LOGS=/home/administrator/toutou-seo-logs
-LOCK=/home/administrator/.toutou-coherence.lock
+LOCK=/home/administrator/.toutou-day.lock
 export PATH=/home/administrator/.local/bin:/usr/local/bin:/usr/bin:/bin
 mkdir -p "$LOGS"
 exec 9>"$LOCK"
 flock -n 9 || { echo "Une relecture est déjà en cours."; exit 0; }
-exec >>"$LOGS/$(date +%F)-coherence.log" 2>&1
-avant_fin() { [[ "$(TZ=Europe/Paris date +%H:%M)" < "$FIN" ]]; }
-reste() { grep -c '^- \[ \]' docs/coherence-queue.md; }
+exec >>"$LOGS/$(date +%F)-$NOM.log" 2>&1
+avant_fin() { [[ $(date +%s) -lt $FIN ]]; }
+reste() { grep -c '^- \[ \]' "$QUEUE"; }
 [[ -d "$WORK/.git" ]] || git clone --quiet "$REPO_URL" "$WORK"
 cd "$WORK"
 lot=0
@@ -28,7 +32,7 @@ while avant_fin; do
   npm ci --no-audit --no-fund --silent
   BEFORE=$(git rev-parse HEAD)
   echo "=== $(date -Is) lot $lot ($(reste) articles restants)"
-  claude -p "$(cat deploy/coherence-prompt.md)" --permission-mode auto --output-format text || echo "claude a terminé avec une erreur"
+  claude -p "$(cat "$PROMPT")" --permission-mode auto --output-format text || echo "claude a terminé avec une erreur"
   if [[ "$(git rev-parse HEAD)" == "$BEFORE" ]]; then echo "Lot $lot : aucun commit"; sleep 60; continue; fi
   ok=0
   for i in 1 2 3; do
