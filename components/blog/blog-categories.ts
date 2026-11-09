@@ -158,6 +158,7 @@ const BREED_SLOT_BY_SLUG: Record<string, string> = {
  * Elle écrase aussi la cover breed historique pour les articles de race.
  */
 const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
+  'avis-multifit': 'art-avis-multifit',
   'chien-peut-manger-choucroute': 'art-chien-peut-manger-choucroute',
   'avis-real-nature': 'art-avis-real-nature',
   'avis-atavik': 'art-avis-atavik',

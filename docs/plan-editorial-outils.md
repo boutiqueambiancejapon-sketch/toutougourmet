@@ -38,7 +38,7 @@ Pages mères déjà en ligne, à doter de la section des modèles au premier mod
 - [x] Real Nature : avis sur la marque, les croquettes et la pâtée (real nature avis, real nature wilderness avis) → avis-real-nature
 - [x] Select Gold : avis sur les croquettes de Maxi Zoo (select gold avis, avis vétérinaire) → avis-select-gold
 - [x] Atavik : avis sur la marque (atavik avis) → avis-atavik
-- [ ] MultiFit : avis sur les croquettes et les pâtées (multifit avis)
+- [x] MultiFit : avis sur les croquettes et les pâtées (multifit avis) → avis-multifit
 - [ ] Eukanuba : avis sur les croquettes (eukanuba avis, avis vétérinaire)
 - [ ] Carnilove : avis sur les croquettes (carnilove avis chien)
 - [ ] Nature's Variety : avis sur les croquettes (nature's variety chien avis)
