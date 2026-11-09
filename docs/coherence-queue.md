@@ -1471,12 +1471,31 @@
   - Dog Chef « recettes développées par des vétérinaires » → 52 à 58 % de viande ou de poisson
   - Tiédir « 30–35 °C » → 35–37 °C (comme les articles perte d'appétit et convalescence)
   - FAQ huile « saumon ou lin, 1 cc par 5 kg » (dix fois la dose de la fiche huile de saumon, lin sans EPA ni DHA) → environ 1 ml pour 10 kg avec une huile à 200 mg/ml, lin déconseillé
-- [ ] `croquettes-pressees-froid-vs-extrudees` · 0 affichages Google (28 j)
-- [ ] `diarrhee-chien-que-faire-alimentation` · 0 affichages Google (28 j)
-- [ ] `distributeur-croquettes-automatique-chien` · 0 affichages Google (28 j)
-- [ ] `elmut-vs-edgard-cooper` · 0 affichages Google (28 j)
-- [ ] `huile-krill-chien-bienfaits-dosage` · 0 affichages Google (28 j)
-- [ ] `just-russel-vs-elmut` · 0 affichages Google (28 j)
+- [x] `croquettes-pressees-froid-vs-extrudees` · 0 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Tableau, gonflement des extrudées « élevé, facteur de risque de torsion » → plus marqué, rôle dans la torsion non démontré (comme le TL;DR et le dossier torsion)
+  - À vérifier (non changé) : prix « 7–12 €/kg » et « 2 à 3 fois plus cher » (Markus-Mühle, Platinum semblent plutôt à 5 à 7 €/kg) ; « 95 % des marques » extrudées
+- [x] `diarrhee-chien-que-faire-alimentation` · 0 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Smecta « 0,5 à 1 ml/kg, 2 à 3 fois par jour » → dose donnée par le vétérinaire (pas de dose de médicament sur le site)
+  - Diarsanyl et Pro-Kolin « à base de diosmectite » → argile : montmorillonite pour Diarsanyl, kaolin pour Pro-Kolin
+  - FAQ diète « 3 à 5 jours après la résolution des selles molles, 5 à 7 jours au total » → 3 à 5 jours jusqu'à ce que les selles se raffermissent (comme le texte, le tableau et la FAQ 1)
+  - À vérifier (non changé) : soluté maison « 1 cuillère à café de sel par litre » (recettes humaines : une demi-cuillère)
+- [x] `distributeur-croquettes-automatique-chien` · 0 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Programmable « 2 à 12 repas par jour » (TL;DR, tableau) → 4 à 6 (comme les prix relevés ; 12 repas = modèle connecté PetSafe)
+  - Fractionnement contre la torsion « 3 à 4 prises » (TL;DR, texte, FAQ), gamelle « trois fois » → 2 à 3 prises (comme les dossiers torsion et grande race)
+- [x] `elmut-vs-edgard-cooper` · 0 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Elmut « sans céréales : oui » (tableau, FAQ allergie) → quinoa dans poulet, dinde, poisson, riz dans bœuf et porc
+  - FAQ Edgard & Cooper « en abonnement en ligne » → sans abonnement (comme le tableau)
+- [x] `huile-krill-chien-bienfaits-dosage` · 0 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Étude 2011 « absorbée 30 à 50 % mieux, pour une dose un peu plus faible » (TL;DR, texte, tableau, verdict) → même dose, environ un tiers de plus en moyenne, écart non concluant (12 hommes, 72 h)
+  - Source « Ulven et al., 2011, PMC 3168413 » → Schuchardt JP et al., 2011, Lipids Health Dis 10:145 (c'est l'étude de ce PMC)
+  - Verdict « la mieux absorbée » → bien absorbée
+  - À vérifier ailleurs (non changé) : krill « la mieux assimilée » et teneur EPA+DHA (15 à 25 % dans `huile-saumon-chien-bienfaits-dosage`, 20 à 30 % dans `omega-3-chien-comparatif-sources`, 15 à 28 % ici)
+- [x] `just-russel-vs-elmut` · 0 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Elmut « sans céréales : oui » → quinoa ou riz selon la recette
+  - Elmut 15 kg « 60-90 € » (tableau, texte) → 75-95 € (comme `elmut-vs-edgard-cooper`) ; 20 kg « 70 à 100 €, écart 20 à 40 € » → 75 à 120 € (fourchette Elmut 10 à 25 kg), écart 30 à 60 €
+  - Just Russel « sans dépasser 50 € par mois » (contredit 46-54 € et 46-60 €) → autour de 50 € pour un chien moyen
+  - « 4,4/5 sur plus de 5 500 avis Trustpilot » (note en étoiles, 4,5/5 et 15 000 avis dans l'avis Just Russel) → valeurs nutritionnelles affichées sur chaque page produit
+  - À vérifier (non changé) : « 27 % MS » de protéines, probablement sur produit brut
 - [ ] `just-russel-vs-japhy` · 0 affichages Google (28 j)
 - [ ] `just-russel-vs-royal-canin` · 0 affichages Google (28 j)
 - [ ] `meilleurs-legumes-chien` · 0 affichages Google (28 j)
