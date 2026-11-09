@@ -46,7 +46,6 @@ function FoodPortionFields({ ofFood, kcal100, moderation, bands, initialWeight =
   const valid = weight !== '' && Number.isFinite(kg) && kg >= 1 && kg <= 90
   const grams = valid ? maxGrams(kg, neutered, kcal100, moderation) : null
   const band = valid && bands.length > 0 ? bandFor(bands, kg) : undefined
-  const ceiling = valid ? maxGrams(kg, neutered, kcal100, false) : null
 
   function onWeight(value: string) {
     setWeight(value)
@@ -90,16 +89,15 @@ function FoodPortionFields({ ofFood, kcal100, moderation, bands, initialWeight =
       </div>
       <output htmlFor={`${id}-kg ${id}-st`} aria-live="polite" className="flex flex-col gap-1">
         {weight !== '' && !valid ? <span className="text-sm text-ink-2">Indique un poids entre 1 et 90 kg.</span> : null}
-        {band && ceiling !== null ? (
+        {band ? (
           <>
             <span className={`rounded-box px-4 py-3 text-base font-semibold leading-snug text-ink ${moderation ? 'bg-amber-bg' : 'bg-green-bg'}`}>
               {band.gMin === band.gMax ? `${band.gMin} g` : `${band.gMin} à ${band.gMax} g`} {ofFood}
-              {band.frequency ? `, ${band.frequency}` : ' par prise'}.
+              {band.frequency ? `, ${band.frequency.charAt(0).toLowerCase()}${band.frequency.slice(1)}` : ' par prise'}.
             </span>
-            <span className="text-sm text-ink-2">
-              Portion conseillée dans ce guide pour un chien de {kg} kg. Plafond de toutes ses friandises du jour :{' '}
-              {ceiling} g de cet aliment au plus (10 % des calories, WSAVA).
-            </span>
+            {/* Portion du tableau seule : le plafond calorique (souvent 5 à 10 fois plus haut) contredisait les limites
+                de l'article quand le risque n'est pas calorique (amandes : graisse, obstruction ; propriétaire, 2026-11-09). */}
+            <span className="text-sm text-ink-2">Portion conseillée dans ce guide pour un chien de {kg} kg.</span>
           </>
         ) : grams !== null ? (
           <>
