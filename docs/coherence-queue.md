@@ -567,12 +567,32 @@
   - Étapes du jeûne, 24-48 h « Consulter, quel que soit le chien » → avant 48 h (seuil adulte du site, `croquettes-chien-perte-appetit`)
   - Petits chiens « 2 à 3 fois plus d'énergie » par kg → environ 2 fois (source citée : 88 contre 45 à 50 kcal/kg)
   - À vérifier (non changé) : protocole de réalimentation sur 7 jours attribué à l'ASPCA
-- [ ] `comment-faire-maigrir-son-chien` · 203 affichages Google (28 j)
-- [ ] `chien-peut-manger-fromage` · 202 affichages Google (28 j)
-- [ ] `biotine-chien-bienfaits-dosage` · 201 affichages Google (28 j)
-- [ ] `croquettes-sans-cereales-chien` · 199 affichages Google (28 j)
-- [ ] `alimentation-chien-sportif-avant-apres-effort` · 195 affichages Google (28 j)
-- [ ] `chien-peut-manger-persil` · 167 affichages Google (28 j)
+- [x] `comment-faire-maigrir-son-chien` · 203 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - « Le Labrador porte une mutation du gène POMC » → environ un Labrador sur quatre (Raffan 2016 : allèle à 12 %, ~23 % de porteurs) ; idem `croquettes-a-volonte-ou-rationnees` (« 12 % des Labradors portent » → un sur quatre)
+  - Deux tranches de jambon (80 kcal) « 20 % » de l'apport d'un chien de 10 kg au régime → plus d'un quart (environ 300 kcal)
+  - FAQ 30 → 25 kg « 250 à 500 g par semaine » → 300 à 600 g (1 à 2 % du poids de départ)
+  - FAQ stérilisé « apport réduit de 20 % supplémentaires » → 20 à 30 % plus faible qu'un chien entier (comme la phrase précédente)
+  - RER 20 kg 536 kcal et 5 kg 176 kcal, 4 à 8 % à 4 semaines : cohérents
+  - À vérifier (non changé) : « 1,8 à 2,5 ans de plus » (Kealy 2002 donne 1,8 an) et « arthrose 1,5 an plus tard » (`nourriture-bouvier-bernois` cite Smith 2006 : 12 ans contre 6 ans)
+- [x] `chien-peut-manger-fromage` · 202 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - FAQ « la règle des 10 % plafonne un Labrador de 30 kg à environ 15 g de comté par jour » (10 % ≈ 30 g) → la dose reste de 15 g par prise (tableau)
+  - « Un cube de roquefort de 20 g » (le cube fait 5 g partout ailleurs) → un morceau de 20 g
+  - Étape urgence « tremblements en 30 minutes à 2 heures » → 30 minutes à 4 heures (texte)
+  - Doses 1,5 à 20 g par gabarit, équivalent frais ×4, méthocarbamol et diazépam : cohérents
+- [x] `biotine-chien-bienfaits-dosage` · 201 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : chat 18,75 µg/1 000 kcal (NRC 2006), Carey et Morris 1977, délais de 6 à 8 semaines cohérents
+- [x] `croquettes-sans-cereales-chien` · 199 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Prix sans céréales « 10-15 €/kg » (tableau et inconvénients) → 5-12 €/kg (Franklin 5,20 à 9 €/kg dans `data/brand-content.ts`)
+  - Franklin « recettes mono-protéine », « référence du segment premium hypoallergénique en France » → recettes sans céréales jusqu'à 70 % de viande ou de poisson, Canard seul pour l'éviction (site officiel : aucune mention mono-protéine)
+  - FAQ chiot « gamme Puppy mono-protéine » → recette chiot Poulet, Saumon & Fenouil, 37,5 % de protéines, DHA
+  - Verdict « notre recommandation n°1 » → notre choix
+  - À vérifier : `data/brand-content.ts` dit « l'abonnement retire 15 à 20 % » ; le site Franklin affiche −30 % sur les 3 premières commandes puis −20 % (cohérent avec `partner-discounts.ts`)
+- [x] `alimentation-chien-sportif-avant-apres-effort` · 195 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Pancréatite : version avant l'effort « plus pauvre en graisses » alors que les deux recettes ont la même cuillère d'huile → version avant l'effort préparée sans l'huile (texte et FAQ)
+  - Délais 2 à 3 h avant, 30 à 90 min après, xylitol 0,1 g/kg : cohérents
+- [x] `chien-peut-manger-persil` · 167 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - « Le départ conseillé vaut un quart du plafond » (¼ c. à café contre 1 c. à soupe à 10 kg) → un dixième
+  - Plafond 1 c. à soupe pour 9 kg et tableau 5 à 30 kg : cohérents
 - [ ] `chardon-marie-chien-bienfaits-dosage` · 161 affichages Google (28 j)
 - [ ] `chien-peut-manger-fenouil` · 152 affichages Google (28 j)
 - [ ] `gamelle-chien-inox-ceramique-plastique-silicone` · 152 affichages Google (28 j)
