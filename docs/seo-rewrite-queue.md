@@ -9,8 +9,8 @@ Pages que Google montre juste après la première page (28 jours au 5 novembre).
 
 - [x] `chien-mange-pistaches` · « pistache chien » (530 affichages, position 8,7, 0 clic), « pistache pour les chiens », « pistache chien toxique » · le lecteur cherche si son chien peut en manger, pas seulement l'urgence : réponse « peut-il manger » en tête, conduite à tenir ensuite · réécrit 2026-11-08
 - [x] `chataignes-marrons-inde-chien-difference-danger` · « châtaigne cuite pour chien » (217, pos 7,4, 0 clic), « chataigne chien », « chataigne cuite chien » · réponse d'abord sur la châtaigne comestible (cuite, quantité par gabarit), le marron d'Inde ensuite · réécrit 2026-11-08
-- [ ] `chien-mange-os-poulet-urgence` · « os de poulet chien » (401, pos 8,7), « os poulet chien », « mon chien a mangé un os cuit que faire » · même sujet que `os-poulet-chien-danger` : renforcer celle-ci, relier l'autre vers elle
-- [ ] `chien-peut-manger-amandes` · « amande chien » (234, pos 8,8, 0 clic), « chien amande »
+- [x] `chien-mange-os-poulet-urgence` · « os de poulet chien » (401, pos 8,7), « os poulet chien », « mon chien a mangé un os cuit que faire » · même sujet que `os-poulet-chien-danger` : renforcer celle-ci, relier l'autre vers elle · réécrit 2026-11-09
+- [x] `chien-peut-manger-amandes` · « amande chien » (234, pos 8,8, 0 clic), « chien amande » · réécrit 2026-11-09
 - [ ] `chien-peut-manger-concombre` · « concombre chien » (214, pos 19,3), « les chiens peuvent ils manger du concombre »
 - [ ] `avis-croquettes-orlando-lidl` · « croquette chien lidl » (125, pos 9,7), « croquette chien lidl prix » (80, pos 9,3) · ajouter le prix relevé et la gamme Lidl, sans toucher au bloc `MeilleuresAlternatives`
 - [ ] `chien-peut-manger-cacahuetes` · « cacahuètes chien » (102, pos 5,6, 0 clic)
@@ -109,7 +109,7 @@ Pages que Google montre juste après la première page (28 jours au 5 novembre).
 - [ ] `chien-peut-manger-jambon` · alimentation-quotidienne · màj 2026-07-21
 - [ ] `chien-peut-manger-cannelle` · alimentation-quotidienne · màj 2026-09-21
 - [ ] `chien-peut-manger-petits-pois` · alimentation-quotidienne · màj 2026-10-11
-- [ ] `chien-peut-manger-amandes` · alimentation-quotidienne · màj 2026-10-17
+- [x] `chien-peut-manger-amandes` · alimentation-quotidienne · màj 2026-10-17 · réécrit 2026-11-09
 - [ ] `chien-peut-manger-cacahuetes` · alimentation-quotidienne · màj 2026-10-19
 - [ ] `chien-peut-manger-pop-corn` · alimentation-quotidienne · màj 2026-10-24
 - [ ] `chien-peut-manger-persil` · alimentation-quotidienne · màj 2026-10-28
@@ -128,7 +128,7 @@ Pages que Google montre juste après la première page (28 jours au 5 novembre).
 - [ ] `chien-mange-limace-urgence` · urgences · màj 2026-03-27
 - [ ] `chien-mange-mort-aux-rats-urgence` · urgences · màj 2026-03-27
 - [ ] `chien-mange-os-cuit-urgence` · urgences · màj 2026-03-27
-- [ ] `chien-mange-os-poulet-urgence` · urgences · màj 2026-03-27
+- [x] `chien-mange-os-poulet-urgence` · urgences · màj 2026-03-27 · réécrit 2026-11-09
 - [ ] `chien-mange-raisin-urgence` · urgences · màj 2026-03-27
 - [ ] `aliments-toxiques-chien-liste-complete` · urgences · màj 2026-04-10
 - [ ] `chien-mange-xylitol-urgence` · urgences · màj 2026-06-17
