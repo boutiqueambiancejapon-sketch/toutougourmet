@@ -909,12 +909,27 @@
   - « légumineuses (pois, lentilles, pomme de terre) » → pois, lentilles, fèves
   - Vérifiés : 1 200-1 500 kcal à 360 kcal = 330 à 420 g ; Dogfy 43 % de protéines MS ; remises partenaires
   - À vérifier (non changé) : « 30 à 40 % de calories en moins » sans source (1 000-1 200 kcal pour 20-25 kg est proche de l'entretien courant) ; Hinchcliff 2011, J Exp Biol
-- [ ] `alimentation-chiot-0-2-mois` · 23 affichages Google (28 j)
-- [ ] `recette-biscuits-potiron-chien` · 21 affichages Google (28 j)
-- [ ] `pica-chien-causes-solutions` · 19 affichages Google (28 j)
-- [ ] `proteines-insectes-croquettes-chien` · 19 affichages Google (28 j)
-- [ ] `chien-peut-manger-viande-crue-barf` · 18 affichages Google (28 j)
-- [ ] `avis-edgard-cooper` · 17 affichages Google (28 j)
+- [x] `alimentation-chiot-0-2-mois` · 23 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - « Le règlement européen sur l'étiquetage impose des minima ; la FEDIAF demande 22,5 g de protéines pour 100 g MS » → minima chiot sans attribution au règlement ; FEDIAF 25 g avant 14 semaines (22,5 g est le chiffre AAFCO)
+  - Vérifiés : vente avant 8 semaines interdite (L214-8), lait de chienne 7,5 % de protéines et 9,5 % de lipides, lactose 4,7 % contre 3,3 %
+- [x] `recette-biscuits-potiron-chien` · 21 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Rendement « environ 25 biscuits » (TL;DR, ingrédients) → environ 50 : 450 g de pâte étalée à 5 mm en carrés de 4 cm
+  - Biscuit de 6 g « 20 à 25 kcal » → 15 à 20 kcal (recette ≈ 880 kcal pour 50 biscuits) ; 1 biscuit pour un chien de 2 kg dépassait 10 %
+  - Purée en cas de trouble digestif « 1 à 4 c. à soupe par repas » (TL;DR, texte, FAQ, verdict) → 1 c. à café à 5 c. à soupe, comme le tableau de chien-peut-manger-butternut-potiron
+- [x] `pica-chien-causes-solutions` · 19 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : 19 chiens et 14 avec affection digestive (Bécuwe-Bonnet 2012), 79 % de mangeurs d'herbe identique à chien-mange-herbe-pourquoi, 208 cas de corps étrangers (Hayes 2009)
+- [x] `proteines-insectes-croquettes-chien` · 19 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - « les 8 acides aminés essentiels » → les 10 acides aminés essentiels du chien
+  - Vérifiés : Tomojo repris par Invers (2024), Tomojo 7 à 10 €/kg chez Zooplus, 56 à 151 Mt de CO₂, bœuf 34 % des allergies
+  - À vérifier (non changé) : espèces du tableau des marques (Tomojo ne nomme plus l'insecte, FungFeed chat au Tenebrio et non Hermetia), Réglo et Ékinoé non trouvés
+- [x] `chien-peut-manger-viande-crue-barf` · 18 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Dog Chef et Elmut « formulées par des vétérinaires nutritionnistes » → Dog Chef : vétérinaires spécialisés en nutrition canine (site officiel) ; Elmut : experts en nutrition canine, repères FEDIAF (site officiel) ; idem tableau et encadré Dog Chef
+  - Coût mensuel du tableau aligné sur la FAQ (chien de 20 kg) : BARF 30-80 → 40-80 € ; repas frais 50-100 → 60-120 € (`data/brand-content.ts`)
+  - « cuite à basse température » pour Elmut → cuite en douceur (90 °C)
+  - À vérifier (non changé) : salmonelles « dans 20 à 40 % des poulets crus » ; « plus de 50 % des chiens nourris cru » (Veterinary Record 2017) ; Dog Chef « au moins 50 % de viande fraîche » (chiffre des croquettes ?)
+- [x] `avis-edgard-cooper` · 17 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Franklin « −30 % sur la première commande, puis −20 % » → puis 15 à 20 % (`data/brand-content.ts`)
+  - Vérifiés : 24,49 € les 2,5 kg et 49,99 € les 7 kg = 7 à 10 €/kg, rachat par General Mills en 2024
 - [ ] `croquettes-chien-digestion-sensible` · 16 affichages Google (28 j)
 - [ ] `recette-friandises-dentaires-maison-chien` · 16 affichages Google (28 j)
 - [ ] `croquettes-chiot-grande-race` · 15 affichages Google (28 j)
