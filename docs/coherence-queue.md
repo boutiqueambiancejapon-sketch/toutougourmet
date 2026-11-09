@@ -262,12 +262,29 @@
   - Comparatif « Canard strict » pour Acana et Farmina (même tableau : oméga-3 de hareng ou d'huile de poisson) → Canard (+ huile de poisson), Canard (+ hareng)
   - Composition, analyse et prix (14-18 €/kg) conformes à la page officielle et au site
   - À vérifier (non changé) : `aggregateRating` 4,8 sur 32 avis en JSON-LD sans avis affichés (DECISIONS : jamais d'aggregateRating) ; légende « protéine nouvelle dans 70 à 80 % des cas » sans source ; composition Farmina N&D Duck (30-40 % de canard, hareng) et glucosamine d'Acana Singles non trouvées
-- [ ] `topping-croquettes-chien-enrichir-gamelle-guide` · 581 affichages Google (28 j)
-- [ ] `chien-mange-couche-normal` · 580 affichages Google (28 j)
-- [ ] `os-poulet-chien-danger` · 580 affichages Google (28 j)
-- [ ] `chien-peut-manger-cerises` · 573 affichages Google (28 j)
-- [ ] `chien-peut-manger-cacahuetes` · 568 affichages Google (28 j)
-- [ ] `meilleures-croquettes-petit-chien` · 563 affichages Google (28 j)
+- [x] `topping-croquettes-chien-enrichir-gamelle-guide` · 581 affichages Google (28 j) · relu 2026-11-09 : 7 corrections
+  - Repère « 5 à 10 g de topping par kg et par jour » (Stat et FAQ : 50 à 100 g de yaourt pour 10 kg, au-dessus des 10 % et du tableau) → 2 à 3 g de topping humide par kg ; 10 kg : 20 à 30 g
+  - Sardines du tableau (1 pour 10 kg, 2 pour 20 kg, 2-3 pour 30 kg, sardine de 30 g) → ¼, ½, 1 et 2 sardines, aligné sur la fiche sardine (≈ 2 g/kg)
+  - Lyophilisé « 5 à 10 g par 10 kg et par repas », 30 g pour 20 kg, 40 g pour 30 kg (≈ 400 kcal/100 g, au-dessus des 10 %) → par jour ; 20 g et 30 g
+  - Comparatif sardine « ½ à 2 sardines, 2 à 3 ×/semaine » → ¼ à 2 selon poids, 1 à 3 ×/semaine
+  - FAQ concentré 10 kg « 5 à 15 g » → 5 à 10 g
+  - Stat lactose « 50 % (AKC) » et « la majorité des chiens adultes » → 30-50 % (valeur AKC de la fiche lait) et « beaucoup de chiens adultes »
+  - Introduction « retirer 10 à 15 % de croquettes » (topping plafonné à 10 %) → autant de calories, 10 % au plus
+- [x] `chien-mange-couche-normal` · 580 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Chien qui ne mange plus et reste prostré « vétérinaire sous 24 à 48 h » (TL;DR, tableau, encadré ; fiche jeûne : tout de suite si d'autres signes) → le jour même
+- [x] `os-poulet-chien-danger` · 580 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - TL;DR chirurgie « plusieurs centaines d'euros » (texte : 500 à 2 000 €) → 500 à 2 000 €
+  - FAQ os cru « surveille 48 h » (reste de l'article et fiches urgence : 72 h) → 72 h
+- [x] `chien-peut-manger-cerises` · 573 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Portions, kcal (7 g, 4,3 kcal par cerise), dose létale HCN 2 mg/kg et délais conformes à l'USDA et au Merck
+  - À vérifier (non changé) : `aliments-toxiques-chien-liste-complete` donne « dose toxique d'amygdaline : 1,5 g/kg » (≈ 90 mg/kg de HCN, loin des 2 mg/kg)
+- [x] `chien-peut-manger-cacahuetes` · 568 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - FAQ beurre de cacahuète « ½ c.à.c. petit chien, 1 c.à.c. grand » (fiche beurre de cacahuète : ½ à 1 c.à.c., 1 c.à.s. pour un grand) → alignée
+- [x] `meilleures-croquettes-petit-chien` · 563 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Virbac HPM Small & Toy énergie « n. c. » → 370 kcal/100 g (page officielle Virbac)
+  - RPC Virbac « 97 » (TL;DR, Stat, tableau, FAQ) → 92 (34 % / 370 kcal)
+  - « un tiers de protéines en plus » → un quart (92 contre 73)
+  - UPD Petite Taille (36,90 € les 8 kg, 30/20 %, P 0,9 %, Ca 1,4 %, 410 kcal, ascophyllum 0,01 %) conforme à la page officielle
 - [ ] `croquettes-chien-demangeaisons` · 543 affichages Google (28 j)
 - [ ] `recette-patee-maison-poulet-chien` · 540 affichages Google (28 j)
 - [ ] `huile-olive-chien-bienfaits-dosage` · 531 affichages Google (28 j)
