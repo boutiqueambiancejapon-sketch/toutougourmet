@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-avis-eukanuba',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'blue',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, attentive fawn boxer dog sitting on a warm wooden kitchen floor beside a simple ceramic bowl filled with brown dog kibble, looking at the bowl with interest. No packaging, no bag, no tin, no logo, no brand, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog and bowl filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the bowl. Exactly 7 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-09 pour l'article avis-eukanuba.",
+  },
+  {
     id: 'art-avis-multifit',
     group: 'articles',
     ratio: '3:2',

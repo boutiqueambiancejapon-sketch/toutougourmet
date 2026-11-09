@@ -1670,3 +1670,4 @@
   - Parts au-dessus de 10 % (gâteau glacé ≈ 175 kcal/100 g) : 5 kg 30 → 15 g, 10 kg 50 → 30 g, 20 kg 80 → 50 g, 30 kg 100-120 → 70 g ; densité ajoutée
   - Xylitol « mortel dès 0,1 g/kg » → hypoglycémie dès 0,1 g/kg, peut être mortel (nécrose du foie dès 0,5 g/kg)
 - [ ] `taurine-chien-carence-cardiomyopathie-dilatee` · 0 affichages Google (28 j)
+- [ ] `avis-eukanuba` · nouvel article 2026-11-09
