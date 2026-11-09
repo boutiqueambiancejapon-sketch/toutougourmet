@@ -337,12 +337,37 @@
 - [x] `chien-peut-manger-cannelle` · 452 affichages Google (28 j) · relu 2026-11-09 : 1 correction
   - Tableau 5 kg « une pincée (moins de 0,5 g) » (10 kg : ~0,3 g) → ~0,15 g
   - Seuil 1 c.à.c./10 kg et paliers 10-40 kg cohérents ; Cassia 1,2-6,5 mg/g de coumarine aligné avec la recette pomme-cannelle
-- [ ] `comprendre-etiquette-patee-chien` · 449 affichages Google (28 j)
-- [ ] `nourriture-berger-blanc-suisse` · 449 affichages Google (28 j)
-- [ ] `eukanuba-vs-royal-canin` · 435 affichages Google (28 j)
-- [ ] `nourriture-shar-pei` · 423 affichages Google (28 j)
-- [ ] `combien-fois-par-jour-donner-manger-chien` · 419 affichages Google (28 j)
-- [ ] `donner-comprime-chien-refuse-medicament` · 418 affichages Google (28 j)
+- [x] `comprendre-etiquette-patee-chien` · 449 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Glucides « 2 à 5 % sur la boîte, soit 15 à 25 % sans l'eau » (à 78 % d'humidité : 9 à 23 %) → 10 à 25 %
+  - À éviter « moins de 7 % de protéines et plus de 82 % d'humidité » (soit 39 % sur matière sèche, une bonne valeur selon le texte) → moins de 6 % pour 78 % d'humidité (environ 27 % sur matière sèche), comme l'exemple du texte
+  - Conversions 9 %/78 % → 41 %, 8 %/78 % → 36 %, seuils FEDIAF 18/25/5,5 %, étiquetage 4/14/26 %, 48 h au frigo (aligné avec `conserver-patee-chien-apres-ouverture`) vérifiés
+- [x] `nourriture-berger-blanc-suisse` · 449 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Passage à l'aliment adulte « entre 18 et 24 mois » (TL;DR, FAQ, verdict : croissance de 15 à 18 mois, junior jusqu'à 15-18 mois) → entre 15 et 18 mois
+  - Repas « quatre jusqu'à 4 mois, trois jusqu'à 6 mois, puis deux » (tableau : 3-4 repas à 3-4 mois, 2-3 à 6-9 mois) → quatre jusqu'à 3 ou 4 mois, trois jusqu'à 6 mois, deux ou trois jusqu'à 9 mois, puis deux
+  - Rations adulte et senior recalculées (25 kg ≈ 290 g à 3 700 kcal/kg, senior 15 à 20 % en dessous) : cohérentes ; poids du standard FCI conforme
+  - À vérifier (non changé) : fréquence de l'allèle MDR1 « ~16 % en Europe » attribuée à Firdová 2016 (étude non ouverte)
+- [x] `eukanuba-vs-royal-canin` · 435 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - Prix Royal Canin « ~2,5 €/kg, moins cher qu'Eukanuba » (`avis-royal-canin` : 6,50 €/kg en grand sac ; Redcare : 6,49 €/kg) → ~6,5 €/kg ; Eukanuba ~2,8 €/kg gardé (Zoomalia : 41,99 € le sac de 15 kg) ; prix « bon » passé à Eukanuba dans le tableau
+  - Budget 15 kg « 300 g/jour, 22-28 € RC / 25-32 € Eukanuba, quelques euros d'écart » → 220 g/jour (≈ 850 kcal), 35-45 € / 18-24 €, plus de 15 € d'écart
+  - TL;DR « à budget proche », verdict « prix au kilo un peu plus bas », « sans trop dépenser », « Elle coûte un peu plus cher » → budget plus bas pour Eukanuba, deux fois moins cher au kilo
+  - Royal Canin « 200+ races » (Stat, tableau, verdict ; site officiel : une trentaine de formules de race, une vingtaine de races) → 20+ races, une vingtaine de races
+  - Eukanuba « 30+ races / ~30 races » (revendeurs : une dizaine de races Breed Specific) → ~10 races, une dizaine
+  - À vérifier (hors file) : `dog-chef-vs-royal-canin` et `just-russel-vs-royal-canin` donnent Royal Canin à 22-35 €/mois pour 15 kg (≈ 3,3-5 €/kg), sous le prix de `avis-royal-canin` ; non changé car leurs conclusions de prix en dépendent
+  - À vérifier (non changé) : vitamine E 220 contre 200 mg/kg, DentaDefense « −80 % de tartre en 28 jours » (chiffre de la marque)
+- [x] `nourriture-shar-pei` · 423 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Besoins « 980 à 1 615 kcal » pour un adulte de 20 à 30 kg (980 kcal = 18 kg) → 1 060 kcal à 20 kg (TL;DR, texte)
+  - Elmut « protéine unique par recette (bœuf, poulet ou saumon) » (`brand-content.ts` : poulet, bœuf, dinde, porc ; poisson avec foie de poulet) → protéine unique en poulet, bœuf, dinde et porc, foie de poulet dans la recette poisson
+  - EPA+DHA 305 mg à 22 kg (30 mg/kg^0,75), 1 140 kcal et 315 g à 22 kg, remises partenaires et recettes Dog Chef (poulet, dinde, canard : page officielle) vérifiés
+  - À vérifier (non changé) : Dogfy menu bœuf « huile de saumon et de lin, 2,9 % d'huiles » (page officielle inaccessible)
+- [x] `combien-fois-par-jour-donner-manger-chien` · 419 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Dog Chef « 3 à 4 jours au réfrigérateur après ouverture » (aide Dog Chef : 3 jours) → 3 jours ; `brand-content.ts` « Ouverts : 24 heures » aligné sur 3 jours
+  - Franklin « 70 % de viande fraîche » (`brand-content.ts` : jusqu'à 70 % de viande ou de poisson) → jusqu'à 70 % de viande ou de poisson
+  - Eau « 50 à 60 ml/kg/j » (`quantite-eau-chien-par-jour` : 50 à 70) → 50 à 70 ml
+  - Mortalité de la torsion « 30 à 40 % » (`combien-temps-chien-sans-manger`, `chien-vomit-apres-manger-causes` : 15 à 40 %) → 15 à 40 %
+  - À vérifier (non changé) : risque « multiplié par 3 » avec un repas unique, attribué à la Morris Animal Foundation (source non retrouvée ; `gamelle-surelevee-chien` ne donne pas de chiffre)
+- [x] `donner-comprime-chien-refuse-medicament` · 418 affichages Google (28 j) · relu 2026-11-09 : 0 correction
+  - Fromage 5 g par 10 kg (aligné avec `chien-peut-manger-fromage`), xylitol 0,1 g/kg (aligné sur le site), 5-6 mL d'eau, pimobendane 1 h avant le repas : cohérents
+  - À vérifier (non changé) : « perd un tiers de son efficacité » avec la nourriture (TL;DR) ; le RCP dit seulement que l'absorption baisse
 - [ ] `recette-riz-poulet-chien-diete-legere` · 417 affichages Google (28 j)
 - [ ] `omega-3-chien-comparatif-sources` · 409 affichages Google (28 j)
 - [ ] `nourriture-whippet` · 408 affichages Google (28 j)
