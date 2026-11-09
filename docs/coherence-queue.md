@@ -839,12 +839,25 @@
 - [x] `croquettes-chien-tartre` · 48 affichages Google (28 j) · relu 2026-11-09 : 1 correction
   - Franklin « riche en protéines animales (70%) » → jusqu'à 70 % de viande ou de poisson (34 % de protéines)
   - À vérifier (non changé) : réduction de la plaque « 40 à 60 % » attribuée à une étude de 2020 ; risque « 5 fois plus élevé » chez les petites races
-- [ ] `alimentation-chien-senior-guide` · 43 affichages Google (28 j)
-- [ ] `huile-de-coco-chien-bienfaits-dosage` · 42 affichages Google (28 j)
-- [ ] `recette-friandises-education-chien` · 42 affichages Google (28 j)
-- [ ] `friandises-franklin-avis-composition` · 40 affichages Google (28 j)
-- [ ] `chien-vegetarien-vegan-science` · 39 affichages Google (28 j)
-- [ ] `recette-patate-douce-sechee-chien` · 39 affichages Google (28 j)
+- [x] `alimentation-chien-senior-guide` · 43 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - « La FEDIAF fixe au moins 25 % de protéines […] pour un senior » → minimum FEDIAF 18 % (21 % si peu actif), rien de plus pour un senior ; viser au moins 25 % (aligné sur nourriture-caniche et nourriture-teckel)
+  - Vérifiés : 720 kcal pour 20 kg senior dans la fourchette de l'outil de ration (624 à 780) ; IRC 10 % des plus de 10 ans comme meilleures-croquettes-chien-senior
+- [x] `huile-de-coco-chien-bienfaits-dosage` · 42 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : tableau (¼ à 2 c.à.c., 11 à 86 kcal) cohérent avec le TL;DR ½ c.à.c. pour 10 kg et avec alimentation-beau-pelage-chien-guide ; NRC EPA + DHA 10 kg ≈ 170 mg
+  - À vérifier (non changé) : « 862 kcal pour 100 ml » (USDA : 892 kcal pour 100 g, soit environ 820 pour 100 ml) ; étude canine de 2024 sur la dermatite atopique
+- [x] `recette-friandises-education-chien` · 42 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Tableau 2–5 kg 8–10 → 5–6, 5–10 kg 15–20 → 10–12, 10–20 kg 30–35 → 18–20, 20–35 kg 40–45 → 30–35, > 35 kg 50–55 → 45–50 (2,6 kcal la bouchée, sous 10 % d'un chien stérilisé du bas du gabarit)
+  - « environ 13 g pour 50 kcal » → 14 g (croquettes à 360 kcal)
+- [x] `friandises-franklin-avis-composition` · 40 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - SizeTable : < 5 kg 2–3 friandises, ¼ stick → 1–2, 1/6 ; 5–15 kg 3–7, ¼–½ → 2–3, ¼ ; 15–30 kg 8–13, ½–1 → 4–8, ½ ; > 30 kg 13–16 → 8–13, 1 stick (9 kcal la friandise, stick 104 à 109 kcal)
+  - Vérifiés : stick entier dès 25 kg (FAQ), 20 friandises plus du double d'un Beagle de 15 kg, stick collagène 145 kcal sous 40 kg
+  - À vérifier (non changé) : prix du 5 novembre (site Franklin en 429 ce soir)
+- [x] `chien-vegetarien-vegan-science` · 39 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - « transition alimentaire classique, sur 14 jours » → version longue, 14 jours au lieu de 7 à 10 (transition-alimentaire-chien)
+  - Vérifiés : Stockman 2013 (200 recettes, 95 %), Okin 2017 (25 à 30 %), paliers 20/40/60/80/100 % sur 14 jours
+- [x] `recette-patate-douce-sechee-chien` · 39 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Tableau 2–5 kg 1 petite lamelle → ½, 5–10 kg 1–2 fines → 1, 10–20 kg 2–3 → 1–1,5, 20–35 kg 3–4 → 2–2,5, > 35 kg 4–5 → 3–4 (bande de 10 g à 35 kcal)
+  - FAQ « Une à deux lamelles suffisent » → d'une demi-lamelle à quatre, comme le tableau
 - [ ] `glucides-croquettes-chien` · 37 affichages Google (28 j)
 - [ ] `croquettes-bio-chien-label-guide-achat` · 36 affichages Google (28 j)
 - [ ] `chien-peut-manger-oignons` · 35 affichages Google (28 j)
