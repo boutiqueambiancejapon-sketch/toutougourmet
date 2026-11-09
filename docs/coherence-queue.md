@@ -1438,12 +1438,39 @@
   - Dog Chef frais « 4 formules, toutes développées par des vétérinaires », plan mixte « sans céréales » → sarrasin dans 4 recettes, riz (porc, poulet), avoine (poisson)
   - TL;DR et verdict : repas frais pour chien très sensible → avec une recette sans riz ni avoine
   - À vérifier ailleurs (non changé) : Elmut « sans céréales » dans `croquettes-chien-cancer`, `elmut-vs-edgard-cooper`, `choisir-alimentation-chat-guide`
-- [ ] `croquettes-chien-maladie-foie` · 0 affichages Google (28 j)
-- [ ] `croquettes-chien-perte-appetit` · 0 affichages Google (28 j)
-- [ ] `croquettes-chien-problemes-cardiaques` · 0 affichages Google (28 j)
-- [ ] `croquettes-chien-sportif` · 0 affichages Google (28 j)
-- [ ] `croquettes-chien-travail` · 0 affichages Google (28 j)
-- [ ] `croquettes-chien-trop-maigre` · 0 affichages Google (28 j)
+- [x] `croquettes-chien-maladie-foie` · 0 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Protéines végétales « produisent plus d'ammoniaque » que la viande → l'inverse : soja et protéines laitières font moins monter l'ammoniaque en encéphalopathie (étude chiens à shunt, manuel vétérinaire Merck)
+  - Hill's l/d « 14,9 % MS, avec SAMe » → environ 18 % sur MS, soja et œuf (SAMe non retrouvée) ; Royal Canin Hepatic cuivre « 5,6 mg/kg », « maïs et gluten de maïs en premières sources de protéines » → 3 mg/kg, isolat de soja hydrolysé (fiche Royal Canin France)
+  - Prix « 18 à 25 €/kg, 80 à 160 € par mois » → Royal Canin Hepatic 8 à 12 €/kg en 12 kg, 65 à 100 € par mois pour 20 kg
+- [x] `croquettes-chien-perte-appetit` · 0 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Dog Chef repas frais « 50 % de viande fraîche cuite » (texte, pour) → 52 à 58 % de viande ou de poisson selon la recette
+  - Conservation après ouverture « 3-4 jours » → 3 jours (site Dog Chef)
+- [x] `croquettes-chien-problemes-cardiaques` · 0 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Sodium par stade « A-B1 < 200, B2 < 150, C-D < 100 mg/100 kcal » (TL;DR, liste, tableau) → B1 sans restriction, B2 < 100, C 50 à 79, D parfois < 50 (repères ACVIM, Cavanaugh, Veterinary Practice News)
+  - Taurine basse « moins de 25 nmol/mL en sang entier » → sous 200 en sang total ou 40 dans le plasma (comme l'article taurine, labo UC Davis)
+  - Prix formules cardiaques « 18 à 26 €/kg » → 7 à 8 €/kg pour Royal Canin Cardiac en 14 kg
+  - Dog Chef « 50 % de viande réelle » (texte, verdict) → 52 à 58 % de viande ou de poisson
+  - À vérifier (non changé) : « 150 à 300 mg de sodium pour 100 kcal » dans les croquettes grand public ; dose de taurine « 500 mg à 1 g par jour »
+- [x] `croquettes-chien-sportif` · 0 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - Royal Canin Endurance 4800 « maïs, riz et farine de poulet en tête » → protéines de volaille déshydratées, graisses animales et riz
+  - Franklin « 70 % de viande, 32 à 38 % de protéines MS » (texte, pour) → jusqu'à 70 % de viande ou de poisson, 34 % pour la plupart (Agneau 25 %)
+  - Franklin « plus d'oméga-3 que les marques sport » → huile de saumon ou poisson dans plusieurs recettes ; densité « à vérifier » → 3 500 à 4 000 kcal/kg (fiches Franklin)
+  - FAQ Labrador 30 kg « 2 à 2,5 fois l'entretien, 450-600 g » (2 fois = environ 700 g) → environ 1,5 fois, 500 à 600 g ; « besoin au repos » → besoin d'entretien (comme le TL;DR)
+  - Repas avant l'effort « 30 %, 2 h avant » → 25 à 30 %, au moins 2 h avant (comme la FAQ)
+  - À vérifier (non changé) : « 4 800 kcal/kg » pour Royal Canin Endurance 4800 (une fiche donne 4 367 kcal/kg calculées), aussi dans le bouton Maxi Zoo
+- [x] `croquettes-chien-travail` · 0 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Étude 2009 « au moins 2,5 g/kg MS de tryptophane réduit l'anxiété » (texte, tableau) → l'étude Bosch 2009 n'a trouvé aucun effet sur le comportement
+  - Franklin « 70 % de viande, 32 à 38 % de protéines MS » (texte, pour, verdict) → jusqu'à 70 % de viande ou de poisson, 34 % pour la plupart
+  - FAQ sans céréales « en général oui », pois conseillés → pas forcément, prudence avec les recettes riches en pois (comme l'article cardiaque)
+  - Pour Franklin « sans pic glycémique nuisant à la concentration » → sans céréales
+  - À vérifier (non changé) : source « Adam Tomlinson, JAVMA 2019 » (cortisol et effort mental) non retrouvée ; « 20 à 30 % d'énergie en plus » ; déficit en magnésium « souvent » chez le chien stressé
+- [x] `croquettes-chien-trop-maigre` · 0 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - Franklin Saumon, Truite & Persil « 36 % de protéines, 18 % de lipides » → 34 % et 16,5 % (fiche Franklin) ; « 32-38 % », « 36–38 % » → 34 % (37,5 % chiot)
+  - Franklin « mono-protéine » pour une recette à deux poissons → une seule viande ou du poisson seul selon la recette ; « huiles (lin, saumon) » → huile de saumon ou graines de lin selon la recette
+  - Elmut « digestibilité notée 4,8/5 » → retiré (note invérifiable)
+  - Dog Chef « recettes développées par des vétérinaires » → 52 à 58 % de viande ou de poisson
+  - Tiédir « 30–35 °C » → 35–37 °C (comme les articles perte d'appétit et convalescence)
+  - FAQ huile « saumon ou lin, 1 cc par 5 kg » (dix fois la dose de la fiche huile de saumon, lin sans EPA ni DHA) → environ 1 ml pour 10 kg avec une huile à 200 mg/ml, lin déconseillé
 - [ ] `croquettes-pressees-froid-vs-extrudees` · 0 affichages Google (28 j)
 - [ ] `diarrhee-chien-que-faire-alimentation` · 0 affichages Google (28 j)
 - [ ] `distributeur-croquettes-automatique-chien` · 0 affichages Google (28 j)
