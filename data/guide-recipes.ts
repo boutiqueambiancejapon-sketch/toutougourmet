@@ -202,7 +202,7 @@ export const GUIDE_RECIPES: GuideRecipe[] = [
       ],
     },
     warnings: [
-      'Le CMV n’est pas optionnel : sans lui, 94 % des rations maison sont déséquilibrées (Texas A&M, Dog Aging Project, 2025).',
+      'Le CMV n’est pas optionnel : sur 1 726 rations maison analysées, 94 % ne couvraient pas tous les besoins (Dog Aging Project, 2025).',
     ],
   },
 ]

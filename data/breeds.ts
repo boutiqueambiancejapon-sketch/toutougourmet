@@ -783,7 +783,7 @@ export const BREEDS: Breed[] = [
     activity: 'Modérée',
     watch: 'Hernie discale',
     health: [
-      { title: 'Hernie discale (IVDD)', text: "Environ 25 % des teckels en développent une. L'obésité multiplie ce risque par 3." },
+      { title: 'Hernie discale (IVDD)', text: "Environ 25 % des teckels en développent une. Les kilos en trop augmentent ce risque." },
     ],
     foodNote: 'Jamais de libre-service. Les friandises végétales peu caloriques (carotte crue, concombre) remplacent les biscuits industriels.',
     near: ['dachshund', 'basset-hound', 'jack-russell-terrier'],
