@@ -370,3 +370,5 @@ Contact (propriétaire, 2026-11-09) : chaque nouveau message envoie une notifica
 Mini-calculateur des articles « peut-il manger » (propriétaire, 2026-11-09, page amandes) : avec un tableau par gabarit, il affiche seulement la portion du tableau, plus le plafond de 10 % des calories, qui contredisait les limites quand le risque n'est pas calorique.
 
 Relecture de cohérence (propriétaire, 2026-11-09) : les tâches de nuit existantes ne touchent pas aux chiffres et laissaient passer les incohérences (avoine, amandes, pomme, poire). Nouvelle étape de nuit `deploy/coherence-prompt.md`, 6 articles par nuit, file `docs/coherence-queue.md` triée par affichages Google, corrections notées avant → après.
+
+Relecture du 2026-11-09 : 368 articles relus en une journée, 972 corrections ; 183 points signalés sans correction faute de source (liste dans docs/coherence-queue.md, lignes « À vérifier »). aggregateRating retiré des 3 avis qui en gardaient (règle « jamais d'aggregateRating »). Chocolat : seuils recalculés (5 à 7 carrés pour le cœur à 5 kg, une trentaine pour 60 kg, carré de 5 g).
