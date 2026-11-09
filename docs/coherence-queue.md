@@ -368,12 +368,27 @@
 - [x] `donner-comprime-chien-refuse-medicament` · 418 affichages Google (28 j) · relu 2026-11-09 : 0 correction
   - Fromage 5 g par 10 kg (aligné avec `chien-peut-manger-fromage`), xylitol 0,1 g/kg (aligné sur le site), 5-6 mL d'eau, pimobendane 1 h avant le repas : cohérents
   - À vérifier (non changé) : « perd un tiers de son efficacité » avec la nourriture (TL;DR) ; le RCP dit seulement que l'absorption baisse
-- [ ] `recette-riz-poulet-chien-diete-legere` · 417 affichages Google (28 j)
-- [ ] `omega-3-chien-comparatif-sources` · 409 affichages Google (28 j)
-- [ ] `nourriture-whippet` · 408 affichages Google (28 j)
-- [ ] `repas-frais-vs-croquettes-chien` · 406 affichages Google (28 j)
-- [ ] `croquettes-chien-hypothyroidie` · 392 affichages Google (28 j)
-- [ ] `croquettes-chien-otites` · 381 affichages Google (28 j)
+- [x] `recette-riz-poulet-chien-diete-legere` · 417 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Rations jour 1 et jours 2-3 (BER 70 × P^0,75, mélange 2:1 à 141 kcal/100 g), 15 à 25 g par repas à 10 kg, cuisson 100 g de riz pour 300 g cuit : cohérents
+  - À vérifier (non changé) : durée « 3 jours au plus » contre « 3 à 5 jours après la résolution, 5 à 7 jours au total » dans `diarrhee-chien-que-faire-alimentation` (aucune source nette ; description de l'article bloquée sur 3 jours) ; basmati « possible » ici, déconseillé dans le guide diarrhée
+- [x] `omega-3-chien-comparatif-sources` · 409 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Sardines « boîte de 85 g = 1 500 à 1 800 mg d'EPA+DHA, plus de cinq fois l'apport d'un 20 kg » (USDA FDC 175139, citée en source : 982 mg/100 g) → environ 850 mg, près de trois fois ; parenthèse anchois/maquereau (classement inversé selon l'USDA) retirée
+  - Tableau sardines par jour 5/10/15/20/25 g → 10/17/30/40/50 g
+  - Apports NRC (30 mg/kg^0,75) et plafonds (2 080, 3 500, 5 900 mg), volumes d'huile : cohérents
+- [x] `nourriture-whippet` · 408 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Conversion de l'ALA « 5 à 15 % » (`omega-3-chien-comparatif-sources`, `huile-saumon-chien-bienfaits-dosage` : moins de 5 %) → moins de 5 % ; étude Stepien 2017 (200 Whippets, 93 % de souffles, 38 % à l'échographie) vérifiée et ajoutée aux sources
+  - À aligner plus tard : `nourriture-golden-retriever` dit aussi « 5-10 % »
+- [x] `repas-frais-vs-croquettes-chien` · 406 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Elmut 15 kg « 55 à 65 €/mois » (`brand-content.ts` : 75 à 120 € de 10 à 25 kg) → 75 à 120 € ; écart annuel « 300 à 400 € » → 500 à 1 000 €
+  - Elmut « Fabriqué en France, 100% naturel » → cuisiné en Poitou-Charentes, ration selon l'âge, la race et le poids
+  - Dog Chef « ingrédients qualité humaine, livraison toutes les 2 semaines » (invérifiable) → cuisiné à Huldenberg, livraison comprise, portions recalculées
+- [x] `croquettes-chien-hypothyroidie` · 392 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Encadré « environ 20 % de moins » (Pros/Cons et FAQ : 15 à 20 %) → 15 à 20 %
+  - FAQ besoin d'un chien de 20 kg « 740 kcal → 590 kcal » (site : 900 kcal) → 900 kcal, soit 720 à 770 kcal
+- [x] `croquettes-chien-otites` · 381 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Franklin « 70 % de viande, une seule source de protéine animale » → jusqu'à 70 % de viande ou de poisson, une seule viande par recette
+  - Franklin « recettes au saumon ou au maquereau » (aucun maquereau dans la gamme) → recette Saumon, Truite & Persil
+  - Régime d'éviction « 8 semaines » (FAQ et reste du site : 8 à 12) → 8 à 12 semaines, deux endroits
 - [ ] `avis-just-russel` · 377 affichages Google (28 j)
 - [ ] `selles-chien-aspect-couleur-consistance` · 375 affichages Google (28 j)
 - [ ] `dog-chef-vs-just-russel` · 373 affichages Google (28 j)
