@@ -1160,12 +1160,53 @@
   - Ration après stérilisation « −15-20 % » (puces, FAQ) contre « −20-25 % » plus bas → 20 à 25 % partout, pesée sur 3 mois, comme croquettes-chien-sterilise
   - Vérifiés : âges de passage du TL;DR, du tableau et de la FAQ ; besoins −20 à 30 % comme le reste du site
   - À vérifier (non changé) : croissance « ralentie de plus de 70 % » à 10 mois chez une grande race
-- [ ] `allergie-alimentaire-chien-symptomes-diagnostic` · 0 affichages Google (28 j)
-- [ ] `avis-atavik` · 0 affichages Google (28 j)
-- [ ] `avis-belcando` · 0 affichages Google (28 j)
-- [ ] `avis-farmina-nd` · 0 affichages Google (28 j)
-- [ ] `avis-happy-dog` · 0 affichages Google (28 j)
-- [ ] `avis-hills-science-diet` · 0 affichages Google (28 j)
+- [x] `allergie-alimentaire-chien-symptomes-diagnostic` · 0 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : allergènes classés (34, 17, 15 %), rémission à 5 et 8 semaines, rechute à 5 et 14 jours (Olivry 2020), races (40 %) ; 34 % pour le bœuf comme proteines-insectes-croquettes-chien
+  - À vérifier (non changé) : « avant 12 mois dans 38 % des cas » (texte intégral Olivry 2019 non lisible) ; hydrolysée « 30 à 50 € par mois pour 20 kg », sans doute trop bas
+- [x] `avis-atavik` · 0 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - « aucune croquette ne descend sous 79/100 » (TL;DR, texte) → croquettes adultes ; la Chiot Poisson Poulet des Classiques a 78/100 dans la base
+  - Poulet Made in France « les pois, puis l'amidon » → les pois, la graisse de volaille, puis l'amidon (fiche officielle)
+  - Classiques « lieu de fabrication non précisé, usine hors de France à deviner » → Truite Canard et Dinde Cerf fabriquées en Italie (fiches officielles) ; idem dans la FAQ
+  - Franklin « −30 % sur la première commande en abonnement » → −30 % en abonnement (`data/partner-discounts.ts`)
+  - Vérifiés : prix 66,90/27,90 € et 71,90/34,50 €, taurine 1 g/kg, 35/15 % et 30/19 %, Truite Canard +10 % de kcal (3 960 contre 3 603)
+- [x] `avis-belcando` · 0 affichages Google (28 j) · relu 2026-11-09 : 9 corrections
+  - BEWITAL « créé en 1953, plus de 70 ans » → 1963, plus de 60 ans (belcando.com)
+  - Gammes inventées « Finest Grain Free Duck », « Master Chicken & Rice », « Junior Chicken & Rice », « Senior Chicken & Herbs », « Junior Large Breed » → recettes réelles Adult GF Duck, Adult Lamb & Rice, Junior Maxi, Senior Sensitive (TL;DR, texte, tableau, FAQ)
+  - GF Duck « canard 40 % + 15 %, patate douce, pois » → 40 % + 18 %, amarante, fécule, farine de pois (58 %)
+  - « Aucune recette ne contient de maïs » (FAQ, encadré) → maïs dans Adult Active et Junior Maxi
+  - Prix « 14-22 €/kg » → 4,40 à 7,60 €/kg sur la boutique officielle ; la section prix et les comparaisons Elmut/Dog Chef alignées
+  - Protéines « 26 à 34 % sur MS » → 19,5 à 29 %
+  - Junior grande race « 1,2 % Ca, 0,9 % P, sans maïs » → Junior Maxi 1,1 % Ca, 0,95 % P, avec maïs
+  - « traçabilité meilleure que les marques américaines » (invérifiable) → usines du Münsterland
+  - FAQ « l'une des meilleures de sa gamme de prix » → selon la recette, Adult Active 50/100 au scanner ; Dog Chef « origine de chaque ingrédient » (invérifiable) → croquettes sans gluten, prébiotiques, glucosamine (`data/brand-content.ts`)
+- [x] `avis-farmina-nd` · 0 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - Prix « 16-28 €/kg » (TL;DR, texte, tableau, alternatives, FAQ) → 5,60 à 8,10 €/kg en 12 kg, Quinoa 9,70 à 11,60 €/kg en 7 kg (zooplus.fr, 9 novembre 2026)
+  - Budget 20 kg « plus de 80 à 100 € par mois » → 60 à 70 € en Prime ; phrase « les repas frais deviennent une option » retirée
+  - Grain Free Chicken & Pomegranate « poulet 65 %, patate douce, pois » → poulet frais 26 %, poulet déshydraté 25 %, patate douce
+  - Tableau Prime « légumineuses faibles » → pois (présents dans la liste)
+  - Dog Chef « chaque ingrédient nommé avec son origine » (invérifiable) → viande nommée en tête de chaque recette
+  - Ponctuation « le blé, Quant à » → « le blé. Quant à »
+  - À vérifier (non changé) : « céréales anciennes qui favorisent moins l'inflammation » ; colonnes part de viande et protéines (MS) du tableau
+- [x] `avis-happy-dog` · 0 affichages Google (28 j) · relu 2026-11-09 : 11 corrections
+  - Tag « BEWITAL » (fabricant de Belcando, pas de Happy Dog) → Happy Dog Sensible ; « contrôles et traçabilité meilleurs que les américaines » → fabrication en Bavière
+  - « Supreme Sensible », « Fit & Well », « Pur Life » → noms actuels Sensible et fit & vital, Pur Life n'existe pas (happydog.fr)
+  - Sensible « 40 à 60 % de protéines animales, viande en premier » → 15 à 30 % déclarées, souvent une seule viande
+  - Neuseeland « agneau 30 %, farine d'agneau 25 %, riz » → protéines d'agneau 20 %, riz, maïs
+  - « Sensible Fish & Rice » (n'existe pas) → France, Africa, Montana : une viande + pomme de terre
+  - fit & vital « riz, avoine » → maïs, riz, orge ; NaturCroq Balance composition alignée sur la fiche
+  - Sans céréales « quelques références » → recettes à la pomme de terre et NaturCroq Grainfree ; Neuseeland, Toscana, Ireland ont des céréales
+  - Prix « 8 à 22 €/kg » retirés (texte et tableau) : environ 3,80 €/kg pour Neuseeland 12,5 kg en Allemagne, pas de prix français trouvé
+  - FAQ allergie « Neuseeland, une protéine et une source de glucides » → France ou Africa (Neuseeland : riz et maïs)
+  - Franklin « 70 % contre 30 à 55 % » → jusqu'à 70 % contre 15 à 30 % ; « ni agneau ni caribou » → ni autruche ni cheval (Franklin a une recette agneau)
+  - Bouton Maxi Zoo « Gamme Supreme sans maïs » → Gamme Sensible
+- [x] `avis-hills-science-diet` · 0 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - « fondée en 1965 par le Dr Mark Morris » → formule de Mark Morris pour Buddy, associé en 1948 à la Hill Packing Company
+  - « maïs en premier ingrédient » (TL;DR, texte, tableau, verdict) → blé ou maïs ; Medium Adult poulet : blé, maïs, farine de poulet et de dinde 23 % (fiches Maxi Zoo)
+  - Colorants « dans certaines références Small & Toy » (texte, verdict) → aucun colorant sur les 125 fiches Hill's lues
+  - Metabolic « rare pour une gamme grand public » → aliment vétérinaire
+  - Prix « 10 à 16 €/kg » → 4,90 €/kg en 14 kg (69 €), 11 €/kg en 2,5 kg (Maxi Zoo)
+  - FAQ 25 kg « 12 €/kg, 100 à 120 € par mois » → 4,90 €/kg, 40 à 50 € par mois
+  - À vérifier (non changé) : Prescription Diet « 150-180 € par mois » ; n/d (oncologie) peut-être arrêté ; « une revue vétérinaire (JSAP 2019) : protéines fraîches plus digestes que les farines de maïs » (encart Elmut)
 - [ ] `avis-japhy` · 0 affichages Google (28 j)
 - [ ] `avis-multifit` · 0 affichages Google (28 j)
 - [ ] `avis-purina-pro-plan` · 0 affichages Google (28 j)
