@@ -521,12 +521,29 @@
   - Brossage « deux à trois fois par semaine suffisent » → au moins trois (`croquettes-chien-tartre`)
   - Stat « 2 affections dépistables (rotule, PRA) » alors que le texte cite aussi von Willebrand et l'ataxie de Bandera → « à surveiller en priorité »
   - 240-430 kcal, 65-115 g à 370 kcal, friandises 25-45 kcal : cohérents
-- [ ] `choisir-taille-croquettes-chien` · 237 affichages Google (28 j)
-- [ ] `croquettes-chien-cancer` · 234 affichages Google (28 j)
-- [ ] `nourriture-springer-spaniel-anglais` · 228 affichages Google (28 j)
-- [ ] `comment-nourrir-chien-sans-dents` · 226 affichages Google (28 j)
-- [ ] `chien-peut-manger-aubergines` · 225 affichages Google (28 j)
-- [ ] `chien-peut-manger-ananas` · 218 affichages Google (28 j)
+- [x] `choisir-taille-croquettes-chien` · 237 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Étude Hennet 2007 « quatre tailles de croquettes » → quatre croquettes (quatre groupes de 10 Beagles, abstract)
+  - FAQ chiot « taille adulte une fois la dentition définitive en place, entre 6 et 12 mois » → avec l'aliment adulte, 9-10 mois (petite race) à 18-24 mois (très grande), comme le reste du site
+  - Hennet 42 % et 55 %, diamètres par gabarit et TL;DR : cohérents
+- [x] `croquettes-chien-cancer` · 234 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Dog Chef « moins de 20 % de glucides et protéines autour de 30 % sur MS » → menu poulet à 48 % de protéines sur MS (`data/brand-content.ts`) ; glucides introuvables sur la page officielle, retirés ; idem dans les avantages
+  - Remises Dog Chef −30 % et Elmut −40 % : conformes
+  - À vérifier (non changé) : Hill's n/d « seule formule vétérinaire pour le cancer » et 18 à 25 €/kg, statut de commercialisation non confirmé ; « 1 chien sur 4 (ACS) » sans source précise
+- [x] `nourriture-springer-spaniel-anglais` · 228 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Stérilisation « 10 à 20 % » de dépense en moins → 20 à 30 % (valeur de la majorité du site)
+  - Rations 200-265 g à 3 800 kcal/kg, 760-1 000 kcal, chasse 355-475 g (1 350-1 800 kcal) : cohérents
+  - Hors article : deux autres articles disent encore 10-20 % et 15-20 % pour la stérilisation
+- [x] `comment-nourrir-chien-sans-dents` · 226 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Retour aux croquettes après extraction « sur 7 à 10 jours » → après 7 à 14 jours (`croquettes-chien-apres-operation`), TL;DR, texte, verdict
+  - Croquette trempée « pas plus de 30 minutes dans la gamelle » → servie dans l'heure, jetée après 2 heures (`faut-il-rehydrater-croquettes-chien`), texte et FAQ
+  - À vérifier (non changé) : Wallis 2020, 44-100 % sous anesthésie et 80-89 % après 3 ans, texte intégral inaccessible
+- [x] `chien-peut-manger-aubergines` · 225 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Tableau 15-30 kg « une tranche cuite (60-80 g) » contre « 2-3 tranches (100-120 g) » au-dessus → 1 à 2 tranches (une tranche ≈ 40 g)
+  - Grammes sous 10 % des calories à 25 kcal/100 g : cohérents
+- [x] `chien-peut-manger-ananas` · 218 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Dés du tableau : « 1 dé de 1 cm (~5 g) » et « 2 à 3 dés de 1,5 cm (~15 g) » (un dé de 1 cm pèse ~1 g) → 1 dé de 1,5 à 2 cm (~5 g), 2 dés de 2 cm (~15 g)
+  - Glaçons et dés glacés « par jour » contre 1 à 2 fois par semaine dans le tableau → par prise, aux fréquences du tableau
+  - Xylitol 0,1 g/kg, Hart 2018 (11 produits, 2 % au plus), 50 kcal et 9,9 g de sucres : cohérents
 - [ ] `megaoesophage-chien-alimentation` · 213 affichages Google (28 j)
 - [ ] `nourriture-malamute-alaska` · 213 affichages Google (28 j)
 - [ ] `recette-poulet-seche-chien` · 213 affichages Google (28 j)
