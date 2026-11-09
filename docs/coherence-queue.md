@@ -544,12 +544,29 @@
   - Dés du tableau : « 1 dé de 1 cm (~5 g) » et « 2 à 3 dés de 1,5 cm (~15 g) » (un dé de 1 cm pèse ~1 g) → 1 dé de 1,5 à 2 cm (~5 g), 2 dés de 2 cm (~15 g)
   - Glaçons et dés glacés « par jour » contre 1 à 2 fois par semaine dans le tableau → par prise, aux fréquences du tableau
   - Xylitol 0,1 g/kg, Hart 2018 (11 produits, 2 % au plus), 50 kcal et 9,9 g de sucres : cohérents
-- [ ] `megaoesophage-chien-alimentation` · 213 affichages Google (28 j)
-- [ ] `nourriture-malamute-alaska` · 213 affichages Google (28 j)
-- [ ] `recette-poulet-seche-chien` · 213 affichages Google (28 j)
-- [ ] `conserver-croquettes-chien-guide-oxydation` · 211 affichages Google (28 j)
-- [ ] `nourriture-bouledogue-francais` · 208 affichages Google (28 j)
-- [ ] `combien-temps-chien-sans-manger` · 205 affichages Google (28 j)
+- [x] `megaoesophage-chien-alimentation` · 213 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : 398 cas Lettonie-Australie, 70 % en vie 46 à 777 jours (Lyngby 2022), vidange médiane 5 min (Haines 2019), sildénafil 1 mg/kg × 2 pendant 14 jours
+- [x] `nourriture-malamute-alaska` · 213 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Dysplasie de la hanche « autour de 15 % des Malamutes testés » → 11 % (OFA, 1974-2013)
+  - Zinc élément 1 mg/kg/jour conforme à Colombini 1997 ; 2 000 kcal à 40 kg et 525 g à 380 kcal cohérents ; NDRG1 3 à 19 mois conforme
+- [x] `recette-poulet-seche-chien` · 213 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Foie de poulet « 13 500 µg de rétinol/100 g, 1-2 portions par semaine » → 3 700 µg et 2-3 fois par semaine (comme `recette-friandises-foie-seche-chien`)
+  - Chiot : « une miette par séance » (texte) et « miette de 2-3 mm par récompense » (FAQ) → une miette de 1-2 mm par récompense partout
+  - « Filet Label Rouge à 10-14 €/kg → séché 25-40 €/kg » → filet standard à 10-14 €, séché 30-45 €/kg (environ 30 % du poids cru ; le Label Rouge dépasse 20 €/kg)
+  - Tableau par poids sous 10 % des kcal et 15-20 kcal pour 5 g : cohérents
+- [x] `conserver-croquettes-chien-guide-oxydation` · 211 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Tableau, standard BHA/BHT « max 6 à 8 semaines » → 6 semaines (TL;DR et FAQ : 4 à 6 semaines au maximum)
+  - FAQ sac de 15 kg pour 60 à 130 g/jour « près de 4 mois » → 4 à 8 mois
+  - À vérifier (non changé) : « 30 à 50 % de vitamine A et 20 à 40 % de vitamine E perdus en 3 mois », sans source précise
+- [x] `nourriture-bouledogue-francais` · 208 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - « Race n°1 en France selon la SCC » → l'une des races les plus populaires (Berger australien en tête du LOF depuis 2018) ; idem dans « Sources »
+  - Prix à 10 kg : Dog Chef 1,60-2,20 → 1,50-2,00 €, Elmut 1,50-2,00 → 1,80-2,50 € (`data/brand-content.ts`) ; intro « environ 1,80 €/jour » → 1,50 à 2,50 €
+  - TL;DR « adulte de 10 kg : 600 à 900 kcal » → 8 à 14 kg (comme le texte)
+- [x] `combien-temps-chien-sans-manger` · 205 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - TL;DR « consulter dès 24 h pour un chiot » → 12 h (tableau par profil et étapes à suivre)
+  - Étapes du jeûne, 24-48 h « Consulter, quel que soit le chien » → avant 48 h (seuil adulte du site, `croquettes-chien-perte-appetit`)
+  - Petits chiens « 2 à 3 fois plus d'énergie » par kg → environ 2 fois (source citée : 88 contre 45 à 50 kcal/kg)
+  - À vérifier (non changé) : protocole de réalimentation sur 7 jours attribué à l'ASPCA
 - [ ] `comment-faire-maigrir-son-chien` · 203 affichages Google (28 j)
 - [ ] `chien-peut-manger-fromage` · 202 affichages Google (28 j)
 - [ ] `biotine-chien-bienfaits-dosage` · 201 affichages Google (28 j)
