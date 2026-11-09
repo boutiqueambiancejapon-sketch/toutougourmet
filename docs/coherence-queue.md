@@ -1402,12 +1402,42 @@
   - « peut attendre moins de 24 heures sans risque » (FAQ : 24 à 48 h) → 24 à 48 heures
   - Repas frais Dog Chef « 50 % de viande fraîche » (chiffre des croquettes) → 52 à 58 % de viande ou de poisson selon la recette (fiches Dog Chef)
   - À vérifier (non changé) : « moins de 5 % de causes médicales » sans source
-- [ ] `croquettes-chien-douleurs-articulaires` · 0 affichages Google (28 j)
-- [ ] `croquettes-chien-dysplasie-hanche` · 0 affichages Google (28 j)
-- [ ] `croquettes-chien-hyperactif` · 0 affichages Google (28 j)
-- [ ] `croquettes-chien-hypertension` · 0 affichages Google (28 j)
-- [ ] `croquettes-chien-infections-urinaires` · 0 affichages Google (28 j)
-- [ ] `croquettes-chien-intolerant-cereales` · 0 affichages Google (28 j)
+- [x] `croquettes-chien-douleurs-articulaires` · 0 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - 120 mg de glucosamine « 4 à 8 fois moins que la dose active » (chien de 25 kg, dose 500 mg) → environ 4 fois moins
+  - Tableau « 800 mg/kg, dose active par ration » (240 mg dans 300 g) → environ 1 700 mg/kg, 500 mg dans 300 g (comme l'article arthrose)
+  - Franklin « ratio oméga-6/oméga-3 inférieur à 5:1 grâce à ses sources marines » (titre, texte, pour) → huile de saumon dans plusieurs recettes ; ratio non publié, Canard à 12 pour 1 (1,2 % / 0,1 %, franklinpetfood.com)
+  - Franklin « 70 % de viande fraîche » → jusqu'à 70 % de viande (Canard : 41 % frais)
+  - À vérifier (non changé) : étude krill « Lipids in Health and Disease, 2017 » non retrouvée
+- [x] `croquettes-chien-dysplasie-hanche` · 0 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - Prévalence « 20 à 70 % » (TL;DR, chiffre clé) → 12 à 70 %, comme la FAQ OFA (Labrador 12 %)
+  - Protéines « au moins 25 % MS » (le tableau classe 22-26 % en standard) → au moins 28 %
+  - Tableau glucosamine « 500 mg/kg, dose active par ration » (175 mg pour 30 kg) → environ 1 500 mg/kg, 500 mg dans 340 g
+  - Franklin « huile de poisson, ratio < 5:1, densité modérée » (titre, texte, pour) → huile de saumon dans plusieurs recettes, Dinde, courge, poire à 349 kcal/100 g (comme l'article arthrose)
+  - Contre glucosamine « non garantie » → 0,1 % au mieux, environ 350 mg par jour pour 30 kg
+  - À vérifier (non changé) : Hill's j/d « 3,5 g d'EPA+DHA pour 1 000 kcal », RC Mobility « 3,6:1 », prix « 14 à 20 €/kg »
+- [x] `croquettes-chien-hyperactif` · 0 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Franklin « 70 % de viande » → jusqu'à 70 % de viande ou de poisson selon la recette (Dinde, courge, poire : 65 %)
+  - FAQ « colorants de synthèse : E150, E160, E102… » → E102, E110, E122, E124, E129 ; E150 (caramel) et E160 (caroténoïdes) ne sont pas de synthèse
+  - À vérifier (non changé) : « 5 à 15 % de chiens sensibles aux colorants » et la source « Dell'Omo et Lipp, 1994 » (aucune étude chien retrouvée) ; hyperkinésie « moins de 1 % »
+- [x] `croquettes-chien-hypertension` · 0 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Hill's h/d « 77 mg de sodium pour 100 kcal » → 26 mg (fiche Hill's, 0,1 % brut)
+  - Aligné ailleurs : `croquettes-chien-problemes-cardiaques` h/d « 77 mg » → 26 mg
+  - À vérifier (non changé) : Royal Canin Cardiac « 87 mg pour 100 kcal »
+- [x] `croquettes-chien-infections-urinaires` · 0 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - « 14 % des consultations vétérinaires » → environ 14 % des chiens au cours de leur vie (Ling, 2001)
+  - Eau chien de 15 kg : croquettes « 100 à 150 ml », frais « 600 à 700 ml » → environ 20 ml dans 200 g de croquettes, environ 400 ml dans 550 g de frais
+  - Hill's u/d (alcalinisant, pour urates et oxalates) présenté contre la struvite (titre H2, texte) → Hill's c/d Multicare (comme `croquettes-chien-calculs-urinaires`)
+  - Formules vétérinaires « 14 à 18 €/kg, 50 à 90 € par mois » (6 kg par mois = 84 €) → 10 à 18 €/kg selon le sac, 60 à 110 € par mois (S/O 13 kg vers 123-137 €)
+  - Franklin contre « prix au kg supérieur aux gammes vétérinaires » (5 à 9 €/kg) → ni pH urinaire ni magnésium contrôlés
+- [x] `croquettes-chien-intolerant-cereales` · 0 affichages Google (28 j) · relu 2026-11-09 : 8 corrections
+  - « notre recommandation n°1 » → notre premier choix
+  - Franklin « mono-protéine, sans mélange de viandes » → une seule viande dans Canard, poisson seul dans Saumon, Truite & Persil
+  - Franklin « 70 % de viande » → jusqu'à 70 % ; « vétérinaire nutritionniste » → vétérinaire
+  - Tableau protéines Franklin « 32–38 % » → 25–37,5 % ; Dog Chef croquettes « 30–35 % » → 30 % (4 fiches)
+  - Elmut « sans céréale ni gluten » → quinoa dans poulet, dinde, poisson, riz dans bœuf et porc
+  - Dog Chef frais « 4 formules, toutes développées par des vétérinaires », plan mixte « sans céréales » → sarrasin dans 4 recettes, riz (porc, poulet), avoine (poisson)
+  - TL;DR et verdict : repas frais pour chien très sensible → avec une recette sans riz ni avoine
+  - À vérifier ailleurs (non changé) : Elmut « sans céréales » dans `croquettes-chien-cancer`, `elmut-vs-edgard-cooper`, `choisir-alimentation-chat-guide`
 - [ ] `croquettes-chien-maladie-foie` · 0 affichages Google (28 j)
 - [ ] `croquettes-chien-perte-appetit` · 0 affichages Google (28 j)
 - [ ] `croquettes-chien-problemes-cardiaques` · 0 affichages Google (28 j)
