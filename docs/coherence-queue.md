@@ -1111,12 +1111,30 @@
   - « Glucides au-dessus de 40 % » à éviter → 45 %, comme l'encadré
   - Vérifiés : seuils FEDIAF 18 et 25 % de protéines, 5,5 % de lipides ; calcul du poulet frais à 70 % d'eau
   - À vérifier (non changé) : ratio oméga-6/oméga-3 « 5:1 à 10:1 » attribué à la FEDIAF
-- [ ] `friandises-naturelles-chien-guide` · 2 affichages Google (28 j)
-- [ ] `nourriture-bouvier-bernois` · 2 affichages Google (28 j)
-- [ ] `alimentation-chien-ete-canicule-guide` · 1 affichages Google (28 j)
-- [ ] `alimentation-chien-grande-race-adulte-guide` · 1 affichages Google (28 j)
-- [ ] `avis-real-nature` · 1 affichages Google (28 j)
-- [ ] `chien-mange-herbe-pourquoi` · 1 affichages Google (28 j)
+- [x] `friandises-naturelles-chien-guide` · 2 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - 80 kcal de friandises « une poignée de sprats séchés (25 g) » (≈ 100 kcal) → 20 g
+  - FAQ « mastication longue (bois de cerf, sabot) réduit le tartre de 20 à 30 % selon le VOHC », « dental sticks nettement moins efficaces » → aucun essai sur bois ou sabot ; le label VOHC exige une baisse moyenne d'au moins 20 % en deux essais et concerne surtout des lamelles du commerce (protocole VOHC)
+  - Vérifiés : carotte 41 kcal, courgette 17, pomme 52, myrtille 57 ; 200 g de carotte = 82 kcal ; 15 kg ≈ 800 kcal
+- [x] `nourriture-bouvier-bernois` · 2 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - StatRow « 2 200–2 800 kcal » à 40 kg (le tableau donne 430 à 640 g à 380 kcal/100 g) → 1 600–2 400 kcal, comme les autres pages (1 750 à 2 370)
+  - Vérifiés : 10 à 16 g/kg contre le tableau ; repas et âges ; Franklin « 60 à 70 % de viande » (jusqu'à 70 % dans brand-content)
+  - À vérifier (non changé) : mortalité de la torsion « 15 à 33 % » ici, « 15 à 40 % » ailleurs ; calcium chiot « 1,2 à 1,8 % » ici, « 1,0 à 1,6 % » sur 3 autres pages ; repos après repas 1 h ou 2 h selon les pages
+- [x] `alimentation-chien-ete-canicule-guide` · 1 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Coup de chaleur « mortalité d'environ 50 % sans prise en charge rapide » (TL;DR et texte) → jusqu'à 1 chien hospitalisé sur 2 (série de 54 chiens traités, comme l'article coup de chaleur)
+  - « Beagle de 20 kg » → chien de 20 kg (poids d'un Beagle obèse)
+  - 280 à 320 ml « l'équivalent de 2 à 3 verres » → 2 verres
+  - Croquettes humidifiées à parts égales « l'apport d'eau double » → 100 ml d'eau en plus pour 100 g
+  - Vérifiés : 50 à 70 puis 80 à 120 ml/kg ; eau des fruits et légumes (USDA) ; seuil 40,5 °C ; 28 °C brachycéphales dans la FAQ et le verdict
+  - À vérifier (non changé) : brachycéphales « 21,2 % des cas » au Royaume-Uni (étude de 2020 non lue en entier)
+- [x] `alimentation-chien-grande-race-adulte-guide` · 1 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : 95 à 130 kcal × P^0,75 pour 25, 30, 35 et 50 kg et 2 kg ; rapport 35/15 kg ; gamelle surélevée RR 2,1, 20 % et 52 % (Glickman 2000)
+  - À vérifier (non changé) : dysplasie 11 % Bergers allemands et 15 % Labradors (SCC 2020)
+- [x] `avis-real-nature` · 1 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : prix au kilo (10,25, 6,58, 11 et 7,75 €) ; matière sèche Pure Horse > 40 % ; glucosamine 3 g / 12 kg ; raisin 1 g/kg ; tableau contre le texte ; remises Franklin et Dog Chef (partner-discounts)
+- [x] `chien-mange-herbe-pourquoi` · 1 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Fibres « 2 à 5 % sur MS selon les recommandations de la FEDIAF » (la FEDIAF ne fixe aucun taux de fibres) → en général 2 à 5 %, FEDIAF retirée des sources
+  - Vérifiés : 79 % et 22 % (Sueda 2008) ; vermifuge 3 à 6 mois
+  - À vérifier (non changé) : plantes dans « 2 à 10 % des contenus d'estomac » de loups
 - [ ] `chien-peut-manger-mangue` · 1 affichages Google (28 j)
 - [ ] `recette-patee-maison-agneau-chien` · 1 affichages Google (28 j)
 - [ ] `alimentation-anxiete-chien-comportement` · 0 affichages Google (28 j)
