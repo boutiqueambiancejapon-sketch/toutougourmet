@@ -512,7 +512,7 @@ export const BREEDS: Breed[] = [
     slug: 'dogue-de-bordeaux',
     name: 'Dogue de Bordeaux',
     weightKg: [50, 65],
-    lifeYears: [5, 8],
+    lifeYears: [5, 6],
     activity: 'Modérée',
     watch: 'Cœur et hanches',
     health: [
@@ -778,7 +778,7 @@ export const BREEDS: Breed[] = [
   {
     slug: 'teckel',
     name: 'Teckel',
-    weightKg: [4, 15],
+    weightKg: [4, 14],
     lifeYears: [0, 0],
     activity: 'Modérée',
     watch: 'Hernie discale',
