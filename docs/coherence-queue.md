@@ -1135,12 +1135,31 @@
   - Fibres « 2 à 5 % sur MS selon les recommandations de la FEDIAF » (la FEDIAF ne fixe aucun taux de fibres) → en général 2 à 5 %, FEDIAF retirée des sources
   - Vérifiés : 79 % et 22 % (Sueda 2008) ; vermifuge 3 à 6 mois
   - À vérifier (non changé) : plantes dans « 2 à 10 % des contenus d'estomac » de loups
-- [ ] `chien-peut-manger-mangue` · 1 affichages Google (28 j)
-- [ ] `recette-patee-maison-agneau-chien` · 1 affichages Google (28 j)
-- [ ] `alimentation-anxiete-chien-comportement` · 0 affichages Google (28 j)
-- [ ] `alimentation-barf-chien-guide-complet` · 0 affichages Google (28 j)
-- [ ] `alimentation-chiot-2-6-mois` · 0 affichages Google (28 j)
-- [ ] `alimentation-chiot-6-12-mois` · 0 affichages Google (28 j)
+- [x] `chien-peut-manger-mangue` · 1 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Tableau 5-15 kg « 2 à 4 cubes (40-60 g) » (60 g dépasse 10 % des calories à 5 kg, plafond 55 g) → 2 à 3 cubes (40-50 g)
+  - Vérifiés : 60 kcal, 13,7 g de sucres, 83,5 g d'eau, 640 µg de bêta-carotène, 36 mg de vitamine C, mangue séchée 319 kcal et 66 g de sucres, poire 9,8 g et pêche 8,4 g (USDA) ; fréquences du TL;DR, du tableau et de la FAQ
+- [x] `recette-patee-maison-agneau-chien` · 1 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - 200 recettes maison « le calcium arrivait en tête des carences » → le plus souvent la choline, la vitamine D, le zinc ou la vitamine E (Stockman 2013) ; idem dans recette-patee-maison-lapin-chien et recette-patee-maison-dinde-chien (« le calcium en tête »)
+  - Vérifiés : 250 g + 125 g + 125 g = 500 g pour 20 kg (2,5 %) ; tableau 2 à 3 % ; Ca/P 1:12 à 1:15 comme les autres recettes
+- [x] `alimentation-anxiete-chien-comportement` · 0 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Alpha-casozépine « nettement baissé par rapport au placebo » → autant qu'avec la sélégiline, essai sans placebo et avec thérapie comportementale (Beata 2007)
+  - Essai Purina BL999 « 12 semaines, période sans traitement au milieu », « tremblements », délai « 6 à 12 semaines » (TL;DR, texte, tableau, protocole, FAQ) → 6 semaines de probiotique et 6 de placebo séparées par 3 semaines, allers-retours, environ 6 semaines (résumé McGowan 2018) ; idem dans microbiote-intestinal-chien-alimentation et aliments-fermentes-chien-bienfaits-dosage
+  - Magnésium « au moins 0,04 g/100 g MS (FEDIAF) » (valeur de croissance tardive) → 0,07 à 0,08 g pour l'adulte
+  - Vérifiés : NRC 170 mg d'EPA+DHA pour 10 kg ; tryptophane 12-20 mg/kg dans le tableau et la FAQ ; kéfir 1 c. à café pour 10 kg au départ (demi-dose de aliments-fermentes)
+- [x] `alimentation-barf-chien-guide-complet` · 0 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - « Salmonella dans 80 % des échantillons de régimes crus commerciaux » → rations BARF maison à base de poulet cru (Joffe 2002, ajouté aux sources)
+  - Pays-Bas « 86 % contenaient E. coli » → 80 % d'E. coli BLSE résistants aux antibiotiques (van Bree 2018)
+  - Carences des 200 recettes « calcium et phosphore en tête », « cible FEDIAF de 1,1 à 1,6 pour 1 » → choline, zinc, vitamines D et E, puis iode et Ca/P en BARF, cible 1:1 à 2:1 comme le reste du site
+  - Vérifiés : recette 300+50+25+25+75+25 = 500 g (2,5 % de 20 kg), parts du TL;DR et du tableau ; 500 à 600 g pour 20 kg
+- [x] `alimentation-chiot-2-6-mois` · 0 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Calcium grand chiot « 1,0 à 4,5 g pour 1 000 kcal » (StatRow, texte, FAQ) → 2,5 à 4,5 g, 4 g au plus avant 14 semaines (FEDIAF, comme calcium-phosphore-chien-ratio-besoins)
+  - « Un chiot de 1 kg a besoin de deux à trois fois plus d'énergie par kilo qu'un chiot de 10 kg » → presque deux fois (10^0,25 = 1,8)
+  - Vérifiés : repas par âge identiques à alimentation-chiot-6-12-mois ; tableau de transition et FAQ
+  - À vérifier (non changé) : étude « 5,5 g/1000 kcal » et « étude de 2006 » (Dobenecker) ; Chihuahua 60 % et Dogue 30 % de la croissance à 2 mois ; « réglementée par le Règlement CE 767/2009 » pour l'allégation chiot grande race
+- [x] `alimentation-chiot-6-12-mois` · 0 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Ration après stérilisation « −15-20 % » (puces, FAQ) contre « −20-25 % » plus bas → 20 à 25 % partout, pesée sur 3 mois, comme croquettes-chien-sterilise
+  - Vérifiés : âges de passage du TL;DR, du tableau et de la FAQ ; besoins −20 à 30 % comme le reste du site
+  - À vérifier (non changé) : croissance « ralentie de plus de 70 % » à 10 mois chez une grande race
 - [ ] `allergie-alimentaire-chien-symptomes-diagnostic` · 0 affichages Google (28 j)
 - [ ] `avis-atavik` · 0 affichages Google (28 j)
 - [ ] `avis-belcando` · 0 affichages Google (28 j)
