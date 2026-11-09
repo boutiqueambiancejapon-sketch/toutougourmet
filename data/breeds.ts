@@ -686,7 +686,7 @@ export const BREEDS: Breed[] = [
     watch: "Torsion d'estomac",
     health: [
       { title: 'Dilatation-torsion gastrique', text: 'Poitrine profonde : deux repas par jour, servis au calme.' },
-      { title: 'Entéropathie au gluten', text: 'Prévalence estimée à 0,8 %. Chez un chien atteint, le retrait complet du gluten sert à la fois de diagnostic et de traitement.' },
+      { title: 'Entéropathie au gluten', text: 'Rare dans la race. Chez un chien atteint, le retrait complet du gluten sert à la fois de diagnostic et de traitement.' },
     ],
     foodNote: "Un chien sain n'a pas besoin d'une croquette sans gluten. Le pelage roux demande un apport régulier en acides gras.",
     near: ['braque-allemand', 'braque-de-weimar', 'epagneul-breton'],

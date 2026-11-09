@@ -73,7 +73,7 @@ export const RANKING_CONTENT: Partial<Record<SegmentSlug, RankingContent>> = {
         h2: 'Quelles croquettes pour un chiot de grande race ?',
         paragraphs: [
           "Un chiot dont le poids adulte dépassera 25 kg a besoin de croquettes modérées en calcium et en calories. Un excès de calcium abîme ses cartilages de croissance et peut laisser des lésions du squelette, et il n'a pas encore le frein qu'a un adulte pour limiter ce qu'il absorbe.",
-          "Sur l'étiquette, vise 0,9 à 1,3 % de calcium sur matière sèche, un rapport calcium/phosphore de 1,2 à 1,5 pour 1 et 380 à 410 kcal pour 100 g. La note du scanner ne suffit pas pour ce profil : une recette très bien notée peut être trop riche pour un Labrador de quatre mois.",
+          "Sur l'étiquette, vise 1 à 1,6 % de calcium sur matière sèche, un rapport calcium/phosphore de 1 à 1,6 pour 1 et 380 à 410 kcal pour 100 g. La note du scanner ne suffit pas pour ce profil : une recette très bien notée peut être trop riche pour un Labrador de quatre mois.",
           "Lis la page produit avant de commander, et garde notre guide des [croquettes pour chiot de grande race](/chien/alimentation-quotidienne/croquettes-chiot-grande-race) sous la main. N'ajoute jamais de calcium à des croquettes complètes. Si ton chiot boite ou s'appuie moins sur une patte, consulte sans attendre.",
         ],
       },
