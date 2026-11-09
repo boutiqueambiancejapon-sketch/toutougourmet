@@ -314,12 +314,29 @@
 - [x] `avis-butternut-box` · 507 affichages Google (28 j) · relu 2026-11-09 : 1 correction
   - Dog Chef « 7 jours et 4 mois » au congélateur (`brand-content.ts` et duel : 10 mois) → 10 mois
   - À vérifier (non changé) : Dog Chef « 5 protéines » contre 11 recettes (`brand-content.ts`), d'où « catalogue le plus large » de Butternut ; « suivi nutritionnel en option payante » chez Dog Chef non trouvé
-- [ ] `chien-peut-manger-betterave` · 497 affichages Google (28 j)
-- [ ] `aliments-toxiques-chien-liste-complete` · 478 affichages Google (28 j)
-- [ ] `chien-mange-crapaud-urgence` · 464 affichages Google (28 j)
-- [ ] `chien-peut-manger-prunes` · 462 affichages Google (28 j)
-- [ ] `croquettes-chien-calculs-urinaires` · 461 affichages Google (28 j)
-- [ ] `chien-peut-manger-cannelle` · 452 affichages Google (28 j)
+- [x] `chien-peut-manger-betterave` · 497 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Potassium « 305 mg » (valeur USDA de la betterave cuite, à côté de folate, vitamine C et kcal de la crue) → 325 mg pour 100 g (TL;DR, Stat, texte)
+  - Tableau 15-30 kg « ½ betterave moyenne (50-70 g) » (betterave moyenne : 80-100 g) → ½ à ¾ de betterave moyenne
+- [x] `aliments-toxiques-chien-liste-complete` · 478 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - Chocolat noir 70 % « 15 mg de théobromine/g » (USDA : 802 mg/100 g ; fiche chocolat : 500-800 mg) → 8 mg/g, tableau 5/10/25 kg ~13/25/63 g
+  - FAQ carré « 5 g, 75 mg, chien de 3-4 kg » (fiche chocolat : carré de 10 g) → 10 g, 80 mg, chien de 4 kg
+  - Ail « 1,25 g/kg » (fiche ail-oignon : 1 g/kg, 5 fois l'oignon) → 1 g/kg
+  - Amygdaline « 1,5 g/kg » (fiches prunes, cerises, pomme : cyanure létal vers 2 mg/kg, Merck) → dose létale du cyanure libéré : environ 2 mg/kg
+  - Sel « dose toxique : 4 g/kg » (eau de mer, pop-corn : signes à 2-3 g/kg, létal à 4 g/kg) → signes dès 2 à 3 g/kg, mortel vers 4 g/kg
+  - Oignon « ¼ / ½ / 1-2 oignons » pour 25-50 / 50-100 / 125-250 g (fiche ail-oignon : ¼ d'oignon = 50 g) → ⅛ à ¼, ¼ à ½, ⅔ à 1 oignon
+  - À vérifier (hors file) : `chien-mange-chocolat-urgence` dit « deux carrés » pour rendre malade un chien de 5 kg (TL;DR) et « 1 carré » dans le texte
+- [x] `chien-mange-crapaud-urgence` · 464 affichages Google (28 j) · relu 2026-11-09 : 0 correction
+  - Rien à corriger : gabarits, délais et protection (arrêté du 8 janvier 2021) cohérents ; aucun autre article ne parle du crapaud
+- [x] `chien-peut-manger-prunes` · 462 affichages Google (28 j) · relu 2026-11-09 : 0 correction
+  - Calcul du cyanure (0,4-17,5 mg/g, 2 mg/kg), portions et plafonds de 10 % vérifiés ; sert de référence pour la liste des toxiques
+- [x] `croquettes-chien-calculs-urinaires` · 461 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Stat « ≥ 400 ml/j » sans poids (FAQ : 400 ml pour 20 kg) → ≥ 20 ml/kg/j, soit 400 ml pour 20 kg
+  - Hill's c/d magnésium « 22 mg/100 kcal » → 24 mg/100 kcal (page officielle hillsvet.com)
+  - Croquettes vétérinaires « 15 à 20 €/kg » (Urinary 13 kg ≈ 10,50 €/kg) → 10 à 20 €/kg selon le sac
+  - À vérifier (non changé) : pH cible Hill's c/d « 5,9 à 6,1 » contre Stat « 6,2-6,4 » (aucune valeur officielle trouvée) ; « 1 à 3 % des chiens selon la FACCO » (la FACCO ne publie pas ce chiffre) ; récidive « 20-30 % contre 60-80 % » attribuée à Hill's ; Franklin « −30 % » (`partner-discounts.ts`) contre « 15 à 20 % » dans `brand-content.ts`
+- [x] `chien-peut-manger-cannelle` · 452 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Tableau 5 kg « une pincée (moins de 0,5 g) » (10 kg : ~0,3 g) → ~0,15 g
+  - Seuil 1 c.à.c./10 kg et paliers 10-40 kg cohérents ; Cassia 1,2-6,5 mg/g de coumarine aligné avec la recette pomme-cannelle
 - [ ] `comprendre-etiquette-patee-chien` · 449 affichages Google (28 j)
 - [ ] `nourriture-berger-blanc-suisse` · 449 affichages Google (28 j)
 - [ ] `eukanuba-vs-royal-canin` · 435 affichages Google (28 j)
