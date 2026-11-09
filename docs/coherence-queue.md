@@ -160,12 +160,32 @@
   - Repas frais « documentent le sodium, oméga-3 naturels », recommandés alors que le texte fixe 13 à 16 % de lipides → plus de 16 % de lipides sur matière sèche (Dog Chef environ 24 %, Elmut 26 à 29 %), à écarter après une pancréatite, avertissement ajouté aux deux lignes
   - Franklin « recette au saumon ou au poisson blanc » (aucune recette au poisson blanc) → Saumon, Truite & Persil
   - À vérifier (non changé) : `brand-content.ts` donne au Menu Poulet Dog Chef 15 % de lipides sur matière sèche, la fiche importée environ 25 % ; « très adapté » pour deux repas frais au-dessus du repère de gras, choix laissé au propriétaire
-- [ ] `nourriture-westie` · 893 affichages Google (28 j)
-- [ ] `meilleure-nourriture-bichon-maltais` · 873 affichages Google (28 j)
-- [ ] `avis-dogfy-diet-repas-frais-chien` · 871 affichages Google (28 j)
-- [ ] `chien-peut-manger-foie` · 825 affichages Google (28 j)
-- [ ] `chien-peut-manger-epinards` · 810 affichages Google (28 j)
-- [ ] `curcuma-chien-bienfaits-dosage` · 803 affichages Google (28 j)
+- [x] `nourriture-westie` · 893 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - TL;DR « 70 à 120 g » (tableau : 70 à 100 g sédentaire, 100 à 130 g actif) → 70 à 130 g
+  - Dogfy Diet « 71 % d'eau » → 72 % (menu bœuf, `brand-content.ts`)
+- [x] `meilleure-nourriture-bichon-maltais` · 873 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Prix Dog Chef 3 kg « ~2,00-2,50 € par jour » → ~1,50-2,00 € (moins de 10 kg, `brand-content.ts`)
+  - Elmut « 60-80 % » de protéines animales → 62 % de viande (47 % pour le poisson)
+  - Franklin « 60 à 70 % de protéines animales », « très digeste (85 à 90 %) » → jusqu'à 70 % de viande, une seule viande ; digestibilité invérifiable retirée (texte et tableau)
+  - FAQ 3 kg « 80 à 90 g, soit 270 à 320 kcal » → 75 à 90 g (à 360 kcal/100 g, comme le calcul du texte)
+  - À vérifier (non changé) : Royal Canin Maltese « environ 30 €/kg », aucun prix dans la base
+- [x] `avis-dogfy-diet-repas-frais-chien` · 871 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - Tableau « Poulet, patate douce, courge » (65 à 70 % de poulet, 8 à 12 % de carotte, que le texte contredisait) → menu bœuf de la page officielle : 60,5 % de bœuf, 26 % de carotte ; comparatif « 65-70 % » → environ 60 % (comme le TL;DR)
+  - « vétérinaires-nutritionnistes » (TL;DR, texte, points forts) → nutritionnistes canins (site officiel)
+  - « Dog Chef le facture en option », « unique sur le marché français » (invérifiable) → Dog Chef recalcule la ration, Butternut Box sans suivi ; « Non annoncé » dans le comparatif et la FAQ
+  - Dog Chef « 5 (+ canard, agneau) » → 5 (poulet, bœuf, porc, canard, poisson) ; format « sachets congelés » → boudins réfrigérés
+  - Dog Chef 20 kg « 120-160 €/mois » → 60-120 € pour 10 à 25 kg (`brand-content.ts`) ; FAQ « coûte un peu plus cher » et « Dogfy en bas du marché par son tarif » retirés
+  - Points faibles « 110-200 €/mois » (texte : dès 60 € pour 5 kg) → 60 à 200 €
+  - À vérifier (non changé) : « 30 à 50 % d'AGE en moins avec la vapeur » attribué à van Rooijen 2013 (revue, pas une comparaison vapeur/autoclave) ; prix Dogfy Diet sans source ; part de protéine Butternut et Fidelis
+- [x] `chien-peut-manger-foie` · 825 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Tableau 3 à 5 kg « 1 foie de poulet entier 2 fois par semaine » (environ 60 g, plus que 5 g par jour) → 1 foie (environ 30 g) par semaine en 2 ou 3 fois ; 10 à 15 kg précisé : 2 ou 3 foies par semaine ou 1 tranche de 30 g 2 ou 3 fois
+  - Dog Chef « proportions calculées par leurs vétérinaires, qualité alimentaire humaine » (invérifiable) → abats des menus Poulet et Bœuf (`brand-content.ts`)
+- [x] `chien-peut-manger-epinards` · 810 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Patate douce « environ 6 mg d'oxalates » parmi les légumes pauvres (le site la dit modérée) → 50 mg ou plus pour 100 g, pas pour un chien sujet aux calculs
+- [x] `curcuma-chien-bienfaits-dosage` · 803 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Étude 2025 « 12 chiens, douleur réduite, mieux que le groupe sans curcumine » → 6 chiens complémentés contre 6 sans rien, marqueurs en baisse, douleur sans écart significatif (PMC 12115434)
+  - Pipérine « ×20 » → chez l'humain (Shoba 1998) : TL;DR, pastille, texte
+  - À vérifier (non changé) : « effet anti-inflammatoire léger à 30 mg par chien et par jour » (revue 2023) ; « montaient mieux les escaliers » retiré (absent de l’article source)
 - [ ] `nourriture-patou-montagne-pyrenees` · 743 affichages Google (28 j)
 - [ ] `butternut-box-vs-dog-chef` · 723 affichages Google (28 j)
 - [ ] `nourriture-cane-corso` · 717 affichages Google (28 j)
