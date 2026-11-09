@@ -486,12 +486,41 @@
   - Calories 220-446 kcal, 60-120 g à 370 kcal, friandises 22-45 kcal, 23-27 cm, poil 12-18 cm : cohérents
 - [x] `chien-peut-manger-pop-corn` · 260 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
   - Tableau PetMD converti en kg (2-20 lb … 91+ lb) vérifié, 8 g = 31 kcal à 387, sel 2-3 et 4 g/kg, xylitol 0,1 et 0,5 g/kg : cohérents
-- [ ] `nourriture-labrador-retriever` · 252 affichages Google (28 j)
-- [ ] `avis-franklin-light-dinde-patate-douce-epinards` · 251 affichages Google (28 j)
-- [ ] `tapis-de-lechage-chien-guide-utilisation` · 247 affichages Google (28 j)
-- [ ] `chien-peut-manger-noisettes` · 245 affichages Google (28 j)
-- [ ] `nourriture-berger-australien` · 241 affichages Google (28 j)
-- [ ] `nourriture-coton-de-tulear` · 241 affichages Google (28 j)
+- [x] `nourriture-labrador-retriever` · 252 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - Dysplasie « 20 à 30 % au Royaume-Uni » (BVA, qui ne publie pas de taux) → 15 % des Labradors suivis par la SCC (`alimentation-chien-grande-race-adulte-guide`)
+  - Glucosamine 1 000-1 500 mg/j pour 30 kg → 1 200-1 800 mg en début de cure, puis moitié moins (`glucosamine-chondroitine-chien-articulations`)
+  - Intro et FAQ dysplasie présentaient la glucosamine comme efficace, le texte dit « résultats mitigés » → oméga-3 en premier, glucosamine aux résultats plus mitigés ; « Elmut et Dog Chef les intègrent » → croquettes Dog Chef
+  - Prix/jour 30 kg : Dog Chef 3,50-4,20 → 4-5,50 €, Elmut 3,20-3,80 → 4-6 €, Franklin 1,50-2 → environ 2,50 € (`data/brand-content.ts`)
+  - Stat « ~3,50 € repas frais/jour » → 4-6 €
+  - À vérifier (non changé) : « chaque kilo de trop ajoute 3 à 5 kg de pression » sans source précise
+- [x] `avis-franklin-light-dinde-patate-douce-epinards` · 251 affichages Google (28 j) · relu 2026-11-09 : 8 corrections
+  - 64 % de dinde fraîche → 63 % de dinde dont 34 % fraîche (fiche officielle, `data/partner-fiches.json`), partout dans le corps
+  - Cellulose ~5 % → 7 % ; protéines ~28-30 % → 30 % ; cendres ~7 % → 6,8 %
+  - Densité ~340-350 kcal → ~327 kcal/100 g (`croquettes-chien-surpoids`, calcul d'Atwater ≈ 322) ; « 10 à 15 % de calories en moins » → 15 à 20 %
+  - « 25 à 40 % de gras en moins » que 14-18 % → 20 à 40 %
+  - Score corporel 6-7 « 1 à 2 kg de trop sur 25 kg » → 10 à 20 %, soit 2,5 à 5 kg (WSAVA)
+  - « Pas de soutien articulaire » → contient glucosamine 0,027 % et chondroïtine 0,019 %, loin des doses d'un complément
+  - FAQ céréales « patate douce et légumineuses (5-10 %) » → aucune légumineuse dans la composition (patate douce 18 %, courge, pomme)
+  - « Recette française » → formulée en France (fabrication en République tchèque, `data/brand-content.ts`)
+  - À voir par le propriétaire : la `description` dit encore « 64 % de dinde » (non touchée) ; non vérifiable : lancement en mai 2026, ancienne recette à la canneberge, chiffres Hill's (fibres et gras à 13,9 % tous deux) ; page officielle en erreur 429
+  - Incohérence hors article : `data/brand-content.ts` dit « l'abonnement retire 15 à 20 % » contre −30 % dans `partner-discounts.ts`
+- [x] `tapis-de-lechage-chien-guide-utilisation` · 247 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Cuillères du tableau fausses (1 c.à.c. = 10-15 g, 4 c.à.s. = 80-120 g) → 2 à 3 c.à.c., 1 à 2, 3 à 4, 4 à 6 et 5 à 8 c.à.s. (5 g et 15 g)
+  - Yaourt grec pour 10 kg « 1 c.à.s. (20 g) » → 1 à 2 c.à.s. (20-30 g), comme le tableau
+  - Taille « 15 à 25 cm » contre 23-30 cm pour les grands chiens plus bas → 15 à 30 cm
+  - Grammes par gabarit sous 10 % des calories, xylitol 0,1 et 0,5 g/kg : cohérents
+- [x] `chien-peut-manger-noisettes` · 245 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - « moins de dix noisettes » à 5 kg et « une bonne poignée » à 30 kg pour 2,2 g/kg → 1,3 g la noisette : huit noisettes, une cinquantaine
+  - Seuils de gabarit : tableau « plus de 15 kg », FAQ « moins de 5 kg » contre 10 kg dans le TL;DR → 10 kg partout
+- [x] `nourriture-berger-australien` · 241 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Grande race « au-dessus de 20 kg, moyenne race sous 18 kg » → seuil de 25 kg (reste du site)
+  - FDA « 2019-2023 » → 2018-2022 (enquête ouverte en juillet 2018, dernière mise à jour fin 2022), texte et Sources
+  - Glucosamine « se justifie dès l'âge adulte » → peut aider un chien arthrosique, preuves modestes (`glucosamine-chondroitine-chien-articulations`)
+  - Stat repas frais 22 kg « ~2,50 € » → 2,50-4 € (`data/brand-content.ts`, 10-25 kg)
+- [x] `nourriture-coton-de-tulear` · 241 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Brossage « deux à trois fois par semaine suffisent » → au moins trois (`croquettes-chien-tartre`)
+  - Stat « 2 affections dépistables (rotule, PRA) » alors que le texte cite aussi von Willebrand et l'ataxie de Bandera → « à surveiller en priorité »
+  - 240-430 kcal, 65-115 g à 370 kcal, friandises 25-45 kcal : cohérents
 - [ ] `choisir-taille-croquettes-chien` · 237 affichages Google (28 j)
 - [ ] `croquettes-chien-cancer` · 234 affichages Google (28 j)
 - [ ] `nourriture-springer-spaniel-anglais` · 228 affichages Google (28 j)
