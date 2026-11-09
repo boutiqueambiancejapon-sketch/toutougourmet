@@ -137,12 +137,29 @@
   - Franklin Senior : valeurs brutes dans une ligne « (MS) » → protéines 30,5 % → 33,9 % MS, phosphore 1 % → 1,1 % MS, au-dessus de la limite (TL;DR, tableau, texte) ; fiche officielle (10 % d'humidité)
   - Ca/P Franklin 1,5 → 1,2 (calcium 1,2 %, phosphore 1 %)
   - À vérifier (non changé) : base (brute ou MS) des valeurs Wolfood, Maison Moulin et Virbac, sans fiche dans la base
-- [ ] `chien-peut-manger-concombre` · 934 affichages Google (28 j)
-- [ ] `chien-peut-manger-oeufs` · 924 affichages Google (28 j)
-- [ ] `graine-de-lin-chien-bienfaits-dosage` · 924 affichages Google (28 j)
-- [ ] `chien-mange-limace-urgence` · 915 affichages Google (28 j)
-- [ ] `chien-toujours-faim-causes-solutions` · 915 affichages Google (28 j)
-- [ ] `nourriture-cavalier-king-charles` · 913 affichages Google (28 j)
+- [x] `chien-peut-manger-concombre` · 934 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Tableau « quantité par prise » alors que le texte parle de maximum par jour → quantité par jour
+  - FAQ « tous les jours s'il est adulte » (tableau : 3 à 5 fois par semaine sous 5 kg) → tous les jours au-dessus de 5 kg, 3 à 5 fois en dessous ; plus de 35 kg « 1/2 concombre » (le texte interdit le demi-concombre entier) → 1/2 concombre en morceaux
+  - FAQ « donne la moitié pendant 2-3 jours » → 1 ou 2 dés, selles surveillées 24 à 48 h (comme le texte)
+- [x] `chien-peut-manger-oeufs` · 924 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Tableau : quantité par semaine multipliée par une fréquence (10 kg : 1 œuf 2 fois par semaine), 30 kg 2 à 3 œufs, 40 kg 3 œufs → 1 œuf par semaine pour 10 kg (3 à 30 kg, 4 à 40 kg), colonne « Répartition » ; FAQ « un œuf par jour possible dès 30 kg », « 1 à 2 œufs par semaine à 10 kg » → pas en routine, 1 œuf par semaine pour 10 kg (comme topping-croquettes et alimentation-beau-pelage)
+  - Coquille « ½ c.à.c. par jour pour 10 kg » (environ 3 g, soit 1 200 mg pour un besoin de 500 mg) → ¼ de c.à.c. (1,5 g), en ration ménagère seulement (comme calcium-phosphore-chien-ratio-besoins : ½ c.à.c. pour 20 kg)
+  - Œuf de caille « 5 fois moins lourd », « 3 à 5 pour 1 œuf de poule » → environ 5
+  - À vérifier (non changé) : avidine « 30 à 40 % d'activité après cuisson » et « 20 % du régime en blanc cru »
+- [x] `graine-de-lin-chien-bienfaits-dosage` · 924 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - TL;DR « ½ c.à.c. par 5 kg » (25 kg donnerait 2,5 c.à.c., le tableau dit 2) → de ½ c.à.c. pour 5 kg à 1 c.à.s. au-delà de 35 kg
+  - Cyanure « 200 g, soit 20 à 40 fois la dose » (10 g pour 20 kg) → environ 20 fois
+  - « doses nutritionnelles 5 à 15 g » → 2,5 à 15 g (comme le tableau)
+- [x] `chien-mange-limace-urgence` · 915 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Fenbendazole « cure de 5 jours » → 5 à 20 jours selon le protocole (essai de terrain à 25 mg/kg pendant 20 jours, cas publiés à 5 et 15 jours)
+  - À vérifier (non changé) : symptômes « 2 à 6 semaines » et « des semaines pour atteindre le cœur » face à une période prépatente de 38 à 57 jours ; « prévention à 75 € environ » sans base
+- [x] `chien-toujours-faim-causes-solutions` · 915 affichages Google (28 j) · relu 2026-11-09 : 0 correction
+  - Rien à corriger : allèle POMC 12 % (un sur huit) cohérent avec nourriture-labrador-retriever (environ 25 % de porteurs)
+- [x] `nourriture-cavalier-king-charles` · 913 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Elmut « oméga-3 marins » (huile de colza dans 4 recettes sur 5, fiches) → ration au gramme et liste courte d'ingrédients ; Dog Chef « sodium et lipides communiqués » (aucun sodium dans les fiches) → huile de poisson dans chaque repas frais
+  - Repas frais « documentent le sodium, oméga-3 naturels », recommandés alors que le texte fixe 13 à 16 % de lipides → plus de 16 % de lipides sur matière sèche (Dog Chef environ 24 %, Elmut 26 à 29 %), à écarter après une pancréatite, avertissement ajouté aux deux lignes
+  - Franklin « recette au saumon ou au poisson blanc » (aucune recette au poisson blanc) → Saumon, Truite & Persil
+  - À vérifier (non changé) : `brand-content.ts` donne au Menu Poulet Dog Chef 15 % de lipides sur matière sèche, la fiche importée environ 25 % ; « très adapté » pour deux repas frais au-dessus du repère de gras, choix laissé au propriétaire
 - [ ] `nourriture-westie` · 893 affichages Google (28 j)
 - [ ] `meilleure-nourriture-bichon-maltais` · 873 affichages Google (28 j)
 - [ ] `avis-dogfy-diet-repas-frais-chien` · 871 affichages Google (28 j)
