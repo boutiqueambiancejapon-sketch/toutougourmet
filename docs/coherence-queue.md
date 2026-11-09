@@ -1207,12 +1207,56 @@
   - Prix « 10 à 16 €/kg » → 4,90 €/kg en 14 kg (69 €), 11 €/kg en 2,5 kg (Maxi Zoo)
   - FAQ 25 kg « 12 €/kg, 100 à 120 € par mois » → 4,90 €/kg, 40 à 50 € par mois
   - À vérifier (non changé) : Prescription Diet « 150-180 € par mois » ; n/d (oncologie) peut-être arrêté ; « une revue vétérinaire (JSAP 2019) : protéines fraîches plus digestes que les farines de maïs » (encart Elmut)
-- [ ] `avis-japhy` · 0 affichages Google (28 j)
-- [ ] `avis-multifit` · 0 affichages Google (28 j)
-- [ ] `avis-purina-pro-plan` · 0 affichages Google (28 j)
-- [ ] `avis-select-gold` · 0 affichages Google (28 j)
-- [ ] `avis-taste-of-the-wild` · 0 affichages Google (28 j)
-- [ ] `avis-wolfsblut` · 0 affichages Google (28 j)
+- [x] `avis-japhy` · 0 affichages Google (28 j) · relu 2026-11-09 : 8 corrections
+  - Trustpilot « 4,6/5, plus de 10 500 avis », « meilleure note des sur-mesure » et récits de pelage tirés des avis → 4,7/5 sur plus de 17 000 avis (Trustpilot, 9 novembre 2026)
+  - « sans céréales » (intro, composition, tableau, FAQ, légumineuses) → maïs et riz dans plusieurs recettes (exemples de japhy.fr)
+  - « plus de 30 % de protéines sur MS, 17 % de glucides » → 27 à 31 % de protéines ; glucides non communiqués sur japhy.fr
+  - « sites nommés, origine tracée » → usine partenaire des Pays de la Loire, non nommée
+  - Livraison « toutes les 4 à 8 semaines » → 4, 5 ou 6 semaines
+  - FAQ 20 kg « 220 à 260 g par jour » → 280 à 320 g (Japhy sert 263 g à un chien de 15 kg)
+  - Senior rein ou cœur « Hill's j/d » (articulations) → Hill's k/d
+  - Dog Chef « 4 mois au congélateur » → 10 mois (`data/brand-content.ts`)
+  - À vérifier (non changé) : « environ 10 % des avis négatifs parlent de résiliation » ; la description dit « sans céréales » (non touchée)
+  - À aligner : `dog-chef-vs-japhy`, `just-russel-vs-japhy`, `avis-just-russel`, `just-russel-vs-royal-canin` disent Japhy sans céréales, 17 % de glucides
+- [x] `avis-multifit` · 0 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Croquettes « 31 à 51/100 », Junior « la mieux notée » (TL;DR, texte) → 31 à 54/100, Junior Sensible agneau à 54/100 (fiches Maxi Zoo)
+  - Pâtées « 53 à 61/100 » → 53 à 70/100, Senior Volaille à 70/100
+  - Pouch Jelly « la meilleure pâtée MultiFit lue » → note de 60/100
+  - Franklin « −30 % sur la première commande » → −30 % en abonnement (`data/partner-discounts.ts`)
+  - Non touché : la description dit encore « croquettes de 31 à 51/100 »
+- [x] `avis-purina-pro-plan` · 0 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - Prix « 9 à 14 €/kg » → 3,50 à 5 € le kilo en 14-16 kg (zooplus.fr, 9 novembre 2026)
+  - Protéines « 30 à 38 % » et tableau en MS → 26 à 32 % (fiches Maxi Zoo)
+  - Sensitive Skin « poulet en premier » → saumon
+  - HA « protéines hydrolysées, sans céréales » → amidon de maïs puis soja hydrolysé ; NF « riz, poulet » → maïs, riz (purina.co.uk)
+  - Franklin « 70 % de viande identifiée, 32-38 % MS, oméga 5:1 » → jusqu'à 70 %, jusqu'à 37,5 %, ligne oméga remplacée par la livraison
+  - « même enveloppe », « traçabilité complète » → un peu plus cher
+- [x] `avis-select-gold` · 0 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - TL;DR Complete « 73 à 86/100 » → 65 à 86/100 (Senior XS à 65)
+  - Pâtées Sensitive « 93 à 95/100 » → 91 à 95/100 chez l'adulte, Junior poulet et riz à 59/100
+  - Franklin « −30 % sur la première commande » → −30 %
+- [x] `avis-taste-of-the-wild` · 0 affichages Google (28 j) · relu 2026-11-09 : 9 corrections
+  - Prix « 8 à 12 €/kg » (TL;DR, texte) → 5,50 à 9 € le kilo selon le sac (zooplus.fr, 9 novembre 2026)
+  - Rappels « salmonelle en 2005, 2006, 2012 » (TL;DR, texte, FAQ) → aflatoxine en 2005, salmonelle en 2012
+  - « Toute la gamme sans céréales » (texte, FAQ) → sauf la gamme Ancient Grains
+  - High Prairie « bison, agneau, pomme de terre, pois, protéines de pois, lentilles » → bison 12 %, agneau et poulet déshydratés, patates douces, pois (zooplus.fr)
+  - « utile aux chiens intolérants au poulet ou au bœuf », Wetlands « intolérant au poulet » → High Prairie et Wetlands contiennent du poulet, High Prairie du bœuf
+  - Tableau protéines MS → étiquettes : 32, 25, 25, 32, 27 %
+  - Cendres « 8 % sur MS » → environ 9 % (9,2 et 8,8 %)
+  - Où acheter « Maxi Zoo, Tiendanimal » → Truffaut, zooplus, Zoomalia
+  - Franklin « 70 % de viande nommée » → jusqu'à 70 %
+  - À vérifier : Sierra Mountain 25 % vient de l'analyse américaine
+- [x] `avis-wolfsblut` · 0 affichages Google (28 j) · relu 2026-11-09 : 9 corrections
+  - Recettes « renne, autruche, morue, Polar Bear » → gibier, cheval, truite, canard, Cold River (wolfsblut.com)
+  - Prix « 12 à 18 €/kg » → 5,40 à 6 € le kilo en 12,5 kg (dm, Rossmann)
+  - « 70 % de protéines animales, 28-34 % MS » → 30 % de gibier à 51 % de cheval
+  - Dark Forest « cerf 45 %, pomme » (texte, tableau, FAQ) → gibier frais 30 %, patates douces 24 %, agneau séché 7 %
+  - Tableau « Arctic (morue) 35 % », Wide Plain 42 % → Cold River 42 % de poisson, Wide Plain 51 % de cheval
+  - « ne collabore pas avec des vétérinaires », fabrication « externalisée » → gamme VetLine développée avec des vétérinaires, « produit en Allemagne »
+  - Où acheter « zooplus, Bitiba » → zooplus vend Wolf of Wilderness, pas Wolfsblut ; page Maxi Zoo vide
+  - Franklin « 70 % de viande fraîche contre 40-45 % », « formulation vétérinaire documentée » → jusqu'à 70 % contre 30 à 51 %, Dr Charlotte Dirat
+  - « moins cher qu'Orijen ou Farmina » → Orijen
+  - Pour le propriétaire : le bouton « Wolfsblut chez Maxi Zoo » (affiliateA et BrandCTA) mène à une page sans produit
 - [ ] `budget-alimentation-chien-par-mois` · 0 affichages Google (28 j)
 - [ ] `chien-mange-mort-aux-rats-urgence` · 0 affichages Google (28 j)
 - [ ] `chien-mange-noix-cajou` · 0 affichages Google (28 j)
