@@ -858,12 +858,24 @@
 - [x] `recette-patate-douce-sechee-chien` · 39 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
   - Tableau 2–5 kg 1 petite lamelle → ½, 5–10 kg 1–2 fines → 1, 10–20 kg 2–3 → 1–1,5, 20–35 kg 3–4 → 2–2,5, > 35 kg 4–5 → 3–4 (bande de 10 g à 35 kcal)
   - FAQ « Une à deux lamelles suffisent » → d'une demi-lamelle à quatre, comme le tableau
-- [ ] `glucides-croquettes-chien` · 37 affichages Google (28 j)
-- [ ] `croquettes-bio-chien-label-guide-achat` · 36 affichages Google (28 j)
-- [ ] `chien-peut-manger-oignons` · 35 affichages Google (28 j)
-- [ ] `chien-peut-manger-mais` · 32 affichages Google (28 j)
-- [ ] `nourriture-setter-irlandais` · 31 affichages Google (28 j)
-- [ ] `chien-peut-manger-paprika` · 30 affichages Google (28 j)
+- [x] `glucides-croquettes-chien` · 37 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : Romsos 1981 (15-20 mg/dL, 63 % contre 96 % à la naissance, 35 % à 3 jours), calcul ENA de l'exemple (36 %)
+- [x] `croquettes-bio-chien-label-guide-achat` · 36 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : seuil de 95 %, application du logo au 1er mai 2024, stocks étiquetés selon les règles nationales
+- [x] `chien-peut-manger-oignons` · 35 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Poudre < 5 kg « 3 à 5 g (1 cuillère à café) » → 1 à 2 cuillères à café (≈ 3 g la cuillère, comme chien-mange-ail-oignon-urgence)
+  - 15-30 kg « 75-150 g, un demi-oignon moyen » → environ un oignon moyen
+  - Surveillance 72 heures / 3 jours (étape, H2, texte, « 3 jours précédents ») → 5 jours, comme les signes annoncés à 1 à 5 jours
+  - À vérifier (non changé) : Labrador classé dans 15-30 kg
+- [x] `chien-peut-manger-mais` · 32 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Tableau > 30 kg « une petite poignée » → 3 à 4 cuillères à soupe (la petite poignée pesait moins que les 2 à 3 c. à soupe du 15-30 kg)
+  - FAQ signes d'occlusion « 12 à 48 h » → 24 à 48 h (StatRow et encadré)
+- [x] `nourriture-setter-irlandais` · 31 affichages Google (28 j) · relu 2026-11-09 : rien à corriger, 1 correction ailleurs
+  - Vérifié : menu bœuf Dogfy (carotte, pomme de terre, patate douce) sur la page officielle
+  - Hors file, nourriture-dalmatien : « menu bœuf Dogfy sans abats » → 48,6 % d'abats (foie et rate) d'après la page officielle, menu déconseillé au Dalmatien ; humidité 71 → 72 %
+  - À vérifier (non changé) : « plus de 1 900 chiens » (Glickman 2000, 217(10) porte sur 1 637 chiens ?) ; prévalence 0,8 % ; ration chasse 500-630 g alors que le texte annonce 2 à 3 fois l'entretien
+- [x] `chien-peut-manger-paprika` · 30 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Signes « en général 3 à 5 jours après le repas » → 1 à 5 jours (chien-peut-manger-oignons, chien-mange-ail-oignon-urgence)
 - [ ] `avis-orijen` · 29 affichages Google (28 j)
 - [ ] `chien-peut-manger-tomate` · 29 affichages Google (28 j)
 - [ ] `chien-peut-manger-pasteque` · 26 affichages Google (28 j)
