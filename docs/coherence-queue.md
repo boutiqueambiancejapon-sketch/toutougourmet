@@ -112,13 +112,31 @@
   - FAQ eau froide « 25 à 30 minutes » → 20 à 30 minutes (comme le texte)
 - [x] `chien-peut-manger-yaourt` · 1165 affichages Google (28 j) · relu 2026-11-09 : 1 correction
   - FAQ « pot sucré de 150 kcal, 15 à 20 % de la journée d'un petit chien » → près de la moitié de la journée d'un chien de 5 kg (environ 330 kcal)
-- [ ] `chien-peut-manger-kiwi` · 1144 affichages Google (28 j)
-- [ ] `nourriture-chihuahua` · 1112 affichages Google (28 j)
-- [ ] `chien-peut-manger-porc` · 1071 affichages Google (28 j)
-- [ ] `chien-peut-manger-petits-pois` · 1025 affichages Google (28 j)
-- [ ] `psyllium-chien-bienfaits-dosage` · 1006 affichages Google (28 j)
+- [x] `chien-peut-manger-kiwi` · 1144 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Tableau plus de 30 kg « 2 à 3 rondelles (30 à 40 g) » avec une rondelle de 10 g → 3 à 4 rondelles ; TL;DR « une demi-rondelle à trois rondelles » → à quatre
+  - TL;DR, intro et verdict « deux à trois fois par semaine » → une à trois fois selon le gabarit (le tableau dit 1 à 2 fois sous 5 kg)
+- [x] `nourriture-chihuahua` · 1112 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Besoin d'un 2 kg « 130 à 160 kcal, actif » → 160 à 185 kcal selon l'activité (FEDIAF 95 et 110 × P^0,75, comme zinc-chien-carence-besoins-sources : 185 kcal à 2 kg) ; 35-42 g → 42-49 g de croquettes ; FAQ idem, repas de 21 à 25 g, phrase « réduis de 15 à 20 % » retirée
+  - TL;DR et pastille « 120 à 200 kcal » (1,5 à 3 kg) → 130 à 250 kcal
+  - Repas frais « 80 à 100 g, 0,90 à 1,30 € par jour, moins qu'un café » → 120 à 140 g (frais cuit 133 kcal/100 g), 1,50 à 2 € (Dog Chef) et 1,80 à 2,50 € (Elmut) par jour pour moins de 10 kg (`brand-content.ts`) ; titre de l'encadré « coût très accessible » → « combien ça coûte »
+  - Franklin « formule petite race, bon effet mécanique », avertissement « 38 % ou plus » → recettes sans céréales, une seule viande, 34 % de protéines au plus pour l'adulte (aucune recette petite race dans les fiches)
+  - À vérifier (non changé, faute de source) : repère « 38 à 42 % de protéines animales » pour un Chihuahua
+- [x] `chien-peut-manger-porc` · 1071 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Encadré « porc d'élevage régulièrement testé, risque non exclu » → élevages porcins français indemnes depuis 2008, virus chez le sanglier sauvage (Sénat, Assemblée nationale)
+  - FAQ jambon cru « risque d'Aujeszky réel si élevage non certifié » → plus salé, risque surtout lié au sanglier cru (aligné sur chien-peut-manger-jambon, « risque théorique »)
+  - « équilibre nutritionnel garanti par des vétérinaires » (Dog Chef, Elmut) → des menus complets (invérifiable, `brand-content.ts`)
+  - À vérifier (non changé) : « sans vaccin » pour le chien, une source évoque un vaccin inactivé en autorisation temporaire
+- [x] `chien-peut-manger-petits-pois` · 1025 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Cuillère à soupe « 10 g, 8 kcal » → environ 15 g, 12 kcal (texte et légende)
+  - FDA « 553 signalements entre janvier 2018 et avril 2019 » → 524 signalements entre janvier 2014 et avril 2019 (page FDA) ; 1 382 cas au 1er novembre 2022 confirmé
+- [x] `psyllium-chien-bienfaits-dosage` · 1006 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - TL;DR, pastille et FAQ « 0,5 à 1 c.à.c. (2 à 4 g) par 10 kg » (pastille « par jour ») → environ ½ c.à.c. (2 g) par 10 kg et par prise, comme le tableau (6 à 8 g au-delà de 30 kg)
+  - À vérifier (non changé) : « 80 % de réponse » de Leib 2000, le résumé dit seulement « la plupart des chiens »
 - [x] `chien-peut-manger-amandes` · 984 affichages Google (28 j) · relu 2026-11-09 : 2 corrections (propriétaire)
-- [ ] `meilleures-croquettes-chien-senior` · 966 affichages Google (28 j)
+- [x] `meilleures-croquettes-chien-senior` · 966 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Franklin Senior : valeurs brutes dans une ligne « (MS) » → protéines 30,5 % → 33,9 % MS, phosphore 1 % → 1,1 % MS, au-dessus de la limite (TL;DR, tableau, texte) ; fiche officielle (10 % d'humidité)
+  - Ca/P Franklin 1,5 → 1,2 (calcium 1,2 %, phosphore 1 %)
+  - À vérifier (non changé) : base (brute ou MS) des valeurs Wolfood, Maison Moulin et Virbac, sans fiche dans la base
 - [ ] `chien-peut-manger-concombre` · 934 affichages Google (28 j)
 - [ ] `chien-peut-manger-oeufs` · 924 affichages Google (28 j)
 - [ ] `graine-de-lin-chien-bienfaits-dosage` · 924 affichages Google (28 j)
