@@ -1496,12 +1496,45 @@
   - Just Russel « sans dépasser 50 € par mois » (contredit 46-54 € et 46-60 €) → autour de 50 € pour un chien moyen
   - « 4,4/5 sur plus de 5 500 avis Trustpilot » (note en étoiles, 4,5/5 et 15 000 avis dans l'avis Just Russel) → valeurs nutritionnelles affichées sur chaque page produit
   - À vérifier (non changé) : « 27 % MS » de protéines, probablement sur produit brut
-- [ ] `just-russel-vs-japhy` · 0 affichages Google (28 j)
-- [ ] `just-russel-vs-royal-canin` · 0 affichages Google (28 j)
-- [ ] `meilleurs-legumes-chien` · 0 affichages Google (28 j)
-- [ ] `moule-verte-chien-arthrose-dosage` · 0 affichages Google (28 j)
-- [ ] `nourriture-akita-inu` · 0 affichages Google (28 j)
-- [ ] `nourriture-basset-hound` · 0 affichages Google (28 j)
+- [x] `just-russel-vs-japhy` · 0 affichages Google (28 j) · relu 2026-11-09 : 9 corrections
+  - Japhy « 30 % et plus de protéines, ~17 % de glucides » (TL;DR, tableau, texte, FAQ) → 25 à 30 % selon la recette (japhy.fr), glucides non communiqués
+  - Japhy « sans céréales (légumineuses) » (tableau, intro, FAQ) → maïs et riz selon la recette, Roxy sans céréales (comme `avis-japhy`)
+  - Japhy « 12 à 18 €/kg », « Just Russel moins cher, surtout pour les grands chiens » (TL;DR, texte, FAQ) → 39,90 € le sac de 6 kg sur japhy.fr (≈ 6,65 €/kg), prix proches quel que soit le gabarit
+  - « 27 % de protéines et autant de glucides » → près de 40 % de glucides
+  - « au niveau d'Acana ou Orijen », « sites de production indiqués » → usine partenaire des Pays de la Loire non nommée
+  - Encart « plus de glucides et moins de protéines qu'avec Japhy » → près de 40 % de glucides
+  - Dog Chef « complément Senior (chondroïtine, glucosamine, soutien cérébral) » → Senior Booster (glucosamine et curcuma), `brand-content.ts`
+  - « Environ 10 % des avis Trustpilot » → des avis négatifs (comme `avis-japhy`, `dog-chef-vs-japhy`)
+  - FAQ sans céréales « Japhy, Dog Chef ou Elmut » (Elmut : quinoa ou riz) → recette Roxy de Japhy, croquettes Canard de Dog Chef
+  - Aligné hors file : `avis-just-russel` (Japhy 30 %+, ~17 %, sans céréales, 12-18 €/kg dans le tableau et la FAQ ; Japhy retiré des marques à 30-42 % de protéines)
+  - À vérifier (non changé) : « livraison payante chez Japhy » (seuils contradictoires selon les sites tiers) ; Just Russel 7,67 €/kg
+  - À aligner plus tard : `dog-chef-vs-japhy` (Japhy « sans céréales », Stat « ~17 % », FAQ « Oui, les deux » ; croquettes Dog Chef « sans céréales » alors que seule la Canard l'est)
+- [x] `just-russel-vs-royal-canin` · 0 affichages Google (28 j) · relu 2026-11-09 : 7 corrections
+  - Royal Canin « protéines animales déshydratées » sans espèce (TL;DR, tableau, texte, contre) → « protéines de volaille déshydratées » et « hydrolysat de protéines animales » (étiquette déjà citée dans l'article)
+  - Glucides 43-50 % « deux fois plus » que moins de 15 % → au moins trois fois plus
+  - Just Russel « facture en plus le port », contre « Livraison payante » → livraison comprise (justrussel.fr, relevé dans `avis-just-russel`)
+  - Sans céréales « Dog Chef ou Japhy » (tableau, FAQ) → croquettes Canard de Dog Chef, recette Roxy de Japhy
+  - FAQ glucides « Japhy (environ 17 %) » → retiré (non communiqué)
+  - « Royal Canin Large Breed Puppy » → Maxi Puppy (nom de la gamme Royal Canin)
+  - À vérifier (non changé) : Royal Canin 22-35 €/mois pour 15 kg et « 30 à 50 % moins cher » (≈ 5 à 6,50 €/kg, soit plutôt 30 à 40 €/mois)
+- [x] `meilleurs-legumes-chien` · 0 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Courgette « la plus légère de la liste » (17 kcal ; concombre 12 kcal sur sa fiche) → juste derrière le concombre
+  - Épinards « 2 à 3 fois par semaine » → 1 à 2 fois (fiche épinards)
+  - Patate douce séchée « four à 100 °C pendant 2 h, plusieurs jours » → 90 °C, 3 à 6 h, 2 à 3 semaines en boîte hermétique (recette dédiée)
+- [x] `moule-verte-chien-arthrose-dosage` · 0 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - PCSO-524 « 30 à 90 mg/jour pour 20 kg » (une capsule Antinol = 50 mg) → étiquette française : 1 capsule sous 20 kg, 2 au-dessus, le double 14 jours
+  - Essai Massey 2006 « amélioration moyenne d'environ 74 % » (absent du résumé) → plus de chiens améliorés qu'avec le placebo à 8 semaines
+  - Source « Comblain et al., 2015 » → Soontornvipart et al., 2015, Thai J Vet Med 45:157-165 (66 chiens, 24 semaines)
+  - FAQ allergie « oméga-3 végétaux (huile de lin, chia) » (lin déconseillé ailleurs, sans EPA ni DHA) → huile d'algue
+  - À vérifier (non changé) : allergie aux fruits de mer « 2-3 % des allergies alimentaires » ; boiterie « dès la 4ᵉ semaine » (Soontornvipart)
+- [x] `nourriture-akita-inu` · 0 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Elmut « oméga-3 dans les formules bœuf et saumon » → Menu Poisson (saumon, colin), `brand-content.ts`
+  - À vérifier (non changé) : thyroïdite « plus de 13 % », « parmi les taux les plus hauts » ; huile de coco contre la sébadénite ; 2 000 à 2 200 kcal pour 35 kg modéré (autres fiches race : 1 600 à 2 200)
+- [x] `nourriture-basset-hound` · 0 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - « Gamelle haute et étroite » (contredit « ne surélève pas la gamelle ») → étroite, à bords hauts, posée au sol
+  - Repas frais 25 kg « environ 2,50 € par jour » (Dog Chef 10-25 kg : 2 à 4 €, Elmut 75 à 120 €/mois) → 3 à 4 €
+  - « Sans effort 30 minutes avant ou après » (texte, FAQ) → pas de jeu intense 30 min avant ni 2 h après (dossier torsion)
+  - À vérifier (non changé) : « 40 à 60 % de chiens obèses » ; 800 à 1 200 kcal pour 20 à 35 kg
 - [ ] `nourriture-beagle` · 0 affichages Google (28 j)
 - [ ] `nourriture-berger-allemand` · 0 affichages Google (28 j)
 - [ ] `nourriture-berger-belge-malinois` · 0 affichages Google (28 j)
