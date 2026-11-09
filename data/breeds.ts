@@ -587,7 +587,7 @@ export const BREEDS: Breed[] = [
     watch: 'Prise de poids',
     health: [
       { title: 'Obésité (mutation POMC)', text: 'Environ 25 % des labradors portent cette mutation qui altère la satiété. La ration se mesure au gramme, jamais en libre-service.' },
-      { title: 'Dysplasie de la hanche et du coude', text: 'Chaque kilo en trop ajoute 3 à 5 kg de pression sur hanches et coudes. Glucosamine (1 000 à 1 500 mg/jour pour 30 kg), chondroïtine et oméga-3.' },
+      { title: 'Dysplasie de la hanche et du coude', text: 'Un Labrador gardé mince voit son arthrose de la hanche arriver bien plus tard. Glucosamine (1 000 à 1 500 mg/jour pour 30 kg), chondroïtine et oméga-3.' },
     ],
     foodNote: 'Matières grasses entre 8 et 14 %, 6 à 10 % après stérilisation. Les friandises comptent dans le total du jour.',
     near: ['golden-retriever', 'berger-blanc-suisse', 'braque-allemand'],
