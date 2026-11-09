@@ -1088,12 +1088,29 @@
   - Elmut « Booster Mobility » (c'est un produit Dog Chef) → repas mijotés, ration sur le profil ; Dog Chef « repas au gramme » → portions recalculées, Mobility Booster
   - Vérifiés : tableaux adulte et chiot croissants ; chocolat 20 mg/kg ; xylitol 0,1 g/kg
   - À vérifier (non changé) : mortalité SDTE « 15 à 40 % » ; rapport Ca/P chiot « 1,2 à 1,4 »
-- [ ] `chien-mange-chocolat-urgence` · 3 affichages Google (28 j)
-- [ ] `chien-peut-manger-carottes` · 3 affichages Google (28 j)
-- [ ] `avis-buddy-pet-foods` · 2 affichages Google (28 j)
-- [ ] `chien-peut-manger-chou-fleur` · 2 affichages Google (28 j)
-- [ ] `chien-peut-manger-choucroute` · 2 affichages Google (28 j)
-- [ ] `comprendre-etiquette-croquettes-chien` · 2 affichages Google (28 j)
+- [x] `chien-mange-chocolat-urgence` · 3 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Chien de 5 kg « 1 carré de noir 70 % peut déjà donner des symptômes » (50-80 mg, sous 20 mg/kg) → 2 carrés, comme le TL;DR et le tableau
+  - Part de fondant « 50 à 100 g de chocolat » et brownie « 30-40 g » → 25 à 50 g et 15-20 g (200 à 250 g de chocolat pour 6 à 16 parts) ; idem dans la FAQ
+  - Vérifiés : théobromine pour 100 g (comme halloween et aliments-toxiques) ; carré de 10 g ; Yorkshire 2 kg et Labrador 30 kg ; seuils 20, 40-60 et 100 mg/kg
+- [x] `chien-peut-manger-carottes` · 3 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Tableau « presque tous les jours » sous 15 kg (la FAQ dit chaque jour pour tout chien sain) → tous les jours possible
+  - friandises-naturelles-chien-guide : « carotte crue, à 35 kcal » → 41 kcal (35 kcal, c'est cuite)
+  - Vérifiés : 41 et 35 kcal, 8 285 µg de bêta-carotène, 2,8 g de fibres, 4,7 g de sucres (USDA) ; carotte de 90 g sous 10 % à 30 kg
+- [x] `avis-buddy-pet-foods` · 2 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Prix « estimé entre 18 et 28 €/kg, au niveau des marques les plus chères » → 14,50 €/kg (2 kg) et 7,50 €/kg (12 kg) chez Zooplus, comme Orijen ; idem dans le tableau
+  - Dog Chef croquettes « 30 %+ de viande, se calcule autrement » → 63 % de canard (50 % frais, 13 % séché), comme avis-dog-chef-croquettes-canard-frais ; idem dans les inconvénients
+  - Dog Chef croquettes « ~11-15 €/kg » → 14-18 €/kg
+  - FAQ « livraison gratuite dès 70 € », « pas d'animalerie généraliste » → dès 30 € (site officiel), vendu aussi sur Zooplus
+  - À vérifier (non changé) : fabrication en République tchèque, ISO 9001, séchage à 70 °C, compensation Gold Standard, 50 pays (site officiel muet sur ces points le 2026-11-09) ; « jusqu'à 80 % » plausible (canard : 70 % de canard + foie + graisse)
+- [x] `chien-peut-manger-chou-fleur` · 2 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : 25 kcal, 92 % d'eau, choline 44 mg, vitamines C et K contre brocoli (USDA) ; tableau croissant sous 10 % ; fréquences du tableau et de la FAQ
+- [x] `chien-peut-manger-choucroute` · 2 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : 1,3 g de sel pour 100 g, 5 g par assiette, signes dès 2 à 3 g/kg (Merck) ; tableau identique à aliments-fermentes-chien-bienfaits-dosage, cuillère à café = 5 g
+- [x] `comprendre-etiquette-croquettes-chien` · 2 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - 38 % de glucides « au-dessus du seuil de 30 % recommandé par les vétérinaires nutritionnistes » (sans source, et l'encadré met 25-35 % en « correct ») → zone médiocre des repères (35 à 45 %)
+  - « Glucides au-dessus de 40 % » à éviter → 45 %, comme l'encadré
+  - Vérifiés : seuils FEDIAF 18 et 25 % de protéines, 5,5 % de lipides ; calcul du poulet frais à 70 % d'eau
+  - À vérifier (non changé) : ratio oméga-6/oméga-3 « 5:1 à 10:1 » attribué à la FEDIAF
 - [ ] `friandises-naturelles-chien-guide` · 2 affichages Google (28 j)
 - [ ] `nourriture-bouvier-bernois` · 2 affichages Google (28 j)
 - [ ] `alimentation-chien-ete-canicule-guide` · 1 affichages Google (28 j)
