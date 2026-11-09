@@ -434,7 +434,7 @@ export const BREEDS: Breed[] = [
     watch: 'Otites',
     health: [
       { title: 'Otites récurrentes', text: 'Souvent liées à une allergie alimentaire : une formule à ingrédients limités peut régler le problème. Les oméga-3 réduisent la fréquence des poussées.' },
-      { title: 'Dysplasie de la hanche', text: 'Environ 20 % des cockers. Glucosamine (500 à 1 000 mg/jour pour 12 à 15 kg) dès 5 ans et poids contrôlé.' },
+      { title: 'Dysplasie de la hanche', text: '5 à 6 % des cockers radiographiés. Glucosamine (500 à 1 000 mg/jour pour 12 à 15 kg) dès 5 ans et poids contrôlé.' },
     ],
     foodNote: "Sujet à l'embonpoint, surtout après stérilisation : la ration baisse alors de 20 %.",
     near: ['springer-spaniel-anglais', 'epagneul-breton', 'beagle'],
