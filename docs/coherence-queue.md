@@ -4,12 +4,25 @@
 > Ordre : affichages Google sur 28 jours (Search Console, liste du 2026-11-09). Les nouveaux articles s'ajoutent en bas.
 > Cocher : `- [x] \`slug\` · … · relu AAAA-MM-JJ : N correction(s)` (ou « rien à corriger »). Bloqué : `- [~]` avec la raison.
 
-- [ ] `avis-croquettes-orlando-lidl` · 7718 affichages Google (28 j)
-- [ ] `chien-mange-os-poulet-urgence` · 6233 affichages Google (28 j)
-- [ ] `chataignes-marrons-inde-chien-difference-danger` · 5161 affichages Google (28 j)
-- [ ] `chien-peut-manger-jambon` · 4415 affichages Google (28 j)
-- [ ] `chien-peut-manger-pates` · 4328 affichages Google (28 j)
-- [ ] `chien-peut-manger-crevettes` · 4279 affichages Google (28 j)
+- [x] `avis-croquettes-orlando-lidl` · 7718 affichages Google (28 j) · relu 2026-11-09 : 7 corrections
+  - Pure Taste : « plafond recommandé de 0,7 % de phosphore », cendres et calcium « au-dessus des seuils » → phosphore 1 % sous le plafond FEDIAF (1,6 % MS), conseil véto pour un senior ; idem dans la FAQ
+  - Franklin protéines « 34 à 37,5 %, presque le double d'Orlando » → 34 % pour la plupart (25 à 37,5 %), une fois et demie
+  - Franklin « vétérinaire nutritionniste » et note Trustpilot → « vétérinaire », note retirée ; « a popularisé le mono-protéine » → créée en 2018 pour une bouledogue allergique
+  - Dog Chef note Trustpilot et « des propriétaires rapportent une meilleure digestion » → retirés
+  - Tableau Dog Chef « Made in France : Oui » → Non (Belgique, Huldenberg)
+  - Tableau prix/kg Franklin 6–9 € → 5–9 € ; Dog Chef ~11–14 € → 14–18 € (avis croquettes Dog Chef)
+  - FAQ « 6 à 8 fois plus cher, 40 à 60 €/mois » → 10 à 13 fois, 55 à 75 €/mois
+- [x] `chien-mange-os-poulet-urgence` · 6233 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - FAQ « dissout en 12 à 24 h, traverse en 24 à 48 h au total » → 12 premières heures, fragments dans les selles entre 48 et 72 h (comme la chronologie)
+  - « selles blanchâtres dans les 24 à 48 heures » → dans les 72 heures
+- [x] `chataignes-marrons-inde-chien-difference-danger` · 5161 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+- [x] `chien-peut-manger-jambon` · 4415 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Sodium : « 2 g de sodium pour 100 g (5 g de sel), dix fois le besoin, une tranche = 400 mg » → 0,8 g de sodium (2 g de sel), six fois, une tranche = 160 mg (TL;DR, encadré, texte, FAQ)
+- [x] `chien-peut-manger-pates` · 4328 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+- [x] `chien-peut-manger-crevettes` · 4279 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - TL;DR « 1 à 2 g de graisses » → 1 g (comme le texte)
+  - Sel : « trois crevettes présalées peuvent suffire » → une ou deux suffisent (80 à 150 mg chacune)
+  - Mercure du saumon « faible à modéré » → les trois contiennent peu de mercure
 - [ ] `chien-peut-manger-figue` · 4088 affichages Google (28 j)
 - [ ] `chien-mange-pistaches` · 3438 affichages Google (28 j)
 - [ ] `quelle-quantite-patee-chien-par-jour` · 3201 affichages Google (28 j)
