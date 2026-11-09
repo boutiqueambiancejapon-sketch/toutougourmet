@@ -769,12 +769,29 @@
   - Hill's a/d et RC Recovery « 4 à 6 € la boîte de 400 g » → 3 à 4 € la boîte de 156 g / 195 g, près de 20 € le kilo (Recovery 195 g à 3,89 €)
   - Dog Chef croquettes « 28 à 32 % de protéines sur MS » → 30 % annoncés, environ 33 % sur MS (`partner-fiches.json`)
   - Elmut « recettes sans céréales » → viande fraîche avec quinoa ou riz (bœuf et porc au riz), texte et pour
-- [ ] `glucosamine-chondroitine-chien-articulations` · 71 affichages Google (28 j)
-- [ ] `recette-biscuits-pomme-cannelle-chien` · 70 affichages Google (28 j)
-- [ ] `chien-peut-manger-gingembre` · 67 affichages Google (28 j)
-- [ ] `croquettes-chien-mauvaise-haleine` · 67 affichages Google (28 j)
-- [ ] `chien-peut-manger-pomme` · 65 affichages Google (28 j)
-- [ ] `zinc-chien-carence-besoins-sources` · 65 affichages Google (28 j)
+- [x] `glucosamine-chondroitine-chien-articulations` · 71 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - TL;DR « glucosamine 20-30 mg/kg/j, chondroïtine 15-20 mg/kg/j » donnés comme dose de l'étude → dose d'entretien, le double les 4 à 6 premières semaines (le tableau donne la dose d'attaque, 40-60 mg/kg)
+  - FAQ glucosamine humaine « 20-30 mg/kg/jour » → en entretien, le double les 4 à 6 premières semaines
+  - Moule verte « 15 à 30 € par mois » → 15 à 35 € (article moule verte)
+  - À vérifier (non changé) : glucosamine des aliments (trachée 1 400 mg pour 30 g, patte de poulet 400 mg) ; « Saur et al., 2023 » à rapprocher de l'essai de 2023 cité par l'article moule verte
+- [x] `recette-biscuits-pomme-cannelle-chien` · 70 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Pépins « plus de 1 000 » pour un chien de 10 kg (TL;DR, encadré chiffré, FAQ) → près de 2 000, comme l'article pomme
+  - « 25 à 30 biscuits » de 10 g à 20 kcal (1 040 kcal de pâte, 460 g crus étalés sur 5 mm) → environ 50 biscuits d'environ 7 g, toujours 20 kcal
+  - 2-5 kg « 1 biscuit » → ½ à 1 (un chien de 2 kg a 16 kcal de friandises par jour)
+  - « retire 5 à 10 g de croquettes » → environ 5 g par biscuit
+  - À vérifier (non changé) : coumarine de la Cassia 1 200 à 6 500 mg/kg ; 127 cas de Vienne (sans symptôme sous 1 g/kg)
+- [x] `chien-peut-manger-gingembre` · 67 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : maropitant 2 mg/kg (vomissements) et 8 mg/kg (transport), xylitol 0,1 g/kg, tableau par poids proportionnel (0,6 g pour ¼ c. à c. par 10 kg)
+  - À vérifier (non changé) : « effet mesurable dès 5 à 10 mg/kg » ; aucune toxicité jusqu'à 2 à 2,5 g/kg
+- [x] `croquettes-chien-mauvaise-haleine` · 67 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Franklin « 70 % de viande fraîche » (texte et pour) → jusqu'à 70 % de viande ou de poisson, dont 35 à 41 % de frais (`partner-fiches.json`)
+  - Franklin « vétérinaire nutritionniste » → une vétérinaire (Dr Charlotte Dirat, `brand-content.ts`)
+  - « 40 à 100 € par mois » pour 10 à 25 kg → 25 à 80 € avec Franklin (5,20 à 9 € le kilo, `brand-content.ts`)
+  - À vérifier (non changé) : 41 % humide contre 22 % sec (étude non nommée) ; VOHC −40 à 60 % de plaque (même chiffre dans l'article tartre)
+- [x] `chien-peut-manger-pomme` · 65 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Cyanure des pépins : 3,9 mg d'amygdaline/g × 5,9 % = 0,23 mg/g, pas 0,2 → 0,003 à 0,01 mg par pépin, dose létale à 10 kg « au moins 2 200 » → 1 900 (TL;DR, texte, FAQ, verdict), Chihuahua 670 → 580, dose de référence 7 à 22 → 6 à 22 pépins
+- [x] `zinc-chien-carence-besoins-sources` · 65 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : tableau = FEDIAF 1,8 mg/100 kcal à 110 kcal/kg^0,75 (FAQ 20 kg : 19 mg), teneurs USDA, 2 à 3 mg/kg de zinc élément, sulfate 10 mg/kg, toxicité 100 mg/kg (Merck)
 - [ ] `recette-patee-maison-canard-chien` · 64 affichages Google (28 j)
 - [ ] `nourriture-epagneul-breton` · 63 affichages Google (28 j)
 - [ ] `nourriture-terre-neuve` · 63 affichages Google (28 j)
