@@ -961,12 +961,38 @@
   - Dog Chef « congelée en portions journalières, algorithme sur le score corporel » → livrée au frais en boudins portionnés, questionnaire et portion recalculée quand le poids change (`data/brand-content.ts`)
   - Vérifiés : kcal par gabarit cohérents avec nourriture-teckel ; 25 % d'IVDD ; remises partenaires
   - À vérifier (non changé) : « standard de 9 à 15 kg » et « intermédiaire de 7 à 9 kg » (le standard FCI plafonne vers 9 kg) ; « consensus vétérinaire » sur la glucosamine préventive dès 2-3 ans ; « première cause d'euthanasie »
-- [ ] `croquettes-chien-stresse-anxieux` · 12 affichages Google (28 j)
-- [ ] `levure-de-biere-chien-bienfaits-dosage` · 12 affichages Google (28 j)
-- [ ] `recette-patee-maison-poisson-chien` · 12 affichages Google (28 j)
-- [ ] `transition-alimentaire-chien` · 12 affichages Google (28 j)
-- [ ] `chien-peut-manger-clementine-orange` · 11 affichages Google (28 j)
-- [ ] `mycotoxines-croquettes-chien-risques-prevention` · 11 affichages Google (28 j)
+- [x] `croquettes-chien-stresse-anxieux` · 12 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Dog Chef « poulet, dinde, agneau » → poulet, bœuf, porc, canard, merlu ou colin (`data/brand-content.ts`)
+  - Dog Chef « digestibilité supérieure à 85 % » (texte et avantage) → retiré (invérifiable) ; remplacé par les menus canard et poisson pour ventres sensibles
+  - Elmut « ajuste chaque recette, tu choisis la protéine, sans sous-produits, ingrédients tracés » → calcule la ration sur le profil ; 8 ingrédients, sous vide à 90 °C (`data/brand-content.ts`)
+  - Elmut avantage « recette ajustée au profil » → ration calculée sur le profil
+  - Vérifiés : remises Dog Chef −30 % (WZU7090) et Elmut −40 % ; tryptophane 2,5 g/kg MS et délai 3-4 semaines comme alimentation-anxiete-chien-comportement
+  - À vérifier (non changé) : « 30 à 40 % des chiens montrent des signes d'anxiété » (CNVSPA 2021, source non retrouvée)
+- [x] `levure-de-biere-chien-bienfaits-dosage` · 12 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Gélules 400 mg « 20 kg : 1, 30 kg : 2, 40 kg+ : 2-3 » → 2, 3 et 4 (1 par 10 kg, comme la poudre)
+  - 40 kg+ « 1,5 cuillère à soupe » (4,5 c. à café) → 4 cuillères à café (1 c. à café par 10 kg)
+  - Cure « 3 à 6 semaines minimum » → au moins 6 semaines, comme le verdict et alimentation-beau-pelage-chien-guide
+  - « 95 % de rations maison carencées sans CMV » → 95 % de recettes maison publiées carencées (Stockman 2013, comme ration-menagere)
+  - Vérifiés : Baker et Farver 1983 (60 chiens, 7 semaines, aucune différence) ; 1 c. à café par 10 kg comme le reste du site
+  - À vérifier (non changé) : « 14 g par jour » dans l'étude anti-puces
+- [x] `recette-patee-maison-poisson-chien` · 12 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Congélation anisakis « -20 °C 7 jours, norme pour la consommation humaine (Règlement 853/2004) » → 7 jours au congélateur domestique (Anses) ; le règlement 853/2004 modifié par 1276/2011 impose -20 °C pendant 24 h en industrie
+  - Vérifiés : tableau 2-3 % du poids (5 à 30 kg) et ration de 500 g pour 20 kg ; Ca/P 1:1 à 2:1 comme recette-patee-maison-boeuf-chien ; -20 °C 7 jours comme alimentation-poisson-chien-guide
+- [x] `transition-alimentaire-chien` · 12 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - FAQ « 14 à 21 jours pour chiots, seniors et chiens sensibles » → 14 jours pour chiots et seniors, 14 à 21 pour les chiens sensibles, comme la grille des profils
+  - FAQ diarrhée au jour 3 « rester 2-3 jours de plus » → 2 jours, comme le texte
+  - Vérifiés : paliers de 25 % sur 10 jours ; alerte vétérinaire à 48 h partout
+- [x] `chien-peut-manger-clementine-orange` · 11 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - TL;DR « un ou deux quartiers pour la plupart des chiens » → de 1 à 5 quartiers selon la taille, 2 à 3 fois par semaine, comme le tableau
+  - Vérifiés : 74 g la clémentine, 8 g le quartier, 47 kcal/100 g (40 g = 19 kcal, sous 10 % pour tous les gabarits) ; 9 à 11 g de sucres ; jus 17 g pour 200 mL ; xylitol 0,1 g/kg
+- [x] `mycotoxines-croquettes-chien-risques-prevention` · 11 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - Midwestern « plus de 300 chiens malades, au moins 110 morts » (TL;DR, texte) → plus de 130 animaux morts et plus de 220 malades (FDA, août 2021)
+  - Valeurs guides attribuées à la FEDIAF (texte, en-tête, OTA, fumonisines) → valeurs guides UE (recommandations 2006/576/CE et 2016/1319)
+  - DON « 5 mg/kg » → 2 mg/kg pour le chien (2016/1319)
+  - Zéaralénone « 0,1 mg/kg » → 0,1 chiot et reproduction, 0,2 adulte (2016/1319)
+  - Chien de 5 kg « 100 g par jour, sac de 3 kg en 30 jours » → environ 80 g, 5 semaines
+  - Sources : ajout des recommandations 2006/576/CE et 2016/1319
+  - À vérifier (non changé) : signes aigus « de 30 minutes à quelques heures » (vrai pour les trémorgènes, l'aflatoxicose met des jours) ; fumonisines FDA « 10 mg/kg » (valeur pour le maïs, pas l'aliment fini)
 - [ ] `nourriture-dogue-de-bordeaux` · 11 affichages Google (28 j)
 - [ ] `torsion-estomac-chien-prevention-alimentation` · 11 affichages Google (28 j)
 - [ ] `recette-friandises-banane-avoine-chien` · 10 affichages Google (28 j)
