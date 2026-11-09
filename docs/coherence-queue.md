@@ -713,12 +713,28 @@
   - Vérifiés : sélénium 9 µg et potassium 318 mg (USDA), portions sous 10 %
 - [x] `chien-mange-cafe-urgence` · 91 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
   - Vérifiés : tableau 20 mg/kg (marc 4,5 mg/g, soluble 31,4 mg/g, filtre 0,4 mg/mL), espresso 64 mg, 7 g de grains enrobés ≈ 60 mg, seuils 20 / 40-50 / 60 mg/kg comme l'article chocolat
-- [ ] `note-etat-corporel-chien-evaluer-maison` · 90 affichages Google (28 j)
-- [ ] `nourriture-braque-allemand` · 90 affichages Google (28 j)
-- [ ] `halloween-chien-bonbons-citrouille-dangers` · 84 affichages Google (28 j)
-- [ ] `alimentation-chienne-gestante-allaitante` · 81 affichages Google (28 j)
-- [ ] `alimentation-beau-pelage-chien-guide` · 80 affichages Google (28 j)
-- [ ] `recette-patee-maison-lapin-chien` · 79 affichages Google (28 j)
+- [x] `note-etat-corporel-chien-evaluer-maison` · 90 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : Kealy 2002 (48 Labradors, 7 portées, 75 % de la ration, 13 contre 11,2 ans), 1 à 2 % par semaine (200 à 400 g à 20 kg), suivi tous les 15 jours partout
+  - À vérifier (non changé) : écart du verre doseur annoncé de 10-20 % ici, 15-20 % ou 20-40 % dans d'autres articles
+- [x] `nourriture-braque-allemand` · 90 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Stérilisation « −10 à 20 % » → −20 à 30 % (valeur de 8 autres articles) ; même correction dans `nourriture-braque-de-weimar`
+  - Dog Chef « besoins qui montent de 30 à 50 % en saison » → 25 à 50 % (comme le texte)
+  - « un chien qui mange 400 à 600 g par jour » → 260 à 630 g (comme le tableau)
+  - FAQ « mâle actif de 25-30 kg » → mâle à l'activité normale (comme le tableau)
+  - À vérifier (non changé) : chiot de 6 mois à 22-26 kg (les courbes de croissance trouvées donnent plutôt 18-23 kg pour un mâle, 15-19 kg pour une femelle, sources de faible qualité)
+- [x] `halloween-chien-bonbons-citrouille-dangers` · 84 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : théobromine noir 70 % 500-800 mg/100 g et lait 150-220 mg (comme l'article chocolat), mini-barres 20 g, FAQ 7-22 mg, xylitol 0,1 et 0,5 g/kg (comme l'article xylitol)
+- [x] `alimentation-chienne-gestante-allaitante` · 81 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - « calories supplémentaires dès la semaine 6 » → semaine 5 (tableau : +10 % en S5)
+  - Retour à la normale « semaines 5 à 6 : vers 200 % ; semaine 7 : 150 % » → semaines 6 à 7 et semaine 8 (tableau : pic S3-S5, 200-250 % en S6-S7)
+  - À vérifier (non changé) : « service de consultation NutriVet » non identifié
+- [x] `alimentation-beau-pelage-chien-guide` · 80 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Huile de coco « 1 c.à.c./10 kg/jour » → ½ c.à.c. (dose maximale de l'article huile de coco)
+  - Sardines « 2 à 3 par semaine pour 20 kg » → 2 (tableau de l'article sardines)
+  - Vérifiés : EPA+DHA 30 mg/kg^0,75 et limite 370 mg/kg^0,75 (tableau), zinc 72 mg/kg MS, Frigg 1989 (119 chiens, 60 % et 31 %), levure et œuf comme leurs articles
+- [x] `recette-patee-maison-lapin-chien` · 79 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : 66 % bœuf, laitiers, poulet ; 250 g cuit = 310 g cru à −20 % ; tableau 60/35 % cohérent avec la recette de 20 kg ; 8 à 12 semaines d'éviction ; Stockman 2013 (200 recettes, 95 %)
+  - À vérifier (non changé) : « le calcium en tête » des carences (Stockman cite surtout choline, vitamine D, zinc et vitamine E ; repris dans 3 articles) ; lapin 4 g de lipides contre poulet 10-15 g (cuisse avec peau, comparaison inégale) ; phosphore 277 mg/100 g
 - [ ] `croquettes-chien-arthrose` · 78 affichages Google (28 j)
 - [ ] `nourriture-chow-chow` · 78 affichages Google (28 j)
 - [ ] `croquettes-chien-diarrhee-chronique` · 77 affichages Google (28 j)
