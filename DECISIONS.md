@@ -366,3 +366,5 @@ Vérifications suite (2026-11-07) : Franklin « 70 % de viande » confirmé sur 
 Pages argent (2026-11-07) : /codes-promo/dog-chef inconnue de Google (indexation demandée par le propriétaire) ; lien « Code promo {marque} » sous chaque encadré partenaire avec remise ; lien de l'avis croquettes canard vers l'avis de marque Dog Chef ; article « Elmut ou Dog Chef » prioritaire à 7 h.
 
 Contact (propriétaire, 2026-11-09) : chaque nouveau message envoie une notification ntfy et un e-mail au propriétaire (CONTACT_NOTIFY_EMAIL, sinon NEWSLETTER_TEST_EMAIL), réponse directe au visiteur (replyTo). Le message reste dans le tableau de bord, onglet Contenu.
+
+Mini-calculateur des articles « peut-il manger » (propriétaire, 2026-11-09, page amandes) : avec un tableau par gabarit, il affiche seulement la portion du tableau, plus le plafond de 10 % des calories, qui contredisait les limites quand le risque n'est pas calorique.

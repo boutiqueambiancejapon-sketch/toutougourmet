@@ -21,7 +21,7 @@ export function FoodPortionCalc({ food, kcal100, moderation, bands }: FoodPortio
       </h2>
       <p className="m-0 text-[15px] leading-relaxed text-ink-2">
         {bands.length > 0
-          ? `La portion vient du tableau par gabarit de ce guide. Le plafond de 10 % des calories du jour, toutes friandises confondues, sert de garde-fou (${kcal100} kcal pour 100 g).`
+          ? 'La portion vient du tableau par gabarit de ce guide : indique son poids pour voir la sienne.'
           : `Le calcul donne la limite à ne pas dépasser : 10 % de ses calories du jour, convertis en grammes (${kcal100} kcal pour 100 g). La portion courante est plus basse.`}
       </p>
       <FoodPortionForm ofFood={ofFood} kcal100={kcal100} moderation={moderation} bands={bands} />
