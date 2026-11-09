@@ -993,12 +993,45 @@
   - Chien de 5 kg « 100 g par jour, sac de 3 kg en 30 jours » → environ 80 g, 5 semaines
   - Sources : ajout des recommandations 2006/576/CE et 2016/1319
   - À vérifier (non changé) : signes aigus « de 30 minutes à quelques heures » (vrai pour les trémorgènes, l'aflatoxicose met des jours) ; fumonisines FDA « 10 mg/kg » (valeur pour le maïs, pas l'aliment fini)
-- [ ] `nourriture-dogue-de-bordeaux` · 11 affichages Google (28 j)
-- [ ] `torsion-estomac-chien-prevention-alimentation` · 11 affichages Google (28 j)
-- [ ] `recette-friandises-banane-avoine-chien` · 10 affichages Google (28 j)
-- [ ] `comment-preparer-repas-chien-soi-meme` · 9 affichages Google (28 j)
-- [ ] `croquettes-chien-surpoids` · 9 affichages Google (28 j)
-- [ ] `nourriture-braque-hongrois` · 9 affichages Google (28 j)
+- [x] `nourriture-dogue-de-bordeaux` · 11 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - Glucosamine « 500 à 1 500 mg » et chondroïtine « 400 à 1 200 mg » par jour → 1 200 à 1 800 mg et 900 à 1 200 mg pour 60 kg (20-30 et 15-20 mg/kg, comme glucosamine-chondroitine-chien-articulations)
+  - Elmut « au gramme près, recettes mono-protéiques (bœuf, poulet, saumon) » → ration selon poids, âge, activité, cinq menus poulet, bœuf, dinde, porc, poisson (`data/brand-content.ts`)
+  - Dog Chef « portions au gramme, protéines uniques (poulet, dinde, canard), sans ultra-transformés » → portions recalculées quand le poids change, menus poulet, bœuf, porc, canard ou poisson
+  - Franklin « EPA/DHA naturels (saumon, sardine), glucosamine intégrée, gamme Large Breed » → 0,5 % d'oméga-3 dans Saumon, Truite & Persil, glucosamine et chondroïtine dans la recette senior (aucune gamme Large Breed)
+  - FAQ « 95 % de rations maison non équilibrées » → 95 % de recettes maison publiées carencées (Stockman 2013)
+  - Vérifiés : rations du tableau et de la FAQ (60 kg, 380 kcal/100 g) ; remises partenaires ; gamelle surélevée comme torsion-estomac
+  - À vérifier (non changé) : « n° 3 OFA » pour la dysplasie de la hanche ; espérance de vie 5 à 8 ans
+- [x] `torsion-estomac-chien-prevention-alimentation` · 11 affichages Google (28 j) · relu 2026-11-09 : 0 correction
+  - Vérifiés : 42 % de risque sur la vie chez le Dogue allemand (Glickman 2000) ; gamelle surélevée × 2 environ ; Pipan 2012 (2 551 chiens) ; délais repas-effort repris dans nourriture-braque-hongrois
+  - À vérifier (non changé) : « jusqu'à 150 fois plus de risque chez les chiens de plus de 40 kg » (TL;DR, source non retrouvée) ; seuil de lipides « 15-18 % MS »
+- [x] `recette-friandises-banane-avoine-chien` · 10 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - Rendement « environ 25 friandises » (TL;DR, texte, sucre réparti) → environ 50 : 385 g de pâte étalée sur 5 mm en carrés de 4 cm de 6 g
+  - Quantité « de quoi tenir une semaine » → deux à trois semaines, en congelant une partie
+  - Énergie « 20 à 25 kcal » la friandise (Stat, texte) → environ 20 kcal (fournée d'environ 1 000 kcal pour 50 pièces)
+  - Tableau 2-5 kg « 1 » → ½ (20 kcal dépassait 10 % pour 2 kg) ; 5-10 kg « 1 à 2 » → 1 ; 10-20 kg « 2 à 3 » → 2
+  - Légende « deux à trois pour un gabarit moyen » → deux
+  - FAQ « une pour 5 kg, une à deux pour 10 kg, deux à trois pour 20 kg » → une demie pour 3 kg, une pour 5 kg, deux pour 10 kg, trois à quatre pour 20 kg
+  - Vérifiés : 20 g de glucides et 320 mg de potassium pour 100 g de banane ; xylitol 0,1 et 0,5 g/kg
+- [x] `comment-preparer-repas-chien-soi-meme` · 9 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Transition « reste 3 jours de plus » → 2 jours, comme transition-alimentaire-chien
+  - Elmut « ajuste ses recettes au poids, à la race et aux sensibilités » → calcule la ration selon le profil (`data/brand-content.ts`)
+  - Elmut avantage « recettes ajustées aux sensibilités » → ration calculée sur le profil
+  - Vérifiés : Dog Chef FEDIAF et NRC (page officielle) ; 1 œuf par semaine pour 10 kg ; foie sous 10 % (50 g pour 15 kg) ; Stockman 2013
+  - À vérifier (non changé) : « 0,5 à 1 g de carbonate de calcium pour 100 g de viande » (seul article à donner une dose)
+- [x] `croquettes-chien-surpoids` · 9 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - TL;DR « obésité, 40 % des chiens en France » → surpoids, 38 % (SantéVet 2024, comme comment-faire-maigrir-son-chien)
+  - « premier facteur de risque du diabète de type 2 » → rend le corps moins sensible à l'insuline (le diabète du chien ressemble au type 1) ; même correction dans comment-faire-maigrir-son-chien
+  - « 2 ans de plus qu'un chien obèse » → près de 2 ans de plus pour des Labradors gardés minces que pour leurs frères un peu trop nourris (Kealy 2002)
+  - Franklin « Dr Dirat, vétérinaire nutritionniste, supervise toutes les formules » → recettes formulées avec la Dr Dirat, vétérinaire ; « protéines de 32 à 38 % » → 30 % (Light), 34 % (adulte)
+  - Elmut et Dog Chef « ration exacte selon le poids cible ; nutriments à moitié dans les selles » → ration selon le profil, recalculée par Dog Chef quand le poids change ; se digère un peu mieux
+  - Transition sur 7 semaines → 10 jours (paliers 1-3, 4-6, 7-9, 10), comme transition-alimentaire-chien
+  - Vérifiés : Franklin Light 11 % de graisses et 327 kcal ; Dog Chef canard 50 % de canard frais, sans céréales ; 1 à 2 % de perte par semaine
+  - À vérifier (non changé) : « 30 kg avec 5 kg en trop, comme s'il pesait 50 kg » ; « la nourriture pèse pour 80 % du bilan calorique »
+- [x] `nourriture-braque-hongrois` · 9 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - TL;DR « pas d'effort intense dans l'heure qui suit le repas » → dans les 2 à 3 heures, comme torsion-estomac-chien-prevention-alimentation
+  - « exercice intense dans l'heure qui précède ou qui suit » → la demi-heure avant et les 2 à 3 heures après
+  - Dog Chef « au gramme, formules à protéine unique avec oméga-3 marins intégrés » → questionnaire, menus poulet, bœuf, porc, canard ou poisson, ce dernier riche en oméga-3
+  - Vérifiés : calories du Vizsla de 25 kg (70 × P^0,75 × 1,2 à 2,5) et 340-380 g à 360 kcal/100 g dans la FAQ
 - [ ] `repas-noel-chien-aliments-autorises-dangereux` · 9 affichages Google (28 j)
 - [ ] `alimentation-chien-hiver-froid-guide` · 8 affichages Google (28 j)
 - [ ] `chien-peut-manger-myrtilles` · 8 affichages Google (28 j)
