@@ -652,12 +652,42 @@
   - « Pas d'exercice intense dans l'heure qui suit » → 2 à 3 heures (pilier torsion)
   - Calories 1 400 à 2 200 kcal par gabarit et Dogfy bœuf 60,5 % : cohérents
   - À vérifier (non changé) : L-carnitine « 500–2 000 mg/jour » (protocoles publiés pour la cardiomyopathie du Boxer : environ 50 mg/kg trois fois par jour)
-- [ ] `recette-muffins-sales-poulet-courgette-chien` · 108 affichages Google (28 j)
-- [ ] `chien-mange-noix-macadamia-urgence` · 106 affichages Google (28 j)
-- [ ] `chien-peut-manger-noix` · 106 affichages Google (28 j)
-- [ ] `avis-acana` · 105 affichages Google (28 j)
-- [ ] `nourriture-schnauzer-nain` · 104 affichages Google (28 j)
-- [ ] `croquettes-a-volonte-ou-rationnees` · 101 affichages Google (28 j)
+- [x] `recette-muffins-sales-poulet-courgette-chien` · 108 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Tableau ½ / 1 / 2 / 2-3 / 3 muffins (45 kcal, au-dessus de 10 % des kcal sous 20 kg) → ¼ / ½ / 1 / 2 / 3
+  - « Pour un premier essai, donne un demi-muffin » → un quart sous 5 kg
+  - Légende « un demi-muffin suffit pour un premier essai chez un petit gabarit » → un quart sous 5 kg
+  - Vérifiés : 45 kcal par muffin (pâte ≈ 1 070 kcal pour 24), 74 °C pour la volaille (USDA)
+- [x] `chien-mange-noix-macadamia-urgence` · 106 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Noix décortiquée « environ 2 g » → 2,5 g (USDA, comme `chien-peut-manger-noix`) ; tableau 6 / 12 / 24 / 40 noix → 5 / 10 / 19 / 34
+  - 35 kg : 84 g « environ 40 noix » (calcul faux même à 2 g) → 34 noix
+  - Intro « elle tue très rarement » (TL;DR : aucun décès recensé) → aucun décès n'est recensé
+  - Idem `aliments-toxiques-chien-liste-complete` : ~5 / ~10 / ~25 noix → ~4 / ~9 / ~22
+  - Vérifiés : seuil 2,4 g/kg, cas cliniques 2,2 à 62,4 g/kg, signes en 3 à 12 h
+  - À vérifier (non changé) : signes qui disparaissent « en 12 à 48 heures » (texte) contre « 24 à 48 heures » (TL;DR, fin d'article)
+- [x] `chien-peut-manger-noix` · 106 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - 24 g à 2,5 g la noix « environ 9 noix » → environ 10, 2 endroits
+  - Vérifiés : lipides 65 g (Grenoble), 72 g (pécan), 61 g (noisette) pour 100 g ; 12 g ≈ 4 à 5 noix pour 5 kg
+  - À vérifier (non changé) : noix de Grenoble « à partir de 7 g/kg, vomissements, diarrhée et signes neurologiques » (le 7 g/kg de `aliments-toxiques-chien-liste-complete` concerne les tremblements de la macadamia) ; « le grillage peut concentrer les mycotoxines »
+- [x] `avis-acana` · 105 affichages Google (28 j) · relu 2026-11-09 : 8 corrections
+  - Light & Fit « 22 % de matières grasses » → 11 % (fiche officielle emea.acana.com)
+  - Densité « ~3 500-3 800 kcal/kg » → plus de 3 300 kcal/kg (Senior 3 325) ; Light & Fit « densité réduite » → 3 070 kcal/kg
+  - Protéines « 31-35 % MS » (Light & Fit 35 % sur l'étiquette, soit ~40 % MS) → sur l'étiquette, tableau et FAQ
+  - FAQ « Acana Senior, moins de protéines » → 33 % de protéines, 14 % de matières grasses (comme la fiche Maxi Zoo plus bas)
+  - socialProof « 4,7/5 · 1 890 avis Maxi Zoo · ingrédients régionaux canadiens » → Gamme Singles mono-protéine · vendu chez Maxi Zoo
+  - Franklin « formulation française par un vétérinaire nutritionniste » → recettes formulées à Paris avec une vétérinaire (`data/brand-content.ts`)
+  - Franklin 20 kg « 70-90 € par mois » → 60 à 75 € (75-80 € au-dessus de 25 kg dans `data/brand-content.ts`)
+  - « Un Labrador de 20 kg » → un chien de 20 kg
+  - À vérifier (non changé) : composition Heritage Free-Run Poultry « poulet frais 26 %, dinde 14 % » (la recette sans céréales APAC affiche 11 % de poulet et 60 % d'ingrédients animaux) ; `data/brand-content.ts` dit « l'abonnement Franklin retire 15 à 20 % » contre −30 % dans `data/partner-discounts.ts`
+- [x] `nourriture-schnauzer-nain` · 104 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - « 25 g de gras pour 1 000 kcal, soit moins de 4 g/100 kcal » → 2,5 g/100 kcal
+  - 6-7 kg : 90-110 g actif, 70-90 g stérilisé (sous le tableau) → 100 à 125 g (360-450 kcal) et 80 à 100 g (280-360 kcal), comme le tableau
+  - Dog Chef « très adapté, recettes modérément grasses » → adapté : porc à 16 % de gras sur sec, autres repas 22-26 % (`partner-fiches.json`)
+  - Elmut « très adapté, gras contrôlé » → correct, 26 à 29 % de gras sur sec, au-dessus de la limite de 15 %
+  - Dogfy « limite 14 % » → 15 % (limite du texte) ; ajout : la plupart des repas frais du commerce dépassent 20 % de gras sur sec
+  - À vérifier (non changé) : « Watson, 2015, consensus ACVIM » (le consensus ACVIM sur la pancréatite date de 2024) ; seuil d'alerte 400 mg/dL et objectif sous 500 mg/dL
+- [x] `croquettes-a-volonte-ou-rationnees` · 101 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : Kealy 2002, 48 Labradors, 25 % de moins, 13 contre 11,2 ans (PMID 11991408) ; POMC un Labrador sur quatre ; 15 kg 640-850 kcal (×1,2 à ×1,6 du besoin au repos) ; 44,5 % et 4,9 millions comme les autres articles
+  - À vérifier (non changé) : notes de silhouette 4,5 contre 6,8 et arthrose « un an et demi plus tard »
 - [ ] `chute-poils-chien-causes-alimentation` · 99 affichages Google (28 j)
 - [ ] `recette-biscuits-sardine-chien` · 99 affichages Google (28 j)
 - [ ] `avis-fidelis-menus-frais-chien-bocaux` · 98 affichages Google (28 j)
