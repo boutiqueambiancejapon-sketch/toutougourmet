@@ -1321,12 +1321,29 @@
   - Aligné ailleurs : `chien-peut-manger-agneau` « ni Dog Chef ni Elmut n'ont de recette à l'agneau » → Dog Chef a ajouté Agneau & Dinde fraîche ; `nourriture-boxer` Elmut « bœuf, poulet ou agneau » → dinde ; `just-russel-vs-elmut` Elmut « poulet, canard, bœuf » → dinde
 - [x] `chien-peut-manger-mures` · 0 affichages Google (28 j) · relu 2026-11-09 : 0 correction
   - Valeurs USDA (43 kcal, 5,3 g de fibres, 0,09 g d'ALA) vérifiées, quantités proches des framboises comme annoncé
-- [ ] `chien-peut-manger-olives` · 0 affichages Google (28 j)
-- [ ] `chien-peut-manger-patate-douce` · 0 affichages Google (28 j)
-- [ ] `chien-peut-manger-peches` · 0 affichages Google (28 j)
-- [ ] `chien-peut-manger-pissenlits` · 0 affichages Google (28 j)
-- [ ] `chien-peut-manger-poivron` · 0 affichages Google (28 j)
-- [ ] `chien-peut-manger-pommes-de-terre` · 0 affichages Google (28 j)
+- [x] `chien-peut-manger-olives` · 0 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - TL;DR « 2-3 olives pour un petit chien, 4-5 pour un grand » (tableau : 1 / 2-3 / 4-5 / 5-6) → 1 à 3 et 4 à 6
+  - Tableau grand chien « jusqu'à tous les jours » (TL;DR : de temps en temps) → 3-4 fois par semaine
+  - Huile d'olive « ½ c. à café pour 10 kg, 1 pour 20-30 kg » et FAQ « 1 c. à café pour 15-20 kg » → ½ sous 10 kg, 1 de 10 à 25 kg (`huile-olive-chien-bienfaits-dosage`)
+  - Ail « disulfure de N-propyle, 5 fois plus que l'oignon » → thiosulfates, 3 à 5 fois plus (`chien-mange-ail-oignon-urgence`)
+  - À aligner (non changé) : fréquence de l'huile d'olive, « quelques fois par semaine » ici contre « quotidien si toléré » dès 10 kg dans `huile-olive-chien-bienfaits-dosage`
+- [x] `chien-peut-manger-patate-douce` · 0 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - « fibres solubles (3,3 g) » (3,3 g = fibres totales) → fibres (3,3 g)
+  - Petit chien « 2 à 3 cuillères à soupe (40-60 g) » (1 c. à soupe ≈ 15 g, 10 % des kcal à 5 kg ≈ 38 g) → 1½ à 2 cuillères à soupe (20-30 g)
+  - Moyen « ½ patate douce moyenne (80-100 g) » (plafond 10 % à 15 kg ≈ 87 g) → 60-80 g
+  - Grand « 1 patate douce moyenne (150-200 g) » (plafond 10 % à 30 kg ≈ 146 g, patate moyenne ≈ 130 g) → 120-140 g
+  - À vérifier (non changé) : valeurs « cuite » mélangent cru et four (vitamine C 20 mg = au four, 2,4 mg crue ; 86 kcal = crue)
+- [x] `chien-peut-manger-peches` · 0 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Très petit chien « 1 petite tranche (20-30 g) » (une tranche normale = 20 g) → 10-20 g
+- [x] `chien-peut-manger-pissenlits` · 0 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - « digestion fragile, préfère la racine » (la racine concentre l'inuline, qui ramollit les selles d'après l'article) → feuilles cuites à la vapeur
+  - Valeurs USDA (10 161 UI, 35 mg de vitamine C, 778 µg de vitamine K, 187 mg de calcium, 3,1 mg de fer, 397 mg de potassium) vérifiées
+- [x] `chien-peut-manger-poivron` · 0 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Poivron jaune « environ 130 mg » de vitamine C → environ 180 mg (USDA FDC 169383 : 183,5 mg)
+  - Petit chien « 3 à 5 lanières » (≈ 50 g, plus que le ¼ de poivron du gabarit moyen) → 2 à 3 lanières
+- [x] `chien-peut-manger-pommes-de-terre` · 0 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Petit chien « 2 à 3 cuillères à soupe (30-50 g) » (plafond 10 % à 5 kg ≈ 38 g) → 1 à 2 cuillères à soupe (15-30 g)
+  - À vérifier (non changé) : « 20 % de la ration au maximum » (TL;DR et texte) à côté de la règle des 10 % des calories ; solanine « élevée » dans les frites et chips alors que l'épluchage en retire l'essentiel
 - [ ] `chien-peut-manger-poulet-cru` · 0 affichages Google (28 j)
 - [ ] `chien-peut-manger-radis` · 0 affichages Google (28 j)
 - [ ] `chien-peut-manger-salade` · 0 affichages Google (28 j)
