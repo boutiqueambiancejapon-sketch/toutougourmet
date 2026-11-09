@@ -23,12 +23,25 @@
   - TL;DR « 1 à 2 g de graisses » → 1 g (comme le texte)
   - Sel : « trois crevettes présalées peuvent suffire » → une ou deux suffisent (80 à 150 mg chacune)
   - Mercure du saumon « faible à modéré » → les trois contiennent peu de mercure
-- [ ] `chien-peut-manger-figue` · 4088 affichages Google (28 j)
-- [ ] `chien-mange-pistaches` · 3438 affichages Google (28 j)
-- [ ] `quelle-quantite-patee-chien-par-jour` · 3201 affichages Google (28 j)
-- [ ] `nourriture-spitz-nain` · 3146 affichages Google (28 j)
-- [ ] `chien-peut-manger-piment` · 3116 affichages Google (28 j)
-- [ ] `aliments-fermentes-chien-bienfaits-dosage` · 2627 affichages Google (28 j)
+- [x] `chien-peut-manger-figue` · 4088 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Tableau > 30 kg « 1 à 2 figues (50 à 90 g) » → 50 à 100 g (une figue ≈ 50 g)
+- [x] `chien-mange-pistaches` · 3438 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - « restent sous le seuil de 5 pistaches » (tableau jusqu'à 5) → ne dépassent pas 5 pistaches ; idem dans la source du tableau
+  - Comparatif « Faible (1-3 pistaches) » → 1 à 5 pistaches (comme le tableau et le seuil de surveillance)
+- [x] `quelle-quantite-patee-chien-par-jour` · 3201 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Repère « 30 g de croquettes ≈ 90 g de pâtée » → 110 g d'une pâtée à 100 kcal (comme l'exemple de ration mixte)
+  - Gamelle « 1 à 2 h au plus » → 4 h au plus, 1 à 2 h en été (texte et FAQ, comme conserver-patee-chien-apres-ouverture)
+- [x] `nourriture-spitz-nain` · 3146 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - « 150 à 230 kcal, soit 30 à 80 g » et « stérilisé 130-170, entier 170-220 kcal » ne collaient pas au tableau (35-80 g à 370 kcal) → 130 à 300 kcal, 35 à 80 g ; stérilisé 130-220, entier 180-300 (TL;DR, stat, texte)
+- [x] `chien-peut-manger-piment` · 3116 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Serrano classé avec le habanero (100 000-350 000 SHU) → avec la cayenne, 10 000-50 000 SHU
+  - FAQ Espelette « 1 500 à 2 500 » → 1 500 à 4 000 (comme le tableau, plafond AOP)
+  - Paprika doux « 100-500 SHU » → 0-500 (comme le tableau)
+- [x] `aliments-fermentes-chien-bienfaits-dosage` · 2627 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Yaourt « 1 c.à.c. à 1 c.à.s. par 5 kg » → 1 c.à.c. par 5 kg (TL;DR, tableau, FAQ) ; tableau 10-20 kg « 1 c.à.s. (10-15 g) » → 2 à 4 c.à.c. (10-20 g)
+  - Tableau 5-10 kg « ½ à 1 c.à.c. (3-5 g) » → 2,5-5 g
+  - Caféine « toxique au-delà de 20 à 40 mg/kg » → dès 20 mg/kg (comme chien-mange-cafe-urgence)
+  - À vérifier (non changé, faute de source) : « SF68, seule souche avec licence UE pour le chien » répété sur 4 articles, d'autres souches semblent autorisées
 - [ ] `chien-peut-manger-pain` · 2065 affichages Google (28 j)
 - [ ] `meilleures-patees-chien` · 2061 affichages Google (28 j)
 - [ ] `chien-peut-manger-miel` · 1987 affichages Google (28 j)
