@@ -417,12 +417,32 @@
   - Prix par jour à 30 kg : Elmut « 3,00-3,60 € » → 4 à 6 €, Dog Chef « 3,20-4,00 € » → 4 à 5,50 €, Franklin « 1,40-1,90 € » → 2,50 € ; repère « ~3,20 € » → 4 à 6 € (`brand-content.ts`)
   - Franklin « digestibilité 85-90 % » (invérifiable) → annoncée très digeste par la marque
   - Dog Chef « formules grandes races, résultats visibles sur le pelage et les articulations » (invérifiable) → ration calculée, recette poisson à 1,4 % d'oméga-3
-- [ ] `chien-peut-manger-noix-de-coco` · 331 affichages Google (28 j)
-- [ ] `chien-mange-ail-oignon-urgence` · 321 affichages Google (28 j)
-- [ ] `recette-glace-maison-chien-ete` · 320 affichages Google (28 j)
-- [ ] `voyager-voiture-chien-alimentation-mal-transports` · 314 affichages Google (28 j)
-- [ ] `proteines-chien-besoins-qualite` · 307 affichages Google (28 j)
-- [ ] `recette-patee-maison-dinde-chien` · 302 affichages Google (28 j)
+- [x] `chien-peut-manger-noix-de-coco` · 331 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Tableau par gabarit : cuillères converties à 3, 6, 10, 15 et 20 g → 5, 10, 15, 22 et 30 g (1 c. à café ≈ 5 g, 1 c. à soupe ≈ 15 g) ; reste sous 7 % des calories du jour
+  - Lipides 33,5 g, 354 kcal et 9 g de fibres (USDA 170169), xylitol 0,1 et 0,5 g/kg : cohérents
+- [x] `chien-mange-ail-oignon-urgence` · 321 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - « Une petite gousse d'ail = un quart d'oignon » (le tableau donne 10 g d'ail ≈ 50 g d'oignon) → deux à trois gousses = un tiers d'oignon
+  - Tableau : 3 g « une demi-gousse » et 10 g « 2 à 3 gousses » (poids de gousse incohérent) → 3 g une petite gousse, 5 g une grosse gousse ; 50 g « un quart » et 150 g « un oignon entier » → un tiers, deux tiers, un oignon entier
+  - Akita, Shiba, Chow-Chow « déficit héréditaire en glutathion » (travaux d'Hokkaido : globules rouges riches en potassium et en glutathion réduit, environ 5 fois la normale, plus sensibles au n-propylthiosulfate) → corrigé dans l'encadré et la FAQ, aligné dans `chien-mange-poireau-urgence` ; sources ajoutées
+  - À vérifier (non changé) : Chow-Chow dans la liste des races sensibles (trait documenté chez le Shiba, l'Akita et le Jindo)
+- [x] `recette-glace-maison-chien-ete` · 320 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - TL;DR « en été 50 à 100 ml/kg » (texte : 50 normal, 70 à 100 par forte chaleur) → 70 à 100 ml/kg par forte chaleur
+  - Recette yaourt « 12 mini-glaçons de 15 ml » pour ~300 ml de mélange → une vingtaine
+  - « Un cube par portion » contre tableau « 1-2 », « 2-3 cubes » → portions en mini-glaçons de 15 ml (1 pour un petit chien, 2 pour un moyen) dans le texte, le tableau, les kcal et la FAQ chiot (demi-glaçon ≈ 7 ml)
+  - Kong M de 80 à 120 kcal compensé par « 10 à 15 g de croquettes » → 20 à 30 g
+  - À aligner plus tard : `alimentation-chien-ete-canicule-guide` donne 80 à 120 ml/kg par forte chaleur (reste du site : 70 à 100, et plus de 100 ml/kg = signe d'alerte dans `quantite-eau-chien-par-jour`)
+- [x] `voyager-voiture-chien-alimentation-mal-transports` · 314 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Valise « 1,5 L d'eau » contre FAQ « 1 à 1,5 L par tranche de 10 kg » → 1 à 1,5 L par tranche de 10 kg
+  - Cerenia « 2 heures avant le départ » (RCP européen : au moins 1 heure, 2 h dans l'étude) → au moins 1 heure ; « contre-indiqué » foie et cœur (RCP : prudence) → à utiliser avec prudence
+  - `chien-peut-manger-gingembre` : Cerenia « 2 mg/kg contre le mal des transports » → 8 mg/kg dans cette indication (2 mg/kg contre les vomissements), deux endroits
+  - Amende 35/75/150 €, 7 % contre 55 % (divisé par 8), 16 semaines, 2 jours au plus : cohérents
+  - À vérifier (non changé) : « 1 chien sur 6 », « 3 chiens malades sur 4 sont des chiots », « habitacle à plus de 40 °C en moins de 10 minutes par 25 °C »
+- [x] `proteines-chien-besoins-qualite` · 307 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - 45 g/1000 kcal ≈ 18 % MS, pâtée 10 % → 40 à 50 % MS, croquette 26 % → 28 %, senior +50 % : cohérents
+- [x] `recette-patee-maison-dinde-chien` · 302 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Poulet « 3 à 4 g de lipides, deux à trois fois plus » que la dinde (moins d'1 g) → trois à cinq fois plus (cuit des deux côtés)
+  - Verdict « neuf cas sur dix » (texte et FAQ : 97 %, Olivry 2017 vérifié) → presque tous les cas (97 %)
+  - À vérifier (non changé) : même réserve que les autres pâtées, 2-3 % du poids sous-nourrit un petit chien (recette ≈ 1,2 kcal/g : 5 kg reçoit 120 à 185 kcal)
 - [ ] `a-quelle-heure-donner-manger-chien` · 294 affichages Google (28 j)
 - [ ] `chien-peut-manger-haricots-verts` · 294 affichages Google (28 j)
 - [ ] `calcium-phosphore-chien-ratio-besoins` · 292 affichages Google (28 j)
