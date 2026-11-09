@@ -1344,12 +1344,33 @@
 - [x] `chien-peut-manger-pommes-de-terre` · 0 affichages Google (28 j) · relu 2026-11-09 : 1 correction
   - Petit chien « 2 à 3 cuillères à soupe (30-50 g) » (plafond 10 % à 5 kg ≈ 38 g) → 1 à 2 cuillères à soupe (15-30 g)
   - À vérifier (non changé) : « 20 % de la ration au maximum » (TL;DR et texte) à côté de la règle des 10 % des calories ; solanine « élevée » dans les frites et chips alors que l'épluchage en retire l'essentiel
-- [ ] `chien-peut-manger-poulet-cru` · 0 affichages Google (28 j)
-- [ ] `chien-peut-manger-radis` · 0 affichages Google (28 j)
-- [ ] `chien-peut-manger-salade` · 0 affichages Google (28 j)
-- [ ] `chien-peut-manger-saumon` · 0 affichages Google (28 j)
-- [ ] `chien-sort-croquettes-bol` · 0 affichages Google (28 j)
-- [ ] `choisir-alimentation-chat-guide` · 0 affichages Google (28 j)
+- [x] `chien-peut-manger-poulet-cru` · 0 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - « la viande brune contient surtout de la taurine » → plus riche en taurine que le blanc
+  - BARF « poulet cru au maximum 70-80 % de la ration » → viande musculaire environ 60 % (`alimentation-barf-chien-guide-complet`)
+  - Vérifié : Dog Chef croquettes 50 % de viande fraîche et code WZU7090 (−30 % box d'essai) identiques au reste du site
+- [x] `chien-peut-manger-radis` · 0 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - FAQ « Évite le radis noir » (tableau et verdict : à limiter) → limite le radis noir
+  - Valeurs USDA (16 kcal, 14 mg de vitamine C, 233 mg de potassium, 3,4 g de glucides) vérifiées
+  - À vérifier (non changé) : « les fanes contiennent moins de glucosinolates que le bulbe »
+- [x] `chien-peut-manger-salade` · 0 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Romaine « environ 3 fois plus de vitamine K » que l'iceberg (USDA : 102,5 contre 24,1 µg) → environ 4 fois
+  - Épinards « 1 à 2 fois par semaine au plus » identique à `chien-peut-manger-epinards`
+- [x] `chien-peut-manger-saumon` · 0 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - « poissons d'eau douce du Pacifique Nord, comme le saumon atlantique » → saumons et truites des rivières de la côte Pacifique d'Amérique du Nord (`recette-friandises-saumon-patate-douce-chien`)
+  - « mortelle en 5 à 10 jours » → 7 à 10 jours (Merck)
+  - Symptômes « dans les 5 à 7 jours » → dans la semaine, parfois jusqu'à un mois (Merck : jusqu'à 33 jours)
+  - FAQ « surveille-le 5 à 7 jours » → un mois, surtout la première semaine
+  - Tableau 20-30 / 40-60 / 80-100 / 100-150 g (saumon cuit ≈ 200 kcal/100 g, jusqu'à 20 % des calories) → 5-10 / 10-15 / 20-35 / 35-60 g, plafond 10 % au bas de chaque gabarit
+  - Phrase ajoutée sous le tableau : 10 % des calories, retirer l'équivalent de la ration pour donner plus
+- [x] `chien-sort-croquettes-bol` · 0 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - « bol en inox ou en céramique » bruyant (plus bas : céramique moins bruyante que l'inox) → bol en inox
+  - À vérifier (non changé) : « avec plusieurs chiens, au moins l'un d'eux le fait presque toujours »
+- [x] `choisir-alimentation-chat-guide` · 0 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - « le chat ne peut pas synthétiser la taurine » (encadré et FAQ) → en fabrique trop peu
+  - Elmut chat « 65 % d'eau » (absent de elmut.fr/produits-chat) → 5 recettes humides sans céréales
+  - « vraie solution médicale » (promesse de soin) → un repas humide les y aide, en plus du suivi vétérinaire
+  - À corriger dans `data/brand-content.ts` (non changé) : Elmut chat « 3 recettes (poulet, bœuf, dinde) » → 5 recettes avec porc et poisson (elmut.fr, 2026-11-09)
+  - À vérifier (non changé) : croquettes seules et « risque rénal », céréales et diabète félin
 - [ ] `congeler-repas-maison-chien-guide` · 0 affichages Google (28 j)
 - [ ] `coprophagie-chien-causes-solutions` · 0 affichages Google (28 j)
 - [ ] `croquettes-chien-allergique` · 0 affichages Google (28 j)
