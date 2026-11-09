@@ -1305,12 +1305,22 @@
   - Encadré « aucune réaction croisée démontrée poulet-canard » → 97 % des chiens sensibilisés au poulet réagissent au canard in vitro (Olivry 2017, déjà cité par `recette-patee-maison-dinde-chien`), source ajoutée
   - FAQ « peau chargée en graisses saturées » (graisse de canard surtout mono-insaturée) → très grasse
   - À vérifier (non changé) : « 1 cou de canard entier » pour un chien de 3 kg
-- [ ] `chien-peut-manger-celeri` · 0 affichages Google (28 j)
-- [ ] `chien-peut-manger-dinde` · 0 affichages Google (28 j)
-- [ ] `chien-peut-manger-endives` · 0 affichages Google (28 j)
-- [ ] `chien-peut-manger-fraises` · 0 affichages Google (28 j)
-- [ ] `chien-peut-manger-lapin` · 0 affichages Google (28 j)
-- [ ] `chien-peut-manger-mures` · 0 affichages Google (28 j)
+- [x] `chien-peut-manger-celeri` · 0 affichages Google (28 j) · relu 2026-11-09 : 0 correction
+  - Valeurs USDA (16 kcal, 29 µg de vitamine K, 260 mg de potassium, céleri-rave 42 kcal) vérifiées, tableau et FAQ alignés
+- [x] `chien-peut-manger-dinde` · 0 affichages Google (28 j) · relu 2026-11-09 : 0 correction
+  - « Dog Chef et Elmut utilisent de la dinde fraîche » vérifié : Dog Chef Dinde fraîche et Agneau & Dinde fraîche (nouveautés, dogchef.com/fr/nos-repas-frais), Elmut Menu Dinde
+  - À ajouter dans `data/brand-content.ts` (non changé) : les deux nouvelles recettes Dog Chef à la dinde
+- [x] `chien-peut-manger-endives` · 0 affichages Google (28 j) · relu 2026-11-09 : 0 correction
+  - Tableau (5 à 10 g la feuille, 100 g l'endive), texte et FAQ alignés
+- [x] `chien-peut-manger-fraises` · 0 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - « la fraise arrive en tête du Dirty Dozen » (EWG 2026 : épinards 1ers, fraises 3es) → parmi les trois premiers
+  - Seuils xylitol 0,1 et 0,5 g/kg identiques au reste du site
+- [x] `chien-peut-manger-lapin` · 0 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - TL;DR « Dog Chef et Elmut peuvent inclure du lapin » → ni l'un ni l'autre n'a de recette au lapin, Dog Chef propose le canard
+  - « gammes courantes plutôt agneau, poulet ou saumon, Elmut peut adapter une recette au lapin » → gammes réelles des deux marques (sites, novembre 2026), canard pour un chien allergique
+  - Aligné ailleurs : `chien-peut-manger-agneau` « ni Dog Chef ni Elmut n'ont de recette à l'agneau » → Dog Chef a ajouté Agneau & Dinde fraîche ; `nourriture-boxer` Elmut « bœuf, poulet ou agneau » → dinde ; `just-russel-vs-elmut` Elmut « poulet, canard, bœuf » → dinde
+- [x] `chien-peut-manger-mures` · 0 affichages Google (28 j) · relu 2026-11-09 : 0 correction
+  - Valeurs USDA (43 kcal, 5,3 g de fibres, 0,09 g d'ALA) vérifiées, quantités proches des framboises comme annoncé
 - [ ] `chien-peut-manger-olives` · 0 affichages Google (28 j)
 - [ ] `chien-peut-manger-patate-douce` · 0 affichages Google (28 j)
 - [ ] `chien-peut-manger-peches` · 0 affichages Google (28 j)
