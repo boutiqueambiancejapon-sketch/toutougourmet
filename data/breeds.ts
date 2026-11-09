@@ -129,7 +129,7 @@ export const BREEDS: Breed[] = [
     activity: 'Très élevée',
     watch: 'Ration selon activité',
     health: [
-      { title: 'Dysplasie de la hanche et du coude', text: 'Elle touche 15 à 20 % des malinois. Glucosamine (1 000 à 1 500 mg/jour pour 25 à 30 kg), oméga-3 et contrôle strict du poids.' },
+      { title: 'Dysplasie de la hanche et du coude', text: 'Une partie des malinois est touchée. Glucosamine (1 000 à 1 500 mg/jour pour 25 à 30 kg), oméga-3 et contrôle strict du poids.' },
       { title: 'Dilatation-torsion gastrique', text: "Thorax profond : deux repas par jour, pas d'effort intense une heure avant et deux heures après le repas." },
       { title: 'Épilepsie idiopathique', text: 'Un effet favorable des régimes enrichis en MCT et en oméga-3 est en partie documenté. À discuter avec le vétérinaire après diagnostic.' },
     ],
@@ -474,7 +474,7 @@ export const BREEDS: Breed[] = [
     activity: 'Élevée',
     watch: 'Calculs urinaires',
     health: [
-      { title: "Calculs d'urate", text: "Tous les dalmatiens excrètent de l'acide urique. Un régime pauvre en purines est obligatoire dès l'âge adulte, avec beaucoup d'eau." },
+      { title: "Calculs d'urate", text: "Presque tous les dalmatiens excrètent de l'acide urique en excès. Un régime pauvre en purines est obligatoire dès l'âge adulte, avec beaucoup d'eau." },
     ],
     foodNote: "À proscrire : abats (même le foie de poulet), sardines, anchois, gibier, moules. Poulet, dinde, œuf et agneau conviennent, avec 1,5 à 2 litres d'eau par jour pour 25 kg.",
     near: ['braque-allemand', 'boxer', 'doberman'],
