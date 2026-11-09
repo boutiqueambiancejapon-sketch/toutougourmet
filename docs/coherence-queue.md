@@ -42,13 +42,30 @@
   - Tableau 5-10 kg « ½ à 1 c.à.c. (3-5 g) » → 2,5-5 g
   - Caféine « toxique au-delà de 20 à 40 mg/kg » → dès 20 mg/kg (comme chien-mange-cafe-urgence)
   - À vérifier (non changé, faute de source) : « SF68, seule souche avec licence UE pour le chien » répété sur 4 articles, d'autres souches semblent autorisées
-- [ ] `chien-peut-manger-pain` · 2065 affichages Google (28 j)
-- [ ] `meilleures-patees-chien` · 2061 affichages Google (28 j)
-- [ ] `chien-peut-manger-miel` · 1987 affichages Google (28 j)
+- [x] `chien-peut-manger-pain` · 2065 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Tranche de pain de mie (80 kcal) « un cinquième du besoin d'un Chihuahua de 3 kg » → plus d'un tiers (besoin ≈ 220 kcal)
+  - Tableau au-dessus de 10 % des calories : < 5 kg 5-10 g → 5 g ; 5-15 kg 10-20 g → 5-10 g ; 15-30 kg 20-30 g → 15-25 g
+- [x] `meilleures-patees-chien` · 2061 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Tableau des quantités (280/555/1000/1330/1670 g) sans densité et hors du calcul du site → pâtée à 100 kcal : 310/520/940/1360/1780 g, complément 95 à 530 g (comme quelle-quantite-patee-chien-par-jour)
+  - Labrador « 1,3 kg, 5 à 10 € par jour » → 1,4 kg, 9 à 17 € avec les marques du tableau (6,30 à 12 €/kg)
+  - Gamelle « 2 heures au plus » → 4 h, une à deux en été ; décongélation « sortir 12 h avant » → au réfrigérateur en 12 à 24 h (comme conserver-patee-chien-apres-ouverture)
+  - « à 4 °C elle se digère moins bien » → froide, elle sent moins fort et le chien la boude (l'article conservation dit qu'elle se digère sans trouble)
+- [x] `chien-peut-manger-miel` · 1987 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Cuillère à café « 6 g » alors que 21 kcal/c.à.c. à 304 kcal = 7 g → 7 g (miel dense), tableau recalculé (2 / 3,5 / 7 / 14 g)
+  - Toux « ½ à 1 c.à.c. 2 à 3 fois par jour » sans gabarit (jusqu'à 30 % des calories d'un chien de 3 kg) → ½ c.à.c. pour un petit chien, 1 pour un moyen ou grand
 - [x] `chien-peut-manger-avoine` · 1866 affichages Google (28 j) · relu 2026-11-09 : 4 corrections (propriétaire)
-- [ ] `chien-peut-manger-sardines` · 1804 affichages Google (28 j)
-- [ ] `conserver-patee-chien-apres-ouverture` · 1718 affichages Google (28 j)
-- [ ] `chien-peut-manger-butternut-potiron` · 1681 affichages Google (28 j)
+- [x] `chien-peut-manger-sardines` · 1804 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - « 10 g par kg et par portion, dans les 10 % » (200 kcal/100 g : 40 % du jour) → 2 g par kg (TL;DR, texte)
+  - Tableau 20-30 / 40-80 / 90-150 / 150-250 / 250-300 g → 5-10 / 10-15 / 20-35 / 40-60 / 60-85 g, une sardine en boîte ≈ 30 g ; FAQ par semaine alignée
+  - Chien en surpoids « 5 g par kg » → 1 g par kg ; chiot « 10-20 g » → 5 à 10 g
+  - Sel idéal « moins de 0,3 g » (tableau) contre 0,5 g (encadré) → 0,5 g partout
+  - Boîte de 120 g « presque un quart » de la journée d'un chien de 20 kg → plus d'un quart (240 kcal sur ≈ 940)
+- [x] `conserver-patee-chien-apres-ouverture` · 1718 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+- [x] `chien-peut-manger-butternut-potiron` · 1681 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Bêta-carotène « jusqu'à 8 500 µg pour 100 g cuit » → environ 4 500 µg (USDA, butternut cuit) ; vitamine C 21 mg (cru) → environ 15 mg cuit
+  - TL;DR « 26 kcal pour 100 g » pour les deux → 26 pour le potiron, une quarantaine pour le butternut (le texte dit le potiron moins calorique)
+  - Eau « 88 à 92 % » → 86 à 92 % (butternut 86 %)
+  - Cuillères à soupe ≠ grammes : 3-4 c.à.s. (60-80 g) → 4-5 c.à.s. (60-75 g) ; 5-6 c.à.s. (100-120 g) → 7-8 ; 30-50 g → 30-45 g ; 1 c.à.c. 5-8 g → 5 g
 - [ ] `chien-peut-manger-poires` · 1664 affichages Google (28 j)
 - [ ] `chien-peut-manger-framboises` · 1617 affichages Google (28 j)
 - [ ] `nourriture-yorkshire-terrier` · 1555 affichages Google (28 j)
