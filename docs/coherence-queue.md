@@ -469,12 +469,23 @@
 - [x] `chien-peut-manger-lentilles` · 283 affichages Google (28 j) · relu 2026-11-09 : 1 correction
   - Tableau : cuillères converties à 15, 25, 50, 75 et 100 g → 5, 15, 30, 45 et 60 g (1 c. à café ≈ 5 g, 1 c. à soupe ≈ 15 g) ; reste sous 10 % des calories du jour
   - 116 kcal, 9 g de protéines, 8 g de fibres, FDA 2018-2022 : cohérents
-- [ ] `quelle-quantite-donner-manger-chien-selon-poids` · 283 affichages Google (28 j)
-- [ ] `vinaigre-de-cidre-chien-bienfaits-precautions` · 276 affichages Google (28 j)
-- [ ] `collagene-chien-bienfaits-dosage` · 273 affichages Google (28 j)
-- [ ] `alimentation-poisson-chien-guide` · 268 affichages Google (28 j)
-- [ ] `nourriture-bichon-havanais` · 268 affichages Google (28 j)
-- [ ] `chien-peut-manger-pop-corn` · 260 affichages Google (28 j)
+- [x] `quelle-quantite-donner-manger-chien-selon-poids` · 283 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Colonne « Repas frais » calculée à 95 kcal/100 g et sans rapport avec les calories des croquettes (2 kg : 60-80 g, soit 57-76 kcal contre 130-170) → stérilisé sédentaire à 133 kcal/100 g (`lib/calculators.ts`, Dog Chef) : 95-125 g à 2 kg … 1 200-1 470 g à 60 kg ; encadré aligné
+  - DentaStix « 5 à 8 % des besoins » d'un petit chien → environ 50 kcal, 10 à 20 % (51 kcal par bâtonnet small, fiches revendeurs)
+  - FAQ obésité « sur 3 à 4 semaines, 10 % par semaine » (30-40 %) contre « jamais plus de 20 à 30 % » → sur 2 à 3 semaines
+- [x] `vinaigre-de-cidre-chien-bienfaits-precautions` · 276 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - pH « 3,1 à 5,0 » (le texte dit plus bas « pH 3 ») → 2,5 à 3 (vinaigre à 5 % d'acide acétique, Bragg mesuré à 3,08)
+  - Larves « 90 % d'une population de puces » → œufs, larves et cocons 95 % (50/35/10, adultes 5 %)
+  - À vérifier (non changé) : « 12 % d'irritations cutanées » attribué à l'AVMA (TL;DR et Sources), introuvable sur avma.org ni ailleurs ; table : saut de 5 ml (15-30 kg) à 15 ml (30 kg et plus) sans source
+- [x] `collagene-chien-bienfaits-dosage` · 273 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Exemples de races du tableau : Chihuahua et Yorkshire à 5 kg, Beagle à 20 kg → Shih Tzu, Bichon ; Border Collie, Springer
+- [x] `alimentation-poisson-chien-guide` · 268 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - « 2 à 3 % du poids du chien par jour » (5 kg : 100-150 g) contre le tableau 15-25 g → 3 à 5 g de poisson cuit par kilo, les jours où il en reçoit (comme le tableau)
+- [x] `nourriture-bichon-havanais` · 268 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - « deux à trois brossages par semaine » → au moins trois (`croquettes-chien-tartre` : 3 fois par semaine au minimum)
+  - Calories 220-446 kcal, 60-120 g à 370 kcal, friandises 22-45 kcal, 23-27 cm, poil 12-18 cm : cohérents
+- [x] `chien-peut-manger-pop-corn` · 260 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Tableau PetMD converti en kg (2-20 lb … 91+ lb) vérifié, 8 g = 31 kcal à 387, sel 2-3 et 4 g/kg, xylitol 0,1 et 0,5 g/kg : cohérents
 - [ ] `nourriture-labrador-retriever` · 252 affichages Google (28 j)
 - [ ] `avis-franklin-light-dinde-patate-douce-epinards` · 251 affichages Google (28 j)
 - [ ] `tapis-de-lechage-chien-guide-utilisation` · 247 affichages Google (28 j)
