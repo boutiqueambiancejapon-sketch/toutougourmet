@@ -819,12 +819,26 @@
   - Franklin « 1,20 à 1,60 € par jour » → 1,50 à 2,50 € (250 à 330 g à 5,20-9 €/kg) ; glucosamine attribuée à la recette senior
   - « Elmut et Dog Chef intègrent glucosamine et oméga-3 à leurs formules grandes races » → Mobility Booster et croquettes avec glucosamine de Dog Chef
   - À vérifier (non changé) : « chaque kilo perdu réduit de 3 à 5 kg la pression sur les articulations »
-- [ ] `nourriture-samoyed` · 59 affichages Google (28 j)
-- [ ] `chien-peut-boire-lait` · 57 affichages Google (28 j)
-- [ ] `recette-friandises-foie-seche-chien` · 53 affichages Google (28 j)
-- [ ] `faut-il-faire-jeuner-son-chien` · 50 affichages Google (28 j)
-- [ ] `coup-de-chaleur-chien-symptomes-premiers-gestes` · 49 affichages Google (28 j)
-- [ ] `croquettes-chien-tartre` · 48 affichages Google (28 j)
+- [x] `nourriture-samoyed` · 59 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Elmut « formules saumon et agneau », « notre choix pour les porteurs, le soutien des reins » → recette au poisson (saumon, colin), choix pour un Samoyed sain ; plus de 45 % de protéines sur MS et du foie, donc avis du vétérinaire si porteur ou protéinurique (l'article déconseille plus de 40 % et le foie dans ce cas)
+  - Dog Chef « (poulet, agneau) » → poulet, canard (`brand-content.ts`)
+  - Vérifiés : NRC EPA + DHA 22 kg = 305 mg, limite 3 760 mg (30 et 370 mg/kg^0,75) ; FAQ 1 400 à 1 600 kcal = 390 à 445 g à 360 kcal
+  - À vérifier (non changé) : première description attribuée à Texas A&M (les travaux connus sur le Samoyède viennent de Guelph, Canada) ; insuffisance rénale « entre 3 et 8 ans » chez les femelles
+- [x] `chien-peut-boire-lait` · 57 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - TL;DR et verdict « 1 cuillère à soupe pour 10 kg, pas plus » → 1 pour commencer, 2 au plus si bien toléré (tableau : 15 ml puis 30 ml pour 10 kg)
+- [x] `recette-friandises-foie-seche-chien` · 53 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Séchage « facteur 4 à 5 » (texte, FAQ rétinol) → 3 à 4 (71 à 76 % d'eau au départ, moins de 10 % à l'arrivée)
+  - Tableau 2–5 kg « ≈ 3–5 g » → 2,5–3,5 g et 5–10 kg « ≈ 5–8 g » → 5–7 g (foie séché ≈ 450 kcal/100 g, sous 10 % des calories d'un chien stérilisé du bas du gabarit)
+  - À vérifier (non changé) : NRC « 333 µg RE par kilo et par jour » et toxicité « 4 000 µg RE/kg/jour » (le besoin semble plutôt de l'ordre de 30 à 50 µg/kg) ; rétinol du foie de porc 5 400 µg (USDA : 6 500)
+- [x] `faut-il-faire-jeuner-son-chien` · 50 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : Leung 2020 (10 chiens, −3,3 % contre −1,7 %, P = 0,067, leptine en baisse dans les deux jeûnes), Dog Aging Project 10 474 et 24 238 chiens
+  - À vérifier (non changé) : FAQ « consulte si le refus dure plus de 24 heures » contre 48 h pour un adulte sain dans combien-temps-chien-sans-manger
+- [x] `coup-de-chaleur-chien-symptomes-premiers-gestes` · 49 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : Hall 2020 (395 cas, 14,18 %, Chow Chow, Bulldog, Bouledogue français, plus de 2 ans, poids au-dessus de la moyenne), Bruchim 2006 (54 chiens, 50 %)
+  - À vérifier (non changé) : seuil du coup de chaleur 40 °C ici, 40,5 °C dans alimentation-chien-ete-canicule-guide et recette-glace-maison-chien-ete ; le guide canicule dit « 50 % sans prise en charge rapide » alors que les 54 chiens étaient hospitalisés
+- [x] `croquettes-chien-tartre` · 48 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Franklin « riche en protéines animales (70%) » → jusqu'à 70 % de viande ou de poisson (34 % de protéines)
+  - À vérifier (non changé) : réduction de la plaque « 40 à 60 % » attribuée à une étude de 2020 ; risque « 5 fois plus élevé » chez les petites races
 - [ ] `alimentation-chien-senior-guide` · 43 affichages Google (28 j)
 - [ ] `huile-de-coco-chien-bienfaits-dosage` · 42 affichages Google (28 j)
 - [ ] `recette-friandises-education-chien` · 42 affichages Google (28 j)
