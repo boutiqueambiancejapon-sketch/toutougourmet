@@ -1535,12 +1535,44 @@
   - Repas frais 25 kg « environ 2,50 € par jour » (Dog Chef 10-25 kg : 2 à 4 €, Elmut 75 à 120 €/mois) → 3 à 4 €
   - « Sans effort 30 minutes avant ou après » (texte, FAQ) → pas de jeu intense 30 min avant ni 2 h après (dossier torsion)
   - À vérifier (non changé) : « 40 à 60 % de chiens obèses » ; 800 à 1 200 kcal pour 20 à 35 kg
-- [ ] `nourriture-beagle` · 0 affichages Google (28 j)
-- [ ] `nourriture-berger-allemand` · 0 affichages Google (28 j)
-- [ ] `nourriture-berger-belge-malinois` · 0 affichages Google (28 j)
-- [ ] `nourriture-berger-de-beauce` · 0 affichages Google (28 j)
-- [ ] `nourriture-berger-des-shetland` · 0 affichages Google (28 j)
-- [ ] `nourriture-bichon-frise` · 0 affichages Google (28 j)
+- [x] `nourriture-beagle` · 0 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Tableau « actif 800 à 900 kcal » (TL;DR 700 à 900) → 700 à 900 kcal
+  - Repas frais 10 kg « 350 à 430 g » (≈ 465 à 570 kcal à 133 kcal/100 g) → 450 à 680 g, d'après le tableau
+  - « 3 à 5 € par jour » → 2 à 4 € (Dog Chef et Elmut 10-25 kg, `brand-content.ts`)
+  - Dog Chef « portion pour perdre 1 à 2 % par semaine » (invérifiable) → portion recalculée quand son poids change
+  - À vérifier (non changé) : « parmi les trois races les plus à risque d'obésité » ; sédentaire ou stérilisé 600 à 750 kcal (formule du site : 400 à 590 kcal pour 10 kg)
+- [x] `nourriture-berger-allemand` · 0 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - Torsion « pas de repas dans l'heure avant ou après un effort » (encadré, 2 FAQ) → pas de jeu intense 30 min avant, ni d'effort intense 2 h après (dossier torsion)
+  - Glucosamine « 1 000 à 1 500 mg pour 30 kg » (texte, FAQ) → 600 à 900 mg, le double les 4 à 6 premières semaines (dossier glucosamine : 20-30 mg/kg)
+  - Prix par jour 30 kg : Dog Chef 3,40-4,20 € → 4 à 5,50 € ; Elmut 3,20-3,80 € → 4 à 6 € ; Franklin 1,50-2 € → environ 2,50 € (`brand-content.ts`)
+  - Elmut « avec prébiotiques (85 à 92 % digéré) », Franklin « 85 à 90 % digéré » (invérifiables) → retirés
+  - FAQ budget « 40 à 60 € Franklin, 95 à 130 € frais » → 75 à 80 € et 120 à 180 €
+  - À vérifier (non changé) : « deuxième race la plus populaire en France » (SCC 2023)
+- [x] `nourriture-berger-belge-malinois` · 0 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - Torsion « pas d'exercice dans l'heure qui entoure le repas » (texte, encadré) → 30 min avant, 2 h après (dossier torsion)
+  - Repas frais « 22 à 26 % de protéines brutes » (ni brut ni sec) → menus Elmut au-delà de 45 % sur matière sèche
+  - Glucosamine « 1 000 à 1 500 mg pour 25 à 30 kg » → 500 à 900 mg, le double les 4 à 6 premières semaines
+  - Elmut « oméga-3 intégrés » → menu Poisson (saumon, colin) ; Dogfy menu bœuf « 45 % protéines, 31 % MG » → 42,9 % et 37,5 % (`brand-content.ts`)
+  - FAQ budget frais « 90 à 130 €, 55-80 € le premier mois » → 120 à 180 € ; remises telles que `partner-discounts.ts` (box d'essai Dog Chef, 1re commande Elmut)
+  - À vérifier (non changé) : dysplasie « 15 à 20 % des Malinois » (OFA : environ 5 %, données européennes introuvables)
+- [x] `nourriture-berger-de-beauce` · 0 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - Intro « actif 35-40 kg : 1 500 à 2 200 kcal » (FAQ : 1 600 à 2 500 selon l'activité) → 1 600 à 2 500 selon son activité
+  - Ring « 2 à 3 fois plus de calories » (contredit « 40 à 50 % plus bas ») → presque deux fois plus qu'un chien peu actif
+  - Torsion « pas d'effort dans l'heure, entraînement à 1-2 h du repas » → 30 min avant, 2 à 3 h après (dossier torsion)
+  - Repas frais 38 kg « 3,50 € par jour » → 4 à 6 € (`brand-content.ts`)
+  - Elmut « fermente moins, utile contre la torsion » (invérifiable) → retiré ; Dogfy « livrés congelés » → réfrigérateur ou congélateur (`avis-dogfy-diet`)
+  - Franklin « 70 % de viande » → jusqu'à 70 % (Agneau : 25 % de protéines)
+- [x] `nourriture-berger-des-shetland` · 0 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - Intro « 400 à 700 kcal actif » (FAQ 450 à 600 pour 8 kg) → 450 à 700
+  - FAQ « 450 à 600 kcal, soit 80 à 120 g de croquettes » → 115 à 165 g (360 à 400 kcal/100 g)
+  - Repas frais 8 kg « 1,50 € par jour » → 1,50 à 2,50 € (Dog Chef et Elmut sous 10 kg)
+  - « 18 g/100 g MS pour un chien tranquille » (FEDIAF : 18 g pour une activité modérée) → minimum européen d'entretien
+  - Rapport oméga-6/oméga-3 « sous 5 » → entre 5:1 et 10:1 (comme le reste du site)
+- [x] `nourriture-bichon-frise` · 0 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - EPA et DHA « tirés de l'huile de lin » (le lin n'en apporte pas) → saumon ou hareng
+  - Repas frais 4 kg « 1,60 € par jour » → 1,50 à 2,50 €
+  - FAQ « 220 à 400 kcal, soit 50 à 80 g de croquettes » → 55 à 110 g
+  - À vérifier (non changé) : « 35 % ou plus de protéines » alors que Franklin, conseillé, est à 34 %
 - [ ] `nourriture-border-collie` · 0 affichages Google (28 j)
 - [ ] `nourriture-caniche` · 0 affichages Google (28 j)
 - [ ] `nourriture-carlin` · 0 affichages Google (28 j)
