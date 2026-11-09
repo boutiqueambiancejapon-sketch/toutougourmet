@@ -144,7 +144,7 @@ export const BREEDS: Breed[] = [
     activity: 'Modérée',
     watch: 'Articulations',
     health: [
-      { title: 'Dysplasie de la hanche et du coude', text: "Le surpoids l'aggrave. Chez le chiot, calcium entre 0,8 et 1,2 % de la matière sèche, sans suralimentation." },
+      { title: 'Dysplasie de la hanche et du coude', text: "Le surpoids l'aggrave. Chez le chiot, calcium entre 1 et 1,6 % de la matière sèche, sans suralimentation." },
       { title: 'Myélopathie dégénérative', text: 'Atteinte nerveuse liée au gène SOD1. Un poids de forme aide le chien à rester mobile plus longtemps.' },
       { title: 'Sensibilité digestive', text: "Les selles molles reviennent au moindre changement brutal d'aliment." },
     ],
@@ -289,7 +289,7 @@ export const BREEDS: Breed[] = [
     watch: "Torsion d'estomac",
     health: [
       { title: 'Dilatation-torsion gastrique', text: 'Poitrine haute et étroite : deux repas par jour, calme une heure avant et une à deux heures après, gamelle au sol.' },
-      { title: 'Croissance du chiot', text: "Croissance freinée jusqu'à 12-15 mois : calcium à 1,0-1,2 % sur matière sèche, jamais de complément calcique maison." },
+      { title: 'Croissance du chiot', text: "Croissance freinée jusqu'à 12-15 mois : calcium entre 1 et 1,6 % sur matière sèche, jamais de complément calcique maison." },
     ],
     foodNote: 'La ration monte de 25 à 50 % les semaines de chasse et redescend de 20 à 30 % à la fermeture. Pas de repas complet dans les deux heures avant une sortie.',
     near: ['braque-de-weimar', 'braque-hongrois', 'setter-irlandais'],
@@ -347,7 +347,7 @@ export const BREEDS: Breed[] = [
     health: [
       { title: 'Dysplasie de la hanche', text: "Jusqu'à 58 % des sujets selon le club de race américain. EPA et DHA à doser avec le vétérinaire, glucosamine, chondroïtine et poids strict (BCS 4-5/9)." },
       { title: "Dilatation-torsion de l'estomac", text: 'Mortelle dans 15 à 40 % des cas. Deux à trois repas par jour, gamelle posée au sol.' },
-      { title: 'Croissance du chiot', text: 'Croissance lente, calcium entre 0,9 et 1,4 % de la matière sèche, sans jamais ajouter de calcium.' },
+      { title: 'Croissance du chiot', text: 'Croissance lente, calcium entre 1 et 1,6 % de la matière sèche, sans jamais ajouter de calcium.' },
     ],
     foodNote: 'Le gobelet des fabricants surestime souvent les portions de 15 à 30 % : la ration se pèse.',
     near: ['dogue-de-bordeaux', 'rottweiler', 'dogue-allemand'],
@@ -615,7 +615,7 @@ export const BREEDS: Breed[] = [
     watch: "Torsion d'estomac",
     health: [
       { title: "Dilatation-torsion de l'estomac", text: 'Thorax profond et étroit : 2 à 3 repas par jour, gamelle anti-glouton posée au sol. La gamelle surélevée double environ le risque.' },
-      { title: 'Dysplasie de la hanche et du coude', text: "Croissance lente jusqu'à 18-24 mois : calcium entre 0,8 et 1,2 % de la matière sèche chez le chiot." },
+      { title: 'Dysplasie de la hanche et du coude', text: "Croissance lente jusqu'à 18-24 mois : calcium entre 1 et 1,6 % de la matière sèche chez le chiot." },
       { title: "Maladie d'Addison", text: '9,73 % des chiens référés dans une étude. Après diagnostic, apport sodé un peu plus généreux sur prescription, 3 repas par jour et bonne hydratation.' },
     ],
     foodNote: 'Un patou de famille en plaine et peu actif risque la surcharge pondérale : 500 à 700 g de croquettes par jour, pesés à la balance.',
@@ -643,7 +643,7 @@ export const BREEDS: Breed[] = [
     activity: 'Modérée',
     watch: 'Croissance du chiot',
     health: [
-      { title: 'Malformations squelettiques', text: "Trop de calcium ou d'énergie pendant les deux premières années les provoque, de façon irréversible. Calcium entre 1,2 et 1,8 % de la matière sèche pendant la croissance." },
+      { title: 'Malformations squelettiques', text: "Trop de calcium ou d'énergie pendant les deux premières années les provoque, de façon irréversible. Calcium entre 1 et 1,6 % de la matière sèche pendant la croissance." },
       { title: 'Torsion gastrique', text: "Risque parmi les plus élevés de l'espèce : deux repas minimum par jour." },
       { title: 'Dysplasie de la hanche et du coude', text: 'Glucosamine et chondroïtine dès 24 mois, oméga-3, et poids surveillé chaque mois.' },
     ],

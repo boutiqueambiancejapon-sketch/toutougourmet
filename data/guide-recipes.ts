@@ -46,15 +46,15 @@ export const GUIDE_RECIPES: GuideRecipe[] = [
       'Sers tiède, jamais brûlant ni sortant du réfrigérateur.',
     ],
     doses: {
-      head: ['Poids du chien', 'Ration par jour (2 à 3 % du poids)'],
+      head: ['Poids du chien', 'Ration par jour (adulte)'],
       rows: [
-        ['5 kg', '100 à 150 g'],
-        ['10 kg', '200 à 300 g'],
-        ['20 kg', '400 à 600 g'],
-        ['30 kg', '600 à 900 g'],
-        ['40 kg', '800 à 1 100 g'],
+        ['5 kg', '220 à 260 g'],
+        ['10 kg', '370 à 440 g'],
+        ['20 kg', '630 à 740 g'],
+        ['30 kg', '850 à 1 000 g'],
+        ['40 kg', '1 050 à 1 240 g'],
       ],
-      note: 'Moitié poulet, moitié riz et légumes.',
+      note: 'Moitié poulet, moitié riz et légumes. Bas de la fourchette : chien stérilisé, haut : chien entier.',
     },
     warnings: [
       'Sans complément minéral-vitaminé, la ration manque de calcium (rapport Ca/P proche de 1:15) : la carence n° 1 des recettes maison (Stockman 2013).',
