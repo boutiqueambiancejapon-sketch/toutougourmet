@@ -1032,12 +1032,31 @@
   - « exercice intense dans l'heure qui précède ou qui suit » → la demi-heure avant et les 2 à 3 heures après
   - Dog Chef « au gramme, formules à protéine unique avec oméga-3 marins intégrés » → questionnaire, menus poulet, bœuf, porc, canard ou poisson, ce dernier riche en oméga-3
   - Vérifiés : calories du Vizsla de 25 kg (70 × P^0,75 × 1,2 à 2,5) et 340-380 g à 360 kcal/100 g dans la FAQ
-- [ ] `repas-noel-chien-aliments-autorises-dangereux` · 9 affichages Google (28 j)
-- [ ] `alimentation-chien-hiver-froid-guide` · 8 affichages Google (28 j)
-- [ ] `chien-peut-manger-myrtilles` · 8 affichages Google (28 j)
-- [ ] `chien-vomit-apres-manger-causes` · 8 affichages Google (28 j)
-- [ ] `microbiote-intestinal-chien-alimentation` · 8 affichages Google (28 j)
-- [ ] `nourriture-welsh-corgi-pembroke` · 8 affichages Google (28 j)
+- [x] `repas-noel-chien-aliments-autorises-dangereux` · 9 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : grammes de chocolat du tableau et de la FAQ (2,3 et 5,5 mg/g, seuils 20, 40-50, 60 mg/kg comme chien-mange-chocolat-urgence) ; 530 kcal pour 10 kg (95 × P^0,75) ; châtaigne 45 g pour 10 kg comme chataignes-marrons-inde ; survie d'un chien sur deux (Eubig 2005)
+- [x] `alimentation-chien-hiver-froid-guide` · 8 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Chocolat « toxique dès 100-200 mg/kg, soit 60 g de chocolat noir pour 10 kg » → premiers signes dès 20 mg/kg, environ 36 g (comme repas-noel et chien-mange-chocolat-urgence)
+  - Tableau « chien vivant dehors 20 à 50 % » → 10 à 50 % (TL;DR et exemple du Berger allemand à +10-20 %)
+  - Antigel « 50 ml, soit 3 cuillères à soupe » → un peu plus de 3 (15 ml la cuillère)
+  - Vérifiés : 4,4 ml/kg d'éthylène glycol ; limite haute de 2 080 mg d'EPA+DHA pour 10 kg comme huile-saumon
+- [x] `chien-peut-manger-myrtilles` · 8 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - FAQ « chiot de petite race : 3 à 5 myrtilles même adulte » → très petite race (moins de 5 kg), le tableau donne 5 à 8 pour 5-15 kg
+  - Vérifiés : 57 kcal, 10 g de sucres, 1,4 g la myrtille (50 baies = 68 g, USDA) ; xylitol 0,1 et 0,5 g/kg
+- [x] `chien-vomit-apres-manger-causes` · 8 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - « pas d'exercice intense pendant 1 à 2 heures » après le repas → 2 à 3 heures, comme torsion-estomac-chien-prevention-alimentation
+  - À vérifier (non changé) : mortalité du SDTE « 15 à 40 % » (description intouchable) contre « 15 à 33 % » dans quand-promener-chien-apres-manger ; « obstruction complète mortelle en 24 à 48 h »
+- [x] `microbiote-intestinal-chien-alimentation` · 8 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - FAQ BARF « Salmonella dans 80 % des échantillons selon une étude de 2006 » → 80 % des rations crues de poulet, étude canadienne de 2002 (Joffe et Schlesinger)
+  - Sources « Finley, 2006 (Salmonella) » → Joffe DJ, Schlesinger DP, Can Vet J 2002
+  - Psyllium « 1-2 g/10 kg/jour » → 2-4 g (2 g par prise, une à deux fois par jour, comme psyllium-chien-bienfaits-dosage)
+  - À vérifier (non changé) : kéfir 1 c. à café pour 5 kg ici et dans aliments-fermentes, mais 1 c. à soupe pour 10 kg dans flatulences et 1 c. à café pour 10 kg dans alimentation-anxiete ; alimentation-barf cite le 80 % sans Joffe 2002 dans ses sources
+- [x] `nourriture-welsh-corgi-pembroke` · 8 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - TL;DR et Stat « 600 à 800 kcal » → 500 à 800 (le tableau commence à 500 pour un sédentaire)
+  - « environ 140 à 200 g par jour » → 130 à 220 g (500-800 kcal à 360-380 kcal/100 g)
+  - FAQ « 150 à 180 g » pour 600-700 kcal → 160 à 195 g
+  - Stérilisation « métabolisme de base -20 à 30 %, réduis de 15 à 20 % » → besoins -20 à 30 %, réduis de 20 à 25 % (comme croquettes-chien-sterilise)
+  - Dog Chef « ration au gramme », Elmut « selon la stérilisation », Dogfy « dosés selon le poids visé », repas frais « ration ajustée au gramme » → portions recalculées, ration sur le profil, sachets prédosés et suivi gratuit (`data/brand-content.ts`)
+  - Franklin « oméga-3 EPA et DHA naturels » → recette Saumon, Truite & Persil à 0,5 % d'oméga-3
 - [ ] `avis-premiere` · 6 affichages Google (28 j)
 - [ ] `meilleure-gamelle-anti-glouton-chien` · 6 affichages Google (28 j)
 - [ ] `nourriture-doberman` · 6 affichages Google (28 j)
