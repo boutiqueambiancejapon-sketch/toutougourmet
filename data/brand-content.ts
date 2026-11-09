@@ -71,7 +71,7 @@ export const brandFaqs: Record<string, BrandFaq[]> = {
   fidelis: [
     { q: 'Les menus Fidelis sont-ils disponibles ?', a: "Au 1er novembre 2026, tous les menus en bocaux étaient affichés « Sold Out » sur le site. Vérifie le stock avant de prévoir une transition alimentaire." },
     { q: 'Faut-il garder les bocaux Fidelis au frigo ?', a: "Pas avant ouverture : le bocal en verre se conserve à température ambiante tant qu'il est fermé." },
-    { q: 'Quelles protéines propose Fidelis ?', a: "La gamme compte 8 recettes, dont le cheval et la chèvre en plus du poulet et du bœuf. Les recettes poulet, bœuf et cheval contiennent 70 % de viande." },
+    { q: 'Quelles protéines propose Fidelis ?', a: "La gamme compte 11 recettes en bocal et 10 protéines, dont le cheval, la chèvre, le porc et le saumon en plus du poulet et du bœuf. Les recettes poulet, bœuf et cheval contiennent 70 % de viande." },
     { q: 'Combien coûte Fidelis ?', a: 'Environ 11 à 12,50 € le kilo selon la recette.' },
     { q: 'Qui est derrière Fidelis ?', a: "La marque est éditée par Sanadog GmbH, en Allemagne. Les recettes ont été développées avec la vétérinaire Anita Kröger." },
   ],
