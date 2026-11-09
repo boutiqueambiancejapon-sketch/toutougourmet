@@ -930,12 +930,37 @@
 - [x] `avis-edgard-cooper` · 17 affichages Google (28 j) · relu 2026-11-09 : 1 correction
   - Franklin « −30 % sur la première commande, puis −20 % » → puis 15 à 20 % (`data/brand-content.ts`)
   - Vérifiés : 24,49 € les 2,5 kg et 49,99 € les 7 kg = 7 à 10 €/kg, rachat par General Mills en 2024
-- [ ] `croquettes-chien-digestion-sensible` · 16 affichages Google (28 j)
-- [ ] `recette-friandises-dentaires-maison-chien` · 16 affichages Google (28 j)
-- [ ] `croquettes-chiot-grande-race` · 15 affichages Google (28 j)
-- [ ] `recette-patee-maison-boeuf-chien` · 15 affichages Google (28 j)
-- [ ] `nourriture-braque-de-weimar` · 13 affichages Google (28 j)
-- [ ] `nourriture-dachshund` · 13 affichages Google (28 j)
+- [x] `croquettes-chien-digestion-sensible` · 16 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - Elmut « clients évaluent la digestibilité à 4,8/5 » et « meilleures selles en 2 à 3 semaines » → retirés (note invérifiable, récit d'avis clients) ; remplacé par cuisson sous vide à 90 °C, 8 ingrédients (`data/brand-content.ts`)
+  - Dog Chef croquettes « 4 recettes : poulet, canard, dinde, bœuf » → poulet ou canard, sans gluten (`data/brand-content.ts`)
+  - Franklin « mono-protéine » illustré par Poulet, Saumon & Fenouil (deux protéines, recette chiot) → Canard, Pomme & Carotte (seule viande : canard)
+  - Franklin « 70 % de viande » → jusqu'à 70 % (Dinde à 65 %)
+  - Repas frais « cuisinés à basse température » (TL;DR, texte) → cuits en douceur (Elmut à 90 °C)
+  - Exercice « 2 heures avant et après le repas » → 1 heure avant, 2 heures après, comme le reste du site
+  - À vérifier (non changé) : Dog Chef croquettes à la dinde (vue chez Zooplus, absente de `data/brand-content.ts`) ; classement de digestibilité poulet/dinde/saumon > bœuf > agneau sans source
+- [x] `recette-friandises-dentaires-maison-chien` · 16 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - « Un biscuit apporte 20 à 30 kcal » appliqué aux deux recettes → bâtonnet n°1 (≈ 10 g, 20 à 30 kcal) ; biscuit céleri de 2 cm ≈ 5 g et une dizaine de kcal (recette ≈ 800 kcal pour ≈ 355 g de pâte)
+  - Vérifiés : xylitol 0,1 et 0,5 g/kg ; seuil VOHC de 15 % par essai (protocole vohc.org, moyenne 20 %) ; 10 % des calories pour 5, 20 et 30 kg
+- [x] `croquettes-chiot-grande-race` · 15 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - FAQ chiot standard « 1,3 à 1,5 % de calcium, 420 à 440 kcal » → 1,2 à 1,5 %, 400 à 440 kcal, comme le tableau
+  - FAQ race géante « calcium sous 1,3 %, énergie sous 400 kcal » → calcium 0,9 à 1,3 %, énergie 380 à 400 kcal (bas de la fourchette du tableau)
+  - À vérifier (non changé) : « au-delà de 1,6 g de calcium pour 100 g MS, lésions reproductibles » (c'est le plafond FEDIAF grande race, pas un résultat d'étude ?) ; calcium chiot grande race très variable sur le site : 0,8-1,2 (patou, berger blanc suisse), 0,9-1,4 (cane corso, dogue de Bordeaux), 1-1,5 (dysplasie, setter), 1,2-1,8 (saint-bernard, au-dessus du plafond FEDIAF)
+- [x] `recette-patee-maison-boeuf-chien` · 15 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Rapport Ca/P « proche de 1:20, loin du 1,2:1 à 1,4:1 » (TL;DR, texte, FAQ) → autour de 1:15, loin du 1:1 à 2:1 (FEDIAF adulte), comme recette-patee-maison-poulet-chien
+  - Tableau 40 kg « 800–1100 g » à 2-3 % du poids → 800–1200 g, bœuf et riz-légumes 400–600 g, comme la recette au poulet
+  - Source « Olivry, Mueller, Veterinary Dermatology 2017 » pour les 34 % → Mueller, Olivry, Prélaud, BMC Veterinary Research 2016
+  - Vérifiés : bœuf 34 % des allergies devant laitiers et poulet ; poulet 2-3 % de MG ; conservation 3 jours et 3 mois comme la recette au poulet
+- [x] `nourriture-braque-de-weimar` · 13 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - TL;DR « adulte actif 1 600 à 2 000 kcal » → 1 600 kcal en famille, 1 900 à 2 200 en saison de chasse, comme le tableau
+  - Tableau chien stérilisé « −10 à −20 % » → −20 à −30 %, comme le texte et le reste du site
+  - Calcium du chiot « 1,0 à 1,5 % MS » → 0,9 à 1,3 %, comme croquettes-chiot-grande-race
+  - Chiot « trois repas jusqu'à six mois » (texte, 2 FAQ) → quatre jusqu'à trois mois, trois jusqu'à six mois, puis deux
+  - Vérifiés : standard FCI (mâle 59-70 cm, 30-40 kg) ; grammes du tableau à 380-400 kcal/100 g
+  - À vérifier (non changé) : « un seul gros repas par jour augmente le risque » attribué à Glickman 2000 (217:1492 porte sur les facteurs non alimentaires)
+- [x] `nourriture-dachshund` · 13 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Dog Chef « congelée en portions journalières, algorithme sur le score corporel » → livrée au frais en boudins portionnés, questionnaire et portion recalculée quand le poids change (`data/brand-content.ts`)
+  - Vérifiés : kcal par gabarit cohérents avec nourriture-teckel ; 25 % d'IVDD ; remises partenaires
+  - À vérifier (non changé) : « standard de 9 à 15 kg » et « intermédiaire de 7 à 9 kg » (le standard FCI plafonne vers 9 kg) ; « consensus vétérinaire » sur la glucosamine préventive dès 2-3 ans ; « première cause d'euthanasie »
 - [ ] `croquettes-chien-stresse-anxieux` · 12 affichages Google (28 j)
 - [ ] `levure-de-biere-chien-bienfaits-dosage` · 12 affichages Google (28 j)
 - [ ] `recette-patee-maison-poisson-chien` · 12 affichages Google (28 j)
