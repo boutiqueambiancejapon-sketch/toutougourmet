@@ -735,12 +735,40 @@
 - [x] `recette-patee-maison-lapin-chien` · 79 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
   - Vérifiés : 66 % bœuf, laitiers, poulet ; 250 g cuit = 310 g cru à −20 % ; tableau 60/35 % cohérent avec la recette de 20 kg ; 8 à 12 semaines d'éviction ; Stockman 2013 (200 recettes, 95 %)
   - À vérifier (non changé) : « le calcium en tête » des carences (Stockman cite surtout choline, vitamine D, zinc et vitamine E ; repris dans 3 articles) ; lapin 4 g de lipides contre poulet 10-15 g (cuisse avec peau, comparaison inégale) ; phosphore 277 mg/100 g
-- [ ] `croquettes-chien-arthrose` · 78 affichages Google (28 j)
-- [ ] `nourriture-chow-chow` · 78 affichages Google (28 j)
-- [ ] `croquettes-chien-diarrhee-chronique` · 77 affichages Google (28 j)
-- [ ] `additifs-croquettes-chien-conservateurs-colorants` · 75 affichages Google (28 j)
-- [ ] `canneberge-chien-infection-urinaire-efficacite` · 75 affichages Google (28 j)
-- [ ] `croquettes-chien-apres-operation` · 71 affichages Google (28 j)
+- [x] `croquettes-chien-arthrose` · 78 affichages Google (28 j) · relu 2026-11-09 : 7 corrections
+  - Glucosamine « sous 400 mg par jour, aucun effet » → sous 500 mg (comme la suite et l'article douleurs articulaires)
+  - Tableau « ≥ 500 mg/kg d'aliment, dose active » → 500 mg par jour à la ration, environ 1 700 mg/kg pour 300 g (500 mg/kg ne donnait que 150 mg)
+  - Perte de poids « 0,5 à 1 % par semaine » → 1 à 2 % (comme note-etat-corporel et surpoids)
+  - Franklin « EPA et DHA d'huile de saumon » dans toutes les recettes → huile de saumon dans plusieurs recettes (`partner-fiches.json`), titre, pour et verdict
+  - Franklin « autour de 3 200 kcal/kg de MS » → Dinde, courge, poire à 349 kcal/100 g, la moins calorique (gamme 349-391 kcal/100 g brut)
+  - Franklin « ne contient pas de glucosamine ajoutée » → 0,1 % au mieux, environ 250 mg par jour à 20 kg
+  - Ajout d'un contre : même la recette la plus légère dépasse les 3 000-3 300 kcal/kg conseillés par l'article
+  - À vérifier (non changé) : « perte de 6 à 8 % du poids, douleur −25 à 30 % » (la source citée, J Orthop Res 2013, non retrouvée) ; « Hill's j/d light » contient moins de glucosamine ; RC Mobility « maïs, blé, riz » en tête
+- [x] `nourriture-chow-chow` · 78 affichages Google (28 j) · relu 2026-11-09 : 6 corrections
+  - « 1 200 à 1 800 kcal par jour » (TL;DR et intro) → 900 à 1 500 kcal (FEDIAF 95-110 kcal/kg^0,75 pour 20-32 kg)
+  - FAQ 25 kg modéré « 1 400 à 1 600 kcal, 390 à 445 g » → 1 100 à 1 250 kcal, 305 à 345 g (repère des autres fiches race : 25 kg calme 940-1 100 kcal)
+  - FAQ hypothyroïdie « −15 à 20 % » → −15 à 25 % (comme l'encadré, l'autre FAQ et `breeds.ts`)
+  - Elmut « recettes à l'agneau et au saumon » → recette au poisson (saumon, colin) ; Elmut n'a pas d'agneau ; « tient compte de l'hypothyroïdie » → le profil demande l'état de santé
+  - Dog Chef « glucosamine naturelle (cartilages) » → Mobility Booster (`brand-content.ts`)
+  - Franklin « 60 à 70 % de protéines animales » → jusqu'à 70 % de viande ou de poisson
+- [x] `croquettes-chien-diarrhee-chronique` · 77 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Franklin « Poulet, Carotte & Épinards » (recette introuvable) → Dinde, Courge & Poire (12 % MG) ou Digestion sensible à l'agneau
+  - Diète « riz-poulet 50/50 pendant 48 h » → 75 % riz, 25 % poulet pendant 3 à 5 jours (article diarrhée et article riz)
+  - Jeûne 12 à 24 h → précisé adulte, 6 h au plus pour un chiot (article diarrhée)
+  - ProTransit Booster « prébiotiques, probiotiques et poudre » → prébiotiques et probiotiques
+  - À vérifier (non changé) : Dog Chef croquettes « deux sans gluten (dinde, bœuf) » alors que les deux contiennent de l'avoine ; psyllium 1 à 2 c. à c. par repas pour 10-20 kg ; riz blanc « nourrit les mauvaises bactéries »
+- [x] `additifs-croquettes-chien-conservateurs-colorants` · 75 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - « croquettes sèches en moyenne 8 à 12 % de MG » → 12 à 20 % (35 recettes sèches de `partner-fiches.json` : 11 à 20 %, médiane 16)
+  - Éthoxyquine « retirée en 2017, transition terminée fin 2020 » → suspendue en 2017, transition terminée au printemps 2020 (art. 3 du règlement 2017/962 : 31 mars 2020), refus définitif en 2022 (règlement 2022/1375)
+  - Sources : ajout du règlement 2022/1375
+  - À vérifier (non changé) : propylène glycol « dose maximale 3 g/kg d'aliment » chez le chien (aucune limite trouvée, il serait passé en matière première)
+- [x] `canneberge-chien-infection-urinaire-efficacite` · 75 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : Olby 2017, 94 chiens, 10/42 (24 %) contre 6/52 (12 %), xylitol 0,1 g/kg comme l'article xylitol
+- [x] `croquettes-chien-apres-operation` · 71 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Reprise « de J3 à J7, +25 % par jour » (ration pleine dès J4) → +10 % de la ration par jour jusqu'à J7
+  - Hill's a/d et RC Recovery « 4 à 6 € la boîte de 400 g » → 3 à 4 € la boîte de 156 g / 195 g, près de 20 € le kilo (Recovery 195 g à 3,89 €)
+  - Dog Chef croquettes « 28 à 32 % de protéines sur MS » → 30 % annoncés, environ 33 % sur MS (`partner-fiches.json`)
+  - Elmut « recettes sans céréales » → viande fraîche avec quinoa ou riz (bœuf et porc au riz), texte et pour
 - [ ] `glucosamine-chondroitine-chien-articulations` · 71 affichages Google (28 j)
 - [ ] `recette-biscuits-pomme-cannelle-chien` · 70 affichages Google (28 j)
 - [ ] `chien-peut-manger-gingembre` · 67 affichages Google (28 j)
