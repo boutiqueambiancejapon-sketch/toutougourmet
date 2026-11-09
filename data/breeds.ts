@@ -43,7 +43,7 @@ export const BREEDS: Breed[] = [
     health: [
       { title: 'Thyroïdite auto-immune', text: "Les oméga-3 EPA/DHA modulent l'inflammation auto-immune. La dose se décide avec le vétérinaire." },
       { title: 'Sébadénite sébacée', text: 'Comme pour la thyroïdite, une alimentation anti-inflammatoire riche en oméga-3 passe en premier.' },
-      { title: 'Dilatation-torsion gastrique', text: "Son gabarit et sa poitrine profonde l'exposent à la torsion : deux repas par jour, et pas d'exercice dans l'heure qui suit." },
+      { title: 'Dilatation-torsion gastrique', text: "Son gabarit et sa poitrine profonde l'exposent à la torsion : deux repas par jour, et pas d'exercice intense dans les deux heures qui suivent." },
     ],
     foodNote: "Malgré son tempérament calme, il lui faut 1 600 à 2 500 kcal par jour selon l'activité, en deux repas.",
     near: ['shiba-inu', 'chow-chow', 'malamute-alaska'],
@@ -130,7 +130,7 @@ export const BREEDS: Breed[] = [
     watch: 'Ration selon activité',
     health: [
       { title: 'Dysplasie de la hanche et du coude', text: 'Elle touche 15 à 20 % des malinois. Glucosamine (1 000 à 1 500 mg/jour pour 25 à 30 kg), oméga-3 et contrôle strict du poids.' },
-      { title: 'Dilatation-torsion gastrique', text: "Thorax profond : deux repas par jour, pas d'effort intense dans l'heure avant ou après le repas." },
+      { title: 'Dilatation-torsion gastrique', text: "Thorax profond : deux repas par jour, pas d'effort intense une heure avant et deux heures après le repas." },
       { title: 'Épilepsie idiopathique', text: 'Un effet favorable des régimes enrichis en MCT et en oméga-3 est en partie documenté. À discuter avec le vétérinaire après diagnostic.' },
     ],
     foodNote: "Un malinois de famille peu sollicité a des besoins 40 à 50 % inférieurs à ceux d'un chien de travail. Nourri comme un chien de brigade, il grossit.",
@@ -159,7 +159,7 @@ export const BREEDS: Breed[] = [
     activity: 'Élevée',
     watch: "Torsion d'estomac",
     health: [
-      { title: 'Torsion gastrique', text: "Poitrine profonde : deux repas par jour, aucun exercice intense dans l'heure avant et après, bol anti-glouton." },
+      { title: 'Torsion gastrique', text: "Poitrine profonde : deux repas par jour, aucun exercice intense une heure avant et deux heures après, bol anti-glouton." },
       { title: 'Dysplasie de la hanche et du coude', text: 'Glucosamine et chondroïtine dès 18 mois, oméga-3, et contrôle du poids : chaque kilo en trop charge hanches et coudes.' },
     ],
     foodNote: "Un beauceron de travail qui devient sédentaire a besoin de 35 % d'énergie en moins. Sans ajustement, il prend du poids en quelques semaines.",
@@ -288,7 +288,7 @@ export const BREEDS: Breed[] = [
     activity: 'Très élevée',
     watch: "Torsion d'estomac",
     health: [
-      { title: 'Dilatation-torsion gastrique', text: 'Poitrine haute et étroite : deux repas par jour, calme une heure avant et une à deux heures après, gamelle au sol.' },
+      { title: 'Dilatation-torsion gastrique', text: 'Poitrine haute et étroite : deux repas par jour, calme une heure avant et deux heures après, gamelle au sol.' },
       { title: 'Croissance du chiot', text: "Croissance freinée jusqu'à 12-15 mois : calcium entre 1 et 1,6 % sur matière sèche, jamais de complément calcique maison." },
     ],
     foodNote: 'La ration monte de 25 à 50 % les semaines de chasse et redescend de 20 à 30 % à la fermeture. Pas de repas complet dans les deux heures avant une sortie.',
@@ -302,7 +302,7 @@ export const BREEDS: Breed[] = [
     activity: 'Très élevée',
     watch: "Torsion d'estomac",
     health: [
-      { title: 'Dilatation-torsion gastrique', text: 'Thorax profond et étroit : deux repas par jour, calme une heure avant et une à deux heures après, gamelle anti-glouton si le chien est glouton.' },
+      { title: 'Dilatation-torsion gastrique', text: 'Thorax profond et étroit : deux repas par jour, calme une heure avant et deux heures après, gamelle anti-glouton si le chien est glouton.' },
       { title: 'Hanches et coudes', text: "Chez le chiot, apport calorique limité et rapport calcium/phosphore d'une formule grande race, sans quoi hanches et coudes se fragilisent." },
     ],
     foodNote: 'Un chien de famille peu sportif descend vers 12 à 15 % de lipides pour ne pas grossir.',
@@ -318,7 +318,7 @@ export const BREEDS: Breed[] = [
     health: [
       { title: 'Hypothyroïdie', text: "Elle fait grossir sans changement de ration. Un vizsla qui prend du poids sans raison justifie un dosage de T4 plutôt qu'une simple baisse de portion." },
       { title: 'Épilepsie idiopathique', text: 'Une raison de plus de surveiller le poids et la régularité des repas.' },
-      { title: 'Dilatation-torsion gastrique', text: "Poitrine profonde : deux repas par jour, pas de gamelle surélevée, pas d'effort intense dans l'heure qui suit." },
+      { title: 'Dilatation-torsion gastrique', text: "Poitrine profonde : deux repas par jour, pas de gamelle surélevée, pas d'effort intense dans les deux heures qui suivent." },
     ],
     foodNote: 'Le gobelet surestime souvent la portion de 15 à 20 % : la ration se pèse et se réévalue chaque mois.',
     near: ['braque-allemand', 'braque-de-weimar', 'epagneul-breton'],
@@ -487,7 +487,7 @@ export const BREEDS: Breed[] = [
     watch: 'Cardiomyopathie dilatée',
     health: [
       { title: 'Cardiomyopathie dilatée', text: "Jusqu'à 58 % des dobermans européens. La taurine et la L-carnitine de la viande sont la première protection nutritionnelle." },
-      { title: 'Dilatation-torsion gastrique', text: "Deux à trois repas par jour, jamais d'exercice dans l'heure qui suit." },
+      { title: 'Dilatation-torsion gastrique', text: "Deux à trois repas par jour, pas d'exercice intense dans les deux heures qui suivent." },
       { title: 'Syndrome de Wobbler', text: 'Une alimentation riche en oméga-3 EPA/DHA et en glucosamine soutient la colonne cervicale.' },
     ],
     foodNote: 'Éviter les formules sans céréales à base de légumineuses, signalées par la FDA en 2019.',
@@ -501,7 +501,7 @@ export const BREEDS: Breed[] = [
     activity: 'Modérée',
     watch: "Torsion d'estomac",
     health: [
-      { title: "Dilatation-torsion de l'estomac", text: "Risque cumulé jusqu'à 40 % sur la vie selon certaines études. Deux repas par jour minimum, pas d'exercice 1 à 2 heures avant et après, croquettes pas trop petites." },
+      { title: "Dilatation-torsion de l'estomac", text: "Risque cumulé jusqu'à 40 % sur la vie selon certaines études. Deux repas par jour minimum, pas d'exercice une heure avant et deux heures après, croquettes pas trop petites." },
       { title: 'Dysplasie de la hanche et du coude', text: 'Le chiot multiplie son poids par 100 en 18 mois : calcium, phosphore et énergie se contrôlent.' },
       { title: 'Cardiomyopathie dilatée', text: 'Les légumineuses en excès sont associées à un signal de cardiomyopathie atypique chez les races prédisposées (FDA 2019).' },
     ],
@@ -629,7 +629,7 @@ export const BREEDS: Breed[] = [
     activity: 'Élevée',
     watch: "Torsion d'estomac",
     health: [
-      { title: 'Dilatation-torsion gastrique', text: "Deux à trois petits repas par jour, jamais d'exercice une heure avant ou après." },
+      { title: 'Dilatation-torsion gastrique', text: "Deux à trois petits repas par jour, pas d'exercice une heure avant et deux heures après." },
       { title: 'Dysplasie et arthrose', text: 'Très fréquentes dans la race : glucosamine (1 000 à 2 000 mg/jour selon le poids) et chondroïtine dès 4-5 ans.' },
     ],
     foodNote: 'Après 7-8 ans, les calories baissent de 20 à 30 % mais les protéines animales restent à 28 % et plus contre la fonte musculaire.',
@@ -796,7 +796,7 @@ export const BREEDS: Breed[] = [
     activity: 'Modérée',
     watch: "Torsion d'estomac",
     health: [
-      { title: 'Torsion gastrique', text: "Deux repas minimum, aucun exercice 1 à 2 heures avant et après, peu d'aliments fermentescibles." },
+      { title: 'Torsion gastrique', text: "Deux repas minimum, aucun exercice une heure avant et deux heures après, peu d'aliments fermentescibles." },
       { title: 'Cardiomyopathie dilatée', text: "Prédisposition de la race : surveiller l'apport en taurine." },
     ],
     foodNote: "Un terre-neuve de compagnie peu actif prend vite du poids : la ration suit l'activité réelle, pas le gabarit seul.",
