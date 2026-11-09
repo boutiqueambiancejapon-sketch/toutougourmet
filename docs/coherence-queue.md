@@ -1612,12 +1612,41 @@
   - Franklin « 60-70 % de protéines animales » → jusqu'à 70 % de viande, 34 % de protéines (Agneau 25 %)
   - Dogfy « sachets congelés » → réfrigérateur ou congélateur
   - À vérifier (non changé) : granulés « 25–30 mm » ; Franklin chien « sans céréales »
-- [ ] `nourriture-saint-bernard` · 0 affichages Google (28 j)
-- [ ] `nourriture-shiba-inu` · 0 affichages Google (28 j)
-- [ ] `nourriture-shih-tzu` · 0 affichages Google (28 j)
-- [ ] `nourriture-teckel` · 0 affichages Google (28 j)
-- [ ] `probiotiques-chien-bienfaits-dosage` · 0 affichages Google (28 j)
-- [ ] `quand-promener-chien-apres-manger` · 0 affichages Google (28 j)
+- [x] `nourriture-saint-bernard` · 0 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Torsion « aucun effort intense 2 h avant et après » → pas de jeu intense 30 min avant, ni d'effort intense 2 h après (dossier torsion)
+  - Repas frais 65 kg « environ 6 € par jour » → plus de 6 € (`brand-content.ts` : 4 à 6 € jusqu'à 40 kg)
+  - Elmut « très digeste, fermente moins, utile contre la torsion » (texte et tableau, invérifiable) → retiré, ration calculée sur le poids
+  - Dogfy « sachets congelés » → sachets à stocker au frais
+  - À vérifier (non changé) : calcium chiot « 1,2 à 1,8 % MS », Ca/P 1,2-1,8 (valeurs AAFCO ; ailleurs sur le site 0,8-1,2 ou 0,9-1,4 pour les géants) ; « FEDIAF : croissance limitée à 70 % de la vitesse maximale » (introuvable)
+- [x] `nourriture-shiba-inu` · 0 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Elmut « source protéique unique (bœuf, poulet, saumon) » → une seule viande (poulet, bœuf, dinde ou porc), le menu Poisson contient du foie de poulet
+  - Dog Chef « protéine unique (poulet, dinde, canard), portions congelées » → menus poulet, bœuf, porc, canard et poisson, portions réfrigérées
+  - Franklin « saumon ou agneau en mono-protéine » → Canard, Pomme & Carotte (une seule viande) ou Saumon, Truite & Persil
+  - À vérifier (non changé) : Franklin « sans céréales »
+- [x] `nourriture-shih-tzu` · 0 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Calories FEDIAF « 350 à 400 kcal (4-5 kg), 440 à 500 (6-7,5 kg) » → 310 à 370 et 420 à 500 (110 kcal/kg^0,75) ; TL;DR 350 → 310
+  - Franklin « 60-70 % de protéines animales, se digère très bien, gamme petite race » → jusqu'à 70 % de viande, 34 % de protéines, 0,5 % d'oméga-3 (Saumon)
+  - Dogfy menu bœuf « huile de lin et de saumon » → 1,6 % d'huiles dont saumon (page officielle : saumon, olive, tournesol, colza)
+  - À vérifier (non changé) : « au moins 35 % de protéines » alors que Franklin, conseillé, est à 34 %
+- [x] `nourriture-teckel` · 0 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Croquettes petite race « 3 à 4 mm maximum » → 6 à 10 mm (comme le reste du site)
+  - Franklin « densité maîtrisée, digestibilité 85-90 % » (invérifiable) → jusqu'à 70 % de viande, 34 % de protéines (Agneau 25 %)
+  - Franklin « formules petite race avec offre de bienvenue » → −30 % en abonnement (`partner-discounts.ts`)
+  - À vérifier (non changé) : « obésité × 3 » ; « vétérinaires orthopédistes : 35 à 40 % de protéines » ; digestibilité 82 % / 85-92 %
+- [x] `probiotiques-chien-bienfaits-dosage` · 0 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - « SF68, seule souche autorisée dans l'UE » (TL;DR, encadré, verdict) → avec *L. acidophilus* CECT 4529 (règlement UE 2018/1558) ; aligné dans `flatulences-chien-causes-solutions-alimentation`, `microbiote-intestinal-chien-alimentation`, `alimentation-anxiete-chien-comportement`
+  - « autorisation de l'EFSA » → autorisation de l'Union européenne
+  - AHC7 « réduit la durée de moitié » → d'environ 40 % (3,9 jours contre 6,6, comme le tableau)
+  - « le matin, 30 minutes avant le repas » (contredit la poudre sur la gamelle et la fiche FortiFlora) → avec le repas, sur la ration
+  - Source Jensen « *Animals* » → Jensen et Bjørnvad, *JVIM*, 2019 (17 études confirmé)
+  - À vérifier (non changé) : BARF « bactéries lactiques issues de la viande fermentée » ; kéfir « 40 milliards pour 125 ml »
+- [x] `quand-promener-chien-apres-manger` · 0 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - TL;DR et intro « 30 min minimum (moins de 15 kg) » (tableau : 20-30 min sous 10 kg) → 20 à 30 min petit chien, 30 à 45 min chien moyen
+  - Grande race jogging « 90–120 min » (tableau, FAQ Golden) → 2 h minimum (dossier torsion : pas de course avant 2 h)
+  - Irish Wolfhound « risque modéré » → très élevé (dossier torsion)
+  - Franklin « 70 % de viande », « sans céréales évite le gonflement de l'amidon » (patate douce) → jusqu'à 70 %, phrase retirée
+  - Dog Chef « texture fraîche limite l'air avalé », verdict « réduit le risque de GDV » (invérifiable) → portions calibrées à répartir en deux repas
+  - À vérifier (non changé) : anti-glouton « −60 à 70 % d'air avalé » ; mortalité 15-33 % ici, 15-40 % ailleurs
 - [ ] `quantite-eau-chien-par-jour` · 0 affichages Google (28 j)
 - [ ] `ration-menagere-chien-guide-recettes` · 0 affichages Google (28 j)
 - [ ] `recette-biscuits-maison-beurre-cacahuete-chien` · 0 affichages Google (28 j)
