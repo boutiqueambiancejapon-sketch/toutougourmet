@@ -1647,10 +1647,26 @@
   - Franklin « 70 % de viande », « sans céréales évite le gonflement de l'amidon » (patate douce) → jusqu'à 70 %, phrase retirée
   - Dog Chef « texture fraîche limite l'air avalé », verdict « réduit le risque de GDV » (invérifiable) → portions calibrées à répartir en deux repas
   - À vérifier (non changé) : anti-glouton « −60 à 70 % d'air avalé » ; mortalité 15-33 % ici, 15-40 % ailleurs
-- [ ] `quantite-eau-chien-par-jour` · 0 affichages Google (28 j)
-- [ ] `ration-menagere-chien-guide-recettes` · 0 affichages Google (28 j)
-- [ ] `recette-biscuits-maison-beurre-cacahuete-chien` · 0 affichages Google (28 j)
-- [ ] `recette-croquettes-maison-chien` · 0 affichages Google (28 j)
-- [ ] `recette-friandises-maison-occuper-chien-rentree` · 0 affichages Google (28 j)
-- [ ] `recette-gateau-anniversaire-chien-maison` · 0 affichages Google (28 j)
+- [x] `quantite-eau-chien-par-jour` · 0 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Soif excessive « plus de 80 à 100 ml par kilo » → plus de 100 ml (TL;DR, FAQ et dossier soif excessive)
+  - FAQ « ces aliments contiennent 70 à 80 % d'eau » (pâtée et ration ménagère) → 65 à 80 % (comme le texte)
+  - À vérifier (non changé) : bi-nutrition « recommandée par le SNVEL » ; Labrador de 30 kg dans le texte, 35 kg dans le tableau
+- [x] `ration-menagere-chien-guide-recettes` · 0 affichages Google (28 j) · relu 2026-11-09 : 5 corrections
+  - Repas frais « formulés par vétérinaires », « équilibrés par des vétérinaires nutritionnistes, qualité humaine » → formule complète, ration calculée selon le profil du chien
+  - Repas frais 20 kg « 3-6 €/jour, 90 à 180 €/mois » → 2-4 €, 60 à 120 € (`brand-content.ts`, Dog Chef et Elmut 10-25 kg)
+  - Repas frais « décongeler et servir » → sortir du frigo (livrés réfrigérés)
+  - « formules hypoallergéniques » → menus canard ou poisson (Dog Chef)
+  - Remises : Dog Chef « −30 % » → sur la box d'essai ; Elmut −40 % sur la première commande ajouté (`partner-discounts.ts`)
+  - À vérifier (non changé) : étude « 1 726 recettes, 94 %, 52 % » (Dog Aging Project ?) ; recettes senior (≈ 420 kcal pour 550-650) et allergique 10 kg (≈ 300 kcal) sous le besoin sans le dire ; dinde « faible en phosphore »
+- [x] `recette-biscuits-maison-beurre-cacahuete-chien` · 0 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Tableau biscuits par jour (35 à 40 kcal pièce) au-dessus de 10 % des calories : 10 kg 1-2 → 1, 20 kg 2-3 → 2, 30 kg 3-4 → 3, 40 kg 4-5 → 3-4
+  - À vérifier (non changé) : chiot « dès 3 mois » ici, « dès 6 mois » pour le gâteau d'anniversaire
+- [x] `recette-croquettes-maison-chien` · 0 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Rapport Ca:P de la recette « près de 1:12 » → autour de 1:8 (≈ 180 mg de calcium pour 1,4 g de phosphore)
+- [x] `recette-friandises-maison-occuper-chien-rentree` · 0 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Tableau par gabarit très au-dessus de 10 % (tapis ≈ 150 kcal, Kong M ≈ 150 kcal) : 5 kg ½ tapis → 1 bâtonnet ou 1 c. à s. de pâte ; 10 kg 1 tapis ou ½ Kong → ⅓ de tapis ou 2 bâtonnets ; 20 kg tapis et ½ Kong → ½ tapis ou ½ Kong ; 30 kg tapis et Kong → ½ tapis et 2 bâtonnets ; 40 kg Kong M-L et 2 bâtonnets → 1 Kong M ou 1 tapis ; calories des recettes ajoutées
+  - 10 % pour 5 kg « environ 25 kcal » → 30 kcal
+- [x] `recette-gateau-anniversaire-chien-maison` · 0 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Parts au-dessus de 10 % (gâteau glacé ≈ 175 kcal/100 g) : 5 kg 30 → 15 g, 10 kg 50 → 30 g, 20 kg 80 → 50 g, 30 kg 100-120 → 70 g ; densité ajoutée
+  - Xylitol « mortel dès 0,1 g/kg » → hypoglycémie dès 0,1 g/kg, peut être mortel (nécrose du foie dès 0,5 g/kg)
 - [ ] `taurine-chien-carence-cardiomyopathie-dilatee` · 0 affichages Google (28 j)
