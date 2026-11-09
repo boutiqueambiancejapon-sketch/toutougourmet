@@ -368,3 +368,5 @@ Pages argent (2026-11-07) : /codes-promo/dog-chef inconnue de Google (indexation
 Contact (propriétaire, 2026-11-09) : chaque nouveau message envoie une notification ntfy et un e-mail au propriétaire (CONTACT_NOTIFY_EMAIL, sinon NEWSLETTER_TEST_EMAIL), réponse directe au visiteur (replyTo). Le message reste dans le tableau de bord, onglet Contenu.
 
 Mini-calculateur des articles « peut-il manger » (propriétaire, 2026-11-09, page amandes) : avec un tableau par gabarit, il affiche seulement la portion du tableau, plus le plafond de 10 % des calories, qui contredisait les limites quand le risque n'est pas calorique.
+
+Relecture de cohérence (propriétaire, 2026-11-09) : les tâches de nuit existantes ne touchent pas aux chiffres et laissaient passer les incohérences (avoine, amandes, pomme, poire). Nouvelle étape de nuit `deploy/coherence-prompt.md`, 6 articles par nuit, file `docs/coherence-queue.md` triée par affichages Google, corrections notées avant → après.
