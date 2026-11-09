@@ -876,12 +876,39 @@
   - À vérifier (non changé) : « plus de 1 900 chiens » (Glickman 2000, 217(10) porte sur 1 637 chiens ?) ; prévalence 0,8 % ; ration chasse 500-630 g alors que le texte annonce 2 à 3 fois l'entretien
 - [x] `chien-peut-manger-paprika` · 30 affichages Google (28 j) · relu 2026-11-09 : 1 correction
   - Signes « en général 3 à 5 jours après le repas » → 1 à 5 jours (chien-peut-manger-oignons, chien-mange-ail-oignon-urgence)
-- [ ] `avis-orijen` · 29 affichages Google (28 j)
-- [ ] `chien-peut-manger-tomate` · 29 affichages Google (28 j)
-- [ ] `chien-peut-manger-pasteque` · 26 affichages Google (28 j)
-- [ ] `croquettes-ou-patee` · 26 affichages Google (28 j)
-- [ ] `chien-peut-manger-beurre-de-cacahuete` · 25 affichages Google (28 j)
-- [ ] `nourriture-husky-siberien` · 24 affichages Google (28 j)
+- [x] `avis-orijen` · 29 affichages Google (28 j) · relu 2026-11-09 : 7 corrections
+  - Prix « 22-32 €/kg » → 8-16 €/kg (fichier Maxi Zoo : Original 11,4 kg 86,99 €, Small Breed 1,8 kg 27,99 €) ; « 2 à 3 fois plus que Royal Canin » → 1,5 à 2 fois ; chien de 30 kg « plus de 100 € par mois » → 80 € avec le sac de 11,4 kg ; repère « croquette à 15 €/kg » → 5 à 9 €/kg
+  - Protéines « 38 à 42 % sur matière sèche » (TL;DR, encadré) → sur l'étiquette (Original 38 % brut, 12 % d'humidité)
+  - Franklin « formulée par un vétérinaire nutritionniste » → recettes formulées avec une vétérinaire ; « 32-38 % de protéines » → 34 % pour la plupart des recettes (`data/brand-content.ts`)
+  - Dog Chef « moins cher qu'Orijen pour les petits et moyens chiens » → budget proche d'Orijen en petit sac pour un petit chien (45 à 60 € par mois)
+  - FAQ Acana « 14-20 €/kg » → 7-12 €/kg chez Maxi Zoo
+  - Hors file, mêmes prix Orijen et Acana alignés : avis-acana (« 30-40 % moins cher, 14-20 €/kg » → 10 à 25 %, 7-12 €/kg ; tableau), avis-ultra-premium-direct (22-32 € → 8-16 € deux fois, « 4 à 8 fois plus bas » → 2 à 4), avis-buddy-pet-foods (texte et tableau), meilleure-nourriture-bichon-maltais (Orijen Small « 55 à 65 €/kg » → 12 à 16 €/kg)
+  - Vérifiés : 3 860 kcal/kg (fiches revendeurs), FDA juin 2019 (Orijen 12 cas, Acana 67)
+- [x] `chien-peut-manger-tomate` · 29 affichages Google (28 j) · relu 2026-11-09 : rien à corriger
+  - Vérifiés : tableau croissant (10 → 100 g, 18 kcal/100 g, sous 10 %), tomatine du fruit vert (plusieurs centaines de mg/kg) cohérente avec « quelques tomates vertes » pour 10 kg
+  - À vérifier (non changé) : seuil de 5 mg de tomatine par kilo attribué à des « données toxicologiques vétérinaires françaises », aucune source chien trouvée (DL50 rat 900 mg/kg)
+- [x] `chien-peut-manger-pasteque` · 26 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - Tableau : dé de 2 cm « environ 15 g » → 8 g ; 2 dés 30 → 15 g ; 3 à 5 dés « 60 à 80 g » → 25 à 40 g
+  - Hors file, chien-peut-manger-melon : pastèque « moins de 10 kcal pour 30 g, moins de calories » → environ 12 kcal, apport proche (39 kcal/100 g sur le site, 34 pour le melon)
+  - À vérifier (non changé) : 39 kcal/100 g (USDA 30, tables françaises 30 à 39 selon la version) ; pépins « 1 à 1,5 cm de long »
+- [x] `croquettes-ou-patee` · 26 affichages Google (28 j) · relu 2026-11-09 : 4 corrections
+  - Eau d'un chien de 10 kg « 400 à 500 ml » → 500 à 700 ml (quantite-eau-chien-par-jour, 50 à 70 ml/kg)
+  - Pâtée « 75 à 85 % d'eau » (texte, FAQ) → 70 à 85 %, comme le tableau
+  - Orijen et Acana sortis du budget « 60 à 100 € par mois » pour un chien de 10 kg → dans l'enveloppe 30 à 60 € (8-16 €/kg, environ 4 kg par mois)
+  - Franklin « protéines animales (60 à 70 %) » → part de viande 65 à 70 % selon la recette
+  - À vérifier (non changé) : « en particulier les mâles » parmi les chiens qui boivent peu
+- [x] `chien-peut-manger-beurre-de-cacahuete` · 25 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - TL;DR petit chien « ½ à 1 c. à café » → ¼ à 1, comme le tableau 2-5 kg
+  - Légende tapis « 30 minutes au congélateur, 20 à 40 minutes » → 20 à 30 minutes, 15 à 30 minutes, comme le texte
+  - FAQ « doses conseillées ½ à 1 c. à café » → ¼ de c. à café à 1 c. à soupe selon le gabarit
+  - Vérifiés : 15 g = 87 kcal, sous 10 % pour chaque gabarit ; xylitol 0,1 et 0,5 g/kg, 1 g et 5 g pour 10 kg
+  - À vérifier (non changé) : « 2 à 4 g de xylitol par cuillère à soupe » ; atteinte du foie 24 à 72 h ici, 12 à 72 h dans chien-peut-manger-pasteque
+- [x] `nourriture-husky-siberien` · 24 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Elmut « formules au bœuf et au saumon » → menus bœuf et poisson (saumon, colin) (`data/brand-content.ts`)
+  - Dog Chef « portions congelées » → livrées au frais (`data/brand-content.ts`)
+  - « légumineuses (pois, lentilles, pomme de terre) » → pois, lentilles, fèves
+  - Vérifiés : 1 200-1 500 kcal à 360 kcal = 330 à 420 g ; Dogfy 43 % de protéines MS ; remises partenaires
+  - À vérifier (non changé) : « 30 à 40 % de calories en moins » sans source (1 000-1 200 kcal pour 20-25 kg est proche de l'entretien courant) ; Hinchcliff 2011, J Exp Biol
 - [ ] `alimentation-chiot-0-2-mois` · 23 affichages Google (28 j)
 - [ ] `recette-biscuits-potiron-chien` · 21 affichages Google (28 j)
 - [ ] `pica-chien-causes-solutions` · 19 affichages Google (28 j)
