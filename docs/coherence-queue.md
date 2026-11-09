@@ -1257,12 +1257,35 @@
   - Franklin « 70 % de viande fraîche contre 40-45 % », « formulation vétérinaire documentée » → jusqu'à 70 % contre 30 à 51 %, Dr Charlotte Dirat
   - « moins cher qu'Orijen ou Farmina » → Orijen
   - Pour le propriétaire : le bouton « Wolfsblut chez Maxi Zoo » (affiliateA et BrandCTA) mène à une page sans produit
-- [ ] `budget-alimentation-chien-par-mois` · 0 affichages Google (28 j)
-- [ ] `chien-mange-mort-aux-rats-urgence` · 0 affichages Google (28 j)
-- [ ] `chien-mange-noix-cajou` · 0 affichages Google (28 j)
-- [ ] `chien-mange-os-cuit-urgence` · 0 affichages Google (28 j)
-- [ ] `chien-mange-raisin-urgence` · 0 affichages Google (28 j)
-- [ ] `chien-peut-manger-agneau` · 0 affichages Google (28 j)
+- [x] `budget-alimentation-chien-par-mois` · 0 affichages Google (28 j) · relu 2026-11-09 : 10 corrections
+  - Croquettes 15 kg « 30-50 € standard, 50-80 € premium » (texte, tableau, FAQ BARF, verdict) → 20-35 € et 30-65 € (Franklin 28-35 €, Royal Canin 22-35 € ailleurs sur le site) ; tableau 5 kg et 30 kg+ alignés
+  - Prix au kilo « 6 € en grande surface, 10-15 € premium, 15-25 € super-premium » → 2 à 4 € en entrée de gamme, 5 à 9 € en premium en grand sac, jusqu'à 11 € en petit sac (Hill's, Pro Plan, Franklin, UPD) ; source Conseils-Animaux remplacée
+  - Coût par gramme de protéine « BARF = standard = 1,6 c, premium 3,4 c » → 1,6 c, 2,3 c, BARF environ 4 c (70 € par mois pour 9 à 13 kg de viande) ; exemple de la FAQ 12 €/kg → 7 €/kg
+  - Repas frais 15 kg « ~120 € », 30 kg+ « ~200+ € », FAQ « 120-200 €, l'option la plus chère » → ~90 €, 120-180 €, 60 à 120 € pour 10 à 25 kg (`data/brand-content.ts`)
+  - « abonnement mensuel engageant » → abonnement (Dog Chef, Franklin, Dogfy sans engagement)
+  - SMIC net « 9,22 €/h en 2026 », « environ 200 € » → environ 9,50 €/h (12,02 € brut au 1er janvier 2026, info.gouv.fr), un peu plus de 200 €
+  - Chiot « 700 à 1 000 €, 60 à 85 € par mois » (texte, FAQ) → 500 à 900 €, 40 à 75 €
+  - Senior « 40 à 70 € » → 25 à 55 € (10 à 20 % de moins que 30-65 €)
+  - FAQ BARF « comparable ou légèrement plus cher » → plus cher (85 € contre 30-65 €)
+  - Surcoût premium « 20 à 30 € » → 10 à 30 €
+  - À vérifier (non changé) : FACCO 97 %, 6,3 milliards, +8 % ; FACCO/Kantar 90 % ; « opérations en janvier et en septembre »
+- [x] `chien-mange-mort-aux-rats-urgence` · 0 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Chlorophacinone « 1 à 2 semaines de vitamine K » (tableau, FAQ) → 3 à 4 semaines (Purdue ADDL) ; tableau 1ère génération : coumafène seul
+  - Bromadiolone, l'un des plus vendus en France, ajouté aux 2ème génération (tableau, FAQ)
+  - À vérifier (non changé) : « 90 % des raticides », coûts, « les graisses accélèrent l'absorption »
+- [x] `chien-mange-noix-cajou` · 0 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - Paliers « 1 à 3 noix » puis « 5 à 10 » → 4 à 10
+  - FAQ « 24 h sans symptôme, tu peux être rassuré » (signes jusqu'à 48 h) → c'est bon signe
+- [x] `chien-mange-os-cuit-urgence` · 0 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
+  - FAQ porc « risque de perforation comparable » au poulet (tableau : poulet maximal, porc très élevé) → les éclats de poulet percent plus facilement
+  - FAQ transit « 24 à 48 heures » (texte : sortie de 48 à 72 h) → 24 à 72 heures
+- [x] `chien-mange-raisin-urgence` · 0 affichages Google (28 j) · relu 2026-11-09 : 1 correction
+  - FAQ un grain « 15 kg ou plus : surveille-le » (TL;DR et étapes : appelle même pour quelques grains) → appelle quand même ton vétérinaire
+- [x] `chien-peut-manger-agneau` · 0 affichages Google (28 j) · relu 2026-11-09 : 3 corrections
+  - Tableau « 20-40 g / 50-90 g / 100-160 g / 180-280 g en complément » (jusqu'à 5 fois les 10 %) → 5-8 g / 10-15 g / 25-35 g / 40-60 g, agneau maigre cuit à 190 kcal/100 g
+  - « Dog Chef, recette à l'agneau » (TL;DR, texte, encadré) → pas de recette agneau (zooplus, dogchef.com) ; recette au canard frais
+  - « Elmut, agneau compris » → Elmut : poulet, bœuf, dinde, porc, poisson (elmut.fr/produits-chien)
+  - À aligner : `chien-peut-manger-lapin` (gammes Dog Chef et Elmut « plutôt l'agneau ») et `nourriture-boxer` (Elmut « bœuf, poulet ou agneau »)
 - [ ] `chien-peut-manger-asperges` · 0 affichages Google (28 j)
 - [ ] `chien-peut-manger-avocat` · 0 affichages Google (28 j)
 - [ ] `chien-peut-manger-banane` · 0 affichages Google (28 j)
