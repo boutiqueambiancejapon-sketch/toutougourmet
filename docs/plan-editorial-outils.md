@@ -40,7 +40,7 @@ Pages mères déjà en ligne, à doter de la section des modèles au premier mod
 - [x] Atavik : avis sur la marque (atavik avis) → avis-atavik
 - [x] MultiFit : avis sur les croquettes et les pâtées (multifit avis) → avis-multifit
 - [x] Eukanuba : avis sur les croquettes (eukanuba avis, avis vétérinaire) → avis-eukanuba
-- [ ] Carnilove : avis sur les croquettes (carnilove avis chien)
+- [x] Carnilove : avis sur les croquettes (carnilove avis chien) → avis-carnilove
 - [ ] Nature's Variety : avis sur les croquettes (nature's variety chien avis)
 - [ ] Pedigree : bon ou mauvais, avis sur la composition (pedigree bon ou mauvais)
 - [ ] Ultima chien : avis sur les croquettes (ultima chien avis vétérinaire)
