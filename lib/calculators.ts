@@ -31,7 +31,9 @@ export const ACTIVITY_FACTORS: Record<ActivityLevel, number> = {
 
 /** Multiplicateur chiot / chaton (croissance) et réduction après stérilisation. */
 export const PUPPY_FACTOR = 1.8
-export const STERILIZED_FACTOR = 0.85
+// Stérilisé : −20 %, bas de la fourchette sourcée de 20 à 30 % (Kawauchi 2017, Jeusette 2004), comme les articles
+// (décision du propriétaire, 2026-11-10 ; avant : −15 %).
+export const STERILIZED_FACTOR = 0.8
 
 /** Densités énergétiques moyennes (kcal pour 100 g) utilisées pour convertir en grammes. */
 export const KIBBLE_KCAL_100G = 360
