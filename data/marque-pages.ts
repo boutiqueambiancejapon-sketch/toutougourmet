@@ -31,6 +31,7 @@ export const MARQUE_PAGES: MarquePage[] = [
   { nom: 'Japhy', href: avis('avis-japhy') },
   { nom: 'Just Russel', href: avis('avis-just-russel') },
   { nom: 'MultiFit', href: avis('avis-multifit') },
+  { nom: "Nature's Variety", href: avis('avis-natures-variety') },
   { nom: 'Orijen', href: avis('avis-orijen') },
   { nom: 'Orlando (Lidl)', href: avis('avis-croquettes-orlando-lidl'), noms: ['Orlando'] },
   { nom: 'Premiere', href: avis('avis-premiere') },

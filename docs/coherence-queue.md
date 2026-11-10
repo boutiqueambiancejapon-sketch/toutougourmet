@@ -1679,3 +1679,4 @@
   - Adulte grande taille poulet « seule recette qui commence par le poulet frais » → comme les autres grande taille au poulet (Chiot grande race, Junior L/XL, Mature grande taille)
   - Vérifié : Berger Allemand 24 % de volailles séchées (page Maxi Zoo), hexamétaphosphate 0,35 à 0,38 %, remises Franklin et Dog Chef
 - [ ] `avis-carnilove` · nouvel article 2026-11-10
+- [ ] `avis-natures-variety` · nouvel article 2026-11-10
