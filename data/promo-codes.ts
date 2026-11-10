@@ -137,7 +137,7 @@ export const PROMO_PAGES: PromoPage[] = [
     conditions: [
       'La remise porte sur la première commande.',
       'Livraison en colis réfrigéré Chronofresh.',
-      'Elmut fait aussi des recettes pour chat (poulet, bœuf, dinde).',
+      'Elmut fait aussi des recettes pour chat (poulet, bœuf, dinde, porc, poisson).',
     ],
     fit: "Elmut cuit ses repas sous vide à 90 °C, sans conservateur ni colorant artificiel, avec des ingrédients de qualité humaine. Notre fiche le conseille pour un chien senior ou en surpoids. Compte environ 55 à 75 € par mois pour un chien de moins de 10 kg.",
     links: [

@@ -573,7 +573,7 @@ export const BREEDS: Breed[] = [
     watch: 'Prise de poids',
     health: [
       { title: 'Luxation primaire du cristallin', text: '27 % de porteurs en Europe. Les oméga-3 EPA/DHA soutiennent la santé oculaire.' },
-      { title: 'Luxation de la rotule', text: 'Glucosamine (300 à 600 mg/jour pour 6 à 8 kg) dès 4-5 ans. Chaque kilo en trop équivaut à 3 à 4 kg de surcharge sur ses articulations.' },
+      { title: 'Luxation de la rotule', text: 'Glucosamine (120 à 240 mg/jour pour 6 à 8 kg) dès 4-5 ans. Chaque kilo en trop charge un peu plus ses genoux.' },
       { title: 'Surpoids', text: "Il progresse discrètement après 5 ans : appétit élevé, friandises qui s'accumulent, activité qui baisse." },
     ],
     foodNote: "Sur un chien de 6 kg, 30 g de friandises industrielles font près de 25 % de l'apport du jour. Pour 7 kg, 35 à 40 kcal de friandises au maximum.",

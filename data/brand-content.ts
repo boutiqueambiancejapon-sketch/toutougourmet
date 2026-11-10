@@ -34,7 +34,7 @@ export const brandFaqs: Record<string, BrandFaq[]> = {
     { q: 'Elmut convient-il aux chiens seniors ou en surpoids ?', a: "Le site d'Elmut dit suivre les préconisations FEDIAF pour les chiens adultes et seniors, et la ration est calculée sur le profil du chien. Les recettes affichent de 26 à 29 % de matières grasses sur matière sèche : pour un chien en surpoids ou malade, décide avec ton vétérinaire." },
     { q: 'Que faire des repas Elmut pendant les vacances ?', a: "Deux solutions. Tu congèles des repas à l'avance (jusqu'à six mois, selon le site d'Elmut) et tu pars avec une glacière. Ou tu suspends l'abonnement depuis ton espace client avant le départ, sans pénalité ni délai minimum." },
     { q: 'Comment conserver les repas Elmut ?', a: "Au réfrigérateur en permanence, jusqu'à la date indiquée sur l'étiquette, puis 5 jours après ouverture du boudin. Au congélateur : jusqu'à six mois, selon le site d'Elmut. Chaque livraison arrive réfrigérée par Chronofresh. Prévois environ deux étagères de frigo pour une semaine, selon la taille du chien." },
-    { q: 'Elmut est-il disponible pour les chats ?', a: "Oui, Elmut propose 3 recettes pour chats (poulet, bœuf, dinde) avec jusqu'à 90 % de viande et moins de 3 % de glucides." },
+    { q: 'Elmut est-il disponible pour les chats ?', a: "Oui, Elmut propose 5 recettes pour chats (poulet, bœuf, dinde, porc, poisson), toutes sans céréales. La recette au poulet contient 92 % de poulet et presque pas de glucides." },
   ],
   'dog-chef': [
     { q: 'Dog Chef est-il une bonne marque ?', a: "D'après sa composition, oui : ses 11 recettes obtiennent de 85 à 95 sur 100 au barème du scanner, avec une viande nommée en tête de liste. Son prix reste élevé, et la box d'essai sert à vérifier que ton chien aime les repas." },
@@ -120,7 +120,7 @@ export const brandDescriptions: Record<string, string[]> = {
   ],
   'dog-chef': [
     "Dog Chef a été fondée en 2017 en Belgique. La marque cuisine ses repas dans son propre atelier à Huldenberg, avec plus de 100 employés, et livre la France, la Belgique et le Luxembourg. Elle a été élue Produit de l'Année 2026 et la livraison est comprise dans le prix.",
-    "Un questionnaire de cinq minutes (race, âge, poids, activité, santé, stérilisation) sert à calculer la ration. Les portions sont recalculées quand le poids du chien change. Trois formules existent : 100 % frais, mixte (frais et croquettes) ou 100 % croquettes. La formule mixte est souvent conseillée pour commencer.",
+    "Un questionnaire de cinq minutes (race, âge, poids, activité, santé, stérilisation) sert à calculer la ration. Les portions sont recalculées quand le poids du chien change. Trois formules existent : 100 % frais, mixte (frais et croquettes) ou 100 % croquettes. La formule mixte est souvent conseillée pour commencer. Les croquettes existent en quatre recettes (poulet, canard, dinde, bœuf) : seule celle au canard est sans céréales, les trois autres sont annoncées sans gluten.",
     "Les Boosters complètent la ration selon le profil : Puppy Booster (calcium et phosphore pour la croissance), Senior Booster (glucosamine et curcuma), Mobility Booster (glucosamine, chondroïtine et églantier) et Pro Transit Booster (pré et probiotiques).",
     "La transition conseillée dure 7 jours. Les repas se gardent 7 jours au réfrigérateur et jusqu'à 10 mois au congélateur, selon le site de Dog Chef. La box d'essai couvre deux semaines.",
   ],
