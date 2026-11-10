@@ -29,6 +29,8 @@ git clean -fdq
 npm ci --no-audit --no-fund --silent
 
 BEFORE=$(git rev-parse HEAD)
+echo "--- fiches ouvertes à Google (10 par jour, scripts/indexer-quotidien.ts)"
+sudo -n -u toutou bash -c 'cd /srv/toutou/current && set -a && . /srv/toutou/shared/.env && set +a && node_modules/.bin/tsx scripts/indexer-quotidien.ts --appliquer' || echo "indexation quotidienne : échec"
 echo "--- réécritures"
 claude -p "$(cat deploy/seo-rewrite-prompt.md)" --permission-mode auto --output-format text || echo "claude (réécritures) a terminé avec une erreur"
 git clean -fdq -e node_modules
