@@ -374,3 +374,5 @@ Relecture de cohérence (propriétaire, 2026-11-09) : les tâches de nuit exista
 Relecture du 2026-11-09 : 368 articles relus en une journée, 972 corrections ; 183 points signalés sans correction faute de source (liste dans docs/coherence-queue.md, lignes « À vérifier »). aggregateRating retiré des 3 avis qui en gardaient (règle « jamais d'aggregateRating »). Chocolat : seuils recalculés (5 à 7 carrés pour le cœur à 5 kg, une trentaine pour 60 kg, carré de 5 g).
 
 Points à sourcer (propriétaire, 2026-11-09) : les 183 chiffres « À vérifier » sont triés par importance (stérilisation, sécurité et doses, nutrition, santé, prix et marques) dans docs/points-a-sourcer.md ; traités par lots de 8 (deploy/sources-prompt.md) : source sérieuse, même valeur sur tout le site, sinon formulation adoucie sans chiffre.
+
+Calculateur de ration (propriétaire, 2026-11-10) : stérilisé × 0,8 (avant × 0,85), aligné sur les articles (« retire 20 % »). Description du Beagle alignée sur son texte (accord du propriétaire).
