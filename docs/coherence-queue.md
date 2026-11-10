@@ -1669,5 +1669,12 @@
 - [x] `recette-gateau-anniversaire-chien-maison` · 0 affichages Google (28 j) · relu 2026-11-09 : 2 corrections
   - Parts au-dessus de 10 % (gâteau glacé ≈ 175 kcal/100 g) : 5 kg 30 → 15 g, 10 kg 50 → 30 g, 20 kg 80 → 50 g, 30 kg 100-120 → 70 g ; densité ajoutée
   - Xylitol « mortel dès 0,1 g/kg » → hypoglycémie dès 0,1 g/kg, peut être mortel (nécrose du foie dès 0,5 g/kg)
-- [ ] `taurine-chien-carence-cardiomyopathie-dilatee` · 0 affichages Google (28 j)
-- [ ] `avis-eukanuba` · nouvel article 2026-11-09
+- [x] `taurine-chien-carence-cardiomyopathie-dilatee` · 0 affichages Google (28 j) · relu 2026-11-10 : 2 corrections
+  - « En 2023, la FDA précise… pas de déficit systématique » → dès 2019, taurine moyenne identique avec ou sans céréales ; mises à jour arrêtées fin 2022 sans lien prouvé (page FDA, 23/12/2022) ; Sources 2018-2023 → 2018-2022 ; aligné dans `nourriture-dogue-allemand` (« alerte 2019, close en 2023 » → 2018, arrêtée fin 2022)
+  - Étude de 18 mois « sans différence significative à l'échographie » → quelques mesures ont varié selon l'aliment, tous les chiens restés normaux (PMC 12408985)
+  - À vérifier (non changé) : « plus de 1 100 cas en 2019-2020 » (FDA : 515 chiens à avril 2019, 1 382 rapports à novembre 2022) ; cuisson « −50 à 75 % de taurine » ; cœur de bœuf 1 200-1 500 mg/kg
+- [x] `avis-eukanuba` · nouvel article 2026-11-09 · relu 2026-11-10 : 3 corrections
+  - « Les douze recettes lues… onze dépassent 65/100 » (l'encadré de la page en affiche 22) → toutes sauf la Weight Control dépassent 65/100
+  - TL;DR « de 67 à 86/100 selon la recette » (contredit la Weight Control à 49) → pour toutes les recettes sauf une
+  - Adulte grande taille poulet « seule recette qui commence par le poulet frais » → comme les autres grande taille au poulet (Chiot grande race, Junior L/XL, Mature grande taille)
+  - Vérifié : Berger Allemand 24 % de volailles séchées (page Maxi Zoo), hexamétaphosphate 0,35 à 0,38 %, remises Franklin et Dog Chef
