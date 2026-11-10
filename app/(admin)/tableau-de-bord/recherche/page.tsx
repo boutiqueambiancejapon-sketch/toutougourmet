@@ -28,9 +28,10 @@ function Tuile({ valeur, libelle }: { valeur: string; libelle: string }) {
   )
 }
 
-export default async function RecherchePage() {
+export default async function RecherchePage({ searchParams }: { searchParams: Promise<{ q?: string | string[] }> }) {
   if (!(await dashboardAllowed())) notFound()
-  const r = await getRecherche()
+  const sp = await searchParams
+  const r = await getRecherche(typeof sp.q === 'string' ? sp.q.slice(0, 100) : '')
   return (
     <DashboardShell
       period={parsePeriod(undefined).key}
@@ -40,12 +41,21 @@ export default async function RecherchePage() {
       notice={r.ok ? null : 'La Search Console n’a pas répondu. Les chiffres reviendront au prochain chargement.'}
     >
       <p className="m-0 mt-3 text-sm"><Link href="/tableau-de-bord/contenu" className="text-ink-2 underline underline-offset-2">Retour à l’onglet Contenu</Link></p>
+      <form method="get" role="search" className="mt-4 flex gap-2">
+        <label className="flex grow">
+          <span className="sr-only">Mot-clé ou adresse</span>
+          <input name="q" defaultValue={r.q} placeholder="Mot-clé ou bout d’adresse : chocolat, /codes-promo…" className="min-h-11 w-full rounded-box border border-line bg-paper px-3 text-base text-ink" />
+        </label>
+        <button type="submit" className="min-h-11 shrink-0 whitespace-nowrap rounded-control bg-ink px-4 font-semibold text-cream">Chercher</button>
+        {r.q ? <Link href="/tableau-de-bord/recherche" className="inline-flex min-h-11 items-center whitespace-nowrap text-sm text-ink-2 underline underline-offset-2">Effacer</Link> : null}
+      </form>
       <dl className="m-0 mt-4 grid grid-cols-3 gap-3">
         <Tuile valeur={nf.format(r.clics)} libelle="Clics depuis Google" />
         <Tuile valeur={nf.format(r.impressions)} libelle="Affichages dans Google" />
         <Tuile valeur={r.position === null ? '?' : r.position.toFixed(1).replace('.', ',')} libelle="Position moyenne" />
       </dl>
       <div className="mt-4 flex flex-col gap-4">
+        {r.q ? <TableGsc titre={`Recherches Google qui contiennent « ${r.q} »`} intro="Chaque recherche avec la page du site que Google montre, triées par affichages (100 au plus). Les tableaux suivants sont filtrés aussi." lignes={r.resultats} /> : null}
         <TableGsc titre="Presque en première page" intro="Position 8 à 20, déjà vues au moins 20 fois : un article renforcé ou mieux relié peut les faire monter. Les meilleures occasions." lignes={r.presque} />
         <TableGsc titre="Bien placées mais peu cliquées" intro="En première page, plus de 50 affichages, moins de 2 % de clics : le titre ou la description donne peu envie." lignes={r.peuCliquees} />
         <TableGsc titre="Recherches qui amènent le plus de clics" lignes={r.requetes} />

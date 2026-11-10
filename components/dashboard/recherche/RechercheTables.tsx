@@ -25,9 +25,10 @@ export function TableGsc({ titre, intro, lignes, page = false }: { titre: string
             </thead>
             <tbody>
               {lignes.map((l) => (
-                <tr key={l.keys[0]} className="border-t border-line">
+                <tr key={l.keys.join('|')} className="border-t border-line">
                   <td className="px-1 py-1.5 text-ink [overflow-wrap:anywhere]">
                     {page ? <a href={l.keys[0]} className="text-ink underline underline-offset-2">{court(l.keys[0])}</a> : l.keys[0]}
+                    {l.keys[1] ? <a href={l.keys[1]} className="block text-xs text-ink-2 underline underline-offset-2">{court(l.keys[1])}</a> : null}
                   </td>
                   <td className="px-1 py-1.5 text-right tabular-nums text-ink">{nf.format(l.clicks)}</td>
                   <td className="px-1 py-1.5 text-right tabular-nums text-ink">{nf.format(l.impressions)}</td>

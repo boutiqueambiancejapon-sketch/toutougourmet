@@ -378,3 +378,5 @@ Points à sourcer (propriétaire, 2026-11-09) : les 183 chiffres « À vérifier
 Calculateur de ration (propriétaire, 2026-11-10) : stérilisé × 0,8 (avant × 0,85), aligné sur les articles (« retire 20 % »). Description du Beagle alignée sur son texte (accord du propriétaire).
 
 Indexation quotidienne (propriétaire, 2026-11-10) : 10 fiches par jour ouvertes à Google par la tâche de nuit (scripts/indexer-quotidien.ts) : marque avec page mère, fiabilité haute, une par recette, mieux notées d'abord, 3 au plus par marque et par jour, jamais une fiche déjà connue (une fiche désactivée reste fermée). 290 candidates au 10 novembre. Noms : « boîtes de » et « humide pour chien » retirés.
+
+Mélange de l'indexation quotidienne (propriétaire, 2026-11-10) : 6 bien notées + 4 mal notées (sous 55), qui proposent des alternatives partenaires ; adresses courtes tirées du nom nettoyé. Vue Recherche Google : champ de recherche par mot-clé ou adresse (paires requête × page).
