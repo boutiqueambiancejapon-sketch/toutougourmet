@@ -1693,3 +1693,4 @@
   - Tableau Med/Maxi poulet et saumon No Grain 84 → 84 à 85/100, Healthy Grains poulet 77 → 77 à 78/100 (sac de 3 kg)
   - Vérifié : 55,99 € les 7 kg (8 €/kg), 1,5 kg à 10,79-11,33 €/kg, pas de taurine ni de calcium déclarés, pâtées 66 % de viande et 28,9 % de bouillon, renommage True Instinct (annoncé fin 2020, lancé en mars 2021)
 - [ ] `avis-pedigree` · nouvel article 2026-11-11
+- [ ] `chien-peut-manger-merguez` · nouvel article 2026-11-11

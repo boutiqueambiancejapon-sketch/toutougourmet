@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-chien-peut-manger-merguez',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, attentive red and white Pembroke Welsh corgi sitting on a wooden garden terrace beside a small plate holding three thin, dark red grilled merguez sausages. The dog looks at the plate without eating. No packaging, no label, no logo, no writing, no fire, no flames.',
+    composition:
+      'Full frame, subject edge to edge, dog and plate filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog, the plate or the sausages. Exactly 7 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-11 pour l'article chien-peut-manger-merguez.",
+  },
+  {
     id: 'art-avis-pedigree',
     group: 'articles',
     ratio: '3:2',
