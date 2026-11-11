@@ -1678,5 +1678,17 @@
   - TL;DR « de 67 à 86/100 selon la recette » (contredit la Weight Control à 49) → pour toutes les recettes sauf une
   - Adulte grande taille poulet « seule recette qui commence par le poulet frais » → comme les autres grande taille au poulet (Chiot grande race, Junior L/XL, Mature grande taille)
   - Vérifié : Berger Allemand 24 % de volailles séchées (page Maxi Zoo), hexamétaphosphate 0,35 à 0,38 %, remises Franklin et Dog Chef
-- [ ] `avis-carnilove` · nouvel article 2026-11-10
-- [ ] `avis-natures-variety` · nouvel article 2026-11-10
+- [x] `avis-carnilove` · nouvel article 2026-11-10 · relu 2026-11-11 : 6 corrections
+  - « Les compositions lues ne listent pas de taurine ajoutée » → toutes les croquettes ajoutent 1 500 mg de taurine par kilo (additifs des fiches carnilove.com)
+  - TL;DR « pois jaunes deuxièmes dans toutes les recettes Active » et « en deuxième position » → deuxièmes ou troisièmes (agneau, chiot et junior : troisièmes)
+  - « Du poisson ou de la viande fraîche, puis des pois, puis des protéines séchées » → l'ordre varie selon la recette
+  - True Fresh contre Active « l'Active, plus grasse » (16 % des deux côtés) → plus riche en protéines ; énergie de l'Active ajoutée (3 792 kcal contre 3 681)
+  - Plantes « à 0,1 % chacune » → argousier à 0,2 %
+  - Vérifié : prix 92,99 € / 12 kg et −15 % en abonnement, notes Maxi Zoo (pâtées 89 à 91, chiot 59, Jerky 80 à 84, Soft Snack 45 à 66), 75 % de protéines animales, graisse de poulet de la Crunchy autruche, ail des ours de la Soft Snack sardines, remises Franklin et Dog Chef
+- [x] `avis-natures-variety` · nouvel article 2026-11-10 · relu 2026-11-11 : 5 corrections
+  - TL;DR « No Grain 83 à 85, Healthy Grains 76 à 78 » (l'encadré de la page affiche aussi les chiot Mini) → 82 à 85 et 76 à 80
+  - « Chaque recette : viande fraîche puis protéine animale déshydratée » (TL;DR et texte) → le plus souvent, sauf les recettes au poisson blanc (pois ou avoine en deuxième)
+  - Pois « arrivent troisièmes » → deuxièmes ou troisièmes (Healthy Grains Med/Maxi poissons blancs : deuxièmes)
+  - Chiot « une recette par gamme » → deux par gamme, Mini (82 et 80/100) et Med/Maxi
+  - Tableau Med/Maxi poulet et saumon No Grain 84 → 84 à 85/100, Healthy Grains poulet 77 → 77 à 78/100 (sac de 3 kg)
+  - Vérifié : 55,99 € les 7 kg (8 €/kg), 1,5 kg à 10,79-11,33 €/kg, pas de taurine ni de calcium déclarés, pâtées 66 % de viande et 28,9 % de bouillon, renommage True Instinct (annoncé fin 2020, lancé en mars 2021)
