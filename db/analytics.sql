@@ -256,3 +256,6 @@ CREATE TABLE IF NOT EXISTS analytics.assistant_cgu (user_id text PRIMARY KEY REF
 
 -- Code-barres et nom lu pour les scans sans fiche (introuvables), visibles dans « Derniers scans » (2026-11-08).
 ALTER TABLE analytics.scanner_events ADD COLUMN IF NOT EXISTS ean text, ADD COLUMN IF NOT EXISTS nom text;
+
+-- Search Console par page et par jour (2026-11-11) : nouvelles pages et leur évolution dans /tableau-de-bord/recherche.
+CREATE TABLE IF NOT EXISTS analytics.gsc_pages_daily (day date NOT NULL, page text NOT NULL, clicks integer NOT NULL, impressions integer NOT NULL, position real NOT NULL, PRIMARY KEY (day, page));

@@ -59,7 +59,7 @@ export interface LigneGsc {
 }
 
 /** Requêtes ou pages sur une période (dates AAAA-MM-JJ), triées par impressions. */
-export async function analyseGsc(site: string, debut: string, fin: string, dimensions: ('query' | 'page')[], rowLimit = 250): Promise<LigneGsc[]> {
-  const r = await gsc<{ rows?: LigneGsc[] }>(`sites/${encodeURIComponent(site)}/searchAnalytics/query`, { startDate: debut, endDate: fin, dimensions, rowLimit, dataState: 'all' })
+export async function analyseGsc(site: string, debut: string, fin: string, dimensions: ('query' | 'page' | 'date')[], rowLimit = 250, startRow = 0): Promise<LigneGsc[]> {
+  const r = await gsc<{ rows?: LigneGsc[] }>(`sites/${encodeURIComponent(site)}/searchAnalytics/query`, { startDate: debut, endDate: fin, dimensions, rowLimit, startRow, dataState: 'all' })
   return r.rows ?? []
 }

@@ -6,6 +6,8 @@ import { parsePeriod } from '@/lib/dashboard/period'
 import { getRecherche } from '@/lib/server/dashboard-recherche'
 import { DashboardShell } from '@/components/dashboard/DashboardShell'
 import { TableGsc } from '@/components/dashboard/recherche/RechercheTables'
+import { NouvellesPages } from '@/components/dashboard/recherche/NouvellesPages'
+import { getNouvellesPages } from '@/lib/server/dashboard-nouvelles-pages'
 
 // @cdc tableau de bord — Recherche Google (Search Console), sous-page de l'onglet Contenu. Jamais indexée.
 
@@ -31,7 +33,7 @@ function Tuile({ valeur, libelle }: { valeur: string; libelle: string }) {
 export default async function RecherchePage({ searchParams }: { searchParams: Promise<{ q?: string | string[] }> }) {
   if (!(await dashboardAllowed())) notFound()
   const sp = await searchParams
-  const r = await getRecherche(typeof sp.q === 'string' ? sp.q.slice(0, 100) : '')
+  const [r, nouvelles] = await Promise.all([getRecherche(typeof sp.q === 'string' ? sp.q.slice(0, 100) : ''), getNouvellesPages()])
   return (
     <DashboardShell
       period={parsePeriod(undefined).key}
@@ -56,6 +58,7 @@ export default async function RecherchePage({ searchParams }: { searchParams: Pr
       </dl>
       <div className="mt-4 flex flex-col gap-4">
         {r.q ? <TableGsc titre={`Recherches Google qui contiennent « ${r.q} »`} intro="Chaque recherche avec la page du site que Google montre, triées par affichages (100 au plus). Les tableaux suivants sont filtrés aussi." lignes={r.resultats} /> : null}
+        {r.q ? null : <NouvellesPages pages={nouvelles.pages} />}
         <TableGsc titre="Presque en première page" intro="Position 8 à 20, déjà vues au moins 20 fois : un article renforcé ou mieux relié peut les faire monter. Les meilleures occasions." lignes={r.presque} />
         <TableGsc titre="Bien placées mais peu cliquées" intro="En première page, plus de 50 affichages, moins de 2 % de clics : le titre ou la description donne peu envie." lignes={r.peuCliquees} />
         <TableGsc titre="Recherches qui amènent le plus de clics" lignes={r.requetes} />
