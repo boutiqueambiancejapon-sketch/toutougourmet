@@ -383,3 +383,5 @@ Mélange de l'indexation quotidienne (propriétaire, 2026-11-10) : 6 bien notée
 
 ## 2026-11-11 — DNS chez Cloudflare
 Compte Vercel bloqué (« fair use », 18 projets du propriétaire) : plus aucune création d'enregistrement possible. Le propriétaire a déplacé le DNS vers Cloudflare (offre gratuite, robots d'IA non bloqués, robots.txt non géré par Cloudflare), Vercel reste registrar. Tous les enregistrements en « DNS only » : Caddy garde ses certificats Let's Encrypt, DKIM Brevo vérifiable. Vérifié via les résolveurs publics : site, redirection racine, tableau de bord, MX ImprovMX, SPF, DKIM, DMARC, code OpenAI.
+
+Outil DNS (propriétaire, 2026-11-11) : clé Cloudflare limitée au DNS de toutou-gourmet.com dans /srv/toutou/shared/.env (CLOUDFLARE_API_TOKEN, déposée par deploy/cle-cloudflare.sh qui la teste). deploy/dns.sh (lister, ajouter, modifier, supprimer) : essai à blanc par défaut, --appliquer pour écrire, sauvegarde de la zone avant chaque changement (/srv/toutou/shared/dns-backups/), « DNS only » par défaut. Autorisation dans Claude Code : règle `Bash(deploy/dns.sh:*)`.
