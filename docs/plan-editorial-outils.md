@@ -42,7 +42,7 @@ Pages mères déjà en ligne, à doter de la section des modèles au premier mod
 - [x] Eukanuba : avis sur les croquettes (eukanuba avis, avis vétérinaire) → avis-eukanuba
 - [x] Carnilove : avis sur les croquettes (carnilove avis chien) → avis-carnilove
 - [x] Nature's Variety : avis sur les croquettes (nature's variety chien avis) → avis-natures-variety
-- [ ] Pedigree : bon ou mauvais, avis sur la composition (pedigree bon ou mauvais)
+- [x] Pedigree : bon ou mauvais, avis sur la composition (pedigree bon ou mauvais) → avis-pedigree
 - [ ] Ultima chien : avis sur les croquettes (ultima chien avis vétérinaire)
 - [ ] Advance chien : avis sur les croquettes (croquettes advance chien avis)
 - [ ] Pâtée Cesar : avis pour un chien (pâtée cesar chien avis)

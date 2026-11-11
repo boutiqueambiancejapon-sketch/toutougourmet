@@ -159,6 +159,7 @@ const BREED_SLOT_BY_SLUG: Record<string, string> = {
  */
 const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'avis-natures-variety': 'art-avis-natures-variety',
+  'avis-pedigree': 'art-avis-pedigree',
   'avis-carnilove': 'art-avis-carnilove',
   'avis-eukanuba': 'art-avis-eukanuba',
   'avis-multifit': 'art-avis-multifit',

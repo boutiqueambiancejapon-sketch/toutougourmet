@@ -34,6 +34,7 @@ export const MARQUE_PAGES: MarquePage[] = [
   { nom: "Nature's Variety", href: avis('avis-natures-variety') },
   { nom: 'Orijen', href: avis('avis-orijen') },
   { nom: 'Orlando (Lidl)', href: avis('avis-croquettes-orlando-lidl'), noms: ['Orlando'] },
+  { nom: 'Pedigree', href: avis('avis-pedigree') },
   { nom: 'Premiere', href: avis('avis-premiere') },
   { nom: 'Purina Pro Plan', href: avis('avis-purina-pro-plan'), noms: ['Pro Plan', 'Purina'] },
   { nom: 'Real Nature', href: avis('avis-real-nature') },
