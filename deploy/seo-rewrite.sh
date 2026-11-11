@@ -29,6 +29,8 @@ git clean -fdq
 npm ci --no-audit --no-fund --silent
 
 BEFORE=$(git rev-parse HEAD)
+echo "--- Search Console par page et par jour (scripts/gsc-snapshot.ts)"
+sudo -n -u toutou bash -c 'cd /srv/toutou/current && set -a && . /srv/toutou/shared/.env && set +a && node_modules/.bin/tsx scripts/gsc-snapshot.ts' || echo "relevé Search Console : échec"
 echo "--- fiches ouvertes à Google (10 par jour, scripts/indexer-quotidien.ts)"
 sudo -n -u toutou bash -c 'cd /srv/toutou/current && set -a && . /srv/toutou/shared/.env && set +a && node_modules/.bin/tsx scripts/indexer-quotidien.ts --appliquer' || echo "indexation quotidienne : échec"
 echo "--- réécritures"
