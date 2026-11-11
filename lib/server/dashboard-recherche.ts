@@ -20,6 +20,8 @@ export interface RechercheData {
   /** Recherche du tableau de bord : paires requête × page qui contiennent le mot ou l'adresse tapés. */
   q: string
   resultats: LigneGsc[]
+  /** Recherches de 8 mots ou plus (souvent des assistants d'IA), avec la page montrée par Google. */
+  longues: LigneGsc[]
 }
 
 const jour = (d: Date) => d.toISOString().slice(0, 10)
@@ -36,7 +38,7 @@ export async function getRecherche(q = ''): Promise<RechercheData> {
     const [toutes, toutesPages, paires] = await Promise.all([
       analyseGsc(GSC_SITE, base.debut, base.fin, ['query'], 1000),
       analyseGsc(GSC_SITE, base.debut, base.fin, ['page'], 500),
-      cherche ? analyseGsc(GSC_SITE, base.debut, base.fin, ['query', 'page'], 5000) : Promise.resolve([]),
+      analyseGsc(GSC_SITE, base.debut, base.fin, ['query', 'page'], 5000),
     ])
     const requetes = toutes.filter(garde)
     const pages = toutesPages.filter(garde)
@@ -54,10 +56,11 @@ export async function getRecherche(q = ''): Promise<RechercheData> {
       peuCliquees: requetes.filter((r) => r.position <= 7.5 && r.impressions >= 50 && r.ctr < 0.02).sort((a, b) => b.impressions - a.impressions).slice(0, 15),
       pages: [...pages].sort((a, b) => b.clicks - a.clicks || b.impressions - a.impressions).slice(0, 20),
       q: q.trim(),
-      resultats: paires.filter(garde).sort((a, b) => b.impressions - a.impressions).slice(0, 100),
+      resultats: cherche ? paires.filter(garde).sort((a, b) => b.impressions - a.impressions).slice(0, 100) : [],
+      longues: paires.filter((l) => l.keys[0].split(/\s+/).length >= 8).filter(garde).sort((a, b) => b.impressions - a.impressions).slice(0, 40),
     }
   } catch (err) {
     console.error('[tableau-de-bord] search console', err instanceof Error ? err.message : err)
-    return { ok: false, ...base, clics: 0, impressions: 0, position: null, requetes: [], presque: [], peuCliquees: [], pages: [], q: q.trim(), resultats: [] }
+    return { ok: false, ...base, clics: 0, impressions: 0, position: null, requetes: [], presque: [], peuCliquees: [], pages: [], q: q.trim(), resultats: [], longues: [] }
   }
 }

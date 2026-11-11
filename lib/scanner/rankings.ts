@@ -17,6 +17,7 @@ export type SegmentSlug =
   | 'tous' | 'chiot' | 'adulte' | 'senior' | 'petit-chien' | 'chien-moyen' | 'grand-chien' | 'sterilise'
   | 'sans-cereales' | 'surpoids' | 'digestion-sensible' | 'peau-sensible' | 'articulations' | 'hypoallergeniques'
   | 'patees' | 'friandises' | 'friandises-a-macher' | 'friandises-petit-chien'
+  | 'patees-senior' | 'patees-chiot' | 'patees-petit-chien'
 
 export interface RankSegment {
   slug: SegmentSlug
@@ -45,6 +46,8 @@ const LARGE = /\b(maxi|large|giant|grande? (taille|race)|labrador|golden|berger 
 const STERILISED = /sterilis|neutered/
 const CHEW = /\b(dent|dental|dentaire|dentastix|oral|hygiene|mastic|a macher|machouiller|os|baton|bully|gosier|oreille|sabot|corne|bois de cerf)/
 const SMALL_TREAT = /\b(mini|small|petits? chiens?|petite (taille|race)|toy|xs)\b/
+const SENIOR_WET = /\b(senior|ageing|mature|age|7\+|8\+)\b/
+const wet = (re: RegExp) => (r: RankRecipe) => r.noun === 'patee' && re.test(fold(r.name))
 const treat = (re: RegExp) => (r: RankRecipe) => r.noun === 'friandise' && re.test(fold(r.name))
 const WEIGHT = /\b(light|weight|fit & trim|satiety)\b/
 
@@ -67,6 +70,9 @@ export const SEGMENTS: RankSegment[] = [
   { slug: 'hypoallergeniques', label: 'Allergies', audience: 'hypoallergéniques', path: '/chien/alimentation-quotidienne/croquettes-chien-allergique', title: '', h1: '', description: '', listTitle: 'Quelles croquettes hypoallergéniques ont la meilleure composition ?', match: named(/hypoallerg/) },
   { slug: 'patees', label: 'Pâtées', audience: 'de pâtée', path: '/chien/alimentation-quotidienne/meilleures-patees-chien', title: '', h1: '', description: '', listTitle: 'Quelles pâtées pour chien ont la meilleure composition ?', match: (r) => r.noun === 'patee' },
   { slug: 'friandises', label: 'Friandises', audience: 'de friandises', path: '/meilleures-friandises', title: 'Meilleures friandises pour chien : le classement', h1: 'Meilleures friandises pour chien : le classement par composition', description: 'Les friandises pour chien classées par note sur 100, selon leur barème propre, à partir des étiquettes lues chez Maxi Zoo.', listTitle: 'Quelles friandises pour chien ont la meilleure composition ?', match: (r) => r.noun === 'friandise' },
+  { slug: 'patees-senior', label: 'Senior', audience: 'de pâtée pour chien senior', path: '/meilleures-patees/senior', title: 'Meilleures pâtées pour chien senior : le classement', h1: 'Meilleures pâtées pour chien senior : le classement par composition', description: 'Les pâtées pour chien senior classées par note de composition sur 100, à partir des étiquettes lues chez Maxi Zoo, recette par recette.', listTitle: 'Quelles pâtées pour chien senior ont la meilleure composition ?', match: wet(SENIOR_WET) },
+  { slug: 'patees-chiot', label: 'Chiot', audience: 'de pâtée pour chiot', path: '/meilleures-patees/chiot', title: 'Meilleures pâtées pour chiot : le classement', h1: 'Meilleures pâtées pour chiot : le classement par composition', description: 'Les pâtées pour chiot classées par note de composition sur 100, à partir des étiquettes lues chez Maxi Zoo, recette par recette.', listTitle: 'Quelles pâtées pour chiot ont la meilleure composition ?', match: wet(PUPPY) },
+  { slug: 'patees-petit-chien', label: 'Petit chien', audience: 'de pâtée pour petit chien', path: '/meilleures-patees/petit-chien', title: 'Meilleures pâtées pour petit chien : le classement', h1: 'Meilleures pâtées pour petit chien : le classement par composition', description: 'Les pâtées pour petit chien classées par note de composition sur 100, à partir des étiquettes lues chez Maxi Zoo, recette par recette.', listTitle: 'Quelles pâtées pour petit chien ont la meilleure composition ?', match: wet(SMALL_TREAT) },
   { slug: 'friandises-a-macher', label: 'À mâcher et dentaires', audience: 'de friandises à mâcher', path: '/meilleures-friandises/a-macher', title: 'Meilleures friandises à mâcher et dentaires pour chien', h1: 'Meilleures friandises à mâcher et dentaires pour chien : le classement', description: 'Bâtonnets dentaires, os et friandises à mâcher pour chien classés par note sur 100, à partir des étiquettes lues chez Maxi Zoo.', listTitle: 'Quelles friandises à mâcher ont la meilleure composition ?', match: treat(CHEW) },
   { slug: 'friandises-petit-chien', label: 'Petit chien', audience: 'de friandises pour petit chien', path: '/meilleures-friandises/petit-chien', title: 'Meilleures friandises pour petit chien : le classement', h1: 'Meilleures friandises pour petit chien : le classement par composition', description: 'Les friandises pour petit chien classées par note sur 100, selon leur barème propre, à partir des étiquettes lues chez Maxi Zoo.', listTitle: 'Quelles friandises pour petit chien ont la meilleure composition ?', match: treat(SMALL_TREAT) },
 ]
@@ -75,6 +81,9 @@ export const segmentBySlug = (slug: string): RankSegment | undefined => SEGMENTS
 
 /** Pages qui ont leur propre adresse sous /meilleures-croquettes (les autres vivent dans un article). */
 export const PAGE_SEGMENTS = SEGMENTS.filter((s) => s.path.startsWith('/meilleures-croquettes/'))
+
+/** Sous-classements des pâtées, sous /meilleures-patees/… */
+export const WET_SEGMENTS = SEGMENTS.filter((s) => s.path.startsWith('/meilleures-patees/'))
 
 /** Sous-classements des friandises, sous /meilleures-friandises/… */
 export const TREAT_SEGMENTS = SEGMENTS.filter((s) => s.path.startsWith('/meilleures-friandises/'))

@@ -59,6 +59,7 @@ export default async function RecherchePage({ searchParams }: { searchParams: Pr
       <div className="mt-4 flex flex-col gap-4">
         {r.q ? <TableGsc titre={`Recherches Google qui contiennent « ${r.q} »`} intro="Chaque recherche avec la page du site que Google montre, triées par affichages (100 au plus). Les tableaux suivants sont filtrés aussi." lignes={r.resultats} /> : null}
         {r.q ? null : <NouvellesPages pages={nouvelles.pages} />}
+        <TableGsc titre="Questions longues (assistants d’IA)" intro="Recherches de 8 mots ou plus, souvent tapées par ChatGPT ou le mode IA de Google pour préparer une réponse : le profil exact du chien et la page que Google montre. Une page générale qui répond à une question précise est une idée d’article ou de section." lignes={r.longues} />
         <TableGsc titre="Presque en première page" intro="Position 8 à 20, déjà vues au moins 20 fois : un article renforcé ou mieux relié peut les faire monter. Les meilleures occasions." lignes={r.presque} />
         <TableGsc titre="Bien placées mais peu cliquées" intro="En première page, plus de 50 affichages, moins de 2 % de clics : le titre ou la description donne peu envie." lignes={r.peuCliquees} />
         <TableGsc titre="Recherches qui amènent le plus de clics" lignes={r.requetes} />

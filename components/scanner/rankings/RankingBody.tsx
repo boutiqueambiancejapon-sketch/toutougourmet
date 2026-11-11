@@ -15,8 +15,8 @@ const TYPES = new Set(['tous', 'patees', 'friandises'])
 function navSegments(segment: RankSegment): { s: RankSegment; label: string }[] {
   const types = SEGMENTS.filter((s) => TYPES.has(s.slug)).map((s) => ({ s, label: s.slug === 'tous' ? 'Croquettes' : s.label }))
   if (segment.slug.startsWith('friandises')) return [...types, ...SEGMENTS.filter((s) => s.slug.startsWith('friandises-')).map((s) => ({ s, label: s.label }))]
-  if (segment.slug === 'patees') return types
-  return SEGMENTS.filter((s) => !s.slug.startsWith('friandises-')).map((s) => ({ s, label: s.label }))
+  if (segment.slug.startsWith('patees')) return [...types, ...SEGMENTS.filter((s) => s.slug.startsWith('patees-')).map((s) => ({ s, label: s.label }))]
+  return SEGMENTS.filter((s) => !s.slug.startsWith('friandises-') && !s.slug.startsWith('patees-')).map((s) => ({ s, label: s.label }))
 }
 
 export const shownRecipes = (list: RankedRecipe[], count: number) => capByBrand(list, 3).slice(0, count)
