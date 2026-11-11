@@ -26,6 +26,8 @@ npm ci --no-audit --no-fund --silent
 
 # Questions posées à Milo sans article du site (60 jours, les plus fréquentes) : sujets pour l'article informatif.
 sudo -n -u postgres psql -d toutou -At -c "SELECT count(*) || '× ' || min(question) FROM analytics.assistant_questions WHERE kind = 'ia' AND created_at > now() - interval '60 days' GROUP BY lower(regexp_replace(question, '[^[:alnum:]]+', ' ', 'g')) ORDER BY count(*) DESC, max(created_at) DESC LIMIT 25" > "$LOGS/milo-sujets.txt" 2>/dev/null || : > "$LOGS/milo-sujets.txt"
+# Questions longues de la Search Console (assistants d'IA) : sujets d'articles ou de sections (2026-11-11).
+sudo -n -u toutou bash -c 'cd /srv/toutou/current && set -a && . /srv/toutou/shared/.env && set +a && node_modules/.bin/tsx scripts/gsc-longues.ts' > "$LOGS/gsc-longues.txt" 2>/dev/null || : > "$LOGS/gsc-longues.txt"
 BEFORE=$(git rev-parse HEAD)
 claude -p "Type d'article aujourd'hui : $TYPE.
 

@@ -22,7 +22,7 @@ export async function SegmentPage({ segment }: { segment: RankSegment }) {
   return (
     <div className="v2 mx-auto flex max-w-prose flex-col gap-6 px-4 pt-4 pb-16 md:px-8 md:pt-8">
       <RankingJsonLd name={segment.h1} path={segment.path} items={shown.map((r) => ({ href: MODEL_REVIEWS[r.key], brand: displayBrand(r.brand), product: displayName(r.name) }))} start={1} total={shown.length} />
-      <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Scanner', href: '/scanner' }, ...(segment.slug.startsWith('friandises-') ? [{ label: 'Friandises', href: '/meilleures-friandises' }] : []), { label: segment.label === 'Toutes' ? 'Classement des croquettes' : segment.label }]} />
+      <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Scanner', href: '/scanner' }, ...(segment.slug.startsWith('friandises-') ? [{ label: 'Friandises', href: '/meilleures-friandises' }] : segment.slug.startsWith('patees-') ? [{ label: 'Pâtées', href: '/chien/alimentation-quotidienne/meilleures-patees-chien' }] : []), { label: segment.label === 'Toutes' ? 'Classement des croquettes' : segment.label }]} />
       <h1 className="m-0 font-display text-[clamp(2rem,5vw,2.75rem)] font-black leading-[1.05] tracking-tight text-ink">{titleTypo(addYear(segment.h1, currentYear(), Infinity))}</h1>
       <RankingBody segment={segment} list={list} count={SHOWN} />
       {content ? <RankingArticle content={content} /> : null}
