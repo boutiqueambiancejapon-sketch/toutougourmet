@@ -42,6 +42,7 @@ Stack : Next.js 16.4.4 + React 19 + TypeScript strict + Tailwind v4 + MDX + Post
 Next.js : 16.4.4 — ne jamais changer sans PR dédiée
 Langue défaut : français à la racine (groupe `app/(fr)`), EN prévu sous `/en`
 Hébergement : VPS one.com (Caddy + systemd + PostgreSQL, voir `deploy/README.md`). Plus de Vercel depuis la bascule du 2026-11-02.
+Domaine : registrar Vercel, DNS chez Cloudflare depuis le 2026-11-11 (serveurs damon et joyce.ns.cloudflare.com), tous les enregistrements en « DNS only ». Le compte Vercel a été bloqué pour dépassement d'usage (offre Hobby) le même jour.
 Branche de prod : `v2` (`toutou-deploy.service`, `DEPLOY_BRANCH=v2`). L'ancienne branche `claude/toutou-gourmet-setup-3mRbP` n'est plus déployée.
 Plan : `tasks/todo.md` · décisions : `DECISIONS.md` · éditeur : Toutou Gourmet (Mathias Cetani), Merchtem, Belgique, BCE BE 0683.927.006, bonjour@toutou-gourmet.com
 Mode de travail : le code vit sur le VPS, Claude Code y tourne (Remote Control depuis l'iPhone ou VS Code en SSH), on construit et on déploie sur place, GitHub garde une copie publique. **Une seule source** : aucune session cloud ne pousse sur ce dépôt.

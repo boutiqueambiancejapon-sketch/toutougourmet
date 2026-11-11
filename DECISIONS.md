@@ -380,3 +380,6 @@ Calculateur de ration (propriétaire, 2026-11-10) : stérilisé × 0,8 (avant ×
 Indexation quotidienne (propriétaire, 2026-11-10) : 10 fiches par jour ouvertes à Google par la tâche de nuit (scripts/indexer-quotidien.ts) : marque avec page mère, fiabilité haute, une par recette, mieux notées d'abord, 3 au plus par marque et par jour, jamais une fiche déjà connue (une fiche désactivée reste fermée). 290 candidates au 10 novembre. Noms : « boîtes de » et « humide pour chien » retirés.
 
 Mélange de l'indexation quotidienne (propriétaire, 2026-11-10) : 6 bien notées + 4 mal notées (sous 55), qui proposent des alternatives partenaires ; adresses courtes tirées du nom nettoyé. Vue Recherche Google : champ de recherche par mot-clé ou adresse (paires requête × page).
+
+## 2026-11-11 — DNS chez Cloudflare
+Compte Vercel bloqué (« fair use », 18 projets du propriétaire) : plus aucune création d'enregistrement possible. Le propriétaire a déplacé le DNS vers Cloudflare (offre gratuite, robots d'IA non bloqués, robots.txt non géré par Cloudflare), Vercel reste registrar. Tous les enregistrements en « DNS only » : Caddy garde ses certificats Let's Encrypt, DKIM Brevo vérifiable. Vérifié via les résolveurs publics : site, redirection racine, tableau de bord, MX ImprovMX, SPF, DKIM, DMARC, code OpenAI.
