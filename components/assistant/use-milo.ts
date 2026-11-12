@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Gravite } from '@/lib/assistant/urgence'
 import { CGU_VERSION } from '@/data/conditions'
+import type { PrixMaxiZoo } from '@/lib/scanner/prix'
 import { track } from '@/lib/analytics'
 
 // @cdc assistant — fil de discussion avec Milo, partagé entre la page /assistant et la petite fenêtre des autres
@@ -16,7 +17,7 @@ export interface MiloReponse {
   gravite: Gravite
   depuisLeSite: boolean
   articles: { url: string; titre: string }[]
-  produits: { nom: string; url: string; chez: string; score: number | null; remise: string | null }[]
+  produits: { nom: string; url: string; chez: string; score: number | null; remise: string | null; prix?: PrixMaxiZoo | null }[]
 }
 export interface MiloMessage {
   q: string

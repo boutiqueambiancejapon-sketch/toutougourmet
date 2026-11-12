@@ -1,6 +1,6 @@
 import { cache } from 'react'
 import { and, eq, isNotNull, or, sql } from 'drizzle-orm'
-import { foodAnalysis } from '@/db/schema'
+import { foodAnalysis, foodPrice } from '@/db/schema'
 import { horsListes, NOM_CLASSEMENT, noteCourante } from '@/lib/scanner/baremes/fiche'
 import { buyLink, type BuyLink } from '@/lib/scanner/buy-link'
 import { isTherapeutic } from '@/lib/scanner/fiche-lists'
@@ -32,8 +32,9 @@ export const rankedRecipes = cache(async (): Promise<RankedRecipe[]> => {
   const d = getDb()
   if (!d) return []
   const rows = await d
-    .select({ slug: foodAnalysis.slug, brand: foodAnalysis.brand, product: foodAnalysis.product, score: foodAnalysis.score, image: foodAnalysis.imageUrl, buyUrl: foodAnalysis.buyUrl, extracted: foodAnalysis.extracted, details: foodAnalysis.details, updatedAt: foodAnalysis.updatedAt })
+    .select({ slug: foodAnalysis.slug, brand: foodAnalysis.brand, product: foodAnalysis.product, score: foodAnalysis.score, image: foodAnalysis.imageUrl, buyUrl: foodAnalysis.buyUrl, prix: foodPrice.prix, prixKg: foodPrice.prixKg, prixAncien: foodPrice.prixAncien, majLe: foodPrice.majLe, extracted: foodAnalysis.extracted, details: foodAnalysis.details, updatedAt: foodAnalysis.updatedAt })
     .from(foodAnalysis)
+    .leftJoin(foodPrice, eq(foodPrice.foodAnalysisId, foodAnalysis.id))
     .where(and(isNotNull(foodAnalysis.score), sql`NOT ${foodAnalysis.discarded}`, or(eq(foodAnalysis.source, 'maxizoo'), eq(foodAnalysis.reviewed, true))))
   const fiches = await fichesIndexees()
   const best = new Map<string, RankedRecipe>()
@@ -57,7 +58,7 @@ export const rankedRecipes = cache(async (): Promise<RankedRecipe[]> => {
       protein: label.constituants.proteines,
       score,
       image: r.image,
-      buy: buyLink(r),
+      buy: buyLink({ ...r, prix: r.prix === null ? null : { prix: r.prix, prixKg: r.prixKg, prixAncien: r.prixAncien, releve: r.majLe ? r.majLe.toISOString().slice(0, 10) : '' } }),
       updatedAt: r.updatedAt,
     })
   }

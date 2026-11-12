@@ -1,5 +1,5 @@
 import { sql } from 'drizzle-orm'
-import { boolean, check, index, integer, jsonb, primaryKey, smallint, text, timestamp, uuid } from 'drizzle-orm/pg-core'
+import { boolean, check, date, index, integer, jsonb, numeric, primaryKey, smallint, text, timestamp, uuid } from 'drizzle-orm/pg-core'
 import type { ExtractedLabel } from '@/lib/scanner/types'
 import type { ScoreResult } from '@/lib/scanner/score'
 import { app } from './app'
@@ -151,6 +151,35 @@ export const foodAnalysisHistory = app.table(
     recordedAt: ts('recorded_at').notNull().defaultNow(),
   },
   (t) => [index('food_analysis_history_fiche_idx').on(t.foodAnalysisId, t.recordedAt)],
+)
+
+/**
+ * Prix Maxi Zoo du jour (fichier Awin, import de nuit, décision du propriétaire du 2026-11-12) : prix, prix au kilo
+ * donné par Maxi Zoo, ancien prix quand le produit est en promotion. Affiché à côté de la note, jamais dans son calcul.
+ */
+export const foodPrice = app.table('food_price', {
+  foodAnalysisId: uuid('food_analysis_id')
+    .primaryKey()
+    .references(() => foodAnalysis.id, { onDelete: 'cascade' }),
+  prix: numeric('prix', { precision: 8, scale: 2, mode: 'number' }).notNull(),
+  prixKg: numeric('prix_kg', { precision: 8, scale: 2, mode: 'number' }),
+  prixAncien: numeric('prix_ancien', { precision: 8, scale: 2, mode: 'number' }),
+  majLe: ts('maj_le').notNull().defaultNow(),
+})
+
+/** Un relevé par fiche et par jour : plus bas prix récent, promotions passées. */
+export const foodPriceHistory = app.table(
+  'food_price_history',
+  {
+    foodAnalysisId: uuid('food_analysis_id')
+      .notNull()
+      .references(() => foodAnalysis.id, { onDelete: 'cascade' }),
+    jour: date('jour', { mode: 'string' }).notNull(),
+    prix: numeric('prix', { precision: 8, scale: 2, mode: 'number' }).notNull(),
+    prixKg: numeric('prix_kg', { precision: 8, scale: 2, mode: 'number' }),
+    prixAncien: numeric('prix_ancien', { precision: 8, scale: 2, mode: 'number' }),
+  },
+  (t) => [primaryKey({ columns: [t.foodAnalysisId, t.jour] })],
 )
 
 export const scanUsage = app.table(
