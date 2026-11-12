@@ -51,6 +51,8 @@ export function pageText(html: string): string {
     .replace(/<[^>]+>/g, ' ')
     .replace(/&nbsp;|&#160;/g, ' ')
     .replace(/&amp;/g, '&')
+    // Guillemets (« pommes "Red Delicious" » chez Acana) : décodés puis retirés, même sans le point-virgule final.
+    .replace(/&quot;?|&#34;|"/g, '')
     .replace(/&#39;|&apos;|&rsquo;/g, "'")
     .replace(/\s+/g, ' ')
 }
