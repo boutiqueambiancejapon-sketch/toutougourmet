@@ -29,7 +29,7 @@ const STATIC_LABELS: Record<string, string> = {
   '/chien/marque': 'Les marques',
   '/chien/marque/comparatif': 'Comparatif des marques',
   '/codes-promo': 'Codes promo pour chien',
-  '/promos-maxi-zoo': 'Promos Maxi Zoo du moment',
+  '/promo-croquettes-chien': 'Promo croquettes chien',
   '/codes-promo/dog-chef': 'Code promo Dog Chef',
   '/codes-promo/dogfy-diet': 'Code promo Dogfy Diet',
   '/codes-promo/elmut': 'Code promo Elmut',

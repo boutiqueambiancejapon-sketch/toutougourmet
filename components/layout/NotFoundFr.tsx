@@ -28,7 +28,7 @@ export async function NotFoundFr() {
         <p className="m-0 flex flex-wrap gap-x-4 gap-y-1 text-base">
           <Link href="/" className={LIEN}>Accueil</Link>
           <Link href="/chien" className={LIEN}>Tous les guides</Link>
-          <Link href="/promos-maxi-zoo" className={LIEN}>Promos Maxi Zoo</Link>
+          <Link href="/promo-croquettes-chien" className={LIEN}>Promo croquettes</Link>
         </p>
       </header>
 
