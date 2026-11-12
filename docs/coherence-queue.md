@@ -1699,3 +1699,4 @@
   - Labrador 30 kg « à peine un dixième » (11 %) → environ un dixième
   - Tableau merguez de dinde « aussi salée » (1,8 g contre 2,1 à 2,3 g) → presque aussi salée, comme la FAQ
   - Vérifié : 283 kcal et 925 mg de sodium (Ciqual), paquet Férial 330 g à 2,1 g de sel, seuil de sel 2 à 3 g/kg et ail 3 à 5 fois l'oignon (comme les autres articles), races exposées à la pancréatite
+- [ ] `avis-ultima` · nouvel article 2026-11-12
