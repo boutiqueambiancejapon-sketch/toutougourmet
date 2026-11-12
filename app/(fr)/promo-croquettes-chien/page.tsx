@@ -51,6 +51,12 @@ export default async function PromosPage() {
           {date ? `Prix relevés le ${new Date(`${date}T12:00:00Z`).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })}. ` : ''}
           Les prix peuvent changer chez Maxi Zoo. La note ne dépend que de l&apos;étiquette, jamais de la promotion.
         </p>
+        {/* @cdc affiliation — rôles distincts (anti-cannibalisation, 2026-11-12) : ici les réductions en magasin ; les
+            codes des marques livrées à domicile vivent sur /codes-promo. */}
+        <p className="m-0 text-base text-ink-2">
+          Pour Dog Chef, Franklin, Elmut, Dogfy Diet ou Ultra Premium Direct, livrés à domicile, la réduction passe par un code ou un lien : vois nos{' '}
+          <Link href="/codes-promo" className="font-semibold text-orange-ink underline underline-offset-2">codes promo des marques partenaires</Link>.
+        </p>
       </header>
       {liste.length === 0 ? <p className="m-0 text-base text-ink-2">Aucun produit bien noté n&apos;est en promotion aujourd&apos;hui. Repasse demain : la liste est mise à jour chaque nuit.</p> : null}
       {GROUPES.map((g) => {

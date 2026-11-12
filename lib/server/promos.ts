@@ -1,4 +1,5 @@
 import { marquePage } from '@/data/marque-pages'
+import { partnerSlugFromName } from '@/data/partner-discounts'
 import { remise } from '@/lib/scanner/prix'
 import { displayBrand, fold } from '@/lib/scanner/rankings'
 import { slugify } from '@/lib/scanner/slug'
@@ -45,7 +46,8 @@ export async function marquesPromo(): Promise<MarquePromo[]> {
     const parKilo = (noun: RankedRecipe['noun']) => recettes.filter((r) => r.noun === noun).sort((a, b) => kg(a) - kg(b) || b.score - a.score)
     const croquettes = parKilo('croquettes')
     const patees = parKilo('patee')
-    if (!mere || Math.max(croquettes.length, patees.length) < MIN_PRIX_MARQUE) continue
+    // Marque partenaire : sa seule page de réduction est /codes-promo/{marque} (anti-cannibalisation, 2026-11-12).
+    if (!mere || partnerSlugFromName(recettes[0].brand) || Math.max(croquettes.length, patees.length) < MIN_PRIX_MARQUE) continue
     sortie.push({
       slug: slugify(displayBrand(recettes[0].brand).replace(/['’]/g, '')),
       nom: displayBrand(recettes[0].brand),
