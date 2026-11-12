@@ -1,4 +1,4 @@
-import { displayBrand, displayName, recipeName } from './rankings'
+import { displayBrand, displayName, fold, recipeName } from './rankings'
 
 // @cdc seo — fiches ouvertes à Google (table app.fiche_index, choisies dans le tableau de bord) : une par recette, nom
 // exact et adresse courte par type. Toutes les autres fiches restent en noindex à leur adresse habituelle. Fonctions pures.
@@ -20,10 +20,29 @@ export const parSlug = (liste: FicheIndexee[], slug: string): FicheIndexee | und
 export const parCle = (liste: FicheIndexee[], cle: string): FicheIndexee | undefined => liste.find((f) => f.actif && f.cle === cle)
 
 /** Nom court d'un produit : la marque et la recette, sans le format. */
+/** Mots allemands du catalogue Maxi Zoo (pâtées Premiere) : « Lamm & Kartoffel » devient « agneau & pomme de terre ». */
+const ALLEMAND: [RegExp, string][] = [
+  [/\bLamm\b/g, 'agneau'], [/\bKartoffeln?\b/g, 'pomme de terre'], [/\bPferd\b/g, 'cheval'], [/\bRind\b/g, 'bœuf'],
+  [/\bHuhn\b/g, 'poulet'], [/\bEnte\b/g, 'canard'], [/\bLachs\b/g, 'saumon'], [/\bPute\b/g, 'dinde'], [/\bKaninchen\b/g, 'lapin'],
+]
+export const sansAllemand = (s: string): string => ALLEMAND.reduce((t, [re, fr]) => t.replace(re, fr), s)
+
+/**
+ * Clé de comparaison d'une recette, plus large que recipeKey : sans « adulte », « nourriture humide pour chien »,
+ * « et/avec », ni l'allemand. Deux fiches de même clé sont la même recette : une seule est ouverte à Google (2026-11-12).
+ */
+export function cleCanonique(brand: string | null, product: string | null): string {
+  const t = fold(sansAllemand(`${brand ?? ''} ${product ?? ''}`))
+    .replace(/\b\d+\s*x\s*[\d,.]+\s*k?g\b|\b[\d,.]+\s*k?g\b/g, ' ')
+    .replace(/\b(nourriture|alimentation|humide|seche|croquettes?|patee|pour|chiens?|adultes?|adult|et|avec|au|aux|a|la|le|l|de|du|des|boites?|eau douce|fresh water)\b/g, ' ')
+    .replace(/[^a-z0-9]+/g, ' ')
+  return [...new Set(t.split(' ').filter(Boolean))].sort().join(' ')
+}
+
 export function nomRecette(brand: string | null, product: string | null): string | null {
   if (!brand || !product) return null
   // Mots de catalogue sans intérêt dans un titre : « nourriture humide pour chien adulte », tirets, virgules.
-  const nom = displayName(recipeName(product))
+  const nom = displayName(recipeName(sansAllemand(product)))
     .replace(/\b(nourriture|alimentation) humide( pour)? chiens?( adultes?)?\b,?|\bhumides? chien( adultes?)?\b,?|\bpâtée pour chiens?\b|\bpour chiens? adultes?\b|\b(nourriture )?humides? pour chiens?\b|\bboîtes? de\b|\bpour chiens?\b/gi, ' ')
     .replace(/\s+[–-]\s+/g, ' ')
     .replace(/\s*,\s*/g, ' ')
