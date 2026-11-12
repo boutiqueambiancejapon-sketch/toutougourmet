@@ -25,6 +25,8 @@ interface BarcodeScannerProps {
 export function BarcodeScanner({ onCode, onCancel, onNoBarcode }: BarcodeScannerProps) {
   const video = useRef<HTMLVideoElement>(null)
   const [state, setState] = useState<CamState>('starting')
+  // Code illisible au bout de 8 s : on propose la photo du paquet en grand (signalé par le propriétaire, 2026-11-12).
+  const [lent, setLent] = useState(false)
   const found = useRef(onCode)
   useEffect(() => {
     found.current = onCode
@@ -34,9 +36,11 @@ export function BarcodeScanner({ onCode, onCancel, onNoBarcode }: BarcodeScanner
     let stream: MediaStream | null = null
     let stopped = false
     let timer: ReturnType<typeof setTimeout> | undefined
+    let relais: ReturnType<typeof setTimeout> | undefined
     const stop = () => {
       stopped = true
       clearTimeout(timer)
+      clearTimeout(relais)
       stream?.getTracks().forEach((t) => t.stop())
     }
     async function scan() {
@@ -58,6 +62,7 @@ export function BarcodeScanner({ onCode, onCancel, onNoBarcode }: BarcodeScanner
         await video.current.play()
         await getDetector()
         setState('live')
+        relais = setTimeout(() => !stopped && setLent(true), 8000)
         void scan()
       } catch (err) {
         const name = err instanceof DOMException ? err.name : ''
@@ -85,6 +90,13 @@ export function BarcodeScanner({ onCode, onCancel, onNoBarcode }: BarcodeScanner
           {MESSAGES[state]}
         </p>
       )}
+      {lent && !blocked ? (
+        <div role="status" className="flex flex-col gap-2 rounded-box border-2 border-ink bg-amber-bg p-3">
+          <p className="m-0 text-[15px] font-semibold text-ink">Le code-barres ne passe pas ?</p>
+          <p className="m-0 text-sm text-ink-2">Pas grave : prends le paquet en photo, on lit l&apos;étiquette à la place.</p>
+          <button type="button" onClick={onNoBarcode} className="min-h-12 self-start whitespace-nowrap rounded-control bg-orange px-5 text-base font-semibold text-ink">Prendre le paquet en photo</button>
+        </div>
+      ) : null}
       <ManualEan onCode={onCode} />
       <ScanFallbackLinks onCancel={onCancel} onNoBarcode={onNoBarcode} />
     </section>
