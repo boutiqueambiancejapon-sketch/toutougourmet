@@ -20,7 +20,7 @@ const POINTS = [
 
 export default function AssistantPage() {
   return (
-    <main className="v2 mx-auto flex w-full max-w-[760px] flex-col gap-8 px-4 pt-6 pb-16 md:px-8 md:pt-10">
+    <div className="v2 mx-auto flex w-full max-w-[760px] flex-col gap-8 px-4 pt-6 pb-16 md:px-8 md:pt-10">
       <header className="flex items-center gap-4 md:gap-6">
         <MiloAvatar size={96} className="border-[3px] shadow-[4px_4px_0_var(--orange)] md:size-[120px]" />
         <div className="flex flex-col gap-2">
@@ -47,6 +47,6 @@ export default function AssistantPage() {
         Milo n&apos;est pas vétérinaire : il ne pose pas de diagnostic et ne donne pas de dose de médicament. Si ton chien va mal, appelle ton vétérinaire. Pour l&apos;instant, Milo répond à 5 questions par jour et par compte. Certaines conversations peuvent être gardées pour entraîner Milo et améliorer sa précision.{' '}
         <Link href="/mon-chien" className="font-semibold text-orange-ink underline underline-offset-2">Enregistrer mon chien</Link>
       </p>
-    </main>
+    </div>
   )
 }

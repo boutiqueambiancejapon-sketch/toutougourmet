@@ -39,7 +39,7 @@ export default async function PromosPage() {
   const liste = await promos()
   const date = liste[0]?.buy?.prix?.releve
   return (
-    <main className="v2 mx-auto flex max-w-prose flex-col gap-6 px-4 pt-4 pb-16 md:px-8 md:pt-8">
+    <div className="v2 mx-auto flex max-w-prose flex-col gap-6 px-4 pt-4 pb-16 md:px-8 md:pt-8">
       <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Codes promo', href: '/codes-promo' }, { label: 'Promos Maxi Zoo' }]} />
       <header className="flex flex-col gap-3">
         <h1 className="m-0 font-display text-[clamp(1.9rem,5vw,2.6rem)] font-black leading-[1.05] tracking-tight text-ink">Promos Maxi Zoo du moment, seulement les produits bien notés</h1>
@@ -68,6 +68,6 @@ export default async function PromosPage() {
         Liens partenaires : on touche une commission si tu commandes, sans surcoût pour toi. Pour comparer sans promotion, vois nos{' '}
         <Link href="/meilleures-croquettes" className="font-semibold text-orange-ink underline underline-offset-2">classements par note</Link>.
       </p>
-    </main>
+    </div>
   )
 }

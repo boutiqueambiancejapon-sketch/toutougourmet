@@ -7,7 +7,7 @@ import { NotFoundFr } from '@/components/layout/NotFoundFr'
 
 export const metadata: Metadata = {
   title: 'Page introuvable',
-  description: "Cette adresse ne mène à aucune page de Toutou Gourmet. L'accueil et le test mènent aux guides, aux outils et aux marques.",
+  description: "Cette adresse ne mène à aucune page de Toutou Gourmet : nos outils, Milo et les produits les mieux notés du moment.",
   robots: { index: false },
 }
 
