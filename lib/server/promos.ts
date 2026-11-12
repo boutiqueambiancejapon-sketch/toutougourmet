@@ -47,7 +47,7 @@ export async function marquesPromo(): Promise<MarquePromo[]> {
     const patees = parKilo('patee')
     if (!mere || Math.max(croquettes.length, patees.length) < MIN_PRIX_MARQUE) continue
     sortie.push({
-      slug: slugify(displayBrand(recettes[0].brand)),
+      slug: slugify(displayBrand(recettes[0].brand).replace(/['’]/g, '')),
       nom: displayBrand(recettes[0].brand),
       avis: mere.href,
       croquettes,
