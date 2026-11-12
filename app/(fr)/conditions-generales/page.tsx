@@ -15,7 +15,7 @@ const date = new Date(`${CGU_VERSION}T12:00:00`).toLocaleDateString('fr-FR', { d
 
 export default function ConditionsPage() {
   return (
-    <main className="v2 mx-auto flex w-full max-w-[720px] flex-col gap-6 px-4 pt-6 pb-16 md:px-8 md:pt-10">
+    <div className="v2 mx-auto flex w-full max-w-[720px] flex-col gap-6 px-4 pt-6 pb-16 md:px-8 md:pt-10">
       <header className="flex flex-col gap-2">
         <h1 className="m-0 font-display text-[clamp(1.75rem,5vw,2.4rem)] font-black leading-[1.05] tracking-tight text-ink">Conditions générales d&apos;utilisation</h1>
         <p className="m-0 text-sm text-ink-2">{`Version du ${date}`}</p>
@@ -35,6 +35,6 @@ export default function ConditionsPage() {
         Voir aussi les <Link href="/mentions-legales" className="font-semibold text-ink underline underline-offset-2">mentions légales</Link> et la{' '}
         <Link href="/politique-de-confidentialite" className="font-semibold text-ink underline underline-offset-2">politique de confidentialité</Link>.
       </p>
-    </main>
+    </div>
   )
 }

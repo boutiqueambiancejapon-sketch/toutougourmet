@@ -29,7 +29,7 @@ const ATOUTS = [
 
 export default function MonChienPage() {
   return (
-    <main className="v2 mx-auto flex max-w-page flex-col gap-12 px-4 pt-6 pb-16 md:px-8 md:pt-10">
+    <div className="v2 mx-auto flex max-w-page flex-col gap-12 px-4 pt-6 pb-16 md:px-8 md:pt-10">
       <section className="grid items-center gap-8 md:grid-cols-2">
         <div className="flex flex-col gap-4">
           <h1 className="m-0 font-display text-[clamp(2rem,5vw,3rem)] font-black leading-[1.05] tracking-tight text-ink">Toute l&apos;alimentation de ton chien, au même endroit</h1>
@@ -67,6 +67,6 @@ export default function MonChienPage() {
         <p className="m-0 text-base text-cream">Trois champs pour le compte, puis son profil.</p>
         <Link href={INSCRIPTION} className="inline-flex min-h-12 items-center justify-center whitespace-nowrap rounded-control bg-amber px-6 font-semibold text-ink no-underline shadow-[4px_4px_0_var(--orange)] hover:underline">Créer mon espace gratuit</Link>
       </section>
-    </main>
+    </div>
   )
 }
