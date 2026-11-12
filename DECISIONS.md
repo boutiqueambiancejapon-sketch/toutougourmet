@@ -406,3 +406,5 @@ Page des promos renommée /promo-croquettes-chien (propriétaire, 2026-11-12 : l
 Promo par marque (propriétaire, 2026-11-12) : « code promo + marque partenaire » → /codes-promo/{marque} (déjà en place) ; « promo croquettes + marque Maxi Zoo » → /promo-croquettes-chien/{marque}, pour les marques avec page mère et au moins 6 croquettes ou 6 pâtées avec un prix : promotions du jour puis prix au kilo (croquettes et pâtées séparées), jamais de faux code promo.
 
 Anti-cannibalisation (propriétaire, 2026-11-12) : /codes-promo = codes des marques partenaires livrées à domicile, /promo-croquettes-chien = réductions Maxi Zoo ; chaque page renvoie à l'autre en tête avec ce rôle ; aucune page promo pour une marque partenaire (code). Titres inchangés.
+
+Doublons de fiches (2026-11-12) : cleCanonique (sans « adulte », « nourriture humide pour chien », « et/avec », mots allemands traduits) ; l'ouverture quotidienne n'ouvre jamais deux fiches de même clé ; doublons déjà ouverts désactivés (la première ouverte reste) ; noms allemands traduits (Lamm → agneau…).
