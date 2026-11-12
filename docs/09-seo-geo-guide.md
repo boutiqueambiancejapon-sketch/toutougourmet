@@ -328,6 +328,18 @@ Sur la branche de production, ces composants n'existent pas encore : la tâche q
 
 ---
 
+### 2.8 Questions à plusieurs critères et données à nous (novembre 2026)
+
+Le 12 novembre 2026, Google a mis Gemini 4 Hydrogen dans l'AI Mode et les AI Overviews. Il comprend les questions longues qui mêlent plusieurs critères (« pâtée de qualité pour mon chien senior de grande taille, bon rapport qualité-prix »), les découpe en plus de sous-requêtes qu'avant et va chercher des sites spécialisés qu'il ne trouvait pas. Il reprend volontiers les tableaux comparatifs et les données qu'on ne trouve nulle part ailleurs. Notre Search Console le confirme : plus de 1 000 questions de 8 mots ou plus en trois mois, presque toutes sur un profil précis de chien.
+
+Pour tout article commercial (classement, avis de marque, guide d'achat, duel) :
+
+1. **Un passage par profil courant.** Âge (chiot, adulte, senior), gabarit (petit, moyen, grand), situation fréquente sans maladie (digestion sensible, peau, stérilisé ou en surpoids) et budget. Une phrase de réponse, puis le lien vers le classement qui correspond (`/meilleures-croquettes/…`, `/meilleures-patees/…`, `/meilleures-friandises/…`).
+2. **Au moins une donnée qu'on est seuls à avoir.** La note de notre scanner sur 100, le rang dans nos classements, le prix au kilo Maxi Zoo du jour ou une promotion en cours. Les composants `<Classement>`, `<MarqueClassement>` et `<MeilleuresAlternatives>` les affichent à jour. Jamais un chiffre recopié chez un concurrent.
+3. **Un tableau qui compare sur les critères demandés** : note, prix au kilo, protéines, gras, céréales. Les assistants d'IA reprennent ces tableaux tels quels.
+4. **Le budget en clair** : une fourchette au kilo et par mois pour un chien d'un poids donné, et le lien vers `/promo-croquettes-chien` quand on parle de prix.
+5. **Visibilité et trafic sont deux chiffres différents.** Une page citée dans une réponse d'IA sans clic fait quand même connaître la marque : on suit les affichages et les questions longues dans la vue Recherche Google du tableau de bord, pas seulement les clics.
+
 ## 3. Hiérarchie des titres
 
 ### 3.1 Règles strictes

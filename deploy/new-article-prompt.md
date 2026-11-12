@@ -57,6 +57,7 @@ Tâche biquotidienne : rédiger UN nouvel article pour Toutou Gourmet (www.touto
 
 ## Vérifications
 - Ajoute le nouvel article en bas de `docs/coherence-queue.md` : `- [ ] \`{slug}\` · nouvel article AAAA-MM-JJ`.
+- Article commercial (classement, avis, guide d'achat, duel) : applique le §2.8 du guide (un passage par profil de chien avec le lien vers le bon classement, au moins une donnée à nous : note du scanner, prix au kilo du jour ou promotion, un tableau comparatif sur les critères demandés).
 - `npx tsx scripts/check-portions.ts` doit afficher « tout est cohérent » : chaque portion du tableau par gabarit monte avec le poids et reste sous 10 % des calories du gabarit. Le résumé (TL;DR), le texte et les tableaux de l'article donnent les mêmes quantités que le `SizeTable`.
 - `npm ci` si nécessaire puis `npm run build` : doit passer. Si le build casse à cause de l'article, corriger ; si impossible, ne rien committer et le signaler.
 - Tirets cadratins (—) : au plus 2 par article, aucun dans le title, les H2, les puces et la FAQ (compter avec `grep -o '—' fichier | wc -l`). Aucune phrase-chute en fin de paragraphe (« Chaque heure compte. », « Le pronostic est sombre. ») : finir sur un fait.
