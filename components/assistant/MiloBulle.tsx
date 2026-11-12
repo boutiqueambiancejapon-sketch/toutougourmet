@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { CENTRES_ANTIPOISON } from '@/lib/assistant/urgence'
+import { PrixLigne } from '@/components/scanner/PrixLigne'
 import { MiloAvatar } from './MiloAvatar'
 import type { MiloMessage, MiloReponse } from './use-milo'
 
@@ -31,6 +32,7 @@ function Produits({ liste }: { liste: MiloReponse['produits'] }) {
               {p.nom}
               {p.score !== null ? <span className="ml-1.5 whitespace-nowrap rounded-pill bg-ink px-2 py-0.5 text-xs text-cream">{`${p.score}/100`}</span> : null}
               {p.remise ? <span className="block text-xs font-normal text-ink-2">{p.remise}</span> : null}
+              {p.prix ? <span className="mt-1 block font-normal"><PrixLigne prix={p.prix} compact /></span> : null}
             </span>
             <a href={p.url} rel="sponsored nofollow noopener" target="_blank" data-cta="assistant-produit" className="inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-control bg-ink px-3.5 text-sm font-semibold text-cream no-underline">{`Voir chez ${p.chez}`}</a>
           </li>

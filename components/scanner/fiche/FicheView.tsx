@@ -8,6 +8,7 @@ import { LabelData } from '../LabelData'
 import { FicheAlternatives } from './FicheAlternatives'
 import { FicheBuy } from './FicheBuy'
 import { buyLink } from '@/lib/scanner/buy-link'
+import { prixDe } from '@/lib/server/prix'
 import { FicheJsonLd } from './FicheJsonLd'
 import { FicheNutrition } from './FicheNutrition'
 import { FicheVerdict } from './FicheVerdict'
@@ -49,7 +50,7 @@ export async function FicheView({ row, indexee, path }: { row: FoodAnalysis; ind
   const better = a.score !== null && a.score < ALTERNATIVE_BELOW ? await betterAtMaxiZoo(noun, a.brand, a.score) : null
   const name = [a.brand, a.product].filter(Boolean).join(' ') || 'Produit sans nom lisible'
   const nom = indexee?.nom ?? nomRecette(a.brand, a.product) ?? name
-  const buy = buyLink({ ...a, buyUrl: row.buyUrl })
+  const buy = buyLink({ ...a, buyUrl: row.buyUrl, prix: await prixDe(row.id) })
   const basis = dryMatterBasis(a.label.constituants, a.label.typeAliment)
   const h1 = indexee ? h1Fiche(indexee.nom, currentYear()) : a.product ? `${a.product}${a.brand ? ` (${a.brand})` : ''} : notre analyse` : `${a.brand ?? words.unnamed} : notre analyse`
   const date = row.createdAt.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Paris' })

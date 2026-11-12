@@ -1,3 +1,4 @@
+import { PrixLigne } from '../PrixLigne'
 import Link from 'next/link'
 import { displayBrand, displayName } from '@/lib/scanner/rankings'
 import type { RankedRecipe } from '@/lib/server/rankings'
@@ -35,6 +36,7 @@ export function RankRow({ recipe, rank }: { recipe: RankedRecipe; rank: number }
           {`Voir chez ${recipe.buy.store}`}
         </a>
       ) : null}
+      {recipe.buy?.prix ? <PrixLigne prix={recipe.buy.prix} compact /> : null}
     </li>
   )
 }

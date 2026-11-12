@@ -396,3 +396,5 @@ ntfy.sh limite les messages anonymes à 250 par jour et par bloc IPv6 /64. Le bl
 d'autres clients de l'hébergeur : le quota était épuisé par d'autres, et le résumé du matin et les alertes
 échouaient (429). Le serveur préfère désormais l'IPv4 (`/etc/gai.conf`, copie d'origine en
 `/etc/gai.conf.avant-ipv4`), et les scripts shell appellent ntfy avec `curl -4`.
+
+Prix Maxi Zoo (propriétaire, 2026-11-12) : prix, prix au kilo (€/kg seulement) et ancien prix en promotion lus dans le fichier Awin à chaque import (app.food_price, historique quotidien app.food_price_history, migration 0018). Affichés sous les boutons « Voir chez Maxi Zoo » des fiches, des classements et des cartes de Milo, avec la date du relevé ; jamais dans le calcul de la note.

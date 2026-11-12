@@ -1,3 +1,4 @@
+import { PrixLigne } from '../PrixLigne'
 import type { ReactNode } from 'react'
 import type { BuyLink } from '@/lib/scanner/buy-link'
 import { BAND_LABELS, bandFor, type ScoreResult } from '@/lib/scanner/score'
@@ -67,6 +68,7 @@ export function FicheHero({ slug, h1, image, details, categorie, buy, children }
             {`Voir chez ${buy.store}`}
           </a>
         ) : null}
+        {buy?.prix ? <PrixLigne prix={buy.prix} /> : null}
         <FavoriButton slug={slug} />
         {children}
       </div>

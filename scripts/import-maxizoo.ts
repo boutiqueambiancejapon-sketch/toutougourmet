@@ -31,6 +31,24 @@ async function main(): Promise<void> {
       [withData.map((i) => i.ean), withData.map((i) => i.image), withData.map((i) => i.buy)],
     )
     console.log(`${updated.rowCount ?? 0} fiches avec image ou lien mis à jour`)
+    // Prix du jour et relevé quotidien (décision du 2026-11-12), pour toute fiche dont le code-barres est dans le fichier.
+    const prixes = all.filter((i) => i.prix)
+    const cols = [prixes.map((i) => i.ean), prixes.map((i) => i.prix), prixes.map((i) => i.prixKg), prixes.map((i) => i.prixAncien)]
+    const prixMaj = await pool.query(
+      `INSERT INTO app.food_price (food_analysis_id, prix, prix_kg, prix_ancien, maj_le)
+       SELECT f.id, v.prix, v.kg, v.ancien, now() FROM unnest($1::text[], $2::numeric[], $3::numeric[], $4::numeric[]) AS v(ean, prix, kg, ancien)
+         JOIN app.food_analysis f ON f.ean = v.ean
+       ON CONFLICT (food_analysis_id) DO UPDATE SET prix = EXCLUDED.prix, prix_kg = EXCLUDED.prix_kg, prix_ancien = EXCLUDED.prix_ancien, maj_le = now()`,
+      cols,
+    )
+    await pool.query(
+      `INSERT INTO app.food_price_history (food_analysis_id, jour, prix, prix_kg, prix_ancien)
+       SELECT f.id, (now() AT TIME ZONE 'Europe/Paris')::date, v.prix, v.kg, v.ancien FROM unnest($1::text[], $2::numeric[], $3::numeric[], $4::numeric[]) AS v(ean, prix, kg, ancien)
+         JOIN app.food_analysis f ON f.ean = v.ean
+       ON CONFLICT (food_analysis_id, jour) DO UPDATE SET prix = EXCLUDED.prix, prix_kg = EXCLUDED.prix_kg, prix_ancien = EXCLUDED.prix_ancien`,
+      cols,
+    )
+    console.log(`${prixMaj.rowCount ?? 0} prix Maxi Zoo enregistrés`)
   }
   const items = all.filter((i) => !state[i.ean]).slice(0, limit)
   const counts: Record<string, number> = {}

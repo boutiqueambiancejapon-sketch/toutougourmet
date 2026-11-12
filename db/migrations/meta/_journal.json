@@ -127,6 +127,13 @@
       "when": 1794047584345,
       "tag": "0017_food_history",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1794466043584,
+      "tag": "0018_food_price",
+      "breakpoints": true
     }
   ]
 }

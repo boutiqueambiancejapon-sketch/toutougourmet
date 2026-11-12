@@ -1,5 +1,6 @@
 import { cache } from 'react'
 import { REPONSE_SENSIBLE } from '@/lib/assistant/sensible'
+import type { PrixMaxiZoo } from '@/lib/scanner/prix'
 import type { Gravite } from '@/lib/assistant/urgence'
 import { ACTIVITY_LABELS, breedName, formatAge } from '@/lib/dog-profile'
 import type { Dog } from '@/db/schema'
@@ -49,6 +50,8 @@ export interface Produit {
   /** Note du scanner ; null pour Dog Chef et Franklin, absents de nos classements. */
   score: number | null
   remise: string | null
+  /** Prix Maxi Zoo du jour, quand on le connaît. */
+  prix?: PrixMaxiZoo | null
 }
 
 const indexArticles = cache((): ArticleIndexe[] =>
@@ -116,7 +119,7 @@ function guidesAchat(index: ArticleIndexe[], question: string): { url: string; t
 const NOUN: Record<Exclude<Achat, 'repas'>, FoodNoun> = { croquettes: 'croquettes', patee: 'patee', friandises: 'friandise' }
 
 const chezMaxiZoo = (r: RankedRecipe): Produit[] =>
-  r.buy?.store === 'Maxi Zoo' ? [{ nom: `${displayBrand(r.brand)} ${displayName(r.name)}`, url: r.buy.href, chez: 'Maxi Zoo', score: r.score, remise: null }] : []
+  r.buy?.store === 'Maxi Zoo' ? [{ nom: `${displayBrand(r.brand)} ${displayName(r.name)}`, url: r.buy.href, chez: 'Maxi Zoo', score: r.score, remise: null, prix: r.buy.prix ?? null }] : []
 
 function partenaire(slug: 'dog-chef' | 'franklin', quoi: string): Produit[] {
   const b = getBrandBySlug(slug)
