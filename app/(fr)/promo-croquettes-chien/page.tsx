@@ -5,6 +5,7 @@ import { RankRow } from '@/components/scanner/rankings/RankRow'
 import { remise } from '@/lib/scanner/prix'
 import type { FoodNoun } from '@/lib/scanner/food-noun'
 import { rankedRecipes, type RankedRecipe } from '@/lib/server/rankings'
+import { marquesPromo } from '@/lib/server/promos'
 
 // @cdc affiliation — promotions Maxi Zoo du moment, croisées avec les notes du scanner (décision du propriétaire du
 // 2026-11-12) : seulement les produits notés 70/100 ou plus, plus forte remise d'abord. Prix du fichier Awin relevé
@@ -36,7 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function PromosPage() {
-  const liste = await promos()
+  const [liste, marques] = await Promise.all([promos(), marquesPromo()])
   const date = liste[0]?.buy?.prix?.releve
   return (
     <div className="v2 mx-auto flex max-w-prose flex-col gap-6 px-4 pt-4 pb-16 md:px-8 md:pt-8">
@@ -64,6 +65,14 @@ export default async function PromosPage() {
           </section>
         )
       })}
+      {marques.length ? (
+        <section aria-labelledby="par-marque" className="flex flex-col gap-2">
+          <h2 id="par-marque" className="m-0 font-display text-2xl font-black text-ink">Promo croquettes par marque</h2>
+          <ul role="list" className="m-0 flex list-none flex-wrap gap-2 p-0">
+            {marques.map((m) => <li key={m.slug}><Link href={`/promo-croquettes-chien/${m.slug}`} className="inline-flex min-h-11 items-center whitespace-nowrap rounded-pill border border-line bg-paper px-3 text-sm font-semibold text-ink no-underline hover:underline">{m.nom}</Link></li>)}
+          </ul>
+        </section>
+      ) : null}
       <p className="m-0 text-sm leading-relaxed text-ink-2">
         Liens partenaires : on touche une commission si tu commandes, sans surcoût pour toi. Pour comparer sans promotion, vois nos{' '}
         <Link href="/meilleures-croquettes" className="font-semibold text-orange-ink underline underline-offset-2">classements par note</Link>.
