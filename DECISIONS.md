@@ -400,3 +400,5 @@ d'autres clients de l'hébergeur : le quota était épuisé par d'autres, et le 
 Prix Maxi Zoo (propriétaire, 2026-11-12) : prix, prix au kilo (€/kg seulement) et ancien prix en promotion lus dans le fichier Awin à chaque import (app.food_price, historique quotidien app.food_price_history, migration 0018). Affichés sous les boutons « Voir chez Maxi Zoo » des fiches, des classements et des cartes de Milo, avec la date du relevé ; jamais dans le calcul de la note.
 
 Page /promos-maxi-zoo (propriétaire, 2026-11-12) : promotions Maxi Zoo du jour croisées avec le scanner, notes 70/100 ou plus, plus forte remise d'abord, par croquettes, pâtées et friandises ; ouverte à Google à partir de 5 produits ; lien en pied de page.
+
+Page des promos renommée /promo-croquettes-chien (propriétaire, 2026-11-12 : la recherche réelle est « promo croquettes chien ») ; /promos-maxi-zoo redirige.
