@@ -408,3 +408,5 @@ Promo par marque (propriétaire, 2026-11-12) : « code promo + marque partenaire
 Anti-cannibalisation (propriétaire, 2026-11-12) : /codes-promo = codes des marques partenaires livrées à domicile, /promo-croquettes-chien = réductions Maxi Zoo ; chaque page renvoie à l'autre en tête avec ce rôle ; aucune page promo pour une marque partenaire (code). Titres inchangés.
 
 Doublons de fiches (2026-11-12) : cleCanonique (sans « adulte », « nourriture humide pour chien », « et/avec », mots allemands traduits) ; l'ouverture quotidienne n'ouvre jamais deux fiches de même clé ; doublons déjà ouverts désactivés (la première ouverte reste) ; noms allemands traduits (Lamm → agneau…).
+
+Filtre /choisir-croquettes (propriétaire, 2026-11-12) : type, âge, gabarit, besoin, sans céréales, budget au kilo, tri par note ou prix ; mêmes règles que les classements ; formulaire GET sans JavaScript ; page de base indexée, combinaisons filtrées en noindex avec canonical ; encadré « Affiner pour ton chien » sur les classements et lien en pied de page.

@@ -25,6 +25,15 @@ export async function SegmentPage({ segment }: { segment: RankSegment }) {
       <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Scanner', href: '/scanner' }, ...(segment.slug.startsWith('friandises-') ? [{ label: 'Friandises', href: '/meilleures-friandises' }] : segment.slug.startsWith('patees-') ? [{ label: 'Pâtées', href: '/chien/alimentation-quotidienne/meilleures-patees-chien' }] : []), { label: segment.label === 'Toutes' ? 'Classement des croquettes' : segment.label }]} />
       <h1 className="m-0 font-display text-[clamp(2rem,5vw,2.75rem)] font-black leading-[1.05] tracking-tight text-ink">{titleTypo(addYear(segment.h1, currentYear(), Infinity))}</h1>
       <RankingBody segment={segment} list={list} count={SHOWN} />
+      {segment.slug.startsWith('friandises') ? null : (
+        <Link href={`/choisir-croquettes${segment.slug.startsWith('patees') ? '?type=patee' : ''}`} className="flex min-h-12 items-center justify-between gap-3 rounded-card border-2 border-ink bg-cream-2 px-4 py-3 text-ink no-underline hover:underline">
+          <span className="flex flex-col">
+            <span className="font-semibold">Affiner pour ton chien</span>
+            <span className="text-sm text-ink-2">Âge, taille, besoin, sans céréales et budget au kilo</span>
+          </span>
+          <span aria-hidden="true">→</span>
+        </Link>
+      )}
       {content ? <RankingArticle content={content} /> : null}
       <section aria-labelledby="methode" className="flex flex-col gap-2">
         <h2 id="methode" className="m-0 font-display text-2xl font-black text-ink">{titleTypo('Comment ce classement est-il calculé ?')}</h2>
