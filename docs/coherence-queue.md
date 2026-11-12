@@ -1692,5 +1692,10 @@
   - Chiot « une recette par gamme » → deux par gamme, Mini (82 et 80/100) et Med/Maxi
   - Tableau Med/Maxi poulet et saumon No Grain 84 → 84 à 85/100, Healthy Grains poulet 77 → 77 à 78/100 (sac de 3 kg)
   - Vérifié : 55,99 € les 7 kg (8 €/kg), 1,5 kg à 10,79-11,33 €/kg, pas de taurine ni de calcium déclarés, pâtées 66 % de viande et 28,9 % de bouillon, renommage True Instinct (annoncé fin 2020, lancé en mars 2021)
-- [ ] `avis-pedigree` · nouvel article 2026-11-11
-- [ ] `chien-peut-manger-merguez` · nouvel article 2026-11-11
+- [x] `avis-pedigree` · nouvel article 2026-11-11 · relu 2026-11-12 : rien à corriger
+  - Vérifié : notes Maxi Zoo (Classic 64 et 50, Select Gold 79, Meati Pur poulet 96), compositions des deux pâtées (51 %, dont 21 % et 31 % + 20 % de sous-produits, 81 % d'eau), croquette zooplus (4 % de bœuf, 3 % de pulpe, 0,7 % de légumes déshydratés, 26,49 € les 7 kg), Select Gold 48,99 € les 12 kg, seuils 4/14/26 % (comme comprendre-etiquette-patee-chien), remises Franklin et Dog Chef
+- [x] `chien-peut-manger-merguez` · nouvel article 2026-11-11 · relu 2026-11-12 : 3 corrections
+  - Tableau < 5 kg « plus de la moitié de ses calories du jour » (vrai à 3 kg, 43 % à 5 kg) → près de la moitié, voire plus
+  - Labrador 30 kg « à peine un dixième » (11 %) → environ un dixième
+  - Tableau merguez de dinde « aussi salée » (1,8 g contre 2,1 à 2,3 g) → presque aussi salée, comme la FAQ
+  - Vérifié : 283 kcal et 925 mg de sodium (Ciqual), paquet Férial 330 g à 2,1 g de sel, seuil de sel 2 à 3 g/kg et ail 3 à 5 fois l'oignon (comme les autres articles), races exposées à la pancréatite
