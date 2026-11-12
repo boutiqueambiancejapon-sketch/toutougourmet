@@ -320,7 +320,7 @@ Validé par le propriétaire (2026-11-04), d'après l'export Search Console. Ces
 - [x] Le chien peut-il manger du paprika ? → chien-peut-manger-paprika
 - [x] Le chien peut-il manger de la choucroute ? → chien-peut-manger-choucroute
 - [x] Le chien peut-il manger des merguez ? → chien-peut-manger-merguez
-- [ ] Le chien peut-il manger du skyr ?
+- [x] Le chien peut-il manger du skyr ? → chien-peut-manger-skyr
 - [ ] Mon chien ne mange plus et reste couché : que faire ? (`bien-nourri`)
 - [ ] Ultra Premium Direct ou Franklin Pet Food : lequel choisir ? (`quiz`)
 - [ ] Le chien peut-il manger du curry ?

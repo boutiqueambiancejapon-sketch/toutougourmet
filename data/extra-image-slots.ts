@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-chien-peut-manger-skyr',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, attentive white Samoyed dog sitting on a warm wooden kitchen floor beside a small ceramic bowl of thick plain white skyr with a wooden spoon resting in it, the dog looking at the bowl with interest. No packaging, no pot, no logo, no brand, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog and bowl filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the bowl. Exactly 7 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-12 pour l'article chien-peut-manger-skyr.",
+  },
+  {
     id: 'art-avis-ultima',
     group: 'articles',
     ratio: '3:2',
