@@ -16,6 +16,7 @@ export const PAGE_DATES: Record<string, string> = {
   '/premium': '2026-11-03',
   '/mon-chien': '2026-11-07',
   '/assistant': '2026-11-07',
+  '/promos-maxi-zoo': '2026-11-12',
   '/conditions-generales': '2026-11-07',
   '/outils': '2026-11-03',
   '/outils/age': '2026-11-02',

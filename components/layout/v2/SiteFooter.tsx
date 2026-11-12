@@ -30,6 +30,7 @@ const COLUMNS: { title: string; links: { href: string; label: string }[] }[] = [
       { href: '/chien/avis-marques/avis-dogfy-diet-repas-frais-chien', label: 'Dogfy Diet' },
       { href: '/comparateur', label: 'Comparateur' },
       { href: '/codes-promo', label: 'Codes promo' },
+      { href: '/promos-maxi-zoo', label: 'Promos Maxi Zoo' },
     ],
   },
   {
