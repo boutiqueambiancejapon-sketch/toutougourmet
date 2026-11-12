@@ -29,7 +29,7 @@ if [[ $STATUS -ne 0 && " $* " != *" --dry "* ]]; then
   if [[ -f $HOME/.config/toutou/alerts.env ]]; then
     set -a; . "$HOME/.config/toutou/alerts.env"; set +a
     if [[ -n "${NTFY_SERVER:-}" && -n "${NTFY_TOPIC:-}" ]]; then
-      curl -s -o /dev/null --max-time 15 -H "Title: Couvertures d'articles" -H "Priority: default" \
+      curl -4 -s -o /dev/null --max-time 15 -H "Title: Couvertures d'articles" -H "Priority: default" \
         -d "Le passage du $(TZ=Europe/Paris date +%d/%m) a rencontré un problème. Voir le journal covers-$(TZ=Europe/Paris date +%F).log sur le serveur." \
         "$NTFY_SERVER/$NTFY_TOPIC" || true
     fi

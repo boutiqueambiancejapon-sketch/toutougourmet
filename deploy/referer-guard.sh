@@ -29,4 +29,4 @@ fi
 SOURCE=$(ls /home/administrator/.config/toutou/alerts.env /srv/toutou/shared/.env 2>/dev/null | head -1)
 TOPIC=$(grep -hE '^NTFY_TOPIC=' /home/administrator/.config/toutou/alerts.env /srv/toutou/shared/.env 2>/dev/null | head -1 | cut -d= -f2-)
 SERVEUR=$(grep -hE '^NTFY_SERVER=' "$SOURCE" 2>/dev/null | head -1 | cut -d= -f2-)
-if [ -n "$TOPIC" ]; then curl -fsS -m 15 -H 'Title: Toutou Gourmet' -d "$MESSAGE" "${SERVEUR:-https://ntfy.sh}/$TOPIC" >/dev/null || true; fi
+if [ -n "$TOPIC" ]; then curl -4 -fsS -m 15 -H 'Title: Toutou Gourmet' -d "$MESSAGE" "${SERVEUR:-https://ntfy.sh}/$TOPIC" >/dev/null || true; fi

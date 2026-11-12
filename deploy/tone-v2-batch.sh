@@ -21,7 +21,7 @@ alert() {
   [[ -f $HOME/.config/toutou/alerts.env ]] || return 0
   set -a; . "$HOME/.config/toutou/alerts.env"; set +a
   [[ -n "${NTFY_SERVER:-}" && -n "${NTFY_TOPIC:-}" ]] || return 0
-  curl -s -o /dev/null --max-time 15 -H "Title: Réécriture du ton" -d "$1" "$NTFY_SERVER/$NTFY_TOPIC" || true
+  curl -4 -s -o /dev/null --max-time 15 -H "Title: Réécriture du ton" -d "$1" "$NTFY_SERVER/$NTFY_TOPIC" || true
 }
 
 [[ -d $WORK/.git ]] || git clone -q "$REPO" "$WORK"

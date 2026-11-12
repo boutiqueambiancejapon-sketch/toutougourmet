@@ -58,7 +58,7 @@ done 3< "$HERE/sites.conf"
 if [[ -n $FAILED && -f $HOME/.config/toutou/alerts.env ]]; then
   set -a; . "$HOME/.config/toutou/alerts.env"; set +a
   if [[ -n "${NTFY_SERVER:-}" && -n "${NTFY_TOPIC:-}" ]]; then
-    curl -s -o /dev/null --max-time 15 -H "Title: Articles de la nuit" -H "Priority: default" \
+    curl -4 -s -o /dev/null --max-time 15 -H "Title: Articles de la nuit" -H "Priority: default" \
       -d "Pas d'article cette nuit pour :$FAILED. Voir le journal articles-$DAY.log sur le serveur." \
       "$NTFY_SERVER/$NTFY_TOPIC" || true
   fi
