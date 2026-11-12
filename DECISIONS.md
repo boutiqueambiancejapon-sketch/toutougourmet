@@ -389,3 +389,10 @@ Outil DNS (propriétaire, 2026-11-11) : clé Cloudflare limitée au DNS de touto
 Nouvelles pages dans Google (propriétaire, 2026-11-11) : analytics.gsc_pages_daily (page × jour, 95 jours repris, puis 7 derniers jours réécrits chaque nuit par la tâche de nuit) ; tableau dans /tableau-de-bord/recherche : pages apparues dans les 45 derniers jours, 7 jours contre les 7 d'avant, 6 semaines d'affichages.
 
 Questions longues (propriétaire, 2026-11-11) : 1 004 recherches de 8 mots ou plus en 3 mois (souvent des assistants d'IA), presque toutes envoyées vers « Meilleures pâtées ». Ajouts : classements /meilleures-patees/senior, /chiot, /petit-chien (reliés depuis la page des pâtées), file de nuit avec melon, chien stérilisé, crevettes, jambon, tableau « Questions longues » dans la vue Recherche Google, et liste des questions longues donnée aux articles de 20 h (scripts/gsc-longues.ts).
+
+## 2026-11-12 — Notifications ntfy en IPv4
+
+ntfy.sh limite les messages anonymes à 250 par jour et par bloc IPv6 /64. Le bloc du VPS est partagé avec
+d'autres clients de l'hébergeur : le quota était épuisé par d'autres, et le résumé du matin et les alertes
+échouaient (429). Le serveur préfère désormais l'IPv4 (`/etc/gai.conf`, copie d'origine en
+`/etc/gai.conf.avant-ipv4`), et les scripts shell appellent ntfy avec `curl -4`.
