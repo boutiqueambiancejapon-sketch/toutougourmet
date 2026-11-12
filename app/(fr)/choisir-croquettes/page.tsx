@@ -28,7 +28,7 @@ export default async function ChoisirCroquettes({ searchParams }: Props) {
   const tous = await rankedRecipes().catch(() => [])
   const res = filtrer(tous, f)
   const ignores = criteresIgnores(f)
-  const mot = f.type === 'patee' ? 'pâtée' : 'recette de croquettes'
+  const [un, plusieurs] = f.type === 'patee' ? ['pâtée', 'pâtées'] : ['recette', 'recettes']
   return (
     <div className="v2 mx-auto flex max-w-prose flex-col gap-6 px-4 pt-4 pb-16 md:px-8 md:pt-8">
       <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Classement des croquettes', href: '/meilleures-croquettes' }, { label: 'Choisir ses croquettes' }]} />
@@ -39,7 +39,7 @@ export default async function ChoisirCroquettes({ searchParams }: Props) {
       <FiltreForm f={f} />
       <section aria-labelledby="resultats" className="flex flex-col gap-3">
         <h2 id="resultats" className="m-0 font-display text-2xl font-black text-ink">
-          {res.length ? `${res.length > MAX ? `Les ${MAX} premières sur ${res.length}` : res.length} ${mot}${res.length > 1 ? 's' : ''} correspondent` : 'Aucune recette ne correspond'}
+          {res.length ? `${res.length > MAX ? `Les ${MAX} premières sur ${res.length}` : res.length} ${res.length > 1 ? plusieurs : un} ${res.length > 1 ? 'correspondent' : 'correspond'}` : 'Aucune recette ne correspond'}
         </h2>
         {ignores.length ? <p className="m-0 text-sm text-ink-2">{`Pour les pâtées, le critère ${ignores.join(' et ')} n'est pas encore disponible : il n'est pas pris en compte.`}</p> : null}
         {res.length === 0 ? <p className="m-0 text-base text-ink-2">Élargis un critère, par exemple le budget ou le gabarit. Un budget au kilo ne garde que les produits dont on connaît le prix.</p> : null}
