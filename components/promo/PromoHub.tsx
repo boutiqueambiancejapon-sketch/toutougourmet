@@ -42,6 +42,12 @@ export function PromoHub() {
             <p className="m-0 text-sm text-ink-2">
               Offres vérifiées le <time dateTime={PROMO_VERIFIED_AT}>{formatFrDate(PROMO_VERIFIED_AT)}</time>.
             </p>
+            {/* @cdc affiliation — rôles distincts (anti-cannibalisation, 2026-11-12) : ici les codes des marques livrées à
+                domicile ; les réductions en magasin sur Royal Canin, Pro Plan… vivent sur /promo-croquettes-chien. */}
+            <p className="m-0 text-base text-ink-2">
+              Tu cherches plutôt une réduction sur Royal Canin, Pro Plan, Orijen ou d&apos;autres marques vendues en animalerie ? Elles n&apos;ont pas de code : vois les{' '}
+              <Link href="/promo-croquettes-chien" className="font-semibold text-orange-ink underline underline-offset-2">promos croquettes du moment chez Maxi Zoo</Link>.
+            </p>
           </header>
         </div>
 
