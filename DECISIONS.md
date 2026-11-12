@@ -402,3 +402,5 @@ Prix Maxi Zoo (propriétaire, 2026-11-12) : prix, prix au kilo (€/kg seulement
 Page /promos-maxi-zoo (propriétaire, 2026-11-12) : promotions Maxi Zoo du jour croisées avec le scanner, notes 70/100 ou plus, plus forte remise d'abord, par croquettes, pâtées et friandises ; ouverte à Google à partir de 5 produits ; lien en pied de page.
 
 Page des promos renommée /promo-croquettes-chien (propriétaire, 2026-11-12 : la recherche réelle est « promo croquettes chien ») ; /promos-maxi-zoo redirige.
+
+Promo par marque (propriétaire, 2026-11-12) : « code promo + marque partenaire » → /codes-promo/{marque} (déjà en place) ; « promo croquettes + marque Maxi Zoo » → /promo-croquettes-chien/{marque}, pour les marques avec page mère et au moins 6 croquettes ou 6 pâtées avec un prix : promotions du jour puis prix au kilo (croquettes et pâtées séparées), jamais de faux code promo.

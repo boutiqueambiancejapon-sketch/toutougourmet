@@ -4,6 +4,7 @@ import { BRAND_PAGES_DATE, PAGE_DATES } from '@/data/page-dates'
 import { getAllArticles, getComparatif, type Article } from '@/lib/mdx'
 import { SEGMENTS } from '@/lib/scanner/rankings'
 import { rankedRecipes, segmentIndexable, segmentRecipes } from '@/lib/server/rankings'
+import { marquesPromo } from '@/lib/server/promos'
 import { ficheIndexeePath } from '@/lib/scanner/fiches-indexees'
 import { fichesIndexees } from '@/lib/server/fiches-indexees'
 import { sitemapTypeOf, type SitemapType } from './types'
@@ -91,6 +92,7 @@ function contentEntries(): SitemapEntry[] {
 /** Classements au-delà du seuil et fiches choisies pour Google. Les autres fiches et les pages marque du scanner : jamais. */
 async function croquettesEntries(): Promise<SitemapEntry[]> {
   const entries: SitemapEntry[] = []
+  for (const m of await marquesPromo().catch(() => [])) entries.push({ path: `/promo-croquettes-chien/${m.slug}`, lastmod: new Date() })
   for (const segment of SEGMENTS.filter((s) => s.path.startsWith('/meilleures-'))) {
     const list = await segmentRecipes(segment)
     if (segmentIndexable(segment, list)) entries.push({ path: segment.path, lastmod: latest(list.map((r) => r.updatedAt)) })
