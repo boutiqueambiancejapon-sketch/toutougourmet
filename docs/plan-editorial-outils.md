@@ -358,7 +358,7 @@ Validé par le propriétaire (2026-11-07) : un client Dog Chef rapporte 50 €, 
 
 ## Ration (`ration`)
 
-- [ ] Combien de croquettes pour un chien de 10 kg (puis 5, 20, 30 kg : un article par poids si la demande existe)
+- [x] Combien de croquettes pour un chien de 10 kg (puis 5, 20, 30 kg : un article par poids si la demande existe) → combien-croquettes-chien-10-kg
 - [ ] Combien de repas par jour pour un chien adulte
 - [ ] Mon chien a toujours faim : ration trop faible ou habitude
 - [ ] Ration d'un chien stérilisé : de combien baisser

@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-combien-croquettes-chien-10-kg',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, attentive red Shiba Inu sitting on a warm wooden kitchen floor beside a simple ceramic bowl filled with brown dog kibble and a small modern kitchen scale holding a few kibbles, the dog looking at the bowl with interest. No packaging, no bag, no logo, no brand, no writing, no numbers on the scale display.',
+    composition:
+      'Full frame, subject edge to edge, dog, bowl and scale filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog, the bowl or the scale. Exactly 7 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-13 pour l'article combien-croquettes-chien-10-kg.",
+  },
+  {
     id: 'art-avis-advance',
     group: 'articles',
     ratio: '3:2',
