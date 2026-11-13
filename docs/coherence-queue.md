@@ -1704,3 +1704,4 @@
 - [x] `chien-peut-manger-skyr` · nouvel article 2026-11-12 · relu 2026-11-13 : 1 correction
   - Cuillère à soupe « 15 à 20 g », > 25 kg « 30 à 40 g » → environ 15 g et 30 g (comme le yaourt et la règle du site) ; FAQ « une dizaine de kcal » → moins de 10 kcal (8,6 kcal pour 15 g)
   - Vérifié : seuils xylitol 0,1 et 0,5 g/kg et délai de 30 minutes (comme chien-mange-xylitol-urgence), chiot dès 3 mois (comme le yaourt), 4 à 5 litres de lait par kilo (Wikipédia), portions sous 10 % des calories
+- [ ] `avis-advance` · nouvel article 2026-11-13

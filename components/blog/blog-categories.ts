@@ -161,6 +161,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-peut-manger-skyr': 'art-chien-peut-manger-skyr',
   'avis-natures-variety': 'art-avis-natures-variety',
   'avis-ultima': 'art-avis-ultima',
+  'avis-advance': 'art-avis-advance',
   'avis-pedigree': 'art-avis-pedigree',
   'avis-carnilove': 'art-avis-carnilove',
   'avis-eukanuba': 'art-avis-eukanuba',

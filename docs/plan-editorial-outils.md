@@ -44,7 +44,7 @@ Pages mères déjà en ligne, à doter de la section des modèles au premier mod
 - [x] Nature's Variety : avis sur les croquettes (nature's variety chien avis) → avis-natures-variety
 - [x] Pedigree : bon ou mauvais, avis sur la composition (pedigree bon ou mauvais) → avis-pedigree
 - [x] Ultima chien : avis sur les croquettes (ultima chien avis vétérinaire) → avis-ultima
-- [ ] Advance chien : avis sur les croquettes (croquettes advance chien avis)
+- [x] Advance chien : avis sur les croquettes (croquettes advance chien avis) → avis-advance
 - [ ] Pâtée Cesar : avis pour un chien (pâtée cesar chien avis)
 - [ ] Dentastix : avis et composition (dentastix avis, avis vétérinaire)
 - [ ] Dentalife : avis et composition (avis dentalife chien)
