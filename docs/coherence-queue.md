@@ -1699,5 +1699,8 @@
   - Labrador 30 kg « à peine un dixième » (11 %) → environ un dixième
   - Tableau merguez de dinde « aussi salée » (1,8 g contre 2,1 à 2,3 g) → presque aussi salée, comme la FAQ
   - Vérifié : 283 kcal et 925 mg de sodium (Ciqual), paquet Férial 330 g à 2,1 g de sel, seuil de sel 2 à 3 g/kg et ail 3 à 5 fois l'oignon (comme les autres articles), races exposées à la pancréatite
-- [ ] `avis-ultima` · nouvel article 2026-11-12
-- [ ] `chien-peut-manger-skyr` · nouvel article 2026-11-12
+- [x] `avis-ultima` · nouvel article 2026-11-12 · relu 2026-11-13 : rien à corriger
+  - Vérifié : prix au kilo (28,99 € les 7,5 kg = 3,87 €, 7,49 € les 1,35 kg = 5,55 €), petit sac pour 55 g par jour = 3 semaines et demie, Select Gold 79/100 et 20 % + 20 % de poulet (comme avis-select-gold), Affinity Petcare et Agrolimen (comme avis-natures-variety), remises Franklin et Dog Chef, box Dog Chef de 14 jours
+- [x] `chien-peut-manger-skyr` · nouvel article 2026-11-12 · relu 2026-11-13 : 1 correction
+  - Cuillère à soupe « 15 à 20 g », > 25 kg « 30 à 40 g » → environ 15 g et 30 g (comme le yaourt et la règle du site) ; FAQ « une dizaine de kcal » → moins de 10 kcal (8,6 kcal pour 15 g)
+  - Vérifié : seuils xylitol 0,1 et 0,5 g/kg et délai de 30 minutes (comme chien-mange-xylitol-urgence), chiot dès 3 mois (comme le yaourt), 4 à 5 litres de lait par kilo (Wikipédia), portions sous 10 % des calories
