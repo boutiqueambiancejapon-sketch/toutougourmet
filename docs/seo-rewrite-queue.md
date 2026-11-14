@@ -13,8 +13,8 @@ Pages que Google montre juste après la première page (28 jours au 5 novembre).
 - [x] `chien-peut-manger-amandes` · « amande chien » (234, pos 8,8, 0 clic), « chien amande » · réécrit 2026-11-09
 - [x] `chien-peut-manger-concombre` · « concombre chien » (214, pos 19,3), « les chiens peuvent ils manger du concombre » · réécrit 2026-11-11
 - [x] `avis-croquettes-orlando-lidl` · « croquette chien lidl » (125, pos 9,7), « croquette chien lidl prix » (80, pos 9,3) · ajouter le prix relevé et la gamme Lidl, sans toucher au bloc `MeilleuresAlternatives` · réécrit 2026-11-11
-- [ ] `chien-peut-manger-cacahuetes` · « cacahuètes chien » (102, pos 5,6, 0 clic)
-- [ ] `chien-peut-manger-melon` · « peut on donner du melon a un chien » (1 053 affichages en 3 mois, position 10), « le melon est il bon pour les chiens » (420), « est ce que le melon est bon pour les chiens » (407) · premier paragraphe qui répond oui en reprenant la question, un H2 « Le melon est-il bon pour les chiens ? »
+- [x] `chien-peut-manger-cacahuetes` · « cacahuètes chien » (102, pos 5,6, 0 clic) · réécrit 2026-11-14
+- [x] `chien-peut-manger-melon` · « peut on donner du melon a un chien » (1 053 affichages en 3 mois, position 10), « le melon est il bon pour les chiens » (420), « est ce que le melon est bon pour les chiens » (407) · premier paragraphe qui répond oui en reprenant la question, un H2 « Le melon est-il bon pour les chiens ? » · réécrit 2026-11-14
 - [ ] `croquettes-chien-sterilise` · questions longues d'assistants d'IA sur le chien stérilisé ou en surpoids (31 recherches, position moyenne 24) : quelles croquettes, combien, comment éviter la prise de poids · réponse directe en tête, ration avec la baisse de 20 à 30 % du site, lien vers le calculateur
 - [ ] `chien-peut-manger-crevettes` · « peut on donner des crevettes a un chien » (219, position 11)
 - [ ] `chien-peut-manger-jambon` · « peut on donner du jambon a un chien » (190, position 10)
