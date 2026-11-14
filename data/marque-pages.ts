@@ -19,6 +19,7 @@ export const MARQUE_PAGES: MarquePage[] = [
   { nom: 'Buddy Pet Foods', href: avis('avis-buddy-pet-foods') },
   { nom: 'Butternut Box', href: avis('avis-butternut-box') },
   { nom: 'Carnilove', href: avis('avis-carnilove') },
+  { nom: 'Cesar', href: avis('avis-cesar') },
   { nom: 'Dog Chef', href: '/chien/marque/dog-chef' },
   { nom: 'Dogfy Diet', href: avis('avis-dogfy-diet-repas-frais-chien') },
   { nom: 'Edgard & Cooper', href: avis('avis-edgard-cooper') },

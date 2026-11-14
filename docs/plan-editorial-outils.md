@@ -45,7 +45,7 @@ Pages mères déjà en ligne, à doter de la section des modèles au premier mod
 - [x] Pedigree : bon ou mauvais, avis sur la composition (pedigree bon ou mauvais) → avis-pedigree
 - [x] Ultima chien : avis sur les croquettes (ultima chien avis vétérinaire) → avis-ultima
 - [x] Advance chien : avis sur les croquettes (croquettes advance chien avis) → avis-advance
-- [ ] Pâtée Cesar : avis pour un chien (pâtée cesar chien avis)
+- [x] Pâtée Cesar : avis pour un chien (pâtée cesar chien avis) → avis-cesar
 - [ ] Dentastix : avis et composition (dentastix avis, avis vétérinaire)
 - [ ] Dentalife : avis et composition (avis dentalife chien)
 - [ ] Whimzees : avis et composition (whimzees chien avis)

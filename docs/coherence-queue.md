@@ -1709,3 +1709,4 @@
 - [x] `combien-croquettes-chien-10-kg` · nouvel article 2026-11-13 · relu 2026-11-14 : 1 correction
   - « 70 à 80 % d'eau, ration trois à quatre fois plus lourde » (repas frais 330-420 g contre 120-150 g, soit 2,8 fois) → 65 à 80 % (comme quantite-eau-chien-par-jour), près de trois fois en repas frais, trois à quatre fois en pâtée
   - Vérifié : tableau par gabarit croissant et cohérent avec le poids métabolique, 1,7 fois pour le double de poids, 50 kcal de friandises (13 g de croquettes), pâtée 430-575 g et repas frais 330-420 g (comme quelle-quantite-patee-chien-par-jour et quelle-quantite-donner-manger-chien-selon-poids), étude Labrador (1,8 an)
+- [ ] `avis-cesar` · nouvel article 2026-11-14
