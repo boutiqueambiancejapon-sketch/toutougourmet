@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-chien-ne-mange-plus-reste-couche',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, tired Bernese Mountain Dog lying down on a soft round dog bed on a warm wooden floor, chin resting on its front paws, eyes open and gentle, next to a simple ceramic bowl full of brown kibble that is untouched. No humans, no packaging, no logo, no brand, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog and bowl filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the bowl. Exactly 8 small confetti and one small orange star, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti', 'sparkle'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-14 pour l'article chien-ne-mange-plus-reste-couche.",
+  },
+  {
     id: 'art-avis-cesar',
     group: 'articles',
     ratio: '3:2',
