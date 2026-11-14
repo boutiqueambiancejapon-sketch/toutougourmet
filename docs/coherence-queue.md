@@ -1704,5 +1704,8 @@
 - [x] `chien-peut-manger-skyr` · nouvel article 2026-11-12 · relu 2026-11-13 : 1 correction
   - Cuillère à soupe « 15 à 20 g », > 25 kg « 30 à 40 g » → environ 15 g et 30 g (comme le yaourt et la règle du site) ; FAQ « une dizaine de kcal » → moins de 10 kcal (8,6 kcal pour 15 g)
   - Vérifié : seuils xylitol 0,1 et 0,5 g/kg et délai de 30 minutes (comme chien-mange-xylitol-urgence), chiot dès 3 mois (comme le yaourt), 4 à 5 litres de lait par kilo (Wikipédia), portions sous 10 % des calories
-- [ ] `avis-advance` · nouvel article 2026-11-13
-- [ ] `combien-croquettes-chien-10-kg` · nouvel article 2026-11-13
+- [x] `avis-advance` · nouvel article 2026-11-13 · relu 2026-11-14 : rien à corriger
+  - Vérifié : compositions et analyses des cinq recettes (advance-affinity.com : poulet 20/20/16/15 %, saumon 18 %, blé 17/10/15/8 %, glucosamine 390 mg/kg, 3 260 kcal/kg de la Light), prix zooplus (59,99 € les 14 kg, 22,99 € les 3 kg), notes des cinq friandises (30 à 53), Select Gold 79/100, Ultima Medium-Maxi qui commence par les céréales (comme avis-ultima), remises Franklin et Dog Chef
+- [x] `combien-croquettes-chien-10-kg` · nouvel article 2026-11-13 · relu 2026-11-14 : 1 correction
+  - « 70 à 80 % d'eau, ration trois à quatre fois plus lourde » (repas frais 330-420 g contre 120-150 g, soit 2,8 fois) → 65 à 80 % (comme quantite-eau-chien-par-jour), près de trois fois en repas frais, trois à quatre fois en pâtée
+  - Vérifié : tableau par gabarit croissant et cohérent avec le poids métabolique, 1,7 fois pour le double de poids, 50 kcal de friandises (13 g de croquettes), pâtée 430-575 g et repas frais 330-420 g (comme quelle-quantite-patee-chien-par-jour et quelle-quantite-donner-manger-chien-selon-poids), étude Labrador (1,8 an)
