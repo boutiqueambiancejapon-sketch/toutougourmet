@@ -7,13 +7,14 @@
 //   node scripts/dns.mjs supprimer TYPE NOM [VALEUR] [--appliquer]
 import { mkdirSync, writeFileSync } from 'node:fs'
 
-const ZONE = 'toutou-gourmet.com'
 const API = 'https://api.cloudflare.com/client/v4'
 const h = { Authorization: `Bearer ${process.env.CLOUDFLARE_API_TOKEN}`, 'Content-Type': 'application/json' }
 const args = process.argv.slice(2).filter((a) => !a.startsWith('--'))
 const flag = (n) => process.argv.includes(`--${n}`)
 const opt = (n) => process.argv.find((a) => a.startsWith(`--${n}=`))?.split('=')[1]
 const appliquer = flag('appliquer')
+// --zone=quel-robot-tondeuse.com pour une autre zone du même compte (la clé doit y avoir accès).
+const ZONE = opt('zone') ?? 'toutou-gourmet.com'
 const fqdn = (nom) => (nom === '@' || nom === ZONE ? ZONE : nom.endsWith(ZONE) ? nom : `${nom}.${ZONE}`)
 
 async function cf(chemin, init = {}) {
@@ -29,7 +30,7 @@ const affiche = (r) => `${r.type.padEnd(5)} ${r.name.padEnd(42)} ${r.type === 'M
 const sauvegarde = () => {
   const dir = '/srv/toutou/shared/dns-backups'
   mkdirSync(dir, { recursive: true })
-  const f = `${dir}/${new Date().toISOString().replace(/[:.]/g, '-')}.json`
+  const f = `${dir}/${ZONE}-${new Date().toISOString().replace(/[:.]/g, '-')}.json`
   writeFileSync(f, JSON.stringify(tout, null, 2))
   console.log(`Sauvegarde : ${f}`)
 }
