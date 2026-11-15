@@ -323,7 +323,7 @@ Validé par le propriétaire (2026-11-04), d'après l'export Search Console. Ces
 - [x] Le chien peut-il manger du skyr ? → chien-peut-manger-skyr
 - [x] Mon chien ne mange plus et reste couché : que faire ? (`bien-nourri`) → chien-ne-mange-plus-reste-couche
 - [ ] Ultra Premium Direct ou Franklin Pet Food : lequel choisir ? (`quiz`)
-- [ ] Le chien peut-il manger du curry ?
+- [x] Le chien peut-il manger du curry ? → chien-peut-manger-curry
 - [~] Le chien peut-il manger des châtaignes ? → chataignes-marrons-inde-chien-difference-danger (déjà couvert, renforcé par la file de réécriture)
 - [ ] Le chien peut-il manger du ketchup ?
 

@@ -162,6 +162,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'chien-ne-mange-plus-reste-couche': 'art-chien-ne-mange-plus-reste-couche',
   'avis-cesar': 'art-avis-cesar',
   'combien-croquettes-chien-10-kg': 'art-combien-croquettes-chien-10-kg',
+  'chien-peut-manger-curry': 'art-chien-peut-manger-curry',
   'chien-peut-manger-skyr': 'art-chien-peut-manger-skyr',
   'avis-natures-variety': 'art-avis-natures-variety',
   'avis-ultima': 'art-avis-ultima',
