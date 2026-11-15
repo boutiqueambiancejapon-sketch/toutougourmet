@@ -1709,5 +1709,16 @@
 - [x] `combien-croquettes-chien-10-kg` · nouvel article 2026-11-13 · relu 2026-11-14 : 1 correction
   - « 70 à 80 % d'eau, ration trois à quatre fois plus lourde » (repas frais 330-420 g contre 120-150 g, soit 2,8 fois) → 65 à 80 % (comme quantite-eau-chien-par-jour), près de trois fois en repas frais, trois à quatre fois en pâtée
   - Vérifié : tableau par gabarit croissant et cohérent avec le poids métabolique, 1,7 fois pour le double de poids, 50 kcal de friandises (13 g de croquettes), pâtée 430-575 g et repas frais 330-420 g (comme quelle-quantite-patee-chien-par-jour et quelle-quantite-donner-manger-chien-selon-poids), étude Labrador (1,8 an)
-- [ ] `avis-cesar` · nouvel article 2026-11-14
-- [ ] `chien-ne-mange-plus-reste-couche` · nouvel article 2026-11-14
+- [x] `avis-cesar` · nouvel article 2026-11-14 · relu 2026-11-15 : 4 corrections
+  - Coût par jour « 3,10 à 3,40 € » → 3,05 à 3,40 € (2¼ barquettes à 1,36 €)
+  - « La marque vise les chiens de 1 à 10 kg » (aucune source, le tableau du fabricant va de 5 à 20 kg) → les petits chiens
+  - Écart de 2,29 €/kg « prix Maxi Zoo » alors que le prix Cesar vient de zooplus → 11,33 € chez Maxi Zoo contre 9,04 € sur zooplus
+  - `meilleures-patees-chien` aligné : Cesar « ~40 % de protéines, ~30 % de glucides sur matière sèche, 80 % d'eau » → 45-50 %, 10-15 %, 80-83 % (calcul sur les fiches Classique et Senior) ; « glucides élevés » → sous-produits animaux non nommés
+  - Vérifié : fiche zooplus Classique bœuf (63 %, 14 % de bœuf, 4 % de foie, 10/5/80 %, 920 kcal/kg, 2¼-2½, 3¾-4¼ et 6½-7¼ barquettes, 35 g d'aliment sec, 18,99 €), fiche auchan poulet (4 % + 4 %, 8/4/82,5 %), fiche zooplus Senior 8+ (90 % des bouchées, 8/5/83 %, 83 kcal, 28,49 € soit 7,12 €/kg), Premiere Finest Meat (97 et 96/100, 50 % + 14 %, 59 % + 4 %, 9/4 %, 11,33 €/kg), Dog Chef 45 à 60 €/mois, Franklin −30 %, 24 à 48 h au frigo
+  - À vérifier (non changé) : `meilleures-patees-chien` range Cesar « en friandise seulement, pas en repas principal » alors que les barquettes sont des aliments complets ; « des sucres et du caramel dans certaines recettes » sans fiche lue
+- [x] `chien-ne-mange-plus-reste-couche` · nouvel article 2026-11-14 · relu 2026-11-15 : 3 corrections
+  - TL;DR « plus de 40 °C de fièvre » → 40 °C ou plus (comme l'étape température et le tableau)
+  - Piroplasmose « 4 à 21 jours après la morsure » (absent de la source citée) → 10 à 21 jours (Vet Times 2016, ajouté aux Sources)
+  - FAQ tremblements « consulte le jour même » alors que le tableau dit « urgences, sans attendre » → appelle tout de suite ton vétérinaire ou la garde
+  - Vérifié : 37,5 à 39,2 °C, recoloration en moins de 2 secondes, vaccin (24 h, appel au-delà d'un ou deux jours), délais cohérents avec combien-temps-chien-sans-manger et croquettes-chien-perte-appetit
+  - À vérifier (non changé) : raticides « 3 à 5 jours » ici et dans aliments-toxiques-chien-liste-complete, « 2 à 5 jours » dans chien-mange-mort-aux-rats-urgence (Merck : coagulation troublée en 2 à 5 jours, saignements en 3 à 7 jours)
