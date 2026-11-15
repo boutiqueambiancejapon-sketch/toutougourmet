@@ -48,6 +48,10 @@ export function PromoHub() {
               Tu cherches plutôt une réduction sur Royal Canin, Pro Plan, Orijen ou d&apos;autres marques vendues en animalerie ? Elles n&apos;ont pas de code : vois les{' '}
               <Link href="/promo-croquettes-chien" className="font-semibold text-orange-ink underline underline-offset-2">promos croquettes du moment chez Maxi Zoo</Link>.
             </p>
+            <p className="m-0 text-base text-ink-2">
+              Le Black Friday tombe le 27 novembre 2026&nbsp;: vois{' '}
+              <Link href="/black-friday-croquettes-chien" className="font-semibold text-orange-ink underline underline-offset-2">les offres Black Friday croquettes et nourriture pour chien</Link>.
+            </p>
           </header>
         </div>
 
