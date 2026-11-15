@@ -57,6 +57,10 @@ export default async function PromosPage() {
           Pour Dog Chef, Franklin, Elmut, Dogfy Diet ou Ultra Premium Direct, livrés à domicile, la réduction passe par un code ou un lien : vois nos{' '}
           <Link href="/codes-promo" className="font-semibold text-orange-ink underline underline-offset-2">codes promo des marques partenaires</Link>.
         </p>
+        <p className="m-0 text-base text-ink-2">
+          Black Friday le 27 novembre&nbsp;: vois{' '}
+          <Link href="/black-friday-croquettes-chien" className="font-semibold text-orange-ink underline underline-offset-2">les offres Black Friday pour chien</Link>.
+        </p>
       </header>
       {liste.length === 0 ? <p className="m-0 text-base text-ink-2">Aucun produit bien noté n&apos;est en promotion aujourd&apos;hui. Repasse demain : la liste est mise à jour chaque nuit.</p> : null}
       {GROUPES.map((g) => {

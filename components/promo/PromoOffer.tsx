@@ -15,6 +15,8 @@ interface Props {
   code: string | null
   /** compact : ligne de carte du hub ; full : bloc encre de la page marque */
   variant?: 'full' | 'compact'
+  /** Emplacement mesuré (data-cta) ; promo-page par défaut */
+  place?: string
 }
 
 export function PromoButton({ brand, slug }: { brand: Brand; slug: OfferSlug }) {
@@ -33,11 +35,11 @@ export function PromoButton({ brand, slug }: { brand: Brand; slug: OfferSlug }) 
   )
 }
 
-export function PromoOffer({ brand, slug, code, variant = 'full' }: Props) {
+export function PromoOffer({ brand, slug, code, variant = 'full', place = PROMO_PLACE }: Props) {
   const discount = CONFIRMED_DISCOUNTS[slug]
   if (variant === 'compact') {
     return (
-      <div data-cta={PROMO_PLACE} className="flex flex-col items-start gap-2">
+      <div data-cta={place} className="flex flex-col items-start gap-2">
         <PromoButton brand={brand} slug={slug} />
       </div>
     )
@@ -45,7 +47,7 @@ export function PromoOffer({ brand, slug, code, variant = 'full' }: Props) {
   return (
     <section
       aria-label={`Offre ${brand.name}`}
-      data-cta={PROMO_PLACE}
+      data-cta={place}
       className="flex max-w-prose flex-col items-start gap-3 rounded-card bg-ink px-5 py-6 text-cream md:px-8"
     >
       <p className="m-0 font-display text-2xl font-black leading-tight text-cream">{discount}</p>
