@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-avis-dentastix',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'blue',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, happy Cavalier King Charles Spaniel (Blenheim coat) lying on a warm wooden floor, holding one plain beige X-shaped dental chew stick between its front paws and looking at it with interest, mouth closed. No humans, no packaging, no bag, no logo, no brand, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the chew stick. Exactly 8 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-15 pour l'article avis-dentastix.",
+  },
+  {
     id: 'art-chien-ne-mange-plus-reste-couche',
     group: 'articles',
     ratio: '3:2',

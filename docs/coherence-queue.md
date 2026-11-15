@@ -1722,3 +1722,4 @@
   - FAQ tremblements « consulte le jour même » alors que le tableau dit « urgences, sans attendre » → appelle tout de suite ton vétérinaire ou la garde
   - Vérifié : 37,5 à 39,2 °C, recoloration en moins de 2 secondes, vaccin (24 h, appel au-delà d'un ou deux jours), délais cohérents avec combien-temps-chien-sans-manger et croquettes-chien-perte-appetit
   - À vérifier (non changé) : raticides « 3 à 5 jours » ici et dans aliments-toxiques-chien-liste-complete, « 2 à 5 jours » dans chien-mange-mort-aux-rats-urgence (Merck : coagulation troublée en 2 à 5 jours, saignements en 3 à 7 jours)
+- [ ] `avis-dentastix` · nouvel article 2026-11-15

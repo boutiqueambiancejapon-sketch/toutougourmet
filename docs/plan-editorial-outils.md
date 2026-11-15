@@ -46,7 +46,7 @@ Pages mères déjà en ligne, à doter de la section des modèles au premier mod
 - [x] Ultima chien : avis sur les croquettes (ultima chien avis vétérinaire) → avis-ultima
 - [x] Advance chien : avis sur les croquettes (croquettes advance chien avis) → avis-advance
 - [x] Pâtée Cesar : avis pour un chien (pâtée cesar chien avis) → avis-cesar
-- [ ] Dentastix : avis et composition (dentastix avis, avis vétérinaire)
+- [x] Dentastix : avis et composition (dentastix avis, avis vétérinaire) → avis-dentastix
 - [ ] Dentalife : avis et composition (avis dentalife chien)
 - [ ] Whimzees : avis et composition (whimzees chien avis)
 
