@@ -410,3 +410,7 @@ Anti-cannibalisation (propriétaire, 2026-11-12) : /codes-promo = codes des marq
 Doublons de fiches (2026-11-12) : cleCanonique (sans « adulte », « nourriture humide pour chien », « et/avec », mots allemands traduits) ; l'ouverture quotidienne n'ouvre jamais deux fiches de même clé ; doublons déjà ouverts désactivés (la première ouverte reste) ; noms allemands traduits (Lamm → agneau…).
 
 Filtre /choisir-croquettes (propriétaire, 2026-11-12) : type, âge, gabarit, besoin, sans céréales, budget au kilo, tri par note ou prix ; mêmes règles que les classements ; formulaire GET sans JavaScript ; page de base indexée, combinaisons filtrées en noindex avec canonical ; encadré « Affiner pour ton chien » sur les classements et lien en pied de page.
+
+
+## 2026-11-15 — DNS de quel-robot-tondeuse.com chez Cloudflare
+Le propriétaire a déplacé le DNS de quel-robot-tondeuse.com vers Cloudflare (Vercel reste registrar) et ajouté la zone à la clé du serveur. `deploy/dns.sh … --zone=quel-robot-tondeuse.com` gère cette zone (sauvegardes préfixées par la zone). Tout en « DNS only ». Restes Vercel retirés (joker `*` vers Vercel, `_domainconnect`). Domaine authentifié chez Brevo (DKIM, code, DMARC, SPF `include:spf.brevo.com`). Reste : renvoi de bonjour@quel-robot-tondeuse.com.
