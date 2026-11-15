@@ -15,8 +15,8 @@ Pages que Google montre juste après la première page (28 jours au 5 novembre).
 - [x] `avis-croquettes-orlando-lidl` · « croquette chien lidl » (125, pos 9,7), « croquette chien lidl prix » (80, pos 9,3) · ajouter le prix relevé et la gamme Lidl, sans toucher au bloc `MeilleuresAlternatives` · réécrit 2026-11-11
 - [x] `chien-peut-manger-cacahuetes` · « cacahuètes chien » (102, pos 5,6, 0 clic) · réécrit 2026-11-14
 - [x] `chien-peut-manger-melon` · « peut on donner du melon a un chien » (1 053 affichages en 3 mois, position 10), « le melon est il bon pour les chiens » (420), « est ce que le melon est bon pour les chiens » (407) · premier paragraphe qui répond oui en reprenant la question, un H2 « Le melon est-il bon pour les chiens ? » · réécrit 2026-11-14
-- [ ] `croquettes-chien-sterilise` · questions longues d'assistants d'IA sur le chien stérilisé ou en surpoids (31 recherches, position moyenne 24) : quelles croquettes, combien, comment éviter la prise de poids · réponse directe en tête, ration avec la baisse de 20 à 30 % du site, lien vers le calculateur
-- [ ] `chien-peut-manger-crevettes` · « peut on donner des crevettes a un chien » (219, position 11)
+- [x] `croquettes-chien-sterilise` · questions longues d'assistants d'IA sur le chien stérilisé ou en surpoids (31 recherches, position moyenne 24) : quelles croquettes, combien, comment éviter la prise de poids · réponse directe en tête, ration avec la baisse de 20 à 30 % du site, lien vers le calculateur · réécrit 2026-11-15
+- [x] `chien-peut-manger-crevettes` · « peut on donner des crevettes a un chien » (219, position 11) · réécrit 2026-11-15
 - [ ] `chien-peut-manger-jambon` · « peut on donner du jambon a un chien » (190, position 10)
 
 ## Règles de la file
@@ -216,7 +216,7 @@ Pages que Google montre juste après la première page (28 jours au 5 novembre).
 - [ ] `croquettes-chien-digestion-sensible` · alimentation-quotidienne · màj 2026-03-13
 - [ ] `croquettes-chien-intolerant-cereales` · alimentation-quotidienne · màj 2026-03-13
 - [ ] `croquettes-chien-reflux-gastrique` · alimentation-quotidienne · màj 2026-03-13
-- [ ] `croquettes-chien-sterilise` · alimentation-quotidienne · màj 2026-03-13
+- [x] `croquettes-chien-sterilise` · alimentation-quotidienne · màj 2026-03-13
 - [ ] `croquettes-chien-trop-maigre` · alimentation-quotidienne · màj 2026-03-13
 - [ ] `budget-alimentation-chien-par-mois` · alimentation-quotidienne · màj 2026-04-01
 - [ ] `comprendre-etiquette-croquettes-chien` · alimentation-quotidienne · màj 2026-04-01
