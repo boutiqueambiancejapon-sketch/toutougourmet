@@ -107,7 +107,6 @@ export async function createCampaign(d: CampaignDraft): Promise<number> {
       htmlContent: d.htmlContent,
       recipients: { listIds: [id] },
       scheduledAt: d.scheduledAt,
-      tag: 'lettre-mensuelle',
       inlineImageActivation: false,
     },
   })
