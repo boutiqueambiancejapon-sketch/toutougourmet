@@ -1731,3 +1731,4 @@
   - FAQ assiette léchée « chien de plus de 10 kg » → plus de 5 kg (le tableau ne demande un appel qu'au-delà d'un fond d'assiette entre 5 et 10 kg)
   - Poudre de curry : oignon et ail « en fin de liste » (5e et 11e sur 14 sur l'étiquette Ducros) → pèsent peu, loin derrière le curcuma et la coriandre
   - Vérifié : seuil de 5 g d'oignon par kilo, 15 g à 3 kg et 150 g à 30 kg, ail 3 à 5 fois, signes 1 à 5 jours, Akita et Shiba (comme chien-mange-ail-oignon-urgence), races exposées à la pancréatite (comme le guide pancréatite), étiquettes Open Food Facts (Ducros, Ayam), référence Yamato 1998
+- [ ] `avis-dentalife` · nouvel article 2026-11-16
