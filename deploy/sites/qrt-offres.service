@@ -1,0 +1,9 @@
+[Unit]
+Description=Quel Robot Tondeuse : relevé des prix Cdiscount et Fnac (Awin)
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=administrator
+Nice=10
+ExecStart=/bin/bash -euo pipefail /home/administrator/Toutou/deploy/sites/qrt-offres.sh

@@ -1,0 +1,9 @@
+[Unit]
+Description=Relevé des prix Quel Robot Tondeuse, une fois par semaine (accord du propriétaire, 16/11/2026)
+
+[Timer]
+OnCalendar=Mon *-*-* 02:15:00 UTC
+Persistent=true
+
+[Install]
+WantedBy=timers.target
