@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-comment-savoir-si-chien-trop-gros',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'green',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, happy yellow Labrador Retriever with a healthy lean silhouette standing in profile on a light wooden floor, visible waist and tucked belly, head turned toward the camera, a soft fabric measuring tape with no markings lying coiled on the floor beside its front paws. No humans, no scale display, no numbers, no writing, no logo.',
+    composition:
+      'Full frame, subject edge to edge, dog filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the tape. Exactly 8 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-16 pour l'article comment-savoir-si-chien-trop-gros.",
+  },
+  {
     id: 'art-avis-dentalife',
     group: 'articles',
     ratio: '3:2',

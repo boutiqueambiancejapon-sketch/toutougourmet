@@ -368,7 +368,7 @@ Validé par le propriétaire (2026-11-07) : un client Dog Chef rapporte 50 €, 
 
 ## Poids idéal (`poids`)
 
-- [ ] Poids idéal d'un chien : comment savoir s'il est trop gros (note d'état corporel)
+- [x] Poids idéal d'un chien : comment savoir s'il est trop gros (note d'état corporel) → comment-savoir-si-chien-trop-gros
 - [ ] Mon chien a grossi après la stérilisation
 - [ ] Perte de poids soudaine chez le chien : quand s'inquiéter
 - [ ] Faire grossir un chien trop maigre sans le rendre malade
