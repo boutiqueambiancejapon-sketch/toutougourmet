@@ -18,6 +18,7 @@ cd "$WORK"
 git fetch -q origin "$BRANCH"
 git checkout -q -B offres "origin/$BRANCH"
 node scripts/offres-awin.mjs "$FEEDS/cdiscount.csv.gz" "$FEEDS/fnac.csv.gz"
+rm -f "$FEEDS/cdiscount.csv.gz"  # 700 Mo, retéléchargé chaque semaine
 if git diff --quiet -- content/offres/offres.json; then echo "Prix inchangés."; exit 0; fi
 git add content/offres/offres.json
 git commit -qm "chore(offres): weekly Cdiscount and Fnac prices
