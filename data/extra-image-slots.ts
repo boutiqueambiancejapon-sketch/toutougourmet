@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-avis-dentalife',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'blue',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, happy liver-and-white English Springer Spaniel lying on a light wooden floor, gently holding one plain pale-beige grooved dental chew stick with a porous texture between its front paws, mouth closed, looking toward the camera. No humans, no packaging, no bag, no logo, no brand, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the chew stick. Exactly 8 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-16 pour l'article avis-dentalife.",
+  },
+  {
     id: 'art-chien-peut-manger-curry',
     group: 'articles',
     ratio: '3:2',

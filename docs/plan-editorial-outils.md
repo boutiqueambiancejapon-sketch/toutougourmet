@@ -47,7 +47,7 @@ Pages mères déjà en ligne, à doter de la section des modèles au premier mod
 - [x] Advance chien : avis sur les croquettes (croquettes advance chien avis) → avis-advance
 - [x] Pâtée Cesar : avis pour un chien (pâtée cesar chien avis) → avis-cesar
 - [x] Dentastix : avis et composition (dentastix avis, avis vétérinaire) → avis-dentastix
-- [ ] Dentalife : avis et composition (avis dentalife chien)
+- [x] Dentalife : avis et composition (avis dentalife chien) → avis-dentalife
 - [ ] Whimzees : avis et composition (whimzees chien avis)
 
 ### Avis modèles

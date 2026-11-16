@@ -1722,5 +1722,13 @@
   - FAQ tremblements « consulte le jour même » alors que le tableau dit « urgences, sans attendre » → appelle tout de suite ton vétérinaire ou la garde
   - Vérifié : 37,5 à 39,2 °C, recoloration en moins de 2 secondes, vaccin (24 h, appel au-delà d'un ou deux jours), délais cohérents avec combien-temps-chien-sans-manger et croquettes-chien-perte-appetit
   - À vérifier (non changé) : raticides « 3 à 5 jours » ici et dans aliments-toxiques-chien-liste-complete, « 2 à 5 jours » dans chien-mange-mort-aux-rats-urgence (Merck : coagulation troublée en 2 à 5 jours, saignements en 3 à 7 jours)
-- [ ] `avis-dentastix` · nouvel article 2026-11-15
-- [ ] `chien-peut-manger-curry` · nouvel article 2026-11-15
+- [x] `avis-dentastix` · nouvel article 2026-11-15 · relu 2026-11-16 : rien à corriger
+  - `quelle-quantite-donner-manger-chien-selon-poids` aligné : petit DentaStix « environ 50 kcal » → environ 45 kcal (110 g les 7, 300 kcal pour 100 g, soit 47 kcal ; comme le tableau de l'avis)
+  - Vérifié : fiche maxizoo.fr du format moyen (2,4 % de tripolyphosphate, 8,5 % de protéines, 1,8 % de matières grasses, 16,89 € soit 11,73 €/kg et 0,30 € pièce, 9 € par mois), fiche zooplus.fr (110 g les 7, 1 440 g les 56, 154 g les 4, 300 kcal pour 100 g, 2,16 % de foie de poulet séché, 80 %, 4 mois), 75 kcal = 20 g de croquettes, liste VOHC (Daily et Fresh, plaque et tartre), notes et prix au kilo des trois alternatives (92, 82, 64), sticks Franklin au tapioca, brossage 3 fois par semaine au minimum (comme croquettes-chien-tartre)
+- [x] `chien-peut-manger-curry` · nouvel article 2026-11-15 · relu 2026-11-16 : 4 corrections
+  - Étape d'appel « s'il pèse moins de 10 kg, s'il a mangé une portion entière » (le tableau dit de surveiller un chien de plus de 25 kg après une assiette) → moins de 5 kg, plus qu'un fond d'assiette sous 10 kg, une assiette entière sous 25 kg
+  - TL;DR « une portion entière chez un petit chien demande un appel » → quelques cuillerées sous 5 kg (comme le tableau)
+  - FAQ assiette léchée « chien de plus de 10 kg » → plus de 5 kg (le tableau ne demande un appel qu'au-delà d'un fond d'assiette entre 5 et 10 kg)
+  - Poudre de curry : oignon et ail « en fin de liste » (5e et 11e sur 14 sur l'étiquette Ducros) → pèsent peu, loin derrière le curcuma et la coriandre
+  - Vérifié : seuil de 5 g d'oignon par kilo, 15 g à 3 kg et 150 g à 30 kg, ail 3 à 5 fois, signes 1 à 5 jours, Akita et Shiba (comme chien-mange-ail-oignon-urgence), races exposées à la pancréatite (comme le guide pancréatite), étiquettes Open Food Facts (Ducros, Ayam), référence Yamato 1998
+- [ ] `avis-dentalife` · nouvel article 2026-11-16
