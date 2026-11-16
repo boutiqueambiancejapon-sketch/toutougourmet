@@ -22,6 +22,8 @@ const CLICK_PLACES: Record<string, string> = {
   'brand-sticky': 'Bandeau collant (fiche marque)',
   'brand-duel-sticky': 'Bandeau collant (duel)',
   'mid-dog-chef': 'Encart du milieu (Dog Chef)',
+  'brand-race-dog-chef': 'Page race, sous la ration (Dog Chef)',
+  'brand-patee-dog-chef': 'Page pâtée (Dog Chef)',
   'race-compare': 'Comparatif race',
   'race-compare-choix': 'Comparatif race, notre choix',
   'account-offer': 'Offres du compte',
