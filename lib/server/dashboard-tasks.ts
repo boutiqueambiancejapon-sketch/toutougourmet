@@ -13,7 +13,7 @@ export const TASKS = [
   { unit: 'toutou-article-matin', label: 'Article du matin (avis)', rhythm: 'chaque jour à 7 h' },
   { unit: 'toutou-article-soir', label: 'Article du soir (informatif)', rhythm: 'chaque jour à 20 h' },
   { unit: 'toutou-seo-rewrite', label: 'Tâche de nuit', rhythm: 'chaque nuit' },
-  { unit: 'toutou-tone', label: 'Réécriture des articles', rhythm: 'la nuit, de 1 h à 8 h' },
+  // Réécriture du ton : faite dans la tâche de nuit (deploy/seo-rewrite.sh) depuis le 2026-11-05 ; toutou-tone.timer est arrêté.
   { unit: 'site-articles', label: 'Articles des autres sites', rhythm: 'chaque nuit' },
   { unit: 'site-covers', label: 'Images des autres sites', rhythm: 'chaque nuit' },
   { unit: 'toutou-welcome', label: 'E-mails de Milo', rhythm: 'chaque matin' },
