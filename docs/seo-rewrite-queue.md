@@ -17,7 +17,7 @@ Pages que Google montre juste après la première page (28 jours au 5 novembre).
 - [x] `chien-peut-manger-melon` · « peut on donner du melon a un chien » (1 053 affichages en 3 mois, position 10), « le melon est il bon pour les chiens » (420), « est ce que le melon est bon pour les chiens » (407) · premier paragraphe qui répond oui en reprenant la question, un H2 « Le melon est-il bon pour les chiens ? » · réécrit 2026-11-14
 - [x] `croquettes-chien-sterilise` · questions longues d'assistants d'IA sur le chien stérilisé ou en surpoids (31 recherches, position moyenne 24) : quelles croquettes, combien, comment éviter la prise de poids · réponse directe en tête, ration avec la baisse de 20 à 30 % du site, lien vers le calculateur · réécrit 2026-11-15
 - [x] `chien-peut-manger-crevettes` · « peut on donner des crevettes a un chien » (219, position 11) · réécrit 2026-11-15
-- [ ] `chien-peut-manger-jambon` · « peut on donner du jambon a un chien » (190, position 10)
+- [x] `chien-peut-manger-jambon` · « peut on donner du jambon a un chien » (190, position 10) · réécrit 2026-11-16
 
 ## Règles de la file
 
@@ -53,7 +53,7 @@ Pages que Google montre juste après la première page (28 jours au 5 novembre).
 - [x] `chien-peut-manger-brocoli` · legumes · màj 2026-03-12 · réécrit 2026-11-06
 - [x] `chien-peut-manger-chou-fleur` · legumes · màj 2026-03-12 · réécrit 2026-11-07
 - [x] `chien-peut-manger-endives` · legumes · màj 2026-03-12 · réécrit 2026-11-07
-- [ ] `chien-peut-manger-poivron` · legumes · màj 2026-03-12
+- [x] `chien-peut-manger-poivron` · legumes · màj 2026-03-12 · réécrit 2026-11-16
 - [ ] `meilleurs-legumes-chien` · legumes · màj 2026-03-12
 - [ ] `chien-peut-manger-asperges` · legumes · màj 2026-03-21
 - [ ] `chien-peut-manger-aubergines` · legumes · màj 2026-03-21
