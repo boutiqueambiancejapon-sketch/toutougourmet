@@ -48,7 +48,7 @@ Pages mères déjà en ligne, à doter de la section des modèles au premier mod
 - [x] Pâtée Cesar : avis pour un chien (pâtée cesar chien avis) → avis-cesar
 - [x] Dentastix : avis et composition (dentastix avis, avis vétérinaire) → avis-dentastix
 - [x] Dentalife : avis et composition (avis dentalife chien) → avis-dentalife
-- [ ] Whimzees : avis et composition (whimzees chien avis)
+- [x] Whimzees : avis et composition (whimzees chien avis) → avis-whimzees
 
 ### Avis modèles
 
