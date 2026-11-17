@@ -325,7 +325,7 @@ Validé par le propriétaire (2026-11-04), d'après l'export Search Console. Ces
 - [ ] Ultra Premium Direct ou Franklin Pet Food : lequel choisir ? (`quiz`)
 - [x] Le chien peut-il manger du curry ? → chien-peut-manger-curry
 - [~] Le chien peut-il manger des châtaignes ? → chataignes-marrons-inde-chien-difference-danger (déjà couvert, renforcé par la file de réécriture)
-- [ ] Le chien peut-il manger du ketchup ?
+- [x] Le chien peut-il manger du ketchup ? → chien-peut-manger-ketchup
 
 ## Repas frais (`ration`, sauf indication)
 

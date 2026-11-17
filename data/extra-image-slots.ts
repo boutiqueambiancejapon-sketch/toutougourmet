@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-chien-peut-manger-ketchup',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, curious blue merle Australian Shepherd sitting on a warm wooden kitchen floor, looking with interest at a small white ceramic ramekin of glossy red tomato ketchup next to a few golden french fries on a plain plate placed on a low wooden stool beside it, mouth closed, not eating. No humans, no bottle, no packaging, no logo, no brand, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the food. Exactly 8 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-17 pour l'article chien-peut-manger-ketchup.",
+  },
+  {
     id: 'art-avis-whimzees',
     group: 'articles',
     ratio: '3:2',
