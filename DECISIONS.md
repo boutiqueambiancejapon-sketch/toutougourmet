@@ -414,3 +414,7 @@ Filtre /choisir-croquettes (propriétaire, 2026-11-12) : type, âge, gabarit, be
 
 ## 2026-11-15 — DNS de quel-robot-tondeuse.com chez Cloudflare
 Le propriétaire a déplacé le DNS de quel-robot-tondeuse.com vers Cloudflare (Vercel reste registrar) et ajouté la zone à la clé du serveur. `deploy/dns.sh … --zone=quel-robot-tondeuse.com` gère cette zone (sauvegardes préfixées par la zone). Tout en « DNS only ». Restes Vercel retirés (joker `*` vers Vercel, `_domainconnect`). Domaine authentifié chez Brevo (DKIM, code, DMARC, SPF `include:spf.brevo.com`). Reste : renvoi de bonjour@quel-robot-tondeuse.com.
+
+## 2026-11-17 — Robots qui cherchent des fichiers secrets
+
+Demande du propriétaire. Caddy coupe la connexion (`abort`) sur les chemins de sondes (`.env`, `.git`, WordPress, PHP, `docker-compose`…) : snippet `(sondes)` en tête de `/etc/caddy/Caddyfile`, importé dans les 20 blocs de sites (sauvegarde `Caddyfile.avant-sondes-20261117`). Testé sur les 666 adresses des plans de site : aucun faux positif. fail2ban : jail `caddy-sondes` (`/etc/fail2ban/jail.d/caddy-sondes.local`, filtre `filter.d/caddy-sondes.conf`, journal de Caddy) bannit 7 jours après 2 sondes en 10 minutes ; Tailscale et le serveur exclus. Aucun fichier sensible n’était servi avant : tous répondaient 404.
