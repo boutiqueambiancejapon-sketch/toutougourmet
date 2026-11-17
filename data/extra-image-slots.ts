@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-avis-whimzees',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'blue',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, happy red smooth-haired Dachshund lying on a warm wooden floor, holding one plain green vegetable dental chew shaped like a small toothbrush with a knobbly head between its front paws, mouth closed, looking toward the camera. No humans, no packaging, no bag, no logo, no brand, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the chew. Exactly 8 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-17 pour l'article avis-whimzees.",
+  },
+  {
     id: 'art-comment-savoir-si-chien-trop-gros',
     group: 'articles',
     ratio: '3:2',

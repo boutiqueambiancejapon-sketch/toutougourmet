@@ -47,6 +47,7 @@ export const MARQUE_PAGES: MarquePage[] = [
   { nom: 'Taste of the Wild', href: avis('avis-taste-of-the-wild') },
   { nom: 'Ultima', href: avis('avis-ultima') },
   { nom: 'Ultra Premium Direct', href: '/chien/marque/ultra-premium-direct' },
+  { nom: 'Whimzees', href: avis('avis-whimzees') },
   { nom: 'Wolfsblut', href: avis('avis-wolfsblut') },
 ]
 

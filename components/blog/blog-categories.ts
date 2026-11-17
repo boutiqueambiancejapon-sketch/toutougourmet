@@ -158,6 +158,7 @@ const BREED_SLOT_BY_SLUG: Record<string, string> = {
  * Elle écrase aussi la cover breed historique pour les articles de race.
  */
 const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
+  'avis-whimzees': 'art-avis-whimzees',
   'comment-savoir-si-chien-trop-gros': 'art-comment-savoir-si-chien-trop-gros',
   'avis-dentalife': 'art-avis-dentalife',
   'avis-dentastix': 'art-avis-dentastix',
