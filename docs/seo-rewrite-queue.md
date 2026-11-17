@@ -54,8 +54,8 @@ Pages que Google montre juste après la première page (28 jours au 5 novembre).
 - [x] `chien-peut-manger-chou-fleur` · legumes · màj 2026-03-12 · réécrit 2026-11-07
 - [x] `chien-peut-manger-endives` · legumes · màj 2026-03-12 · réécrit 2026-11-07
 - [x] `chien-peut-manger-poivron` · legumes · màj 2026-03-12 · réécrit 2026-11-16
-- [ ] `meilleurs-legumes-chien` · legumes · màj 2026-03-12
-- [ ] `chien-peut-manger-asperges` · legumes · màj 2026-03-21
+- [x] `meilleurs-legumes-chien` · legumes · màj 2026-03-12 · réécrit 2026-11-17
+- [x] `chien-peut-manger-asperges` · legumes · màj 2026-03-21 · réécrit 2026-11-17
 - [ ] `chien-peut-manger-aubergines` · legumes · màj 2026-03-21
 - [ ] `chien-peut-manger-betterave` · legumes · màj 2026-03-21
 - [ ] `chien-peut-manger-butternut-potiron` · legumes · màj 2026-03-21
