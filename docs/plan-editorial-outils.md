@@ -260,7 +260,7 @@ Titre : « {Modèle} : avis et composition ». Les marques alternent dans la lis
 
 ### Duels et besoins
 
-- [ ] Royal Canin ou Pro Plan : lequel choisir pour son chien (royal canin ou proplan chien)
+- [x] Royal Canin ou Pro Plan : lequel choisir pour son chien (royal canin ou proplan chien) → royal-canin-vs-pro-plan
 - [ ] Quelles croquettes choisir chez Maxi Zoo (croquettes maxi zoo chien)
 - [ ] Orijen ou Acana : quelles différences (orijen ou acana)
 - [ ] Royal Canin ou Hill's : lequel choisir (royal canin ou hills)
