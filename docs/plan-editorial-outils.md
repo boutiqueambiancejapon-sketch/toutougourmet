@@ -322,7 +322,7 @@ Validé par le propriétaire (2026-11-04), d'après l'export Search Console. Ces
 - [x] Le chien peut-il manger des merguez ? → chien-peut-manger-merguez
 - [x] Le chien peut-il manger du skyr ? → chien-peut-manger-skyr
 - [x] Mon chien ne mange plus et reste couché : que faire ? (`bien-nourri`) → chien-ne-mange-plus-reste-couche
-- [ ] Ultra Premium Direct ou Franklin Pet Food : lequel choisir ? (`quiz`)
+- [~] Ultra Premium Direct ou Franklin Pet Food : lequel choisir ? (`quiz`) → franklin-vs-ultra-premium-direct (duel déjà en ligne sous /chien/marque)
 - [x] Le chien peut-il manger du curry ? → chien-peut-manger-curry
 - [~] Le chien peut-il manger des châtaignes ? → chataignes-marrons-inde-chien-difference-danger (déjà couvert, renforcé par la file de réécriture)
 - [x] Le chien peut-il manger du ketchup ? → chien-peut-manger-ketchup
