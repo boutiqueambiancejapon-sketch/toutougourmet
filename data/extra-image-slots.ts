@@ -28,7 +28,20 @@ export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
       'Full frame, subject edge to edge, dog and the two bowls filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the bowls. Exactly 8 small confetti, only in the corners, no text, no numbers, no humans.',
     decorations: ['confetti'],
     notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-18 pour l'article royal-canin-vs-pro-plan.",
+  },  {
+    id: 'art-pourquoi-chien-se-gratte',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'green',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A friendly medium-sized tan and white mixed-breed dog sitting on a light living-room rug, scratching behind its ear with its hind leg, eyes half closed, relaxed. Healthy coat, no lesions. No humans, no products, no logo, no writing.',
+    composition: 'Full frame, subject edge to edge. Exactly 8 small confetti, only in the corners.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-20 pour l'article pourquoi-chien-se-gratte.",
   },
+
   {
     id: 'art-chien-peut-manger-ketchup',
     group: 'articles',
