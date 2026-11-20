@@ -160,6 +160,7 @@ const BREED_SLOT_BY_SLUG: Record<string, string> = {
 const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'complement-alimentaire-chien': 'art-complement-alimentaire-chien',
   'chien-peut-manger-kaki': 'art-chien-peut-manger-kaki',
+  'chien-peut-manger-choux-de-bruxelles': 'art-chien-peut-manger-choux-de-bruxelles',
   'royal-canin-vs-pro-plan': 'art-royal-canin-vs-pro-plan',
   'pourquoi-chien-se-gratte': 'art-pourquoi-chien-se-gratte',
   'chien-peut-manger-ketchup': 'art-chien-peut-manger-ketchup',

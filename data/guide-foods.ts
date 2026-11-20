@@ -29,7 +29,7 @@ export const FOOD_FAMILY: Record<string, GuideFamily> = Object.fromEntries([
   ...fam('legumes', [
     'chien-peut-manger-asperges', 'chien-peut-manger-aubergines', 'chien-peut-manger-betterave', 'chien-peut-manger-brocoli',
     'chien-peut-manger-butternut-potiron', 'chien-peut-manger-carottes', 'chien-peut-manger-celeri', 'chien-peut-manger-champignons',
-    'chien-peut-manger-chou-fleur', 'chien-peut-manger-concombre', 'chien-peut-manger-cornichons', 'chien-peut-manger-courgette',
+    'chien-peut-manger-chou-fleur', 'chien-peut-manger-choux-de-bruxelles', 'chien-peut-manger-concombre', 'chien-peut-manger-cornichons', 'chien-peut-manger-courgette',
     'chien-peut-manger-endives', 'chien-peut-manger-epinards', 'chien-peut-manger-fenouil', 'chien-peut-manger-haricots-verts',
     'chien-peut-manger-lentilles', 'chien-peut-manger-navet', 'chien-peut-manger-olives', 'chien-peut-manger-petits-pois',
     'chien-peut-manger-pissenlits', 'chien-peut-manger-poivron', 'chien-peut-manger-radis', 'chien-peut-manger-salade',

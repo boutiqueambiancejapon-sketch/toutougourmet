@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-chien-peut-manger-choux-de-bruxelles',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, happy apricot Miniature Poodle (caniche) with a neatly groomed curly coat sitting on a warm wooden kitchen floor, looking with interest at a plain ceramic bowl of a few steamed green Brussels sprouts cut in quarters, with a few whole fresh Brussels sprouts on a small plain wooden board placed on a low wooden stool beside it, mouth closed, not eating. No humans, no packaging, no logo, no brand, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog, bowl and the Brussels sprouts filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the vegetables. Exactly 8 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-20 pour l'article chien-peut-manger-choux-de-bruxelles.",
+  },
+  {
     id: 'art-complement-alimentaire-chien',
     group: 'articles',
     ratio: '3:2',

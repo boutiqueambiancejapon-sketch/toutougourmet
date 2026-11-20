@@ -1748,3 +1748,4 @@
 - [ ] `royal-canin-vs-pro-plan` · nouvel article 2026-11-18
 - [ ] `chien-peut-manger-kaki` · nouvel article 2026-11-18
 - [ ] `complement-alimentaire-chien` · nouvel article 2026-11-20
+- [ ] `chien-peut-manger-choux-de-bruxelles` · nouvel article 2026-11-20
