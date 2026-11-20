@@ -158,6 +158,7 @@ const BREED_SLOT_BY_SLUG: Record<string, string> = {
  * Elle écrase aussi la cover breed historique pour les articles de race.
  */
 const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
+  'complement-alimentaire-chien': 'art-complement-alimentaire-chien',
   'chien-peut-manger-kaki': 'art-chien-peut-manger-kaki',
   'royal-canin-vs-pro-plan': 'art-royal-canin-vs-pro-plan',
   'chien-peut-manger-ketchup': 'art-chien-peut-manger-ketchup',

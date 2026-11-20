@@ -288,7 +288,7 @@ Règles de ces pages, en plus de celles de « Avis + Maxi Zoo » :
 - Barre collante : si un produit Maxi Zoo correspond exactement au sujet, ajouter au frontmatter `stickyProduct:` avec `name` (court) et `url` (lien de l'outil), et un bloc `<ProductPicks>` avant la FAQ. Aucun produit exact : pas de barre. Jamais sur une page d'urgence ou de maladie grave.
 - Frontmatter : même `category` et `categorySlug` que `huile-saumon-chien-bienfaits-dosage`. Une page par besoin, jamais par taille de flacon.
 
-- [ ] Complément alimentaire pour chien : lesquels servent vraiment (meilleur complement alimentaire chien) : page centrale, à écrire en premier
+- [x] Complément alimentaire pour chien : lesquels servent vraiment (meilleur complement alimentaire chien) : page centrale, à écrire en premier → complement-alimentaire-chien
 - [ ] Complément alimentaire pour les articulations du chien (complement alimentaire articulation chien, maxi zoo)
 - [ ] Complément alimentaire contre les démangeaisons du chien (meilleur complement alimentaire chien demangeaison)
 - [ ] Complément alimentaire pour chien senior (meilleur complement alimentaire chien senior)

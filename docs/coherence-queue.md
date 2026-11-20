@@ -1747,3 +1747,4 @@
   - Vérifié : 6 étiquettes Open Food Facts rouvertes (Heinz classique 22,8 g de sucres et 1,8 g de sel, sans oignon ni ail ; Heinz bio, Lidl et Jardin Bio étic avec oignon ou ail après le sel ; Heinz Zéro au sucralose ; Heinz −50 % à la stévia ; aucun xylitol), cuillère à soupe de 15 g = 3,4 g de sucres, sel (2 à 3 g par kilo, soit plus d'un kilo de ketchup pour 10 kg), xylitol 30 à 60 minutes et signes de l'oignon sur 5 jours (comme les fiches d'urgence), Akita et Shiba, tableau du guide barbecue
 - [ ] `royal-canin-vs-pro-plan` · nouvel article 2026-11-18
 - [ ] `chien-peut-manger-kaki` · nouvel article 2026-11-18
+- [ ] `complement-alimentaire-chien` · nouvel article 2026-11-20

@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-complement-alimentaire-chien',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, healthy German Shorthaired Pointer (braque allemand) with a liver and white ticked coat sitting on a warm wooden kitchen floor next to a plain ceramic bowl of kibble, beside a small amber glass bottle of fish oil without any label and a small plain ceramic dish of a few round capsules, looking at the bowl with interest, mouth closed, not eating. No humans, no packaging, no logo, no brand, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog, bowl and the small bottle filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the objects. Exactly 8 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-20 pour l'article complement-alimentaire-chien.",
+  },
+  {
     id: 'art-chien-peut-manger-kaki',
     group: 'articles',
     ratio: '3:2',
