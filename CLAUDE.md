@@ -38,8 +38,8 @@ Il n'est pas technique, parle français, suit souvent depuis son iPhone et veut 
 ## Projet
 
 Domaine : www.toutou-gourmet.com · tableau de bord : dashboard.toutou-gourmet.com (liens vers le site public toujours en absolu)
-Stack : Next.js 16.4.4 + React 19 + TypeScript strict + Tailwind v4 + MDX + PostgreSQL (Drizzle pour le schéma `app`, SQL à la main pour `analytics` dans `db/analytics.sql`)
-Next.js : 16.4.4 — ne jamais changer sans PR dédiée
+Stack : Next.js 16.4.6 + React 19 + TypeScript strict + Tailwind v4 + MDX + PostgreSQL (Drizzle pour le schéma `app`, SQL à la main pour `analytics` dans `db/analytics.sql`)
+Next.js : 16.4.6 — ne jamais changer sans PR dédiée
 Langue défaut : français à la racine (groupe `app/(fr)`), EN prévu sous `/en`
 Hébergement : VPS one.com (Caddy + systemd + PostgreSQL, voir `deploy/README.md`). Plus de Vercel depuis la bascule du 2026-11-02.
 Domaine : registrar Vercel, DNS chez Cloudflare depuis le 2026-11-11 (serveurs damon et joyce.ns.cloudflare.com), tous les enregistrements en « DNS only ». Le compte Vercel a été bloqué pour dépassement d'usage (offre Hobby) le même jour.
