@@ -31,7 +31,7 @@ export function ScannerTiles({ counts, reports }: { counts: ScannerCounts; repor
       <div className="col-span-2 md:col-span-1">
         <Tile value={reports === null ? '?' : nf.format(reports)} label="Signalements à lire" detail={reports === null ? 'Lecture impossible' : undefined} />
         {reports ? (
-          <Link href="/tableau-de-bord/contenu#fiches" className="mt-1 block text-xs text-ink-2 underline underline-offset-2">
+          <Link href="/tableau-de-bord/relecture#fiches" className="mt-1 block text-xs text-ink-2 underline underline-offset-2">
             Ouvrir les fiches à relire
           </Link>
         ) : null}

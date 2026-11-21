@@ -259,3 +259,68 @@ ALTER TABLE analytics.scanner_events ADD COLUMN IF NOT EXISTS ean text, ADD COLU
 
 -- Search Console par page et par jour (2026-11-11) : nouvelles pages et leur évolution dans /tableau-de-bord/recherche.
 CREATE TABLE IF NOT EXISTS analytics.gsc_pages_daily (day date NOT NULL, page text NOT NULL, clicks integer NOT NULL, impressions integer NOT NULL, position real NOT NULL, PRIMARY KEY (day, page));
+
+-- Tableau de bord SEO (2026-11-21). Search Console par jour et par appareil (DESKTOP, MOBILE, TABLET), relevée chaque nuit
+-- par scripts/seo/collect.ts (10 derniers jours réécrits) et rattrapée depuis le 5 mars 2026. Ancres (#section) fusionnées.
+CREATE TABLE IF NOT EXISTS analytics.gsc_site_daily (day date NOT NULL, device text NOT NULL, clicks integer NOT NULL, impressions integer NOT NULL, position real NOT NULL, PRIMARY KEY (day, device));
+CREATE TABLE IF NOT EXISTS analytics.gsc_page_daily (day date NOT NULL, page text NOT NULL, device text NOT NULL, clicks integer NOT NULL, impressions integer NOT NULL, position real NOT NULL, PRIMARY KEY (day, page, device));
+CREATE INDEX IF NOT EXISTS gsc_page_daily_page_idx ON analytics.gsc_page_daily (page, day);
+CREATE TABLE IF NOT EXISTS analytics.gsc_qp_daily (day date NOT NULL, query text NOT NULL, page text NOT NULL, device text NOT NULL, clicks integer NOT NULL, impressions integer NOT NULL, position real NOT NULL, PRIMARY KEY (day, query, page, device));
+CREATE INDEX IF NOT EXISTS gsc_qp_daily_query_idx ON analytics.gsc_qp_daily (query, day);
+CREATE INDEX IF NOT EXISTS gsc_qp_daily_page_idx ON analytics.gsc_qp_daily (page, day);
+
+-- Inspection d'URL de Google (scripts/seo/inspect.ts, au plus 2 000 adresses par nuit) : état d'indexation et raison.
+CREATE TABLE IF NOT EXISTS analytics.url_inspection (
+  path text PRIMARY KEY, checked_at timestamptz NOT NULL, verdict text, coverage text, indexing_state text, page_fetch text,
+  robots text, last_crawl timestamptz, google_canonical text, user_canonical text, error text
+);
+
+-- Audit des pages du plan du site, chaque nuit (scripts/seo/audit.ts) : balises et liens internes (graphe).
+CREATE TABLE IF NOT EXISTS analytics.page_audit (
+  path text PRIMARY KEY, checked_at timestamptz NOT NULL, status integer NOT NULL, title text, description text,
+  canonical text, h1 text, noindex boolean NOT NULL DEFAULT false, in_sitemap boolean NOT NULL DEFAULT true, links_out integer NOT NULL DEFAULT 0
+);
+CREATE TABLE IF NOT EXISTS analytics.page_links (src text NOT NULL, dst text NOT NULL, PRIMARY KEY (src, dst));
+CREATE INDEX IF NOT EXISTS page_links_dst_idx ON analytics.page_links (dst);
+CREATE TABLE IF NOT EXISTS analytics.link_status (path text PRIMARY KEY, status integer NOT NULL, checked_at timestamptz NOT NULL);
+
+-- Notes posées sur les courbes : à la main (tableau de bord) ou par les tâches (source = auto, ref unique).
+CREATE TABLE IF NOT EXISTS analytics.seo_notes (
+  id bigserial PRIMARY KEY, day date NOT NULL, kind text NOT NULL, text text NOT NULL, source text NOT NULL DEFAULT 'manuel',
+  ref text UNIQUE, created_at timestamptz NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS seo_notes_day_idx ON analytics.seo_notes (day);
+
+-- « Marquer comme fait » des 5 actions du jour : la clé de l'action (stable d'un jour à l'autre).
+CREATE TABLE IF NOT EXISTS analytics.seo_actions_done (key text PRIMARY KEY, title text NOT NULL, done_at timestamptz NOT NULL DEFAULT now());
+
+-- Ventes réelles recopiées du centre de contrôle (table commissions), chaque nuit (scripts/seo/sync-revenue.mjs).
+CREATE TABLE IF NOT EXISTS analytics.revenue_sales (
+  project text NOT NULL, day date NOT NULL, program text NOT NULL, amount real NOT NULL, sales integer NOT NULL, status text NOT NULL,
+  PRIMARY KEY (project, day, program)
+);
+
+-- Filtre anti-robots (2026-11-21) : empreinte du jour (sel en base, effacé après 2 jours) posée sur les pages vues humaines
+-- et sur les balises JS reçues. Une empreinte qui enchaîne les pages sans jamais envoyer la balise est un robot.
+CREATE TABLE IF NOT EXISTS analytics.daily_salt (day date PRIMARY KEY, salt text NOT NULL);
+CREATE TABLE IF NOT EXISTS analytics.beacon_seen (day date NOT NULL, vkey text NOT NULL, PRIMARY KEY (day, vkey));
+ALTER TABLE analytics.hits ADD COLUMN IF NOT EXISTS vkey text;
+CREATE INDEX IF NOT EXISTS hits_vkey_idx ON analytics.hits (vkey, ts) WHERE vkey IS NOT NULL;
+
+ALTER TABLE analytics.gsc_site_daily OWNER TO toutou;
+ALTER TABLE analytics.gsc_page_daily OWNER TO toutou;
+ALTER TABLE analytics.gsc_qp_daily OWNER TO toutou;
+ALTER TABLE analytics.url_inspection OWNER TO toutou;
+ALTER TABLE analytics.page_audit OWNER TO toutou;
+ALTER TABLE analytics.page_links OWNER TO toutou;
+ALTER TABLE analytics.link_status OWNER TO toutou;
+ALTER TABLE analytics.seo_notes OWNER TO toutou;
+ALTER TABLE analytics.seo_actions_done OWNER TO toutou;
+ALTER TABLE analytics.revenue_sales OWNER TO toutou;
+ALTER TABLE analytics.daily_salt OWNER TO toutou;
+ALTER TABLE analytics.beacon_seen OWNER TO toutou;
+-- Ingestion des journaux (compte administrator) : sel du jour, balises vues, reclassement des robots.
+GRANT SELECT, INSERT, DELETE ON analytics.daily_salt, analytics.beacon_seen TO administrator;
+GRANT UPDATE ON analytics.hits TO administrator;
+-- Recopie des ventes du centre de contrôle (compte administrator, seul à lire sa base).
+GRANT SELECT, INSERT, UPDATE, DELETE ON analytics.revenue_sales TO administrator;

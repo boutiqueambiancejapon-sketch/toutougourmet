@@ -10,7 +10,7 @@ export const LIMITS = { loadPerCore: 0.8, memoryFree: 0.15, diskFree: 0.15 } as 
 /** Alerte et onglet du tableau de bord qui en montre le détail. */
 export interface HealthAlert {
   text: string
-  tab: 'serveur' | 'contenu'
+  tab: 'serveur' | 'relecture'
 }
 
 export interface ServerHealth {
@@ -40,7 +40,7 @@ function alertsOf({ host, tasks, backup }: Pick<ServerHealth, 'host' | 'tasks' |
   }
   for (const t of tasks) {
     // La tâche de nuit se lit dans l'onglet Contenu, les autres dans Serveur.
-    const tab = t.unit === 'toutou-seo-rewrite' || t.unit.startsWith('toutou-article') ? 'contenu' : 'serveur'
+    const tab = t.unit === 'toutou-seo-rewrite' || t.unit.startsWith('toutou-article') ? 'relecture' : 'serveur'
     if (t.state === 'failed') push(`${t.label} : le dernier passage a échoué.`, tab)
     if (t.state === 'stopped') push(`${t.label} : la tâche planifiée est arrêtée.`, tab)
   }

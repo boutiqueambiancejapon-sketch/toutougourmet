@@ -24,7 +24,7 @@ export default async function ContentTab(props: TabPageProps) {
   const [{ data, ok }, logs, tone] = await Promise.all([loadContent(), getNightLogs(7), getToneProgress()])
   const unread = data.messages.filter((m) => !m.handled).length
   return (
-    <DashboardShell period={period.key} current="contenu" noPeriod notice={ok ? null : READ_FAILED}>
+    <DashboardShell period={period.key} current="relecture" noPeriod notice={ok ? null : READ_FAILED}>
       <ContentTodo messages={unread} review={data.review.length} imported={data.imported?.total ?? null} checks={logs[0]?.checks.length ?? 0} />
       <ToneCard progress={tone} />
       <p className="m-0 mt-4">

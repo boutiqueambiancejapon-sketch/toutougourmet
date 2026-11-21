@@ -37,12 +37,12 @@ export default async function RecherchePage({ searchParams }: { searchParams: Pr
   return (
     <DashboardShell
       period={parsePeriod(undefined).key}
-      current="contenu"
+      current="relecture"
       title="Recherche Google"
       intro={`Ce que les gens tapent dans Google avant d’arriver sur le site, du ${date(r.debut)} au ${date(r.fin)} (Google publie avec deux jours de retard).`}
       notice={r.ok ? null : 'La Search Console n’a pas répondu. Les chiffres reviendront au prochain chargement.'}
     >
-      <p className="m-0 mt-3 text-sm"><Link href="/tableau-de-bord/contenu" className="text-ink-2 underline underline-offset-2">Retour à l’onglet Contenu</Link></p>
+      <p className="m-0 mt-3 text-sm"><Link href="/tableau-de-bord/relecture" className="text-ink-2 underline underline-offset-2">Retour à l’onglet Contenu</Link></p>
       <form method="get" role="search" className="mt-4 flex gap-2">
         <label className="flex grow">
           <span className="sr-only">Mot-clé ou adresse</span>

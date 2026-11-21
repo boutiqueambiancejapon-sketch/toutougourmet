@@ -29,7 +29,7 @@ export function TodoList({ counts, period }: { counts: TodoCounts; period: Perio
             return (
               <li key={i.key}>
                 <Link
-                  href={tabHref('contenu', period, i.hash)}
+                  href={tabHref('relecture', period, i.hash)}
                   className="flex min-h-12 items-center justify-between gap-3 px-3 py-2.5 text-ink no-underline hover:bg-cream"
                 >
                   <span className="min-w-0">{i.label}</span>

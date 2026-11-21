@@ -1,11 +1,11 @@
 import type { ReactNode } from 'react'
-import type { PeriodKey } from '@/lib/dashboard/period'
-import { tabOf, type TabSlug } from '@/lib/dashboard/tabs'
-import { dashboardAuthMode } from '@/lib/server/dashboard-login/mode'
-import { DashboardHeader } from './DashboardHeader'
+import Link from 'next/link'
+import { PERIODS, type PeriodKey } from '@/lib/dashboard/period'
+import { tabHref, tabOf, type TabSlug } from '@/lib/dashboard/tabs'
+import { SeoShell } from '@/components/seo-dash/shell/SeoShell'
 
-// @cdc tableau de bord — cadre commun à l'accueil et aux onglets : en-tête, titre (le nom de
-// l'onglet), la question à laquelle il répond, puis ses blocs.
+// @cdc tableau de bord — cadre des outils (anciens écrans) : même menu que le tableau de bord SEO, avec leur
+// propre sélecteur de période (?periode=24h|7j|30j|90j) quand ils en ont un.
 
 interface ShellProps {
   period: PeriodKey
@@ -19,29 +19,40 @@ interface ShellProps {
   intro?: string
   /** Base injoignable ou lecture en échec : dit en clair, la page reste debout. */
   notice?: string | null
-  /** Vrai sur l'écran Sécurité : aucun onglet allumé. */
+  /** Vrai sur l'écran Sécurité. */
   security?: boolean
+  /** Entrée du menu à allumer quand elle diffère de l'onglet d'origine (ex. « scanner », « assistant »). */
+  tool?: string
   children: ReactNode
 }
 
-export async function DashboardShell({ period, current, sub, noPeriod, title, intro, notice, security = false, children }: ShellProps) {
+const NAV_OF: Record<string, string> = { robots: 'exploration', trafic: '' }
+
+export function DashboardShell({ period, current, sub, noPeriod, title, intro, notice, security = false, tool, children }: ShellProps) {
   const tab = tabOf(current)
-  const hasLogin = (await dashboardAuthMode()) === 'login'
+  const nav = tool ?? (security ? 'securite' : (NAV_OF[current] ?? current))
   return (
-    <>
-      <DashboardHeader period={period} current={current} sub={sub} noPeriod={noPeriod} securityLink={hasLogin} onSecurity={security} />
-      <main className="mx-auto w-full max-w-page px-4 pb-16 md:px-8">
-        <div className="pt-5">
-          <h1 className="page-title m-0 text-ink">{title ?? (current ? tab.label : 'Tableau de bord')}</h1>
-          <p className="m-0 mt-1 max-w-prose text-sm text-ink-2">{intro ?? tab.question}</p>
-        </div>
-        {notice ? (
-          <p role="status" className="m-0 mt-4 rounded-box border border-amber bg-amber-bg px-4 py-3 text-sm text-amber-ink">
-            {notice}
-          </p>
-        ) : null}
-        {children}
-      </main>
-    </>
+    <SeoShell current={nav} title={title ?? (current ? tab.label : 'Tableau de bord')} sub={intro ?? tab.question} legacy>
+      {noPeriod ? null : (
+        <nav aria-label="Période" className="flex w-fit gap-0.5 rounded-pill bg-cream-2 p-0.5">
+          {(Object.keys(PERIODS) as PeriodKey[]).map((key) => (
+            <Link
+              key={key}
+              href={tabHref(current, key, '', sub)}
+              aria-current={key === period ? 'true' : undefined}
+              className={`inline-flex min-h-9 min-w-10 items-center justify-center whitespace-nowrap rounded-pill px-2 text-sm font-semibold no-underline ${key === period ? 'bg-ink text-cream' : 'text-ink-2 hover:text-ink'}`}
+            >
+              {PERIODS[key].label}
+            </Link>
+          ))}
+        </nav>
+      )}
+      {notice ? (
+        <p role="status" className="m-0 mt-4 rounded-box border border-amber bg-amber-bg px-4 py-3 text-sm text-amber-ink">
+          {notice}
+        </p>
+      ) : null}
+      {children}
+    </SeoShell>
   )
 }

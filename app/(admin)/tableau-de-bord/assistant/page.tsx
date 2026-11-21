@@ -24,13 +24,14 @@ export default async function AssistantSuiviPage() {
   return (
     <DashboardShell
       period={parsePeriod(undefined).key}
-      current="contenu"
+      current="relecture"
+      tool="assistant"
       title="Milo, l’assistant"
       intro="Questions posées, réponses, coût, comptes ouverts grâce au chat et clics vers les partenaires. Le coût est une estimation : 0,001 $ par appel à l’IA."
       notice={s.ok ? null : READ_FAILED}
     >
       <p className="m-0 mt-3 text-sm">
-        <Link href="/tableau-de-bord/contenu" className="text-ink-2 underline underline-offset-2">Retour à l’onglet Contenu</Link>
+        <Link href="/tableau-de-bord/relecture" className="text-ink-2 underline underline-offset-2">Retour à l’onglet Contenu</Link>
         {' · '}
         <a href="https://www.toutou-gourmet.com/assistant" className="text-ink-2 underline underline-offset-2">Ouvrir Milo sur le site</a>
       </p>
