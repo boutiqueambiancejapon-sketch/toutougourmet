@@ -8,6 +8,7 @@ import { chartNotes } from '@/lib/seo-dash/server/notes'
 import { openSeoPage, param, type SeoPageProps } from '@/lib/seo-dash/server/page'
 import { readBlock } from '@/lib/seo-dash/server/sql'
 import { pageVitals } from '@/lib/seo-dash/server/vitals'
+import { GoogleDelay } from '@/components/seo-dash/ui/GoogleDelay'
 import { SeoShell } from '@/components/seo-dash/shell/SeoShell'
 import { Tile } from '@/components/seo-dash/ui/Tile'
 import { Card } from '@/components/seo-dash/ui/Card'
@@ -33,6 +34,7 @@ export default async function PageDetailPage(props: SeoPageProps) {
   const clicks = d?.partnerClicks.reduce((a, x) => a + x.n, 0) ?? 0
   return (
     <SeoShell current="google" title={title} sub="Détail d’une page · même gabarit pour toutes les pages" filters={f} path={hrefOf('google/page')} keep={{ u: path }} fresh={d ? `Google : données jusqu’au ${dayLabel(d.ranges.last)}` : undefined}>
+      <GoogleDelay filters={f} last={d?.ranges.last} />
       <p className="sd-crumb">
         <Link href={hrefOf('google', query)}>Google</Link> › <Link href={`${hrefOf('google', query)}#requetes`}>Pages</Link> › {pageTypeLabel(pageTypeOf(path))}
       </p>

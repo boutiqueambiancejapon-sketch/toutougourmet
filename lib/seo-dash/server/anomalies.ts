@@ -1,5 +1,5 @@
 import type { Pool } from 'pg'
-import type { Filters } from '../filters'
+import { PERIOD_LABEL, type Filters } from '../filters'
 import { dayLabel, n0, pct } from '../format'
 import { googlebotSql } from './crawl'
 import { deltas, gscAgg } from './gsc-core'
@@ -44,7 +44,7 @@ export async function anomalies(pool: Pool, f: Filters, links: AnomalyLinks): Pr
     out.push({
       status: 'warn',
       text: `Le taux de clic baisse (${pct(shift.prev.ctr)} → ${pct(shift.cur.ctr)}) alors que les affichages montent (+${n0(Math.round(((shift.cur.impressions - shift.prev.impressions) / shift.prev.impressions) * 100))} %) : de nouvelles pages apparaissent, encore bas dans Google.`,
-      meta: `${f.days} jours`,
+      meta: PERIOD_LABEL[f.period],
       href: links.google,
       hrefLabel: 'Google',
     })
@@ -65,7 +65,7 @@ export async function anomalies(pool: Pool, f: Filters, links: AnomalyLinks): Pr
     const [a, b] = await Promise.all([gscAgg(pool, f, r.cur, 'page'), gscAgg(pool, f, r.prev, 'page')])
     const best = deltas(a, b, 1).up[0]
     if (best && best.diff >= 10) {
-      out.push({ status: 'good', text: `« ${best.key.split('/').pop()} » : +${n0(best.diff)} clics, meilleure progression du site.`, meta: `${f.days} jours`, href: links.page(best.key), hrefLabel: 'Page' })
+      out.push({ status: 'good', text: `« ${best.key.split('/').pop()} » : +${n0(best.diff)} clics, meilleure progression du site.`, meta: PERIOD_LABEL[f.period], href: links.page(best.key), hrefLabel: 'Page' })
     }
   }
   return out

@@ -24,16 +24,16 @@ export function DirectTabs({ current, query }: { current: 'en-direct' | 'sources
   )
 }
 
-export function ChannelsCard({ families, buckets, week, csv }: { families: FamilyRow[]; buckets: Bucket[]; week: boolean; csv: string }) {
+export function ChannelsCard({ families, buckets, step, csv }: { families: FamilyRow[]; buckets: Bucket[]; step: string; csv: string }) {
   const shown = families.filter((f) => f.visits > 0)
   return (
-    <Card title="Visites par canal" desc={`${week ? 'Par semaine' : 'Par jour'} · navigation interne exclue`} csv={csv}>
+    <Card title="Visites par canal" desc={`Par ${step} · navigation interne exclue`} csv={csv}>
       <Bars
         labels={buckets.map((b) => b.label)}
         titles={buckets.map((b) => b.title)}
         series={(shown.length ? shown : families).map((f) => ({ key: f.family, label: f.label, color: f.color, values: f.spark }))}
         height={220}
-        label="Visites par canal et par jour"
+        label={`Visites par canal et par ${step}`}
       />
     </Card>
   )

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { SITE } from '@/lib/seo-dash/config'
-import { filterQuery } from '@/lib/seo-dash/filters'
+import { filterQuery, isHourly } from '@/lib/seo-dash/filters'
 import { dayLabel, n0, pct } from '@/lib/seo-dash/format'
 import { csvHref, hrefOf } from '@/lib/seo-dash/nav'
 import { exploration } from '@/lib/seo-dash/server/exploration'
@@ -20,6 +20,7 @@ export const dynamic = 'force-dynamic'
 
 export default async function ExplorationPage(props: SeoPageProps) {
   const { filters: f, params, query } = await openSeoPage(props)
+  const unit = isHourly(f) ? 'heure' : 'jour'
   const robot = param(params, 'robot') === 'bing' ? 'bing' : 'google'
   const res = await readBlock('exploration', null, (pool) => exploration(pool, f, robot))
   const d = res.value
@@ -42,14 +43,14 @@ export default async function ExplorationPage(props: SeoPageProps) {
       {d ? (
         <>
           <div className="sd-grid sd-g4 k2">
-            <Tile label={`${name}, pages par jour`} value={n0(Math.round(d.total / Math.max(1, d.days.filter((x) => x >= SITE.logsStart).length)))} note={`${n0(d.total)} passages en ${d.days.filter((x) => x >= SITE.logsStart).length} jours`} />
+            <Tile label={`${name}, pages par ${unit}`} value={n0(Math.round(d.total / Math.max(1, d.days.filter((x) => x >= SITE.logsStart).length)))} note={`${n0(d.total)} passages en ${d.days.filter((x) => x >= SITE.logsStart).length} ${unit === 'heure' ? 'heures' : 'jours'}`} />
             <Tile label="Réponses correctes (200)" value={d.total ? pct(d.status.ok / d.total) : '—'} note={`${n0(d.status.e404)} erreurs 4xx · ${n0(d.status.e5xx)} erreurs 5xx`} />
             <Tile label="Robots d’IA" value={n0(d.aiTotal)} note={`passages sur la période`} />
             <Tile label="Jamais vues par Google" value={<>{n0(d.never.paths.length)} <small>/ {n0(d.never.sitemap)}</small></>} note="adresses du plan du site" />
           </div>
           <div className="sd-grid sd-g3 sd-gap">
             <div className="sd-span2">
-              <Card title={`${name} par jour et type de page`} desc={`Journaux du serveur${robot === 'google' ? ' (Googlebot vérifié par ses adresses)' : ''}`} tools={seg}>
+              <Card title={`${name} par ${unit} et type de page`} desc={`Journaux du serveur${robot === 'google' ? ' (Googlebot vérifié par ses adresses)' : ''}`} tools={seg}>
                 <Bars
                   labels={labels}
                   series={[
@@ -59,7 +60,7 @@ export default async function ExplorationPage(props: SeoPageProps) {
                     { key: 'asset', label: 'images et fichiers', color: 'var(--sd-s4)', values: d.byDay.asset },
                   ]}
                   height={230}
-                  label={`${name} par jour et type de page`}
+                  label={`${name} par ${unit} et type de page`}
                 />
               </Card>
             </div>
@@ -69,7 +70,7 @@ export default async function ExplorationPage(props: SeoPageProps) {
           </div>
           <div className="sd-grid sd-g3 sd-gap">
             <div className="sd-span2">
-              <Card title="Robots d’IA par jour">
+              <Card title={`Robots d’IA par ${unit}`}>
                 <LineChart
                   days={d.days}
                   series={[
@@ -77,7 +78,7 @@ export default async function ExplorationPage(props: SeoPageProps) {
                     { key: 't', label: 'pour entraîner', color: 'var(--sd-s3)', values: d.aiDaily.ai_training },
                     { key: 'u', label: 'demandé par un utilisateur', color: 'var(--sd-s4)', values: d.aiDaily.ai_user },
                   ]}
-                  label="Passages des robots d’IA par jour"
+                  label={`Passages des robots d’IA par ${unit}`}
                 />
               </Card>
             </div>

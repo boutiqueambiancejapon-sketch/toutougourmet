@@ -1,5 +1,5 @@
 import { SITE } from '@/lib/seo-dash/config'
-import { lastLabel } from '@/lib/seo-dash/filters'
+import { lastLabel, isHourly } from '@/lib/seo-dash/filters'
 import { dayLabel, eur, n0, n1, pct, pct0 } from '@/lib/seo-dash/format'
 import { csvHref, hrefOf } from '@/lib/seo-dash/nav'
 import { openSeoPage, type SeoPageProps } from '@/lib/seo-dash/server/page'
@@ -20,6 +20,7 @@ const COLORS = ['var(--sd-s1)', 'var(--sd-s2)', 'var(--sd-s3)', 'var(--sd-s4)']
 
 export default async function RevenuePage(props: SeoPageProps) {
   const { filters: f, query } = await openSeoPage(props)
+  const unit = isHourly(f) ? 'heure' : 'jour'
   const res = await readBlock('revenus', null, (pool) => revenueData(pool, f))
   const d = res.value
   const share = d ? Math.min(1, d.month.amount / SITE.goalMonthly) : 0
@@ -40,8 +41,8 @@ export default async function RevenuePage(props: SeoPageProps) {
           </div>
           <div className="sd-grid sd-g3 sd-gap">
             <div className="sd-span2">
-              <Card title="Clics partenaires par jour" desc="Les revenus suivent les clics Dog Chef et Franklin ; les autres n’ont pas encore de valeur">
-                <Bars labels={d.days.map(dayLabel)} series={d.byBrandDay.map((b, i) => ({ key: b.brand, label: b.brand, color: COLORS[i] ?? 'var(--sd-prev)', values: b.values }))} label="Clics partenaires par jour et par marque" />
+              <Card title={`Clics partenaires par ${unit}`} desc="Les revenus suivent les clics Dog Chef et Franklin ; les autres n’ont pas encore de valeur">
+                <Bars labels={d.days.map(dayLabel)} series={d.byBrandDay.map((b, i) => ({ key: b.brand, label: b.brand, color: COLORS[i] ?? 'var(--sd-prev)', values: b.values }))} label={`Clics partenaires par ${unit} et par marque`} />
               </Card>
             </div>
             <ByPartner brands={d.brands} csv={csvHref('partenaires', query)} />

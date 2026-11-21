@@ -1,7 +1,7 @@
 import type { Pool } from 'pg'
 import { SITE } from '../config'
 import type { Filters } from '../filters'
-import { daysOf, type Range, type Ranges } from './range'
+import { bucketSql, daysOf, spanSql, type Range, type Ranges } from './range'
 import { filterSql, num, Params } from './sql'
 
 // @cdc tableau de bord SEO — chiffres du site lui-même (balise JS, analytics.events, propriétaire exclu) : visiteurs
@@ -39,11 +39,11 @@ export async function siteDaily(pool: Pool, f: Filters, r: Range): Promise<SiteD
   const p = new Params()
   const where = filterSql(f, p, { pageCol: 'page', deviceCol: 'device', deviceKind: 'hits' })
   const { rows } = await pool.query(
-    `SELECT (ts AT TIME ZONE 'Europe/Paris')::date::text AS day, name, coalesce(props->>'brand', '') AS brand,
+    `SELECT ${bucketSql(r)} AS day, name, coalesce(props->>'brand', '') AS brand,
             count(*)::int AS n, count(DISTINCT visitor)::int AS v
        FROM analytics.events
       WHERE name IN ('Pageview', 'Affiliate Click', 'Account Created')
-        AND ts >= (${p.add(r.start)}::date AT TIME ZONE 'Europe/Paris') AND ts < ((${p.add(r.end)}::date + 1) AT TIME ZONE 'Europe/Paris')${where}
+        AND ${spanSql(p, r)}${where}
       GROUP BY 1, 2, 3`,
     p.values,
   )
@@ -84,7 +84,21 @@ export interface SiteKpis {
   prev: SiteTotals | null
 }
 
+/** Visiteurs distincts d'une fenêtre en heures (additionner les heures compterait plusieurs fois la même personne). */
+async function visitorsIn(pool: Pool, f: Filters, r: Range): Promise<number> {
+  const p = new Params()
+  const where = filterSql(f, p, { pageCol: 'page', deviceCol: 'device', deviceKind: 'hits' })
+  const { rows } = await pool.query<{ v: number }>(`SELECT count(DISTINCT visitor)::int AS v FROM analytics.events WHERE name = 'Pageview' AND ${spanSql(p, r)}${where}`, p.values)
+  return num(rows[0]?.v)
+}
+
 export async function siteKpis(pool: Pool, f: Filters, ranges: Ranges): Promise<SiteKpis> {
   const [daily, prevDaily] = await Promise.all([siteDaily(pool, f, ranges.cur), ranges.prev ? siteDaily(pool, f, ranges.prev) : Promise.resolve([])])
-  return { ranges, daily, prevDaily, cur: sumDays(daily), prev: ranges.prev && !ranges.partial ? sumDays(prevDaily) : null }
+  const cur = { ...sumDays(daily) }
+  const prev = ranges.prev && !ranges.partial ? { ...sumDays(prevDaily) } : null
+  if (ranges.cur.hourly) {
+    cur.visitors = await visitorsIn(pool, f, ranges.cur)
+    if (prev && ranges.prev) prev.visitors = await visitorsIn(pool, f, ranges.prev)
+  }
+  return { ranges, daily, prevDaily, cur, prev }
 }

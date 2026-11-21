@@ -2,7 +2,7 @@ import type { Pool } from 'pg'
 import { SITE } from '../config'
 import type { Filters } from '../filters'
 import { tsIn } from './crawl'
-import { clipStart, daysOf, logRanges, type Ranges } from './range'
+import { bucketSql, clipStart, daysOf, logRanges, type Ranges } from './range'
 import { clickValue } from './site'
 import { filterSql, Params } from './sql'
 
@@ -43,7 +43,7 @@ export async function revenueData(pool: Pool, f: Filters): Promise<RevenueData> 
   const span = tsIn(p, ranges.cur)
   const [clicks, views, real] = await Promise.all([
     pool.query<{ day: string; page: string; brand: string; n: number }>(
-      `SELECT (ts AT TIME ZONE 'Europe/Paris')::date::text AS day, page, coalesce(props->>'brand', '?') AS brand, count(*)::int AS n
+      `SELECT ${bucketSql(ranges.cur)} AS day, page, coalesce(props->>'brand', '?') AS brand, count(*)::int AS n
          FROM analytics.events WHERE name = 'Affiliate Click' AND ${span}${where} GROUP BY 1, 2, 3`,
       p.values,
     ),

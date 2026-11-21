@@ -1,6 +1,6 @@
 import type { Pool } from 'pg'
 import { SITE } from '../config'
-import type { Range } from './range'
+import { spanSql, type Range } from './range'
 import { Params } from './sql'
 
 // @cdc tableau de bord SEO — journaux du serveur (analytics.hits) : Googlebot vérifié par les plages d'adresses
@@ -44,8 +44,7 @@ export function crawlGroupSql(p: Params): string {
   return `CASE WHEN ${ASSET_SQL} THEN 'asset' WHEN path ~ ${p.add(fiche)} THEN 'fiche' WHEN path ~ ${p.add(article)} THEN 'article' ELSE 'autre' END`
 }
 
-export const tsIn = (p: Params, r: Range, col = 'ts'): string =>
-  `${col} >= (${p.add(r.start)}::date AT TIME ZONE 'Europe/Paris') AND ${col} < ((${p.add(r.end)}::date + 1) AT TIME ZONE 'Europe/Paris')`
+export const tsIn = (p: Params, r: Range, col = 'ts'): string => spanSql(p, r, col)
 
 export interface ErrorRow {
   path: string

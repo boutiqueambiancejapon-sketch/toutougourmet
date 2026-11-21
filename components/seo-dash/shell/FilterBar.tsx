@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { SITE } from '@/lib/seo-dash/config'
-import { COMPARE_LABEL, DEVICE_LABEL, filterQuery, PERIOD_LABEL, type CompareKey, type DeviceKey, type Filters, type PeriodKey } from '@/lib/seo-dash/filters'
+import { COMPARE_LABEL, DEVICE_LABEL, filterQuery, PERIOD_LABEL, prevPeriodLabel, type CompareKey, type DeviceKey, type Filters, type PeriodKey } from '@/lib/seo-dash/filters'
 
 // @cdc tableau de bord SEO — une rangée de filtres au-dessus de tout ce qu'elle règle (période d'abord). Menus en
 // <details> : de simples liens, sans JavaScript, l'adresse garde l'état et se partage.
@@ -37,13 +37,13 @@ export function FilterBar({ filters, path, keep = {}, fresh, hide = [] }: Props)
   const go = (change: Partial<Filters>) => `${path}${filterQuery(filters, change, keep)}`
   const periods = Object.entries(PERIOD_LABEL) as [PeriodKey, string][]
   const compares: [CompareKey, string][] = [
-    ['avant', `${PERIOD_LABEL[filters.period]} d’avant`],
+    ['avant', prevPeriodLabel(filters.period)],
     ['annee', 'l’an dernier'],
     ['aucune', 'rien'],
   ]
   const types: [string, string][] = [['toutes', 'Toutes'], ...SITE.pageTypes.map((t): [string, string] => [t.key, t.plural])]
   const devices = Object.entries(DEVICE_LABEL) as [DeviceKey, string][]
-  const compareValue = filters.compare === 'avant' ? `${PERIOD_LABEL[filters.period]} d’avant` : COMPARE_LABEL[filters.compare]
+  const compareValue = filters.compare === 'avant' ? prevPeriodLabel(filters.period) : COMPARE_LABEL[filters.compare]
   return (
     <div className="sd-filters" role="group" aria-label="Filtres de la page">
       <Menu label="Période" value={PERIOD_LABEL[filters.period]} options={periods} current={filters.period} href={(k) => go({ period: k, days: 0 })} />
