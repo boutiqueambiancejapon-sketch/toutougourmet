@@ -5,6 +5,8 @@
 # puis le lien "current" bascule dessus. La version en ligne n'est jamais touchée
 # pendant le build (pas de npm ci dans le dossier servi).
 set -euo pipefail
+export PATH="/usr/local/bin:${PATH:-/usr/bin:/bin}"
+command -v vps-build >/dev/null || vps-build() { while [[ $1 != -- ]]; do shift; done; shift; "$@"; }
 
 ROOT=/srv/toutou
 REPO="$ROOT/repo"            # clone git (lecture seule, clé de déploiement)
@@ -41,9 +43,10 @@ if [[ -n "$PREV" && -d "$PREV/node_modules" && -f "$PREV/package-lock.json" ]] &
   echo "→ Bibliothèques inchangées : réutilisées"
   cp -al "$PREV/node_modules" node_modules
 else
-  npm ci --no-audit --no-fund
+  vps-build --name toutou-npm-ci -- npm ci --no-audit --no-fund
 fi
-NODE_OPTIONS=--max-old-space-size=4096 npm run build
+# File d'attente commune du serveur (Safeguard) : un seul build à la fois, mémoire bornée.
+NODE_OPTIONS=--max-old-space-size=4096 vps-build --name toutou-deploy -- npm run build
 
 echo "→ Bascule vers $SHA"
 ln -sfn "$DEST" "$ROOT/current.new"

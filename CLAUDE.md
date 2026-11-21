@@ -50,7 +50,7 @@ Mode de travail : le code vit sur le VPS, Claude Code y tourne (Remote Control d
 ### Déployer
 
 1. Branche depuis `v2`, modifs, `npx tsc --noEmit`, lint des fichiers touchés.
-2. `NODE_OPTIONS=--max-old-space-size=4096 nice -n 10 npm run build` (un seul build à la fois).
+2. `NODE_OPTIONS=--max-old-space-size=4096 vps-build -- npm run build`. **Tout build ou `npm ci` passe par `vps-build -- <commande>`** (Safeguard : file d'attente commune du serveur, un seul build à la fois, mémoire bornée à 5 Go, journal `/var/log/safeguard/builds.log`). Il attend seul son tour : ne jamais chercher soi-même avec `ps`/`pgrep` si un autre build tourne.
 3. Commit, `git checkout v2 && git pull origin v2`, `git merge --no-ff <branche>`, `git push -u origin v2`.
 4. `sudo systemctl start toutou-deploy.service`, puis vérifier que `readlink -f /srv/toutou/current` finit par le hash de `HEAD`.
 5. Changement de schéma Drizzle : `sudo /usr/local/sbin/toutou-migrate` après le push. Table `analytics` : la créer à la main (propriétaire `toutou`) et l'ajouter à `db/analytics.sql`.

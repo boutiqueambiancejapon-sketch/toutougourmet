@@ -16,7 +16,7 @@ Les fichiers `content/blog/*.mdx` avec `categorySlug: "race"` qui ne contiennent
 - NE PAS toucher : slug, `categorySlug`, `category`, `date`, doses, chiffres sourcés. `updatedAt` = date du jour.
 
 ## Vérifications (une seule construction du site)
-- Après les 2 fiches : `npm run build > /tmp/race-build.log 2>&1`. Si elle échoue à cause d'une fiche, corrige-la ; si impossible, annule cette fiche (`git checkout -- fichier`) et relance une fois.
+- Après les 2 fiches : `vps-build -- npm run build > /tmp/race-build.log 2>&1`. Si elle échoue à cause d'une fiche, corrige-la ; si impossible, annule cette fiche (`git checkout -- fichier`) et relance une fois.
 - Pour chaque fiche : un seul `<BreedBrandCompare>`, aucune URL d'affiliation hors du composant (`grep -c "c3po.link\|tidd.ly\|dogchef.com/fr/code" fichier` doit trouver 0 hors du composant), aucune marque absente de `data/brands.ts`.
 
 ## Commit

@@ -1,0 +1,169 @@
+#!/usr/bin/env bash
+# Safeguard : file d'attente commune des builds du VPS (installé dans /usr/local/bin/vps-build).
+#   vps-build [--name ÉTIQUETTE] [--timeout SECONDES] [--wait-max SECONDES] -- commande args…
+#   vps-bg -- commande args…        (lien vers ce fichier : tâche de fond, sans file d'attente)
+# Un seul build à la fois sur tout le serveur (flock), chacun dans une boîte mémoire systemd
+# (build.slice, MemoryHigh/MemoryMax), avec un délai maximal. Journal : /var/log/safeguard/builds.log
+# et journald (étiquette « safeguard »). Réglages bornés : /var/lib/safeguard/limits.env.
+set -uo pipefail
+
+SELF=$(readlink -f "$0")
+RUN_DIR=/run/safeguard
+LOCK=$RUN_DIR/build.lock
+LOG=/var/log/safeguard/builds.log
+LIMITS=/var/lib/safeguard/limits.env
+
+num() { [[ ${1:-} =~ ^[0-9]+$ ]] && echo "$1" || echo "$2"; }
+clamp() { local v=$1 lo=$2 hi=$3; (( v < lo )) && v=$lo; (( v > hi )) && v=$hi; echo "$v"; }
+human() { awk -v b="${1:-0}" 'BEGIN { if (b !~ /^[0-9]+$/ || b == 0) { print "?"; exit } printf "%.1fG", b / 1073741824 }'; }
+
+# --- Étages internes (lancés dans la boîte mémoire) --------------------------
+if [[ ${1:-} == --inner-env ]]; then
+  # Lancé par sudo + systemd-run : on remet l'environnement de l'appelant (sudo l'a vidé).
+  envfile=$2; shift 2
+  mapfile -d '' ENVV < "$envfile"
+  exec env -i "${ENVV[@]}" "$SELF" "$@"
+fi
+if [[ ${1:-} == --inner ]]; then
+  res=$2 tmo=$3; shift 3; [[ ${1:-} == -- ]] && shift
+  export VPS_BUILD_HELD=1
+  echo started > "$res"
+  # Premier tué si la mémoire manque (une boîte systemd « scope » ne sait pas le régler elle-même).
+  echo 500 > /proc/self/oom_score_adj 2>/dev/null || true
+  nice -n 10 timeout --kill-after=60s "$tmo" "$@" &
+  pid=$!
+  trap 'kill -TERM "$pid" 2>/dev/null' TERM INT HUP
+  wait "$pid"; rc=$?
+  while kill -0 "$pid" 2>/dev/null; do wait "$pid"; rc=$?; done
+  cg=$(cut -d: -f3 /proc/self/cgroup | head -1)
+  peak=$(cat "/sys/fs/cgroup$cg/memory.peak" 2>/dev/null || echo 0)
+  printf '%s %s\n' "$rc" "$peak" > "$res"
+  exit "$rc"
+fi
+
+# --- Tâche de fond (vps-bg) : boîte background.slice, sans verrou -------------
+if [[ $(basename "$0") == vps-bg ]]; then
+  UNITOPT=()
+  if [[ ${1:-} == --unit ]]; then [[ ${2:-} =~ ^[a-zA-Z0-9_-]+$ ]] && UNITOPT=(--unit="$2"); shift 2; fi
+  [[ ${1:-} == -- ]] && shift
+  (( $# )) || { echo "usage : vps-bg [--unit NOM] -- commande…" >&2; exit 64; }
+  if grep -q 'background\.slice' /proc/self/cgroup; then exec "$@"; fi
+  if (( EUID == 0 )); then exec systemd-run --quiet --scope "${UNITOPT[@]}" --slice=background.slice -- "$SELF" --bg-exec "$@"; fi
+  if sudo -n true 2>/dev/null; then
+    envfile=$(mktemp); env -0 > "$envfile"
+    # Le fichier est relu dès le lancement, puis effacé par un processus détaché.
+    ( sleep 30; rm -f "$envfile" ) >/dev/null 2>&1 &
+    exec sudo -n systemd-run --quiet --scope "${UNITOPT[@]}" --slice=background.slice \
+      --uid="$(id -u)" --gid="$(id -g)" -- "$SELF" --inner-env "$envfile" --bg-exec "$@"
+  fi
+  exec "$@"
+fi
+if [[ ${1:-} == --bg-exec ]]; then shift; echo 300 > /proc/self/oom_score_adj 2>/dev/null || true; exec "$@"; fi
+
+# --- vps-build ---------------------------------------------------------------
+NAME="" TMO="" WAITMAX=""
+while (( $# )); do
+  case $1 in
+    --name) NAME=$2; shift 2 ;;
+    --name=*) NAME=${1#*=}; shift ;;
+    --timeout) TMO=$2; shift 2 ;;
+    --timeout=*) TMO=${1#*=}; shift ;;
+    --wait-max) WAITMAX=$2; shift 2 ;;
+    --wait-max=*) WAITMAX=${1#*=}; shift ;;
+    --) shift; break ;;
+    -h|--help) sed -n '2,8p' "$SELF"; exit 0 ;;
+    *) break ;;
+  esac
+done
+(( $# )) || { echo "usage : vps-build [--name X] [--timeout S] -- commande…" >&2; exit 64; }
+
+# Build lancé depuis un build déjà dans la file : pas de second verrou (sinon blocage).
+if [[ ${VPS_BUILD_HELD:-} == 1 ]]; then exec "$@"; fi
+
+# Réglages (bornés, quoi qu'il y ait dans le fichier).
+BUILD_MEMORY_MAX_GB=5 BUILD_MEMORY_HIGH_GB=4 BUILD_TIMEOUT=3600 BUILD_WAIT_MAX=5400
+# shellcheck disable=SC1090
+[[ -r $LIMITS ]] && . <(grep -E '^BUILD_[A-Z_]+=[0-9]+$' "$LIMITS")
+MAXG=$(clamp "$(num "$BUILD_MEMORY_MAX_GB" 5)" 3 7)
+HIGHG=$(clamp "$(num "$BUILD_MEMORY_HIGH_GB" 4)" 2 "$MAXG")
+TMO=$(clamp "$(num "${TMO:-$BUILD_TIMEOUT}" 3600)" 300 7200)
+WAITMAX=$(clamp "$(num "${WAITMAX:-$BUILD_WAIT_MAX}" 5400)" 60 14400)
+
+WHO=$(id -un)
+UNIT=$(cut -d: -f3 /proc/self/cgroup | head -1); UNIT=${UNIT##*/}
+WHAT=$(printf '%s ' "$@" | tr '"\n' "' " | cut -c1-160); WHAT=${WHAT% }
+LABEL=${NAME:-$(basename "$PWD")}
+ID="$$-$(date +%s)"
+
+say() {
+  local line
+  line="$(TZ=Europe/Brussels date -Is) $* id=$ID user=$WHO unit=$UNIT label=$LABEL"
+  { [[ -w $LOG ]] && echo "$line" >> "$LOG"; } 2>/dev/null
+  logger -t safeguard -- "build $line" 2>/dev/null || true
+}
+
+if [[ ! -d $RUN_DIR || ! -w $LOCK ]]; then
+  # Safeguard pas installé (ou /run vidé) : on construit quand même, sans file.
+  echo "vps-build : file d'attente absente, build lancé sans verrou." >&2
+  exec nice -n 10 timeout --kill-after=60s "$TMO" "$@"
+fi
+
+T0=$(date +%s)
+exec 9<>"$LOCK"
+if ! flock -n 9; then
+  printf '%s %s %s %s\n' "$T0" "$WHO" "$LABEL" "$WHAT" > "$RUN_DIR/wait.$$"
+  holder=$(cat "$RUN_DIR"/hold.* 2>/dev/null | head -1 | cut -d' ' -f2-3)
+  echo "vps-build : un autre build tourne (${holder:-?}), mise en file…" >&2
+  say "event=queued cmd=\"$WHAT\""
+  if ! flock -w "$WAITMAX" 9; then
+    rm -f "$RUN_DIR/wait.$$"
+    say "event=gave-up wait=$(( $(date +%s) - T0 ))s"
+    echo "vps-build : attente trop longue (${WAITMAX}s), abandon." >&2
+    exit 75
+  fi
+  rm -f "$RUN_DIR/wait.$$"
+fi
+T1=$(date +%s)
+WAIT=$((T1 - T0))
+printf '%s %s %s %s\n' "$T1" "$WHO" "$LABEL" "$WHAT" > "$RUN_DIR/hold.$$"
+RES=$(mktemp); ENVF=""
+cleanup() { rm -f "$RUN_DIR/hold.$$" "$RUN_DIR/wait.$$" "$RES" ${ENVF:+"$ENVF"}; }
+trap cleanup EXIT
+
+PROPS=(-p "MemoryHigh=${HIGHG}G" -p "MemoryMax=${MAXG}G" -p CPUWeight=60)
+if grep -q 'build\.slice' /proc/self/cgroup; then
+  MODE=unit; CMD=("$SELF" --inner "$RES" "$TMO" -- "$@")
+elif (( EUID == 0 )); then
+  MODE=scope; CMD=(systemd-run --quiet --scope --slice=build.slice "${PROPS[@]}" -- "$SELF" --inner "$RES" "$TMO" -- "$@")
+elif sudo -n true 2>/dev/null; then
+  MODE=scope; ENVF=$(mktemp); env -0 > "$ENVF"
+  CMD=(sudo -n systemd-run --quiet --scope --slice=build.slice "${PROPS[@]}" --uid="$(id -u)" --gid="$(id -g)" -- "$SELF" --inner-env "$ENVF" --inner "$RES" "$TMO" -- "$@")
+else
+  MODE=plain; CMD=("$SELF" --inner "$RES" "$TMO" -- "$@")
+fi
+say "event=start mode=$MODE wait=${WAIT}s mem=${HIGHG}G/${MAXG}G timeout=${TMO}s cmd=\"$WHAT\""
+(( WAIT > 5 )) && echo "vps-build : à mon tour après ${WAIT}s d'attente." >&2
+
+# Le verrou (fd 9) n'est pas transmis à la commande : un processus resté en vie ne le garde pas.
+"${CMD[@]}" 9>&- &
+CHILD=$!
+trap 'kill -TERM "$CHILD" 2>/dev/null' TERM INT HUP
+wait "$CHILD"; RC=$?
+# wait est interrompu par un signal : on attend la vraie fin de l'enfant.
+while kill -0 "$CHILD" 2>/dev/null; do wait "$CHILD"; RC=$?; done
+if [[ $MODE == scope && ! -s $RES ]]; then
+  # La boîte systemd n'a pas pu être créée (la commande n'a pas démarré) : on construit sans elle.
+  say "event=no-scope rc=$RC"
+  MODE=plain
+  "$SELF" --inner "$RES" "$TMO" -- "$@" 9>&- &
+  CHILD=$!
+  wait "$CHILD"; RC=$?
+  while kill -0 "$CHILD" 2>/dev/null; do wait "$CHILD"; RC=$?; done
+fi
+read -r IRC PEAK < "$RES" 2>/dev/null || { IRC=$RC; PEAK=0; }
+[[ $IRC == started ]] && { IRC=$RC; PEAK=0; }
+[[ $MODE == plain ]] && PEAK=0
+DUR=$(( $(date +%s) - T1 ))
+EVENT=done; [[ $IRC == 124 || $IRC == 137 ]] && EVENT=timeout
+say "event=$EVENT rc=$IRC wait=${WAIT}s dur=${DUR}s peak=$(human "$PEAK") mode=$MODE"
+exit "$IRC"

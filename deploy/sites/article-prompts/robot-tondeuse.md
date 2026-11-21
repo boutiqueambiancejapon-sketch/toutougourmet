@@ -19,7 +19,7 @@ Pour un sujet **achat** : conseil d'achat honnête (le lecteur veut être aidé 
    - **Jamais d'ASIN inventé.** En cas de doute, cite le produit sans lien affilié. Le tag d'affiliation est géré par le code du site à partir de l'ASIN.
 4. Rédaction : français, ton de conseil honnête, orienté décision, 1 200 à 2 000 mots. Calibre le schéma (frontmatter, dossier, slug, syntaxe d'image) sur 1 ou 2 articles existants. Structure à adapter : titre avec un critère de recherche (année, surface, budget, marque), chapô, « Critères pour bien choisir » (surface, pente, autonomie, navigation, connectivité, bruit, sécurité, budget), tableau comparatif si top ou comparatif, un H2 par modèle (présentation, points forts, points faibles, à qui ça s'adresse, fourchette de prix, lien affilié), « Notre recommandation », FAQ de 3 à 5 questions. Sources citées en lien. Frontmatter : date du jour, description de 150 à 160 caractères, catégorie (guide-achat, comparatif, tuto, faq, ou celle des articles gazon et entretien existants), tags.
 5. Contraintes : prix et caractéristiques vérifiés sur au moins 2 sources, jamais de chiffre ni de test inventé ; prix fluctuant = fourchette et « prix indicatif à la date de publication ». Défauts mentionnés, neutralité entre marques.
-6. Vérification : `npm run build` doit passer, les 2 images génériques sont dans le corps.
+6. Vérification : `vps-build -- npm run build` doit passer, les 2 images génériques sont dans le corps.
 7. Commit : `content(blog): add <slug>` (ajoute « and N products » si la base a changé).
 
 Compte rendu : format, titre, slug, requête visée, produits cités avec ASIN (en signalant les ajouts), état du build.

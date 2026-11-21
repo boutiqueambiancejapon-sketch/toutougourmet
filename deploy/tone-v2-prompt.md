@@ -18,7 +18,7 @@ Informatif, intéressant, légèrement scientifique et divertissant : un article
 
 ## Vérifications
 - Compare à l'ancienne version (`git diff`) dans les sections sécurité : aucun nombre, aucune dose, aucun numéro modifié.
-- `nice -n 10 npm run build > /tmp/tone-v2-build.log 2>&1`, une seule fois. Échec à cause d'un article : corrige, sinon annule-le et relance une fois.
+- `vps-build -- npm run build > /tmp/tone-v2-build.log 2>&1`, une seule fois. Échec à cause d'un article : corrige, sinon annule-le et relance une fois.
 
 ## Commit
 Coche chaque article dans `docs/tone-v2-queue.md` (`- [x] \`slug\``). Un commit Conventional Commits en anglais, `content(tone): rewrite N articles for v2 (slug1, slug2, …)`, terminé par une ligne vide puis `Co-Authored-By: Claude <noreply@anthropic.com>`. NE PAS pousser : le script s'en charge.

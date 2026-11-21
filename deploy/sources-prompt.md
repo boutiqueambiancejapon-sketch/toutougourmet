@@ -21,7 +21,7 @@ Ouvre `docs/points-a-sourcer.md` et prends les 8 premiers non cochés (`- [ ]`),
 
 ## Vérifications
 - `npx tsx scripts/check-portions.ts` affiche « tout est cohérent ».
-- `npm ci` si besoin puis `npm run build` : doit passer.
+- `npm ci` si besoin puis `vps-build -- npm run build` : doit passer.
 
 ## Commit
 Un commit : `fix(content): source N flagged figures`, avec `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`. `updatedAt` = date du jour pour chaque article modifié.

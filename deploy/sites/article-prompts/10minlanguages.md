@@ -7,7 +7,7 @@ Lis CLAUDE.md, DECISIONS.md, PROGRESS.md et `docs/WRITING.md` du dépôt avant d
 3. Recherche : lis 3 à 5 pages bien classées, note les sous-questions et les chiffres ; chaque chiffre (prix, durée, niveaux CEFR, heures FSI…) vient d'une source vérifiée et citée. Jamais de chiffre inventé, jamais de prix de cours sans source datée.
 4. Rédaction : anglais naturel et direct, 1 200 à 2 000 mots, H2 en questions que l'on taperait dans Google, tableau quand il aide, FAQ de 4 à 6 questions si le format s'y prête, 2 à 4 liens internes vers des articles existants (vérifie qu'ils existent). Pas de formules creuses, pas de « In today's world », pas de « Let's dive in », 2 tirets cadratins au plus, zéro emoji.
 5. Image de partage : le champ facultatif `ogHook` du frontmatter (voir docs/WRITING.md) reçoit le chiffre le plus accrocheur de l'article, recopié exactement du texte (ex. « €31 median lesson »). Jamais de chiffre absent du texte ; sans chiffre fort, laisse le champ vide.
-6. Vérification : `npm run build` doit passer.
+6. Vérification : `vps-build -- npm run build` doit passer.
 7. Commit : `content(blog): add <slug>`.
 
 Compte rendu : titre, slug, requête visée, état du build.

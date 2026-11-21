@@ -38,7 +38,7 @@ Suivre §9 du guide :
 ## Vérifications
 - Article commercial : vérifier le §2.8 du guide (passages par profil, donnée à nous, tableau comparatif) et ajouter ce qui manque.
 - `npx tsx scripts/check-portions.ts` doit afficher « tout est cohérent » : chaque portion du tableau par gabarit monte avec le poids et reste sous 10 % des calories du gabarit. Le résumé (TL;DR), le texte et les tableaux de l'article donnent les mêmes quantités que le `SizeTable`.
-- `npm ci` si nécessaire puis `npm run build` : doit passer. Si le build casse à cause d'un article modifié, corriger ; si impossible, annuler les changements de cet article, le marquer `- [~]` avec la raison dans la file et passer au suivant.
+- `npm ci` si nécessaire puis `vps-build -- npm run build` : doit passer. Si le build casse à cause d'un article modifié, corriger ; si impossible, annuler les changements de cet article, le marquer `- [~]` avec la raison dans la file et passer au suivant.
 - title ≤ 60 caractères, description ≤ 155 caractères : pour un champ à remplir seulement.
 - Aucune dose ou quantité existante modifiée sans source.
 
