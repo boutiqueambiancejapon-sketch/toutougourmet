@@ -32,6 +32,7 @@ export const COVERAGE_FR: Record<string, string> = {
   'Duplicate, Google chose different canonical than user': 'En double, Google a choisi une autre page canonique',
   'Duplicate without user-selected canonical': 'En double, sans page canonique choisie',
   "Excluded by 'noindex' tag": 'Exclue par la balise noindex',
+  'Excluded by ‘noindex’ tag': 'Exclue par la balise noindex',
   'Page with redirect': 'Page avec redirection',
   'Not found (404)': 'Introuvable (404)',
   'URL is unknown to Google': 'Adresse inconnue de Google',
