@@ -64,7 +64,15 @@ export async function crawlErrors(pool: Pool, r: Range, min = 400): Promise<Erro
       GROUP BY 1, 2 ORDER BY 3 DESC, 1 LIMIT 200`,
     p.values,
   )
-  return rows as ErrorRow[]
+  // Une adresse corrigée depuis (réponse correcte plus récente que la dernière erreur) sort de la liste.
+  const errs = rows as ErrorRow[]
+  if (!errs.length) return errs
+  const fixed = await pool.query<{ path: string; last: string }>(
+    `SELECT path, max(ts)::date::text AS last FROM analytics.hits WHERE path = ANY($1::text[]) AND status < 400 AND ts >= $2::date GROUP BY 1`,
+    [[...new Set(errs.map((e) => e.path))], r.start],
+  )
+  const ok = new Map(fixed.rows.map((x) => [x.path, x.last]))
+  return errs.filter((e) => !ok.has(e.path) || (ok.get(e.path) ?? '') < e.last)
 }
 
 /** Chemins vus au moins une fois par Googlebot vérifié depuis le début des journaux. */

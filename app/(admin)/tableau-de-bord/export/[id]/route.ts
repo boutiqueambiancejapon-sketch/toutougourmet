@@ -23,7 +23,8 @@ export async function GET(req: NextRequest, ctx: { params: Promise<{ id: string 
   const params: RawParams = Object.fromEntries(req.nextUrl.searchParams.entries())
   let rows
   try {
-    rows = await set.rows(pool, parseFilters(params), params)
+    // Décimales à la française (virgule) : le séparateur de colonnes est déjà le point-virgule.
+    rows = (await set.rows(pool, parseFilters(params), params)).map((r) => r.map((v) => (typeof v === 'number' && !Number.isInteger(v) ? String(v).replace('.', ',') : v)))
   } catch (err) {
     console.error('[tableau-de-bord export]', id, err instanceof Error ? err.message : err)
     return new NextResponse('Lecture impossible', { status: 500, headers: NO_STORE })
