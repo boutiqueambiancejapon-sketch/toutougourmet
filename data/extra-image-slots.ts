@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-chien-peut-manger-huitres',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, happy orange and white Brittany Spaniel (épagneul breton) sitting on a warm wooden kitchen floor, looking with interest at a plain white ceramic bowl holding two small cooked oyster meats, beside a low wooden board with a few closed whole oysters in their shells and half a lemon, mouth closed, not eating. No humans, no packaging, no logo, no brand, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog, bowl and the oysters filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the oysters. Exactly 8 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-21 pour l'article chien-peut-manger-huitres.",
+  },
+  {
     id: 'art-avis-edgard-cooper-barquette',
     group: 'articles',
     ratio: '3:2',
