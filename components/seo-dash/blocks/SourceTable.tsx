@@ -60,20 +60,20 @@ export function SourceRows({ rows, base, query, spark = false, color, linkOf, la
             <thead>
               <tr>
                 <th>{first}</th>
-                {spark ? <th className="sd-hide-s" aria-label="Évolution" /> : null}
+                {spark ? <th aria-label="Évolution" /> : null}
                 <th className="num">Visites</th>
                 <th className="num sd-hide-s">Part</th>
                 <th className="num">Écart</th>
-                <th className="num">Pages/visite</th>
+                <th className="num sd-hide-s">Pages/visite</th>
                 <th className="num" title={`${CONVERSIONS.clicks} pour 100 visites`}>Clics /100</th>
-                <th className="num" title={`${CONVERSIONS.signups} pour 100 visites`}>Inscr. /100</th>
+                <th className="num sd-hide-s" title={`${CONVERSIONS.signups} pour 100 visites`}>Inscr. /100</th>
               </tr>
             </thead>
             <tbody>
               {rows.map((r) => (
                 <tr key={r.key}>
                   <td className="u">
-                    <Link href={linkOf ? linkOf(r) : sourceHref(r.key, query)} title={labelOf ? labelOf(r) : r.name}>
+                    <Link href={linkOf ? linkOf(r) : sourceHref(r.key, query)} title={linkOf ? r.key : r.name}>
                       {color ? (
                         <span className="sd-fam">
                           <i style={{ background: color }} aria-hidden="true" />
@@ -87,9 +87,9 @@ export function SourceRows({ rows, base, query, spark = false, color, linkOf, la
                     </Link>
                   </td>
                   {spark ? (
-                    <td className="sd-hide-s">
+                    <td>
                       <span className="sd-spark">
-                        <Sparkline values={r.spark} width={84} height={22} />
+                        <Sparkline values={r.spark} width={64} height={22} />
                       </span>
                     </td>
                   ) : null}
@@ -98,9 +98,9 @@ export function SourceRows({ rows, base, query, spark = false, color, linkOf, la
                   <td className="num">
                     <Delta cur={r.visits} prev={r.prev} />
                   </td>
-                  <td className="num">{rate(perVisit(r))}</td>
+                  <td className="num sd-hide-s">{rate(perVisit(r))}</td>
                   <td className="num">{rate(per100(r.clicks, r.visits))}</td>
-                  <td className="num">{rate(per100(r.signups, r.visits))}</td>
+                  <td className="num sd-hide-s">{rate(per100(r.signups, r.visits))}</td>
                 </tr>
               ))}
             </tbody>
