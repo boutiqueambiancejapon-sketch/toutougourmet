@@ -1762,3 +1762,4 @@
   - verdictNote « un à cinq selon sa taille » (le tableau commence à un demi-chou) → d'un demi à cinq
   - Vérifié : chou de 19 g pour 8 kcal, grammes du tableau (½ chou = 5 à 10 g, 3 à 5 choux = 60 à 100 g), seuil de 5 g d'oignon par kilo (comme chien-mange-ail-oignon-urgence), repas de Noël (« un ou deux choux », cohérent)
   - À vérifier (non changé) : 43 kcal pour 100 g est la valeur crue (USDA), les portions sont cuites (36 kcal cuit à l'eau) : écart sans effet sur les conseils
+- [ ] `avis-edgard-cooper-barquette` · nouvel article 2026-11-21

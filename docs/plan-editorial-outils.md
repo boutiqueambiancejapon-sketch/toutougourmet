@@ -54,8 +54,8 @@ Pages mères déjà en ligne, à doter de la section des modèles au premier mod
 
 Titre : « {Modèle} : avis et composition ». Les marques alternent dans la liste. Les modèles dont Google suggère déjà « … avis » passent devant dans leur marque. Les 175 autres modèles du fichier restent hors liste tant que la Search Console ne montre pas de demande.
 
-- [ ] Edgard & Cooper chiot : avis et quantités (edgard cooper chiot avis, quantité)
-- [ ] Edgard & Cooper barquettes : avis sur la pâtée (edgard cooper barquette chien)
+- [~] Edgard & Cooper chiot : avis et quantités (edgard cooper chiot avis, quantité) → fiche indexée (edgard-cooper-croquettes-chiot-moyenne-taille-poulet-et-canard, edgard-cooper-chiot-grande-taille-poulet-et-canard)
+- [x] Edgard & Cooper barquettes : avis sur la pâtée (edgard cooper barquette chien) → avis-edgard-cooper-barquette
 - [ ] Pro Plan Sensitive Digestion à l'agneau : avis (pro plan sensitive digestion agneau avis)
 - [ ] Select Gold Sensitive : pour quel chien (select gold sensitive chien avis)
 - [ ] Wilderness pâtée pour chien : avis (real nature pâtée chien avis)

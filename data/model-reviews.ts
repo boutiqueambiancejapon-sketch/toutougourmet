@@ -5,6 +5,7 @@ import { ficheIndexeePath, parCle, type FicheIndexee } from '@/lib/scanner/fiche
 
 export const MODEL_REVIEWS: Record<string, string> = {
   'dog chef|croquettes au canard frais': '/chien/avis-marques/avis-dog-chef-croquettes-canard-frais',
+  'edgard & cooper|barquette chien adulte dinde poulet': '/chien/avis-marques/avis-edgard-cooper-barquette',
   'franklin pet food|croquettes dinde patate douce epinards': '/chien/avis-marques/avis-franklin-light-dinde-patate-douce-epinards',
 }
 

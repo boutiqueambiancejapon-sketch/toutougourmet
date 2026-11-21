@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-avis-edgard-cooper-barquette',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'blue',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, happy Blenheim Cavalier King Charles Spaniel (chestnut and white, long silky ears) sitting on a warm wooden kitchen floor in front of a plain white ceramic bowl filled with chunky moist meat pâté with a few small pieces of carrot and pumpkin, looking at the bowl with interest, mouth closed, not eating. No humans, no packaging, no tray, no logo, no brand, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog and the bowl filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the bowl. Exactly 8 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-21 pour l'article avis-edgard-cooper-barquette.",
+  },
+  {
     id: 'art-chien-peut-manger-choux-de-bruxelles',
     group: 'articles',
     ratio: '3:2',
