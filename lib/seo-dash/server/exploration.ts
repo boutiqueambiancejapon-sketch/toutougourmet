@@ -1,9 +1,8 @@
 import type { Pool } from 'pg'
-import { SITE } from '../config'
 import type { Filters } from '../filters'
 import { publications } from './content'
 import { crawlErrors, crawlGroupSql, googlebotSql, tsIn, type ErrorRow } from './crawl'
-import { daysOf, logRanges, type Ranges } from './range'
+import { clipStart, daysOf, logRanges, type Ranges } from './range'
 import { filterSql, Params } from './sql'
 import { neverCrawled, type NeverCrawled } from './today'
 
@@ -27,9 +26,8 @@ export interface ExplorationData {
 }
 
 export async function exploration(pool: Pool, f: Filters, robot: 'google' | 'bing'): Promise<ExplorationData> {
-  const all = logRanges(f)
   // Pas de colonnes vides avant le premier jour des journaux.
-  const ranges = { ...all, cur: { ...all.cur, start: all.cur.start < SITE.logsStart ? SITE.logsStart : all.cur.start } }
+  const ranges = clipStart(logRanges(f))
   const days = daysOf(ranges.cur)
   const p = new Params()
   const who = robot === 'bing' ? `bot = 'Bingbot'` : await googlebotSql(p)

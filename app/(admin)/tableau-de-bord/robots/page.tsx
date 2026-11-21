@@ -1,29 +1,12 @@
-import { parseRobotFilter } from '@/lib/dashboard/robots'
-import { openTab, READ_FAILED, type TabPageProps } from '@/lib/dashboard/tab-page'
-import { EMPTY_ROBOTS, getRobots } from '@/lib/server/dashboard-robots'
-import { safeRead } from '@/lib/server/dashboard-safe'
-import { loadRobots } from '@/lib/server/dashboard-tabs'
-import { pageTitles } from '@/lib/server/dashboard-traffic'
-import { AiSection } from '@/components/dashboard/AiSection'
-import { DashboardShell } from '@/components/dashboard/DashboardShell'
+import { redirect } from 'next/navigation'
+import { openSeoPage, type SeoPageProps } from '@/lib/seo-dash/server/page'
+import { hrefOf } from '@/lib/seo-dash/nav'
 
-// @cdc tableau de bord — onglet Robots IA : couverture, filtres par robot et par type de visite,
-// graphiques, pages lues, visiteurs envoyés par une IA, vraies erreurs et articles jamais lus.
+// @cdc tableau de bord SEO — ancienne adresse (Robots IA), gardée pour les favoris : renvoi vers « Exploration ».
 
 export const dynamic = 'force-dynamic'
 
-type Props = { searchParams: Promise<{ periode?: string | string[]; robot?: string | string[]; visite?: string | string[] }> } & TabPageProps
-
-export default async function RobotsTab(props: Props) {
-  const period = await openTab(props)
-  const sp = await props.searchParams
-  const filter = parseRobotFilter(sp.robot, sp.visite)
-  const [{ data, ok }, robots] = await Promise.all([loadRobots(period), safeRead('robots', EMPTY_ROBOTS, (pool) => getRobots(pool, period, filter))])
-  const titles = pageTitles()
-  const articles = [...titles.entries()].map(([path, title]) => ({ path, title }))
-  return (
-    <DashboardShell period={period.key} current="robots" notice={ok && robots.ok ? null : READ_FAILED}>
-      <AiSection data={robots.value} ai={data.ai} period={period} filter={filter} articles={articles} titles={titles} />
-    </DashboardShell>
-  )
+export default async function Moved(props: SeoPageProps) {
+  const { query } = await openSeoPage(props)
+  redirect(hrefOf('exploration', query))
 }

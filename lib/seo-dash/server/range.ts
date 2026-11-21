@@ -72,3 +72,8 @@ export function logRanges(f: Filters): Ranges {
   const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Paris' }).format(new Date())
   return rangesFrom(today, f, SITE.logsStart)
 }
+
+/** Période ramenée au premier jour des données (pas de colonnes vides avant le début des journaux). */
+export function clipStart(r: Ranges): Ranges {
+  return r.cur.start >= r.firstData ? r : { ...r, cur: { ...r.cur, start: r.firstData } }
+}
