@@ -102,6 +102,25 @@ if (ooms.length) {
 }
 if (state.oom && now - state.oom.ts < 60 * MIN) add('oom', 'urgent', 'Un programme a été tué faute de mémoire', state.oom.victims.length ? `Victime : ${state.oom.victims.join(', ')}.` : 'Voir le journal du noyau.');
 
+// Limite de l'abonnement Claude atteinte (5 h ou semaine) : les articles et les fiches de la nuit échoueraient.
+// Lu dans le journal système et dans les journaux des tâches (~administrator/sites-logs) écrits depuis le passage précédent.
+const LIMIT_RE = /hit your (?:5-hour|weekly) limit|out of (?:usage )?credits/i;
+const sinceLim = Math.floor((state.limitChecked ?? now - 2 * MIN) / 1000);
+let limitLine = sh('journalctl', ['--no-pager', '-o', 'cat', '--since', `@${sinceLim}`]).split('\n').find((l) => LIMIT_RE.test(l)) ?? '';
+if (!limitLine) {
+  const recent = sh('find', ['/home/administrator/sites-logs', '-type', 'f', '-newermt', `@${sinceLim}`]).split('\n').filter(Boolean).slice(0, 20);
+  for (const f of recent) { const hit = sh('grep', ['-m1', '-iE', LIMIT_RE.source, f]).trim(); if (hit) { limitLine = hit; break; } }
+}
+state.limitChecked = now;
+if (limitLine) {
+  const reset = /resets ([^)·"]+)/i.exec(limitLine)?.[1]?.trim() ?? '';
+  state.claudeLimit = { ts: now, weekly: /weekly/i.test(limitLine), reset };
+  log(`claude : limite atteinte ${state.claudeLimit.weekly ? '(semaine)' : '(5 h)'} ${reset}`);
+}
+if (state.claudeLimit && now - state.claudeLimit.ts < 3 * 60 * MIN) {
+  add('claude', 'urgent', `Limite Claude atteinte${state.claudeLimit.weekly ? ' pour la semaine' : ''}`, `Les tâches Claude (articles, fiches, agents) échouent jusqu’à la remise à zéro${state.claudeLimit.reset ? ` (${state.claudeLimit.reset}, heure UTC)` : ''}. Ralentir les chantiers.`);
+}
+
 const failed = sh('systemctl', ['list-units', '--state=failed', '--no-legend', '--plain']).split('\n').map((l) => l.trim().split(/\s+/)[0]).filter((u) => u && !u.startsWith('run-'));
 if (failed.length) add('echecs', 'veille', `${failed.length} tâche${failed.length > 1 ? 's' : ''} en échec`, failed.join(', '));
 
