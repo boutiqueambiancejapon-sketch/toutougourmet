@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { countryName } from '@/lib/dashboard/country'
-import { dayLabel, deltaOf, n0, n1 } from '@/lib/seo-dash/format'
+import { dayLabel, deltaOf, n0, n1, shortPath } from '@/lib/seo-dash/format'
 import { csvHref, hrefOf, pageHref } from '@/lib/seo-dash/nav'
 import { openSeoPage, param, type SeoPageProps } from '@/lib/seo-dash/server/page'
 import { countriesOf, DEVICE_KINDS, devicesOf, groupBy, landingsOf, loadVisits, matchKey, per100, perVisit } from '@/lib/seo-dash/server/sources'
@@ -66,7 +66,7 @@ export default async function SourceDetailPage(props: SeoPageProps) {
           </div>
           {names.length > 1 ? <SourceTable title={`Sources · ${title}`} rows={names} base={row.visits} query={query} spark csv={csvHref('sources-liste', query, { famille: key?.family ?? '' })} /> : null}
           <div className="sd-gap" />
-          <SourceTable title="Pages d’arrivée" desc="Première page de chaque visite venue de cette source" first="Page" rows={landings} base={row.visits} query={query} linkOf={(r) => pageHref(r.key, query)} labelOf={(r) => r.key} csv={csvHref('sources-arrivees', query, { s })} />
+          <SourceTable title="Pages d’arrivée" desc="Première page de chaque visite venue de cette source" first="Page" rows={landings} base={row.visits} query={query} linkOf={(r) => pageHref(r.key, query)} labelOf={(r) => shortPath(r.key, 44)} csv={csvHref('sources-arrivees', query, { s })} />
         </>
       ) : match && res.ok ? (
         <Empty>Aucune visite venue de cette source sur la période.</Empty>

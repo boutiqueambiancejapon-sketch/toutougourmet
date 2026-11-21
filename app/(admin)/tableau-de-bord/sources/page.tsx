@@ -1,5 +1,5 @@
 import { compareLabel, filterQuery } from '@/lib/seo-dash/filters'
-import { dayLabel, deltaOf, n0, n1, pct0 } from '@/lib/seo-dash/format'
+import { dayLabel, deltaOf, n0, n1, shortPath, pct0 } from '@/lib/seo-dash/format'
 import { csvHref, hrefOf, pageHref } from '@/lib/seo-dash/nav'
 import { frDate } from '@/lib/seo-dash/server/range'
 import { openSeoPage, param, type SeoPageProps } from '@/lib/seo-dash/server/page'
@@ -69,15 +69,16 @@ export default async function SourcesPage(props: SeoPageProps) {
           <Section id="moteurs" title="Moteurs de recherche hors Google" desc="Bing, DuckDuckGo, Ecosia, Qwant, Yahoo, Brave… même quand ils envoient peu de monde" />
           <SourceTable title="Autres moteurs" desc="Part : dans les visites venues de la recherche" rows={engines} base={search?.visits ?? 0} query={query} csv={csvHref('sources-moteurs', query)} spark empty="Aucune visite venue d’un autre moteur que Google sur la période." />
           <Section id="canaux" title="Par canal" desc="Chaque source avec ses visites, son écart et ce qu’elle rapporte pour 100 visites" />
-          <div className="sd-grid sd-g2">
-            {d.families.map((x) => (
+          <div className="sd-grid">
+            {d.families.filter((x) => x.visits > 0 || (x.prev ?? 0) > 0).map((x) => (
               <SourceTable key={x.family} title={x.label} desc={`${n0(x.visits)} visites · ${pct0(total.visits ? x.visits / total.visits : 0)} du total`} rows={x.rows} base={x.visits} query={query} color={x.color} csv={csvHref('sources-liste', query, { famille: x.family })} empty="Aucune visite sur la période." />
             ))}
           </div>
+          {d.families.some((x) => !x.visits && !x.prev) ? <p className="sd-note sd-gap">Aucune visite sur la période : {d.families.filter((x) => !x.visits && !x.prev).map((x) => x.label).join(', ')}.</p> : null}
           <Section id="arrivees" title="Pages d’arrivée par source" desc="Où arrivent les visites de chaque source, et ce qu’elles rapportent" />
           <Card title={`Pages d’arrivée · ${voirLabel}`} csv={csvHref('sources-arrivees', query, { s: voir })}>
             <SourceChips items={chips} current={voir} hrefFor={(k) => `${path}${filterQuery(f, {}, { voir: k })}#arrivees`} />
-            <SourceRows rows={landings} base={landings.reduce((a, r) => a + r.visits, 0)} query={query} first="Page" linkOf={(r) => pageHref(r.key, query)} labelOf={(r) => r.key} empty="Aucune page d’arrivée pour cette source sur la période." />
+            <SourceRows rows={landings} base={landings.reduce((a, r) => a + r.visits, 0)} query={query} first="Page" linkOf={(r) => pageHref(r.key, query)} labelOf={(r) => shortPath(r.key, 44)} empty="Aucune page d’arrivée pour cette source sur la période." />
           </Card>
           <Section id="appareils" title="Appareils et pays" />
           <SplitCard families={d.families} csv={csvHref('sources-appareils-pays', query)} />
