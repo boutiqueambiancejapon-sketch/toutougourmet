@@ -59,3 +59,9 @@ export function compareLabel(f: Filters): string {
   if (f.compare === 'aucune') return ''
   return `${PERIOD_LABEL[f.period]} d’avant`
 }
+
+/** « 28 derniers jours », « 3 derniers mois ». */
+export function lastLabel(p: PeriodKey): string {
+  const [n, unit] = PERIOD_LABEL[p].split(' ')
+  return `${n} derniers ${unit}`
+}

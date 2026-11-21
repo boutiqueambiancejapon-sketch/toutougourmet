@@ -104,7 +104,7 @@ export type RouteKind = 'public' | 'data' | 'page'
 export function routeKind(pathname: string, method: string): RouteKind {
   const path = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname
   if (path === LOGIN_PATH || path.startsWith(`${LOGIN_PATH}/`)) return 'public'
-  if (DATA_ROUTES.includes(path)) return 'data'
+  if (DATA_ROUTES.includes(path) || path.startsWith(`${ROOT}/export/`)) return 'data'
   return method === 'GET' || method === 'HEAD' ? 'page' : 'data'
 }
 

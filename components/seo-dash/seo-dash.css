@@ -19,6 +19,8 @@
   --sd-s3: #1baf7a;
   --sd-s4: #6250d6;
   --sd-prev: #C9BFB4;
+  --sd-up: #2a78d6;
+  --sd-down: #e34948;
   --sd-good: #0ca30c;
   --sd-warn: #fab219;
   --sd-serious: #ec835a;
@@ -229,3 +231,9 @@
 .sd-sel.plain > summary { border: 0; padding: 0; background: none; min-height: 0; font-size: 12px; color: var(--sd-ink-3); }
 .sd-sel.plain > summary span { color: var(--sd-ink-3); }
 .sd-mtop .sd-sel.plain > summary { color: var(--sd-ink-3); }
+.sd-arrow { vertical-align: -1px; margin-right: 3px; }
+.sd-range { display: block; overflow: visible; }
+.sd-seg-bar { display: flex; gap: 2px; height: 10px; min-width: 160px; }
+.sd-seg-bar i { display: block; height: 10px; border-radius: 5px; min-width: 4px; }
+.sd-v td.sd-wide { width: 50%; }
+.sd-tile svg.sd-arrow { display: inline; margin-top: 0; }

@@ -66,16 +66,26 @@ export interface Agg extends Totals {
   key: string
 }
 
-/** Requêtes (toutes pages confondues) ou pages, agrégées sur la période. */
+/**
+ * Requêtes (toutes pages confondues) ou pages, agrégées sur la période. Pour une requête, Google compte un affichage
+ * par recherche même si deux pages du site sortent : on garde, chaque jour, le plus grand nombre d'affichages et la
+ * meilleure position parmi ses pages (comme la dimension « requête » de la Search Console).
+ */
 export async function gscAgg(pool: Pool, f: Filters, r: Range, by: 'query' | 'page', opts: { page?: string; query?: string; limit?: number } = {}): Promise<Agg[]> {
   const p = new Params()
-  const table = by === 'page' && !opts.query ? 'analytics.gsc_page_daily' : 'analytics.gsc_qp_daily'
   let where = filterSql(f, p, { pageCol: 'page', deviceCol: 'device' })
   if (opts.page) where += ` AND page = ${p.add(opts.page)}`
   if (opts.query) where += ` AND query = ${p.add(opts.query)}`
+  const span = `day BETWEEN ${p.add(r.start)} AND ${p.add(r.end)}`
+  const from =
+    by === 'page' && !opts.query
+      ? `analytics.gsc_page_daily WHERE ${span}${where}`
+      : by === 'page' || opts.page
+        ? `analytics.gsc_qp_daily WHERE ${span}${where}`
+        : `(SELECT day, query, device, sum(clicks) AS clicks, max(impressions) AS impressions, min(position) AS position
+             FROM analytics.gsc_qp_daily WHERE ${span}${where} GROUP BY 1, 2, 3) q`
   const { rows } = await pool.query(
-    `SELECT ${by} AS key, ${AGG} FROM ${table} WHERE day BETWEEN ${p.add(r.start)} AND ${p.add(r.end)}${where}
-      GROUP BY 1 ORDER BY sum(clicks) DESC, sum(impressions) DESC LIMIT ${p.add(opts.limit ?? 5000)}`,
+    `SELECT ${by} AS key, ${AGG} FROM ${from} GROUP BY 1 ORDER BY sum(clicks) DESC, sum(impressions) DESC LIMIT ${p.add(opts.limit ?? 50000)}`,
     p.values,
   )
   return rows.map((x: { key: string; clicks: unknown; impressions: unknown; position: unknown }) => ({ key: x.key, ...totalsOf(x) }))

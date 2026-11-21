@@ -56,3 +56,25 @@ export function currentSlug(pathname: string): string {
   if (first === 'visiteurs') return 'conversions'
   return first
 }
+
+/** Détail d'une page (même gabarit pour toutes), filtres gardés. */
+export function pageHref(path: string, query = ''): string {
+  const q = new URLSearchParams(query.replace(/^\?/, ''))
+  q.set('u', path)
+  return `${ROOT}/google/page?${q.toString()}`
+}
+
+/** Détail d'une requête. */
+export function queryHref(text: string, query = ''): string {
+  const q = new URLSearchParams(query.replace(/^\?/, ''))
+  q.set('q', text)
+  return `${ROOT}/google/requete?${q.toString()}`
+}
+
+/** Export CSV d'un tableau : même requête que l'écran. */
+export function csvHref(id: string, query = '', extra: Record<string, string> = {}): string {
+  const q = new URLSearchParams(query.replace(/^\?/, ''))
+  for (const [k, v] of Object.entries(extra)) q.set(k, v)
+  const s = q.toString()
+  return `${ROOT}/export/${id}${s ? `?${s}` : ''}`
+}

@@ -58,3 +58,6 @@ export function shortPath(path: string, max = 46): string {
   const last = `/…/${parts[parts.length - 1] ?? ''}`
   return last.length <= max ? last : `${last.slice(0, max - 1)}…`
 }
+
+/** Arrondi pour un export (2 décimales par défaut). */
+export const round = (v: number, digits = 2): number => Math.round(v * 10 ** digits) / 10 ** digits
