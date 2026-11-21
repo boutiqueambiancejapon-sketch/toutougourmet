@@ -237,3 +237,8 @@
 .sd-seg-bar i { display: block; height: 10px; border-radius: 5px; min-width: 4px; }
 .sd-v td.sd-wide { width: 50%; }
 .sd-tile svg.sd-arrow { display: inline; margin-top: 0; }
+.sd-v td.sd-bar-cell { width: 40%; min-width: 70px; }
+.sd-g2 td.u, .sd-g3 td.u { max-width: 220px; }
+.sd-g3 > .sd-card td.u { max-width: 150px; }
+.sd-span2 td.u { max-width: 280px; }
+@media (max-width: 820px) { .sd-g2 td.u, .sd-g3 td.u, .sd-span2 td.u { max-width: 170px; } }

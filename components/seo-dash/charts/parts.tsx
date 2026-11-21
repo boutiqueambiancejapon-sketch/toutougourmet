@@ -22,7 +22,7 @@ export function useWidth(initial = 640): [React.RefObject<HTMLDivElement | null>
 
 export function fmt(v: number | null | undefined, f: ValueFormat): string {
   if (v === null || v === undefined || Number.isNaN(v)) return '—'
-  if (f === 'position') return n1(v)
+  if (f === 'position' || f === 'decimal') return n1(v)
   if (f === 'pct') return pct(v)
   if (f === 'eur') return eur(v)
   return n0(v)

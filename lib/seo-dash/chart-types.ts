@@ -40,4 +40,4 @@ export interface BarSeries {
   values: number[]
 }
 
-export type ValueFormat = 'count' | 'position' | 'pct' | 'eur'
+export type ValueFormat = 'count' | 'position' | 'decimal' | 'pct' | 'eur'
