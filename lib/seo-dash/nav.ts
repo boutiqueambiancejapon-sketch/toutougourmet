@@ -3,7 +3,7 @@
 
 export const ROOT = '/tableau-de-bord'
 
-export type IconKey = 'today' | 'google' | 'crawl' | 'tech' | 'revenue' | 'live' | 'notes' | 'menu'
+export type IconKey = 'today' | 'google' | 'crawl' | 'tech' | 'revenue' | 'live' | 'sources' | 'notes' | 'menu'
 
 export interface NavItem {
   slug: string
@@ -21,6 +21,7 @@ export const MAIN_TABS: NavItem[] = [
   { slug: 'technique', label: 'Technique', desc: 'Vitesse, liens cassés, titres', icon: 'tech' },
   { slug: 'revenus', label: 'Revenus', desc: 'Quelles pages rapportent, et combien', icon: 'revenue' },
   { slug: 'en-direct', label: 'Direct', desc: 'Qui est sur le site maintenant', icon: 'live' },
+  { slug: 'sources', label: 'Sources', desc: 'Moteurs, IA, réseaux, e-mails : d’où viennent les visites', icon: 'sources' },
   { slug: 'contenu', label: 'Contenu & notes', desc: 'Publications, changements, notes', icon: 'notes' },
 ]
 
@@ -43,6 +44,9 @@ export const BOTTOM_BAR: { slug: string; label: string; icon: IconKey }[] = [
   { slug: 'en-direct', label: 'Direct', icon: 'live' },
   { slug: 'menu', label: 'Menu', icon: 'menu' },
 ]
+
+/** Écrans sans onglet dans la barre du bas : celui qui s'allume à leur place (Sources est un sous-onglet de Direct). */
+export const BOTTOM_PARENT: Record<string, string> = { sources: 'en-direct' }
 
 export function hrefOf(slug: string, query = ''): string {
   return `${slug ? `${ROOT}/${slug}` : ROOT}${query}`

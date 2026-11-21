@@ -1,0 +1,25 @@
+/* @cdc tableau de bord SEO — écran Sources (même feuille sur les trois sites). Six familles en ordre fixe, palette
+   validée (validate_palette.js, surface blanche, voisins CVD ≥ 16) : orange, bleu, vert d'eau, violet, jaune, rose.
+   Vert d'eau, jaune et rose passent sous 3:1 : légende, libellés écrits et vue tableau partout. */
+.sd {
+  --sd-f1: #d9581f;
+  --sd-f2: #2a78d6;
+  --sd-f3: #1baf7a;
+  --sd-f4: #6250d6;
+  --sd-f5: #eda100;
+  --sd-f6: #e87ba4;
+}
+.sd-fam { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.sd-fam i { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.sd-stack { display: flex; gap: 2px; height: 8px; border-radius: 4px; overflow: hidden; background: var(--sd-sunk); min-width: 90px; }
+.sd-stack i { display: block; height: 100%; }
+.sd-split td { white-space: nowrap; }
+.sd-split .sd-small { color: var(--sd-ink-3); }
+.sd-spark { display: block; }
+.sd-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+.sd-chips a { font-size: 13px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--sd-line-2); color: var(--sd-ink-2); white-space: nowrap; }
+.sd-chips a[aria-current] { background: var(--sd-ink); border-color: var(--sd-ink); color: var(--sd-card); }
+.sd-zero { color: var(--sd-ink-3); }
+@media (max-width: 820px) {
+  .sd-hide-s { display: none; }
+}
