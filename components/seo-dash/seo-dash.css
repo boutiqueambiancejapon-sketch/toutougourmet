@@ -242,3 +242,4 @@
 .sd-g3 > .sd-card td.u { max-width: 150px; }
 .sd-span2 td.u { max-width: 280px; }
 @media (max-width: 820px) { .sd-g2 td.u, .sd-g3 td.u, .sd-span2 td.u { max-width: 170px; } }
+.sd-nw { white-space: nowrap; }
