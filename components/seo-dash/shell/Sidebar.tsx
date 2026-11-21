@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { SITE } from '@/lib/seo-dash/config'
-import { BOTTOM_BAR, hrefOf, MAIN_TABS, TOOLS } from '@/lib/seo-dash/nav'
+import { BOTTOM_BAR, BOTTOM_PARENT, hrefOf, MAIN_TABS, TOOLS } from '@/lib/seo-dash/nav'
 import { NavIcon } from './Icons'
 
 // @cdc tableau de bord SEO — menu de gauche (ordinateur), en-tête et barre du bas (iPhone). Les filtres suivent
@@ -65,7 +65,8 @@ export function MobileTop({ title }: { title: string }) {
   )
 }
 
-export function BottomBar({ current, query }: { current: string; query: string }) {
+export function BottomBar({ current: screen, query }: { current: string; query: string }) {
+  const current = BOTTOM_PARENT[screen] ?? screen
   const tools = TOOLS.some((t) => t.slug === current) || current === 'menu'
   return (
     <nav className="sd-mtab" aria-label="Onglets principaux">
