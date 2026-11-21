@@ -37,29 +37,36 @@ async function main(): Promise<void> {
   const queue = map.map((e) => ({ e, s: score(e) })).filter((x) => x.s > 0).sort((a, b) => b.s - a.s || age(b.e.path) - age(a.e.path)).slice(0, MAX)
   let ok = 0
   let failed = 0
-  for (const { e } of queue) {
-    try {
-      const r = await inspectUrl(SITE.gscSite, `${SITE.baseUrl}${e.path === '/' ? '/' : e.path}`)
-      await db.query(
-        `INSERT INTO analytics.url_inspection (path, checked_at, verdict, coverage, indexing_state, page_fetch, robots, last_crawl, google_canonical, user_canonical, error)
-         VALUES ($1, now(), $2, $3, $4, $5, $6, $7, $8, $9, NULL)
-         ON CONFLICT (path) DO UPDATE SET checked_at = now(), verdict = $2, coverage = $3, indexing_state = $4, page_fetch = $5, robots = $6,
-           last_crawl = $7, google_canonical = $8, user_canonical = $9, error = NULL`,
-        [e.path, r.verdict, r.coverageState, r.indexingState, r.pageFetchState, r.robotsTxtState, r.lastCrawlTime, r.googleCanonical, r.userCanonical],
-      )
-      ok++
-    } catch (err) {
-      failed++
-      const msg = err instanceof Error ? err.message : String(err)
-      // Quota atteint : on s'arrête, la nuit suivante reprendra.
-      if (/ 429 | quota/i.test(msg)) {
-        console.error(`quota atteint après ${ok} adresses`)
-        break
+  let stop = false
+  let next = 0
+  // 4 à la fois : Google répond en quelques secondes, le quota est de 600 par minute.
+  const worker = async () => {
+    while (!stop && next < queue.length) {
+      const { e } = queue[next++]
+      try {
+        const r = await inspectUrl(SITE.gscSite, `${SITE.baseUrl}${e.path}`)
+        await db.query(
+          `INSERT INTO analytics.url_inspection (path, checked_at, verdict, coverage, indexing_state, page_fetch, robots, last_crawl, google_canonical, user_canonical, error)
+           VALUES ($1, now(), $2, $3, $4, $5, $6, $7, $8, $9, NULL)
+           ON CONFLICT (path) DO UPDATE SET checked_at = now(), verdict = $2, coverage = $3, indexing_state = $4, page_fetch = $5, robots = $6,
+             last_crawl = $7, google_canonical = $8, user_canonical = $9, error = NULL`,
+          [e.path, r.verdict, r.coverageState, r.indexingState, r.pageFetchState, r.robotsTxtState, r.lastCrawlTime, r.googleCanonical, r.userCanonical],
+        )
+        ok++
+      } catch (err) {
+        failed++
+        const msg = err instanceof Error ? err.message : String(err)
+        // Quota atteint : on s'arrête, la nuit suivante reprendra.
+        if (/ 429 | quota/i.test(msg)) {
+          if (!stop) console.error(`quota atteint après ${ok} adresses`)
+          stop = true
+        }
+        if (failed > 20 && ok === 0) stop = true
       }
-      if (failed > 20 && ok === 0) throw new Error(`inspection impossible : ${msg}`)
     }
-    await new Promise((r) => setTimeout(r, 150))
   }
+  await Promise.all(Array.from({ length: 4 }, worker))
+  if (failed > 20 && ok === 0) throw new Error('inspection impossible : aucune réponse valable')
   await db.end()
   console.log(`Inspection d'URL : ${ok} adresses relevées, ${failed} échecs, ${queue.length} en file sur ${map.length}`)
 }
