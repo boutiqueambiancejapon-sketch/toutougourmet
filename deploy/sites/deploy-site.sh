@@ -4,6 +4,7 @@
 # Construit dans /srv/sites/<nom>/releases/<sha> (le site servi n'est jamais touché pendant le build),
 # garde 2 versions, réutilise node_modules si package-lock.json n'a pas changé, redémarre site@<nom>.
 set -euo pipefail
+command -v vps-build >/dev/null || vps-build() { while [[ $1 != -- ]]; do shift; done; shift; "$@"; }
 NAME=${1:?nom du site}
 FORCE=${2:-}
 CONF=/home/administrator/Toutou/deploy/sites/sites.conf
@@ -25,12 +26,13 @@ if [[ -n "$PREV" && -d "$PREV/node_modules" ]] && cmp -s "$PREV/package-lock.jso
   cp -al "$PREV/node_modules" "$DEST/node_modules"
 else
   # npm ci exige un package-lock à jour ; certains dépôts (construits par Vercel avec npm install) ne le sont pas.
-  (cd "$DEST" && { npm ci --no-audit --no-fund --loglevel=error || { echo "package-lock désynchronisé : npm install"; npm install --no-audit --no-fund --loglevel=error; }; })
+  (cd "$DEST" && { vps-build --name "$NAME-npm-ci" -- npm ci --no-audit --no-fund --loglevel=error || { echo "package-lock désynchronisé : npm install"; vps-build --name "$NAME-npm-install" -- npm install --no-audit --no-fund --loglevel=error; }; })
 fi
 # Étape propre à un site avant le build (ex. voyance-fiable : « rm -f middleware.ts », comme sa config Vercel).
 [[ -f "$ROOT/shared/prebuild.sh" ]] && (cd "$DEST" && bash "$ROOT/shared/prebuild.sh")
 set -a; [[ -f "$ROOT/shared/.env" ]] && . "$ROOT/shared/.env"; set +a
-(cd "$DEST" && NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 nice -n 10 npx next build ${NEXT_BUILD_FLAGS:-})
+# File d'attente commune du serveur (Safeguard) : un seul build à la fois, mémoire bornée.
+(cd "$DEST" && NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 vps-build --name "$NAME-deploy" -- npx next build ${NEXT_BUILD_FLAGS:-})
 chgrp -R sites "$DEST/.next" && chmod -R g+w "$DEST/.next"
 ln -sfn "$DEST" "$ROOT/current.new" && mv -T "$ROOT/current.new" "$ROOT/current"
 sudo systemctl restart "site@$NAME"

@@ -1,0 +1,11 @@
+# Safeguard : boîte commune des builds (vps-build, toutou-deploy, site-deploy@).
+# Un seul build à la fois (verrou de vps-build) ; chaque build a aussi sa propre limite (MemoryMax=5G).
+# Moins prioritaire que les sites pour le processeur, et premier tué en cas de manque de mémoire.
+[Unit]
+Description=Safeguard : builds (file d'attente vps-build)
+
+[Slice]
+CPUWeight=60
+IOWeight=60
+MemoryHigh=5G
+MemoryMax=6G

@@ -22,7 +22,7 @@ Ouvre `docs/coherence-queue.md` et prends les 6 premiers non cochés (`- [ ]`), 
 
 ## Vérifications
 - `npx tsx scripts/check-portions.ts` affiche « tout est cohérent ».
-- `npm ci` si besoin puis `npm run build` : doit passer.
+- `npm ci` si besoin puis `vps-build -- npm run build` : doit passer.
 
 ## Commit
 Un commit pour la nuit : `fix(content): coherence pass for N articles`, avec `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`. Coche les articles dans `docs/coherence-queue.md` avec le nombre de corrections, et pour chaque correction une ligne courte en dessous (avant → après). `updatedAt` = date du jour seulement pour un article corrigé.

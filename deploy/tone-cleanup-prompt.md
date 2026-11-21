@@ -30,7 +30,7 @@ Pour chaque article, relis tout le texte, y compris le paragraphe qui suit le TL
 - `updatedAt` = date du jour.
 
 ## Vérifications (une seule construction du site, à la fin, pour ménager la mémoire du serveur)
-- Après les 10 articles : `npm run build > /tmp/tone-build.log 2>&1`. S'il échoue à cause d'un article, corrige-le ; si impossible, annule les changements de cet article (`git checkout -- fichier`) et relance une fois.
+- Après les 10 articles : `vps-build -- npm run build > /tmp/tone-build.log 2>&1`. S'il échoue à cause d'un article, corrige-le ; si impossible, annule les changements de cet article (`git checkout -- fichier`) et relance une fois.
 - Pour chaque article : tirets ≤ 2, emojis = 0, aucun nombre modifié (compare avant/après).
 
 ## Commit

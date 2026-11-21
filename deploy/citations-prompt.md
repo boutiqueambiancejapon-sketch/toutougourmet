@@ -11,7 +11,7 @@ Dans `content/blog/*.mdx`, compte dans le texte placé avant le titre `## Source
 
 ## Vérifications (une seule construction du site)
 - `git diff` de chaque fichier : seules les références et les rares mots de raccord changent. Compare les nombres hors références avant et après : aucun ne doit changer.
-- `npm run build > /tmp/citations-build.log 2>&1`. S'il échoue à cause d'un article, corrige-le ; si impossible, annule cet article (`git checkout -- fichier`) et relance une fois.
+- `vps-build -- npm run build > /tmp/citations-build.log 2>&1`. S'il échoue à cause d'un article, corrige-le ; si impossible, annule cet article (`git checkout -- fichier`) et relance une fois.
 
 ## Commit
 - Un commit Conventional Commits en anglais, ex. `content(sources): move study references to the Sources block (10 articles)`, terminé par une ligne vide puis :

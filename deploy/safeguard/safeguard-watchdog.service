@@ -1,0 +1,8 @@
+[Unit]
+Description=Safeguard : veilleur du serveur (mémoire, swap, charge, disque, OOM, file des builds)
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/node /usr/local/sbin/safeguard-watchdog.mjs
+Nice=5
+TimeoutStartSec=50s

@@ -1,0 +1,10 @@
+# Safeguard : tâches de fond (articles, réécritures, imports, relevés, agents du centre de contrôle).
+# Freinées au-delà de 5 Go, plafonnées à 8 Go, processeur en dernier : les sites passent d'abord.
+[Unit]
+Description=Safeguard : tâches de fond
+
+[Slice]
+CPUWeight=30
+IOWeight=40
+MemoryHigh=5G
+MemoryMax=8G
