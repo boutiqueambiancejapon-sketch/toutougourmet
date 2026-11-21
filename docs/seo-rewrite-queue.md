@@ -58,8 +58,8 @@ Pages que Google montre juste après la première page (28 jours au 5 novembre).
 - [x] `chien-peut-manger-asperges` · legumes · màj 2026-03-21 · réécrit 2026-11-17
 - [x] `chien-peut-manger-aubergines` · legumes · màj 2026-03-21 · réécrit 2026-11-18
 - [x] `chien-peut-manger-betterave` · legumes · màj 2026-03-21 · réécrit 2026-11-18
-- [ ] `chien-peut-manger-butternut-potiron` · legumes · màj 2026-03-21
-- [ ] `chien-peut-manger-celeri` · legumes · màj 2026-03-21
+- [x] `chien-peut-manger-butternut-potiron` · legumes · màj 2026-03-21 · réécrit 2026-11-21
+- [x] `chien-peut-manger-celeri` · legumes · màj 2026-03-21 · réécrit 2026-11-21
 - [ ] `chien-peut-manger-champignons` · legumes · màj 2026-03-21
 - [ ] `chien-peut-manger-fenouil` · legumes · màj 2026-03-21
 - [ ] `chien-peut-manger-mais` · legumes · màj 2026-03-21
