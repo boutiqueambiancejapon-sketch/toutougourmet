@@ -81,11 +81,11 @@ done
 if [[ ${VPS_BUILD_HELD:-} == 1 ]]; then exec "$@"; fi
 
 # Réglages (bornés, quoi qu'il y ait dans le fichier).
-BUILD_MEMORY_MAX_GB=5 BUILD_MEMORY_HIGH_GB=4 BUILD_TIMEOUT=3600 BUILD_WAIT_MAX=5400
+BUILD_MEMORY_MAX_GB=9 BUILD_MEMORY_HIGH_GB=7 BUILD_TIMEOUT=3600 BUILD_WAIT_MAX=5400
 # shellcheck disable=SC1090
 [[ -r $LIMITS ]] && . <(grep -E '^BUILD_[A-Z_]+=[0-9]+$' "$LIMITS")
-MAXG=$(clamp "$(num "$BUILD_MEMORY_MAX_GB" 5)" 3 7)
-HIGHG=$(clamp "$(num "$BUILD_MEMORY_HIGH_GB" 4)" 2 "$MAXG")
+MAXG=$(clamp "$(num "$BUILD_MEMORY_MAX_GB" 9)" 4 10)
+HIGHG=$(clamp "$(num "$BUILD_MEMORY_HIGH_GB" 7)" 3 "$MAXG")
 TMO=$(clamp "$(num "${TMO:-$BUILD_TIMEOUT}" 3600)" 300 7200)
 WAITMAX=$(clamp "$(num "${WAITMAX:-$BUILD_WAIT_MAX}" 5400)" 60 14400)
 
