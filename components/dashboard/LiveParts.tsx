@@ -1,5 +1,6 @@
 import type { LiveData, LiveEvent } from '@/lib/server/dashboard-live'
 import { countryName } from '@/lib/dashboard/country'
+import { SourceChip } from './SourceChip'
 
 // @cdc tableau de bord — morceaux d'affichage de la vue « En direct ».
 
@@ -82,9 +83,11 @@ export function Feed({ items }: { items: LiveEvent[] }) {
           <span className="min-w-0 flex-1 [overflow-wrap:anywhere]">
             <span className={e.name === 'Pageview' ? 'text-ink' : 'font-semibold text-orange-ink'}>{LABELS[e.name] ?? e.name}</span>
             {e.detail ? <span className="text-ink"> · {e.detail}</span> : null}
+            <span className="mt-0.5 block text-xs">
+              <SourceChip source={e.source} />
+            </span>
             <span className="block text-xs text-ink-2">
               {e.page}
-              {e.ref && !e.ref.endsWith('toutou-gourmet.com') ? ` · depuis ${e.ref}` : ''}
               {e.device ? ` · ${e.device === 'mobile' ? 'mobile' : e.device === 'tablet' ? 'tablette' : 'ordinateur'}` : ''}
               {` · ${countryName(e.country)}`}
             </span>

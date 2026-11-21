@@ -62,7 +62,10 @@ export default function PolitiqueConfidentialitePage() {
               avec notre propre outil, hébergé sur notre serveur. Il ne dépose aucun cookie et n&apos;enregistre
               pas ton adresse IP. Au moment de la visite, il en déduit seulement ton pays avec une base
               installée sur notre serveur (DB-IP), puis l&apos;adresse est oubliée : seul le code du pays
-              (par exemple FR) est gardé. Aucune de ces données ne part chez un service tiers.
+              (par exemple FR) est gardé. Il note aussi d&apos;où tu arrives : le nom du site seulement
+              (par exemple google.com, jamais l&apos;adresse complète), la source de campagne d&apos;un lien
+              (utm_source) et, quand tu passes d&apos;une page à l&apos;autre, la page précédente du site.
+              Aucune de ces données ne part chez un service tiers.
             </p>
             <p className="mb-2">
               Nous utilisons aussi Google Analytics 4 (Google Ireland Ltd). Tant que tu n&apos;as pas cliqué

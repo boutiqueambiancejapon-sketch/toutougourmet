@@ -21,6 +21,8 @@ const SOURCE = 'caddy-journal'
 const BATCH = 500
 const RETENTION_DAYS = 180
 const STATIC = /^\/(_next\/|images\/|fonts\/|favicon|icons?\/|apple-touch|manifest|robots\.txt$|sitemap)|\.(js|css|map|png|jpe?g|webp|avif|gif|svg|ico|woff2?|txt|xml|json)$/i
+// Images de partage et icônes générées par Next.js (/blog/x/opengraph-image-ab12cd), fiches PDF : pas des pages.
+const ASSET = /(^|\/)(opengraph-image|twitter-image)(-[a-z0-9]+)?(\.\w+)?$|(^|\/)(apple-)?icon\d*(-[a-z0-9]+)?\.\w+$|(^|\/)(apple-)?icon\d*$|\/sw\.js$|\.(pdf|webmanifest)$/i
 
 const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL || 'postgresql:///toutou?host=/var/run/postgresql', max: 2 })
 
@@ -72,7 +74,7 @@ function toHit(entry) {
   const path = uri.split('?')[0].slice(0, 300)
   const ua = header(req.headers, 'User-Agent') || ''
   const { kind, bot, operator } = classifyUa(ua)
-  if (kind === 'human' && (STATIC.test(path) || req.method !== 'GET' || path.startsWith('/api/'))) return null
+  if (kind === 'human' && (STATIC.test(path) || ASSET.test(path) || req.method !== 'GET' || path.startsWith('/api/'))) return null
   // Préchargements de Next.js (liens du menu chargés en arrière-plan) et tableau de bord du
   // propriétaire : ce ne sont pas des visites.
   const prefetch = header(req.headers, 'RSC') || header(req.headers, 'Next-Router-Prefetch') ||
