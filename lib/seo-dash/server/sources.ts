@@ -97,7 +97,7 @@ function bucketsOf(r: Range, week: boolean): { buckets: Bucket[]; bucketOf: (day
 
 function keep(f: Filters) {
   const device = f.device === 'tous' ? null : DEVICE_HITS[f.device]
-  return (v: VisitRow) => (!device || v.device === device) && (f.pages === 'toutes' || pageTypeOf(v.landing.split('?')[0]) === f.pages)
+  return (v: VisitRow) => (!device || v.device === device) && (f.pages === 'toutes' || pageTypeOf(v.landing.split('?')[0] ?? v.landing) === f.pages)
 }
 
 function classified(rows: VisitRow[], f: Filters): Visit[] {
@@ -151,7 +151,7 @@ export function groupBy(l: Loaded, keyOf: (v: Visit) => string | null, match: (v
     }
     add(row, v)
     const b = l.bucketOf(v.day)
-    if (b >= 0) row.spark[b] += 1
+    if (b >= 0) row.spark[b] = (row.spark[b] ?? 0) + 1
   }
   if (l.compare) {
     for (const v of l.prev) {
@@ -227,7 +227,7 @@ export function matchKey(key: string): ((v: Visit) => boolean) | null {
 
 /** Pages d'arrivée d'une source ou d'une famille. */
 export function landingsOf(l: Loaded, match: (v: Visit) => boolean): SourceRow[] {
-  return groupBy(l, (v) => v.landing.split('?')[0], match)
+  return groupBy(l, (v) => v.landing.split('?')[0] ?? v.landing, match)
 }
 
 /** Pour 100 visites (null sans visite). */
