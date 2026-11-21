@@ -1,15 +1,15 @@
 # Range les journaux d'accès de Caddy dans analytics.hits (tableau de bord maison).
 # SupplementaryGroups donne la lecture du journal système à ce seul service, sans changer
-# les groupes du compte. Après la bascule : User=toutou et WorkingDirectory=/srv/toutou/current.
+# les groupes du compte. Depuis le 2026-11-21 : compte toutou et version en ligne (filtre anti-robots).
 [Unit]
 Description=Toutou Gourmet - ingestion des journaux Caddy
 After=postgresql.service
 
 [Service]
 Type=oneshot
-User=administrator
+User=toutou
 SupplementaryGroups=systemd-journal
-WorkingDirectory=/home/administrator/toutou-preview/current
+WorkingDirectory=/srv/toutou/current
 Environment=INGEST_HOSTS=www.toutou-gourmet.com,toutou-gourmet.com,dashboard.toutou-gourmet.com
 Environment=DATABASE_URL=postgresql:///toutou?host=/var/run/postgresql
 # Facultatif, même valeur que dans le .env du site : adresses ou plages à ne pas compter.

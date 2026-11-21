@@ -30,6 +30,8 @@ export interface SiteConfig {
   clientValue: Record<string, number>
   clientRate: Record<string, number>
   pageTypes: PageTypeRule[]
+  /** Pages-listes (plan du site HTML) : leurs liens ne comptent pas pour repérer une page orpheline. */
+  linkHubs: string[]
   /** Les autres tableaux de bord : sélecteur de site. */
   sites: { key: string; label: string; url: string }[]
 }
@@ -56,6 +58,7 @@ export const SITE: SiteConfig = {
     { key: 'promo', label: 'code promo', plural: 'Codes promo', match: /^\/(codes-promo|promo-croquettes-chien|black-friday-croquettes-chien)(\/|$)/ },
     { key: 'outil', label: 'outil', plural: 'Accueil et outils', match: /^\/($|outils|scanner|quiz|comparateur|choisir-croquettes|assistant|mon-chien|guide-alimentation)/ },
   ],
+  linkHubs: ['/plan-du-site'],
   sites: [
     { key: 'toutou', label: 'Toutou Gourmet', url: 'https://dashboard.toutou-gourmet.com/tableau-de-bord' },
     { key: '10min', label: '10minlanguages', url: 'https://10minlanguages.com/dashboard' },

@@ -1,4 +1,5 @@
 import type { Pool } from 'pg'
+import { SITE } from '../config'
 import type { Filters } from '../filters'
 import { googlebotSql, tsIn } from './crawl'
 import { gscAgg, gscDaily, type Agg, type DayPoint, type Totals } from './gsc-core'
@@ -41,7 +42,7 @@ export async function pageDetail(pool: Pool, f: Filters, path: string): Promise<
     pool.query(`SELECT count(*)::int AS n FROM analytics.events WHERE name = 'Pageview' AND page = ${ev.add(path)} AND ${tsIn(ev, logs.cur)}${evWhere}`, ev.values),
     pool.query(`SELECT coalesce(props->>'brand', '?') AS brand, count(*)::int AS n FROM analytics.events WHERE name = 'Affiliate Click' AND page = $1 AND ts >= $2::date GROUP BY 1 ORDER BY 2 DESC`, [path, logs.cur.start]),
     pool.query(`SELECT verdict, coverage, checked_at::date::text AS checked, google_canonical AS canonical FROM analytics.url_inspection WHERE path = $1`, [path]),
-    pool.query(`SELECT a.title, a.description, a.status, (SELECT count(DISTINCT src)::int FROM analytics.page_links l WHERE l.dst = a.path AND l.src <> a.path) AS "linksIn" FROM analytics.page_audit a WHERE a.path = $1`, [path]),
+    pool.query(`SELECT a.title, a.description, a.status, (SELECT count(DISTINCT src)::int FROM analytics.page_links l WHERE l.dst = a.path AND l.src <> a.path AND NOT l.src = ANY($2::text[])) AS "linksIn" FROM analytics.page_audit a WHERE a.path = $1`, [path, SITE.linkHubs]),
     pool.query(`SELECT min(day)::text AS d FROM analytics.gsc_page_daily WHERE page = $1 AND impressions > 0`, [path]),
   ])
   return {

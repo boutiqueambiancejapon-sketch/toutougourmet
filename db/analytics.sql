@@ -294,18 +294,11 @@ CREATE INDEX IF NOT EXISTS seo_notes_day_idx ON analytics.seo_notes (day);
 -- « Marquer comme fait » des 5 actions du jour : la clé de l'action (stable d'un jour à l'autre).
 CREATE TABLE IF NOT EXISTS analytics.seo_actions_done (key text PRIMARY KEY, title text NOT NULL, done_at timestamptz NOT NULL DEFAULT now());
 
--- Ventes réelles recopiées du centre de contrôle (table commissions), chaque nuit (scripts/seo/sync-revenue.mjs).
+-- Ventes réelles recopiées du centre de contrôle (table commissions), toutes les heures (deploy/revenue-sync.sh).
 CREATE TABLE IF NOT EXISTS analytics.revenue_sales (
   project text NOT NULL, day date NOT NULL, program text NOT NULL, amount real NOT NULL, sales integer NOT NULL, status text NOT NULL,
   PRIMARY KEY (project, day, program)
 );
-
--- Filtre anti-robots (2026-11-21) : empreinte du jour (sel en base, effacé après 2 jours) posée sur les pages vues humaines
--- et sur les balises JS reçues. Une empreinte qui enchaîne les pages sans jamais envoyer la balise est un robot.
-CREATE TABLE IF NOT EXISTS analytics.daily_salt (day date PRIMARY KEY, salt text NOT NULL);
-CREATE TABLE IF NOT EXISTS analytics.beacon_seen (day date NOT NULL, vkey text NOT NULL, PRIMARY KEY (day, vkey));
-ALTER TABLE analytics.hits ADD COLUMN IF NOT EXISTS vkey text;
-CREATE INDEX IF NOT EXISTS hits_vkey_idx ON analytics.hits (vkey, ts) WHERE vkey IS NOT NULL;
 
 ALTER TABLE analytics.gsc_site_daily OWNER TO toutou;
 ALTER TABLE analytics.gsc_page_daily OWNER TO toutou;
@@ -317,10 +310,7 @@ ALTER TABLE analytics.link_status OWNER TO toutou;
 ALTER TABLE analytics.seo_notes OWNER TO toutou;
 ALTER TABLE analytics.seo_actions_done OWNER TO toutou;
 ALTER TABLE analytics.revenue_sales OWNER TO toutou;
-ALTER TABLE analytics.daily_salt OWNER TO toutou;
-ALTER TABLE analytics.beacon_seen OWNER TO toutou;
--- Ingestion des journaux (compte administrator) : sel du jour, balises vues, reclassement des robots.
-GRANT SELECT, INSERT, DELETE ON analytics.daily_salt, analytics.beacon_seen TO administrator;
-GRANT UPDATE ON analytics.hits TO administrator;
+-- Filtre anti-robots (2026-11-21, scripts/ingest-caddy-logs.mjs) : kind « scraper » pour les pages vues sans balise JS
+-- ni référent, sans Accept-Language ou par un navigateur sans tête ; balises de robots renommées « Pageview (robot) ».
 -- Recopie des ventes du centre de contrôle (compte administrator, seul à lire sa base).
 GRANT SELECT, INSERT, UPDATE, DELETE ON analytics.revenue_sales TO administrator;

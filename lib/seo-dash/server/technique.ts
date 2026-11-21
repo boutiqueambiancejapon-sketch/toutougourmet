@@ -1,5 +1,5 @@
 import type { Pool } from 'pg'
-import { pageTypeLabel, pageTypeOf } from '../config'
+import { pageTypeLabel, pageTypeOf, SITE } from '../config'
 import { crawlErrors, type ErrorRow } from './crawl'
 import { cruxConfigured, cruxOrigin, type CruxResult } from './crux'
 import { logRanges } from './range'
@@ -37,8 +37,9 @@ export async function technique(pool: Pool): Promise<TechniqueData> {
         WHERE s.status >= 400 GROUP BY 1, 2 ORDER BY 3 DESC LIMIT 100`,
     ),
     pool.query<{ path: string; n: number }>(
-      `SELECT a.path, (SELECT count(DISTINCT l.src)::int FROM analytics.page_links l WHERE l.dst = a.path AND l.src <> a.path) AS n
+      `SELECT a.path, (SELECT count(DISTINCT l.src)::int FROM analytics.page_links l WHERE l.dst = a.path AND l.src <> a.path AND NOT l.src = ANY($1::text[])) AS n
          FROM analytics.page_audit a WHERE a.in_sitemap AND a.status = 200 AND a.path <> '/'`,
+      [SITE.linkHubs],
     ),
     crawlErrors(pool, logs.cur),
     groupVitals(pool, (t) => pageTypeLabel(t, true)),

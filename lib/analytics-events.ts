@@ -27,6 +27,7 @@ export const ANALYTICS_EVENTS = [
   'Sitter Sheet Created',
   'Sitter Template Download',
   'Pageview',
+  'Web Vital',
 ] as const
 
 /**

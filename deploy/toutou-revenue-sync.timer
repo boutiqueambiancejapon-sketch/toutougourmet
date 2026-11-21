@@ -1,0 +1,9 @@
+[Unit]
+Description=Toutou Gourmet - ventes réelles vers le tableau de bord, toutes les heures
+
+[Timer]
+OnCalendar=*:52
+Persistent=false
+
+[Install]
+WantedBy=timers.target

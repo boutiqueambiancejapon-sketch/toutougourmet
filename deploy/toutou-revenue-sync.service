@@ -1,0 +1,11 @@
+# Recopie les ventes réelles du centre de contrôle dans analytics.revenue_sales (écran Revenus).
+# Installé : sudo install -m 755 deploy/revenue-sync.sh /usr/local/sbin/toutou-revenue-sync
+[Unit]
+Description=Toutou Gourmet - ventes réelles vers le tableau de bord
+After=postgresql.service
+
+[Service]
+Type=oneshot
+User=administrator
+Nice=15
+ExecStart=/usr/bin/bash -euo pipefail /usr/local/sbin/toutou-revenue-sync
