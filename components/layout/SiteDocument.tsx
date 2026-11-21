@@ -5,6 +5,7 @@ import { Tracking } from '@/components/analytics/Tracking'
 import { GtagLoader } from '@/components/analytics/GtagLoader'
 import { ConsentBanner } from '@/components/consent/ConsentBanner'
 import GoogleAnalyticsPageView from './GoogleAnalyticsPageView'
+import { WebVitals } from './WebVitals'
 import { fraunces, dmSans } from '@/lib/fonts'
 import { SITE_URL, type Locale } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
@@ -67,6 +68,7 @@ export function SiteDocument({ locale, header, footer, children }: SiteDocumentP
 
         <ScrollToTop />
         <GoogleAnalyticsPageView />
+        <WebVitals />
         {header}
         <main id="main-content">{children}</main>
         {footer}

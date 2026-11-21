@@ -73,13 +73,22 @@ function toHit(entry) {
   const uri = req.uri || '/'
   const path = uri.split('?')[0].slice(0, 300)
   const ua = header(req.headers, 'User-Agent') || ''
-  const { kind, bot, operator } = classifyUa(ua)
-  if (kind === 'human' && (STATIC.test(path) || ASSET.test(path) || req.method !== 'GET' || path.startsWith('/api/'))) return null
+  let { kind, bot, operator } = classifyUa(ua)
+  // @cdc mesure — filtre anti-robots (2026-11-21) : un vrai navigateur envoie toujours Accept-Language ; un
+  // navigateur sans tête ou un Chrome très ancien est un robot qui se fait passer pour une personne.
+  if (kind === 'human' && req.method === 'GET') {
+    const lang = header(req.headers, 'Accept-Language')
+    const chrome = /Chrome\/(\d+)\./.exec(ua)
+    if (!lang) { kind = 'scraper'; bot = 'sans langue' }
+    else if (/HeadlessChrome|PhantomJS|Electron\//.test(ua)) { kind = 'scraper'; bot = 'navigateur sans tête' }
+    else if (chrome && Number(chrome[1]) < 100) { kind = 'scraper'; bot = 'navigateur périmé' }
+  }
+  if ((kind === 'human' || kind === 'scraper') && (STATIC.test(path) || ASSET.test(path) || req.method !== 'GET' || path.startsWith('/api/'))) return null
   // Préchargements de Next.js (liens du menu chargés en arrière-plan) et tableau de bord du
   // propriétaire : ce ne sont pas des visites.
   const prefetch = header(req.headers, 'RSC') || header(req.headers, 'Next-Router-Prefetch') ||
     /prefetch/i.test(header(req.headers, 'Sec-Purpose') || header(req.headers, 'Purpose') || '') || /[?&]_rsc=/.test(uri)
-  if (kind === 'human' && prefetch) return null
+  if ((kind === 'human' || kind === 'scraper') && prefetch) return null
   if (String(req.host || '').startsWith('dashboard.')) return null
   if (kind === 'human' && isOwnerIp(clientIp)) return null
   const refHost = hostOf(header(req.headers, 'Referer'))
@@ -92,7 +101,7 @@ function toHit(entry) {
     bytes: entry.size ?? null,
     duration_ms: entry.duration != null ? Math.round(entry.duration * 1000) : null,
     kind, bot, operator,
-    device: kind === 'human' ? deviceOf(ua) : null,
+    device: kind === 'human' || kind === 'scraper' ? deviceOf(ua) : null,
     ref_host: refHost && refHost !== (req.host || '').replace(/^www\./, '') ? refHost.slice(0, 100) : null,
     ref_ai: kind === 'human' ? aiReferrer(refHost, uri) : null,
     ip: kind === 'human' ? null : clientIp,
@@ -130,6 +139,24 @@ async function flush(rows, cursor) {
   }
 }
 
+// @cdc mesure — filtre anti-robots, seconde passe : une page vue « humaine » sans balise JS (événement Pageview de la
+// même page, même appareil, à 2 minutes près) et sans référent est un robot qui imite un navigateur. Les pages des
+// 5 dernières minutes attendent leur balise. Le référent externe (Google…) garde le bénéfice du doute.
+export const RECLASS_SQL = `UPDATE analytics.hits h SET kind = 'scraper', bot = 'sans balise JS'
+  WHERE h.kind = 'human' AND h.ref_host IS NULL AND h.ts < now() - interval '5 minutes' AND h.ts >= $1
+    AND NOT EXISTS (SELECT 1 FROM analytics.events e WHERE e.name = 'Pageview' AND e.page = h.path
+      AND e.ts BETWEEN h.ts - interval '120 seconds' AND h.ts + interval '120 seconds' AND e.device IS NOT DISTINCT FROM h.device)`
+
+// @cdc mesure — robots qui exécutent le JavaScript (la balise part quand même) : page vue sans référent ni page
+// précédente depuis un pays hors des marchés du site, ou plus de 30 pages vues en une heure pour une même empreinte.
+// Renommées « Pageview (robot) » : gardées pour contrôle, hors de tous les comptes de personnes.
+const MARKETS = (process.env.ANALYTICS_MARKETS || 'FR,BE,CH,LU,MC,CA,RE,GP,MQ,GF,YT,NC,PF,PM,MA,DZ,TN,SN,CI').split(',')
+export const RECLASS_EVENTS_SQL = `UPDATE analytics.events SET name = 'Pageview (robot)'
+  WHERE name = 'Pageview' AND ts >= $1 AND ts < now() - interval '5 minutes' AND (
+    (ref_host IS NULL AND props->>'from' IS NULL AND (country IS NULL OR NOT country = ANY($2::text[])))
+    OR visitor IN (SELECT visitor FROM analytics.events WHERE name IN ('Pageview', 'Pageview (robot)') AND ts >= $1 AND visitor IS NOT NULL
+                    GROUP BY visitor, date_trunc('hour', ts) HAVING count(*) > 30))`
+
 async function main() {
   const { rows } = await pool.query('SELECT cursor FROM analytics.ingest_state WHERE source = $1', [SOURCE])
   const cursor = rows[0]?.cursor
@@ -160,6 +187,10 @@ async function main() {
   if (code !== 0 && seen === 0) throw new Error(`journalctl a échoué (code ${code}) : droits de lecture du journal ?`)
 
   if (!DRY) {
+    const re = await pool.query(RECLASS_SQL, [new Date(Date.now() - 2 * 3600_000).toISOString()])
+    if (re.rowCount) console.log(`[ingest] ${re.rowCount} pages vues reclassées en robots (sans balise JS)`)
+    const ev = await pool.query(RECLASS_EVENTS_SQL, [new Date(Date.now() - 2 * 3600_000).toISOString(), MARKETS])
+    if (ev.rowCount) console.log(`[ingest] ${ev.rowCount} balises de robots écartées`)
     await pool.query(`DELETE FROM analytics.hits WHERE ts < now() - interval '${RETENTION_DAYS} days'`)
     await pool.query(`DELETE FROM analytics.events WHERE ts < now() - interval '400 days'`)
   }

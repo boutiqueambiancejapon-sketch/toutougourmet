@@ -1,0 +1,14 @@
+# Relevés de nuit du tableau de bord SEO : Search Console, notes automatiques, audit des pages, inspection d'URL.
+[Unit]
+Description=Toutou Gourmet - relevés du tableau de bord SEO
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=toutou
+WorkingDirectory=/srv/toutou/current
+EnvironmentFile=/srv/toutou/shared/.env
+Nice=15
+TimeoutStartSec=2h
+ExecStart=/usr/bin/bash /srv/toutou/current/deploy/seo-collect.sh

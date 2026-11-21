@@ -35,7 +35,7 @@ export async function googlebotSql(p: Params, alias = ''): Promise<string> {
 /** Fichiers (images, scripts, icônes) : ni pages ni erreurs à corriger dans le contenu. */
 export const ASSET_SQL = `(path ~ '^/(_next/|images/|fonts/|icons?/)' OR path ~ '\\.(js|css|map|png|jpe?g|webp|avif|gif|svg|ico|woff2?|txt|xml|json|pdf)$')`
 /** Sondes de pirates (wp-admin, .env, .php…) : retirées des erreurs, elles ne disent rien du site. */
-export const PROBE_SQL = `(path ~* '(wp-|\\.php|\\.env|\\.git|xmlrpc|cgi-bin|\\.asp|/admin|phpmyadmin|\\.sql|\\.bak|\\.zip)')`
+export const PROBE_SQL = `(path ~* '(wp-|\\.php|\\.env|\\.git|xmlrpc|cgi-bin|\\.asp|/admin|phpmyadmin|\\.sql|\\.bak|\\.zip|netlify|firebase|\\.well-known|\\.aws|\\.ds_store|config\\.)')`
 
 /** Groupe d'affichage d'une adresse de journal : fiche, article, autre page, fichier. */
 export function crawlGroupSql(p: Params): string {

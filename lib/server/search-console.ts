@@ -63,3 +63,37 @@ export async function analyseGsc(site: string, debut: string, fin: string, dimen
   const r = await gsc<{ rows?: LigneGsc[] }>(`sites/${encodeURIComponent(site)}/searchAnalytics/query`, { startDate: debut, endDate: fin, dimensions, rowLimit, startRow, dataState: 'all' })
   return r.rows ?? []
 }
+
+export interface InspectionResult {
+  verdict: string | null
+  coverageState: string | null
+  indexingState: string | null
+  pageFetchState: string | null
+  robotsTxtState: string | null
+  lastCrawlTime: string | null
+  googleCanonical: string | null
+  userCanonical: string | null
+}
+
+/** Inspection d'URL (état d'indexation d'une adresse), quota Google : 2 000 par jour et par propriété. */
+export async function inspectUrl(site: string, url: string): Promise<InspectionResult> {
+  const res = await fetch('https://searchconsole.googleapis.com/v1/urlInspection/index:inspect', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${await accessToken()}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ inspectionUrl: url, siteUrl: site }),
+    cache: 'no-store',
+  })
+  if (!res.ok) throw new Error(`Inspection ${res.status} : ${(await res.text()).slice(0, 200)}`)
+  const data = (await res.json()) as { inspectionResult?: { indexStatusResult?: Partial<InspectionResult> } }
+  const r = data.inspectionResult?.indexStatusResult ?? {}
+  return {
+    verdict: r.verdict ?? null,
+    coverageState: r.coverageState ?? null,
+    indexingState: r.indexingState ?? null,
+    pageFetchState: r.pageFetchState ?? null,
+    robotsTxtState: r.robotsTxtState ?? null,
+    lastCrawlTime: r.lastCrawlTime ?? null,
+    googleCanonical: r.googleCanonical ?? null,
+    userCanonical: r.userCanonical ?? null,
+  }
+}

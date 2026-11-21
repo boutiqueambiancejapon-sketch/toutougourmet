@@ -1,5 +1,5 @@
 import type { TechniqueData } from '@/lib/seo-dash/server/technique'
-import { pageTypeLabel } from '@/lib/seo-dash/config'
+import { pageTypeLabel, pageTypeOf } from '@/lib/seo-dash/config'
 import { n0, shortPath } from '@/lib/seo-dash/format'
 import { PageLink } from '../ui/Cells'
 import { Card, Empty } from '../ui/Card'
@@ -7,10 +7,20 @@ import { Card, Empty } from '../ui/Card'
 // @cdc tableau de bord SEO — Technique : liens cassés, pages orphelines, titres et descriptions (signalés, jamais
 // réécrits sans l'accord du propriétaire).
 
+/** Cause probable d'une erreur vue par un robot, par règles simples sur l'adresse. */
+function causeOf(path: string, status: number): string {
+  if (path.startsWith('/_next/image')) return 'image redimensionnée refusée'
+  if (status >= 500) return 'erreur du serveur'
+  if (/\.xml.+/.test(path)) return 'adresse mal formée'
+  if (pageTypeOf(path) === 'fiche') return 'fiche retirée du catalogue'
+  if (/\.\w{2,5}$/.test(path)) return 'fichier absent'
+  return 'page absente ou déplacée'
+}
+
 export function BrokenCard({ d, csv }: { d: TechniqueData; csv: string }) {
   const rows = [
     ...d.broken.map((b) => ({ path: b.path, status: b.status, n: b.from, cause: `lien interne depuis ${b.from} page${b.from > 1 ? 's' : ''}`, example: b.example })),
-    ...d.robot404.filter((r) => !d.broken.some((b) => b.path === r.path)).map((r) => ({ path: r.path, status: r.status, n: r.hits, cause: 'demandée par un robot', example: null })),
+    ...d.robot404.filter((r) => !d.broken.some((b) => b.path === r.path)).map((r) => ({ path: r.path, status: r.status, n: r.hits, cause: causeOf(r.path, r.status), example: null })),
   ]
   return (
     <Card title="Liens cassés" desc="Liens internes qui mènent à une erreur (audit de nuit), puis adresses en erreur demandées par Googlebot ou Bingbot" csv={csv}>

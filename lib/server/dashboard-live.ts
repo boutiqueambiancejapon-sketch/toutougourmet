@@ -72,7 +72,7 @@ export async function getLive(pool: Pool): Promise<LiveData> {
     pool.query<FeedRow>(
       `SELECT ts, name, page, coalesce(props->>'brand', props->>'tool', props->>'query', props->>'place') AS detail,
               device, ref_host AS ref, country, props->>'utm_source' AS utm, props->>'utm_medium' AS medium, props->>'from' AS from_path
-         FROM analytics.events ORDER BY ts DESC LIMIT 25`,
+         FROM analytics.events WHERE name NOT IN ('Web Vital', 'Pageview (robot)') ORDER BY ts DESC LIMIT 25`,
     ),
     pool.query<{ ts: Date; label: string; kind: string; path: string }>(
       `SELECT ts, coalesce(operator, bot, '?') AS label, kind, path FROM analytics.hits
