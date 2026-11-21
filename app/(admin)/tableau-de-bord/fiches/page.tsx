@@ -25,7 +25,7 @@ export default async function FichesPage({ searchParams }: Props) {
   const lien = (p: number) => `/tableau-de-bord/fiches?${new URLSearchParams(Object.entries({ ...f, page: String(p) }).filter((e): e is [string, string] => Boolean(e[1]))).toString()}`
   return (
     <main className="mx-auto flex w-full max-w-page flex-col gap-4 px-4 pb-16 md:px-8">
-      <p className="m-0 pt-6 text-sm"><Link href="/tableau-de-bord/contenu" className="text-ink-2 underline underline-offset-2">Retour au contenu</Link></p>
+      <p className="m-0 pt-6 text-sm"><Link href="/tableau-de-bord/relecture" className="text-ink-2 underline underline-offset-2">Retour au contenu</Link></p>
       <header className="flex flex-col gap-1">
         <h1 className="m-0 font-display text-3xl font-black text-ink">Fiches produit et Google</h1>
         <p className="m-0 text-sm text-ink-2">{`${toutes.filter((l) => l.indexee).length} indexées sur ${toutes.length} recettes. Une recette regroupe tous ses formats. Le changement arrive tout de suite sur le site, puis Google met quelques jours.`}</p>

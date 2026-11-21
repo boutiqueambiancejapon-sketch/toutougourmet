@@ -105,14 +105,14 @@ export async function getTodoCounts(pool: Pool): Promise<TodoCounts> {
 
 export interface StatusLine {
   text: string
-  tab: 'serveur' | 'contenu'
+  tab: 'serveur' | 'relecture'
 }
 
 /** Problèmes en cours : serveur, tâches, sauvegarde (dashboard-health) et dernière nuit (alertes). */
 export async function getStatusLines(now = new Date()): Promise<StatusLine[]> {
   const [health, night] = await Promise.all([getServerHealth(), checkNight(now).catch(() => [])])
-  const lines: StatusLine[] = night.map((n) => ({ text: n.line, tab: 'contenu' }))
+  const lines: StatusLine[] = night.map((n) => ({ text: n.line, tab: 'relecture' }))
   // Une nuit en échec est déjà dite par le compte rendu : pas de seconde ligne pour la même tâche.
-  for (const a of health.alertItems) if (!(lines.length > 0 && a.tab === 'contenu')) lines.push(a)
+  for (const a of health.alertItems) if (!(lines.length > 0 && a.tab === 'relecture')) lines.push(a)
   return lines
 }

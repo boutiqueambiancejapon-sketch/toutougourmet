@@ -32,13 +32,14 @@ export default async function ScannerHealthPage() {
   return (
     <DashboardShell
       period={parsePeriod(undefined).key}
-      current="contenu"
+      current="relecture"
+      tool="scanner"
       title="Santé du scanner"
       intro="Chaque essai de scan compte, réussi ou non. Les chiffres partent de la mise en service du journal."
       notice={!health.journal ? NOT_YET : health.partial ? READ_FAILED : null}
     >
       <p className="m-0 mt-3 text-sm">
-        <Link href="/tableau-de-bord/contenu" className="text-ink-2 underline underline-offset-2">
+        <Link href="/tableau-de-bord/relecture" className="text-ink-2 underline underline-offset-2">
           Retour à l’onglet Contenu
         </Link>
       </p>

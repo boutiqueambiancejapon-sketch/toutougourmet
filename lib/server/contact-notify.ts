@@ -7,7 +7,7 @@ import { sendTransactionalEmail } from './mailer'
 // téléphone (ntfy) et e-mail à CONTACT_NOTIFY_EMAIL, sinon NEWSLETTER_TEST_EMAIL, avec réponse directe au visiteur.
 // Le message reste aussi dans le tableau de bord (onglet Contenu). Une panne d'envoi ne bloque jamais le formulaire.
 
-const DASHBOARD = 'https://dashboard.toutou-gourmet.com/tableau-de-bord/contenu#messages'
+const DASHBOARD = 'https://dashboard.toutou-gourmet.com/tableau-de-bord/relecture#messages'
 
 export async function notifyContact(msg: ContactMessage): Promise<void> {
   const to = process.env.CONTACT_NOTIFY_EMAIL || process.env.NEWSLETTER_TEST_EMAIL
