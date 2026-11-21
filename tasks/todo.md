@@ -258,15 +258,15 @@ Maquette : https://maquette-10min.85-190-127-13.sslip.io/dashboard-seo/ (sources
 Modulaire pour 10minlanguages et QRT : `lib/seo-dash/config.ts` (propre au site), `lib/seo-dash/server/*` (données),
 `components/seo-dash/*` (vues). Chaque étape est déployée.
 
-- [ ] 0. Correctif 404 Googlebot : /apple-icon.svg et /images/brand/logo.webp
-- [ ] 1. Navigation : 7 onglets + Outils, barre iPhone, sélecteur de site, barre période + comparaison (URL), export CSV, détail page et requête, redirections
-- [ ] Collecte Search Console : `analytics.gsc_site_daily`, `gsc_page_daily`, `gsc_qp_daily` (jour × appareil), rattrapage depuis le 5 mars 2026, chaque nuit
-- [ ] 2. Aujourd'hui : tuiles + courbes, 5 actions (calcul déterministe, « fait » en base), anomalies
-- [ ] 3. Google : tous les blocs de la maquette, ancres fusionnées, comparaison sur un an seulement si les données existent
-- [ ] 4. Exploration : Googlebot et robots d'IA par type de page, codes, 404/5xx, jamais vues, délais publication → passage → affichage
-- [ ] 5. Technique : titres et descriptions, liens cassés et orphelines (graphe de liens chaque nuit), Core Web Vitals (web-vitals maison + CrUX « À connecter »)
-- [ ] 6. Revenus : visites → clics → clients estimés → €, objectif 5 000 €, ventes réelles du centre de contrôle
-- [ ] 7. Direct : vue en direct déplacée
-- [ ] 8. Contenu & notes : calendrier, notes manuelles + automatiques, pastilles sur toutes les courbes
-- [ ] 9. Filtre anti-robots des visiteurs (UA, cadence, balise JS absente), historique reclassé
-- [ ] 10. Inspection d'URL chaque nuit (≤ 2 000/jour, priorités), minuterie hors 7 h et 20 h
+- [x] 0. Correctif 404 Googlebot : /apple-icon.svg et /images/brand/logo.webp
+- [x] 1. Navigation : 7 onglets + Outils, barre iPhone, sélecteur de site, barre période + comparaison (URL), export CSV, détail page et requête, redirections
+- [x] Collecte Search Console : `analytics.gsc_site_daily`, `gsc_page_daily`, `gsc_qp_daily` (jour × appareil), rattrapage depuis le 5 mars 2026, chaque nuit
+- [x] 2. Aujourd'hui : tuiles + courbes, 5 actions (calcul déterministe, « fait » en base), anomalies
+- [x] 3. Google : tous les blocs de la maquette, ancres fusionnées, comparaison sur un an seulement si les données existent
+- [x] 4. Exploration : Googlebot et robots d'IA par type de page, codes, 404/5xx, jamais vues, délais publication → passage → affichage
+- [~] 5. Technique : titres et descriptions, liens cassés et orphelines (graphe de liens chaque nuit), Core Web Vitals (web-vitals maison ; CrUX « À connecter » : clé du propriétaire)
+- [x] 6. Revenus : visites → clics → clients estimés → €, objectif 5 000 €, ventes réelles du centre de contrôle
+- [x] 7. Direct : vue en direct déplacée
+- [x] 8. Contenu & notes : calendrier, notes manuelles + automatiques, pastilles sur toutes les courbes
+- [x] 9. Filtre anti-robots des visiteurs (UA, cadence, balise JS absente), historique reclassé
+- [x] 10. Inspection d'URL chaque nuit (≤ 2 000/jour, priorités), minuterie hors 7 h et 20 h
