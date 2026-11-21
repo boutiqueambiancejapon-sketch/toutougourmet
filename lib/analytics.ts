@@ -12,12 +12,35 @@ type Props = Record<string, string | number | boolean>
 // @cdc mesure — chaque action (hors page vue, dont le type se déduit du chemin) porte le type de
 // page de la carte des conversions (lib/page-type.ts) : clic partenaire, invitation compte vue ou
 // cliquée, inscription, résultat d'outil, téléchargement… Un `pageType` passé à la main l'emporte.
+// @cdc mesure — page précédente sur le site : après une navigation sans rechargement,
+// document.referrer garde le site d'origine (Google…), on envoie donc la page d'avant.
+let lastPath: string | null = null
+
+/** Source de campagne de la page d'entrée (utm_source, ?ref=, utm_medium), sans le reste de l'adresse. */
+function campaign(): Props {
+  const q = new URLSearchParams(window.location.search)
+  const out: Props = {}
+  const source = q.get('utm_source') ?? q.get('ref')
+  const medium = q.get('utm_medium')
+  if (source) out.utm_source = source.slice(0, 60)
+  if (medium) out.utm_medium = medium.slice(0, 30)
+  return out
+}
+
 export function track(event: AnalyticsEvent, props: Props = {}): void {
   if (typeof window === 'undefined') return
   try {
     const path = window.location.pathname
-    const withType = event === 'Pageview' ? props : { pageType: pageTypeOf(path), ...props }
-    const payload = JSON.stringify({ n: event, p: path, r: document.referrer, props: withType })
+    let referrer = document.referrer
+    let withType: Props
+    if (event === 'Pageview') {
+      if (lastPath) referrer = window.location.origin + lastPath
+      lastPath = path
+      withType = { ...campaign(), ...props }
+    } else {
+      withType = { pageType: pageTypeOf(path), ...props }
+    }
+    const payload = JSON.stringify({ n: event, p: path, r: referrer, props: withType })
     const blob = new Blob([payload], { type: 'application/json' })
     if (!navigator.sendBeacon?.('/api/e', blob)) {
       void fetch('/api/e', { method: 'POST', body: payload, keepalive: true, cache: 'no-store' })

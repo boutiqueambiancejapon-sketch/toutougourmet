@@ -1,4 +1,5 @@
 import type { Pool } from 'pg'
+import { sourceOf, type Source } from '@/lib/dashboard/source'
 
 // @cdc tableau de bord — données de la vue « En direct » : pages vues des 30 dernières minutes
 // (événements Pageview envoyés par le site), pays du moment, fil des dernières actions, robots IA récents
@@ -12,6 +13,15 @@ export interface LiveEvent {
   device: string | null
   ref: string | null
   country: string | null
+  /** Provenance : moteur, IA, réseau, e-mail, autre site, navigation interne ou accès direct. */
+  source: Source
+}
+
+interface FeedRow extends Omit<LiveEvent, 'ts' | 'source'> {
+  ts: Date
+  utm: string | null
+  medium: string | null
+  from_path: string | null
 }
 
 export interface LiveData {
@@ -59,9 +69,9 @@ export async function getLive(pool: Pool): Promise<LiveData> {
       `SELECT coalesce(country, '') AS label, count(*)::int AS value FROM analytics.events
         WHERE name = 'Pageview' AND ts >= now() - interval '5 minutes' GROUP BY 1 ORDER BY 2 DESC, 1 LIMIT 8`,
     ),
-    pool.query<{ ts: Date; name: string; page: string; detail: string | null; device: string | null; ref: string | null; country: string | null }>(
+    pool.query<FeedRow>(
       `SELECT ts, name, page, coalesce(props->>'brand', props->>'tool', props->>'query', props->>'place') AS detail,
-              device, ref_host AS ref, country
+              device, ref_host AS ref, country, props->>'utm_source' AS utm, props->>'utm_medium' AS medium, props->>'from' AS from_path
          FROM analytics.events ORDER BY ts DESC LIMIT 25`,
     ),
     pool.query<{ ts: Date; label: string; kind: string; path: string }>(
@@ -82,7 +92,11 @@ export async function getLive(pool: Pool): Promise<LiveData> {
     pages: pages.rows,
     refs: refs.rows,
     countries: countries.rows,
-    feed: feed.rows.map((r) => ({ ...r, ts: r.ts.toISOString() })),
+    feed: feed.rows.map(({ utm, medium, from_path, ...r }) => ({
+      ...r,
+      ts: r.ts.toISOString(),
+      source: sourceOf({ host: r.ref, utmSource: utm, utmMedium: medium, from: from_path }),
+    })),
     bots: bots.rows.map((r) => ({ ...r, ts: r.ts.toISOString() })),
   }
 }

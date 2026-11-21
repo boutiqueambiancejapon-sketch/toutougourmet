@@ -46,6 +46,17 @@ function cleanProps(raw: unknown): Record<string, string | number | boolean> {
   return out
 }
 
+/** Chemin de la page précédente quand elle est sur le site (jamais une adresse extérieure). */
+function ownPathOf(url: unknown, host: string | null): string | null {
+  if (typeof url !== 'string' || !url || !host) return null
+  try {
+    const u = new URL(url)
+    return u.hostname.replace(/^www\./, '') === host ? u.pathname.slice(0, 120) : null
+  } catch {
+    return null
+  }
+}
+
 function hostOf(url: unknown): string | null {
   if (typeof url !== 'string' || !url) return null
   try {
@@ -86,10 +97,14 @@ export async function POST(req: NextRequest) {
   const refHost = hostOf(body.r)
   // aocr.org est un faux référent posé par un robot, le site lui-même n'y est pour rien : ses visites faussent les chiffres.
   if (refHost === 'aocr.org') return done()
+  const props = cleanProps(body.props)
+  const from = ownPathOf(body.r, host ? host.replace(/^www\./, '').split(':')[0] : null)
+  delete props.from
+  if (from && body.n === 'Pageview') props.from = from
   try {
     await pool.query(
       'INSERT INTO analytics.events (name, page, props, ref_host, device, country, visitor) VALUES ($1, $2, $3, $4, $5, $6, $7)',
-      [body.n, body.p.slice(0, 300), JSON.stringify(cleanProps(body.props)), refHost, deviceOf(ua), countryOf(ip), visitorId(ip, ua)],
+      [body.n, body.p.slice(0, 300), JSON.stringify(props), refHost, deviceOf(ua), countryOf(ip), visitorId(ip, ua)],
     )
   } catch (err) {
     console.error('[api/e] insert failed', err instanceof Error ? err.message : err)
