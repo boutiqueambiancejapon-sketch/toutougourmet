@@ -38,7 +38,7 @@ export function MiloChat({ compact = false }: { compact?: boolean }) {
   return (
     <section aria-label="Discussion avec Milo" className={`flex min-h-0 flex-col gap-3 ${compact ? 'h-full' : ''}`}>
       <div className={`flex min-h-0 flex-col gap-4 ${compact ? 'grow overflow-y-auto overscroll-contain px-1' : ''}`}>
-        {fil.length === 0 && !occupe && !compte ? (
+        {fil.length === 0 && !occupe && compte === null ? (
           <div className="flex flex-col gap-3">
             <div className="flex items-start gap-2">
               <MiloAvatar size={32} />
@@ -59,7 +59,7 @@ export function MiloChat({ compact = false }: { compact?: boolean }) {
             {dernier ? <MiloBulle m={dernier} enCours /> : null}
           </ol>
         ) : null}
-        {compte ? <MiloCompte question={compte} place={compact ? 'assistant-fenetre' : 'assistant'} /> : null}
+        {compte !== null ? <MiloCompte question={compte} place={compact ? 'assistant-fenetre' : 'assistant'} /> : null}
         <div ref={fin} />
       </div>
       <form onSubmit={(e) => { e.preventDefault(); partir(texte) }} className="relative flex shrink-0 items-end gap-2 rounded-box border-2 border-ink bg-paper p-1.5 focus-within:shadow-[3px_3px_0_var(--orange)]">

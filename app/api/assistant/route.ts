@@ -21,6 +21,9 @@ const LIMITES = [
 
 const non = (status: number, message: string) => NextResponse.json({ ok: false, message }, { status, headers })
 
+const ESSAI = 'milo_essai'
+const ESSAI_IP = [{ windowMs: 24 * 60 * 60_000, max: 3 }] as const
+
 const PAR_ADRESSE = [
   { windowMs: 10 * 60_000, max: 15 },
   { windowMs: 24 * 60 * 60_000, max: 40 },
@@ -40,28 +43,37 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   if (robot(req, body)) return non(400, 'Requête refusée.')
   if (overLimit(`assistant-ip:${clientIp(req.headers)}`, PAR_ADRESSE)) return non(429, 'Beaucoup de questions d\'affilée : réessaie dans un moment.')
   const user = await getSessionUser()
-  if (!user) return NextResponse.json({ ok: false, compte: true, message: 'Crée ton compte gratuit pour avoir la réponse de Milo.' }, { status: 401, headers })
-  if (!(await cguOk(user.id, body?.cgu === CGU_VERSION).catch(() => false))) return NextResponse.json({ ok: false, cgu: true, message: 'Accepte les conditions d’utilisation pour discuter avec Milo.' }, { status: 409, headers })
+  // Première réponse sans compte (décision du propriétaire, 2026-11-21 : 0 compte ouvert via Milo en 14 jours avec le
+  // compte obligatoire) : une réponse de l'IA par navigateur (témoin) et 3 par adresse et par jour, puis le compte.
+  const essai = !user
+  const compteRequis = () => NextResponse.json({ ok: false, compte: true, message: 'Crée ton compte gratuit pour continuer avec Milo.' }, { status: 401, headers })
+  if (essai && (req.cookies.get(ESSAI)?.value || overLimit(`assistant-essai:${clientIp(req.headers)}`, ESSAI_IP))) return compteRequis()
+  const cguAcceptees = user ? await cguOk(user.id, body?.cgu === CGU_VERSION).catch(() => false) : body?.cgu === CGU_VERSION
+  if (!cguAcceptees) return NextResponse.json({ ok: false, cgu: true, message: 'Accepte les conditions d’utilisation pour discuter avec Milo.' }, { status: 409, headers })
   const question = typeof body?.question === 'string' ? body.question.trim() : ''
   if (question.length < 3 || question.length > 500) return non(400, 'Pose ta question en une ou deux phrases.')
   const lieu = body?.lieu === 'fenetre' ? 'fenetre' : 'page'
   const historique: Echange[] = Array.isArray(body?.historique)
     ? body.historique.slice(-4).flatMap((h: unknown) => (h && typeof h === 'object' && typeof (h as Echange).q === 'string' && typeof (h as Echange).r === 'string' ? [{ q: (h as Echange).q.slice(0, 500), r: (h as Echange).r.slice(0, 1500) }] : []))
     : []
-  if (overLimit(`assistant:${user.id}`, LIMITES)) return non(429, 'Beaucoup de questions d\'affilée : réessaie dans un moment.')
+  if (user && overLimit(`assistant:${user.id}`, LIMITES)) return non(429, 'Beaucoup de questions d\'affilée : réessaie dans un moment.')
   const fixe = async (r: Reponse) => {
     await noterQuestion(question, r, lieu)
     return NextResponse.json({ ok: true, ...r }, { headers })
   }
   const sensible = sujetSensible(question)
   if (sensible) return fixe(renvoiVeterinaire(question, sensible))
-  const chiens = await listDogs(user.id).then(profilChiens).catch(() => '')
+  const chiens = user ? await listDogs(user.id).then(profilChiens).catch(() => '') : ''
   const manque = contexteManquant(question, historique.map((h) => `${h.q} ${h.r}`).join(' '), chiens)
   if (manque) return fixe(demanderContexte(manque, question))
-  if (!(await compterQuestion(user.id))) return non(429, `Tu as posé tes ${QUESTIONS_PAR_JOUR} questions du jour. Milo revient demain matin.`)
+  if (user && !(await compterQuestion(user.id))) return non(429, `Tu as posé tes ${QUESTIONS_PAR_JOUR} questions du jour. Milo revient demain matin.`)
   if (!(await reserverAppel())) return non(429, 'L\'assistant a beaucoup servi aujourd\'hui. Réessaie demain.')
   try {
-    return await fixe(await repondre(question, historique, chiens))
+    const r = await repondre(question, historique, chiens)
+    await noterQuestion(question, r, lieu)
+    const res = NextResponse.json({ ok: true, ...r, essai }, { headers })
+    if (essai) res.cookies.set(ESSAI, '1', { maxAge: 60 * 60 * 24 * 30, httpOnly: true, sameSite: 'lax', secure: true, path: '/' })
+    return res
   } catch (err) {
     console.error('[assistant] échec', err instanceof Error ? err.message : err)
     await noterQuestion(question, null, lieu)
