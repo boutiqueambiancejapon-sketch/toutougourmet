@@ -17,14 +17,26 @@ async function main(): Promise<void> {
     lignes.push(...page)
     if (page.length < 25000) break
   }
+  // Une page compte aussi sous ses ancres (#section) : tout s'additionne ici, avant l'écriture. Avant le 2026-11-21,
+  // l'écriture par lots remplaçait la ligne, et une ancre à 0 clic écrasait parfois la page (relevés faussés).
+  const total = new Map<string, { d: string; p: string; c: number; i: number; pi: number }>()
+  for (const l of lignes) {
+    const p = l.keys[1].split('#')[0]
+    const k = `${l.keys[0]}|${p}`
+    const t = total.get(k) ?? { d: l.keys[0], p, c: 0, i: 0, pi: 0 }
+    t.c += l.clicks
+    t.i += l.impressions
+    t.pi += l.position * l.impressions
+    total.set(k, t)
+  }
+  const agreges = [...total.values()]
   const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL })
-  for (let i = 0; i < lignes.length; i += 500) {
-    const lot = lignes.slice(i, i + 500)
-    const valeurs = lot.flatMap((l) => [l.keys[0], l.keys[1].split('#')[0], l.clicks, l.impressions, l.position])
+  for (let i = 0; i < agreges.length; i += 500) {
+    const lot = agreges.slice(i, i + 500)
+    const valeurs = lot.flatMap((l) => [l.d, l.p, l.c, l.i, l.i ? l.pi / l.i : 0])
     const places = lot.map((_, j) => `($${j * 5 + 1}::date, $${j * 5 + 2}::text, $${j * 5 + 3}::int, $${j * 5 + 4}::int, $${j * 5 + 5}::real)`).join(', ')
     await pool.query(
-      `INSERT INTO analytics.gsc_pages_daily (day, page, clicks, impressions, position) SELECT d::date, p, sum(c)::int, sum(i)::int, (sum(pos * i) / nullif(sum(i), 0))::real
-         FROM (VALUES ${places}) AS v(d, p, c, i, pos) GROUP BY d, p
+      `INSERT INTO analytics.gsc_pages_daily (day, page, clicks, impressions, position) SELECT d, p, c, i, pos FROM (VALUES ${places}) AS v(d, p, c, i, pos)
        ON CONFLICT (day, page) DO UPDATE SET clicks = EXCLUDED.clicks, impressions = EXCLUDED.impressions, position = EXCLUDED.position`,
       valeurs,
     )

@@ -18,7 +18,7 @@ Les piliers, dans l'ordre où ils servent ce parcours :
 1. **Contenu SEO et GEO** : articles automatisés (créneaux 7 h et 20 h), pages piliers, pages mères « Avis + marque », classements `/meilleures-…`, fiches produits indexées par lots (`app.fiche_index`, bascule dans le tableau de bord).
 2. **Base produits et notes** : fiches importées de Maxi Zoo et lues sur étiquette, quatre barèmes déterministes (croquettes et pâtées, friandises, compléments, huiles), fiabilité affichée.
 3. **Scanner** : code-barres et photo d'étiquette. L'IA lit, notre algorithme note. Il reste simple.
-4. **Milo, l'assistant** (le Shiba des e-mails) : compte obligatoire, CGU acceptées, 5 questions par jour, nos articles d'abord, questions de contexte, renvoi au vétérinaire sur les sujets sensibles, conseils d'achat en liens partenaires seulement.
+4. **Milo, l'assistant** (le Shiba des e-mails) : une première réponse offerte sans compte puis compte obligatoire (2026-11-21), CGU acceptées, 5 questions par jour, nos articles d'abord, questions de contexte, renvoi au vétérinaire sur les sujets sensibles, conseils d'achat en liens partenaires seulement.
 5. **Compte et « Mon chien »** : profils, pesées, rations, aliments gardés, historique des compositions, rappels. Le compte gratuit doit déjà valoir le coup.
 6. **Revenus** : affiliation aujourd'hui (Maxi Zoo, Dog Chef, Franklin, Elmut, Dogfy Diet, Ultra Premium Direct). Premium prévu (3,99 €/mois ou 29,99 €/an, `tasks/todo.md` lot 7), CGV à écrire avant de vendre.
 7. **International** plus tard : EN sous `/en`.

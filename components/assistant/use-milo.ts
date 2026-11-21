@@ -81,7 +81,7 @@ export function useMilo(lieu: 'page' | 'fenetre') {
     setOccupe(true)
     setCompte(null)
     const res = await fetch('/api/assistant', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ question: q, historique, site, lieu, t: Date.now() - depuis.current, cgu: lire<string | null>(local(), CGU, null) }) }).catch(() => null)
-    const body = (await res?.json().catch(() => null)) as (MiloReponse & { ok: boolean; compte?: boolean; cgu?: boolean; message?: string }) | null
+    const body = (await res?.json().catch(() => null)) as (MiloReponse & { ok: boolean; compte?: boolean; cgu?: boolean; essai?: boolean; message?: string }) | null
     setOccupe(false)
     if (body?.cgu) {
       accepterCgu(false)
@@ -98,6 +98,8 @@ export function useMilo(lieu: 'page' | 'fenetre') {
     }
     track('Assistant Question', { lieu })
     garder([...avant, body?.ok ? { q, r: body } : { q, erreur: body?.message ?? 'Pas de réponse pour l’instant. Réessaie dans un instant.' }])
+    // Réponse offerte sans compte : l'invitation à créer le compte s'affiche juste dessous (chaîne vide = sans question).
+    if (body?.ok && body.essai) setCompte('')
   }, [garder, lieu, accepterCgu])
 
   useEffect(() => {
