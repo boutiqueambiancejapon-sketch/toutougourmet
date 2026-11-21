@@ -1745,7 +1745,20 @@
   - Étape d'appel « ou s'il pèse moins de 5 kg » (le texte dit qu'une lichette ne demande rien, le tableau fait appeler sous 5 kg après une coupelle d'un ketchup à l'oignon ou à l'ail) → une bonne partie d'un flacon à l'oignon ou à l'ail, une coupelle sous 5 kg
   - `chien-peut-manger-tomate` aligné : « la plupart des sauces, coulis et ketchups contiennent de l'oignon et de l'ail » → la plupart des sauces et des coulis, et un ketchup sur deux parmi ceux lus (3 étiquettes sur 6, aucun dans le Heinz classique)
   - Vérifié : 6 étiquettes Open Food Facts rouvertes (Heinz classique 22,8 g de sucres et 1,8 g de sel, sans oignon ni ail ; Heinz bio, Lidl et Jardin Bio étic avec oignon ou ail après le sel ; Heinz Zéro au sucralose ; Heinz −50 % à la stévia ; aucun xylitol), cuillère à soupe de 15 g = 3,4 g de sucres, sel (2 à 3 g par kilo, soit plus d'un kilo de ketchup pour 10 kg), xylitol 30 à 60 minutes et signes de l'oignon sur 5 jours (comme les fiches d'urgence), Akita et Shiba, tableau du guide barbecue
-- [ ] `royal-canin-vs-pro-plan` · nouvel article 2026-11-18
-- [ ] `chien-peut-manger-kaki` · nouvel article 2026-11-18
-- [ ] `complement-alimentaire-chien` · nouvel article 2026-11-20
-- [ ] `chien-peut-manger-choux-de-bruxelles` · nouvel article 2026-11-20
+- [x] `royal-canin-vs-pro-plan` · nouvel article 2026-11-18 · relu 2026-11-21 : 1 correction
+  - Paragraphe chiot sans note alors que Royal Canin Medium Chiot obtient 62/100 et Pro Plan Puppy Medium Healthy Start 59 → notes ajoutées, et « Chez le chiot, Royal Canin passe devant de peu » sous « Pro Plan reste devant à tous les gabarits adultes »
+  - Vérifié (base du site) : notes des douze recettes (59/73, 50/73, 59/75, 49/76, 49/73), prix au kilo (4,67 et 4,07 € ; 6,58 et 4,50 € ; 5,81 et 7,71 €), protéines et graisses (25/14, 26/16, 32 et 30 % chez le chiot), premiers ingrédients (poulet 20 et 19 %, agneau 19 %, saumon 17 %), six lignes pour trois céréales chez Royal Canin Medium et cinq chez Pro Plan Medium, colostrum, glucosamine et chondroïtine du Maxi, 35 et 31 € par mois pour 7,5 kg, transition d'une dizaine de jours (comme transition-alimentaire-chien), remises Franklin et Dog Chef (data/partner-discounts.ts)
+- [x] `chien-peut-manger-kaki` · nouvel article 2026-11-18 · relu 2026-11-21 : 1 correction
+  - Introduction « Un ou deux quartiers suffisent » (le TL;DR et le tableau vont jusqu'à 4 quartiers) → un à quatre quartiers selon sa taille
+  - Vérifié : 70 kcal et 12,5 g de sucres (USDA), kaki de 168 g soit 118 kcal, quartier de 20 g pour 15 kcal, plus de la moitié de la journée d'un Yorkshire de 3 kg (223 kcal), tableau sous 10 % des calories
+- [x] `complement-alimentaire-chien` · nouvel article 2026-11-20 · relu 2026-11-21 : 3 corrections
+  - Tableau AHC7 « diarrhée plus courte de deux jours environ » (6,6 jours contre 3,9, comme le texte et probiotiques-chien-bienfaits-dosage) → de près de trois jours
+  - « Le calcium manque en premier » (Stockman 2013 cite d'abord le zinc et la choline, comme ration-menagere-chien-guide-recettes) → le calcium manque souvent
+  - Tableau « la ration maison manque presque toujours de calcium et de zinc » → 95 % des recettes publiées manquent d'au moins un nutriment (zinc, choline, calcium, vitamine D)
+  - Vérifié : 200 recettes et 95 % (Stockman 2013), 8 à 12 semaines pour les oméga-3 sur la peau (comme huile-saumon), 6 et 8 semaines pour la moule verte (essais de 2002 et 2009), SF68 autorisée pour le chien, fiches FortiFlora et huile de saumon PetBalance en base, Dog Chef (questionnaire poids, âge, activité dans data/brand-content.ts)
+  - À vérifier (non changé) : `moule-verte-chien-arthrose-dosage` donne 4 à 8 semaines dans le TL;DR mais « agit en 2 à 4 semaines » plus bas ; poudre articulations PetBalance (27 % et 20 %) absente de la base, fiche non rouverte
+- [x] `chien-peut-manger-choux-de-bruxelles` · nouvel article 2026-11-20 · relu 2026-11-21 : 2 corrections
+  - Fréquence « deux à trois fois par semaine » (le tableau donne 1 à 2 fois sous 5 kg et 2 fois de 5 à 15 kg) → une à trois fois par semaine
+  - verdictNote « un à cinq selon sa taille » (le tableau commence à un demi-chou) → d'un demi à cinq
+  - Vérifié : chou de 19 g pour 8 kcal, grammes du tableau (½ chou = 5 à 10 g, 3 à 5 choux = 60 à 100 g), seuil de 5 g d'oignon par kilo (comme chien-mange-ail-oignon-urgence), repas de Noël (« un ou deux choux », cohérent)
+  - À vérifier (non changé) : 43 kcal pour 100 g est la valeur crue (USDA), les portions sont cuites (36 kcal cuit à l'eau) : écart sans effet sur les conseils
