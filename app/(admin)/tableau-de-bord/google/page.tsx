@@ -1,4 +1,4 @@
-import { compareLabel, filterQuery, lastLabel, PERIOD_LABEL } from '@/lib/seo-dash/filters'
+import { compareLabel, filterQuery, lastLabel, PERIOD_LABEL, prevPeriodLabel } from '@/lib/seo-dash/filters'
 import { dayLabel } from '@/lib/seo-dash/format'
 import { csvHref, hrefOf } from '@/lib/seo-dash/nav'
 import { EMPTY_GOOGLE, googleData } from '@/lib/seo-dash/server/google'
@@ -8,6 +8,7 @@ import { openSeoPage, param, type SeoPageProps } from '@/lib/seo-dash/server/pag
 import { gscRanges, rangesFrom } from '@/lib/seo-dash/server/range'
 import { readBlock } from '@/lib/seo-dash/server/sql'
 import { SITE } from '@/lib/seo-dash/config'
+import { GoogleDelay } from '@/components/seo-dash/ui/GoogleDelay'
 import { SeoShell } from '@/components/seo-dash/shell/SeoShell'
 import { GoogleTiles } from '@/components/seo-dash/blocks/GoogleTiles'
 import { ClicksCard, SmallSeries } from '@/components/seo-dash/blocks/GoogleCharts'
@@ -34,9 +35,10 @@ export default async function GooglePage(props: SeoPageProps) {
   const notes = (await readBlock('notes', [], async (pool) => chartNotes(pool, (await gscRanges(pool, f)).cur))).value
   const week = param(params, 'pas') === 'semaine'
   const path = hrefOf('google')
-  const prevLabel = f.compare === 'annee' ? 'l’an dernier' : `${PERIOD_LABEL[f.period]} d’avant`
+  const prevLabel = f.compare === 'annee' ? 'l’an dernier' : prevPeriodLabel(f.period)
   return (
     <SeoShell current="google" title="Google" sub="Search Console : ce que Google montre du site, et où gagner des clics" filters={f} path={path} fresh={`Google : données jusqu’au ${dayLabel(d.ranges.last)}`}>
+      <GoogleDelay filters={f} last={d.ranges.last} />
       <GoogleTabs />
       <div id="vue" />
       {data.ok ? null : <p className="sd-note warn">La lecture des données Google a échoué : les blocs restent vides.</p>}

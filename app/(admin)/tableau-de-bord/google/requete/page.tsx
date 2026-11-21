@@ -6,6 +6,7 @@ import { queryDetail } from '@/lib/seo-dash/server/detail'
 import { chartNotes } from '@/lib/seo-dash/server/notes'
 import { openSeoPage, param, type SeoPageProps } from '@/lib/seo-dash/server/page'
 import { readBlock } from '@/lib/seo-dash/server/sql'
+import { GoogleDelay } from '@/components/seo-dash/ui/GoogleDelay'
 import { SeoShell } from '@/components/seo-dash/shell/SeoShell'
 import { Tile } from '@/components/seo-dash/ui/Tile'
 import { Card } from '@/components/seo-dash/ui/Card'
@@ -29,6 +30,7 @@ export default async function QueryDetailPage(props: SeoPageProps) {
   const weeks = d ? weekly(d.long) : []
   return (
     <SeoShell current="google" title={`« ${q} »`} sub="Détail d’une requête · même gabarit pour toutes les requêtes" filters={f} path={hrefOf('google/requete')} keep={{ q }} fresh={d ? `Google : données jusqu’au ${dayLabel(d.ranges.last)}` : undefined}>
+      <GoogleDelay filters={f} last={d?.ranges.last} />
       <p className="sd-crumb">
         <Link href={hrefOf('google', query)}>Google</Link> › <Link href={`${hrefOf('google', query)}#requetes`}>Requêtes</Link> › {q}
       </p>

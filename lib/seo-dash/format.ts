@@ -16,6 +16,7 @@ export const pct0 = (ratio: number): string => `${nf0.format(ratio * 100)} %`
 
 /** « 21 nov. » pour une date AAAA-MM-JJ. */
 export function dayLabel(iso: string): string {
+  if (iso[10] === 'T' && iso.length === 13) return `${Number(iso.slice(11, 13))} h`
   return dayFmt.format(new Date(`${iso.slice(0, 10)}T00:00:00Z`))
 }
 

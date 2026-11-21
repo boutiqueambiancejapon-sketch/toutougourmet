@@ -59,7 +59,7 @@ export default async function SourcesPage(props: SeoPageProps) {
           {!d.compare && f.compare !== 'aucune' ? <p className="sd-note sd-gap">Pas d’écart affiché : les relevés commencent le {frDate(SITE.logsStart)}, la période d’avant n’est pas complète.</p> : null}
           <div className="sd-grid sd-g3 sd-gap">
             <div className="sd-span2">
-              <ChannelsCard families={d.families} buckets={d.buckets} week={d.week} csv={csvHref('sources-canaux', query)} />
+              <ChannelsCard families={d.families} buckets={d.buckets} step={d.step} csv={csvHref('sources-canaux', query)} />
             </div>
             <Card title="Part de chaque canal" desc={vs ? `Écart contre ${vs} dans les tableaux` : 'Visites de la période'}>
               <BarList items={d.families.filter((x) => x.visits > 0).map((x) => ({ key: x.family, label: x.label, value: x.visits, text: `${n0(x.visits)} · ${pct0(total.visits ? x.visits / total.visits : 0)}` }))} empty="Aucune visite sur la période." />

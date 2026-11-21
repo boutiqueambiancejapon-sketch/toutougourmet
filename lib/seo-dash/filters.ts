@@ -3,9 +3,17 @@ import { SITE } from './config'
 // @cdc tableau de bord SEO — barre commune (période, comparaison, type de page, appareil), lue dans l'adresse
 // et partagée par toute la page : chaque bloc, chaque export CSV lisent les mêmes filtres.
 
-export const PERIOD_DAYS = { '7j': 7, '28j': 28, '3m': 91, '6m': 182, '12m': 364 } as const
+export const PERIOD_DAYS = { aujourdhui: 1, '24h': 1, '7j': 7, '28j': 28, '3m': 91, '6m': 182, '12m': 364 } as const
 export type PeriodKey = keyof typeof PERIOD_DAYS
-export const PERIOD_LABEL: Record<PeriodKey, string> = { '7j': '7 jours', '28j': '28 jours', '3m': '3 mois', '6m': '6 mois', '12m': '12 mois' }
+export const PERIOD_LABEL: Record<PeriodKey, string> = { aujourdhui: 'Aujourd’hui', '24h': '24 h', '7j': '7 jours', '28j': '28 jours', '3m': '3 mois', '6m': '6 mois', '12m': '12 mois' }
+
+/** Périodes en heures (journaux et événements à l'heure près ; Google n'a que des jours). */
+export const isHourly = (f: Pick<Filters, 'period'>): boolean => f.period === '24h' || f.period === 'aujourdhui'
+
+/** Période d'avant, en mots : « 28 jours d’avant », « 24 h d’avant », « hier aux mêmes heures ». */
+export function prevPeriodLabel(p: PeriodKey): string {
+  return p === 'aujourdhui' ? 'hier aux mêmes heures' : `${PERIOD_LABEL[p]} d’avant`
+}
 
 export const COMPARE_LABEL = { avant: 'période d’avant', annee: 'l’an dernier', aucune: 'rien' } as const
 export type CompareKey = keyof typeof COMPARE_LABEL
@@ -57,11 +65,13 @@ export function filterQuery(f: Filters, change: Partial<Filters> = {}, extra: Re
 export function compareLabel(f: Filters): string {
   if (f.compare === 'annee') return 'l’an dernier'
   if (f.compare === 'aucune') return ''
-  return `${PERIOD_LABEL[f.period]} d’avant`
+  return prevPeriodLabel(f.period)
 }
 
 /** « 28 derniers jours », « 3 derniers mois ». */
 export function lastLabel(p: PeriodKey): string {
+  if (p === 'aujourdhui') return 'aujourd’hui'
+  if (p === '24h') return '24 dernières heures'
   const [n, unit] = PERIOD_LABEL[p].split(' ')
   return `${n} derniers ${unit}`
 }

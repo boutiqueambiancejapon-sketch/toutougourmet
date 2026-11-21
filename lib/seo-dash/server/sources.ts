@@ -2,7 +2,7 @@ import type { Pool } from 'pg'
 import { pageTypeOf } from '../config'
 import { DEVICE_HITS, type Filters } from '../filters'
 import { classify, FAMILIES, type Family, parseSourceKey, sourceKey } from '../source'
-import { addDays, clipStart, daysOf, logRanges, type Range, type Ranges } from './range'
+import { addDays, clipStart, daysOf, inRange, logRanges, type Range, type Ranges } from './range'
 import { visitRows, type VisitRow } from './visits'
 
 // @cdc tableau de bord SEO — écran Sources (même fichier sur les trois sites) : visites classées par famille et par
@@ -57,6 +57,8 @@ export interface Loaded {
   /** Écarts à montrer (comparaison choisie et période d'avant complète). */
   compare: boolean
   week: boolean
+  /** Pas des colonnes : « heure », « jour » ou « semaine ». */
+  step: string
   buckets: Bucket[]
   bucketOf: (day: string) => number
   cur: Visit[]
@@ -67,6 +69,7 @@ export interface SourcesData {
   ranges: Ranges
   compare: boolean
   week: boolean
+  step: string
   buckets: Bucket[]
   total: Metrics & { prev: number | null }
   /** Visites commencées par une page du site (onglet laissé ouvert plus de 30 min). */
@@ -83,6 +86,11 @@ const monday = (day: string): string => addDays(day, -((at(day).getUTCDay() + 6)
 
 function bucketsOf(r: Range, week: boolean): { buckets: Bucket[]; bucketOf: (day: string) => number } {
   const days = daysOf(r)
+  if (r.hourly) {
+    const idx = new Map(days.map((d, i) => [d, i]))
+    const h = (k: string) => `${Number(k.slice(11, 13))} h`
+    return { buckets: days.map((k) => ({ label: h(k), title: `${longFmt.format(at(k.slice(0, 10)))}, ${h(k)}` })), bucketOf: (k) => idx.get(k) ?? -1 }
+  }
   if (!week) {
     const idx = new Map(days.map((d, i) => [d, i]))
     return { buckets: days.map((d) => ({ label: dayFmt.format(at(d)), title: longFmt.format(at(d)) })), bucketOf: (d) => idx.get(d) ?? -1 }
@@ -111,16 +119,17 @@ function classified(rows: VisitRow[], f: Filters): Visit[] {
 export async function loadVisits(pool: Pool, f: Filters): Promise<Loaded> {
   const ranges = clipStart(logRanges(f))
   const compare = Boolean(ranges.prev) && !ranges.partial
-  const start = compare && ranges.prev ? ranges.prev.start : ranges.cur.start
-  const rows = await visitRows(pool, start, ranges.cur.end)
+  const span: Range = compare && ranges.prev ? { ...ranges.cur, start: ranges.prev.start, from: ranges.prev.from } : ranges.cur
+  const rows = await visitRows(pool, span)
   const week = f.days > 28
   const { buckets, bucketOf } = bucketsOf(ranges.cur, week)
-  const inCur = (d: string) => d >= ranges.cur.start && d <= ranges.cur.end
-  const inPrev = (d: string) => Boolean(compare && ranges.prev && d >= ranges.prev.start && d <= ranges.prev.end)
+  const inCur = (d: string) => inRange(ranges.cur, d)
+  const inPrev = (d: string) => Boolean(compare && ranges.prev && inRange(ranges.prev, d))
   return {
     ranges,
     compare,
     week,
+    step: ranges.cur.hourly ? 'heure' : week ? 'semaine' : 'jour',
     buckets,
     bucketOf,
     cur: classified(rows.filter((r) => inCur(r.day)), f),
@@ -206,6 +215,7 @@ export function sourcesData(l: Loaded): SourcesData {
     ranges: l.ranges,
     compare: l.compare,
     week: l.week,
+    step: l.step,
     buckets: l.buckets,
     total: { ...total, prev: l.compare ? l.prev.filter((v) => v.family !== 'internal').length : null },
     internal: l.cur.length - entries.length,

@@ -2,7 +2,7 @@ import type { Pool } from 'pg'
 import type { Filters } from '../filters'
 import { publications } from './content'
 import { crawlErrors, crawlGroupSql, googlebotSql, tsIn, type ErrorRow } from './crawl'
-import { clipStart, daysOf, logRanges, type Ranges } from './range'
+import { bucketSql, clipStart, daysOf, logRanges, spanSql, type Ranges } from './range'
 import { filterSql, Params } from './sql'
 import { neverCrawled, type NeverCrawled } from './today'
 
@@ -34,7 +34,9 @@ export async function exploration(pool: Pool, f: Filters, robot: 'google' | 'bin
   const page = filterSql(f, p, { pageCol: 'path' })
   const span = tsIn(p, ranges.cur)
   const group = crawlGroupSql(p)
-  const day = `(ts AT TIME ZONE 'Europe/Paris')::date::text`
+  const day = bucketSql(ranges.cur)
+  const q = new Params()
+  const aiSpan = spanSql(q, ranges.cur)
   const [crawl, ai, aiDaily, errors, never] = await Promise.all([
     pool.query<{ day: string; g: CrawlGroup; status: number; n: number }>(
       `SELECT ${day} AS day, ${group} AS g, (status / 100)::int * 100 AS status, count(*)::int AS n FROM analytics.hits
@@ -42,12 +44,12 @@ export async function exploration(pool: Pool, f: Filters, robot: 'google' | 'bin
       p.values,
     ),
     pool.query<{ label: string; n: number }>(
-      `SELECT coalesce(operator, bot, '?') AS label, count(*)::int AS n FROM analytics.hits WHERE kind LIKE 'ai\\_%' AND ts >= $1::date AND ts < $2::date + 1 GROUP BY 1 ORDER BY 2 DESC LIMIT 10`,
-      [ranges.cur.start, ranges.cur.end],
+      `SELECT coalesce(operator, bot, '?') AS label, count(*)::int AS n FROM analytics.hits WHERE kind LIKE 'ai\\_%' AND ${aiSpan} GROUP BY 1 ORDER BY 2 DESC LIMIT 10`,
+      q.values,
     ),
     pool.query<{ day: string; kind: 'ai_search' | 'ai_training' | 'ai_user'; n: number }>(
-      `SELECT ${day} AS day, kind, count(*)::int AS n FROM analytics.hits WHERE kind LIKE 'ai\\_%' AND ts >= $1::date AND ts < $2::date + 1 GROUP BY 1, 2`,
-      [ranges.cur.start, ranges.cur.end],
+      `SELECT ${day} AS day, kind, count(*)::int AS n FROM analytics.hits WHERE kind LIKE 'ai\\_%' AND ${aiSpan} GROUP BY 1, 2`,
+      q.values,
     ),
     crawlErrors(pool, ranges.cur),
     neverCrawled(pool).catch((): NeverCrawled => ({ sitemap: 0, paths: [], groups: [] })),

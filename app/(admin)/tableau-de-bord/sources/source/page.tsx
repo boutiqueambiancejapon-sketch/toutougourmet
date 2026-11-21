@@ -52,7 +52,7 @@ export default async function SourceDetailPage(props: SeoPageProps) {
             <Tile label="Inscriptions" value={n1(per100(row.signups, row.visits) ?? 0)} note={`pour 100 visites · ${n0(row.signups)} au total`} />
           </div>
           <div className="sd-grid sd-g3 sd-gap">
-            <Card className="sd-span2" title="Visites" desc={l.week ? 'Par semaine' : 'Par jour'}>
+            <Card className="sd-span2" title="Visites" desc={`Par ${l.step}`}>
               <Bars labels={l.buckets.map((b) => b.label)} titles={l.buckets.map((b) => b.title)} series={[{ key: 'v', label: 'visites', color, values: row.spark }]} height={180} label={`Visites venues de ${title}`} />
             </Card>
             <div className="sd-grid">
