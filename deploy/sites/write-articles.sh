@@ -50,6 +50,7 @@ write_one() {
 # Lecture sur le descripteur 3 : claude et npm ne doivent pas consommer la liste des sites.
 while read -r site repo _port branch <&3; do
   [[ -z ${site:-} || $site == \#* ]] && continue
+  [[ $repo == -local ]] && continue  # dépôt local sans GitHub (ambiance-japon) : pas d’articles automatiques
   [[ -n $ONLY && $site != "$ONLY" ]] && continue
   echo "=== $(date -Is) $site"
   write_one "$site" "$repo" "$branch" </dev/null || FAILED="$FAILED $site"
