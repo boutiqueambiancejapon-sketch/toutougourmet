@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-prix-repas-frais-chien-par-mois',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'blue',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, happy white Bichon Frise with a fluffy curly coat sitting on a light wooden kitchen floor, looking with interest at a plain white ceramic bowl filled with a fresh home-style meal of cooked chicken pieces, diced carrots and green beans, beside a closed small cool box and a few plain unlabeled vacuum-sealed food pouches, mouth closed, not eating. No humans, no packaging text, no logo, no brand, no writing, no price tags.',
+    composition:
+      'Full frame, subject edge to edge, dog, bowl and pouches filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the food. Exactly 8 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-22 pour l'article prix-repas-frais-chien-par-mois.",
+  },
+  {
     id: 'art-chien-peut-manger-huitres',
     group: 'articles',
     ratio: '3:2',

@@ -1773,3 +1773,4 @@
   - Tableau 10 à 25 kg « 1 à 2 huîtres (5 à 15 g) » (2 huîtres font 10 à 18 g) → 5 à 18 g
   - Tableau plus de 40 kg « 2 à 3 huîtres (15 à 25 g) » (2 à 3 × 5 à 9 g) → 10 à 27 g
   - Vérifié : portions sous 10 % des calories (163 kcal/100 g), seuil de 5 g d'oignon par kilo (comme ail-oignon et 3 autres articles), cuisson FDA (3 min pochée, 4 à 9 min de vapeur après ouverture), deux chiens morts en 2018 sur la côte est anglaise (Turner et al., Toxins)
+- [ ] `prix-repas-frais-chien-par-mois` · nouvel article 2026-11-22
