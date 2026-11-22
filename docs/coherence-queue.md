@@ -1762,5 +1762,14 @@
   - verdictNote « un à cinq selon sa taille » (le tableau commence à un demi-chou) → d'un demi à cinq
   - Vérifié : chou de 19 g pour 8 kcal, grammes du tableau (½ chou = 5 à 10 g, 3 à 5 choux = 60 à 100 g), seuil de 5 g d'oignon par kilo (comme chien-mange-ail-oignon-urgence), repas de Noël (« un ou deux choux », cohérent)
   - À vérifier (non changé) : 43 kcal pour 100 g est la valeur crue (USDA), les portions sont cuites (36 kcal cuit à l'eau) : écart sans effet sur les conseils
-- [ ] `avis-edgard-cooper-barquette` · nouvel article 2026-11-21
-- [ ] `chien-peut-manger-huitres` · nouvel article 2026-11-21
+- [x] `avis-edgard-cooper-barquette` · nouvel article 2026-11-21 · relu 2026-11-22 : 5 corrections
+  - Liste « petit chien » avec le cavalier King Charles (rangé dans 6 à 10 kg du tableau, 3 à 4,5 barquettes) → spitz nain, comme la ligne 1 à 5 kg
+  - Tranches de poids « 11 à 22 kg » puis « 21 à 30 kg » (chevauchement) → 23 à 30 kg, comme le texte « entre 11 et 22 kg »
+  - Coût 10 kg en barquettes de 300 g « 6 € par jour, 180 € par mois » (670 g × 9,81 €/kg = 6,57 €) → 6,50 € par jour, 200 € par mois
+  - Prix au kilo Saumon & Dinde 300 g « 9,81 € » alors que la légende annonce le plus grand lot (36x300 g à 9,54 €/kg chez Maxi Zoo) → 9,54 €, source complétée
+  - Choix Saumon & Dinde 18x300 g « le format le moins cher au kilo » (le 36x300 g et la Bœuf & Agneau sont moins chers) → un tiers moins cher au kilo que la barquette de 150 g
+  - Vérifié : notes du scanner (90, 90, 83, 90, 90, 90), compositions et constituants des 6 recettes, prix 49,49 € et 52,99 € du 2026-11-22, absence de poulet dans Saumon & Dinde et Gibier & Canard, remises Dog Chef et Franklin, General Mills depuis 2024 (comme avis-edgard-cooper)
+- [x] `chien-peut-manger-huitres` · nouvel article 2026-11-21 · relu 2026-11-22 : 2 corrections
+  - Tableau 10 à 25 kg « 1 à 2 huîtres (5 à 15 g) » (2 huîtres font 10 à 18 g) → 5 à 18 g
+  - Tableau plus de 40 kg « 2 à 3 huîtres (15 à 25 g) » (2 à 3 × 5 à 9 g) → 10 à 27 g
+  - Vérifié : portions sous 10 % des calories (163 kcal/100 g), seuil de 5 g d'oignon par kilo (comme ail-oignon et 3 autres articles), cuisson FDA (3 min pochée, 4 à 9 min de vapeur après ouverture), deux chiens morts en 2018 sur la côte est anglaise (Turner et al., Toxins)
