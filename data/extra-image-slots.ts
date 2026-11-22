@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-chien-bien-nourri-signes',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, healthy Golden Retriever with a glossy, shining golden coat and a lean athletic silhouette, sitting on a warm wooden kitchen floor in soft daylight, looking with interest at a plain white ceramic bowl filled with dry kibble beside a small plain white ceramic bowl of water, mouth closed, not eating. No humans, no packaging, no logo, no brand, no writing, no scale display.',
+    composition:
+      'Full frame, subject edge to edge, dog and bowls filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the food. Exactly 8 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-22 pour l'article chien-bien-nourri-signes.",
+  },
+  {
     id: 'art-prix-repas-frais-chien-par-mois',
     group: 'articles',
     ratio: '3:2',

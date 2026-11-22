@@ -377,7 +377,7 @@ Validé par le propriétaire (2026-11-07) : un client Dog Chef rapporte 50 €, 
 
 ## Bilan « Est-il bien nourri ? » (`bien-nourri`)
 
-- [ ] Signes qu'un chien est bien nourri (pelage, selles, énergie)
+- [x] Signes qu'un chien est bien nourri (pelage, selles, énergie) → chien-bien-nourri-signes
 - [ ] Poil terne chez le chien : l'alimentation est-elle en cause
 - [ ] Chien qui mange de l'herbe : faim, carence ou habitude
 - [ ] Chien qui mange ses crottes (coprophagie) : rôle de l'alimentation
