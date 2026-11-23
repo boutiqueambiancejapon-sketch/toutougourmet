@@ -56,14 +56,14 @@ Titre : « {Modèle} : avis et composition ». Les marques alternent dans la lis
 
 - [~] Edgard & Cooper chiot : avis et quantités (edgard cooper chiot avis, quantité) → fiche indexée (edgard-cooper-croquettes-chiot-moyenne-taille-poulet-et-canard, edgard-cooper-chiot-grande-taille-poulet-et-canard)
 - [x] Edgard & Cooper barquettes : avis sur la pâtée (edgard cooper barquette chien) → avis-edgard-cooper-barquette
-- [ ] Pro Plan Sensitive Digestion à l'agneau : avis (pro plan sensitive digestion agneau avis)
-- [ ] Select Gold Sensitive : pour quel chien (select gold sensitive chien avis)
-- [ ] Wilderness pâtée pour chien : avis (real nature pâtée chien avis)
-- [ ] Premiere Meati : avis sur la pâtée (premiere meati chien)
-- [ ] Eukanuba Puppy : avis pour un chiot (eukanuba puppy avis)
-- [ ] Orijen Original : avis et composition (orijen original chien)
-- [ ] Royal Canin Bouledogue Français Adulte (royal canin bouledogue français adulte)
-- [ ] Pro Plan Puppy Medium Sensitive Digestion (pro plan puppy medium sensitive digestion)
+- [~] Pro Plan Sensitive Digestion à l'agneau : avis (pro plan sensitive digestion agneau avis) → fiche indexée (purina-pro-plan-medium-adult-sensitive-digestion)
+- [~] Select Gold Sensitive : pour quel chien (select gold sensitive chien avis) → couvert par avis-select-gold (section Sensitive) et fiches Sensitive indexées
+- [~] Wilderness pâtée pour chien : avis (real nature pâtée chien avis) → fiches indexées (patees/real-nature-wilderness-…)
+- [~] Premiere Meati : avis sur la pâtée (premiere meati chien) → fiches indexées (patees/premiere-meati-…)
+- [~] Eukanuba Puppy : avis pour un chiot (eukanuba puppy avis) → fiche indexée (eukanuba-croquettes-chiot-taille-moyenne-poulet)
+- [~] Orijen Original : avis et composition (orijen original chien) → fiche indexée (orijen-original-adult)
+- [~] Royal Canin Bouledogue Français Adulte (royal canin bouledogue français adulte) → fiche indexée (royal-canin-bouledogue-francais-adult)
+- [x] Pro Plan Puppy Medium Sensitive Digestion (pro plan puppy medium sensitive digestion) → avis-pro-plan-puppy-medium-sensitive-digestion
 - [ ] Orijen Chiot (orijen chiot)
 - [ ] Acana Chiot Grande Race (acana chiot grande race)
 - [ ] Hill's Sensitive Stomach & Skin (hill's sensitive stomach & skin)

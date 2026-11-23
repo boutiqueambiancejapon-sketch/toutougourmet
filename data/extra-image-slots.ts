@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-avis-pro-plan-puppy-medium-sensitive-digestion',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'blue',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, healthy tricolour Beagle puppy about four months old (tan, black and white coat, soft floppy ears) sitting on a light wooden kitchen floor in soft daylight, looking with interest at a plain white ceramic bowl filled with small brown dry kibble, mouth closed, not eating. No humans, no packaging, no bag, no logo, no brand, no writing.',
+    composition:
+      'Full frame, subject edge to edge, puppy and bowl filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the bowl. Exactly 8 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-23 pour l'article avis-pro-plan-puppy-medium-sensitive-digestion.",
+  },
+  {
     id: 'art-chien-bien-nourri-signes',
     group: 'articles',
     ratio: '3:2',
