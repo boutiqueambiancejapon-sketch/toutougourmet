@@ -300,3 +300,8 @@ Nouvel onglet « Sources » (menu à côté de Direct ; sur iPhone : Menu, et so
 ## 2026-11-22 — Relecture de cohérence (nuit)
 
 File `docs/coherence-queue.md` vidée : 2 articles relus (huîtres : 2 corrections de grammes dans le tableau ; barquette Edgard & Cooper : 5 corrections, prix Saumon & Dinde 36x300 g à 9,54 €/kg, coût mensuel 10 kg, tranches de poids). Détail dans la file. Il faudra y ajouter de nouveaux articles pour la prochaine nuit.
+
+## 2026-11-23 — Relecture de cohérence (nuit)
+- File épuisée : 2 articles relus (`prix-repas-frais-chien-par-mois`, `chien-bien-nourri-signes`), 1 correction chacun.
+- Prix Dog Chef alignés sur la grille officielle (dogchef.com/fr, 2,10 à 6,57 € par jour) dans `data/brand-content.ts` et 9 autres articles : un chien de 15 kg coûte environ 100 € par mois, pas 60 à 90 €. Détail dans `docs/coherence-queue.md`.
+- À vérifier : remise « 5 à 10 % selon le plan », prix Just Russel et Japhy.
