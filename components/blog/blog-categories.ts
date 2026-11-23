@@ -158,6 +158,7 @@ const BREED_SLOT_BY_SLUG: Record<string, string> = {
  * Elle écrase aussi la cover breed historique pour les articles de race.
  */
 const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
+  'chien-peut-manger-pain-epices': 'art-chien-peut-manger-pain-epices',
   'chien-bien-nourri-signes': 'art-chien-bien-nourri-signes',
   'avis-edgard-cooper-barquette': 'art-avis-edgard-cooper-barquette',
   'avis-pro-plan-puppy-medium-sensitive-digestion': 'art-avis-pro-plan-puppy-medium-sensitive-digestion',

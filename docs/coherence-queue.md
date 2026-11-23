@@ -1782,3 +1782,4 @@
   - FAQ « Fais la transition sur une semaine » → sur 7 à 10 jours (comme transition-alimentaire-chien et prix-repas-frais-chien-par-mois)
   - Vérifié : gobelet doseur −18 % à +80 % (German 2011), 200 recettes et 95 % (Stockman 2013, zinc, choline, vitamine D comme complement-alimentaire-chien), poil amélioré au bout d'un mois et effet perdu un mois après l'arrêt (Rees 2001), échelle des selles 1 à 7 avec 2 idéal (Purina), mutation POMC chez une partie des Labradors, Dog Chef −30 % box d'essai (data/partner-discounts.ts)
 - [ ] `avis-pro-plan-puppy-medium-sensitive-digestion` · nouvel article 2026-11-23
+- [ ] `chien-peut-manger-pain-epices` · nouvel article 2026-11-23

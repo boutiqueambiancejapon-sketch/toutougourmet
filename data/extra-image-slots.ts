@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-chien-peut-manger-pain-epices',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      "A calm, happy red and white Pembroke Welsh Corgi sitting on a warm wooden kitchen floor in soft winter daylight, looking with interest at a low wooden board holding a French loaf of pain d'épices (brown honey spice bread) with two slices cut, a cinnamon stick and a star anise beside it, mouth closed, not eating. No humans, no packaging, no logo, no brand, no writing.",
+    composition:
+      'Full frame, subject edge to edge, dog and the board filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the food. Exactly 8 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-23 pour l'article chien-peut-manger-pain-epices.",
+  },
+  {
     id: 'art-avis-pro-plan-puppy-medium-sensitive-digestion',
     group: 'articles',
     ratio: '3:2',
