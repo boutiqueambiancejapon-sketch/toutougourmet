@@ -307,3 +307,8 @@ File `docs/coherence-queue.md` vidée : 2 articles relus (huîtres : 2 correctio
 - File épuisée : 2 articles relus (`prix-repas-frais-chien-par-mois`, `chien-bien-nourri-signes`), 1 correction chacun.
 - Prix Dog Chef alignés sur la grille officielle (dogchef.com/fr, 2,10 à 6,57 € par jour) dans `data/brand-content.ts` et 9 autres articles : un chien de 15 kg coûte environ 100 € par mois, pas 60 à 90 €. Détail dans `docs/coherence-queue.md`.
 - À vérifier : remise « 5 à 10 % selon le plan », prix Just Russel et Japhy.
+
+## 2026-11-24 — Relecture de cohérence (nuit)
+- File épuisée : 2 articles relus (`avis-pro-plan-puppy-medium-sensitive-digestion` : 5 corrections, `chien-peut-manger-pain-epices` : 1).
+- Notes Pro Plan alignées sur les fiches publiées (Sensitive Digestion 73, Healthy Start 59, Sensitive Skin 75, Adult 73 au lieu de 69 / 72 / 69 / 68), aussi dans `avis-purina-pro-plan`. Détail dans `docs/coherence-queue.md`.
+- À décider par le propriétaire : la `description` de l'avis Pro Plan Puppy annonce toujours « 69/100 ».
