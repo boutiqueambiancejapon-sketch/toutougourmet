@@ -1781,5 +1781,15 @@
 - [x] `chien-bien-nourri-signes` · nouvel article 2026-11-22 · relu 2026-11-23 : 1 correction
   - FAQ « Fais la transition sur une semaine » → sur 7 à 10 jours (comme transition-alimentaire-chien et prix-repas-frais-chien-par-mois)
   - Vérifié : gobelet doseur −18 % à +80 % (German 2011), 200 recettes et 95 % (Stockman 2013, zinc, choline, vitamine D comme complement-alimentaire-chien), poil amélioré au bout d'un mois et effet perdu un mois après l'arrêt (Rees 2001), échelle des selles 1 à 7 avec 2 idéal (Purina), mutation POMC chez une partie des Labradors, Dog Chef −30 % box d'essai (data/partner-discounts.ts)
-- [ ] `avis-pro-plan-puppy-medium-sensitive-digestion` · nouvel article 2026-11-23
-- [ ] `chien-peut-manger-pain-epices` · nouvel article 2026-11-23
+- [x] `avis-pro-plan-puppy-medium-sensitive-digestion` · nouvel article 2026-11-23 · relu 2026-11-24 : 5 corrections (+ 1 fichier aligné)
+  - Notes du scanner 69 / 72 / 69 / 68 (Sensitive Digestion, Healthy Start, Sensitive Skin, Adult) dans le TL;DR, l'intro, le tableau et les ProductPicks → 73 / 59 / 75 / 73, comme les fiches publiées et `royal-canin-vs-pro-plan`
+  - « La Healthy Start au poulet fait un peu mieux (72/100) pour le même prix » → la Sensitive Skin fait un peu mieux (75/100) pour le même prix, la Healthy Start, un peu moins chère, descend à 59/100
+  - Légende des prix « 57,99 € barré, 49,29 € » valable pour toutes les recettes chiot → précisé : 55,99 € et 47,59 € pour la Healthy Start (3,97 €/kg)
+  - « Le petit sac double presque la facture » (10,2 kg × 6,40 € = 65 € contre 42 €) → elle monte à 65 € environ
+  - Aligné : `avis-purina-pro-plan` tableau des recettes 69/100 → 73/100
+  - Vérifié : prix 49,29 € et 19,19 € (4,11 et 6,40 €/kg), Adult 14 kg 4,50 €/kg, composition (agneau 20 %, volaille séchée, riz 15 %, pulpe 5 %, farine de maïs), 30/19 %, Ca 1,38 / P 0,96, ration 340 g × 30 j × 4,11 € = 42 €, Franklin −30 % en abonnement et chiot 37,5 % de protéines avec DHA (data/brand-content.ts)
+  - À vérifier (non changé, décision du propriétaire) : la `description` annonce encore « 69/100 au scanner »
+- [x] `chien-peut-manger-pain-epices` · nouvel article 2026-11-23 · relu 2026-11-24 : 1 correction
+  - FAQ pain entier avalé « appelle si ton chien pèse moins de 10 kg » (le tableau demande un appel pour un pain entier de 10 à 25 kg) → moins de 25 kg
+  - Vérifié : xylitol 30 à 60 minutes (comme chien-mange-xylitol-urgence), myristicine neurotoxique à dose élevée (comme cannelle et biscuits potiron), sucres 31 à 53 g et 0,9 à 1,1 g de gras pour 100 g, 295 à 327 kcal (Open Food Facts), épices Bonne Maman sous 1 %
+  - À vérifier (non changé) : « neuf pains d'épices lus » pour la fourchette de sucres, seuls cinq ont une valeur dans les sources ; seuil d'une cuillère à café de muscade (PetMD, non rouvert)
