@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-quelles-croquettes-choisir-maxi-zoo',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'blue',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, healthy Belgian Malinois (fawn coat with black mask) lying on a light wooden floor in soft daylight, head up, looking attentively at a full stainless steel bowl of brown dry kibble placed in front of its paws, mouth closed, not eating. No humans, no bag, no packaging, no logo, no brand, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog and bowl filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the bowl. Exactly 8 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-24 pour l'article quelles-croquettes-choisir-maxi-zoo.",
+  },
+  {
     id: 'art-chien-peut-manger-pain-epices',
     group: 'articles',
     ratio: '3:2',

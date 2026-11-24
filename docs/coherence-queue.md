@@ -1793,3 +1793,4 @@
   - FAQ pain entier avalé « appelle si ton chien pèse moins de 10 kg » (le tableau demande un appel pour un pain entier de 10 à 25 kg) → moins de 25 kg
   - Vérifié : xylitol 30 à 60 minutes (comme chien-mange-xylitol-urgence), myristicine neurotoxique à dose élevée (comme cannelle et biscuits potiron), sucres 31 à 53 g et 0,9 à 1,1 g de gras pour 100 g, 295 à 327 kcal (Open Food Facts), épices Bonne Maman sous 1 %
   - À vérifier (non changé) : « neuf pains d'épices lus » pour la fourchette de sucres, seuls cinq ont une valeur dans les sources ; seuil d'une cuillère à café de muscade (PetMD, non rouvert)
+- [ ] `quelles-croquettes-choisir-maxi-zoo` · nouvel article 2026-11-24
