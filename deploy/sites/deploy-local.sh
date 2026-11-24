@@ -8,9 +8,16 @@ NAME=${1:?nom du site}
 FORCE=${2:-}
 CONF=/home/administrator/Toutou/deploy/sites/sites.conf
 read -r _ REPO PORT BRANCH < <(awk -v n="$NAME" '$1==n' "$CONF")
-[[ "${REPO:-}" == "-local" ]] || { echo "$NAME n'est pas un site local (colonne dépôt = -local)"; exit 1; }
+# Dépôt « -socle:<dépôt> » : plusieurs sites construits depuis un même dépôt local (~/sites-src/<dépôt>), la destination
+# vient de SITE_DEST dans /srv/sites/<nom>/shared/.env ; destinations/<SITE_DEST>/public remplace public/ dans la version.
+SRCNAME=$NAME
+case "${REPO:-}" in
+  -local) ;;
+  -socle:*) SRCNAME=${REPO#-socle:} ;;
+  *) echo "$NAME n'est pas un site local (colonne dépôt = -local ou -socle:<dépôt>)"; exit 1 ;;
+esac
 ROOT=/srv/sites/$NAME
-SRC=/home/administrator/sites-src/$NAME
+SRC=/home/administrator/sites-src/$SRCNAME
 [[ -d "$SRC/.git" ]] || { echo "Dépôt absent : $SRC"; exit 1; }
 exec 9>"$ROOT/deploy.lock"; flock -n 9 || { echo "Déjà en cours."; exit 0; }
 SHA=$(git -C "$SRC" rev-parse --short=12 "$BRANCH")
@@ -26,6 +33,10 @@ else
   (cd "$DEST" && vps-build --name "$NAME-npm-ci" -- npm ci --no-audit --no-fund --loglevel=error)
 fi
 set -a; [[ -f "$ROOT/shared/.env" ]] && . "$ROOT/shared/.env"; set +a
+if [[ "${REPO}" == -socle:* ]]; then
+  [[ -n "${SITE_DEST:-}" && -d "$DEST/destinations/$SITE_DEST" ]] || { echo "SITE_DEST absent ou inconnu pour $NAME"; exit 1; }
+  if [[ -d "$DEST/destinations/$SITE_DEST/public" ]]; then rm -rf "$DEST/public"; cp -a "$DEST/destinations/$SITE_DEST/public" "$DEST/public"; fi
+fi
 (cd "$DEST" && NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 vps-build --name "$NAME-deploy" -- npx next build)
 chgrp -R sites "$DEST/.next" && chmod -R g+w "$DEST/.next"
 ln -sfn "$DEST" "$ROOT/current.new" && mv -T "$ROOT/current.new" "$ROOT/current"
