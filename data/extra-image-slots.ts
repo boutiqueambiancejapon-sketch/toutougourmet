@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-chien-peut-manger-panais',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, happy tricolour Bernese Mountain Dog (black coat, rust and white markings) lying on a warm wooden kitchen floor in soft winter daylight, head up, looking with interest at a small white ceramic plate of peeled, cooked parsnip slices in front of its paws, with two whole raw cream-coloured parsnips lying beside the plate. Mouth closed, not eating. No humans, no packaging, no logo, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog and plate filling the whole width, no empty band. Photographic dog with no drawn lines on its body, no outline or contour strokes around the dog or the vegetables. At most 8 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-24 pour l'article chien-peut-manger-panais.",
+  },
+  {
     id: 'art-quelles-croquettes-choisir-maxi-zoo',
     group: 'articles',
     ratio: '3:2',
