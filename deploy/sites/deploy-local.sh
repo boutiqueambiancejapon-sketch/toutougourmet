@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Met en ligne un site dont le dépôt n'existe qu'en local sur le VPS (pas de GitHub), ex. ambiance-japon.
+# Met en ligne un site dont le dépôt n'existe qu'en local sur le VPS (pas de GitHub), ex. ambiance-japon (socle neko-voyage).
 # Usage (administrator) : deploy-local.sh <nom> [--force]
 # Même déroulé que deploy-site.sh, mais la source est la branche locale de ~/sites-src/<nom> (git archive), sans fetch.
 set -euo pipefail
@@ -34,8 +34,14 @@ else
 fi
 set -a; [[ -f "$ROOT/shared/.env" ]] && . "$ROOT/shared/.env"; set +a
 if [[ "${REPO}" == -socle:* ]]; then
-  [[ -n "${SITE_DEST:-}" && -d "$DEST/destinations/$SITE_DEST" ]] || { echo "SITE_DEST absent ou inconnu pour $NAME"; exit 1; }
-  if [[ -d "$DEST/destinations/$SITE_DEST/public" ]]; then rm -rf "$DEST/public"; cp -a "$DEST/destinations/$SITE_DEST/public" "$DEST/public"; fi
+  # SITE_DEST absent ou « japon » : configuration d'Ambiance Japon à la racine du socle (pas de dossier destinations/japon).
+  DEST_ID=${SITE_DEST:-japon}
+  if [[ "$DEST_ID" != japon ]]; then
+    [[ -d "$DEST/destinations/$DEST_ID" ]] || { echo "SITE_DEST inconnu pour $NAME : $DEST_ID"; exit 1; }
+    if [[ -d "$DEST/destinations/$DEST_ID/public" ]]; then rm -rf "$DEST/public"; cp -a "$DEST/destinations/$DEST_ID/public" "$DEST/public"; fi
+  fi
+  # Retire les fichiers de route des autres destinations (HTML d'AJ identique, voir le script).
+  if [[ -f "$DEST/scripts/usine/prune-routes.sh" ]]; then bash -euo pipefail "$DEST/scripts/usine/prune-routes.sh" "$DEST" "$DEST_ID"; fi
 fi
 (cd "$DEST" && NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 vps-build --name "$NAME-deploy" -- npx next build)
 chgrp -R sites "$DEST/.next" && chmod -R g+w "$DEST/.next"
