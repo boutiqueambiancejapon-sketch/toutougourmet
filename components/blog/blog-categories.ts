@@ -163,6 +163,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'quelles-croquettes-choisir-maxi-zoo': 'art-quelles-croquettes-choisir-maxi-zoo',
   'chien-peut-manger-pain-epices': 'art-chien-peut-manger-pain-epices',
   'chien-bien-nourri-signes': 'art-chien-bien-nourri-signes',
+  'partir-vacances-chien-liste-a-emporter': 'art-partir-vacances-chien-liste-a-emporter',
   'avis-edgard-cooper-barquette': 'art-avis-edgard-cooper-barquette',
   'avis-pro-plan-puppy-medium-sensitive-digestion': 'art-avis-pro-plan-puppy-medium-sensitive-digestion',
   'complement-alimentaire-chien': 'art-complement-alimentaire-chien',

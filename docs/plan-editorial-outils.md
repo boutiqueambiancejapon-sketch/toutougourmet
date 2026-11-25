@@ -345,7 +345,7 @@ Validé par le propriétaire (2026-11-07) : un client Dog Chef rapporte 50 €, 
 
 ## Fiche de garde (`fiche-de-garde`) et voyage
 
-- [ ] Partir en vacances avec son chien : la liste de ce qu'il faut emporter (alimentation, eau, papiers)
+- [x] Partir en vacances avec son chien : la liste de ce qu'il faut emporter (alimentation, eau, papiers) → partir-vacances-chien-liste-a-emporter
 - [ ] Prendre l'avion avec son chien : repas avant le vol, jeûne, eau
 - [ ] Voyager en train avec son chien : repas, eau, friandises pendant le trajet
 - [ ] Mettre son chien en pension : que donner, faut-il apporter ses croquettes

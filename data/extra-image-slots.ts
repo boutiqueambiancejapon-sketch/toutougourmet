@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-partir-vacances-chien-liste-a-emporter',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, happy black and white Border Collie sitting on a light wooden floor in soft summer daylight next to an open canvas travel bag, with a folded travel water bowl, a small closed tin of dry kibble, a coiled leash and a rolled-up blanket placed beside the bag, head up, mouth closed, looking attentively ahead. No humans, no packaging text, no logo, no brand, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog and travel bag filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the objects. Exactly 8 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-25 pour l'article partir-vacances-chien-liste-a-emporter.",
+  },
+  {
     id: 'art-avis-real-nature-country-selection-scandinavia',
     group: 'articles',
     ratio: '3:2',
