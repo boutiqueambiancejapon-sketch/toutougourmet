@@ -626,7 +626,7 @@ async function cmdApply(id) {
     const st = step(s, def.id);
     if (st.status === 'done' || st.status === 'skipped') continue;
     say(`→ ${def.label}`);
-    st.status = 'running'; st.at = now(); save(s);
+    st.status = 'running'; st.note = null; st.at = now(); save(s);
     try {
       await def.apply(c, st);
       if (st.status === 'running') st.status = 'done';
