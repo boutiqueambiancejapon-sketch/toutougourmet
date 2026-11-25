@@ -427,3 +427,12 @@ Arrêt : `sudo systemctl disable --now toutou-alerts.timer toutou-weekly.timer`.
 ## Fiches Maxi Zoo
 
 `toutou-maxizoo.timer` lit 200 pages produit par nuit, sans IA (`scripts/import-maxizoo.ts`). Le fichier Awin reste hors du dépôt : `/srv/toutou/shared/maxizoo-feed.csv.gz`, à remplacer pour le mettre à jour. Le suivi est dans `/srv/toutou/shared/maxizoo-state.json`. Installer : copier les deux unités dans `/etc/systemd/system`, `daemon-reload`, puis `enable --now toutou-maxizoo.timer`. Essai sans écriture : `tsx scripts/import-maxizoo.ts --limite=20 --essai` (il ne teste pas l'écriture en base). Chaque passage ajoute aussi l'image du fichier à toute fiche dont le code-barres correspond.
+
+## Usine à sites : assistant « Nouveau site »
+
+Onglet **Usine** du centre de contrôle (`/usine`). Moteur : `deploy/sites/usine/new-site.mjs` (compte administrator, gestes système par `sudo -n`), squelette de destination : `deploy/sites/usine/skeleton.mjs`.
+
+- `plan <id>` (paramètres JSON sur l'entrée standard) : essai à blanc, rien de créé. `apply <id>` : DNS Cloudflare (A @ et www, DNS only), branche `usine/<id>` du socle neko-voyage (squelette, `main` jamais touchée), base et rôle `<id>` + schémas de `scripts/usine/migrate.sh`, Brevo (domaine, DKIM/code/DMARC dans Cloudflare, authentification, expéditeur hello@, liste), `/srv/sites/<id>/shared/.env` (secrets copiés sans affichage, STAGING=1, MAIL_MODE=test), ligne `sites.conf` (commit du seul fichier sur v2), `/etc/caddy/usine/<id>.caddy` (mot de passe des maquettes + noindex, `caddy validate` puis rechargement), `site@<id>`, `deploy-local.sh`, contrôles. Domaine `*.sslip.io` : Cloudflare et Brevo sautés.
+- Reprise : relancer `apply` repart de l'étape en échec. `undo <id> [--dry]` : supprime seulement ce que l'assistant a créé (noté dans `/var/lib/usine/<id>/state.json`), puis archive état et journal dans `/var/lib/usine/_archive/`. `open <id> [--dry]` : STAGING=0, MAIL_MODE=live, bloc Caddy public, nouveau build, contrôles (refusé pour sslip.io). `check <id>` : dest:check + parité + DNS/Brevo en lecture. `status` : état de tous les sites.
+- Protégés : ambiance-japon, miami, toutou et les sites de `sites.conf` non créés par l'assistant. Sauvegardes : `/var/lib/usine/backups/` (Caddyfile, sites.conf) et `/etc/caddy/Caddyfile.avant-usine-*`.
+- Actions humaines : Cloudflare Email Routing (contact@ → Gmail, la clé n'a pas ce droit), Search Console et Bing à l'ouverture.
