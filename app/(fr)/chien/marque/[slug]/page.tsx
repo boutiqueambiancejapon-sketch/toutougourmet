@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { brands, brandOfferLabel, getBrandBySlug, getDuelPairs, DUEL_BRAND_SLUGS, type Brand } from '@/data/brands'
 import { getComparatif } from '@/lib/mdx'
-import { BrandPage } from '@/components/marques/BrandPage'
+import { BrandPage, NO_PROMO_IN_TITLE } from '@/components/marques/BrandPage'
 import { BrandDuel } from '@/components/marques/BrandDuel'
 import { ComparatifEditorial } from '@/components/marques/ComparatifEditorial'
 import { currentYear } from '@/lib/title-year'
@@ -40,7 +40,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const brand = getBrandBySlug(slug)
   if (!brand) return {}
   return {
-    title: `${brand.name} : avis ${currentYear()}, prix, code promo`,
+    title: NO_PROMO_IN_TITLE.includes(brand.slug)
+      ? `${brand.name} : avis ${currentYear()}, prix et composition`
+      : `${brand.name} : avis ${currentYear()}, prix, code promo`,
     description: `Avis ${brand.name} : composition, prix, avantages et inconvénients. ${brandOfferLabel(brand)}.`,
     alternates: { canonical: `https://www.toutou-gourmet.com/chien/marque/${slug}` },
   }
