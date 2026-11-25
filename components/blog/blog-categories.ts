@@ -158,6 +158,7 @@ const BREED_SLOT_BY_SLUG: Record<string, string> = {
  * Elle écrase aussi la cover breed historique pour les articles de race.
  */
 const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
+  'avis-real-nature-country-selection-scandinavia': 'art-avis-real-nature-country-selection-scandinavia',
   'chien-peut-manger-panais': 'art-chien-peut-manger-panais',
   'quelles-croquettes-choisir-maxi-zoo': 'art-quelles-croquettes-choisir-maxi-zoo',
   'chien-peut-manger-pain-epices': 'art-chien-peut-manger-pain-epices',

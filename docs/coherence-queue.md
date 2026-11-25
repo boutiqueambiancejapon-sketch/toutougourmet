@@ -1806,3 +1806,4 @@
   - « le céleri… avec les mêmes règles sur les feuilles » (fanes de panais interdites, feuilles de céleri autorisées dans chien-peut-manger-celeri) → ses feuilles se donnent en petite quantité
   - Vérifié : panais bouilli 71 kcal, cru 4,9 g de fibres et 4,8 g de sucres pour 100 g (USDA), rondelle de 1 cm à 10 g et 7 kcal, tableau sous 10 % des calories (check-portions), furocoumarines non détruites par la cuisson et plus abondantes dans une racine abîmée (Ivie 1981, Ceska 1986)
   - À vérifier (non changé) : « quelques grammes de racine peuvent tuer un chien » et convulsions en moins d'une heure pour la ciguë vireuse et l'œnanthe safranée (Merck, non rouvert)
+- [ ] `avis-real-nature-country-selection-scandinavia` · nouvel article 2026-11-25

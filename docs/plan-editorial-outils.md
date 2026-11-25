@@ -64,10 +64,10 @@ Titre : « {Modèle} : avis et composition ». Les marques alternent dans la lis
 - [~] Orijen Original : avis et composition (orijen original chien) → fiche indexée (orijen-original-adult)
 - [~] Royal Canin Bouledogue Français Adulte (royal canin bouledogue français adulte) → fiche indexée (royal-canin-bouledogue-francais-adult)
 - [x] Pro Plan Puppy Medium Sensitive Digestion (pro plan puppy medium sensitive digestion) → avis-pro-plan-puppy-medium-sensitive-digestion
-- [ ] Orijen Chiot (orijen chiot)
-- [ ] Acana Chiot Grande Race (acana chiot grande race)
-- [ ] Hill's Sensitive Stomach & Skin (hill's sensitive stomach & skin)
-- [ ] Real Nature Country Selection Adulte Scandinavia (real nature country selection adulte scandinavia)
+- [~] Orijen Chiot (orijen chiot) → fiche indexée (orijen-puppy)
+- [~] Acana Chiot Grande Race (acana chiot grande race) → fiche indexée (acana-chiot-grande-race)
+- [~] Hill's Sensitive Stomach & Skin (hill's sensitive stomach & skin) → fiche indexée (hills-science-plan-sensitive-stomach-skin-small-mini)
+- [x] Real Nature Country Selection Adulte Scandinavia (real nature country selection adulte scandinavia) → avis-real-nature-country-selection-scandinavia
 - [ ] Eukanuba Adulte Grande Taille Poulet (eukanuba adulte grande taille poulet)
 - [ ] Ultima Medium Maxi Light (ultima medium maxi light)
 - [ ] Select Gold Complete Adulte Medium Poulet (select gold complete adulte medium poulet)
