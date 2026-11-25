@@ -27,6 +27,12 @@ DEST=$ROOT/releases/$SHA
 rm -rf "$DEST"; mkdir -p "$DEST"
 git -C "$SRC" archive "$BRANCH" | tar -x -C "$DEST"
 PREV=$(readlink -f "$ROOT/current" 2>/dev/null || true)
+# Premier déploiement d'un site du socle (assistant « Nouveau site » de l'usine) : node_modules d'un site frère s'il a le même package-lock.
+if [[ -z "$PREV" || ! -d "$PREV/node_modules" ]]; then
+  for c in /srv/sites/*/current; do
+    if [[ -d "$c/node_modules" ]] && cmp -s "$c/package-lock.json" "$DEST/package-lock.json"; then PREV=$(readlink -f "$c"); break; fi
+  done
+fi
 if [[ -n "$PREV" && -d "$PREV/node_modules" ]] && cmp -s "$PREV/package-lock.json" "$DEST/package-lock.json"; then
   cp -al "$PREV/node_modules" "$DEST/node_modules"
 else
