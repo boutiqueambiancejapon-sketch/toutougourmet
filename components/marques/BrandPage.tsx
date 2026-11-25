@@ -21,6 +21,10 @@ import { STOP_BRAND_PAGE } from '@/lib/sticky-cta-config'
 
 const SITE = 'https://www.toutou-gourmet.com'
 
+// @cdc 04-pages — « code promo » retiré du titre de ces fiches, qui passaient devant /codes-promo/<marque> (SEO 2026-11-25).
+// En échange, un lien visible vers la page code promo en haut de la fiche.
+export const NO_PROMO_IN_TITLE = ['franklin', 'elmut']
+
 export function BrandPage({ brand }: { brand: Brand }) {
   // Une question déjà traitée par une section de la page (data/brand-hub.ts) ne revient pas dans la FAQ (2026-11-07).
   const faqs = sansDoublons(brandFaqs[brand.slug] ?? [], (BRAND_HUB[brand.slug]?.sections ?? []).map((x) => x.h2))
@@ -59,6 +63,11 @@ export function BrandPage({ brand }: { brand: Brand }) {
           <BreadcrumbNav items={[{ label: 'Accueil', href: '/' }, { label: 'Guides', href: '/chien' }, { label: 'Marques', href: '/chien/marque' }, { label: brand.name }]} />
           <BrandHero brand={brand} />
           <BrandIdentity brand={brand} />
+          {promo.length > 0 && isOfferSlug(brand.slug) && NO_PROMO_IN_TITLE.includes(brand.slug) ? (
+            <p className="m-0">
+              <Link href={promo[0].href} className="font-semibold text-orange-ink underline underline-offset-4 hover:text-ink">{frTypo(`Tu cherches la remise ? Code promo ${brand.name} : ${shortDiscount(brand.slug)} →`)}</Link>
+            </p>
+          ) : null}
         </div>
         <BrandPresentation brand={brand} paragraphs={brandDescriptions[brand.slug] ?? []} />
         <BrandProsCons brand={brand} />
