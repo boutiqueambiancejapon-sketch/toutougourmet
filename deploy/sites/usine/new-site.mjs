@@ -342,10 +342,19 @@ const STEPS = [
       if (!hasRole) { psql(`CREATE ROLE ${c.db} NOLOGIN`); st.data.createdRole = true; save(c.s); say(`  Rôle ${c.db} créé.`); }
       if (!hasDb) { psql(`CREATE DATABASE ${c.db} OWNER ${c.db}`); st.data.createdDb = true; save(c.s); say(`  Base ${c.db} créée.`); }
       psql(`GRANT ${c.db} TO sites`);
-      for (const f of migrations(c)) {
-        const sql = git(['show', `${c.branch}:db/${f}.sql`]).replace(/(AUTHORIZATION|OWNER TO|GRANT [a-z]+ TO|TO) aj;/g, `$1 ${c.db};`);
-        sudo(['-u', 'postgres', 'psql', '-X', '-q', '-v', 'ON_ERROR_STOP=1', '-d', c.db, '-f', '-'], { input: sql });
+      // Fichiers idempotents, mais certains dépendent d'un fichier listé plus loin (neko-paid → premium) : comme migrate.sh,
+      // on continue après un échec, puis on rejoue les fichiers en échec (3 passes au plus).
+      let todo = migrations(c), last = '';
+      for (let pass = 1; todo.length && pass <= 3; pass++) {
+        const failed = [];
+        for (const f of todo) {
+          const sql = git(['show', `${c.branch}:db/${f}.sql`]).replace(/(AUTHORIZATION|OWNER TO|GRANT [a-z]+ TO|TO) aj;/g, `$1 ${c.db};`);
+          try { sudo(['-u', 'postgres', 'psql', '-X', '-q', '-v', 'ON_ERROR_STOP=1', '-d', c.db, '-f', '-'], { input: sql }); } catch (e) { failed.push(f); last = e.message; }
+        }
+        if (failed.length) say(`  Passe ${pass} : ${failed.join(', ')} à rejouer.`);
+        todo = failed;
       }
+      if (todo.length) throw new Error(`Schémas en échec : ${todo.join(', ')} (${last})`);
       const n = psql(`SELECT count(*) FROM pg_namespace WHERE nspowner = (SELECT oid FROM pg_roles WHERE rolname = '${c.db}')`, c.db).trim();
       st.created = true;
       say(`  ${migrations(c).length} fichiers SQL joués, ${n} schémas appartiennent à ${c.db}.`);
