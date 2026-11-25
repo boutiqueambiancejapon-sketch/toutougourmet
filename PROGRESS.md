@@ -314,3 +314,6 @@ File `docs/coherence-queue.md` vidée : 2 articles relus (huîtres : 2 correctio
 - File épuisée : 2 articles relus (`avis-pro-plan-puppy-medium-sensitive-digestion` : 5 corrections, `chien-peut-manger-pain-epices` : 1).
 - Notes Pro Plan alignées sur les fiches publiées (Sensitive Digestion 73, Healthy Start 59, Sensitive Skin 75, Adult 73 au lieu de 69 / 72 / 69 / 68), aussi dans `avis-purina-pro-plan`. Détail dans `docs/coherence-queue.md`.
 - À décider par le propriétaire : la `description` de l'avis Pro Plan Puppy annonce toujours « 69/100 ».
+
+## 2026-11-25 — Relecture de cohérence (nuit)
+- File épuisée : 2 articles relus (`quelles-croquettes-choisir-maxi-zoo` 3 corrections, `chien-peut-manger-panais` 4 corrections), détail dans `docs/coherence-queue.md`. En ligne (release 72fee890).
