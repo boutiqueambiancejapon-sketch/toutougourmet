@@ -1793,5 +1793,16 @@
   - FAQ pain entier avalé « appelle si ton chien pèse moins de 10 kg » (le tableau demande un appel pour un pain entier de 10 à 25 kg) → moins de 25 kg
   - Vérifié : xylitol 30 à 60 minutes (comme chien-mange-xylitol-urgence), myristicine neurotoxique à dose élevée (comme cannelle et biscuits potiron), sucres 31 à 53 g et 0,9 à 1,1 g de gras pour 100 g, 295 à 327 kcal (Open Food Facts), épices Bonne Maman sous 1 %
   - À vérifier (non changé) : « neuf pains d'épices lus » pour la fourchette de sucres, seuls cinq ont une valeur dans les sources ; seuil d'une cuillère à café de muscade (PetMD, non rouvert)
-- [ ] `quelles-croquettes-choisir-maxi-zoo` · nouvel article 2026-11-24
-- [ ] `chien-peut-manger-panais` · nouvel article 2026-11-24
+- [x] `quelles-croquettes-choisir-maxi-zoo` · nouvel article 2026-11-24 · relu 2026-11-25 : 3 corrections
+  - TL;DR « Orijen et Acana dominent les notes, mais coûtent 7 à 10 € le kilo » (tableau : 7,63 € et 6,75 €, Acana 85/100 sous Wide Savannah 96/100) → Orijen domine les notes (97/100) mais coûte 7,63 € le kilo, et Acana 6,75 € pour 85/100
+  - Select Gold « 49 recettes de 55 à 86/100 » → de 43 à 86/100 (Sensitive Senior XS agneau et riz à 43/100 dans la base, notes inchangées depuis le 7 novembre)
+  - Phrase cassée « comme l'explique notre page sur les croquettes pour chien en surpoids explique comment s'y prendre » → « : notre page… explique comment s'y prendre »
+  - Vérifié dans la base (prix du 25 novembre identiques au 24) : les 11 lignes du tableau, Wide Savannah 96 à 5,27 € (78,99 € barré), grande taille 90 à 6,58 €, Acana Grande Race 89 à 6,93 €, Junior Wild Valley 93, Acana Puppy Large Breed 92, Eukanuba chiot 83 à 3,75 €, Eukanuba adulte 36,54 € au lieu de 42,99 € (2,44 €/kg), Rocky Hills 90 à 11,29 €, Senior Dark Fjord 88 à 5,33 €, Select Gold Light 85, Pro Plan Light/Sterilised 73, Sensitive Skin Medium 76 à 4,50 €, Sensitive Digestion 73 à 75, Hill's Sensitive Stomach & Skin Small 76 à 13,46 €, Orijen Small Breed 97 au-dessus de 15 € en 1,8 kg, Orijen 95 à 98, Pure Chicken 91, Premiere sans céréales 58 à 62 ; budgets mensuels 250 g × 30 j (57, 40, 18, 31, 35 €) ; Franklin −30 % en abonnement et Dog Chef −30 % box d'essai (data/partner-discounts.ts)
+  - À vérifier (non changé) : compositions Wide Savannah (sanglier 30 %, agneau 20 %, 37 % de protéines), Select Gold (poulet 20 % + 20 %, maïs 17,5 % × 2) et Eukanuba (27 % de protéines, hexamétaphosphate) non rouvertes sur maxizoo.fr ; médianes de gamme non recalculées
+- [x] `chien-peut-manger-panais` · nouvel article 2026-11-24 · relu 2026-11-25 : 4 corrections
+  - « 71 kcal pour 100 g, un peu plus que la carotte » → deux fois plus que la carotte cuite (35 kcal dans chien-peut-manger-carottes)
+  - Tableau purée maison « Oui, 1 à 3 cuillères » (45 g au-dessus des 10 à 20 g d'un chien de moins de 5 kg, sous les 70 à 100 g d'un grand chien) → 1 à 6 cuillères à soupe selon le gabarit
+  - FAQ petit pot « une à trois cuillères selon le gabarit » → d'une cuillère à soupe pour un chien de moins de 5 kg à six pour un grand chien
+  - « le céleri… avec les mêmes règles sur les feuilles » (fanes de panais interdites, feuilles de céleri autorisées dans chien-peut-manger-celeri) → ses feuilles se donnent en petite quantité
+  - Vérifié : panais bouilli 71 kcal, cru 4,9 g de fibres et 4,8 g de sucres pour 100 g (USDA), rondelle de 1 cm à 10 g et 7 kcal, tableau sous 10 % des calories (check-portions), furocoumarines non détruites par la cuisson et plus abondantes dans une racine abîmée (Ivie 1981, Ceska 1986)
+  - À vérifier (non changé) : « quelques grammes de racine peuvent tuer un chien » et convulsions en moins d'une heure pour la ciguë vireuse et l'œnanthe safranée (Merck, non rouvert)
