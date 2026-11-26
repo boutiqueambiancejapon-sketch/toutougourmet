@@ -8,6 +8,7 @@ export const MODEL_REVIEWS: Record<string, string> = {
   'edgard & cooper|barquette chien adulte dinde poulet': '/chien/avis-marques/avis-edgard-cooper-barquette',
   'pro plan|puppy medium sensitive digestion agneau': '/chien/avis-marques/avis-pro-plan-puppy-medium-sensitive-digestion',
   'real nature|croquettes country selection pour chien adulte scandinavia saumon et renne': '/chien/avis-marques/avis-real-nature-country-selection-scandinavia',
+  'select gold|complete croquettes chien adulte medium poulet': '/chien/avis-marques/avis-select-gold-complete-adulte-medium-poulet',
   'franklin pet food|croquettes dinde patate douce epinards': '/chien/avis-marques/avis-franklin-light-dinde-patate-douce-epinards',
 }
 

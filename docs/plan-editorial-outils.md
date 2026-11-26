@@ -68,9 +68,9 @@ Titre : « {Modèle} : avis et composition ». Les marques alternent dans la lis
 - [~] Acana Chiot Grande Race (acana chiot grande race) → fiche indexée (acana-chiot-grande-race)
 - [~] Hill's Sensitive Stomach & Skin (hill's sensitive stomach & skin) → fiche indexée (hills-science-plan-sensitive-stomach-skin-small-mini)
 - [x] Real Nature Country Selection Adulte Scandinavia (real nature country selection adulte scandinavia) → avis-real-nature-country-selection-scandinavia
-- [ ] Eukanuba Adulte Grande Taille Poulet (eukanuba adulte grande taille poulet)
-- [ ] Ultima Medium Maxi Light (ultima medium maxi light)
-- [ ] Select Gold Complete Adulte Medium Poulet (select gold complete adulte medium poulet)
+- [~] Eukanuba Adulte Grande Taille Poulet (eukanuba adulte grande taille poulet) → fiche indexée (eukanuba-adulte-grande-taille-poulet)
+- [~] Ultima Medium Maxi Light (ultima medium maxi light) → composition illisible sur la seule fiche Maxi Zoo (7,5 kg), rien d'affirmable
+- [x] Select Gold Complete Adulte Medium Poulet (select gold complete adulte medium poulet) → avis-select-gold-complete-adulte-medium-poulet
 - [ ] Premiere Best Meat Adulte Bœuf (premiere best meat adulte bœuf)
 - [ ] Nature's Variety Healthy Grains Adulte Mini (nature's variety healthy grains adulte mini)
 - [ ] Carnilove Active Agneau & Sanglier (carnilove active agneau & sanglier)
