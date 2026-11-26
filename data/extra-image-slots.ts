@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-fruits-chien-peut-manger-liste',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, happy Cavalier King Charles Spaniel (Blenheim coat, chestnut and white, long silky ears) sitting on a light wooden floor in soft daylight, head up, looking with curiosity at a low wooden board in front of its paws holding fresh fruit pieces: apple slices without seeds, a few blueberries, strawberries, watermelon cubes and banana rounds. Mouth closed, not eating. No humans, no packaging, no logo, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog and fruit board filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the fruit. Exactly 8 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-26 pour l'article fruits-chien-peut-manger-liste.",
+  },
+  {
     id: 'art-avis-select-gold-complete-adulte-medium-poulet',
     group: 'articles',
     ratio: '3:2',

@@ -1815,3 +1815,4 @@
   - « laisse passer une heure entre un effort et le repas » (le site dit 2 h avant l'effort et 1 h après, risque de torsion) → pas de repas dans les 2 heures avant un effort ni dans l'heure qui suit
   - Vérifié : 190 g par jour pour 15 kg stérilisé (189 g dans faire-garder-son-chien-vacances-alimentation), 16 à 17 jours × 190 g = 3,0 à 3,2 kg ; repas 2 à 3 h avant la route (voyager-voiture) ; transition 7 à 10 jours ; 24 à 48 h sans manger (croquettes-chien-perte-appetit) ; rage à 12 semaines et 21 jours, ténia 24 à 120 h pour Finlande, Irlande, Malte et Norvège (règlements 576/2013 et 2018/772)
 - [ ] `avis-select-gold-complete-adulte-medium-poulet` · nouvel article 2026-11-26
+- [ ] `fruits-chien-peut-manger-liste` · nouvel article 2026-11-26
