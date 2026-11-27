@@ -51,6 +51,7 @@ write_one() {
 while read -r site repo _port branch <&3; do
   [[ -z ${site:-} || $site == \#* ]] && continue
   [[ $repo == -local || $repo == -socle:* ]] && continue  # dépôt local sans GitHub (ambiance-japon, socle) : pas d’articles automatiques
+  [[ $site == travel-belgium ]] && continue  # passé sur le moteur Neko (destination belgium) le 27/11/2026 : rédacteur du centre de contrôle
   [[ -n $ONLY && $site != "$ONLY" ]] && continue
   echo "=== $(date -Is) $site"
   write_one "$site" "$repo" "$branch" </dev/null || FAILED="$FAILED $site"
