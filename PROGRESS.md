@@ -322,3 +322,6 @@ File `docs/coherence-queue.md` vidée : 2 articles relus (huîtres : 2 correctio
 
 ## 2026-11-25 — Relecture de cohérence (nuit)
 - File épuisée : 2 articles relus (`quelles-croquettes-choisir-maxi-zoo` 3 corrections, `chien-peut-manger-panais` 4 corrections), détail dans `docs/coherence-queue.md`. En ligne (release 72fee890).
+
+## 2026-11-27 — Relecture de cohérence (nuit)
+- File épuisée : 2 articles relus (`avis-select-gold-complete-adulte-medium-poulet` 2 corrections : ration chien actif et races par poids ; `fruits-chien-peut-manger-liste` 3 corrections : grammes par tranche alignés sur la fiche pomme, FAQ quotidienne alignée sur le tableau). Détail dans `docs/coherence-queue.md`. Ajouter des articles à la file pour la prochaine nuit.

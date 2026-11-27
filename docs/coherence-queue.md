@@ -1814,5 +1814,10 @@
 - [x] `partir-vacances-chien-liste-a-emporter` · nouvel article 2026-11-25 · relu 2026-11-26 : 1 correction
   - « laisse passer une heure entre un effort et le repas » (le site dit 2 h avant l'effort et 1 h après, risque de torsion) → pas de repas dans les 2 heures avant un effort ni dans l'heure qui suit
   - Vérifié : 190 g par jour pour 15 kg stérilisé (189 g dans faire-garder-son-chien-vacances-alimentation), 16 à 17 jours × 190 g = 3,0 à 3,2 kg ; repas 2 à 3 h avant la route (voyager-voiture) ; transition 7 à 10 jours ; 24 à 48 h sans manger (croquettes-chien-perte-appetit) ; rage à 12 semaines et 21 jours, ténia 24 à 120 h pour Finlande, Irlande, Malte et Norvège (règlements 576/2013 et 2018/772)
-- [ ] `avis-select-gold-complete-adulte-medium-poulet` · nouvel article 2026-11-26
-- [ ] `fruits-chien-peut-manger-liste` · nouvel article 2026-11-26
+- [x] `avis-select-gold-complete-adulte-medium-poulet` · nouvel article 2026-11-26 · relu 2026-11-27 : 2 corrections
+  - Ration chien très actif « environ 15 % de plus » → « environ un cinquième de plus » (fiche Maxi Zoo : 190/160, 240/200, 350/295 g)
+  - Races du tableau de ration : beagle (9-11 kg) à 15 kg, cocker à 11 kg, whippet (12-13 kg) à 20 kg → beagle et shiba à 11 kg, cocker et épagneul breton à 15 kg, border collie et springer à 20 kg
+- [x] `fruits-chien-peut-manger-liste` · nouvel article 2026-11-26 · relu 2026-11-27 : 3 corrections
+  - Tableau 5 à 15 kg « 2 à 3 tranches (20 à 45 g) » → « 1 à 2 tranches (25 à 45 g) », comme la fiche pomme (tranche de 23 g, précisée dans la source du tableau)
+  - Plus de 30 kg « ⅓ à ½ pomme (70 à 90 g) » → « (60 à 90 g) » (⅓ de pomme de 182 g)
+  - FAQ « fruits tous les jours : oui, en petite portion » → portion du tableau réduite, car prévue pour 2 à 4 prises par semaine
