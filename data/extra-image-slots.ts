@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-chien-peut-manger-foie-gras',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      "A calm, elegant fawn and white Whippet (short smooth coat, slim body, folded rose ears) sitting on a light wooden floor in a cosy winter dining room with soft warm daylight, looking up at the viewer beside a low wooden table on which sits a small wooden board with a slice of pale pink foie gras terrine and a few toasted bread slices, clearly out of the dog's mouth. Mouth closed, not eating. No humans, no packaging, no jar label, no logo, no brand name, no writing.",
+    composition:
+      'Full frame, subject edge to edge, dog and table filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the food. Exactly 8 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-27 pour l'article chien-peut-manger-foie-gras.",
+  },
+  {
     id: 'art-avis-natures-variety-healthy-grains-mini',
     group: 'articles',
     ratio: '3:2',

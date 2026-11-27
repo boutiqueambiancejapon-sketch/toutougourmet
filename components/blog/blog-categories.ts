@@ -194,6 +194,7 @@ const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
   'avis-multifit': 'art-avis-multifit',
   'chien-peut-manger-choucroute': 'art-chien-peut-manger-choucroute',
   'chien-peut-manger-merguez': 'art-chien-peut-manger-merguez',
+  'chien-peut-manger-foie-gras': 'art-chien-peut-manger-foie-gras',
   'avis-real-nature': 'art-avis-real-nature',
   'avis-atavik': 'art-avis-atavik',
   'avis-select-gold': 'art-avis-select-gold',

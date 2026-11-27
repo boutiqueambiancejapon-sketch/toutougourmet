@@ -1822,3 +1822,4 @@
   - Plus de 30 kg « ⅓ à ½ pomme (70 à 90 g) » → « (60 à 90 g) » (⅓ de pomme de 182 g)
   - FAQ « fruits tous les jours : oui, en petite portion » → portion du tableau réduite, car prévue pour 2 à 4 prises par semaine
 - [ ] `avis-natures-variety-healthy-grains-mini` · nouvel article 2026-11-27
+- [ ] `chien-peut-manger-foie-gras` · nouvel article 2026-11-27
