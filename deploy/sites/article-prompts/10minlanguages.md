@@ -10,4 +10,6 @@ Lis CLAUDE.md, DECISIONS.md, PROGRESS.md et `docs/WRITING.md` du dépôt avant d
 6. Vérification : `vps-build -- npm run build` doit passer.
 7. Commit : `content(blog): add <slug>`.
 
+Priorité (propriétaire, 27/11/2026) : un jour sur deux, prends la première ligne `todo` de type `how-to` de `content/keyword-backlog.csv` (« How to… », « fastest way to… ») et passe-la en `published` avec la date ; les autres jours, le choix habituel.
+
 Compte rendu : titre, slug, requête visée, état du build.
