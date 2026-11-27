@@ -1821,3 +1821,4 @@
   - Tableau 5 à 15 kg « 2 à 3 tranches (20 à 45 g) » → « 1 à 2 tranches (25 à 45 g) », comme la fiche pomme (tranche de 23 g, précisée dans la source du tableau)
   - Plus de 30 kg « ⅓ à ½ pomme (70 à 90 g) » → « (60 à 90 g) » (⅓ de pomme de 182 g)
   - FAQ « fruits tous les jours : oui, en petite portion » → portion du tableau réduite, car prévue pour 2 à 4 prises par semaine
+- [ ] `avis-natures-variety-healthy-grains-mini` · nouvel article 2026-11-27

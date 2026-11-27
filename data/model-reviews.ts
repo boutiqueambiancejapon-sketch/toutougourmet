@@ -6,6 +6,7 @@ import { ficheIndexeePath, parCle, type FicheIndexee } from '@/lib/scanner/fiche
 export const MODEL_REVIEWS: Record<string, string> = {
   'dog chef|croquettes au canard frais': '/chien/avis-marques/avis-dog-chef-croquettes-canard-frais',
   'edgard & cooper|barquette chien adulte dinde poulet': '/chien/avis-marques/avis-edgard-cooper-barquette',
+  "nature's variety|healthy grain mini poulet": '/chien/avis-marques/avis-natures-variety-healthy-grains-mini',
   'pro plan|puppy medium sensitive digestion agneau': '/chien/avis-marques/avis-pro-plan-puppy-medium-sensitive-digestion',
   'real nature|croquettes country selection pour chien adulte scandinavia saumon et renne': '/chien/avis-marques/avis-real-nature-country-selection-scandinavia',
   'select gold|complete croquettes chien adulte medium poulet': '/chien/avis-marques/avis-select-gold-complete-adulte-medium-poulet',

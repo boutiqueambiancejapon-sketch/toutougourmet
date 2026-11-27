@@ -71,8 +71,8 @@ Titre : « {Modèle} : avis et composition ». Les marques alternent dans la lis
 - [~] Eukanuba Adulte Grande Taille Poulet (eukanuba adulte grande taille poulet) → fiche indexée (eukanuba-adulte-grande-taille-poulet)
 - [~] Ultima Medium Maxi Light (ultima medium maxi light) → composition illisible sur la seule fiche Maxi Zoo (7,5 kg), rien d'affirmable
 - [x] Select Gold Complete Adulte Medium Poulet (select gold complete adulte medium poulet) → avis-select-gold-complete-adulte-medium-poulet
-- [ ] Premiere Best Meat Adulte Bœuf (premiere best meat adulte bœuf)
-- [ ] Nature's Variety Healthy Grains Adulte Mini (nature's variety healthy grains adulte mini)
+- [~] Premiere Best Meat Adulte Bœuf (premiere best meat adulte bœuf) → fiche indexée (premiere-best-meat-aliments-secs-boeuf)
+- [x] Nature's Variety Healthy Grains Adulte Mini (nature's variety healthy grains adulte mini) → avis-natures-variety-healthy-grains-mini
 - [ ] Carnilove Active Agneau & Sanglier (carnilove active agneau & sanglier)
 - [ ] Royal Canin Chihuahua Puppy (royal canin chihuahua puppy)
 - [ ] Pro Plan Adult 7+ Medium (pro plan adult 7+ medium)
