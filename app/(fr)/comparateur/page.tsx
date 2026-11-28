@@ -10,7 +10,7 @@ import { currentYear } from '@/lib/title-year'
 export const metadata: Metadata = {
   title: `Comparatif nourriture pour chien ${currentYear()}`,
   description:
-    "Franklin, Elmut, Ultra Premium Direct, Dog Chef, Dogfy Diet et Fidelis comparés : prix, type d'aliment, fabrication, livraison et offres de bienvenue.",
+    "Franklin, Elmut, Ultra Premium Direct, Dog Chef et Dogfy Diet comparés : prix, type d'aliment, fabrication, livraison et offres de bienvenue.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/comparateur' },
 }
 

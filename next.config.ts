@@ -24,6 +24,8 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Fidelis : programme d'affiliation terminé le 30/11/2026, la page marque renvoie vers l'avis (sans lien partenaire).
+      { source: '/chien/marque/fidelis', destination: '/chien/avis-marques/avis-fidelis-menus-frais-chien-bocaux', permanent: true },
       // ── Favicon ─────────────────────────────────────
       // Le binaire `app/favicon.ico` contient le triangle Next.js scaffold
       // (jamais remplacé). On le bypass via redirect vers /icon.svg qui est

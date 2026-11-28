@@ -28,7 +28,6 @@ export const MARQUE_PAGES: MarquePage[] = [
   { nom: 'Elmut', href: '/chien/marque/elmut' },
   { nom: 'Eukanuba', href: avis('avis-eukanuba') },
   { nom: 'Farmina N&D', href: avis('avis-farmina-nd'), noms: ['Farmina'] },
-  { nom: 'Fidelis', href: '/chien/marque/fidelis' },
   { nom: 'Franklin', href: '/chien/marque/franklin', noms: ['Franklin Pet Food'] },
   { nom: 'Happy Dog', href: avis('avis-happy-dog') },
   { nom: "Hill's Science Diet", href: avis('avis-hills-science-diet'), noms: ['Hills', "Hill's"] },
