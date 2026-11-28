@@ -1821,5 +1821,11 @@
   - Tableau 5 à 15 kg « 2 à 3 tranches (20 à 45 g) » → « 1 à 2 tranches (25 à 45 g) », comme la fiche pomme (tranche de 23 g, précisée dans la source du tableau)
   - Plus de 30 kg « ⅓ à ½ pomme (70 à 90 g) » → « (60 à 90 g) » (⅓ de pomme de 182 g)
   - FAQ « fruits tous les jours : oui, en petite portion » → portion du tableau réduite, car prévue pour 2 à 4 prises par semaine
-- [ ] `avis-natures-variety-healthy-grains-mini` · nouvel article 2026-11-27
-- [ ] `chien-peut-manger-foie-gras` · nouvel article 2026-11-27
+- [x] `avis-natures-variety-healthy-grains-mini` · nouvel article 2026-11-27 · relu 2026-11-28 : 1 correction
+  - « compte une semaine de transition alimentaire » → 7 à 10 jours (comme transition-alimentaire-chien)
+  - Vérifié dans la base : notes 78/100 (Mini poulet 1,5 et 7 kg, dinde, poisson blanc), 80/100 Chiot Mini, 85/100 No Grain Mini, Med/Maxi poulet 16 % de poulet frais et 28/16 % ; compositions (poulet 20 %, protéine de poulet 19 %, pois 13 %, avoine 12 %, riz complet 7 %, graisse 6 %, hydrolysats 4 % ; dinde avec protéine de poulet 19 % ; poisson blanc 20 %, avoine 13 %, pois 13 %, maïs, thon 11 %), 29/17 %, calcium et phosphore absents ; prix 55,99 € (8,00 €/kg) et 16,19 € (10,79 €/kg) ; budgets 19, 34, 26 et 45 € par mois ; un quart moins cher au kilo ; Franklin 7 recettes 83 à 92/100 et −30 % en abonnement (data/brand-content.ts, data/partner-discounts.ts)
+  - À vérifier (non changé) : Maxi Zoo affiche depuis le 28 novembre une promo −20 % (44,79 € les 7 kg, 12,95 € les 1,5 kg), les prix de l'article restent datés du 27 ; tableau de ration (25 à 140 g) en image sur la fiche, non relu ; la base donne 8,10 €/kg pour le poisson blanc 1,5 kg (16,19 € ÷ 1,5 = 10,79 €, erreur de la base)
+- [x] `chien-peut-manger-foie-gras` · nouvel article 2026-11-27 · relu 2026-11-28 : 1 correction (+ 2 fichiers alignés)
+  - Coin de toast chez un chien de 20 kg « un œil sur lui pendant deux jours » → trois jours (tableau 72 h, encadré 24 à 72 h, étape « trois jours »)
+  - Aligné : `chien-peut-manger-foie` et `chien-peut-manger-canard` donnaient le sel et l'alcool comme raisons d'éviter le foie gras → moitié graisse, risque de pancréatite (1,1 g de sel et 0,6 % d'armagnac pour 100 g, Open Food Facts)
+  - Vérifié : tranche de 40 g à 204 kcal et 21 g de gras (511 kcal, 53 g pour 100 g), gras huit fois les protéines (6,4 g), 300 g = 3,3 g de sel, sous le seuil de 2 à 3 g par kilo (comme chien-peut-manger-jambon), part de ration 3 kg / 10 kg / 30 kg cohérente avec un besoin de chien stérilisé, races à pancréatite (comme pancreatite-chien-alimentation-guide et repas-noel), signes dans les 24 à 72 h partout
