@@ -30,6 +30,11 @@ export interface SourceRow extends Metrics {
   prev: number | null
   /** Visites par jour (ou par semaine). */
   spark: number[]
+  /** Page d'arrivée la plus fréquente et nombre de pages d'arrivée différentes (28/11/2026 : « je ne vois pas quelle page »). */
+  top?: string
+  pages?: number
+  /** Campagne (utm_source / utm_campaign) la plus fréquente, quand le lien en porte une. */
+  utm?: string
 }
 
 export type DeviceKind = 'mobile' | 'desktop' | 'tablet'
@@ -149,6 +154,8 @@ function add(m: Metrics, v: Visit): void {
 /** Lignes par clé (source, page…), triées par visites. */
 export function groupBy(l: Loaded, keyOf: (v: Visit) => string | null, match: (v: Visit) => boolean = () => true): SourceRow[] {
   const by = new Map<string, SourceRow>()
+  const land = new Map<string, Map<string, number>>(), utms = new Map<string, Map<string, number>>()
+  const best = (m?: Map<string, number>) => (m ? [...m.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] : undefined)
   for (const v of l.cur) {
     if (!match(v)) continue
     const k = keyOf(v)
@@ -159,6 +166,9 @@ export function groupBy(l: Loaded, keyOf: (v: Visit) => string | null, match: (v
       by.set(k, row)
     }
     add(row, v)
+    const lc = (land.get(k) ?? land.set(k, new Map()).get(k))!
+    lc.set(v.landing, (lc.get(v.landing) ?? 0) + 1)
+    if (v.utm) { const uc = (utms.get(k) ?? utms.set(k, new Map()).get(k))!; uc.set(v.utm, (uc.get(v.utm) ?? 0) + 1) }
     const b = l.bucketOf(v.day)
     if (b >= 0) row.spark[b] = (row.spark[b] ?? 0) + 1
   }
@@ -172,6 +182,7 @@ export function groupBy(l: Loaded, keyOf: (v: Visit) => string | null, match: (v
       else by.set(k, { key: k, family: v.family, name: v.name, ...zero(), prev: 1, spark: l.buckets.map(() => 0) })
     }
   }
+  for (const [k, row] of by) { row.top = best(land.get(k)); row.pages = land.get(k)?.size ?? 0; row.utm = best(utms.get(k)) }
   return [...by.values()].sort((a, b) => b.visits - a.visits || (b.prev ?? 0) - (a.prev ?? 0) || a.key.localeCompare(b.key))
 }
 
