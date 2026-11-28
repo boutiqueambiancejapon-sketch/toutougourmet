@@ -167,6 +167,21 @@ export const foodPrice = app.table('food_price', {
   majLe: ts('maj_le').notNull().defaultNow(),
 })
 
+/** Même produit chez Amazon (API Creators, relevé chaque nuit) : page exacte, prix et prix au kilo. Affiché à côté de Maxi Zoo,
+ *  jamais dans la note. Une ligne par fiche, remplacée à chaque relevé ; dispo = false quand Amazon ne le vend plus. */
+export const foodAmazon = app.table('food_amazon', {
+  foodAnalysisId: uuid('food_analysis_id')
+    .primaryKey()
+    .references(() => foodAnalysis.id, { onDelete: 'cascade' }),
+  asin: text('asin').notNull(),
+  titre: text('titre').notNull(),
+  prix: numeric('prix', { precision: 8, scale: 2, mode: 'number' }),
+  prixKg: numeric('prix_kg', { precision: 8, scale: 2, mode: 'number' }),
+  poidsKg: numeric('poids_kg', { precision: 8, scale: 3, mode: 'number' }),
+  dispo: boolean('dispo').notNull().default(true),
+  majLe: ts('maj_le').notNull().defaultNow(),
+})
+
 /** Un relevé par fiche et par jour : plus bas prix récent, promotions passées. */
 export const foodPriceHistory = app.table(
   'food_price_history',

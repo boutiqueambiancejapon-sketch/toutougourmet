@@ -20,6 +20,13 @@ export interface BuyLink {
   amazon: boolean
   /** Prix Maxi Zoo du produit exact (lien de la fiche seulement, pas une page de marque). */
   prix?: PrixMaxiZoo
+  /** Lien Amazon vers la page exacte du produit (API Creators), et non une recherche. */
+  exact?: boolean
+}
+
+/** Recherche Amazon remplacée par la page exacte du produit quand le relevé de nuit l'a trouvée. */
+export function avecAmazon(link: BuyLink | null, href: string | null): BuyLink | null {
+  return link?.amazon && href ? { ...link, href, exact: true } : link
 }
 
 const awin = (url: string) => `https://www.awin1.com/cread.php?awinmid=68698&awinaffid=1112904&ued=${encodeURIComponent(url)}`

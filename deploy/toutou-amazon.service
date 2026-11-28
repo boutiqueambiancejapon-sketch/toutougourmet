@@ -1,0 +1,14 @@
+# Même produit chez Amazon pour chaque fiche notée au moins 55 (API Creators, décision du propriétaire du 2026-11-28).
+[Unit]
+Description=Toutou Gourmet - offres Amazon des fiches
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=toutou
+WorkingDirectory=/srv/toutou/current
+EnvironmentFile=/srv/toutou/shared/.env
+Nice=15
+TimeoutStartSec=2h
+ExecStart=/srv/toutou/current/node_modules/.bin/tsx scripts/amazon-offres.ts --limite=2000

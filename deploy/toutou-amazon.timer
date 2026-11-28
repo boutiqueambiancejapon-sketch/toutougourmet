@@ -1,0 +1,10 @@
+# Chaque nuit, après le relevé Maxi Zoo (02:13) : Amazon impose des prix affichés de moins de 24 heures.
+[Unit]
+Description=Toutou Gourmet - offres Amazon des fiches, chaque nuit
+
+[Timer]
+OnCalendar=*-*-* 03:20:00 Europe/Paris
+Persistent=false
+
+[Install]
+WantedBy=timers.target
