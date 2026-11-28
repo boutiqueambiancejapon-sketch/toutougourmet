@@ -1,6 +1,8 @@
 import { PrixLigne } from '../PrixLigne'
 import type { ReactNode } from 'react'
 import type { BuyLink } from '@/lib/scanner/buy-link'
+import type { OffreAmazon } from '@/lib/server/amazon'
+import { FicheCompare } from './FicheCompare'
 import { BAND_LABELS, bandFor, type ScoreResult } from '@/lib/scanner/score'
 import { titleTypo } from '@/lib/title-typo'
 import { ProductPhoto } from '../ProductPhoto'
@@ -43,10 +45,12 @@ interface FicheHeroProps {
   details: ScoreResult
   categorie: string | null
   buy: BuyLink | null
+  /** Même produit chez Amazon (relevé de nuit) : comparateur à côté de Maxi Zoo. */
+  amazon?: OffreAmazon | null
   children?: ReactNode
 }
 
-export function FicheHero({ slug, h1, image, details, categorie, buy, children }: FicheHeroProps) {
+export function FicheHero({ slug, h1, image, details, categorie, buy, amazon = null, children }: FicheHeroProps) {
   const { score } = details
   const fiabilite = details.bareme?.simple ? undefined : details.bareme?.fiabilite
   return (
@@ -63,12 +67,14 @@ export function FicheHero({ slug, h1, image, details, categorie, buy, children }
           <KindTag details={details} />
         </div>
         {categorie ? <p className="m-0 text-sm text-ink-2">{`Note calculée sur l'étiquette, ${categorie}.`}</p> : null}
-        {buy ? (
+        {buy && amazon && !buy.amazon ? (
+          <FicheCompare buy={buy} amazon={amazon} />
+        ) : buy ? (
           <a href={buy.href} rel="sponsored nofollow noopener" target="_blank" data-cta="fiche-achat-haut" className="inline-flex min-h-12 items-center justify-center whitespace-nowrap rounded-control bg-orange px-5 font-semibold text-ink no-underline hover:underline">
             {`Voir chez ${buy.store}`}
           </a>
         ) : null}
-        {buy?.prix ? <PrixLigne prix={buy.prix} /> : null}
+        {buy?.prix && !(amazon && !buy.amazon) ? <PrixLigne prix={buy.prix} /> : null}
         <FavoriButton slug={slug} />
         {children}
       </div>
