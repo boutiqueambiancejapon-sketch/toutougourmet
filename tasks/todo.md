@@ -273,7 +273,8 @@ Modulaire pour 10minlanguages et QRT : `lib/seo-dash/config.ts` (propre au site)
 
 ## Amazon à côté de Maxi Zoo (propriétaire, 28/11/2026)
 « Remplacer tous les liens Amazon par les vrais, et proposer les mêmes produits que Maxi Zoo sur Amazon avec un petit message prix le plus bas. »
-- [ ] Table `app.food_amazon` (ASIN, titre, prix, prix au kilo, disponibilité, relevé) + migration.
-- [ ] `scripts/amazon-offres.ts` : API Amazon Creators (clés du coffre dans `/srv/toutou/shared/.env`), recherche marque + produit pour chaque fiche notée ≥ 55, fiche Amazon gardée seulement si titre = marque + produit et poids lisible ; même poids que Maxi Zoo d'abord. Relevé chaque nuit (Amazon impose des prix de moins de 24 h).
-- [ ] Fiche : bouton « Voir sur Amazon » (page exacte du produit, plus la recherche) à côté de Maxi Zoo, prix et prix au kilo datés ; « Prix le plus bas » sur le moins cher au kilo, seulement si les deux prix au kilo sont connus. Mention Partenaire Amazon et date/heure du prix.
-- [ ] Liens Amazon des articles (`data/health-picks.ts`, `os-poulet-chien-danger`) : page exacte du produit.
+- [x] Table `app.food_amazon` (ASIN, titre, prix, prix au kilo, disponibilité, relevé) + migration.
+- [x] `scripts/amazon-offres.ts` : API Amazon Creators (clés du coffre dans `/srv/toutou/shared/.env`), recherche marque + produit pour chaque fiche notée ≥ 55, fiche Amazon gardée seulement si titre = marque + produit et poids lisible ; même poids que Maxi Zoo d'abord. Relevé chaque nuit (Amazon impose des prix de moins de 24 h).
+- [x] Fiche : bouton « Voir sur Amazon » (page exacte du produit, plus la recherche) à côté de Maxi Zoo, prix et prix au kilo datés ; « Prix le plus bas » sur le moins cher au kilo, seulement si les deux prix au kilo sont connus. Mention Partenaire Amazon et date/heure du prix.
+- [x] Liens Amazon des articles (`data/health-picks.ts`, `os-poulet-chien-danger`) : page exacte du produit.
+- 28/11 : en ligne. Relevé `toutou-amazon.timer` à 3 h 20 ; Amazon limite le débit des comptes à peu de ventes, le relevé attend et reprend (les fiches jamais relevées d'abord). Badge « Prix le plus bas » seulement pour deux sacs de même poids ; pas de prix au kilo pour un lot ou un poids douteux. Articles santé : 4 liens exacts (Renal, k/d, Cardiac, Gastrointestinal Low Fat) ; h/d et NeuroCare restent en recherche (introuvable ou indisponible).
