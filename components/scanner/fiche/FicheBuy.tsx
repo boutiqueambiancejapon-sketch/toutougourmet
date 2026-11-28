@@ -5,7 +5,7 @@ import type { OffreAmazon } from '@/lib/server/amazon'
 
 // @cdc lot 6 — carte « Où l'acheter ? » d'une fiche : lien partenaire déclaré comme tel, clic mesuré
 // par components/analytics/Tracking.tsx (data-cta). Depuis le 28/11/2026, le même produit chez Amazon à côté de Maxi Zoo,
-// avec « Prix le plus bas » sur le moins cher au kilo (seulement si les deux prix au kilo sont connus).
+// avec « Prix le plus bas » sur le moins cher au kilo, seulement pour deux sacs de même poids.
 
 const BTN = 'inline-flex min-h-12 items-center justify-center whitespace-nowrap rounded-control px-4 text-center font-semibold no-underline'
 const MENTION_AMAZON = 'En tant que Partenaire Amazon, on réalise un bénéfice sur les achats remplissant les conditions requises.'
@@ -30,7 +30,8 @@ export function FicheBuy({ link, amazon = null }: { link: BuyLink | null; amazon
   const mzKg = link.prix?.prixKg ?? null
   // Lien principal déjà sur Amazon (marque absente de Maxi Zoo) : pas de deuxième bouton, son prix sous le premier.
   const second = link.amazon ? null : amazon
-  const best = second ? moinsCher(mzKg, second.prixKg) : null
+  const mzPoids = link.prix && mzKg ? link.prix.prix / mzKg : null
+  const best = second ? moinsCher(mzKg, second.prixKg, mzPoids, second.poidsKg) : null
   return (
     <section aria-labelledby="acheter" className="flex flex-col gap-3 rounded-card border border-line bg-paper p-4">
       <h2 id="acheter" className="m-0 font-display text-xl font-black text-ink">
