@@ -1,47 +1,13 @@
 // Même produit chez Amazon pour chaque fiche notée au moins 55 (décision du propriétaire du 2026-11-28) : recherche par l'API
 // Amazon Creators (marque + produit), choix de la bonne fiche (lib/scanner/amazon.ts), écriture dans app.food_amazon.
-// Lancé chaque nuit (deploy/toutou-amazon.timer) : Amazon impose des prix affichés de moins de 24 heures.
+// Lancé chaque nuit (deploy/toutou-amazon.timer) ; les prix sont rafraîchis chaque heure par scripts/amazon-prix.ts (Amazon : 1 h au plus).
 //   tsx scripts/amazon-offres.ts [--limite=2000] [--essai]
 // Clés : AMAZON_CREATORS_ID, AMAZON_CREATORS_SECRET, AMAZON_PARTNER_TAG (coffre du centre de contrôle, /srv/toutou/shared/.env).
 import pg from 'pg'
 import { choisir, type AmazonItem } from '../lib/scanner/amazon'
 import { isTherapeutic } from '../lib/scanner/fiche-lists'
 
-const TOKEN_URL = 'https://api.amazon.co.uk/auth/o2/token'
-const SEARCH_URL = 'https://creatorsapi.amazon/catalog/v1/searchItems'
-const PAUSE_MS = 2000 // une requête toutes les 2 secondes (le débit accordé par Amazon dépend des ventes)
-
-let token = { value: '', until: 0 }
-async function bearer(): Promise<string> {
-  if (token.value && Date.now() < token.until) return token.value
-  const r = await fetch(TOKEN_URL, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ grant_type: 'client_credentials', client_id: process.env.AMAZON_CREATORS_ID, client_secret: process.env.AMAZON_CREATORS_SECRET, scope: 'creatorsapi::default' }),
-  })
-  const j = (await r.json()) as { access_token?: string; expires_in?: number }
-  if (!j.access_token) throw new Error(`jeton Amazon refusé (${r.status})`)
-  token = { value: j.access_token, until: Date.now() + ((j.expires_in ?? 3600) - 120) * 1000 }
-  return token.value
-}
-
-type Listing = { price?: { money?: { amount?: number } }; availability?: { type?: string } }
-type Item = { asin: string; itemInfo?: { title?: { displayValue?: string } }; offersV2?: { listings?: Listing[] } | null }
-
-async function search(keywords: string): Promise<AmazonItem[]> {
-  const r = await fetch(SEARCH_URL, {
-    method: 'POST',
-    headers: { authorization: `Bearer ${await bearer()}`, 'content-type': 'application/json', 'x-marketplace': 'www.amazon.fr' },
-    body: JSON.stringify({ keywords, marketplace: 'www.amazon.fr', partnerTag: process.env.AMAZON_PARTNER_TAG, resources: ['itemInfo.title', 'offersV2.listings.price', 'offersV2.listings.availability'] }),
-  })
-  if (r.status === 429) throw new Error('quota Amazon atteint')
-  const j = (await r.json().catch(() => ({}))) as { searchResult?: { items?: Item[] } }
-  return (j.searchResult?.items ?? []).map((it) => {
-    const l = it.offersV2?.listings?.[0]
-    const type = l?.availability?.type ?? ''
-    return { asin: it.asin, titre: it.itemInfo?.title?.displayValue ?? '', prix: l?.price?.money?.amount ?? null, dispo: type === 'IN_STOCK' || type === 'IN_STOCK_SCARCE' }
-  })
-}
+import { PAUSE_MS, search } from './lib-amazon-api'
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 

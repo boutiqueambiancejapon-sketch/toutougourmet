@@ -11,4 +11,5 @@ WorkingDirectory=/srv/toutou/current
 EnvironmentFile=/srv/toutou/shared/.env
 Nice=15
 TimeoutStartSec=5h
-ExecStart=/srv/toutou/current/node_modules/.bin/tsx scripts/amazon-offres.ts --limite=2000
+# Verrou commun à tous les scripts Amazon (Toutou et QRT) : 1 requête par seconde pour tout le compte.
+ExecStart=/usr/bin/flock -w 3600 /run/lock/amazon-api.lock /srv/toutou/current/node_modules/.bin/tsx scripts/amazon-offres.ts --limite=2000

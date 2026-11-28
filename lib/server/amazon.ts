@@ -23,7 +23,7 @@ export async function amazonDe(foodAnalysisId: string): Promise<OffreAmazon | nu
       `SELECT asin, prix, prix_kg, poids_kg, to_char(maj_le AT TIME ZONE 'Europe/Paris', 'FMDD') || ' ' ||
               (ARRAY['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'])[extract(month FROM maj_le AT TIME ZONE 'Europe/Paris')::int]
               || ' à ' || to_char(maj_le AT TIME ZONE 'Europe/Paris', 'HH24:MI') AS releve
-         FROM app.food_amazon WHERE food_analysis_id = $1 AND dispo AND maj_le > now() - interval '26 hours'`,
+         FROM app.food_amazon WHERE food_analysis_id = $1 AND dispo AND maj_le > now() - interval '70 minutes'`,
       [foodAnalysisId],
     )
     .catch(() => ({ rows: [] }))

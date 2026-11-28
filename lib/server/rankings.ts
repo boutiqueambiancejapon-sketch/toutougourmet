@@ -27,7 +27,7 @@ export interface RankedRecipe extends RankRecipe {
   image: string | null
   protein: number | null
   buy: BuyLink | null
-  /** Même produit chez Amazon (relevé de moins de 26 h), affiché à côté de Maxi Zoo. */
+  /** Même produit chez Amazon (prix relevé il y a moins de 70 minutes), affiché à côté de Maxi Zoo. */
   amazon: { href: string; prix: number | null; prixKg: number | null; poidsKg: number | null } | null
   updatedAt: Date
 }
@@ -39,7 +39,7 @@ export const rankedRecipes = cache(async (): Promise<RankedRecipe[]> => {
     .select({ slug: foodAnalysis.slug, brand: foodAnalysis.brand, product: foodAnalysis.product, score: foodAnalysis.score, image: foodAnalysis.imageUrl, buyUrl: foodAnalysis.buyUrl, prix: foodPrice.prix, prixKg: foodPrice.prixKg, prixAncien: foodPrice.prixAncien, majLe: foodPrice.majLe, extracted: foodAnalysis.extracted, details: foodAnalysis.details, updatedAt: foodAnalysis.updatedAt, amzAsin: foodAmazon.asin, amzPrix: foodAmazon.prix, amzPrixKg: foodAmazon.prixKg, amzPoids: foodAmazon.poidsKg })
     .from(foodAnalysis)
     .leftJoin(foodPrice, eq(foodPrice.foodAnalysisId, foodAnalysis.id))
-    .leftJoin(foodAmazon, and(eq(foodAmazon.foodAnalysisId, foodAnalysis.id), eq(foodAmazon.dispo, true), sql`${foodAmazon.majLe} > now() - interval '26 hours'`))
+    .leftJoin(foodAmazon, and(eq(foodAmazon.foodAnalysisId, foodAnalysis.id), eq(foodAmazon.dispo, true), sql`${foodAmazon.majLe} > now() - interval '70 minutes'`))
     .where(and(isNotNull(foodAnalysis.score), sql`NOT ${foodAnalysis.discarded}`, or(eq(foodAnalysis.source, 'maxizoo'), eq(foodAnalysis.reviewed, true))))
   const fiches = await fichesIndexees()
   const best = new Map<string, RankedRecipe>()
