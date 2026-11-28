@@ -53,12 +53,11 @@ export function Sparkline({ values, prev, invert = false, width = 120, height = 
     return 3 + (invert ? t : 1 - t) * (height - 6)
   }
   const path = (s: number[]) => s.map((v, i) => `${i ? 'L' : 'M'}${x(i, s.length).toFixed(1)},${y(v).toFixed(1)}`).join('')
-  const last = values[values.length - 1]
   return (
-    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} role="img" aria-label="Évolution sur la période">
-      {prev && prev.length > 1 ? <path d={path(prev)} fill="none" stroke="var(--sd-prev)" strokeWidth="1.5" strokeLinejoin="round" /> : null}
-      <path d={path(values)} fill="none" stroke="var(--sd-s1)" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
-      <circle cx={x(values.length - 1, values.length)} cy={y(last)} r="3" fill="var(--sd-s1)" stroke="var(--sd-card)" strokeWidth="1.5" />
+    // Largeur de la tuile (CSS, .sd-spark) et non 120 px fixes : la courbe débordait des tuiles étroites (iPad, 28/11/2026).
+    <svg className="sd-spark" width={width} height={height} viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none" role="img" aria-label="Évolution sur la période">
+      {prev && prev.length > 1 ? <path d={path(prev)} fill="none" stroke="var(--sd-prev)" strokeWidth="1.5" strokeLinejoin="round" vectorEffect="non-scaling-stroke" /> : null}
+      <path d={path(values)} fill="none" stroke="var(--sd-s1)" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
     </svg>
   )
 }
