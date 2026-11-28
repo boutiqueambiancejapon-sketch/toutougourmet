@@ -208,7 +208,7 @@
   .sd-app { display: block; }
   .sd-side { display: none; }
   .sd-main { padding: 0 14px calc(96px + env(safe-area-inset-bottom)); }
-  .sd-mtop { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 0 6px; position: sticky; top: 0; background: var(--sd-page); z-index: 6; }
+  .sd-mtop { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 0 6px; position: sticky; top: 0; background: var(--sd-page); z-index: 32; }
   .sd-mtop .ti { font-weight: 600; font-size: 17px; }
   .sd-mtop .site { font-size: 12px; color: var(--sd-ink-3); }
   .sd-top { display: none; }

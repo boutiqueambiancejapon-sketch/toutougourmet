@@ -61,8 +61,11 @@ export const SITE: SiteConfig = {
   linkHubs: ['/plan-du-site'],
   sites: [
     { key: 'toutou', label: 'Toutou Gourmet', url: 'https://dashboard.toutou-gourmet.com/tableau-de-bord' },
-    { key: '10min', label: '10minlanguages', url: 'https://10minlanguages.com/dashboard' },
+    { key: 'aj', label: 'Ambiance Japon', url: 'https://ambiance-japon.com/dashboard' },
+    { key: 'miami', label: 'Miami with Neko', url: 'https://miamiwithneko.com/dashboard' },
+    { key: 'belgium', label: 'Travel to Belgium', url: 'https://travel-to-belgium.com/dashboard' },
     { key: 'qrt', label: 'Quel Robot Tondeuse', url: 'https://quel-robot-tondeuse.com/dashboard' },
+    { key: '10min', label: '10minlanguages', url: 'https://10minlanguages.com/dashboard' },
   ],
 }
 
