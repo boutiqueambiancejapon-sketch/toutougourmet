@@ -289,7 +289,7 @@ Règles de ces pages, en plus de celles de « Avis + Maxi Zoo » :
 - Frontmatter : même `category` et `categorySlug` que `huile-saumon-chien-bienfaits-dosage`. Une page par besoin, jamais par taille de flacon.
 
 - [x] Complément alimentaire pour chien : lesquels servent vraiment (meilleur complement alimentaire chien) : page centrale, à écrire en premier → complement-alimentaire-chien
-- [ ] Complément alimentaire pour les articulations du chien (complement alimentaire articulation chien, maxi zoo)
+- [x] Complément alimentaire pour les articulations du chien (complement alimentaire articulation chien, maxi zoo) → complement-alimentaire-articulation-chien
 - [ ] Complément alimentaire contre les démangeaisons du chien (meilleur complement alimentaire chien demangeaison)
 - [ ] Complément alimentaire pour chien senior (meilleur complement alimentaire chien senior)
 - [ ] Complément alimentaire pour chien arthrosique (complément alimentaire chien arthrose)
