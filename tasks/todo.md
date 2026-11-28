@@ -270,3 +270,10 @@ Modulaire pour 10minlanguages et QRT : `lib/seo-dash/config.ts` (propre au site)
 - [x] 8. Contenu & notes : calendrier, notes manuelles + automatiques, pastilles sur toutes les courbes
 - [x] 9. Filtre anti-robots des visiteurs (UA, cadence, balise JS absente), historique reclassé
 - [x] 10. Inspection d'URL chaque nuit (≤ 2 000/jour, priorités), minuterie hors 7 h et 20 h
+
+## Amazon à côté de Maxi Zoo (propriétaire, 28/11/2026)
+« Remplacer tous les liens Amazon par les vrais, et proposer les mêmes produits que Maxi Zoo sur Amazon avec un petit message prix le plus bas. »
+- [ ] Table `app.food_amazon` (ASIN, titre, prix, prix au kilo, disponibilité, relevé) + migration.
+- [ ] `scripts/amazon-offres.ts` : API Amazon Creators (clés du coffre dans `/srv/toutou/shared/.env`), recherche marque + produit pour chaque fiche notée ≥ 55, fiche Amazon gardée seulement si titre = marque + produit et poids lisible ; même poids que Maxi Zoo d'abord. Relevé chaque nuit (Amazon impose des prix de moins de 24 h).
+- [ ] Fiche : bouton « Voir sur Amazon » (page exacte du produit, plus la recherche) à côté de Maxi Zoo, prix et prix au kilo datés ; « Prix le plus bas » sur le moins cher au kilo, seulement si les deux prix au kilo sont connus. Mention Partenaire Amazon et date/heure du prix.
+- [ ] Liens Amazon des articles (`data/health-picks.ts`, `os-poulet-chien-danger`) : page exacte du produit.
