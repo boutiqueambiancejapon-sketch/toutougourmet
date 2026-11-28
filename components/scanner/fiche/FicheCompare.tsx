@@ -3,6 +3,7 @@ import type { BuyLink } from '@/lib/scanner/buy-link'
 import { moinsCher } from '@/lib/scanner/amazon'
 import { dateReleve, euros } from '@/lib/scanner/prix'
 import type { OffreAmazon } from '@/lib/server/amazon'
+import { toGo } from '@/lib/go'
 
 // @cdc lot 6 — comparateur du haut de fiche (propriétaire, 28/11/2026) : Maxi Zoo et Amazon côte à côte, prix et prix au kilo,
 // « Prix le plus bas » sur le moins cher au kilo pour deux sacs de même poids. Liens partenaires déclarés, clics mesurés (data-cta).
@@ -20,7 +21,7 @@ export function FicheCompare({ buy, amazon }: { buy: BuyLink; amazon: OffreAmazo
   return (
     <div className="flex flex-col gap-3" data-compare="maxizoo-amazon">
       <div className="flex flex-col gap-1">
-        <a href={buy.href} rel="sponsored nofollow noopener" target="_blank" data-cta="fiche-achat-haut" className={`${BTN} bg-orange text-ink`}>
+        <a href={toGo(buy.href)} rel="sponsored nofollow noopener" target="_blank" data-cta="fiche-achat-haut" className={`${BTN} bg-orange text-ink`}>
           {`Voir chez ${buy.store}`}
         </a>
         <span className="flex flex-wrap items-center gap-2">
@@ -29,7 +30,7 @@ export function FicheCompare({ buy, amazon }: { buy: BuyLink; amazon: OffreAmazo
         </span>
       </div>
       <div className="flex flex-col gap-1">
-        <a href={amazon.href} rel="sponsored nofollow noopener" target="_blank" data-cta="fiche-achat-haut-amazon" className={`${BTN} border border-line-2 bg-paper text-ink`}>
+        <a href={toGo(amazon.href)} rel="sponsored nofollow noopener" target="_blank" data-cta="fiche-achat-haut-amazon" className={`${BTN} border border-line-2 bg-paper text-ink`}>
           Voir sur Amazon
         </a>
         <span className="flex flex-wrap items-center gap-2 text-sm text-ink-2">

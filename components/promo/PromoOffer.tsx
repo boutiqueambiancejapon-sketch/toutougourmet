@@ -2,6 +2,7 @@ import type { Brand } from '@/data/brands'
 import { CONFIRMED_DISCOUNTS, shortDiscount, type OfferSlug } from '@/data/partner-discounts'
 import { AffiliateNote } from '@/components/marques/AffiliateNote'
 import { CopyCode } from './CopyCode'
+import { toGo } from '@/lib/go'
 
 // @cdc affiliation — bloc offre des pages « code promo » : remise confirmée, code s'il existe,
 // bouton vers le lien partenaire. Rendu serveur. Le clic est mesuré par
@@ -23,7 +24,7 @@ export function PromoButton({ brand, slug }: { brand: Brand; slug: OfferSlug }) 
   const short = shortDiscount(slug)
   return (
     <a
-      href={brand.affiliateUrl}
+      href={toGo(brand.affiliateUrl)}
       target="_blank"
       rel="sponsored noopener"
       className="inline-flex min-h-12 items-center rounded-control bg-orange px-5 py-3 font-bold text-ink no-underline shadow-[4px_4px_0_var(--ink)] transition-transform hover:-translate-y-0.5"

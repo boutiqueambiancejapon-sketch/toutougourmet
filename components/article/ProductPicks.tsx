@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { ProductPhoto } from '@/components/scanner/ProductPhoto'
 import { titleTypo } from '@/lib/title-typo'
+import { toGo } from '@/lib/go'
 
 // @cdc avis — bloc produits des articles d'avis : photo, raison, lien affilié exact déclaré. Rendu serveur.
 // Dans le MDX : <ProductPicks title="…"><ProductPick name="…" why="…" href="…" image="…" /></ProductPicks>
@@ -23,7 +24,7 @@ export function ProductPick({ name, why, href, image, vet, store = 'Maxi Zoo' }:
       </p>
       <p className="m-0 text-[15px] leading-relaxed text-ink-2">{why}</p>
       {vet ? <p className="m-0 text-sm font-semibold text-ink">Sur avis de ton vétérinaire</p> : null}
-      <a href={href} rel="sponsored nofollow noopener" target="_blank" className="inline-flex min-h-11 items-center justify-center self-start whitespace-nowrap rounded-control bg-ink px-4 font-semibold !text-cream !no-underline hover:!underline">
+      <a href={toGo(href)} rel="sponsored nofollow noopener" target="_blank" className="inline-flex min-h-11 items-center justify-center self-start whitespace-nowrap rounded-control bg-ink px-4 font-semibold !text-cream !no-underline hover:!underline">
         {`Voir chez ${store}`}
       </a>
     </li>

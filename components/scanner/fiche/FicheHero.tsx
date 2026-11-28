@@ -10,6 +10,7 @@ import { BAND_CLASSES } from '../ScoreBadge'
 import { KindTag } from '../treat/KindTag'
 import { FavoriButton } from './FavoriButton'
 import { FIABILITE_LABEL } from './FicheFiabilite'
+import { toGo } from '@/lib/go'
 
 // @cdc scanner — haut de fiche : photo, note en anneau, verdict en un mot et bouton d'achat, visibles sans défiler.
 
@@ -70,7 +71,7 @@ export function FicheHero({ slug, h1, image, details, categorie, buy, amazon = n
         {buy && amazon && !buy.amazon ? (
           <FicheCompare buy={buy} amazon={amazon} />
         ) : buy ? (
-          <a href={buy.href} rel="sponsored nofollow noopener" target="_blank" data-cta="fiche-achat-haut" className="inline-flex min-h-12 items-center justify-center whitespace-nowrap rounded-control bg-orange px-5 font-semibold text-ink no-underline hover:underline">
+          <a href={toGo(buy.href)} rel="sponsored nofollow noopener" target="_blank" data-cta="fiche-achat-haut" className="inline-flex min-h-12 items-center justify-center whitespace-nowrap rounded-control bg-orange px-5 font-semibold text-ink no-underline hover:underline">
             {`Voir chez ${buy.store}`}
           </a>
         ) : null}

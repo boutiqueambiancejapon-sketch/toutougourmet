@@ -2,6 +2,7 @@
 
 import { useState, type ReactNode } from 'react'
 import { partnerCta } from '@/lib/partner-cta'
+import { toGo } from '@/lib/go'
 
 // @cdc affiliation — bouton unique des offres partenaires (BrandCTA, comparatif race, encart du
 // milieu, offres du compte, offres des outils). Avec un code promo : « Voir le code promo », le
@@ -36,7 +37,7 @@ export function PartnerButton({ href, fallback, className, srLabel, after, statu
   const [status, setStatus] = useState<'idle' | 'copied' | 'shown'>('idle')
   const link = (
     <a
-      href={href}
+      href={toGo(href)}
       target="_blank"
       rel="sponsored noopener"
       onClick={code ? () => void copy(code).then((ok) => setStatus(ok ? 'copied' : 'shown')) : undefined}

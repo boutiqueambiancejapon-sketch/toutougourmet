@@ -4,6 +4,7 @@ import { ScoreBadge } from '@/components/scanner/ScoreBadge'
 import { betterKibbleOffer } from '@/lib/account-offers'
 import type { ScanSummary } from '@/lib/server/scanner'
 import { PARTNER_NOTICE } from './OfferCard'
+import { toGo } from '@/lib/go'
 
 // @cdc lot 6 — historique du scanner dans l'espace compte, du plus récent au plus ancien.
 // Sous une croquette notée sous 55 : une alternative partenaire (tous les comptes). Premium : historique complet
@@ -31,7 +32,7 @@ export function ScanRows({ scans }: { scans: (Omit<ScanSummary, 'at'> & { at: Da
             </Link>
             {s.score !== null && s.score < LOW_SCORE ? (
               <p data-cta="account-alternative" className="m-0 rounded-control bg-amber-bg px-3 py-2 text-sm leading-relaxed text-ink-2">
-                <a href={alt.url} rel="sponsored noopener" target="_blank" className="font-semibold text-orange-ink underline underline-offset-2">
+                <a href={toGo(alt.url)} rel="sponsored noopener" target="_blank" className="font-semibold text-orange-ink underline underline-offset-2">
                   Voir une meilleure alternative
                 </a>
                 {` : ${alt.brand}${alt.discount ? ` (${alt.discount})` : ''}. ${alt.reason}`}
