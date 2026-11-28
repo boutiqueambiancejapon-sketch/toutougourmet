@@ -157,6 +157,11 @@ export const RECLASS_EVENTS_SQL = `UPDATE analytics.events SET name = 'Pageview 
     OR visitor IN (SELECT visitor FROM analytics.events WHERE name IN ('Pageview', 'Pageview (robot)') AND ts >= $1 AND visitor IS NOT NULL
                     GROUP BY visitor, date_trunc('hour', ts) HAVING count(*) > 30))`
 
+// @cdc mesure — page vue « humaine » sans référent depuis un pays hors des marchés du site : robot (28/11/2026 : visites directes ×8
+// depuis le 21/11, à 85 % des États-Unis, de Singapour, du Brésil et de Chine). Même règle que les balises ci-dessus.
+export const RECLASS_MARKETS_SQL = `UPDATE analytics.hits SET kind = 'scraper', bot = 'hors marchés, sans référent'
+  WHERE kind = 'human' AND ref_host IS NULL AND ts >= $1 AND (country IS NULL OR NOT country = ANY($2::text[]))`
+
 async function main() {
   const { rows } = await pool.query('SELECT cursor FROM analytics.ingest_state WHERE source = $1', [SOURCE])
   const cursor = rows[0]?.cursor
@@ -189,6 +194,8 @@ async function main() {
   if (!DRY) {
     const re = await pool.query(RECLASS_SQL, [new Date(Date.now() - 2 * 3600_000).toISOString()])
     if (re.rowCount) console.log(`[ingest] ${re.rowCount} pages vues reclassées en robots (sans balise JS)`)
+    const mk = await pool.query(RECLASS_MARKETS_SQL, [new Date(Date.now() - 2 * 3600_000).toISOString(), MARKETS])
+    if (mk.rowCount) console.log(`[ingest] ${mk.rowCount} pages vues hors marchés sans référent reclassées en robots`)
     const ev = await pool.query(RECLASS_EVENTS_SQL, [new Date(Date.now() - 2 * 3600_000).toISOString(), MARKETS])
     if (ev.rowCount) console.log(`[ingest] ${ev.rowCount} balises de robots écartées`)
     await pool.query(`DELETE FROM analytics.hits WHERE ts < now() - interval '${RETENTION_DAYS} days'`)
