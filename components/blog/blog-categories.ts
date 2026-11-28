@@ -158,6 +158,7 @@ const BREED_SLOT_BY_SLUG: Record<string, string> = {
  * Elle écrase aussi la cover breed historique pour les articles de race.
  */
 const ARTICLE_SLOT_BY_SLUG: Record<string, string> = {
+  'croquettes-premium-ou-supermarche': 'art-croquettes-premium-ou-supermarche',
   'complement-alimentaire-articulation-chien': 'art-complement-alimentaire-articulation-chien',
   'avis-natures-variety-healthy-grains-mini': 'art-avis-natures-variety-healthy-grains-mini',
   'fruits-chien-peut-manger-liste': 'art-fruits-chien-peut-manger-liste',

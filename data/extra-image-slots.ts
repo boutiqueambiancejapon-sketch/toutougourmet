@@ -16,6 +16,20 @@ import type { ImageSlot } from '@/data/images-manifest'
  */
 export const EXTRA_IMAGE_SLOTS: readonly ImageSlot[] = [
   {
+    id: 'art-croquettes-premium-ou-supermarche',
+    group: 'articles',
+    ratio: '3:2',
+    tone: 'rose',
+    imageReady: true,
+    ext: 'webp',
+    subject:
+      'A calm, fluffy white Samoyed dog sitting on a light wooden kitchen floor in soft daylight, looking at the viewer with a gentle closed-mouth expression, between two plain ceramic bowls of dry kibble: the left bowl holds small pale beige kibble, the right bowl holds darker brown kibble. Mouth closed, not eating. No humans, no packaging, no bag, no logo, no brand name, no writing.',
+    composition:
+      'Full frame, subject edge to edge, dog and both bowls filling the whole width, no empty band. Photographic dog with no drawn lines at all on its body, no outline, no contour strokes on the dog or the bowls. Exactly 8 small confetti, only in the corners, no text, no numbers, no humans.',
+    decorations: ['confetti'],
+    notes: "Cover générée par scripts/generate-images.mjs (Gemini) le 2026-11-28 pour l'article croquettes-premium-ou-supermarche.",
+  },
+  {
     id: 'art-complement-alimentaire-articulation-chien',
     group: 'articles',
     ratio: '3:2',

@@ -385,10 +385,10 @@ Validé par le propriétaire (2026-11-07) : un client Dog Chef rapporte 50 €, 
 
 ## Scanner (`scanner`)
 
-- [ ] Comment savoir si des croquettes sont de bonne qualité
-- [ ] Taux de protéines idéal dans les croquettes pour chien
-- [ ] « Sous-produits animaux » sur l'étiquette : ce que ça veut dire
-- [ ] Croquettes premium ou supermarché : la différence sur l'étiquette
+- [~] Comment savoir si des croquettes sont de bonne qualité → comprendre-etiquette-croquettes-chien
+- [~] Taux de protéines idéal dans les croquettes pour chien → proteines-chien-besoins-qualite
+- [~] « Sous-produits animaux » sur l'étiquette : ce que ça veut dire → comprendre-etiquette-croquettes-chien (section sous-produits)
+- [x] Croquettes premium ou supermarché : la différence sur l'étiquette → croquettes-premium-ou-supermarche
 - [ ] Friandises pour chien : lesquelles éviter au rayon (sucre, glycérine, colorants)
 - [ ] Os à mâcher pour chien : peau de buffle, corne, bois de cerf, lesquels choisir
 - [ ] Bâtonnets à mâcher et dentaires : utiles ou pas

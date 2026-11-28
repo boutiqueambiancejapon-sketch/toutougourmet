@@ -1830,3 +1830,4 @@
   - Aligné : `chien-peut-manger-foie` et `chien-peut-manger-canard` donnaient le sel et l'alcool comme raisons d'éviter le foie gras → moitié graisse, risque de pancréatite (1,1 g de sel et 0,6 % d'armagnac pour 100 g, Open Food Facts)
   - Vérifié : tranche de 40 g à 204 kcal et 21 g de gras (511 kcal, 53 g pour 100 g), gras huit fois les protéines (6,4 g), 300 g = 3,3 g de sel, sous le seuil de 2 à 3 g par kilo (comme chien-peut-manger-jambon), part de ration 3 kg / 10 kg / 30 kg cohérente avec un besoin de chien stérilisé, races à pancréatite (comme pancreatite-chien-alimentation-guide et repas-noel), signes dans les 24 à 72 h partout
 - [ ] `complement-alimentaire-articulation-chien` · nouvel article 2026-11-28
+- [ ] `croquettes-premium-ou-supermarche` · nouvel article 2026-11-28
