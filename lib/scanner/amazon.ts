@@ -31,6 +31,8 @@ export function poidsKg(titre: string): number | null {
     const kg = multi[3] === 'kg' ? v : v / 1000
     return n > 0 && n <= 48 ? Math.round(n * kg * 1000) / 1000 : null
   }
+  // Lot sans multiplicateur lisible (« lot de », « pack », « 12 sachets »…) : poids total inconnu.
+  if (/\b(lot|lots|pack|packs|paquets|boites|sachets|barquettes|bouchees|sticks|pieces)\b|\b\d+\s*(sachets|barquettes|boites|sticks|pieces|unites)\b/.test(t)) return null
   const all = [...t.matchAll(/(\d+(?:[.,]\d+)?)\s*(kg|g)\b/g)].map((m) => (m[2] === 'kg' ? Number(m[1].replace(',', '.')) : Number(m[1].replace(',', '.')) / 1000))
   const uniq = [...new Set(all.filter((x) => x > 0))]
   return uniq.length === 1 ? Math.round(uniq[0] * 1000) / 1000 : null
@@ -50,7 +52,10 @@ export function choisir(items: AmazonItem[], marque: string, produit: string, po
       const t = ` ${norm(i.titre)} `
       const vus = mots.filter((x) => t.includes(` ${x} `)).length
       const kg = poidsKg(i.titre)
-      return { ...i, poidsKg: kg, prixKg: kg ? Math.round(((i.prix as number) / kg) * 100) / 100 : null, part: mots.length ? vus / mots.length : 1 }
+      const pk = kg ? Math.round(((i.prix as number) / kg) * 100) / 100 : null
+      // Prix au kilo invraisemblable pour un aliment (lecture du poids douteuse) : on ne l'affiche pas.
+      const sur = pk !== null && pk >= 0.5 && pk <= 80
+      return { ...i, poidsKg: sur ? kg : null, prixKg: sur ? pk : null, part: mots.length ? vus / mots.length : 1 }
     })
     .filter((i) => i.part >= 0.7)
   if (!ok.length) return null
