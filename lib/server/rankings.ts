@@ -27,7 +27,7 @@ export interface RankedRecipe extends RankRecipe {
   image: string | null
   protein: number | null
   buy: BuyLink | null
-  /** Même produit chez Amazon (prix relevé il y a moins de 70 minutes), affiché à côté de Maxi Zoo. */
+  /** Même produit chez Amazon (relevé de moins de 26 h ; prix affiché seulement s'il a moins de 70 minutes), affiché à côté de Maxi Zoo. */
   amazon: { href: string; prix: number | null; prixKg: number | null; poidsKg: number | null } | null
   updatedAt: Date
 }
@@ -36,10 +36,10 @@ export const rankedRecipes = cache(async (): Promise<RankedRecipe[]> => {
   const d = getDb()
   if (!d) return []
   const rows = await d
-    .select({ slug: foodAnalysis.slug, brand: foodAnalysis.brand, product: foodAnalysis.product, score: foodAnalysis.score, image: foodAnalysis.imageUrl, buyUrl: foodAnalysis.buyUrl, prix: foodPrice.prix, prixKg: foodPrice.prixKg, prixAncien: foodPrice.prixAncien, majLe: foodPrice.majLe, extracted: foodAnalysis.extracted, details: foodAnalysis.details, updatedAt: foodAnalysis.updatedAt, amzAsin: foodAmazon.asin, amzPrix: foodAmazon.prix, amzPrixKg: foodAmazon.prixKg, amzPoids: foodAmazon.poidsKg })
+    .select({ slug: foodAnalysis.slug, brand: foodAnalysis.brand, product: foodAnalysis.product, score: foodAnalysis.score, image: foodAnalysis.imageUrl, buyUrl: foodAnalysis.buyUrl, prix: foodPrice.prix, prixKg: foodPrice.prixKg, prixAncien: foodPrice.prixAncien, majLe: foodPrice.majLe, extracted: foodAnalysis.extracted, details: foodAnalysis.details, updatedAt: foodAnalysis.updatedAt, amzAsin: foodAmazon.asin, amzPrix: foodAmazon.prix, amzPrixKg: foodAmazon.prixKg, amzPoids: foodAmazon.poidsKg, amzFrais: sql<boolean>`${foodAmazon.majLe} > now() - interval '70 minutes'` })
     .from(foodAnalysis)
     .leftJoin(foodPrice, eq(foodPrice.foodAnalysisId, foodAnalysis.id))
-    .leftJoin(foodAmazon, and(eq(foodAmazon.foodAnalysisId, foodAnalysis.id), eq(foodAmazon.dispo, true), sql`${foodAmazon.majLe} > now() - interval '70 minutes'`))
+    .leftJoin(foodAmazon, and(eq(foodAmazon.foodAnalysisId, foodAnalysis.id), eq(foodAmazon.dispo, true), sql`${foodAmazon.majLe} > now() - interval '26 hours'`))
     .where(and(isNotNull(foodAnalysis.score), sql`NOT ${foodAnalysis.discarded}`, or(eq(foodAnalysis.source, 'maxizoo'), eq(foodAnalysis.reviewed, true))))
   const fiches = await fichesIndexees()
   const best = new Map<string, RankedRecipe>()
@@ -64,7 +64,7 @@ export const rankedRecipes = cache(async (): Promise<RankedRecipe[]> => {
       score,
       image: r.image,
       buy: avecAmazon(buyLink({ ...r, prix: r.prix === null ? null : { prix: r.prix, prixKg: r.prixKg, prixAncien: r.prixAncien, releve: r.majLe ? r.majLe.toISOString().slice(0, 10) : '' } }), r.amzAsin ? amazonUrl(r.amzAsin, AMAZON_TAG) : null),
-      amazon: r.amzAsin ? { href: amazonUrl(r.amzAsin, AMAZON_TAG), prix: r.amzPrix, prixKg: r.amzPrixKg, poidsKg: r.amzPoids } : null,
+      amazon: r.amzAsin ? { href: amazonUrl(r.amzAsin, AMAZON_TAG), prix: r.amzFrais ? r.amzPrix : null, prixKg: r.amzFrais ? r.amzPrixKg : null, poidsKg: r.amzPoids } : null,
       updatedAt: r.updatedAt,
     })
   }
