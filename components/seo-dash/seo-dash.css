@@ -262,3 +262,6 @@
 .sd-linkbtn { border: 0; background: none; padding: 0; font: inherit; color: var(--sd-accent-ink); text-decoration: underline; cursor: pointer; }
 .sd-heat { grid-auto-columns: 14px; justify-content: start; }
 .sd-v td.sd-vital { min-width: 120px; width: 22%; }
+
+/* Sources : page d'arrivée sous le nom de la source (28/11/2026). */
+.sd-land { display: block; font-size: 12px; color: var(--sd-ink-3); max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

@@ -85,6 +85,7 @@ export function SourceRows({ rows, base, query, spark = false, color, linkOf, la
                         r.name
                       )}
                     </Link>
+                    {r.top ? <span className="sd-land">→ {r.top}{r.pages && r.pages > 1 ? ` · +${r.pages - 1} autre${r.pages > 2 ? 's' : ''}` : ''}{r.utm ? ` · campagne ${r.utm}` : ''}</span> : null}
                   </td>
                   {spark ? (
                     <td>
