@@ -9,7 +9,7 @@ import { isTherapeutic } from '../lib/scanner/fiche-lists'
 
 const TOKEN_URL = 'https://api.amazon.co.uk/auth/o2/token'
 const SEARCH_URL = 'https://creatorsapi.amazon/catalog/v1/searchItems'
-const PAUSE_MS = 1100 // une requête par seconde au plus
+const PAUSE_MS = 2000 // une requête toutes les 2 secondes (le débit accordé par Amazon dépend des ventes)
 
 let token = { value: '', until: 0 }
 async function bearer(): Promise<string> {
@@ -63,11 +63,19 @@ async function main(): Promise<void> {
   for (const f of rows) {
     if (isTherapeutic(f)) continue
     const poidsMz = f.prix && f.prix_kg && Number(f.prix_kg) > 0 ? Number(f.prix) / Number(f.prix_kg) : null
-    let items: AmazonItem[]
-    try {
-      items = await search(`${f.brand} ${f.product}`.replace(/\s+/g, ' ').trim().slice(0, 120))
-    } catch (e) {
-      console.error(`arrêt : ${e instanceof Error ? e.message : e}`)
+    // Amazon limite le débit (429) : on attend et on réessaie (1, 2, 4, 8 minutes) ; arrêt seulement après 5 refus de suite.
+    let items: AmazonItem[] | null = null
+    for (let essai = 0; essai < 5 && items === null; essai++) {
+      try {
+        items = await search(`${f.brand} ${f.product}`.replace(/\s+/g, ' ').trim().slice(0, 120))
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e)
+        if (!/quota/.test(msg)) { console.error(`erreur : ${msg}`); break }
+        await sleep(60_000 * 2 ** essai)
+      }
+    }
+    if (items === null) {
+      console.error('arrêt : Amazon refuse encore après 5 essais (débit ou quota du jour)')
       break
     }
     const c = choisir(items, f.brand, f.product, poidsMz)

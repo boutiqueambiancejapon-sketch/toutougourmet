@@ -1,5 +1,5 @@
-// @cdc santé — produits proposés dans les articles de maladie. Maxi Zoo via le fichier Awin, recherche
-// Amazon quand Maxi Zoo n'a pas la formule. Le texte reprend ce que dit la marque, sans promettre de soin.
+// @cdc santé — produits proposés dans les articles de maladie. Maxi Zoo via le fichier Awin, page exacte du
+// produit sur Amazon (API Creators, 28/11/2026) ou recherche quand elle est introuvable, quand Maxi Zoo n'a pas la formule. Le texte reprend ce que dit la marque, sans promettre de soin.
 
 export interface HealthPick {
   name: string
@@ -93,7 +93,7 @@ export const HEALTH_NEEDS = {
         "why": "Gamme vétérinaire de la marque pour le rein.",
         "vet": true,
         "store": "Amazon",
-        "href": "https://www.amazon.fr/s?k=Royal%20Canin%20Veterinary%20Renal%20chien&tag=ambiancejap0a-21",
+        "href": "https://www.amazon.fr/dp/B0041TS3N2?tag=ambiancejap0a-21",
         "image": null
       },
       {
@@ -101,7 +101,7 @@ export const HEALTH_NEEDS = {
         "why": "Gamme clinique de la marque pour le rein.",
         "vet": true,
         "store": "Amazon",
-        "href": "https://www.amazon.fr/s?k=Hill%27s%20Prescription%20Diet%20k/d%20chien&tag=ambiancejap0a-21",
+        "href": "https://www.amazon.fr/dp/B09VT54XHK?tag=ambiancejap0a-21",
         "image": null
       }
     ]
@@ -115,7 +115,7 @@ export const HEALTH_NEEDS = {
         "why": "Gamme vétérinaire de la marque pour le cœur.",
         "vet": true,
         "store": "Amazon",
-        "href": "https://www.amazon.fr/s?k=Royal%20Canin%20Veterinary%20Cardiac%20chien&tag=ambiancejap0a-21",
+        "href": "https://www.amazon.fr/dp/B0C7QYPVLG?tag=ambiancejap0a-21",
         "image": null
       },
       {
@@ -151,7 +151,7 @@ export const HEALTH_NEEDS = {
         "why": "Gamme vétérinaire pauvre en graisses de la marque.",
         "vet": true,
         "store": "Amazon",
-        "href": "https://www.amazon.fr/s?k=Royal%20Canin%20Veterinary%20Gastrointestinal%20Low%20Fat%20chien&tag=ambiancejap0a-21",
+        "href": "https://www.amazon.fr/dp/B0036EXVEE?tag=ambiancejap0a-21",
         "image": null
       }
     ]

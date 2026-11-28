@@ -10,5 +10,5 @@ User=toutou
 WorkingDirectory=/srv/toutou/current
 EnvironmentFile=/srv/toutou/shared/.env
 Nice=15
-TimeoutStartSec=2h
+TimeoutStartSec=5h
 ExecStart=/srv/toutou/current/node_modules/.bin/tsx scripts/amazon-offres.ts --limite=2000
