@@ -52,6 +52,14 @@ export function track(event: AnalyticsEvent, props: Props = {}): void {
 
 /** Marque d'un lien partenaire, sinon null. */
 export function affiliateBrand(href: string): string | null {
+  // Liens protégés (lib/go.ts) : /go/<jeton base64url> → adresse du marchand, pour garder la mesure par partenaire.
+  const go = /\/go\/([A-Za-z0-9_-]{8,})/.exec(href)
+  if (go) {
+    try {
+      const b = atob(go[1].replace(/-/g, '+').replace(/_/g, '/'))
+      href = new TextDecoder().decode(Uint8Array.from(b, (c) => c.charCodeAt(0)))
+    } catch { /* jeton illisible : pas de marque */ }
+  }
   const rules: [RegExp, string][] = [
     [/dogchef\.com\/fr\/code/, 'Dog Chef'],
     [/c3po\.link\/QWMW4k6mbU/, 'Elmut'],

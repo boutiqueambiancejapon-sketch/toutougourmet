@@ -1,5 +1,6 @@
 import { brands, brandOfferLabel } from '@/data/brands'
 import { AffiliateNote } from './AffiliateNote'
+import { toGo } from '@/lib/go'
 
 // @cdc affiliation — offres de bienvenue des marques en lignes sobres : un lien par marque,
 // aucun pour une marque en rupture. data-cta="brand-<place>" pour savoir d'où vient le clic.
@@ -13,7 +14,7 @@ export function BrandOfferList({ place }: { place: string }) {
             <span className={`grow text-sm ${b.stockNote ? 'font-semibold text-orange-ink' : 'text-ink-2'}`}>{brandOfferLabel(b)}</span>
             {b.stockNote ? null : (
               <a
-                href={b.affiliateUrl}
+                href={toGo(b.affiliateUrl)}
                 target="_blank"
                 rel="sponsored noopener"
                 className="inline-flex min-h-11 items-center self-start whitespace-nowrap font-semibold text-orange-ink underline underline-offset-4 hover:text-ink sm:self-auto"

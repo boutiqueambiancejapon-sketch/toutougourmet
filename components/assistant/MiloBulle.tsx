@@ -3,6 +3,7 @@ import { CENTRES_ANTIPOISON } from '@/lib/assistant/urgence'
 import { PrixLigne } from '@/components/scanner/PrixLigne'
 import { MiloAvatar } from './MiloAvatar'
 import type { MiloMessage, MiloReponse } from './use-milo'
+import { toGo } from '@/lib/go'
 
 // @cdc assistant — un échange : la question, puis la réponse de Milo. Les centres antipoison ne s'affichent que si
 // Milo juge la situation urgente ; la mention « les IA peuvent faire des erreurs » quand aucun article ne l'appuie.
@@ -34,7 +35,7 @@ function Produits({ liste }: { liste: MiloReponse['produits'] }) {
               {p.remise ? <span className="block text-xs font-normal text-ink-2">{p.remise}</span> : null}
               {p.prix ? <span className="mt-1 block font-normal"><PrixLigne prix={p.prix} compact /></span> : null}
             </span>
-            <a href={p.url} rel="sponsored nofollow noopener" target="_blank" data-cta="assistant-produit" className="inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-control bg-ink px-3.5 text-sm font-semibold text-cream no-underline">{`Voir chez ${p.chez}`}</a>
+            <a href={toGo(p.url)} rel="sponsored nofollow noopener" target="_blank" data-cta="assistant-produit" className="inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-control bg-ink px-3.5 text-sm font-semibold text-cream no-underline">{`Voir chez ${p.chez}`}</a>
           </li>
         ))}
       </ul>

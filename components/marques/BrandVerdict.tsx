@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { brandOfferLabel, type Brand } from '@/data/brands'
 import { AffiliateNote } from './AffiliateNote'
 import { titleTypo } from '@/lib/title-typo'
+import { toGo } from '@/lib/go'
 
 // @cdc affiliation — CTA principal d'une fiche marque (un seul par page) : bloc orange plein, verdict
 // en clair, un bouton. Marque en rupture : pas de bouton, un lien discret et des alternatives.
@@ -24,14 +25,14 @@ export function BrandVerdict({ brand, verdict }: { brand: Brand; verdict: string
         <p className="m-0 mt-4 flex flex-wrap gap-x-6 gap-y-2">
           <Link href="/chien/avis-marques/avis-dogfy-diet-repas-frais-chien" className="font-semibold text-ink underline underline-offset-4">Voir Dogfy Diet</Link>
           <Link href="/chien/marque/dog-chef" className="font-semibold text-ink underline underline-offset-4">Voir Dog Chef</Link>
-          <a href={brand.affiliateUrl} target="_blank" rel="sponsored noopener" className="text-ink-2 underline underline-offset-4">
+          <a href={toGo(brand.affiliateUrl)} target="_blank" rel="sponsored noopener" className="text-ink-2 underline underline-offset-4">
             Vérifier le stock chez {brand.name}
           </a>
         </p>
       ) : (
         <div className="mt-6 flex flex-col items-start gap-3">
           <a
-            href={brand.affiliateUrl}
+            href={toGo(brand.affiliateUrl)}
             target="_blank"
             rel="sponsored noopener"
             className="inline-flex min-h-12 items-center rounded-control bg-ink px-6 py-3 text-lg font-bold text-cream no-underline transition-transform hover:-translate-y-0.5"

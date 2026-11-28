@@ -6,6 +6,7 @@ import { displayBrand, displayName } from '@/lib/scanner/rankings'
 import type { RankedRecipe } from '@/lib/server/rankings'
 import { ProductPhoto } from '../ProductPhoto'
 import { ScoreBadge } from '../ScoreBadge'
+import { toGo } from '@/lib/go'
 
 // @cdc cluster scanner — une ligne de classement : rang, photo, note, ce que dit l'étiquette, lien d'achat déclaré.
 
@@ -32,7 +33,7 @@ function RankAmazon({ recipe }: { recipe: RankedRecipe }) {
   return (
     <span className="flex flex-wrap items-center gap-2 text-sm text-ink-2">
       {best === 'maxizoo' ? <span className="whitespace-nowrap rounded-pill bg-green-bg px-2 py-0.5 text-xs font-bold text-green-ink">Prix le plus bas chez Maxi Zoo</span> : null}
-      <a href={a.href} rel="sponsored nofollow noopener" target="_blank" data-cta="classement-produit-amazon" className="whitespace-nowrap font-semibold text-ink underline underline-offset-2">
+      <a href={toGo(a.href)} rel="sponsored nofollow noopener" target="_blank" data-cta="classement-produit-amazon" className="whitespace-nowrap font-semibold text-ink underline underline-offset-2">
         Voir sur Amazon
       </a>
       {a.prix !== null ? <span>{`${euros(a.prix)}${a.prixKg !== null ? ` · ${euros(a.prixKg)}/kg` : ''}`}</span> : null}
@@ -54,7 +55,7 @@ export function RankRow({ recipe, rank }: { recipe: RankedRecipe; rank: number }
       </div>
       <RankFacts recipe={recipe} />
       {recipe.buy ? (
-        <a href={recipe.buy.href} rel="sponsored nofollow noopener" target="_blank" data-cta="classement-produit" className="inline-flex min-h-11 items-center justify-center self-start whitespace-nowrap rounded-control bg-ink px-4 font-semibold !text-cream !no-underline hover:!underline">
+        <a href={toGo(recipe.buy.href)} rel="sponsored nofollow noopener" target="_blank" data-cta="classement-produit" className="inline-flex min-h-11 items-center justify-center self-start whitespace-nowrap rounded-control bg-ink px-4 font-semibold !text-cream !no-underline hover:!underline">
           {`Voir chez ${recipe.buy.store}`}
         </a>
       ) : null}

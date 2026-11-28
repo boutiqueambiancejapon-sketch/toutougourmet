@@ -1,6 +1,7 @@
 import type { Brand } from '@/data/brands'
 import { brandOfferLabel } from '@/data/brands'
 import { AffiliateNote } from './AffiliateNote'
+import { toGo } from '@/lib/go'
 
 // @cdc affiliation — les deux offres d'un duel, côte à côte, en liens discrets (pas deux gros boutons
 // identiques, audit design-cro §3). `place` remplit data-cta pour savoir d'où vient le clic.
@@ -14,7 +15,7 @@ export function DualBrandCTA({ brandA, brandB, place }: { brandA: Brand; brandB:
             <span className={`text-sm ${b.stockNote ? 'text-orange-ink' : 'text-ink-2'}`}>{brandOfferLabel(b)}</span>
             {b.stockNote ? null : (
               <a
-                href={b.affiliateUrl}
+                href={toGo(b.affiliateUrl)}
                 target="_blank"
                 rel="sponsored noopener"
                 className="inline-flex min-h-11 max-w-full items-center self-start font-semibold text-orange-ink underline underline-offset-4 hover:text-ink"

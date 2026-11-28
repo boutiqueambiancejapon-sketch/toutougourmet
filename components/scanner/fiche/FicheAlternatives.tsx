@@ -2,6 +2,7 @@ import Link from 'next/link'
 import type { Alternative } from '@/lib/scanner/seo'
 import type { BetterProduct } from '@/lib/server/scanner-catalog'
 import { ProductPhoto } from '../ProductPhoto'
+import { toGo } from '@/lib/go'
 
 // @cdc lot 6 — fiche /croquettes/[slug] sous 55/100 : « Par quoi les remplacer ? ». Une ou deux
 // marques partenaires (data/brands.ts), lien sponsorisé déclaré comme tel.
@@ -25,7 +26,7 @@ export function FicheAlternatives({ alternatives, better = null, category = null
             </p>
             <p className="m-0 text-[15px] leading-relaxed text-ink-2">{`Mieux noté par notre barème : ${better.score}/100${category ? `, ${category}` : ''}.`}</p>
             <div className="flex flex-wrap items-center gap-3">
-              <a href={better.buyUrl} rel="sponsored nofollow noopener" target="_blank" data-cta="scan-alternative-maxizoo" className="inline-flex min-h-11 items-center whitespace-nowrap rounded-control bg-ink px-4 font-semibold text-cream no-underline hover:underline">
+              <a href={toGo(better.buyUrl)} rel="sponsored nofollow noopener" target="_blank" data-cta="scan-alternative-maxizoo" className="inline-flex min-h-11 items-center whitespace-nowrap rounded-control bg-ink px-4 font-semibold text-cream no-underline hover:underline">
                 Voir chez Maxi Zoo
               </a>
               <Link href={`/croquettes/${better.slug}`} className="text-sm text-ink-2 underline underline-offset-2">
@@ -41,7 +42,7 @@ export function FicheAlternatives({ alternatives, better = null, category = null
             {brand.discountOffer ? <p className="m-0 text-sm font-semibold text-ink">{brand.discountOffer}</p> : null}
             <div className="flex flex-wrap items-center gap-3">
               <a
-                href={brand.affiliateUrl}
+                href={toGo(brand.affiliateUrl)}
                 rel="sponsored noopener"
                 target="_blank"
                 data-cta="scan-alternative"

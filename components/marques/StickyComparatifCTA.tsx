@@ -1,6 +1,7 @@
 'use client'
 
 import { StickyBar } from '@/components/blog/StickyBar'
+import { toGo } from '@/lib/go'
 
 // @cdc affiliation — bandeau collant d'un duel : les deux offres en liens compacts, même coque que
 // les articles (StickyBar). Une marque en rupture n'y figure pas (filtrée par la page).
@@ -18,7 +19,7 @@ export function StickyComparatifCTA({ brands }: { brands: BrandInfo[] }) {
       <p data-cta="brand-duel-sticky" className="m-0 flex min-w-0 flex-1 items-center gap-2">
         <span className="hidden flex-1 text-sm text-cream/75 sm:inline">Voir les offres</span>
         {brands.map((b) => (
-          <a key={b.name} href={b.affiliateUrl} target="_blank" rel="sponsored noopener" className={LINK}>
+          <a key={b.name} href={toGo(b.affiliateUrl)} target="_blank" rel="sponsored noopener" className={LINK}>
             {b.name}&nbsp;→
           </a>
         ))}

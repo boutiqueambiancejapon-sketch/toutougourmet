@@ -3,6 +3,7 @@ import { getBrandBySlug } from '@/data/brands'
 import { IconBowl, IconDog, IconHeart, IconPaw, IconScale, IconTarget, type IconProps } from '@/components/icons'
 import { AffiliateNote } from './AffiliateNote'
 import { frTypo } from '@/lib/utils'
+import { toGo } from '@/lib/go'
 
 // @cdc 04-pages — « Quelle marque pour ton chien ? » par profil (audit design-cro §3) : une marque,
 // une raison vérifiable, un seul lien partenaire. Chaque raison reprend un fait déjà publié (source en
@@ -100,7 +101,7 @@ export function BrandProfiles() {
             </p>
             <div data-cta={`brand-profil-${id}`}>
               <a
-                href={brand.affiliateUrl}
+                href={toGo(brand.affiliateUrl)}
                 target="_blank"
                 rel="sponsored noopener"
                 className="inline-flex min-h-11 max-w-full items-center font-semibold text-orange-ink underline underline-offset-4 hover:text-ink"

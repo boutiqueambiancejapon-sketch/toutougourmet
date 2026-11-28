@@ -2,6 +2,7 @@ import type { BuyLink } from '@/lib/scanner/buy-link'
 import { moinsCher } from '@/lib/scanner/amazon'
 import { euros } from '@/lib/scanner/prix'
 import type { OffreAmazon } from '@/lib/server/amazon'
+import { toGo } from '@/lib/go'
 
 // @cdc lot 6 — carte « Où l'acheter ? » d'une fiche : lien partenaire déclaré comme tel, clic mesuré
 // par components/analytics/Tracking.tsx (data-cta). Depuis le 28/11/2026, le même produit chez Amazon à côté de Maxi Zoo,
@@ -38,14 +39,14 @@ export function FicheBuy({ link, amazon = null }: { link: BuyLink | null; amazon
         Où l&apos;acheter&nbsp;?
       </h2>
       <div className="flex flex-col gap-2">
-        <a href={link.href} rel="sponsored nofollow noopener" target="_blank" data-cta="fiche-achat" className={`${BTN} bg-orange text-ink`}>
+        <a href={toGo(link.href)} rel="sponsored nofollow noopener" target="_blank" data-cta="fiche-achat" className={`${BTN} bg-orange text-ink`}>
           {`Acheter chez ${link.store}`}
         </a>
         {link.prix ? <Ligne prix={link.prix.prix} prixKg={mzKg} best={best === 'maxizoo'} /> : link.amazon && amazon ? <Ligne prix={amazon.prix} prixKg={amazon.prixKg} best={false} /> : null}
       </div>
       {second ? (
         <div className="flex flex-col gap-2">
-          <a href={second.href} rel="sponsored nofollow noopener" target="_blank" data-cta="fiche-achat-amazon" className={`${BTN} border border-line-2 bg-paper text-ink`}>
+          <a href={toGo(second.href)} rel="sponsored nofollow noopener" target="_blank" data-cta="fiche-achat-amazon" className={`${BTN} border border-line-2 bg-paper text-ink`}>
             Voir sur Amazon
           </a>
           <Ligne prix={second.prix} prixKg={second.prixKg} best={best === 'amazon'} />
