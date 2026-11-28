@@ -1,0 +1,15 @@
+# Prix Amazon des fiches, chaque heure (Amazon : un prix ne se garde pas plus d'1 heure), décision du 2026-11-28.
+[Unit]
+Description=Toutou Gourmet - prix Amazon des fiches (chaque heure)
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=toutou
+WorkingDirectory=/srv/toutou/current
+EnvironmentFile=/srv/toutou/shared/.env
+Nice=15
+TimeoutStartSec=50min
+# Verrou commun à tous les scripts Amazon (Toutou et QRT) : attend au plus 20 min la fin d'un autre script.
+ExecStart=/usr/bin/flock -w 1200 /run/lock/amazon-api.lock /srv/toutou/current/node_modules/.bin/tsx scripts/amazon-prix.ts

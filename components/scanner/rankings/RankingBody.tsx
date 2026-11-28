@@ -42,7 +42,7 @@ export function RankingBody({ segment, list, count, note }: { segment: RankSegme
         <ol role="list" className="m-0 flex list-none flex-col gap-3 p-0">
           {shown.map((r, i) => <RankRow key={r.key} recipe={r} rank={i + 1} />)}
         </ol>
-        <p className="m-0 text-sm leading-relaxed text-ink-2">{`${note ? `${note} ` : ''}Liens partenaires : on touche une commission si tu commandes, sans surcoût pour toi. Prix Amazon relevés dans les dernières 24 heures, ils peuvent avoir changé ; en tant que Partenaire Amazon, on réalise un bénéfice sur les achats remplissant les conditions requises. Le rang ne dépend que de l'étiquette.`}</p>
+        <p className="m-0 text-sm leading-relaxed text-ink-2">{`${note ? `${note} ` : ''}Liens partenaires : on touche une commission si tu commandes, sans surcoût pour toi. Prix Amazon relevés dans l'heure, ils peuvent avoir changé ; en tant que Partenaire Amazon, on réalise un bénéfice sur les achats remplissant les conditions requises. Le rang ne dépend que de l'étiquette.`}</p>
       </section>
       <ToolCta tool="scanner" />
     </>
