@@ -134,6 +134,13 @@
       "when": 1794466043584,
       "tag": "0018_food_price",
       "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1795856329030,
+      "tag": "0019_food_amazon",
+      "breakpoints": true
     }
   ]
 }
