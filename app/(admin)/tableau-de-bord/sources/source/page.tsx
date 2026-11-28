@@ -67,6 +67,28 @@ export default async function SourceDetailPage(props: SeoPageProps) {
           {names.length > 1 ? <SourceTable title={`Sources · ${title}`} rows={names} base={row.visits} query={query} spark csv={csvHref('sources-liste', query, { famille: key?.family ?? '' })} /> : null}
           <div className="sd-gap" />
           <SourceTable title="Pages d’arrivée" desc="Première page de chaque visite venue de cette source" first="Page" rows={landings} base={row.visits} query={query} linkOf={(r) => pageHref(r.key, query)} labelOf={(r) => shortPath(r.key, 44)} csv={csvHref('sources-arrivees', query, { s })} />
+          <div className="sd-gap" />
+          {/* Chaque visite de la source (28/11/2026 : « je ne vois pas d’où viennent Instagram et les autres ») : les réseaux ne
+             transmettent que leur domaine ; le détail d’un post ne se voit qu’avec une étiquette utm sur nos propres liens. */}
+          <Card title="Dernières visites" desc="Chaque visite venue de cette source : jour, page d’arrivée, adresse d’origine, campagne, pays, appareil, pages vues et clic partenaire">
+            <div className="sd-tw">
+              <table className="sd-v">
+                <thead><tr><th>Jour</th><th>Page d’arrivée</th><th>Origine</th><th>Pays</th><th className="num">Pages</th><th className="num">Clic</th></tr></thead>
+                <tbody>
+                  {[...visits].sort((a, b) => b.day.localeCompare(a.day)).slice(0, 50).map((v, i) => (
+                    <tr key={i}>
+                      <td>{v.day.slice(8, 10)}/{v.day.slice(5, 7)}</td>
+                      <td className="u">{v.landing}</td>
+                      <td className="u">{[v.ref, v.utm ? `campagne ${v.utm}` : null, v.medium].filter(Boolean).join(' · ') || 'direct'}</td>
+                      <td>{v.country ? countryName(v.country) : '—'} · {v.device ?? '—'}</td>
+                      <td className="num">{v.views}</td>
+                      <td className="num">{v.clicks ? 'oui' : '—'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Card>
         </>
       ) : match && res.ok ? (
         <Empty>Aucune visite venue de cette source sur la période.</Empty>
