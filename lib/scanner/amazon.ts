@@ -62,9 +62,11 @@ export function choisir(items: AmazonItem[], marque: string, produit: string, po
   return best
 }
 
-/** « Prix le plus bas » : sur le marchand le moins cher au kilo, seulement si les deux prix au kilo sont connus et diffèrent d'au moins 1 %. */
-export function moinsCher(maxiZooKg: number | null, amazonKg: number | null): 'maxizoo' | 'amazon' | null {
-  if (!maxiZooKg || !amazonKg) return null
+/** « Prix le plus bas » : seulement pour deux sacs de même poids (± 5 %) dont les prix au kilo sont connus et diffèrent d'au moins 1 %.
+ *  Comparer un sac de 3 kg à un sac de 14 kg ne serait pas honnête : pas de badge dans ce cas. */
+export function moinsCher(maxiZooKg: number | null, amazonKg: number | null, poidsMaxiZoo: number | null = null, poidsAmazon: number | null = null): 'maxizoo' | 'amazon' | null {
+  if (!maxiZooKg || !amazonKg || !poidsMaxiZoo || !poidsAmazon) return null
+  if (Math.abs(poidsMaxiZoo - poidsAmazon) / poidsMaxiZoo > 0.05) return null
   if (Math.abs(maxiZooKg - amazonKg) / Math.max(maxiZooKg, amazonKg) < 0.01) return null
   return amazonKg < maxiZooKg ? 'amazon' : 'maxizoo'
 }
