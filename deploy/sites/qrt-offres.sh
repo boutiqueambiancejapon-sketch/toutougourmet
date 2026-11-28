@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Relevé hebdomadaire des prix Cdiscount et Fnac (flux Awin) pour Quel Robot Tondeuse.
-# Accord du propriétaire le 16/11/2026 : une fois par semaine.
+# Propriétaire : une fois par semaine (16/11/2026), puis deux fois par jour à 12 h et minuit (28/11/2026).
 # Télécharge les flux (adresses privées dans ~/.config/toutou/awin.env), met à jour content/offres/offres.json
 # dans une copie de travail à part, puis envoie sur la branche en ligne si les prix ont changé
 # (la mise à jour automatique du site les publie dans l'heure).
@@ -21,7 +21,7 @@ node scripts/offres-awin.mjs "$FEEDS/cdiscount.csv.gz" "$FEEDS/fnac.csv.gz"
 rm -f "$FEEDS/cdiscount.csv.gz"  # 700 Mo, retéléchargé chaque semaine
 if git diff --quiet -- content/offres/offres.json; then echo "Prix inchangés."; exit 0; fi
 git add content/offres/offres.json
-git commit -qm "chore(offres): weekly Cdiscount and Fnac prices
+git commit -qm "chore(offres): Cdiscount and Fnac prices (twice a day)
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 for i in 1 2 3; do
