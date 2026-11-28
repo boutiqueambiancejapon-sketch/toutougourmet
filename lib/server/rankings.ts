@@ -1,8 +1,10 @@
 import { cache } from 'react'
 import { and, eq, isNotNull, or, sql } from 'drizzle-orm'
-import { foodAnalysis, foodPrice } from '@/db/schema'
+import { foodAmazon, foodAnalysis, foodPrice } from '@/db/schema'
 import { horsListes, NOM_CLASSEMENT, noteCourante } from '@/lib/scanner/baremes/fiche'
-import { buyLink, type BuyLink } from '@/lib/scanner/buy-link'
+import { avecAmazon, buyLink, type BuyLink } from '@/lib/scanner/buy-link'
+import { amazonUrl } from '@/lib/scanner/amazon'
+import { AMAZON_TAG } from './amazon'
 import { isTherapeutic } from '@/lib/scanner/fiche-lists'
 import { foodNoun } from '@/lib/scanner/food-noun'
 import { isSupplementName, MIN_BRANDS, MIN_RECIPES, recipeKey, recipeName, type RankRecipe, type RankSegment } from '@/lib/scanner/rankings'
@@ -25,6 +27,8 @@ export interface RankedRecipe extends RankRecipe {
   image: string | null
   protein: number | null
   buy: BuyLink | null
+  /** Même produit chez Amazon (relevé de moins de 26 h), affiché à côté de Maxi Zoo. */
+  amazon: { href: string; prix: number | null; prixKg: number | null; poidsKg: number | null } | null
   updatedAt: Date
 }
 
@@ -32,9 +36,10 @@ export const rankedRecipes = cache(async (): Promise<RankedRecipe[]> => {
   const d = getDb()
   if (!d) return []
   const rows = await d
-    .select({ slug: foodAnalysis.slug, brand: foodAnalysis.brand, product: foodAnalysis.product, score: foodAnalysis.score, image: foodAnalysis.imageUrl, buyUrl: foodAnalysis.buyUrl, prix: foodPrice.prix, prixKg: foodPrice.prixKg, prixAncien: foodPrice.prixAncien, majLe: foodPrice.majLe, extracted: foodAnalysis.extracted, details: foodAnalysis.details, updatedAt: foodAnalysis.updatedAt })
+    .select({ slug: foodAnalysis.slug, brand: foodAnalysis.brand, product: foodAnalysis.product, score: foodAnalysis.score, image: foodAnalysis.imageUrl, buyUrl: foodAnalysis.buyUrl, prix: foodPrice.prix, prixKg: foodPrice.prixKg, prixAncien: foodPrice.prixAncien, majLe: foodPrice.majLe, extracted: foodAnalysis.extracted, details: foodAnalysis.details, updatedAt: foodAnalysis.updatedAt, amzAsin: foodAmazon.asin, amzPrix: foodAmazon.prix, amzPrixKg: foodAmazon.prixKg, amzPoids: foodAmazon.poidsKg })
     .from(foodAnalysis)
     .leftJoin(foodPrice, eq(foodPrice.foodAnalysisId, foodAnalysis.id))
+    .leftJoin(foodAmazon, and(eq(foodAmazon.foodAnalysisId, foodAnalysis.id), eq(foodAmazon.dispo, true), sql`${foodAmazon.majLe} > now() - interval '26 hours'`))
     .where(and(isNotNull(foodAnalysis.score), sql`NOT ${foodAnalysis.discarded}`, or(eq(foodAnalysis.source, 'maxizoo'), eq(foodAnalysis.reviewed, true))))
   const fiches = await fichesIndexees()
   const best = new Map<string, RankedRecipe>()
@@ -58,7 +63,8 @@ export const rankedRecipes = cache(async (): Promise<RankedRecipe[]> => {
       protein: label.constituants.proteines,
       score,
       image: r.image,
-      buy: buyLink({ ...r, prix: r.prix === null ? null : { prix: r.prix, prixKg: r.prixKg, prixAncien: r.prixAncien, releve: r.majLe ? r.majLe.toISOString().slice(0, 10) : '' } }),
+      buy: avecAmazon(buyLink({ ...r, prix: r.prix === null ? null : { prix: r.prix, prixKg: r.prixKg, prixAncien: r.prixAncien, releve: r.majLe ? r.majLe.toISOString().slice(0, 10) : '' } }), r.amzAsin ? amazonUrl(r.amzAsin, AMAZON_TAG) : null),
+      amazon: r.amzAsin ? { href: amazonUrl(r.amzAsin, AMAZON_TAG), prix: r.amzPrix, prixKg: r.amzPrixKg, poidsKg: r.amzPoids } : null,
       updatedAt: r.updatedAt,
     })
   }
