@@ -15,6 +15,8 @@ export interface Brand {
   logo: string
   tagline: string
   affiliateUrl: string
+  /** Programme d'affiliation terminé (date) : la marque sort de toutes les listes, offres et boutons. */
+  ended?: string
   affiliateCode: string | null
   animal: ('chien' | 'chat')[]
   type: string[]
@@ -46,7 +48,7 @@ export interface BrandFacts {
   bestFor: string
 }
 
-export const brands: Brand[] = [
+const ALL_BRANDS: Brand[] = [
   {
     slug: 'franklin',
     name: 'Franklin Pet Food',
@@ -256,7 +258,9 @@ export const brands: Brand[] = [
     name: 'Fidelis',
     logo: '/images/marques/fidelis-logo.webp',
     tagline: 'Menus frais en bocaux de verre, cuits à la vapeur douce',
-    affiliateUrl: 'https://tidd.ly/48rl0Z3',
+    // Fidelis France a mis fin au programme le 30/11/2026 (e-mail du 28/11) : plus aucun lien ni bouton.
+    affiliateUrl: 'https://fidelis.fr/',
+    ended: '2026-11-30',
     affiliateCode: null,
     animal: ['chien'],
     type: ['menus en bocaux'],
@@ -293,6 +297,9 @@ export const brands: Brand[] = [
     stockNote: 'Bocaux en rupture de stock au 1er novembre 2026',
   },
 ]
+
+/** Marques partenaires actives (programme en cours). */
+export const brands: Brand[] = ALL_BRANDS.filter((b) => !b.ended)
 
 export function getBrandBySlug(slug: string): Brand | undefined {
   return brands.find((b) => b.slug === slug)

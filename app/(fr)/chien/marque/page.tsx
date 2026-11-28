@@ -11,7 +11,7 @@ import { IconChevron } from '@/components/icons'
 export const metadata: Metadata = {
   title: 'Avis croquettes premium pour chien',
   description:
-    "Dog Chef, Elmut, Franklin, Ultra Premium Direct, Dogfy Diet, Fidelis : avis, comparatifs et offres. Choisis la marque selon le profil de ton chien.",
+    "Dog Chef, Elmut, Franklin, Ultra Premium Direct, Dogfy Diet : avis, comparatifs et offres. Choisis la marque selon le profil de ton chien.",
   alternates: { canonical: 'https://www.toutou-gourmet.com/chien/marque' },
 }
 
