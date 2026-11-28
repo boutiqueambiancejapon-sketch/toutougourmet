@@ -42,7 +42,13 @@ for i in 1 2 3; do
   git fetch --quiet origin v2
   if git rebase --quiet origin/v2 && git push --quiet origin HEAD:v2; then
     echo "✓ Poussé sur v2 : $(git log -1 --format='%h %s')"
-    sudo -n systemctl start --no-block toutou-deploy.service || echo "Mise en ligne à la prochaine heure pile."
+    # Le soir, pas de mise à jour tout de suite : collision mémoire avec la fin du build (OOM 25 et 26/11).
+    # Le timer toutou-deploy de 19 h 20 UTC s'en charge (accord écrit du propriétaire, 2026-11-28).
+    if [[ "$TYPE" == "informatif" ]]; then
+      echo "Mise en ligne par toutou-deploy.timer (prochaine heure, à :20)."
+    else
+      sudo -n systemctl start --no-block toutou-deploy.service || echo "Mise en ligne à la prochaine heure pile."
+    fi
     exit 0
   fi
   git rebase --abort 2>/dev/null || true

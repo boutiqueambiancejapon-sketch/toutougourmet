@@ -1,8 +1,8 @@
 [Unit]
-Description=Relevé des prix Quel Robot Tondeuse, une fois par semaine (accord du propriétaire, 16/11/2026)
+Description=Relevé des prix Quel Robot Tondeuse, deux fois par jour à 12 h et minuit (propriétaire, 28/11/2026 : ne rater aucune offre flash)
 
 [Timer]
-OnCalendar=Mon *-*-* 02:15:00 UTC
+OnCalendar=*-*-* 00,12:00:00 Europe/Paris
 Persistent=true
 
 [Install]
