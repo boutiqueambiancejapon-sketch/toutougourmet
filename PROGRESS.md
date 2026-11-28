@@ -327,3 +327,7 @@ File `docs/coherence-queue.md` vidée : 2 articles relus (huîtres : 2 correctio
 
 ## 2026-11-27 — Relecture de cohérence (nuit)
 - File épuisée : 2 articles relus (`avis-select-gold-complete-adulte-medium-poulet` 2 corrections : ration chien actif et races par poids ; `fruits-chien-peut-manger-liste` 3 corrections : grammes par tranche alignés sur la fiche pomme, FAQ quotidienne alignée sur le tableau). Détail dans `docs/coherence-queue.md`. Ajouter des articles à la file pour la prochaine nuit.
+
+## 2026-11-28 — Relecture de cohérence (nuit)
+- File épuisée : 2 articles relus (`avis-natures-variety-healthy-grains-mini` 1 correction : transition 7 à 10 jours ; `chien-peut-manger-foie-gras` 1 correction : surveillance trois jours, + `chien-peut-manger-foie` et `chien-peut-manger-canard` alignés sur le gras plutôt que le sel). Détail dans `docs/coherence-queue.md`. En ligne (release 00dca26d).
+- À voir : promo Maxi Zoo −20 % sur la Healthy Grains Mini depuis le 28 ; `prix_kg` faux (8,10 au lieu de 10,79) pour Healthy Grains Mini Poissons Blancs 1,5 kg dans `app.food_price`.
